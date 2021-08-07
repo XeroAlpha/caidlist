@@ -249,7 +249,7 @@ async function analyzeAutocompletionEnums() {
     console.log("Analyzing effects...");
     let effects = await cachedOutput("autocompleted.effects", async () => {
         return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/effect @s "))
-            .filter(effect => effect != "[");
+            .filter(effect => effect != "[" && effect != "clear");
     });
 
     console.log("Analyzing enchantments...");
@@ -314,7 +314,9 @@ function analyzeApkPackageDataEnums(packageZip) {
     let sounds = [],
         particleEmitters = [],
         animations = [],
+        fogs = [],
         entityEventsMap = {},
+        entityFamilyMap = {},
         lang = {};
     console.log("Analyzing package entries...");
     entries.forEach(entry => {
@@ -349,6 +351,15 @@ function analyzeApkPackageDataEnums(packageZip) {
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
+        } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/fogs\/(?:[^\/]+)\.json$/)) {
+            let entryData = entry.getData().toString("utf-8");
+            let fog = JSON.parse(entryData);
+            let formatVersion = fog["format_version"];
+            if (formatVersion == "1.16.100") {
+                fogs.push(fog["minecraft:fog_settings"]["description"]["identifier"]);
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
         } else if (entryName.match(/^assets\/behavior_packs\/(?:[^\/]+)\/entities\/(?:[^\/]+)\.json$/)) {
             let entryData = entry.getData().toString("utf-8");
             let entity = JSON.parse(entryData);
@@ -364,12 +375,20 @@ function analyzeApkPackageDataEnums(packageZip) {
                 formatVersion == "1.16.210" ||
                 formatVersion == "1.17.10" ||
                 formatVersion == "1.17.20") {
-                let owner = entity["minecraft:entity"]["description"]["identifier"];
+                let id = entity["minecraft:entity"]["description"]["identifier"];
                 let events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
+                let components = entity["minecraft:entity"]["components"] ?? {};
+                let typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
+                let typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
                 events.forEach(event => {
                     let eventOwners = entityEventsMap[event];
                     if (!eventOwners) eventOwners = entityEventsMap[event] = [];
-                    eventOwners.push(owner);
+                    eventOwners.push(id);
+                });
+                typeFamilies.forEach(familyName => {
+                    let familyMembers = entityFamilyMap[familyName];
+                    if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
+                    familyMembers.push(id);
                 });
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
@@ -384,23 +403,20 @@ function analyzeApkPackageDataEnums(packageZip) {
     Object.keys(entityEventsMap).forEach(key => {
         entityEventsMap[key] = entityEventsMap[key].filter((e, i, a) => a.indexOf(e) >= i).sort();
     });
-
-    cachedOutput("package.data", {
-        sounds,
-        particleEmitters,
-        animations,
-        entityEventsMap
+    Object.keys(entityFamilyMap).forEach(key => {
+        entityFamilyMap[key] = entityFamilyMap[key].filter((e, i, a) => a.indexOf(e) >= i).sort();
     });
-    cachedOutput("package.lang", lang);
 
     return {
-        data: {
+        data: cachedOutput("package.data", {
             sounds,
             particleEmitters,
             animations,
-            entityEventsMap
-        },
-        lang,
+            fogs,
+            entityEventsMap,
+            entityFamilyMap
+        }),
+        lang: cachedOutput("package.lang", lang),
         version: config.installPackageVersion
     };
 }
@@ -441,10 +457,13 @@ function parseEnumMapLua(luaContent) {
             if (line.startsWith("--")) return;
             let matchResult;
             if (matchResult = itemRegExp.exec(line)) {
-                enumMapStack[0][matchResult[1]] = matchResult[2].split("|").slice(-1)[0];
+                let key = matchResult[1].replace(/\\/g, ""); // 处理 Lua 字符串转义
+                let value = matchResult[2].split("|").slice(-1)[0];
+                enumMapStack[0][key] = value;
             } else if (matchResult = groupStartRegExp.exec(line)) {
+                let key = matchResult[1].replace(/\\/g, ""); // 处理 Lua 字符串转义
                 let group = {};
-                enumMapStack[0][matchResult[1]] = group;
+                enumMapStack[0][key] = group;
                 enumMapStack.unshift(group);
             } else if (groupEndRegExp.test(line)) {
                 if (enumMapStack.length > 1) {
@@ -565,7 +584,7 @@ function matchTranslation(options) {
                     if (key.startsWith("#")) {
                         key = originalValue + "." + key.slice(1);
                     }
-                    return translateCached(key);
+                    return translateCached(key).translation;
                 });
                 setInlineCommentAfterField(translationMap, originalValue, userTranslation);
             }
@@ -629,41 +648,61 @@ function matchTranslation(options) {
     };
 }
 
+const CircularTranslationResult = {
+    state: "notFound",
+    translation: "<Circular>",
+    comment: "This is a place holder"
+};
 function matchTranslations(options) {
     const { originalArray } = options;
     let translateResultMap = {};
+    let translateCacheMap = {};
     let translateStates = {
         provided: [],
         guessFromStd: [],
         guessFromLang: [],
         notFound: []
     };
-    let translate = (originalValue) => {
-        let result = matchTranslation({
-            ...options,
-            translateCached,
-            originalValue
-        });
-        translateStates[result.state].push(originalValue);
-        translateResultMap[originalValue] = result.translation;
-        setInlineCommentAfterField(translateResultMap, originalValue, result.comment);
-        return result.translation;
-    };
     let translateCached = (originalValue) => {
-        let cache = translateResultMap[originalValue];
+        let cache = translateCacheMap[originalValue];
         if (cache) {
             return cache;
         } else {
-            translateResultMap[originalValue] = "<Circular>";
-            return translate(originalValue);
+            let result;
+            translateCacheMap[originalValue] = CircularTranslationResult;
+            result = matchTranslation({
+                ...options,
+                translateCached,
+                originalValue
+            });
+            translateCacheMap[originalValue] = result;
+            return result;
         }
     };
-    originalArray.forEach(translateCached);
+    originalArray.forEach(originalValue => {
+        let result = translateCached(originalValue);
+        translateStates[result.state].push(originalValue);
+        translateResultMap[originalValue] = result.translation;
+        setInlineCommentAfterField(translateResultMap, originalValue, result.comment);
+    });
     return {
         states: translateStates,
         result: translateResultMap
     };
 }
+
+function cascadeMap(mapOfMap, priority, includeAll) {
+    let i, result = {};
+    if (includeAll) {
+        for (i in mapOfMap) {
+            JSON.assign(result, mapOfMap[i]);
+        }
+    }
+    for (i = priority.length - 1; i >= 0; i--) {
+        JSON.assign(result, mapOfMap[priority[i]]);
+    }
+    return result;
+};
 //#endregion
 
 //#region User Translation
@@ -675,10 +714,12 @@ function loadUserTranslation() {
         sound: cachedOutput("translation.sound", initialValue),
         entity: cachedOutput("translation.entity", initialValue),
         entityEvent: cachedOutput("translation.entity_event", initialValue),
+        entityFamily: cachedOutput("translation.entity_family", initialValue),
         particleEmitter: cachedOutput("translation.particle_emitter", initialValue),
         animation: cachedOutput("translation.animation", initialValue),
         effect: cachedOutput("translation.effect", initialValue),
         enchant: cachedOutput("translation.enchant", initialValue),
+        fog: cachedOutput("translation.fog", initialValue),
         location: cachedOutput("translation.location", initialValue),
     };
 }
@@ -689,10 +730,12 @@ function saveUserTranslation(userTranslation) {
     cachedOutput("translation.sound", userTranslation.sound);
     cachedOutput("translation.entity", userTranslation.entity);
     cachedOutput("translation.entity_event", userTranslation.entityEvent);
+    cachedOutput("translation.entity_family", userTranslation.entityFamily);
     cachedOutput("translation.particle_emitter", userTranslation.particleEmitter);
     cachedOutput("translation.animation", userTranslation.animation);
     cachedOutput("translation.effect", userTranslation.effect);
     cachedOutput("translation.enchant", userTranslation.enchant);
+    cachedOutput("translation.fog", userTranslation.fog);
     cachedOutput("translation.location", userTranslation.location);
 }
 //#endregion
@@ -726,11 +769,7 @@ async function main() {
     let block = matchTranslations({
         originalArray: enums.blocks,
         translationMap: userTranslation.block,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["ItemSprite"],
-            ...standardizedTranslation["BlockSprite"]
-        },
+        stdTransMap: cascadeMap(standardizedTranslation, ["BlockSprite", "ItemSprite"], true),
         langMap: lang,
         langKeyPrefix: "tile.",
         langKeySuffix: ".name"
@@ -738,11 +777,7 @@ async function main() {
     let item = matchTranslations({
         originalArray: enums.items.filter(item => !enums.blocks.includes(item)),
         translationMap: userTranslation.item,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["BlockSprite"],
-            ...standardizedTranslation["ItemSprite"]
-        },
+        stdTransMap: cascadeMap(standardizedTranslation, ["ItemSprite", "BlockSprite"], true),
         langMap: lang,
         langKeyPrefix: "item.",
         langKeySuffix: ".name"
@@ -750,18 +785,12 @@ async function main() {
     let sound = matchTranslations({
         originalArray: enums.sounds,
         translationMap: userTranslation.sound,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["EntitySprite"]
-        }
+        stdTransMap: cascadeMap(standardizedTranslation, [], true)
     });
     let entity = matchTranslations({
         originalArray: enums.entities,
         translationMap: userTranslation.entity,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["EntitySprite"]
-        },
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
         langMap: lang,
         langKeyPrefix: "entity.",
         langKeySuffix: ".name"
@@ -769,42 +798,50 @@ async function main() {
     let entityEvent = matchTranslations({
         originalArray: Object.keys(enums.entityEventsMap),
         translationMap: userTranslation.entityEvent,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["EntitySprite"]
-        }
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
     });
-    let particleEmitter = matchTranslations({
-        originalArray: enums.particleEmitters,
-        translationMap: userTranslation.particleEmitter
+    let entityFamily = matchTranslations({
+        originalArray: Object.keys(enums.entityFamilyMap),
+        translationMap: userTranslation.entityFamily,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
     });
     let animation = matchTranslations({
         originalArray: enums.animations,
         translationMap: userTranslation.animation,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["EntitySprite"]
-        }
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
     });
     let effect = matchTranslations({
         originalArray: enums.effects,
         translationMap: userTranslation.effect,
-        stdTransMap: {
-            ...standardizedTranslation["Exclusive"],
-            ...standardizedTranslation["EffectSprite"]
-        },
+        stdTransMap: cascadeMap(standardizedTranslation, ["EffectSprite"], true)
     });
     let enchant = matchTranslations({
         originalArray: enums.enchantments,
         translationMap: userTranslation.enchant
     });
+    let particleEmitter = matchTranslations({
+        originalArray: enums.particleEmitters,
+        translationMap: userTranslation.particleEmitter
+    });
+    let fog = matchTranslations({
+        originalArray: enums.fogs,
+        translationMap: userTranslation.fog,
+        stdTransMap: cascadeMap(standardizedTranslation, ["BiomeSprite"], true)
+    });
     let location = matchTranslations({
         originalArray: enums.locations,
-        translationMap: userTranslation.location
+        translationMap: userTranslation.location,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EnvSprite"], true)
     });
     Object.keys(entityEvent.result).forEach(key => {
+        if (entityEvent.result[key]) return;
         let comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
         setInlineCommentAfterField(userTranslation.entityEvent, key, comment);
+    });
+    Object.keys(entityFamily.result).forEach(key => {
+        if (entityFamily.result[key]) return;
+        let comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
+        setInlineCommentAfterField(userTranslation.entityFamily, key, comment);
     });
     let mergedItem = {};
     enums.items.forEach(key => {
@@ -823,10 +860,12 @@ async function main() {
         sound: sound.states,
         entity: entity.states,
         entityEvent: entityEvent.states,
+        entityFamily: entityFamily.states,
         particleEmitter: particleEmitter.states,
         animation: animation.states,
         effect: effect.states,
         enchant: enchant.states,
+        fog: fog.states,
         location: location.states
     });
     let translationMaps = {
@@ -837,24 +876,26 @@ async function main() {
         entity: entity.result,
         summonable_entity: summonableEntity,
         entity_event: entityEvent.result,
+        entity_family: entityFamily.result,
         particle_emitter: particleEmitter.result,
         animation: animation.result,
         effect: effect.result,
         enchant_type: enchant.result,
+        fog: fog.result,
         structure: location.result
     };
-    cachedOutput("output.ids", {
+    fs.writeFileSync(nodePath.resolve(__dirname, "output", "output.ids.json"), JSON.stringify({
         name: "ID表补丁包",
         author: "CA制作组",
         description: "该命令库将旧ID表替换为更新的版本。",
         uuid: "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
         version: [0, 0, 1],
-        require: [],
+        require: ["acf728c5-dd5d-4a38-b43d-7c4f18149fbd", "590cdcb5-3cdf-42fa-902c-b578779335ab"],
         minSupportVer: "0.7.4",
         targetSupportVer: packageDataEnums.version,
         mode: "overwrite",
         enums: translationMaps
-    });
+    }, null, "\t"));
     writeTransMapsExcel(nodePath.resolve(__dirname, "output", "ids.xlsx"), translationMaps);
     saveUserTranslation(userTranslation);
 }
