@@ -10,10 +10,10 @@ async function recogizeCommand(adbClient, deviceSerial) {
     let img = sharp(screenshotPng);
     img.removeAlpha()
         .extract({
-            left: config.commandAreaRect[0],
-            top: config.commandAreaRect[1],
-            width: config.commandAreaRect[2],
-            height: config.commandAreaRect[3]
+            left: config.commandAreaRect["1"][0],
+            top: config.commandAreaRect["1"][1],
+            width: config.commandAreaRect["1"][2],
+            height: config.commandAreaRect["1"][3]
         })
         .negate()
         .threshold(10);

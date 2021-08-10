@@ -67,9 +67,14 @@ const adb = require("adbkit");
 const sharp = require("sharp");
 const tesseract = require("node-tesseract-ocr");
 const tesseractMistakes = require("./tesseract_mistakes.json");
+
+async function adbShell(adbClient, deviceSerial, command) {
+    let stream = await adbClient.shell(deviceSerial, command);
+    return await adb.util.readAll(stream);
+}
+
 async function getDeviceSurfaceOrientation(adbClient, deviceSerial) {
-    let stream = await adbClient.shell(deviceSerial, "dumpsys input | grep SurfaceOrientation | awk '{print $2}' | head -n 1");
-    let output = await adb.util.readAll(stream);
+    let output = await adbShell(adbClient, deviceSerial, "dumpsys input | grep SurfaceOrientation | awk '{print $2}' | head -n 1");
     return parseInt(output.toString().trim());
 }
 
@@ -103,16 +108,20 @@ async function waitForAnyDevice(adbClient) {
     }
 }
 
-async function recogizeCommand(adbClient, deviceSerial) {
+async function captureScreen(adbClient, deviceSerial) {
     let screenshotPngStream = await adbClient.screencap(deviceSerial);
-    let screenshotPng = await adb.util.readAll(screenshotPngStream);
+    return await adb.util.readAll(screenshotPngStream);
+}
+
+async function recogizeCommand(screenshotPng, surfaceOrientation) {
+    let commandAreaRect = config.commandAreaRect[surfaceOrientation];
     let img = sharp(screenshotPng);
     img.removeAlpha()
         .extract({
-            left: config.commandAreaRect[0],
-            top: config.commandAreaRect[1],
-            width: config.commandAreaRect[2],
-            height: config.commandAreaRect[3]
+            left: commandAreaRect[0],
+            top: commandAreaRect[1],
+            width: commandAreaRect[2],
+            height: commandAreaRect[3]
         })
         .negate()
         .threshold(10);
@@ -129,6 +138,10 @@ async function recogizeCommand(adbClient, deviceSerial) {
         return tesseractMistakes[commandText];
     }
     return commandText;
+}
+
+async function recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation) {
+    return await recogizeCommand(await captureScreen(adbClient, deviceSerial), surfaceOrientation);
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
@@ -154,26 +167,26 @@ function guessTruncatedString(truncatedStr, startsWith) {
 }
 
 async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
-    // 初始状态：聊天栏
+    // 初始状态：游戏HUD
     let autocompletions = [];
-
-    console.log("Please reset the command box");
-    await input();
+    let surfaceOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
+    
+    // 打开聊天栏
+    await adbShell(adbClient, deviceSerial, "input keyevent 48"); // KEYCODE_T
 
     console.log("Entering " + command);
-    await adbClient.shell(deviceSerial, "input text " + JSON.stringify(command));
+    await adbShell(adbClient, deviceSerial, "input text " + JSON.stringify(command));
 
     let autocompletedCommand = command.trim();
     let recogizedCommand = autocompletedCommand;
-    await retryUntilComplete(100, 50, async () => {
-        let command = await recogizeCommand(adbClient, deviceSerial);
+    await retryUntilComplete(3, 0, async () => {
+        let command = await recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation);
         return command == autocompletedCommand;
     });
-    await sleepAsync(500);
     while(true) {
-        await adbClient.shell(deviceSerial, "input keyevent 61"); // Tab
-        recogizedCommand = await retryUntilComplete(100, 50, async () => {
-            let command = await recogizeCommand(adbClient, deviceSerial);
+        await adbShell(adbClient, deviceSerial, "input keyevent 61"); // KEYCODE_TAB
+        recogizedCommand = await retryUntilComplete(3, 0, async () => {
+            let command = await recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation);
             return recogizedCommand != command ? command : null;
         });
 
@@ -191,10 +204,15 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
             autocompletions.push(autocompletion);
         }
     }
+
+    // 退出聊天栏
+    await adbShell(adbClient, deviceSerial, "input keyevent 111"); // KEYCODE_ESCAPE
+    await adbShell(adbClient, deviceSerial, "input keyevent 111"); // KEYCODE_ESCAPE
+
     return autocompletions;
 }
 
-async function analyzeAutocompletionEnums() {
+async function analyzeAutocompletionEnums(branch) {
 	console.log("Connecting ADB host...");
 	let adbClient = adb.createClient();
     console.log("Connecting to device...");
@@ -204,73 +222,61 @@ async function analyzeAutocompletionEnums() {
         deviceSerial = await waitForAnyDevice(adbClient);
     }
 
-    let surfaceOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
-    if (surfaceOrientation != config.surfaceOrientation) {
-        throw new Error("Wrong screen orientation: " + surfaceOrientation);
-    }
+    console.log("[" + branch + "] Press <Enter> if the device is ready");
+    await input();
 
     console.log("Analyzing blocks...");
-    let blocks = await cachedOutput("autocompleted.blocks", async () => {
+    let blocks = await cachedOutput(`autocompleted.${branch}.blocks`, async () => {
         return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testforblock ~ ~ ~ ");
     });
 
     console.log("Analyzing items...");
-    let items = await cachedOutput("autocompleted.items", async () => {
+    let items = await cachedOutput(`autocompleted.${branch}.items`, async () => {
         return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/clear @s "))
             .filter(item => item != "[");
     });
 
-    let entityNamespaceProcessor = entities => {
-        return entities.map((entity, _, allEntities) => {
-            if (!entity.includes(":")) {
-                let entityNameWithNamespace = "minecraft:" + entity;
-                if (allEntities.includes(entityNameWithNamespace)) {
-                    return null;
-                }
-            }
-            return entity;
-        }).filter(entity => entity != null);
-    };
     console.log("Analyzing entities...");
-    let entities = await cachedOutput("autocompleted.entities", async () => {
-        return entityNamespaceProcessor(
-            (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testfor @e[type="))
-                .filter(entity => entity != "!")
-        );
+    let entities = await cachedOutput(`autocompleted.${branch}.entities`, async () => {
+        return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testfor @e[type="))
+            .filter(entity => entity != "!");
     });
 
     console.log("Analyzing summonable entities...");
-    let summonableEntities = await cachedOutput("autocompleted.summonable_entities", async () => {
-        return entityNamespaceProcessor(
-            await analyzeCommandAutocompletion(adbClient, deviceSerial, "/summon ")
-        );
+    let summonableEntities = await cachedOutput(`autocompleted.${branch}.summonable_entities`, async () => {
+        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/summon ");
     });
 
     console.log("Analyzing effects...");
-    let effects = await cachedOutput("autocompleted.effects", async () => {
+    let effects = await cachedOutput(`autocompleted.${branch}.effects`, async () => {
         return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/effect @s "))
             .filter(effect => effect != "[" && effect != "clear");
     });
 
     console.log("Analyzing enchantments...");
-    let enchantments = await cachedOutput("autocompleted.enchantments", async () => {
+    let enchantments = await cachedOutput(`autocompleted.${branch}.enchantments`, async () => {
         return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/enchant @s "))
             .filter(enchantment => enchantment != "[");
     });
 
     console.log("Analyzing gamerules...");
-    let gamerules = await cachedOutput("autocompleted.gamerules", async () => {
+    let gamerules = await cachedOutput(`autocompleted.${branch}.gamerules`, async () => {
         return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/gamerule ");
     });
 
     console.log("Analyzing locations...");
-    let locations = await cachedOutput("autocompleted.locations", async () => {
+    let locations = await cachedOutput(`autocompleted.${branch}.locations`, async () => {
         return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/locate ");
     });
 
     console.log("Analyzing mobevents...");
-    let mobevents = await cachedOutput("autocompleted.mobevents", async () => {
+    let mobevents = await cachedOutput(`autocompleted.${branch}.mobevents`, async () => {
         return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/mobevent ");
+    });
+
+    console.log("Analyzing selectors...");
+    let selectors = await cachedOutput(`autocompleted.${branch}.selectors`, async () => {
+        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testfor @e[");
     });
 
     return {
@@ -282,14 +288,26 @@ async function analyzeAutocompletionEnums() {
         enchantments,
         gamerules,
         locations,
-        mobevents
+        mobevents,
+        selectors
     };
 }
 
 async function analyzeAutocompletionEnumsCached() {
-    return cachedOutput("autocompleted", async () => {
-        return await analyzeAutocompletionEnums();
-    });
+    return {
+        vanilla: await cachedOutput("autocompleted.vanilla", async () => {
+            console.log("Please switch to a vanilla world");
+            return await analyzeAutocompletionEnums("vanilla");
+        }),
+        education: await cachedOutput("autocompleted.education", async () => {
+            console.log("Please switch to a education world");
+            return await analyzeAutocompletionEnums("education");
+        }),
+        experiment: await cachedOutput("autocompleted.experiment", async () => {
+            console.log("Please switch to a experiment world");
+            return await analyzeAutocompletionEnums("experiment");
+        })
+    };
 }
 //#endregion
 
@@ -408,16 +426,15 @@ function analyzeApkPackageDataEnums(packageZip) {
     });
 
     return {
-        data: cachedOutput("package.data", {
+        data: {
             sounds,
             particleEmitters,
             animations,
             fogs,
             entityEventsMap,
             entityFamilyMap
-        }),
-        lang: cachedOutput("package.lang", lang),
-        version: config.installPackageVersion
+        },
+        lang: lang
     };
 }
 
@@ -438,11 +455,34 @@ function analyzePackageDataEnums() {
         return analyzeApkPackageDataEnums(new AdmZip(packagePath));
     }
 }
+
+function analyzePackageDataEnumsCached() {
+    let dataCache = cachedOutput("package.data");
+    let langCache = cachedOutput("package.lang");
+    let infoCache = cachedOutput("package.info");
+    if (dataCache && langCache && infoCache && infoCache.packagePath == config.installPackagePath) {
+        return {
+            data: dataCache,
+            lang: langCache,
+            version: infoCache.version
+        };
+    } else {
+        let result = analyzePackageDataEnums();
+        return {
+            data: cachedOutput("package.data", result.data),
+            lang: cachedOutput("package.lang", result.lang),
+            ...cachedOutput("package.info", {
+                version: config.installPackageVersion,
+                packagePath: config.installPackagePath
+            })
+        };
+    }
+}
 //#endregion
 
 //#region Wiki Data Extract
 const got = require("got");
-async function fetchWikiRawChinese(word) {
+async function fetchMZHWikiRaw(word) {
     return await got(`https://minecraft.fandom.com/zh/wiki/${word}?action=raw`).text();
 }
 
@@ -518,13 +558,13 @@ function extendEnumMap(enumMaps) {
 async function fetchStandardizedTranslation() {
     return cachedOutput("wiki.standardized_translation", async () => {
         console.log("Fetching standardized translation for blocks...");
-        let block = parseEnumMapLua(await fetchWikiRawChinese("模块:Autolink/Block"));
+        let block = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Block"));
         console.log("Fetching standardized translation for items...");
-        let item = parseEnumMapLua(await fetchWikiRawChinese("模块:Autolink/Item"));
+        let item = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Item"));
         console.log("Fetching standardized translation for exclusive things...");
-        let exclusive = parseEnumMapLua(await fetchWikiRawChinese("模块:Autolink/Exclusive"));
+        let exclusive = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Exclusive"));
         console.log("Fetching standardized translation for others...");
-        let other = parseEnumMapLua(await fetchWikiRawChinese("模块:Autolink/Other"));
+        let other = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Other"));
         return extendEnumMap({
             BlockSprite: block,
             ItemSprite: item,
@@ -553,7 +593,7 @@ function setInlineCommentAfterField(obj, fieldName, comment) {
 }
 
 function runTemplate(template, getter) {
-    return template.replace(/\{\{([^}]+?)\}\}/g, (_, templateName) => {
+    return template.replace(/\{\{([^}]+)\}\}/g, (_, templateName) => {
         return getter(templateName);
     });
 }
@@ -703,6 +743,18 @@ function cascadeMap(mapOfMap, priority, includeAll) {
     }
     return result;
 };
+
+function removeMinecraftNamespace(array) {
+    return array.map((item, _, array) => {
+        if (!item.includes(":")) {
+            let nameWithNamespace = "minecraft:" + item;
+            if (array.includes(nameWithNamespace)) {
+                return null;
+            }
+        }
+        return item;
+    }).filter(item => item != null);
+}
 //#endregion
 
 //#region User Translation
@@ -756,11 +808,11 @@ function writeTransMapsExcel(outputFile, transMaps) {
 //#endregion
 
 async function main() {
-    let packageDataEnums = analyzePackageDataEnums();
+    let packageDataEnums = analyzePackageDataEnumsCached();
     let autocompletedEnums = await analyzeAutocompletionEnumsCached();
     let enums = {
         ...packageDataEnums.data,
-        ...autocompletedEnums
+        ...autocompletedEnums.vanilla
     };
     let lang = packageDataEnums.lang;
     let standardizedTranslation = await fetchStandardizedTranslation();
@@ -788,7 +840,7 @@ async function main() {
         stdTransMap: cascadeMap(standardizedTranslation, [], true)
     });
     let entity = matchTranslations({
-        originalArray: enums.entities,
+        originalArray: removeMinecraftNamespace(enums.entities),
         translationMap: userTranslation.entity,
         stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
         langMap: lang,
@@ -896,7 +948,7 @@ async function main() {
         mode: "overwrite",
         enums: translationMaps
     }, null, "\t"));
-    writeTransMapsExcel(nodePath.resolve(__dirname, "output", "ids.xlsx"), translationMaps);
+    writeTransMapsExcel(nodePath.resolve(__dirname, "output", "output.ids.xlsx"), translationMaps);
     saveUserTranslation(userTranslation);
 }
 

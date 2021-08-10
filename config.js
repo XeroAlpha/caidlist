@@ -11,8 +11,9 @@ exports.tesseract = {
     "tessdata-dir": __dirname + "/tesstrain/tessdata"
 }
 
-// ← 屏幕朝向
-exports.surfaceOrientation = 1;
 // 命令区域大小
-exports.commandAreaRect = [479, 950, 1650, 125];
+exports.commandAreaRect = {
+    "1": [479, 950, 1650, 125], // <- phone
+    "3": [410, 950, 1650, 125]  // phone ->
+};
 //#endregion
