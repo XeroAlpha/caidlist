@@ -315,21 +315,26 @@ async function analyzeAutocompletionEnums(branch) {
     };
 }
 
-async function analyzeAutocompletionEnumsCached() {
-    return {
+async function analyzeAutocompletionEnumsCached(packageType) {
+    let result = {
         vanilla: await cachedOutput("autocompleted.vanilla", async () => {
             console.log("Please switch to a vanilla world");
             return await analyzeAutocompletionEnums("vanilla");
-        }),
-        education: await cachedOutput("autocompleted.education", async () => {
-            console.log("Please switch to a education world");
-            return await analyzeAutocompletionEnums("education");
-        }),
-        experiment: await cachedOutput("autocompleted.experiment", async () => {
-            console.log("Please switch to a experiment world");
-            return await analyzeAutocompletionEnums("experiment");
         })
     };
+    if (packageType != "netease") {
+        result.education = await cachedOutput("autocompleted.education", async () => {
+            console.log("Please switch to a education world");
+            return await analyzeAutocompletionEnums("education");
+        });
+    }
+    if (packageType == "beta") {
+        result.experiment = await cachedOutput("autocompleted.experiment", async () => {
+            console.log("Please switch to a experiment world");
+            return await analyzeAutocompletionEnums("experiment");
+        });
+    }
+    return result;
 }
 //#endregion
 
@@ -486,7 +491,8 @@ function analyzePackageDataEnumsCached() {
         return {
             data: dataCache,
             lang: langCache,
-            version: infoCache.version
+            version: infoCache.version,
+            packageType: infoCache.type
         };
     } else {
         let result = analyzePackageDataEnums();
@@ -495,6 +501,7 @@ function analyzePackageDataEnumsCached() {
             lang: cachedOutput("package.lang", result.lang),
             ...cachedOutput("package.info", {
                 version: config.installPackageVersion,
+                type: config.installPackageType,
                 packagePath: config.installPackagePath
             })
         };
@@ -831,7 +838,7 @@ function writeTransMapsExcel(outputFile, transMaps) {
 
 async function main() {
     let packageDataEnums = analyzePackageDataEnumsCached();
-    let autocompletedEnums = await analyzeAutocompletionEnumsCached();
+    let autocompletedEnums = await analyzeAutocompletionEnumsCached(packageDataEnums.packageType);
     let enums = {
         ...packageDataEnums.data,
         ...autocompletedEnums.vanilla
