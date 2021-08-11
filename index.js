@@ -60,6 +60,27 @@ function input(query) {
         });
     });
 }
+
+function pause(query) {
+    return input(query);
+}
+
+function checkPause(timeout, query) {
+    return new Promise(resolve => {
+        let stdin = process.stdin;
+        let hasSignal = false;
+        let onData = () => hasSignal = true;
+        stdin.on("data", onData);
+        setTimeout(() => {
+            stdin.removeListener("data", onData);
+            if (hasSignal) {
+                pause(query).then(resolve);
+            } else {
+                resolve();
+            }
+        }, timeout);
+    });
+}
 //#endregion
 
 //#region Autocompletion related
@@ -170,6 +191,8 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
     // 初始状态：游戏HUD
     let autocompletions = [];
     let surfaceOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
+
+    await checkPause(10, "Press <Enter> to continue");
     
     // 打开聊天栏
     await adbShell(adbClient, deviceSerial, "input keyevent 48"); // KEYCODE_T
@@ -222,8 +245,7 @@ async function analyzeAutocompletionEnums(branch) {
         deviceSerial = await waitForAnyDevice(adbClient);
     }
 
-    console.log("[" + branch + "] Press <Enter> if the device is ready");
-    await input();
+    await pause("[" + branch + "] Press <Enter> if the device is ready");
 
     console.log("Analyzing blocks...");
     let blocks = await cachedOutput(`autocompleted.${branch}.blocks`, async () => {
