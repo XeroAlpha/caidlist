@@ -422,18 +422,23 @@ function analyzeApkPackageDataEnums(packageZip) {
                 formatVersion == "1.17.20") {
                 let id = entity["minecraft:entity"]["description"]["identifier"];
                 let events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
-                let components = entity["minecraft:entity"]["components"] ?? {};
-                let typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
-                let typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
+                let globalComponents = entity["minecraft:entity"]["components"] ?? {};
+                let componentGroups = entity["minecraft:entity"]["component_groups"] ?? {};
                 events.forEach(event => {
                     let eventOwners = entityEventsMap[event];
                     if (!eventOwners) eventOwners = entityEventsMap[event] = [];
                     eventOwners.push(id);
                 });
-                typeFamilies.forEach(familyName => {
-                    let familyMembers = entityFamilyMap[familyName];
-                    if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
-                    familyMembers.push(id);
+                [ null, ...Object.keys(componentGroups) ].forEach(componentName => {
+                    let groupId = componentName ? `${id}/${componentName}` : id;
+                    let components = componentName ? componentGroups[componentName] : globalComponents;
+                    let typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
+                    let typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
+                    typeFamilies.forEach(familyName => {
+                        let familyMembers = entityFamilyMap[familyName];
+                        if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
+                        familyMembers.push(groupId);
+                    });
                 });
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);

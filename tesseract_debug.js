@@ -49,6 +49,7 @@ async function tesseractDebug() {
     let deviceSerial = (await adbClient.listDevices())[0].id;
     let screenPng = await captureScreen(adbClient, deviceSerial);
     let screenOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
+    console.log("screenOrientation = " + screenOrientation);
     console.log(await recogizeCommandDebug(screenPng, screenOrientation));
 }
 
