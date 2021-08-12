@@ -145,7 +145,7 @@ async function recogizeCommand(screenshotPng, surfaceOrientation) {
             height: commandAreaRect[3]
         })
         .negate()
-        .threshold(10);
+        .threshold(60);
     let commandTextImage = await img.png().toBuffer();
     // await img.png().toFile("test.png");
     let commandText = await tesseract.recognize(commandTextImage, {

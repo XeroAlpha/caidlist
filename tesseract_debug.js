@@ -30,7 +30,7 @@ async function recogizeCommandDebug(screenshotPng, surfaceOrientation) {
             height: commandAreaRect[3]
         })
         .negate()
-        .threshold(10);
+        .threshold(60);
     let commandTextImage = await img.png().toBuffer();
     fs.writeFileSync("./tstest_input.png", screenshotPng);
     fs.writeFileSync("./tstest_output.png", commandTextImage);
