@@ -627,7 +627,7 @@ function setInlineCommentAfterField(obj, fieldName, comment) {
 }
 
 function runTemplate(template, getter) {
-    return template.replace(/\{\{([^}]+)\}\}/g, (_, templateName) => {
+    return template.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, templateName) => {
         return getter(templateName);
     });
 }
