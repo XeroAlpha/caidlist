@@ -38,4 +38,51 @@
 
 ### 校对
 1. 检查输出的 `output.ids.json`（拓展包）与 `output.ids.xlsx`（ID-翻译对照表）。发现错译、漏译时请修改对应的 `translate.xxxxx.json`，随后从“运行”工作流继续。
-2. `translate.xxxxx.json` 支持引用标准化译名表数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。
+2. `translate.xxxxx.json` 支持引用标准化译名表数据与Java版语言数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。具体格式请参见 [翻译流程介绍](#翻译流程介绍) 一节。
+
+## 翻译流程介绍
+
+ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用户自定义译名表、标准化译名表、基岩版语言文件。
+
+用户自定义译名表即为 `translate.xxxxx.json`，为可带有注释的 JSON（即 JSONC）键值对。其中键通常为 ID，值为 ID 对应的翻译。当从用户自定义译名表中加载翻译时，生成工具会根据对应的 ID 在用户自定义译名表中搜索对应的翻译。
+
+当从 [标准化译名表](https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中加载翻译时，生成工具会将 ID 转换为自然英语形式（全部小写，将下划线“_”替换为空格）后在标准化译名表中搜索。
+
+当从基岩版语言文件中加载翻译时，生成工具会先尝试搜索ID为 `<前缀>.<ID>.<后缀>` 形式的条目，随后尝试搜索所有满足 `<前缀>.<含有ID的字符串>.<后缀>` 条件的条目。
+
+如果通过以上流程均无法找到翻译，则置空。
+
+用户自定义译名表的值支持为以下格式：
+
+- 字面量。例如 `僵尸`。
+- 直接引用。格式为 `<引用来源ID>: <引用ID>`。目前支持以下引用来源：
+    - 标准化译名表，引用 ID 为表中条目对应的英语。引用来源 ID 为 `ST`，例如 `ST: zombie` 可以表示 `僵尸`。
+    - Java版语言文件，引用 ID 为条目 ID。引用来源 ID 为 `JE`，例如 `JE: entity.minecraft.zombie` 也可表示 `僵尸`。
+    - 其他翻译。例如 `entity: zombie` 会引用实体翻译中僵尸的翻译。
+        - 注意，翻译条目只能引用在此之前翻译完成的列表中的条目。
+- 拼接模板。在字面量中穿插 `{{模板表达式}}`，生成工具会自动解释模板表达式并将模板表达式与字面量拼接起来。模板表达式支持以下格式：
+    - 内部引用。格式为 `{{<ID>}}`，通过此方法可直接引用已有的翻译。例如 `{{zombie}}{{villager}}` 可以表示为 `僵尸村民`（并不推荐这么做）。
+    - 外部引用。格式为 `{{<引用来源ID>!<引用ID>}}`。例如 `{{ST!zombie}}` 可以表示 `僵尸`。
+    - 模板引用。格式为 `{{模板|参数1|参数2|...}}`。例如：
+        - `{{JE!record.nowPlaying|JE!item.minecraft.music_disc_strad.desc}}` 表示 `正在播放：C418 - strad`。
+        - `{{JE!record.nowPlaying|'My Music}}` 表示 `正在播放：My Music`。
+
+翻译顺序为：
+
+|顺序|枚举名|ID|枚举来源|
+|---|---|---|---|
+|1|方块|block|`/testforblock ~ ~ ~ <Tab>`|
+|2|物品（不是方块）|item|从物品列表中移除所有方块|
+|3|实体|entity|`/testfor @e[type=<Tab>`|
+|4|状态效果|effect|`/effect @s <Tab>`|
+|5|附魔类型|enchant|`/enchant @s <Tab>`|
+|6|距离模糊配置|fog|/assets/resource_packs/?/fogs/*.json|
+|7|结构|location|`/locate <Tab>`|
+|8|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
+|9|实体类型分类|entityFamily|/assets/behavior_packs/?/entities/*.json|
+|10|动画控制器|animation|/assets/resource_packs/?/animations/*.json|
+|11|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
+|12|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
+|13|物品|item|`/clear @s <Tab>`|
+|14|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
+|15|可生成的实体|summonableEntity|`/summon <Tab>`|

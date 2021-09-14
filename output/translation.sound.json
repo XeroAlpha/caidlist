@@ -1,981 +1,1062 @@
 {
-    "ambient.basalt_deltas.additions": "",
-    "ambient.basalt_deltas.loop": "",
-    "ambient.basalt_deltas.mood": "",
-    "ambient.candle": "",
-    "ambient.cave": "",
-    "ambient.crimson_forest.additions": "",
-    "ambient.crimson_forest.loop": "",
-    "ambient.crimson_forest.mood": "",
-    "ambient.nether_wastes.additions": "",
-    "ambient.nether_wastes.loop": "",
-    "ambient.nether_wastes.mood": "",
-    "ambient.soulsand_valley.additions": "",
-    "ambient.soulsand_valley.loop": "",
-    "ambient.soulsand_valley.mood": "",
-    "ambient.warped_forest.additions": "",
-    "ambient.warped_forest.loop": "",
-    "ambient.warped_forest.mood": "",
-    "ambient.weather.lightning.impact": "",
-    "ambient.weather.rain": "",
-    "ambient.weather.thunder": "",
-    "armor.equip_chain": "",
-    "armor.equip_diamond": "",
-    "armor.equip_generic": "",
-    "armor.equip_gold": "",
-    "armor.equip_iron": "",
-    "armor.equip_leather": "",
-    "armor.equip_netherite": "",
-    "beacon.activate": "",
-    "beacon.ambient": "",
-    "beacon.deactivate": "",
-    "beacon.power": "",
-    "block.bamboo.break": "",
-    "block.bamboo.fall": "",
-    "block.bamboo.hit": "",
-    "block.bamboo.place": "",
-    "block.bamboo.step": "",
-    "block.bamboo_sapling.break": "",
-    "block.bamboo_sapling.place": "",
-    "block.barrel.close": "",
-    "block.barrel.open": "",
-    "block.beehive.drip": "",
-    "block.beehive.enter": "",
-    "block.beehive.exit": "",
-    "block.beehive.shear": "",
-    "block.beehive.work": "",
-    "block.bell.hit": "",
-    "block.blastfurnace.fire_crackle": "",
-    "block.bowhit": "",
-    "block.campfire.crackle": "",
-    "block.cartography_table.use": "",
-    "block.chorusflower.death": "",
-    "block.chorusflower.grow": "",
+    "ambient.*.additions": "%s：环境附加音效",
+    "ambient.*.loop": "%s：环境循环音效",
+    "ambient.*.mood": "%s：{{JE!subtitles.ambient.cave}}", // %s：怪异的噪声
+    "ambient.basalt_deltas.additions": "{{ambient.*.additions|ST!basalt deltas}}", // 玄武岩三角洲：环境附加音效
+    "ambient.basalt_deltas.loop": "{{ambient.*.loop|ST!basalt deltas}}", // 玄武岩三角洲：环境循环音效
+    "ambient.basalt_deltas.mood": "{{ambient.*.mood|ST!basalt deltas}}", // 玄武岩三角洲：怪异的噪声
+    "ambient.candle": "JE: subtitles.block.candle.crackle", // 蜡烛：噼啪作响
+    "ambient.cave": "{{ambient.*.mood|ST!cave}}", // 洞穴：怪异的噪声
+    "ambient.crimson_forest.additions": "{{ambient.*.additions|ST!crimson forest}}", // 绯红森林：环境附加音效
+    "ambient.crimson_forest.loop": "{{ambient.*.loop|ST!crimson forest}}", // 绯红森林：环境循环音效
+    "ambient.crimson_forest.mood": "{{ambient.*.mood|ST!crimson forest}}", // 绯红森林：怪异的噪声
+    "ambient.nether_wastes.additions": "{{ambient.*.additions|ST!nether wastes}}", // 下界荒地：环境附加音效
+    "ambient.nether_wastes.loop": "{{ambient.*.loop|ST!nether wastes}}", // 下界荒地：环境循环音效
+    "ambient.nether_wastes.mood": "{{ambient.*.mood|ST!nether wastes}}", // 下界荒地：怪异的噪声
+    "ambient.soulsand_valley.additions": "{{ambient.*.additions|ST!soul sand valley}}", // 灵魂沙峡谷：环境附加音效
+    "ambient.soulsand_valley.loop": "{{ambient.*.loop|ST!soul sand valley}}", // 灵魂沙峡谷：环境循环音效
+    "ambient.soulsand_valley.mood": "{{ambient.*.mood|ST!soul sand valley}}", // 灵魂沙峡谷：怪异的噪声
+    "ambient.warped_forest.additions": "{{ambient.*.additions|ST!warped forest}}", // 诡异森林：环境附加音效
+    "ambient.warped_forest.loop": "{{ambient.*.loop|ST!warped forest}}", // 诡异森林：环境循环音效
+    "ambient.warped_forest.mood": "{{ambient.*.mood|ST!warped forest}}", // 诡异森林：怪异的噪声
+    "ambient.weather.lightning.impact": "JE: subtitles.entity.lightning_bolt.impact", // 电闪
+    "ambient.weather.rain": "JE: subtitles.weather.rain", // 雨：落下
+    "ambient.weather.thunder": "JE: subtitles.entity.lightning_bolt.thunder", // 雷鸣
+    "armor.equip_chain": "JE: subtitles.item.armor.equip_chain", // 锁链盔甲：碰擦
+    "armor.equip_diamond": "JE: subtitles.item.armor.equip_diamond", // 钻石盔甲：碰擦
+    "armor.equip_generic": "JE: subtitles.item.armor.equip", // 盔甲：装备
+    "armor.equip_gold": "JE: subtitles.item.armor.equip_gold", // 黄金盔甲：叮当
+    "armor.equip_iron": "JE: subtitles.item.armor.equip_iron", // 铁质盔甲：铿锵
+    "armor.equip_leather": "JE: subtitles.item.armor.equip_leather", // 皮革护甲：摩擦
+    "armor.equip_netherite": "JE: subtitles.item.armor.equip_netherite", // 下界合金盔甲：铿锵
+    "beacon.activate": "JE: subtitles.block.beacon.activate", // 信标：激活
+    "beacon.ambient": "JE: subtitles.block.beacon.ambient", // 信标：嗡嗡作响
+    "beacon.deactivate": "JE: subtitles.block.beacon.deactivate", // 信标：失效
+    "beacon.power": "JE: subtitles.block.beacon.power_select", // 信标：选择效果
+    "block.*.break": "%s：被破坏",
+    "block.*.climb": "%s：被攀爬",
+    "block.*.fall": "%s：某物摔落",
+    "block.*.hit": "%s：损坏中",
+    "block.*.hurt": "%s：造成伤害",
+    "block.*.jump": "%s：某物跳跃",
+    "block.*.land": "%s：某物着陆",
+    "block.*.place": "%s：被放置",
+    "block.*.step": "%s：踩上",
+    "block.*.use": "%s：使用",
+    "block.bamboo.break": "{{block.*.break|block!bamboo}}", // 竹子：被破坏
+    "block.bamboo.fall": "{{block.*.fall|block!bamboo}}", // 竹子：某物摔落
+    "block.bamboo.hit": "{{block.*.hit|block!bamboo}}", // 竹子：损坏中
+    "block.bamboo.place": "{{block.*.place|block!bamboo}}", // 竹子：被放置
+    "block.bamboo.step": "{{block.*.step|block!bamboo}}", // 竹子：踩上
+    "block.bamboo_sapling.break": "{{block.*.break|block!bamboo_sapling}}", // 竹笋：被破坏
+    "block.bamboo_sapling.place": "{{block.*.place|block!bamboo_sapling}}", // 竹笋：被放置
+    "block.barrel.close": "JE: subtitles.block.barrel.close", // 木桶：关闭
+    "block.barrel.open": "JE: subtitles.block.barrel.open", // 木桶：打开
+    "block.beehive.drip": "JE: subtitles.block.beehive.drip", // 蜂蜜：滴落
+    "block.beehive.enter": "JE: subtitles.block.beehive.enter", // 蜜蜂：入巢
+    "block.beehive.exit": "JE: subtitles.block.beehive.exit", // 蜜蜂：离巢
+    "block.beehive.shear": "JE: subtitles.block.beehive.shear", // 剪刀：刮削
+    "block.beehive.work": "JE: subtitles.block.beehive.work", // 蜜蜂：工作
+    "block.bell.hit": "JE: subtitles.block.bell.use", // 钟：响起
+    "block.blastfurnace.fire_crackle": "JE: subtitles.block.blastfurnace.fire_crackle", // 高炉：噼啪作响
+    "block.bowhit": "JE: subtitles.entity.arrow.hit", // 箭：击中
+    "block.campfire.crackle": "JE: subtitles.block.campfire.crackle", // 营火：噼啪作响
+    "block.cartography_table.use": "JE: subtitles.ui.cartography_table.take_result", // 地图：绘制
+    "block.chorusflower.death": "JE: subtitles.block.chorus_flower.death", // 紫颂花：凋零
+    "block.chorusflower.grow": "JE: subtitles.block.chorus_flower.grow", // 紫颂花：生长
     "block.click": "",
-    "block.composter.empty": "",
-    "block.composter.fill": "",
-    "block.composter.fill_success": "",
-    "block.composter.ready": "",
-    "block.end_portal.spawn": "",
-    "block.end_portal_frame.fill": "",
-    "block.false_permissions": "",
-    "block.furnace.lit": "",
-    "block.grindstone.use": "",
-    "block.itemframe.add_item": "",
-    "block.itemframe.break": "",
-    "block.itemframe.place": "",
-    "block.itemframe.remove_item": "",
-    "block.itemframe.rotate_item": "",
-    "block.lantern.break": "",
-    "block.lantern.fall": "",
-    "block.lantern.hit": "",
-    "block.lantern.place": "",
-    "block.lantern.step": "",
-    "block.loom.use": "",
-    "block.scaffolding.break": "",
-    "block.scaffolding.climb": "",
-    "block.scaffolding.fall": "",
-    "block.scaffolding.hit": "",
-    "block.scaffolding.place": "",
-    "block.scaffolding.step": "",
-    "block.smoker.smoke": "",
-    "block.stonecutter.use": "",
-    "block.sweet_berry_bush.break": "",
-    "block.sweet_berry_bush.hurt": "",
-    "block.sweet_berry_bush.pick": "",
-    "block.sweet_berry_bush.place": "",
-    "block.turtle_egg.break": "",
-    "block.turtle_egg.crack": "",
-    "block.turtle_egg.drop": "",
-    "bottle.dragonbreath": "",
-    "break.amethyst_block": "",
-    "break.amethyst_cluster": "",
-    "break.azalea": "",
-    "break.big_dripleaf": "",
-    "break.calcite": "",
-    "break.dirt_with_roots": "",
-    "break.dripstone_block": "",
-    "break.hanging_roots": "",
-    "break.large_amethyst_bud": "",
-    "break.medium_amethyst_bud": "",
-    "break.pointed_dripstone": "",
-    "break.small_amethyst_bud": "",
-    "break.spore_blossom": "",
-    "break.tuff": "",
-    "bubble.down": "",
-    "bubble.downinside": "",
-    "bubble.pop": "",
-    "bubble.up": "",
-    "bubble.upinside": "",
-    "bucket.empty_fish": "",
-    "bucket.empty_lava": "",
-    "bucket.empty_powder_snow": "",
-    "bucket.empty_water": "",
-    "bucket.fill_fish": "",
-    "bucket.fill_lava": "",
-    "bucket.fill_powder_snow": "",
-    "bucket.fill_water": "",
-    "cake.add_candle": "",
-    "camera.take_picture": "",
-    "cauldron.adddye": "",
-    "cauldron.cleanarmor": "",
-    "cauldron.cleanbanner": "",
-    "cauldron.dyearmor": "",
-    "cauldron.explode": "",
-    "cauldron.fillpotion": "",
-    "cauldron.fillwater": "",
-    "cauldron.takepotion": "",
-    "cauldron.takewater": "",
-    "cauldron_drip.lava.pointed_dripstone": "",
-    "cauldron_drip.water.pointed_dripstone": "",
-    "chime.amethyst_block": "",
-    "component.jump_to_block": "",
-    "conduit.activate": "",
-    "conduit.ambient": "",
-    "conduit.attack": "",
-    "conduit.deactivate": "",
-    "conduit.short": "",
-    "copper.wax.off": "",
-    "copper.wax.on": "",
-    "crossbow.loading.end": "",
-    "crossbow.loading.middle": "",
-    "crossbow.loading.start": "",
-    "crossbow.quick_charge.end": "",
-    "crossbow.quick_charge.middle": "",
-    "crossbow.quick_charge.start": "",
-    "crossbow.shoot": "",
-    "damage.fallbig": "",
-    "damage.fallsmall": "",
-    "dig.ancient_debris": "",
-    "dig.azalea_leaves": "",
-    "dig.basalt": "",
-    "dig.bone_block": "",
-    "dig.candle": "",
-    "dig.cave_vines": "",
-    "dig.chain": "",
-    "dig.cloth": "",
-    "dig.copper": "",
-    "dig.coral": "",
-    "dig.deepslate": "",
-    "dig.deepslate_bricks": "",
-    "dig.fungus": "",
-    "dig.grass": "",
-    "dig.gravel": "",
-    "dig.honey_block": "",
-    "dig.lodestone": "",
-    "dig.moss": "",
-    "dig.nether_brick": "",
-    "dig.nether_gold_ore": "",
-    "dig.nether_sprouts": "",
-    "dig.nether_wart": "",
-    "dig.netherite": "",
-    "dig.netherrack": "",
-    "dig.nylium": "",
-    "dig.powder_snow": "",
-    "dig.roots": "",
-    "dig.sand": "",
-    "dig.shroomlight": "",
-    "dig.snow": "",
-    "dig.soul_sand": "",
-    "dig.soul_soil": "",
-    "dig.stem": "",
-    "dig.stone": "",
-    "dig.vines": "",
-    "dig.wood": "",
-    "drip.lava.pointed_dripstone": "",
-    "drip.water.pointed_dripstone": "",
-    "elytra.loop": "",
-    "entity.zombie.converted_to_drowned": "",
-    "extinguish.candle": "",
-    "fall.amethyst_block": "",
-    "fall.amethyst_cluster": "",
-    "fall.ancient_debris": "",
-    "fall.azalea": "",
-    "fall.azalea_leaves": "",
-    "fall.basalt": "",
-    "fall.big_dripleaf": "",
-    "fall.bone_block": "",
-    "fall.calcite": "",
-    "fall.cave_vines": "",
-    "fall.chain": "",
-    "fall.cloth": "",
-    "fall.copper": "",
-    "fall.coral": "",
-    "fall.deepslate": "",
-    "fall.deepslate_bricks": "",
-    "fall.dirt_with_roots": "",
-    "fall.dripstone_block": "",
-    "fall.egg": "",
-    "fall.grass": "",
-    "fall.gravel": "",
-    "fall.hanging_roots": "",
-    "fall.honey_block": "",
-    "fall.ladder": "",
-    "fall.moss": "",
-    "fall.nether_brick": "",
-    "fall.nether_gold_ore": "",
-    "fall.nether_sprouts": "",
-    "fall.nether_wart": "",
-    "fall.netherite": "",
-    "fall.netherrack": "",
-    "fall.nylium": "",
-    "fall.pointed_dripstone": "",
-    "fall.powder_snow": "",
-    "fall.roots": "",
-    "fall.sand": "",
-    "fall.shroomlight": "",
-    "fall.slime": "",
-    "fall.snow": "",
-    "fall.soul_sand": "",
-    "fall.soul_soil": "",
-    "fall.spore_blossom": "",
-    "fall.stem": "",
-    "fall.stone": "",
-    "fall.tuff": "",
-    "fall.vines": "",
-    "fall.wood": "",
-    "fire.fire": "",
-    "fire.ignite": "",
-    "firework.blast": "",
-    "firework.large_blast": "",
-    "firework.launch": "",
-    "firework.shoot": "",
-    "firework.twinkle": "",
-    "game.player.attack.nodamage": "",
-    "game.player.attack.strong": "",
-    "game.player.die": "",
-    "game.player.hurt": "",
-    "hit.amethyst_block": "",
-    "hit.amethyst_cluster": "",
-    "hit.ancient_debris": "",
-    "hit.anvil": "",
-    "hit.azalea": "",
-    "hit.azalea_leaves": "",
-    "hit.basalt": "",
-    "hit.big_dripleaf": "",
-    "hit.bone_block": "",
-    "hit.calcite": "",
-    "hit.candle": "",
-    "hit.cave_vines": "",
-    "hit.chain": "",
-    "hit.cloth": "",
-    "hit.copper": "",
-    "hit.coral": "",
-    "hit.deepslate": "",
-    "hit.deepslate_bricks": "",
-    "hit.dirt_with_roots": "",
-    "hit.dripstone_block": "",
-    "hit.grass": "",
-    "hit.gravel": "",
-    "hit.hanging_roots": "",
-    "hit.honey_block": "",
-    "hit.ladder": "",
-    "hit.moss": "",
-    "hit.nether_brick": "",
-    "hit.nether_gold_ore": "",
-    "hit.nether_sprouts": "",
-    "hit.nether_wart": "",
-    "hit.netherite": "",
-    "hit.netherrack": "",
-    "hit.nylium": "",
-    "hit.pointed_dripstone": "",
-    "hit.powder_snow": "",
-    "hit.roots": "",
-    "hit.sand": "",
-    "hit.shroomlight": "",
-    "hit.slime": "",
-    "hit.snow": "",
-    "hit.soul_sand": "",
-    "hit.soul_soil": "",
-    "hit.spore_blossom": "",
-    "hit.stem": "",
-    "hit.stone": "",
-    "hit.tuff": "",
-    "hit.vines": "",
-    "hit.wood": "",
-    "item.bone_meal.use": "",
-    "item.book.page_turn": "",
-    "item.book.put": "",
-    "item.shield.block": "",
-    "item.spyglass.stop_using": "",
-    "item.spyglass.use": "",
-    "item.trident.hit": "",
-    "item.trident.hit_ground": "",
-    "item.trident.return": "",
-    "item.trident.riptide_1": "",
-    "item.trident.riptide_2": "",
-    "item.trident.riptide_3": "",
-    "item.trident.throw": "",
-    "item.trident.thunder": "",
-    "jump.ancient_debris": "",
-    "jump.azalea": "",
-    "jump.basalt": "",
-    "jump.big_dripleaf": "",
-    "jump.bone_block": "",
-    "jump.cave_vines": "",
-    "jump.chain": "",
-    "jump.cloth": "",
-    "jump.coral": "",
-    "jump.deepslate": "",
-    "jump.deepslate_bricks": "",
-    "jump.dirt_with_roots": "",
-    "jump.dripstone_block": "",
-    "jump.grass": "",
-    "jump.gravel": "",
-    "jump.hanging_roots": "",
-    "jump.honey_block": "",
-    "jump.moss": "",
-    "jump.nether_brick": "",
-    "jump.nether_gold_ore": "",
-    "jump.nether_sprouts": "",
-    "jump.nether_wart": "",
-    "jump.netherite": "",
-    "jump.netherrack": "",
-    "jump.nylium": "",
-    "jump.pointed_dripstone": "",
-    "jump.roots": "",
-    "jump.sand": "",
-    "jump.shroomlight": "",
-    "jump.slime": "",
-    "jump.snow": "",
-    "jump.soul_sand": "",
-    "jump.soul_soil": "",
-    "jump.spore_blossom": "",
-    "jump.stem": "",
-    "jump.stone": "",
-    "jump.vines": "",
-    "jump.wood": "",
-    "land.ancient_debris": "",
-    "land.azalea": "",
-    "land.basalt": "",
-    "land.big_dripleaf": "",
-    "land.bone_block": "",
-    "land.cave_vines": "",
-    "land.chain": "",
-    "land.cloth": "",
-    "land.coral": "",
-    "land.deepslate": "",
-    "land.deepslate_bricks": "",
-    "land.dirt_with_roots": "",
-    "land.dripstone_block": "",
-    "land.grass": "",
-    "land.gravel": "",
-    "land.hanging_roots": "",
-    "land.honey_block": "",
-    "land.moss": "",
-    "land.nether_brick": "",
-    "land.nether_gold_ore": "",
-    "land.nether_sprouts": "",
-    "land.nether_wart": "",
-    "land.netherite": "",
-    "land.netherrack": "",
-    "land.nylium": "",
-    "land.pointed_dripstone": "",
-    "land.roots": "",
-    "land.sand": "",
-    "land.shroomlight": "",
-    "land.slime": "",
-    "land.snow": "",
-    "land.soul_sand": "",
-    "land.soul_soil": "",
-    "land.spore_blossom": "",
-    "land.stem": "",
-    "land.stone": "",
-    "land.vines": "",
-    "land.wood": "",
-    "leashknot.break": "",
-    "leashknot.place": "",
-    "liquid.lava": "",
-    "liquid.lavapop": "",
-    "liquid.water": "",
-    "lodestone_compass.link_compass_to_lodestone": "",
-    "minecart.base": "",
-    "minecart.inside": "",
-    "mob.agent.spawn": "",
-    "mob.armor_stand.break": "",
-    "mob.armor_stand.hit": "",
-    "mob.armor_stand.land": "",
-    "mob.armor_stand.place": "",
-    "mob.axolotl.attack": "",
-    "mob.axolotl.death": "",
-    "mob.axolotl.hurt": "",
-    "mob.axolotl.idle": "",
-    "mob.axolotl.idle_water": "",
-    "mob.axolotl.splash": "",
-    "mob.axolotl.swim": "",
-    "mob.bat.death": "",
-    "mob.bat.hurt": "",
-    "mob.bat.idle": "",
-    "mob.bat.takeoff": "",
-    "mob.bee.aggressive": "",
-    "mob.bee.death": "",
-    "mob.bee.hurt": "",
-    "mob.bee.loop": "",
-    "mob.bee.pollinate": "",
-    "mob.bee.sting": "",
-    "mob.blaze.breathe": "",
-    "mob.blaze.death": "",
-    "mob.blaze.hit": "",
-    "mob.blaze.shoot": "",
-    "mob.cat.beg": "",
-    "mob.cat.eat": "",
-    "mob.cat.hiss": "",
-    "mob.cat.hit": "",
-    "mob.cat.meow": "",
-    "mob.cat.purr": "",
-    "mob.cat.purreow": "",
-    "mob.cat.straymeow": "",
-    "mob.chicken.hurt": "",
-    "mob.chicken.plop": "",
-    "mob.chicken.say": "",
-    "mob.chicken.step": "",
-    "mob.cow.hurt": "",
-    "mob.cow.milk": "",
-    "mob.cow.say": "",
-    "mob.cow.step": "",
-    "mob.creeper.death": "",
-    "mob.creeper.say": "",
-    "mob.dolphin.attack": "",
-    "mob.dolphin.blowhole": "",
-    "mob.dolphin.death": "",
-    "mob.dolphin.eat": "",
-    "mob.dolphin.hurt": "",
-    "mob.dolphin.idle": "",
-    "mob.dolphin.idle_water": "",
-    "mob.dolphin.jump": "",
-    "mob.dolphin.play": "",
-    "mob.dolphin.splash": "",
-    "mob.dolphin.swim": "",
-    "mob.drowned.death": "",
-    "mob.drowned.death_water": "",
-    "mob.drowned.hurt": "",
-    "mob.drowned.hurt_water": "",
-    "mob.drowned.say": "",
-    "mob.drowned.say_water": "",
-    "mob.drowned.shoot": "",
-    "mob.drowned.step": "",
-    "mob.drowned.swim": "",
-    "mob.elderguardian.curse": "",
-    "mob.elderguardian.death": "",
-    "mob.elderguardian.hit": "",
-    "mob.elderguardian.idle": "",
-    "mob.enderdragon.death": "",
-    "mob.enderdragon.flap": "",
-    "mob.enderdragon.growl": "",
-    "mob.enderdragon.hit": "",
-    "mob.endermen.death": "",
-    "mob.endermen.hit": "",
-    "mob.endermen.idle": "",
-    "mob.endermen.portal": "",
-    "mob.endermen.scream": "",
-    "mob.endermen.stare": "",
-    "mob.endermite.hit": "",
-    "mob.endermite.kill": "",
-    "mob.endermite.say": "",
-    "mob.endermite.step": "",
-    "mob.evocation_fangs.attack": "",
-    "mob.evocation_illager.ambient": "",
-    "mob.evocation_illager.cast_spell": "",
-    "mob.evocation_illager.celebrate": "",
-    "mob.evocation_illager.death": "",
-    "mob.evocation_illager.hurt": "",
-    "mob.evocation_illager.prepare_attack": "",
-    "mob.evocation_illager.prepare_summon": "",
-    "mob.evocation_illager.prepare_wololo": "",
-    "mob.fish.flop": "",
-    "mob.fish.hurt": "",
-    "mob.fish.step": "",
-    "mob.fox.aggro": "",
-    "mob.fox.ambient": "",
-    "mob.fox.bite": "",
-    "mob.fox.death": "",
-    "mob.fox.eat": "",
-    "mob.fox.hurt": "",
-    "mob.fox.screech": "",
-    "mob.fox.sleep": "",
-    "mob.fox.sniff": "",
-    "mob.fox.spit": "",
-    "mob.ghast.affectionate_scream": "",
-    "mob.ghast.charge": "",
-    "mob.ghast.death": "",
-    "mob.ghast.fireball": "",
-    "mob.ghast.moan": "",
-    "mob.ghast.scream": "",
-    "mob.glow_squid.ambient": "",
-    "mob.glow_squid.death": "",
-    "mob.glow_squid.hurt": "",
-    "mob.glow_squid.ink_squirt": "",
-    "mob.goat.ambient": "",
-    "mob.goat.ambient.screamer": "",
-    "mob.goat.death": "",
-    "mob.goat.death.screamer": "",
-    "mob.goat.eat": "",
-    "mob.goat.hurt": "",
-    "mob.goat.hurt.screamer": "",
-    "mob.goat.milk.screamer": "",
-    "mob.goat.prepare_ram": "",
-    "mob.goat.prepare_ram.screamer": "",
-    "mob.goat.ram_impact": "",
-    "mob.goat.ram_impact.screamer": "",
-    "mob.goat.step": "",
-    "mob.guardian.ambient": "",
-    "mob.guardian.attack_loop": "",
-    "mob.guardian.death": "",
-    "mob.guardian.flop": "",
-    "mob.guardian.hit": "",
-    "mob.guardian.land_death": "",
-    "mob.guardian.land_hit": "",
-    "mob.guardian.land_idle": "",
-    "mob.hoglin.ambient": "",
-    "mob.hoglin.angry": "",
-    "mob.hoglin.attack": "",
-    "mob.hoglin.death": "",
-    "mob.hoglin.howl": "",
-    "mob.hoglin.hurt": "",
-    "mob.hoglin.retreat": "",
-    "mob.hoglin.step": "",
-    "mob.horse.angry": "",
-    "mob.horse.armor": "",
-    "mob.horse.breathe": "",
-    "mob.horse.death": "",
-    "mob.horse.donkey.angry": "",
-    "mob.horse.donkey.death": "",
-    "mob.horse.donkey.hit": "",
-    "mob.horse.donkey.idle": "",
-    "mob.horse.eat": "",
-    "mob.horse.gallop": "",
-    "mob.horse.hit": "",
-    "mob.horse.idle": "",
-    "mob.horse.jump": "",
-    "mob.horse.land": "",
-    "mob.horse.leather": "",
-    "mob.horse.skeleton.death": "",
-    "mob.horse.skeleton.hit": "",
-    "mob.horse.skeleton.idle": "",
-    "mob.horse.soft": "",
-    "mob.horse.wood": "",
-    "mob.horse.zombie.death": "",
-    "mob.horse.zombie.hit": "",
-    "mob.horse.zombie.idle": "",
-    "mob.husk.ambient": "",
-    "mob.husk.death": "",
-    "mob.husk.hurt": "",
-    "mob.husk.step": "",
-    "mob.irongolem.death": "",
-    "mob.irongolem.hit": "",
-    "mob.irongolem.throw": "",
-    "mob.irongolem.walk": "",
-    "mob.llama.angry": "",
-    "mob.llama.death": "",
-    "mob.llama.eat": "",
-    "mob.llama.hurt": "",
-    "mob.llama.idle": "",
-    "mob.llama.spit": "",
-    "mob.llama.step": "",
-    "mob.llama.swag": "",
-    "mob.magmacube.big": "",
-    "mob.magmacube.jump": "",
-    "mob.magmacube.small": "",
-    "mob.mooshroom.convert": "",
-    "mob.mooshroom.eat": "",
-    "mob.mooshroom.suspicious_milk": "",
-    "mob.ocelot.death": "",
-    "mob.ocelot.idle": "",
-    "mob.panda.bite": "",
-    "mob.panda.cant_breed": "",
-    "mob.panda.death": "",
-    "mob.panda.eat": "",
-    "mob.panda.hurt": "",
-    "mob.panda.idle": "",
-    "mob.panda.idle.aggressive": "",
-    "mob.panda.idle.worried": "",
-    "mob.panda.presneeze": "",
-    "mob.panda.sneeze": "",
-    "mob.panda.step": "",
-    "mob.panda_baby.idle": "",
-    "mob.parrot.death": "",
-    "mob.parrot.eat": "",
-    "mob.parrot.fly": "",
-    "mob.parrot.hurt": "",
-    "mob.parrot.idle": "",
-    "mob.parrot.step": "",
-    "mob.phantom.bite": "",
-    "mob.phantom.death": "",
-    "mob.phantom.flap": "",
-    "mob.phantom.hurt": "",
-    "mob.phantom.idle": "",
-    "mob.phantom.swoop": "",
-    "mob.pig.boost": "",
-    "mob.pig.death": "",
-    "mob.pig.say": "",
-    "mob.pig.step": "",
-    "mob.piglin.admiring_item": "",
-    "mob.piglin.ambient": "",
-    "mob.piglin.angry": "",
-    "mob.piglin.celebrate": "",
-    "mob.piglin.converted_to_zombified": "",
-    "mob.piglin.death": "",
-    "mob.piglin.hurt": "",
-    "mob.piglin.jealous": "",
-    "mob.piglin.retreat": "",
-    "mob.piglin.step": "",
-    "mob.piglin_brute.ambient": "",
-    "mob.piglin_brute.angry": "",
-    "mob.piglin_brute.converted_to_zombified": "",
-    "mob.piglin_brute.death": "",
-    "mob.piglin_brute.hurt": "",
-    "mob.piglin_brute.step": "",
-    "mob.pillager.celebrate": "",
-    "mob.pillager.death": "",
-    "mob.pillager.hurt": "",
-    "mob.pillager.idle": "",
-    "mob.player.hurt_drown": "",
-    "mob.player.hurt_freeze": "",
-    "mob.player.hurt_on_fire": "",
-    "mob.polarbear.death": "",
-    "mob.polarbear.hurt": "",
-    "mob.polarbear.idle": "",
-    "mob.polarbear.step": "",
-    "mob.polarbear.warning": "",
-    "mob.polarbear_baby.idle": "",
-    "mob.rabbit.death": "",
-    "mob.rabbit.hop": "",
-    "mob.rabbit.hurt": "",
-    "mob.rabbit.idle": "",
-    "mob.ravager.ambient": "",
-    "mob.ravager.bite": "",
-    "mob.ravager.celebrate": "",
-    "mob.ravager.death": "",
-    "mob.ravager.hurt": "",
-    "mob.ravager.roar": "",
-    "mob.ravager.step": "",
-    "mob.ravager.stun": "",
-    "mob.sheep.say": "",
-    "mob.sheep.shear": "",
-    "mob.sheep.step": "",
-    "mob.shulker.ambient": "",
-    "mob.shulker.bullet.hit": "",
-    "mob.shulker.close": "",
-    "mob.shulker.close.hurt": "",
-    "mob.shulker.death": "",
-    "mob.shulker.hurt": "",
-    "mob.shulker.open": "",
-    "mob.shulker.shoot": "",
-    "mob.shulker.teleport": "",
-    "mob.silverfish.hit": "",
-    "mob.silverfish.kill": "",
-    "mob.silverfish.say": "",
-    "mob.silverfish.step": "",
-    "mob.skeleton.convert_to_stray": "",
-    "mob.skeleton.death": "",
-    "mob.skeleton.hurt": "",
-    "mob.skeleton.say": "",
-    "mob.skeleton.step": "",
-    "mob.slime.attack": "",
-    "mob.slime.big": "",
-    "mob.slime.death": "",
-    "mob.slime.hurt": "",
-    "mob.slime.jump": "",
-    "mob.slime.small": "",
-    "mob.slime.squish": "",
-    "mob.snowgolem.death": "",
-    "mob.snowgolem.hurt": "",
-    "mob.snowgolem.shoot": "",
-    "mob.spider.death": "",
-    "mob.spider.say": "",
-    "mob.spider.step": "",
-    "mob.squid.ambient": "",
-    "mob.squid.death": "",
-    "mob.squid.hurt": "",
-    "mob.squid.ink_squirt": "",
-    "mob.stray.ambient": "",
-    "mob.stray.death": "",
-    "mob.stray.hurt": "",
-    "mob.stray.step": "",
-    "mob.strider.death": "",
-    "mob.strider.eat": "",
-    "mob.strider.hurt": "",
-    "mob.strider.idle": "",
-    "mob.strider.panic": "",
-    "mob.strider.step": "",
-    "mob.strider.step_lava": "",
-    "mob.strider.tempt": "",
-    "mob.turtle.ambient": "",
-    "mob.turtle.death": "",
-    "mob.turtle.hurt": "",
-    "mob.turtle.step": "",
-    "mob.turtle.swim": "",
-    "mob.turtle_baby.born": "",
-    "mob.turtle_baby.death": "",
-    "mob.turtle_baby.hurt": "",
-    "mob.turtle_baby.step": "",
-    "mob.vex.ambient": "",
-    "mob.vex.charge": "",
-    "mob.vex.death": "",
-    "mob.vex.hurt": "",
-    "mob.villager.death": "",
-    "mob.villager.haggle": "",
-    "mob.villager.hit": "",
-    "mob.villager.idle": "",
-    "mob.villager.no": "",
-    "mob.villager.yes": "",
-    "mob.vindicator.celebrate": "",
-    "mob.vindicator.death": "",
-    "mob.vindicator.hurt": "",
-    "mob.vindicator.idle": "",
-    "mob.wanderingtrader.death": "",
-    "mob.wanderingtrader.disappeared": "",
-    "mob.wanderingtrader.drink_milk": "",
-    "mob.wanderingtrader.drink_potion": "",
-    "mob.wanderingtrader.haggle": "",
-    "mob.wanderingtrader.hurt": "",
-    "mob.wanderingtrader.idle": "",
-    "mob.wanderingtrader.no": "",
-    "mob.wanderingtrader.reappeared": "",
-    "mob.wanderingtrader.yes": "",
-    "mob.witch.ambient": "",
-    "mob.witch.celebrate": "",
-    "mob.witch.death": "",
-    "mob.witch.drink": "",
-    "mob.witch.hurt": "",
-    "mob.witch.throw": "",
-    "mob.wither.ambient": "",
-    "mob.wither.break_block": "",
-    "mob.wither.death": "",
-    "mob.wither.hurt": "",
-    "mob.wither.shoot": "",
-    "mob.wither.spawn": "",
-    "mob.wolf.bark": "",
-    "mob.wolf.death": "",
-    "mob.wolf.growl": "",
-    "mob.wolf.hurt": "",
-    "mob.wolf.panting": "",
-    "mob.wolf.shake": "",
-    "mob.wolf.step": "",
-    "mob.wolf.whine": "",
-    "mob.zoglin.angry": "",
-    "mob.zoglin.attack": "",
-    "mob.zoglin.death": "",
-    "mob.zoglin.hurt": "",
-    "mob.zoglin.idle": "",
-    "mob.zoglin.step": "",
-    "mob.zombie.death": "",
-    "mob.zombie.hurt": "",
-    "mob.zombie.remedy": "",
-    "mob.zombie.say": "",
-    "mob.zombie.step": "",
-    "mob.zombie.unfect": "",
-    "mob.zombie.wood": "",
-    "mob.zombie.woodbreak": "",
-    "mob.zombie_villager.death": "",
-    "mob.zombie_villager.hurt": "",
-    "mob.zombie_villager.say": "",
-    "mob.zombiepig.zpig": "",
-    "mob.zombiepig.zpigangry": "",
-    "mob.zombiepig.zpigdeath": "",
-    "mob.zombiepig.zpighurt": "",
-    "music.game": "",
-    "music.game.creative": "",
-    "music.game.credits": "",
-    "music.game.crimson_forest": "",
-    "music.game.end": "",
-    "music.game.endboss": "",
-    "music.game.nether": "",
-    "music.game.nether_wastes": "",
-    "music.game.soulsand_valley": "",
-    "music.game.water": "",
-    "music.menu": "",
-    "note.banjo": "",
-    "note.bass": "",
-    "note.bassattack": "",
-    "note.bd": "",
-    "note.bell": "",
-    "note.bit": "",
-    "note.chime": "",
-    "note.cow_bell": "",
-    "note.didgeridoo": "",
-    "note.flute": "",
-    "note.guitar": "",
-    "note.harp": "",
-    "note.hat": "",
-    "note.iron_xylophone": "",
-    "note.pling": "",
-    "note.snare": "",
-    "note.xylophone": "",
-    "particle.soul_escape": "",
-    "pick_berries.cave_vines": "",
-    "place.amethyst_block": "",
-    "place.amethyst_cluster": "",
-    "place.azalea": "",
-    "place.azalea_leaves": "",
-    "place.big_dripleaf": "",
-    "place.calcite": "",
-    "place.copper": "",
-    "place.deepslate": "",
-    "place.deepslate_bricks": "",
-    "place.dirt_with_roots": "",
-    "place.dripstone_block": "",
-    "place.hanging_roots": "",
-    "place.large_amethyst_bud": "",
-    "place.medium_amethyst_bud": "",
-    "place.moss": "",
-    "place.pointed_dripstone": "",
-    "place.powder_snow": "",
-    "place.small_amethyst_bud": "",
-    "place.spore_blossom": "",
-    "place.tuff": "",
-    "portal.portal": "",
-    "portal.travel": "",
-    "portal.trigger": "",
-    "raid.horn": "",
-    "random.anvil_break": "",
-    "random.anvil_land": "",
-    "random.anvil_use": "",
-    "random.bow": "",
-    "random.bowhit": "",
-    "random.break": "",
-    "random.burp": "",
-    "random.chestclosed": "",
-    "random.chestopen": "",
-    "random.click": "",
-    "random.door_close": "",
-    "random.door_open": "",
-    "random.drink": "",
-    "random.drink_honey": "",
-    "random.eat": "",
-    "random.enderchestclosed": "",
-    "random.enderchestopen": "",
-    "random.explode": "",
-    "random.fizz": "",
-    "random.fuse": "",
-    "random.glass": "",
-    "random.hurt": "",
-    "random.levelup": "",
-    "random.orb": "",
-    "random.pop": "",
-    "random.pop2": "",
-    "random.potion.brewed": "",
-    "random.screenshot": "",
-    "random.shulkerboxclosed": "",
-    "random.shulkerboxopen": "",
-    "random.splash": "",
-    "random.swim": "",
-    "random.toast": "",
-    "random.totem": "",
-    "record.11": "",
-    "record.13": "",
-    "record.blocks": "",
-    "record.cat": "",
-    "record.chirp": "",
-    "record.far": "",
-    "record.mall": "",
-    "record.mellohi": "",
-    "record.pigstep": "",
-    "record.stal": "",
-    "record.strad": "",
-    "record.wait": "",
-    "record.ward": "",
-    "respawn_anchor.ambient": "",
-    "respawn_anchor.charge": "",
-    "respawn_anchor.deplete": "",
-    "respawn_anchor.set_spawn": "",
-    "scrape": "",
-    "sign.dye.use": "",
-    "sign.ink_sac.use": "",
-    "smithing_table.use": "",
-    "step.amethyst_block": "",
-    "step.amethyst_cluster": "",
-    "step.ancient_debris": "",
-    "step.azalea": "",
-    "step.azalea_leaves": "",
-    "step.basalt": "",
-    "step.big_dripleaf": "",
-    "step.bone_block": "",
-    "step.calcite": "",
-    "step.candle": "",
-    "step.cave_vines": "",
-    "step.chain": "",
-    "step.cloth": "",
-    "step.copper": "",
-    "step.coral": "",
-    "step.deepslate": "",
-    "step.deepslate_bricks": "",
-    "step.dirt_with_roots": "",
-    "step.dripstone_block": "",
-    "step.grass": "",
-    "step.gravel": "",
-    "step.hanging_roots": "",
-    "step.honey_block": "",
-    "step.ladder": "",
-    "step.moss": "",
-    "step.nether_brick": "",
-    "step.nether_gold_ore": "",
-    "step.nether_sprouts": "",
-    "step.nether_wart": "",
-    "step.netherite": "",
-    "step.netherrack": "",
-    "step.nylium": "",
-    "step.pointed_dripstone": "",
-    "step.powder_snow": "",
-    "step.roots": "",
-    "step.sand": "",
-    "step.shroomlight": "",
-    "step.slime": "",
-    "step.snow": "",
-    "step.soul_sand": "",
-    "step.soul_soil": "",
-    "step.spore_blossom": "",
-    "step.stem": "",
-    "step.stone": "",
-    "step.tuff": "",
-    "step.vines": "",
-    "step.wood": "",
-    "tile.piston.in": "",
-    "tile.piston.out": "",
-    "tilt_down.big_dripleaf": "",
-    "tilt_up.big_dripleaf": "",
-    "ui.cartography_table.take_result": "",
-    "ui.loom.select_pattern": "",
-    "ui.loom.take_result": "",
-    "ui.stonecutter.take_result": "",
-    "use.ancient_debris": "",
-    "use.basalt": "",
-    "use.bone_block": "",
-    "use.candle": "",
-    "use.cave_vines": "",
-    "use.chain": "",
-    "use.cloth": "",
-    "use.copper": "",
-    "use.coral": "",
-    "use.deepslate": "",
-    "use.deepslate_bricks": "",
-    "use.dirt_with_roots": "",
-    "use.dripstone_block": "",
-    "use.grass": "",
-    "use.gravel": "",
-    "use.hanging_roots": "",
-    "use.honey_block": "",
-    "use.ladder": "",
-    "use.moss": "",
-    "use.nether_brick": "",
-    "use.nether_gold_ore": "",
-    "use.nether_sprouts": "",
-    "use.nether_wart": "",
-    "use.netherite": "",
-    "use.netherrack": "",
-    "use.nylium": "",
-    "use.pointed_dripstone": "",
-    "use.roots": "",
-    "use.sand": "",
-    "use.shroomlight": "",
-    "use.slime": "",
-    "use.snow": "",
-    "use.soul_sand": "",
-    "use.soul_soil": "",
-    "use.spore_blossom": "",
-    "use.stem": "",
-    "use.stone": "",
-    "use.vines": "",
-    "use.wood": "",
+    "block.composter.empty": "JE: subtitles.block.composter.empty", // 堆肥桶：清空
+    "block.composter.fill": "JE: subtitles.block.composter.fill", // 堆肥桶：填充
+    "block.composter.fill_success": "JE: subtitles.block.composter.ready", // 堆肥桶：堆肥
+    "block.composter.ready": "JE: subtitles.block.composter.ready", // 堆肥桶：堆肥
+    "block.end_portal.spawn": "JE: subtitles.block.end_portal.spawn", // 末地传送门：开启
+    "block.end_portal_frame.fill": "JE: subtitles.block.end_portal_frame.fill", // 末影之眼：嵌入
+    "block.false_permissions": "方块：无权限",
+    "block.furnace.lit": "JE: subtitles.block.furnace.fire_crackle", // 熔炉：噼啪作响
+    "block.grindstone.use": "JE: subtitles.block.grindstone.use", // 砂轮：使用
+    "block.itemframe.add_item": "JE: subtitles.entity.item_frame.add_item", // 物品展示框：填充
+    "block.itemframe.break": "JE: subtitles.entity.item_frame.break", // 物品展示框：被破坏
+    "block.itemframe.place": "JE: subtitles.entity.item_frame.place", // 物品展示框：被放置
+    "block.itemframe.remove_item": "JE: subtitles.entity.item_frame.remove_item", // 物品展示框：清空
+    "block.itemframe.rotate_item": "JE: subtitles.entity.item_frame.rotate_item", // 物品展示框：转动
+    "block.lantern.break": "{{block.*.break|block!lantern}}", // 灯笼：被破坏
+    "block.lantern.fall": "{{block.*.fall|block!lantern}}", // 灯笼：某物摔落
+    "block.lantern.hit": "{{block.*.hit|block!lantern}}", // 灯笼：损坏中
+    "block.lantern.place": "{{block.*.place|block!lantern}}", // 灯笼：被放置
+    "block.lantern.step": "{{block.*.step|block!lantern}}", // 灯笼：踩上
+    "block.loom.use": "JE: subtitles.ui.loom.take_result", // 织布机：使用
+    "block.scaffolding.break": "{{block.*.break|block!scaffolding}}", // 脚手架：被破坏
+    "block.scaffolding.climb": "{{block.*.climb|block!scaffolding}}", // 脚手架：被攀爬
+    "block.scaffolding.fall": "{{block.*.fall|block!scaffolding}}", // 脚手架：某物摔落
+    "block.scaffolding.hit": "{{block.*.hit|block!scaffolding}}", // 脚手架：损坏中
+    "block.scaffolding.place": "{{block.*.place|block!scaffolding}}", // 脚手架：被放置
+    "block.scaffolding.step": "{{block.*.step|block!scaffolding}}", // 脚手架：踩上
+    "block.smoker.smoke": "JE: subtitles.block.smoker.smoke", // 烟熏炉：烟熏
+    "block.stonecutter.use": "JE: subtitles.ui.stonecutter.take_result", // 切石机：使用
+    "block.sweet_berry_bush.break": "{{block.*.break|block!sweet_berry_bush}}", // 甜浆果丛：被破坏
+    "block.sweet_berry_bush.hurt": "{{block.*.hurt|block!sweet_berry_bush}}", // 甜浆果丛：造成伤害
+    "block.sweet_berry_bush.pick": "JE: subtitles.block.sweet_berry_bush.pick_berries", // 浆果：弹出
+    "block.sweet_berry_bush.place": "{{block.*.place|block!sweet_berry_bush}}", // 甜浆果丛：被放置
+    "block.turtle_egg.break": "JE: subtitles.entity.turtle.egg_break", // 海龟蛋：破裂
+    "block.turtle_egg.crack": "JE: subtitles.entity.turtle.egg_crack", // 海龟蛋：裂开
+    "block.turtle_egg.drop": "JE: subtitles.entity.turtle.egg_hatch", // 海龟蛋：孵化
+    "block_sound.amethyst_block": "block: amethyst_block", // 紫水晶块
+    "block_sound.amethyst_cluster": "block: amethyst_cluster", // 紫水晶簇
+    "block_sound.ancient_debris": "block: ancient_debris", // 远古残骸
+    "block_sound.azalea": "block: azalea", // 杜鹃花丛
+    "block_sound.azalea_leaves": "block: azalea_leaves", // 杜鹃树叶
+    "block_sound.basalt": "block: basalt", // 玄武岩
+    "block_sound.big_dripleaf": "block: big_dripleaf", // 大型垂滴叶
+    "block_sound.bone_block": "block: bone_block", // 骨块
+    "block_sound.calcite": "block: calcite", // 方解石
+    "block_sound.candle": "block: candle", // 蜡烛
+    "block_sound.cave_vines": "block: cave_vines", // 洞穴藤蔓
+    "block_sound.chain": "block: chain", // 锁链
+    "block_sound.cloth": "布质方块",
+    "block_sound.copper": "ST: block of copper", // 铜块
+    "block_sound.coral": "block: coral", // 珊瑚
+    "block_sound.deepslate": "block: deepslate", // 深板岩
+    "block_sound.deepslate_bricks": "block: deepslate_bricks", // 深板岩砖
+    "block_sound.fungus": "ST: fungus", // 菌类
+    "block_sound.grass": "block: grass", // 草
+    "block_sound.gravel": "block: gravel", // 沙砾
+    "block_sound.honey_block": "block: honey_block", // 蜂蜜块
+    "block_sound.lodestone": "block: lodestone", // 磁石
+    "block_sound.moss": "苔藓",
+    "block_sound.nether_brick": "block: nether_brick", // 下界砖
+    "block_sound.nether_gold_ore": "block: nether_gold_ore", // 下界金矿石
+    "block_sound.nether_sprouts": "block: nether_sprouts", // 下界苗
+    "block_sound.nether_wart": "block: nether_wart", // 下界疣
+    "block_sound.netherite": "block: netherite_block", // 下界合金块
+    "block_sound.netherrack": "block: netherrack", // 下界岩
+    "block_sound.nylium": "ST: nylium", // 菌岩
+    "block_sound.powder_snow": "block: powder_snow", // 细雪
+    "block_sound.roots": "ST: roots", // 菌索
+    "block_sound.sand": "ST: sand", // 沙子
+    "block_sound.shroomlight": "block: shroomlight", // 菌光体
+    "block_sound.snow": "block: snow", // 雪块
+    "block_sound.soul_sand": "block: soul_sand", // 灵魂沙
+    "block_sound.soul_soil": "block: soul_soil", // 灵魂土
+    "block_sound.stem": "ST: stem", // 菌柄
+    "block_sound.stone": "block: stone", // 石头
+    "block_sound.vines": "ST: vines", // 藤蔓
+    "block_sound.wood": "ST: wood", // 木头
+    "block_sound.dirt_with_roots": "block: dirt_with_roots", // 缠根泥土
+    "block_sound.dripstone_block": "block: dripstone_block", // 滴水石块
+    "block_sound.hanging_roots": "block: hanging_roots", // 垂根
+    "block_sound.large_amethyst_bud": "block: large_amethyst_bud", // 大型紫晶芽
+    "block_sound.medium_amethyst_bud": "block: medium_amethyst_bud", // 中型紫晶芽
+    "block_sound.pointed_dripstone": "block: pointed_dripstone", // 滴水石锥
+    "block_sound.small_amethyst_bud": "block: small_amethyst_bud", // 小型紫晶芽
+    "block_sound.spore_blossom": "block: spore_blossom", // 孢子花
+    "block_sound.tuff": "block: tuff", // 凝灰岩
+    "block_sound.egg": "block: turtle_egg", // 海龟蛋
+    "block_sound.ladder": "block: ladder", // 梯子
+    "block_sound.slime": "block: slime", // 黏液块
+    "block_sound.anvil": "block: anvil", // 铁砧
+    "bottle.dragonbreath": "{{item!dragon_breath}}：被装起", // 龙息：被装起
+    "break.*": "{{block.*.break}}", // %s：被破坏
+    "break.amethyst_block": "{{break.*|block_sound.amethyst_block}}", // 紫水晶块：被破坏
+    "break.amethyst_cluster": "{{break.*|block_sound.amethyst_cluster}}", // 紫水晶簇：被破坏
+    "break.azalea": "{{break.*|block_sound.azalea}}", // 杜鹃花丛：被破坏
+    "break.big_dripleaf": "{{break.*|block_sound.big_dripleaf}}", // 大型垂滴叶：被破坏
+    "break.calcite": "{{break.*|block_sound.calcite}}", // 方解石：被破坏
+    "break.dirt_with_roots": "{{break.*|block_sound.dirt_with_roots}}", // 缠根泥土：被破坏
+    "break.dripstone_block": "{{break.*|block_sound.dripstone_block}}", // 滴水石块：被破坏
+    "break.hanging_roots": "{{break.*|block_sound.hanging_roots}}", // 垂根：被破坏
+    "break.large_amethyst_bud": "{{break.*|block_sound.large_amethyst_bud}}", // 大型紫晶芽：被破坏
+    "break.medium_amethyst_bud": "{{break.*|block_sound.medium_amethyst_bud}}", // 中型紫晶芽：被破坏
+    "break.pointed_dripstone": "{{break.*|block_sound.pointed_dripstone}}", // 滴水石锥：被破坏
+    "break.small_amethyst_bud": "{{break.*|block_sound.small_amethyst_bud}}", // 小型紫晶芽：被破坏
+    "break.spore_blossom": "{{break.*|block_sound.spore_blossom}}", // 孢子花：被破坏
+    "break.tuff": "{{break.*|block_sound.tuff}}", // 凝灰岩：被破坏
+    "bubble.down": "JE: subtitles.block.bubble_column.whirlpool_ambient", // 气泡：旋转
+    "bubble.downinside": "JE: subtitles.block.bubble_column.whirlpool_inside", // 气泡：骤降
+    "bubble.pop": "JE: subtitles.block.bubble_column.bubble_pop", // 气泡：破裂
+    "bubble.up": "JE: subtitles.block.bubble_column.upwards_ambient", // 气泡：上浮
+    "bubble.upinside": "JE: subtitles.block.bubble_column.upwards_inside", // 气泡：飞升
+    "bucket.empty_*": "{{JE!subtitles.item.bucket.empty}}%s", // 桶：倒空%s
+    "bucket.empty_fish": "{{ST!fish}}：被倒出", // 鱼：被倒出
+    "bucket.empty_lava": "{{bucket.empty_*|block!lava}}", // 桶：倒空熔岩
+    "bucket.empty_powder_snow": "{{bucket.empty_*|block!powder_snow}}", // 桶：倒空细雪
+    "bucket.empty_water": "{{bucket.empty_*|block!water}}", // 桶：倒空水
+    "bucket.fill_*": "{{JE!subtitles.item.bucket.fill}}%s", // 桶：装满%s
+    "bucket.fill_fish": "JE: subtitles.item.bucket.fill_fish", // 鱼：被捕获
+    "bucket.fill_lava": "{{bucket.fill_*|block!lava}}", // 桶：装满熔岩
+    "bucket.fill_powder_snow": "{{bucket.fill_*|block!powder_snow}}", // 桶：装满细雪
+    "bucket.fill_water": "{{bucket.fill_*|block!water}}", // 桶：装满水
+    "cake.add_candle": "JE: subtitles.block.cake.add_candle", // 蛋糕：吧唧
+    "camera.take_picture": "{{ST!camera}}：拍照", // 相机：拍照
+    "cauldron.adddye": "{{block!cauldron}}：染色", // 炼药锅：染色
+    "cauldron.cleanarmor": "{{block!cauldron}}：洗去{{ST!leather armor}}的颜色", // 炼药锅：洗去皮革盔甲的颜色
+    "cauldron.cleanbanner": "{{block!cauldron}}：洗去{{ST!banner}}的一层图案", // 炼药锅：洗去旗帜的一层图案
+    "cauldron.dyearmor": "{{block!cauldron}}：对{{ST!leather armor}}染色", // 炼药锅：对皮革盔甲染色
+    "cauldron.explode": "{{block!cauldron}}：爆炸", // 炼药锅：爆炸
+    "cauldron.fillpotion": "{{block!cauldron}}：装入{{ST!potion}}", // 炼药锅：装入药水
+    "cauldron.fillwater": "{{block!cauldron}}：装入{{ST!water}}", // 炼药锅：装入水
+    "cauldron.takepotion": "{{block!cauldron}}：取出{{ST!potion}}", // 炼药锅：取出药水
+    "cauldron.takewater": "{{block!cauldron}}：取出{{ST!water}}", // 炼药锅：取出水
+    "cauldron_drip.lava.pointed_dripstone": "JE: subtitles.block.pointed_dripstone.drip_lava_into_cauldron", // 熔岩：滴入炼药锅
+    "cauldron_drip.water.pointed_dripstone": "JE: subtitles.block.pointed_dripstone.drip_water_into_cauldron", // 水：滴入炼药锅
+    "chime.amethyst_block": "JE: subtitles.block.amethyst_block.chime", // 紫水晶：叮铃
+    "component.jump_to_block": "实体：跳跃",
+    "conduit.activate": "JE: subtitles.block.conduit.activate", // 潮涌核心：激活
+    "conduit.ambient": "JE: subtitles.block.conduit.ambient", // 潮涌核心：涌动
+    "conduit.attack": "JE: subtitles.block.conduit.attack.target", // 潮涌核心：攻击
+    "conduit.deactivate": "JE: subtitles.block.conduit.deactivate", // 潮涌核心：失效
+    "conduit.short": "{{block!conduit}}：附加音效", // 潮涌核心：附加音效
+    "copper.wax.off": "JE: subtitles.item.axe.wax_off", // 脱蜡
+    "copper.wax.on": "JE: subtitles.item.honeycomb.wax_on", // 涂蜡
+    "crossbow.loading.end": "JE: subtitles.item.crossbow.load", // 弩：装填
+    "crossbow.loading.middle": "{{item!crossbow}}：持续蓄力", // 弩：持续蓄力
+    "crossbow.loading.start": "JE: subtitles.item.crossbow.charge", // 弩：蓄力
+    "crossbow.quick_charge.*": "%s（{{enchant!quick_charge}}）", // %s（快速装填）
+    "crossbow.quick_charge.end": "{{crossbow.quick_charge.*|crossbow.loading.end}}", // 弩：装填（快速装填）
+    "crossbow.quick_charge.middle": "{{crossbow.quick_charge.*|crossbow.loading.middle}}", // 弩：持续蓄力（快速装填）
+    "crossbow.quick_charge.start": "{{crossbow.quick_charge.*|crossbow.loading.start}}", // 弩：蓄力（快速装填）
+    "crossbow.shoot": "JE: subtitles.item.crossbow.shoot", // 弩：发射
+    "damage.fallbig": "JE: subtitles.entity.generic.big_fall", // 某物：着地
+    "damage.fallsmall": "JE: subtitles.entity.generic.small_fall", // 某物：摔倒
+    "dig.*": "{{block.*.break}}", // %s：被破坏
+    "dig.ancient_debris": "{{dig.*|block_sound.ancient_debris}}", // 远古残骸：被破坏
+    "dig.azalea_leaves": "{{dig.*|block_sound.azalea_leaves}}", // 杜鹃树叶：被破坏
+    "dig.basalt": "{{dig.*|block_sound.basalt}}", // 玄武岩：被破坏
+    "dig.bone_block": "{{dig.*|block_sound.bone_block}}", // 骨块：被破坏
+    "dig.candle": "{{dig.*|block_sound.candle}}", // 蜡烛：被破坏
+    "dig.cave_vines": "{{dig.*|block_sound.cave_vines}}", // 洞穴藤蔓：被破坏
+    "dig.chain": "{{dig.*|block_sound.chain}}", // 锁链：被破坏
+    "dig.cloth": "{{dig.*|block_sound.cloth}}", // 布质方块：被破坏
+    "dig.copper": "{{dig.*|block_sound.copper}}", // 铜块：被破坏
+    "dig.coral": "{{dig.*|block_sound.coral}}", // 珊瑚：被破坏
+    "dig.deepslate": "{{dig.*|block_sound.deepslate}}", // 深板岩：被破坏
+    "dig.deepslate_bricks": "{{dig.*|block_sound.deepslate_bricks}}", // 深板岩砖：被破坏
+    "dig.fungus": "{{dig.*|block_sound.fungus}}", // 菌类：被破坏
+    "dig.grass": "{{dig.*|block_sound.grass}}", // 草：被破坏
+    "dig.gravel": "{{dig.*|block_sound.gravel}}", // 沙砾：被破坏
+    "dig.honey_block": "{{dig.*|block_sound.honey_block}}", // 蜂蜜块：被破坏
+    "dig.lodestone": "{{dig.*|block_sound.lodestone}}", // 磁石：被破坏
+    "dig.moss": "{{dig.*|block_sound.moss}}", // 苔藓：被破坏
+    "dig.nether_brick": "{{dig.*|block_sound.nether_brick}}", // 下界砖：被破坏
+    "dig.nether_gold_ore": "{{dig.*|block_sound.nether_gold_ore}}", // 下界金矿石：被破坏
+    "dig.nether_sprouts": "{{dig.*|block_sound.nether_sprouts}}", // 下界苗：被破坏
+    "dig.nether_wart": "{{dig.*|block_sound.nether_wart}}", // 下界疣：被破坏
+    "dig.netherite": "{{dig.*|block_sound.netherite}}", // 下界合金块：被破坏
+    "dig.netherrack": "{{dig.*|block_sound.netherrack}}", // 下界岩：被破坏
+    "dig.nylium": "{{dig.*|block_sound.nylium}}", // 菌岩：被破坏
+    "dig.powder_snow": "{{dig.*|block_sound.powder_snow}}", // 细雪：被破坏
+    "dig.roots": "{{dig.*|block_sound.roots}}", // 菌索：被破坏
+    "dig.sand": "{{dig.*|block_sound.sand}}", // 沙子：被破坏
+    "dig.shroomlight": "{{dig.*|block_sound.shroomlight}}", // 菌光体：被破坏
+    "dig.snow": "{{dig.*|block_sound.snow}}", // 雪块：被破坏
+    "dig.soul_sand": "{{dig.*|block_sound.soul_sand}}", // 灵魂沙：被破坏
+    "dig.soul_soil": "{{dig.*|block_sound.soul_soil}}", // 灵魂土：被破坏
+    "dig.stem": "{{dig.*|block_sound.stem}}", // 菌柄：被破坏
+    "dig.stone": "{{dig.*|block_sound.stone}}", // 石头：被破坏
+    "dig.vines": "{{dig.*|block_sound.vines}}", // 藤蔓：被破坏
+    "dig.wood": "{{dig.*|block_sound.wood}}", // 木头：被破坏
+    "drip.lava.pointed_dripstone": "JE: subtitles.block.pointed_dripstone.drip_lava", // 熔岩：滴落
+    "drip.water.pointed_dripstone": "JE: subtitles.block.pointed_dripstone.drip_water", // 水：滴落
+    "elytra.loop": "{{item!elytra}}：飞行", // 鞘翅：飞行
+    "entity.zombie.converted_to_drowned": "JE: subtitles.entity.zombie.converted_to_drowned", // 僵尸：转化为溺尸
+    "extinguish.candle": "{{block!candle}}：熄灭", // 蜡烛：熄灭
+    "fall.*": "{{block.*.fall}}", // %s：某物摔落
+    "fall.amethyst_block": "{{fall.*|block_sound.amethyst_block}}", // 紫水晶块：某物摔落
+    "fall.amethyst_cluster": "{{fall.*|block_sound.amethyst_cluster}}", // 紫水晶簇：某物摔落
+    "fall.ancient_debris": "{{fall.*|block_sound.ancient_debris}}", // 远古残骸：某物摔落
+    "fall.azalea": "{{fall.*|block_sound.azalea}}", // 杜鹃花丛：某物摔落
+    "fall.azalea_leaves": "{{fall.*|block_sound.azalea_leaves}}", // 杜鹃树叶：某物摔落
+    "fall.basalt": "{{fall.*|block_sound.basalt}}", // 玄武岩：某物摔落
+    "fall.big_dripleaf": "{{fall.*|block_sound.big_dripleaf}}", // 大型垂滴叶：某物摔落
+    "fall.bone_block": "{{fall.*|block_sound.bone_block}}", // 骨块：某物摔落
+    "fall.calcite": "{{fall.*|block_sound.calcite}}", // 方解石：某物摔落
+    "fall.cave_vines": "{{fall.*|block_sound.cave_vines}}", // 洞穴藤蔓：某物摔落
+    "fall.chain": "{{fall.*|block_sound.chain}}", // 锁链：某物摔落
+    "fall.cloth": "{{fall.*|block_sound.cloth}}", // 布质方块：某物摔落
+    "fall.copper": "{{fall.*|block_sound.copper}}", // 铜块：某物摔落
+    "fall.coral": "{{fall.*|block_sound.coral}}", // 珊瑚：某物摔落
+    "fall.deepslate": "{{fall.*|block_sound.deepslate}}", // 深板岩：某物摔落
+    "fall.deepslate_bricks": "{{fall.*|block_sound.deepslate_bricks}}", // 深板岩砖：某物摔落
+    "fall.dirt_with_roots": "{{fall.*|block_sound.dirt_with_roots}}", // 缠根泥土：某物摔落
+    "fall.dripstone_block": "{{fall.*|block_sound.dripstone_block}}", // 滴水石块：某物摔落
+    "fall.egg": "{{fall.*|block_sound.egg}}", // 海龟蛋：某物摔落
+    "fall.grass": "{{fall.*|block_sound.grass}}", // 草：某物摔落
+    "fall.gravel": "{{fall.*|block_sound.gravel}}", // 沙砾：某物摔落
+    "fall.hanging_roots": "{{fall.*|block_sound.hanging_roots}}", // 垂根：某物摔落
+    "fall.honey_block": "{{fall.*|block_sound.honey_block}}", // 蜂蜜块：某物摔落
+    "fall.ladder": "{{fall.*|block_sound.ladder}}", // 梯子：某物摔落
+    "fall.moss": "{{fall.*|block_sound.moss}}", // 苔藓：某物摔落
+    "fall.nether_brick": "{{fall.*|block_sound.nether_brick}}", // 下界砖：某物摔落
+    "fall.nether_gold_ore": "{{fall.*|block_sound.nether_gold_ore}}", // 下界金矿石：某物摔落
+    "fall.nether_sprouts": "{{fall.*|block_sound.nether_sprouts}}", // 下界苗：某物摔落
+    "fall.nether_wart": "{{fall.*|block_sound.nether_wart}}", // 下界疣：某物摔落
+    "fall.netherite": "{{fall.*|block_sound.netherite}}", // 下界合金块：某物摔落
+    "fall.netherrack": "{{fall.*|block_sound.netherrack}}", // 下界岩：某物摔落
+    "fall.nylium": "{{fall.*|block_sound.nylium}}", // 菌岩：某物摔落
+    "fall.pointed_dripstone": "{{fall.*|block_sound.pointed_dripstone}}", // 滴水石锥：某物摔落
+    "fall.powder_snow": "{{fall.*|block_sound.powder_snow}}", // 细雪：某物摔落
+    "fall.roots": "{{fall.*|block_sound.roots}}", // 菌索：某物摔落
+    "fall.sand": "{{fall.*|block_sound.sand}}", // 沙子：某物摔落
+    "fall.shroomlight": "{{fall.*|block_sound.shroomlight}}", // 菌光体：某物摔落
+    "fall.slime": "{{fall.*|block_sound.slime}}", // 黏液块：某物摔落
+    "fall.snow": "{{fall.*|block_sound.snow}}", // 雪块：某物摔落
+    "fall.soul_sand": "{{fall.*|block_sound.soul_sand}}", // 灵魂沙：某物摔落
+    "fall.soul_soil": "{{fall.*|block_sound.soul_soil}}", // 灵魂土：某物摔落
+    "fall.spore_blossom": "{{fall.*|block_sound.spore_blossom}}", // 孢子花：某物摔落
+    "fall.stem": "{{fall.*|block_sound.stem}}", // 菌柄：某物摔落
+    "fall.stone": "{{fall.*|block_sound.stone}}", // 石头：某物摔落
+    "fall.tuff": "{{fall.*|block_sound.tuff}}", // 凝灰岩：某物摔落
+    "fall.vines": "{{fall.*|block_sound.vines}}", // 藤蔓：某物摔落
+    "fall.wood": "{{fall.*|block_sound.wood}}", // 木头：某物摔落
+    "fire.fire": "JE: subtitles.block.fire.ambient", // 火：噼啪作响
+    "fire.ignite": "JE: subtitles.item.flintandsteel.use", // 打火石：生火
+    "firework.blast": "JE: subtitles.entity.firework_rocket.blast", // 烟花：爆炸
+    "firework.large_blast": "{{item!firework_rocket}}：强烈爆炸", // 烟花火箭：强烈爆炸
+    "firework.launch": "{{item!firework_rocket}}：升空", // 烟花火箭：升空
+    "firework.shoot": "JE: subtitles.entity.firework_rocket.launch", // 烟花：发射
+    "firework.twinkle": "JE: subtitles.entity.firework_rocket.twinkle", // 烟火：闪烁
+    "game.player.attack.nodamage": "{{entity!player}}：{{JE!subtitles.entity.player.attack.weak}}", // 玩家：轻击
+    "game.player.attack.strong": "{{entity!player}}：{{JE!subtitles.entity.player.attack.strong}}", // 玩家：重击
+    "game.player.die": "{{entity!player}}：死亡", // 玩家：死亡
+    "game.player.hurt": "JE: subtitles.entity.player.hurt", // 玩家：受伤
+    "hit.*": "{{block.*.hit}}", // %s：损坏中
+    "hit.amethyst_block": "{{hit.*|block_sound.amethyst_block}}", // 紫水晶块：损坏中
+    "hit.amethyst_cluster": "{{hit.*|block_sound.amethyst_cluster}}", // 紫水晶簇：损坏中
+    "hit.ancient_debris": "{{hit.*|block_sound.ancient_debris}}", // 远古残骸：损坏中
+    "hit.anvil": "{{hit.*|block_sound.anvil}}", // 铁砧：损坏中
+    "hit.azalea": "{{hit.*|block_sound.azalea}}", // 杜鹃花丛：损坏中
+    "hit.azalea_leaves": "{{hit.*|block_sound.azalea_leaves}}", // 杜鹃树叶：损坏中
+    "hit.basalt": "{{hit.*|block_sound.basalt}}", // 玄武岩：损坏中
+    "hit.big_dripleaf": "{{hit.*|block_sound.big_dripleaf}}", // 大型垂滴叶：损坏中
+    "hit.bone_block": "{{hit.*|block_sound.bone_block}}", // 骨块：损坏中
+    "hit.calcite": "{{hit.*|block_sound.calcite}}", // 方解石：损坏中
+    "hit.candle": "{{hit.*|block_sound.candle}}", // 蜡烛：损坏中
+    "hit.cave_vines": "{{hit.*|block_sound.cave_vines}}", // 洞穴藤蔓：损坏中
+    "hit.chain": "{{hit.*|block_sound.chain}}", // 锁链：损坏中
+    "hit.cloth": "{{hit.*|block_sound.cloth}}", // 布质方块：损坏中
+    "hit.copper": "{{hit.*|block_sound.copper}}", // 铜块：损坏中
+    "hit.coral": "{{hit.*|block_sound.coral}}", // 珊瑚：损坏中
+    "hit.deepslate": "{{hit.*|block_sound.deepslate}}", // 深板岩：损坏中
+    "hit.deepslate_bricks": "{{hit.*|block_sound.deepslate_bricks}}", // 深板岩砖：损坏中
+    "hit.dirt_with_roots": "{{hit.*|block_sound.dirt_with_roots}}", // 缠根泥土：损坏中
+    "hit.dripstone_block": "{{hit.*|block_sound.dripstone_block}}", // 滴水石块：损坏中
+    "hit.grass": "{{hit.*|block_sound.grass}}", // 草：损坏中
+    "hit.gravel": "{{hit.*|block_sound.gravel}}", // 沙砾：损坏中
+    "hit.hanging_roots": "{{hit.*|block_sound.hanging_roots}}", // 垂根：损坏中
+    "hit.honey_block": "{{hit.*|block_sound.honey_block}}", // 蜂蜜块：损坏中
+    "hit.ladder": "{{hit.*|block_sound.ladder}}", // 梯子：损坏中
+    "hit.moss": "{{hit.*|block_sound.moss}}", // 苔藓：损坏中
+    "hit.nether_brick": "{{hit.*|block_sound.nether_brick}}", // 下界砖：损坏中
+    "hit.nether_gold_ore": "{{hit.*|block_sound.nether_gold_ore}}", // 下界金矿石：损坏中
+    "hit.nether_sprouts": "{{hit.*|block_sound.nether_sprouts}}", // 下界苗：损坏中
+    "hit.nether_wart": "{{hit.*|block_sound.nether_wart}}", // 下界疣：损坏中
+    "hit.netherite": "{{hit.*|block_sound.netherite}}", // 下界合金块：损坏中
+    "hit.netherrack": "{{hit.*|block_sound.netherrack}}", // 下界岩：损坏中
+    "hit.nylium": "{{hit.*|block_sound.nylium}}", // 菌岩：损坏中
+    "hit.pointed_dripstone": "{{hit.*|block_sound.pointed_dripstone}}", // 滴水石锥：损坏中
+    "hit.powder_snow": "{{hit.*|block_sound.powder_snow}}", // 细雪：损坏中
+    "hit.roots": "{{hit.*|block_sound.roots}}", // 菌索：损坏中
+    "hit.sand": "{{hit.*|block_sound.sand}}", // 沙子：损坏中
+    "hit.shroomlight": "{{hit.*|block_sound.shroomlight}}", // 菌光体：损坏中
+    "hit.slime": "{{hit.*|block_sound.slime}}", // 黏液块：损坏中
+    "hit.snow": "{{hit.*|block_sound.snow}}", // 雪块：损坏中
+    "hit.soul_sand": "{{hit.*|block_sound.soul_sand}}", // 灵魂沙：损坏中
+    "hit.soul_soil": "{{hit.*|block_sound.soul_soil}}", // 灵魂土：损坏中
+    "hit.spore_blossom": "{{hit.*|block_sound.spore_blossom}}", // 孢子花：损坏中
+    "hit.stem": "{{hit.*|block_sound.stem}}", // 菌柄：损坏中
+    "hit.stone": "{{hit.*|block_sound.stone}}", // 石头：损坏中
+    "hit.tuff": "{{hit.*|block_sound.tuff}}", // 凝灰岩：损坏中
+    "hit.vines": "{{hit.*|block_sound.vines}}", // 藤蔓：损坏中
+    "hit.wood": "{{hit.*|block_sound.wood}}", // 木头：损坏中
+    "item.bone_meal.use": "JE: subtitles.item.bone_meal.use", // 骨粉：沙沙作响
+    "item.book.page_turn": "JE: subtitles.item.book.page_turn", // 书页：沙沙作响
+    "item.book.put": "JE: subtitles.item.book.put", // 书：放置
+    "item.shield.block": "JE: subtitles.item.shield.block", // 盾牌：格挡
+    "item.spyglass.stop_using": "JE: subtitles.item.spyglass.stop_using", // 望远镜：缩小
+    "item.spyglass.use": "JE: subtitles.item.spyglass.use", // 望远镜：放大
+    "item.trident.hit": "JE: subtitles.item.trident.hit", // 三叉戟：突刺
+    "item.trident.hit_ground": "JE: subtitles.item.trident.hit_ground", // 三叉戟：振动
+    "item.trident.return": "JE: subtitles.item.trident.return", // 三叉戟：收回
+    "item.trident.riptide_1": "{{JE!subtitles.item.trident.riptide}}（{{enchant!riptide}}I）", // 三叉戟：突进（激流I）
+    "item.trident.riptide_2": "{{JE!subtitles.item.trident.riptide}}（{{enchant!riptide}}II）", // 三叉戟：突进（激流II）
+    "item.trident.riptide_3": "{{JE!subtitles.item.trident.riptide}}（{{enchant!riptide}}III）", // 三叉戟：突进（激流III）
+    "item.trident.throw": "JE: subtitles.item.trident.throw", // 三叉戟：铿锵
+    "item.trident.thunder": "JE: subtitles.item.trident.thunder", // 三叉戟：电闪雷鸣
+    "jump.*": "{{block.*.jump}}", // %s：某物跳跃
+    "jump.ancient_debris": "{{jump.*|block_sound.ancient_debris}}", // 远古残骸：某物跳跃
+    "jump.azalea": "{{jump.*|block_sound.azalea}}", // 杜鹃花丛：某物跳跃
+    "jump.basalt": "{{jump.*|block_sound.basalt}}", // 玄武岩：某物跳跃
+    "jump.big_dripleaf": "{{jump.*|block_sound.big_dripleaf}}", // 大型垂滴叶：某物跳跃
+    "jump.bone_block": "{{jump.*|block_sound.bone_block}}", // 骨块：某物跳跃
+    "jump.cave_vines": "{{jump.*|block_sound.cave_vines}}", // 洞穴藤蔓：某物跳跃
+    "jump.chain": "{{jump.*|block_sound.chain}}", // 锁链：某物跳跃
+    "jump.cloth": "{{jump.*|block_sound.cloth}}", // 布质方块：某物跳跃
+    "jump.coral": "{{jump.*|block_sound.coral}}", // 珊瑚：某物跳跃
+    "jump.deepslate": "{{jump.*|block_sound.deepslate}}", // 深板岩：某物跳跃
+    "jump.deepslate_bricks": "{{jump.*|block_sound.deepslate_bricks}}", // 深板岩砖：某物跳跃
+    "jump.dirt_with_roots": "{{jump.*|block_sound.dirt_with_roots}}", // 缠根泥土：某物跳跃
+    "jump.dripstone_block": "{{jump.*|block_sound.dripstone_block}}", // 滴水石块：某物跳跃
+    "jump.grass": "{{jump.*|block_sound.grass}}", // 草：某物跳跃
+    "jump.gravel": "{{jump.*|block_sound.gravel}}", // 沙砾：某物跳跃
+    "jump.hanging_roots": "{{jump.*|block_sound.hanging_roots}}", // 垂根：某物跳跃
+    "jump.honey_block": "{{jump.*|block_sound.honey_block}}", // 蜂蜜块：某物跳跃
+    "jump.moss": "{{jump.*|block_sound.moss}}", // 苔藓：某物跳跃
+    "jump.nether_brick": "{{jump.*|block_sound.nether_brick}}", // 下界砖：某物跳跃
+    "jump.nether_gold_ore": "{{jump.*|block_sound.nether_gold_ore}}", // 下界金矿石：某物跳跃
+    "jump.nether_sprouts": "{{jump.*|block_sound.nether_sprouts}}", // 下界苗：某物跳跃
+    "jump.nether_wart": "{{jump.*|block_sound.nether_wart}}", // 下界疣：某物跳跃
+    "jump.netherite": "{{jump.*|block_sound.netherite}}", // 下界合金块：某物跳跃
+    "jump.netherrack": "{{jump.*|block_sound.netherrack}}", // 下界岩：某物跳跃
+    "jump.nylium": "{{jump.*|block_sound.nylium}}", // 菌岩：某物跳跃
+    "jump.pointed_dripstone": "{{jump.*|block_sound.pointed_dripstone}}", // 滴水石锥：某物跳跃
+    "jump.roots": "{{jump.*|block_sound.roots}}", // 菌索：某物跳跃
+    "jump.sand": "{{jump.*|block_sound.sand}}", // 沙子：某物跳跃
+    "jump.shroomlight": "{{jump.*|block_sound.shroomlight}}", // 菌光体：某物跳跃
+    "jump.slime": "{{jump.*|block_sound.slime}}", // 黏液块：某物跳跃
+    "jump.snow": "{{jump.*|block_sound.snow}}", // 雪块：某物跳跃
+    "jump.soul_sand": "{{jump.*|block_sound.soul_sand}}", // 灵魂沙：某物跳跃
+    "jump.soul_soil": "{{jump.*|block_sound.soul_soil}}", // 灵魂土：某物跳跃
+    "jump.spore_blossom": "{{jump.*|block_sound.spore_blossom}}", // 孢子花：某物跳跃
+    "jump.stem": "{{jump.*|block_sound.stem}}", // 菌柄：某物跳跃
+    "jump.stone": "{{jump.*|block_sound.stone}}", // 石头：某物跳跃
+    "jump.vines": "{{jump.*|block_sound.vines}}", // 藤蔓：某物跳跃
+    "jump.wood": "{{jump.*|block_sound.wood}}", // 木头：某物跳跃
+    "land.*": "{{block.*.land}}", // %s：某物着陆
+    "land.ancient_debris": "{{land.*|block_sound.ancient_debris}}", // 远古残骸：某物着陆
+    "land.azalea": "{{land.*|block_sound.azalea}}", // 杜鹃花丛：某物着陆
+    "land.basalt": "{{land.*|block_sound.basalt}}", // 玄武岩：某物着陆
+    "land.big_dripleaf": "{{land.*|block_sound.big_dripleaf}}", // 大型垂滴叶：某物着陆
+    "land.bone_block": "{{land.*|block_sound.bone_block}}", // 骨块：某物着陆
+    "land.cave_vines": "{{land.*|block_sound.cave_vines}}", // 洞穴藤蔓：某物着陆
+    "land.chain": "{{land.*|block_sound.chain}}", // 锁链：某物着陆
+    "land.cloth": "{{land.*|block_sound.cloth}}", // 布质方块：某物着陆
+    "land.coral": "{{land.*|block_sound.coral}}", // 珊瑚：某物着陆
+    "land.deepslate": "{{land.*|block_sound.deepslate}}", // 深板岩：某物着陆
+    "land.deepslate_bricks": "{{land.*|block_sound.deepslate_bricks}}", // 深板岩砖：某物着陆
+    "land.dirt_with_roots": "{{land.*|block_sound.dirt_with_roots}}", // 缠根泥土：某物着陆
+    "land.dripstone_block": "{{land.*|block_sound.dripstone_block}}", // 滴水石块：某物着陆
+    "land.grass": "{{land.*|block_sound.grass}}", // 草：某物着陆
+    "land.gravel": "{{land.*|block_sound.gravel}}", // 沙砾：某物着陆
+    "land.hanging_roots": "{{land.*|block_sound.hanging_roots}}", // 垂根：某物着陆
+    "land.honey_block": "{{land.*|block_sound.honey_block}}", // 蜂蜜块：某物着陆
+    "land.moss": "{{land.*|block_sound.moss}}", // 苔藓：某物着陆
+    "land.nether_brick": "{{land.*|block_sound.nether_brick}}", // 下界砖：某物着陆
+    "land.nether_gold_ore": "{{land.*|block_sound.nether_gold_ore}}", // 下界金矿石：某物着陆
+    "land.nether_sprouts": "{{land.*|block_sound.nether_sprouts}}", // 下界苗：某物着陆
+    "land.nether_wart": "{{land.*|block_sound.nether_wart}}", // 下界疣：某物着陆
+    "land.netherite": "{{land.*|block_sound.netherite}}", // 下界合金块：某物着陆
+    "land.netherrack": "{{land.*|block_sound.netherrack}}", // 下界岩：某物着陆
+    "land.nylium": "{{land.*|block_sound.nylium}}", // 菌岩：某物着陆
+    "land.pointed_dripstone": "{{land.*|block_sound.pointed_dripstone}}", // 滴水石锥：某物着陆
+    "land.roots": "{{land.*|block_sound.roots}}", // 菌索：某物着陆
+    "land.sand": "{{land.*|block_sound.sand}}", // 沙子：某物着陆
+    "land.shroomlight": "{{land.*|block_sound.shroomlight}}", // 菌光体：某物着陆
+    "land.slime": "{{land.*|block_sound.slime}}", // 黏液块：某物着陆
+    "land.snow": "{{land.*|block_sound.snow}}", // 雪块：某物着陆
+    "land.soul_sand": "{{land.*|block_sound.soul_sand}}", // 灵魂沙：某物着陆
+    "land.soul_soil": "{{land.*|block_sound.soul_soil}}", // 灵魂土：某物着陆
+    "land.spore_blossom": "{{land.*|block_sound.spore_blossom}}", // 孢子花：某物着陆
+    "land.stem": "{{land.*|block_sound.stem}}", // 菌柄：某物着陆
+    "land.stone": "{{land.*|block_sound.stone}}", // 石头：某物着陆
+    "land.vines": "{{land.*|block_sound.vines}}", // 藤蔓：某物着陆
+    "land.wood": "{{land.*|block_sound.wood}}", // 木头：某物着陆
+    "leashknot.break": "JE: subtitles.entity.leash_knot.break", // 拴绳结：被破坏
+    "leashknot.place": "JE: subtitles.entity.leash_knot.place", // 拴绳结：被系上
+    "liquid.lava": "{{block!lava}}：翻滚", // 熔岩：翻滚
+    "liquid.lavapop": "JE: subtitles.block.lava.ambient", // 熔岩：迸裂
+    "liquid.water": "JE: subtitles.block.water.ambient", // 水：流动
+    "lodestone_compass.link_compass_to_lodestone": "JE: subtitles.item.lodestone_compass.lock", // 磁石指针：绑定磁石
+    "minecart.base": "JE: subtitles.entity.minecart.riding", // 矿车：行进
+    "minecart.inside": "{{entity!minecart}}：骑乘", // 矿车：骑乘
+    "mob.agent.spawn": "{{ST!agent}}：生成", // 智能体：生成
+    "mob.armor_stand.break": "{{block.*.break|entity!armor_stand}}", // 盔甲架：被破坏
+    "mob.armor_stand.hit": "{{block.*.hit|entity!armor_stand}}", // 盔甲架：损坏中
+    "mob.armor_stand.land": "{{block.*.land|entity!armor_stand}}", // 盔甲架：某物着陆
+    "mob.armor_stand.place": "{{block.*.place|entity!armor_stand}}", // 盔甲架：被放置
+    "mob.axolotl.attack": "JE: subtitles.entity.axolotl.attack", // 美西螈：攻击
+    "mob.axolotl.death": "JE: subtitles.entity.axolotl.death", // 美西螈：死亡
+    "mob.axolotl.hurt": "JE: subtitles.entity.axolotl.hurt", // 美西螈：受伤
+    "mob.axolotl.idle": "JE: subtitles.entity.axolotl.idle_water", // 美西螈：啾啾
+    "mob.axolotl.idle_water": "JE: subtitles.entity.axolotl.idle_water", // 美西螈：啾啾
+    "mob.axolotl.splash": "JE: subtitles.entity.axolotl.splash", // 美西螈：溅起水花
+    "mob.axolotl.swim": "JE: subtitles.entity.axolotl.swim", // 美西螈：游泳
+    "mob.bat.death": "JE: subtitles.entity.bat.death", // 蝙蝠：死亡
+    "mob.bat.hurt": "JE: subtitles.entity.bat.hurt", // 蝙蝠：受伤
+    "mob.bat.idle": "JE: subtitles.entity.bat.ambient", // 蝙蝠：尖声叫
+    "mob.bat.takeoff": "JE: subtitles.entity.bat.takeoff", // 蝙蝠：起飞
+    "mob.bee.aggressive": "JE: subtitles.entity.bee.loop_aggressive", // 蜜蜂：愤怒地嗡嗡叫
+    "mob.bee.death": "JE: subtitles.entity.bee.death", // 蜜蜂：死亡
+    "mob.bee.hurt": "JE: subtitles.entity.bee.hurt", // 蜜蜂：受伤
+    "mob.bee.loop": "JE: subtitles.entity.bee.loop", // 蜜蜂：嗡嗡
+    "mob.bee.pollinate": "JE: subtitles.entity.bee.pollinate", // 蜜蜂：高兴地嗡嗡叫
+    "mob.bee.sting": "JE: subtitles.entity.bee.sting", // 蜜蜂：蛰
+    "mob.blaze.breathe": "JE: subtitles.entity.blaze.ambient", // 烈焰人：呼吸
+    "mob.blaze.death": "JE: subtitles.entity.blaze.death", // 烈焰人：死亡
+    "mob.blaze.hit": "JE: subtitles.entity.blaze.hurt", // 烈焰人：受伤
+    "mob.blaze.shoot": "JE: subtitles.entity.blaze.shoot", // 烈焰人：射击
+    "mob.cat.beg": "JE: subtitles.entity.cat.beg_for_food", // 猫：求食
+    "mob.cat.eat": "JE: subtitles.entity.cat.eat", // 猫：进食
+    "mob.cat.hiss": "JE: subtitles.entity.cat.hiss", // 猫：嘶嘶声
+    "mob.cat.hit": "JE: subtitles.entity.cat.hurt", // 猫：受伤
+    "mob.cat.meow": "JE: subtitles.entity.cat.ambient", // 猫：喵~
+    "mob.cat.purr": "JE: subtitles.entity.cat.purr", // 猫：呼噜声
+    "mob.cat.purreow": "{{entity!cat}}：呼噜~喵~", // 猫：呼噜~喵~
+    "mob.cat.straymeow": "{{mob.cat.meow}}（未驯服）", // 猫：喵~（未驯服）
+    "mob.chicken.hurt": "JE: subtitles.entity.chicken.hurt", // 鸡：受伤
+    "mob.chicken.plop": "JE: subtitles.entity.chicken.egg", // 鸡：下蛋
+    "mob.chicken.say": "JE: subtitles.entity.chicken.ambient", // 鸡：咯咯叫
+    "mob.chicken.step": "{{entity!chicken}}：行走", // 鸡：行走
+    "mob.cow.hurt": "JE: subtitles.entity.cow.hurt", // 牛：受伤
+    "mob.cow.milk": "JE: subtitles.entity.cow.milk", // 牛：被挤奶
+    "mob.cow.say": "JE: subtitles.entity.cow.ambient", // 牛：哞~
+    "mob.cow.step": "{{entity!cow}}：行走", // 牛：行走
+    "mob.creeper.death": "JE: subtitles.entity.creeper.death", // 苦力怕：死亡
+    "mob.creeper.say": "JE: subtitles.entity.creeper.hurt", // 苦力怕：受伤
+    "mob.dolphin.attack": "JE: subtitles.entity.dolphin.attack", // 海豚：攻击
+    "mob.dolphin.blowhole": "{{entity!dolphin}}：吹气", // 海豚：吹气
+    "mob.dolphin.death": "JE: subtitles.entity.dolphin.death", // 海豚：死亡
+    "mob.dolphin.eat": "JE: subtitles.entity.dolphin.eat", // 海豚：进食
+    "mob.dolphin.hurt": "JE: subtitles.entity.dolphin.hurt", // 海豚：受伤
+    "mob.dolphin.idle": "JE: subtitles.entity.dolphin.ambient", // 海豚：啾啾
+    "mob.dolphin.idle_water": "JE: subtitles.entity.dolphin.ambient_water", // 海豚：吹口哨
+    "mob.dolphin.jump": "JE: subtitles.entity.dolphin.jump", // 海豚：跃起
+    "mob.dolphin.play": "JE: subtitles.entity.dolphin.play", // 海豚：嬉戏
+    "mob.dolphin.splash": "JE: subtitles.entity.dolphin.splash", // 海豚：溅起水花
+    "mob.dolphin.swim": "JE: subtitles.entity.dolphin.swim", // 海豚：游泳
+    "mob.drowned.death": "JE: subtitles.entity.drowned.death", // 溺尸：死亡
+    "mob.drowned.death_water": "{{mob.drowned.death}}（水中）", // 溺尸：死亡（水中）
+    "mob.drowned.hurt": "JE: subtitles.entity.drowned.hurt", // 溺尸：受伤
+    "mob.drowned.hurt_water": "{{mob.drowned.hurt}}（水中）", // 溺尸：受伤（水中）
+    "mob.drowned.say": "JE: subtitles.entity.drowned.ambient", // 溺尸：呻吟
+    "mob.drowned.say_water": "JE: subtitles.entity.drowned.ambient_water", // 溺尸：呻吟
+    "mob.drowned.shoot": "JE: subtitles.entity.drowned.shoot", // 溺尸：投掷三叉戟
+    "mob.drowned.step": "JE: subtitles.entity.drowned.step", // 溺尸：脚步声
+    "mob.drowned.swim": "JE: subtitles.entity.drowned.swim", // 溺尸：游泳
+    "mob.elderguardian.curse": "JE: subtitles.entity.elder_guardian.curse", // 远古守卫者：诅咒
+    "mob.elderguardian.death": "JE: subtitles.entity.elder_guardian.death", // 远古守卫者：死亡
+    "mob.elderguardian.hit": "JE: subtitles.entity.elder_guardian.hurt", // 远古守卫者：受伤
+    "mob.elderguardian.idle": "JE: subtitles.entity.elder_guardian.ambient", // 远古守卫者：低鸣
+    "mob.enderdragon.death": "JE: subtitles.entity.ender_dragon.death", // 末影龙：死亡
+    "mob.enderdragon.flap": "JE: subtitles.entity.ender_dragon.flap", // 末影龙：拍打翅膀
+    "mob.enderdragon.growl": "JE: subtitles.entity.ender_dragon.growl", // 末影龙：吼叫
+    "mob.enderdragon.hit": "JE: subtitles.entity.ender_dragon.hurt", // 末影龙：受伤
+    "mob.endermen.death": "JE: subtitles.entity.enderman.death", // 末影人：死亡
+    "mob.endermen.hit": "JE: subtitles.entity.enderman.hurt", // 末影人：受伤
+    "mob.endermen.idle": "JE: subtitles.entity.enderman.ambient", // 末影人：低鸣
+    "mob.endermen.portal": "JE: subtitles.entity.enderman.teleport", // 末影人：传送
+    "mob.endermen.scream": "{{mob.endermen.idle}}（敌对状态）", // 末影人：低鸣（敌对状态）
+    "mob.endermen.stare": "JE: subtitles.entity.enderman.stare", // 末影人：喊叫
+    "mob.endermite.hit": "JE: subtitles.entity.endermite.hurt", // 末影螨：受伤
+    "mob.endermite.kill": "JE: subtitles.entity.endermite.death", // 末影螨：死亡
+    "mob.endermite.say": "JE: subtitles.entity.endermite.ambient", // 末影螨：叫声
+    "mob.endermite.step": "{{entity!endermite}}：行走", // 末影螨：行走
+    "mob.evocation_fangs.attack": "JE: subtitles.entity.evoker_fangs.attack", // 尖牙：咬合
+    "mob.evocation_illager.ambient": "JE: subtitles.entity.evoker.ambient", // 唤魔者：咕哝
+    "mob.evocation_illager.cast_spell": "JE: subtitles.entity.evoker.cast_spell", // 唤魔者：施法
+    "mob.evocation_illager.celebrate": "JE: subtitles.entity.evoker.celebrate", // 唤魔者：欢呼
+    "mob.evocation_illager.death": "JE: subtitles.entity.evoker.death", // 唤魔者：死亡
+    "mob.evocation_illager.hurt": "JE: subtitles.entity.evoker.hurt", // 唤魔者：受伤
+    "mob.evocation_illager.prepare_attack": "JE: subtitles.entity.evoker.prepare_attack", // 唤魔者：准备攻击
+    "mob.evocation_illager.prepare_summon": "JE: subtitles.entity.evoker.prepare_summon", // 唤魔者：准备召唤
+    "mob.evocation_illager.prepare_wololo": "JE: subtitles.entity.evoker.prepare_wololo", // 唤魔者：准备施咒
+    "mob.fish.flop": "JE: subtitles.entity.cod.flop", // 鳕鱼：扑腾
+    "mob.fish.hurt": "JE: subtitles.entity.cod.hurt", // 鳕鱼：受伤
+    "mob.fish.step": "{{entity!cod}}：游泳", // 鳕鱼：游泳
+    "mob.fox.aggro": "JE: subtitles.entity.fox.aggro", // 狐狸：愤怒
+    "mob.fox.ambient": "JE: subtitles.entity.fox.ambient", // 狐狸：吱吱叫
+    "mob.fox.bite": "JE: subtitles.entity.fox.bite", // 狐狸：撕咬
+    "mob.fox.death": "JE: subtitles.entity.fox.death", // 狐狸：死亡
+    "mob.fox.eat": "JE: subtitles.entity.fox.eat", // 狐狸：进食
+    "mob.fox.hurt": "JE: subtitles.entity.fox.hurt", // 狐狸：受伤
+    "mob.fox.screech": "JE: subtitles.entity.fox.screech", // 狐狸：尖声叫
+    "mob.fox.sleep": "JE: subtitles.entity.fox.sleep", // 狐狸：打鼾
+    "mob.fox.sniff": "JE: subtitles.entity.fox.sniff", // 狐狸：嗅探
+    "mob.fox.spit": "JE: subtitles.entity.fox.spit", // 狐狸：吐出
+    "mob.ghast.affectionate_scream": "{{entity!ghast}}：深情尖叫", // 恶魂：深情尖叫
+    "mob.ghast.charge": "{{entity!ghast}}：警告", // 恶魂：警告
+    "mob.ghast.death": "JE: subtitles.entity.ghast.death", // 恶魂：死亡
+    "mob.ghast.fireball": "JE: subtitles.entity.ghast.shoot", // 恶魂：射击
+    "mob.ghast.moan": "JE: subtitles.entity.ghast.ambient", // 恶魂：哭泣
+    "mob.ghast.scream": "JE: subtitles.entity.ghast.hurt", // 恶魂：受伤
+    "mob.glow_squid.ambient": "JE: subtitles.entity.glow_squid.ambient", // 发光鱿鱼：游泳
+    "mob.glow_squid.death": "JE: subtitles.entity.glow_squid.death", // 发光鱿鱼：死亡
+    "mob.glow_squid.hurt": "JE: subtitles.entity.glow_squid.hurt", // 发光鱿鱼：受伤
+    "mob.glow_squid.ink_squirt": "JE: subtitles.entity.glow_squid.squirt", // 发光鱿鱼：喷墨
+    "mob.goat.ambient": "JE: subtitles.entity.goat.ambient", // 山羊：咩~
+    "mob.goat.ambient.screamer": "JE: subtitles.entity.goat.screaming.ambient", // 山羊：喊叫
+    "mob.goat.death": "JE: subtitles.entity.goat.death", // 山羊：死亡
+    "mob.goat.death.screamer": "{{mob.goat.death}}（尖叫变种）", // 山羊：死亡（尖叫变种）
+    "mob.goat.eat": "JE: subtitles.entity.goat.eat", // 山羊：进食
+    "mob.goat.hurt": "JE: subtitles.entity.goat.hurt", // 山羊：受伤
+    "mob.goat.hurt.screamer": "{{mob.goat.hurt}}（尖叫变种）", // 山羊：受伤（尖叫变种）
+    "mob.goat.milk.screamer": "{{mob.goat.milk}}（尖叫变种）", // （尖叫变种）
+    "mob.goat.prepare_ram": "JE: subtitles.entity.goat.prepare_ram", // 山羊：跺脚
+    "mob.goat.prepare_ram.screamer": "{{mob.goat.prepare_ram}}（尖叫变种）", // 山羊：跺脚（尖叫变种）
+    "mob.goat.ram_impact": "JE: subtitles.entity.goat.ram_impact", // 山羊：冲撞
+    "mob.goat.ram_impact.screamer": "{{mob.goat.ram_impact}}（尖叫变种）", // 山羊：冲撞（尖叫变种）
+    "mob.goat.step": "JE: subtitles.entity.goat.step", // 山羊：脚步声
+    "mob.guardian.ambient": "JE: subtitles.entity.guardian.ambient", // 守卫者：低鸣
+    "mob.guardian.attack_loop": "JE: subtitles.entity.guardian.attack", // 守卫者：射击
+    "mob.guardian.death": "JE: subtitles.entity.guardian.death", // 守卫者：死亡
+    "mob.guardian.flop": "JE: subtitles.entity.guardian.flop", // 守卫者：落地
+    "mob.guardian.hit": "JE: subtitles.entity.guardian.hurt", // 守卫者：受伤
+    "mob.guardian.land_death": "{{mob.guardian.death}}（陆地上）", // 守卫者：死亡（陆地上）
+    "mob.guardian.land_hit": "{{mob.guardian.hit}}（陆地上）", // 守卫者：受伤（陆地上）
+    "mob.guardian.land_idle": "{{mob.guardian.ambient}}（陆地上）", // 守卫者：低鸣（陆地上）
+    "mob.hoglin.ambient": "JE: subtitles.entity.hoglin.ambient", // 疣猪兽：咆哮
+    "mob.hoglin.angry": "JE: subtitles.entity.hoglin.angry", // 疣猪兽：怒吼
+    "mob.hoglin.attack": "JE: subtitles.entity.hoglin.attack", // 疣猪兽：攻击
+    "mob.hoglin.death": "JE: subtitles.entity.hoglin.death", // 疣猪兽：死亡
+    "mob.hoglin.howl": "{{entity!hoglin}}：嚎叫", // 疣猪兽：嚎叫
+    "mob.hoglin.hurt": "JE: subtitles.entity.hoglin.hurt", // 疣猪兽：受伤
+    "mob.hoglin.retreat": "JE: subtitles.entity.hoglin.retreat", // 疣猪兽：退缩
+    "mob.hoglin.step": "JE: subtitles.entity.hoglin.step", // 疣猪兽：脚步声
+    "mob.horse.angry": "JE: subtitles.entity.horse.angry", // 马：嘶鸣
+    "mob.horse.armor": "JE: subtitles.entity.horse.armor", // 马铠：装备
+    "mob.horse.breathe": "JE: subtitles.entity.horse.breathe", // 马：呼吸
+    "mob.horse.death": "JE: subtitles.entity.horse.death", // 马：死亡
+    "mob.horse.donkey.angry": "JE: subtitles.entity.donkey.angry", // 驴：嘶叫
+    "mob.horse.donkey.death": "JE: subtitles.entity.donkey.death", // 驴：死亡
+    "mob.horse.donkey.hit": "JE: subtitles.entity.donkey.hurt", // 驴：受伤
+    "mob.horse.donkey.idle": "JE: subtitles.entity.donkey.ambient", // 驴：嘶叫
+    "mob.horse.eat": "JE: subtitles.entity.horse.eat", // 马：进食
+    "mob.horse.gallop": "JE: subtitles.entity.horse.gallop", // 马：奔腾
+    "mob.horse.hit": "JE: subtitles.entity.horse.hurt", // 马：受伤
+    "mob.horse.idle": "JE: subtitles.entity.horse.ambient", // 马：嘶鸣
+    "mob.horse.jump": "JE: subtitles.entity.horse.jump", // 马：跳跃
+    "mob.horse.land": "{{entity!horse}}：着陆", // 马：着陆
+    "mob.horse.leather": "JE: subtitles.entity.horse.saddle", // 鞍：装备
+    "mob.horse.skeleton.death": "JE: subtitles.entity.skeleton_horse.death", // 骷髅马：死亡
+    "mob.horse.skeleton.hit": "JE: subtitles.entity.skeleton_horse.hurt", // 骷髅马：受伤
+    "mob.horse.skeleton.idle": "JE: subtitles.entity.skeleton_horse.ambient", // 骷髅马：嘶叫
+    "mob.horse.soft": "{{entity!horse}}：践踏", // 马：践踏
+    "mob.horse.wood": "{{entity!horse}}：践踏木制方块", // 马：践踏木制方块
+    "mob.horse.zombie.death": "JE: subtitles.entity.zombie_horse.death", // 僵尸马：死亡
+    "mob.horse.zombie.hit": "JE: subtitles.entity.zombie_horse.hurt", // 僵尸马：受伤
+    "mob.horse.zombie.idle": "JE: subtitles.entity.zombie_horse.ambient", // 僵尸马：嘶叫
+    "mob.husk.ambient": "JE: subtitles.entity.husk.ambient", // 尸壳：低吼
+    "mob.husk.death": "JE: subtitles.entity.husk.death", // 尸壳：死亡
+    "mob.husk.hurt": "JE: subtitles.entity.husk.hurt", // 尸壳：受伤
+    "mob.husk.step": "{{entity!husk}}：行走", // 尸壳：行走
+    "mob.irongolem.death": "JE: subtitles.entity.iron_golem.death", // 铁傀儡：死亡
+    "mob.irongolem.hit": "JE: subtitles.entity.iron_golem.hurt", // 铁傀儡：受伤
+    "mob.irongolem.throw": "JE: subtitles.entity.iron_golem.attack", // 铁傀儡：攻击
+    "mob.irongolem.walk": "{{entity!iron_golem}}：行走", // 铁傀儡：行走
+    "mob.llama.angry": "JE: subtitles.entity.llama.angry", // 羊驼：怒吼
+    "mob.llama.death": "JE: subtitles.entity.llama.death", // 羊驼：死亡
+    "mob.llama.eat": "JE: subtitles.entity.llama.eat", // 羊驼：进食
+    "mob.llama.hurt": "JE: subtitles.entity.llama.hurt", // 羊驼：受伤
+    "mob.llama.idle": "JE: subtitles.entity.llama.ambient", // 羊驼：吼叫
+    "mob.llama.spit": "JE: subtitles.entity.llama.spit", // 羊驼：喷射唾沫
+    "mob.llama.step": "JE: subtitles.entity.llama.step", // 羊驼：脚步声
+    "mob.llama.swag": "JE: subtitles.entity.llama.swag", // 羊驼：被装饰
+    "mob.magmacube.big": "JE: subtitles.entity.magma_cube.squish", // 岩浆怪：移动
+    "mob.magmacube.jump": "{{entity!magma_cube}}：跳跃", // 岩浆怪：跳跃
+    "mob.magmacube.small": "{{mob.magmacube.big}}（小型）", // 岩浆怪：移动（小型）
+    "mob.mooshroom.convert": "JE: subtitles.entity.mooshroom.convert", // 哞菇：转化
+    "mob.mooshroom.eat": "JE: subtitles.entity.mooshroom.eat", // 哞菇：进食
+    "mob.mooshroom.suspicious_milk": "JE: subtitles.entity.mooshroom.suspicious_milk", // 哞菇：被可疑地挤奶
+    "mob.ocelot.death": "{{entity!ocelot}}：死亡", // 豹猫：死亡
+    "mob.ocelot.idle": "{{entity!ocelot}}：喵~", // 豹猫：喵~
+    "mob.panda.bite": "JE: subtitles.entity.panda.bite", // 熊猫：撕咬
+    "mob.panda.cant_breed": "JE: subtitles.entity.panda.cant_breed", // 熊猫：哀鸣
+    "mob.panda.death": "JE: subtitles.entity.panda.death", // 熊猫：死亡
+    "mob.panda.eat": "JE: subtitles.entity.panda.eat", // 熊猫：进食
+    "mob.panda.hurt": "JE: subtitles.entity.panda.hurt", // 熊猫：受伤
+    "mob.panda.idle": "JE: subtitles.entity.panda.ambient", // 熊猫：喘息
+    "mob.panda.idle.aggressive": "JE: subtitles.entity.panda.aggressive_ambient", // 熊猫：发怒
+    "mob.panda.idle.worried": "JE: subtitles.entity.panda.worried_ambient", // 熊猫：呜咽
+    "mob.panda.presneeze": "JE: subtitles.entity.panda.pre_sneeze", // 熊猫：鼻痒
+    "mob.panda.sneeze": "JE: subtitles.entity.panda.sneeze", // 熊猫：打喷嚏
+    "mob.panda.step": "JE: subtitles.entity.panda.step", // 熊猫：脚步声
+    "mob.panda_baby.idle": "{{mob.panda.idle}}（幼年）", // 熊猫：喘息（幼年）
+    "mob.parrot.death": "JE: subtitles.entity.parrot.death", // 鹦鹉：死亡
+    "mob.parrot.eat": "JE: subtitles.entity.parrot.eats", // 鹦鹉：进食
+    "mob.parrot.fly": "JE: subtitles.entity.parrot.fly", // 鹦鹉：扑翼
+    "mob.parrot.hurt": "JE: subtitles.entity.parrot.hurts", // 鹦鹉：受伤
+    "mob.parrot.idle": "JE: subtitles.entity.parrot.ambient", // 鹦鹉：说话
+    "mob.parrot.step": "{{entity!parrot}}：行走", // 鹦鹉：行走
+    "mob.phantom.bite": "JE: subtitles.entity.phantom.bite", // 幻翼：撕咬
+    "mob.phantom.death": "JE: subtitles.entity.phantom.death", // 幻翼：死亡
+    "mob.phantom.flap": "JE: subtitles.entity.phantom.flap", // 幻翼：振翅
+    "mob.phantom.hurt": "JE: subtitles.entity.phantom.hurt", // 幻翼：受伤
+    "mob.phantom.idle": "JE: subtitles.entity.phantom.ambient", // 幻翼：尖声叫
+    "mob.phantom.swoop": "JE: subtitles.entity.phantom.swoop", // 幻翼：俯冲
+    "mob.pig.boost": "{{entity!pig}}：加速", // 猪：加速
+    "mob.pig.death": "JE: subtitles.entity.pig.death", // 猪：死亡
+    "mob.pig.say": "JE: subtitles.entity.pig.ambient", // 猪：哼叫
+    "mob.pig.step": "{{entity!pig}}：行走", // 猪：行走
+    "mob.piglin.admiring_item": "JE: subtitles.entity.piglin.admiring_item", // 猪灵：端详物品
+    "mob.piglin.ambient": "JE: subtitles.entity.piglin.ambient", // 猪灵：哼叫
+    "mob.piglin.angry": "JE: subtitles.entity.piglin.angry", // 猪灵：愤怒地哼叫
+    "mob.piglin.celebrate": "JE: subtitles.entity.piglin.celebrate", // 猪灵：庆祝
+    "mob.piglin.converted_to_zombified": "JE: subtitles.entity.piglin.converted_to_zombified", // 猪灵：转化为僵尸猪灵
+    "mob.piglin.death": "JE: subtitles.entity.piglin.death", // 猪灵：死亡
+    "mob.piglin.hurt": "JE: subtitles.entity.piglin.hurt", // 猪灵：受伤
+    "mob.piglin.jealous": "JE: subtitles.entity.piglin.jealous", // 猪灵：羡慕地哼叫
+    "mob.piglin.retreat": "JE: subtitles.entity.piglin.retreat", // 猪灵：退缩
+    "mob.piglin.step": "JE: subtitles.entity.piglin.step", // 猪灵：脚步声
+    "mob.piglin_brute.ambient": "JE: subtitles.entity.piglin_brute.ambient", // 猪灵蛮兵：哼叫
+    "mob.piglin_brute.angry": "JE: subtitles.entity.piglin_brute.angry", // 猪灵蛮兵：愤怒地哼叫
+    "mob.piglin_brute.converted_to_zombified": "JE: subtitles.entity.piglin_brute.converted_to_zombified", // 猪灵蛮兵：转化为僵尸猪灵
+    "mob.piglin_brute.death": "JE: subtitles.entity.piglin_brute.death", // 猪灵蛮兵：死亡
+    "mob.piglin_brute.hurt": "JE: subtitles.entity.piglin_brute.hurt", // 猪灵蛮兵：受伤
+    "mob.piglin_brute.step": "JE: subtitles.entity.piglin_brute.step", // 猪灵蛮兵：脚步声
+    "mob.pillager.celebrate": "JE: subtitles.entity.pillager.celebrate", // 掠夺者：欢呼
+    "mob.pillager.death": "JE: subtitles.entity.pillager.death", // 掠夺者：死亡
+    "mob.pillager.hurt": "JE: subtitles.entity.pillager.hurt", // 掠夺者：受伤
+    "mob.pillager.idle": "JE: subtitles.entity.pillager.ambient", // 掠夺者：咕哝
+    "mob.player.hurt_drown": "JE: subtitles.entity.player.hurt_drown", // 玩家：溺水
+    "mob.player.hurt_freeze": "JE: subtitles.entity.player.freeze_hurt", // 玩家：冻伤
+    "mob.player.hurt_on_fire": "JE: subtitles.entity.player.hurt_on_fire", // 玩家：燃烧
+    "mob.polarbear.death": "JE: subtitles.entity.polar_bear.death", // 北极熊：死亡
+    "mob.polarbear.hurt": "JE: subtitles.entity.polar_bear.hurt", // 北极熊：受伤
+    "mob.polarbear.idle": "JE: subtitles.entity.polar_bear.ambient", // 北极熊：低吼
+    "mob.polarbear.step": "{{entity!polar_bear}}：行走", // 北极熊：行走
+    "mob.polarbear.warning": "JE: subtitles.entity.polar_bear.warning", // 北极熊：咆哮
+    "mob.polarbear_baby.idle": "{{mob.polarbear.idle}}（幼年）", // 北极熊：低吼（幼年）
+    "mob.rabbit.death": "JE: subtitles.entity.rabbit.death", // 兔子：死亡
+    "mob.rabbit.hop": "JE: subtitles.entity.rabbit.jump", // 兔子：跳动
+    "mob.rabbit.hurt": "JE: subtitles.entity.rabbit.hurt", // 兔子：受伤
+    "mob.rabbit.idle": "JE: subtitles.entity.rabbit.ambient", // 兔子：吱吱叫
+    "mob.ravager.ambient": "JE: subtitles.entity.ravager.ambient", // 劫掠兽：呼噜
+    "mob.ravager.bite": "JE: subtitles.entity.ravager.attack", // 劫掠兽：撕咬
+    "mob.ravager.celebrate": "JE: subtitles.entity.ravager.celebrate", // 劫掠兽：欢呼
+    "mob.ravager.death": "JE: subtitles.entity.ravager.death", // 劫掠兽：死亡
+    "mob.ravager.hurt": "JE: subtitles.entity.ravager.hurt", // 劫掠兽：受伤
+    "mob.ravager.roar": "JE: subtitles.entity.ravager.roar", // 劫掠兽：咆哮
+    "mob.ravager.step": "JE: subtitles.entity.ravager.step", // 劫掠兽：脚步声
+    "mob.ravager.stun": "JE: subtitles.entity.ravager.stunned", // 劫掠兽：眩晕
+    "mob.sheep.say": "JE: subtitles.entity.sheep.ambient", // 绵羊：咩~
+    "mob.sheep.shear": "{{entity!sheep}}：剪毛", // 绵羊：剪毛
+    "mob.sheep.step": "{{entity!sheep}}：行走", // 绵羊：行走
+    "mob.shulker.ambient": "JE: subtitles.entity.shulker.ambient", // 潜影贝：窥视
+    "mob.shulker.bullet.hit": "JE: subtitles.entity.shulker_bullet.hit", // 潜影贝导弹：爆炸
+    "mob.shulker.close": "JE: subtitles.entity.shulker.close", // 潜影贝：关闭
+    "mob.shulker.close.hurt": "{{mob.shulker.hurt}}（关闭时）", // 潜影贝：受伤（关闭时）
+    "mob.shulker.death": "JE: subtitles.entity.shulker.death", // 潜影贝：死亡
+    "mob.shulker.hurt": "JE: subtitles.entity.shulker.hurt", // 潜影贝：受伤
+    "mob.shulker.open": "JE: subtitles.entity.shulker.open", // 潜影贝：打开
+    "mob.shulker.shoot": "JE: subtitles.entity.shulker.shoot", // 潜影贝：射击
+    "mob.shulker.teleport": "JE: subtitles.entity.shulker.teleport", // 潜影贝：传送
+    "mob.silverfish.hit": "JE: subtitles.entity.silverfish.hurt", // 蠹虫：受伤
+    "mob.silverfish.kill": "JE: subtitles.entity.silverfish.death", // 蠹虫：死亡
+    "mob.silverfish.say": "JE: subtitles.entity.silverfish.ambient", // 蠹虫：嘶嘶
+    "mob.silverfish.step": "{{entity!silverfish}}：行走", // 蠹虫：行走
+    "mob.skeleton.convert_to_stray": "JE: subtitles.entity.skeleton.converted_to_stray", // 骷髅：转化为流浪者
+    "mob.skeleton.death": "JE: subtitles.entity.skeleton.death", // 骷髅：死亡
+    "mob.skeleton.hurt": "JE: subtitles.entity.skeleton.hurt", // 骷髅：受伤
+    "mob.skeleton.say": "JE: subtitles.entity.skeleton.ambient", // 骷髅：咯咯声
+    "mob.skeleton.step": "{{entity!skeleton}}：行走", // 骷髅：行走
+    "mob.slime.attack": "JE: subtitles.entity.slime.attack", // 史莱姆：攻击
+    "mob.slime.big": "{{mob.slime.squish}}", // 史莱姆：移动
+    "mob.slime.death": "JE: subtitles.entity.slime.death", // 史莱姆：死亡
+    "mob.slime.hurt": "JE: subtitles.entity.slime.hurt", // 史莱姆：受伤
+    "mob.slime.jump": "{{entity!slime}}：跳跃", // 史莱姆：跳跃
+    "mob.slime.small": "{{mob.slime.squish}}（小型）", // 史莱姆：移动（小型）
+    "mob.slime.squish": "JE: subtitles.entity.slime.squish", // 史莱姆：移动
+    "mob.snowgolem.death": "JE: subtitles.entity.snow_golem.death", // 雪傀儡：死亡
+    "mob.snowgolem.hurt": "JE: subtitles.entity.snow_golem.hurt", // 雪傀儡：受伤
+    "mob.snowgolem.shoot": "{{entity!snow_golem}}：射击", // 雪傀儡：射击
+    "mob.spider.death": "JE: subtitles.entity.spider.death", // 蜘蛛：死亡
+    "mob.spider.say": "JE: subtitles.entity.spider.ambient", // 蜘蛛：嘶嘶
+    "mob.spider.step": "{{entity!spider}}：爬行", // 蜘蛛：爬行
+    "mob.squid.ambient": "JE: subtitles.entity.squid.ambient", // 鱿鱼：游动
+    "mob.squid.death": "JE: subtitles.entity.squid.death", // 鱿鱼：死亡
+    "mob.squid.hurt": "JE: subtitles.entity.squid.hurt", // 鱿鱼：受伤
+    "mob.squid.ink_squirt": "JE: subtitles.entity.squid.squirt", // 鱿鱼：喷墨
+    "mob.stray.ambient": "JE: subtitles.entity.stray.ambient", // 流浪者：咯咯声
+    "mob.stray.death": "JE: subtitles.entity.stray.death", // 流浪者：死亡
+    "mob.stray.hurt": "JE: subtitles.entity.stray.hurt", // 流浪者：受伤
+    "mob.stray.step": "{{entity!stray}}：行走", // 流浪者：行走
+    "mob.strider.death": "JE: subtitles.entity.strider.death", // 炽足兽：死亡
+    "mob.strider.eat": "JE: subtitles.entity.strider.eat", // 炽足兽：进食
+    "mob.strider.hurt": "JE: subtitles.entity.strider.hurt", // 炽足兽：受伤
+    "mob.strider.idle": "JE: subtitles.entity.strider.idle", // 炽足兽：啾啾
+    "mob.strider.panic": "JE: subtitles.entity.strider.retreat", // 炽足兽：退缩
+    "mob.strider.step": "{{entity!strider}}：行走", // 炽足兽：行走
+    "mob.strider.step_lava": "{{entity!strider}}：在{{ST!lava}}上行走", // 炽足兽：在熔岩上行走
+    "mob.strider.tempt": "JE: subtitles.entity.strider.happy", // 炽足兽：颤鸣
+    "mob.turtle.ambient": "JE: subtitles.entity.turtle.ambient_land", // 海龟：啾啾
+    "mob.turtle.death": "JE: subtitles.entity.turtle.death", // 海龟：死亡
+    "mob.turtle.hurt": "JE: subtitles.entity.turtle.hurt", // 海龟：受伤
+    "mob.turtle.step": "{{entity!turtle}}：爬行", // 海龟：爬行
+    "mob.turtle.swim": "JE: subtitles.entity.turtle.swim", // 海龟：游动
+    "mob.turtle_baby.born": "JE: subtitles.entity.turtle.egg_hatch", // 海龟蛋：孵化
+    "mob.turtle_baby.death": "JE: subtitles.entity.turtle.death_baby", // 幼年海龟：死亡
+    "mob.turtle_baby.hurt": "JE: subtitles.entity.turtle.hurt_baby", // 幼年海龟：受伤
+    "mob.turtle_baby.step": "幼年{{entity!turtle}}：爬行", // 幼年海龟：爬行
+    "mob.vex.ambient": "JE: subtitles.entity.vex.ambient", // 恼鬼：恼人
+    "mob.vex.charge": "JE: subtitles.entity.vex.charge", // 恼鬼：尖叫
+    "mob.vex.death": "JE: subtitles.entity.vex.death", // 恼鬼：死亡
+    "mob.vex.hurt": "JE: subtitles.entity.vex.hurt", // 恼鬼：受伤
+    "mob.villager.death": "JE: subtitles.entity.villager.death", // 村民：死亡
+    "mob.villager.haggle": "JE: subtitles.entity.villager.trade", // 村民：交易
+    "mob.villager.hit": "JE: subtitles.entity.villager.hurt", // 村民：受伤
+    "mob.villager.idle": "JE: subtitles.entity.villager.ambient", // 村民：喃喃自语
+    "mob.villager.no": "JE: subtitles.entity.villager.no", // 村民：反对
+    "mob.villager.yes": "JE: subtitles.entity.villager.yes", // 村民：赞同
+    "mob.vindicator.celebrate": "JE: subtitles.entity.vindicator.celebrate", // 卫道士：欢呼
+    "mob.vindicator.death": "JE: subtitles.entity.vindicator.death", // 卫道士：死亡
+    "mob.vindicator.hurt": "JE: subtitles.entity.vindicator.hurt", // 卫道士：受伤
+    "mob.vindicator.idle": "JE: subtitles.entity.vindicator.ambient", // 卫道士：低语
+    "mob.wanderingtrader.death": "JE: subtitles.entity.wandering_trader.death", // 流浪商人：死亡
+    "mob.wanderingtrader.disappeared": "JE: subtitles.entity.wandering_trader.disappeared", // 流浪商人：隐身
+    "mob.wanderingtrader.drink_milk": "JE: subtitles.entity.wandering_trader.drink_milk", // 流浪商人：喝奶
+    "mob.wanderingtrader.drink_potion": "JE: subtitles.entity.wandering_trader.drink_potion", // 流浪商人：饮用药水
+    "mob.wanderingtrader.haggle": "JE: subtitles.entity.wandering_trader.trade", // 流浪商人：交易
+    "mob.wanderingtrader.hurt": "JE: subtitles.entity.wandering_trader.hurt", // 流浪商人：受伤
+    "mob.wanderingtrader.idle": "JE: subtitles.entity.wandering_trader.ambient", // 流浪商人：喃喃自语
+    "mob.wanderingtrader.no": "JE: subtitles.entity.wandering_trader.no", // 流浪商人：拒绝
+    "mob.wanderingtrader.reappeared": "JE: subtitles.entity.wandering_trader.reappeared", // 流浪商人：现身
+    "mob.wanderingtrader.yes": "JE: subtitles.entity.wandering_trader.yes", // 流浪商人：同意
+    "mob.witch.ambient": "JE: subtitles.entity.witch.ambient", // 女巫：暗笑
+    "mob.witch.celebrate": "JE: subtitles.entity.witch.celebrate", // 女巫：欢呼
+    "mob.witch.death": "JE: subtitles.entity.witch.death", // 女巫：死亡
+    "mob.witch.drink": "JE: subtitles.entity.witch.drink", // 女巫：饮用药水
+    "mob.witch.hurt": "JE: subtitles.entity.witch.hurt", // 女巫：受伤
+    "mob.witch.throw": "JE: subtitles.entity.witch.throw", // 女巫：投掷
+    "mob.wither.ambient": "JE: subtitles.entity.wither.ambient", // 凋灵：愤怒
+    "mob.wither.break_block": "{{entity!wither}}：破坏方块", // 凋灵：破坏方块
+    "mob.wither.death": "JE: subtitles.entity.wither.death", // 凋灵：死亡
+    "mob.wither.hurt": "JE: subtitles.entity.wither.hurt", // 凋灵：受伤
+    "mob.wither.shoot": "JE: subtitles.entity.wither.shoot", // 凋灵：攻击
+    "mob.wither.spawn": "JE: subtitles.entity.wither.spawn", // 凋灵：解放
+    "mob.wolf.bark": "{{entity!wolf}}：吠叫", // 狼：吠叫
+    "mob.wolf.death": "JE: subtitles.entity.wolf.death", // 狼：死亡
+    "mob.wolf.growl": "JE: subtitles.entity.wolf.growl", // 狼：嚎叫
+    "mob.wolf.hurt": "JE: subtitles.entity.wolf.hurt", // 狼：受伤
+    "mob.wolf.panting": "JE: subtitles.entity.wolf.ambient", // 狼：喘息
+    "mob.wolf.shake": "JE: subtitles.entity.wolf.shake", // 狼：摇动
+    "mob.wolf.step": "{{entity!wolf}}：行走", // 狼：行走
+    "mob.wolf.whine": "{{entity!wolf}}：哀鸣", // 狼：哀鸣
+    "mob.zoglin.angry": "JE: subtitles.entity.zoglin.angry", // 僵尸疣猪兽：怒吼
+    "mob.zoglin.attack": "JE: subtitles.entity.zoglin.attack", // 僵尸疣猪兽：攻击
+    "mob.zoglin.death": "JE: subtitles.entity.zoglin.death", // 僵尸疣猪兽：死亡
+    "mob.zoglin.hurt": "JE: subtitles.entity.zoglin.hurt", // 僵尸疣猪兽：受伤
+    "mob.zoglin.idle": "JE: subtitles.entity.zoglin.ambient", // 僵尸疣猪兽：咆哮
+    "mob.zoglin.step": "JE: subtitles.entity.zoglin.step", // 僵尸疣猪兽：脚步声
+    "mob.zombie.death": "JE: subtitles.entity.zombie.death", // 僵尸：死亡
+    "mob.zombie.hurt": "JE: subtitles.entity.zombie.hurt", // 僵尸：受伤
+    "mob.zombie.remedy": "JE: subtitles.entity.zombie_villager.cure", // 僵尸村民：撕心裂肺
+    "mob.zombie.say": "JE: subtitles.entity.zombie.ambient", // 僵尸：低吼
+    "mob.zombie.step": "{{entity!zombie}}：行走", // 僵尸：行走
+    "mob.zombie.unfect": "JE: subtitles.entity.zombie_villager.converted", // 僵尸村民：哀嚎
+    "mob.zombie.wood": "JE: subtitles.entity.zombie.attack_wooden_door", // 门：晃动
+    "mob.zombie.woodbreak": "JE: subtitles.entity.zombie.break_wooden_door", // 门：毁坏
+    "mob.zombie_villager.death": "JE: subtitles.entity.zombie_villager.death", // 僵尸村民：死亡
+    "mob.zombie_villager.hurt": "JE: subtitles.entity.zombie_villager.hurt", // 僵尸村民：受伤
+    "mob.zombie_villager.say": "JE: subtitles.entity.zombie_villager.ambient", // 僵尸村民：低吼
+    "mob.zombiepig.zpig": "JE: subtitles.entity.zombified_piglin.ambient", // 僵尸猪灵：呼噜
+    "mob.zombiepig.zpigangry": "JE: subtitles.entity.zombified_piglin.angry", // 僵尸猪灵：愤怒地呼噜
+    "mob.zombiepig.zpigdeath": "JE: subtitles.entity.zombified_piglin.death", // 僵尸猪灵：死亡
+    "mob.zombiepig.zpighurt": "JE: subtitles.entity.zombified_piglin.hurt", // 僵尸猪灵：受伤
+    "music.game": "生存模式背景音乐",
+    "music.game.creative": "创造模式背景音乐",
+    "music.game.credits": "制作人员界面背景音乐",
+    "music.game.crimson_forest": "{{ST!crimson forest}}背景音乐", // 绯红森林背景音乐
+    "music.game.end": "{{ST!the end}}背景音乐", // 末地背景音乐
+    "music.game.endboss": "{{ST!ender dragon}}战斗背景音乐", // 末影龙战斗背景音乐
+    "music.game.nether": "{{ST!the nether}}背景音乐", // 下界背景音乐
+    "music.game.nether_wastes": "{{ST!nether wastes}}背景音乐", // 下界荒地背景音乐
+    "music.game.soulsand_valley": "{{ST!soul sand valley}}背景音乐", // 灵魂沙峡谷背景音乐
+    "music.game.water": "水下背景音乐",
+    "music.menu": "菜单背景音乐",
+    "note.*": "{{JE!subtitles.block.note_block.note}}%s", // 音符盒：播放%s
+    "note.banjo": "{{note.*|'班卓琴}}", // 音符盒：播放班卓琴
+    "note.bass": "{{note.*|'贝斯}}", // 音符盒：播放贝斯
+    "note.bassattack": "{{note.*|'贝斯}}", // 音符盒：播放贝斯
+    "note.bd": "{{note.*|'底鼓}}", // 音符盒：播放底鼓
+    "note.bell": "{{note.*|'钟琴}}", // 音符盒：播放钟琴
+    "note.bit": "{{note.*|'方波}}", // 音符盒：播放方波
+    "note.chime": "{{note.*|'管钟}}", // 音符盒：播放管钟
+    "note.cow_bell": "{{note.*|'牛铃}}", // 音符盒：播放牛铃
+    "note.didgeridoo": "{{note.*|'迪吉里杜管}}", // 音符盒：播放迪吉里杜管
+    "note.flute": "{{note.*|'长笛}}", // 音符盒：播放长笛
+    "note.guitar": "{{note.*|'吉他}}", // 音符盒：播放吉他
+    "note.harp": "{{note.*|'竖琴}}", // 音符盒：播放竖琴
+    "note.hat": "{{note.*|'击鼓沿}}", // 音符盒：播放击鼓沿
+    "note.iron_xylophone": "{{note.*|'颤音琴}}", // 音符盒：播放颤音琴
+    "note.pling": "{{note.*|'电钢琴}}", // 音符盒：播放电钢琴
+    "note.snare": "{{note.*|'小军鼓}}", // 音符盒：播放小军鼓
+    "note.xylophone": "{{note.*|'木琴}}", // 音符盒：播放木琴
+    "particle.soul_escape": "JE: subtitles.particle.soul_escape", // 灵魂：逸散
+    "pick_berries.cave_vines": "{{item!glow_berries}}：弹出", // 发光浆果：弹出
+    "place.*": "{{block.*.place}}", // %s：被放置
+    "place.amethyst_block": "{{place.*|block_sound.amethyst_block}}", // 紫水晶块：被放置
+    "place.amethyst_cluster": "{{place.*|block_sound.amethyst_cluster}}", // 紫水晶簇：被放置
+    "place.azalea": "{{place.*|block_sound.azalea}}", // 杜鹃花丛：被放置
+    "place.azalea_leaves": "{{place.*|block_sound.azalea_leaves}}", // 杜鹃树叶：被放置
+    "place.big_dripleaf": "{{place.*|block_sound.big_dripleaf}}", // 大型垂滴叶：被放置
+    "place.calcite": "{{place.*|block_sound.calcite}}", // 方解石：被放置
+    "place.copper": "{{place.*|block_sound.copper}}", // 铜块：被放置
+    "place.deepslate": "{{place.*|block_sound.deepslate}}", // 深板岩：被放置
+    "place.deepslate_bricks": "{{place.*|block_sound.deepslate_bricks}}", // 深板岩砖：被放置
+    "place.dirt_with_roots": "{{place.*|block_sound.dirt_with_roots}}", // 缠根泥土：被放置
+    "place.dripstone_block": "{{place.*|block_sound.dripstone_block}}", // 滴水石块：被放置
+    "place.hanging_roots": "{{place.*|block_sound.hanging_roots}}", // 垂根：被放置
+    "place.large_amethyst_bud": "{{place.*|block_sound.large_amethyst_bud}}", // 大型紫晶芽：被放置
+    "place.medium_amethyst_bud": "{{place.*|block_sound.medium_amethyst_bud}}", // 中型紫晶芽：被放置
+    "place.moss": "{{place.*|block_sound.moss}}", // 苔藓：被放置
+    "place.pointed_dripstone": "{{place.*|block_sound.pointed_dripstone}}", // 滴水石锥：被放置
+    "place.powder_snow": "{{place.*|block_sound.powder_snow}}", // 细雪：被放置
+    "place.small_amethyst_bud": "{{place.*|block_sound.small_amethyst_bud}}", // 小型紫晶芽：被放置
+    "place.spore_blossom": "{{place.*|block_sound.spore_blossom}}", // 孢子花：被放置
+    "place.tuff": "{{place.*|block_sound.tuff}}", // 凝灰岩：被放置
+    "portal.portal": "JE: subtitles.block.portal.ambient", // 传送门：呼啸
+    "portal.travel": "JE: subtitles.block.portal.travel", // 传送门：噪声消散
+    "portal.trigger": "JE: subtitles.block.portal.trigger", // 传送门：噪声渐响
+    "raid.horn": "JE: subtitles.event.raid.horn", // 不祥号角：鸣响
+    "random.anvil_break": "JE: subtitles.block.anvil.destroy", // 铁砧：被毁
+    "random.anvil_land": "JE: subtitles.block.anvil.land", // 铁砧：着地
+    "random.anvil_use": "JE: subtitles.block.anvil.use", // 铁砧：使用
+    "random.bow": "JE: subtitles.entity.arrow.shoot", // 箭：被射出
+    "random.bowhit": "JE: subtitles.entity.arrow.hit", // 箭：击中
+    "random.break": "JE: subtitles.entity.item.break", // 物品：被破坏
+    "random.burp": "JE: subtitles.entity.player.burp", // 打嗝
+    "random.chestclosed": "JE: subtitles.block.chest.close", // 箱子：关闭
+    "random.chestopen": "JE: subtitles.block.chest.open", // 箱子：开启
+    "random.click": "UI：点击",
+    "random.door_close": "{{ST!door}}：关闭", // 门：关闭
+    "random.door_open": "{{ST!door}}：开启", // 门：开启
+    "random.drink": "JE: subtitles.entity.generic.drink", // 啜饮
+    "random.drink_honey": "JE: subtitles.item.honey_bottle.drink", // 吞咽
+    "random.eat": "JE: subtitles.entity.generic.eat", // 进食
+    "random.enderchestclosed": "{{block!ender_chest}}：关闭", // 末影箱：关闭
+    "random.enderchestopen": "{{block!ender_chest}}：关闭", // 末影箱：关闭
+    "random.explode": "JE: subtitles.entity.generic.explode", // 爆炸
+    "random.fizz": "JE: subtitles.block.fire.extinguish", // 火：熄灭
+    "random.fuse": "嘶嘶作响",
+    "random.glass": "{{block!glass}}：碎裂", // 玻璃：碎裂
+    "random.hurt": "JE: subtitles.entity.generic.hurt", // 某物：受伤
+    "random.levelup": "JE: subtitles.entity.player.levelup", // 玩家：升级
+    "random.orb": "JE: subtitles.entity.experience_orb.pickup", // 获得经验
+    "random.pop": "{{ST!items}}：被扔出", // 物品：被扔出
+    "random.pop2": "{{ST!items}}：被扔出", // 物品：被扔出
+    "random.potion.brewed": "JE: subtitles.block.brewing_stand.brew", // 酿造台：冒泡
+    "random.screenshot": "屏幕截图",
+    "random.shulkerboxclosed": "JE: subtitles.block.shulker_box.close", // 潜影盒：关闭
+    "random.shulkerboxopen": "JE: subtitles.block.shulker_box.open", // 潜影盒：开启
+    "random.splash": "JE: subtitles.entity.generic.splash", // 溅起水花
+    "random.swim": "JE: subtitles.entity.generic.swim", // 实体：游泳
+    "random.toast": "UI：弹出",
+    "random.totem": "JE: subtitles.item.totem.use", // 图腾：发动
+    "record.*": "音乐唱片（%s）",
+    "record.11": "{{record.*|'11}}", // 音乐唱片（11）
+    "record.13": "{{record.*|'13}}", // 音乐唱片（13）
+    "record.blocks": "{{record.*|'blocks}}", // 音乐唱片（blocks）
+    "record.cat": "{{record.*|'cat}}", // 音乐唱片（cat）
+    "record.chirp": "{{record.*|'chirp}}", // 音乐唱片（chirp）
+    "record.far": "{{record.*|'far}}", // 音乐唱片（far）
+    "record.mall": "{{record.*|'mall}}", // 音乐唱片（mall）
+    "record.mellohi": "{{record.*|'mellohi}}", // 音乐唱片（mellohi）
+    "record.pigstep": "{{record.*|'pigstep}}", // 音乐唱片（pigstep）
+    "record.stal": "{{record.*|'stal}}", // 音乐唱片（stal）
+    "record.strad": "{{record.*|'strad}}", // 音乐唱片（strad）
+    "record.wait": "{{record.*|'wait}}", // 音乐唱片（wait）
+    "record.ward": "{{record.*|'ward}}", // 音乐唱片（ward）
+    "respawn_anchor.ambient": "JE: subtitles.block.respawn_anchor.ambient", // 传送门：呼啸
+    "respawn_anchor.charge": "JE: subtitles.block.respawn_anchor.charge", // 重生锚：充能
+    "respawn_anchor.deplete": "JE: subtitles.block.respawn_anchor.deplete", // 重生锚：耗能
+    "respawn_anchor.set_spawn": "JE: subtitles.block.respawn_anchor.set_spawn", // 重生锚：设置出生点
+    "scrape": "JE: subtitles.item.axe.scrape", // 斧：刮削
+    "sign.dye.use": "JE: subtitles.item.dye.use", // 染料：染色
+    "sign.ink_sac.use": "JE: subtitles.item.ink_sac.use", // 墨囊：涂抹
+    "smithing_table.use": "JE: subtitles.block.smithing_table.use", // 锻造台：使用
+    "step.*": "{{block.*.step}}", // %s：踩上
+    "step.amethyst_block": "{{step.*|block_sound.amethyst_block}}", // 紫水晶块：踩上
+    "step.amethyst_cluster": "{{step.*|block_sound.amethyst_cluster}}", // 紫水晶簇：踩上
+    "step.ancient_debris": "{{step.*|block_sound.ancient_debris}}", // 远古残骸：踩上
+    "step.azalea": "{{step.*|block_sound.azalea}}", // 杜鹃花丛：踩上
+    "step.azalea_leaves": "{{step.*|block_sound.azalea_leaves}}", // 杜鹃树叶：踩上
+    "step.basalt": "{{step.*|block_sound.basalt}}", // 玄武岩：踩上
+    "step.big_dripleaf": "{{step.*|block_sound.big_dripleaf}}", // 大型垂滴叶：踩上
+    "step.bone_block": "{{step.*|block_sound.bone_block}}", // 骨块：踩上
+    "step.calcite": "{{step.*|block_sound.calcite}}", // 方解石：踩上
+    "step.candle": "{{step.*|block_sound.candle}}", // 蜡烛：踩上
+    "step.cave_vines": "{{step.*|block_sound.cave_vines}}", // 洞穴藤蔓：踩上
+    "step.chain": "{{step.*|block_sound.chain}}", // 锁链：踩上
+    "step.cloth": "{{step.*|block_sound.cloth}}", // 布质方块：踩上
+    "step.copper": "{{step.*|block_sound.copper}}", // 铜块：踩上
+    "step.coral": "{{step.*|block_sound.coral}}", // 珊瑚：踩上
+    "step.deepslate": "{{step.*|block_sound.deepslate}}", // 深板岩：踩上
+    "step.deepslate_bricks": "{{step.*|block_sound.deepslate_bricks}}", // 深板岩砖：踩上
+    "step.dirt_with_roots": "{{step.*|block_sound.dirt_with_roots}}", // 缠根泥土：踩上
+    "step.dripstone_block": "{{step.*|block_sound.dripstone_block}}", // 滴水石块：踩上
+    "step.grass": "{{step.*|block_sound.grass}}", // 草：踩上
+    "step.gravel": "{{step.*|block_sound.gravel}}", // 沙砾：踩上
+    "step.hanging_roots": "{{step.*|block_sound.hanging_roots}}", // 垂根：踩上
+    "step.honey_block": "{{step.*|block_sound.honey_block}}", // 蜂蜜块：踩上
+    "step.ladder": "{{step.*|block_sound.ladder}}", // 梯子：踩上
+    "step.moss": "{{step.*|block_sound.moss}}", // 苔藓：踩上
+    "step.nether_brick": "{{step.*|block_sound.nether_brick}}", // 下界砖：踩上
+    "step.nether_gold_ore": "{{step.*|block_sound.nether_gold_ore}}", // 下界金矿石：踩上
+    "step.nether_sprouts": "{{step.*|block_sound.nether_sprouts}}", // 下界苗：踩上
+    "step.nether_wart": "{{step.*|block_sound.nether_wart}}", // 下界疣：踩上
+    "step.netherite": "{{step.*|block_sound.netherite}}", // 下界合金块：踩上
+    "step.netherrack": "{{step.*|block_sound.netherrack}}", // 下界岩：踩上
+    "step.nylium": "{{step.*|block_sound.nylium}}", // 菌岩：踩上
+    "step.pointed_dripstone": "{{step.*|block_sound.pointed_dripstone}}", // 滴水石锥：踩上
+    "step.powder_snow": "{{step.*|block_sound.powder_snow}}", // 细雪：踩上
+    "step.roots": "{{step.*|block_sound.roots}}", // 菌索：踩上
+    "step.sand": "{{step.*|block_sound.sand}}", // 沙子：踩上
+    "step.shroomlight": "{{step.*|block_sound.shroomlight}}", // 菌光体：踩上
+    "step.slime": "{{step.*|block_sound.slime}}", // 黏液块：踩上
+    "step.snow": "{{step.*|block_sound.snow}}", // 雪块：踩上
+    "step.soul_sand": "{{step.*|block_sound.soul_sand}}", // 灵魂沙：踩上
+    "step.soul_soil": "{{step.*|block_sound.soul_soil}}", // 灵魂土：踩上
+    "step.spore_blossom": "{{step.*|block_sound.spore_blossom}}", // 孢子花：踩上
+    "step.stem": "{{step.*|block_sound.stem}}", // 菌柄：踩上
+    "step.stone": "{{step.*|block_sound.stone}}", // 石头：踩上
+    "step.tuff": "{{step.*|block_sound.tuff}}", // 凝灰岩：踩上
+    "step.vines": "{{step.*|block_sound.vines}}", // 藤蔓：踩上
+    "step.wood": "{{step.*|block_sound.wood}}", // 木头：踩上
+    "tile.piston.in": "{{block!piston}}：缩回", // 活塞：缩回
+    "tile.piston.out": "{{block!piston}}：伸出", // 活塞：伸出
+    "tilt_down.big_dripleaf": "JE: subtitles.block.big_dripleaf.tilt_down", // 垂滴叶：折下
+    "tilt_up.big_dripleaf": "JE: subtitles.block.big_dripleaf.tilt_up", // 垂滴叶：升起
+    "ui.cartography_table.take_result": "JE: subtitles.ui.cartography_table.take_result", // 地图：绘制
+    "ui.loom.select_pattern": "{{block!loom}}：选择图案", // 织布机：选择图案
+    "ui.loom.take_result": "JE: subtitles.ui.loom.take_result", // 织布机：使用
+    "ui.stonecutter.take_result": "JE: subtitles.ui.stonecutter.take_result", // 切石机：使用
+    "use.*": "{{block.*.use}}", // %s：使用
+    "use.ancient_debris": "{{use.*|block_sound.ancient_debris}}", // 远古残骸：使用
+    "use.basalt": "{{use.*|block_sound.basalt}}", // 玄武岩：使用
+    "use.bone_block": "{{use.*|block_sound.bone_block}}", // 骨块：使用
+    "use.candle": "{{use.*|block_sound.candle}}", // 蜡烛：使用
+    "use.cave_vines": "{{use.*|block_sound.cave_vines}}", // 洞穴藤蔓：使用
+    "use.chain": "{{use.*|block_sound.chain}}", // 锁链：使用
+    "use.cloth": "{{use.*|block_sound.cloth}}", // 布质方块：使用
+    "use.copper": "{{use.*|block_sound.copper}}", // 铜块：使用
+    "use.coral": "{{use.*|block_sound.coral}}", // 珊瑚：使用
+    "use.deepslate": "{{use.*|block_sound.deepslate}}", // 深板岩：使用
+    "use.deepslate_bricks": "{{use.*|block_sound.deepslate_bricks}}", // 深板岩砖：使用
+    "use.dirt_with_roots": "{{use.*|block_sound.dirt_with_roots}}", // 缠根泥土：使用
+    "use.dripstone_block": "{{use.*|block_sound.dripstone_block}}", // 滴水石块：使用
+    "use.grass": "{{use.*|block_sound.grass}}", // 草：使用
+    "use.gravel": "{{use.*|block_sound.gravel}}", // 沙砾：使用
+    "use.hanging_roots": "{{use.*|block_sound.hanging_roots}}", // 垂根：使用
+    "use.honey_block": "{{use.*|block_sound.honey_block}}", // 蜂蜜块：使用
+    "use.ladder": "{{use.*|block_sound.ladder}}", // 梯子：使用
+    "use.moss": "{{use.*|block_sound.moss}}", // 苔藓：使用
+    "use.nether_brick": "{{use.*|block_sound.nether_brick}}", // 下界砖：使用
+    "use.nether_gold_ore": "{{use.*|block_sound.nether_gold_ore}}", // 下界金矿石：使用
+    "use.nether_sprouts": "{{use.*|block_sound.nether_sprouts}}", // 下界苗：使用
+    "use.nether_wart": "{{use.*|block_sound.nether_wart}}", // 下界疣：使用
+    "use.netherite": "{{use.*|block_sound.netherite}}", // 下界合金块：使用
+    "use.netherrack": "{{use.*|block_sound.netherrack}}", // 下界岩：使用
+    "use.nylium": "{{use.*|block_sound.nylium}}", // 菌岩：使用
+    "use.pointed_dripstone": "{{use.*|block_sound.pointed_dripstone}}", // 滴水石锥：使用
+    "use.roots": "{{use.*|block_sound.roots}}", // 菌索：使用
+    "use.sand": "{{use.*|block_sound.sand}}", // 沙子：使用
+    "use.shroomlight": "{{use.*|block_sound.shroomlight}}", // 菌光体：使用
+    "use.slime": "{{use.*|block_sound.slime}}", // 黏液块：使用
+    "use.snow": "{{use.*|block_sound.snow}}", // 雪块：使用
+    "use.soul_sand": "{{use.*|block_sound.soul_sand}}", // 灵魂沙：使用
+    "use.soul_soil": "{{use.*|block_sound.soul_soil}}", // 灵魂土：使用
+    "use.spore_blossom": "{{use.*|block_sound.spore_blossom}}", // 孢子花：使用
+    "use.stem": "{{use.*|block_sound.stem}}", // 菌柄：使用
+    "use.stone": "{{use.*|block_sound.stone}}", // 石头：使用
+    "use.vines": "{{use.*|block_sound.vines}}", // 藤蔓：使用
+    "use.wood": "{{use.*|block_sound.wood}}", // 木头：使用
     "vr.stutterturn": ""
 }

@@ -17,10 +17,10 @@ const sleepAsync = ms => new Promise(resolve => setTimeout(resolve, ms));
  * 3. cachedOutput(id, Promise.resolve(any)) => Promise resolves any
  *    cache = await valueOrProcessor();
  * 
- * 4. cachedOutput(id, () => any) => Promise resolves cache ?? any
+ * 4. cachedOutput(id, () => any) => cache ?? any
  *    cache = cache ?? valueOrProcessor()
  * 
- * 5. cachedOutput(id, () => Promise.resolve(any)) => Promise resolves cache ?? any
+ * 5. cachedOutput(id, () => Promise.resolve(any)) => cache ?? Promise resolves any
  *    cache = cache ?? await valueOrProcessor()
  */
 function cachedOutput(id, valueOrProcessor) {
@@ -80,6 +80,19 @@ function checkPause(timeout, query) {
             }
         }, timeout);
     });
+}
+
+function forEachObject(object, f, thisArg) {
+    Object.keys(object).forEach(key => f.call(thisArg, object[key], key, object));
+}
+
+function replaceObjectKey(object, replaceArgsGroups) {
+    let newObject = {};
+    forEachObject(object, (value, key) => {
+        let replacedKey = replaceArgsGroups.reduce((prev, args) => prev.replace(...args), key);
+        newObject[replacedKey] = value;
+    });
+    return newObject;
 }
 //#endregion
 
@@ -450,11 +463,11 @@ function analyzeApkPackageDataEnums(packageZip) {
     sounds = sounds.filter((e, i, a) => a.indexOf(e) >= i).sort();
     particleEmitters = particleEmitters.filter((e, i, a) => a.indexOf(e) >= i).sort();
     animations = animations.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    Object.keys(entityEventsMap).forEach(key => {
-        entityEventsMap[key] = entityEventsMap[key].filter((e, i, a) => a.indexOf(e) >= i).sort();
+    forEachObject(entityEventsMap, (value, key, obj) => {
+        obj[key] = value.filter((e, i, a) => a.indexOf(e) >= i).sort();
     });
-    Object.keys(entityFamilyMap).forEach(key => {
-        entityFamilyMap[key] = entityFamilyMap[key].filter((e, i, a) => a.indexOf(e) >= i).sort();
+    forEachObject(entityFamilyMap, (value, key, obj) => {
+        obj[key] = value.filter((e, i, a) => a.indexOf(e) >= i).sort();
     });
 
     return {
@@ -515,7 +528,7 @@ function analyzePackageDataEnumsCached() {
 //#endregion
 
 //#region Wiki Data Extract
-const got = require("got");
+const got = require("got").default;
 async function fetchMZHWikiRaw(word) {
     return await got(`https://minecraft.fandom.com/zh/wiki/${word}?action=raw`).text();
 }
@@ -609,7 +622,66 @@ async function fetchStandardizedTranslation() {
 }
 //#endregion
 
+//#region JE Language Data Extract
+const crypto = require("crypto");
+function digestBufferHex(algorithm, buffer) {
+    let digest = crypto.createHash(algorithm);
+    digest.update(buffer);
+    return digest.digest().toString("hex");
+}
+
+async function fetchVersionsManifest(apiHost) {
+    return await got(`${apiHost}/mc/game/version_manifest.json`).json();
+}
+
+async function fetchVersionMeta(apiHost, manifest, versionId) {
+    if (versionId == "latest" || versionId == "lastest_release") {
+        versionId = manifest.latest.release;
+    } else if (versionId == "latest_snapshot") {
+        versionId = manifest.latest.snapshot;
+    }
+    let version = manifest.versions.find(version => version.id == versionId);
+    if (!version) throw new Error("Version not found: " + versionId);
+    return await got(version.url.replace("https://launchermeta.mojang.com", apiHost)).json();
+}
+
+async function fetchVersionAssetIndex(apiHost, versionMeta) {
+    let meta = versionMeta.assetIndex;
+    let content = await got(meta.url.replace("https://launchermeta.mojang.com", apiHost)).buffer();
+    if (content.length == meta.size && digestBufferHex("sha1", content) == meta.sha1) {
+        return JSON.parse(content.toString());
+    } else {
+        throw new Error("meta mismatched for asset index");
+    }
+}
+
+async function fetchVersionAsset(apiHost, assetIndex, objectName) {
+    let object = assetIndex.objects[objectName];
+    if (!object) throw new Error("Asset object not found: " + objectName);
+    let content = await got(`${apiHost}/${object.hash.slice(0, 2)}/${object.hash}`).buffer();
+    if (content.length == object.size && digestBufferHex("sha1", content) == object.hash) {
+        return content;
+    } else {
+        throw new Error("meta mismatched for asset: " + objectName);
+    }
+}
+
+function fetchJavaEditionLangData() {
+    return cachedOutput("java.package.lang", async () => {
+        const metaApiHost = "https://launchermeta.mojang.com";
+        const assetApiHost = "https://resources.download.minecraft.net";
+        console.log("Fetching Java Edition language data...");
+        let manifest = await fetchVersionsManifest(metaApiHost);
+        let versionMeta = await fetchVersionMeta(metaApiHost, manifest, "latest_snapshot");
+        let assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
+        let langAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
+        return JSON.parse(langAsset.toString());
+    });
+}
+//#endregion
+
 //#region Translate Match
+const util = require("util");
 function filterObjectMap(map, predicate) {
     return JSON.assign({}, map, Object.keys(map).filter(key => predicate(key, map[key], map)));
 }
@@ -636,34 +708,46 @@ function matchTranslation(options) {
     const {
         originalValue,
         translationMap,
+        resultMaps,
         stdTransMap,
+        javaEditionLangMap,
         langMap,
         langKeyPrefix,
         langKeySuffix,
+        autoMatch,
         translateCached
     } = options;
     let userTranslation = translationMap[originalValue];
     let stdTranslationKey = originalValue.replace(/^minecraft:/i, "").replace(/_/g, " ");
     let stdTranslation;
-    if (stdTransMap) {
-        if (userTranslation) {
-            if (userTranslation.startsWith("ST: ")) { // 标准化译名模板
-                userTranslation = stdTransMap[userTranslation.slice(4)];
-                if (!userTranslation) {
-                    console.warn("Incorrect STRef: " + originalValue);
+    if (userTranslation) {
+        if (userTranslation.includes("{{") && userTranslation.includes("}}")) { // 拼接模板
+            userTranslation = runTemplate(userTranslation, key => {
+                if (key.startsWith("#")) {
+                    key = originalValue + "." + key.slice(1);
                 }
-                setInlineCommentAfterField(translationMap, originalValue, userTranslation);
-            } else if (userTranslation.includes("{{") && userTranslation.includes("}}")) { // 拼接模板
-                userTranslation = runTemplate(userTranslation, key => {
-                    if (key.startsWith("#")) {
-                        key = originalValue + "." + key.slice(1);
-                    }
-                    return translateCached(key).translation;
-                });
-                setInlineCommentAfterField(translationMap, originalValue, userTranslation);
+                return translateCached(key, originalValue).translation;
+            });
+            setInlineCommentAfterField(translationMap, originalValue, userTranslation);
+        } else if (userTranslation.includes(":")) { // 直接引用
+            let colonPos = userTranslation.indexOf(":");
+            let source = userTranslation.slice(0, colonPos).trim();
+            let key = userTranslation.slice(colonPos + 1).trim();
+            if (stdTransMap && source.toLowerCase() == "st") { // 标准化译名
+                userTranslation = stdTransMap[key];
+            } else if (javaEditionLangMap && source.toLowerCase() == "je") { // Java版语言文件
+                userTranslation = javaEditionLangMap[key];
+            } else if (source in resultMaps) { // 其他翻译
+                userTranslation = resultMaps[source][key];
+            } else {
+                userTranslation = undefined;
             }
+            if (!userTranslation) {
+                console.warn(`Incorrect Ref: ${originalValue}(${source}: ${key})`);
+            }
+            setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         }
-        stdTranslation = stdTransMap[stdTranslationKey];
+        if (!userTranslation) userTranslation = "EMPTY";
     }
     if (userTranslation == "EMPTY") {
         return {
@@ -679,42 +763,46 @@ function matchTranslation(options) {
             comment: null
         };
     }
-    if (stdTranslation) {
-        translationMap[originalValue] = "ST: " + stdTranslationKey;
-        setInlineCommentAfterField(translationMap, originalValue, `${stdTranslation}`);
-        return {
-            state: "provided",
-            translation: stdTranslation,
-            comment: null
-        };
-    }
-    if (langMap) {
-        let langKeyExact = langKeyPrefix + originalValue + langKeySuffix;
-        if (langMap[langKeyExact]) {
-            let translation = langMap[langKeyExact];
-            translationMap[originalValue] = "";
-            setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
+    if (autoMatch) {
+        if (stdTransMap) {
+            stdTranslation = stdTransMap[stdTranslationKey];
+        }
+        if (stdTranslation) {
+            translationMap[originalValue] = "ST: " + stdTranslationKey;
+            setInlineCommentAfterField(translationMap, originalValue, `${stdTranslation}`);
             return {
-                state: "guessFromLang",
-                translation: translation,
-                comment: `lang: ${langKeyExact}`
+                state: "provided",
+                translation: stdTranslation,
+                comment: null
             };
         }
-        let langKeyLikely = Object.keys(langMap)
-            .filter(key => key.startsWith(langKeyPrefix) && key.includes(originalValue) && key.endsWith(langKeySuffix));
-        if (langKeyLikely.length) {
-            let translation = langKeyLikely.map(key => langMap[key]).join("/");
-            translationMap[originalValue] = "";
-            setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
-            return {
-                state: "guessFromLang",
-                translation: translation,
-                comment: `lang: ${langKeyLikely.join(", ")}`
-            };
+        if (langMap && langKeyPrefix != null && langKeySuffix != null) {
+            let langKeyExact = langKeyPrefix + originalValue + langKeySuffix;
+            if (langMap[langKeyExact]) {
+                let translation = langMap[langKeyExact];
+                translationMap[originalValue] = "";
+                setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
+                return {
+                    state: "guessFromLang",
+                    translation: translation,
+                    comment: `lang: ${langKeyExact}`
+                };
+            }
+            let langKeyLikely = Object.keys(langMap)
+                .filter(key => key.startsWith(langKeyPrefix) && key.includes(originalValue) && key.endsWith(langKeySuffix));
+            if (langKeyLikely.length) {
+                let translation = langKeyLikely.map(key => langMap[key]).join("/");
+                translationMap[originalValue] = "";
+                setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
+                return {
+                    state: "guessFromLang",
+                    translation: translation,
+                    comment: `lang: ${langKeyLikely.join(", ")}`
+                };
+            }
         }
+        setInlineCommentAfterField(translationMap, originalValue, null);
     }
-    translationMap[originalValue] = "";
-    setInlineCommentAfterField(translationMap, originalValue, null);
     return {
         state: "notFound",
         translation: "",
@@ -728,7 +816,7 @@ const CircularTranslationResult = {
     comment: "This is a place holder"
 };
 function matchTranslations(options) {
-    const { originalArray } = options;
+    const { resultMaps, stateMaps, name, originalArray, postProcessor } = options;
     let translateResultMap = {};
     let translateCacheMap = {};
     let translateStates = {
@@ -737,11 +825,38 @@ function matchTranslations(options) {
         guessFromLang: [],
         notFound: []
     };
-    let translateCached = (originalValue) => {
+    let translateCached = (originalValue, rootKey) => {
         let cache = translateCacheMap[originalValue];
         if (cache) {
             return cache;
-        } else {
+        } else if (originalValue.includes("|")) { // 拼接模板
+            let refs = originalValue.split("|").map(ref => {
+                let trimedRef = ref.trim();
+                if (trimedRef.startsWith("'")) { // 原始字符，原样传递
+                    if (trimedRef.endsWith("'")) {
+                        return trimedRef.slice(1, -1);
+                    } else {
+                        return trimedRef.slice(1);
+                    }
+                } else {
+                    let result = translateCached(trimedRef, rootKey);
+                    return result.translation;
+                }
+            });
+            return {
+                translation: util.format(...refs)
+            };
+        } else if (originalValue.includes("!")) { // 外部引用
+            let translationMap = {};
+            translationMap[rootKey] = originalValue.replace("!", ":");
+            let result = matchTranslation({
+                ...options,
+                originalValue: rootKey,
+                translationMap: translationMap,
+                translateCached
+            });
+            return result;
+        } else { // 内部引用
             let result;
             translateCacheMap[originalValue] = CircularTranslationResult;
             result = matchTranslation({
@@ -754,15 +869,17 @@ function matchTranslations(options) {
         }
     };
     originalArray.forEach(originalValue => {
-        let result = translateCached(originalValue);
+        let result = translateCached(originalValue, originalValue);
         translateStates[result.state].push(originalValue);
         translateResultMap[originalValue] = result.translation;
         setInlineCommentAfterField(translateResultMap, originalValue, result.comment);
     });
-    return {
-        states: translateStates,
-        result: translateResultMap
-    };
+    if (postProcessor) {
+        let newResultMap = postProcessor(translateResultMap, translateStates);
+        if (newResultMap) translateResultMap = newResultMap;
+    }
+    resultMaps[name] = translateResultMap;
+    stateMaps[name] = translateStates;
 }
 
 function cascadeMap(mapOfMap, priority, includeAll) {
@@ -792,37 +909,32 @@ function removeMinecraftNamespace(array) {
 //#endregion
 
 //#region User Translation
+const userTranslationStorageKey = {
+    block: "translation.block",
+    item: "translation.item",
+    sound: "translation.sound",
+    entity: "translation.entity",
+    entityEvent: "translation.entity_event",
+    entityFamily: "translation.entity_family",
+    particleEmitter: "translation.particle_emitter",
+    animation: "translation.animation",
+    effect: "translation.effect",
+    enchant: "translation.enchant",
+    fog: "translation.fog",
+    location: "translation.location"
+};
 function loadUserTranslation() {
-    const initialValue = () => new Object();
-    return {
-        block: cachedOutput("translation.block", initialValue),
-        item: cachedOutput("translation.item", initialValue),
-        sound: cachedOutput("translation.sound", initialValue),
-        entity: cachedOutput("translation.entity", initialValue),
-        entityEvent: cachedOutput("translation.entity_event", initialValue),
-        entityFamily: cachedOutput("translation.entity_family", initialValue),
-        particleEmitter: cachedOutput("translation.particle_emitter", initialValue),
-        animation: cachedOutput("translation.animation", initialValue),
-        effect: cachedOutput("translation.effect", initialValue),
-        enchant: cachedOutput("translation.enchant", initialValue),
-        fog: cachedOutput("translation.fog", initialValue),
-        location: cachedOutput("translation.location", initialValue),
-    };
+    let userTranslation = {};
+    forEachObject(userTranslationStorageKey, (v, k) => {
+        userTranslation[k] = cachedOutput(v, () => new Object());
+    });
+    return userTranslation;
 }
 
 function saveUserTranslation(userTranslation) {
-    cachedOutput("translation.block", userTranslation.block);
-    cachedOutput("translation.item", userTranslation.item);
-    cachedOutput("translation.sound", userTranslation.sound);
-    cachedOutput("translation.entity", userTranslation.entity);
-    cachedOutput("translation.entity_event", userTranslation.entityEvent);
-    cachedOutput("translation.entity_family", userTranslation.entityFamily);
-    cachedOutput("translation.particle_emitter", userTranslation.particleEmitter);
-    cachedOutput("translation.animation", userTranslation.animation);
-    cachedOutput("translation.effect", userTranslation.effect);
-    cachedOutput("translation.enchant", userTranslation.enchant);
-    cachedOutput("translation.fog", userTranslation.fog);
-    cachedOutput("translation.location", userTranslation.location);
+    forEachObject(userTranslationStorageKey, (v, k) => {
+        cachedOutput(v, userTranslation[k]);
+    });
 }
 //#endregion
 
@@ -850,126 +962,152 @@ async function main() {
     };
     let lang = packageDataEnums.lang;
     let standardizedTranslation = await fetchStandardizedTranslation();
+    let javaEditionLang = await fetchJavaEditionLangData();
     let userTranslation = loadUserTranslation();
     console.log("Matching translations...");
-    let block = matchTranslations({
+    let translationResultMaps = {}, translationStateMaps = {};
+    let commonOptions = {
+        resultMaps: translationResultMaps,
+        stateMaps: translationStateMaps,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true),
+        javaEditionLangMap: javaEditionLang,
+        langMap: lang,
+        autoMatch: true
+    };
+    matchTranslations({
+        ...commonOptions,
+        name: "block",
         originalArray: enums.blocks,
         translationMap: userTranslation.block,
         stdTransMap: cascadeMap(standardizedTranslation, ["BlockSprite", "ItemSprite"], true),
-        langMap: lang,
         langKeyPrefix: "tile.",
         langKeySuffix: ".name"
     });
-    let item = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "item",
         originalArray: enums.items.filter(item => !enums.blocks.includes(item)),
         translationMap: userTranslation.item,
         stdTransMap: cascadeMap(standardizedTranslation, ["ItemSprite", "BlockSprite"], true),
-        langMap: lang,
         langKeyPrefix: "item.",
-        langKeySuffix: ".name"
+        langKeySuffix: ".name",
+        postProcessor(item) {
+            let mergedItem = {}, block = translationResultMaps.block;
+            enums.items.forEach(key => {
+                if (key in block) {
+                    JSON.assign(mergedItem, block, [key]);
+                } else {
+                    JSON.assign(mergedItem, item, [key]);
+                }
+            });
+            return mergedItem;
+        }
     });
-    let sound = matchTranslations({
-        originalArray: enums.sounds,
-        translationMap: userTranslation.sound,
-        stdTransMap: cascadeMap(standardizedTranslation, [], true)
-    });
-    let entity = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "entity",
         originalArray: removeMinecraftNamespace(enums.entities),
         translationMap: userTranslation.entity,
         stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
-        langMap: lang,
         langKeyPrefix: "entity.",
-        langKeySuffix: ".name"
+        langKeySuffix: ".name",
+        postProcessor(entity) {
+            let mergedEntity = {};
+            enums.entities.forEach(key => {
+                if (key in entity) {
+                    JSON.assign(mergedEntity, entity, [key]);
+                } else {
+                    mergedEntity[key] = entity["minecraft:" + key];
+                }
+            });
+            return mergedEntity;
+        }
     });
-    let entityEvent = matchTranslations({
-        originalArray: Object.keys(enums.entityEventsMap),
-        translationMap: userTranslation.entityEvent,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
-    });
-    let entityFamily = matchTranslations({
-        originalArray: Object.keys(enums.entityFamilyMap),
-        translationMap: userTranslation.entityFamily,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
-    });
-    let animation = matchTranslations({
-        originalArray: enums.animations,
-        translationMap: userTranslation.animation,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
-    });
-    let effect = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "effect",
         originalArray: enums.effects,
         translationMap: userTranslation.effect,
         stdTransMap: cascadeMap(standardizedTranslation, ["EffectSprite"], true)
     });
-    let enchant = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "enchant",
         originalArray: enums.enchantments,
         translationMap: userTranslation.enchant
     });
-    let particleEmitter = matchTranslations({
-        originalArray: enums.particleEmitters,
-        translationMap: userTranslation.particleEmitter
-    });
-    let fog = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "fog",
         originalArray: enums.fogs,
         translationMap: userTranslation.fog,
         stdTransMap: cascadeMap(standardizedTranslation, ["BiomeSprite"], true)
     });
-    let location = matchTranslations({
+    matchTranslations({
+        ...commonOptions,
+        name: "location",
         originalArray: enums.locations,
         translationMap: userTranslation.location,
         stdTransMap: cascadeMap(standardizedTranslation, ["EnvSprite"], true)
     });
-    Object.keys(entityEvent.result).forEach(key => {
-        if (entityEvent.result[key]) return;
-        let comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
-        setInlineCommentAfterField(userTranslation.entityEvent, key, comment);
-    });
-    Object.keys(entityFamily.result).forEach(key => {
-        if (entityFamily.result[key]) return;
-        let comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
-        setInlineCommentAfterField(userTranslation.entityFamily, key, comment);
-    });
-    let mergedItem = {};
-    enums.items.forEach(key => {
-        if (key in block.result) {
-            JSON.assign(mergedItem, block.result, [key]);
-        } else {
-            JSON.assign(mergedItem, item.result, [key]);
+    matchTranslations({
+        ...commonOptions,
+        name: "entityEvent",
+        originalArray: Object.keys(enums.entityEventsMap),
+        translationMap: userTranslation.entityEvent,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        postProcessor(entityEvent) {
+            forEachObject(entityEvent, (value, key) => {
+                if (value) return;
+                let comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
+                setInlineCommentAfterField(userTranslation.entityEvent, key, comment);
+            });
         }
     });
-    let music = filterObjectMap(sound.result, key => key.startsWith("music.") || key.startsWith("record."));
-    let summonableEntity = filterObjectMap(entity.result, key => enums.summonableEntities.includes(key));
-    console.log("Exporting command library...");
-    cachedOutput("output.translation.state", {
-        block: block.states,
-        item: item.states,
-        sound: sound.states,
-        entity: entity.states,
-        entityEvent: entityEvent.states,
-        entityFamily: entityFamily.states,
-        particleEmitter: particleEmitter.states,
-        animation: animation.states,
-        effect: effect.states,
-        enchant: enchant.states,
-        fog: fog.states,
-        location: location.states
+    matchTranslations({
+        ...commonOptions,
+        name: "entityFamily",
+        originalArray: Object.keys(enums.entityFamilyMap),
+        translationMap: userTranslation.entityFamily,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        postProcessor(entityFamily) {
+            forEachObject(entityFamily, (value, key) => {
+                if (value) return;
+                let comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
+                setInlineCommentAfterField(userTranslation.entityFamily, key, comment);
+            });
+        }
     });
-    let translationMaps = {
-        block: block.result,
-        item: mergedItem,
-        sound: sound.result,
-        music: music,
-        entity: entity.result,
-        summonable_entity: summonableEntity,
-        entity_event: entityEvent.result,
-        entity_family: entityFamily.result,
-        particle_emitter: particleEmitter.result,
-        animation: animation.result,
-        effect: effect.result,
-        enchant_type: enchant.result,
-        fog: fog.result,
-        structure: location.result
-    };
+    matchTranslations({
+        ...commonOptions,
+        name: "animation",
+        originalArray: enums.animations,
+        translationMap: userTranslation.animation,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: "particleEmitter",
+        originalArray: enums.particleEmitters,
+        translationMap: userTranslation.particleEmitter,
+        autoMatch: false
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: "sound",
+        originalArray: enums.sounds,
+        translationMap: userTranslation.sound
+    });
+    translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
+    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
+
+    console.log("Exporting command library...");
+    cachedOutput("output.translation.state", translationStateMaps);
+    let renamedTranslationResultMaps = replaceObjectKey(translationResultMaps, [
+        [/[A-Z]/g, (match, offset) => (offset > 0 ? "_" : "") + match.toLowerCase()], // camelCase -> snake_case
+        ["enchant", "enchant_type"],
+        ["location", "structure"]
+    ]);
     fs.writeFileSync(nodePath.resolve(__dirname, "output", "output.ids.json"), JSON.stringify({
         name: "ID表补丁包",
         author: "CA制作组",
@@ -980,9 +1118,9 @@ async function main() {
         minSupportVer: "0.7.4",
         targetSupportVer: packageDataEnums.version,
         mode: "overwrite",
-        enums: translationMaps
+        enums: renamedTranslationResultMaps
     }, null, "\t"));
-    writeTransMapsExcel(nodePath.resolve(__dirname, "output", "output.ids.xlsx"), translationMaps);
+    writeTransMapsExcel(nodePath.resolve(__dirname, "output", "output.ids.xlsx"), translationResultMaps);
     saveUserTranslation(userTranslation);
 }
 
