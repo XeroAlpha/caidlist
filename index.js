@@ -483,18 +483,26 @@ function analyzeApkPackageDataEnums(packageZip) {
     };
 }
 
+const apksInstallPack = [
+    "install_pack.apk",
+    "split_install_pack.apk",
+    "com.mojang.minecraftpe.apk",
+    "base.apk"
+];
 function analyzePackageDataEnums() {
     let packagePath = config.installPackagePath;
     if (packagePath.endsWith(".apks")) {
         let packageZip = new AdmZip(packagePath);
-        let installPackApkEntry = packageZip.getEntry("split_install_pack.apk");
-        let installPackApk;
+        let i, installPackApkEntry, installPackApk;
         console.log("Unpacking install pack...");
-        if (installPackApkEntry) {
-            installPackApk = packageZip.readFile(installPackApkEntry);
-        } else {
-            installPackApk = packageZip.readFile("base.apk");
+        for (i = 0; i < apksInstallPack.length; i++) {
+            installPackApkEntry = packageZip.getEntry(apksInstallPack[i]);
+            if (installPackApkEntry) break;
         }
+        if (!installPackApkEntry) {
+            throw new Error("Install Pack not found!");
+        }
+        installPackApk = packageZip.readFile(installPackApkEntry);
         return analyzeApkPackageDataEnums(new AdmZip(installPackApk));
     } else {
         return analyzeApkPackageDataEnums(new AdmZip(packagePath));
