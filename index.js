@@ -94,6 +94,31 @@ function replaceObjectKey(object, replaceArgsGroups) {
     });
     return newObject;
 }
+
+function compareMinecraftVersion(a, b) {
+    const asVersionArray = str => str.split(".").map(e => parseInt(e)).map(e => isNaN(e) ? 0 : e);
+    const aver = asVersionArray(a), bver = asVersionArray(b);
+    let i, minLength = Math.min(aver.length, bver.length);
+    for (i = 0; i < minLength; i++) {
+        if (aver[i] == bver[i]) continue;
+        return aver[i] - bver[i];
+    }
+    return aver.length - bver.length;
+}
+
+function fixZero(str, zeroCount) {
+    return str.length >= zeroCount ? str : "0" + fixZero(str, zeroCount - 1);
+}
+
+function formatTimeLeft(seconds) {
+    if (seconds < 100) {
+        return `${seconds.toFixed(1)}s`;
+    } else if (seconds < 6000) {
+        return `${Math.floor(seconds / 60)}m${fixZero((seconds % 60).toFixed(0), 2)}s`;
+    } else {
+        return `${Math.floor(seconds / 3600)}h${fixZero(Math.floor(seconds / 60) % 60, 2)}m${fixZero((seconds % 60).toFixed(0), 2)}s`;
+    }
+}
 //#endregion
 
 //#region Autocompletion related
@@ -200,7 +225,7 @@ function guessTruncatedString(truncatedStr, startsWith) {
     return null;
 }
 
-async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
+async function analyzeCommandAutocompletion(adbClient, deviceSerial, command, progressName, approxLength) {
     // 初始状态：游戏HUD
     let autocompletions = [];
     let surfaceOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
@@ -210,7 +235,7 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
     // 打开聊天栏
     await adbShell(adbClient, deviceSerial, "input keyevent 48"); // KEYCODE_T
 
-    console.log("Entering " + command);
+    console.log(`Starting ${progressName}: ${command}`);
     await adbShell(adbClient, deviceSerial, "input text " + JSON.stringify(command));
 
     let autocompletedCommand = command.trim();
@@ -219,6 +244,7 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
         let command = await recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation);
         return command == autocompletedCommand;
     });
+    let timeStart = Date.now(), stepCount = 0;
     while(true) {
         await adbShell(adbClient, deviceSerial, "input keyevent 61"); // KEYCODE_TAB
         recogizedCommand = await retryUntilComplete(3, 0, async () => {
@@ -233,11 +259,20 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
 
         let autocompletion = autocompletedCommand.slice(command.length);
         if (autocompletions.includes(autocompletion)) {
-            console.log("Loop autocompletion detected: " + autocompletion);
+            console.log("Exit condition: " + autocompletion);
             break;
         } else {
-            console.log("Autocompletion detected: " + recogizedCommand);
             autocompletions.push(autocompletion);
+            if (approxLength) {
+                let stepSpentAvg = (Date.now() - timeStart) / ++stepCount;
+                let percentage = (autocompletions.length / approxLength * 100).toFixed(1);
+                let timeLeft = (approxLength - autocompletions.length) * stepSpentAvg;
+                let timeLeftStr = formatTimeLeft(timeLeft / 1000);
+                let estTimeStr = new Date(Date.now() + timeLeft).toLocaleTimeString();
+                console.log(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`);
+            } else {
+                console.log(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
+            }
         }
     }
 
@@ -248,7 +283,31 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command) {
     return autocompletions;
 }
 
-async function analyzeAutocompletionEnums(branch) {
+async function analyzeAutocompletionEnumCached(options, name, commandPrefix, exclusion) {
+    const {
+        adbClient, deviceSerial,
+        branch, version, target
+    } = options;
+    const id = name.replace(/\s+(\S)/g, (_, ch) => ch.toUpperCase());
+    const cacheId = `autocompleted.${branch}.${name.replace(/\s+/g, "_")}`;
+    let cache = cachedOutput(cacheId), result;
+
+    if (Array.isArray(cache)) cache = { result: cache, length: cache.length };
+    if (cache && version == cache.version) result = cache.result;
+    if (!result) {
+        let progressName = `${branch}.${name.replace(/\s+/g, "_")}`;
+        result = await analyzeCommandAutocompletion(adbClient, deviceSerial, commandPrefix, progressName, cache && cache.length);
+        if (exclusion) result = result.filter(e => !exclusion.includes(e));
+        cachedOutput(cacheId, { version, result, length: result.length });
+    }
+    return target[id] = result;
+}
+
+async function analyzeAutocompletionEnums(branch, version) {
+    const cacheId = `autocompleted.${branch}`;
+    const cache = cachedOutput(cacheId);
+    if (cache && version == cache.version) return cache;
+
 	console.log("Connecting ADB host...");
 	let adbClient = adb.createClient();
     console.log("Connecting to device...");
@@ -258,94 +317,37 @@ async function analyzeAutocompletionEnums(branch) {
         deviceSerial = await waitForAnyDevice(adbClient);
     }
 
-    await pause("[" + branch + "] Press <Enter> if the device is ready");
-
-    console.log("Analyzing blocks...");
-    let blocks = await cachedOutput(`autocompleted.${branch}.blocks`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testforblock ~ ~ ~ ");
-    });
-
-    console.log("Analyzing items...");
-    let items = await cachedOutput(`autocompleted.${branch}.items`, async () => {
-        return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/clear @s "))
-            .filter(item => item != "[");
-    });
-
-    console.log("Analyzing entities...");
-    let entities = await cachedOutput(`autocompleted.${branch}.entities`, async () => {
-        return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testfor @e[type="))
-            .filter(entity => entity != "!");
-    });
-
-    console.log("Analyzing summonable entities...");
-    let summonableEntities = await cachedOutput(`autocompleted.${branch}.summonable_entities`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/summon ");
-    });
-
-    console.log("Analyzing effects...");
-    let effects = await cachedOutput(`autocompleted.${branch}.effects`, async () => {
-        return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/effect @s "))
-            .filter(effect => effect != "[" && effect != "clear");
-    });
-
-    console.log("Analyzing enchantments...");
-    let enchantments = await cachedOutput(`autocompleted.${branch}.enchantments`, async () => {
-        return (await analyzeCommandAutocompletion(adbClient, deviceSerial, "/enchant @s "))
-            .filter(enchantment => enchantment != "[");
-    });
-
-    console.log("Analyzing gamerules...");
-    let gamerules = await cachedOutput(`autocompleted.${branch}.gamerules`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/gamerule ");
-    });
-
-    console.log("Analyzing locations...");
-    let locations = await cachedOutput(`autocompleted.${branch}.locations`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/locate ");
-    });
-
-    console.log("Analyzing mobevents...");
-    let mobevents = await cachedOutput(`autocompleted.${branch}.mobevents`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/mobevent ");
-    });
-
-    console.log("Analyzing selectors...");
-    let selectors = await cachedOutput(`autocompleted.${branch}.selectors`, async () => {
-        return await analyzeCommandAutocompletion(adbClient, deviceSerial, "/testfor @e[");
-    });
-
-    return {
-        blocks,
-        items,
-        entities,
-        summonableEntities,
-        effects,
-        enchantments,
-        gamerules,
-        locations,
-        mobevents,
-        selectors
+    console.log("Please switch to branch: " + branch);
+    await pause("Press <Enter> if the device is ready");
+    const target = { version };
+    const options = {
+        adbClient, deviceSerial,
+        branch, version, target
     };
+
+    await analyzeAutocompletionEnumCached(options, "blocks", "/testforblock ~ ~ ~ ");
+    await analyzeAutocompletionEnumCached(options, "items", "/clear @s ", [ "[" ]);
+    await analyzeAutocompletionEnumCached(options, "entities", "/testfor @e[type=", [ "!" ]);
+    await analyzeAutocompletionEnumCached(options, "summonable entities", "/summon ");
+    await analyzeAutocompletionEnumCached(options, "effects", "/effect @s ", [ "[", "clear" ]);
+    await analyzeAutocompletionEnumCached(options, "enchantments", "/enchant @s ", [ "[" ]);
+    await analyzeAutocompletionEnumCached(options, "gamerules", "/gamerule ");
+    await analyzeAutocompletionEnumCached(options, "locations", "/locate ");
+    await analyzeAutocompletionEnumCached(options, "mobevents", "/mobevent ");
+    await analyzeAutocompletionEnumCached(options, "selectors", "/testfor @e[");
+
+    return cachedOutput(cacheId, target);
 }
 
-async function analyzeAutocompletionEnumsCached(packageType) {
+async function analyzeAutocompletionEnumsCached(packageType, version) {
     let result = {
-        vanilla: await cachedOutput("autocompleted.vanilla", async () => {
-            console.log("Please switch to a vanilla world");
-            return await analyzeAutocompletionEnums("vanilla");
-        })
+        vanilla: await analyzeAutocompletionEnums("vanilla", version)
     };
     if (packageType != "netease") {
-        result.education = await cachedOutput("autocompleted.education", async () => {
-            console.log("Please switch to a education world");
-            return await analyzeAutocompletionEnums("education");
-        });
+        result.education = await analyzeAutocompletionEnums("education", version);
     }
     if (packageType == "beta") {
-        result.experiment = await cachedOutput("autocompleted.experiment", async () => {
-            console.log("Please switch to a experiment world");
-            return await analyzeAutocompletionEnums("experiment");
-        });
+        result.experiment = await analyzeAutocompletionEnums("experiment", version);
     }
     return result;
 }
@@ -963,7 +965,7 @@ function writeTransMapsExcel(outputFile, transMaps) {
 
 async function main() {
     let packageDataEnums = analyzePackageDataEnumsCached();
-    let autocompletedEnums = await analyzeAutocompletionEnumsCached(packageDataEnums.packageType);
+    let autocompletedEnums = await analyzeAutocompletionEnumsCached(packageDataEnums.packageType, packageDataEnums.version);
     let enums = {
         ...packageDataEnums.data,
         ...autocompletedEnums.vanilla
