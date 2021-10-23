@@ -1,7 +1,7 @@
 // 安装包版本
-exports.installPackageVersion = "1.17.40.21";
+exports.installPackageVersion = "1.17.40.23";
 // 安装包路径
-exports.installPackagePath = "H:\\BedrockVersions\\New\\Minecraft_1.17.40b2 (1.17.40.21)_armv8.apks";
+exports.installPackagePath = "H:\\BedrockVersions\\New\\Minecraft_1.17.40b3 (1.17.40.23)_armv8.apks";
 // 安装包类型（release 表示正式版，beta 表示开发版，netease 表示网易版）
 exports.installPackageType = "beta";
 
