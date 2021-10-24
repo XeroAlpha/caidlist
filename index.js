@@ -95,6 +95,12 @@ function replaceObjectKey(object, replaceArgsGroups) {
     return newObject;
 }
 
+function keyArrayToObject(arr, f) {
+    let obj = {};
+    arr.forEach((e, i, a) => obj[e] = f(e, i, a));
+    return obj;
+}
+
 function compareMinecraftVersion(a, b) {
     const asVersionArray = str => str.split(".").map(e => parseInt(e)).map(e => isNaN(e) ? 0 : e);
     const aver = asVersionArray(a), bver = asVersionArray(b);
@@ -124,6 +130,7 @@ function formatTimeLeft(seconds) {
 //#region Autocompletion related
 const adb = require("adbkit");
 const sharp = require("sharp");
+const assert = require("assert").strict;
 const tesseract = require("node-tesseract-ocr");
 const tesseractMistakes = require("./tesseract_mistakes.json");
 
@@ -199,8 +206,13 @@ async function recogizeCommand(screenshotPng, surfaceOrientation) {
     return commandText;
 }
 
-async function recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation) {
+async function recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation) {
     return await recogizeCommand(await captureScreen(adbClient, deviceSerial), surfaceOrientation);
+}
+
+async function recogizeCommandRemoteAsync(adbClient, deviceSerial, surfaceOrientation, onRecoginzed) {
+    let screenshotPng = await captureScreen(adbClient, deviceSerial);
+    recogizeCommand(screenshotPng, surfaceOrientation).then(onRecoginzed);
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
@@ -240,17 +252,13 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command, pr
 
     let autocompletedCommand = command.trim();
     let recogizedCommand = autocompletedCommand;
-    await retryUntilComplete(3, 0, async () => {
-        let command = await recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation);
-        return command == autocompletedCommand;
-    });
+    assert.equal(await recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation), autocompletedCommand);
     let timeStart = Date.now(), stepCount = 0;
     while(true) {
         await adbShell(adbClient, deviceSerial, "input keyevent 61"); // KEYCODE_TAB
-        recogizedCommand = await retryUntilComplete(3, 0, async () => {
-            let command = await recogizeCommandRemote(adbClient, deviceSerial, surfaceOrientation);
-            return recogizedCommand != command ? command : null;
-        });
+        let newRecognizedCommand = await recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation);
+        assert.notEqual(newRecognizedCommand, recogizeCommand);
+        recogizedCommand = newRecognizedCommand;
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
         if (!autocompletedCommand) {
@@ -336,6 +344,10 @@ async function analyzeAutocompletionEnums(branch, version) {
     await analyzeAutocompletionEnumCached(options, "mobevents", "/mobevent ");
     await analyzeAutocompletionEnumCached(options, "selectors", "/testfor @e[");
 
+    if (compareMinecraftVersion(version, "1.18.0.21") >= 0) {
+        await analyzeAutocompletionEnumCached(options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
+    }
+
     return cachedOutput(cacheId, target);
 }
 
@@ -375,6 +387,7 @@ function analyzeApkPackageDataEnums(packageZip) {
         particleEmitters = [],
         animations = [],
         fogs = [],
+        lootTables = [],
         entityEventsMap = {},
         entityFamilyMap = {},
         lang = {};
@@ -458,6 +471,11 @@ function analyzeApkPackageDataEnums(packageZip) {
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
+        } else if (entryName.match(/^assets\/behavior_packs\/(?:[^\/]+)\/loot_tables\/(.+)\.json$/)) {
+            let match = entryName.match(/\/loot_tables\/(.+)\.json$/);
+            if (match) {
+                lootTables.push(match[1]);
+            }
         } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
             parseMinecraftLang(lang, entry.getData().toString("utf-8"));
         }
@@ -478,6 +496,7 @@ function analyzeApkPackageDataEnums(packageZip) {
             particleEmitters,
             animations,
             fogs,
+            lootTables,
             entityEventsMap,
             entityFamilyMap
         },
@@ -685,7 +704,12 @@ function fetchJavaEditionLangData() {
         let versionMeta = await fetchVersionMeta(metaApiHost, manifest, "latest_snapshot");
         let assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
         let langAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
-        return JSON.parse(langAsset.toString());
+        return {
+            "__VERSION__": versionMeta.id,
+            "__VERSION_TYPE__": versionMeta.type,
+            "__VERSION_TIME__": versionMeta.time,
+            ...JSON.parse(langAsset.toString())
+        }
     });
 }
 //#endregion
@@ -811,6 +835,9 @@ function matchTranslation(options) {
                 };
             }
         }
+        if (!translationMap[originalValue]) {
+            translationMap[originalValue] = "";
+        }
         setInlineCommentAfterField(translationMap, originalValue, null);
     }
     return {
@@ -931,7 +958,8 @@ const userTranslationStorageKey = {
     effect: "translation.effect",
     enchant: "translation.enchant",
     fog: "translation.fog",
-    location: "translation.location"
+    location: "translation.location",
+    lootTable: "translation.lootTable"
 };
 function loadUserTranslation() {
     let userTranslation = {};
@@ -1108,8 +1136,37 @@ async function main() {
         originalArray: enums.sounds,
         translationMap: userTranslation.sound
     });
+    if (compareMinecraftVersion(packageDataEnums.version, "1.18.0.21") >= 0) {
+        matchTranslations({
+            ...commonOptions,
+            name: "lootTable",
+            originalArray: enums.lootTables,
+            translationMap: userTranslation.lootTable,
+            postProcessor(lootTable) {
+                let nameWrapped = {};
+                forEachObject(lootTable, (value, key) => {
+                    let wrappedKey = JSON.stringify(key);
+                    if (key.includes("/")) {
+                        nameWrapped[wrappedKey] = value;
+                    } else {
+                        nameWrapped[wrappedKey] = value;
+                        nameWrapped[key] = value;
+                    }
+                });
+                return nameWrapped;
+            }
+        });
+    }
     translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
     translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
+    translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, k => {
+        if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
+        if (k in translationResultMaps.item) {
+            return translationResultMaps.item[k];
+        } else {
+            return "";
+        }
+    });
 
     console.log("Exporting command library...");
     cachedOutput("output.translation.state", translationStateMaps);
@@ -1124,7 +1181,7 @@ async function main() {
         description: "该命令库将旧ID表替换为更新的版本。",
         uuid: "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
         version: [0, 0, 1],
-        require: ["acf728c5-dd5d-4a38-b43d-7c4f18149fbd", "590cdcb5-3cdf-42fa-902c-b578779335ab"],
+        require: [],
         minSupportVer: "0.7.4",
         targetSupportVer: packageDataEnums.version,
         mode: "overwrite",
