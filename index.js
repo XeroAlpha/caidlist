@@ -102,7 +102,12 @@ function keyArrayToObject(arr, f) {
 }
 
 function compareMinecraftVersion(a, b) {
-    const asVersionArray = str => str.split(".").map(e => parseInt(e)).map(e => isNaN(e) ? 0 : e);
+    const asVersionArray = str => {
+        return str
+            .split(".")
+            .map(e => e == "*" ? Infinity : parseInt(e))
+            .map(e => isNaN(e) ? -1 : e);
+    };
     const aver = asVersionArray(a), bver = asVersionArray(b);
     let i, minLength = Math.min(aver.length, bver.length);
     for (i = 0; i < minLength; i++) {
@@ -110,6 +115,10 @@ function compareMinecraftVersion(a, b) {
         return aver[i] - bver[i];
     }
     return aver.length - bver.length;
+}
+
+function testMinecraftVersionInRange(version, rangeL, rangeU) {
+    return compareMinecraftVersion(version, rangeL) >= 0 && compareMinecraftVersion(version, rangeU) <= 0;
 }
 
 function fixZero(str, zeroCount) {
@@ -344,7 +353,7 @@ async function analyzeAutocompletionEnums(branch, version) {
     await analyzeAutocompletionEnumCached(options, "mobevents", "/mobevent ");
     await analyzeAutocompletionEnumCached(options, "selectors", "/testfor @e[");
 
-    if (compareMinecraftVersion(version, "1.18.0.21") >= 0) {
+    if (testMinecraftVersionInRange(version, "1.18.0.21", "1.18.0.21")) {
         await analyzeAutocompletionEnumCached(options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
     }
 
@@ -1233,7 +1242,7 @@ async function main() {
         originalArray: enums.sounds,
         translationMap: userTranslation.sound
     });
-    if (compareMinecraftVersion(packageDataEnums.version, "1.18.0.21") >= 0) {
+    if (testMinecraftVersionInRange(packageDataEnums.version, "1.18.0.21", "*")) {
         matchTranslations({
             ...commonOptions,
             name: "lootTable",
@@ -1254,14 +1263,16 @@ async function main() {
     }
     translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
     translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
-    translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, k => {
-        if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
-        if (k in translationResultMaps.item) {
-            return translationResultMaps.item[k];
-        } else {
-            return "";
-        }
-    });
+    if (enums.lootTool) {
+        translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, k => {
+            if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
+            if (k in translationResultMaps.item) {
+                return translationResultMaps.item[k];
+            } else {
+                return "";
+            }
+        });
+    }
 
     console.log("Exporting command library...");
     cachedOutput("output.translation.state", translationStateMaps);
