@@ -82,6 +82,11 @@ function checkPause(timeout, query) {
     });
 }
 
+function runJobsAndReturn(mainJob, ...concurrentJobs) {
+    return Promise.all([ mainJob, ...concurrentJobs ])
+        .then(results => results[0]);
+}
+
 function forEachObject(object, f, thisArg) {
     Object.keys(object).forEach(key => f.call(thisArg, object[key], key, object));
 }
@@ -137,19 +142,19 @@ function formatTimeLeft(seconds) {
 //#endregion
 
 //#region Autocompletion related
-const adb = require("adbkit");
+const adb = require("@devicefarmer/adbkit").Adb;
 const sharp = require("sharp");
 const assert = require("assert").strict;
 const tesseract = require("node-tesseract-ocr");
 const tesseractMistakes = require("./tesseract_mistakes.json");
 
-async function adbShell(adbClient, deviceSerial, command) {
-    let stream = await adbClient.shell(deviceSerial, command);
+async function adbShell(device, command) {
+    let stream = await device.shell(command);
     return await adb.util.readAll(stream);
 }
 
-async function getDeviceSurfaceOrientation(adbClient, deviceSerial) {
-    let output = await adbShell(adbClient, deviceSerial, "dumpsys input | grep SurfaceOrientation | awk '{print $2}' | head -n 1");
+async function getDeviceSurfaceOrientation(device) {
+    let output = await adbShell(device, "dumpsys input | grep SurfaceOrientation | awk '{print $2}' | head -n 1");
     return parseInt(output.toString().trim());
 }
 
@@ -157,7 +162,7 @@ async function getAnyOnlineDevice(adbClient) {
     let devices = await adbClient.listDevices();
     let onlineDevices = devices.filter(device => device.type != "offline");
     if (onlineDevices.length != 0) {
-        return onlineDevices[0].id;
+        return adbClient.getDevice(onlineDevices[0].id);
     } else {
         return null;
     }
@@ -172,7 +177,7 @@ async function waitForAnyDevice(adbClient) {
                 let checkingDevices = [...changes.added, ...changes.changed];
                 checkingDevices = checkingDevices.filter(device => device.type != "offline");
                 if (checkingDevices.length != 0) {
-                    resolve(checkingDevices[0].id);
+                    resolve(adbClient.getDevice(checkingDevices[0].id));
                     tracker.end();
                 }
             });
@@ -183,8 +188,29 @@ async function waitForAnyDevice(adbClient) {
     }
 }
 
-async function captureScreen(adbClient, deviceSerial) {
-    let screenshotPngStream = await adbClient.screencap(deviceSerial);
+async function openMonkey(device) {
+    let monkeyPid = (await adbShell(device, "ps -A | grep com.android.commands.monkey | awk '{print $2}'")).toString().trim();
+    if (monkeyPid) { // kill monkey
+        await adbShell(device, "kill -9 " + monkeyPid);
+        await sleepAsync(1000);
+    }
+    return device.openMonkey();
+}
+
+function sendMonkeyCommand(monkey, command) {
+    return new Promise((resolve, reject) => {
+        monkey.send(command, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
+async function captureScreen(device) {
+    let screenshotPngStream = await device.screencap();
     return await adb.util.readAll(screenshotPngStream);
 }
 
@@ -215,13 +241,8 @@ async function recogizeCommand(screenshotPng, surfaceOrientation) {
     return commandText;
 }
 
-async function recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation) {
-    return await recogizeCommand(await captureScreen(adbClient, deviceSerial), surfaceOrientation);
-}
-
-async function recogizeCommandRemoteAsync(adbClient, deviceSerial, surfaceOrientation, onRecoginzed) {
-    let screenshotPng = await captureScreen(adbClient, deviceSerial);
-    recogizeCommand(screenshotPng, surfaceOrientation).then(onRecoginzed);
+async function recogizeCommandRemoteSync(device, surfaceOrientation) {
+    return await recogizeCommand(await captureScreen(device), surfaceOrientation);
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
@@ -246,26 +267,36 @@ function guessTruncatedString(truncatedStr, startsWith) {
     return null;
 }
 
-async function analyzeCommandAutocompletion(adbClient, deviceSerial, command, progressName, approxLength) {
+async function analyzeCommandAutocompletion(device, command, progressName, approxLength) {
     // 初始状态：游戏HUD
     let autocompletions = [];
-    let surfaceOrientation = await getDeviceSurfaceOrientation(adbClient, deviceSerial);
-
-    await checkPause(10, "Press <Enter> to continue");
+    let surfaceOrientation = await getDeviceSurfaceOrientation(device);
+    let monkey = await openMonkey(device);
     
     // 打开聊天栏
-    await adbShell(adbClient, deviceSerial, "input keyevent 48"); // KEYCODE_T
+    await sendMonkeyCommand(monkey, "press KEYCODE_T");
 
     console.log(`Starting ${progressName}: ${command}`);
-    await adbShell(adbClient, deviceSerial, "input text " + JSON.stringify(command));
+    await adbShell(device, "input text " + JSON.stringify(command));
 
+    let screenshotPng = await captureScreen(device);
+    const pressTabThenCapture = async () => {
+        await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
+        await sleepAsync(100); // wait for responding to key events
+        screenshotPng = await captureScreen(device);
+    };
     let autocompletedCommand = command.trim();
-    let recogizedCommand = autocompletedCommand;
-    assert.equal(await recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation), autocompletedCommand);
+    let recogizedCommand = await runJobsAndReturn(
+        recogizeCommand(screenshotPng, surfaceOrientation),
+        pressTabThenCapture()
+    );
+    assert.equal(recogizedCommand, autocompletedCommand);
     let timeStart = Date.now(), stepCount = 0;
     while(true) {
-        await adbShell(adbClient, deviceSerial, "input keyevent 61"); // KEYCODE_TAB
-        let newRecognizedCommand = await recogizeCommandRemoteSync(adbClient, deviceSerial, surfaceOrientation);
+        let newRecognizedCommand = await runJobsAndReturn(
+            recogizeCommand(screenshotPng, surfaceOrientation),
+            pressTabThenCapture()
+        );
         assert.notEqual(newRecognizedCommand, recogizeCommand);
         recogizedCommand = newRecognizedCommand;
 
@@ -294,15 +325,17 @@ async function analyzeCommandAutocompletion(adbClient, deviceSerial, command, pr
     }
 
     // 退出聊天栏
-    await adbShell(adbClient, deviceSerial, "input keyevent 111"); // KEYCODE_ESCAPE
-    await adbShell(adbClient, deviceSerial, "input keyevent 111"); // KEYCODE_ESCAPE
+    await sendMonkeyCommand(monkey, "press KEYCODE_ESCAPE");
+    await sendMonkeyCommand(monkey, "press KEYCODE_ESCAPE");
+    await sendMonkeyCommand(monkey, "quit");
+    monkey.end();
 
     return autocompletions;
 }
 
 async function analyzeAutocompletionEnumCached(options, name, commandPrefix, exclusion) {
     const {
-        adbClient, deviceSerial,
+        device,
         branch, version, target
     } = options;
     const id = name.replace(/\s+(\S)/g, (_, ch) => ch.toUpperCase());
@@ -313,7 +346,7 @@ async function analyzeAutocompletionEnumCached(options, name, commandPrefix, exc
     if (cache && version == cache.version) result = cache.result;
     if (!result) {
         let progressName = `${branch}.${name.replace(/\s+/g, "_")}`;
-        result = await analyzeCommandAutocompletion(adbClient, deviceSerial, commandPrefix, progressName, cache && cache.length);
+        result = await analyzeCommandAutocompletion(device, commandPrefix, progressName, cache && cache.length);
         if (exclusion) result = result.filter(e => !exclusion.includes(e));
         cachedOutput(cacheId, { version, result, length: result.length });
     }
@@ -328,17 +361,17 @@ async function analyzeAutocompletionEnums(branch, version) {
 	console.log("Connecting ADB host...");
 	let adbClient = adb.createClient();
     console.log("Connecting to device...");
-    let deviceSerial = await getAnyOnlineDevice(adbClient);
-    if (!deviceSerial) {
+    let device = await getAnyOnlineDevice(adbClient);
+    if (!device) {
         console.log("Please plug in the device...");
-        deviceSerial = await waitForAnyDevice(adbClient);
+        device = await waitForAnyDevice(adbClient);
     }
 
     console.log("Please switch to branch: " + branch);
     await pause("Press <Enter> if the device is ready");
     const target = { version };
     const options = {
-        adbClient, deviceSerial,
+        device,
         branch, version, target
     };
 
