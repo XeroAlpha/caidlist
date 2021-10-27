@@ -1293,6 +1293,9 @@ async function main() {
             }
         });
         translationResultMaps.lootTableWrapped = nameWrapped;
+    } else {
+        translationResultMaps.lootTable = {};
+        translationResultMaps.lootTableWrapped = {};
     }
     translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
     translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
@@ -1305,6 +1308,8 @@ async function main() {
                 return "";
             }
         });
+    } else {
+        translationResultMaps.lootTool = {};
     }
 
     console.log("Exporting command library...");

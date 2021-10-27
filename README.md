@@ -1,6 +1,6 @@
 # 命令助手ID表生成工具
 ## 简介
-命令助手作者使用此工具生成ID表。
+命令助手作者 [ProjectXero](https://gitee.com/projectxero) 使用此工具生成ID表。
 
 ## 工作流
 请视情况选择工作流。
@@ -23,17 +23,16 @@
 
 ### 清空导出数据
 1. 删除 `output` 目录下所有以 `output` 开头的文件。
-2. 如果提供了 Minecraft 安装包，请删除 `output` 目录下所有以 `package` 开头的文件。
-3. 如果需要重新进行 OCR，请删除 `output` 目录下所有以 `autocompleted` 开头的文件。
-4. 如果不想使用仓库内自带的翻译，请删除 `output` 目录下所有以 `translation` 开头的文件。
-5. 如果需要强制刷新标准化译名表的缓存，请删除 `output` 目录下所有以 `wiki` 开头的文件。
+2. 如果不想使用仓库内自带的翻译，请删除 `output` 目录下所有以 `translation` 开头的文件。
+3. 如果需要强制刷新标准化译名表的缓存，请删除 `output` 目录下所有以 `wiki` 开头的文件。
+4. 如果需要强制刷新Java版语言数据的缓存，请删除 `output` 目录下所有以 `java` 开头的文件。
 
 ### 运行
 1. 运行 `node index.js`。
 
 ### 运行（仅OCR）
 1. 运行 `node index.js`。
-2. 打开 Minecraft，进入一个已开启作弊的单人世界，等待游戏进入HUD界面。在终端出现 `Press <Enter> if the device is ready` 提示且游戏已进入HUD界面时，按下回车。出现 `Please switch to a education world` 提示时，进入一个已开启作弊的教育版世界。出现 `Please switch to a experiment world` 提示时，进入一个已开启作弊与所有实验性功能的单人世界。
+2. 打开 Minecraft，进入一个已开启作弊的单人世界，等待游戏进入HUD界面。在终端出现 `Press <Enter> if the device is ready` 提示且游戏已进入HUD界面时，按下回车。出现 `Please switch to branch: education` 提示时，进入一个已开启作弊的教育版世界。出现 `Please switch to branch: experiment` 提示时，进入一个已开启作弊与所有实验性功能的单人世界。
 3. 此过程中如果终端没有提示要求操作，请不要控制手机，也不要让 Minecraft 切至后台，否则可能导致流程失败。如果遵守上述要求后仍然出现提示 `Auto-completed command test failed`，可能为 Tesseract 识别出错，您需要将错误的条目和正确的条目手动保存到 `tesseract_mistakes.json` 以便让本工具手动纠正。
 
 ### 校对
@@ -72,7 +71,7 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 |顺序|枚举名|ID|枚举来源|
 |---|---|---|---|
 |1|方块|block|`/testforblock ~ ~ ~ <Tab>`|
-|2|物品（不是方块）|item|从物品列表中移除所有方块|
+|2|物品|item|`/clear @s <Tab>`|
 |3|实体|entity|`/testfor @e[type=<Tab>`|
 |4|状态效果|effect|`/effect @s <Tab>`|
 |5|附魔类型|enchant|`/enchant @s <Tab>`|
@@ -83,6 +82,7 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 |10|动画控制器|animation|/assets/resource_packs/?/animations/*.json|
 |11|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
 |12|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
-|13|物品|item|`/clear @s <Tab>`|
+|13|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
 |14|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
 |15|可生成的实体|summonableEntity|`/summon <Tab>`|
+|16|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
