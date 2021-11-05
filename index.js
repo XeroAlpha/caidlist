@@ -500,7 +500,7 @@ function analyzeApkPackageDataEnums(packageZip) {
                     eventOwners.push(id);
                 });
                 [ null, ...Object.keys(componentGroups) ].forEach(componentName => {
-                    let groupId = componentName ? `${id}/${componentName}` : id;
+                    let groupId = componentName ? `${id}<${componentName}>` : id;
                     let components = componentName ? componentGroups[componentName] : globalComponents;
                     let typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
                     let typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
@@ -1065,8 +1065,8 @@ function writeTransMapTextZip(outputFile, version, originalEnums, transMaps) {
     forEachObject(enums.entityFamily, (v, k, o) => {
         let relatedEntities = originalEnums.entityFamilyMap[k];
         let relatedEntitiesStr = relatedEntities.map(e => {
-            let withoutSlash = e.replace(/\/.+$/, "");
-            return entityNameAlias[withoutSlash] || enums.entity[withoutSlash] || withoutSlash;
+            let withoutComp = e.replace(/<.+>$/, "");
+            return entityNameAlias[withoutComp] || enums.entity[withoutComp] || withoutComp;
         }).filter((e, i, a) => a.indexOf(e) >= i);
         if (relatedEntitiesStr.length > 1) {
             v += "（" + relatedEntitiesStr.join("、") + "）";
