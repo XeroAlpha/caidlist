@@ -91,6 +91,10 @@ function forEachObject(object, f, thisArg) {
     Object.keys(object).forEach(key => f.call(thisArg, object[key], key, object));
 }
 
+function filterObjectMap(map, predicate) {
+    return JSON.assign({}, map, Object.keys(map).filter(key => predicate(key, map[key], map)));
+}
+
 function replaceObjectKey(object, replaceArgsGroups) {
     let newObject = {};
     forEachObject(object, (value, key) => {
@@ -104,6 +108,10 @@ function keyArrayToObject(arr, f) {
     let obj = {};
     arr.forEach((e, i, a) => obj[e] = f(e, i, a));
     return obj;
+}
+
+function objectToArray(obj, f) {
+    return Object.keys(obj).map(k => f(k, obj[k], obj));
 }
 
 function compareMinecraftVersion(a, b) {
@@ -758,9 +766,6 @@ function fetchJavaEditionLangData() {
 
 //#region Translate Match
 const util = require("util");
-function filterObjectMap(map, predicate) {
-    return JSON.assign({}, map, Object.keys(map).filter(key => predicate(key, map[key], map)));
-}
 
 function setInlineCommentAfterField(obj, fieldName, comment) {
     if (comment) {
@@ -1039,14 +1044,29 @@ const entityNameAlias = {
     "minecraft:villager_v2": "村民",
     "minecraft:zombie_villager_v2": "僵尸村民"
 };
-function writeTransMapTextZip(outputFile, version, originalEnums, transMaps) {
+const transMapNames = [
+    ["block", "方块"],
+    ["item", "物品"],
+    ["effect", "状态效果"],
+    ["enchant", "魔咒"],
+    ["fog", "迷雾"],
+    ["location", "结构"],
+    ["entityEvent", "实体事件"],
+    ["entityFamily", "实体类型分类"],
+    ["entity", "实体"],
+    ["animation", "动画"],
+    ["particleEmitter", "粒子发射器"],
+    ["sound", "声音"],
+    ["lootTable", "战利品表"]
+];
+function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, transMaps) {
     const footText = [
         "※此ID表是MCBEID表的一部分，对应游戏版本为" + version,
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let zip = new AdmZip();
     let enums = filterObjectMap(transMaps, k => !skipTransMapKey.includes(k));
-    let entityEventByEntity = {};
+    let entityEventByEntity = {}, entityEventSplit = [];
     forEachObject(enums.entityEvent, (v, k, o) => {
         let relatedEntities = originalEnums.entityEventsMap[k];
         let relatedEntitiesStr = relatedEntities.map(e => {
@@ -1073,15 +1093,15 @@ function writeTransMapTextZip(outputFile, version, originalEnums, transMaps) {
             o[k] = v;
         }
     });
-    enums.entityEventSplit = [];
+    entityEventSplit = [];
     forEachObject(entityEventByEntity, (entityEvents, entityName) => {
-        enums.entityEventSplit.push("【" + entityName + "】");
+        entityEventSplit.push("【" + entityName + "】");
         forEachObject(entityEvents, (entityEventDesc, entityEventName) => {
-            enums.entityEventSplit.push(entityEventName + ": " + entityEventDesc);
+            entityEventSplit.push(entityEventName + ": " + entityEventDesc);
         });
-        enums.entityEventSplit.push("");
+        entityEventSplit.push("");
     });
-    enums.entityEventSplit.push(...footText);
+    entityEventSplit.push(...footText);
     let files = {
         "_MCBEID_.txt": [
             "【MCBEID表】",
@@ -1095,24 +1115,14 @@ function writeTransMapTextZip(outputFile, version, originalEnums, transMaps) {
             "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
             "",
             "【目录】",
-            "block.txt：方块",
-            "item.txt：物品",
-            "effect.txt：状态效果",
-            "enchant.txt：附魔",
-            "fog.txt：迷雾",
-            "location.txt：结构",
-            "entityEvent.txt：实体事件（总表）",
-            "entityEventSplit.txt：实体事件（分表）",
-            "entityFamily.txt：实体类型分类",
-            "entity.txt：实体",
-            "animation.txt：动画",
-            "particleEmitter.txt：粒子发射器",
-            "sound.txt：声音",
-            "lootTable.txt：战利品表"
+            ...transMapNames.map(e => e[0] + ".txt: " + e[1]),
+            "",
+            "entityEventSplit.txt: 根据实体类型分类的实体事件表"
         ],
         ...replaceObjectKey(enums, [
             [ /(.+)/, "$1.txt" ]
-        ])
+        ]),
+        "entityEventSplit.txt": entityEventSplit
     };
     
     forEachObject(files, (content, fileName) => {
@@ -1126,7 +1136,13 @@ function writeTransMapTextZip(outputFile, version, originalEnums, transMaps) {
         }
         zip.addFile(fileName, Buffer.from(content, "utf-8"));
     });
-    fs.writeFileSync(outputFile, zip.toBuffer());
+    fs.writeFileSync(outputZip, zip.toBuffer());
+    fs.writeFileSync(outputJson, JSON.stringify({
+        version,
+        publishTime: Date.now(),
+        enums,
+        names: transMapNames
+    }));
 }
 //#endregion
 
@@ -1337,6 +1353,7 @@ async function main() {
     );
     writeTransMapTextZip(
         nodePath.resolve(__dirname, "output", "output.ids.zip"),
+        nodePath.resolve(__dirname, "output", "output.all.json"),
         packageDataEnums.version,
         enums,
         translationResultMaps
