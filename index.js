@@ -1139,7 +1139,6 @@ function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, tra
     fs.writeFileSync(outputZip, zip.toBuffer());
     fs.writeFileSync(outputJson, JSON.stringify({
         version,
-        publishTime: Date.now(),
         enums,
         names: transMapNames
     }));
