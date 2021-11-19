@@ -1057,16 +1057,27 @@ const transMapNames = [
     ["animation", "动画"],
     ["particleEmitter", "粒子发射器"],
     ["sound", "声音"],
-    ["lootTable", "战利品表"]
+    ["lootTable", "战利品表"],
+    ["stdTrans", "标准化译名表"]
 ];
-function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, transMaps) {
+const stdTransMapNames = [
+    ["BlockSprite", "方块"],
+    ["ItemSprite", "物品"],
+    ["EntitySprite", "实体"],
+    ["BiomeSprite", "生物群系"],
+    ["EffectSprite", "状态效果"],
+    ["EnvSprite", "环境"],
+    ["Exclusive", "基岩版独占"]
+];
+function writeTransMapTextZip(options) {
+    const { outputZip, outputJson, version, originalEnums, transMaps, stdTransMap } = options;
     const footText = [
         "※此ID表是MCBEID表的一部分，对应游戏版本为" + version,
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let zip = new AdmZip();
     let enums = filterObjectMap(transMaps, k => !skipTransMapKey.includes(k));
-    let entityEventByEntity = {}, entityEventSplit = [];
+    let entityEventByEntity = {}, entityEventSplit, stdTransText, stdTransEnum;
     forEachObject(enums.entityEvent, (v, k, o) => {
         let relatedEntities = originalEnums.entityEventsMap[k];
         let relatedEntitiesStr = relatedEntities.map(e => {
@@ -1102,6 +1113,18 @@ function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, tra
         entityEventSplit.push("");
     });
     entityEventSplit.push(...footText);
+    stdTransText = [];
+    stdTransEnum = {};
+    stdTransMapNames.forEach(e => {
+        const [ key, name ] = e;
+        stdTransText.push("【" + name + "】");
+        forEachObject(stdTransMap[key], (transValue, transKey) => {
+            stdTransEnum[key + ": " + transKey] = transValue;
+            stdTransText.push(transKey + ": " + transValue);
+        });
+        stdTransText.push("");
+    });
+    stdTransText.push(...footText);
     let files = {
         "_MCBEID_.txt": [
             "【MCBEID表】",
@@ -1122,9 +1145,9 @@ function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, tra
         ...replaceObjectKey(enums, [
             [ /(.+)/, "$1.txt" ]
         ]),
-        "entityEventSplit.txt": entityEventSplit
+        "entityEventSplit.txt": entityEventSplit,
+        "stdTrans.txt": stdTransText
     };
-    
     forEachObject(files, (content, fileName) => {
         if (Array.isArray(content)) {
             content = content.join("\r\n");
@@ -1139,7 +1162,10 @@ function writeTransMapTextZip(outputZip, outputJson, version, originalEnums, tra
     fs.writeFileSync(outputZip, zip.toBuffer());
     fs.writeFileSync(outputJson, JSON.stringify({
         version,
-        enums,
+        enums: {
+            ...enums,
+            stdTrans: stdTransEnum
+        },
         names: transMapNames
     }));
 }
@@ -1154,7 +1180,7 @@ async function main() {
     };
     let lang = packageDataEnums.lang;
     let standardizedTranslation = await fetchStandardizedTranslation();
-    let javaEditionLang = await fetchJavaEditionLangData();
+    let javaEditionLang = filterObjectMap(await fetchJavaEditionLangData(), k => !k.startsWith("__"));
     let userTranslation = loadUserTranslation();
     console.log("Matching translations...");
     let translationResultMaps = {}, translationStateMaps = {};
@@ -1350,13 +1376,18 @@ async function main() {
         nodePath.resolve(__dirname, "output", "output.ids.xlsx"),
         translationResultMaps
     );
-    writeTransMapTextZip(
-        nodePath.resolve(__dirname, "output", "output.ids.zip"),
-        nodePath.resolve(__dirname, "output", "output.all.json"),
-        packageDataEnums.version,
-        enums,
-        translationResultMaps
-    );
+    writeTransMapTextZip({
+        outputZip: nodePath.resolve(__dirname, "output", "output.ids.zip"),
+        outputJson: nodePath.resolve(__dirname, "output", "output.all.json"),
+        version: packageDataEnums.version,
+        originalEnums: enums,
+        transMaps: translationResultMaps,
+        stdTransMap: standardizedTranslation,
+        langMap: {
+            bedrock: lang,
+            java: javaEditionLang
+        }
+    });
     saveUserTranslation(userTranslation);
 }
 
