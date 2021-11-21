@@ -430,21 +430,37 @@ function parseMinecraftLang(target, langContent) {
         });
 }
 
-function analyzeApkPackageDataEnums(packageZip) {
-    let entries = packageZip.getEntries();
+function analyzeApkPackageLang(packageZip) {
+    let entries = packageZip.getEntries(), lang = {};
+    console.log("Analyzing package entries for language file...");
+    entries.forEach(entry => {
+        let entryName = entry.entryName;
+        if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
+            parseMinecraftLang(lang, entry.getData().toString("utf-8"));
+        }
+    });
+    return lang;
+}
 
+const branchEntryNameKeywords = {
+    "vanilla": [ "vanilla" ],
+    "education": [ "vanilla", "chemistry", "education" ],
+    "experiment": [ "vanilla", "experiment", "test" ]
+};
+function analyzeApkPackageDataEnums(packageZip, branch) {
+    let entries = packageZip.getEntries();
+    let entryNameKeywords = branchEntryNameKeywords[branch] || [];
     let sounds = [],
         particleEmitters = [],
         animations = [],
         fogs = [],
         lootTables = [],
         entityEventsMap = {},
-        entityFamilyMap = {},
-        lang = {};
-    console.log("Analyzing package entries...");
+        entityFamilyMap = {};
+    console.log("[" + branch + "]Analyzing package entries for data enums...");
     entries.forEach(entry => {
         let entryName = entry.entryName;
-        if (!entryName.includes("vanilla")) return;
+        if (!entryNameKeywords.some(keyword => entryName.includes(keyword))) return;
         if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/sounds\/sound_definitions\.json$/)) {
             let entryData = entry.getData().toString("utf-8");
             let soundDefinition = JSON.parse(entryData);
@@ -526,8 +542,6 @@ function analyzeApkPackageDataEnums(packageZip) {
             if (match) {
                 lootTables.push(match[1]);
             }
-        } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
-            parseMinecraftLang(lang, entry.getData().toString("utf-8"));
         }
     });
     sounds = sounds.filter((e, i, a) => a.indexOf(e) >= i).sort();
@@ -541,16 +555,13 @@ function analyzeApkPackageDataEnums(packageZip) {
     });
 
     return {
-        data: {
-            sounds,
-            particleEmitters,
-            animations,
-            fogs,
-            lootTables,
-            entityEventsMap,
-            entityFamilyMap
-        },
-        lang: lang
+        sounds,
+        particleEmitters,
+        animations,
+        fogs,
+        lootTables,
+        entityEventsMap,
+        entityFamilyMap
     };
 }
 
@@ -560,7 +571,7 @@ const apksInstallPack = [
     "com.mojang.minecraftpe.apk",
     "base.apk"
 ];
-function analyzePackageDataEnums() {
+function extractInstallPack() {
     let packagePath = config.installPackagePath;
     if (packagePath.endsWith(".apks")) {
         let packageZip = new AdmZip(packagePath);
@@ -574,13 +585,13 @@ function analyzePackageDataEnums() {
             throw new Error("Install Pack not found!");
         }
         installPackApk = packageZip.readFile(installPackApkEntry);
-        return analyzeApkPackageDataEnums(new AdmZip(installPackApk));
+        return new AdmZip(installPackApk);
     } else {
-        return analyzeApkPackageDataEnums(new AdmZip(packagePath));
+        return new AdmZip(packagePath);
     }
 }
 
-function analyzePackageDataEnumsCached() {
+function analyzePackageDataEnumsCached(branch) {
     let dataCache = cachedOutput("package.data");
     let langCache = cachedOutput("package.lang");
     let infoCache = cachedOutput("package.info");
@@ -592,10 +603,16 @@ function analyzePackageDataEnumsCached() {
             packageType: infoCache.type
         };
     } else {
-        let result = analyzePackageDataEnums();
+        let installPack = extractInstallPack();
+        let lang = analyzeApkPackageLang(installPack);
+        let data = {
+            vanilla: analyzeApkPackageDataEnums(installPack, "vanilla"),
+            education: analyzeApkPackageDataEnums(installPack, "education"),
+            experiment: analyzeApkPackageDataEnums(installPack, "experiment"),
+        };
         return {
-            data: cachedOutput("package.data", result.data),
-            lang: cachedOutput("package.lang", result.lang),
+            data: cachedOutput("package.data", data),
+            lang: cachedOutput("package.lang", lang),
             ...cachedOutput("package.info", {
                 version: config.installPackageVersion,
                 type: config.installPackageType,
@@ -616,7 +633,8 @@ function parseEnumMapLua(luaContent) {
     let enumMapStack = [{}];
     let itemRegExp = /\['(.*)'\](?:\s*)=(?:\s*)'(.*)'/,
         groupStartRegExp = /\['(.*)'\](?:\s*)=(?:\s*){/,
-        groupEndRegExp = /\}(?:,)?/;
+        groupEndRegExp = /\}(?:,)?/,
+        zhHansRegExp = /-\{(.+?)\}-/g;
     luaContent.split("\n")
         .forEach(line => {
             line = line.trim();
@@ -625,7 +643,7 @@ function parseEnumMapLua(luaContent) {
             if (matchResult = itemRegExp.exec(line)) {
                 let key = matchResult[1].replace(/\\/g, ""); // 处理 Lua 字符串转义
                 let value = matchResult[2].split("|").slice(-1)[0];
-                enumMapStack[0][key] = value;
+                enumMapStack[0][key] = value.replace(zhHansRegExp, "$1");
             } else if (matchResult = groupStartRegExp.exec(line)) {
                 let key = matchResult[1].replace(/\\/g, ""); // 处理 Lua 字符串转义
                 let group = {};
@@ -746,7 +764,7 @@ async function fetchVersionAsset(apiHost, assetIndex, objectName) {
 }
 
 function fetchJavaEditionLangData() {
-    return cachedOutput("java.package.lang", async () => {
+    let result = cachedOutput("java.package.lang", async () => {
         const metaApiHost = "https://launchermeta.mojang.com";
         const assetApiHost = "https://resources.download.minecraft.net";
         console.log("Fetching Java Edition language data...");
@@ -761,6 +779,7 @@ function fetchJavaEditionLangData() {
             ...JSON.parse(langAsset.toString())
         }
     });
+    return filterObjectMap(result, k => !k.startsWith("__"));
 }
 //#endregion
 
@@ -1044,7 +1063,134 @@ const entityNameAlias = {
     "minecraft:villager_v2": "村民",
     "minecraft:zombie_villager_v2": "僵尸村民"
 };
-const transMapNames = [
+function writeTransMapTextZip(options) {
+    const {
+        outputZip,
+        outputJson,
+        branchName,
+        version,
+        originalEnums,
+        transMaps,
+        transMapNames,
+        stdTransMap,
+        stdTransMapNames
+    } = options;
+    const footText = [
+        "※此ID表是MCBEID表的一部分，对应游戏版本为" + version + "（" + branchName + "）",
+        "※详见：https://gitee.com/projectxero/caidlist"
+    ];
+    let entityEventByEntity = {}, entityEventSplit, stdTransText, stdTransEnum;
+    let enums = filterObjectMap(transMaps, k => !skipTransMapKey.includes(k));
+    if (originalEnums) {
+        forEachObject(enums.entityEvent, (v, k, o) => {
+            let relatedEntities = originalEnums.entityEventsMap[k];
+            let relatedEntitiesStr = relatedEntities.map(e => {
+                return entityNameAlias[e] || enums.entity[e] || e;
+            }).filter((e, i, a) => a.indexOf(e) >= i);
+            relatedEntitiesStr.forEach(e => {
+                let brotherEvents = entityEventByEntity[e];
+                if (!brotherEvents) {
+                    brotherEvents = entityEventByEntity[e] = {};
+                }
+                brotherEvents[k] = v;
+            });
+            v += "（" + relatedEntitiesStr.join("、") + "）";
+            o[k] = v;
+        });
+        forEachObject(enums.entityFamily, (v, k, o) => {
+            let relatedEntities = originalEnums.entityFamilyMap[k];
+            let relatedEntitiesStr = relatedEntities.map(e => {
+                let withoutComp = e.replace(/<.+>$/, "");
+                return entityNameAlias[withoutComp] || enums.entity[withoutComp] || withoutComp;
+            }).filter((e, i, a) => a.indexOf(e) >= i);
+            if (relatedEntitiesStr.length > 1) {
+                v += "（" + relatedEntitiesStr.join("、") + "）";
+                o[k] = v;
+            }
+        });
+        entityEventSplit = [];
+        forEachObject(entityEventByEntity, (entityEvents, entityName) => {
+            entityEventSplit.push("【" + entityName + "】");
+            forEachObject(entityEvents, (entityEventDesc, entityEventName) => {
+                entityEventSplit.push(entityEventName + ": " + entityEventDesc);
+            });
+            entityEventSplit.push("");
+        });
+        entityEventSplit.push(...footText);
+    }
+    if (stdTransMap) {
+        stdTransText = [];
+        stdTransEnum = {};
+        stdTransMapNames.forEach(e => {
+            const [ key, name ] = e;
+            stdTransText.push("【" + name + "】");
+            forEachObject(stdTransMap[key], (transValue, transKey) => {
+                stdTransEnum[key + ": " + transKey] = transValue;
+                stdTransText.push(transKey + ": " + transValue);
+            });
+            stdTransText.push("");
+        });
+        stdTransText.push(...footText);
+    }
+    if (outputZip) {
+        let zip = new AdmZip();
+        let files = {
+            ...replaceObjectKey(enums, [
+                [ /(.+)/, "$1.txt" ]
+            ]),
+            "entityEventSplit.txt": entityEventSplit,
+            "stdTrans.txt": stdTransText
+        };
+        files["_MCBEID_.txt"] = [
+            "【MCBEID表】",
+            "官方下载地址：https://ca.projectxero.top/idlist/latest.zip",
+            "本ID表由B站@ProjectXero与命令助手开发组的小伙伴们维护，发现错误或有建议可私聊UP主或加群【MCBE命令助手开发区】：671317302",
+            "",
+            "发布时间：" + new Date().toLocaleString(),
+            "对应游戏版本：" + version + "（" + branchName + "）",
+            "",
+            "项目网站：https://gitee.com/projectxero/caidlist",
+            "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
+            "",
+            "【目录】",
+            ...transMapNames.filter(e => files[e[0] + ".txt"]).map(e => e[0] + ".txt: " + e[1])
+        ];
+        forEachObject(files, (content, fileName) => {
+            if (Array.isArray(content)) {
+                content = content.join("\r\n");
+            } else if (typeof content == "object") {
+                let arr = [];
+                forEachObject(content, (v, k) => arr.push(k + ": " + v));
+                arr.push("", ...footText);
+                content = arr.join("\r\n");
+            } else {
+                return;
+            }
+            zip.addFile(fileName, Buffer.from(content, "utf-8"));
+        });
+        fs.writeFileSync(outputZip, zip.toBuffer());
+    }
+    if (outputJson) {
+        let jsonEnums = {
+            ...enums,
+            stdTrans: stdTransEnum
+        };
+        fs.writeFileSync(outputJson, JSON.stringify({
+            branchName,
+            version,
+            enums: jsonEnums,
+            names: transMapNames.filter(e => jsonEnums[e[0]])
+        }));
+    }
+}
+//#endregion
+
+const branchName = {
+    vanilla: "原版",
+    education: "教育版",
+    experiment: "实验性玩法"
+};
+const defaultTransMapNames = [
     ["block", "方块"],
     ["item", "物品"],
     ["effect", "状态效果"],
@@ -1052,6 +1198,7 @@ const transMapNames = [
     ["fog", "迷雾"],
     ["location", "结构"],
     ["entityEvent", "实体事件"],
+    ["entityEventSplit", "根据实体类型分类的实体事件表"],
     ["entityFamily", "实体类型分类"],
     ["entity", "实体"],
     ["animation", "动画"],
@@ -1069,118 +1216,16 @@ const stdTransMapNames = [
     ["EnvSprite", "环境"],
     ["Exclusive", "基岩版独占"]
 ];
-function writeTransMapTextZip(options) {
-    const { outputZip, outputJson, version, originalEnums, transMaps, stdTransMap } = options;
-    const footText = [
-        "※此ID表是MCBEID表的一部分，对应游戏版本为" + version,
-        "※详见：https://gitee.com/projectxero/caidlist"
-    ];
-    let zip = new AdmZip();
-    let enums = filterObjectMap(transMaps, k => !skipTransMapKey.includes(k));
-    let entityEventByEntity = {}, entityEventSplit, stdTransText, stdTransEnum;
-    forEachObject(enums.entityEvent, (v, k, o) => {
-        let relatedEntities = originalEnums.entityEventsMap[k];
-        let relatedEntitiesStr = relatedEntities.map(e => {
-            return entityNameAlias[e] || enums.entity[e] || e;
-        }).filter((e, i, a) => a.indexOf(e) >= i);
-        relatedEntitiesStr.forEach(e => {
-            let brotherEvents = entityEventByEntity[e];
-            if (!brotherEvents) {
-                brotherEvents = entityEventByEntity[e] = {};
-            }
-            brotherEvents[k] = v;
-        });
-        v += "（" + relatedEntitiesStr.join("、") + "）";
-        o[k] = v;
-    });
-    forEachObject(enums.entityFamily, (v, k, o) => {
-        let relatedEntities = originalEnums.entityFamilyMap[k];
-        let relatedEntitiesStr = relatedEntities.map(e => {
-            let withoutComp = e.replace(/<.+>$/, "");
-            return entityNameAlias[withoutComp] || enums.entity[withoutComp] || withoutComp;
-        }).filter((e, i, a) => a.indexOf(e) >= i);
-        if (relatedEntitiesStr.length > 1) {
-            v += "（" + relatedEntitiesStr.join("、") + "）";
-            o[k] = v;
-        }
-    });
-    entityEventSplit = [];
-    forEachObject(entityEventByEntity, (entityEvents, entityName) => {
-        entityEventSplit.push("【" + entityName + "】");
-        forEachObject(entityEvents, (entityEventDesc, entityEventName) => {
-            entityEventSplit.push(entityEventName + ": " + entityEventDesc);
-        });
-        entityEventSplit.push("");
-    });
-    entityEventSplit.push(...footText);
-    stdTransText = [];
-    stdTransEnum = {};
-    stdTransMapNames.forEach(e => {
-        const [ key, name ] = e;
-        stdTransText.push("【" + name + "】");
-        forEachObject(stdTransMap[key], (transValue, transKey) => {
-            stdTransEnum[key + ": " + transKey] = transValue;
-            stdTransText.push(transKey + ": " + transValue);
-        });
-        stdTransText.push("");
-    });
-    stdTransText.push(...footText);
-    let files = {
-        "_MCBEID_.txt": [
-            "【MCBEID表】",
-            "官方下载地址：https://ca.projectxero.top/idlist/latest.zip",
-            "本ID表由B站@ProjectXero与命令助手开发组的小伙伴们维护，发现错误或有建议可私聊UP主或加群【MCBE命令助手开发区】：671317302",
-            "",
-            "发布时间：" + new Date().toLocaleString(),
-            "对应游戏版本：" + version,
-            "",
-            "项目网站：https://gitee.com/projectxero/caidlist",
-            "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
-            "",
-            "【目录】",
-            ...transMapNames.map(e => e[0] + ".txt: " + e[1]),
-            "",
-            "entityEventSplit.txt: 根据实体类型分类的实体事件表"
-        ],
-        ...replaceObjectKey(enums, [
-            [ /(.+)/, "$1.txt" ]
-        ]),
-        "entityEventSplit.txt": entityEventSplit,
-        "stdTrans.txt": stdTransText
-    };
-    forEachObject(files, (content, fileName) => {
-        if (Array.isArray(content)) {
-            content = content.join("\r\n");
-        } else if (typeof content == "object") {
-            let arr = [];
-            forEachObject(content, (v, k) => arr.push(k + ": " + v));
-            arr.push("", ...footText);
-            content = arr.join("\r\n");
-        }
-        zip.addFile(fileName, Buffer.from(content, "utf-8"));
-    });
-    fs.writeFileSync(outputZip, zip.toBuffer());
-    fs.writeFileSync(outputJson, JSON.stringify({
-        version,
-        enums: {
-            ...enums,
-            stdTrans: stdTransEnum
-        },
-        names: transMapNames
-    }));
-}
-//#endregion
-
-async function main() {
+async function generateOutputFiles(branch) {
     let packageDataEnums = analyzePackageDataEnumsCached();
     let autocompletedEnums = await analyzeAutocompletionEnumsCached(packageDataEnums.packageType, packageDataEnums.version);
     let enums = {
-        ...packageDataEnums.data,
-        ...autocompletedEnums.vanilla
+        ...packageDataEnums.data[branch],
+        ...autocompletedEnums[branch]
     };
     let lang = packageDataEnums.lang;
     let standardizedTranslation = await fetchStandardizedTranslation();
-    let javaEditionLang = filterObjectMap(await fetchJavaEditionLangData(), k => !k.startsWith("__"));
+    let javaEditionLang = await fetchJavaEditionLangData();
     let userTranslation = loadUserTranslation();
     console.log("Matching translations...");
     let translationResultMaps = {}, translationStateMaps = {};
@@ -1353,15 +1398,15 @@ async function main() {
         translationResultMaps.lootTool = {};
     }
 
-    console.log("Exporting command library...");
-    cachedOutput("output.translation.state", translationStateMaps);
+    console.log("Exporting files...");
+    cachedOutput("output." + branch + ".translation.state", translationStateMaps);
     let renamedTranslationResultMaps = replaceObjectKey(translationResultMaps, [
         [/[A-Z]/g, (match, offset) => (offset > 0 ? "_" : "") + match.toLowerCase()], // camelCase -> snake_case
         ["enchant", "enchant_type"],
         ["location", "structure"]
     ]);
-    fs.writeFileSync(nodePath.resolve(__dirname, "output", "output.ids.json"), JSON.stringify({
-        name: "ID表补丁包",
+    fs.writeFileSync(nodePath.resolve(__dirname, "output", "output." + branch + ".ids.json"), JSON.stringify({
+        name: "ID表补丁包（" + branchName[branch] + "）",
         author: "CA制作组",
         description: "该命令库将旧ID表替换为更新的版本。",
         uuid: "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
@@ -1373,22 +1418,55 @@ async function main() {
         enums: renamedTranslationResultMaps
     }, null, "\t"));
     writeTransMapsExcel(
-        nodePath.resolve(__dirname, "output", "output.ids.xlsx"),
+        nodePath.resolve(__dirname, "output", "output." + branch + ".ids.xlsx"),
         translationResultMaps
     );
     writeTransMapTextZip({
-        outputZip: nodePath.resolve(__dirname, "output", "output.ids.zip"),
-        outputJson: nodePath.resolve(__dirname, "output", "output.all.json"),
+        outputZip: nodePath.resolve(__dirname, "output", "output." + branch + ".ids.zip"),
+        outputJson: nodePath.resolve(__dirname, "output", "output." + branch + ".all.json"),
+        branchName: branchName[branch],
         version: packageDataEnums.version,
         originalEnums: enums,
         transMaps: translationResultMaps,
+        transMapNames: defaultTransMapNames,
         stdTransMap: standardizedTranslation,
-        langMap: {
-            bedrock: lang,
-            java: javaEditionLang
-        }
+        stdTransMapNames
     });
     saveUserTranslation(userTranslation);
+}
+
+async function generateTranslatorHelperFiles() {
+    let packageDataEnums = analyzePackageDataEnumsCached();
+    let standardizedTranslation = await fetchStandardizedTranslation();
+    let bedrockEditionLang = packageDataEnums.lang;
+    let javaEditionLang = await fetchJavaEditionLangData();
+    writeTransMapTextZip({
+        outputZip: nodePath.resolve(__dirname, "output", "output.translator.ids.zip"),
+        outputJson: nodePath.resolve(__dirname, "output", "output.translator.all.json"),
+        branchName: "翻译专用",
+        version: packageDataEnums.version,
+        transMaps: {
+            ...standardizedTranslation,
+            BedrockEditionLang: bedrockEditionLang,
+            JavaEditionLang: javaEditionLang
+        },
+        transMapNames: [
+            ...stdTransMapNames,
+            [ "BedrockEditionLang", "基岩版语言文件" ],
+            [ "JavaEditionLang", "Java版语言文件" ]
+        ]
+    });
+}
+
+async function main() {
+    console.log("Generating output files for vanilla...");
+    await generateOutputFiles("vanilla");
+    console.log("Generating output files for education...");
+    await generateOutputFiles("education");
+    console.log("Generating output files for experiment...");
+    await generateOutputFiles("experiment");
+    console.log("Generating output files for translator...");
+    await generateTranslatorHelperFiles();
 }
 
 main().catch(err => {
