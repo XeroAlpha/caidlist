@@ -763,8 +763,8 @@ async function fetchVersionAsset(apiHost, assetIndex, objectName) {
     }
 }
 
-function fetchJavaEditionLangData() {
-    let result = cachedOutput("java.package.lang", async () => {
+async function fetchJavaEditionLangData() {
+    let result = await cachedOutput("java.package.lang", async () => {
         const metaApiHost = "https://launchermeta.mojang.com";
         const assetApiHost = "https://resources.download.minecraft.net";
         console.log("Fetching Java Edition language data...");
