@@ -110,6 +110,12 @@ function keyArrayToObject(arr, f) {
     return obj;
 }
 
+function kvArrayToObject(kv) {
+    let obj = {};
+    arr.forEach((kv) => obj[k] = v);
+    return obj;
+}
+
 function objectToArray(obj, f) {
     return Object.keys(obj).map(k => f(k, obj[k], obj));
 }
@@ -629,6 +635,10 @@ async function fetchMZHWikiRaw(word) {
     return await got(`https://minecraft.fandom.com/zh/wiki/${word}?action=raw`).text();
 }
 
+async function fetchBEDevWikiRaw(word) {
+    return await got(`https://wiki.bedev.cn/${word}?action=raw`).text();
+}
+
 function parseEnumMapLua(luaContent) {
     let enumMapStack = [{}];
     let itemRegExp = /\['(.*)'\](?:\s*)=(?:\s*)'(.*)'/,
@@ -699,21 +709,49 @@ function extendEnumMap(enumMaps) {
     return enumMaps;
 }
 
+function mergeEnumMap(maps) {
+    let output = {};
+    maps.forEach(map => {
+        forEachObject(map, (v, k) => {
+            if (k in output) {
+
+            } else {
+
+            }
+        });
+    });
+    return output;
+}
+
 async function fetchStandardizedTranslation() {
     return cachedOutput("wiki.standardized_translation", async () => {
-        console.log("Fetching standardized translation for blocks...");
-        let block = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Block"));
-        console.log("Fetching standardized translation for items...");
-        let item = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Item"));
-        console.log("Fetching standardized translation for exclusive things...");
-        let exclusive = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Exclusive"));
-        console.log("Fetching standardized translation for others...");
-        let other = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Other"));
+        let block, item, exclusive, mcwzhOthers, bedwOthers, bedwGlossary;
+
+        console.log("Fetching MCWZH:ST/Autolink/Block...");
+        block = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Block"));
+
+        console.log("Fetching MCWZH:ST/Autolink/Item...");
+        item = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Item"));
+
+        console.log("Fetching MCWZH:ST/Autolink/Exclusive...");
+        exclusive = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Exclusive"));
+
+        console.log("Fetching MCWZH:ST/Autolink/Others...");
+        mcwzhOthers = parseEnumMapLua(await fetchMZHWikiRaw("模块:Autolink/Other"));
+
+        console.log("Fetching BEDW:ST/Autolink/Others...")
+        bedwOthers = parseEnumMapLua(await fetchBEDevWikiRaw("模块:Autolink/Other"));
+
+        console.log("Fetching BEDW:ST/Autolink/Glossary...")
+        bedwGlossary = parseEnumMapLua(await fetchBEDevWikiRaw("模块:Autolink/Glossary"));
+
         return extendEnumMap({
             BlockSprite: block,
             ItemSprite: item,
             Exclusive: exclusive,
-            ...other
+            ...bedwGlossary,
+            ...bedwOthers,
+            ...mcwzhOthers
         });
     });
 }
@@ -1141,6 +1179,7 @@ function writeTransMapTextZip(options) {
             "entityEventSplit.txt": entityEventSplit,
             "stdTrans.txt": stdTransText
         };
+        let fileDescriptions = transMapNames.map(e => [e[0] + ".txt", e[1]]);
         files["_MCBEID_.txt"] = [
             "【MCBEID表】",
             "官方下载地址：https://ca.projectxero.top/idlist/latest.zip",
@@ -1149,17 +1188,19 @@ function writeTransMapTextZip(options) {
             "发布时间：" + new Date().toLocaleString(),
             "对应游戏版本：" + version + "（" + branchName + "）",
             "",
-            "项目网站：https://gitee.com/projectxero/caidlist",
+            "在线版：https://ca.projectxero.top/idlist/",
             "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
             "",
             "【目录】",
-            ...transMapNames.filter(e => files[e[0] + ".txt"]).map(e => e[0] + ".txt: " + e[1])
+            ...fileDescriptions.filter(e => files[e[0]]).map(e => e[0] + ": " + e[1])
         ];
         forEachObject(files, (content, fileName) => {
             if (Array.isArray(content)) {
                 content = content.join("\r\n");
             } else if (typeof content == "object") {
+                let contentDescription = fileDescriptions.find(e => e[0] == fileName);
                 let arr = [];
+                if (contentDescription) arr.push("【" + contentDescription[1] + "】")
                 forEachObject(content, (v, k) => arr.push(k + ": " + v));
                 arr.push("", ...footText);
                 content = arr.join("\r\n");
@@ -1193,6 +1234,7 @@ const branchName = {
 const defaultTransMapNames = [
     ["block", "方块"],
     ["item", "物品"],
+    ["entity", "实体"],
     ["effect", "状态效果"],
     ["enchant", "魔咒"],
     ["fog", "迷雾"],
@@ -1200,7 +1242,6 @@ const defaultTransMapNames = [
     ["entityEvent", "实体事件"],
     ["entityEventSplit", "根据实体类型分类的实体事件表"],
     ["entityFamily", "实体类型分类"],
-    ["entity", "实体"],
     ["animation", "动画"],
     ["particleEmitter", "粒子发射器"],
     ["sound", "声音"],
@@ -1211,10 +1252,16 @@ const stdTransMapNames = [
     ["BlockSprite", "方块"],
     ["ItemSprite", "物品"],
     ["EntitySprite", "实体"],
-    ["BiomeSprite", "生物群系"],
     ["EffectSprite", "状态效果"],
+    ["EnchantmentSprite", "魔咒"],
+    ["BiomeSprite", "生物群系"],
     ["EnvSprite", "环境"],
-    ["Exclusive", "基岩版独占"]
+    ["Exclusive", "基岩版独占"],
+    ["VanillaSprite", "其他原版内容"],
+    ["AddonSprite", "附加包术语"],
+    ["ModPESprite", "ModPE术语"],
+    ["InnerCoreSprite", "InnerCore术语"],
+    ["TechnicSprite", "其他技术术语"]
 ];
 async function generateOutputFiles(branch) {
     let packageDataEnums = analyzePackageDataEnumsCached();
@@ -1428,9 +1475,9 @@ async function generateOutputFiles(branch) {
         version: packageDataEnums.version,
         originalEnums: enums,
         transMaps: translationResultMaps,
-        transMapNames: defaultTransMapNames,
-        stdTransMap: standardizedTranslation,
-        stdTransMapNames
+        transMapNames: defaultTransMapNames
+        // stdTransMap: standardizedTranslation,
+        // stdTransMapNames
     });
     saveUserTranslation(userTranslation);
 }
