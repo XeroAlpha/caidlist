@@ -203,12 +203,14 @@ async function waitForAnyDevice(adbClient) {
 }
 
 async function openMonkey(device) {
+    const monkeyPort = 10000 + Math.floor(Math.random() * 10000);
     let monkeyPid = (await adbShell(device, "ps -A | grep com.android.commands.monkey | awk '{print $2}'")).toString().trim();
     if (monkeyPid) { // kill monkey
         await adbShell(device, "kill -9 " + monkeyPid);
         await sleepAsync(1000);
     }
-    return device.openMonkey();
+    console.log("Opening monkey in port " + monkeyPort);
+    return device.openMonkey(monkeyPort);
 }
 
 function sendMonkeyCommand(monkey, command) {
