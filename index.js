@@ -1231,22 +1231,23 @@ const branchName = {
     education: "教育版",
     experiment: "实验性玩法"
 };
+// [ id, name, description ]
 const defaultTransMapNames = [
-    ["block", "方块"],
-    ["item", "物品"],
-    ["entity", "实体"],
-    ["effect", "状态效果"],
-    ["enchant", "魔咒"],
-    ["fog", "迷雾"],
-    ["location", "结构"],
-    ["entityEvent", "实体事件"],
+    ["block", "方块", "用于 setblock、fill 等命令的方块 ID"],
+    ["item", "物品", "用于 give、clear 等命令的物品 ID"],
+    ["entity", "实体", "用于 type 选择器的实体 ID"],
+    ["effect", "状态效果", "用于 effect 命令的状态效果 ID"],
+    ["enchant", "魔咒", "用于 enchant 命令的魔咒 ID"],
+    ["fog", "迷雾", "用于 fog 命令的迷雾配置 ID"],
+    ["location", "结构", "用于 locate 命令的结构 ID"],
+    ["entityEvent", "实体事件", "用于 summon 等命令的实体事件 ID"],
     ["entityEventSplit", "根据实体类型分类的实体事件表"],
-    ["entityFamily", "实体类型分类"],
-    ["animation", "动画"],
-    ["particleEmitter", "粒子发射器"],
-    ["sound", "声音"],
-    ["lootTable", "战利品表"],
-    ["stdTrans", "标准化译名表"]
+    ["entityFamily", "实体族", "用于 family 选择器的实体族 ID"],
+    ["animation", "动画", "用于 playanimation 命令的动画控制器 ID"],
+    ["particleEmitter", "粒子发射器", "用于 particle 命令的粒子发射器 ID"],
+    ["sound", "声音", "用于 playsound 命令的声音 ID"],
+    ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
+    ["stdTrans", "标准化译名表", "整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表"]
 ];
 const stdTransMapNames = [
     ["BlockSprite", "方块"],
