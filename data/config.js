@@ -1,9 +1,12 @@
-// 安装包版本
-exports.installPackageVersion = "1.18.0.02"; // Release 1.18.0
-// 安装包路径
-exports.installPackagePath = "H:\\BedrockVersions\\New\\Minecraft_1.18.0 (1.18.0.02)_armv8.apks";
-// 安装包类型（release 表示正式版，beta 表示开发版，netease 表示网易版）
-exports.installPackageType = "beta";
+
+exports.packageInfo = {
+    // 安装包版本
+    version: "1.18.0.02",
+    // 安装包路径
+    path: "H:\\BedrockVersions\\New\\Minecraft_1.18.0 (1.18.0.02)_armv8.apks",
+    // 安装包类型（release 表示正式版，beta 表示开发版，netease 表示网易版）
+    type: "beta"
+};
 
 //#region 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
 exports.tesseract = {
