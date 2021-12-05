@@ -245,7 +245,7 @@ async function analyzeAutocompletionEnumCached(options, name, commandPrefix, exc
     return target[id] = result;
 }
 
-async function analyzeAutocompletionEnums(branch, version) {
+async function analyzeAutocompletionEnumsCached(branch, version) {
     const cacheId = `autocompleted.${branch}`;
     const cache = cachedOutput(cacheId);
     if (cache && version == cache.version) return cache;
@@ -286,19 +286,6 @@ async function analyzeAutocompletionEnums(branch, version) {
     }
 
     return cachedOutput(cacheId, target);
-}
-
-async function analyzeAutocompletionEnumsCached(packageType, version) {
-    let result = {
-        vanilla: await analyzeAutocompletionEnums("vanilla", version)
-    };
-    if (packageType != "netease") {
-        result.education = await analyzeAutocompletionEnums("education", version);
-    }
-    if (packageType == "beta") {
-        result.experiment = await analyzeAutocompletionEnums("experiment", version);
-    }
-    return result;
 }
 
 module.exports = {

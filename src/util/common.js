@@ -110,9 +110,9 @@ function keyArrayToObject(arr, f) {
     return obj;
 }
 
-function kvArrayToObject(kv) {
+function kvArrayToObject(kvArray) {
     let obj = {};
-    arr.forEach((kv) => obj[k] = v);
+    kvArray.forEach((kv) => obj[kv[0]] = kv[1]);
     return obj;
 }
 

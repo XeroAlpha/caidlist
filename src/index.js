@@ -1,17 +1,16 @@
 const {
     generateOutputFiles,
-    generateTranslatorHelperFiles
+    generateTranslatorHelperFiles,
+    generateOutputIndex
 } = require("./generate");
 
 async function main() {
-    console.log("Generating output files for vanilla...");
-    await generateOutputFiles("vanilla");
-    console.log("Generating output files for education...");
-    await generateOutputFiles("education");
-    console.log("Generating output files for experiment...");
-    await generateOutputFiles("experiment");
-    console.log("Generating output files for translator...");
-    await generateTranslatorHelperFiles();
+    const branches = generateOutputIndex();
+    let i;
+    for (i = 0; i < branches.length; i++) {
+        console.log("Generating output files for " + branches[i] + "...");
+        await generateOutputFiles(branches[i]);
+    }
 }
 
 main().catch(err => {
