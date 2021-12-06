@@ -1,9 +1,9 @@
 
 exports.packageInfo = {
     // 安装包版本
-    version: "1.18.10.21",
+    version: "1.18.1.02",
     // 安装包路径
-    path: "H:\\BedrockVersions\\New\\Minecraft_1.18.10b2 (1.18.10.21)_armv8.apks",
+    path: "H:\\BedrockVersions\\New\\Minecraft_1.18.1 (1.18.1.02)_armv8.apks",
     // 安装包类型（release 表示正式版，beta 表示开发版，netease 表示网易版）
     type: "beta"
 };
