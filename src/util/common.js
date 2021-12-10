@@ -169,14 +169,18 @@ function formatTimeLeft(seconds) {
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
-    let result;
+    let result, lastError;
     while(maxRetryCount > 0) {
-        result = await f();
-        if (result) return result;
+        try {
+            result = await f();
+            if (result) return result;
+        } catch(err) {
+            lastError = err;
+        }
         if (retryInterval) await sleepAsync(retryInterval);
         maxRetryCount--;
     }
-    throw new Error("Retry count limit exceeded");
+    throw lastError || new Error("Retry count limit exceeded");
 }
 
 function cascadeMap(mapOfMap, priority, includeAll) {

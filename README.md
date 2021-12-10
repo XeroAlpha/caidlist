@@ -22,28 +22,28 @@
 6. 按文件中的注释修改 `data/config.js`。
 
 ### 清空导出数据
-1. 删除 `output` 目录下所有以 `output` 开头的文件。
-2. 如果不想使用仓库内自带的翻译，请删除 `output` 目录下所有以 `translation` 开头的文件。
-3. 如果需要强制刷新标准化译名表的缓存，请删除 `output` 目录下所有以 `wiki` 开头的文件。
-4. 如果需要强制刷新Java版语言数据的缓存，请删除 `output` 目录下所有以 `java` 开头的文件。
+1. 删除 `output` 目录下的所有文件。
+2. 如果不想使用仓库内自带的翻译，请删除 `translation` 目录下的所有文件。
+3. 如果需要强制刷新标准化译名表的缓存，请删除 `version/common/wiki` 目录下的所有文件。
+4. 如果需要强制刷新Java版语言数据的缓存，请删除 `version/common/java` 目录下的所有文件。
 
 ### 运行
-1. 运行 `npm run start`。
+1. 运行 `npm run generate-release` 或 `npm run generate-beta`，取决于你要生成哪种版本的数据。
 
 ### 运行（仅OCR）
-1. 运行 `npm run start`。
+1. 运行 `npm run generate-release` 或 `npm run generate-beta`。
 2. 打开 Minecraft，进入一个已开启作弊的单人世界，等待游戏进入HUD界面。在终端出现 `Press <Enter> if the device is ready` 提示且游戏已进入HUD界面时，按下回车。出现 `Please switch to branch: education` 提示时，进入一个已开启作弊的教育版世界。出现 `Please switch to branch: experiment` 提示时，进入一个已开启作弊与所有实验性功能的单人世界。
-3. 此过程中如果终端没有提示要求操作，请不要控制手机，也不要让 Minecraft 切至后台，否则可能导致流程失败。如果遵守上述要求后仍然出现提示 `Auto-completed command test failed`，可能为 Tesseract 识别出错，您需要将错误的条目和正确的条目手动保存到 `data/tesseract_mistakes.json` 以便让本工具手动纠正。
+3. 此过程中如果终端没有提示要求操作，请不要控制手机，也不要让 Minecraft 切至后台，否则可能导致流程失败。如果遵守上述要求后仍然出现提示 `Auto-completed command test failed`，可能为 Tesseract 识别出错，您需要将错误的条目和对应正确的条目手动保存到 `data/config.js` 以便让本工具手动纠正。
 
 ### 校对
-1. 检查输出的 `output.xxxxx.ids.json`（拓展包）与 `output.xxxxx.ids.xlsx`（ID-翻译对照表）。发现错译、漏译时请修改对应的 `translate.xxxxx.json`，随后从“运行”工作流继续。
-2. `translate.xxxxx.json` 支持引用标准化译名表数据与Java版语言数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。具体格式请参见 [翻译流程介绍](#翻译流程介绍) 一节。
+1. 检查输出的 `output/xxx/clib/xxx.json`（拓展包）与 `output/xxx/translation/xxx.xlsx`（ID-翻译对照表）。发现错译、漏译时请修改对应的 `translation/xxx.json`，随后从“运行”工作流继续。
+2. `translation/xxx.json` 支持引用标准化译名表数据与Java版语言数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。具体格式请参见 [翻译流程介绍](#翻译流程介绍) 一节。
 
 ## 翻译流程介绍
 
 ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用户自定义译名表、标准化译名表、基岩版语言文件。
 
-用户自定义译名表即为 `translate.xxxxx.json`，为可带有注释的 JSON（即 JSONC）键值对。其中键通常为 ID，值为 ID 对应的翻译。当从用户自定义译名表中加载翻译时，生成工具会根据对应的 ID 在用户自定义译名表中搜索对应的翻译。
+用户自定义译名表即为 `translation/xxx.json`，为可带有注释的 JSON（即 JSONC）键值对。其中键通常为 ID，值为 ID 对应的翻译。当从用户自定义译名表中加载翻译时，生成工具会根据对应的 ID 在用户自定义译名表中搜索对应的翻译。
 
 当从 [标准化译名表](https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中加载翻译时，生成工具会将 ID 转换为自然英语形式（全部小写，将下划线“_”替换为空格）后在标准化译名表中搜索。
 

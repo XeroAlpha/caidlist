@@ -2,19 +2,19 @@
 exports.packageVersions = {
     release: { // 正式版
         // 安装包版本
-        version: "1.18.1.02",
+        version: "1.18.2.03",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.1 (1.18.1.02)_armv8.apks",
+        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.2 (1.18.2.03)_armv8.extract.apks",
         // 可用分支
         branches: [ "vanilla", "education", "experiment" ]
     },
     beta: { // 测试版
         // 安装包版本
-        version: "1.18.10.21",
+        version: "1.18.10.22",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.10b2 (1.18.10.21)_armv8.apks",
+        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.10b3 (1.18.10.22)_armv8.apks",
         // 可用分支
-        branches: [ "translator", "vanilla" ]
+        branches: [ "vanilla", "education", "experiment", "translator" ]
     }
 };
 

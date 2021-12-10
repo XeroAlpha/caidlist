@@ -172,18 +172,20 @@ async function analyzeCommandAutocompletionSync(cx, device, command, progressNam
     await adbShell(device, "input text " + JSON.stringify(command));
 
     let autocompletedCommand = command.trim();
-    let recogizedCommand = await retryUntilComplete(3, 0, async () => {
+    let recogizedCommand = await retryUntilComplete(10, 0, async () => {
         let screenshotImage = await captureScreenCompat(device, minicap);
         let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
-        return command == autocompletedCommand ? command : null;
+        assert.equal(command, autocompletedCommand);
+        return command;
     });
     let timeStart = Date.now(), stepCount = 0;
     while(true) {
         await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
-        recogizedCommand = await retryUntilComplete(3, 0, async () => {
+        recogizedCommand = await retryUntilComplete(10, 0, async () => {
             let screenshotImage = await captureScreenCompat(device, minicap);
             let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
-            return recogizedCommand != command ? command : null;
+            assert.notEqual(recogizedCommand, command);
+            return command;
         });
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
