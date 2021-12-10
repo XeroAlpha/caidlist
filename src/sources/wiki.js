@@ -80,7 +80,7 @@ function extendEnumMap(enumMaps) {
 }
 
 async function fetchStandardizedTranslation() {
-    return cachedOutput("wiki.standardized_translation", async () => {
+    return cachedOutput("version.common.wiki.standardized_translation", async () => {
         let block, item, exclusive, mcwzhOthers, bedwOthers, bedwGlossary;
 
         console.log("Fetching MCWZH:ST/Autolink/Block...");

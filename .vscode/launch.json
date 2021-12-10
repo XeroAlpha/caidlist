@@ -7,11 +7,28 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run analyzer",
+            "name": "Run analyzer for release",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "src/index.js"
+            "program": "src/index.js",
+            "args": [
+                "generate",
+                "release"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run analyzer for beta",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "src/index.js",
+            "args": [
+                "generate",
+                "beta"
+            ]
         }
     ]
 }

@@ -1,8 +1,6 @@
 const sharp = require("sharp");
 const assert = require("assert").strict;
 const tesseract = require("node-tesseract-ocr");
-const tesseractMistakes = require("../../data/tesseract_mistakes.json");
-const config = require("../../data/config");
 const {
     newAdbClient,
     getAnyOnlineDevice,
@@ -36,8 +34,8 @@ async function captureScreenCompat(device, minicapHandler) {
     }
 }
 
-async function recogizeCommand(screenshotImage, surfaceOrientation) {
-    let commandAreaRect = config.commandAreaRect[surfaceOrientation];
+async function recogizeCommand(cx, screenshotImage, surfaceOrientation) {
+    let commandAreaRect = cx.commandAreaRect[surfaceOrientation];
     let img = sharp(screenshotImage);
     img.removeAlpha()
         .extract({
@@ -51,20 +49,20 @@ async function recogizeCommand(screenshotImage, surfaceOrientation) {
     let commandTextImage = await img.png().toBuffer();
     // await img.png().toFile("test.png");
     let commandText = await tesseract.recognize(commandTextImage, {
-        ...config.tesseract,
+        ...cx.tesseractOptions,
         lang: "eng",
         psm: 7,
         oem: 3
     });
     commandText = commandText.trim();
-    if (commandText in tesseractMistakes) {
-        return tesseractMistakes[commandText];
+    if (commandText in cx.tesseractMistakes) {
+        return cx.tesseractMistakes[commandText];
     }
     return commandText;
 }
 
-async function recogizeCommandRemoteSync(device, surfaceOrientation) {
-    return await recogizeCommand(await captureScreen(device), surfaceOrientation);
+async function recogizeCommandRemoteSync(cx, device, surfaceOrientation) {
+    return await recogizeCommand(cx, await captureScreen(device), surfaceOrientation);
 }
 
 function guessTruncatedString(truncatedStr, startsWith) {
@@ -105,17 +103,17 @@ async function analyzeCommandAutocompletion(device, command, progressName, appro
     };
     let autocompletedCommand = command.trim();
     let recogizedCommand = await runJobsAndReturn(
-        recogizeCommand(screenshotImage, surfaceOrientation),
+        recogizeCommand(cx, screenshotImage, surfaceOrientation),
         pressTabThenCapture()
     );
     assert.equal(recogizedCommand, autocompletedCommand);
     let timeStart = Date.now(), stepCount = 0;
     while(true) {
         let newRecognizedCommand = await runJobsAndReturn(
-            recogizeCommand(screenshotImage, surfaceOrientation),
+            recogizeCommand(cx, screenshotImage, surfaceOrientation),
             pressTabThenCapture()
         );
-        assert.notEqual(newRecognizedCommand, recogizeCommand);
+        assert.notEqual(newRecognizedCommand, recogizedCommand);
         recogizedCommand = newRecognizedCommand;
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
@@ -155,7 +153,7 @@ async function analyzeCommandAutocompletion(device, command, progressName, appro
     return autocompletions;
 }
 
-async function analyzeCommandAutocompletionSync(device, command, progressName, approxLength) {
+async function analyzeCommandAutocompletionSync(cx, device, command, progressName, approxLength) {
     // 初始状态：游戏HUD
     let autocompletions = [];
     let surfaceOrientation = await getDeviceSurfaceOrientation(device);
@@ -176,7 +174,7 @@ async function analyzeCommandAutocompletionSync(device, command, progressName, a
     let autocompletedCommand = command.trim();
     let recogizedCommand = await retryUntilComplete(3, 0, async () => {
         let screenshotImage = await captureScreenCompat(device, minicap);
-        let command = await recogizeCommand(screenshotImage, surfaceOrientation);
+        let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
         return command == autocompletedCommand ? command : null;
     });
     let timeStart = Date.now(), stepCount = 0;
@@ -184,7 +182,7 @@ async function analyzeCommandAutocompletionSync(device, command, progressName, a
         await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
         recogizedCommand = await retryUntilComplete(3, 0, async () => {
             let screenshotImage = await captureScreenCompat(device, minicap);
-            let command = await recogizeCommand(screenshotImage, surfaceOrientation);
+            let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
             return recogizedCommand != command ? command : null;
         });
 
@@ -225,30 +223,29 @@ async function analyzeCommandAutocompletionSync(device, command, progressName, a
     return autocompletions;
 }
 
-async function analyzeAutocompletionEnumCached(options, name, commandPrefix, exclusion) {
-    const {
-        device,
-        branch, version, target
-    } = options;
+async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix, exclusion) {
+    const { version, branch, packageVersion } = cx;
+    const { device, target } = options;
     const id = name.replace(/\s+(\S)/g, (_, ch) => ch.toUpperCase());
-    const cacheId = `autocompleted.${branch}.${name.replace(/\s+/g, "_")}`;
+    const cacheId = `version.${version}.autocompletion.${branch.id}.${name.replace(/\s+/g, "_")}`;
     let cache = cachedOutput(cacheId), result;
 
     if (Array.isArray(cache)) cache = { result: cache, length: cache.length };
-    if (cache && version == cache.version) result = cache.result;
+    if (cache && packageVersion == cache.packageVersion) result = cache.result;
     if (!result) {
-        let progressName = `${branch}.${name.replace(/\s+/g, "_")}`;
-        result = await analyzeCommandAutocompletionSync(device, commandPrefix, progressName, cache && cache.length);
+        const progressName = `${version}.${branch.id}.${name.replace(/\s+/g, "_")}`;
+        result = await analyzeCommandAutocompletionSync(cx, device, commandPrefix, progressName, cache && cache.length);
         if (exclusion) result = result.filter(e => !exclusion.includes(e));
-        cachedOutput(cacheId, { version, result, length: result.length });
+        cachedOutput(cacheId, { packageVersion, result, length: result.length });
     }
     return target[id] = result;
 }
 
-async function analyzeAutocompletionEnumsCached(branch, version) {
-    const cacheId = `autocompleted.${branch}`;
+async function analyzeAutocompletionEnumsCached(cx) {
+    const { version, branch, packageVersion } = cx;
+    const cacheId = `version.${version}.autocompletion.${branch.id}`;
     const cache = cachedOutput(cacheId);
-    if (cache && version == cache.version) return cache;
+    if (cache && packageVersion == cache.packageVersion) return cache;
 
 	console.log("Connecting ADB host...");
 	let adbClient = newAdbClient();
@@ -259,30 +256,29 @@ async function analyzeAutocompletionEnumsCached(branch, version) {
         device = await waitForAnyDevice(adbClient);
     }
 
-    console.log("Please switch to branch: " + branch);
+    console.log("Please switch to branch: " + branch.id);
     await pause("Press <Enter> if the device is ready");
-    const target = { version };
+    const target = { packageVersion };
     const options = {
-        device,
-        branch, version, target
+        device, target
     };
 
-    await analyzeAutocompletionEnumCached(options, "blocks", "/testforblock ~ ~ ~ ");
-    await analyzeAutocompletionEnumCached(options, "items", "/clear @s ", [ "[" ]);
-    await analyzeAutocompletionEnumCached(options, "entities", "/testfor @e[type=", [ "!" ]);
-    await analyzeAutocompletionEnumCached(options, "summonable entities", "/summon ");
-    await analyzeAutocompletionEnumCached(options, "effects", "/effect @s ", [ "[", "clear" ]);
-    await analyzeAutocompletionEnumCached(options, "enchantments", "/enchant @s ", [ "[" ]);
-    await analyzeAutocompletionEnumCached(options, "gamerules", "/gamerule ");
-    await analyzeAutocompletionEnumCached(options, "locations", "/locate ");
-    await analyzeAutocompletionEnumCached(options, "mobevents", "/mobevent ");
-    await analyzeAutocompletionEnumCached(options, "selectors", "/testfor @e[");
+    await analyzeAutocompletionEnumCached(cx, options, "blocks", "/testforblock ~ ~ ~ ");
+    await analyzeAutocompletionEnumCached(cx, options, "items", "/clear @s ", [ "[" ]);
+    await analyzeAutocompletionEnumCached(cx, options, "entities", "/testfor @e[type=", [ "!" ]);
+    await analyzeAutocompletionEnumCached(cx, options, "summonable entities", "/summon ");
+    await analyzeAutocompletionEnumCached(cx, options, "effects", "/effect @s ", [ "[", "clear" ]);
+    await analyzeAutocompletionEnumCached(cx, options, "enchantments", "/enchant @s ", [ "[" ]);
+    await analyzeAutocompletionEnumCached(cx, options, "gamerules", "/gamerule ");
+    await analyzeAutocompletionEnumCached(cx, options, "locations", "/locate ");
+    await analyzeAutocompletionEnumCached(cx, options, "mobevents", "/mobevent ");
+    await analyzeAutocompletionEnumCached(cx, options, "selectors", "/testfor @e[");
 
     if (
-        testMinecraftVersionInRange(version, "1.18.0.21", "1.18.0.21") ||
-        testMinecraftVersionInRange(version, "1.18.10.21", "*")
+        testMinecraftVersionInRange(packageVersion, "1.18.0.21", "1.18.0.21") ||
+        testMinecraftVersionInRange(packageVersion, "1.18.10.21", "*")
     ) {
-        await analyzeAutocompletionEnumCached(options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
+        await analyzeAutocompletionEnumCached(cx, options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
     }
 
     return cachedOutput(cacheId, target);

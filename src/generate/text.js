@@ -58,19 +58,20 @@ function generateTextFromMapTree(map, treeDepth) {
     return output;
 }
 
-function writeTransMapTextZip(options) {
+function writeTransMapTextZip(cx, options) {
+    const branchName = cx.branch.name;
+    const { packageVersion } = cx;
     const {
         outputFile,
-        branchName,
-        version,
         originalEnums,
         transMaps,
         transMapNames,
         stdTransMap,
         stdTransMapNames
     } = options;
+    const gameVersionText = packageVersion + "（" + branchName + "）";
     const footText = [
-        "※此ID表是MCBEID表的一部分，对应游戏版本为" + version + "（" + branchName + "）",
+        "※此ID表是MCBEID表的一部分，对应游戏版本为" + gameVersionText,
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let entityEventSplit, stdTransText;
@@ -119,7 +120,7 @@ function writeTransMapTextZip(options) {
         "本ID表由B站@ProjectXero与命令助手开发组的小伙伴们维护，发现错误或有建议可私聊UP主或加群【MCBE命令助手开发区】：671317302",
         "",
         "发布时间：" + new Date().toLocaleString(),
-        "对应游戏版本：" + version + "（" + branchName + "）",
+        "对应游戏版本：" + gameVersionText,
         "",
         "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
         "",

@@ -3,7 +3,21 @@ const nodePath = require("path");
 const readline = require("readline");
 const JSON = require("comment-json");
 
-const projectOutput = nodePath.resolve(__dirname, "../../output");
+const projectRoot = nodePath.resolve(__dirname, "../..");
+
+function projectPath(id, suffix) {
+    let pathSegments;
+    if (!suffix) suffix = "json";
+    if (Array.isArray(id)) {
+        pathSegments = id;
+    } else {
+        pathSegments = id.split(".");
+    }
+    pathSegments[pathSegments.length - 1] += "." + suffix;
+    let path = nodePath.resolve(projectRoot, ...pathSegments);
+    fs.mkdirSync(nodePath.resolve(path, ".."), { recursive: true });
+    return path;
+}
 
 const sleepAsync = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -24,7 +38,7 @@ const sleepAsync = ms => new Promise(resolve => setTimeout(resolve, ms));
  *    cache = cache ?? await valueOrProcessor()
  */
 function cachedOutput(id, valueOrProcessor) {
-    let path = nodePath.resolve(projectOutput, id + ".json");
+    let path = projectPath(id, "json");
     let useCache = fs.existsSync(path);
     let processor;
     if (valueOrProcessor == null) {
@@ -209,7 +223,7 @@ function eventTriggered(eventEmitter, triggerEvent) {
 }
 
 module.exports = {
-    projectOutput,
+    projectPath,
     sleepAsync,
     cachedOutput,
     input,

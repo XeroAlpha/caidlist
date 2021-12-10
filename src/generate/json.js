@@ -4,11 +4,11 @@ const {
     fixEntityRelatedIds
 } = require("./text");
 
-function writeTransMapJson(options) {
+function writeTransMapJson(cx, options) {
+    const branchName = cx.branch.name;
+    const { packageVersion } = cx.packageVersion;
     const {
         outputFile,
-        branchName,
-        version,
         originalEnums,
         transMaps,
         transMapNames
@@ -33,24 +33,22 @@ function writeTransMapJson(options) {
     }
     fs.writeFileSync(outputFile, JSON.stringify({
         branchName,
-        version,
+        packageVersion,
         enums: enums,
         names: transMapNames.filter(e => enums[e[0]])
     }));
 }
 
-function writeTransMapIndexJson(options) {
-    const { outputFile, version, rootUrl, branchList } = options;
+function writeTransMapIndexJson(cx, options) {
+    const { version, packageVersion } = cx;
+    const { outputFile, rootUrl, branchList } = options;
     fs.writeFileSync(outputFile, JSON.stringify({
-        dataVersion: version,
+        dataVersion: packageVersion,
         branchList: branchList.map(branch => {
-            let fnSuffix = branch[1] ? "." + branch[1] : "";
             return {
-                id: branch[0],
-                name: branch[2],
-                description: branch[3],
-                dataUrl: rootUrl + "/data" + fnSuffix + ".json",
-                offlineUrl: rootUrl + "/latest" + fnSuffix + ".zip"
+                ...branch,
+                dataUrl: `${rootUrl}/${version}.${branch.id}.json`,
+                offlineUrl: `${rootUrl}/${version}.${branch.id}.zip`
             };
         })
     }, null, 4));

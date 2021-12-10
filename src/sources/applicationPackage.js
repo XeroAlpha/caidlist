@@ -35,9 +35,9 @@ const branchEntryNameKeywords = {
     "education": [ "vanilla", "chemistry", "education" ],
     "experiment": [ "vanilla", "experiment", "test" ]
 };
-function analyzeApkPackageDataEnums(packageZip, branch) {
+function analyzeApkPackageDataEnums(packageZip, branchId) {
     let entries = packageZip.getEntries();
-    let entryNameKeywords = branchEntryNameKeywords[branch] || [];
+    let entryNameKeywords = branchEntryNameKeywords[branchId] || [];
     let sounds = [],
         particleEmitters = [],
         animations = [],
@@ -45,7 +45,7 @@ function analyzeApkPackageDataEnums(packageZip, branch) {
         lootTables = [],
         entityEventsMap = {},
         entityFamilyMap = {};
-    console.log("[" + branch + "]Analyzing package entries for data enums...");
+    console.log("[" + branchId + "]Analyzing package entries for data enums...");
     entries.forEach(entry => {
         let entryName = entry.entryName;
         if (!entryNameKeywords.some(keyword => entryName.includes(keyword))) return;
@@ -178,16 +178,18 @@ function extractInstallPack(packagePath) {
     }
 }
 
-function analyzePackageDataEnumsCached(packageInfo) {
-    let dataCache = cachedOutput("package.data");
-    let langCache = cachedOutput("package.lang");
-    let infoCache = cachedOutput("package.info");
+function analyzePackageDataEnumsCached(cx) {
+    const { version, packageInfo, packageVersion } = cx;
+    let dataCache = cachedOutput(`version.${version}.package.data`);
+    let langCache = cachedOutput(`version.${version}.package.lang`);
+    let infoCache = cachedOutput(`version.${version}.package.info`);
     if (dataCache && langCache && infoCache && infoCache.packagePath == packageInfo.path) {
         return {
             data: dataCache,
             lang: langCache,
-            version: infoCache.version,
-            packageType: infoCache.type
+            packageVersion: infoCache.version,
+            packageType: infoCache.type,
+            packagePath: packageInfo.path
         };
     } else {
         let installPack = extractInstallPack(packageInfo.path);
@@ -198,11 +200,11 @@ function analyzePackageDataEnumsCached(packageInfo) {
             experiment: analyzeApkPackageDataEnums(installPack, "experiment"),
         };
         return {
-            data: cachedOutput("package.data", data),
-            lang: cachedOutput("package.lang", lang),
-            ...cachedOutput("package.info", {
-                version: packageInfo.version,
-                type: packageInfo.type,
+            data: cachedOutput(`version.${version}.package.data`, data),
+            lang: cachedOutput(`version.${version}.package.lang`, lang),
+            ...cachedOutput(`version.${version}.package.info`, {
+                packageVersion,
+                packageType: packageInfo.type,
                 packagePath: packageInfo.path
             })
         };
