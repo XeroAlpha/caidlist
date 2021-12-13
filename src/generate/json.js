@@ -6,7 +6,7 @@ const {
 
 function writeTransMapJson(cx, options) {
     const branchName = cx.branch.name;
-    const { packageVersion } = cx.packageVersion;
+    const { version, packageVersion } = cx;
     const {
         outputFile,
         originalEnums,
@@ -32,6 +32,7 @@ function writeTransMapJson(cx, options) {
         );
     }
     fs.writeFileSync(outputFile, JSON.stringify({
+        versionType: version,
         branchName,
         packageVersion,
         enums: enums,
@@ -41,17 +42,34 @@ function writeTransMapJson(cx, options) {
 
 function writeTransMapIndexJson(cx, options) {
     const { version, packageVersion } = cx;
-    const { outputFile, rootUrl, branchList } = options;
-    fs.writeFileSync(outputFile, JSON.stringify({
+    const { outputFile, mergedFile, rootUrl, branchList, versionDescription } = options;
+    const indexData = {
         dataVersion: packageVersion,
         branchList: branchList.map(branch => {
             return {
                 ...branch,
-                dataUrl: `${rootUrl}/${version}.${branch.id}.json`,
-                offlineUrl: `${rootUrl}/${version}.${branch.id}.zip`
+                dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
+                offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
             };
         })
-    }, null, 4));
+    };
+    if (outputFile) {
+        fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
+    }
+    if (mergedFile) {
+        let mergedData;
+        if (fs.existsSync(mergedFile)) {
+            const mergedDataContent = fs.readFileSync(mergedFile, "utf-8");
+            mergedData = JSON.parse(mergedDataContent);
+        } else {
+            mergedData = {};
+        }
+        mergedData[version] = {
+            ...versionDescription,
+            ...indexData
+        };
+        fs.writeFileSync(mergedFile, JSON.stringify(mergedData, null, 4));
+    }
 }
 
 module.exports = {

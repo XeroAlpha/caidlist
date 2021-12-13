@@ -254,13 +254,13 @@ async function generateBranchedOutputFiles(cx) {
     }
 
     console.log("Exporting files...");
-    cachedOutput(`output.${version}.translation.${branch.id}`, translationStateMaps);
+    cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);
     let renamedTranslationResultMaps = replaceObjectKey(translationResultMaps, [
         [/[A-Z]/g, (match, offset) => (offset > 0 ? "_" : "") + match.toLowerCase()], // camelCase -> snake_case
         ["enchant", "enchant_type"],
         ["location", "structure"]
     ]);
-    fs.writeFileSync(projectPath(`output.${version}.clib.${branch.id}`), JSON.stringify({
+    fs.writeFileSync(projectPath(`output.clib.${version}.${branch.id}`), JSON.stringify({
         name: "ID表补丁包（" + branchNameMap[branch.id] + "）",
         author: "CA制作组",
         description: "该命令库将旧ID表替换为更新的版本。",
@@ -273,11 +273,11 @@ async function generateBranchedOutputFiles(cx) {
         enums: renamedTranslationResultMaps
     }, null, "\t"));
     writeTransMapsExcel(
-        projectPath(`output.${version}.translation.${branch.id}`, "xlsx"),
+        projectPath(`output.translation.${version}.${branch.id}`, "xlsx"),
         translationResultMaps
     );
     writeTransMapTextZip(cx, {
-        outputFile: projectPath(`output.${version}.text.${branch.id}`, "zip"),
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, "zip"),
         branchNameMap: branchNameMap[branch.id],
         version: packageVersion,
         originalEnums: enums,
@@ -287,7 +287,7 @@ async function generateBranchedOutputFiles(cx) {
         stdTransMapNames
     });
     writeTransMapJson(cx, {
-        outputFile: projectPath(`output.${version}.web.${branch.id}`),
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, "json"),
         branchNameMap: branchNameMap[branch.id],
         version: packageVersion,
         originalEnums: enums,
@@ -313,12 +313,12 @@ async function generateTranslatorHelperFiles(cx) {
         [ "JavaEditionLang", "Java版语言文件" ]
     ];
     writeTransMapTextZip(cx, {
-        outputFile: projectPath(`output.${cx.version}.text.translation`, "zip"),
+        outputFile: projectPath(`output.web.${cx.version}.translator`, "zip"),
         transMaps,
         transMapNames
     });
     writeTransMapJson(cx, {
-        outputFile: projectPath(`output.${cx.version}.web.translation`),
+        outputFile: projectPath(`output.web.${cx.version}.translator`, "json"),
         transMaps,
         transMapNames
     });
@@ -330,9 +330,27 @@ const branchDescriptionMap = {
     experiment: "启用了所有实验性玩法选项后创建的世界的ID表",
     translator: "为翻译英文文本设计，包含了标准化译名表与语言文件"
 };
+const versionDescriptionMap = {
+    beta: {
+        id: "beta",
+        name: "测试版",
+        sortOrder: 0
+    },
+    release: {
+        id: "release",
+        name: "正式版",
+        sortOrder: 1
+    },
+    netease: {
+        id: "netease",
+        name: "中国版",
+        sortOrder: 2
+    }
+};
 function generateOutputIndex(cx) {
-    cx.packageInfo = cx.packageVersions[cx.version];
-    if (!cx.packageInfo) throw new Error("Unknown version: " + cx.version);
+    const { version } = cx;
+    cx.packageInfo = cx.packageVersions[version];
+    if (!cx.packageInfo) throw new Error("Unknown version: " + version);
     cx.packageVersion = cx.packageInfo.version;
     let branchList = cx.packageInfo.branches.map(id => {
         return {
@@ -342,9 +360,11 @@ function generateOutputIndex(cx) {
         };
     });
     writeTransMapIndexJson(cx, {
-        outputFile: projectPath(`output.${cx.version}.web.index`),
-        rootUrl: ".",
-        branchList
+        outputFile: projectPath(`output.web.${version}.index`),
+        mergedFile: projectPath(`output.web.index`),
+        rootUrl: "./data",
+        branchList,
+        versionDescription: versionDescriptionMap[version]
     });
     return branchList;
 }
