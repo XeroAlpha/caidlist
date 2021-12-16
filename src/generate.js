@@ -352,6 +352,11 @@ function generateOutputIndex(cx) {
     cx.packageInfo = cx.packageVersions[version];
     if (!cx.packageInfo) throw new Error("Unknown version: " + version);
     cx.packageVersion = cx.packageInfo.version;
+    if (cx.packageInfo.config) {
+        forEachObject(cx.packageInfo.config, (v, k) => {
+            cx[k] = v;
+        });
+    }
     let branchList = cx.packageInfo.branches.map(id => {
         return {
             id,

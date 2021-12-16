@@ -40,6 +40,9 @@ function matchTranslation(options) {
                 userTranslation = stdTransMap[key];
             } else if (javaEditionLangMap && source.toLowerCase() == "je") { // Java版语言文件
                 userTranslation = javaEditionLangMap[key];
+            } else if (source.toLowerCase() == "missing") { // 暂缺译名
+                console.warn(`Missing Translation: ${originalValue} -> ${key}`);
+                userTranslation = key;
             } else if (source in resultMaps) { // 其他翻译
                 userTranslation = resultMaps[source][key];
             } else {

@@ -10,9 +10,9 @@ exports.packageVersions = {
     },
     beta: { // 测试版
         // 安装包版本
-        version: "1.18.10.22",
+        version: "1.18.10.24",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.10b3 (1.18.10.22)_armv8.apks",
+        path: "H:\\BedrockVersions\\New\\1.18.10.24.apks",
         // 可用分支
         branches: [ "vanilla", "education", "experiment", "translator" ]
     }

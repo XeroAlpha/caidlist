@@ -91,17 +91,21 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             let entryData = entry.getData().toString("utf-8");
             let entity = JSON.parse(entryData);
             let formatVersion = entity["format_version"];
-            if (formatVersion == "1.8.0" ||
-                formatVersion == "1.10.0" || 
-                formatVersion == "1.12.0" ||
-                formatVersion == "1.13.0" ||
-                formatVersion == "1.14.0" ||
-                formatVersion == "1.15.0" ||
-                formatVersion == "1.16.0" ||
-                formatVersion == "1.16.100" ||
-                formatVersion == "1.16.210" ||
-                formatVersion == "1.17.10" ||
-                formatVersion == "1.17.20") {
+            let acceptVersionType1 = [
+                "1.8.0",
+                "1.10.0" ,
+                "1.12.0",
+                "1.13.0",
+                "1.14.0",
+                "1.15.0",
+                "1.16.0",
+                "1.16.100",
+                "1.16.210",
+                "1.17.10",
+                "1.17.20",
+                "1.18.10"
+            ].includes(formatVersion);
+            if (acceptVersionType1) {
                 let id = entity["minecraft:entity"]["description"]["identifier"];
                 let events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
                 let globalComponents = entity["minecraft:entity"]["components"] ?? {};

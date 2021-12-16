@@ -283,6 +283,10 @@ async function analyzeAutocompletionEnumsCached(cx) {
         await analyzeAutocompletionEnumCached(cx, options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
     }
 
+    if (branch.id == "education") {
+        await analyzeAutocompletionEnumCached(cx, options, "abilities", "/ability @s ", [ "[" ]);
+    }
+
     return cachedOutput(cacheId, target);
 }
 
