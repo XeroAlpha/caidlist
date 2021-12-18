@@ -4,7 +4,8 @@ const {
     forEachObject,
     filterObjectMap,
     replaceObjectKey,
-    kvArrayToObject
+    kvArrayToObject,
+    deepCopy
 } = require("../util/common");
 
 const lineBreak = "\r\n";
@@ -75,7 +76,7 @@ function writeTransMapTextZip(cx, options) {
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let entityEventSplit, stdTransText;
-    let enums = filterRedundantEnums(transMaps);
+    let enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
         let entityEventByEntity = fixEntityRelatedIds(
             enums.entityEvent,

@@ -3,6 +3,9 @@ const {
     filterRedundantEnums,
     fixEntityRelatedIds
 } = require("./text");
+const {
+    deepCopy
+} = require("../util/common");
 
 function writeTransMapJson(cx, options) {
     const branchName = cx.branch.name;
@@ -13,7 +16,7 @@ function writeTransMapJson(cx, options) {
         transMaps,
         transMapNames
     } = options;
-    let enums = filterRedundantEnums(transMaps);
+    let enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
         fixEntityRelatedIds(
             enums.entityEvent,

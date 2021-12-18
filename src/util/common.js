@@ -134,6 +134,20 @@ function objectToArray(obj, f) {
     return Object.keys(obj).map(k => f(k, obj[k], obj));
 }
 
+function deepCopy(something) {
+    if (Array.isArray(something)) {
+        return something.map(e => deepCopy(e));
+    } else if (typeof something == "object") {
+        let newObject = {};
+        forEachObject(something, (value, key) => {
+            newObject[key] = deepCopy(value);
+        });
+        return newObject;
+    } else {
+        return something;
+    }
+}
+
 function compareMinecraftVersion(a, b) {
     const asVersionArray = str => {
         return str
@@ -240,6 +254,7 @@ module.exports = {
     keyArrayToObject,
     kvArrayToObject,
     objectToArray,
+    deepCopy,
     compareMinecraftVersion,
     testMinecraftVersionInRange,
     formatTimeLeft,
