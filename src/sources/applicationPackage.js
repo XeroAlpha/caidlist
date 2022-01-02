@@ -2,7 +2,10 @@ const AdmZip = require("adm-zip");
 const JSON = require("comment-json");
 const {
     cachedOutput,
-    forEachObject
+    forEachObject,
+    filterObjectMap,
+    compareMinecraftVersion,
+    uniqueAndSort
 } = require("../util/common");
 
 function parseMinecraftLang(target, langContent) {
@@ -22,10 +25,10 @@ function parseMinecraftLang(target, langContent) {
 }
 
 function analyzeApkPackageLang(packageZip) {
-    let entries = packageZip.getEntries(), lang = {};
+    const entries = packageZip.getEntries(), lang = {};
     console.log("Analyzing package entries for language file...");
     entries.forEach(entry => {
-        let entryName = entry.entryName;
+        const entryName = entry.entryName;
         if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
             parseMinecraftLang(lang, entry.getData().toString("utf-8"));
         }
@@ -38,24 +41,14 @@ const branchEntryNameKeywords = {
     "education": [ "vanilla", "chemistry", "education" ],
     "experiment": [ "vanilla", "experiment", "test" ]
 };
-function analyzeApkPackageDataEnums(packageZip, branchId) {
-    let entries = packageZip.getEntries();
-    let entryNameKeywords = branchEntryNameKeywords[branchId] || [];
-    let sounds = [],
-        particleEmitters = [],
-        animations = [],
-        fogs = [],
-        lootTables = [],
-        entityEventsMap = {},
-        entityFamilyMap = {};
-    console.log("[" + branchId + "]Analyzing package entries for data enums...");
-    entries.forEach(entry => {
-        let entryName = entry.entryName;
-        if (!entryNameKeywords.some(keyword => entryName.includes(keyword))) return;
-        if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/sounds\/sound_definitions\.json$/)) {
-            let entryData = entry.getData().toString("utf-8");
-            let soundDefinition = JSON.parse(entryData);
-            let formatVersion = soundDefinition["format_version"];
+const entryAnalyzer = [
+    {
+        name: "soundDefinition",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/sounds\/sound_definitions\.json$/,
+        analyze(results, entryName, soundDefinition) {
+            const { sounds } = results;
+            const formatVersion = soundDefinition["format_version"];
             if (formatVersion == "1.14.0") {
                 sounds.push(...Object.keys(soundDefinition["sound_definitions"]));
             } else if (!formatVersion) {
@@ -63,40 +56,205 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
-        } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/particles\/(?:[^\/]+)\.json$/)) {
-            let entryData = entry.getData().toString("utf-8");
-            let particle = JSON.parse(entryData);
-            let formatVersion = particle["format_version"];
+        }
+    },
+    {
+        name: "particle",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/particles\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, particle) {
+            const { particleEmitters } = results;
+            const formatVersion = particle["format_version"];
             if (formatVersion == "1.10.0") {
                 particleEmitters.push(particle["particle_effect"]["description"]["identifier"]);
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
-        } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/animations\/(?:[^\/]+)\.json$/)) {
-            let entryData = entry.getData().toString("utf-8");
-            let animation = JSON.parse(entryData);
-            let formatVersion = animation["format_version"];
-            if (formatVersion == "1.8.0" || formatVersion == "1.10.0") {
-                animations.push(...Object.keys(animation["animations"]));
+        }
+    },
+    {
+        name: "entityDefinition",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/entity\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, clientEntity) {
+            const { entityDefinitionMap } = results.internal;
+            const formatVersion = clientEntity["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                const entityDescription = clientEntity["minecraft:client_entity"]["description"];
+                const id = entityDescription["identifier"];
+                const minEngineVersion = entityDescription["min_engine_version"] || "0";
+                const defData = {
+                    minEngineVersion,
+                    geometry: entityDescription["geometry"] || {},
+                    animationRefs: entityDescription["animations"] || {},
+                    animationControllers: entityDescription["animation_controllers"] || [],
+                    renderControllers: entityDescription["render_controllers"] || []
+                };
+                const existDefData = entityDefinitionMap[id];
+                if (!existDefData) {
+                    entityDefinitionMap[id] = defData;
+                } else {
+                    if (compareMinecraftVersion(
+                        minEngineVersion,
+                        existDefData.minEngineVersion
+                    ) > 0) {
+                        entityDefinitionMap[id] = defData;
+                    }
+                }
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
-        } else if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/fogs\/(?:[^\/]+)\.json$/)) {
-            let entryData = entry.getData().toString("utf-8");
-            let fog = JSON.parse(entryData);
-            let formatVersion = fog["format_version"];
+        },
+        versionsGroups: [
+            [
+                "1.8.0",
+                "1.10.0"
+            ]
+        ]
+    },
+    {
+        name: "geometry",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/models\/(?:[^]+)\.json$/,
+        analyze(results, entryName, geometry) {
+            const { geometryMap } = results;
+            const formatVersion = geometry["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                Object.keys(geometry).forEach(geometryId => {
+                    if (geometryId == "format_version") return;
+                    const colonPos = geometryId.indexOf(":");
+                    if (colonPos > 0) {
+                        geometryId = geometryId.slice(0, colonPos);
+                    }
+                    geometryMap[geometryId] = [];
+                });
+            } else if (this.versionsGroups[1].includes(formatVersion)) {
+                geometry["minecraft:geometry"].forEach(data => {
+                    geometryMap[data["description"]["identifier"]] = [];
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        },
+        versionsGroups: [
+            [
+                undefined,
+                "1.8.0",
+                "1.10.0"
+            ],
+            [
+                "1.12.0",
+                "1.14.0",
+                "1.16.0"
+            ]
+        ]
+    },
+    {
+        name: "animation",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/animations\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, animations) {
+            const { animationMap } = results;
+            const formatVersion = animations["format_version"];
+            if (formatVersion == "1.8.0" || formatVersion == "1.10.0") {
+                Object.keys(animations["animations"]).forEach(animationId => {
+                    animationMap[animationId] = [];
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        }
+    },
+    {
+        name: "animationController",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/animation_controllers\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, animationControllers) {
+            const { animationControllerMap } = results;
+            const formatVersion = animationControllers["format_version"];
+            if (formatVersion == "1.10.0") {
+                Object.keys(animationControllers["animation_controllers"]).forEach(controllerId => {
+                    animationControllerMap[controllerId] = [];
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        }
+    },
+    {
+        name: "renderController",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/render_controllers\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, renderControllers) {
+            const { renderControllerMap } = results;
+            const formatVersion = renderControllers["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                Object.keys(renderControllers["render_controllers"]).forEach(controllerId => {
+                    renderControllerMap[controllerId] = [];
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        },
+        versionsGroups: [
+            [
+                "1.8.0",
+                "1.10",
+                "1.10.0"
+            ]
+        ]
+    },
+    
+    {
+        name: "fog",
+        type: "json",
+        regex: /^assets\/resource_packs\/(?:[^\/]+)\/fogs\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, fog) {
+            const { fogs } = results;
+            const formatVersion = fog["format_version"];
             if (formatVersion == "1.16.100") {
                 fogs.push(fog["minecraft:fog_settings"]["description"]["identifier"]);
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
-        } else if (entryName.match(/^assets\/behavior_packs\/(?:[^\/]+)\/entities\/(?:[^\/]+)\.json$/)) {
-            let entryData = entry.getData().toString("utf-8");
-            let entity = JSON.parse(entryData);
-            let formatVersion = entity["format_version"];
-            let acceptVersionType1 = [
+        }
+    },
+    {
+        name: "entityBehavior",
+        type: "json",
+        regex: /^assets\/behavior_packs\/(?:[^\/]+)\/entities\/(?:[^\/]+)\.json$/,
+        analyze(results, entryName, entity) {
+            const { entityEventsMap, entityFamilyMap } = results;
+            const formatVersion = entity["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                const id = entity["minecraft:entity"]["description"]["identifier"];
+                const events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
+                const globalComponents = entity["minecraft:entity"]["components"] ?? {};
+                const componentGroups = entity["minecraft:entity"]["component_groups"] ?? {};
+                events.forEach(event => {
+                    let eventOwners = entityEventsMap[event];
+                    if (!eventOwners) eventOwners = entityEventsMap[event] = [];
+                    eventOwners.push(id);
+                });
+                [ null, ...Object.keys(componentGroups) ].forEach(componentName => {
+                    const groupId = componentName ? `${id}<${componentName}>` : id;
+                    const components = componentName ? componentGroups[componentName] : globalComponents;
+                    const typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
+                    const typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
+                    typeFamilies.forEach(familyName => {
+                        let familyMembers = entityFamilyMap[familyName];
+                        if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
+                        familyMembers.push(groupId);
+                    });
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        },
+        versionsGroups: [
+            [
                 "1.8.0",
-                "1.10.0" ,
+                "1.10.0",
                 "1.12.0",
                 "1.13.0",
                 "1.14.0",
@@ -107,57 +265,112 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
                 "1.17.10",
                 "1.17.20",
                 "1.18.10"
-            ].includes(formatVersion);
-            if (acceptVersionType1) {
-                let id = entity["minecraft:entity"]["description"]["identifier"];
-                let events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
-                let globalComponents = entity["minecraft:entity"]["components"] ?? {};
-                let componentGroups = entity["minecraft:entity"]["component_groups"] ?? {};
-                events.forEach(event => {
-                    let eventOwners = entityEventsMap[event];
-                    if (!eventOwners) eventOwners = entityEventsMap[event] = [];
-                    eventOwners.push(id);
-                });
-                [ null, ...Object.keys(componentGroups) ].forEach(componentName => {
-                    let groupId = componentName ? `${id}<${componentName}>` : id;
-                    let components = componentName ? componentGroups[componentName] : globalComponents;
-                    let typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
-                    let typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
-                    typeFamilies.forEach(familyName => {
-                        let familyMembers = entityFamilyMap[familyName];
-                        if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
-                        familyMembers.push(groupId);
-                    });
-                });
-            } else {
-                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
-            }
-        } else if (entryName.match(/^assets\/behavior_packs\/(?:[^\/]+)\/loot_tables\/(.+)\.json$/)) {
-            let match = entryName.match(/\/loot_tables\/(.+)\.json$/);
+            ]
+        ]
+    },
+    {
+        name: "lootTable",
+        regex: /^assets\/behavior_packs\/(?:[^\/]+)\/loot_tables\/(.+)\.json$/,
+        analyze(results, entryName) {
+            const { lootTables } = results;
+            const match = this.regex.exec(entryName);
             if (match) {
                 lootTables.push(match[1]);
             }
         }
-    });
-    sounds = sounds.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    particleEmitters = particleEmitters.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    animations = animations.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    forEachObject(entityEventsMap, (value, key, obj) => {
-        obj[key] = value.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    });
-    forEachObject(entityFamilyMap, (value, key, obj) => {
-        obj[key] = value.filter((e, i, a) => a.indexOf(e) >= i).sort();
-    });
-
-    return {
-        sounds,
-        particleEmitters,
-        animations,
-        fogs,
-        lootTables,
-        entityEventsMap,
-        entityFamilyMap
+    }
+];
+function analyzeApkPackageDataEnums(packageZip, branchId) {
+    const entries = packageZip.getEntries();
+    const entryNameKeywords = branchEntryNameKeywords[branchId] || [];
+    const results = {
+        internal: {
+            entityDefinitionMap: {}
+        },
+        sounds: [],
+        particleEmitters: [],
+        fogs: [],
+        lootTables: [],
+        geometryMap: {},
+        animationMap: {},
+        animationControllerMap: {},
+        renderControllerMap: {},
+        entityEventsMap: {},
+        entityFamilyMap: {}
     };
+    console.log("[" + branchId + "]Analyzing package entries for data enums...");
+    entries.forEach(entry => {
+        const entryName = entry.entryName;
+        if (!entryNameKeywords.some(keyword => entryName.includes(keyword))) return;
+        const analyzer = entryAnalyzer.find(e => e.regex.test(entryName));
+        if (analyzer) {
+            let entryData = entry.getData();
+            if (analyzer.type == "json") {
+                entryData = JSON.parse(entryData.toString("utf8"));
+            }
+            analyzer.analyze(results, entryName, entryData);
+        }
+    });
+    forEachObject(results.internal.entityDefinitionMap, (definition, entityId) => {
+        const {
+            geometryMap,
+            animationMap,
+            animationControllerMap,
+            renderControllerMap
+        } = results;
+        forEachObject(definition.geometry, (ref, action) => {
+            if (!geometryMap[ref]) {
+                geometryMap[ref] = [];
+            }
+            geometryMap[ref].push(`${entityId}<${action}>`);
+        });
+        forEachObject(definition.animationRefs, (ref, action) => {
+            if (ref.startsWith("controller")) {
+                if (!animationControllerMap[ref]) {
+                    animationControllerMap[ref] = [];
+                }
+                animationControllerMap[ref].push(`${entityId}<${action}>`);
+            } else {
+                if (!animationMap[ref]) {
+                    animationMap[ref] = [];
+                }
+                animationMap[ref].push(`${entityId}<${action}>`);
+            }
+        });
+        definition.animationControllers.forEach(controllerGroup => {
+            forEachObject(controllerGroup, (ref, action) => {
+                if (!animationControllerMap[ref]) {
+                    animationControllerMap[ref] = [];
+                }
+                animationControllerMap[ref].push(`${entityId}<${action}>`);
+            });
+        });
+        definition.renderControllers.forEach(renderController => {
+            if (!renderControllerMap[renderController]) {
+                renderControllerMap[renderController] = [];
+            }
+            renderControllerMap[renderController].push(`${entityId}`);
+        });
+    });
+    [
+        "sounds",
+        "particleEmitters",
+        "entityEventsMap",
+        "entityFamilyMap",
+        "geometryMap",
+        "animationMap",
+        "animationControllerMap",
+        "renderControllerMap"
+    ].forEach(e => {
+        if (e.endsWith("Map")) {
+            forEachObject(results[e], (value) => {
+                uniqueAndSort(value);
+            });
+        } else {
+            uniqueAndSort(results[e]);
+        }
+    });
+    return filterObjectMap(results, k => k != "internal");
 }
 
 const apksInstallPack = [
@@ -168,7 +381,7 @@ const apksInstallPack = [
 ];
 function extractInstallPack(packagePath) {
     if (packagePath.endsWith(".apks")) {
-        let packageZip = new AdmZip(packagePath);
+        const packageZip = new AdmZip(packagePath);
         let i, installPackApkEntry, installPackApk;
         console.log("Unpacking install pack...");
         for (i = 0; i < apksInstallPack.length; i++) {
@@ -187,9 +400,9 @@ function extractInstallPack(packagePath) {
 
 function analyzePackageDataEnumsCached(cx) {
     const { version, packageInfo, packageVersion } = cx;
-    let dataCache = cachedOutput(`version.${version}.package.data`);
-    let langCache = cachedOutput(`version.${version}.package.lang`);
-    let infoCache = cachedOutput(`version.${version}.package.info`);
+    const dataCache = cachedOutput(`version.${version}.package.data`);
+    const langCache = cachedOutput(`version.${version}.package.lang`);
+    const infoCache = cachedOutput(`version.${version}.package.info`);
     if (dataCache && langCache && infoCache && infoCache.packagePath == packageInfo.path) {
         return {
             data: dataCache,
@@ -199,9 +412,9 @@ function analyzePackageDataEnumsCached(cx) {
             packagePath: packageInfo.path
         };
     } else {
-        let installPack = extractInstallPack(packageInfo.path);
-        let lang = analyzeApkPackageLang(installPack);
-        let data = {
+        const installPack = extractInstallPack(packageInfo.path);
+        const lang = analyzeApkPackageLang(installPack);
+        const data = {
             vanilla: analyzeApkPackageDataEnums(installPack, "vanilla"),
             education: analyzeApkPackageDataEnums(installPack, "education"),
             experiment: analyzeApkPackageDataEnums(installPack, "experiment"),

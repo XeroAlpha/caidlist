@@ -5,7 +5,8 @@ const {
     filterObjectMap,
     replaceObjectKey,
     kvArrayToObject,
-    deepCopy
+    deepCopy,
+    uniqueAndSort
 } = require("../util/common");
 
 const lineBreak = "\r\n";
@@ -19,14 +20,21 @@ const entityNameAlias = {
     "minecraft:villager_v2": "村民",
     "minecraft:zombie_villager_v2": "僵尸村民"
 };
-function fixEntityRelatedIds(transMap, relatedEntityMap, entityNameMap, relatedEntitieModifier) {
+function fixEntityRelatedIds(
+    transMap,
+    relatedEntityMap,
+    entityNameMap,
+    relatedEntitiesModifier,
+    relatedEntitiesStrModifier
+) {
     let splitMap = {};
     forEachObject(transMap, (v, k, o) => {
         let relatedEntities = relatedEntityMap[k];
         let relatedEntitiesStr = relatedEntities.map(e => {
             let withoutComp = e.replace(/<.+>$/, "");
             return entityNameAlias[withoutComp] || entityNameMap[withoutComp] || withoutComp;
-        }).filter((e, i, a) => a.indexOf(e) >= i);
+        });
+        uniqueAndSort(relatedEntitiesStr);
         relatedEntitiesStr.forEach(e => {
             let brotherItems = splitMap[e];
             if (!brotherItems) {
@@ -34,11 +42,15 @@ function fixEntityRelatedIds(transMap, relatedEntityMap, entityNameMap, relatedE
             }
             brotherItems[k] = v;
         });
-        if (relatedEntitieModifier) {
-            relatedEntitieModifier(relatedEntitiesStr);
+        if (relatedEntitiesModifier) {
+            relatedEntitiesModifier(relatedEntitiesStr);
         }
         if (relatedEntitiesStr.length > 0) {
-            v += "（" + relatedEntitiesStr.join("、") + "）";
+            if (relatedEntitiesStrModifier) {
+                v = relatedEntitiesStrModifier(v, relatedEntitiesStr);
+            } else {
+                v += "（由" + relatedEntitiesStr.join("、") + "使用）";
+            }
             o[k] = v;
         }
     });
@@ -91,7 +103,8 @@ function writeTransMapTextZip(cx, options) {
                 if (relatedEntities.length == 1) {
                     relatedEntities.length = 0;
                 }
-            }
+            },
+            (value, str) => `${value}（${str.join("、")}）`
         );
         entityEventSplit = generateTextFromMapTree(entityEventByEntity, 1);
         entityEventSplit.push(...footText);

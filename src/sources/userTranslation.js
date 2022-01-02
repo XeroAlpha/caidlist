@@ -12,6 +12,7 @@ const userTranslationStorageKey = {
     entityFamily: "translation.entity_family",
     particleEmitter: "translation.particle_emitter",
     animation: "translation.animation",
+    animationController: "translation.animation_controller",
     effect: "translation.effect",
     enchant: "translation.enchant",
     fog: "translation.fog",

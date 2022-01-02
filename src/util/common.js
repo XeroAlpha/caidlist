@@ -101,6 +101,17 @@ function runJobsAndReturn(mainJob, ...concurrentJobs) {
         .then(results => results[0]);
 }
 
+function uniqueAndSort(array, compareFn) {
+    let i;
+    array.sort(compareFn);
+    if (!compareFn) compareFn = (a, b) => a < b ? -1 : a == b ? 0 : 1;
+    for (i = array.length - 2; i >= 0; i--) {
+        if (compareFn(array[i], array[i + 1]) == 0) {
+            array.splice(i, 1);
+        }
+    }
+}
+
 function forEachObject(object, f, thisArg) {
     Object.keys(object).forEach(key => f.call(thisArg, object[key], key, object));
 }
@@ -248,6 +259,7 @@ module.exports = {
     pause,
     checkPause,
     runJobsAndReturn,
+    uniqueAndSort,
     forEachObject,
     filterObjectMap,
     replaceObjectKey,

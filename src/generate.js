@@ -49,7 +49,8 @@ const defaultTransMapNames = [
     ["entityEvent", "实体事件", "用于 summon 等命令的实体事件 ID"],
     ["entityEventSplit", "根据实体类型分类的实体事件表"],
     ["entityFamily", "实体族", "用于 family 选择器的实体族 ID"],
-    ["animation", "动画", "用于 playanimation 命令的动画控制器 ID"],
+    ["animation", "动画", "用于 playanimation 命令的动画 ID"],
+    ["animationController", "动画控制器", "用于 playanimation 命令的动画控制器 ID"],
     ["particleEmitter", "粒子发射器", "用于 particle 命令的粒子发射器 ID"],
     ["sound", "声音", "用于 playsound 命令的声音 ID"],
     ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
@@ -110,7 +111,7 @@ async function generateBranchedOutputFiles(cx) {
         langKeyPrefix: "item.",
         langKeySuffix: ".name",
         postProcessor(item) {
-            let mergedItem = {}, block = translationResultMaps.block;
+            const mergedItem = {}, block = translationResultMaps.block;
             enums.items.forEach(key => {
                 if (key in block) {
                     JSON.assign(mergedItem, block, [key]);
@@ -130,7 +131,7 @@ async function generateBranchedOutputFiles(cx) {
         langKeyPrefix: "entity.",
         langKeySuffix: ".name",
         postProcessor(entity) {
-            let mergedEntity = {};
+            const mergedEntity = {};
             enums.entities.forEach(key => {
                 if (key in entity) {
                     JSON.assign(mergedEntity, entity, [key]);
@@ -177,7 +178,7 @@ async function generateBranchedOutputFiles(cx) {
         postProcessor(entityEvent) {
             forEachObject(entityEvent, (value, key) => {
                 if (value) return;
-                let comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
+                const comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
                 setInlineCommentAfterField(userTranslation.entityEvent, key, comment);
             });
         }
@@ -191,7 +192,7 @@ async function generateBranchedOutputFiles(cx) {
         postProcessor(entityFamily) {
             forEachObject(entityFamily, (value, key) => {
                 if (value) return;
-                let comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
+                const comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
                 setInlineCommentAfterField(userTranslation.entityFamily, key, comment);
             });
         }
@@ -199,9 +200,36 @@ async function generateBranchedOutputFiles(cx) {
     matchTranslations({
         ...commonOptions,
         name: "animation",
-        originalArray: enums.animations,
+        originalArray: Object.keys(enums.animationMap),
         translationMap: userTranslation.animation,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        postProcessor(animation) {
+            forEachObject(animation, (value, key) => {
+                if (value) return;
+                const relatedEntites = enums.animationMap[key];
+                if (relatedEntites.length) {
+                    const comment = `from: ${relatedEntites.join(", ")}`;
+                    setInlineCommentAfterField(userTranslation.animation, key, comment);
+                }
+            });
+        }
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: "animationController",
+        originalArray: Object.keys(enums.animationControllerMap),
+        translationMap: userTranslation.animationController,
+        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        postProcessor(animationController) {
+            forEachObject(animationController, (value, key) => {
+                if (value) return;
+                const relatedEntites = enums.animationControllerMap[key];
+                if (relatedEntites.length) {
+                    const comment = `from: ${relatedEntites.join(", ")}`;
+                    setInlineCommentAfterField(userTranslation.animationController, key, comment);
+                }
+            });
+        }
     });
     matchTranslations({
         ...commonOptions,

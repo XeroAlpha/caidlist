@@ -31,7 +31,18 @@ function writeTransMapJson(cx, options) {
                 if (relatedEntities.length == 1) {
                     relatedEntities.length = 0;
                 }
-            }
+            },
+            (value, str) => `${value}（${str.join("、")}）`
+        );
+        fixEntityRelatedIds(
+            enums.animation,
+            originalEnums.animationMap,
+            enums.entity
+        );
+        fixEntityRelatedIds(
+            enums.animationController,
+            originalEnums.animationControllerMap,
+            enums.entity
         );
     }
     fs.writeFileSync(outputFile, JSON.stringify({
