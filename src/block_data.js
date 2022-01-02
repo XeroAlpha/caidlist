@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { WSApp } = require("E:\\Project\\mcpews");
+const { WSApp } = require("mcpews");
 const { projectPath } = require("./util/common");
 
 const MAX_BLOCK_DATA_VALUE = 15;
@@ -27,6 +27,7 @@ async function main([ version, branch, build ]) {
     const app = new WSApp(19134);
     console.log(`Type "/connect <ip address>:19134" in the game console to connect.`);
     const session = await app.waitForSession();
+    console.log(`Connected!`);
     if (build == "build") {
         generate(session, blockIds);
     }

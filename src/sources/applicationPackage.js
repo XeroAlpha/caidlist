@@ -6,14 +6,17 @@ const {
 } = require("../util/common");
 
 function parseMinecraftLang(target, langContent) {
-    let regexp = /^(.+)=(.+)(?:\t)+#/;
     langContent.split("\n")
-        .forEach(line => {
-            line = line.trim();
-            if (line.startsWith("##")) return;
-            let matchResult = regexp.exec(line);
-            if (matchResult) {
-                target[matchResult[1]] = matchResult[2].trim();
+        .forEach((line) => {
+            let lineEnd, equPos;
+            line = line.trimStart();
+            lineEnd = line.indexOf("\t");
+            if (lineEnd >= 0) line = line.slice(0, lineEnd);
+            lineEnd = line.indexOf("##");
+            if (lineEnd >= 0) line = line.slice(0, lineEnd);
+            equPos = line.indexOf("=");
+            if (equPos > 0 && equPos < line.length - 1) {
+                target[line.slice(0, equPos)] = line.slice(equPos + 1);
             }
         });
 }
