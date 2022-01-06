@@ -17,6 +17,7 @@ const userTranslationStorageKey = {
     enchant: "translation.enchant",
     fog: "translation.fog",
     location: "translation.location",
+    damageCause: "translation.damage_cause",
     lootTable: "translation.lootTable"
 };
 function loadUserTranslation() {

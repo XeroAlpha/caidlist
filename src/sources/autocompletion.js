@@ -21,10 +21,10 @@ const {
     cachedOutput,
     pause,
     runJobsAndReturn,
-    testMinecraftVersionInRange,
     retryUntilComplete,
     formatTimeLeft
 } = require("../util/common");
+const support = require("./support");
 
 async function captureScreenCompat(device, minicapHandler) {
     if (minicapHandler) {
@@ -276,11 +276,11 @@ async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, "mobevents", "/mobevent ");
     await analyzeAutocompletionEnumCached(cx, options, "selectors", "/testfor @e[");
 
-    if (
-        testMinecraftVersionInRange(packageVersion, "1.18.0.21", "1.18.0.21") ||
-        testMinecraftVersionInRange(packageVersion, "1.18.10.21", "*")
-    ) {
+    if (support.lootCommand(packageVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [ "mainhand", "offhand" ]);
+    }
+    if (support.damageCommand(packageVersion)) {
+        await analyzeAutocompletionEnumCached(cx, options, "damage causes", "/damage @s 0 ");
     }
 
     if (branch.id == "education") {

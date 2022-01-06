@@ -9,6 +9,7 @@ const {
     loadUserTranslation,
     saveUserTranslation
 } = require("./sources/userTranslation");
+const support = require("./sources/support");
 const { matchTranslations } = require("./util/templateMatch");
 const { writeTransMapsExcel } = require("./generate/excel");
 const { writeTransMapTextZip } = require("./generate/text");
@@ -24,7 +25,6 @@ const {
     replaceObjectKey,
     keyArrayToObject,
     objectToArray,
-    testMinecraftVersionInRange,
     cascadeMap,
     removeMinecraftNamespace,
     setInlineCommentAfterField
@@ -46,6 +46,7 @@ const defaultTransMapNames = [
     ["enchant", "魔咒", "用于 enchant 命令的魔咒 ID"],
     ["fog", "迷雾", "用于 fog 命令的迷雾配置 ID"],
     ["location", "结构", "用于 locate 命令的结构 ID"],
+    ["damageCause", "伤害来源", "用于 damage 命令的伤害来源 ID"],
     ["entityEvent", "实体事件", "用于 summon 等命令的实体事件 ID"],
     ["entityEventSplit", "根据实体类型分类的实体事件表"],
     ["entityFamily", "实体族", "用于 family 选择器的实体族 ID"],
@@ -244,7 +245,7 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: enums.sounds,
         translationMap: userTranslation.sound
     });
-    if (testMinecraftVersionInRange(packageVersion, "1.18.0.21", "*")) {
+    if (support.lootTable(packageVersion)) {
         matchTranslations({
             ...commonOptions,
             name: "lootTable",
@@ -265,6 +266,14 @@ async function generateBranchedOutputFiles(cx) {
     } else {
         translationResultMaps.lootTable = {};
         translationResultMaps.lootTableWrapped = {};
+    }
+    if (support.damageCommand(packageVersion)) {
+        matchTranslations({
+            ...commonOptions,
+            name: "damageCause",
+            originalArray: enums.damageCauses,
+            translationMap: userTranslation.damageCause
+        });
     }
     translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
     translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));

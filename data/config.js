@@ -10,9 +10,9 @@ exports.packageVersions = {
     },
     beta: { // 测试版
         // 安装包版本
-        version: "1.18.10.24",
+        version: "1.18.10.26",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\1.18.10.24.apks",
+        path: "H:\\BedrockVersions\\New\\1.18.10.26.apks",
         // 可用分支
         branches: [ "vanilla", "education", "experiment", "translator" ]
     }
