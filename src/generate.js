@@ -80,9 +80,9 @@ async function generateBranchedOutputFiles(cx) {
         ...packageDataEnums.data[branch.id],
         ...autocompletedEnums
     };
-    let lang = packageDataEnums.lang;
+    let lang = packageDataEnums.lang["zh_cn"];
     let standardizedTranslation = await fetchStandardizedTranslation();
-    let javaEditionLang = await fetchJavaEditionLangData();
+    let javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
     let userTranslation = loadUserTranslation();
     console.log("Matching translations...");
     let translationResultMaps = {}, translationStateMaps = {};
@@ -337,8 +337,8 @@ async function generateBranchedOutputFiles(cx) {
 async function generateTranslatorHelperFiles(cx) {
     let packageDataEnums = analyzePackageDataEnumsCached(cx);
     let standardizedTranslation = await fetchStandardizedTranslation();
-    let bedrockEditionLang = packageDataEnums.lang;
-    let javaEditionLang = await fetchJavaEditionLangData();
+    let bedrockEditionLang = packageDataEnums.lang["zh_cn"];
+    let javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
     let transMaps = {
         ...standardizedTranslation,
         BedrockEditionLang: bedrockEditionLang,
@@ -369,17 +369,14 @@ const branchDescriptionMap = {
 };
 const versionDescriptionMap = {
     beta: {
-        id: "beta",
         name: "测试版",
         sortOrder: 0
     },
     release: {
-        id: "release",
         name: "正式版",
         sortOrder: 1
     },
     netease: {
-        id: "netease",
         name: "中国版",
         sortOrder: 2
     }

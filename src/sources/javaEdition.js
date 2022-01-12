@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 const got = require("got").default;
+const AdmZip = require("adm-zip");
 const {
     cachedOutput,
     filterObjectMap
@@ -10,6 +11,10 @@ function digestBufferHex(algorithm, buffer) {
     digest.update(buffer);
     return digest.digest().toString("hex");
 }
+
+const releaseApiHost = "https://launcher.mojang.com";
+const metaApiHost = "https://launchermeta.mojang.com";
+const assetApiHost = "https://resources.download.minecraft.net";
 
 async function fetchVersionsManifest(apiHost) {
     return await got(`${apiHost}/mc/game/version_manifest.json`).json();
@@ -24,6 +29,17 @@ async function fetchVersionMeta(apiHost, manifest, versionId) {
     let version = manifest.versions.find(version => version.id == versionId);
     if (!version) throw new Error("Version not found: " + versionId);
     return await got(version.url.replace("https://launchermeta.mojang.com", apiHost)).json();
+}
+
+async function fetchVersionReleaseFile(apiHost, versionMeta, releaseId) {
+    let release = versionMeta.downloads[releaseId];
+    if (!release) throw new Error("Release file not found: " + releaseId);
+    let content = await got(release.url.replace("https://launcher.mojang.com", apiHost)).buffer();
+    if (content.length == release.size && digestBufferHex("sha1", content) == release.sha1) {
+        return content;
+    } else {
+        throw new Error("meta mismatched for release: " + releaseId);
+    }
 }
 
 async function fetchVersionAssetIndex(apiHost, versionMeta) {
@@ -47,20 +63,26 @@ async function fetchVersionAsset(apiHost, assetIndex, objectName) {
     }
 }
 
+function extractFileFromZip(zipPathOrBuffer, entryName) {
+    const zip = new AdmZip(zipPathOrBuffer);
+    return zip.readFile(entryName);
+}
+
 async function fetchJavaEditionLangData() {
-    let result = await cachedOutput("version.common.java.lang", async () => {
-        const metaApiHost = "https://launchermeta.mojang.com";
-        const assetApiHost = "https://resources.download.minecraft.net";
+    const result = await cachedOutput("version.common.java.lang", async () => {
         console.log("Fetching Java Edition language data...");
-        let manifest = await fetchVersionsManifest(metaApiHost);
-        let versionMeta = await fetchVersionMeta(metaApiHost, manifest, "latest_snapshot");
-        let assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
-        let langAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
+        const manifest = await fetchVersionsManifest(metaApiHost);
+        const versionMeta = await fetchVersionMeta(metaApiHost, manifest, "latest_snapshot");
+        const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, "client");
+        const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
+        const langZhAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
+        const langEnAsset = await extractFileFromZip(releaseFile, "assets/minecraft/lang/en_us.json");
         return {
             "__VERSION__": versionMeta.id,
             "__VERSION_TYPE__": versionMeta.type,
             "__VERSION_TIME__": versionMeta.time,
-            ...JSON.parse(langAsset.toString())
+            "zh_cn": JSON.parse(langZhAsset.toString()),
+            "en_us": JSON.parse(langEnAsset.toString())
         }
     });
     return filterObjectMap(result, k => !k.startsWith("__"));

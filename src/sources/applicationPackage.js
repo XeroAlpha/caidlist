@@ -9,7 +9,7 @@ const {
 } = require("../util/common");
 
 function parseMinecraftLang(target, langContent) {
-    langContent.split("\n")
+    langContent.split(/(?:\n|\r)+/)
         .forEach((line) => {
             let lineEnd, equPos;
             line = line.trimStart();
@@ -25,15 +25,21 @@ function parseMinecraftLang(target, langContent) {
 }
 
 function analyzeApkPackageLang(packageZip) {
-    const entries = packageZip.getEntries(), lang = {};
+    const entries = packageZip.getEntries(), langZh = {}, langEn = {};
     console.log("Analyzing package entries for language file...");
     entries.forEach(entry => {
         const entryName = entry.entryName;
         if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
-            parseMinecraftLang(lang, entry.getData().toString("utf-8"));
+            parseMinecraftLang(langZh, entry.getData().toString("utf-8"));
+        }
+        if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/en_US\.lang$/)) {
+            parseMinecraftLang(langEn, entry.getData().toString("utf-8"));
         }
     });
-    return lang;
+    return {
+        "zh_cn": langZh,
+        "en_us": langEn
+    };
 }
 
 const branchEntryNameKeywords = {

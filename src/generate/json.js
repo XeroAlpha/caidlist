@@ -7,9 +7,7 @@ const {
     deepCopy
 } = require("../util/common");
 
-function writeTransMapJson(cx, options) {
-    const branchName = cx.branch.name;
-    const { version, packageVersion } = cx;
+function writeTransMapJson(_, options) {
     const {
         outputFile,
         originalEnums,
@@ -46,9 +44,6 @@ function writeTransMapJson(cx, options) {
         );
     }
     fs.writeFileSync(outputFile, JSON.stringify({
-        versionType: version,
-        branchName,
-        packageVersion,
         enums: enums,
         names: transMapNames.filter(e => enums[e[0]])
     }));
@@ -71,18 +66,23 @@ function writeTransMapIndexJson(cx, options) {
         fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
     }
     if (mergedFile) {
-        let mergedData;
+        let mergedList = null, mergeIndex;
         if (fs.existsSync(mergedFile)) {
-            const mergedDataContent = fs.readFileSync(mergedFile, "utf-8");
-            mergedData = JSON.parse(mergedDataContent);
-        } else {
-            mergedData = {};
+            const mergedFileContent = fs.readFileSync(mergedFile, "utf-8");
+            mergedList = JSON.parse(mergedFileContent);
         }
-        mergedData[version] = {
+        if (!Array.isArray(mergedList)) {
+            mergedList = [];
+        }
+        mergeIndex = mergedList.findIndex(e => e.id == version);
+        if (mergeIndex < 0) mergeIndex = mergedList.length;
+        mergedList[mergeIndex] = {
+            id: version,
             ...versionDescription,
             ...indexData
         };
-        fs.writeFileSync(mergedFile, JSON.stringify(mergedData, null, 4));
+        mergedList.sort((a, b) => a.sortOrder - b.sortOrder);
+        fs.writeFileSync(mergedFile, JSON.stringify(mergedList, null, 4));
     }
 }
 
