@@ -277,7 +277,7 @@ async function generateBranchedOutputFiles(cx) {
     }
     translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
     translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
-    if (enums.lootTool) {
+    if (enums.lootTools) {
         translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, k => {
             if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
             if (k in translationResultMaps.item) {
