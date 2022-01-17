@@ -370,16 +370,26 @@ const branchDescriptionMap = {
 const versionDescriptionMap = {
     beta: {
         name: "测试版",
+        description: "更新速度快，包含较多不稳定的新特性的版本",
         sortOrder: 0
     },
     release: {
         name: "正式版",
+        description: "更新速度慢，向所有人开放的稳定版本",
         sortOrder: 1
     },
     netease: {
         name: "中国版",
+        description: "由网易推出的中国本地化版本，通常落后于正式版",
         sortOrder: 2
-    }
+    },
+    netease_dev: {
+        // name: "中国版测试版",
+        // description: "面向中国版开发者开放的测试版本",
+        name: "中国版",
+        description: "由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。",
+        sortOrder: 3
+    },
 };
 function generateOutputIndex(cx) {
     const { version } = cx;

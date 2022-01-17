@@ -22,7 +22,8 @@ const {
     pause,
     runJobsAndReturn,
     retryUntilComplete,
-    formatTimeLeft
+    formatTimeLeft,
+    forEachObject
 } = require("../util/common");
 const support = require("./support");
 
@@ -46,6 +47,14 @@ async function recogizeCommand(cx, screenshotImage, surfaceOrientation) {
         })
         .negate()
         .threshold(60);
+    if (cx.dpiScale) {
+        img.resize({
+            width: commandAreaRect[2] * cx.dpiScale,
+            height: commandAreaRect[3] * cx.dpiScale,
+            fit: "fill",
+            kernel: "nearest"
+        });
+    }
     let commandTextImage = await img.png().toBuffer();
     // await img.png().toFile("test.png");
     let commandText = await tesseract.recognize(commandTextImage, {
@@ -55,9 +64,13 @@ async function recogizeCommand(cx, screenshotImage, surfaceOrientation) {
         oem: 3
     });
     commandText = commandText.trim();
-    if (commandText in cx.tesseractMistakes) {
-        return cx.tesseractMistakes[commandText];
-    }
+    forEachObject(cx.tesseractMistakes, (v, k) => {
+        let index = 0;
+        while ((index = commandText.indexOf(k, index)) >= 0) {
+            commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
+            index += k.length;
+        }
+    });
     return commandText;
 }
 
