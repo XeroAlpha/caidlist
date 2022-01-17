@@ -62,9 +62,9 @@ exports.packageVersions = {
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: "1.16.203.2.0",
+        version: "1.17.2.0.0",
         // 安装包路径
-        path: "H:\\BedrockVersions\\neteasedev\\dev_launcher_1.25.100.150059.apk",
+        path: "H:\\BedrockVersions\\neteasedev\\dev_launcher_2.0.100.154200.apk",
         // 可用分支
         branches: ["vanilla", "experiment"],
         config: unicodeOCROptions
