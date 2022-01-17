@@ -96,16 +96,15 @@ function checkPause(timeout, query) {
     });
 }
 
-function runJobsAndReturn(mainJob, ...concurrentJobs) {
-    return Promise.all([ mainJob, ...concurrentJobs ])
-        .then(results => results[0]);
+async function runJobsAndReturn(mainJob, ...concurrentJobs) {
+    const results = await Promise.all([mainJob, ...concurrentJobs]);
+    return results[0];
 }
 
 function uniqueAndSort(array, compareFn) {
-    let i;
     array.sort(compareFn);
     if (!compareFn) compareFn = (a, b) => a < b ? -1 : a == b ? 0 : 1;
-    for (i = array.length - 2; i >= 0; i--) {
+    for (let i = array.length - 2; i >= 0; i--) {
         if (compareFn(array[i], array[i + 1]) == 0) {
             array.splice(i, 1);
         }
@@ -167,8 +166,8 @@ function compareMinecraftVersion(a, b) {
             .map(e => isNaN(e) ? -1 : e);
     };
     const aver = asVersionArray(a), bver = asVersionArray(b);
-    let i, minLength = Math.min(aver.length, bver.length);
-    for (i = 0; i < minLength; i++) {
+    let minLength = Math.min(aver.length, bver.length);
+    for (let i = 0; i < minLength; i++) {
         if (aver[i] == bver[i]) continue;
         return aver[i] - bver[i];
     }
@@ -251,6 +250,13 @@ function eventTriggered(eventEmitter, triggerEvent) {
     });
 }
 
+async function forEachArray(arr, f, thisArg) {
+    const len = arr.length;
+    for (let i = 0; i < len; i++) {
+        await f.call(thisArg, arr[i], i, arr);
+    }
+}
+
 module.exports = {
     projectPath,
     sleepAsync,
@@ -274,5 +280,6 @@ module.exports = {
     cascadeMap,
     removeMinecraftNamespace,
     setInlineCommentAfterField,
-    eventTriggered
+    eventTriggered,
+    forEachArray
 };

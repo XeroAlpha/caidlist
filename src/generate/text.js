@@ -73,7 +73,7 @@ function generateTextFromMapTree(map, treeDepth) {
 
 function writeTransMapTextZip(cx, options) {
     const branchName = cx.branch.name;
-    const { packageVersion } = cx;
+    const { packageVersion, versionInfo } = cx;
     const {
         outputFile,
         originalEnums,
@@ -82,7 +82,7 @@ function writeTransMapTextZip(cx, options) {
         stdTransMap,
         stdTransMapNames
     } = options;
-    const gameVersionText = packageVersion + "（" + branchName + "）";
+    const gameVersionText = versionInfo.name + "（" + packageVersion + "）- " + branchName;
     const footText = [
         "※此ID表是MCBEID表的一部分，对应游戏版本为" + gameVersionText,
         "※详见：https://gitee.com/projectxero/caidlist"

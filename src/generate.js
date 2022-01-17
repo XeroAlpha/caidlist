@@ -1,5 +1,3 @@
-const fs = require("fs");
-const nodePath = require("path");
 const JSON = require("comment-json");
 const { analyzePackageDataEnumsCached } = require("./sources/applicationPackage");
 const { analyzeAutocompletionEnumsCached } = require("./sources/autocompletion");
@@ -12,6 +10,7 @@ const {
 const support = require("./sources/support");
 const { matchTranslations } = require("./util/templateMatch");
 const { writeTransMapsExcel } = require("./generate/excel");
+const { writeTransMapClib } = require("./generate/clib");
 const { writeTransMapTextZip } = require("./generate/text");
 const {
     writeTransMapJson,
@@ -22,21 +21,12 @@ const {
     cachedOutput,
     forEachObject,
     filterObjectMap,
-    replaceObjectKey,
     keyArrayToObject,
-    objectToArray,
     cascadeMap,
     removeMinecraftNamespace,
     setInlineCommentAfterField
 } = require("./util/common");
-const config = require("../data/config");
 
-const branchNameMap = {
-    vanilla: "原版",
-    education: "教育版",
-    experiment: "实验性玩法",
-    translator: "翻译专用"
-};
 // [ id, name, description ]
 const defaultTransMapNames = [
     ["block", "方块", "用于 setblock、fill 等命令的方块 ID"],
@@ -292,31 +282,16 @@ async function generateBranchedOutputFiles(cx) {
 
     console.log("Exporting files...");
     cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);
-    let renamedTranslationResultMaps = replaceObjectKey(translationResultMaps, [
-        [/[A-Z]/g, (match, offset) => (offset > 0 ? "_" : "") + match.toLowerCase()], // camelCase -> snake_case
-        ["enchant", "enchant_type"],
-        ["location", "structure"]
-    ]);
-    fs.writeFileSync(projectPath(`output.clib.${version}.${branch.id}`), JSON.stringify({
-        name: "ID表补丁包（" + branchNameMap[branch.id] + "）",
-        author: "CA制作组",
-        description: "该命令库将旧ID表替换为更新的版本。",
-        uuid: "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
-        version: [0, 0, 1],
-        require: [],
-        minSupportVer: "0.7.4",
-        targetSupportVer: packageVersion,
-        mode: "overwrite",
-        enums: renamedTranslationResultMaps
-    }, null, "\t"));
+    writeTransMapClib(cx, {
+        outputFile: projectPath(`output.clib.${version}.${branch.id}`),
+        translationResultMaps
+    })
     writeTransMapsExcel(
         projectPath(`output.translation.${version}.${branch.id}`, "xlsx"),
         translationResultMaps
     );
     writeTransMapTextZip(cx, {
         outputFile: projectPath(`output.web.${version}.${branch.id}`, "zip"),
-        branchNameMap: branchNameMap[branch.id],
-        version: packageVersion,
         originalEnums: enums,
         transMaps: translationResultMaps,
         transMapNames: defaultTransMapNames,
@@ -325,8 +300,6 @@ async function generateBranchedOutputFiles(cx) {
     });
     writeTransMapJson(cx, {
         outputFile: projectPath(`output.web.${version}.${branch.id}`, "json"),
-        branchNameMap: branchNameMap[branch.id],
-        version: packageVersion,
         originalEnums: enums,
         transMaps: translationResultMaps,
         transMapNames: defaultTransMapNames
@@ -361,13 +334,7 @@ async function generateTranslatorHelperFiles(cx) {
     });
 }
 
-const branchDescriptionMap = {
-    vanilla: "使用默认设置创建的世界的ID表",
-    education: "启用了教育版选项后创建的世界的ID表",
-    experiment: "启用了所有实验性玩法选项后创建的世界的ID表",
-    translator: "为翻译英文文本设计，包含了标准化译名表与语言文件"
-};
-const versionDescriptionMap = {
+const versionInfoMap = {
     beta: {
         name: "测试版",
         description: "更新速度快，包含较多不稳定的新特性的版本",
@@ -391,6 +358,24 @@ const versionDescriptionMap = {
         sortOrder: 3
     },
 };
+const branchInfoMap = {
+    vanilla: {
+        name: "原版",
+        description: "使用默认设置创建的世界的ID表"
+    },
+    education: {
+        name: "教育版",
+        description: "启用了教育版选项后创建的世界的ID表"
+    },
+    experiment: {
+        name: "实验性玩法",
+        description: "启用了所有实验性玩法选项后创建的世界的ID表"
+    },
+    translator: {
+        name: "翻译专用",
+        description: "为翻译英文文本设计，包含了标准化译名表与语言文件"
+    }
+};
 function generateOutputIndex(cx) {
     const { version } = cx;
     cx.packageInfo = cx.packageVersions[version];
@@ -401,19 +386,18 @@ function generateOutputIndex(cx) {
             cx[k] = v;
         });
     }
+    cx.versionInfo = versionInfoMap[version];
     let branchList = cx.packageInfo.branches.map(id => {
         return {
             id,
-            name: branchNameMap[id],
-            description: branchDescriptionMap[id]
+            ...branchInfoMap[id]
         };
     });
     writeTransMapIndexJson(cx, {
         outputFile: projectPath(`output.web.${version}.index`),
         mergedFile: projectPath(`output.web.index`),
         rootUrl: "./data",
-        branchList,
-        versionDescription: versionDescriptionMap[version]
+        branchList
     });
     return branchList;
 }

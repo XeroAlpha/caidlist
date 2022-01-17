@@ -50,8 +50,8 @@ function writeTransMapJson(_, options) {
 }
 
 function writeTransMapIndexJson(cx, options) {
-    const { version, packageVersion } = cx;
-    const { outputFile, mergedFile, rootUrl, branchList, versionDescription } = options;
+    const { version, packageVersion, versionInfo } = cx;
+    const { outputFile, mergedFile, rootUrl, branchList } = options;
     const indexData = {
         dataVersion: packageVersion,
         branchList: branchList.map(branch => {
@@ -78,7 +78,7 @@ function writeTransMapIndexJson(cx, options) {
         if (mergeIndex < 0) mergeIndex = mergedList.length;
         mergedList[mergeIndex] = {
             id: version,
-            ...versionDescription,
+            ...versionInfo,
             ...indexData
         };
         mergedList.sort((a, b) => a.sortOrder - b.sortOrder);
