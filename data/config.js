@@ -1,5 +1,5 @@
 //#region 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
-const default8OCROptions = {
+const commonOCROptions = {
     tesseractOptions: {
         // Tesseract 安装路径
         binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
@@ -18,7 +18,7 @@ const default8OCROptions = {
     }
 };
 
-const unicodeOCROptions = {
+const neteaseOCROptions = {
     tesseractOptions: {
         // Tesseract 安装路径
         binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
@@ -47,7 +47,7 @@ exports.packageVersions = {
         path: "H:\\BedrockVersions\\New\\Minecraft_1.18.2 (1.18.2.03)_armv8.extract.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment"],
-        config: default8OCROptions
+        config: commonOCROptions
     },
     // 测试版
     beta: {
@@ -57,7 +57,7 @@ exports.packageVersions = {
         path: "H:\\BedrockVersions\\New\\1.18.10.27.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
-        config: default8OCROptions
+        config: commonOCROptions
     },
     // 中国版测试版
     netease_dev: {
@@ -67,6 +67,6 @@ exports.packageVersions = {
         path: "H:\\BedrockVersions\\neteasedev\\dev_launcher_2.0.100.154200.apk",
         // 可用分支
         branches: ["vanilla", "experiment"],
-        config: unicodeOCROptions
+        config: neteaseOCROptions
     }
 };

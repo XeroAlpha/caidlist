@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <title>Autocompletion Screen</title>
+        <style>
+            body {
+                margin: 0px;
+                overflow: hidden;
+                background: center / cover url(https://ca.projectxero.top/img/background2.png);
+                font-family: "HYWenHei 65W", "思源黑体", monospace;
+                font-size: 16px;
+                display: flex;
+                flex-direction: row;
+            }
+            .leftbar {
+                display: flex;
+                flex: 0 0 auto;
+                flex-direction: column;
+            }
+            .rightbar {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+            }
+            .bar {
+                border-radius: 10px;
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.7);
+            }
+            .mojangles {
+                font-family: "Mojangles", "HYWenHei 65W", "思源黑体", monospace;
+            }
+            .screenshot-container {
+                display: flex;
+                flex: 0 0 auto;
+                margin: 20px 10px 10px 20px;
+                width: 60vw;
+                height: 27vw;
+                justify-content: center;
+                align-items: center;
+            }
+            .screenshot-available > .screenshot-nosignal {
+                display: none;
+            }
+            .screenshot-nosignal {
+                flex: 0 0 auto;
+                font-size: 3em;
+                text-align: center;
+            }
+            .screenshot {
+                display: none;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center center;
+            }
+            .screenshot-available > .screenshot {
+                display: flex;
+            }
+            .logs {
+                margin: 10px 10px 20px 20px;
+                flex: 1;
+                overflow: hidden;
+                white-space: pre-wrap;
+            }
+            .explanation {
+                margin: 20px 20px 10px 10px;
+                flex: 1;
+                overflow: hidden;
+            }
+            .explanation p {
+                margin: 10px 0px 10px 0px;
+                word-break: break-all;
+            }
+            .danmaku {
+                margin: 15px 20px 20px 10px;
+                flex: 0 0 auto;
+                height: 30vh;
+                overflow: hidden;
+                white-space: pre-wrap;
+            }
+            .statusbar {
+                margin: 10px 20px 10px 10px;
+                flex: 0 0 auto;
+                overflow: hidden;
+                word-break: break-all;
+                white-space: pre-wrap;
+            }
+        </style>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dynamic-marquee@latest"></script>
+    </head>
+    <body>
+        <div class="leftbar">
+            <div class="screenshot-container bar">
+                <div class="screenshot-nosignal">正在生成世界</div>
+                <img class="screenshot" src="" />
+            </div>
+            <div class="logs bar mojangles"></div>
+        </div>
+        <div class="rightbar">
+            <div class="explanation bar"></div>
+            <div class="statusbar bar"></div>
+            <div class="danmaku bar"></div>
+        </div>
+        <script>
+            const screenshotContainer = document.querySelector(".screenshot-container");
+            const screenshotEl = document.querySelector(".screenshot");
+            const logsEl = document.querySelector(".logs");
+            const explanationEl = document.querySelector(".explanation");
+            const statusBarEl = document.querySelector(".statusbar");
+            const danmakuEl = document.querySelector(".danmaku");
+            const versionNameMap = {
+                beta: "测试版",
+                release: "正式版",
+                netease_dev: "中国版测试版"
+            };
+            const branchNameMap = {
+                vanilla: "原版",
+                education: "教育版",
+                experiment: "实验性玩法"
+            };
+            const enumNameMap = {
+                blocks: "方块（用于 setblock、fill 等命令的方块 ID）",
+                items: "物品（用于 give、clear 等命令的物品 ID）",
+                entities: "实体（用于 type 选择器的实体 ID）",
+                "summonable entities": "可召唤实体（用于 summon 命令的实体 ID）",
+                effects: "状态效果（用于 effect 命令的状态效果 ID）",
+                enchantments: "魔咒（用于 enchant 命令的魔咒 ID）",
+                gamerules: "游戏规则（用于 gamerule 命令的游戏规则 ID）",
+                locations: "结构（用于 locate 命令的结构 ID）",
+                mobevents: "生物事件（用于 mobevent 命令的生物事件 ID）",
+                selectors: "目标选择器参数",
+                "loot tools": "战利品工具表（用于 loot 命令的工具选项）",
+                "damage causes": "伤害来源（用于 damage 命令的伤害来源 ID）",
+                abilities: "能力（用于教育版 ability 命令的能力 ID）"
+            };
+            let sessionId = null;
+            let screenshotId = null;
+            let logs = [];
+            let danmakus = [];
+            let danmakuOnline = false;
+            function dateTimeString(d) {
+                const date = [d.getFullYear(), "年", d.getMonth() + 1, "月", d.getDate(), "日"];
+                const time = [d.getHours(), d.getMinutes(), d.getSeconds()].map((e) => String(e).padStart(2, "0"));
+                return date.join("") + " " + time.join(":");
+            }
+            function timeLeftString(seconds) {
+                seconds = Math.floor(seconds);
+                const sec = (seconds % 60).toFixed(0);
+                const min = Math.floor(seconds / 60) % 60;
+                const hr = Math.floor(seconds / 3600);
+                if (hr) {
+                    return `${hr}小时${min.padStart(2, "0")}分${sec.padStart(2, "0")}秒`;
+                } else if (min) {
+                    return `${min}分${sec.padStart(2, "0")}秒`;
+                } else {
+                    return `${sec}秒`;
+                }
+            }
+            async function updateStatus() {
+                let hb = { sessionId: null };
+                let success = false;
+                try {
+                    hb = await (await fetch("http://localhost:19333/heartbeat?since=" + logs.length)).json();
+                    success = true;
+                } catch (err) {}
+                const text = [];
+                text.push(`时间：${dateTimeString(new Date())}`);
+                if (hb.version) {
+                    const versionName = versionNameMap[hb.version];
+                    const branchName = branchNameMap[hb.branch];
+                    text.push(`项目：${versionName}（${hb.packageVersion}）- ${branchName}`);
+                }
+                if (hb.enumId) {
+                    text.push(`条目：${enumNameMap[hb.enumId]}`);
+                }
+                if (hb.autocompletion) {
+                    text.push(`识别结果：${hb.autocompletion}`);
+                }
+                if (hb.resultLength) {
+                    const speed = (1000 / hb.stepSpent).toFixed(1);
+                    text.push(`识别速度：${speed}条/秒`);
+                    if (hb.approxLength) {
+                        const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
+                        text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
+                        text.push(`剩余时间：约${timeLeftString(hb.timeLeft / 1000)} - 平均${averageSpeed}条/秒`);
+                        text.push(`预计结束时间：${dateTimeString(new Date(hb.estTime))}`);
+                    } else {
+                        text.push(`已识别：${hb.resultLength} 条目`);
+                    }
+                }
+                if (hb.sessionId != sessionId) {
+                    screenshotId = null;
+                    logs.length = 0;
+                    sessionId = hb.sessionId;
+                    screenshotContainer.classList.remove("screenshot-available");
+                }
+                if (hb.screenshotId && hb.screenshotId != screenshotId) {
+                    if (screenshotId == null) {
+                        screenshotContainer.classList.add("screenshot-available");
+                    }
+                    screenshotId = hb.screenshotId;
+                    screenshotEl.src = "http://localhost:19333/screenshot?id=" + screenshotId;
+                }
+                if (hb.logs && hb.logs.length) {
+                    logs.push(...hb.logs);
+                    logsEl.innerHTML = logs.join("\n");
+                    logsEl.scroll({
+                        top: logsEl.scrollHeight,
+                        left: 0,
+                        behavior: hb.logs.length > 10 ? "auto" : "smooth"
+                    });
+                }
+                if (!sessionId) {
+                    text.push("状态服务器：离线");
+                }
+                if (!danmakuOnline) {
+                    text.push("弹幕姬：离线");
+                }
+                statusBarEl.innerHTML = text.join("\n");
+                setTimeout(updateStatus, success ? 100 : 1000);
+            }
+            async function updateDanmaku() {
+                let lines = [];
+                let success = false;
+                try {
+                    lines = await (await fetch("http://localhost:19334/lines?since=" + danmakus.length)).json();
+                    success = true;
+                    danmakuOnline = true;
+                } catch (err) {
+                    danmakuOnline = false;
+                }
+                if (lines.length) {
+                    danmakus.push(...lines);
+                    danmakuEl.innerHTML = danmakus.join("\n");
+                }
+                danmakuEl.scroll({
+                    top: danmakuEl.scrollHeight,
+                    left: 0,
+                    behavior: lines.length > 10 ? "auto" : "smooth"
+                });
+                setTimeout(updateDanmaku, 1000);
+            }
+            updateStatus();
+            updateDanmaku();
+            const marquee = new dynamicMarquee.Marquee(explanationEl, {
+                rate: -20 / devicePixelRatio,
+                upDown: true,
+                startOnScreen: true
+            });
+            const explanationTexts = [
+                ["这是在做什么？", "获取Minecraft新版的ID表，我叫它爬ID表。"],
+                ["是什么原理？", "模拟键盘按Tab键然后对聊天框进行文字图像识别。"],
+                ["有什么用？", "扔到命令助手和MCBEID表里，顺带完善MC更新记录。"],
+                ["我在哪里能查到你爬出来的ID？", "MCBEID表，https://ca.projectxero.top/idlist/"],
+                [
+                    "我想要你爬的数据，请问哪里有白嫖？",
+                    '<span style="text-decoration: line-through">MCBEID表的关于页面有写。</span> 自己爬。'
+                ],
+                [
+                    "这个是每周的常驻节目吗？",
+                    "测试版一般会在每周的周三或周四发布，我会在当天或次日进行直播爬ID表，一次直播一个半小时左右。"
+                ],
+                [
+                    "我能来这个直播间干什么？",
+                    '<span style="text-decoration: line-through">了解ID的变化情况。</span>欢迎来弹幕聊天啊，听听歌也行。'
+                ],
+                ["命令助手呢？你啥时候更新？", "已经在更了，具体啥时候看我自己空闲情况吧。"]
+            ];
+            dynamicMarquee.loop(
+                marquee,
+                explanationTexts.map((e) => () => {
+                    const el = document.createElement("p");
+                    el.innerHTML = "问：" + e[0] + "<br />答：" + e[1];
+                    return el;
+                })
+            );
+        </script>
+    </body>
+</html>
