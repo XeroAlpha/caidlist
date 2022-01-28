@@ -234,7 +234,9 @@ const entryAnalyzer = [
             const { entityEventsMap, entityFamilyMap } = results;
             const formatVersion = entity["format_version"];
             if (this.versionsGroups[0].includes(formatVersion)) {
-                const id = entity["minecraft:entity"]["description"]["identifier"];
+                const entityDescription = entity["minecraft:entity"]["description"];
+                if (!entityDescription) return;
+                const id = entityDescription["identifier"];
                 const events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
                 const globalComponents = entity["minecraft:entity"]["components"] ?? {};
                 const componentGroups = entity["minecraft:entity"]["component_groups"] ?? {};
@@ -315,7 +317,12 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             if (analyzer.type == "json") {
                 entryData = JSON.parse(entryData.toString("utf8"));
             }
-            analyzer.analyze(results, entryName, entryData);
+            try {
+                analyzer.analyze(results, entryName, entryData);
+            } catch(err) {
+                console.error("Analyze Error: " + entryName);
+                console.error(err);
+            }
         }
     });
     forEachObject(results.internal.entityDefinitionMap, (definition, entityId) => {

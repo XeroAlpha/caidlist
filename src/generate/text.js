@@ -113,8 +113,12 @@ function writeTransMapTextZip(cx, options) {
         stdTransText = generateTextFromMapTree(
             kvArrayToObject(stdTransMapNames.map(e => {
                 const [ key, name ] = e;
-                return [ name, stdTransMap[key] ];
-            })),
+                if (key in stdTransMap) {
+                    return [ name, stdTransMap[key] ];
+                } else {
+                    return null;
+                }
+            }).filter(e => e != null)),
             1
         );
         stdTransText.push(...footText);

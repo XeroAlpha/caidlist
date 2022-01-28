@@ -47,7 +47,7 @@ const defaultTransMapNames = [
     ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
     ["stdTrans", "标准化译名表", "整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表"]
 ];
-const stdTransMapNames = [
+const translatorMapNames = [
     ["BlockSprite", "方块"],
     ["ItemSprite", "物品"],
     ["EntitySprite", "实体"],
@@ -60,7 +60,11 @@ const stdTransMapNames = [
     ["AddonSprite", "附加包术语"],
     ["ModPESprite", "ModPE术语"],
     ["InnerCoreSprite", "InnerCore术语"],
-    ["TechnicSprite", "其他技术术语"]
+    ["TechnicSprite", "其他技术术语"],
+    [ "BedrockEditionLang", "基岩版中文语言文件" ],
+    [ "JavaEditionLang", "Java版中文语言文件" ],
+    [ "BedrockEditionLangSource", "基岩版英文语言文件" ],
+    [ "JavaEditionLangSource", "Java版英文语言文件" ]
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, packageVersion } = cx;
@@ -296,7 +300,7 @@ async function generateBranchedOutputFiles(cx) {
         transMaps: translationResultMaps,
         transMapNames: defaultTransMapNames,
         stdTransMap: standardizedTranslation,
-        stdTransMapNames
+        stdTransMapNames: translatorMapNames
     });
     writeTransMapJson(cx, {
         outputFile: projectPath(`output.web.${version}.${branch.id}`, "json"),
@@ -310,27 +314,24 @@ async function generateBranchedOutputFiles(cx) {
 async function generateTranslatorHelperFiles(cx) {
     let packageDataEnums = analyzePackageDataEnumsCached(cx);
     let standardizedTranslation = await fetchStandardizedTranslation();
-    let bedrockEditionLang = packageDataEnums.lang["zh_cn"];
-    let javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
+    let bedrockEditionLang = packageDataEnums.lang;
+    let javaEditionLang = await fetchJavaEditionLangData();
     let transMaps = {
         ...standardizedTranslation,
-        BedrockEditionLang: bedrockEditionLang,
-        JavaEditionLang: javaEditionLang
+        BedrockEditionLang: bedrockEditionLang["zh_cn"],
+        JavaEditionLang: javaEditionLang["zh_cn"],
+        BedrockEditionLangSource: bedrockEditionLang["en_us"],
+        JavaEditionLangSource: javaEditionLang["en_us"],
     };
-    let transMapNames = [
-        ...stdTransMapNames,
-        [ "BedrockEditionLang", "基岩版语言文件" ],
-        [ "JavaEditionLang", "Java版语言文件" ]
-    ];
     writeTransMapTextZip(cx, {
         outputFile: projectPath(`output.web.${cx.version}.translator`, "zip"),
         transMaps,
-        transMapNames
+        transMapNames: translatorMapNames
     });
     writeTransMapJson(cx, {
         outputFile: projectPath(`output.web.${cx.version}.translator`, "json"),
         transMaps,
-        transMapNames
+        transMapNames: translatorMapNames
     });
 }
 

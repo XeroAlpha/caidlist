@@ -52,9 +52,9 @@ exports.packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.18.10.28",
+        version: "1.18.20.21",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\1.18.10.28.apks",
+        path: "H:\\BedrockVersions\\New\\1.18.20.21.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
         config: commonOCROptions
