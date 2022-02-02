@@ -329,8 +329,8 @@ async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, "enchantments", "/enchant @s ", ["["]);
     await analyzeAutocompletionEnumCached(cx, options, "gamerules", "/gamerule ");
     await analyzeAutocompletionEnumCached(cx, options, "locations", "/locate ");
-    await analyzeAutocompletionEnumCached(cx, options, "mobevents", "/mobevent ", ["["]);
-    await analyzeAutocompletionEnumCached(cx, options, "entity slots", "/replaceitem entity @s ");
+    await analyzeAutocompletionEnumCached(cx, options, "mobevents", "/mobevent ");
+    await analyzeAutocompletionEnumCached(cx, options, "entity slots", "/replaceitem entity @s ", ["["]);
     await analyzeAutocompletionEnumCached(cx, options, "selectors", "/testfor @e[");
 
     if (support.lootCommand(packageVersion)) {
@@ -341,6 +341,9 @@ async function analyzeAutocompletionEnumsCached(cx) {
     }
     if (support.damageCommand(packageVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "damage causes", "/damage @s 0 ");
+    }
+    if (support.hasItemSelectorParam(packageVersion)) {
+        await analyzeAutocompletionEnumCached(cx, options, "item with aliases", "/testfor @e[hasitem={item=");
     }
 
     if (branch.id == "education") {

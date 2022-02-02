@@ -44,7 +44,7 @@ exports.packageVersions = {
         // 安装包版本
         version: "1.18.2.03",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\Minecraft_1.18.2 (1.18.2.03)_armv8.extract.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.2.03.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment"],
         config: commonOCROptions
@@ -54,7 +54,7 @@ exports.packageVersions = {
         // 安装包版本
         version: "1.18.20.21",
         // 安装包路径
-        path: "H:\\BedrockVersions\\New\\1.18.20.21.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.20.21.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
         config: commonOCROptions
@@ -64,7 +64,7 @@ exports.packageVersions = {
         // 安装包版本
         version: "1.17.2.0.0",
         // 安装包路径
-        path: "H:\\BedrockVersions\\neteasedev\\dev_launcher_2.0.100.154200.apk",
+        path: "H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.0.100.154200.apk",
         // 可用分支
         branches: ["vanilla", "experiment"],
         config: neteaseOCROptions

@@ -12,5 +12,8 @@ module.exports = {
     },
     damageCommand(packageVersion) {
         return testMinecraftVersionInRange(packageVersion, "1.18.10.26", "*");
+    },
+    hasItemSelectorParam(packageVersion) {
+        return testMinecraftVersionInRange(packageVersion, "1.18.20.21", "*");
     }
 };

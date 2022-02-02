@@ -133,6 +133,7 @@
                 selectors: "目标选择器参数",
                 "loot tools": "战利品工具表（用于 loot 命令的工具选项）",
                 "damage causes": "伤害来源（用于 damage 命令的伤害来源 ID）",
+                "item with aliases": "物品（包含别名，可用于 give、clear 等命令）",
                 abilities: "能力（用于教育版 ability 命令的能力 ID）"
             };
             let sessionId = null;
@@ -205,7 +206,7 @@
                 }
                 if (hb.logs && hb.logs.length) {
                     logs.push(...hb.logs);
-                    logsEl.innerHTML = logs.join("\n");
+                    logsEl.innerHTML = logs.slice(Math.max(logs.length - logs.length % 100 - 30, 0)).join("\n");
                     logsEl.scroll({
                         top: logsEl.scrollHeight,
                         left: 0,

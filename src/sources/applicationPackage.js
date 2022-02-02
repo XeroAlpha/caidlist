@@ -135,9 +135,11 @@ const entryAnalyzer = [
                     geometryMap[geometryId] = [];
                 });
             } else if (this.versionsGroups[1].includes(formatVersion)) {
-                geometry["minecraft:geometry"].forEach(data => {
-                    geometryMap[data["description"]["identifier"]] = [];
-                });
+                if (Array.isArray(geometry["minecraft:geometry"])) {
+                    geometry["minecraft:geometry"].forEach(data => {
+                        geometryMap[data["description"]["identifier"]] = [];
+                    });
+                }
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
