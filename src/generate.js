@@ -336,6 +336,11 @@ async function generateTranslatorHelperFiles(cx) {
 }
 
 const versionInfoMap = {
+    preview: {
+        name: "预览版",
+        description: "更新速度快，包含较多不稳定的新特性的版本",
+        sortOrder: 0
+    },
     beta: {
         name: "测试版",
         description: "更新速度快，包含较多不稳定的新特性的版本",
