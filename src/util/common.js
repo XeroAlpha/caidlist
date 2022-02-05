@@ -19,21 +19,21 @@ function projectPath(id, suffix) {
     return path;
 }
 
-const sleepAsync = ms => new Promise(resolve => setTimeout(resolve, ms));
+const sleepAsync = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * Examples:
  * 1. cachedOutput(id [, nullValue = undefined]) => cache ?? nullValue
- * 
+ *
  * 2. cachedOutput(id, nonNullValue) => nonNullValue
  *    cache = nonNullValue
- * 
+ *
  * 3. cachedOutput(id, Promise.resolve(any)) => Promise resolves any
  *    cache = await valueOrProcessor();
- * 
+ *
  * 4. cachedOutput(id, () => any) => cache ?? any
  *    cache = cache ?? valueOrProcessor()
- * 
+ *
  * 5. cachedOutput(id, () => Promise.resolve(any)) => cache ?? Promise resolves any
  *    cache = cache ?? await valueOrProcessor()
  */
@@ -54,7 +54,7 @@ function cachedOutput(id, valueOrProcessor) {
     } else {
         let output = processor();
         if (output instanceof Promise) {
-            return output.then(output => {
+            return output.then((output) => {
                 fs.writeFileSync(path, JSON.stringify(output, null, 4));
                 return output;
             });
@@ -66,9 +66,9 @@ function cachedOutput(id, valueOrProcessor) {
 }
 
 function input(query) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         let rl = readline.Interface(process.stdin, process.stdout);
-        rl.question(query ?? "", answer => {
+        rl.question(query ?? "", (answer) => {
             resolve(answer);
             rl.close();
         });
@@ -80,10 +80,10 @@ function pause(query) {
 }
 
 function checkPause(timeout, query) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         let stdin = process.stdin;
         let hasSignal = false;
-        let onData = () => hasSignal = true;
+        let onData = () => (hasSignal = true);
         stdin.on("data", onData);
         setTimeout(() => {
             stdin.removeListener("data", onData);
@@ -103,7 +103,7 @@ async function runJobsAndReturn(mainJob, ...concurrentJobs) {
 
 function uniqueAndSort(array, compareFn) {
     array.sort(compareFn);
-    if (!compareFn) compareFn = (a, b) => a < b ? -1 : a == b ? 0 : 1;
+    if (!compareFn) compareFn = (a, b) => (a < b ? -1 : a == b ? 0 : 1);
     for (let i = array.length - 2; i >= 0; i--) {
         if (compareFn(array[i], array[i + 1]) == 0) {
             array.splice(i, 1);
@@ -112,11 +112,18 @@ function uniqueAndSort(array, compareFn) {
 }
 
 function forEachObject(object, f, thisArg) {
-    Object.keys(object).forEach(key => f.call(thisArg, object[key], key, object));
+    Object.keys(object).forEach((key) => f.call(thisArg, object[key], key, object));
 }
 
 function filterObjectMap(map, predicate) {
-    return JSON.assign({}, map, Object.keys(map).filter(key => predicate(key, map[key], map)));
+    const keys = Object.keys(map).filter((key) => predicate(key, map[key], map));
+    return JSON.assign({}, map, keys);
+}
+
+function excludeObjectEntry(map, excludeKeys, excludeValues) {
+    if (!excludeKeys) excludeKeys = [];
+    if (!excludeValues) excludeValues = [];
+    return filterObjectMap(map, (k, v) => !excludeKeys.includes(k) && !excludeValues.includes(v));
 }
 
 function replaceObjectKey(object, replaceArgsGroups) {
@@ -130,23 +137,23 @@ function replaceObjectKey(object, replaceArgsGroups) {
 
 function keyArrayToObject(arr, f) {
     let obj = {};
-    arr.forEach((e, i, a) => obj[e] = f(e, i, a));
+    arr.forEach((e, i, a) => (obj[e] = f(e, i, a)));
     return obj;
 }
 
 function kvArrayToObject(kvArray) {
     let obj = {};
-    kvArray.forEach((kv) => obj[kv[0]] = kv[1]);
+    kvArray.forEach((kv) => (obj[kv[0]] = kv[1]));
     return obj;
 }
 
 function objectToArray(obj, f) {
-    return Object.keys(obj).map(k => f(k, obj[k], obj));
+    return Object.keys(obj).map((k) => f(k, obj[k], obj));
 }
 
 function deepCopy(something) {
     if (Array.isArray(something)) {
-        return something.map(e => deepCopy(e));
+        return something.map((e) => deepCopy(e));
     } else if (typeof something == "object") {
         let newObject = {};
         forEachObject(something, (value, key) => {
@@ -159,13 +166,14 @@ function deepCopy(something) {
 }
 
 function compareMinecraftVersion(a, b) {
-    const asVersionArray = str => {
+    const asVersionArray = (str) => {
         return str
             .split(".")
-            .map(e => e == "*" ? Infinity : parseInt(e))
-            .map(e => isNaN(e) ? -1 : e);
+            .map((e) => (e == "*" ? Infinity : parseInt(e)))
+            .map((e) => (isNaN(e) ? -1 : e));
     };
-    const aver = asVersionArray(a), bver = asVersionArray(b);
+    const aver = asVersionArray(a),
+        bver = asVersionArray(b);
     let minLength = Math.min(aver.length, bver.length);
     for (let i = 0; i < minLength; i++) {
         if (aver[i] == bver[i]) continue;
@@ -178,27 +186,26 @@ function testMinecraftVersionInRange(version, rangeL, rangeU) {
     return compareMinecraftVersion(version, rangeL) >= 0 && compareMinecraftVersion(version, rangeU) <= 0;
 }
 
-function fixZero(str, zeroCount) {
-    return str.length >= zeroCount ? str : "0" + fixZero(str, zeroCount - 1);
-}
-
 function formatTimeLeft(seconds) {
-    if (seconds < 100) {
-        return `${seconds.toFixed(1)}s`;
-    } else if (seconds < 6000) {
-        return `${Math.floor(seconds / 60)}m${fixZero((seconds % 60).toFixed(0), 2)}s`;
+    const sec = (seconds % 60).toFixed(1);
+    const min = (Math.floor(seconds / 60) % 60).toFixed(0);
+    const hr = Math.floor(seconds / 3600).toFixed(0);
+    if (seconds > 6000) {
+        return `${hr}h${min.padStart(2, "0")}m${sec.padStart(2, "0")}s`;
+    } else if (seconds > 60) {
+        return `${min}m${sec.padStart(2, "0")}s`;
     } else {
-        return `${Math.floor(seconds / 3600)}h${fixZero(Math.floor(seconds / 60) % 60, 2)}m${fixZero((seconds % 60).toFixed(0), 2)}s`;
+        return `${sec}s`;
     }
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
     let result, lastError;
-    while(maxRetryCount > 0) {
+    while (maxRetryCount > 0) {
         try {
             result = await f();
             if (result) return result;
-        } catch(err) {
+        } catch (err) {
             lastError = err;
         }
         if (retryInterval) await sleepAsync(retryInterval);
@@ -208,7 +215,8 @@ async function retryUntilComplete(maxRetryCount, retryInterval, f) {
 }
 
 function cascadeMap(mapOfMap, priority, includeAll) {
-    let i, result = {};
+    const result = {};
+    let i;
     if (includeAll) {
         for (i in mapOfMap) {
             JSON.assign(result, mapOfMap[i]);
@@ -218,27 +226,31 @@ function cascadeMap(mapOfMap, priority, includeAll) {
         JSON.assign(result, mapOfMap[priority[i]]);
     }
     return result;
-};
+}
 
 function removeMinecraftNamespace(array) {
-    return array.map((item, _, array) => {
-        if (!item.includes(":")) {
-            let nameWithNamespace = "minecraft:" + item;
-            if (array.includes(nameWithNamespace)) {
-                return null;
+    return array
+        .map((item, _, array) => {
+            if (!item.includes(":")) {
+                let nameWithNamespace = "minecraft:" + item;
+                if (array.includes(nameWithNamespace)) {
+                    return null;
+                }
             }
-        }
-        return item;
-    }).filter(item => item != null);
+            return item;
+        })
+        .filter((item) => item != null);
 }
 
 function setInlineCommentAfterField(obj, fieldName, comment) {
     if (comment) {
-        obj[Symbol.for("after:" + fieldName)] = [{
-            type: "LineComment",
-            value: " " + comment,
-            inline: true
-        }];
+        obj[Symbol.for("after:" + fieldName)] = [
+            {
+                type: "LineComment",
+                value: " " + comment,
+                inline: true
+            }
+        ];
     } else {
         delete obj[Symbol.for("after:" + fieldName)];
     }
@@ -268,6 +280,7 @@ module.exports = {
     uniqueAndSort,
     forEachObject,
     filterObjectMap,
+    excludeObjectEntry,
     replaceObjectKey,
     keyArrayToObject,
     kvArrayToObject,

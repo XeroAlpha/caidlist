@@ -1,26 +1,12 @@
 const fs = require("fs");
-const {
-    filterRedundantEnums,
-    fixEntityRelatedIds
-} = require("./text");
-const {
-    deepCopy
-} = require("../util/common");
+const { filterRedundantEnums, fixEntityRelatedIds } = require("./text");
+const { deepCopy, forEachObject } = require("../util/common");
 
 function writeTransMapJson(_, options) {
-    const {
-        outputFile,
-        originalEnums,
-        transMaps,
-        transMapNames
-    } = options;
-    let enums = deepCopy(filterRedundantEnums(transMaps));
+    const { outputFile, originalEnums, transMaps, transMapNames } = options;
+    const enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
-        fixEntityRelatedIds(
-            enums.entityEvent,
-            originalEnums.entityEventsMap,
-            enums.entity
-        );
+        fixEntityRelatedIds(enums.entityEvent, originalEnums.entityEventsMap, enums.entity);
         fixEntityRelatedIds(
             enums.entityFamily,
             originalEnums.entityFamilyMap,
@@ -32,21 +18,21 @@ function writeTransMapJson(_, options) {
             },
             (value, str) => `${value}（${str.join("、")}）`
         );
-        fixEntityRelatedIds(
-            enums.animation,
-            originalEnums.animationMap,
-            enums.entity
-        );
-        fixEntityRelatedIds(
-            enums.animationController,
-            originalEnums.animationControllerMap,
-            enums.entity
-        );
+        fixEntityRelatedIds(enums.animation, originalEnums.animationMap, enums.entity);
+        fixEntityRelatedIds(enums.animationController, originalEnums.animationControllerMap, enums.entity);
+        forEachObject(enums.entity, (v, k, o) => {
+            if (!(k in transMaps.summonableEntity)) {
+                o[k] = v + "（不可召唤）";
+            }
+        });
     }
-    fs.writeFileSync(outputFile, JSON.stringify({
-        enums: enums,
-        names: transMapNames.filter(e => enums[e[0]])
-    }));
+    fs.writeFileSync(
+        outputFile,
+        JSON.stringify({
+            enums: enums,
+            names: transMapNames.filter((e) => enums[e[0]])
+        })
+    );
 }
 
 function writeTransMapIndexJson(cx, options) {
@@ -54,7 +40,7 @@ function writeTransMapIndexJson(cx, options) {
     const { outputFile, mergedFile, rootUrl, branchList } = options;
     const indexData = {
         dataVersion: packageVersion,
-        branchList: branchList.map(branch => {
+        branchList: branchList.map((branch) => {
             return {
                 ...branch,
                 dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
@@ -66,7 +52,8 @@ function writeTransMapIndexJson(cx, options) {
         fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
     }
     if (mergedFile) {
-        let mergedList = null, mergeIndex;
+        let mergedList = null,
+            mergeIndex;
         if (fs.existsSync(mergedFile)) {
             const mergedFileContent = fs.readFileSync(mergedFile, "utf-8");
             mergedList = JSON.parse(mergedFileContent);
@@ -74,7 +61,7 @@ function writeTransMapIndexJson(cx, options) {
         if (!Array.isArray(mergedList)) {
             mergedList = [];
         }
-        mergeIndex = mergedList.findIndex(e => e.id == version);
+        mergeIndex = mergedList.findIndex((e) => e.id == version);
         if (mergeIndex < 0) mergeIndex = mergedList.length;
         mergedList[mergeIndex] = {
             id: version,
@@ -89,4 +76,4 @@ function writeTransMapIndexJson(cx, options) {
 module.exports = {
     writeTransMapJson,
     writeTransMapIndexJson
-}
+};

@@ -2,6 +2,8 @@
 ## 简介
 命令助手作者 [ProjectXero](https://gitee.com/projectxero) 使用此工具生成ID表。
 
+[MCBEID表](https://ca.projectxero.top/idlist/) 是基于此工具的数据制作的可离线使用的ID表查询网站。
+
 ## 工作流
 请视情况选择工作流。
 
@@ -77,14 +79,17 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 |3|实体|entity|`/testfor @e[type=<Tab>`|
 |4|状态效果|effect|`/effect @s <Tab>`|
 |5|附魔类型|enchant|`/enchant @s <Tab>`|
-|6|距离模糊配置|fog|/assets/resource_packs/?/fogs/*.json|
+|6|迷雾|fog|/assets/resource_packs/?/fogs/*.json|
 |7|结构|location|`/locate <Tab>`|
 |8|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
-|9|实体类型分类|entityFamily|/assets/behavior_packs/?/entities/*.json|
-|10|动画控制器|animation|/assets/resource_packs/?/animations/*.json|
-|11|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
-|12|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
-|13|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
-|14|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
-|15|可生成的实体|summonableEntity|`/summon <Tab>`|
-|16|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
+|9|实体族|entityFamily|/assets/behavior_packs/?/entities/*.json|
+|10|动画|animation|/assets/resource_packs/?/animations/*.json|
+|11|动画控制器|animationController|/assets/resource_packs/?/animation_controllers/*.json|
+|12|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
+|13|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
+|14|游戏规则|gamerule|`/gamerule <Tab>`|
+|15|槽位类型|entitySlot|`/replaceitem entity @s <Tab>`|
+|16|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
+|17|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
+|18|可生成的实体|summonableEntity|`/summon <Tab>`|
+|19|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|

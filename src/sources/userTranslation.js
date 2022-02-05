@@ -1,7 +1,4 @@
-const {
-    cachedOutput,
-    forEachObject
-} = require("../util/common");
+const { cachedOutput, forEachObject } = require("../util/common");
 
 const userTranslationStorageKey = {
     block: "translation.block",
@@ -18,6 +15,8 @@ const userTranslationStorageKey = {
     fog: "translation.fog",
     location: "translation.location",
     damageCause: "translation.damage_cause",
+    gamerule: "translation.gamerule",
+    entitySlot: "translation.entity_slot",
     lootTable: "translation.lootTable"
 };
 function loadUserTranslation() {
@@ -37,4 +36,4 @@ function saveUserTranslation(userTranslation) {
 module.exports = {
     loadUserTranslation,
     saveUserTranslation
-}
+};

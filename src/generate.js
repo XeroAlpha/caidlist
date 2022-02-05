@@ -3,19 +3,13 @@ const { analyzePackageDataEnumsCached } = require("./sources/applicationPackage"
 const { analyzeAutocompletionEnumsCached } = require("./sources/autocompletion");
 const { fetchStandardizedTranslation } = require("./sources/wiki");
 const { fetchJavaEditionLangData } = require("./sources/javaEdition");
-const {
-    loadUserTranslation,
-    saveUserTranslation
-} = require("./sources/userTranslation");
+const { loadUserTranslation, saveUserTranslation } = require("./sources/userTranslation");
 const support = require("./sources/support");
 const { matchTranslations } = require("./util/templateMatch");
 const { writeTransMapsExcel } = require("./generate/excel");
 const { writeTransMapClib } = require("./generate/clib");
 const { writeTransMapTextZip } = require("./generate/text");
-const {
-    writeTransMapJson,
-    writeTransMapIndexJson
-} = require("./generate/json");
+const { writeTransMapJson, writeTransMapIndexJson } = require("./generate/json");
 const {
     projectPath,
     cachedOutput,
@@ -31,15 +25,17 @@ const {
 const defaultTransMapNames = [
     ["block", "方块", "用于 setblock、fill 等命令的方块 ID"],
     ["item", "物品", "用于 give、clear 等命令的物品 ID"],
-    ["entity", "实体", "用于 type 选择器的实体 ID"],
+    ["entity", "实体", "用于 summon 命令与 type 选择器参数的实体 ID"],
     ["effect", "状态效果", "用于 effect 命令的状态效果 ID"],
     ["enchant", "魔咒", "用于 enchant 命令的魔咒 ID"],
     ["fog", "迷雾", "用于 fog 命令的迷雾配置 ID"],
     ["location", "结构", "用于 locate 命令的结构 ID"],
+    ["gamerule", "游戏规则", "用于 gamerule 命令的游戏规则 ID"],
+    ["entitySlot", "槽位类型", "用于 replaceitem 命令与 hasitem 选择器参数的槽位类型 ID"],
     ["damageCause", "伤害来源", "用于 damage 命令的伤害来源 ID"],
     ["entityEvent", "实体事件", "用于 summon 等命令的实体事件 ID"],
     ["entityEventSplit", "根据实体类型分类的实体事件表"],
-    ["entityFamily", "实体族", "用于 family 选择器的实体族 ID"],
+    ["entityFamily", "实体族", "用于 family 选择器参数的实体族 ID"],
     ["animation", "动画", "用于 playanimation 命令的动画 ID"],
     ["animationController", "动画控制器", "用于 playanimation 命令的动画控制器 ID"],
     ["particleEmitter", "粒子发射器", "用于 particle 命令的粒子发射器 ID"],
@@ -61,10 +57,10 @@ const translatorMapNames = [
     ["ModPESprite", "ModPE术语"],
     ["InnerCoreSprite", "InnerCore术语"],
     ["TechnicSprite", "其他技术术语"],
-    [ "BedrockEditionLang", "基岩版中文语言文件" ],
-    [ "JavaEditionLang", "Java版中文语言文件" ],
-    [ "BedrockEditionLangSource", "基岩版英文语言文件" ],
-    [ "JavaEditionLangSource", "Java版英文语言文件" ]
+    ["BedrockEditionLang", "基岩版中文语言文件"],
+    ["JavaEditionLang", "Java版中文语言文件"],
+    ["BedrockEditionLangSource", "基岩版英文语言文件"],
+    ["JavaEditionLangSource", "Java版英文语言文件"]
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, packageVersion } = cx;
@@ -79,7 +75,8 @@ async function generateBranchedOutputFiles(cx) {
     let javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
     let userTranslation = loadUserTranslation();
     console.log("Matching translations...");
-    let translationResultMaps = {}, translationStateMaps = {};
+    let translationResultMaps = {},
+        translationStateMaps = {};
     let commonOptions = {
         resultMaps: translationResultMaps,
         stateMaps: translationStateMaps,
@@ -100,14 +97,15 @@ async function generateBranchedOutputFiles(cx) {
     matchTranslations({
         ...commonOptions,
         name: "item",
-        originalArray: enums.items.filter(item => !enums.blocks.includes(item)),
+        originalArray: enums.items.filter((item) => !enums.blocks.includes(item)),
         translationMap: userTranslation.item,
         stdTransMap: cascadeMap(standardizedTranslation, ["ItemSprite", "BlockSprite"], true),
         langKeyPrefix: "item.",
         langKeySuffix: ".name",
         postProcessor(item) {
-            const mergedItem = {}, block = translationResultMaps.block;
-            enums.items.forEach(key => {
+            const mergedItem = {},
+                block = translationResultMaps.block;
+            enums.items.forEach((key) => {
                 if (key in block) {
                     JSON.assign(mergedItem, block, [key]);
                 } else {
@@ -127,7 +125,7 @@ async function generateBranchedOutputFiles(cx) {
         langKeySuffix: ".name",
         postProcessor(entity) {
             const mergedEntity = {};
-            enums.entities.forEach(key => {
+            enums.entities.forEach((key) => {
                 if (key in entity) {
                     JSON.assign(mergedEntity, entity, [key]);
                 } else {
@@ -239,6 +237,18 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: enums.sounds,
         translationMap: userTranslation.sound
     });
+    matchTranslations({
+        ...commonOptions,
+        name: "gamerule",
+        originalArray: enums.gamerules,
+        translationMap: userTranslation.gamerule
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: "entitySlot",
+        originalArray: enums.entitySlots,
+        translationMap: userTranslation.entitySlot
+    });
     if (support.lootTable(packageVersion)) {
         matchTranslations({
             ...commonOptions,
@@ -269,10 +279,15 @@ async function generateBranchedOutputFiles(cx) {
             translationMap: userTranslation.damageCause
         });
     }
-    translationResultMaps.music = filterObjectMap(translationResultMaps.sound, key => key.startsWith("music.") || key.startsWith("record."));
-    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, key => enums.summonableEntities.includes(key));
+    translationResultMaps.music = filterObjectMap(
+        translationResultMaps.sound,
+        (key) => key.startsWith("music.") || key.startsWith("record.")
+    );
+    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, (key) =>
+        enums.summonableEntities.includes(key)
+    );
     if (enums.lootTools) {
-        translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, k => {
+        translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, (k) => {
             if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
             if (k in translationResultMaps.item) {
                 return translationResultMaps.item[k];
@@ -289,11 +304,8 @@ async function generateBranchedOutputFiles(cx) {
     writeTransMapClib(cx, {
         outputFile: projectPath(`output.clib.${version}.${branch.id}`),
         translationResultMaps
-    })
-    writeTransMapsExcel(
-        projectPath(`output.translation.${version}.${branch.id}`, "xlsx"),
-        translationResultMaps
-    );
+    });
+    writeTransMapsExcel(projectPath(`output.translation.${version}.${branch.id}`, "xlsx"), translationResultMaps);
     writeTransMapTextZip(cx, {
         outputFile: projectPath(`output.web.${version}.${branch.id}`, "zip"),
         originalEnums: enums,
@@ -321,7 +333,7 @@ async function generateTranslatorHelperFiles(cx) {
         BedrockEditionLang: bedrockEditionLang["zh_cn"],
         JavaEditionLang: javaEditionLang["zh_cn"],
         BedrockEditionLangSource: bedrockEditionLang["en_us"],
-        JavaEditionLangSource: javaEditionLang["en_us"],
+        JavaEditionLangSource: javaEditionLang["en_us"]
     };
     writeTransMapTextZip(cx, {
         outputFile: projectPath(`output.web.${cx.version}.translator`, "zip"),
@@ -360,9 +372,10 @@ const versionInfoMap = {
         // name: "中国版测试版",
         // description: "面向中国版开发者开放的测试版本",
         name: "中国版",
-        description: "由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。",
+        description:
+            "由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。",
         sortOrder: 3
-    },
+    }
 };
 const branchInfoMap = {
     vanilla: {
@@ -393,7 +406,7 @@ function generateOutputIndex(cx) {
         });
     }
     cx.versionInfo = versionInfoMap[version];
-    let branchList = cx.packageInfo.branches.map(id => {
+    let branchList = cx.packageInfo.branches.map((id) => {
         return {
             id,
             ...branchInfoMap[id]

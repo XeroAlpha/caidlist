@@ -13,7 +13,7 @@ const lineBreak = "\r\n";
 
 const skipTransMapKey = ["lootTableWrapped", "music", "summonableEntity", "lootTool"];
 function filterRedundantEnums(transMaps) {
-    return filterObjectMap(transMaps, k => !skipTransMapKey.includes(k));
+    return filterObjectMap(transMaps, (k) => !skipTransMapKey.includes(k));
 }
 
 const entityNameAlias = {
@@ -30,12 +30,12 @@ function fixEntityRelatedIds(
     let splitMap = {};
     forEachObject(transMap, (v, k, o) => {
         let relatedEntities = relatedEntityMap[k];
-        let relatedEntitiesStr = relatedEntities.map(e => {
+        let relatedEntitiesStr = relatedEntities.map((e) => {
             let withoutComp = e.replace(/<.+>$/, "");
             return entityNameAlias[withoutComp] || entityNameMap[withoutComp] || withoutComp;
         });
         uniqueAndSort(relatedEntitiesStr);
-        relatedEntitiesStr.forEach(e => {
+        relatedEntitiesStr.forEach((e) => {
             let brotherItems = splitMap[e];
             if (!brotherItems) {
                 brotherItems = splitMap[e] = {};
@@ -74,27 +74,16 @@ function generateTextFromMapTree(map, treeDepth) {
 function writeTransMapTextZip(cx, options) {
     const branchName = cx.branch.name;
     const { packageVersion, versionInfo } = cx;
-    const {
-        outputFile,
-        originalEnums,
-        transMaps,
-        transMapNames,
-        stdTransMap,
-        stdTransMapNames
-    } = options;
+    const { outputFile, originalEnums, transMaps, transMapNames, stdTransMap, stdTransMapNames } = options;
     const gameVersionText = versionInfo.name + "（" + packageVersion + "）- " + branchName;
     const footText = [
         "※此ID表是MCBEID表的一部分，对应游戏版本为" + gameVersionText,
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let entityEventSplit, stdTransText;
-    let enums = deepCopy(filterRedundantEnums(transMaps));
+    const enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
-        let entityEventByEntity = fixEntityRelatedIds(
-            enums.entityEvent,
-            originalEnums.entityEventsMap,
-            enums.entity
-        );
+        const entityEventByEntity = fixEntityRelatedIds(enums.entityEvent, originalEnums.entityEventsMap, enums.entity);
         fixEntityRelatedIds(
             enums.entityFamily,
             originalEnums.entityFamilyMap,
@@ -108,30 +97,37 @@ function writeTransMapTextZip(cx, options) {
         );
         entityEventSplit = generateTextFromMapTree(entityEventByEntity, 1);
         entityEventSplit.push(...footText);
+        forEachObject(enums.entity, (v, k, o) => {
+            if (!(k in transMaps.summonableEntity)) {
+                o[k] = v + "（不可召唤）";
+            }
+        });
     }
     if (stdTransMap) {
         stdTransText = generateTextFromMapTree(
-            kvArrayToObject(stdTransMapNames.map(e => {
-                const [ key, name ] = e;
-                if (key in stdTransMap) {
-                    return [ name, stdTransMap[key] ];
-                } else {
-                    return null;
-                }
-            }).filter(e => e != null)),
+            kvArrayToObject(
+                stdTransMapNames
+                    .map((e) => {
+                        const [key, name] = e;
+                        if (key in stdTransMap) {
+                            return [name, stdTransMap[key]];
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter((e) => e != null)
+            ),
             1
         );
         stdTransText.push(...footText);
     }
-    let zip = new AdmZip();
-    let files = {
-        ...replaceObjectKey(enums, [
-            [ /(.+)/, "$1.txt" ]
-        ]),
+    const zip = new AdmZip();
+    const files = {
+        ...replaceObjectKey(enums, [[/(.+)/, "$1.txt"]]),
         "entityEventSplit.txt": entityEventSplit,
         "stdTrans.txt": stdTransText
     };
-    let fileDescriptions = transMapNames.map(e => [e[0] + ".txt", e[1]]);
+    const fileDescriptions = transMapNames.map((e) => [e[0] + ".txt", e[1]]);
     files["_MCBEID_.txt"] = [
         "【MCBEID表】",
         "在线版：https://ca.projectxero.top/idlist/",
@@ -143,14 +139,15 @@ function writeTransMapTextZip(cx, options) {
         "Minecraft 命令更新日志：https://ca.projectxero.top/blog/command/command-history/",
         "",
         "【目录】",
-        ...fileDescriptions.filter(e => files[e[0]]).map(e => e[0] + ": " + e[1])
+        ...fileDescriptions.filter((e) => files[e[0]]).map((e) => e[0] + ": " + e[1])
     ];
     forEachObject(files, (content, fileName) => {
         if (Array.isArray(content)) {
             content = content.join(lineBreak);
         } else if (typeof content == "object") {
-            let contentDescription = fileDescriptions.find(e => e[0] == fileName);
-            let arr = [], obj;
+            const contentDescription = fileDescriptions.find((e) => e[0] == fileName);
+            const arr = [];
+            let obj;
             if (contentDescription) {
                 obj = { [contentDescription[1]]: content };
             } else {
@@ -172,4 +169,4 @@ module.exports = {
     fixEntityRelatedIds,
     generateTextFromMapTree,
     writeTransMapTextZip
-}
+};

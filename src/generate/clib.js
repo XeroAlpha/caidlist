@@ -1,11 +1,16 @@
 const fs = require("fs");
-const { replaceObjectKey } = require("../util/common");
+const { replaceObjectKey, excludeObjectEntry } = require("../util/common");
 
 function writeTransMapClib(cx, options) {
     const branchName = cx.branch.name;
     const { packageVersion, versionInfo } = cx;
     const { outputFile, translationResultMaps } = options;
-    let renamedTranslationResultMaps = replaceObjectKey(translationResultMaps, [
+    const filteredTranslationResultMaps = excludeObjectEntry(translationResultMaps, [
+        "gamerule",
+        "command",
+        "blockState"
+    ]);
+    const renamedTranslationResultMaps = replaceObjectKey(filteredTranslationResultMaps, [
         [/[A-Z]/g, (match, offset) => (offset > 0 ? "_" : "") + match.toLowerCase()], // camelCase -> snake_case
         ["enchant", "enchant_type"],
         ["location", "structure"]
