@@ -22,6 +22,7 @@ const {
 } = require("../util/common");
 const support = require("./support");
 const { AutocompletionScreen } = require("../live/autocompletionScreen");
+const { doWSRelatedJobsCached } = require("./wsconnect");
 
 async function captureScreenCompat(device, minicapHandler, screen) {
     let screenshot;
@@ -320,6 +321,10 @@ async function analyzeAutocompletionEnumsCached(cx) {
         target,
         screen
     };
+
+    if (support.mcpews(version)) {
+        await doWSRelatedJobsCached(cx, device, target);
+    }
 
     await analyzeAutocompletionEnumCached(cx, options, "blocks", "/testforblock ~ ~ ~ ");
     await analyzeAutocompletionEnumCached(cx, options, "items", "/clear @s ", ["["]);
