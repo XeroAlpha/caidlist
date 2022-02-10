@@ -17,6 +17,7 @@ const userTranslationStorageKey = {
     damageCause: "translation.damage_cause",
     gamerule: "translation.gamerule",
     entitySlot: "translation.entity_slot",
+    feature: "translation.feature",
     lootTable: "translation.lootTable"
 };
 function loadUserTranslation() {

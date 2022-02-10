@@ -187,7 +187,7 @@ function testMinecraftVersionInRange(version, rangeL, rangeU) {
 }
 
 function formatTimeLeft(seconds) {
-    const sec = (seconds % 60).toFixed(1);
+    const sec = (seconds % 60).toFixed(0);
     const min = (Math.floor(seconds / 60) % 60).toFixed(0);
     const hr = Math.floor(seconds / 3600).toFixed(0);
     if (seconds > 6000) {
@@ -195,7 +195,7 @@ function formatTimeLeft(seconds) {
     } else if (seconds > 60) {
         return `${min}m${sec.padStart(2, "0")}s`;
     } else {
-        return `${sec}s`;
+        return `${seconds.toFixed(1)}s`;
     }
 }
 

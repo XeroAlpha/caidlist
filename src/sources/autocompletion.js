@@ -203,11 +203,18 @@ async function analyzeCommandAutocompletionSync(cx, device, screen, command, pro
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     while (true) {
         await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
-        recogizedCommand = await retryUntilComplete(10, 0, async () => {
-            let screenshotImage = await captureScreenCompat(device, minicap, screen);
-            let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
-            assert.notEqual(recogizedCommand, command);
-            return command;
+        recogizedCommand = await retryUntilComplete(10, 1000, async () => {
+            try{
+                return await retryUntilComplete(10, 0, async () => {
+                    let screenshotImage = await captureScreenCompat(device, minicap, screen);
+                    let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
+                    assert.notEqual(recogizedCommand, command);
+                    return command;
+                });
+            } catch(err) {
+                // 跳过重复ID
+                await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
+            }
         });
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
@@ -349,6 +356,9 @@ async function analyzeAutocompletionEnumsCached(cx) {
     }
     if (support.hasItemSelectorParam(packageVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "item with aliases", "/testfor @e[hasitem={item=");
+    }
+    if (support.placefeatureCommand(packageVersion)) {
+        await analyzeAutocompletionEnumCached(cx, options, "features and rules", "/placefeature ");
     }
 
     if (branch.id == "education") {

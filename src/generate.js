@@ -39,6 +39,7 @@ const defaultTransMapNames = [
     ["animation", "动画", "用于 playanimation 命令的动画 ID"],
     ["animationController", "动画控制器", "用于 playanimation 命令的动画控制器 ID"],
     ["particleEmitter", "粒子发射器", "用于 particle 命令的粒子发射器 ID"],
+    ["featureAndRules", "地物与地物规则", "用于 placefeature 命令的地物 ID 和地物规则 ID"],
     ["sound", "声音", "用于 playsound 命令的声音 ID"],
     ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
     ["stdTrans", "标准化译名表", "整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表"]
@@ -277,6 +278,14 @@ async function generateBranchedOutputFiles(cx) {
             name: "damageCause",
             originalArray: enums.damageCauses,
             translationMap: userTranslation.damageCause
+        });
+    }
+    if (support.placefeatureCommand(packageVersion)) {
+        matchTranslations({
+            ...commonOptions,
+            name: "featureAndRule",
+            originalArray: enums.featuresAndRules,
+            translationMap: userTranslation.feature
         });
     }
     translationResultMaps.music = filterObjectMap(

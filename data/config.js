@@ -18,13 +18,34 @@ const commonOCROptions = {
     }
 };
 
-const neteaseOCROptions = {
-    tesseractOptions: {
-        // Tesseract 安装路径
-        binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
-        // 训练数据路径
-        "tessdata-dir": __dirname + "/tesstrain/tessdata"
+const smallerGUIOCROptions = { // GUI Scale = -1
+    ...commonOCROptions,
+    // 命令区域大小
+    commandAreaRect: {
+        1: [397, 976, 1784, 100], // <- phone
+        3: [328, 976, 1784, 100] // phone ->
     },
+    tesseractMistakes: {
+        "'/sUmmOn Creeper": "/summon creeper",
+        "'/sUmmOn raVager": "/summon ravager"
+    }
+};
+
+const smallestGUIOCROptions = { // GUI Scale = -2
+    ...commonOCROptions,
+    // 命令区域大小
+    commandAreaRect: {
+        1: [315, 1002, 1920, 75], // <- phone
+        3: [246, 1002, 1920, 75] // phone ->
+    },
+    tesseractMistakes: {
+        "'/summon Creeper": "/summon creeper",
+        "'/summon ravager": "/summon ravager"
+    }
+};
+
+const neteaseOCROptions = {
+    ...commonOCROptions,
     // 命令区域大小
     commandAreaRect: {
         1: [424, 922, 1660, 100], // <- phone
@@ -42,22 +63,22 @@ exports.packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: "1.18.2.03",
+        version: "1.18.10.04",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.2.03.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.10.04.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment"],
-        config: commonOCROptions
+        config: smallerGUIOCROptions
     },
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.18.20.23",
+        version: "1.18.20.25",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.20.23.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.20.25.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
-        config: commonOCROptions
+        config: smallerGUIOCROptions
     },
     // 中国版测试版
     netease_dev: {

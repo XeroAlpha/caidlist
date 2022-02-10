@@ -89,7 +89,6 @@
             "block.turtle_egg.break",
             "block.turtle_egg.crack",
             "block.turtle_egg.drop",
-            "bloom.sculk_catalyst",
             "bottle.dragonbreath",
             "break.amethyst_block",
             "break.amethyst_cluster",
@@ -102,11 +101,6 @@
             "break.large_amethyst_bud",
             "break.medium_amethyst_bud",
             "break.pointed_dripstone",
-            "break.sculk",
-            "break.sculk_catalyst",
-            "break.sculk_sensor",
-            "break.sculk_shrieker",
-            "break.sculk_vein",
             "break.small_amethyst_bud",
             "break.spore_blossom",
             "break.tuff",
@@ -231,8 +225,6 @@
             "fall.powder_snow",
             "fall.roots",
             "fall.sand",
-            "fall.sculk_sensor",
-            "fall.sculk_shrieker",
             "fall.shroomlight",
             "fall.slime",
             "fall.snow",
@@ -292,10 +284,6 @@
             "hit.powder_snow",
             "hit.roots",
             "hit.sand",
-            "hit.sculk",
-            "hit.sculk_catalyst",
-            "hit.sculk_sensor",
-            "hit.sculk_shrieker",
             "hit.shroomlight",
             "hit.slime",
             "hit.snow",
@@ -349,7 +337,6 @@
             "jump.pointed_dripstone",
             "jump.roots",
             "jump.sand",
-            "jump.sculk_sensor",
             "jump.shroomlight",
             "jump.slime",
             "jump.snow",
@@ -388,7 +375,6 @@
             "land.pointed_dripstone",
             "land.roots",
             "land.sand",
-            "land.sculk_sensor",
             "land.shroomlight",
             "land.slime",
             "land.snow",
@@ -577,8 +563,10 @@
             "mob.husk.death",
             "mob.husk.hurt",
             "mob.husk.step",
+            "mob.irongolem.crack",
             "mob.irongolem.death",
             "mob.irongolem.hit",
+            "mob.irongolem.repair",
             "mob.irongolem.throw",
             "mob.irongolem.walk",
             "mob.llama.angry",
@@ -812,9 +800,6 @@
             "music.game.warped_forest",
             "music.game.water",
             "music.menu",
-            "nearby_close.warden",
-            "nearby_closer.warden",
-            "nearby_closest.warden",
             "note.banjo",
             "note.bass",
             "note.bassattack",
@@ -851,18 +836,12 @@
             "place.moss",
             "place.pointed_dripstone",
             "place.powder_snow",
-            "place.sculk",
-            "place.sculk_catalyst",
-            "place.sculk_sensor",
-            "place.sculk_shrieker",
             "place.small_amethyst_bud",
             "place.spore_blossom",
             "place.tuff",
             "portal.portal",
             "portal.travel",
             "portal.trigger",
-            "power.off.sculk_sensor",
-            "power.on.sculk_sensor",
             "raid.horn",
             "random.anvil_break",
             "random.anvil_land",
@@ -917,12 +896,9 @@
             "respawn_anchor.deplete",
             "respawn_anchor.set_spawn",
             "scrape",
-            "shriek.sculk_shrieker",
             "sign.dye.use",
             "sign.ink_sac.use",
-            "slightly_angry.warden",
             "smithing_table.use",
-            "spread.sculk",
             "step.amethyst_block",
             "step.amethyst_cluster",
             "step.ancient_debris",
@@ -959,11 +935,6 @@
             "step.powder_snow",
             "step.roots",
             "step.sand",
-            "step.sculk",
-            "step.sculk_catalyst",
-            "step.sculk_sensor",
-            "step.sculk_shrieker",
-            "step.sculk_vein",
             "step.shroomlight",
             "step.slime",
             "step.snow",
@@ -1012,7 +983,6 @@
             "use.pointed_dripstone",
             "use.roots",
             "use.sand",
-            "use.sculk_sensor",
             "use.shroomlight",
             "use.slime",
             "use.snow",
@@ -1128,9 +1098,6 @@
             "minecraft:redstone_torch_dust_particle",
             "minecraft:redstone_wire_dust_particle",
             "minecraft:rising_border_dust_particle",
-            "minecraft:sculk_sensor_redstone_particle",
-            "minecraft:sculk_soul_particle",
-            "minecraft:shriek_particle",
             "minecraft:shulker_bullet",
             "minecraft:silverfish_grief_emitter",
             "minecraft:snowflake_particle",
@@ -1149,7 +1116,6 @@
             "minecraft:totem_manual",
             "minecraft:totem_particle",
             "minecraft:underwater_torch_particle",
-            "minecraft:vibration_signal",
             "minecraft:villager_angry",
             "minecraft:villager_happy",
             "minecraft:water_drip_particle",
@@ -3057,7 +3023,8 @@
             ],
             "animation.humanoid.holding_spyglass": [],
             "animation.spyglass.holding": [],
-            "animation.spyglass.scoping": []
+            "animation.spyglass.scoping": [],
+            "animation.player.first_person.shield_block": []
         },
         "animationControllerMap": {
             "controller.animation.agent.move": [
@@ -3886,6 +3853,7 @@
             "controller.render.goat": [
                 "minecraft:goat"
             ],
+            "controller.render.iron_golem_cracks": [],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -4290,6 +4258,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -4297,6 +4267,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -5028,6 +5000,18 @@
                 "minecraft:ravager",
                 "minecraft:vindicator",
                 "minecraft:witch"
+            ],
+            "spawn_small": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_medium": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_large": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
             ]
         },
         "entityFamilyMap": {
@@ -5888,7 +5872,6 @@
             "block.turtle_egg.break",
             "block.turtle_egg.crack",
             "block.turtle_egg.drop",
-            "bloom.sculk_catalyst",
             "bottle.dragonbreath",
             "break.amethyst_block",
             "break.amethyst_cluster",
@@ -5901,11 +5884,6 @@
             "break.large_amethyst_bud",
             "break.medium_amethyst_bud",
             "break.pointed_dripstone",
-            "break.sculk",
-            "break.sculk_catalyst",
-            "break.sculk_sensor",
-            "break.sculk_shrieker",
-            "break.sculk_vein",
             "break.small_amethyst_bud",
             "break.spore_blossom",
             "break.tuff",
@@ -6031,8 +6009,6 @@
             "fall.powder_snow",
             "fall.roots",
             "fall.sand",
-            "fall.sculk_sensor",
-            "fall.sculk_shrieker",
             "fall.shroomlight",
             "fall.slime",
             "fall.snow",
@@ -6092,10 +6068,6 @@
             "hit.powder_snow",
             "hit.roots",
             "hit.sand",
-            "hit.sculk",
-            "hit.sculk_catalyst",
-            "hit.sculk_sensor",
-            "hit.sculk_shrieker",
             "hit.shroomlight",
             "hit.slime",
             "hit.snow",
@@ -6149,7 +6121,6 @@
             "jump.pointed_dripstone",
             "jump.roots",
             "jump.sand",
-            "jump.sculk_sensor",
             "jump.shroomlight",
             "jump.slime",
             "jump.snow",
@@ -6188,7 +6159,6 @@
             "land.pointed_dripstone",
             "land.roots",
             "land.sand",
-            "land.sculk_sensor",
             "land.shroomlight",
             "land.slime",
             "land.snow",
@@ -6378,8 +6348,10 @@
             "mob.husk.death",
             "mob.husk.hurt",
             "mob.husk.step",
+            "mob.irongolem.crack",
             "mob.irongolem.death",
             "mob.irongolem.hit",
+            "mob.irongolem.repair",
             "mob.irongolem.throw",
             "mob.irongolem.walk",
             "mob.llama.angry",
@@ -6613,9 +6585,6 @@
             "music.game.warped_forest",
             "music.game.water",
             "music.menu",
-            "nearby_close.warden",
-            "nearby_closer.warden",
-            "nearby_closest.warden",
             "note.banjo",
             "note.bass",
             "note.bassattack",
@@ -6652,18 +6621,12 @@
             "place.moss",
             "place.pointed_dripstone",
             "place.powder_snow",
-            "place.sculk",
-            "place.sculk_catalyst",
-            "place.sculk_sensor",
-            "place.sculk_shrieker",
             "place.small_amethyst_bud",
             "place.spore_blossom",
             "place.tuff",
             "portal.portal",
             "portal.travel",
             "portal.trigger",
-            "power.off.sculk_sensor",
-            "power.on.sculk_sensor",
             "raid.horn",
             "random.anvil_break",
             "random.anvil_land",
@@ -6718,13 +6681,10 @@
             "respawn_anchor.deplete",
             "respawn_anchor.set_spawn",
             "scrape",
-            "shriek.sculk_shrieker",
             "sign.dye.use",
             "sign.ink_sac.use",
-            "slightly_angry.warden",
             "smithing_table.use",
             "sparkler.active",
-            "spread.sculk",
             "step.amethyst_block",
             "step.amethyst_cluster",
             "step.ancient_debris",
@@ -6761,11 +6721,6 @@
             "step.powder_snow",
             "step.roots",
             "step.sand",
-            "step.sculk",
-            "step.sculk_catalyst",
-            "step.sculk_sensor",
-            "step.sculk_shrieker",
-            "step.sculk_vein",
             "step.shroomlight",
             "step.slime",
             "step.snow",
@@ -6814,7 +6769,6 @@
             "use.pointed_dripstone",
             "use.roots",
             "use.sand",
-            "use.sculk_sensor",
             "use.shroomlight",
             "use.slime",
             "use.snow",
@@ -6930,9 +6884,6 @@
             "minecraft:redstone_torch_dust_particle",
             "minecraft:redstone_wire_dust_particle",
             "minecraft:rising_border_dust_particle",
-            "minecraft:sculk_sensor_redstone_particle",
-            "minecraft:sculk_soul_particle",
-            "minecraft:shriek_particle",
             "minecraft:shulker_bullet",
             "minecraft:silverfish_grief_emitter",
             "minecraft:snowflake_particle",
@@ -6951,7 +6902,6 @@
             "minecraft:totem_manual",
             "minecraft:totem_particle",
             "minecraft:underwater_torch_particle",
-            "minecraft:vibration_signal",
             "minecraft:villager_angry",
             "minecraft:villager_happy",
             "minecraft:water_drip_particle",
@@ -8864,7 +8814,8 @@
             ],
             "animation.humanoid.holding_spyglass": [],
             "animation.spyglass.holding": [],
-            "animation.spyglass.scoping": []
+            "animation.spyglass.scoping": [],
+            "animation.player.first_person.shield_block": []
         },
         "animationControllerMap": {
             "controller.animation.agent.move": [
@@ -9697,6 +9648,7 @@
             "controller.render.goat": [
                 "minecraft:goat"
             ],
+            "controller.render.iron_golem_cracks": [],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -10101,6 +10053,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -10108,6 +10062,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -10839,6 +10795,18 @@
                 "minecraft:ravager",
                 "minecraft:vindicator",
                 "minecraft:witch"
+            ],
+            "spawn_small": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_medium": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_large": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
             ]
         },
         "entityFamilyMap": {
@@ -12120,6 +12088,13 @@
             "mob.fox.sleep",
             "mob.fox.sniff",
             "mob.fox.spit",
+            "mob.frog.ambient",
+            "mob.frog.death",
+            "mob.frog.eat",
+            "mob.frog.hurt",
+            "mob.frog.jump_to_block",
+            "mob.frog.step",
+            "mob.frog.tongue",
             "mob.ghast.affectionate_scream",
             "mob.ghast.charge",
             "mob.ghast.death",
@@ -12186,8 +12161,10 @@
             "mob.husk.death",
             "mob.husk.hurt",
             "mob.husk.step",
+            "mob.irongolem.crack",
             "mob.irongolem.death",
             "mob.irongolem.hit",
+            "mob.irongolem.repair",
             "mob.irongolem.throw",
             "mob.irongolem.walk",
             "mob.llama.angry",
@@ -12325,6 +12302,8 @@
             "mob.strider.step",
             "mob.strider.step_lava",
             "mob.strider.tempt",
+            "mob.tadpole.death",
+            "mob.tadpole.hurt",
             "mob.turtle.ambient",
             "mob.turtle.death",
             "mob.turtle.hurt",
@@ -13067,6 +13046,12 @@
             "chests/stronghold_corridor"
         ],
         "geometryMap": {
+            "geometry.frog": [
+                "minecraft:frog<default>"
+            ],
+            "geometry.tadpole": [
+                "minecraft:tadpole<default>"
+            ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>"
             ],
@@ -13458,6 +13443,33 @@
             ]
         },
         "animationMap": {
+            "animation.frog.croak": [
+                "minecraft:frog<croak>"
+            ],
+            "animation.frog.walk": [
+                "minecraft:frog<walk>"
+            ],
+            "animation.frog.jump": [
+                "minecraft:frog<jump>"
+            ],
+            "animation.frog.fall": [
+                "minecraft:frog<fall>"
+            ],
+            "animation.frog.jump.up": [
+                "minecraft:frog<jump_up>"
+            ],
+            "animation.frog.tongue": [
+                "minecraft:frog<tongue>"
+            ],
+            "animation.frog.swim": [
+                "minecraft:frog<swim>"
+            ],
+            "animation.frog.idle.water": [
+                "minecraft:frog<idle_water>"
+            ],
+            "animation.tadpole.swim": [
+                "minecraft:tadpole<swim>"
+            ],
             "animation.actor.billboard": [
                 "minecraft:dragon_fireball<face_player>",
                 "minecraft:egg<flying>",
@@ -14022,6 +14034,7 @@
                 "minecraft:elder_guardian<look_at_target>",
                 "minecraft:evocation_illager<look_at_target>",
                 "minecraft:fox<look_at_target>",
+                "minecraft:frog<look_at_target>",
                 "minecraft:guardian<look_at_target>",
                 "minecraft:iron_golem<look_at_target>",
                 "minecraft:llama<look_at_target>",
@@ -14666,9 +14679,22 @@
             ],
             "animation.humanoid.holding_spyglass": [],
             "animation.spyglass.holding": [],
-            "animation.spyglass.scoping": []
+            "animation.spyglass.scoping": [],
+            "animation.player.first_person.shield_block": []
         },
         "animationControllerMap": {
+            "controller.animation.frog.general": [
+                "minecraft:frog<general>"
+            ],
+            "controller.animation.frog.eat_mob": [
+                "minecraft:frog<eat_mob>"
+            ],
+            "controller.animation.frog.croaking": [
+                "minecraft:frog<croaking>"
+            ],
+            "controller.animation.tadpole.general": [
+                "minecraft:tadpole<general>"
+            ],
             "controller.animation.agent.move": [
                 "minecraft:agent<move_controller>"
             ],
@@ -15165,6 +15191,12 @@
             ]
         },
         "renderControllerMap": {
+            "controller.render.frog": [
+                "minecraft:frog"
+            ],
+            "controller.render.tadpole": [
+                "minecraft:tadpole"
+            ],
             "controller.render.agent": [
                 "minecraft:agent"
             ],
@@ -15495,6 +15527,7 @@
             "controller.render.goat": [
                 "minecraft:goat"
             ],
+            "controller.render.iron_golem_cracks": [],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -15502,15 +15535,6 @@
             ]
         },
         "entityEventsMap": {
-            "become_witch": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
-            "become_zombie": [
-                "minecraft:pig",
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
             "minecraft:entity_spawned": [
                 "minecraft:arrow",
                 "minecraft:axolotl",
@@ -15530,6 +15554,7 @@
                 "minecraft:enderman",
                 "minecraft:fishing_hook",
                 "minecraft:fox",
+                "minecraft:frog",
                 "minecraft:glow_squid",
                 "minecraft:goat",
                 "minecraft:hoglin",
@@ -15578,18 +15603,14 @@
                 "minecraft:zombie_villager",
                 "minecraft:zombie_villager_v2"
             ],
-            "minecraft:spawn_from_village": [
-                "minecraft:cat",
-                "minecraft:villager_v2"
+            "attack_cooldown_complete_event": [
+                "minecraft:axolotl",
+                "minecraft:goat",
+                "minecraft:hoglin",
+                "minecraft:piglin"
             ],
-            "minecraft:entity_transformed": [
-                "minecraft:cow",
-                "minecraft:villager",
-                "minecraft:villager_v2",
-                "minecraft:zoglin",
-                "minecraft:zombie_pigman",
-                "minecraft:zombie_villager",
-                "minecraft:zombie_villager_v2"
+            "killed_enemy_event": [
+                "minecraft:axolotl"
             ],
             "minecraft:entity_born": [
                 "minecraft:axolotl",
@@ -15618,26 +15639,6 @@
                 "minecraft:villager_v2",
                 "minecraft:wolf"
             ],
-            "minecraft:spawn_farmer": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
-            "minecraft:spawn_librarian": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
-            "minecraft:spawn_cleric": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
-            "minecraft:spawn_armorer": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
-            "minecraft:spawn_butcher": [
-                "minecraft:villager",
-                "minecraft:villager_v2"
-            ],
             "minecraft:ageable_grow_up": [
                 "minecraft:axolotl",
                 "minecraft:bee",
@@ -15664,6 +15665,85 @@
                 "minecraft:villager_v2",
                 "minecraft:wolf",
                 "minecraft:zombie_horse"
+            ],
+            "stop_drying_out": [
+                "minecraft:axolotl"
+            ],
+            "start_drying_out": [
+                "minecraft:axolotl"
+            ],
+            "dried_out": [
+                "minecraft:axolotl",
+                "minecraft:dolphin"
+            ],
+            "recover_after_dried_out": [
+                "minecraft:axolotl",
+                "minecraft:dolphin"
+            ],
+            "enter_water": [
+                "minecraft:axolotl"
+            ],
+            "spawn_temperate": [
+                "minecraft:frog"
+            ],
+            "spawn_cold": [
+                "minecraft:frog"
+            ],
+            "spawn_warm": [
+                "minecraft:frog"
+            ],
+            "minecraft:entity_transformed": [
+                "minecraft:cow",
+                "minecraft:frog",
+                "minecraft:villager",
+                "minecraft:villager_v2",
+                "minecraft:zoglin",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager",
+                "minecraft:zombie_villager_v2"
+            ],
+            "become_pregnant": [
+                "minecraft:frog"
+            ],
+            "laid_egg": [
+                "minecraft:frog"
+            ],
+            "ageable_grow_up": [
+                "minecraft:dolphin",
+                "minecraft:tadpole"
+            ],
+            "become_witch": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "become_zombie": [
+                "minecraft:pig",
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_from_village": [
+                "minecraft:cat",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_farmer": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_librarian": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_cleric": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_armorer": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
+            ],
+            "minecraft:spawn_butcher": [
+                "minecraft:villager",
+                "minecraft:villager_v2"
             ],
             "minecraft:become_unskilled": [
                 "minecraft:villager_v2"
@@ -15899,6 +15979,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -15906,6 +15988,8 @@
                 "minecraft:evocation_illager",
                 "minecraft:pillager",
                 "minecraft:ravager",
+                "minecraft:villager",
+                "minecraft:villager_v2",
                 "minecraft:vindicator",
                 "minecraft:witch"
             ],
@@ -16481,12 +16565,6 @@
             "escaped_event": [
                 "minecraft:hoglin"
             ],
-            "attack_cooldown_complete_event": [
-                "minecraft:axolotl",
-                "minecraft:goat",
-                "minecraft:hoglin",
-                "minecraft:piglin"
-            ],
             "spawn_adult_no_hunting": [
                 "minecraft:piglin"
             ],
@@ -16557,9 +16635,6 @@
             "minecraft:sink": [
                 "minecraft:boat"
             ],
-            "ageable_grow_up": [
-                "minecraft:dolphin"
-            ],
             "become_angry": [
                 "minecraft:dolphin"
             ],
@@ -16570,10 +16645,6 @@
                 "minecraft:dolphin"
             ],
             "start_dryingout": [
-                "minecraft:dolphin"
-            ],
-            "dried_out": [
-                "minecraft:axolotl",
                 "minecraft:dolphin"
             ],
             "navigation_on_land": [
@@ -16596,22 +16667,6 @@
             ],
             "minecraft:spawn_baby": [
                 "minecraft:llama"
-            ],
-            "killed_enemy_event": [
-                "minecraft:axolotl"
-            ],
-            "stop_drying_out": [
-                "minecraft:axolotl"
-            ],
-            "start_drying_out": [
-                "minecraft:axolotl"
-            ],
-            "recover_after_dried_out": [
-                "minecraft:axolotl",
-                "minecraft:dolphin"
-            ],
-            "enter_water": [
-                "minecraft:axolotl"
             ],
             "minecraft:born_default": [
                 "minecraft:goat"
@@ -16637,9 +16692,163 @@
                 "minecraft:ravager",
                 "minecraft:vindicator",
                 "minecraft:witch"
+            ],
+            "spawn_small": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_medium": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
+            ],
+            "spawn_large": [
+                "minecraft:magma_cube",
+                "minecraft:slime"
             ]
         },
         "entityFamilyMap": {
+            "axolotl": [
+                "minecraft:axolotl"
+            ],
+            "mob": [
+                "minecraft:armor_stand",
+                "minecraft:axolotl",
+                "minecraft:bat",
+                "minecraft:bee",
+                "minecraft:bee<countdown_to_perish>",
+                "minecraft:blaze",
+                "minecraft:cat",
+                "minecraft:cave_spider",
+                "minecraft:chicken",
+                "minecraft:cow",
+                "minecraft:creeper",
+                "minecraft:dolphin",
+                "minecraft:donkey",
+                "minecraft:drowned",
+                "minecraft:elder_guardian",
+                "minecraft:ender_dragon",
+                "minecraft:enderman",
+                "minecraft:endermite",
+                "minecraft:evocation_illager",
+                "minecraft:fox",
+                "minecraft:frog",
+                "minecraft:ghast",
+                "minecraft:glow_squid",
+                "minecraft:guardian",
+                "minecraft:hoglin<huntable_adult>",
+                "minecraft:hoglin<minecraft:hoglin_baby>",
+                "minecraft:hoglin<unhuntable_adult>",
+                "minecraft:horse",
+                "minecraft:husk",
+                "minecraft:iron_golem",
+                "minecraft:llama",
+                "minecraft:magma_cube",
+                "minecraft:mooshroom",
+                "minecraft:mule",
+                "minecraft:npc",
+                "minecraft:ocelot",
+                "minecraft:panda<minecraft:panda_aggressive>",
+                "minecraft:parrot<minecraft:parrot_tame>",
+                "minecraft:parrot<minecraft:parrot_wild>",
+                "minecraft:phantom",
+                "minecraft:pig",
+                "minecraft:pillager",
+                "minecraft:polar_bear",
+                "minecraft:rabbit",
+                "minecraft:ravager",
+                "minecraft:sheep",
+                "minecraft:shulker",
+                "minecraft:silverfish",
+                "minecraft:skeleton",
+                "minecraft:skeleton_horse",
+                "minecraft:slime",
+                "minecraft:snow_golem",
+                "minecraft:spider",
+                "minecraft:squid",
+                "minecraft:stray",
+                "minecraft:strider",
+                "minecraft:strider<minecraft:strider_adult>",
+                "minecraft:strider<minecraft:strider_baby>",
+                "minecraft:tadpole",
+                "minecraft:tripod_camera",
+                "minecraft:turtle<minecraft:adult>",
+                "minecraft:turtle<minecraft:baby>",
+                "minecraft:vex",
+                "minecraft:villager",
+                "minecraft:villager<armorer>",
+                "minecraft:villager<butcher>",
+                "minecraft:villager<cartographer>",
+                "minecraft:villager<cleric>",
+                "minecraft:villager<farmer>",
+                "minecraft:villager<fisherman>",
+                "minecraft:villager<fletcher>",
+                "minecraft:villager<leatherworker>",
+                "minecraft:villager<librarian>",
+                "minecraft:villager<shepherd>",
+                "minecraft:villager<toolsmith>",
+                "minecraft:villager<weaponsmith>",
+                "minecraft:villager_v2",
+                "minecraft:villager_v2<armorer>",
+                "minecraft:villager_v2<butcher>",
+                "minecraft:villager_v2<cartographer>",
+                "minecraft:villager_v2<cleric>",
+                "minecraft:villager_v2<farmer>",
+                "minecraft:villager_v2<fisherman>",
+                "minecraft:villager_v2<fletcher>",
+                "minecraft:villager_v2<leatherworker>",
+                "minecraft:villager_v2<librarian>",
+                "minecraft:villager_v2<mason>",
+                "minecraft:villager_v2<nitwit>",
+                "minecraft:villager_v2<shepherd>",
+                "minecraft:villager_v2<toolsmith>",
+                "minecraft:villager_v2<unskilled>",
+                "minecraft:villager_v2<weaponsmith>",
+                "minecraft:vindicator",
+                "minecraft:wandering_trader",
+                "minecraft:wandering_trader<despawning>",
+                "minecraft:witch",
+                "minecraft:wither",
+                "minecraft:wither_skeleton",
+                "minecraft:wolf",
+                "minecraft:zoglin<zoglin_adult>",
+                "minecraft:zoglin<zoglin_baby>",
+                "minecraft:zombie",
+                "minecraft:zombie_horse",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager<armorer>",
+                "minecraft:zombie_villager<butcher>",
+                "minecraft:zombie_villager<cartographer>",
+                "minecraft:zombie_villager<cleric>",
+                "minecraft:zombie_villager<farmer>",
+                "minecraft:zombie_villager<fisherman>",
+                "minecraft:zombie_villager<fletcher>",
+                "minecraft:zombie_villager<leatherworker>",
+                "minecraft:zombie_villager<librarian>",
+                "minecraft:zombie_villager<shepherd>",
+                "minecraft:zombie_villager<toolsmith>",
+                "minecraft:zombie_villager<weaponsmith>",
+                "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<butcher>",
+                "minecraft:zombie_villager_v2<cartographer>",
+                "minecraft:zombie_villager_v2<cleric>",
+                "minecraft:zombie_villager_v2<farmer>",
+                "minecraft:zombie_villager_v2<fisherman>",
+                "minecraft:zombie_villager_v2<fletcher>",
+                "minecraft:zombie_villager_v2<leatherworker>",
+                "minecraft:zombie_villager_v2<librarian>",
+                "minecraft:zombie_villager_v2<mason>",
+                "minecraft:zombie_villager_v2<nitwit>",
+                "minecraft:zombie_villager_v2<shepherd>",
+                "minecraft:zombie_villager_v2<toolsmith>",
+                "minecraft:zombie_villager_v2<unskilled>",
+                "minecraft:zombie_villager_v2<weaponsmith>"
+            ],
+            "frog": [
+                "minecraft:frog"
+            ],
+            "tadpole": [
+                "minecraft:tadpole"
+            ],
             "villager": [
                 "minecraft:villager",
                 "minecraft:villager<armorer>",
@@ -16965,137 +17174,6 @@
                 "minecraft:tnt_minecart",
                 "minecraft:tripod_camera"
             ],
-            "mob": [
-                "minecraft:armor_stand",
-                "minecraft:axolotl",
-                "minecraft:bat",
-                "minecraft:bee",
-                "minecraft:bee<countdown_to_perish>",
-                "minecraft:blaze",
-                "minecraft:cat",
-                "minecraft:cave_spider",
-                "minecraft:chicken",
-                "minecraft:cow",
-                "minecraft:creeper",
-                "minecraft:dolphin",
-                "minecraft:donkey",
-                "minecraft:drowned",
-                "minecraft:elder_guardian",
-                "minecraft:ender_dragon",
-                "minecraft:enderman",
-                "minecraft:endermite",
-                "minecraft:evocation_illager",
-                "minecraft:fox",
-                "minecraft:ghast",
-                "minecraft:glow_squid",
-                "minecraft:guardian",
-                "minecraft:hoglin<huntable_adult>",
-                "minecraft:hoglin<minecraft:hoglin_baby>",
-                "minecraft:hoglin<unhuntable_adult>",
-                "minecraft:horse",
-                "minecraft:husk",
-                "minecraft:iron_golem",
-                "minecraft:llama",
-                "minecraft:magma_cube",
-                "minecraft:mooshroom",
-                "minecraft:mule",
-                "minecraft:npc",
-                "minecraft:ocelot",
-                "minecraft:panda<minecraft:panda_aggressive>",
-                "minecraft:parrot<minecraft:parrot_tame>",
-                "minecraft:parrot<minecraft:parrot_wild>",
-                "minecraft:phantom",
-                "minecraft:pig",
-                "minecraft:pillager",
-                "minecraft:polar_bear",
-                "minecraft:rabbit",
-                "minecraft:ravager",
-                "minecraft:sheep",
-                "minecraft:shulker",
-                "minecraft:silverfish",
-                "minecraft:skeleton",
-                "minecraft:skeleton_horse",
-                "minecraft:slime",
-                "minecraft:snow_golem",
-                "minecraft:spider",
-                "minecraft:squid",
-                "minecraft:stray",
-                "minecraft:strider",
-                "minecraft:strider<minecraft:strider_adult>",
-                "minecraft:strider<minecraft:strider_baby>",
-                "minecraft:tripod_camera",
-                "minecraft:turtle<minecraft:adult>",
-                "minecraft:turtle<minecraft:baby>",
-                "minecraft:vex",
-                "minecraft:villager",
-                "minecraft:villager<armorer>",
-                "minecraft:villager<butcher>",
-                "minecraft:villager<cartographer>",
-                "minecraft:villager<cleric>",
-                "minecraft:villager<farmer>",
-                "minecraft:villager<fisherman>",
-                "minecraft:villager<fletcher>",
-                "minecraft:villager<leatherworker>",
-                "minecraft:villager<librarian>",
-                "minecraft:villager<shepherd>",
-                "minecraft:villager<toolsmith>",
-                "minecraft:villager<weaponsmith>",
-                "minecraft:villager_v2",
-                "minecraft:villager_v2<armorer>",
-                "minecraft:villager_v2<butcher>",
-                "minecraft:villager_v2<cartographer>",
-                "minecraft:villager_v2<cleric>",
-                "minecraft:villager_v2<farmer>",
-                "minecraft:villager_v2<fisherman>",
-                "minecraft:villager_v2<fletcher>",
-                "minecraft:villager_v2<leatherworker>",
-                "minecraft:villager_v2<librarian>",
-                "minecraft:villager_v2<mason>",
-                "minecraft:villager_v2<nitwit>",
-                "minecraft:villager_v2<shepherd>",
-                "minecraft:villager_v2<toolsmith>",
-                "minecraft:villager_v2<unskilled>",
-                "minecraft:villager_v2<weaponsmith>",
-                "minecraft:vindicator",
-                "minecraft:wandering_trader",
-                "minecraft:wandering_trader<despawning>",
-                "minecraft:witch",
-                "minecraft:wither",
-                "minecraft:wither_skeleton",
-                "minecraft:wolf",
-                "minecraft:zoglin<zoglin_adult>",
-                "minecraft:zoglin<zoglin_baby>",
-                "minecraft:zombie",
-                "minecraft:zombie_horse",
-                "minecraft:zombie_pigman",
-                "minecraft:zombie_villager<armorer>",
-                "minecraft:zombie_villager<butcher>",
-                "minecraft:zombie_villager<cartographer>",
-                "minecraft:zombie_villager<cleric>",
-                "minecraft:zombie_villager<farmer>",
-                "minecraft:zombie_villager<fisherman>",
-                "minecraft:zombie_villager<fletcher>",
-                "minecraft:zombie_villager<leatherworker>",
-                "minecraft:zombie_villager<librarian>",
-                "minecraft:zombie_villager<shepherd>",
-                "minecraft:zombie_villager<toolsmith>",
-                "minecraft:zombie_villager<weaponsmith>",
-                "minecraft:zombie_villager_v2<armorer>",
-                "minecraft:zombie_villager_v2<butcher>",
-                "minecraft:zombie_villager_v2<cartographer>",
-                "minecraft:zombie_villager_v2<cleric>",
-                "minecraft:zombie_villager_v2<farmer>",
-                "minecraft:zombie_villager_v2<fisherman>",
-                "minecraft:zombie_villager_v2<fletcher>",
-                "minecraft:zombie_villager_v2<leatherworker>",
-                "minecraft:zombie_villager_v2<librarian>",
-                "minecraft:zombie_villager_v2<mason>",
-                "minecraft:zombie_villager_v2<nitwit>",
-                "minecraft:zombie_villager_v2<shepherd>",
-                "minecraft:zombie_villager_v2<toolsmith>",
-                "minecraft:zombie_villager_v2<unskilled>",
-                "minecraft:zombie_villager_v2<weaponsmith>"
-            ],
             "bat": [
                 "minecraft:bat"
             ],
@@ -17388,9 +17466,6 @@
             ],
             "zoglin_adult": [
                 "minecraft:zoglin<zoglin_adult>"
-            ],
-            "axolotl": [
-                "minecraft:axolotl"
             ],
             "lightweight": [
                 "minecraft:endermite",
