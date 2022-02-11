@@ -9,25 +9,26 @@ const {
 } = require("../util/common");
 
 function parseMinecraftLang(target, langContent) {
-    langContent.split(/(?:\n|\r)+/)
-        .forEach((line) => {
-            let lineEnd, equPos;
-            line = line.trimStart();
-            lineEnd = line.indexOf("\t");
-            if (lineEnd >= 0) line = line.slice(0, lineEnd);
-            lineEnd = line.indexOf("##");
-            if (lineEnd >= 0) line = line.slice(0, lineEnd);
-            equPos = line.indexOf("=");
-            if (equPos > 0 && equPos < line.length - 1) {
-                target[line.slice(0, equPos)] = line.slice(equPos + 1);
-            }
-        });
+    langContent.split(/(?:\n|\r)+/).forEach((line) => {
+        let lineEnd, equPos;
+        line = line.trimStart();
+        lineEnd = line.indexOf("\t");
+        if (lineEnd >= 0) line = line.slice(0, lineEnd);
+        lineEnd = line.indexOf("##");
+        if (lineEnd >= 0) line = line.slice(0, lineEnd);
+        equPos = line.indexOf("=");
+        if (equPos > 0 && equPos < line.length - 1) {
+            target[line.slice(0, equPos)] = line.slice(equPos + 1);
+        }
+    });
 }
 
 function analyzeApkPackageLang(packageZip) {
-    const entries = packageZip.getEntries(), langZh = {}, langEn = {};
+    const entries = packageZip.getEntries();
+    const langZh = {};
+    const langEn = {};
     console.log("Analyzing package entries for language file...");
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
         const entryName = entry.entryName;
         if (entryName.match(/^assets\/resource_packs\/(?:[^\/]+)\/texts\/zh_CN\.lang$/)) {
             parseMinecraftLang(langZh, entry.getData().toString("utf-8"));
@@ -37,15 +38,15 @@ function analyzeApkPackageLang(packageZip) {
         }
     });
     return {
-        "zh_cn": langZh,
-        "en_us": langEn
+        zh_cn: langZh,
+        en_us: langEn
     };
 }
 
 const branchEntryNameKeywords = {
-    "vanilla": [ "vanilla" ],
-    "education": [ "vanilla", "chemistry", "education" ],
-    "experiment": [ "vanilla", "experiment", "test" ]
+    vanilla: ["assets/definitions/", "vanilla"],
+    education: ["assets/definitions/", "vanilla", "chemistry", "education"],
+    experiment: ["assets/definitions/", "vanilla", "experiment", "test"]
 };
 const entryAnalyzer = [
     {
@@ -100,10 +101,7 @@ const entryAnalyzer = [
                 if (!existDefData) {
                     entityDefinitionMap[id] = defData;
                 } else {
-                    if (compareMinecraftVersion(
-                        minEngineVersion,
-                        existDefData.minEngineVersion
-                    ) > 0) {
+                    if (compareMinecraftVersion(minEngineVersion, existDefData.minEngineVersion) > 0) {
                         entityDefinitionMap[id] = defData;
                     }
                 }
@@ -111,12 +109,7 @@ const entryAnalyzer = [
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
         },
-        versionsGroups: [
-            [
-                "1.8.0",
-                "1.10.0"
-            ]
-        ]
+        versionsGroups: [["1.8.0", "1.10.0"]]
     },
     {
         name: "geometry",
@@ -126,7 +119,7 @@ const entryAnalyzer = [
             const { geometryMap } = results;
             const formatVersion = geometry["format_version"];
             if (this.versionsGroups[0].includes(formatVersion)) {
-                Object.keys(geometry).forEach(geometryId => {
+                Object.keys(geometry).forEach((geometryId) => {
                     if (geometryId == "format_version") return;
                     const colonPos = geometryId.indexOf(":");
                     if (colonPos > 0) {
@@ -136,7 +129,7 @@ const entryAnalyzer = [
                 });
             } else if (this.versionsGroups[1].includes(formatVersion)) {
                 if (Array.isArray(geometry["minecraft:geometry"])) {
-                    geometry["minecraft:geometry"].forEach(data => {
+                    geometry["minecraft:geometry"].forEach((data) => {
                         geometryMap[data["description"]["identifier"]] = [];
                     });
                 }
@@ -145,17 +138,8 @@ const entryAnalyzer = [
             }
         },
         versionsGroups: [
-            [
-                undefined,
-                "1.8.0",
-                "1.10.0"
-            ],
-            [
-                "1.12.0",
-                "1.13.0",
-                "1.14.0",
-                "1.16.0"
-            ]
+            [undefined, "1.8.0", "1.10.0"],
+            ["1.12.0", "1.13.0", "1.14.0", "1.16.0"]
         ]
     },
     {
@@ -166,7 +150,7 @@ const entryAnalyzer = [
             const { animationMap } = results;
             const formatVersion = animations["format_version"];
             if (formatVersion == "1.8.0" || formatVersion == "1.10.0") {
-                Object.keys(animations["animations"]).forEach(animationId => {
+                Object.keys(animations["animations"]).forEach((animationId) => {
                     animationMap[animationId] = [];
                 });
             } else {
@@ -182,7 +166,7 @@ const entryAnalyzer = [
             const { animationControllerMap } = results;
             const formatVersion = animationControllers["format_version"];
             if (formatVersion == "1.10.0") {
-                Object.keys(animationControllers["animation_controllers"]).forEach(controllerId => {
+                Object.keys(animationControllers["animation_controllers"]).forEach((controllerId) => {
                     animationControllerMap[controllerId] = [];
                 });
             } else {
@@ -198,22 +182,15 @@ const entryAnalyzer = [
             const { renderControllerMap } = results;
             const formatVersion = renderControllers["format_version"];
             if (this.versionsGroups[0].includes(formatVersion)) {
-                Object.keys(renderControllers["render_controllers"]).forEach(controllerId => {
+                Object.keys(renderControllers["render_controllers"]).forEach((controllerId) => {
                     renderControllerMap[controllerId] = [];
                 });
             } else {
                 console.warn("Unknown format version: " + formatVersion + " - " + entryName);
             }
         },
-        versionsGroups: [
-            [
-                "1.8.0",
-                "1.10",
-                "1.10.0"
-            ]
-        ]
+        versionsGroups: [["1.8.0", "1.10", "1.10.0"]]
     },
-    
     {
         name: "fog",
         type: "json",
@@ -242,17 +219,17 @@ const entryAnalyzer = [
                 const events = Object.keys(entity["minecraft:entity"]["events"] ?? {});
                 const globalComponents = entity["minecraft:entity"]["components"] ?? {};
                 const componentGroups = entity["minecraft:entity"]["component_groups"] ?? {};
-                events.forEach(event => {
+                events.forEach((event) => {
                     let eventOwners = entityEventsMap[event];
                     if (!eventOwners) eventOwners = entityEventsMap[event] = [];
                     eventOwners.push(id);
                 });
-                [ null, ...Object.keys(componentGroups) ].forEach(componentName => {
+                [null, ...Object.keys(componentGroups)].forEach((componentName) => {
                     const groupId = componentName ? `${id}<${componentName}>` : id;
                     const components = componentName ? componentGroups[componentName] : globalComponents;
                     const typeFamilyObj = components["minecraft:type_family"]?.family ?? [];
                     const typeFamilies = JSON.CommentArray.isArray(typeFamilyObj) ? typeFamilyObj : [typeFamilyObj];
-                    typeFamilies.forEach(familyName => {
+                    typeFamilies.forEach((familyName) => {
                         let familyMembers = entityFamilyMap[familyName];
                         if (!familyMembers) familyMembers = entityFamilyMap[familyName] = [];
                         familyMembers.push(groupId);
@@ -290,6 +267,46 @@ const entryAnalyzer = [
                 lootTables.push(match[1]);
             }
         }
+    },
+    {
+        name: "feature",
+        type: "json",
+        regexList: [
+            /^assets\/definitions\/features\/(?:[^\/]+)\.json$/,
+            /^assets\/behavior_packs\/(?:[^\/]+)\/features\/(.+)\.json$/
+        ],
+        analyze(results, entryName, feature) {
+            const { features } = results;
+            const formatVersion = feature["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                forEachObject(feature, (v, k) => {
+                    if (typeof v == "object") {
+                        features.push(v["description"]["identifier"]);
+                    }
+                });
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        },
+        versionsGroups: [["1.13.0", "1.14.0", "1.16.0", "1.16.100"]]
+    },
+    {
+        name: "featureRule",
+        type: "json",
+        regexList: [
+            /^assets\/definitions\/feature_rules\/(?:[^\/]+)\.json$/,
+            /^assets\/behavior_packs\/(?:[^\/]+)\/feature_rules\/(.+)\.json$/
+        ],
+        analyze(results, entryName, featureRule) {
+            const { featureRules } = results;
+            const formatVersion = featureRule["format_version"];
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                featureRules.push(featureRule["minecraft:feature_rules"]["description"]["identifier"]);
+            } else {
+                console.warn("Unknown format version: " + formatVersion + " - " + entryName);
+            }
+        },
+        versionsGroups: [["1.13.0", "1.14.0", "1.16.0", "1.16.100"]]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {
@@ -303,6 +320,8 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         particleEmitters: [],
         fogs: [],
         lootTables: [],
+        features: [],
+        featureRules: [],
         geometryMap: {},
         animationMap: {},
         animationControllerMap: {},
@@ -311,30 +330,33 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         entityFamilyMap: {}
     };
     console.log("[" + branchId + "]Analyzing package entries for data enums...");
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
         const entryName = entry.entryName;
-        if (!entryNameKeywords.some(keyword => entryName.includes(keyword))) return;
-        const analyzer = entryAnalyzer.find(e => e.regex.test(entryName));
+        const analyzer = entryAnalyzer.find((e) => {
+            if (e.regex) {
+                return e.regex.test(entryName);
+            } else if (e.regexList) {
+                return e.regexList.some((regex) => regex.test(entryName));
+            } else if (e.filter) {
+                return e.filter(entryName, entry);
+            }
+        });
         if (analyzer) {
+            if (!entryNameKeywords.some((keyword) => entryName.includes(keyword))) return;
             let entryData = entry.getData();
             if (analyzer.type == "json") {
                 entryData = JSON.parse(entryData.toString("utf8"));
             }
             try {
                 analyzer.analyze(results, entryName, entryData);
-            } catch(err) {
+            } catch (err) {
                 console.error("Analyze Error: " + entryName);
                 console.error(err);
             }
         }
     });
     forEachObject(results.internal.entityDefinitionMap, (definition, entityId) => {
-        const {
-            geometryMap,
-            animationMap,
-            animationControllerMap,
-            renderControllerMap
-        } = results;
+        const { geometryMap, animationMap, animationControllerMap, renderControllerMap } = results;
         forEachObject(definition.geometry, (ref, action) => {
             if (!geometryMap[ref]) {
                 geometryMap[ref] = [];
@@ -354,7 +376,7 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
                 animationMap[ref].push(`${entityId}<${action}>`);
             }
         });
-        definition.animationControllers.forEach(controllerGroup => {
+        definition.animationControllers.forEach((controllerGroup) => {
             forEachObject(controllerGroup, (ref, action) => {
                 if (!animationControllerMap[ref]) {
                     animationControllerMap[ref] = [];
@@ -362,40 +384,26 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
                 animationControllerMap[ref].push(`${entityId}<${action}>`);
             });
         });
-        definition.renderControllers.forEach(renderController => {
+        definition.renderControllers.forEach((renderController) => {
             if (!renderControllerMap[renderController]) {
                 renderControllerMap[renderController] = [];
             }
             renderControllerMap[renderController].push(`${entityId}`);
         });
     });
-    [
-        "sounds",
-        "particleEmitters",
-        "entityEventsMap",
-        "entityFamilyMap",
-        "geometryMap",
-        "animationMap",
-        "animationControllerMap",
-        "renderControllerMap"
-    ].forEach(e => {
-        if (e.endsWith("Map")) {
-            forEachObject(results[e], (value) => {
+    forEachObject(results, (v, k) => {
+        if (k.endsWith("Map")) {
+            forEachObject(v, (value) => {
                 uniqueAndSort(value);
             });
-        } else {
-            uniqueAndSort(results[e]);
+        } else if (k != "internal") {
+            uniqueAndSort(v);
         }
     });
-    return filterObjectMap(results, k => k != "internal");
+    return filterObjectMap(results, (k) => k != "internal");
 }
 
-const apksInstallPack = [
-    "install_pack.apk",
-    "split_install_pack.apk",
-    "com.mojang.minecraftpe.apk",
-    "base.apk"
-];
+const apksInstallPack = ["install_pack.apk", "split_install_pack.apk", "com.mojang.minecraftpe.apk", "base.apk"];
 function extractInstallPack(packagePath) {
     if (packagePath.endsWith(".apks")) {
         const packageZip = new AdmZip(packagePath);
@@ -434,7 +442,7 @@ function analyzePackageDataEnumsCached(cx) {
         const data = {
             vanilla: analyzeApkPackageDataEnums(installPack, "vanilla"),
             education: analyzeApkPackageDataEnums(installPack, "education"),
-            experiment: analyzeApkPackageDataEnums(installPack, "experiment"),
+            experiment: analyzeApkPackageDataEnums(installPack, "experiment")
         };
         return {
             data: cachedOutput(`version.${version}.package.data`, data),
