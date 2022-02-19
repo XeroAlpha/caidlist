@@ -21,7 +21,7 @@ module.exports = {
         return testMinecraftVersionInRange(packageVersion, "1.18.20.21", "*");
     },
     placefeatureCommand(packageVersion) {
-        return testMinecraftVersionInRange(packageVersion, "1.18.20.25", "*");
+        return testMinecraftVersionInRange(packageVersion, "1.18.20.25", "1.18.20.26");
     },
     mcpews(versionType) {
         return versionType != "netease" && versionType != "netease_dev";

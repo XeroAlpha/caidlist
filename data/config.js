@@ -63,22 +63,22 @@ exports.packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: "1.18.10.04",
+        version: "1.18.12.01",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.10.04.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.12.01.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment"],
-        config: smallerGUIOCROptions
+        config: smallestGUIOCROptions
     },
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.18.20.25",
+        version: "1.18.20.27",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.20.25.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.20.27.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
-        config: smallerGUIOCROptions
+        config: smallestGUIOCROptions
     },
     // 中国版测试版
     netease_dev: {
