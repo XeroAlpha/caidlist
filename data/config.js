@@ -73,9 +73,9 @@ exports.packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.18.20.27",
+        version: "1.18.20.29",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.20.27.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.20.29.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator"],
         config: smallestGUIOCROptions
