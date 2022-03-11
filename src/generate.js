@@ -384,6 +384,12 @@ const versionInfoMap = {
         description:
             "由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。",
         sortOrder: 3
+    },
+    bds: {
+        name: "专用服务器",
+        description: "与正式版同步更新",
+        sortOrder: 4,
+        disablePackageInspect: true
     }
 };
 const branchInfoMap = {

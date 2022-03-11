@@ -44,7 +44,7 @@ function analyzeApkPackageLang(packageZip) {
 }
 
 const branchEntryNameKeywords = {
-    vanilla: ["assets/definitions/", "vanilla"],
+    vanilla: ["assets/definitions/", "vanilla", "~gametest"],
     education: ["assets/definitions/", "vanilla", "chemistry", "education"],
     experiment: ["assets/definitions/", "vanilla", "experiment", "test"]
 };
@@ -312,6 +312,8 @@ const entryAnalyzer = [
 function analyzeApkPackageDataEnums(packageZip, branchId) {
     const entries = packageZip.getEntries();
     const entryNameKeywords = branchEntryNameKeywords[branchId] || [];
+    const entryNameAllowKeywords = entryNameKeywords.filter(e => !e.startsWith("~"));
+    const entryNameDenyKeywords = entryNameKeywords.filter(e => e.startsWith("~")).map(e => e.slice(1));
     const results = {
         internal: {
             entityDefinitionMap: {}
@@ -342,7 +344,8 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             }
         });
         if (analyzer) {
-            if (!entryNameKeywords.some((keyword) => entryName.includes(keyword))) return;
+            if (entryNameDenyKeywords.some((keyword) => entryName.includes(keyword))) return;
+            if (entryNameAllowKeywords.every((keyword) => !entryName.includes(keyword))) return;
             let entryData = entry.getData();
             if (analyzer.type == "json") {
                 entryData = JSON.parse(entryData.toString("utf8"));

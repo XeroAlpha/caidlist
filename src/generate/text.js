@@ -11,9 +11,13 @@ const {
 
 const lineBreak = "\r\n";
 
-const skipTransMapKey = ["lootTableWrapped", "music", "summonableEntity", "lootTool"];
+const redundantEnumKey = ["lootTableWrapped", "music", "summonableEntity", "lootTool"];
+const skipEnumKey = ["command", "blockState"];
 function filterRedundantEnums(transMaps) {
-    return filterObjectMap(transMaps, (k) => !skipTransMapKey.includes(k));
+    return filterObjectMap(transMaps, (k) => !redundantEnumKey.includes(k));
+}
+function filterSkippedEnums(transMaps) {
+    return filterObjectMap(transMaps, (k) => !skipEnumKey.includes(k));
 }
 
 const entityNameAlias = {
@@ -81,7 +85,7 @@ function writeTransMapTextZip(cx, options) {
         "※详见：https://gitee.com/projectxero/caidlist"
     ];
     let entityEventSplit, stdTransText;
-    const enums = deepCopy(filterRedundantEnums(transMaps));
+    const enums = deepCopy(filterSkippedEnums(filterRedundantEnums(transMaps)));
     if (originalEnums) {
         const entityEventByEntity = fixEntityRelatedIds(enums.entityEvent, originalEnums.entityEventsMap, enums.entity);
         fixEntityRelatedIds(
