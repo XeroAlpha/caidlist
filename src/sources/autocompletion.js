@@ -214,6 +214,7 @@ async function analyzeCommandAutocompletionSync(cx, device, screen, command, pro
             } catch(err) {
                 // 跳过重复ID
                 await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
+                throw err;
             }
         });
 
@@ -300,7 +301,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
 }
 
 async function analyzeAutocompletionEnumsCached(cx) {
-    const { version, branch, packageVersion } = cx;
+    const { version, branch, packageVersion, coreVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}`;
     const cache = cachedOutput(cacheId);
     if (cache && packageVersion == cache.packageVersion) return cache;
@@ -345,19 +346,19 @@ async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, "entity slots", "/replaceitem entity @s ", ["["]);
     await analyzeAutocompletionEnumCached(cx, options, "selectors", "/testfor @e[");
 
-    if (support.lootCommand(packageVersion)) {
+    if (support.lootCommand(coreVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "loot tools", "/loot spawn ~ ~ ~ loot empty ", [
             "mainhand",
             "offhand"
         ]);
     }
-    if (support.damageCommand(packageVersion)) {
+    if (support.damageCommand(coreVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "damage causes", "/damage @s 0 ");
     }
-    if (support.hasItemSelectorParam(packageVersion)) {
+    if (support.hasItemSelectorParam(coreVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "item with aliases", "/testfor @e[hasitem={item=");
     }
-    if (support.placefeatureCommand(packageVersion)) {
+    if (support.placefeatureCommand(coreVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, "features and rules", "/placefeature ");
     }
 

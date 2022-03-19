@@ -83,9 +83,10 @@ exports.packageVersions = {
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: "1.17.2.0.0",
+        version: "2.1beta-159689",
+        coreVersion: "1.17.2.0.0",
         // 安装包路径
-        path: "H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.0.100.155144.apk",
+        path: "H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.1.100.159689.apk",
         // 可用分支
         branches: ["vanilla", "experiment"],
         config: neteaseOCROptions

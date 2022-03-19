@@ -3,7 +3,7 @@ const { replaceObjectKey, excludeObjectEntry } = require("../util/common");
 
 function writeTransMapClib(cx, options) {
     const branchName = cx.branch.name;
-    const { packageVersion, versionInfo } = cx;
+    const { packageVersion, coreVersion, versionInfo } = cx;
     const { outputFile, translationResultMaps } = options;
     const filteredTranslationResultMaps = excludeObjectEntry(translationResultMaps, [
         "gamerule",
@@ -33,7 +33,7 @@ function writeTransMapClib(cx, options) {
                 version: [0, 0, 1],
                 require: [],
                 minSupportVer: "0.7.4",
-                targetSupportVer: packageVersion,
+                targetSupportVer: coreVersion,
                 mode: "overwrite",
                 enums: renamedTranslationResultMaps
             },

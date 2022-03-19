@@ -36,10 +36,11 @@ function writeTransMapJson(_, options) {
 }
 
 function writeTransMapIndexJson(cx, options) {
-    const { version, packageVersion, versionInfo } = cx;
+    const { version, packageVersion, coreVersion, versionInfo } = cx;
     const { outputFile, mergedFile, rootUrl, branchList } = options;
     const indexData = {
         dataVersion: packageVersion,
+        coreVersion: coreVersion,
         branchList: branchList.map((branch) => {
             return {
                 ...branch,

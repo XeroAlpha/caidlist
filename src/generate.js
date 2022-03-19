@@ -64,7 +64,7 @@ const translatorMapNames = [
     ["JavaEditionLangSource", "Java版英文语言文件"]
 ];
 async function generateBranchedOutputFiles(cx) {
-    const { version, branch, packageVersion } = cx;
+    const { version, branch, coreVersion } = cx;
     let packageDataEnums = analyzePackageDataEnumsCached(cx);
     let autocompletedEnums = await analyzeAutocompletionEnumsCached(cx);
     let enums = {
@@ -250,7 +250,7 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: enums.entitySlots,
         translationMap: userTranslation.entitySlot
     });
-    if (support.lootTable(packageVersion)) {
+    if (support.lootTable(coreVersion)) {
         matchTranslations({
             ...commonOptions,
             name: "lootTable",
@@ -272,7 +272,7 @@ async function generateBranchedOutputFiles(cx) {
         translationResultMaps.lootTable = {};
         translationResultMaps.lootTableWrapped = {};
     }
-    if (support.damageCommand(packageVersion)) {
+    if (support.damageCommand(coreVersion)) {
         matchTranslations({
             ...commonOptions,
             name: "damageCause",
@@ -280,7 +280,7 @@ async function generateBranchedOutputFiles(cx) {
             translationMap: userTranslation.damageCause
         });
     }
-    if (support.placefeatureCommand(packageVersion)) {
+    if (support.placefeatureCommand(coreVersion)) {
         matchTranslations({
             ...commonOptions,
             name: "featureAndRule",
@@ -415,6 +415,7 @@ function generateOutputIndex(cx) {
     cx.packageInfo = cx.packageVersions[version];
     if (!cx.packageInfo) throw new Error("Unknown version: " + version);
     cx.packageVersion = cx.packageInfo.version;
+    cx.coreVersion = cx.packageInfo.coreVersion || cx.packageVersion;
     if (cx.packageInfo.config) {
         forEachObject(cx.packageInfo.config, (v, k) => {
             cx[k] = v;

@@ -59,7 +59,7 @@ async function doWSRelatedJobs(cx, device) {
     await adbShell(device, "input keyevent 66"); // KEYCODE_ENTER
     const session = await sessionPromise;
     let commandList;
-    if (testMinecraftVersionInRange(cx.packageVersion, "1.2", "*")) {
+    if (testMinecraftVersionInRange(cx.coreVersion, "1.2", "*")) {
         commandList = await listCommands(session);
     } else {
         commandList = await listCommandsLegacy(session);
