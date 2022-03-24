@@ -13792,11 +13792,7 @@
             "minecraft:scatter_tall_grass_around_forest_foliage_feature",
             "minecraft:scatter_tall_grass_around_tree_feature",
             "minecraft:scatter_tall_grass_feature",
-            "minecraft:sculk_catalyst_central_patch_feature",
-            "minecraft:sculk_catalyst_feature",
-            "minecraft:sculk_catalyst_snap_to_floor_feature",
             "minecraft:sculk_patch_feature",
-            "minecraft:sculk_vein_cluster_feature",
             "minecraft:sculk_vein_feature",
             "minecraft:select_beehive_feature",
             "minecraft:select_birch_tree_feature",
@@ -13967,7 +13963,6 @@
             "minecraft:overworld_underground_lapis_ore_feature",
             "minecraft:overworld_underground_redstone_ore_feature",
             "minecraft:overworld_underground_redstone_ore_lower_feature",
-            "minecraft:overworld_underground_sculk_vein_feature",
             "minecraft:overworld_underground_tuff_feature",
             "minecraft:overworld_underwater_cave_carver_feature",
             "minecraft:overworld_underwater_magma_feature",
@@ -13985,7 +13980,8 @@
             "minecraft:savanna_surface_flowers_feature",
             "minecraft:savanna_surface_tall_grass_feature",
             "minecraft:savanna_surface_trees_feature",
-            "minecraft:sculk_catalyst_feature",
+            "minecraft:sculk_patch_feature",
+            "minecraft:sculk_vein_feature",
             "minecraft:small_dripstone_feature",
             "minecraft:soulsand_valley_fossil_surface_feature",
             "minecraft:surface_pass_large_dripstone_feature",
@@ -14408,6 +14404,9 @@
                 "minecraft:goat<default>"
             ],
             "geometry.spyglass": [],
+            "geometry.chest_boat": [
+                "minecraft:chest_boat<default>"
+            ],
             "geometry.boat": [
                 "minecraft:boat<default>"
             ]
@@ -16518,7 +16517,14 @@
             ]
         },
         "entityEventsMap": {
+            "pickup_item_delay": [
+                "minecraft:allay"
+            ],
+            "pickup_item_delay_complete": [
+                "minecraft:allay"
+            ],
             "minecraft:entity_spawned": [
+                "minecraft:allay",
                 "minecraft:arrow",
                 "minecraft:axolotl",
                 "minecraft:bee",
@@ -16665,6 +16671,22 @@
             ],
             "enter_water": [
                 "minecraft:axolotl"
+            ],
+            "minecraft:entered_bubble_column_down": [
+                "minecraft:boat",
+                "minecraft:chest_boat"
+            ],
+            "minecraft:entered_bubble_column_up": [
+                "minecraft:boat",
+                "minecraft:chest_boat"
+            ],
+            "minecraft:exited_bubble_column": [
+                "minecraft:boat",
+                "minecraft:chest_boat"
+            ],
+            "minecraft:sink": [
+                "minecraft:boat",
+                "minecraft:chest_boat"
             ],
             "spawn_temperate": [
                 "minecraft:frog"
@@ -17606,18 +17628,6 @@
             "minecraft:on_hurt_event": [
                 "minecraft:blaze"
             ],
-            "minecraft:entered_bubble_column_down": [
-                "minecraft:boat"
-            ],
-            "minecraft:entered_bubble_column_up": [
-                "minecraft:boat"
-            ],
-            "minecraft:exited_bubble_column": [
-                "minecraft:boat"
-            ],
-            "minecraft:sink": [
-                "minecraft:boat"
-            ],
             "become_angry": [
                 "minecraft:dolphin"
             ],
@@ -17829,6 +17839,22 @@
             ],
             "axolotl": [
                 "minecraft:axolotl"
+            ],
+            "boat": [
+                "minecraft:boat",
+                "minecraft:chest_boat"
+            ],
+            "inanimate": [
+                "minecraft:armor_stand",
+                "minecraft:boat",
+                "minecraft:chest_boat",
+                "minecraft:chest_minecart",
+                "minecraft:command_block_minecart",
+                "minecraft:hopper_minecart",
+                "minecraft:minecart",
+                "minecraft:tnt",
+                "minecraft:tnt_minecart",
+                "minecraft:tripod_camera"
             ],
             "frog": [
                 "minecraft:frog"
@@ -18150,25 +18176,11 @@
             "armor_stand": [
                 "minecraft:armor_stand"
             ],
-            "inanimate": [
-                "minecraft:armor_stand",
-                "minecraft:boat",
-                "minecraft:chest_minecart",
-                "minecraft:command_block_minecart",
-                "minecraft:hopper_minecart",
-                "minecraft:minecart",
-                "minecraft:tnt",
-                "minecraft:tnt_minecart",
-                "minecraft:tripod_camera"
-            ],
             "bat": [
                 "minecraft:bat"
             ],
             "blaze": [
                 "minecraft:blaze"
-            ],
-            "boat": [
-                "minecraft:boat"
             ],
             "cat": [
                 "minecraft:cat"
