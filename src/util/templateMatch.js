@@ -41,8 +41,20 @@ function matchTranslation(options) {
             } else if (javaEditionLangMap && source.toLowerCase() == "je") { // Java版语言文件
                 userTranslation = javaEditionLangMap[key];
             } else if (source.toLowerCase() == "missing") { // 暂缺译名
-                console.warn(`Missing Translation: ${originalValue} -> ${key}`);
-                userTranslation = key;
+                const tempTranslationMap = {};
+                tempTranslationMap[originalValue] = key;
+                userTranslation = matchTranslation({
+                    ...options,
+                    originalValue,
+                    translationMap: tempTranslationMap,
+                    autoMatch: false
+                }).translation;
+                if (userTranslation.toLowerCase() in stdTransMap) {
+                    userTranslation = stdTransMap[userTranslation.toLowerCase()];
+                    console.warn(`Translation Found: ${originalValue} -> ${userTranslation}`);
+                } else {
+                    console.warn(`Missing Translation: ${originalValue} -> ${userTranslation}`);
+                }
             } else if (source in resultMaps) { // 其他翻译
                 userTranslation = resultMaps[source][key];
             } else {
