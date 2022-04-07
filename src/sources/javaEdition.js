@@ -76,7 +76,7 @@ async function fetchJavaEditionLangData() {
         const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, "client");
         const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
         const langZhAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
-        const langEnAsset = await extractFileFromZip(releaseFile, "assets/minecraft/lang/en_us.json");
+        const langEnAsset = extractFileFromZip(releaseFile, "assets/minecraft/lang/en_us.json");
         return {
             "__VERSION__": versionMeta.id,
             "__VERSION_TYPE__": versionMeta.type,

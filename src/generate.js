@@ -10,6 +10,7 @@ const { writeTransMapsExcel } = require("./generate/excel");
 const { writeTransMapClib } = require("./generate/clib");
 const { writeTransMapTextZip } = require("./generate/text");
 const { writeTransMapJson, writeTransMapIndexJson } = require("./generate/json");
+const { writeLangParity, compareEditionLangs } = require("./generate/langParity");
 const {
     projectPath,
     cachedOutput,
@@ -354,6 +355,15 @@ async function generateTranslatorHelperFiles(cx) {
         transMaps,
         transMapNames: translatorMapNames
     });
+    writeLangParity(
+        projectPath(`output.parity.${cx.version}.output`, "lang"),
+        compareEditionLangs(
+            bedrockEditionLang,
+            javaEditionLang,
+            "zh_cn",
+            "en_us"
+        )
+    );
 }
 
 const versionInfoMap = {
