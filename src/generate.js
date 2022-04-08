@@ -10,7 +10,7 @@ const { writeTransMapsExcel } = require("./generate/excel");
 const { writeTransMapClib } = require("./generate/clib");
 const { writeTransMapTextZip } = require("./generate/text");
 const { writeTransMapJson, writeTransMapIndexJson } = require("./generate/json");
-const { writeLangParity, compareEditionLangs } = require("./generate/langParity");
+const { writeLangParityPack, compareEditionLangs } = require("./generate/langParity");
 const {
     projectPath,
     cachedOutput,
@@ -333,12 +333,42 @@ async function generateBranchedOutputFiles(cx) {
     saveUserTranslation(userTranslation);
 }
 
+async function generateLangParityPack(cx) {
+    const packageDataEnums = analyzePackageDataEnumsCached(cx);
+    const standardizedTranslation = await fetchStandardizedTranslation();
+    const bedrockEditionLang = packageDataEnums.lang;
+    const javaEditionLang = await fetchJavaEditionLangData();
+    const userTranslation = loadUserTranslation();
+    const overrideRawMap = userTranslation.langParity;
+    const overrideMapResult = {};
+    matchTranslations({
+        resultMaps: overrideMapResult,
+        name: "langParity",
+        originalArray: Object.keys(overrideRawMap),
+        translationMap: overrideRawMap,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true),
+        javaEditionLangMap: javaEditionLang,
+        langMap: bedrockEditionLang
+    });
+    writeLangParityPack(cx, {
+        outputLangFile: projectPath(`output.lang_parity.${cx.version}.output`, "lang"),
+        outputPackFile: projectPath(`output.lang_parity.${cx.version}.output`, "mcpack"),
+        differences: compareEditionLangs({
+            bedrockEditionLang,
+            javaEditionLang,
+            compareLangId: "zh_cn",
+            baseLangId: "en_us"
+        }),
+        overrideMap: overrideMapResult.langParity
+    });
+}
+
 async function generateTranslatorHelperFiles(cx) {
-    let packageDataEnums = analyzePackageDataEnumsCached(cx);
-    let standardizedTranslation = await fetchStandardizedTranslation();
-    let bedrockEditionLang = packageDataEnums.lang;
-    let javaEditionLang = await fetchJavaEditionLangData();
-    let transMaps = {
+    const packageDataEnums = analyzePackageDataEnumsCached(cx);
+    const standardizedTranslation = await fetchStandardizedTranslation();
+    const bedrockEditionLang = packageDataEnums.lang;
+    const javaEditionLang = await fetchJavaEditionLangData();
+    const transMaps = {
         ...standardizedTranslation,
         BedrockEditionLang: bedrockEditionLang["zh_cn"],
         JavaEditionLang: javaEditionLang["zh_cn"],
@@ -355,15 +385,6 @@ async function generateTranslatorHelperFiles(cx) {
         transMaps,
         transMapNames: translatorMapNames
     });
-    writeLangParity(
-        projectPath(`output.parity.${cx.version}.output`, "lang"),
-        compareEditionLangs(
-            bedrockEditionLang,
-            javaEditionLang,
-            "zh_cn",
-            "en_us"
-        )
-    );
 }
 
 const versionInfoMap = {
@@ -450,6 +471,8 @@ function generateOutputIndex(cx) {
 async function generateOutputFiles(cx) {
     if (cx.branch.id == "translator") {
         return await generateTranslatorHelperFiles(cx);
+    } else if (cx.branch.id == "langParity") {
+        return await generateLangParityPack(cx);
     } else {
         return await generateBranchedOutputFiles(cx);
     }

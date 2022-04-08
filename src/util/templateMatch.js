@@ -40,6 +40,8 @@ function matchTranslation(options) {
                 userTranslation = stdTransMap[key];
             } else if (javaEditionLangMap && source.toLowerCase() == "je") { // Java版语言文件
                 userTranslation = javaEditionLangMap[key];
+            } else if (langMap && source.toLowerCase() == "be") { // 基岩版语言文件
+                userTranslation = langMap[key];
             } else if (source.toLowerCase() == "missing") { // 暂缺译名
                 const tempTranslationMap = {};
                 tempTranslationMap[originalValue] = key;
@@ -200,7 +202,9 @@ function matchTranslations(options) {
         if (newResultMap) translateResultMap = newResultMap;
     }
     resultMaps[name] = translateResultMap;
-    stateMaps[name] = translateStates;
+    if (stateMaps) {
+        stateMaps[name] = translateStates;
+    }
 }
 
 module.exports = {
