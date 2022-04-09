@@ -18,8 +18,8 @@ const userTranslationStorageKey = {
     gamerule: "translation.gamerule",
     entitySlot: "translation.entity_slot",
     feature: "translation.feature",
-    lootTable: "translation.lootTable",
-    langParity: "translation.langParity"
+    lootTable: "translation.loot_table",
+    langParity: "translation.lang_parity"
 };
 function loadUserTranslation() {
     let userTranslation = {};

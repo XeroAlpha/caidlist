@@ -19,7 +19,8 @@ const {
     keyArrayToObject,
     cascadeMap,
     removeMinecraftNamespace,
-    setInlineCommentAfterField
+    setInlineCommentAfterField,
+    deepCopy
 } = require("./util/common");
 
 // [ id, name, description ]
@@ -340,10 +341,14 @@ async function generateLangParityPack(cx) {
     const javaEditionLang = await fetchJavaEditionLangData();
     const userTranslation = loadUserTranslation();
     const overrideRawMap = userTranslation.langParity;
-    const overrideMapResult = {};
+    const overrideMapResult = deepCopy({
+        ...standardizedTranslation,
+        JESource: javaEditionLang["en_us"],
+        Source: bedrockEditionLang["en_us"],
+    });
     matchTranslations({
         resultMaps: overrideMapResult,
-        name: "langParity",
+        name: "LangParity",
         originalArray: Object.keys(overrideRawMap),
         translationMap: overrideRawMap,
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
@@ -351,6 +356,7 @@ async function generateLangParityPack(cx) {
         langMap: bedrockEditionLang
     });
     writeLangParityPack(cx, {
+        outputDifferenceFile: projectPath(`output.lang_parity.${cx.version}.difference`, "json"),
         outputLangFile: projectPath(`output.lang_parity.${cx.version}.output`, "lang"),
         outputPackFile: projectPath(`output.lang_parity.${cx.version}.output`, "mcpack"),
         differences: compareEditionLangs({
@@ -359,7 +365,7 @@ async function generateLangParityPack(cx) {
             compareLangId: "zh_cn",
             baseLangId: "en_us"
         }),
-        overrideMap: overrideMapResult.langParity
+        overrideMap: overrideMapResult.LangParity
     });
 }
 
