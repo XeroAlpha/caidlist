@@ -73,9 +73,9 @@ exports.packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.19.0.20",
+        version: "1.19.0.24",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.19.0.20.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.19.0.24.apks",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator", "langParity"],
         config: smallestGUIOCROptions
@@ -83,7 +83,7 @@ exports.packageVersions = {
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: "2.1beta-159689",
+        version: "2.1beta-159689", // 由于资源包BUG暂停更新
         coreVersion: "1.17.3.0.0",
         // 安装包路径
         path: "H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.1.100.159689.apk",
