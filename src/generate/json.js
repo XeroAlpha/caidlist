@@ -41,13 +41,15 @@ function writeTransMapIndexJson(cx, options) {
     const indexData = {
         dataVersion: packageVersion,
         coreVersion: coreVersion,
-        branchList: branchList.map((branch) => {
-            return {
-                ...branch,
-                dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
-                offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
-            };
-        })
+        branchList: branchList
+            .filter((branch) => !branch.hideOnWeb)
+            .map((branch) => {
+                return {
+                    ...branch,
+                    dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
+                    offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
+                };
+            })
     };
     if (outputFile) {
         fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));

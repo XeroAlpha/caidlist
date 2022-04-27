@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.18.12.01",
+    "packageVersion": "1.18.30.04",
     "result": {
         "commandList": [
             "/? <page: int>",
@@ -47,6 +47,10 @@
             "/kill [target: target]",
             "/list",
             "/locate <feature: Feature> [useNewChunksOnly: Boolean]",
+            "/loot give <players: target> kill <entity: target> [<tool>|mainhand|offhand: string]",
+            "/loot give <players: target> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
+            "/loot insert <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]",
+            "/loot insert <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
             "/loot spawn <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]",
             "/loot spawn <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
             "/me <message: message>",
@@ -117,9 +121,11 @@
             "/testforblock <position: x y z> <tileName: Block> [blockStates: block states]",
             "/testforblock <position: x y z> <tileName: Block> [dataValue: int]",
             "/testforblocks <begin: x y z> <end: x y z> <destination: x y z> [masked|all]",
-            "/tickingarea add <from: x y z> <to: x y z> [name: string]",
-            "/tickingarea add circle <center: x y z> <radius: int> [name: string]",
+            "/tickingarea add <from: x y z> <to: x y z> [name: string] [preload: Boolean]",
+            "/tickingarea add circle <center: x y z> <radius: int> [name: string] [preload: Boolean]",
             "/tickingarea list [all-dimensions: AllDimensions]",
+            "/tickingarea preload <name: string> [preload: Boolean]",
+            "/tickingarea preload <position: x y z> [preload: Boolean]",
             "/tickingarea remove <name: string>",
             "/tickingarea remove <position: x y z>",
             "/tickingarea remove_all",

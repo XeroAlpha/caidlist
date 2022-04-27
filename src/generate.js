@@ -445,6 +445,11 @@ const branchInfoMap = {
     translator: {
         name: "翻译专用",
         description: "为翻译英文文本设计，包含了标准化译名表与语言文件"
+    },
+    langParity: {
+        name: "译名比较",
+        description: "比较基岩版翻译与标准化译名，展示两者的差异",
+        hideOnWeb: true
     }
 };
 function generateOutputIndex(cx) {
@@ -468,7 +473,7 @@ function generateOutputIndex(cx) {
     writeTransMapIndexJson(cx, {
         outputFile: projectPath(`output.web.${version}.index`),
         mergedFile: projectPath(`output.web.index`),
-        rootUrl: "./data",
+        rootUrl: ".",
         branchList
     });
     return branchList;

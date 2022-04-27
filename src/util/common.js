@@ -50,7 +50,13 @@ function cachedOutput(id, valueOrProcessor) {
         processor = () => valueOrProcessor;
     }
     if (useCache) {
-        return JSON.parse(fs.readFileSync(path, "utf-8"));
+        try {
+            return JSON.parse(fs.readFileSync(path, "utf-8"));
+        } catch (e) {
+            console.error("Cannot use cache: " + path);
+        }
+        fs.unlinkSync(path);
+        return cachedOutput(id, valueOrProcessor);
     } else {
         let output = processor();
         if (output instanceof Promise) {
