@@ -63,9 +63,9 @@ exports.packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: "1.18.30.04",
+        version: "1.18.31.04",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.18.30.04.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.18.31.04.apk",
         // 可用分支
         branches: ["vanilla", "education", "experiment"],
         config: smallestGUIOCROptions
@@ -73,9 +73,9 @@ exports.packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.19.0.26",
+        version: "1.19.0.28",
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.19.0.26.apks",
+        path: "H:\\BedrockVersions\\Latest\\1.19.0.28.apk",
         // 可用分支
         branches: ["vanilla", "education", "experiment", "translator", "langParity"],
         config: smallestGUIOCROptions
@@ -91,4 +91,9 @@ exports.packageVersions = {
         branches: ["vanilla", "experiment"],
         config: neteaseOCROptions
     }
+};
+
+exports.proxyConfig = {
+    http: "http://localhost:7890",
+    https: "http://localhost:7890"
 };
