@@ -44,6 +44,7 @@ const defaultTransMapNames = [
     ["featureAndRule", "地物与地物规则", "用于 placefeature 命令的地物 ID 和地物规则 ID"],
     ["sound", "声音", "用于 playsound 命令的声音 ID"],
     ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
+    ["command", "命令", "可见的命令列表"],
     ["stdTrans", "标准化译名表", "整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表"]
 ];
 const translatorMapNames = [
@@ -88,6 +89,14 @@ async function generateBranchedOutputFiles(cx) {
         langMap: lang,
         autoMatch: true
     };
+    matchTranslations({
+        ...commonOptions,
+        name: "glossary",
+        originalArray: Object.keys(userTranslation.glossary),
+        translationMap: userTranslation.glossary,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true),
+        autoMatch: false
+    });
     matchTranslations({
         ...commonOptions,
         name: "block",
@@ -252,6 +261,15 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: enums.entitySlots,
         translationMap: userTranslation.entitySlot
     });
+    if (support.mcpews(version)) {
+        matchTranslations({
+            ...commonOptions,
+            name: "command",
+            originalArray: enums.commandList.map(e => e.replace(/^\//, "")),
+            translationMap: userTranslation.command,
+            stdTransMap: cascadeMap(standardizedTranslation, [], true)
+        });
+    }
     if (support.lootTable(coreVersion)) {
         matchTranslations({
             ...commonOptions,
@@ -309,6 +327,8 @@ async function generateBranchedOutputFiles(cx) {
     } else {
         translationResultMaps.lootTool = {};
     }
+    delete translationResultMaps.glossary;
+    delete translationStateMaps.glossary;
 
     console.log("Exporting files...");
     cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);

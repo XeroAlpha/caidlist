@@ -1,6 +1,8 @@
 const { cachedOutput, forEachObject } = require("../util/common");
 
 const userTranslationStorageKey = {
+    glossary: "translation.glossary",
+    command: "translation.command",
     block: "translation.block",
     item: "translation.item",
     sound: "translation.sound",

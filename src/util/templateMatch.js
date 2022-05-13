@@ -29,7 +29,7 @@ function matchTranslation(options) {
                 if (key.startsWith("#")) {
                     key = originalValue + "." + key.slice(1);
                 }
-                return translateCached(key, originalValue).translation;
+                return translateCached(key, originalValue, true).translation;
             });
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         } else if (userTranslation.includes(":")) { // 直接引用
@@ -42,6 +42,8 @@ function matchTranslation(options) {
                 userTranslation = javaEditionLangMap[key];
             } else if (langMap && source.toLowerCase() == "be") { // 基岩版语言文件
                 userTranslation = langMap[key];
+            } else if (source.toLowerCase() == "this") { // 当前列表
+                userTranslation = translateCached(key, originalValue).translation;
             } else if (source.toLowerCase() == "missing") { // 暂缺译名
                 const tempTranslationMap = {};
                 tempTranslationMap[originalValue] = key;
@@ -148,11 +150,11 @@ function matchTranslations(options) {
         guessFromLang: [],
         notFound: []
     };
-    let translateCached = (originalValue, rootKey) => {
+    let translateCached = (originalValue, rootKey, insideTemplate) => {
         let cache = translateCacheMap[originalValue];
         if (cache) {
             return cache;
-        } else if (originalValue.includes("|")) { // 拼接模板
+        } else if (insideTemplate && originalValue.includes("|")) { // 拼接模板
             let refs = originalValue.split("|").map(ref => {
                 let trimedRef = ref.trim();
                 if (trimedRef.startsWith("'")) { // 原始字符，原样传递
@@ -169,7 +171,7 @@ function matchTranslations(options) {
             return {
                 translation: util.format(...refs)
             };
-        } else if (originalValue.includes("!")) { // 外部引用
+        } else if (insideTemplate && originalValue.includes("!")) { // 外部引用
             let translationMap = {};
             translationMap[rootKey] = originalValue.replace("!", ":");
             let result = matchTranslation({

@@ -7,7 +7,7 @@ function listCommands(session) {
         const list = [];
         let i = 0;
         let count = 0;
-        function processBody(body) {
+        function processBody({ body }) {
             list.push(...body.body.split("\n"));
             i++;
             if (i > count) {
@@ -16,7 +16,7 @@ function listCommands(session) {
                 session.sendCommand(["help", i], processBody);
             }
         }
-        session.sendCommand("help", (body) => {
+        session.sendCommand("help", ({ body }) => {
             list.push(...body.body.split("\n"));
             i = body.page;
             count = body.pageCount;
@@ -31,7 +31,7 @@ function listCommandsLegacy(session) {
         const list = [];
         let i = 0;
         let count = 0;
-        function processBody(body) {
+        function processBody({ body }) {
             list.push(...body.body.split("\n"));
             i++;
             if (i > count) {
@@ -40,7 +40,7 @@ function listCommandsLegacy(session) {
                 session.sendCommandLegacy("help", "byPage", { page: i }, processBody);
             }
         }
-        session.sendCommandLegacy("help", "byPage", {}, (body) => {
+        session.sendCommandLegacy("help", "byPage", {}, ({ body }) => {
             list.push(...body.body.split("\n"));
             i = body.page;
             count = body.pageCount;
@@ -57,7 +57,7 @@ async function doWSRelatedJobs(cx, device) {
     await adbShell(device, "input keyevent 48"); // KEYCODE_T
     await adbShell(device, "input text " + JSON.stringify("/connect 127.0.0.1:19134"));
     await adbShell(device, "input keyevent 66"); // KEYCODE_ENTER
-    const session = await sessionPromise;
+    const { session } = await sessionPromise;
     let commandList;
     if (testMinecraftVersionInRange(cx.coreVersion, "1.2", "*")) {
         commandList = await listCommands(session);
