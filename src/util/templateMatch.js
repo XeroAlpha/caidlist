@@ -7,6 +7,8 @@ function runTemplate(template, getter) {
     });
 }
 
+const refTemplateRegex = /^(\S*):/
+
 function matchTranslation(options) {
     const {
         originalValue,
@@ -32,11 +34,13 @@ function matchTranslation(options) {
                 return translateCached(key, originalValue, true).translation;
             });
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
-        } else if (userTranslation.includes(":")) { // 直接引用
+        } else if (refTemplateRegex.test(userTranslation)) { // 直接引用
             let colonPos = userTranslation.indexOf(":");
             let source = userTranslation.slice(0, colonPos).trim();
             let key = userTranslation.slice(colonPos + 1).trim();
-            if (stdTransMap && source.toLowerCase() == "st") { // 标准化译名
+            if (source == "") { // 直接使用
+                userTranslation = userTranslation.slice(colonPos + 1);
+            } else if (stdTransMap && source.toLowerCase() == "st") { // 标准化译名
                 userTranslation = stdTransMap[key];
             } else if (javaEditionLangMap && source.toLowerCase() == "je") { // Java版语言文件
                 userTranslation = javaEditionLangMap[key];
