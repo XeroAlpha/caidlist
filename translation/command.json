@@ -1,7 +1,7 @@
 {
-    // Helper Template
-    "arg": "",
     // Help text
+    "ability.get": "查询玩家拥有的能力。",
+    "ability.set": "设置玩家拥有的能力。",
     "camerashake.add": "为玩家应用镜头摇晃效果。",
     "camerashake.stop": "为玩家移除镜头摇晃效果。",
     "clear.default": "清除玩家物品栏中的物品。",
@@ -19,55 +19,75 @@
     "difficulty.withInt": "更改游戏难度。",
     "effect.add": "为实体添加状态效果。",
     "effect.clear": "清除实体的状态效果。",
-    "enchant.withInt": "对实体手持的物品进行附魔。",
     "enchant.withEnum": "对实体手持的物品进行附魔。",
+    "enchant.withInt": "对实体手持的物品进行附魔。",
     "event.entity": "为实体触发实体事件。",
     "execute.default": "改变位置与执行者并执行命令。",
     "execute.detect": "改变位置与执行者，并仅当特定方块满足条件时执行命令。",
-    "fill.replace.withBlockState": "用指定方块替换区域中的特定方块。",
-    "fill.replace.withDataValue": "用指定方块替换区域中的特定方块。",
     "fill.default.withBlockState": "用指定方块填充区域。",
     "fill.default.withDataValue": "用指定方块填充区域。",
+    "fill.replace.withBlockState": "用指定方块替换区域中的特定方块。",
+    "fill.replace.withDataValue": "用指定方块替换区域中的特定方块。",
     "fog.delete": "从玩家的迷雾栈中移除迷雾。",
     "fog.push": "向玩家的迷雾栈中添加迷雾。",
     "function.default": "调用函数。",
     "gamemode.withEnum": "更改游戏模式。",
     "gamemode.withInt": "更改游戏模式。",
-    "gamerule.viewAll": "查看所有游戏规则。",
     "gamerule.boolGameRule": "查看或修改特定布尔类型游戏规则。",
     "gamerule.intGameRule": "查看或修改特定整型游戏规则。",
+    "gamerule.viewAll": "查看所有游戏规则。",
+    "gametest.clearAll": "清除所有 GameTest 测试。",
+    "gametest.create": "为 GameTest 测试分配区域。",
+    "gametest.pos": "查询最近的 GameTest 测试的位置。",
+    "gametest.run.default": "运行指定的 GameTest 测试。",
+    "gametest.run.short": "运行指定的 GameTest 测试。",
+    "gametest.runset": "运行指定的 GameTest 测试集合。",
+    "gametest.runthese": "运行附近所有的 GameTest 测试。",
+    "gametest.runthis": "运行最近的 GameTest 测试。",
     "give.default": "给予玩家特定物品。",
-    "help.withPage": "按页数列出命令用法。",
     "help.withCommand": "按命令名列出命令用法。",
+    "help.withPage": "按页数列出命令用法。",
+    "immutableworld.default": "查询或设置世界是否不可更改。",
     "kick.default": "踢出特定玩家。",
     "kill.default": "击杀或移除实体。",
     "list.default": "列出在线玩家。",
     "locate.default": "寻找并确定最近的特定结构的坐标。",
-    "loot.give.from.kill": "loot give <players: target> kill <entity: target> [<tool>|mainhand|offhand: string]",
-    "loot.give.from.loot": "loot give <players: target> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
-    "loot.insert.from.kill": "loot insert <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]",
-    "loot.insert.from.loot": "loot insert <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
-    "loot.spawn.from.kill": "loot spawn <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]",
-    "loot.spawn.from.loot": "loot spawn <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
-    "me.default": "me <message: message>",
-    "mobevent.default": "mobevent <event: MobEvent> [value: Boolean]",
-    "music.play": "music play <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]",
-    "music.queue": "music queue <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]",
-    "music.stop": "music stop [fadeSeconds: float]",
-    "music.volume": "music volume <volume: float>",
-    "op.default": "op <player: target>",
-    "particle.default": "particle <effect: string> [position: x y z]",
-    "playanimation.default": "playanimation <entity: target> <animation: string> [next_state: string] [blend_out_time: float] [stop_expression: string] [controller: string]",
-    "playsound.default": "playsound <sound: string> [player: target] [position: x y z] [volume: float] [pitch: float] [minimumVolume: float]",
-    "reload.default": "reload",
-    "replaceitem.block.default": "replaceitem block <position: x y z> slot.container <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]",
-    "replaceitem.block.withOldItemHandling": "replaceitem block <position: x y z> slot.container <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]",
-    "replaceitem.entity.default": "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]",
-    "replaceitem.entity.withOldItemHandling": "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]",
+    "loot.*.from.kill": "特定实体被击杀",
+    "loot.*.from.loot": "通过特定战利品表",
+    "loot.give.from.*": "给予玩家%s所能获得的战利品。",
+    "loot.give.from.kill": "{{loot.give.from.*|loot.*.from.kill}}", // 给予玩家特定实体被击杀所能获得的战利品。
+    "loot.give.from.loot": "{{loot.give.from.*|loot.*.from.loot}}", // 给予玩家通过特定战利品表所能获得的战利品。
+    "loot.insert.from.*": "向指定容器方块中加入%s所能获得的战利品。",
+    "loot.insert.from.kill": "{{loot.insert.from.*|loot.*.from.kill}}", // 向指定容器方块中加入特定实体被击杀所能获得的战利品。
+    "loot.insert.from.loot": "{{loot.insert.from.*|loot.*.from.loot}}", // 向指定容器方块中加入通过特定战利品表所能获得的战利品。
+    "loot.replace.entity.default.from.*": "将指定实体的某一槽位替换为%s所能获得的战利品。",
+    "loot.replace.entity.default.from.kill": "{{loot.replace.entity.default.from.*|loot.*.from.kill}}", // 将指定实体的某一槽位替换为特定实体被击杀所能获得的战利品。
+    "loot.replace.entity.default.from.loot": "{{loot.replace.entity.default.from.*|loot.*.from.loot}}", // 将指定实体的某一槽位替换为通过特定战利品表所能获得的战利品。
+    "loot.replace.entity.withCount.from.*": "将指定实体的某一槽位替换为%s所能获得的战利品。",
+    "loot.replace.entity.withCount.from.kill": "{{loot.replace.entity.withCount.from.*|loot.*.from.kill}}", // 将指定实体的某一槽位替换为特定实体被击杀所能获得的战利品。
+    "loot.replace.entity.withCount.from.loot": "{{loot.replace.entity.withCount.from.*|loot.*.from.loot}}", // 将指定实体的某一槽位替换为通过特定战利品表所能获得的战利品。
+    "loot.spawn.from.*": "在指定位置掉落%s所能获得的战利品。",
+    "loot.spawn.from.kill": "{{loot.spawn.from.*|loot.*.from.kill}}", // 在指定位置掉落特定实体被击杀所能获得的战利品。
+    "loot.spawn.from.loot": "{{loot.spawn.from.*|loot.*.from.loot}}", // 在指定位置掉落通过特定战利品表所能获得的战利品。
+    "me.default": "发送一条关于自己的消息。",
+    "mobevent.default": "查询或设置生物事件的启用状态。",
+    "music.play": "播放指定的音乐。",
+    "music.queue": "将指定音乐加入播放队列。",
+    "music.stop": "播放指定的音乐。",
+    "music.volume": "设置音乐播放的音量。",
+    "op.default": "赋予特定玩家管理员身份。",
+    "particle.default": "在指定位置生成粒子发射器。",
+    "playanimation.default": "在特定实体上播放实体动画。",
+    "playsound.default": "在特定位置为指定玩家播放声音。",
+    "reload.default": "重新加载行为包中的函数。",
+    "replaceitem.block.default": "替换指定方块容器中的物品。",
+    "replaceitem.block.withOldItemHandling": "替换指定方块容器中的物品。",
+    "replaceitem.entity.default": "替换指定实体特定槽位中的物品。",
+    "replaceitem.entity.withOldItemHandling": "替换指定实体特定槽位中的物品。",
+    "ride.evictRiders": "ride <rides: target> evict_riders",
     "ride.startRiding": "ride <riders: target> start_riding <ride: target> [teleportRules: TeleportRules] [howToFill: FillType]",
     "ride.stopRiding": "ride <riders: target> stop_riding",
     "ride.summonRide": "ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]",
-    "ride.evictRiders": "ride <rides: target> evict_riders",
     "ride.summonRider": "ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]",
     "say.default": "say <message: message>",
     "schedule.onAreaLoad.add.box": "schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>",
@@ -76,14 +96,19 @@
     "scoreboard.objectives.add": "scoreboard objectives add <objective: string> dummy [displayName: string]",
     "scoreboard.objectives.list": "scoreboard objectives list",
     "scoreboard.objectives.remove": "scoreboard objectives remove <objective: string>",
-    "scoreboard.objectives.setdisplay.default": "scoreboard objectives setdisplay <list|sidebar> [objective: string] [ascending|descending]",
     "scoreboard.objectives.setdisplay.belowName": "scoreboard objectives setdisplay belowname [objective: string]",
-    "scoreboard.players.modify": "scoreboard players <add|remove|set> <player: target> <objective: string> <count: int>",
+    "scoreboard.objectives.setdisplay.default": "scoreboard objectives setdisplay <list|sidebar> [objective: string] [ascending|descending]",
     "scoreboard.players.list": "scoreboard players list [playername: target]",
+    "scoreboard.players.modify": "scoreboard players <add|remove|set> <player: target> <objective: string> <count: int>",
     "scoreboard.players.operation": "scoreboard players operation <targetName: target> <targetObjective: string> <operation: operator> <selector: target> <objective: string>",
     "scoreboard.players.random": "scoreboard players random <player: target> <objective: string> <min: int> <max: int>",
     "scoreboard.players.reset": "scoreboard players reset <player: target> [objective: string]",
     "scoreboard.players.test": "scoreboard players test <player: target> <objective: string> <min: wildcard int> [max: wildcard int]",
+    "script.debugger.close": "script debugger close",
+    "script.debugger.connect": "script debugger connect <host: string> <port: int>",
+    "script.debugger.listen": "script debugger listen <port: int>",
+    "script.profiler.start": "script profiler start",
+    "script.profiler.stop": "script profiler stop",
     "setblock.withBlockState": "setblock <position: x y z> <tileName: Block> [blockStates: block states] [replace|destroy|keep]",
     "setblock.withDataValue": "setblock <position: x y z> <tileName: Block> [tileData: int] [replace|destroy|keep]",
     "setmaxplayers.default": "setmaxplayers <maxPlayers: int>",
@@ -98,18 +123,18 @@
     "structure.save.short": "structure save <name: string> <from: x y z> <to: x y z> [saveMode: StructureSaveMode]",
     "summon.default": "summon <entityType: EntityType> <nameTag: string> [spawnPos: x y z]",
     "summon.withSpawnEvent": "summon <entityType: EntityType> [spawnPos: x y z] [spawnEvent: string] [nameTag: string]",
-    "tag.modify": "tag <entity: target> <add|remove> <name: string>",
     "tag.list": "tag <entity: target> list",
-    "teleport.self.toEntity": "teleport <destination: target> [checkForBlocks: Boolean]",
-    "teleport.self.toPos.default": "teleport <destination: x y z> [checkForBlocks: Boolean]",
-    "teleport.self.toPos.withRotation": "teleport <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]",
-    "teleport.self.toPos.facing.entity": "teleport <destination: x y z> facing <lookAtEntity: target> [checkForBlocks: Boolean]",
-    "teleport.self.toPos.facing.position": "teleport <destination: x y z> facing <lookAtPosition: x y z> [checkForBlocks: Boolean]",
+    "tag.modify": "tag <entity: target> <add|remove> <name: string>",
     "teleport.entity.toEntity": "teleport <victim: target> <destination: target> [checkForBlocks: Boolean]",
     "teleport.entity.toPos.default": "teleport <victim: target> <destination: x y z> [checkForBlocks: Boolean]",
-    "teleport.entity.toPos.withRotation": "teleport <victim: target> <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]",
     "teleport.entity.toPos.facing.entity": "teleport <victim: target> <destination: x y z> facing <lookAtEntity: target> [checkForBlocks: Boolean]",
     "teleport.entity.toPos.facing.position": "teleport <victim: target> <destination: x y z> facing <lookAtPosition: x y z> [checkForBlocks: Boolean]",
+    "teleport.entity.toPos.withRotation": "teleport <victim: target> <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]",
+    "teleport.self.toEntity": "teleport <destination: target> [checkForBlocks: Boolean]",
+    "teleport.self.toPos.default": "teleport <destination: x y z> [checkForBlocks: Boolean]",
+    "teleport.self.toPos.facing.entity": "teleport <destination: x y z> facing <lookAtEntity: target> [checkForBlocks: Boolean]",
+    "teleport.self.toPos.facing.position": "teleport <destination: x y z> facing <lookAtPosition: x y z> [checkForBlocks: Boolean]",
+    "teleport.self.toPos.withRotation": "teleport <destination: x y z> [yRot: value] [xRot: value] [checkForBlocks: Boolean]",
     "tell.default": "msg <target: target> <message: message>",
     "tellraw.default": "tellraw <target: target> <raw json message: json>",
     "testfor.default": "testfor <victim: target>",
@@ -126,48 +151,28 @@
     "tickingarea.removeAll": "tickingarea remove_all",
     "time.add": "time add <amount: int>",
     "time.query": "time query <time: TimeQuery>",
-    "time.set.withInt": "time set <amount: int>",
     "time.set.withEnum": "time set <time: TimeSpec>",
-    "title.show": "title <player: target> <title|subtitle|actionbar> <titleText: message>",
+    "time.set.withInt": "time set <amount: int>",
     "title.clear": "title <player: target> clear",
     "title.reset": "title <player: target> reset",
+    "title.show": "title <player: target> <title|subtitle|actionbar> <titleText: message>",
     "title.times": "title <player: target> times <fadeIn: int> <stay: int> <fadeOut: int>",
-    "titleraw.show": "titleraw <player: target> <titleLocation: TitleRawSet> <raw json titleText: json>",
     "titleraw.clear": "titleraw <player: target> clear",
     "titleraw.reset": "titleraw <player: target> reset",
+    "titleraw.show": "titleraw <player: target> <titleLocation: TitleRawSet> <raw json titleText: json>",
     "titleraw.times": "titleraw <player: target> times <fadeIn: int> <stay: int> <fadeOut: int>",
     "toggledownfall.default": "toggledownfall",
-    "weather.update": "weather <clear|rain|thunder> [duration: int]",
-    "weather.query": "weather query",
-    "wsserver.default": "connect <serverUri: text>",
-    "xp.withInt": "xp <amount: int> [player: target]",
-    "xp.withLevel": "xp <amount: int>L [player: target]",
-    "ability.set": "ability <player: target> <ability: Ability> <value: Boolean>",
-    "ability.get": "ability <player: target> [ability: Ability]",
-    "immutableworld.default": "immutableworld [value: Boolean]",
-    "worldbuilder.default": "wb",
-    "gametest.clearAll": "gametest clearall",
-    "gametest.create": "gametest create <testName: string> [width: int] [height: int] [depth: int]",
-    "gametest.pos": "gametest pos",
-    "gametest.run.default": "gametest run <testName: GameTestName> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]",
-    "gametest.run.short": "gametest run <testName: GameTestName> [rotationSteps: int]",
-    "gametest.runset": "gametest runset [tag: GameTestTag] [rotationSteps: int]",
-    "gametest.runthese": "gametest runthese",
-    "gametest.runthis": "gametest runthis",
-    "script.debugger.close": "script debugger close",
-    "script.debugger.connect": "script debugger connect <host: string> <port: int>",
-    "script.debugger.listen": "script debugger listen <port: int>",
     "volumearea.add": "volumearea add <identifier: string> <from: x y z> <to: x y z> [name: string]",
     "volumearea.list": "volumearea list [all-dimensions: VolumeAreaAllDimensions]",
     "volumearea.remove.withName": "volumearea remove <name: string>",
     "volumearea.remove.withPosition": "volumearea remove <position: x y z>",
     "volumearea.removeAll": "volumearea remove_all",
-    "loot.replace.entity.default.from.kill": "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> kill <entity: target> [<tool>|mainhand|offhand: string]",
-    "loot.replace.entity.default.from.loot": "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
-    "loot.replace.entity.withCount.from.kill": "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> kill <entity: target> [<tool>|mainhand|offhand: string]",
-    "loot.replace.entity.withCount.from.loot": "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]",
-    "script.profiler.start": "script profiler start",
-    "script.profiler.stop": "script profiler stop",
+    "weather.query": "weather query",
+    "weather.update": "weather <clear|rain|thunder> [duration: int]",
+    "worldbuilder.default": "wb",
+    "wsserver.default": "connect <serverUri: text>",
+    "xp.withInt": "xp <amount: int> [player: target]",
+    "xp.withLevel": "xp <amount: int>L [player: target]",
     // Command Syntax
     "? <page: int>": "this: help.withPage", // 按页数列出命令用法。
     "? [command: CommandName]": "this: help.withCommand", // 按命令名列出命令用法。
@@ -214,28 +219,28 @@
     "kill [target: target]": "this: kill.default", // 击杀或移除实体。
     "list": "this: list.default", // 列出在线玩家。
     "locate <feature: Feature> [useNewChunksOnly: Boolean]": "this: locate.default", // 寻找并确定最近的特定结构的坐标。
-    "loot give <players: target> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.give.from.kill", // loot give <players: target> kill <entity: target> [<tool>|mainhand|offhand: string]
-    "loot give <players: target> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.give.from.loot", // loot give <players: target> loot <loot_table: string> [<tool>|mainhand|offhand: string]
-    "loot insert <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.insert.from.kill", // loot insert <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]
-    "loot insert <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.insert.from.loot", // loot insert <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]
-    "loot spawn <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.spawn.from.kill", // loot spawn <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]
-    "loot spawn <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.spawn.from.loot", // loot spawn <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]
-    "me <message: message>": "this: me.default", // me <message: message>
-    "mobevent <event: MobEvent> [value: Boolean]": "this: mobevent.default", // mobevent <event: MobEvent> [value: Boolean]
+    "loot give <players: target> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.give.from.kill", // 给予玩家特定实体被击杀所能获得的战利品。
+    "loot give <players: target> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.give.from.loot", // 给予玩家通过特定战利品表所能获得的战利品。
+    "loot insert <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.insert.from.kill", // 向指定容器方块中加入特定实体被击杀所能获得的战利品。
+    "loot insert <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.insert.from.loot", // 向指定容器方块中加入通过特定战利品表所能获得的战利品。
+    "loot spawn <position: x y z> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.spawn.from.kill", // 在指定位置掉落特定实体被击杀所能获得的战利品。
+    "loot spawn <position: x y z> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.spawn.from.loot", // 在指定位置掉落通过特定战利品表所能获得的战利品。
+    "me <message: message>": "this: me.default", // 发送一条关于自己的消息。
+    "mobevent <event: MobEvent> [value: Boolean]": "this: mobevent.default", // 查询或设置生物事件的启用状态。
     "msg <target: target> <message: message>": "this: tell.default", // msg <target: target> <message: message>
-    "music play <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]": "this: music.play", // music play <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]
-    "music queue <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]": "this: music.queue", // music queue <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]
-    "music stop [fadeSeconds: float]": "this: music.stop", // music stop [fadeSeconds: float]
-    "music volume <volume: float>": "this: music.volume", // music volume <volume: float>
-    "op <player: target>": "this: op.default", // op <player: target>
-    "particle <effect: string> [position: x y z]": "this: particle.default", // particle <effect: string> [position: x y z]
-    "playanimation <entity: target> <animation: string> [next_state: string] [blend_out_time: float] [stop_expression: string] [controller: string]": "this: playanimation.default", // playanimation <entity: target> <animation: string> [next_state: string] [blend_out_time: float] [stop_expression: string] [controller: string]
-    "playsound <sound: string> [player: target] [position: x y z] [volume: float] [pitch: float] [minimumVolume: float]": "this: playsound.default", // playsound <sound: string> [player: target] [position: x y z] [volume: float] [pitch: float] [minimumVolume: float]
-    "reload": "this: reload.default", // reload
-    "replaceitem block <position: x y z> slot.container <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.block.default", // replaceitem block <position: x y z> slot.container <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]
-    "replaceitem block <position: x y z> slot.container <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.block.withOldItemHandling", // replaceitem block <position: x y z> slot.container <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]
-    "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.entity.default", // replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]
-    "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.entity.withOldItemHandling", // replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]
+    "music play <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]": "this: music.play", // 播放指定的音乐。
+    "music queue <trackName: string> [volume: float] [fadeSeconds: float] [repeatMode: MusicRepeatMode]": "this: music.queue", // 将指定音乐加入播放队列。
+    "music stop [fadeSeconds: float]": "this: music.stop", // 播放指定的音乐。
+    "music volume <volume: float>": "this: music.volume", // 设置音乐播放的音量。
+    "op <player: target>": "this: op.default", // 赋予特定玩家管理员身份。
+    "particle <effect: string> [position: x y z]": "this: particle.default", // 在指定位置生成粒子发射器。
+    "playanimation <entity: target> <animation: string> [next_state: string] [blend_out_time: float] [stop_expression: string] [controller: string]": "this: playanimation.default", // 在特定实体上播放实体动画。
+    "playsound <sound: string> [player: target] [position: x y z] [volume: float] [pitch: float] [minimumVolume: float]": "this: playsound.default", // 在特定位置为指定玩家播放声音。
+    "reload": "this: reload.default", // 重新加载行为包中的函数。
+    "replaceitem block <position: x y z> slot.container <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.block.default", // 替换指定方块容器中的物品。
+    "replaceitem block <position: x y z> slot.container <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.block.withOldItemHandling", // 替换指定方块容器中的物品。
+    "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.entity.default", // 替换指定实体特定槽位中的物品。
+    "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.entity.withOldItemHandling", // 替换指定实体特定槽位中的物品。
     "ride <riders: target> start_riding <ride: target> [teleportRules: TeleportRules] [howToFill: FillType]": "this: ride.startRiding", // ride <riders: target> start_riding <ride: target> [teleportRules: TeleportRules] [howToFill: FillType]
     "ride <riders: target> stop_riding": "this: ride.stopRiding", // ride <riders: target> stop_riding
     "ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]": "this: ride.summonRide", // ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]
@@ -325,19 +330,19 @@
     "wsserver <serverUri: text>": "this: wsserver.default", // connect <serverUri: text>
     "xp <amount: int> [player: target]": "this: xp.withInt", // xp <amount: int> [player: target]
     "xp <amount: int>L [player: target]": "this: xp.withLevel", // xp <amount: int>L [player: target]
-    "ability <player: target> <ability: Ability> <value: Boolean>": "this: ability.set", // ability <player: target> <ability: Ability> <value: Boolean>
-    "ability <player: target> [ability: Ability]": "this: ability.get", // ability <player: target> [ability: Ability]
-    "immutableworld [value: Boolean]": "this: immutableworld.default", // immutableworld [value: Boolean]
+    "ability <player: target> <ability: Ability> <value: Boolean>": "this: ability.set", // 设置玩家拥有的能力。
+    "ability <player: target> [ability: Ability]": "this: ability.get", // 查询玩家拥有的能力。
+    "immutableworld [value: Boolean]": "this: immutableworld.default", // 查询或设置世界是否不可更改。
     "wb": "this: worldbuilder.default", // wb
     "worldbuilder": "this: worldbuilder.default", // wb
-    "gametest clearall": "this: gametest.clearAll", // gametest clearall
-    "gametest create <testName: string> [width: int] [height: int] [depth: int]": "this: gametest.create", // gametest create <testName: string> [width: int] [height: int] [depth: int]
-    "gametest pos": "this: gametest.pos", // gametest pos
-    "gametest run <testName: GameTestName> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]": "this: gametest.run.default", // gametest run <testName: GameTestName> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]
-    "gametest run <testName: GameTestName> [rotationSteps: int]": "this: gametest.run.short", // gametest run <testName: GameTestName> [rotationSteps: int]
-    "gametest runset [tag: GameTestTag] [rotationSteps: int]": "this: gametest.runset", // gametest runset [tag: GameTestTag] [rotationSteps: int]
-    "gametest runthese": "this: gametest.runthese", // gametest runthese
-    "gametest runthis": "this: gametest.runthis", // gametest runthis
+    "gametest clearall": "this: gametest.clearAll", // 清除所有 GameTest 测试。
+    "gametest create <testName: string> [width: int] [height: int] [depth: int]": "this: gametest.create", // 为 GameTest 测试分配区域。
+    "gametest pos": "this: gametest.pos", // 查询最近的 GameTest 测试的位置。
+    "gametest run <testName: GameTestName> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]": "this: gametest.run.default", // 运行指定的 GameTest 测试。
+    "gametest run <testName: GameTestName> [rotationSteps: int]": "this: gametest.run.short", // 运行指定的 GameTest 测试。
+    "gametest runset [tag: GameTestTag] [rotationSteps: int]": "this: gametest.runset", // 运行指定的 GameTest 测试集合。
+    "gametest runthese": "this: gametest.runthese", // 运行附近所有的 GameTest 测试。
+    "gametest runthis": "this: gametest.runthis", // 运行最近的 GameTest 测试。
     "script debugger close": "this: script.debugger.close", // script debugger close
     "script debugger connect <host: string> <port: int>": "this: script.debugger.connect", // script debugger connect <host: string> <port: int>
     "script debugger listen <port: int>": "this: script.debugger.listen", // script debugger listen <port: int>
@@ -346,14 +351,26 @@
     "volumearea remove <name: string>": "this: volumearea.remove.withName", // volumearea remove <name: string>
     "volumearea remove <position: x y z>": "this: volumearea.remove.withPosition", // volumearea remove <position: x y z>
     "volumearea remove_all": "this: volumearea.removeAll", // volumearea remove_all
-    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.default.from.kill", // loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> kill <entity: target> [<tool>|mainhand|offhand: string]
-    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.default.from.loot", // loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]
-    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.withCount.from.kill", // loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> kill <entity: target> [<tool>|mainhand|offhand: string]
-    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.withCount.from.loot", // loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]
-    "gametest run <testName: string> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]": "this: gametest.run.default", // gametest run <testName: GameTestName> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]
-    "gametest run <testName: string> [rotationSteps: int]": "this: gametest.run.short", // gametest run <testName: GameTestName> [rotationSteps: int]
-    "gametest runset [tag: string] [rotationSteps: int]": "this: gametest.runset", // gametest runset [tag: GameTestTag] [rotationSteps: int]
+    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.withCount.from.kill", // 将指定实体的某一槽位替换为特定实体被击杀所能获得的战利品。
+    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.withCount.from.loot", // 将指定实体的某一槽位替换为通过特定战利品表所能获得的战利品。
+    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.default.from.kill", // 将指定实体的某一槽位替换为特定实体被击杀所能获得的战利品。
+    "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.default.from.loot", // 将指定实体的某一槽位替换为通过特定战利品表所能获得的战利品。
+    "gametest run <testName: string> <stopOnFailure: Boolean> <repeatCount: int> [rotationSteps: int]": "this: gametest.run.default", // 运行指定的 GameTest 测试。
+    "gametest run <testName: string> [rotationSteps: int]": "this: gametest.run.short", // 运行指定的 GameTest 测试。
+    "gametest runset [tag: string] [rotationSteps: int]": "this: gametest.runset", // 运行指定的 GameTest 测试集合。
     "script debugger connect [host: string] [port: int]": "this: script.debugger.connect", // script debugger connect <host: string> <port: int>
     "script profiler start": "this: script.profiler.start", // script profiler start
-    "script profiler stop": "this: script.profiler.stop" // script profiler stop
+    "script profiler stop": "this: script.profiler.stop", // script profiler stop
+    "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> <blockStates: block states> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> <data: int> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> blocks <begin: x y z> <end: x y z> <destination: x y z> <scan mode: BlocksScanMode> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> entity <target: target> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> score <target: target> <objective: string> <operation: compare operator> <source: target> <objective: string> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute <subcommand: Option_If_Unless> score <target: target> <objective: string> matches <range: integer range> [chainedCommand: ExecuteChainedOption_0]": "",
+    "execute as <origin: target> <chainedCommand: ExecuteChainedOption_0>": "",
+    "execute at <origin: target> <chainedCommand: ExecuteChainedOption_0>": "",
+    "execute positioned <position: x y z> <chainedCommand: ExecuteChainedOption_0>": "",
+    "execute positioned as <origin: target> <chainedCommand: ExecuteChainedOption_0>": "",
+    "execute run <command: command>": ""
 }

@@ -168,7 +168,7 @@ function matchTranslations(options) {
                         return trimedRef.slice(1);
                     }
                 } else {
-                    let result = translateCached(trimedRef, rootKey);
+                    let result = translateCached(trimedRef, rootKey, true);
                     return result.translation;
                 }
             });

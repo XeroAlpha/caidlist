@@ -925,6 +925,7 @@
             "tadpole_spawn_egg",
             "tnt_minecart",
             "totem_of_undying",
+            "trader_llama_spawn_egg",
             "trident",
             "tropical_fish",
             "tropical_fish_bucket",
@@ -1058,6 +1059,7 @@
             "minecraft:thrown_trident",
             "minecraft:tnt",
             "minecraft:tnt_minecart",
+            "minecraft:trader_llama",
             "minecraft:tropicalfish",
             "minecraft:turtle",
             "minecraft:vex",
@@ -1081,9 +1083,7 @@
         ],
         "guessFromStd": [],
         "guessFromLang": [],
-        "notFound": [
-            "minecraft:firefly"
-        ]
+        "notFound": []
     },
     "effect": {
         "provided": [
@@ -1169,11 +1169,6 @@
     },
     "fog": {
         "provided": [
-            "minecraft:fog_default"
-        ],
-        "guessFromStd": [],
-        "guessFromLang": [],
-        "notFound": [
             "minecraft:fog_bamboo_jungle",
             "minecraft:fog_bamboo_jungle_hills",
             "minecraft:fog_basalt_deltas",
@@ -1191,6 +1186,7 @@
             "minecraft:fog_deep_lukewarm_ocean",
             "minecraft:fog_deep_ocean",
             "minecraft:fog_deep_warm_ocean",
+            "minecraft:fog_default",
             "minecraft:fog_desert",
             "minecraft:fog_desert_hills",
             "minecraft:fog_extreme_hills",
@@ -1244,7 +1240,10 @@
             "minecraft:fog_the_end",
             "minecraft:fog_warm_ocean",
             "minecraft:fog_warped_forest"
-        ]
+        ],
+        "guessFromStd": [],
+        "guessFromLang": [],
+        "notFound": []
     },
     "location": {
         "provided": [
@@ -1591,7 +1590,8 @@
             "minecraft:on_riding_player",
             "minecraft:on_not_riding_player",
             "minecraft:spawn_emerging",
-            "minecraft:emerged"
+            "minecraft:emerged",
+            "on_digging_event"
         ]
     },
     "entityFamily": {
@@ -3639,8 +3639,6 @@
             "enchant <player: target> <enchantmentId: int> [level: int]",
             "enchant <player: target> <enchantmentName: Enchant> [level: int]",
             "event entity <target: target> <eventName: string>",
-            "execute <origin: target> <position: x y z> <command: command>",
-            "execute <origin: target> <position: x y z> detect <detectPos: x y z> <block: Block> <data: int> <command: command>",
             "fill <from: x y z> <to: x y z> <tileName: Block> <blockStates: block states> replace [replaceTileName: Block] [replaceBlockStates: block states]",
             "fill <from: x y z> <to: x y z> <tileName: Block> <tileData: int> replace [replaceTileName: Block] [replaceDataValue: int]",
             "fill <from: x y z> <to: x y z> <tileName: Block> [blockStates: block states] [oldBlockHandling: FillMode]",
@@ -3796,7 +3794,20 @@
         ],
         "guessFromStd": [],
         "guessFromLang": [],
-        "notFound": []
+        "notFound": [
+            "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> <blockStates: block states> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> <data: int> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> block <position: x y z> <block: Block> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> blocks <begin: x y z> <end: x y z> <destination: x y z> <scan mode: BlocksScanMode> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> entity <target: target> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> score <target: target> <objective: string> <operation: compare operator> <source: target> <objective: string> [chainedCommand: ExecuteChainedOption_0]",
+            "execute <subcommand: Option_If_Unless> score <target: target> <objective: string> matches <range: integer range> [chainedCommand: ExecuteChainedOption_0]",
+            "execute as <origin: target> <chainedCommand: ExecuteChainedOption_0>",
+            "execute at <origin: target> <chainedCommand: ExecuteChainedOption_0>",
+            "execute positioned <position: x y z> <chainedCommand: ExecuteChainedOption_0>",
+            "execute positioned as <origin: target> <chainedCommand: ExecuteChainedOption_0>",
+            "execute run <command: command>"
+        ]
     },
     "lootTable": {
         "provided": [
