@@ -1,6 +1,7 @@
 const fs = require("fs");
 const nodePath = require("path");
 const readline = require("readline");
+const notifier = require("node-notifier");
 const JSON = require("comment-json");
 
 const projectRoot = nodePath.resolve(__dirname, "../..");
@@ -81,25 +82,17 @@ function input(query) {
     });
 }
 
-function pause(query) {
-    return input(query);
+function pause(message) {
+    notify(message);
+    return input(message);
 }
 
-function checkPause(timeout, query) {
-    return new Promise((resolve) => {
-        let stdin = process.stdin;
-        let hasSignal = false;
-        let onData = () => (hasSignal = true);
-        stdin.on("data", onData);
-        setTimeout(() => {
-            stdin.removeListener("data", onData);
-            if (hasSignal) {
-                pause(query).then(resolve);
-            } else {
-                resolve();
-            }
-        }, timeout);
-    });
+function notify(message) {
+    notifier.notify({
+        title: "IDList",
+        message,
+        icon: nodePath.resolve(__dirname, "../assets/icon.png"),
+    })
 }
 
 async function runJobsAndReturn(mainJob, ...concurrentJobs) {
@@ -279,9 +272,7 @@ module.exports = {
     projectPath,
     sleepAsync,
     cachedOutput,
-    input,
     pause,
-    checkPause,
     runJobsAndReturn,
     uniqueAndSort,
     forEachObject,

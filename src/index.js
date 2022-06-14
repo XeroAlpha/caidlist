@@ -9,6 +9,7 @@ async function main(args) {
         await forEachArray(versionIds, async (versionId) => {
             context.version = versionId;
             const branches = generateOutputIndex(context);
+            console.log("Current version: " + versionId + " (" + context.packageVersions[versionId].version + ")");
             await forEachArray(branches, async (branch) => {
                 context.branch = branch;
                 console.log("Generating output files for " + versionId + "/" + branch.id + "...");

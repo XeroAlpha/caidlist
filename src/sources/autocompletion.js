@@ -321,8 +321,7 @@ async function analyzeAutocompletionEnumsCached(cx) {
         packageVersion
     });
 
-    console.log("Please switch to branch: " + branch.id);
-    await pause("Press <Enter> if the device is ready");
+    await pause("Please switch to branch: " + branch.id + "\nInteract if the device is ready");
     const target = { packageVersion };
     const options = {
         device,
