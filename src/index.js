@@ -1,5 +1,5 @@
 const { generateOutputFiles, generateOutputIndex } = require("./generate");
-const { forEachArray } = require("./util/common");
+const { forEachArray, pause } = require("./util/common");
 const config = require("../data/config");
 
 async function main(args) {
@@ -16,6 +16,7 @@ async function main(args) {
                 await generateOutputFiles(context);
             });
         });
+        await pause("Generate Task is finished.");
     } else {
         throw new Error("Unknown task: " + args[0]);
     }
