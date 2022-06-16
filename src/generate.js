@@ -31,6 +31,7 @@ const defaultTransMapNames = [
     ["effect", "状态效果", "用于 effect 命令的状态效果 ID"],
     ["enchant", "魔咒", "用于 enchant 命令的魔咒 ID"],
     ["fog", "迷雾", "用于 fog 命令的迷雾配置 ID"],
+    ["biome", "生物群系", "用于 locate 命令的生物群系 ID"],
     ["location", "结构", "用于 locate 命令的结构 ID"],
     ["gamerule", "游戏规则", "用于 gamerule 命令的游戏规则 ID"],
     ["entitySlot", "槽位类型", "用于 replaceitem 命令与 hasitem 选择器参数的槽位类型 ID"],
@@ -174,6 +175,15 @@ async function generateBranchedOutputFiles(cx) {
         translationMap: userTranslation.location,
         stdTransMap: cascadeMap(standardizedTranslation, ["EnvSprite"], true)
     });
+    if (support.newLocateCommand(coreVersion)) {
+        matchTranslations({
+            ...commonOptions,
+            name: "biome",
+            originalArray: enums.biomes,
+            translationMap: userTranslation.biome,
+            stdTransMap: cascadeMap(standardizedTranslation, ["BiomeSprite"], true)
+        });
+    }
     matchTranslations({
         ...commonOptions,
         name: "entityEvent",

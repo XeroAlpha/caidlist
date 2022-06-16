@@ -340,7 +340,12 @@ async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, "effects", "/effect @s ", ["[", "clear"]);
     await analyzeAutocompletionEnumCached(cx, options, "enchantments", "/enchant @s ", ["["]);
     await analyzeAutocompletionEnumCached(cx, options, "gamerules", "/gamerule ");
-    await analyzeAutocompletionEnumCached(cx, options, "locations", "/locate ");
+    if (support.newLocateCommand(coreVersion)) {
+        await analyzeAutocompletionEnumCached(cx, options, "locations", "/locate structure ");
+        await analyzeAutocompletionEnumCached(cx, options, "biomes", "/locate biome ");
+    } else {
+        await analyzeAutocompletionEnumCached(cx, options, "locations", "/locate ");
+    }
     await analyzeAutocompletionEnumCached(cx, options, "mobevents", "/mobevent ");
     await analyzeAutocompletionEnumCached(cx, options, "entity slots", "/replaceitem entity @s ", ["["]);
     await analyzeAutocompletionEnumCached(cx, options, "selectors", "/testfor @e[");

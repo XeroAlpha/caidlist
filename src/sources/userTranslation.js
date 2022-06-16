@@ -16,6 +16,7 @@ const userTranslationStorageKey = {
     enchant: "translation.enchant",
     fog: "translation.fog",
     location: "translation.location",
+    biome: "translation.biome",
     damageCause: "translation.damage_cause",
     gamerule: "translation.gamerule",
     entitySlot: "translation.entity_slot",

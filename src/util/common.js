@@ -273,6 +273,7 @@ module.exports = {
     sleepAsync,
     cachedOutput,
     pause,
+    notify,
     runJobsAndReturn,
     uniqueAndSort,
     forEachObject,
