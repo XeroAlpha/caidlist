@@ -88,7 +88,7 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 |6|附魔类型|enchant|`/enchant @s <Tab>`|
 |7|迷雾|fog|/assets/resource_packs/?/fogs/*.json|
 |8|结构|location|`/locate structure <Tab>`|
-|9|生物群系|location|`/locate biome <Tab>`|
+|9|生物群系|biome|`/locate biome <Tab>`|
 |10|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
 |11|实体族|entityFamily|/assets/behavior_packs/?/entities/*.json|
 |12|动画|animation|/assets/resource_packs/?/animations/*.json|

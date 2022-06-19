@@ -8,6 +8,14 @@ const Keywords = Symbol("Keywords");
 const PackageVersion = Symbol("PackageVersion");
 const GlobalSearchEnumId = "#global";
 
+function dateTimeToString(date) {
+    const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    const timeString = [date.getHours(), date.getMinutes(), date.getSeconds()]
+        .map((e) => e.toFixed(0).padStart(2, "0"))
+        .join(":");
+    return `${dateString} ${timeString}`;
+}
+
 function readJSON(path) {
     return JSON.parse(fs.readFileSync(path, "utf-8"));
 }
@@ -169,9 +177,12 @@ function doSearch(dataStore, options) {
     if (enumId != GlobalSearchEnumId) {
         result.push(...searchEnum(searcher, { scope, limit, enumId, branchData }));
     } else {
+        let restLimit = limit;
         for (const enumId in branchData.enums) {
-            result.push(...searchEnum(searcher, { scope, limit, enumId, branchData }));
-            if (result.length >= limit) {
+            const enumResult = searchEnum(searcher, { scope, limit: restLimit, enumId, branchData });
+            result.push(...enumResult);
+            restLimit -= enumResult.length;
+            if (restLimit <= 0) {
                 break;
             }
         }
@@ -198,14 +209,15 @@ const app = new Koa();
 const router = new Router();
 
 router.get("/search", (ctx, next) => {
-    if (Date.now() - dataCheckTime > UPDATE_INTERVAL) {
+    const now = new Date();
+    if (now - dataCheckTime > UPDATE_INTERVAL) {
         const modifiedTime = readFileModifiedTime(dataIndexPath);
         if (!isNaN(modifiedTime) && modifiedTime != dataUpdateTime) {
             dataStore = loadData(dataIndexPath);
-            console.log("DataStore successfully reloaded.");
+            process.stdout.write(`[${dateTimeToString(now)}] DataStore successfully reloaded.\n`);
             dataUpdateTime = modifiedTime;
         }
-        dataCheckTime = Date.now();
+        dataCheckTime = now.getTime();
     }
     try {
         const options = {
@@ -225,12 +237,16 @@ router.get("/search", (ctx, next) => {
                 result
             }
         };
-        console.log(`${ctx.querystring}|${options.searchText} -> ${result.length} result(s)`);
+        const time = Date.now() - now;
+        process.stdout.write(
+            `[${dateTimeToString(now)}] ${ctx.querystring}|${options.searchText} -> ${
+                result.length
+            } result(s) in ${time}ms\n`
+        );
     } catch (err) {
         ctx.status = 400;
         ctx.body = { error: err.message };
-        console.warn(`${ctx.querystring} -> Error: ${err.message}`);
-        console.warn(err.stack);
+        process.stdout.write(`[${dateTimeToString(now)}] ${ctx.querystring} -> Error: ${err.message}\n${err.stack}\n`);
         return;
     }
 });
@@ -239,4 +255,4 @@ app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(PORT);
 
-console.log("Server started at http://localhost:" + PORT);
+process.stdout.write(`Server started at http://localhost:${PORT}\n`);
