@@ -4,6 +4,8 @@
 
 [MCBEID表](https://ca.projectxero.top/idlist/) 是基于此工具的数据制作的可离线使用的ID表查询网站。
 
+[MCBEID表 在线搜索API](./backend/API.md) 是基于此工具的数据制作的在线ID表搜索接口。
+
 ## 工作流
 请视情况选择工作流。
 
@@ -58,11 +60,15 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 用户自定义译名表的值支持为以下格式：
 
 - 字面量。例如 `僵尸`。
+    - 可在前面加上冒号，用于与下方用法相区分。例如 `:ST: zombie` 表示 `ST: zombie`。
 - 直接引用。格式为 `<引用来源ID>: <引用ID>`。目前支持以下引用来源：
+    - 内部引用，引用来源 ID 为 `this`，等效于拼接模板的内部引用。例如 `this: a` 会引用当前翻译表中 ID 为 `a` 的翻译。
     - 标准化译名表，引用 ID 为表中条目对应的英语。引用来源 ID 为 `ST`，例如 `ST: zombie` 可以表示 `僵尸`。
     - Java版语言文件，引用 ID 为条目 ID。引用来源 ID 为 `JE`，例如 `JE: entity.minecraft.zombie` 也可表示 `僵尸`。
+    - 基岩版语言文件，引用 ID 为条目 ID，如非必要请勿使用此项。引用来源 ID 为 `BE`，例如 `BE: entity.zombie.name` 也可表示 `僵尸`。
     - 其他翻译。例如 `entity: zombie` 会引用实体翻译中僵尸的翻译。
         - 注意，翻译条目只能引用在此之前翻译完成的列表中的条目。
+    - 暂定翻译。用于标记某个条目为暂定翻译。引用来源 ID 为 `Missing`，例如 `Missing: BE: tile.sculk.name` 会展示警告，表示这是个暂定翻译，暂时使用 `BE: tile.sculk.name` 的结果代替。
 - 拼接模板。在字面量中穿插 `{{模板表达式}}`，生成工具会自动解释模板表达式并将模板表达式与字面量拼接起来。模板表达式支持以下格式：
     - 内部引用。格式为 `{{<ID>}}`，通过此方法可直接引用已有的翻译。例如 `{{zombie}}{{villager}}` 可以表示为 `僵尸村民`（并不推荐这么做）。
     - 外部引用。格式为 `{{<引用来源ID>!<引用ID>}}`。例如 `{{ST!zombie}}` 可以表示 `僵尸`。
@@ -74,22 +80,27 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 
 |顺序|枚举名|ID|枚举来源|
 |---|---|---|---|
-|1|方块|block|`/testforblock ~ ~ ~ <Tab>`|
-|2|物品|item|`/clear @s <Tab>`|
-|3|实体|entity|`/testfor @e[type=<Tab>`|
-|4|状态效果|effect|`/effect @s <Tab>`|
-|5|附魔类型|enchant|`/enchant @s <Tab>`|
-|6|迷雾|fog|/assets/resource_packs/?/fogs/*.json|
-|7|结构|location|`/locate <Tab>`|
-|8|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
-|9|实体族|entityFamily|/assets/behavior_packs/?/entities/*.json|
-|10|动画|animation|/assets/resource_packs/?/animations/*.json|
-|11|动画控制器|animationController|/assets/resource_packs/?/animation_controllers/*.json|
-|12|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
-|13|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
-|14|游戏规则|gamerule|`/gamerule <Tab>`|
-|15|槽位类型|entitySlot|`/replaceitem entity @s <Tab>`|
-|16|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
-|17|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
-|18|可生成的实体|summonableEntity|`/summon <Tab>`|
-|19|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
+|1|术语表|glossary|自定义|
+|2|方块|block|`/testforblock ~ ~ ~ <Tab>`|
+|3|物品|item|`/clear @s <Tab>`|
+|4|实体|entity|`/testfor @e[type=<Tab>`|
+|5|状态效果|effect|`/effect @s <Tab>`|
+|6|附魔类型|enchant|`/enchant @s <Tab>`|
+|7|迷雾|fog|/assets/resource_packs/?/fogs/*.json|
+|8|结构|location|`/locate structure <Tab>`|
+|9|生物群系|location|`/locate biome <Tab>`|
+|10|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
+|11|实体族|entityFamily|/assets/behavior_packs/?/entities/*.json|
+|12|动画|animation|/assets/resource_packs/?/animations/*.json|
+|13|动画控制器|animationController|/assets/resource_packs/?/animation_controllers/*.json|
+|14|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
+|15|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
+|16|游戏规则|gamerule|`/gamerule <Tab>`|
+|17|槽位类型|entitySlot|`/replaceitem entity @s <Tab>`|
+|18|命令|command|`/help <page>` 的返回内容|
+|19|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
+|20|伤害来源|damageCause|`/damage @s 0 <Tab>`|
+|21|地物与地物规则|featureAndRule|`/placefeature <Tab>`|
+|22|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
+|23|可生成的实体|summonableEntity|`/summon <Tab>`|
+|24|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
