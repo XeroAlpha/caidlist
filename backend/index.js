@@ -30,14 +30,23 @@ function readFileModifiedTime(path) {
 }
 
 function loadData(path) {
+    const pinyinRaw = require("pinyin");
+    const pinyin = (w) => pinyinRaw(w, { style: pinyinRaw.STYLE_NORMAL }).join("");
     const dataIndex = readJSON(path);
     const newData = {};
     const keywords = {};
-    const addKeywords = (k, c) => {
+    const addKeywordsRaw = (k, c) => {
         if (k in keywords) {
             keywords[k].push(c);
         } else {
             keywords[k] = [c];
+        }
+    };
+    const addKeywords = (k, c) => {
+        const pinyinKey = pinyin(k);
+        addKeywordsRaw(k, c);
+        if (pinyinKey != k) {
+            addKeywordsRaw(pinyinKey, c);
         }
     };
     dataIndex.forEach((versionIndex) => {
@@ -53,7 +62,11 @@ function loadData(path) {
             addKeywords(branchId, { versionType, branchId });
             addKeywords(branchInfo.name, { versionType, branchId });
             for (const enumKey in branchData.enums) {
-                enumEntriesMap[enumKey] = Object.entries(branchData.enums[enumKey]);
+                enumEntriesMap[enumKey] = Object.entries(branchData.enums[enumKey]).map(([key, value]) => [
+                    key,
+                    value,
+                    pinyin(value)
+                ]);
             }
             branchData.names.forEach(([id, name]) => {
                 addKeywords(id, { versionType, branchId, enumId: id });
@@ -156,8 +169,8 @@ function searchEnum(searcher, { scope, limit, enumId, branchData }) {
     if (!enumName || !enumEntries) {
         throw new Error("Invalid enum id: " + enumId);
     }
-    for (const [key, value] of enumEntries) {
-        if (!(enableSearchKey && searcher(key)) && !(enableSearchValue && searcher(value))) {
+    for (const [key, value, valuePinyin] of enumEntries) {
+        if (!(enableSearchKey && searcher(key)) && !(enableSearchValue && (searcher(value) || searcher(valuePinyin)))) {
             continue;
         }
         result.push({ enumId, enumName, key, value });
@@ -238,18 +251,21 @@ router.get("/search", (ctx, next) => {
             }
         };
         const time = Date.now() - now;
+        const results = `${result.length} result(s) in ${time}ms`;
         process.stdout.write(
-            `[${dateTimeToString(now)}] ${ctx.querystring}|${options.searchText} -> ${
-                result.length
-            } result(s) in ${time}ms\n`
+            `[${dateTimeToString(now)} ${ctx.ip}] ${ctx.querystring}|${options.searchText} -> ${results}\n`
         );
     } catch (err) {
         ctx.status = 400;
         ctx.body = { error: err.message };
-        process.stdout.write(`[${dateTimeToString(now)}] ${ctx.querystring} -> Error: ${err.message}\n${err.stack}\n`);
+        process.stdout.write(
+            `[${dateTimeToString(now)} ${ctx.ip}] ${ctx.querystring} -> Error: ${err.message}\n${err.stack}\n`
+        );
         return;
     }
 });
+
+app.proxy = true;
 
 app.use(router.routes()).use(router.allowedMethods());
 
