@@ -236,7 +236,7 @@ router.get("/search", (ctx, next) => {
         const options = {
             strategy: ctx.query.match || "keyword",
             scope: ctx.query.scope || "all",
-            limit: ctx.query.limit || 1,
+            limit: Math.max(Math.min(parseInt(ctx.query.limit), 1000), 1) || 1,
             versionType: ctx.query.version || "",
             branchId: ctx.query.branch || "",
             enumId: ctx.query.enum || "",
