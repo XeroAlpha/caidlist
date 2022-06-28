@@ -122,9 +122,14 @@ function prepareSearch(dataStore, options) {
             .split(/\s+/)
             .filter((e) => e.length > 0);
         const keywords = patchOptionByKeywords(dataStore, rawKeywords, options);
+        let startsWith = null;
+        if (keywords.length > 0 && keywords[0].length > 1 && keywords[0].startsWith("^")) {
+            startsWith = keywords[0] = keywords[0].slice(1);
+        }
         searcher = (value) => {
             const valueLowerCase = value.toLowerCase();
             let start = 0;
+            if (startsWith && !value.startsWith(startsWith)) return false;
             for (const keyword of keywords) {
                 const indexInValue = valueLowerCase.indexOf(keyword, start);
                 if (indexInValue < 0) {
@@ -211,6 +216,13 @@ function toPWAHash(options) {
     ].join("/");
 }
 
+function toHumanReadable(options, result) {
+    const lines = result.map((entry) => `${entry.enumName}: ${entry.key} -> ${entry.value}`);
+    if (lines.length > 0) lines.push("");
+    lines.push("https://ca.projectxero.top/idlist/" + toPWAHash(options));
+    return lines.join("\r\n");
+}
+
 const dataIndexPath = nodePath.resolve(process.argv[2], "index.json");
 let dataStore = loadData(dataIndexPath);
 let dataCheckTime = Date.now();
@@ -223,6 +235,7 @@ const router = new Router();
 
 router.get("/search", (ctx, next) => {
     const now = new Date();
+    process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ->] ${ctx.querystring}\n`);
     if (now - dataCheckTime > UPDATE_INTERVAL) {
         const modifiedTime = readFileModifiedTime(dataIndexPath);
         if (!isNaN(modifiedTime) && modifiedTime != dataUpdateTime) {
@@ -240,27 +253,28 @@ router.get("/search", (ctx, next) => {
             versionType: ctx.query.version || "",
             branchId: ctx.query.branch || "",
             enumId: ctx.query.enum || "",
-            searchText: ctx.query.q || ""
+            searchText: ctx.query.q || "",
+            format: ctx.query.format || "json"
         };
         const result = doSearch(dataStore, options);
-        ctx.body = {
-            data: {
-                count: result.length,
-                hash: toPWAHash(options),
-                result
-            }
-        };
+        if (options.format == "text") {
+            ctx.body = toHumanReadable(options, result);
+        } else {
+            ctx.body = {
+                data: {
+                    count: result.length,
+                    hash: toPWAHash(options),
+                    result
+                }
+            };
+        }
         const time = Date.now() - now;
         const results = `${result.length} result(s) in ${time}ms`;
-        process.stdout.write(
-            `[${dateTimeToString(now)} ${ctx.ip}] ${ctx.querystring}|${options.searchText} -> ${results}\n`
-        );
+        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} <-] ${options.searchText} -> ${results}\n`);
     } catch (err) {
         ctx.status = 400;
         ctx.body = { error: err.message };
-        process.stdout.write(
-            `[${dateTimeToString(now)} ${ctx.ip}] ${ctx.querystring} -> Error: ${err.message}\n${err.stack}\n`
-        );
+        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} <-] Error: ${err.message}\n${err.stack}\n`);
         return;
     }
 });
