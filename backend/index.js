@@ -6,7 +6,7 @@ const Router = require("@koa/router");
 const DefaultId = Symbol("DefaultId");
 const Keywords = Symbol("Keywords");
 const PackageVersion = Symbol("PackageVersion");
-const GlobalSearchEnumId = "#global";
+const GlobalSearchEnumId = "global";
 
 function dateTimeToString(date) {
     const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
