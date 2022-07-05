@@ -1,5 +1,5 @@
 const { generateOutputFiles, generateOutputIndex } = require("./generate");
-const { forEachArray, notify } = require("./util/common");
+const { forEachArray } = require("./util/common");
 const config = require("../data/config");
 
 async function main(args) {

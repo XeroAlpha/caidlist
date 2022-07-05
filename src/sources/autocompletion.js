@@ -1,3 +1,4 @@
+const { Transform } = require("stream");
 const sharp = require("sharp");
 const assert = require("assert").strict;
 const tesseract = require("node-tesseract-ocr");
@@ -10,73 +11,18 @@ const {
     openMonkey,
     sendMonkeyCommand
 } = require("../util/adb");
-const { openMinicap, stopMinicap, captureScreen, peekImageFromMinicap } = require("../util/captureScreen");
+const { openMinicap, stopMinicap } = require("../util/captureScreen");
 const {
-    sleepAsync,
     cachedOutput,
     pause,
-    runJobsAndReturn,
     retryUntilComplete,
     formatTimeLeft,
-    forEachObject
+    forEachObject,
+    peekDataFromStream
 } = require("../util/common");
 const support = require("./support");
 const { AutocompletionScreen } = require("../live/autocompletionScreen");
 const { doWSRelatedJobsCached } = require("./wsconnect");
-
-async function captureScreenCompat(device, minicapHandler, screen) {
-    let screenshot;
-    if (minicapHandler) {
-        screenshot = await peekImageFromMinicap(minicapHandler);
-    } else {
-        screenshot = await captureScreen(device);
-    }
-    screen.updateScreenshot(screenshot);
-    return screenshot;
-}
-
-async function recogizeCommand(cx, screenshotImage, surfaceOrientation) {
-    let commandAreaRect = cx.commandAreaRect[surfaceOrientation];
-    let img = sharp(screenshotImage);
-    img.removeAlpha()
-        .extract({
-            left: commandAreaRect[0],
-            top: commandAreaRect[1],
-            width: commandAreaRect[2],
-            height: commandAreaRect[3]
-        })
-        .negate()
-        .threshold(60);
-    if (cx.dpiScale) {
-        img.resize({
-            width: commandAreaRect[2] * cx.dpiScale,
-            height: commandAreaRect[3] * cx.dpiScale,
-            fit: "fill",
-            kernel: "nearest"
-        });
-    }
-    let commandTextImage = await img.png().toBuffer();
-    // await img.png().toFile("test.png");
-    let commandText = await tesseract.recognize(commandTextImage, {
-        ...cx.tesseractOptions,
-        lang: "eng",
-        psm: 7,
-        oem: 3
-    });
-    commandText = commandText.trim();
-    forEachObject(cx.tesseractMistakes, (v, k) => {
-        let index = 0;
-        while ((index = commandText.indexOf(k, index)) >= 0) {
-            commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
-            index += k.length;
-        }
-    });
-    return commandText;
-}
-
-async function recogizeCommandRemoteSync(cx, device, surfaceOrientation) {
-    return await recogizeCommand(cx, await captureScreen(device), surfaceOrientation);
-}
 
 function guessTruncatedString(truncatedStr, startsWith) {
     let spos, tpos;
@@ -89,97 +35,12 @@ function guessTruncatedString(truncatedStr, startsWith) {
     return null;
 }
 
-/** @deprecated */
-async function analyzeCommandAutocompletion(device, command, progressName, approxLength) {
+async function analyzeCommandAutocompletionFast(cx, device, screen, command, progressName, approxLength) {
     // 初始状态：游戏HUD
-    let autocompletions = [];
-    let surfaceOrientation = await getDeviceSurfaceOrientation(device);
-    let monkey = await openMonkey(device);
-    let minicap;
-    try {
-        minicap = await openMinicap(device);
-    } catch (err) {
-        console.error("Open minicap failed, fallback to screencap", err);
-    }
-
-    // 打开聊天栏
-    await sendMonkeyCommand(monkey, "press KEYCODE_T");
-
-    console.log(`Starting ${progressName}: ${command}`);
-    await adbShell(device, "input text " + JSON.stringify(command));
-
-    let screenshotImage = await captureScreenCompat(device, minicap);
-    const pressTabThenCapture = async () => {
-        await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
-        await sleepAsync(300); // wait for responding to key events
-        screenshotImage = await captureScreenCompat(device, minicap);
-    };
-    let autocompletedCommand = command.trim();
-    let recogizedCommand = await runJobsAndReturn(
-        recogizeCommand(cx, screenshotImage, surfaceOrientation),
-        pressTabThenCapture()
-    );
-    assert.equal(recogizedCommand, autocompletedCommand);
-    let timeStart = Date.now(),
-        stepCount = 0;
-    while (true) {
-        let newRecognizedCommand = await runJobsAndReturn(
-            recogizeCommand(cx, screenshotImage, surfaceOrientation),
-            pressTabThenCapture()
-        );
-        assert.notEqual(newRecognizedCommand, recogizedCommand);
-        recogizedCommand = newRecognizedCommand;
-
-        autocompletedCommand = guessTruncatedString(recogizedCommand, command);
-        if (!autocompletedCommand) {
-            throw new Error("Auto-completed command test failed: " + recogizedCommand);
-        }
-
-        let autocompletion = autocompletedCommand.slice(command.length);
-        if (autocompletions.includes(autocompletion)) {
-            console.log("Exit condition: " + autocompletion);
-            break;
-        } else {
-            autocompletions.push(autocompletion);
-            if (approxLength) {
-                let stepSpentAvg = (Date.now() - timeStart) / ++stepCount;
-                let percentage = ((autocompletions.length / approxLength) * 100).toFixed(1);
-                let timeLeft = (approxLength - autocompletions.length) * stepSpentAvg;
-                let timeLeftStr = formatTimeLeft(timeLeft / 1000);
-                let estTimeStr = new Date(Date.now() + timeLeft).toLocaleTimeString();
-                console.log(
-                    `[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`
-                );
-            } else {
-                console.log(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
-            }
-        }
-    }
-
-    // 退出聊天栏
-    await sendMonkeyCommand(monkey, "press KEYCODE_ESCAPE");
-    await sendMonkeyCommand(monkey, "press KEYCODE_ESCAPE");
-    await sendMonkeyCommand(monkey, "quit");
-    monkey.end();
-
-    if (minicap) {
-        await stopMinicap(device, minicap);
-    }
-
-    return autocompletions;
-}
-
-async function analyzeCommandAutocompletionSync(cx, device, screen, command, progressName, approxLength) {
-    // 初始状态：游戏HUD
-    let autocompletions = [];
-    let surfaceOrientation = await getDeviceSurfaceOrientation(device);
-    let monkey = await openMonkey(device);
-    let minicap;
-    try {
-        minicap = await openMinicap(device);
-    } catch (err) {
-        console.error("Open minicap failed, fallback to screencap", err);
-    }
+    const autocompletions = [];
+    const surfaceOrientation = await getDeviceSurfaceOrientation(device);
+    const commandAreaRect = cx.commandAreaRect[surfaceOrientation];
+    const monkey = await openMonkey(device);
     screen.updateStatus({ approxLength });
 
     // 打开聊天栏
@@ -190,10 +51,90 @@ async function analyzeCommandAutocompletionSync(cx, device, screen, command, pro
     screen.log("Input " + command);
     await adbShell(device, "input text " + JSON.stringify(command));
 
+    const imageStream = await openMinicap(device);
+    const pipeline = imageStream
+        .pipe(
+            new Transform({
+                objectMode: true,
+                transform(imageData, encoding, done) {
+                    screen.updateScreenshot(imageData);
+                    done(null, imageData);
+                }
+            })
+        )
+        .pipe(
+            new Transform({
+                objectMode: true,
+                transform(imageData, encoding, done) {
+                    const pipe = sharp(imageData);
+                    pipe.removeAlpha()
+                        .extract({
+                            left: commandAreaRect[0],
+                            top: commandAreaRect[1],
+                            width: commandAreaRect[2],
+                            height: commandAreaRect[3]
+                        })
+                        .negate()
+                        .threshold(60);
+                    if (cx.dpiScale) {
+                        pipe.resize({
+                            width: commandAreaRect[2] * cx.dpiScale,
+                            height: commandAreaRect[3] * cx.dpiScale,
+                            fit: "fill",
+                            kernel: "nearest"
+                        });
+                    }
+                    pipe.raw()
+                        .toBuffer({ resolveWithObject: true })
+                        .then(async (image) => {
+                            if (!this.lastImage || !image.data.equals(this.lastImage.data)) {
+                                done(null, (this.lastImage = image));
+                                await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
+                            } else {
+                                done();
+                            }
+                        });
+                }
+            })
+        )
+        .pipe(
+            new Transform({
+                objectMode: true,
+                highWaterMark: 16384,
+                transform(image, encoding, done) {
+                    sharp(image.data, { raw: image.info })
+                        .png()
+                        .toBuffer()
+                        .then((pngData) => {
+                            return tesseract.recognize(pngData, {
+                                ...cx.tesseractOptions,
+                                lang: "eng",
+                                psm: 7,
+                                oem: 3
+                            });
+                        })
+                        .then((text) => {
+                            let commandText = text.trim();
+                            forEachObject(cx.tesseractMistakes, (v, k) => {
+                                let index = 0;
+                                while ((index = commandText.indexOf(k, index)) >= 0) {
+                                    commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
+                                    index += k.length;
+                                }
+                            });
+                            if (!this.last || this.last != commandText) {
+                                done(null, (this.last = commandText));
+                            } else {
+                                done();
+                            }
+                        });
+                }
+            })
+        );
+
     let autocompletedCommand = command.trim();
     let recogizedCommand = await retryUntilComplete(10, 0, async () => {
-        let screenshotImage = await captureScreenCompat(device, minicap, screen);
-        let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
+        const command = await peekDataFromStream(pipeline, 0);
         assert.equal(command, autocompletedCommand);
         return command;
     });
@@ -202,16 +143,10 @@ async function analyzeCommandAutocompletionSync(cx, device, screen, command, pro
     let stepCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     while (true) {
-        await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
-        recogizedCommand = await retryUntilComplete(10, 1000, async () => {
-            try{
-                return await retryUntilComplete(10, 0, async () => {
-                    let screenshotImage = await captureScreenCompat(device, minicap, screen);
-                    let command = await recogizeCommand(cx, screenshotImage, surfaceOrientation);
-                    assert.notEqual(recogizedCommand, command);
-                    return command;
-                });
-            } catch(err) {
+        recogizedCommand = await retryUntilComplete(10, 0, async () => {
+            try {
+                return await peekDataFromStream(pipeline, 1000);
+            } catch (err) {
                 // 跳过重复ID
                 await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
                 throw err;
@@ -266,9 +201,7 @@ async function analyzeCommandAutocompletionSync(cx, device, screen, command, pro
     await sendMonkeyCommand(monkey, "quit");
     monkey.end();
 
-    if (minicap) {
-        await stopMinicap(device, minicap);
-    }
+    await stopMinicap(device, imageStream);
 
     return autocompletions;
 }
@@ -286,7 +219,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
     if (!result) {
         const progressName = `${version}.${branch.id}.${name.replace(/\s+/g, "_")}`;
         screen.updateStatus({ enumId: name, commandPrefix });
-        result = await analyzeCommandAutocompletionSync(
+        result = await analyzeCommandAutocompletionFast(
             cx,
             device,
             screen,

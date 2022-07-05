@@ -14,13 +14,13 @@ async function openMinicap(device) {
     return await minicap.start(device);
 }
 
-async function stopMinicap(device, handler) {
-    await minicap.stop(device, handler);
+async function stopMinicap(device, imageStream) {
+    await minicap.stop(device, imageStream);
     await minicap.uninstall(device);
 }
 
-async function peekImageFromMinicap(minicapHandler) {
-    return await eventTriggered(minicapHandler, "frame");
+async function peekImageFromMinicap(imageStream) {
+    return await eventTriggered(imageStream, "data");
 }
 
 module.exports = {

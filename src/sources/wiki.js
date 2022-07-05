@@ -2,11 +2,11 @@ const { cachedOutput } = require("../util/common");
 const { fetchText } = require("../util/network");
 
 async function fetchMZHWikiRaw(word) {
-    return await fetchText(`https://minecraft.fandom.com/zh/wiki/${word}?action=raw`);
+    return await fetchText(`https://minecraft.fandom.com/zh/wiki/${encodeURIComponent(word)}?action=raw`);
 }
 
 async function fetchBEDevWikiRaw(word) {
-    return await fetchText(`https://wiki.bedev.cn/${word}?action=raw`);
+    return await fetchText(`https://wiki.bedev.cn/${encodeURIComponent(word)}?action=raw`);
 }
 
 function parseEnumMapLua(luaContent) {
@@ -38,7 +38,7 @@ function parseEnumMapLua(luaContent) {
 }
 
 // Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink
-// Last update:  2021/8/5 15:19 by MysticNebula70
+// Last update:  2021/8/5 07:19 by MysticNebula70
 const enumMapColors = {
     "black ": "黑色",
     "blue ": "蓝色",

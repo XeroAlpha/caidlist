@@ -268,6 +268,40 @@ async function forEachArray(arr, f, thisArg) {
     }
 }
 
+function peekDataFromStream(stream, timeout) {
+    const data = stream.read();
+    if (data === null) {
+        return new Promise((resolve, reject) => {
+            const callback = (error, data) => {
+                stream.off("readable", readableCallback);
+                stream.off("error", errorCallback);
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            }
+            const readableCallback = () => {
+                callback(null, stream.read());
+            };
+            const errorCallback = (err) => {
+                callback(err);
+            };
+            let timeoutId;
+            stream.on("readable", readableCallback);
+            stream.on("error", errorCallback);
+            if (timeout > 0) {
+                const timeoutError = new Error(`Timeout ${timeout} exceed.`);
+                timeoutId = setTimeout(() => {
+                    callback(timeoutError);
+                }, timeout);
+            }
+        });
+    } else {
+        return data;
+    }
+}
+
 module.exports = {
     projectPath,
     sleepAsync,
@@ -292,5 +326,6 @@ module.exports = {
     removeMinecraftNamespace,
     setInlineCommentAfterField,
     eventTriggered,
-    forEachArray
+    forEachArray,
+    peekDataFromStream
 };

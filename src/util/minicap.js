@@ -1,15 +1,7 @@
 const events = require("events");
-const {
-    adbShell,
-    extractFromShell,
-    getSystemProp,
-    pushWithSync,
-    getDeviceSurfaceOrientation
-} = require("./adb");
-const {
-    sleepAsync,
-    eventTriggered
-} = require("./common");
+const { adbShell, extractFromShell, getSystemProp, pushWithSync, getDeviceSurfaceOrientation } = require("./adb");
+const { sleepAsync } = require("./common");
+const { StateTransform } = require("./stateStream");
 
 async function install(device) {
     const prebuiltRoot = "@devicefarmer/minicap-prebuilt/prebuilt";
@@ -18,12 +10,12 @@ async function install(device) {
     const sdk = parseInt(await getSystemProp(device, "ro.build.version.sdk"));
     let binFile, soFile;
     if (sdk >= 16) {
-        binFile = require.resolve(`${prebuiltRoot}/${abi}/bin/minicap`); 
+        binFile = require.resolve(`${prebuiltRoot}/${abi}/bin/minicap`);
     } else {
-        binFile = require.resolve(`${prebuiltRoot}/${abi}/bin/minicap-nopie`)
+        binFile = require.resolve(`${prebuiltRoot}/${abi}/bin/minicap-nopie`);
     }
     soFile = require.resolve(`${prebuiltRoot}/${abi}/lib/android-${sdk}/minicap.so`);
-    
+
     const sync = await device.syncService();
     await pushWithSync(sync, binFile, `${remoteTempDir}/minicap`, "0755");
     await pushWithSync(sync, soFile, `${remoteTempDir}/minicap.so`);
@@ -36,63 +28,35 @@ async function uninstall(device) {
     await adbShell(device, `rm -f ${remoteTempDir}/minicap.so`);
 }
 
-async function readUntilBytes(stream, byteCount) {
-    let chunks = [], chunk;
-    while (byteCount) {
-        chunk = stream.read(byteCount);
-        if (!chunk) {
-            chunk = stream.read();
-        }
-        if (chunk) {
-            chunks.push(chunk);
-            byteCount -= chunk.length;
-        }
-        await eventTriggered(stream, "readable");
+class MinicapStream extends StateTransform {
+    constructor(minicapProc) {
+        super();
+        this.minicapProc = minicapProc;
     }
-    return Buffer.concat(chunks);
-}
 
-async function readMinicapHeader(stream, handler) {
-    let headerLen, headerBuf;
-    handler.version = (await readUntilBytes(stream, 1))[0];
-    headerLen = (await readUntilBytes(stream, 1))[0];
-    headerBuf = await readUntilBytes(stream, headerLen - 2);
-    handler.pid = headerBuf.readUInt32LE(0);
-    handler.realDisplaySize = [
-        headerBuf.readUInt32LE(4),
-        headerBuf.readUInt32LE(8)
-    ];
-    handler.virtualDisplaySize = [
-        headerBuf.readUInt32LE(12),
-        headerBuf.readUInt32LE(16)
-    ];
-    handler.orientation = headerBuf[20];
-    handler.quirkFlags = headerBuf[21];
-}
-
-async function readMinicapFrame(stream) {
-    const len = (await readUntilBytes(stream, 4)).readUInt32LE(0);
-    return await readUntilBytes(stream, len);
-}
-
-async function connectMinicap(stream, minicapProc) {
-    let handler = new events.EventEmitter();
-    stream.pause();
-    stream.on("end", () => {
-        handler.stopped = true;
-        handler.emit("end");
-    });
-    stream.once("readable", async () => {
-        await readMinicapHeader(stream, handler);
-        handler.emit("header", handler);
-        while (!handler.stopped) {
-            handler.emit("frame", await readMinicapFrame(stream));
+    _processChunk(state, chunk) {
+        switch (state) {
+            case 0: // STATE_HEADER_VERSION
+                this.version = chunk.readUInt8();
+                return [1, 1];
+            case 1: // STATE_HEADER_LEN
+                return [2, chunk.readUInt8() - 2];
+            case 2: // STATE_HEADER_CONTENT
+                this.pid = chunk.readUInt32LE(0);
+                this.realDisplaySize = [chunk.readUInt32LE(4), chunk.readUInt32LE(8)];
+                this.virtualDisplaySize = [chunk.readUInt32LE(12), chunk.readUInt32LE(16)];
+                this.orientation = chunk.readUInt8(20);
+                this.quirkFlags = chunk.readUInt8(21);
+                return [3, 4];
+            case 3: // STATE_DATA_LEN
+                return [4, chunk.readUInt32LE()];
+            case 4: // STATE_DATA_CONTENT
+                this.push(chunk);
+                return [3, 4];
+            default:
+                return [0, 1];
         }
-        stream.destroy();
-    });
-    handler.stream = stream;
-    handler.minicapProc = minicapProc;
-    return handler;
+    }
 }
 
 async function start(device, options) {
@@ -103,7 +67,7 @@ async function start(device, options) {
         arguments.push("-d", options.display);
     }
     if (options.socketName) {
-        arguments.push("-n", socketName = options.socketName);
+        arguments.push("-n", (socketName = options.socketName));
     }
     if (options.projection) {
         arguments.push("-P", options.projection);
@@ -127,15 +91,15 @@ async function start(device, options) {
         arguments.push("-r", options.frameRate);
     }
     let minicapProc = await device.shell(arguments.join(" "));
-    // minicapProc.on("data", data => console.log(data.toString()));
-    let retryCount = 20;
-    while(retryCount--) {
-        try {
-            return connectMinicap(await device.openLocal(`localabstract:${socketName}`), minicapProc);
-        } catch(err) {
-            // ignore it
-        }
+    let retryCount = 3;
+    while (retryCount--) {
         await sleepAsync(500);
+        try {
+            const localStream = await device.openLocal(`localabstract:${socketName}`);
+            return localStream.pipe(new MinicapStream(minicapProc));
+        } catch (err) {
+            console.error(err);
+        }
     }
     throw new Error("Unable to establish connection to minicap");
 }
