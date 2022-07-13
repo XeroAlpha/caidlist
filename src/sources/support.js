@@ -24,7 +24,11 @@ module.exports = {
         return testMinecraftVersionInRange(coreVersion, "1.18.20.25", "1.18.20.26");
     },
     newLocateCommand(coreVersion) {
-        return testMinecraftVersionInRange(coreVersion, "1.19.10.23", "*");
+        return (
+            testMinecraftVersionInRange(coreVersion, "1.19.10.23", "*") ||
+            testMinecraftVersionInRange(coreVersion, "1.19.10.03", "1.19.10.03")
+        );
+
     },
     mcpews(versionType) {
         return versionType != "netease" && versionType != "netease_dev";

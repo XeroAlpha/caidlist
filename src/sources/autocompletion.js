@@ -18,7 +18,8 @@ const {
     retryUntilComplete,
     formatTimeLeft,
     forEachObject,
-    peekDataFromStream
+    peekDataFromStream,
+    sleepAsync
 } = require("../util/common");
 const support = require("./support");
 const { AutocompletionScreen } = require("../live/autocompletionScreen");
@@ -45,12 +46,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
 
     // 打开聊天栏
     await sendMonkeyCommand(monkey, "press KEYCODE_T");
+    await sleepAsync(500);
 
     console.log(`Starting ${progressName}: ${command}`);
     screen.clearLog();
     screen.log("Input " + command);
     await adbShell(device, "input text " + JSON.stringify(command));
 
+    let reactInterval = 0, reactFrameCount = 0, tesseractQueue = 0;
     const imageStream = await openMinicap(device);
     const pipeline = imageStream
         .pipe(
@@ -86,11 +89,19 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                     }
                     pipe.raw()
                         .toBuffer({ resolveWithObject: true })
-                        .then(async (image) => {
+                        .then((image) => {
                             if (!this.lastImage || !image.data.equals(this.lastImage.data)) {
+                                const now = Date.now();
+                                sendMonkeyCommand(monkey, "press KEYCODE_TAB"); // async
+                                if (this.lastImageTime) {
+                                    reactFrameCount = this.framesBeforeChange;
+                                    reactInterval = now - this.lastImageTime;
+                                }
+                                this.lastImageTime = now;
+                                this.framesBeforeChange = 1;
                                 done(null, (this.lastImage = image));
-                                await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
                             } else {
+                                this.framesBeforeChange++;
                                 done();
                             }
                         });
@@ -100,34 +111,42 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         .pipe(
             new Transform({
                 objectMode: true,
-                highWaterMark: 16384,
                 transform(image, encoding, done) {
                     sharp(image.data, { raw: image.info })
                         .png()
                         .toBuffer()
                         .then((pngData) => {
-                            return tesseract.recognize(pngData, {
+                            const promise = tesseract.recognize(pngData, {
                                 ...cx.tesseractOptions,
                                 lang: "eng",
                                 psm: 7,
                                 oem: 3
                             });
-                        })
-                        .then((text) => {
-                            let commandText = text.trim();
-                            forEachObject(cx.tesseractMistakes, (v, k) => {
-                                let index = 0;
-                                while ((index = commandText.indexOf(k, index)) >= 0) {
-                                    commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
-                                    index += k.length;
-                                }
-                            });
-                            if (!this.last || this.last != commandText) {
-                                done(null, (this.last = commandText));
-                            } else {
-                                done();
+                            done(null, promise);
+                        });
+                }
+            })
+        ).pipe(
+            new Transform({
+                objectMode: true,
+                highWaterMark: 16384,
+                transform(promise, encoding, done) {
+                    promise.then((text) => {
+                        let commandText = text.trim();
+                        forEachObject(cx.tesseractMistakes, (v, k) => {
+                            let index = 0;
+                            while ((index = commandText.indexOf(k, index)) >= 0) {
+                                commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
+                                index += k.length;
                             }
                         });
+                        if (commandText.length && (!this.last || this.last != commandText)) {
+                            done(null, (this.last = commandText));
+                            tesseractQueue = this.readableLength;
+                        } else {
+                            done();
+                        }
+                    });
                 }
             })
         );
@@ -143,7 +162,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let stepCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     while (true) {
-        recogizedCommand = await retryUntilComplete(10, 0, async () => {
+        recogizedCommand = await retryUntilComplete(10, 500, async () => {
             try {
                 return await peekDataFromStream(pipeline, 1000);
             } catch (err) {
@@ -174,7 +193,10 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 recogizedCommand,
                 autocompletion,
                 stepSpent,
-                resultLength: autocompletions.length
+                resultLength: autocompletions.length,
+                reactInterval,
+                reactFrameCount,
+                tesseractQueue
             });
             screen.log("Recognized: " + recogizedCommand);
             autocompletions.push(autocompletion);
