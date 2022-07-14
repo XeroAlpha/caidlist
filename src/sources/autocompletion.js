@@ -53,7 +53,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     screen.log("Input " + command);
     await adbShell(device, "input text " + JSON.stringify(command));
 
-    let reactInterval = 0, reactFrameCount = 0, tesseractQueue = 0;
+    let reactInterval = 0, reactFrameCount = 0;
     const imageStream = await openMinicap(device);
     const pipeline = imageStream
         .pipe(
@@ -129,7 +129,6 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         ).pipe(
             new Transform({
                 objectMode: true,
-                highWaterMark: 16384,
                 transform(promise, encoding, done) {
                     promise.then((text) => {
                         let commandText = text.trim();
@@ -142,7 +141,6 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                         });
                         if (commandText.length && (!this.last || this.last != commandText)) {
                             done(null, (this.last = commandText));
-                            tesseractQueue = this.readableLength;
                         } else {
                             done();
                         }
@@ -162,14 +160,8 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let stepCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     while (true) {
-        recogizedCommand = await retryUntilComplete(10, 500, async () => {
-            try {
-                return await peekDataFromStream(pipeline, 1000);
-            } catch (err) {
-                // 跳过重复ID
-                await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
-                throw err;
-            }
+        recogizedCommand = await retryUntilComplete(10, 500, () => {
+            return peekDataFromStream(pipeline, 1000);
         });
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
@@ -195,8 +187,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 stepSpent,
                 resultLength: autocompletions.length,
                 reactInterval,
-                reactFrameCount,
-                tesseractQueue
+                reactFrameCount
             });
             screen.log("Recognized: " + recogizedCommand);
             autocompletions.push(autocompletion);

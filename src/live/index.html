@@ -197,7 +197,7 @@
                 if (hb.resultLength) {
                     const speed = (1000 / hb.stepSpent).toFixed(1);
                     const fps = (hb.reactFrameCount / hb.reactInterval * 1000).toFixed(1);
-                    text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}张/条 ${fps} fps，${hb.tesseractQueue} 识别中）`);
+                    text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}张/条 ${fps} fps）`);
                     if (hb.approxLength) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
                         text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
@@ -293,8 +293,7 @@
                     '<span style="text-decoration: line-through">了解ID的变化情况。</span>欢迎来弹幕聊天啊，听听歌也行。',
                     '但<span style="font-weight: bold">请不要在直播间里赠送付费的礼物或者上舰</span>。'
                 ],
-                ["怎么催更比较好啊？", "已经在更了，具体啥时候看我自己空闲情况吧。"],
-                ["命令助手呢？你啥时候更新？", "已经在更了，具体啥时候看我自己空闲情况吧。"],
+                ["命令助手呢？你啥时候更新？", "无限期暂停更新中，别催了，催了也没用"],
                 ["为什么UP主的主页打不开？", "我也不清楚啊，不如关注一下UP主翻翻动态试试？"]
             ];
             dynamicMarquee.loop(
