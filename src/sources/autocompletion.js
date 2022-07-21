@@ -160,8 +160,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let stepCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     while (true) {
-        recogizedCommand = await retryUntilComplete(10, 500, () => {
-            return peekDataFromStream(pipeline, 1000);
+        recogizedCommand = await retryUntilComplete(10, 500, async () => {
+            try {
+                return await peekDataFromStream(pipeline, 1000);
+            } catch (err) {
+                // 跳过重复ID
+                await sendMonkeyCommand(monkey, "press KEYCODE_TAB");
+                throw err;
+            }
         });
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);

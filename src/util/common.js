@@ -275,6 +275,7 @@ function peekDataFromStream(stream, timeout) {
             const callback = (error, data) => {
                 stream.off("readable", readableCallback);
                 stream.off("error", errorCallback);
+                clearTimeout(timeoutId);
                 if (error) {
                     reject(error);
                 } else {
