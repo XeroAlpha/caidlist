@@ -189,9 +189,9 @@ function formatTimeLeft(seconds) {
     const sec = (seconds % 60).toFixed(0);
     const min = (Math.floor(seconds / 60) % 60).toFixed(0);
     const hr = Math.floor(seconds / 3600).toFixed(0);
-    if (seconds > 6000) {
+    if (seconds >= 6000) {
         return `${hr}h${min.padStart(2, "0")}m${sec.padStart(2, "0")}s`;
-    } else if (seconds > 60) {
+    } else if (seconds >= 60) {
         return `${min}m${sec.padStart(2, "0")}s`;
     } else {
         return `${seconds.toFixed(1)}s`;

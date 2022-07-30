@@ -69,6 +69,7 @@
                 flex: 1;
                 overflow: hidden;
                 white-space: pre-wrap;
+                word-break: break-all;
                 overflow-wrap: anywhere;
             }
             .explanation {
@@ -93,6 +94,7 @@
                 overflow: hidden;
                 word-break: break-all;
                 white-space: pre-wrap;
+                overflow-wrap: anywhere;
             }
         </style>
         <script>
@@ -154,6 +156,7 @@
             let sessionId = null;
             let screenshotId = null;
             let logs = [];
+            let lastLogTime = Infinity;
             let danmakus = [];
             let danmakuOnline = false;
             function dateTimeString(d) {
@@ -166,9 +169,9 @@
                 const sec = (seconds % 60).toFixed(0);
                 const min = (Math.floor(seconds / 60) % 60).toFixed(0);
                 const hr = Math.floor(seconds / 3600).toFixed(0);
-                if (seconds > 3600) {
+                if (seconds >= 3600) {
                     return `${hr}小时${min.padStart(2, "0")}分${sec.padStart(2, "0")}秒`;
-                } else if (seconds > 60) {
+                } else if (seconds >= 60) {
                     return `${min}分${sec.padStart(2, "0")}秒`;
                 } else {
                     return `${sec}秒`;
@@ -226,8 +229,9 @@
                     logsEl.scroll({
                         top: logsEl.scrollHeight,
                         left: 0,
-                        behavior: hb.logs.length > 10 ? "auto" : "smooth"
+                        behavior: Date.now() - lastLogTime < 200 ? "auto" : "smooth"
                     });
+                    lastLogTime = Date.now();
                 }
                 if (!sessionId) {
                     text.push("状态服务器：离线");
