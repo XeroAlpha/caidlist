@@ -1,14 +1,20 @@
 const crypto = require("crypto");
-const got = require("got").default;
 const { HttpProxyAgent, HttpsProxyAgent } = require("hpagent");
 const { proxyConfig } = require("../../data/config");
 
-const proxiedGot = got.extend({
-    agent: {
-        http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
-        https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
+/** @type {import("got").Got} */
+let proxiedGot = null;
+async function getProxiedGot() {
+    if (proxiedGot == null) {
+        proxiedGot = (await import("got")).got.extend({
+            agent: {
+                http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
+                https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
+            }
+        });
     }
-});
+    return proxiedGot;
+}
 
 function digestBufferHex(algorithm, buffer) {
     const digest = crypto.createHash(algorithm);
@@ -17,7 +23,8 @@ function digestBufferHex(algorithm, buffer) {
 }
 
 async function fetchRedirect(url) {
-    const response = await proxiedGot.head(url, {
+    const got = await getProxiedGot();
+    const response = await got.head(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
@@ -29,7 +36,8 @@ async function fetchRedirect(url) {
 }
 
 async function fetchFile(url, size, sha1) {
-    const request = proxiedGot(url, {
+    const got = await getProxiedGot();
+    const request = got(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
@@ -66,7 +74,7 @@ async function fetchJSON(url, size, sha1) {
 }
 
 module.exports = {
-    proxiedGot,
+    getProxiedGot,
     fetchRedirect,
     fetchFile,
     fetchJSON,
