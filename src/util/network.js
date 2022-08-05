@@ -16,6 +16,18 @@ function digestBufferHex(algorithm, buffer) {
     return digest.digest().toString("hex");
 }
 
+async function fetchRedirect(url) {
+    const response = await proxiedGot.head(url, {
+        timeout: {
+            lookup: 30000,
+            connect: 30000,
+            secureConnect: 30000
+        },
+        followRedirect: false
+    });
+    return response.headers.location;
+}
+
 async function fetchFile(url, size, sha1) {
     const request = proxiedGot(url, {
         timeout: {
@@ -55,6 +67,7 @@ async function fetchJSON(url, size, sha1) {
 
 module.exports = {
     proxiedGot,
+    fetchRedirect,
     fetchFile,
     fetchJSON,
     fetchText

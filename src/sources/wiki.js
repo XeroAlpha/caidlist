@@ -37,7 +37,7 @@ function parseEnumMapLua(luaContent) {
     return enumMapStack[0];
 }
 
-// Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink
+// Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink?action=history
 // Last update:  2021/8/5 07:19 by MysticNebula70
 const enumMapColors = {
     "black ": "黑色",

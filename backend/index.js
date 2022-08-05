@@ -44,9 +44,9 @@ function loadData(path) {
     };
     const addKeywords = (k, c) => {
         const pinyinKey = pinyin(k);
-        addKeywordsRaw(k, c);
+        addKeywordsRaw(k.toLowerCase(), c);
         if (pinyinKey != k) {
-            addKeywordsRaw(pinyinKey, c);
+            addKeywordsRaw(pinyinKey.toLowerCase(), c);
         }
     };
     dataIndex.forEach((versionIndex) => {
