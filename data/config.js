@@ -67,7 +67,7 @@ exports.packageVersions = {
         // 安装包路径
         path: "H:\\BedrockVersions\\Latest\\1.19.11.01.apk",
         // 可用分支
-        branches: ["vanilla", "education", "experiment"],
+        branches: ["vanilla", "education", "experiment", "documentation"],
         config: smallestGUIOCROptions
     },
     // 测试版
@@ -77,7 +77,7 @@ exports.packageVersions = {
         // 安装包路径
         path: "H:\\BedrockVersions\\Latest\\1.19.30.20.apk",
         // 可用分支
-        branches: ["vanilla", "education", "experiment", "translator", "langParity"],
+        branches: ["vanilla", "education", "experiment", "translator", "documentation", "langParity"],
         config: smallestGUIOCROptions
     },
     // 中国版测试版

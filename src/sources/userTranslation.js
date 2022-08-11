@@ -22,7 +22,8 @@ const userTranslationStorageKey = {
     entitySlot: "translation.entity_slot",
     feature: "translation.feature",
     lootTable: "translation.loot_table",
-    langParity: "translation.lang_parity"
+    langParity: "translation.lang_parity",
+    documentation: "translation.documentation"
 };
 function loadUserTranslation() {
     let userTranslation = {};

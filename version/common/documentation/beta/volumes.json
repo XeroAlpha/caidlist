@@ -1,0 +1,178 @@
+{
+    "title": "VOLUMES DOCUMENTATION",
+    "version": "1.19.30.20",
+    "content": [],
+    "sections": [
+        {
+            "name": "Volumes",
+            "level": 1,
+            "content": [],
+            "sections": [
+                {
+                    "name": "Volume Components",
+                    "level": 2,
+                    "content": [
+                        "These are the various possible components for this entity",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minecraft:fog",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Displays the given fog whenever a player enters the volume. Each volume can only have one fog attached.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "fog_identifier",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The identifier of a fog definition. Note that you will not receive any feedback if the definition does not exist."
+                                                },
+                                                {
+                                                    "Name": "priority",
+                                                    "Type": "Integer",
+                                                    "Default Value": "INT_MAX",
+                                                    "Description": "The priority for this fog definition setting. Smaller numbers have higher priority. Fogs with equal priority will be combined together."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_actor_enter",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Component that defines what happens when an actor enters the volume. Can contain multiple json objects.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "on_enter",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "Required array that contains all the triggers.",
+                                                        {
+                                                            "section": "condition",
+                                                            "content": [
+                                                                "Molang expression to test against the actor. The given event will be triggered if the expression evaluates to true."
+                                                            ]
+                                                        },
+                                                        {
+                                                            "section": "event",
+                                                            "content": [
+                                                                "Name of the event to run."
+                                                            ]
+                                                        },
+                                                        {
+                                                            "section": "target",
+                                                            "content": [
+                                                                "One of \"self\" or \"other\". Self means the event is attached to the volume. Other means the event is attached to the actor."
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_actor_leave",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Component that defines what happens when an actor leaves the volume.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "on_leave",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "Required array that contains all the triggers.",
+                                                        {
+                                                            "section": "condition",
+                                                            "content": [
+                                                                "Molang expression to test against the actor. The given event will be triggered if the expression evaluates to true."
+                                                            ]
+                                                        },
+                                                        {
+                                                            "section": "event",
+                                                            "content": [
+                                                                "Name of the event to run."
+                                                            ]
+                                                        },
+                                                        {
+                                                            "section": "target",
+                                                            "content": [
+                                                                "One of \"self\" or \"other\". Self means the event is attached to the volume. Other means the event is attached to the actor."
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Volume Definition Properties",
+                    "level": 2,
+                    "content": [
+                        "The properties of a minecraft:volume entity. All components are optional.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Specifies the version of the game this entity was made in. Minimum supported version is 1.17.0. Current supported version is 1.19.30."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Example",
+                            "level": 22,
+                            "content": [
+                                "Example",
+                                {
+                                    "type": "code",
+                                    "content": "{\n  \"format_version\": 1.17.0,\n  \"minecraft:volume\": {\n    \"description\": {\n      \"identifier\": \"your_custom_namespace:sample_volume\"\n    },\n    \"components\": {\n      \"minecraft:fog\": {\n        \"fog_identifier\": \"minecraft:fog_savanna\",\n        \"priority\": 1\n      }\n    }\n  }\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Volume Description Properties",
+                    "level": 2,
+                    "content": [
+                        "The description contains a single 'identifier' string",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "identifier",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "The unique identifier for this volume. It must be of the form 'namespace:name', where namespace cannot be 'minecraft'."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

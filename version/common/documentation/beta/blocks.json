@@ -1,0 +1,1118 @@
+{
+    "title": "BLOCKS DOCUMENTATION",
+    "version": "1.19.30.20",
+    "content": [],
+    "sections": [
+        {
+            "name": "Blocks",
+            "level": 1,
+            "content": [],
+            "sections": [
+                {
+                    "name": "Block Components",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minecraft:block_light_filter",
+                                    "Type": "Integer",
+                                    "Default Value": "15",
+                                    "Description": "The amount that light will be dampened when it passes through the block, in a range (0-15). Higher value means the light will be dampened more."
+                                },
+                                {
+                                    "Name": "minecraft:breathability",
+                                    "Type": "Enumerator",
+                                    "Default Value": "solid",
+                                    "Description": "The breathing type of this block that affects the breathing state of mobs when they have their breathing points inside this block. Available values: solid, airExperimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:collision_box",
+                                    "Type": "Boolean / JSON Object",
+                                    "Default Value": "true",
+                                    "Description": [
+                                        "Defines the area of the block that collides with entities. If set to true, default values are used. If set to false, the block's collision with entities is disabled. If this component is omitted, default values are used.",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "origin",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[-8.0, 0.0, -8.0]",
+                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
+                                                },
+                                                {
+                                                    "Name": "size",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[16.0, 16.0, 16.0]",
+                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:crafting_table",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Makes your block into a custom crafting table which enables the crafting table UI and the ability to craft recipes. This component supports only \"recipe_shaped\" and \"recipe_shapeless\" typed recipes and not others like \"recipe_furnace\" or \"recipe_brewing_mix\". If there are two recipes for one item, the recipe book will pick the first that was parsed. If two input recipes are the same, crafting may assert and the resulting item may vary.",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "section": "crafting_tags",
+                                            "content": [
+                                                "Defines the tags recipes should define to be crafted on this table. Limited to 64 tags. Each tag is limited to 64 characters."
+                                            ]
+                                        },
+                                        {
+                                            "section": "table_name",
+                                            "content": [
+                                                "Specifies the language file key that maps to what text will be displayed in the UI of this table. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this field is omitted, the name displayed will default to the name specified in the \"display_name\" component. If this block has no \"display_name\" component, the name displayed will default to the name of the block."
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:destructible_by_explosion",
+                                    "Type": "Boolean / JSON Object",
+                                    "Default Value": "true",
+                                    "Description": [
+                                        "Describes the destructible by explosion properties for this block. If set to true, the block will have the default explosion resistance. If set to false, this block is indestructible by explosion. If the component is omitted, the block will have the default explosion resistance.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "explosion_resistance",
+                                                    "Type": "Decimal",
+                                                    "Default Value": "0",
+                                                    "Description": "Sets the explosion resistance for the block. Greater values result in greater resistance to explosions. The scale will be different for different explosion power levels. A negative value or 0 means it will easily explode; larger numbers increase level of resistance."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:destructible_by_mining",
+                                    "Type": "Boolean / JSON Object",
+                                    "Default Value": "true",
+                                    "Description": [
+                                        "Describes the destructible by mining properties for this block. If set to true, the block will take the default number of seconds to destroy. If set to false, this block is indestructible by mining. If the component is omitted, the block will take the default number of seconds to destroy.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "seconds_to_destroy",
+                                                    "Type": "Decimal",
+                                                    "Default Value": "0.0",
+                                                    "Description": "Sets the number of seconds it takes to destroy the block with base equipment. Greater numbers result in greater mining times."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:display_name",
+                                    "Type": "Localization String",
+                                    "Default Value": "",
+                                    "Description": "Specifies the language file key that maps to what text will be displayed when you hover over the block. Key is limited to 256 characters.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:flammable",
+                                    "Type": "Boolean / JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes the flammable properties for this block. If set to true, default values are used. If set to false, or if this component is omitted, the block will not be able to catch on fire naturally from neighbors, but it can still be directly ignited.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "catch_chance_modifier",
+                                                    "Type": "Integer",
+                                                    "Default Value": "5",
+                                                    "Description": "A modifier affecting the chance that this block will catch flame when next to a fire. Values are greater than or equal to 0, with a higher number meaning more likely to catch on fire. For a \"catch_chance_modifier\" greater than 0, the fire will continue to burn until the block is destroyed (or it will burn forever if the \"destroy_chance_modifier\" is 0). If the \"catch_chance_modifier\" is 0, and the block is directly ignited, the fire will eventually burn out without destroying the block (or it will have a chance to be destroyed if \"destroy_chance_modifier\" is greater than 0). The default value of 5 is the same as that of Planks."
+                                                },
+                                                {
+                                                    "Name": "destroy_chance_modifier",
+                                                    "Type": "Integer",
+                                                    "Default Value": "20",
+                                                    "Description": "A modifier affecting the chance that this block will be destroyed by flames when on fire. Values are greater than or equal to 0, with a higher number meaning more likely to be destroyed by fire. For a \"destroy_chance_modifier\" of 0, the block will never be destroyed by fire, and the fire will burn forever if the \"catch_chance_modifier\" is greater than 0. The default value of 20 is the same as that of Planks."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:friction",
+                                    "Type": "Decimal",
+                                    "Default Value": "0.4",
+                                    "Description": "Describes the friction for this block in a range of (0.0-0.9). Friction affects an entity's movement speed when it travels on the block. Greater value results in more friction."
+                                },
+                                {
+                                    "Name": "minecraft:geometry",
+                                    "Type": "Identifier String",
+                                    "Default Value": "",
+                                    "Description": "The description identifier of the geometry file to use to render this block. This identifier must match an existing geometry identifier in any of the currently loaded resource packs.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:light_emission",
+                                    "Type": "Integer",
+                                    "Default Value": "0",
+                                    "Description": "The amount of light this block will emit in a range (0-15). Higher value means more light will be emitted."
+                                },
+                                {
+                                    "Name": "minecraft:loot",
+                                    "Type": "Path String",
+                                    "Default Value": "",
+                                    "Description": "The path to the loot table, relative to the behavior pack. Path string is limited to 256 characters."
+                                },
+                                {
+                                    "Name": "minecraft:map_color",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Sets the color of the block when rendered to a map. The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255. If this component is omitted, the block will not show up on the map."
+                                },
+                                {
+                                    "Name": "minecraft:material_instances",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The material instances for a block. Maps face or material_instance names in a geometry file to an actual material instance. You can assign a material instance object to any of these faces: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\", or \"*\". You can also give an instance the name of your choosing such as \"my_instance\", and then assign it to a face by doing \"north\":\"my_instance\".",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "section": "Material Instance",
+                                            "content": [
+                                                "A material instance definition to map to a material instance in a geometry file. The material instance \"*\" will be used for any materials that don't have a match.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "ambient_occlusion",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "true",
+                                                            "Description": "Should this material have ambient occlusion applied when lighting? If true, shadows will be created around and underneath the block."
+                                                        },
+                                                        {
+                                                            "Name": "face_dimming",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "true",
+                                                            "Description": "Should this material be dimmed by the direction it's facing?"
+                                                        },
+                                                        {
+                                                            "Name": "render_method",
+                                                            "Type": "String",
+                                                            "Default Value": "opaque",
+                                                            "Description": "The render method to use. Must be one of these options:\"opaque\" - Used for a regular block texture without an alpha layer. Does not allow for transparency or translucency.\"double_sided\" - Used for completely disabling backface culling.\"blend\" - Used for a block like stained glass. Allows for transparency and translucency (slightly transparent textures).\"alpha_test\" - Used for a block like the vanilla (unstained) glass. Does not allow for translucency, only fully opaque or fully transparent textures. Also disables backface culling."
+                                                        },
+                                                        {
+                                                            "Name": "texture",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "Texture name for the material."
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:part_visibility",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets conditions for when the block's different parts are visible.",
+                                        "Experimental toggles required: Upcoming Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "conditions",
+                                                    "Type": "JSON Object",
+                                                    "Default Value": "",
+                                                    "Description": "A JSON object that contains a list of key/value pairs that map from bone name in a geometry file (key) to a condition that turns their rendering on/off (value). The condition should be a Molang query that uses block properties to determine true/false. Supported queries include 'has_block_property', 'block_property', and other queries that can evaluate without knowledge of the block's in-game positional or player affected data."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:placement_filter",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets rules for under what conditions the block can be placed/survive",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "section": "conditions",
+                                            "content": [
+                                                "List of conditions where the block can be placed/survive. Limited to 64 conditions.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "allowed_faces",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": "List of any of the following strings describing which face(s) this block can be placed on: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\", \"side\", \"all\". Limited to 6 faces."
+                                                        },
+                                                        {
+                                                            "Name": "block_filter",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": [
+                                                                "List of blocks that this block can be placed against in the \"allowed_faces\" direction. Limited to 64 blocks. Each block in this list can either be specified as a String (block name) or as a BlockDescriptor. A BlockDescriptor is an object that allows you to reference a block (or multiple blocks) based on its tags, or based on its name and states. The fields of a BlockDescriptor are described below.",
+                                                                {
+                                                                    "type": "table",
+                                                                    "rows": [
+                                                                        {
+                                                                            "Name": "name",
+                                                                            "Type": "String",
+                                                                            "Default Value": "",
+                                                                            "Description": "The name of a block."
+                                                                        },
+                                                                        {
+                                                                            "Name": "states",
+                                                                            "Type": "Array",
+                                                                            "Default Value": "",
+                                                                            "Description": "The list of Vanilla block states and their values that the block can have, expressed in key/value pairs."
+                                                                        },
+                                                                        {
+                                                                            "Name": "tags",
+                                                                            "Type": "String",
+                                                                            "Default Value": "1",
+                                                                            "Description": "A condition using Molang queries that results to true/false that can be used to query for blocks with certain tags."
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:queued_ticking",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Triggers the specified event, either once, or at a regular interval equal to a number of ticks randomly chosen from the interval_range provided.",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "interval_range",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": "A range of values, specified in ticks, that will be used to decide the interval between times this event triggers. Each interval will be chosen randomly from the range, so the times between this event triggering will differ given an interval_range of two different values. If the values in the interval_range are the same, the event will always be triggered after that number of ticks."
+                                                },
+                                                {
+                                                    "Name": "looping",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "true",
+                                                    "Description": "Does the event loop? If false, the event will only be triggered once, after a delay equal to a number of ticks randomly chosen from the interval_range. If true, the event will loop, and each interval between events will be equal to a number of ticks randomly chosen from the interval_range."
+                                                },
+                                                {
+                                                    "Name": "on_tick",
+                                                    "Type": "Trigger",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "The event that will be triggered once or on an interval.",
+                                                        {
+                                                            "type": "table",
+                                                            "rows": [
+                                                                {
+                                                                    "Name": "condition",
+                                                                    "Type": "String",
+                                                                    "Default Value": "1",
+                                                                    "Description": "A condition using Molang queries that results to true/false. If true on the scheduled tick, the event will be triggered. If false on the scheduled tick, the event will not be triggered."
+                                                                },
+                                                                {
+                                                                    "Name": "event",
+                                                                    "Type": "String",
+                                                                    "Default Value": "set_block_property",
+                                                                    "Description": "The event that will be triggered."
+                                                                },
+                                                                {
+                                                                    "Name": "target",
+                                                                    "Type": "String",
+                                                                    "Default Value": "self",
+                                                                    "Description": "The target of the event executed by the block."
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:random_ticking",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Triggers the specified event randomly based on the random tick speed gamerule. The random tick speed determines how often blocks are updated. Some other examples of game mechanics that use random ticking are crop growth and fire spreading.",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "on_tick",
+                                                    "Type": "Trigger",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "The event that will be triggered on random ticks.",
+                                                        {
+                                                            "type": "table",
+                                                            "rows": [
+                                                                {
+                                                                    "Name": "condition",
+                                                                    "Type": "String",
+                                                                    "Default Value": "1",
+                                                                    "Description": "A condition using Molang queries that results to true/false. If true on the random tick, the event will be triggered. If false on the random tick, the event will not be triggered."
+                                                                },
+                                                                {
+                                                                    "Name": "event",
+                                                                    "Type": "String",
+                                                                    "Default Value": "set_block_property",
+                                                                    "Description": "The event that will be triggered."
+                                                                },
+                                                                {
+                                                                    "Name": "target",
+                                                                    "Type": "String",
+                                                                    "Default Value": "self",
+                                                                    "Description": "The target of the event executed by the block."
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:rotation",
+                                    "Type": "Vector [a, b, c]",
+                                    "Default Value": "rotation[0, 0, 0]",
+                                    "Description": "The block's rotation around the center of the cube in degrees. The rotation is specified as [x, y, z]. Angles need to be in factors of 90.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:selection_box",
+                                    "Type": "Boolean / JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Defines the area of the block that is selected by the player's cursor. If set to true, default values are used. If set to false, this block is not selectable by the player's cursor. If this component is omitted, default values are used.",
+                                        "Experimental toggles required: Holiday Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "origin",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[-8.0, 0.0, -8.0]",
+                                                    "Description": "Minimal position of the bounds of the selection box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
+                                                },
+                                                {
+                                                    "Name": "size",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[16.0, 16.0, 16.0]",
+                                                    "Description": "Size of each side of the selection box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:unit_cube",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Block Definition Properties",
+                    "level": 2,
+                    "content": [
+                        "These properties are part of the Block Definition. This helps the system determine how to parse and initialize this block.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Code Example",
+                            "level": 22,
+                            "content": [
+                                "Example",
+                                {
+                                    "type": "code",
+                                    "content": "{\n  \"format_version\": \"1.19.30\",\n  \"minecraft:block\": {\n    \"description\": {\n      \"identifier\": \"design:lavenderstone\"\n    },\n    \"components\": {\n      \"minecraft:loot\": \"loot_tables/chests/simple_dungeon.json\",\n      \"minecraft:destroy_time\": 4.0,\n      \"minecraft:friction\": 0.6,\n      \"minecraft:map_color\": \"#00ff00\",\n      \"minecraft:flammable\": {\n        \"flame_odds\": 50,\n        \"burn_odds\": 0\n    },\n      \"minecraft:light_emission\": 1\n    }\n  }\n}"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Block Description Properties",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "identifier",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "The identifier for this block. The name must include a namespace and must not use the Minecraft namespace unless overriding a Vanilla block."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Block Event Responses",
+                    "level": 2,
+                    "content": [
+                        "Event responses for block trigger components.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "add_mob_effect",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Apply mob effect to target.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "amplifier",
+                                                    "Type": "Integer",
+                                                    "Default Value": "0",
+                                                    "Description": "The amplifier for the mob effect."
+                                                },
+                                                {
+                                                    "Name": "duration",
+                                                    "Type": "Decimal",
+                                                    "Default Value": "0.0",
+                                                    "Description": "The duration of the mob effect."
+                                                },
+                                                {
+                                                    "Name": "effect",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The mob effect to apply."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "damage",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Deals damage to the target.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "amount",
+                                                    "Type": "Integer",
+                                                    "Default Value": "0",
+                                                    "Description": "The amount of damage to deal."
+                                                },
+                                                {
+                                                    "Name": "mob_amount",
+                                                    "Type": "Integer",
+                                                    "Default Value": "0",
+                                                    "Description": "The amount of damage to deal if held by a mob."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                },
+                                                {
+                                                    "Name": "type",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The type of damage to deal."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "decrement_stack",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Decrement item stack."
+                                },
+                                {
+                                    "Name": "die",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Kill target. If target is self and this is run from a block then destroy the block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "play_effect",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Spawns a particle effect relative to target position.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "data",
+                                                    "Type": "Integer",
+                                                    "Default Value": "0",
+                                                    "Description": "Particle data value."
+                                                },
+                                                {
+                                                    "Name": "effect",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The name of the particle effect to create."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "play_sound",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Play a sound relative to target position.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "sound",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The name of the sound to play."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "remove_mob_effect",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Removes mob effect from target.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "effect",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The mob effect to remove. Use 'all' to remove all mob effects from target."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "run_command",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Triggers a slash command or a list of slash commands.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "command",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "Slash command to run."
+                                                },
+                                                {
+                                                    "Name": "command array",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": "List of slash commands to run."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "set_block",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets this block to another block type.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "block_type",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The type of block to set."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "set_block_at_pos",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets a block relative to this block to another block type.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "block_offset",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[0.0, 0.0, 0.0]",
+                                                    "Description": "The offset from the block's center."
+                                                },
+                                                {
+                                                    "Name": "block_type",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The type of block to set."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "set_block_property",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets a block property on this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "property",
+                                                    "Type": "Molang",
+                                                    "Default Value": "",
+                                                    "Description": "Block property to set on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "spawn_loot",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Spawn loot from block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "table",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "File path, relative to the Behavior Pack's path, to the loot table file."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "swing",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Event causes the actor to swing."
+                                },
+                                {
+                                    "Name": "teleport",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Teleport target randomly around destination point.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "avoid_water",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "true",
+                                                    "Description": "Determines if the teleport avoids putting the target in water."
+                                                },
+                                                {
+                                                    "Name": "destination",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[0.0, 0.0, 0.0]",
+                                                    "Description": "Origin destination of the teleport."
+                                                },
+                                                {
+                                                    "Name": "land_on_block",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "true",
+                                                    "Description": "Determines if the teleport places the target on a block."
+                                                },
+                                                {
+                                                    "Name": "max_range",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[8.0, 8.0, 8.0]",
+                                                    "Description": "Max range the target can teleport relative to the origin destination."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "Minecraft Filter",
+                                                    "Default Value": "self",
+                                                    "Description": "The target context to execute against."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "transform_item",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Transforms item into another item.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "transform",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "Name of the item it should transform into"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Code Example",
+                            "level": 22,
+                            "content": [
+                                "Event Response Example",
+                                {
+                                    "type": "code",
+                                    "content": "\"minecraft:block\": {\n      \"description\": {\n        \"identifier\": \"test:on_interact_change_state_block\",\n        \"properties\": {\n          \"minecraft:direction\": {\n          }\n        }\n      },\n      \"components\": {\n        \"minecraft:on_interact\": {\n          \"event\": \"test_event\"\n        }\n      },\n      \"events\": {\n        \"test_event\": {\n          \"set_block_property\": {\n            \"minecraft:direction\": \"1\"\n          }\n        }\n      }\n    }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Block Trigger Components",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minecraft:on_fall_on",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "min_fall_distance",
+                                                    "Type": "Decimal",
+                                                    "Default Value": "0.0",
+                                                    "Description": "The minimum distance in blocks that an actor needs to fall to trigger this event."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_interact",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_placed",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_player_destroyed",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_player_placing",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_step_off",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:on_step_on",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Describes event for this block.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "condition",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The condition of event to be executed on the block."
+                                                },
+                                                {
+                                                    "Name": "event",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The event executed on the block."
+                                                },
+                                                {
+                                                    "Name": "target",
+                                                    "Type": "String",
+                                                    "Default Value": "self",
+                                                    "Description": "The target of event executed on the block."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

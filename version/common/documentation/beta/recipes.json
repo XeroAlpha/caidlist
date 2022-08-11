@@ -1,0 +1,274 @@
+{
+    "title": "RECIPES DOCUMENTATION",
+    "version": "1.19.30.20",
+    "content": [],
+    "sections": [
+        {
+            "name": "Recipes",
+            "level": 1,
+            "content": [
+                "Recipes are setup in Json files under the behavior_packs /'name of pack'/ recipes directory.",
+                "Recipe JSON files have different structures dependent on their type.",
+                "There are 3 types of recipes, Furnace, Shaped and Shapeless."
+            ],
+            "sections": [
+                {
+                    "name": "Furnace Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a furnace recipe for a furnace.'Input' items will burn and transform into items specified in 'output'.."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "input",
+                                            "Type": "item names",
+                                            "Description": "Items used as input for the furnace recipe."
+                                        },
+                                        {
+                                            "Name": "output",
+                                            "Type": "item names",
+                                            "Description": "Items used as output for the furnace recipe."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Furnace Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_furnace\": {\n\"description\": {\n\"identifier\": \"minecraft:furnace_beef\"\n},\n\"tags\": [\"furnace\", \"smoker\", \"campfire\", \"soul_campfire\"],\n\"input\": {\n\"item\": \"minecraft:beef\",\n\"data\": 0,\n\"count\": 4\n},\n\"output \": \"minecraft:cooked_beef\"\n}\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Potion Brewing Container Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a Potion Brewing Container Recipe.."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "input",
+                                            "Type": "potion",
+                                            "Description": "input potion used in the brewing container recipe."
+                                        },
+                                        {
+                                            "Name": "output",
+                                            "Type": "potion",
+                                            "Description": "output potion from the brewing container recipe."
+                                        },
+                                        {
+                                            "Name": "reagent",
+                                            "Type": "item",
+                                            "Description": "item used in the brewing container recipe with the input potion."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "Item used in a Brewing Container Recipe."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Potion Brewing Container Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_container\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_potion_sulphur\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion\",\n  \"reagent\": \"minecraft:gunpowder\",\n  \"output\": \"minecraft:splash_potion\",\n \n  }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Potion Brewing Mix",
+                    "level": 2,
+                    "content": [
+                        "Represents a Potion Brewing Mix.."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "input",
+                                            "Type": "potion",
+                                            "Description": "input potion used on the brewing stand."
+                                        },
+                                        {
+                                            "Name": "output",
+                                            "Type": "potion",
+                                            "Description": "output potion from mixing the input potion with the reagent on the brewing stand."
+                                        },
+                                        {
+                                            "Name": "reagent",
+                                            "Type": "item",
+                                            "Description": "item used to mix with the input potion."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "Item used to make a brewing mix."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Potion Brewing Mix Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_mix\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_awkward_blaze_powder\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion_type:awkward\",\n  \"reagent\": \"minecraft:blaze_powder\",\n  \"output\": \"minecraft:potion_type:strength\",\n \n  }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Shaped Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a shaped crafting recipe for a crafting table.",
+                        "The key used in the pattern may be any single character except the 'space' character, which is reserved for empty slots in a recipe.."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "key",
+                                            "Type": "array of key and item pairs",
+                                            "Description": "patten key character mapped to item names."
+                                        },
+                                        {
+                                            "Name": "pattern",
+                                            "Type": "array of strings",
+                                            "Description": "characters that represent a pattern to be defined by keys."
+                                        },
+                                        {
+                                            "Name": "priority",
+                                            "Type": "integer",
+                                            "Description": "Item used as output for the furnace recipe."
+                                        },
+                                        {
+                                            "Name": "result",
+                                            "Type": "array of item names",
+                                            "Description": "when input items match the pattern then these items are the result."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "Item used as input for the furnace recipe."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Shaped Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_shaped\": {\n\"description\": {\n  \"identifier\": \"minecraft:acacia_boat\"\n  },\n\"tags\": [ \"crafting_table\" ],\n\"pattern\": [\n        \"#P#\",\n        \"###\"\n        ],\n  \"key\": {\n    \"P\": {\n      \"item\": \"minecraft:wooden_shovel\"\n    },\n    \"#\": {\n      \"item\": \"minecraft:planks\",\n      \"data\": 4\n      }\n    },\n\"result\": {\n    \"item\": \"minecraft:boat\",\n    \"data\": 4\n    }\n  }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Shapeless Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a shapeless crafting recipe.."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "ingredients",
+                                            "Type": "array of item names",
+                                            "Description": "items used as input (without a shape) for the recipe."
+                                        },
+                                        {
+                                            "Name": "priority",
+                                            "Type": "integer",
+                                            "Description": "Item used as output for the furnace recipe."
+                                        },
+                                        {
+                                            "Name": "result",
+                                            "Type": "array of item names",
+                                            "Description": "these items are the result."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "Item used as input for the furnace recipe."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Shapeless Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_shapeless\": {\n\"description\": {\n  \"identifier\": \"minecraft:firecharge_coal_sulphur\"\n  },\n \"priority\": 0,\n \"ingredients\": {\n      \"item\": \"minecraft:fireball\",\n      \"data\": 0,\n      \"count\": 4\n },\n\"result\": {\n      \"item\": \"minecraft:blaze_powder\",\n      \"data\": 4\n      }\n  }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

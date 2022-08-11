@@ -3,6 +3,7 @@ const nodePath = require("path");
 const readline = require("readline");
 const notifier = require("node-notifier");
 const JSON = require("comment-json");
+const { CommentLocation, setJSONComment, clearJSONComment } = require("./comment");
 
 const projectRoot = nodePath.resolve(__dirname, "../..");
 
@@ -249,16 +250,11 @@ function removeMinecraftNamespace(array) {
 }
 
 function setInlineCommentAfterField(obj, fieldName, comment) {
+    const symbol = CommentLocation.after(fieldName);
     if (comment) {
-        obj[Symbol.for("after:" + fieldName)] = [
-            {
-                type: "LineComment",
-                value: " " + comment,
-                inline: true
-            }
-        ];
+        setJSONComment(obj, symbol, "inlineLine", " " + comment);
     } else {
-        delete obj[Symbol.for("after:" + fieldName)];
+        clearJSONComment(obj, symbol);
     }
 }
 

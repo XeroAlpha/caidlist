@@ -32,7 +32,7 @@ async function fetchRedirect(url) {
         },
         followRedirect: false
     });
-    return response.headers.location;
+    return response.headers.location || url;
 }
 
 async function fetchFile(url, size, sha1) {

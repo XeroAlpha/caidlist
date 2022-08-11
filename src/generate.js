@@ -3,6 +3,7 @@ const { analyzePackageDataEnumsCached } = require("./sources/applicationPackage"
 const { analyzeAutocompletionEnumsCached } = require("./sources/autocompletion");
 const { fetchStandardizedTranslation } = require("./sources/wiki");
 const { fetchJavaEditionLangData } = require("./sources/javaEdition");
+const { fetchDocumentationIds, doSchemaTranslation } = require("./sources/documentation");
 const { loadUserTranslation, saveUserTranslation } = require("./sources/userTranslation");
 const support = require("./sources/support");
 const { matchTranslations } = require("./util/templateMatch");
@@ -67,22 +68,33 @@ const translatorMapNames = [
     ["BedrockEditionLangSource", "基岩版英文语言文件"],
     ["JavaEditionLangSource", "Java版英文语言文件"]
 ];
+const documentationMapNames = [
+    ["entityFilter", "实体过滤器"],
+    ["entityBehavior", "实体AI意向"],
+    ["entityAttribute", "实体特性"],
+    ["entityBuiltinEvent", "实体内置事件"],
+    ["entityComponent", "实体组件"],
+    ["entityProperty", "实体属性"],
+    ["entityTrigger", "实体触发器"],
+    ["featureType", "地物类型"],
+    ["molangQuery", "Molang查询函数"]
+];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, coreVersion } = cx;
-    let packageDataEnums = analyzePackageDataEnumsCached(cx);
-    let autocompletedEnums = await analyzeAutocompletionEnumsCached(cx);
-    let enums = {
+    const packageDataEnums = analyzePackageDataEnumsCached(cx);
+    const autocompletedEnums = await analyzeAutocompletionEnumsCached(cx);
+    const enums = {
         ...packageDataEnums.data[branch.id],
         ...autocompletedEnums
     };
-    let lang = packageDataEnums.lang["zh_cn"];
-    let standardizedTranslation = await fetchStandardizedTranslation();
-    let javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
-    let userTranslation = loadUserTranslation();
+    const lang = packageDataEnums.lang["zh_cn"];
+    const standardizedTranslation = await fetchStandardizedTranslation();
+    const javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
+    const userTranslation = loadUserTranslation();
     console.log("Matching translations...");
-    let translationResultMaps = {},
-        translationStateMaps = {};
-    let commonOptions = {
+    const translationResultMaps = {};
+    const translationStateMaps = {};
+    const commonOptions = {
         resultMaps: translationResultMaps,
         stateMaps: translationStateMaps,
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
@@ -287,9 +299,9 @@ async function generateBranchedOutputFiles(cx) {
             originalArray: enums.lootTables,
             translationMap: userTranslation.lootTable
         });
-        let nameWrapped = {};
+        const nameWrapped = {};
         forEachObject(translationResultMaps.lootTable, (value, key) => {
-            let wrappedKey = JSON.stringify(key);
+            const wrappedKey = JSON.stringify(key);
             if (key.includes("/")) {
                 nameWrapped[wrappedKey] = value;
             } else {
@@ -423,6 +435,50 @@ async function generateTranslatorHelperFiles(cx) {
     });
 }
 
+async function generateDocumentationOutputFiles(cx) {
+    const ids = await fetchDocumentationIds(cx);
+    const standardizedTranslation = await fetchStandardizedTranslation();
+    const userTranslation = loadUserTranslation().documentation;
+    const resultContainer = {};
+    const transMaps = {};
+    if (!userTranslation.glossary) {
+        userTranslation.glossary = {};
+    }
+    matchTranslations({
+        resultMaps: resultContainer,
+        name: "glossary",
+        originalArray: Object.keys(userTranslation.glossary),
+        translationMap: userTranslation.glossary,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true)
+    });
+    forEachObject(ids, (table, tableId) => {
+        transMaps[tableId] = doSchemaTranslation(table, (map, keys) => {
+            if (!userTranslation[tableId]) {
+                userTranslation[tableId] = {};
+            }
+            matchTranslations({
+                resultMaps: resultContainer,
+                name: tableId,
+                originalArray: keys,
+                translationMap: userTranslation[tableId],
+                stdTransMap: cascadeMap(standardizedTranslation, [], true)
+            });
+            return resultContainer[tableId];
+        });
+    });
+    writeTransMapTextZip(cx, {
+        outputFile: projectPath(`output.web.${cx.version}.documentation`, "zip"),
+        transMaps,
+        transMapNames: documentationMapNames
+    });
+    writeTransMapJson(cx, {
+        outputFile: projectPath(`output.web.${cx.version}.documentation`, "json"),
+        transMaps,
+        transMapNames: documentationMapNames
+    });
+    saveUserTranslation({ documentation: userTranslation });
+}
+
 const versionInfoMap = {
     preview: {
         name: "预览版",
@@ -476,6 +532,10 @@ const branchInfoMap = {
         name: "翻译专用",
         description: "为翻译英文文本设计，包含了标准化译名表与语言文件"
     },
+    documentation: {
+        name: "文档",
+        description: "开发者文档中出现的ID及其描述"
+    },
     langParity: {
         name: "译名比较",
         description: "比较基岩版翻译与标准化译名，展示两者的差异",
@@ -514,6 +574,8 @@ async function generateOutputFiles(cx) {
         return await generateTranslatorHelperFiles(cx);
     } else if (cx.branch.id == "langParity") {
         return await generateLangParityPack(cx);
+    } else if (cx.branch.id == "documentation") {
+        return await generateDocumentationOutputFiles(cx);
     } else {
         return await generateBranchedOutputFiles(cx);
     }
