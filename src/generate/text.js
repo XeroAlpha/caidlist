@@ -1,6 +1,7 @@
 const fs = require("fs");
 const AdmZip = require("adm-zip");
 const {
+    projectInfo,
     forEachObject,
     filterObjectMap,
     replaceObjectKey,
@@ -82,7 +83,7 @@ function writeTransMapTextZip(cx, options) {
     const gameVersionText = versionInfo.name + "（" + packageVersion + "）- " + branchName;
     const footText = [
         "※此ID表是MCBEID表的一部分，对应游戏版本为" + gameVersionText,
-        "※详见：https://gitee.com/projectxero/caidlist"
+        "※详见：" + projectInfo.homepage
     ];
     let entityEventSplit, stdTransText;
     const enums = deepCopy(filterSkippedEnums(filterRedundantEnums(transMaps)));

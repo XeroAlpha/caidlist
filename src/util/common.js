@@ -6,6 +6,8 @@ const JSON = require("comment-json");
 
 const projectRoot = nodePath.resolve(__dirname, "../..");
 
+const projectInfo = require(nodePath.resolve(projectRoot, "package.json"));
+
 function projectPath(id, suffix) {
     let pathSegments;
     if (!suffix) suffix = "json";
@@ -110,6 +112,11 @@ function uniqueAndSort(array, compareFn) {
     }
 }
 
+/**
+ * @template K, V
+ * @param {Record<K, V>} object
+ * @param {(v: V, k: K, o: Record<K, V>) => void} f
+ */
 function forEachObject(object, f, thisArg) {
     Object.keys(object).forEach((key) => f.call(thisArg, object[key], key, object));
 }
@@ -150,17 +157,17 @@ function objectToArray(obj, f) {
     return Object.keys(obj).map((k) => f(k, obj[k], obj));
 }
 
-function deepCopy(something) {
-    if (Array.isArray(something)) {
-        return something.map((e) => deepCopy(e));
-    } else if (typeof something == "object") {
+function deepCopy(json) {
+    if (Array.isArray(json)) {
+        return json.map((e) => deepCopy(e));
+    } else if (typeof json == "object") {
         let newObject = {};
-        forEachObject(something, (value, key) => {
+        forEachObject(json, (value, key) => {
             newObject[key] = deepCopy(value);
         });
         return newObject;
     } else {
-        return something;
+        return json;
     }
 }
 
@@ -304,6 +311,7 @@ function peekDataFromStream(stream, timeout) {
 }
 
 module.exports = {
+    projectInfo,
     projectPath,
     sleepAsync,
     cachedOutput,
