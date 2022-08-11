@@ -491,7 +491,7 @@ async function fetchDocumentationIds(cx) {
     const behaviorPackUrl = await fetchRedirect(TemplatePackLink[version].behaviorPack);
     const cacheKey = "version.common.documentation." + version;
     let cache = cachedOutput(cacheKey);
-    if (!cache/* || cache.__URL__ != behaviorPackUrl*/) {
+    if (!cache || cache.__URL__ != behaviorPackUrl) {
         const behaviorPackData = await fetchFile(behaviorPackUrl);
         const behaviorPackParsed = parseBehaviorPack(behaviorPackData, cacheKey);
         cache = cachedOutput(cacheKey, {

@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.19.10.3",
+    "version": "1.19.20.2",
     "content": [],
     "sections": [
         {
@@ -953,6 +953,10 @@
                                     "Description": "Returns the ground speed of the entity in meters/second"
                                 },
                                 {
+                                    "Name": "query.had_component_group",
+                                    "Description": "Usable only in behavior packs when determining the default value for an entity's Property. Requires one string argument. If the entity is being loaded from data that was last saved with a component_group with the specified name, returns 1.0, otherwise returns 0.0. The purpose of this query is to allow entity definitions to change and still be able to load the correct state of entities."
+                                },
+                                {
                                     "Name": "query.has_any_family",
                                     "Description": "Returns 1 if the entity has any of the specified families, else 0."
                                 },
@@ -1708,10 +1712,6 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "query.actor_property",
-                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not."
-                                },
-                                {
                                     "Name": "query.biome_has_all_tags",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if all of them exist in the biome, else it returns 0.  Eg: query.biome_has_all_tags('is_cold', 'has_trees')"
                                 },
@@ -1772,12 +1772,12 @@
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the array of entities that are riding this entity"
                                 },
                                 {
-                                    "Name": "query.has_actor_property",
-                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise."
-                                },
-                                {
                                     "Name": "query.has_player_rider",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0"
+                                },
+                                {
+                                    "Name": "query.has_property",
+                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise."
                                 },
                                 {
                                     "Name": "query.is_attached",
@@ -1790,6 +1790,10 @@
                                 {
                                     "Name": "query.is_spectator",
                                     "Description": "(EXPERIMENTAL. Enable 'Spectator Mode' to use.) Returns 1.0 if the entity is spectator, else it returns 0.0"
+                                },
+                                {
+                                    "Name": "query.property",
+                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not."
                                 },
                                 {
                                     "Name": "query.relative_block_has_all_tags",
