@@ -60,23 +60,30 @@ async function fetchVersionsManifestCached() {
 }
 
 async function fetchJavaEditionLangData() {
-    const manifest = await fetchVersionsManifestCached();
-    const versionId = getLatestSnapshotVersionId(manifest);
     let cache = cachedOutput("version.common.java.lang");
-    if (!cache || cache.__VERSION__ != versionId) {
-        console.log("Fetching Java Edition language data...");
-        const versionMeta = await fetchVersionMeta(metaApiHost, manifest, versionId);
-        const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, "client");
-        const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
-        const langZhAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
-        const langEnAsset = extractFileFromZip(releaseFile, "assets/minecraft/lang/en_us.json");
-        cache = cachedOutput("version.common.java.lang", {
-            __VERSION__: versionMeta.id,
-            __VERSION_TYPE__: versionMeta.type,
-            __VERSION_TIME__: versionMeta.time,
-            zh_cn: JSON.parse(langZhAsset.toString()),
-            en_us: JSON.parse(langEnAsset.toString())
-        });
+    try {
+        const manifest = await fetchVersionsManifestCached();
+        const versionId = getLatestSnapshotVersionId(manifest);
+        if (!cache || cache.__VERSION__ != versionId) {
+            console.log("Fetching Java Edition language data...");
+            const versionMeta = await fetchVersionMeta(metaApiHost, manifest, versionId);
+            const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, "client");
+            const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
+            const langZhAsset = await fetchVersionAsset(assetApiHost, assetIndex, "minecraft/lang/zh_cn.json");
+            const langEnAsset = extractFileFromZip(releaseFile, "assets/minecraft/lang/en_us.json");
+            cache = cachedOutput("version.common.java.lang", {
+                __VERSION__: versionMeta.id,
+                __VERSION_TYPE__: versionMeta.type,
+                __VERSION_TIME__: versionMeta.time,
+                zh_cn: JSON.parse(langZhAsset.toString()),
+                en_us: JSON.parse(langEnAsset.toString())
+            });
+        }
+    } catch(err) {
+        if (!cache) {
+            throw err;
+        }
+        console.error("Failed to fetch version manifest of java edition, use cache instead: " + err);
     }
     return filterObjectMap(cache, (k) => !(k.startsWith("__") && k.endsWith("__")));
 }

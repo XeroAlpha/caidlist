@@ -488,17 +488,24 @@ function extractDocumentationIds(docMap) {
 
 async function fetchDocumentationIds(cx) {
     const { version } = cx;
-    const behaviorPackUrl = await fetchRedirect(TemplatePackLink[version].behaviorPack);
     const cacheKey = "version.common.documentation." + version;
     let cache = cachedOutput(cacheKey);
-    if (!cache || cache.__URL__ != behaviorPackUrl) {
-        const behaviorPackData = await fetchFile(behaviorPackUrl);
-        const behaviorPackParsed = parseBehaviorPack(behaviorPackData, cacheKey);
-        cache = cachedOutput(cacheKey, {
-            __VERSION__: behaviorPackParsed.__VERSION__,
-            __URL__: behaviorPackUrl,
-            ...extractDocumentationIds(behaviorPackParsed)
-        });
+    try {
+        const behaviorPackUrl = await fetchRedirect(TemplatePackLink[version].behaviorPack);
+        if (!cache || cache.__URL__ != behaviorPackUrl) {
+            const behaviorPackData = await fetchFile(behaviorPackUrl);
+            const behaviorPackParsed = parseBehaviorPack(behaviorPackData, cacheKey);
+            cache = cachedOutput(cacheKey, {
+                __VERSION__: behaviorPackParsed.__VERSION__,
+                __URL__: behaviorPackUrl,
+                ...extractDocumentationIds(behaviorPackParsed)
+            });
+        }
+    } catch(err) {
+        if (!cache) {
+            throw err;
+        }
+        console.error("Failed to fetch template behavior pack, use cache instead: " + err);
     }
     return filterObjectMap(cache, (k) => !(k.startsWith("__") && k.endsWith("__")));
 }
@@ -604,17 +611,10 @@ function doSchemaTranslation(schemaMap, onTranslate) {
     forEachObject(schemaMap, (schema, mapKey) => {
         visitSchema(schema, (type, schemaNode, path) => {
             const k = path.join("|>");
-            const v = [];
-            if (schemaNode.type) {
-                v.push("{" + schemaNode.type + "}");
-            }
-            if (schemaNode.description) {
-                v.push(schemaNode.description);
-            }
             if (k in flatMap) {
                 console.warn("Duplicated path: " + k);
             }
-            flatMap[k] = v.join(" ");
+            flatMap[k] = schemaNode.description || "";
         }, [mapKey]);
     });
     const translatedFlatMap = onTranslate(flatMap, Object.keys(flatMap)) || flatMap;
