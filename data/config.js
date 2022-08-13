@@ -1,10 +1,10 @@
-//#region 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
+// #region 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
 const commonOCROptions = {
     tesseractOptions: {
         // Tesseract 安装路径
         binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
         // 训练数据路径
-        "tessdata-dir": __dirname + "/tesstrain/tessdata"
+        'tessdata-dir': `${__dirname}/tesstrain/tessdata`
     },
     // 命令区域大小
     commandAreaRect: {
@@ -13,23 +13,23 @@ const commonOCROptions = {
     },
     // OCR识别错误手动校正
     tesseractMistakes: {
-        "'n\"'sUmmOn Creeper": "/summon creeper",
-        "'n\"'sUmmOn raVager": "/summon ravager"
+        '\'n"\'sUmmOn Creeper': '/summon creeper',
+        '\'n"\'sUmmOn raVager': '/summon ravager'
     }
 };
 
-const smallerGUIOCROptions = { // GUI Scale = -1
-    ...commonOCROptions,
-    // 命令区域大小
-    commandAreaRect: {
-        1: [397, 976, 1784, 100], // <- phone
-        3: [328, 976, 1784, 100] // phone ->
-    },
-    tesseractMistakes: {
-        "'/sUmmOn Creeper": "/summon creeper",
-        "'/sUmmOn raVager": "/summon ravager"
-    }
-};
+// const smallerGUIOCROptions = { // GUI Scale = -1
+//     ...commonOCROptions,
+//     // 命令区域大小
+//     commandAreaRect: {
+//         1: [397, 976, 1784, 100], // <- phone
+//         3: [328, 976, 1784, 100] // phone ->
+//     },
+//     tesseractMistakes: {
+//         '\'/sUmmOn Creeper': '/summon creeper',
+//         '\'/sUmmOn raVager': '/summon ravager'
+//     }
+// };
 
 const smallestGUIOCROptions = { // GUI Scale = -2
     ...commonOCROptions,
@@ -39,8 +39,8 @@ const smallestGUIOCROptions = { // GUI Scale = -2
         3: [246, 1002, 1920, 75] // phone ->
     },
     tesseractMistakes: {
-        "'/summon Creeper": "/summon creeper",
-        "'/summon ravager": "/summon ravager"
+        '\'/summon Creeper': '/summon creeper',
+        '\'/summon ravager': '/summon ravager'
     }
 };
 
@@ -53,47 +53,47 @@ const neteaseOCROptions = {
     },
     // OCR识别错误手动校正
     tesseractMistakes: {
-        "/sUmmOn Creeper": "/summon creeper",
-        "/sUmmOn raVager": "/summon ravager"
+        '/sUmmOn Creeper': '/summon creeper',
+        '/sUmmOn raVager': '/summon ravager'
     }
 };
-//#endregion
+// #endregion
 
 exports.packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: "1.19.20.02",
+        version: '1.19.20.02',
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.19.20.02.apk",
+        path: 'H:\\BedrockVersions\\Latest\\1.19.20.02.apk',
         // 可用分支
-        branches: ["vanilla", "education", "experiment", "documentation"],
+        branches: ['vanilla', 'education', 'experiment', 'documentation'],
         config: smallestGUIOCROptions
     },
     // 测试版
     beta: {
         // 安装包版本
-        version: "1.19.30.21",
+        version: '1.19.30.21',
         // 安装包路径
-        path: "H:\\BedrockVersions\\Latest\\1.19.30.21.apk",
+        path: 'H:\\BedrockVersions\\Latest\\1.19.30.21.apk',
         // 可用分支
-        branches: ["vanilla", "education", "experiment", "translator", "documentation", "langParity"],
+        branches: ['vanilla', 'education', 'experiment', 'translator', 'documentation', 'langParity'],
         config: smallestGUIOCROptions
     },
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: "2.1beta-159689", // 由于资源包BUG暂停更新
-        coreVersion: "1.17.3.0.0",
+        version: '2.1beta-159689', // 由于资源包BUG暂停更新
+        coreVersion: '1.17.3.0.0',
         // 安装包路径
-        path: "H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.1.100.159689.apk",
+        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.1.100.159689.apk',
         // 可用分支
-        branches: ["vanilla", "experiment"],
+        branches: ['vanilla', 'experiment'],
         config: neteaseOCROptions
     }
 };
 
 exports.proxyConfig = {
-    http: "http://localhost:7890",
-    https: "http://localhost:7890"
+    http: 'http://localhost:7890',
+    https: 'http://localhost:7890'
 };

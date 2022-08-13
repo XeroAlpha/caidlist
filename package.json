@@ -9,7 +9,10 @@
     "generate-netease": "node src/index.js generate netease_dev",
     "generate-all": "node src/index.js generate beta release netease_dev",
     "backend": "node backend/index.js output/web",
-    "tsdebug": "node src/tesseract_debug.js"
+    "tsdebug": "node src/tesseract_debug.js",
+    "lint": "eslint . --ext .js --ext .html",
+    "lint-fix": "eslint . --ext .js --ext .html --fix",
+    "lint-fix-rule": "eslint . --ext .js --ext .html --no-eslintrc --env commonjs --env es2021 --env node --parser-options=ecmaVersion:latest --fix --rule"
   },
   "author": "ProjectXero",
   "homepage": "https://github.com/XeroAlpha/caidlist",
@@ -23,17 +26,24 @@
     "@devicefarmer/minicap-prebuilt": "^2.7.1",
     "adm-zip": "^0.5.9",
     "comment-json": "^4.2.2",
-    "got": "^12.3.0",
+    "got": "^12.3.1",
     "hpagent": "^1.0.0",
     "mcpews": "^3.0.1",
     "node-html-parser": "^5.3.3",
     "node-lcs": "^1.0.4",
     "node-notifier": "^10.0.1",
     "node-tesseract-ocr": "^2.2.1",
+    "prettier": "^2.7.1",
     "sharp": "^0.30.7",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/node-notifier": "^8.0.2"
+    "@html-eslint/eslint-plugin": "^0.13.2",
+    "@html-eslint/parser": "^0.13.2",
+    "@types/node-notifier": "^8.0.2",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.26.0"
   }
 }

@@ -1,17 +1,17 @@
-const JSON = require("comment-json");
-const { analyzePackageDataEnumsCached } = require("./sources/applicationPackage");
-const { analyzeAutocompletionEnumsCached } = require("./sources/autocompletion");
-const { fetchStandardizedTranslation } = require("./sources/wiki");
-const { fetchJavaEditionLangData } = require("./sources/javaEdition");
-const { fetchDocumentationIds, doSchemaTranslation } = require("./sources/documentation");
-const { loadUserTranslation, saveUserTranslation } = require("./sources/userTranslation");
-const support = require("./sources/support");
-const { matchTranslations } = require("./util/templateMatch");
-const { writeTransMapsExcel } = require("./generate/excel");
-const { writeTransMapClib } = require("./generate/clib");
-const { writeTransMapTextZip } = require("./generate/text");
-const { writeTransMapJson, writeTransMapIndexJson } = require("./generate/json");
-const { writeLangParityPack, compareEditionLangs } = require("./generate/langParity");
+const CommentJSON = require('comment-json');
+const { analyzePackageDataEnumsCached } = require('./sources/applicationPackage');
+const { analyzeAutocompletionEnumsCached } = require('./sources/autocompletion');
+const { fetchStandardizedTranslation } = require('./sources/wiki');
+const { fetchJavaEditionLangData } = require('./sources/javaEdition');
+const { fetchDocumentationIds, doSchemaTranslation } = require('./sources/documentation');
+const { loadUserTranslation, saveUserTranslation } = require('./sources/userTranslation');
+const support = require('./sources/support');
+const { matchTranslations } = require('./util/templateMatch');
+const { writeTransMapsExcel } = require('./generate/excel');
+const { writeTransMapClib } = require('./generate/clib');
+const { writeTransMapTextZip } = require('./generate/text');
+const { writeTransMapJson, writeTransMapIndexJson } = require('./generate/json');
+const { writeLangParityPack, compareEditionLangs } = require('./generate/langParity');
 const {
     projectPath,
     cachedOutput,
@@ -22,62 +22,65 @@ const {
     removeMinecraftNamespace,
     setInlineCommentAfterField,
     deepCopy
-} = require("./util/common");
+} = require('./util/common');
+
+const BASE_LANG_ID = 'en_us';
+const USER_LANG_ID = 'zh_cn';
 
 // [ id, name, description ]
 const defaultTransMapNames = [
-    ["block", "方块", "用于 setblock、fill 等命令的方块 ID"],
-    ["item", "物品", "用于 give、clear 等命令的物品 ID"],
-    ["entity", "实体", "用于 summon 命令与 type 选择器参数的实体 ID"],
-    ["effect", "状态效果", "用于 effect 命令的状态效果 ID"],
-    ["enchant", "魔咒", "用于 enchant 命令的魔咒 ID"],
-    ["fog", "迷雾", "用于 fog 命令的迷雾配置 ID"],
-    ["biome", "生物群系", "用于 locate 命令的生物群系 ID"],
-    ["location", "结构", "用于 locate 命令的结构 ID"],
-    ["gamerule", "游戏规则", "用于 gamerule 命令的游戏规则 ID"],
-    ["entitySlot", "槽位类型", "用于 replaceitem 命令与 hasitem 选择器参数的槽位类型 ID"],
-    ["damageCause", "伤害来源", "用于 damage 命令的伤害来源 ID"],
-    ["entityEvent", "实体事件", "用于 summon 等命令的实体事件 ID"],
-    ["entityEventSplit", "根据实体类型分类的实体事件表"],
-    ["entityFamily", "实体族", "用于 family 选择器参数的实体族 ID"],
-    ["animation", "动画", "用于 playanimation 命令的动画 ID"],
-    ["animationController", "动画控制器", "用于 playanimation 命令的动画控制器 ID"],
-    ["particleEmitter", "粒子发射器", "用于 particle 命令的粒子发射器 ID"],
-    ["featureAndRule", "地物与地物规则", "用于 placefeature 命令的地物 ID 和地物规则 ID"],
-    ["sound", "声音", "用于 playsound 命令的声音 ID"],
-    ["lootTable", "战利品表", "用于 loot 命令的战利品表选项"],
-    ["command", "命令", "可见的命令列表"],
-    ["stdTrans", "标准化译名表", "整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表"]
+    ['block', '方块', '用于 setblock、fill 等命令的方块 ID'],
+    ['item', '物品', '用于 give、clear 等命令的物品 ID'],
+    ['entity', '实体', '用于 summon 命令与 type 选择器参数的实体 ID'],
+    ['effect', '状态效果', '用于 effect 命令的状态效果 ID'],
+    ['enchant', '魔咒', '用于 enchant 命令的魔咒 ID'],
+    ['fog', '迷雾', '用于 fog 命令的迷雾配置 ID'],
+    ['biome', '生物群系', '用于 locate 命令的生物群系 ID'],
+    ['location', '结构', '用于 locate 命令的结构 ID'],
+    ['gamerule', '游戏规则', '用于 gamerule 命令的游戏规则 ID'],
+    ['entitySlot', '槽位类型', '用于 replaceitem 命令与 hasitem 选择器参数的槽位类型 ID'],
+    ['damageCause', '伤害来源', '用于 damage 命令的伤害来源 ID'],
+    ['entityEvent', '实体事件', '用于 summon 等命令的实体事件 ID'],
+    ['entityEventSplit', '根据实体类型分类的实体事件表'],
+    ['entityFamily', '实体族', '用于 family 选择器参数的实体族 ID'],
+    ['animation', '动画', '用于 playanimation 命令的动画 ID'],
+    ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
+    ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
+    ['featureAndRule', '地物与地物规则', '用于 placefeature 命令的地物 ID 和地物规则 ID'],
+    ['sound', '声音', '用于 playsound 命令的声音 ID'],
+    ['lootTable', '战利品表', '用于 loot 命令的战利品表选项'],
+    ['command', '命令', '可见的命令列表'],
+    ['stdTrans', '标准化译名表', '整合了中文 Minecraft Wiki 与 Minecraft基岩版开发Wiki 的标准化译名表']
 ];
 const translatorMapNames = [
-    ["BlockSprite", "方块"],
-    ["ItemSprite", "物品"],
-    ["EntitySprite", "实体"],
-    ["EffectSprite", "状态效果"],
-    ["EnchantmentSprite", "魔咒"],
-    ["BiomeSprite", "生物群系"],
-    ["EnvSprite", "环境"],
-    ["Exclusive", "基岩版独占"],
-    ["VanillaSprite", "其他原版内容"],
-    ["AddonSprite", "附加包术语"],
-    ["ModPESprite", "ModPE术语"],
-    ["InnerCoreSprite", "InnerCore术语"],
-    ["TechnicSprite", "其他技术术语"],
-    ["BedrockEditionLang", "基岩版中文语言文件"],
-    ["JavaEditionLang", "Java版中文语言文件"],
-    ["BedrockEditionLangSource", "基岩版英文语言文件"],
-    ["JavaEditionLangSource", "Java版英文语言文件"]
+    ['BlockSprite', '方块'],
+    ['ItemSprite', '物品'],
+    ['EntitySprite', '实体'],
+    ['EffectSprite', '状态效果'],
+    ['EnchantmentSprite', '魔咒'],
+    ['BiomeSprite', '生物群系'],
+    ['EnvSprite', '环境'],
+    ['Exclusive', '基岩版独占'],
+    ['VanillaSprite', '其他原版内容'],
+    ['AddonSprite', '附加包术语'],
+    ['ModPESprite', 'ModPE术语'],
+    ['InnerCoreSprite', 'InnerCore术语'],
+    ['TechnicSprite', '其他技术术语'],
+    ['BedrockEditionLang', '基岩版中文语言文件'],
+    ['JavaEditionLang', 'Java版中文语言文件'],
+    ['BedrockEditionLangSource', '基岩版英文语言文件'],
+    ['JavaEditionLangSource', 'Java版英文语言文件']
 ];
 const documentationMapNames = [
-    ["entityFilter", "实体过滤器"],
-    ["entityBehavior", "实体AI意向"],
-    ["entityAttribute", "实体特性"],
-    ["entityBuiltinEvent", "实体内置事件"],
-    ["entityComponent", "实体组件"],
-    ["entityProperty", "实体属性"],
-    ["entityTrigger", "实体触发器"],
-    ["featureType", "地物类型"],
-    ["molangQuery", "Molang查询函数"]
+    ['entityFilter', '实体过滤器'],
+    ['entityBehavior', '实体AI意向'],
+    ['entityAttribute', '实体特性'],
+    ['entityBuiltinEvent', '实体内置事件'],
+    ['entityComponent', '实体组件'],
+    ['entityProperty', '实体属性'],
+    ['entityTrigger', '实体触发器'],
+    ['featureType', '地物类型'],
+    ['molangQuery', 'Molang查询函数']
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, coreVersion } = cx;
@@ -87,11 +90,11 @@ async function generateBranchedOutputFiles(cx) {
         ...packageDataEnums.data[branch.id],
         ...autocompletedEnums
     };
-    const lang = packageDataEnums.lang["zh_cn"];
+    const lang = packageDataEnums.lang[USER_LANG_ID];
     const standardizedTranslation = await fetchStandardizedTranslation();
-    const javaEditionLang = (await fetchJavaEditionLangData())["zh_cn"];
+    const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
     const userTranslation = loadUserTranslation();
-    console.log("Matching translations...");
+    console.log('Matching translations...');
     const translationResultMaps = {};
     const translationStateMaps = {};
     const commonOptions = {
@@ -100,41 +103,41 @@ async function generateBranchedOutputFiles(cx) {
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
         javaEditionLangMap: javaEditionLang,
         langMap: lang,
-        autoMatch: true
+        autoMatch: ['stdTrans', 'lang', 'langLikely']
     };
     matchTranslations({
         ...commonOptions,
-        name: "glossary",
+        name: 'glossary',
         originalArray: Object.keys(userTranslation.glossary),
         translationMap: userTranslation.glossary,
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
-        autoMatch: false
+        autoMatch: null
     });
     matchTranslations({
         ...commonOptions,
-        name: "block",
+        name: 'block',
         originalArray: enums.blocks,
         translationMap: userTranslation.block,
-        stdTransMap: cascadeMap(standardizedTranslation, ["BlockSprite", "ItemSprite"], true),
-        langKeyPrefix: "tile.",
-        langKeySuffix: ".name"
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        langKeyPrefix: 'tile.',
+        langKeySuffix: '.name'
     });
     matchTranslations({
         ...commonOptions,
-        name: "item",
+        name: 'item',
         originalArray: enums.items.filter((item) => !enums.blocks.includes(item)),
         translationMap: userTranslation.item,
-        stdTransMap: cascadeMap(standardizedTranslation, ["ItemSprite", "BlockSprite"], true),
-        langKeyPrefix: "item.",
-        langKeySuffix: ".name",
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'BlockSprite'], true),
+        langKeyPrefix: 'item.',
+        langKeySuffix: '.name',
         postProcessor(item) {
-            const mergedItem = {},
-                block = translationResultMaps.block;
+            const mergedItem = {};
+            const { block } = translationResultMaps;
             enums.items.forEach((key) => {
                 if (key in block) {
-                    JSON.assign(mergedItem, block, [key]);
+                    CommentJSON.assign(mergedItem, block, [key]);
                 } else {
-                    JSON.assign(mergedItem, item, [key]);
+                    CommentJSON.assign(mergedItem, item, [key]);
                 }
             });
             return mergedItem;
@@ -142,19 +145,19 @@ async function generateBranchedOutputFiles(cx) {
     });
     matchTranslations({
         ...commonOptions,
-        name: "entity",
+        name: 'entity',
         originalArray: removeMinecraftNamespace(enums.entities),
         translationMap: userTranslation.entity,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
-        langKeyPrefix: "entity.",
-        langKeySuffix: ".name",
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        langKeyPrefix: 'entity.',
+        langKeySuffix: '.name',
         postProcessor(entity) {
             const mergedEntity = {};
             enums.entities.forEach((key) => {
                 if (key in entity) {
-                    JSON.assign(mergedEntity, entity, [key]);
+                    CommentJSON.assign(mergedEntity, entity, [key]);
                 } else {
-                    mergedEntity[key] = entity["minecraft:" + key];
+                    mergedEntity[key] = entity[`minecraft:${key}`];
                 }
             });
             return mergedEntity;
@@ -162,80 +165,80 @@ async function generateBranchedOutputFiles(cx) {
     });
     matchTranslations({
         ...commonOptions,
-        name: "effect",
+        name: 'effect',
         originalArray: enums.effects,
         translationMap: userTranslation.effect,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EffectSprite"], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['EffectSprite'], true)
     });
     matchTranslations({
         ...commonOptions,
-        name: "enchant",
+        name: 'enchant',
         originalArray: enums.enchantments,
         translationMap: userTranslation.enchant
     });
     matchTranslations({
         ...commonOptions,
-        name: "fog",
+        name: 'fog',
         originalArray: enums.fogs,
         translationMap: userTranslation.fog,
-        stdTransMap: cascadeMap(standardizedTranslation, ["BiomeSprite"], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite'], true)
     });
     matchTranslations({
         ...commonOptions,
-        name: "location",
+        name: 'location',
         originalArray: enums.locations,
         translationMap: userTranslation.location,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EnvSprite"], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['EnvSprite'], true)
     });
     if (support.newLocateCommand(coreVersion)) {
         matchTranslations({
             ...commonOptions,
-            name: "biome",
+            name: 'biome',
             originalArray: enums.biomes,
             translationMap: userTranslation.biome,
-            stdTransMap: cascadeMap(standardizedTranslation, ["BiomeSprite"], true)
+            stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite'], true)
         });
     }
     matchTranslations({
         ...commonOptions,
-        name: "entityEvent",
+        name: 'entityEvent',
         originalArray: Object.keys(enums.entityEventsMap),
         translationMap: userTranslation.entityEvent,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
         postProcessor(entityEvent) {
             forEachObject(entityEvent, (value, key) => {
                 if (value) return;
-                const comment = `from: ${enums.entityEventsMap[key].join(", ")}`;
+                const comment = `from: ${enums.entityEventsMap[key].join(', ')}`;
                 setInlineCommentAfterField(userTranslation.entityEvent, key, comment);
             });
         }
     });
     matchTranslations({
         ...commonOptions,
-        name: "entityFamily",
+        name: 'entityFamily',
         originalArray: Object.keys(enums.entityFamilyMap),
         translationMap: userTranslation.entityFamily,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
         postProcessor(entityFamily) {
             forEachObject(entityFamily, (value, key) => {
                 if (value) return;
-                const comment = `from: ${enums.entityFamilyMap[key].join(", ")}`;
+                const comment = `from: ${enums.entityFamilyMap[key].join(', ')}`;
                 setInlineCommentAfterField(userTranslation.entityFamily, key, comment);
             });
         }
     });
     matchTranslations({
         ...commonOptions,
-        name: "animation",
+        name: 'animation',
         originalArray: Object.keys(enums.animationMap),
         translationMap: userTranslation.animation,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
         postProcessor(animation) {
             forEachObject(animation, (value, key) => {
                 if (value) return;
                 const relatedEntites = enums.animationMap[key];
                 if (relatedEntites.length) {
-                    const comment = `from: ${relatedEntites.join(", ")}`;
+                    const comment = `from: ${relatedEntites.join(', ')}`;
                     setInlineCommentAfterField(userTranslation.animation, key, comment);
                 }
             });
@@ -243,16 +246,16 @@ async function generateBranchedOutputFiles(cx) {
     });
     matchTranslations({
         ...commonOptions,
-        name: "animationController",
+        name: 'animationController',
         originalArray: Object.keys(enums.animationControllerMap),
         translationMap: userTranslation.animationController,
-        stdTransMap: cascadeMap(standardizedTranslation, ["EntitySprite", "ItemSprite"], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
         postProcessor(animationController) {
             forEachObject(animationController, (value, key) => {
                 if (value) return;
                 const relatedEntites = enums.animationControllerMap[key];
                 if (relatedEntites.length) {
-                    const comment = `from: ${relatedEntites.join(", ")}`;
+                    const comment = `from: ${relatedEntites.join(', ')}`;
                     setInlineCommentAfterField(userTranslation.animationController, key, comment);
                 }
             });
@@ -260,34 +263,34 @@ async function generateBranchedOutputFiles(cx) {
     });
     matchTranslations({
         ...commonOptions,
-        name: "particleEmitter",
+        name: 'particleEmitter',
         originalArray: enums.particleEmitters,
         translationMap: userTranslation.particleEmitter,
-        autoMatch: false
+        autoMatch: null
     });
     matchTranslations({
         ...commonOptions,
-        name: "sound",
+        name: 'sound',
         originalArray: enums.sounds,
         translationMap: userTranslation.sound
     });
     matchTranslations({
         ...commonOptions,
-        name: "gamerule",
+        name: 'gamerule',
         originalArray: enums.gamerules,
         translationMap: userTranslation.gamerule
     });
     matchTranslations({
         ...commonOptions,
-        name: "entitySlot",
+        name: 'entitySlot',
         originalArray: enums.entitySlots,
         translationMap: userTranslation.entitySlot
     });
     if (support.mcpews(version)) {
         matchTranslations({
             ...commonOptions,
-            name: "command",
-            originalArray: enums.commandList.map(e => e.replace(/^\//, "")),
+            name: 'command',
+            originalArray: enums.commandList.map((e) => e.replace(/^\//, '')),
             translationMap: userTranslation.command,
             stdTransMap: cascadeMap(standardizedTranslation, [], true)
         });
@@ -295,14 +298,14 @@ async function generateBranchedOutputFiles(cx) {
     if (support.lootTable(coreVersion)) {
         matchTranslations({
             ...commonOptions,
-            name: "lootTable",
+            name: 'lootTable',
             originalArray: enums.lootTables,
             translationMap: userTranslation.lootTable
         });
         const nameWrapped = {};
         forEachObject(translationResultMaps.lootTable, (value, key) => {
-            const wrappedKey = JSON.stringify(key);
-            if (key.includes("/")) {
+            const wrappedKey = CommentJSON.stringify(key);
+            if (key.includes('/')) {
                 nameWrapped[wrappedKey] = value;
             } else {
                 nameWrapped[wrappedKey] = value;
@@ -317,7 +320,7 @@ async function generateBranchedOutputFiles(cx) {
     if (support.damageCommand(coreVersion)) {
         matchTranslations({
             ...commonOptions,
-            name: "damageCause",
+            name: 'damageCause',
             originalArray: enums.damageCauses,
             translationMap: userTranslation.damageCause
         });
@@ -325,26 +328,24 @@ async function generateBranchedOutputFiles(cx) {
     if (support.placefeatureCommand(coreVersion)) {
         matchTranslations({
             ...commonOptions,
-            name: "featureAndRule",
+            name: 'featureAndRule',
             originalArray: enums.featuresAndRules,
             translationMap: userTranslation.feature
         });
     }
     translationResultMaps.music = filterObjectMap(
         translationResultMaps.sound,
-        (key) => key.startsWith("music.") || key.startsWith("record.")
+        (key) => key.startsWith('music.') || key.startsWith('record.')
     );
-    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, (key) =>
-        enums.summonableEntities.includes(key)
-    );
+    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, (key) => enums.summonableEntities.includes(key));
     if (enums.lootTools) {
         translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, (k) => {
-            if (k.startsWith("minecraft:")) k = k.slice("minecraft:".length);
-            if (k in translationResultMaps.item) {
-                return translationResultMaps.item[k];
-            } else {
-                return "";
+            let key = k;
+            if (k.startsWith('minecraft:')) key = k.slice('minecraft:'.length);
+            if (key in translationResultMaps.item) {
+                return translationResultMaps.item[key];
             }
+            return '';
         });
     } else {
         translationResultMaps.lootTool = {};
@@ -352,15 +353,15 @@ async function generateBranchedOutputFiles(cx) {
     delete translationResultMaps.glossary;
     delete translationStateMaps.glossary;
 
-    console.log("Exporting files...");
+    console.log('Exporting files...');
     cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);
     writeTransMapClib(cx, {
         outputFile: projectPath(`output.clib.${version}.${branch.id}`),
         translationResultMaps
     });
-    writeTransMapsExcel(projectPath(`output.translation.${version}.${branch.id}`, "xlsx"), translationResultMaps);
+    writeTransMapsExcel(projectPath(`output.translation.${version}.${branch.id}`, 'xlsx'), translationResultMaps);
     writeTransMapTextZip(cx, {
-        outputFile: projectPath(`output.web.${version}.${branch.id}`, "zip"),
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, 'zip'),
         originalEnums: enums,
         transMaps: translationResultMaps,
         transMapNames: defaultTransMapNames,
@@ -368,7 +369,7 @@ async function generateBranchedOutputFiles(cx) {
         stdTransMapNames: translatorMapNames
     });
     writeTransMapJson(cx, {
-        outputFile: projectPath(`output.web.${version}.${branch.id}`, "json"),
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, 'json'),
         originalEnums: enums,
         transMaps: translationResultMaps,
         transMapNames: defaultTransMapNames
@@ -385,12 +386,12 @@ async function generateLangParityPack(cx) {
     const overrideRawMap = userTranslation.langParity;
     const overrideMapResult = deepCopy({
         ...standardizedTranslation,
-        JESource: javaEditionLang["en_us"],
-        Source: bedrockEditionLang["en_us"],
+        JESource: javaEditionLang[BASE_LANG_ID],
+        Source: bedrockEditionLang[BASE_LANG_ID]
     });
     matchTranslations({
         resultMaps: overrideMapResult,
-        name: "LangParity",
+        name: 'LangParity',
         originalArray: Object.keys(overrideRawMap),
         translationMap: overrideRawMap,
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
@@ -398,14 +399,14 @@ async function generateLangParityPack(cx) {
         langMap: bedrockEditionLang
     });
     writeLangParityPack(cx, {
-        outputDifferenceFile: projectPath(`output.lang_parity.${cx.version}.difference`, "json"),
-        outputLangFile: projectPath(`output.lang_parity.${cx.version}.output`, "lang"),
-        outputPackFile: projectPath(`output.lang_parity.${cx.version}.output`, "mcpack"),
+        outputDifferenceFile: projectPath(`output.lang_parity.${cx.version}.difference`, 'json'),
+        outputLangFile: projectPath(`output.lang_parity.${cx.version}.output`, 'lang'),
+        outputPackFile: projectPath(`output.lang_parity.${cx.version}.output`, 'mcpack'),
         differences: compareEditionLangs({
             bedrockEditionLang,
             javaEditionLang,
-            compareLangId: "zh_cn",
-            baseLangId: "en_us"
+            compareLangId: USER_LANG_ID,
+            baseLangId: BASE_LANG_ID
         }),
         overrideMap: overrideMapResult.LangParity
     });
@@ -418,18 +419,18 @@ async function generateTranslatorHelperFiles(cx) {
     const javaEditionLang = await fetchJavaEditionLangData();
     const transMaps = {
         ...standardizedTranslation,
-        BedrockEditionLang: bedrockEditionLang["zh_cn"],
-        JavaEditionLang: javaEditionLang["zh_cn"],
-        BedrockEditionLangSource: bedrockEditionLang["en_us"],
-        JavaEditionLangSource: javaEditionLang["en_us"]
+        BedrockEditionLang: bedrockEditionLang[USER_LANG_ID],
+        JavaEditionLang: javaEditionLang[USER_LANG_ID],
+        BedrockEditionLangSource: bedrockEditionLang[BASE_LANG_ID],
+        JavaEditionLangSource: javaEditionLang[BASE_LANG_ID]
     };
     writeTransMapTextZip(cx, {
-        outputFile: projectPath(`output.web.${cx.version}.translator`, "zip"),
+        outputFile: projectPath(`output.web.${cx.version}.translator`, 'zip'),
         transMaps,
         transMapNames: translatorMapNames
     });
     writeTransMapJson(cx, {
-        outputFile: projectPath(`output.web.${cx.version}.translator`, "json"),
+        outputFile: projectPath(`output.web.${cx.version}.translator`, 'json'),
         transMaps,
         transMapNames: translatorMapNames
     });
@@ -446,7 +447,7 @@ async function generateDocumentationOutputFiles(cx) {
     }
     matchTranslations({
         resultMaps: resultContainer,
-        name: "glossary",
+        name: 'glossary',
         originalArray: Object.keys(userTranslation.glossary),
         translationMap: userTranslation.glossary,
         stdTransMap: cascadeMap(standardizedTranslation, [], true)
@@ -461,18 +462,22 @@ async function generateDocumentationOutputFiles(cx) {
                 name: tableId,
                 originalArray: keys,
                 translationMap: userTranslation[tableId],
-                stdTransMap: cascadeMap(standardizedTranslation, [], true)
+                stdTransMap: cascadeMap(standardizedTranslation, [], true),
+                langMap: map,
+                langKeyPrefix: '',
+                langKeySuffix: '',
+                autoMatch: ['lang']
             });
             return resultContainer[tableId];
         });
     });
     writeTransMapTextZip(cx, {
-        outputFile: projectPath(`output.web.${cx.version}.documentation`, "zip"),
+        outputFile: projectPath(`output.web.${cx.version}.documentation`, 'zip'),
         transMaps,
         transMapNames: documentationMapNames
     });
     writeTransMapJson(cx, {
-        outputFile: projectPath(`output.web.${cx.version}.documentation`, "json"),
+        outputFile: projectPath(`output.web.${cx.version}.documentation`, 'json'),
         transMaps,
         transMapNames: documentationMapNames
     });
@@ -481,71 +486,71 @@ async function generateDocumentationOutputFiles(cx) {
 
 const versionInfoMap = {
     preview: {
-        name: "预览版",
-        description: "更新速度快，包含较多不稳定的新特性的版本",
+        name: '预览版',
+        description: '更新速度快，包含较多不稳定的新特性的版本',
         sortOrder: 0
     },
     beta: {
-        name: "测试版",
-        description: "更新速度快，包含较多不稳定的新特性的版本",
+        name: '测试版',
+        description: '更新速度快，包含较多不稳定的新特性的版本',
         sortOrder: 0
     },
     release: {
-        name: "正式版",
-        description: "更新速度慢，向所有人开放的稳定版本",
+        name: '正式版',
+        description: '更新速度慢，向所有人开放的稳定版本',
         sortOrder: 1
     },
     netease: {
-        name: "中国版",
-        description: "由网易推出的中国本地化版本，通常落后于正式版",
+        name: '中国版',
+        description: '由网易推出的中国本地化版本，通常落后于正式版',
         sortOrder: 2
     },
     netease_dev: {
         // name: "中国版测试版",
         // description: "面向中国版开发者开放的测试版本",
-        name: "中国版",
+        name: '中国版',
         description:
-            "由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。",
+            '由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。',
         sortOrder: 3
     },
     bds: {
-        name: "专用服务器",
-        description: "与正式版同步更新",
+        name: '专用服务器',
+        description: '与正式版同步更新',
         sortOrder: 4,
         disablePackageInspect: true
     }
 };
 const branchInfoMap = {
     vanilla: {
-        name: "原版",
-        description: "使用默认设置创建的世界的ID表"
+        name: '原版',
+        description: '使用默认设置创建的世界的ID表'
     },
     education: {
-        name: "教育版",
-        description: "启用了教育版选项后创建的世界的ID表"
+        name: '教育版',
+        description: '启用了教育版选项后创建的世界的ID表'
     },
     experiment: {
-        name: "实验性玩法",
-        description: "启用了所有实验性玩法选项后创建的世界的ID表"
+        name: '实验性玩法',
+        description: '启用了所有实验性玩法选项后创建的世界的ID表'
     },
     translator: {
-        name: "翻译专用",
-        description: "为翻译英文文本设计，包含了标准化译名表与语言文件"
+        name: '翻译专用',
+        description: '为翻译英文文本设计，包含了标准化译名表与语言文件'
     },
     documentation: {
-        name: "文档",
-        description: "开发者文档中出现的ID及其描述"
+        name: '文档',
+        description: '开发者文档中出现的ID及其描述'
     },
     langParity: {
-        name: "译名比较",
-        description: "比较基岩版翻译与标准化译名，展示两者的差异",
+        name: '译名比较',
+        description: '比较基岩版翻译与标准化译名，展示两者的差异',
         hideOnWeb: true
     }
 };
 function generateOutputIndex(cx) {
     const { version } = cx;
     cx.packageInfo = cx.packageVersions[version];
-    if (!cx.packageInfo) throw new Error("Unknown version: " + version);
+    if (!cx.packageInfo) throw new Error(`Unknown version: ${version}`);
     cx.packageVersion = cx.packageInfo.version;
     cx.coreVersion = cx.packageInfo.coreVersion || cx.packageVersion;
     if (cx.packageInfo.config) {
@@ -554,31 +559,28 @@ function generateOutputIndex(cx) {
         });
     }
     cx.versionInfo = versionInfoMap[version];
-    let branchList = cx.packageInfo.branches.map((id) => {
-        return {
-            id,
-            ...branchInfoMap[id]
-        };
-    });
+    const branchList = cx.packageInfo.branches.map((id) => ({
+        id,
+        ...branchInfoMap[id]
+    }));
     writeTransMapIndexJson(cx, {
         outputFile: projectPath(`output.web.${version}.index`),
-        mergedFile: projectPath(`output.web.index`),
-        rootUrl: ".",
+        mergedFile: projectPath('output.web.index'),
+        rootUrl: '.',
         branchList
     });
     return branchList;
 }
 
 async function generateOutputFiles(cx) {
-    if (cx.branch.id == "translator") {
-        return await generateTranslatorHelperFiles(cx);
-    } else if (cx.branch.id == "langParity") {
-        return await generateLangParityPack(cx);
-    } else if (cx.branch.id == "documentation") {
-        return await generateDocumentationOutputFiles(cx);
-    } else {
-        return await generateBranchedOutputFiles(cx);
+    if (cx.branch.id === 'translator') {
+        return generateTranslatorHelperFiles(cx);
+    } if (cx.branch.id === 'langParity') {
+        return generateLangParityPack(cx);
+    } if (cx.branch.id === 'documentation') {
+        return generateDocumentationOutputFiles(cx);
     }
+    return generateBranchedOutputFiles(cx);
 }
 
 module.exports = {

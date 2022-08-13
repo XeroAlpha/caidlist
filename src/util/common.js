@@ -1,29 +1,28 @@
-const fs = require("fs");
-const nodePath = require("path");
-const readline = require("readline");
-const notifier = require("node-notifier");
-const JSON = require("comment-json");
-const { CommentLocation, setJSONComment, clearJSONComment } = require("./comment");
+const fs = require('fs');
+const nodePath = require('path');
+const readline = require('readline');
+const notifier = require('node-notifier');
+const CommentJSON = require('comment-json');
+const { CommentLocation, setJSONComment, clearJSONComment } = require('./comment');
 
-const projectRoot = nodePath.resolve(__dirname, "../..");
+const projectRoot = nodePath.resolve(__dirname, '../..');
 
-const projectInfo = require(nodePath.resolve(projectRoot, "package.json"));
+const projectInfo = require(nodePath.resolve(projectRoot, 'package.json'));
 
 function projectPath(id, suffix) {
     let pathSegments;
-    if (!suffix) suffix = "json";
     if (Array.isArray(id)) {
         pathSegments = id;
     } else {
-        pathSegments = id.split(".");
+        pathSegments = id.split('.');
     }
-    pathSegments[pathSegments.length - 1] += "." + suffix;
-    let path = nodePath.resolve(projectRoot, ...pathSegments);
-    fs.mkdirSync(nodePath.resolve(path, ".."), { recursive: true });
+    pathSegments[pathSegments.length - 1] += `.${suffix || 'json'}`;
+    const path = nodePath.resolve(projectRoot, ...pathSegments);
+    fs.mkdirSync(nodePath.resolve(path, '..'), { recursive: true });
     return path;
 }
 
-const sleepAsync = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
 /**
  * Examples:
@@ -42,7 +41,7 @@ const sleepAsync = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
  *    cache = cache ?? await valueOrProcessor()
  */
 function cachedOutput(id, valueOrProcessor) {
-    let path = projectPath(id, "json");
+    const path = projectPath(id, 'json');
     let useCache = fs.existsSync(path);
     let processor;
     if (valueOrProcessor == null) {
@@ -55,33 +54,40 @@ function cachedOutput(id, valueOrProcessor) {
     }
     if (useCache) {
         try {
-            return JSON.parse(fs.readFileSync(path, "utf-8"));
+            return CommentJSON.parse(fs.readFileSync(path, 'utf-8'));
         } catch (e) {
-            console.error("Cannot use cache: " + path);
+            console.error(`Cannot use cache: ${path}`);
         }
         fs.unlinkSync(path);
         return cachedOutput(id, valueOrProcessor);
-    } else {
-        let output = processor();
-        if (output instanceof Promise) {
-            return output.then((output) => {
-                fs.writeFileSync(path, JSON.stringify(output, null, 4));
-                return output;
-            });
-        } else if (output != undefined) {
-            fs.writeFileSync(path, JSON.stringify(output, null, 4));
-        }
-        return output;
     }
+    const output = processor();
+    if (output instanceof Promise) {
+        return output.then((outputResolve) => {
+            fs.writeFileSync(path, CommentJSON.stringify(outputResolve, null, 4));
+            return outputResolve;
+        });
+    } if (output !== undefined) {
+        fs.writeFileSync(path, CommentJSON.stringify(output, null, 4));
+    }
+    return output;
 }
 
 function input(query) {
     return new Promise((resolve) => {
-        let rl = readline.Interface(process.stdin, process.stdout);
-        rl.question(query ?? "", (answer) => {
+        const rl = readline.Interface(process.stdin, process.stdout);
+        rl.question(query ?? '', (answer) => {
             resolve(answer);
             rl.close();
         });
+    });
+}
+
+function notify(message) {
+    notifier.notify({
+        title: 'IDList',
+        message,
+        icon: nodePath.resolve(__dirname, '../assets/icon.png')
     });
 }
 
@@ -90,24 +96,16 @@ function pause(message) {
     return input(message);
 }
 
-function notify(message) {
-    notifier.notify({
-        title: "IDList",
-        message,
-        icon: nodePath.resolve(__dirname, "../assets/icon.png"),
-    })
-}
-
 async function runJobsAndReturn(mainJob, ...concurrentJobs) {
     const results = await Promise.all([mainJob, ...concurrentJobs]);
     return results[0];
 }
 
 function uniqueAndSort(array, compareFn) {
-    array.sort(compareFn);
-    if (!compareFn) compareFn = (a, b) => (a < b ? -1 : a == b ? 0 : 1);
+    const compare = compareFn ?? ((a, b) => (a < b ? -1 : a === b ? 0 : 1));
+    array.sort(compare);
     for (let i = array.length - 2; i >= 0; i--) {
-        if (compareFn(array[i], array[i + 1]) == 0) {
+        if (compare(array[i], array[i + 1]) === 0) {
             array.splice(i, 1);
         }
     }
@@ -124,33 +122,33 @@ function forEachObject(object, f, thisArg) {
 
 function filterObjectMap(map, predicate) {
     const keys = Object.keys(map).filter((key) => predicate(key, map[key], map));
-    return JSON.assign({}, map, keys);
+    return CommentJSON.assign({}, map, keys);
 }
 
 function excludeObjectEntry(map, excludeKeys, excludeValues) {
-    if (!excludeKeys) excludeKeys = [];
-    if (!excludeValues) excludeValues = [];
-    return filterObjectMap(map, (k, v) => !excludeKeys.includes(k) && !excludeValues.includes(v));
+    const excludeKeysOpt = excludeKeys ?? [];
+    const excludeValuesOpt = excludeValues ?? [];
+    return filterObjectMap(map, (k, v) => !excludeKeysOpt.includes(k) && !excludeValuesOpt.includes(v));
 }
 
 function replaceObjectKey(object, replaceArgsGroups) {
-    let newObject = {};
+    const newObject = {};
     forEachObject(object, (value, key) => {
-        let replacedKey = replaceArgsGroups.reduce((prev, args) => prev.replace(...args), key);
+        const replacedKey = replaceArgsGroups.reduce((prev, args) => prev.replace(...args), key);
         newObject[replacedKey] = value;
     });
     return newObject;
 }
 
 function keyArrayToObject(arr, f) {
-    let obj = {};
+    const obj = {};
     arr.forEach((e, i, a) => (obj[e] = f(e, i, a)));
     return obj;
 }
 
 function kvArrayToObject(kvArray) {
-    let obj = {};
-    kvArray.forEach((kv) => (obj[kv[0]] = kv[1]));
+    const obj = {};
+    kvArray.forEach(([k, v]) => (obj[k] = v));
     return obj;
 }
 
@@ -161,29 +159,26 @@ function objectToArray(obj, f) {
 function deepCopy(json) {
     if (Array.isArray(json)) {
         return json.map((e) => deepCopy(e));
-    } else if (typeof json == "object") {
-        let newObject = {};
+    } if (typeof json === 'object') {
+        const newObject = {};
         forEachObject(json, (value, key) => {
             newObject[key] = deepCopy(value);
         });
         return newObject;
-    } else {
-        return json;
     }
+    return json;
 }
 
 function compareMinecraftVersion(a, b) {
-    const asVersionArray = (str) => {
-        return str
-            .split(".")
-            .map((e) => (e == "*" ? Infinity : parseInt(e)))
-            .map((e) => (isNaN(e) ? -1 : e));
-    };
-    const aver = asVersionArray(a),
-        bver = asVersionArray(b);
-    let minLength = Math.min(aver.length, bver.length);
+    const asVersionArray = (str) => str
+        .split('.')
+        .map((e) => (e === '*' ? Infinity : parseInt(e, 10)))
+        .map((e) => (Number.isNaN(e) ? -1 : e));
+    const aver = asVersionArray(a);
+    const bver = asVersionArray(b);
+    const minLength = Math.min(aver.length, bver.length);
     for (let i = 0; i < minLength; i++) {
-        if (aver[i] == bver[i]) continue;
+        if (aver[i] === bver[i]) continue;
         return aver[i] - bver[i];
     }
     return aver.length - bver.length;
@@ -198,17 +193,18 @@ function formatTimeLeft(seconds) {
     const min = (Math.floor(seconds / 60) % 60).toFixed(0);
     const hr = Math.floor(seconds / 3600).toFixed(0);
     if (seconds >= 6000) {
-        return `${hr}h${min.padStart(2, "0")}m${sec.padStart(2, "0")}s`;
-    } else if (seconds >= 60) {
-        return `${min}m${sec.padStart(2, "0")}s`;
-    } else {
-        return `${seconds.toFixed(1)}s`;
+        return `${hr}h${min.padStart(2, '0')}m${sec.padStart(2, '0')}s`;
+    } if (seconds >= 60) {
+        return `${min}m${sec.padStart(2, '0')}s`;
     }
+    return `${seconds.toFixed(1)}s`;
 }
 
 async function retryUntilComplete(maxRetryCount, retryInterval, f) {
-    let result, lastError;
-    while (maxRetryCount > 0) {
+    let result;
+    let lastError;
+    let retryCountLeft = maxRetryCount;
+    while (retryCountLeft > 0) {
         try {
             result = await f();
             if (result) return result;
@@ -216,30 +212,30 @@ async function retryUntilComplete(maxRetryCount, retryInterval, f) {
             lastError = err;
         }
         if (retryInterval) await sleepAsync(retryInterval);
-        maxRetryCount--;
+        retryCountLeft--;
     }
-    throw lastError || new Error("Retry count limit exceeded");
+    throw lastError || new Error('Retry count limit exceeded');
 }
 
 function cascadeMap(mapOfMap, priority, includeAll) {
     const result = {};
     let i;
     if (includeAll) {
-        for (i in mapOfMap) {
-            JSON.assign(result, mapOfMap[i]);
+        for (const value of Object.values(mapOfMap)) {
+            CommentJSON.assign(result, value);
         }
     }
     for (i = priority.length - 1; i >= 0; i--) {
-        JSON.assign(result, mapOfMap[priority[i]]);
+        CommentJSON.assign(result, mapOfMap[priority[i]]);
     }
     return result;
 }
 
 function removeMinecraftNamespace(array) {
     return array
-        .map((item, _, array) => {
-            if (!item.includes(":")) {
-                let nameWithNamespace = "minecraft:" + item;
+        .map((item) => {
+            if (!item.includes(':')) {
+                const nameWithNamespace = `minecraft:${item}`;
                 if (array.includes(nameWithNamespace)) {
                     return null;
                 }
@@ -252,7 +248,7 @@ function removeMinecraftNamespace(array) {
 function setInlineCommentAfterField(obj, fieldName, comment) {
     const symbol = CommentLocation.after(fieldName);
     if (comment) {
-        setJSONComment(obj, symbol, "inlineLine", " " + comment);
+        setJSONComment(obj, symbol, 'inlineLine', ` ${comment}`);
     } else {
         clearJSONComment(obj, symbol);
     }
@@ -271,29 +267,31 @@ async function forEachArray(arr, f, thisArg) {
     }
 }
 
-function peekDataFromStream(stream, timeout) {
+function readStreamOnce(stream, timeout) {
     const data = stream.read();
     if (data === null) {
         return new Promise((resolve, reject) => {
-            const callback = (error, data) => {
-                stream.off("readable", readableCallback);
-                stream.off("error", errorCallback);
+            let readableCallback;
+            let errorCallback;
+            let timeoutId;
+            const callback = (error, result) => {
+                stream.off('readable', readableCallback);
+                stream.off('error', errorCallback);
                 clearTimeout(timeoutId);
                 if (error) {
                     reject(error);
                 } else {
-                    resolve(data);
+                    resolve(result);
                 }
-            }
-            const readableCallback = () => {
+            };
+            readableCallback = () => {
                 callback(null, stream.read());
             };
-            const errorCallback = (err) => {
+            errorCallback = (err) => {
                 callback(err);
             };
-            let timeoutId;
-            stream.on("readable", readableCallback);
-            stream.on("error", errorCallback);
+            stream.on('readable', readableCallback);
+            stream.on('error', errorCallback);
             if (timeout > 0) {
                 const timeoutError = new Error(`Timeout ${timeout} exceed.`);
                 timeoutId = setTimeout(() => {
@@ -301,9 +299,8 @@ function peekDataFromStream(stream, timeout) {
                 }, timeout);
             }
         });
-    } else {
-        return data;
     }
+    return data;
 }
 
 module.exports = {
@@ -332,5 +329,5 @@ module.exports = {
     setInlineCommentAfterField,
     eventTriggered,
     forEachArray,
-    peekDataFromStream
+    readStreamOnce
 };

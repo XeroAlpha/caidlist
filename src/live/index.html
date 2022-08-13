@@ -1,7 +1,8 @@
-<html>
+<!DOCTYPE HTML>
+<html lang="zh">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title>Autocompletion Screen</title>
         <style>
             body {
@@ -98,7 +99,7 @@
             }
         </style>
         <script>
-            window.addEventListener("error", (error) => {
+            window.addEventListener('error', (error) => {
                 document.write(error.message);
             });
         </script>
@@ -108,7 +109,7 @@
         <div class="leftbar">
             <div class="screenshot-container bar">
                 <div class="screenshot-nosignal">正在生成世界</div>
-                <img class="screenshot" src="" />
+                <img class="screenshot" src="" alt="screenshot">
             </div>
             <div class="logs bar mojangles"></div>
         </div>
@@ -118,72 +119,72 @@
             <div class="danmaku bar"></div>
         </div>
         <script>
-            const screenshotContainer = document.querySelector(".screenshot-container");
-            const screenshotEl = document.querySelector(".screenshot");
-            const logsEl = document.querySelector(".logs");
-            const explanationEl = document.querySelector(".explanation");
-            const statusBarEl = document.querySelector(".statusbar");
-            const danmakuEl = document.querySelector(".danmaku");
+            /* global dynamicMarquee */
+            const screenshotContainer = document.querySelector('.screenshot-container');
+            const screenshotEl = document.querySelector('.screenshot');
+            const logsEl = document.querySelector('.logs');
+            const explanationEl = document.querySelector('.explanation');
+            const statusBarEl = document.querySelector('.statusbar');
+            const danmakuEl = document.querySelector('.danmaku');
             const versionNameMap = {
-                beta: "测试版",
-                release: "正式版",
-                netease_dev: "中国版测试版"
+                beta: '测试版',
+                release: '正式版',
+                netease_dev: '中国版测试版'
             };
             const branchNameMap = {
-                vanilla: "原版",
-                education: "教育版",
-                experiment: "实验性玩法"
+                vanilla: '原版',
+                education: '教育版',
+                experiment: '实验性玩法'
             };
             const enumNameMap = {
-                blocks: "方块（用于 setblock、fill 等命令的方块 ID）",
-                items: "物品（用于 give、clear 等命令的物品 ID）",
-                entities: "实体（用于 type 选择器的实体 ID）",
-                "summonable entities": "可召唤实体（用于 summon 命令的实体 ID）",
-                effects: "状态效果（用于 effect 命令的状态效果 ID）",
-                enchantments: "魔咒（用于 enchant 命令的魔咒 ID）",
-                gamerules: "游戏规则（用于 gamerule 命令的游戏规则 ID）",
-                locations: "结构（用于 locate 命令的结构 ID）",
-                biomes: "生物群系（用于 locate 命令的生物群系 ID）",
-                mobevents: "生物事件（用于 mobevent 命令的生物事件 ID）",
-                "entity slots": "栏位（用于 replaceitem 命令等的栏位 ID）",
-                selectors: "目标选择器参数",
-                "loot tools": "战利品工具表（用于 loot 命令的工具选项）",
-                "damage causes": "伤害来源（用于 damage 命令的伤害来源 ID）",
-                "item with aliases": "物品（包含别名，可用于 give、clear 等命令）",
-                features: "地物与地物规则（用于 placefeature 命令）",
-                abilities: "能力（用于教育版 ability 命令的能力 ID）"
+                blocks: '方块（用于 setblock、fill 等命令的方块 ID）',
+                items: '物品（用于 give、clear 等命令的物品 ID）',
+                entities: '实体（用于 type 选择器的实体 ID）',
+                'summonable entities': '可召唤实体（用于 summon 命令的实体 ID）',
+                effects: '状态效果（用于 effect 命令的状态效果 ID）',
+                enchantments: '魔咒（用于 enchant 命令的魔咒 ID）',
+                gamerules: '游戏规则（用于 gamerule 命令的游戏规则 ID）',
+                locations: '结构（用于 locate 命令的结构 ID）',
+                biomes: '生物群系（用于 locate 命令的生物群系 ID）',
+                mobevents: '生物事件（用于 mobevent 命令的生物事件 ID）',
+                'entity slots': '栏位（用于 replaceitem 命令等的栏位 ID）',
+                selectors: '目标选择器参数',
+                'loot tools': '战利品工具表（用于 loot 命令的工具选项）',
+                'damage causes': '伤害来源（用于 damage 命令的伤害来源 ID）',
+                'item with aliases': '物品（包含别名，可用于 give、clear 等命令）',
+                features: '地物与地物规则（用于 placefeature 命令）',
+                abilities: '能力（用于教育版 ability 命令的能力 ID）'
             };
             let sessionId = null;
             let screenshotId = null;
-            let logs = [];
+            const logs = [];
             let lastLogTime = Infinity;
-            let danmakus = [];
+            const danmakus = [];
             let danmakuOnline = false;
             function dateTimeString(d) {
-                const date = [d.getFullYear(), "年", d.getMonth() + 1, "月", d.getDate(), "日"];
-                const time = [d.getHours(), d.getMinutes(), d.getSeconds()].map((e) => String(e).padStart(2, "0"));
-                return date.join("") + " " + time.join(":");
+                const date = [d.getFullYear(), '年', d.getMonth() + 1, '月', d.getDate(), '日'];
+                const time = [d.getHours(), d.getMinutes(), d.getSeconds()].map((e) => String(e).padStart(2, '0'));
+                return `${date.join('')} ${time.join(':')}`;
             }
             function timeLeftString(seconds) {
-                seconds = Math.floor(seconds);
-                const sec = (seconds % 60).toFixed(0);
-                const min = (Math.floor(seconds / 60) % 60).toFixed(0);
-                const hr = Math.floor(seconds / 3600).toFixed(0);
-                if (seconds >= 3600) {
-                    return `${hr}小时${min.padStart(2, "0")}分${sec.padStart(2, "0")}秒`;
-                } else if (seconds >= 60) {
-                    return `${min}分${sec.padStart(2, "0")}秒`;
-                } else {
-                    return `${sec}秒`;
+                const floorSeconds = Math.floor(seconds);
+                const sec = (floorSeconds % 60).toFixed(0);
+                const min = (Math.floor(floorSeconds / 60) % 60).toFixed(0);
+                const hr = Math.floor(floorSeconds / 3600).toFixed(0);
+                if (floorSeconds >= 3600) {
+                    return `${hr}小时${min.padStart(2, '0')}分${sec.padStart(2, '0')}秒`;
+                } if (floorSeconds >= 60) {
+                    return `${min}分${sec.padStart(2, '0')}秒`;
                 }
+                return `${sec}秒`;
             }
             async function updateStatus() {
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await (await fetch("http://localhost:19333/heartbeat?since=" + logs.length)).json();
+                    hb = await (await fetch(`http://localhost:19333/heartbeat?since=${logs.length}`)).json();
                     success = true;
-                } catch (err) {}
+                } catch (err) { /* ignore */ }
                 const text = [];
                 text.push(`时间：${dateTimeString(new Date())}`);
                 if (hb.version) {
@@ -199,7 +200,7 @@
                 }
                 if (hb.resultLength) {
                     const speed = (1000 / hb.stepSpent).toFixed(1);
-                    const fps = (hb.reactFrameCount / hb.reactInterval * 1000).toFixed(1);
+                    const fps = ((hb.reactFrameCount / hb.reactInterval) * 1000).toFixed(1);
                     text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}张/条 ${fps} fps）`);
                     if (hb.approxLength) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
@@ -210,56 +211,54 @@
                         text.push(`已识别：${hb.resultLength} 条目`);
                     }
                 }
-                if (hb.sessionId != sessionId) {
+                if (hb.sessionId !== sessionId) {
                     screenshotId = null;
                     logs.length = 0;
                     sessionId = hb.sessionId;
-                    screenshotContainer.classList.remove("screenshot-available");
+                    screenshotContainer.classList.remove('screenshot-available');
                 }
-                if (hb.screenshotId && hb.screenshotId != screenshotId) {
+                if (hb.screenshotId && hb.screenshotId !== screenshotId) {
                     if (screenshotId == null) {
-                        screenshotContainer.classList.add("screenshot-available");
+                        screenshotContainer.classList.add('screenshot-available');
                     }
                     screenshotId = hb.screenshotId;
-                    screenshotEl.src = "http://localhost:19333/screenshot?id=" + screenshotId;
+                    screenshotEl.src = `http://localhost:19333/screenshot?id=${screenshotId}`;
                 }
                 if (hb.logs && hb.logs.length) {
                     logs.push(...hb.logs);
-                    logsEl.innerHTML = logs.slice(Math.max(logs.length - (logs.length % 100) - 30, 0)).join("\n");
+                    logsEl.innerHTML = logs.slice(Math.max(logs.length - (logs.length % 100) - 30, 0)).join('\n');
                     logsEl.scroll({
                         top: logsEl.scrollHeight,
                         left: 0,
-                        behavior: Date.now() - lastLogTime < 200 ? "auto" : "smooth"
+                        behavior: Date.now() - lastLogTime < 200 ? 'auto' : 'smooth'
                     });
                     lastLogTime = Date.now();
                 }
                 if (!sessionId) {
-                    text.push("状态服务器：离线");
+                    text.push('状态服务器：离线');
                 }
                 if (!danmakuOnline) {
-                    text.push("弹幕姬：离线");
+                    text.push('弹幕姬：离线');
                 }
-                statusBarEl.innerHTML = text.join("\n");
+                statusBarEl.innerHTML = text.join('\n');
                 setTimeout(updateStatus, success ? 100 : 1000);
             }
             async function updateDanmaku() {
                 let lines = [];
-                let success = false;
                 try {
-                    lines = await (await fetch("http://localhost:19334/lines?since=" + danmakus.length)).json();
-                    success = true;
+                    lines = await (await fetch(`http://localhost:19334/lines?since=${danmakus.length}`)).json();
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;
                 }
                 if (lines.length) {
                     danmakus.push(...lines);
-                    danmakuEl.innerHTML = danmakus.join("\n");
+                    danmakuEl.innerHTML = danmakus.join('\n');
                 }
                 danmakuEl.scroll({
                     top: danmakuEl.scrollHeight,
                     left: 0,
-                    behavior: lines.length > 10 ? "auto" : "smooth"
+                    behavior: lines.length > 10 ? 'auto' : 'smooth'
                 });
                 setTimeout(updateDanmaku, 1000);
             }
@@ -271,40 +270,40 @@
                 startOnScreen: true
             });
             const explanationTexts = [
-                ["这是在做什么？", "获取Minecraft基岩版最新版本的ID表，我叫它爬ID表。"],
-                ["是什么原理？", "模拟键盘按Tab键然后对聊天框进行文字图像识别。"],
-                ["有什么用？", "扔到命令助手和MCBEID表里，顺带完善MC更新记录。"],
+                ['这是在做什么？', '获取Minecraft基岩版最新版本的ID表，我叫它爬ID表。'],
+                ['是什么原理？', '模拟键盘按Tab键然后对聊天框进行文字图像识别。'],
+                ['有什么用？', '扔到命令助手和MCBEID表里，顺带完善MC更新记录。'],
                 [
-                    "纯路人。为什么要做这个？",
-                    "众所周知命令里有很多英文的ID，例如方块ID。有个ID与中文的对照表就很方便。",
-                    "目前正在做的就是通过一些方法提取这个对照表的数据。"
+                    '纯路人。为什么要做这个？',
+                    '众所周知命令里有很多英文的ID，例如方块ID。有个ID与中文的对照表就很方便。',
+                    '目前正在做的就是通过一些方法提取这个对照表的数据。'
                 ],
-                ["我在哪里能找到你上面说的对照表？", "MCBEID表，https://ca.projectxero.top/idlist/"],
+                ['我在哪里能找到你上面说的对照表？', 'MCBEID表，https://ca.projectxero.top/idlist/'],
                 [
-                    "我想要你爬的数据，请问哪里有白嫖？",
+                    '我想要你爬的数据，请问哪里有白嫖？',
                     '<span style="text-decoration: line-through">MCBEID表的关于页面有写。</span> 自己爬。'
                 ],
                 [
-                    "你手机卡成这样了，没事吗？",
-                    "这个只是截图帧率低，大概低于10fps，实际上手机非常流畅，30fps不在话下。"
+                    '你手机卡成这样了，没事吗？',
+                    '这个只是截图帧率低，大概低于10fps，实际上手机非常流畅，30fps不在话下。'
                 ],
                 [
-                    "这个是每周的常驻节目吗？",
-                    "测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播两个小时左右。"
+                    '这个是每周的常驻节目吗？',
+                    '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播两个小时左右。'
                 ],
                 [
-                    "我能来这个直播间干什么？",
+                    '我能来这个直播间干什么？',
                     '<span style="text-decoration: line-through">了解ID的变化情况。</span>欢迎来弹幕聊天啊，听听歌也行。',
                     '但<span style="font-weight: bold">请不要在直播间里赠送付费的礼物或者上舰</span>。'
                 ],
-                ["命令助手呢？你啥时候更新？", "无限期暂停更新中，别催了，催了也没用"],
-                ["为什么UP主的主页打不开？", "我也不清楚啊，不如关注一下UP主翻翻动态试试？"]
+                ['命令助手呢？你啥时候更新？', '无限期暂停更新中，别催了，催了也没用'],
+                ['为什么UP主的主页打不开？', '我也不清楚啊，不如关注一下UP主翻翻动态试试？']
             ];
             dynamicMarquee.loop(
                 marquee,
                 explanationTexts.map((e) => () => {
-                    const el = document.createElement("p");
-                    el.innerHTML = "问：" + e[0] + "<br />答：" + e.slice(1).join("");
+                    const el = document.createElement('p');
+                    el.innerHTML = `问：${e[0]}<br />答：${e.slice(1).join('')}`;
                     return el;
                 })
             );

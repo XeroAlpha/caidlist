@@ -1,31 +1,37 @@
 const CommentLocation = {
-    beforeAll() { return Symbol.for("before-all"); },
+    beforeAll() { return Symbol.for('before-all'); },
     before(prop) {
         if (prop) {
-            return Symbol.for("before:" + prop);
-        } else {
-            return Symbol.for("before");
+            return Symbol.for(`before:${prop}`);
         }
+        return Symbol.for('before');
     },
-    afterProp(prop) { return Symbol.for("after-prop:" + prop); },
-    afterColon(prop) { return Symbol.for("after-colon:" + prop); },
-    afterValue(prop) { return Symbol.for("after-value:" + prop); },
+    afterProp(prop) { return Symbol.for(`after-prop:${prop}`); },
+    afterColon(prop) { return Symbol.for(`after-colon:${prop}`); },
+    afterValue(prop) { return Symbol.for(`after-value:${prop}`); },
     after(prop) {
         if (prop) {
-            return Symbol.for("after:" + prop);
-        } else {
-            return Symbol.for("after");
+            return Symbol.for(`after:${prop}`);
         }
+        return Symbol.for('after');
     },
-    afterAll() { return Symbol.for("after-all"); },
+    afterAll() { return Symbol.for('after-all'); }
 };
 
 function parseJSONComment(type, comment) {
     return {
-        type: type == "block" || type == "inlineBlock" ? "BlockComment" : "LineComment",
+        type: type === 'block' || type === 'inlineBlock' ? 'BlockComment' : 'LineComment',
         value: comment,
-        inline: type == "inlineBlock" || type == "inlineLine"
+        inline: type === 'inlineBlock' || type === 'inlineLine'
     };
+}
+
+function setJSONComment(target, symbol, type, comment) {
+    target[symbol] = [parseJSONComment(type, comment)];
+}
+
+function clearJSONComment(target, symbol) {
+    delete target[symbol];
 }
 
 function addJSONComment(target, symbol, type, comment) {
@@ -35,14 +41,6 @@ function addJSONComment(target, symbol, type, comment) {
     } else {
         setJSONComment(target, symbol, type, comment);
     }
-}
-
-function setJSONComment(target, symbol, type, comment) {
-    target[symbol] = [parseJSONComment(type, comment)];
-}
-
-function clearJSONComment(target, symbol) {
-    delete target[symbol];
 }
 
 function copyJSONComment(source, sourceSymbol, target, targetSymbol) {
@@ -69,4 +67,4 @@ module.exports = {
     clearJSONComment,
     copyJSONComment,
     moveJSONComment
-}
+};

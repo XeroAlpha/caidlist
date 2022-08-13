@@ -1,4 +1,4 @@
-const { Transform } = require("stream");
+const { Transform } = require('stream');
 
 class StateTransform extends Transform {
     constructor() {
@@ -18,28 +18,27 @@ class StateTransform extends Transform {
      * @param {Buffer} chunk Data chunk
      * @returns {[any, number]} Next state and its length
      */
+    // eslint-disable-next-line no-unused-vars, class-methods-use-this
     _processChunk(state, chunk) {
-        throw new Error("Need implement _processChunk(state, chunk)");
+        throw new Error('Need implement _processChunk(state, chunk)');
     }
 
     _transform(chunk, encoding, done) {
-        if (encoding != "buffer") {
-            chunk = Buffer.from(chunk, encoding);
-        }
         this._bufferLength += chunk.length;
         this._bufferChunks.push(chunk);
         while (this._bufferLength >= this._triggerLength) {
-            const bufferedChunk =
-                this._bufferChunks.length == 1 ? this._bufferChunks[0] : Buffer.concat(this._bufferChunks);
+            const bufferedChunk = this._bufferChunks.length === 1
+                ? this._bufferChunks[0]
+                : Buffer.concat(this._bufferChunks);
             const triggerChunk = bufferedChunk.slice(0, this._triggerLength);
             this._bufferLength -= this._triggerLength;
             this._bufferChunks = [bufferedChunk.slice(this._triggerLength)];
             const next = this._processChunk(this._state, triggerChunk);
             if (next && Array.isArray(next)) {
-                this._state = next[0];
-                this._triggerLength = next[1];
+                [this._state, this._triggerLength] = next;
             } else {
-                return done(next);
+                done(next);
+                return;
             }
         }
         done();

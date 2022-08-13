@@ -1,23 +1,24 @@
-const fs = require("fs");
-const nodePath = require("path");
-const Koa = require("koa");
-const Router = require("@koa/router");
+const fs = require('fs');
+const nodePath = require('path');
+const Koa = require('koa');
+const Router = require('@koa/router');
+const pinyinRaw = require('pinyin');
 
-const DefaultId = Symbol("DefaultId");
-const Keywords = Symbol("Keywords");
-const PackageVersion = Symbol("PackageVersion");
-const GlobalSearchEnumId = "global";
+const DefaultId = Symbol('DefaultId');
+const Keywords = Symbol('Keywords');
+const PackageVersion = Symbol('PackageVersion');
+const GlobalSearchEnumId = 'global';
 
 function dateTimeToString(date) {
     const dateString = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     const timeString = [date.getHours(), date.getMinutes(), date.getSeconds()]
-        .map((e) => e.toFixed(0).padStart(2, "0"))
-        .join(":");
+        .map((e) => e.toFixed(0).padStart(2, '0'))
+        .join(':');
     return `${dateString} ${timeString}`;
 }
 
 function readJSON(path) {
-    return JSON.parse(fs.readFileSync(path, "utf-8"));
+    return JSON.parse(fs.readFileSync(path, 'utf-8'));
 }
 
 function readFileModifiedTime(path) {
@@ -30,8 +31,7 @@ function readFileModifiedTime(path) {
 }
 
 function loadData(path) {
-    const pinyinRaw = require("pinyin");
-    const pinyin = (w) => pinyinRaw(w, { style: pinyinRaw.STYLE_NORMAL }).join("");
+    const pinyin = (w) => pinyinRaw(w, { style: pinyinRaw.STYLE_NORMAL }).join('');
     const dataIndex = readJSON(path);
     const newData = {};
     const keywords = {};
@@ -45,7 +45,7 @@ function loadData(path) {
     const addKeywords = (k, c) => {
         const pinyinKey = pinyin(k);
         addKeywordsRaw(k.toLowerCase(), c);
-        if (pinyinKey != k) {
+        if (pinyinKey !== k) {
             addKeywordsRaw(pinyinKey.toLowerCase(), c);
         }
     };
@@ -55,14 +55,14 @@ function loadData(path) {
         addKeywords(versionType, { versionType });
         addKeywords(versionIndex.name, { versionType });
         versionIndex.branchList.forEach((branchInfo) => {
-            const branchData = readJSON(nodePath.join(path, "..", versionIndex.id, branchInfo.id + ".json"));
+            const branchData = readJSON(nodePath.join(path, '..', versionIndex.id, `${branchInfo.id}.json`));
             const enumEntriesMap = {};
             const nameMap = {};
             const branchId = branchInfo.id;
             addKeywords(branchId, { versionType, branchId });
             addKeywords(branchInfo.name, { versionType, branchId });
-            for (const enumKey in branchData.enums) {
-                enumEntriesMap[enumKey] = Object.entries(branchData.enums[enumKey]).map(([key, value]) => [
+            for (const [enumKey, enumData] of Object.entries(branchData.enums)) {
+                enumEntriesMap[enumKey] = Object.entries(enumData).map(([key, value]) => [
                     key,
                     value,
                     pinyin(value)
@@ -95,7 +95,7 @@ function patchOptionByKeywords(dataStore, keywords, options) {
         if (keywordContext) {
             const context = keywordContext.find((e) => {
                 for (const [key, value] of Object.entries(e)) {
-                    if (options[key] && options[key] != value) return false;
+                    if (options[key] && options[key] !== value) return false;
                 }
                 return true;
             });
@@ -109,21 +109,21 @@ function patchOptionByKeywords(dataStore, keywords, options) {
         break;
     }
     const filteredKeywords = keywords.slice(i);
-    options.searchText = filteredKeywords.join(" ");
+    options.searchText = filteredKeywords.join(' ');
     return filteredKeywords;
 }
 
 function prepareSearch(dataStore, options) {
     const { strategy, searchText } = options;
     let searcher;
-    if (strategy == "keyword") {
+    if (strategy === 'keyword') {
         const rawKeywords = searchText
             .toLowerCase()
             .split(/\s+/)
             .filter((e) => e.length > 0);
         const keywords = patchOptionByKeywords(dataStore, rawKeywords, options);
         let startsWith = null;
-        if (keywords.length > 0 && keywords[0].length > 1 && keywords[0].startsWith("^")) {
+        if (keywords.length > 0 && keywords[0].length > 1 && keywords[0].startsWith('^')) {
             startsWith = keywords[0] = keywords[0].slice(1);
         }
         searcher = (value) => {
@@ -134,20 +134,19 @@ function prepareSearch(dataStore, options) {
                 const indexInValue = valueLowerCase.indexOf(keyword, start);
                 if (indexInValue < 0) {
                     return false;
-                } else {
-                    start = indexInValue + keyword.length;
                 }
+                start = indexInValue + keyword.length;
             }
             return true;
         };
-    } else if (strategy == "contains") {
+    } else if (strategy === 'contains') {
         searcher = (value) => value.indexOf(searchText) >= 0;
-    } else if (strategy == "startswith") {
+    } else if (strategy === 'startswith') {
         searcher = (value) => value.startsWith(searchText);
-    } else if (strategy == "equals") {
-        searcher = (value) => value == searchText;
+    } else if (strategy === 'equals') {
+        searcher = (value) => value === searchText;
     } else {
-        throw new Error("Invalid strategy: " + strategy);
+        throw new Error(`Invalid strategy: ${strategy}`);
     }
     const { versionType, branchId, enumId } = options;
     let versionData = dataStore[versionType];
@@ -158,7 +157,7 @@ function prepareSearch(dataStore, options) {
     if (!branchData) {
         branchData = versionData[(options.branchId = versionData[DefaultId])];
     }
-    let enumData = branchData.enums[enumId];
+    const enumData = branchData.enums[enumId];
     if (!enumData) {
         options.enumId = GlobalSearchEnumId;
     }
@@ -167,12 +166,12 @@ function prepareSearch(dataStore, options) {
 
 function searchEnum(searcher, { scope, limit, enumId, branchData }) {
     const result = [];
-    const enableSearchKey = scope == "all" || scope == "key";
-    const enableSearchValue = scope == "all" || scope == "value";
+    const enableSearchKey = scope === 'all' || scope === 'key';
+    const enableSearchValue = scope === 'all' || scope === 'value';
     const enumEntries = branchData.enums[enumId];
     const enumName = branchData.names[enumId];
     if (!enumName || !enumEntries) {
-        throw new Error("Invalid enum id: " + enumId);
+        throw new Error(`Invalid enum id: ${enumId}`);
     }
     for (const [key, value, valuePinyin] of enumEntries) {
         if (!(enableSearchKey && searcher(key)) && !(enableSearchValue && (searcher(value) || searcher(valuePinyin)))) {
@@ -192,12 +191,12 @@ function doSearch(dataStore, options) {
     const versionData = dataStore[versionType];
     const branchData = versionData[branchId];
     const result = [];
-    if (enumId != GlobalSearchEnumId) {
+    if (enumId !== GlobalSearchEnumId) {
         result.push(...searchEnum(searcher, { scope, limit, enumId, branchData }));
     } else {
         let restLimit = limit;
-        for (const enumId in branchData.enums) {
-            const enumResult = searchEnum(searcher, { scope, limit: restLimit, enumId, branchData });
+        for (const id of Object.keys(branchData.enums)) {
+            const enumResult = searchEnum(searcher, { scope, limit: restLimit, enumId: id, branchData });
             result.push(...enumResult);
             restLimit -= enumResult.length;
             if (restLimit <= 0) {
@@ -210,20 +209,20 @@ function doSearch(dataStore, options) {
 
 function toPWAHash(options) {
     return [
-        "#" + options.versionType + "-" + options.branchId,
+        `#${options.versionType}-${options.branchId}`,
         options.enumId,
         encodeURIComponent(options.searchText)
-    ].join("/");
+    ].join('/');
 }
 
 function toHumanReadable(options, result) {
     const lines = result.map((entry) => `${entry.enumName}: ${entry.key} -> ${entry.value}`);
-    if (lines.length > 0) lines.push("");
-    lines.push("https://ca.projectxero.top/idlist/" + toPWAHash(options));
-    return lines.join("\r\n");
+    if (lines.length > 0) lines.push('');
+    lines.push(`https://ca.projectxero.top/idlist/${toPWAHash(options)}`);
+    return lines.join('\r\n');
 }
 
-const dataIndexPath = nodePath.resolve(process.argv[2], "index.json");
+const dataIndexPath = nodePath.resolve(process.argv[2], 'index.json');
 let dataStore = loadData(dataIndexPath);
 let dataCheckTime = Date.now();
 let dataUpdateTime = readFileModifiedTime(dataIndexPath);
@@ -233,12 +232,12 @@ const PORT = 18345;
 const app = new Koa();
 const router = new Router();
 
-router.get("/search", (ctx, next) => {
+router.get('/search', (ctx) => {
     const now = new Date();
     process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ->] ${ctx.querystring}\n`);
     if (now - dataCheckTime > UPDATE_INTERVAL) {
         const modifiedTime = readFileModifiedTime(dataIndexPath);
-        if (!isNaN(modifiedTime) && modifiedTime != dataUpdateTime) {
+        if (!Number.isNaN(modifiedTime) && modifiedTime !== dataUpdateTime) {
             dataStore = loadData(dataIndexPath);
             process.stdout.write(`[${dateTimeToString(now)}] DataStore successfully reloaded.\n`);
             dataUpdateTime = modifiedTime;
@@ -247,17 +246,17 @@ router.get("/search", (ctx, next) => {
     }
     try {
         const options = {
-            strategy: ctx.query.match || "keyword",
-            scope: ctx.query.scope || "all",
-            limit: Math.max(Math.min(parseInt(ctx.query.limit), 1000), 1) || 1,
-            versionType: ctx.query.version || "",
-            branchId: ctx.query.branch || "",
-            enumId: ctx.query.enum || "",
-            searchText: ctx.query.q || "",
-            format: ctx.query.format || "json"
+            strategy: ctx.query.match || 'keyword',
+            scope: ctx.query.scope || 'all',
+            limit: Math.max(Math.min(parseInt(ctx.query.limit, 10), 1000), 1) || 1,
+            versionType: ctx.query.version || '',
+            branchId: ctx.query.branch || '',
+            enumId: ctx.query.enum || '',
+            searchText: ctx.query.q || '',
+            format: ctx.query.format || 'json'
         };
         const result = doSearch(dataStore, options);
-        if (options.format == "text") {
+        if (options.format === 'text') {
             ctx.body = toHumanReadable(options, result);
         } else {
             ctx.body = {
@@ -275,7 +274,6 @@ router.get("/search", (ctx, next) => {
         ctx.status = 400;
         ctx.body = { error: err.message };
         process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} <-] Error: ${err.message}\n${err.stack}\n`);
-        return;
     }
 });
 

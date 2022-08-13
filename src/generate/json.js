@@ -1,9 +1,11 @@
-const fs = require("fs");
-const { filterRedundantEnums, fixEntityRelatedIds } = require("./text");
-const { deepCopy, forEachObject } = require("../util/common");
+const fs = require('fs');
+const { filterRedundantEnums, fixEntityRelatedIds } = require('./text');
+const { deepCopy, forEachObject } = require('../util/common');
 
 function writeTransMapJson(_, options) {
-    const { outputFile, originalEnums, transMaps, transMapNames } = options;
+    const {
+        outputFile, originalEnums, transMaps, transMapNames
+    } = options;
     const enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
         fixEntityRelatedIds(enums.entityEvent, originalEnums.entityEventsMap, enums.entity);
@@ -12,59 +14,60 @@ function writeTransMapJson(_, options) {
             originalEnums.entityFamilyMap,
             enums.entity,
             (relatedEntities) => {
-                if (relatedEntities.length == 1) {
+                if (relatedEntities.length === 1) {
                     relatedEntities.length = 0;
                 }
             },
-            (value, str) => `${value}（${str.join("、")}）`
+            (value, str) => `${value}（${str.join('、')}）`
         );
         fixEntityRelatedIds(enums.animation, originalEnums.animationMap, enums.entity);
         fixEntityRelatedIds(enums.animationController, originalEnums.animationControllerMap, enums.entity);
         forEachObject(enums.entity, (v, k, o) => {
             if (!(k in transMaps.summonableEntity)) {
-                o[k] = v + "（不可召唤）";
+                o[k] = `${v}（不可召唤）`;
             }
         });
     }
     fs.writeFileSync(
         outputFile,
         JSON.stringify({
-            enums: enums,
+            enums,
             names: transMapNames.filter((e) => enums[e[0]])
         })
     );
 }
 
 function writeTransMapIndexJson(cx, options) {
-    const { version, packageVersion, coreVersion, versionInfo } = cx;
-    const { outputFile, mergedFile, rootUrl, branchList } = options;
+    const {
+        version, packageVersion, coreVersion, versionInfo
+    } = cx;
+    const {
+        outputFile, mergedFile, rootUrl, branchList
+    } = options;
     const indexData = {
         dataVersion: packageVersion,
-        coreVersion: coreVersion,
+        coreVersion,
         branchList: branchList
             .filter((branch) => !branch.hideOnWeb)
-            .map((branch) => {
-                return {
-                    ...branch,
-                    dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
-                    offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
-                };
-            })
+            .map((branch) => ({
+                ...branch,
+                dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
+                offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
+            }))
     };
     if (outputFile) {
         fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
     }
     if (mergedFile) {
-        let mergedList = null,
-            mergeIndex;
+        let mergedList = null;
         if (fs.existsSync(mergedFile)) {
-            const mergedFileContent = fs.readFileSync(mergedFile, "utf-8");
+            const mergedFileContent = fs.readFileSync(mergedFile, 'utf-8');
             mergedList = JSON.parse(mergedFileContent);
         }
         if (!Array.isArray(mergedList)) {
             mergedList = [];
         }
-        mergeIndex = mergedList.findIndex((e) => e.id == version);
+        let mergeIndex = mergedList.findIndex((e) => e.id === version);
         if (mergeIndex < 0) mergeIndex = mergedList.length;
         mergedList[mergeIndex] = {
             id: version,
