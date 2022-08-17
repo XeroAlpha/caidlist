@@ -3,7 +3,7 @@ const AdmZip = require('adm-zip');
 const { parse: parseHtml, TextNode, HTMLElement } = require('node-html-parser');
 const CommentJSON = require('comment-json');
 const prettier = require('prettier');
-const { cachedOutput, filterObjectMap, forEachObject, deepCopy } = require('../util/common');
+const { cachedOutput, forEachObject, deepCopy } = require('../util/common');
 const { fetchFile, fetchRedirect } = require('../util/network');
 const { CommentLocation, addJSONComment } = require('../util/comment');
 
@@ -371,7 +371,9 @@ function createSectionTableAnalyzer({
     path,
     tableIndex,
     idKey,
+    getId,
     descriptionKey,
+    getDescription,
     withSchema
 }) {
     return {
@@ -382,12 +384,31 @@ function createSectionTableAnalyzer({
             const tables = section.content.filter((e) => typeof e === 'object' && e.type === 'table');
             const table = tables[tableIndex >= 0 ? tableIndex : tables.length + tableIndex];
             const result = {};
+            const idGetter = (row) => {
+                if (getId) {
+                    return getId(row);
+                }
+                if (idKey) {
+                    return row[idKey];
+                }
+                throw new Error('Id cannot be empty');
+            };
+            const descriptionGetter = (row) => {
+                if (getDescription) {
+                    return getDescription(row);
+                }
+                if (descriptionKey) {
+                    return row[descriptionKey];
+                }
+                return '';
+            };
             table.rows.forEach((row) => {
-                const id = contentToPlain(row[idKey]);
+                const parsedId = contentToPlain(idGetter(row));
+                const parsedDesc = descriptionGetter(row);
                 if (withSchema) {
-                    result[id] = generateSchema(row[descriptionKey]);
+                    result[parsedId] = generateSchema(parsedDesc);
                 } else {
-                    result[id] = contentFirstLine(row[descriptionKey]);
+                    result[parsedId] = contentFirstLine(parsedDesc);
                 }
             });
             return result;
@@ -395,7 +416,98 @@ function createSectionTableAnalyzer({
     };
 }
 
+function createSchemeTableAnalyzer({
+    name,
+    target,
+    documentation,
+    path,
+    tableIndex
+}) {
+    return {
+        name: target,
+        documentation,
+        extract(doc) {
+            const section = findSection(doc, ...path);
+            const tables = section.content.filter((e) => typeof e === 'object' && e.type === 'table');
+            const table = tables[tableIndex >= 0 ? tableIndex : tables.length + tableIndex];
+            const result = {};
+            result[name] = generateSchema([table]);
+            return result;
+        }
+    };
+}
+
 const pageAnalyzer = [
+    createSectionTableAnalyzer({
+        name: 'blockState',
+        documentation: 'Addons',
+        path: ['BlockStates'],
+        tableIndex: 0,
+        idKey: 'Block State Name',
+        descriptionKey: 'Description'
+    }),
+    createSectionTableAnalyzer({
+        name: 'block',
+        documentation: 'Addons',
+        path: ['Blocks'],
+        tableIndex: 0,
+        idKey: 'Name'
+    }),
+    createSectionTableAnalyzer({
+        name: 'entity',
+        documentation: 'Addons',
+        path: ['Entities'],
+        tableIndex: 0,
+        idKey: 'Identifier',
+        getDescription(row) {
+            const { 'Full ID': fullId, 'Short ID': shortId } = row;
+            return `0x${fullId.toString(16).padStart(8, '0')} (0x${shortId.toString(16).padStart(2, '0')})`;
+        }
+    }),
+    createSectionTableAnalyzer({
+        name: 'damageSource',
+        documentation: 'Addons',
+        path: ['Entity Damage Source'],
+        tableIndex: 0,
+        idKey: 'Damage Source',
+        descriptionKey: 'ID'
+    }),
+    // createMojangSchemeAnalyzer({
+    //     name: 'biome_schema',
+    //     target: 'schema',
+    //     documentation: 'Biomes',
+    //     path: ['Schema'],
+    //     codeIndex: 0
+    // }),
+    createSchemeTableAnalyzer({
+        name: 'block_components',
+        target: 'schema',
+        documentation: 'Blocks',
+        path: ['Blocks', 'Block Components'],
+        tableIndex: 0
+    }),
+    createSchemeTableAnalyzer({
+        name: 'block_event_responses',
+        target: 'schema',
+        documentation: 'Blocks',
+        path: ['Blocks', 'Block Event Responses'],
+        tableIndex: 0
+    }),
+    createSchemeTableAnalyzer({
+        name: 'block_trigger_components',
+        target: 'schema',
+        documentation: 'Blocks',
+        path: ['Blocks', 'Block Trigger Components'],
+        tableIndex: 0
+    }),
+    createSectionTableAnalyzer({
+        name: 'entitySpawnRuleConditionComponent',
+        documentation: 'Entities',
+        path: ['Data-Driven Spawning', 'Spawn Rules', 'Components'],
+        tableIndex: 0,
+        idKey: 'Name',
+        descriptionKey: 'Description'
+    }),
     createSectionSummaryAnalyzer({
         name: 'entityFilter',
         documentation: 'Entities',
@@ -444,6 +556,24 @@ const pageAnalyzer = [
         path: ['Supported features']
     }),
     createSectionTableAnalyzer({
+        name: 'itemComponent',
+        documentation: 'Item',
+        path: ['Items', 'Item Components'],
+        tableIndex: 0,
+        idKey: 'Name',
+        descriptionKey: 'Description'
+    }),
+    createSectionTableAnalyzer({
+        name: 'molangMath',
+        documentation: 'Molang',
+        path: ['Lexical Structure', 'Math Functions'],
+        tableIndex: 0,
+        getId(row) {
+            return row.Function.replace(/^`(.+)`$/, '$1');
+        },
+        descriptionKey: 'Description'
+    }),
+    createSectionTableAnalyzer({
         name: 'molangQuery',
         documentation: 'Molang',
         path: ['Domain Examples', 'List of Entity Queries'],
@@ -452,17 +582,53 @@ const pageAnalyzer = [
         descriptionKey: 'Description'
     }),
     createSectionTableAnalyzer({
-        name: 'molangQuery',
+        name: 'molangQueryExperimental',
         documentation: 'Molang',
         path: ['Domain Examples', 'List of Experimental Entity Queries'],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
+    }),
+    // createMojangSchemeAnalyzer({
+    //     target: 'schema',
+    //     documentation: 'Schemas',
+    //     path: ['Schemas'],
+    //     codeIndex: 0
+    // }),
+    createSchemeTableAnalyzer({
+        name: 'volume_components',
+        target: 'schema',
+        documentation: 'Volumes',
+        path: ['Volumes', 'Volume Components'],
+        tableIndex: 0
     })
+];
+
+const remapIdTable = [
+    ['entityFilter', 'entityFilter'],
+    ['entityBehavior', 'entityBehavior'],
+    ['entityAttribute', 'entityAttribute'],
+    ['entityBuiltinEvent', 'entityBuiltinEvent'],
+    ['entityComponent', 'entityComponent'],
+    ['entityProperty', 'entityProperty'],
+    ['entityTrigger', 'entityTrigger'],
+    ['featureType', 'featureType'],
+    ['molangQuery', 'molangQuery'],
+    ['molangQueryExperimental', 'molangQuery']
 ];
 
 function extractDocumentationIds(docMap) {
     const target = {};
+    const indexMap = {};
+    forEachObject(docMap, (v, k) => {
+        if (typeof v !== 'object') return;
+        const visitor = (doc) => ({
+            name: doc.name || doc.title,
+            sections: doc.sections?.map(visitor)
+        });
+        indexMap[k] = visitor(v);
+    });
+    target.index = indexMap;
     pageAnalyzer.forEach((analyzer) => {
         const doc = docMap[analyzer.documentation];
         if (!doc) {
@@ -499,7 +665,15 @@ async function fetchDocumentationIds(cx) {
         }
         console.error(`Failed to fetch template behavior pack, use cache instead: ${err}`);
     }
-    return filterObjectMap(cache, (k) => !(k.startsWith('__') && k.endsWith('__')));
+    const target = {};
+    remapIdTable.forEach(([name, targetName]) => {
+        if (targetName in target) {
+            Object.assign(target[targetName], cache[name]);
+        } else {
+            target[targetName] = cache[name];
+        }
+    });
+    return target;
 }
 
 /**
@@ -532,6 +706,7 @@ function tryParseJSON(str, defaultValue) {
 }
 
 function getDefaultValue(schema) {
+    let result;
     switch (schema.type) {
         case 'Boolean':
             return schema.defaultValue === 'true';
@@ -543,19 +718,31 @@ function getDefaultValue(schema) {
         case 'Molang':
             return String(schema.defaultValue);
         case 'Array':
-            return [];
+        case 'List':
+            result = [];
+            if (schema.defaultValue) {
+                addJSONComment(result, CommentLocation.before(), 'inlineBlock', schema.defaultValue);
+            }
+            return result;
         case 'JSON Object':
-            return {};
+            result = {};
+            if (schema.defaultValue) {
+                addJSONComment(result, CommentLocation.before(), 'inlineBlock', schema.defaultValue);
+            }
+            return result;
         case 'Range [a, b]':
             return tryParseJSON(schema.defaultValue, 0);
         case 'Vector [a, b, c]':
             return tryParseJSON(schema.defaultValue, [0, 0, 0]);
-        case 'List':
-            return [];
         case 'Minecraft Filter':
         case 'Trigger':
         case 'Item Description Properties':
-            return {};
+            if (schema.defaultValue) {
+                result = {};
+                addJSONComment(result, CommentLocation.before(), 'inlineBlock', schema.defaultValue);
+                return result;
+            }
+            return null;
         case undefined:
             if (schema.children) {
                 return {};
