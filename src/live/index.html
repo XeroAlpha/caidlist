@@ -158,9 +158,11 @@
             let sessionId = null;
             let screenshotId = null;
             const logs = [];
-            let lastLogTime = Infinity;
+            let lastLogTime = Date.now();
+            let lastActiveTime = Date.now();
             const danmakus = [];
             let danmakuOnline = false;
+            let obsStreaming = null;
             function dateTimeString(d) {
                 const date = [d.getFullYear(), '年', d.getMonth() + 1, '月', d.getDate(), '日'];
                 const time = [d.getHours(), d.getMinutes(), d.getSeconds()].map((e) => String(e).padStart(2, '0'));
@@ -177,6 +179,33 @@
                     return `${min}分${sec.padStart(2, '0')}秒`;
                 }
                 return `${sec}秒`;
+            }
+            async function tryInitOBS() {
+                try {
+                    const obs = window.obsstudio;
+                    const controlLevel = await new Promise((resolve) => {
+                        obs.getControlLevel(resolve);
+                    });
+                    if (controlLevel < 5) {
+                        throw new Error('Permission denied');
+                    }
+                    const status = await new Promise((resolve) => {
+                        obs.getStatus(resolve);
+                    });
+                    obsStreaming = status.streaming;
+                    window.addEventListener('obsStreamingStarted', () => {
+                        obsStreaming = true;
+                        lastActiveTime = Date.now();
+                    });
+                    window.addEventListener('obsStreamingStopped', () => {
+                        obsStreaming = false;
+                    });
+                } catch (err) {
+                    console.warn('OBS api is not available, skipped...', err);
+                }
+            }
+            if (window.obsstudio) {
+                tryInitOBS();
             }
             async function updateStatus() {
                 let hb = { sessionId: null };
@@ -230,15 +259,25 @@
                     logsEl.scroll({
                         top: logsEl.scrollHeight,
                         left: 0,
-                        behavior: Date.now() - lastLogTime < 200 ? 'auto' : 'smooth'
+                        behavior: Date.now() - lastLogTime < 200 || hb.logs.length > 10 ? 'auto' : 'smooth'
                     });
                     lastLogTime = Date.now();
+                    lastActiveTime = Date.now();
                 }
                 if (!sessionId) {
                     text.push('状态服务器：离线');
                 }
                 if (!danmakuOnline) {
                     text.push('弹幕姬：离线');
+                }
+                if (obsStreaming) {
+                    const unresponsibleSeconds = (Date.now() - lastActiveTime) / 1000;
+                    if (unresponsibleSeconds > 60) {
+                        text.push(`将在${timeLeftString(360 - unresponsibleSeconds)}后自动结束直播`);
+                    }
+                    if (unresponsibleSeconds > 360) {
+                        window.obsstudio.stopStreaming();
+                    }
                 }
                 statusBarEl.innerHTML = text.join('\n');
                 setTimeout(updateStatus, success ? 100 : 1000);
