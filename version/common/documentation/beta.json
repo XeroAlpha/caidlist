@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.30.23",
-    "__URL__": "https://meedownloads.blob.core.windows.net/add-ons/Vanilla_Behavior_Pack_Preview_1.19.30.23.zip",
+    "__VERSION__": "1.19.40.20",
+    "__URL__": "https://meedownloads.blob.core.windows.net/add-ons/Vanilla_Behavior_Pack_Preview_1.19.40.20.zip",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -499,6 +499,14 @@
                         },
                         {
                             "name": "is_avoiding_mobs",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "is_baby",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -1931,6 +1939,35 @@
         },
         "Entity Events": {
             "name": "ENTITY EVENTS DOCUMENTATION",
+            "sections": [
+                {
+                    "name": "This describes the structure of the Events section."
+                },
+                {
+                    "name": "Overview"
+                },
+                {
+                    "name": "Versioned Changes"
+                },
+                {
+                    "name": "Randomize Node"
+                },
+                {
+                    "name": "Sequence Node"
+                },
+                {
+                    "name": "Trigger"
+                },
+                {
+                    "name": "Add Component Group"
+                },
+                {
+                    "name": "Remove Component Group"
+                }
+            ]
+        },
+        "Entity Timeline Events": {
+            "name": "ENTITY TIMELINE EVENTS DOCUMENTATION",
             "sections": [
                 {
                     "name": "Animation Controller Events"
@@ -4550,6 +4587,7 @@
         "inactivity_timer": "Tests if the specified duration in seconds of inactivity for despawning has been reached.",
         "is_altitude": "Tests the current altitude against a provided value. 0= bedrock elevation.",
         "is_avoiding_mobs": "Returns true if the subject entity is fleeing from other mobs.",
+        "is_baby": "Returns true when the subject entity is a baby.",
         "is_biome": "Tests whether the Subject is currently in the named biome.",
         "is_block": "Returns true when the block has the given name.",
         "is_brightness": "Tests the current brightness against a provided value in the range (0.0f, 1.0f).",
@@ -8068,13 +8106,55 @@
             ]
         },
         "minecraft:behavior.play": {
-            "description": "Allows the mob to play with other baby villagers. This can only be used by Villagers.",
+            "description": "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
             "children": [
+                {
+                    "name": "chance_to_start",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Percent chance that the mob will start this goal, from 0 to 1."
+                },
+                {
+                    "name": "follow_distance",
+                    "type": "Integer",
+                    "defaultValue": "2",
+                    "description": "The distance (in blocks) that the mob tries to be in range of the friend it's following."
+                },
+                {
+                    "name": "friend_search_area",
+                    "type": "Vector [a, b, c]",
+                    "defaultValue": "[6, 3, 6]",
+                    "description": "The dimensions of the AABB used to search for a potential friend to play with."
+                },
+                {
+                    "name": "friend_types",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "The entity type(s) to consider when searching for a potential friend to play with."
+                },
+                {
+                    "name": "max_play_duration_seconds",
+                    "type": "Decimal",
+                    "defaultValue": "50.00",
+                    "description": "The max amount of seconds that the mob will play for before exiting the Goal."
+                },
+                {
+                    "name": "random_pos_search_height",
+                    "type": "Integer",
+                    "defaultValue": "3",
+                    "description": "The height (in blocks) that the mob will search within to find a random position position to move to. Must be at least 1."
+                },
+                {
+                    "name": "random_pos_search_range",
+                    "type": "Integer",
+                    "defaultValue": "16",
+                    "description": "The distance (in blocks) on ground that the mob will search within to find a random position to move to. Must be at least 1."
+                },
                 {
                     "name": "speed_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "Movement speed multiplier of the mob when using this AI Goal"
+                    "defaultValue": "1.00",
+                    "description": "Movement speed multiplier of the mob when using this AI Goal."
                 }
             ]
         },

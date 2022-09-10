@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.30.23",
+    "version": "1.19.40.20",
     "content": [],
     "sections": [
         {
@@ -4477,6 +4477,136 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"is_avoiding_mobs\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "is_baby",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the subject entity is a baby.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"is_baby\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"is_baby\" }"
                                 }
                             ]
                         }
@@ -14642,15 +14772,57 @@
                             "name": "minecraft:behavior.play",
                             "level": 12,
                             "content": [
-                                "Allows the mob to play with other baby villagers. This can only be used by Villagers.",
+                                "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
                                 {
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "chance_to_start",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.00",
+                                            "Description": "Percent chance that the mob will start this goal, from 0 to 1."
+                                        },
+                                        {
+                                            "Name": "follow_distance",
+                                            "Type": "Integer",
+                                            "Default Value": "2",
+                                            "Description": "The distance (in blocks) that the mob tries to be in range of the friend it's following."
+                                        },
+                                        {
+                                            "Name": "friend_search_area",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[6, 3, 6]",
+                                            "Description": "The dimensions of the AABB used to search for a potential friend to play with."
+                                        },
+                                        {
+                                            "Name": "friend_types",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "The entity type(s) to consider when searching for a potential friend to play with."
+                                        },
+                                        {
+                                            "Name": "max_play_duration_seconds",
+                                            "Type": "Decimal",
+                                            "Default Value": "50.00",
+                                            "Description": "The max amount of seconds that the mob will play for before exiting the Goal."
+                                        },
+                                        {
+                                            "Name": "random_pos_search_height",
+                                            "Type": "Integer",
+                                            "Default Value": "3",
+                                            "Description": "The height (in blocks) that the mob will search within to find a random position position to move to. Must be at least 1."
+                                        },
+                                        {
+                                            "Name": "random_pos_search_range",
+                                            "Type": "Integer",
+                                            "Default Value": "16",
+                                            "Description": "The distance (in blocks) on ground that the mob will search within to find a random position to move to. Must be at least 1."
+                                        },
+                                        {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Movement speed multiplier of the mob when using this AI Goal"
+                                            "Default Value": "1.00",
+                                            "Description": "Movement speed multiplier of the mob when using this AI Goal."
                                         }
                                     ]
                                 }
@@ -22851,7 +23023,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.play",
-                                            "ID": "-505601580"
+                                            "ID": "9028661884418335188"
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.play_dead",
