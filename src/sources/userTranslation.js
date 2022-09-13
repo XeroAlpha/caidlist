@@ -4,6 +4,8 @@ const userTranslationStorageKey = {
     glossary: 'translation.glossary',
     command: 'translation.command',
     block: 'translation.block',
+    blockState: 'translation.block_state',
+    blockTag: 'translation.block_tag',
     item: 'translation.item',
     sound: 'translation.sound',
     entity: 'translation.entity',

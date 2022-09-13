@@ -1,5 +1,6 @@
 const { WSServer } = require('mcpews');
-const { cachedOutput, eventTriggered, testMinecraftVersionInRange, sleepAsync } = require('../util/common');
+const pEvent = require('p-event');
+const { cachedOutput, testMinecraftVersionInRange, sleepAsync } = require('../util/common');
 const { adbShell } = require('../util/adb');
 
 function listCommands(session) {
@@ -52,7 +53,7 @@ function listCommandsLegacy(session) {
 
 async function doWSRelatedJobs(cx, device) {
     const wsServer = new WSServer(0);
-    const sessionPromise = eventTriggered(wsServer, 'client');
+    const sessionPromise = pEvent(wsServer, 'client');
     await device.reverse('tcp:19134', `tcp:${wsServer.address().port}`);
     await adbShell(device, 'input keyevent 48'); // KEYCODE_T
     await sleepAsync(500);

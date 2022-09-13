@@ -1,8 +1,6 @@
 const adb = require('@devicefarmer/adbkit').Adb;
+const pEvent = require('p-event');
 const minicap = require('./minicap');
-const {
-    eventTriggered
-} = require('./common');
 
 async function captureScreen(device) {
     const screenshotPngStream = await device.screencap();
@@ -20,7 +18,7 @@ async function stopMinicap(device, imageStream) {
 }
 
 async function readImageFromMinicap(imageStream) {
-    return eventTriggered(imageStream, 'data');
+    return pEvent(imageStream, 'data');
 }
 
 module.exports = {

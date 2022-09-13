@@ -5,6 +5,7 @@ const { fetchStandardizedTranslation } = require('./sources/wiki');
 const { fetchJavaEditionLangData } = require('./sources/javaEdition');
 const { fetchDocumentationIds, doSchemaTranslation } = require('./sources/documentation');
 const { loadUserTranslation, saveUserTranslation } = require('./sources/userTranslation');
+const { analyzeGameTestEnumsCached } = require('./sources/gametest');
 const support = require('./sources/support');
 const { matchTranslations } = require('./util/templateMatch');
 const { writeTransMapsExcel } = require('./generate/excel');
@@ -484,6 +485,10 @@ async function generateDocumentationOutputFiles(cx) {
     saveUserTranslation({ documentation: userTranslation });
 }
 
+async function generateGameTestOutputFiles(cx) {
+    await analyzeGameTestEnumsCached(cx);
+}
+
 const versionInfoMap = {
     preview: {
         name: '预览版',
@@ -538,6 +543,11 @@ const branchInfoMap = {
         name: '实验性玩法',
         description: '启用了所有实验性玩法选项后创建的世界的ID表'
     },
+    gametest: {
+        name: 'GameTest',
+        description: '通过GameTest创建的ID表',
+        hideOnWeb: true
+    },
     translator: {
         name: '翻译专用',
         description: '为翻译英文文本设计，包含了标准化译名表与语言文件'
@@ -580,10 +590,15 @@ function generateOutputIndex(cx) {
 async function generateOutputFiles(cx) {
     if (cx.branch.id === 'translator') {
         return generateTranslatorHelperFiles(cx);
-    } if (cx.branch.id === 'langParity') {
+    }
+    if (cx.branch.id === 'langParity') {
         return generateLangParityPack(cx);
-    } if (cx.branch.id === 'documentation') {
+    }
+    if (cx.branch.id === 'documentation') {
         return generateDocumentationOutputFiles(cx);
+    }
+    if (cx.branch.id === 'gametest') {
+        return generateGameTestOutputFiles(cx);
     }
     return generateBranchedOutputFiles(cx);
 }

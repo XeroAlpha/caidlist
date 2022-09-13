@@ -169,6 +169,20 @@ function deepCopy(json) {
     return json;
 }
 
+function isExtendFrom(o, parent) {
+    return Object.entries(parent).every(([k, v]) => o[k] === v);
+}
+
+function isArraySetEqual(a, b) {
+    return a.length === b.length && a.every((e) => b.includes(e));
+}
+
+const stringComparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0);
+
+function sortObjectKey(o) {
+    return kvArrayToObject(Object.entries(o).sort(stringComparator));
+}
+
 function compareMinecraftVersion(a, b) {
     const asVersionArray = (str) => str
         .split('.')
@@ -254,12 +268,6 @@ function setInlineCommentAfterField(obj, fieldName, comment) {
     }
 }
 
-function eventTriggered(eventEmitter, triggerEvent) {
-    return new Promise((resolve) => {
-        eventEmitter.once(triggerEvent, resolve);
-    });
-}
-
 async function forEachArray(arr, f, thisArg) {
     const len = arr.length;
     for (let i = 0; i < len; i++) {
@@ -320,6 +328,10 @@ module.exports = {
     kvArrayToObject,
     objectToArray,
     deepCopy,
+    isExtendFrom,
+    isArraySetEqual,
+    stringComparator,
+    sortObjectKey,
     compareMinecraftVersion,
     testMinecraftVersionInRange,
     formatTimeLeft,
@@ -327,7 +339,6 @@ module.exports = {
     cascadeMap,
     removeMinecraftNamespace,
     setInlineCommentAfterField,
-    eventTriggered,
     forEachArray,
     readStreamOnce
 };

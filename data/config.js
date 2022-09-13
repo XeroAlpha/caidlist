@@ -77,7 +77,15 @@ exports.packageVersions = {
         // 安装包路径
         path: 'H:\\BedrockVersions\\Latest\\1.19.40.20.apk',
         // 可用分支
-        branches: ['vanilla', 'education', 'experiment', 'translator', 'documentation', 'langParity'],
+        branches: [
+            'vanilla',
+            'education',
+            'experiment',
+            'gametest',
+            'translator',
+            'documentation',
+            'langParity'
+        ],
         config: smallestGUIOCROptions
     },
     // 中国版测试版
