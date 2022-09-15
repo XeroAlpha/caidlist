@@ -1,7 +1,7 @@
-const net = require('net');
-const pEvent = require('p-event');
-const { QuickJSDebugProtocol, QuickJSDebugSession } = require('quickjs-debugger');
-const {
+import { createServer } from 'net';
+import { pEvent } from 'p-event';
+import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
+import {
     cachedOutput,
     sleepAsync,
     filterObjectMap,
@@ -11,8 +11,13 @@ const {
     stringComparator,
     kvArrayToObject,
     pause
-} = require('../util/common');
-const { newAdbClient, getAnyOnlineDevice, waitForAnyDevice, adbShell } = require('../util/adb');
+} from '../util/common.js';
+import {
+    newAdbClient,
+    getAnyOnlineDevice,
+    waitForAnyDevice,
+    adbShell
+} from '../util/adb.js';
 
 /**
  * Only used in QuickJSDebugSession.evaluate
@@ -325,7 +330,7 @@ async function evaluateExtractors(cx, target, session) {
     await session.continue();
 }
 
-async function analyzeGameTestEnumsCached(cx) {
+export default async function analyzeGameTestEnumsCached(cx) {
     const { version, packageVersion } = cx;
     const cacheId = `version.${version}.gametest.all`;
     const cache = cachedOutput(cacheId);
@@ -341,7 +346,7 @@ async function analyzeGameTestEnumsCached(cx) {
     }
     await pause('Please switch to branch: gametest\nInteract if the device is ready');
 
-    const server = net.createServer();
+    const server = createServer();
     server.listen(0);
     const socketPromise = pEvent(server, 'connection');
     await device.reverse('tcp:19144', `tcp:${server.address().port}`);
@@ -358,7 +363,3 @@ async function analyzeGameTestEnumsCached(cx) {
     server.close();
     return cachedOutput(cacheId, target);
 }
-
-module.exports = {
-    analyzeGameTestEnumsCached
-};

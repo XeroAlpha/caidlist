@@ -1,7 +1,7 @@
-const { WSServer } = require('mcpews');
-const pEvent = require('p-event');
-const { cachedOutput, testMinecraftVersionInRange, sleepAsync } = require('../util/common');
-const { adbShell } = require('../util/adb');
+import { WSServer } from 'mcpews';
+import { pEvent } from 'p-event';
+import { cachedOutput, testMinecraftVersionInRange, sleepAsync } from '../util/common.js';
+import { adbShell } from '../util/adb.js';
 
 function listCommands(session) {
     return new Promise((resolve) => {
@@ -71,7 +71,7 @@ async function doWSRelatedJobs(cx, device) {
     return { commandList };
 }
 
-async function doWSRelatedJobsCached(cx, device, target) {
+export default async function doWSRelatedJobsCached(cx, device, target) {
     const { version, branch, packageVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}.mcpews`;
     const cache = cachedOutput(cacheId);
@@ -83,5 +83,3 @@ async function doWSRelatedJobsCached(cx, device, target) {
     }
     Object.assign(target, result);
 }
-
-module.exports = { doWSRelatedJobsCached };

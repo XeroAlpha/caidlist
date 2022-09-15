@@ -1,6 +1,6 @@
-const fs = require('fs');
-const AdmZip = require('adm-zip');
-const {
+import { writeFileSync } from 'fs';
+import AdmZip from 'adm-zip';
+import {
     projectInfo,
     forEachObject,
     filterObjectMap,
@@ -8,16 +8,18 @@ const {
     kvArrayToObject,
     deepCopy,
     uniqueAndSort
-} = require('../util/common');
+} from '../util/common.js';
 
 const lineBreak = '\r\n';
 
 const redundantEnumKey = ['lootTableWrapped', 'music', 'summonableEntity', 'lootTool'];
 const skipEnumKey = ['command', 'blockState'];
-function filterRedundantEnums(transMaps) {
+
+export function filterRedundantEnums(transMaps) {
     return filterObjectMap(transMaps, (k) => !redundantEnumKey.includes(k));
 }
-function filterSkippedEnums(transMaps) {
+
+export function filterSkippedEnums(transMaps) {
     return filterObjectMap(transMaps, (k) => !skipEnumKey.includes(k));
 }
 
@@ -25,7 +27,8 @@ const entityNameAlias = {
     'minecraft:villager_v2': '村民',
     'minecraft:zombie_villager_v2': '僵尸村民'
 };
-function fixEntityRelatedIds(
+
+export function fixEntityRelatedIds(
     transMap,
     relatedEntityMap,
     entityNameMap,
@@ -63,7 +66,7 @@ function fixEntityRelatedIds(
     return splitMap;
 }
 
-function generateTextFromMapTree(map, treeDepth) {
+export function generateTextFromMapTree(map, treeDepth) {
     const output = [];
     if (treeDepth > 0) {
         forEachObject(map, (submap, mapName) => {
@@ -77,7 +80,7 @@ function generateTextFromMapTree(map, treeDepth) {
     return output;
 }
 
-function writeTransMapTextZip(cx, options) {
+export function writeTransMapTextZip(cx, options) {
     const branchName = cx.branch.name;
     const { packageVersion, versionInfo } = cx;
     const { outputFile, originalEnums, transMaps, transMapNames, stdTransMap, stdTransMapNames } = options;
@@ -162,12 +165,5 @@ function writeTransMapTextZip(cx, options) {
         }
         zip.addFile(fileName, Buffer.from(fileContent, 'utf-8'));
     });
-    fs.writeFileSync(outputFile, zip.toBuffer());
+    writeFileSync(outputFile, zip.toBuffer());
 }
-
-module.exports = {
-    filterRedundantEnums,
-    fixEntityRelatedIds,
-    generateTextFromMapTree,
-    writeTransMapTextZip
-};

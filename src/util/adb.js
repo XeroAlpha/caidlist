@@ -1,13 +1,13 @@
-const adb = require('@devicefarmer/adbkit').Adb;
-const {
-    sleepAsync
-} = require('./common');
+import AdbKit from '@devicefarmer/adbkit';
+import { sleepAsync } from './common.js';
 
-function newAdbClient() {
-    return adb.createClient();
+const { Adb } = AdbKit;
+
+export function newAdbClient() {
+    return Adb.createClient();
 }
 
-async function getAnyOnlineDevice(adbClient) {
+export async function getAnyOnlineDevice(adbClient) {
     const devices = await adbClient.listDevices();
     const onlineDevices = devices.filter((device) => device.type !== 'offline');
     if (onlineDevices.length !== 0) {
@@ -16,7 +16,7 @@ async function getAnyOnlineDevice(adbClient) {
     return null;
 }
 
-async function waitForAnyDevice(adbClient) {
+export async function waitForAnyDevice(adbClient) {
     const onlineDevice = await getAnyOnlineDevice(adbClient);
     if (!onlineDevice) {
         const tracker = await adbClient.trackDevices();
@@ -35,14 +35,14 @@ async function waitForAnyDevice(adbClient) {
     return onlineDevice;
 }
 
-async function adbShell(device, command) {
+export async function adbShell(device, command) {
     const stream = await device.shell(command);
-    const output = await adb.util.readAll(stream);
+    const output = await Adb.util.readAll(stream);
     stream.destroy();
     return output;
 }
 
-async function extractFromShell(device, command, regExp, index) {
+export async function extractFromShell(device, command, regExp, index) {
     const output = await adbShell(device, command);
     const match = output.toString().match(regExp);
     if (match) {
@@ -51,16 +51,16 @@ async function extractFromShell(device, command, regExp, index) {
     return null;
 }
 
-async function getDeviceSurfaceOrientation(device) {
+export async function getDeviceSurfaceOrientation(device) {
     return Number(await extractFromShell(device, 'dumpsys input', /SurfaceOrientation: (\d+)/, 1));
 }
 
-async function getSystemProp(device, propertyName) {
+export async function getSystemProp(device, propertyName) {
     const output = await adbShell(device, `getprop ${propertyName}`);
     return output.toString().trim();
 }
 
-async function pushWithSync(sync, content, path, mode, onProgress) {
+export async function pushWithSync(sync, content, path, mode, onProgress) {
     return new Promise((resolve, reject) => {
         const pushTransfer = sync.push(content, path, mode);
         if (onProgress) pushTransfer.on('progress', onProgress);
@@ -69,7 +69,7 @@ async function pushWithSync(sync, content, path, mode, onProgress) {
     });
 }
 
-async function openMonkey(device) {
+export async function openMonkey(device) {
     const monkeyPort = 11534;
     const monkeyPid = (await adbShell(device, 'ps -A | grep com.android.commands.monkey | awk \'{print $2}\'')).toString().trim();
     if (monkeyPid) { // kill monkey
@@ -79,7 +79,7 @@ async function openMonkey(device) {
     return device.openMonkey(monkeyPort);
 }
 
-function sendMonkeyCommand(monkey, command) {
+export function sendMonkeyCommand(monkey, command) {
     return new Promise((resolve, reject) => {
         monkey.send(command, (err, result) => {
             if (err) {
@@ -90,16 +90,3 @@ function sendMonkeyCommand(monkey, command) {
         });
     });
 }
-
-module.exports = {
-    newAdbClient,
-    getAnyOnlineDevice,
-    waitForAnyDevice,
-    adbShell,
-    extractFromShell,
-    getDeviceSurfaceOrientation,
-    getSystemProp,
-    pushWithSync,
-    openMonkey,
-    sendMonkeyCommand
-};

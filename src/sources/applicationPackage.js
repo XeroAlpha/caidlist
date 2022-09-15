@@ -1,12 +1,12 @@
-const AdmZip = require('adm-zip');
-const CommentJSON = require('comment-json');
-const {
+import AdmZip from 'adm-zip';
+import * as CommentJSON from 'comment-json';
+import {
     cachedOutput,
     forEachObject,
     filterObjectMap,
     compareMinecraftVersion,
     uniqueAndSort
-} = require('../util/common');
+} from '../util/common.js';
 
 function parseMinecraftLang(target, langContent) {
     langContent.split(/(?:\n|\r)+/).forEach((line) => {
@@ -429,7 +429,7 @@ function extractInstallPack(packagePath) {
     return new AdmZip(packagePath);
 }
 
-function analyzePackageDataEnumsCached(cx) {
+export default function analyzePackageDataEnumsCached(cx) {
     const { version, packageInfo, packageVersion } = cx;
     const dataCache = cachedOutput(`version.${version}.package.data`);
     const langCache = cachedOutput(`version.${version}.package.lang`);
@@ -460,7 +460,3 @@ function analyzePackageDataEnumsCached(cx) {
         })
     };
 }
-
-module.exports = {
-    analyzePackageDataEnumsCached
-};

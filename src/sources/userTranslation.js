@@ -1,4 +1,4 @@
-const { cachedOutput, forEachObject } = require('../util/common');
+import { cachedOutput, forEachObject } from '../util/common.js';
 
 const userTranslationStorageKey = {
     glossary: 'translation.glossary',
@@ -27,7 +27,8 @@ const userTranslationStorageKey = {
     langParity: 'translation.lang_parity',
     documentation: 'translation.documentation'
 };
-function loadUserTranslation() {
+
+export function loadUserTranslation() {
     const userTranslation = {};
     forEachObject(userTranslationStorageKey, (v, k) => {
         userTranslation[k] = cachedOutput(v, () => ({}));
@@ -35,13 +36,8 @@ function loadUserTranslation() {
     return userTranslation;
 }
 
-function saveUserTranslation(userTranslation) {
+export function saveUserTranslation(userTranslation) {
     forEachObject(userTranslationStorageKey, (v, k) => {
         cachedOutput(v, userTranslation[k]);
     });
 }
-
-module.exports = {
-    loadUserTranslation,
-    saveUserTranslation
-};

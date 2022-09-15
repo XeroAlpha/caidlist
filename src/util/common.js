@@ -1,15 +1,16 @@
-const fs = require('fs');
-const nodePath = require('path');
-const readline = require('readline');
-const notifier = require('node-notifier');
-const CommentJSON = require('comment-json');
-const { CommentLocation, setJSONComment, clearJSONComment } = require('./comment');
+import { mkdirSync, existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
+import nodePath from 'path';
+import { createInterface } from 'readline';
+import { URL, fileURLToPath } from 'url';
+import notifier from 'node-notifier';
+import * as CommentJSON from 'comment-json';
+import { CommentLocation, setJSONComment, clearJSONComment } from './comment.js';
 
-const projectRoot = nodePath.resolve(__dirname, '../..');
+export const projectRoot = fileURLToPath(new URL('../..', import.meta.url));
 
-const projectInfo = require(nodePath.resolve(projectRoot, 'package.json'));
+export const projectInfo = JSON.parse(readFileSync(nodePath.resolve(projectRoot, 'package.json')));
 
-function projectPath(id, suffix) {
+export function projectPath(id, suffix) {
     let pathSegments;
     if (Array.isArray(id)) {
         pathSegments = id;
@@ -18,11 +19,11 @@ function projectPath(id, suffix) {
     }
     pathSegments[pathSegments.length - 1] += `.${suffix || 'json'}`;
     const path = nodePath.resolve(projectRoot, ...pathSegments);
-    fs.mkdirSync(nodePath.resolve(path, '..'), { recursive: true });
+    mkdirSync(nodePath.resolve(path, '..'), { recursive: true });
     return path;
 }
 
-const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
+export const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
 /**
  * Examples:
@@ -40,9 +41,9 @@ const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); }
  * 5. cachedOutput(id, () => Promise.resolve(any)) => cache ?? Promise resolves any
  *    cache = cache ?? await valueOrProcessor()
  */
-function cachedOutput(id, valueOrProcessor) {
+export function cachedOutput(id, valueOrProcessor) {
     const path = projectPath(id, 'json');
-    let useCache = fs.existsSync(path);
+    let useCache = existsSync(path);
     let processor;
     if (valueOrProcessor == null) {
         if (!useCache) return null;
@@ -54,28 +55,31 @@ function cachedOutput(id, valueOrProcessor) {
     }
     if (useCache) {
         try {
-            return CommentJSON.parse(fs.readFileSync(path, 'utf-8'));
+            return CommentJSON.parse(readFileSync(path, 'utf-8'));
         } catch (e) {
             console.error(`Cannot use cache: ${path}`);
         }
-        fs.unlinkSync(path);
+        unlinkSync(path);
         return cachedOutput(id, valueOrProcessor);
     }
     const output = processor();
     if (output instanceof Promise) {
         return output.then((outputResolve) => {
-            fs.writeFileSync(path, CommentJSON.stringify(outputResolve, null, 4));
+            writeFileSync(path, CommentJSON.stringify(outputResolve, null, 4));
             return outputResolve;
         });
     } if (output !== undefined) {
-        fs.writeFileSync(path, CommentJSON.stringify(output, null, 4));
+        writeFileSync(path, CommentJSON.stringify(output, null, 4));
     }
     return output;
 }
 
 function input(query) {
     return new Promise((resolve) => {
-        const rl = readline.Interface(process.stdin, process.stdout);
+        const rl = createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
         rl.question(query ?? '', (answer) => {
             resolve(answer);
             rl.close();
@@ -83,25 +87,25 @@ function input(query) {
     });
 }
 
-function notify(message) {
+export function notify(message) {
     notifier.notify({
         title: 'IDList',
         message,
-        icon: nodePath.resolve(__dirname, '../assets/icon.png')
+        icon: nodePath.resolve(projectRoot, 'src/assets/icon.png')
     });
 }
 
-function pause(message) {
+export function pause(message) {
     notify(message);
     return input(message);
 }
 
-async function runJobsAndReturn(mainJob, ...concurrentJobs) {
+export async function runJobsAndReturn(mainJob, ...concurrentJobs) {
     const results = await Promise.all([mainJob, ...concurrentJobs]);
     return results[0];
 }
 
-function uniqueAndSort(array, compareFn) {
+export function uniqueAndSort(array, compareFn) {
     const compare = compareFn ?? ((a, b) => (a < b ? -1 : a === b ? 0 : 1));
     array.sort(compare);
     for (let i = array.length - 2; i >= 0; i--) {
@@ -116,22 +120,22 @@ function uniqueAndSort(array, compareFn) {
  * @param {Record<K, V>} object
  * @param {(v: V, k: K, o: Record<K, V>) => void} f
  */
-function forEachObject(object, f, thisArg) {
+export function forEachObject(object, f, thisArg) {
     Object.keys(object).forEach((key) => f.call(thisArg, object[key], key, object));
 }
 
-function filterObjectMap(map, predicate) {
+export function filterObjectMap(map, predicate) {
     const keys = Object.keys(map).filter((key) => predicate(key, map[key], map));
     return CommentJSON.assign({}, map, keys);
 }
 
-function excludeObjectEntry(map, excludeKeys, excludeValues) {
+export function excludeObjectEntry(map, excludeKeys, excludeValues) {
     const excludeKeysOpt = excludeKeys ?? [];
     const excludeValuesOpt = excludeValues ?? [];
     return filterObjectMap(map, (k, v) => !excludeKeysOpt.includes(k) && !excludeValuesOpt.includes(v));
 }
 
-function replaceObjectKey(object, replaceArgsGroups) {
+export function replaceObjectKey(object, replaceArgsGroups) {
     const newObject = {};
     forEachObject(object, (value, key) => {
         const replacedKey = replaceArgsGroups.reduce((prev, args) => prev.replace(...args), key);
@@ -140,23 +144,23 @@ function replaceObjectKey(object, replaceArgsGroups) {
     return newObject;
 }
 
-function keyArrayToObject(arr, f) {
+export function keyArrayToObject(arr, f) {
     const obj = {};
     arr.forEach((e, i, a) => (obj[e] = f(e, i, a)));
     return obj;
 }
 
-function kvArrayToObject(kvArray) {
+export function kvArrayToObject(kvArray) {
     const obj = {};
     kvArray.forEach(([k, v]) => (obj[k] = v));
     return obj;
 }
 
-function objectToArray(obj, f) {
+export function objectToArray(obj, f) {
     return Object.keys(obj).map((k) => f(k, obj[k], obj));
 }
 
-function deepCopy(json) {
+export function deepCopy(json) {
     if (Array.isArray(json)) {
         return json.map((e) => deepCopy(e));
     } if (typeof json === 'object') {
@@ -169,21 +173,21 @@ function deepCopy(json) {
     return json;
 }
 
-function isExtendFrom(o, parent) {
+export function isExtendFrom(o, parent) {
     return Object.entries(parent).every(([k, v]) => o[k] === v);
 }
 
-function isArraySetEqual(a, b) {
+export function isArraySetEqual(a, b) {
     return a.length === b.length && a.every((e) => b.includes(e));
 }
 
-const stringComparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0);
+export const stringComparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0);
 
-function sortObjectKey(o) {
+export function sortObjectKey(o) {
     return kvArrayToObject(Object.entries(o).sort(stringComparator));
 }
 
-function compareMinecraftVersion(a, b) {
+export function compareMinecraftVersion(a, b) {
     const asVersionArray = (str) => str
         .split('.')
         .map((e) => (e === '*' ? Infinity : parseInt(e, 10)))
@@ -198,11 +202,11 @@ function compareMinecraftVersion(a, b) {
     return aver.length - bver.length;
 }
 
-function testMinecraftVersionInRange(version, rangeL, rangeU) {
+export function testMinecraftVersionInRange(version, rangeL, rangeU) {
     return compareMinecraftVersion(version, rangeL) >= 0 && compareMinecraftVersion(version, rangeU) <= 0;
 }
 
-function formatTimeLeft(seconds) {
+export function formatTimeLeft(seconds) {
     const sec = (seconds % 60).toFixed(0);
     const min = (Math.floor(seconds / 60) % 60).toFixed(0);
     const hr = Math.floor(seconds / 3600).toFixed(0);
@@ -214,7 +218,7 @@ function formatTimeLeft(seconds) {
     return `${seconds.toFixed(1)}s`;
 }
 
-async function retryUntilComplete(maxRetryCount, retryInterval, f) {
+export async function retryUntilComplete(maxRetryCount, retryInterval, f) {
     let result;
     let lastError;
     let retryCountLeft = maxRetryCount;
@@ -231,7 +235,7 @@ async function retryUntilComplete(maxRetryCount, retryInterval, f) {
     throw lastError || new Error('Retry count limit exceeded');
 }
 
-function cascadeMap(mapOfMap, priority, includeAll) {
+export function cascadeMap(mapOfMap, priority, includeAll) {
     const result = {};
     let i;
     if (includeAll) {
@@ -245,7 +249,7 @@ function cascadeMap(mapOfMap, priority, includeAll) {
     return result;
 }
 
-function removeMinecraftNamespace(array) {
+export function removeMinecraftNamespace(array) {
     return array
         .map((item) => {
             if (!item.includes(':')) {
@@ -259,7 +263,7 @@ function removeMinecraftNamespace(array) {
         .filter((item) => item != null);
 }
 
-function setInlineCommentAfterField(obj, fieldName, comment) {
+export function setInlineCommentAfterField(obj, fieldName, comment) {
     const symbol = CommentLocation.after(fieldName);
     if (comment) {
         setJSONComment(obj, symbol, 'inlineLine', ` ${comment}`);
@@ -268,14 +272,14 @@ function setInlineCommentAfterField(obj, fieldName, comment) {
     }
 }
 
-async function forEachArray(arr, f, thisArg) {
+export async function forEachArray(arr, f, thisArg) {
     const len = arr.length;
     for (let i = 0; i < len; i++) {
         await f.call(thisArg, arr[i], i, arr);
     }
 }
 
-function readStreamOnce(stream, timeout) {
+export function readStreamOnce(stream, timeout) {
     const data = stream.read();
     if (data === null) {
         return new Promise((resolve, reject) => {
@@ -310,35 +314,3 @@ function readStreamOnce(stream, timeout) {
     }
     return data;
 }
-
-module.exports = {
-    projectInfo,
-    projectPath,
-    sleepAsync,
-    cachedOutput,
-    pause,
-    notify,
-    runJobsAndReturn,
-    uniqueAndSort,
-    forEachObject,
-    filterObjectMap,
-    excludeObjectEntry,
-    replaceObjectKey,
-    keyArrayToObject,
-    kvArrayToObject,
-    objectToArray,
-    deepCopy,
-    isExtendFrom,
-    isArraySetEqual,
-    stringComparator,
-    sortObjectKey,
-    compareMinecraftVersion,
-    testMinecraftVersionInRange,
-    formatTimeLeft,
-    retryUntilComplete,
-    cascadeMap,
-    removeMinecraftNamespace,
-    setInlineCommentAfterField,
-    forEachArray,
-    readStreamOnce
-};

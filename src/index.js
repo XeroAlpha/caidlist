@@ -1,6 +1,6 @@
-const { generateOutputFiles, generateOutputIndex } = require('./generate');
-const { forEachArray } = require('./util/common');
-const config = require('../data/config');
+import { generateOutputFiles, generateOutputIndex } from './generate.js';
+import { forEachArray } from './util/common.js';
+import * as config from '../data/config.js';
 
 async function main(args) {
     const context = { ...config };

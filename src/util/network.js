@@ -1,31 +1,23 @@
-const crypto = require('crypto');
-const { HttpProxyAgent, HttpsProxyAgent } = require('hpagent');
-const { proxyConfig } = require('../../data/config');
+import { createHash } from 'crypto';
+import { got } from 'got';
+import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
+import { proxyConfig } from '../../data/config.js';
 
-/** @type {import("got").Got} */
-let proxiedGot = null;
-async function getProxiedGot() {
-    if (proxiedGot == null) { // hack to import got in CommonJS
-        // eslint-disable-next-line import/no-unresolved
-        proxiedGot = (await import('got')).got.extend({
-            agent: {
-                http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
-                https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
-            }
-        });
+export const proxiedGot = got.extend({
+    agent: {
+        http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
+        https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
     }
-    return proxiedGot;
-}
+});
 
 function digestBufferHex(algorithm, buffer) {
-    const digest = crypto.createHash(algorithm);
+    const digest = createHash(algorithm);
     digest.update(buffer);
     return digest.digest().toString('hex');
 }
 
-async function fetchRedirect(url) {
-    const got = await getProxiedGot();
-    const response = await got.head(url, {
+export async function fetchRedirect(url) {
+    const response = await proxiedGot.head(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
@@ -36,9 +28,8 @@ async function fetchRedirect(url) {
     return response.headers.location || url;
 }
 
-async function fetchFile(url, size, sha1) {
-    const got = await getProxiedGot();
-    const request = got(url, {
+export async function fetchFile(url, size, sha1) {
+    const request = proxiedGot(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
@@ -64,20 +55,12 @@ async function fetchFile(url, size, sha1) {
     return content;
 }
 
-async function fetchText(url, size, sha1) {
+export async function fetchText(url, size, sha1) {
     const content = await fetchFile(url, size, sha1);
     return content.toString();
 }
 
-async function fetchJSON(url, size, sha1) {
+export async function fetchJSON(url, size, sha1) {
     const content = await fetchText(url, size, sha1);
     return JSON.parse(content);
 }
-
-module.exports = {
-    getProxiedGot,
-    fetchRedirect,
-    fetchFile,
-    fetchJSON,
-    fetchText
-};

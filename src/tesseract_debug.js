@@ -1,17 +1,9 @@
-const fs = require('fs');
-const sharp = require('sharp');
-const tesseract = require('node-tesseract-ocr');
-const config = require('../data/config');
-const {
-    newAdbClient,
-    getDeviceSurfaceOrientation,
-    getAnyOnlineDevice
-} = require('./util/adb');
-const {
-    openMinicap,
-    stopMinicap,
-    readImageFromMinicap
-} = require('./util/captureScreen');
+import { writeFileSync } from 'fs';
+import { recognize } from 'node-tesseract-ocr';
+import sharp from 'sharp';
+import { packageVersions } from '../data/config.js';
+import { newAdbClient, getDeviceSurfaceOrientation, getAnyOnlineDevice } from './util/adb.js';
+import { openMinicap, stopMinicap, readImageFromMinicap } from './util/captureScreen.js';
 
 async function recogizeCommandDebug(cx, screenImage, surfaceOrientation) {
     const commandAreaRect = cx.commandAreaRect[surfaceOrientation];
@@ -34,9 +26,9 @@ async function recogizeCommandDebug(cx, screenImage, surfaceOrientation) {
         });
     }
     const commandTextImage = await img.png().toBuffer();
-    fs.writeFileSync('./tstest_input.jpg', screenImage); // maybe jpg
-    fs.writeFileSync('./tstest_output.png', commandTextImage);
-    let commandText = await tesseract.recognize(commandTextImage, {
+    writeFileSync('./tstest_input.jpg', screenImage); // maybe jpg
+    writeFileSync('./tstest_output.png', commandTextImage);
+    let commandText = await recognize(commandTextImage, {
         ...cx.tesseractOptions,
         lang: 'eng',
         psm: 7,
@@ -47,7 +39,7 @@ async function recogizeCommandDebug(cx, screenImage, surfaceOrientation) {
 }
 
 async function tesseractDebug([versionType]) {
-    const cx = config.packageVersions[versionType].config;
+    const cx = packageVersions[versionType].config;
     const adbClient = newAdbClient();
     const device = await getAnyOnlineDevice(adbClient);
     const minicap = await openMinicap(device);

@@ -1,5 +1,5 @@
-const util = require('util');
-const { setInlineCommentAfterField } = require('./common');
+import { format } from 'util';
+import { setInlineCommentAfterField } from './common.js';
 
 function runTemplate(template, getter) {
     return template.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, templateName) => getter(templateName));
@@ -7,7 +7,7 @@ function runTemplate(template, getter) {
 
 const refTemplateRegex = /^(\S*):/;
 
-function matchTranslation(options) {
+export function matchTranslation(options) {
     const {
         originalValue,
         translationMap,
@@ -148,7 +148,8 @@ const CircularTranslationResult = {
     translation: '<Circular>',
     comment: 'This is a place holder'
 };
-function matchTranslations(options) {
+
+export function matchTranslations(options) {
     const { resultMaps, stateMaps, name, originalArray, postProcessor } = options;
     const translateResultMap = {};
     const translateCacheMap = {};
@@ -175,7 +176,7 @@ function matchTranslations(options) {
                 return result.translation;
             });
             return {
-                translation: util.format(...refs)
+                translation: format(...refs)
             };
         } if (insideTemplate && originalValue.includes('!')) { // 外部引用
             const translationMap = {};
@@ -212,8 +213,3 @@ function matchTranslations(options) {
         stateMaps[name] = translateStates;
     }
 }
-
-module.exports = {
-    matchTranslation,
-    matchTranslations
-};

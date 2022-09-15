@@ -1,6 +1,6 @@
-const fs = require('fs');
-const { WSApp } = require('mcpews');
-const { projectPath } = require('./util/common');
+import { readFileSync } from 'fs';
+import { WSApp } from 'mcpews';
+import { projectPath } from './util/common.js';
 
 const MAX_BLOCK_DATA_VALUE = 15;
 const BASE = [0, -59, 0];
@@ -20,7 +20,7 @@ async function generate(session, blockIds) {
 }
 
 async function main([version, branch, build]) {
-    const data = JSON.parse(fs.readFileSync(projectPath(`output.web.${version}.${branch}`), 'utf-8'));
+    const data = JSON.parse(readFileSync(projectPath(`output.web.${version}.${branch}`), 'utf-8'));
     const blocks = data.enums.block;
     const blockIds = Object.keys(blocks);
     const app = new WSApp(19134);

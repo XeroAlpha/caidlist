@@ -1,4 +1,4 @@
-const CommentLocation = {
+export const CommentLocation = {
     beforeAll() { return Symbol.for('before-all'); },
     before(prop) {
         if (prop) {
@@ -26,15 +26,15 @@ function parseJSONComment(type, comment) {
     };
 }
 
-function setJSONComment(target, symbol, type, comment) {
+export function setJSONComment(target, symbol, type, comment) {
     target[symbol] = [parseJSONComment(type, comment)];
 }
 
-function clearJSONComment(target, symbol) {
+export function clearJSONComment(target, symbol) {
     delete target[symbol];
 }
 
-function addJSONComment(target, symbol, type, comment) {
+export function addJSONComment(target, symbol, type, comment) {
     const comments = target[symbol];
     if (Array.isArray(comments)) {
         comments.push(parseJSONComment(type, comment));
@@ -43,7 +43,7 @@ function addJSONComment(target, symbol, type, comment) {
     }
 }
 
-function copyJSONComment(source, sourceSymbol, target, targetSymbol) {
+export function copyJSONComment(source, sourceSymbol, target, targetSymbol) {
     const sourceComments = source[sourceSymbol];
     const targetComments = target[targetSymbol];
     if (sourceComments) {
@@ -55,16 +55,7 @@ function copyJSONComment(source, sourceSymbol, target, targetSymbol) {
     }
 }
 
-function moveJSONComment(source, sourceSymbol, target, targetSymbol) {
+export function moveJSONComment(source, sourceSymbol, target, targetSymbol) {
     copyJSONComment(source, sourceSymbol, target, targetSymbol);
     clearJSONComment(source, sourceSymbol);
 }
-
-module.exports = {
-    CommentLocation,
-    addJSONComment,
-    setJSONComment,
-    clearJSONComment,
-    copyJSONComment,
-    moveJSONComment
-};

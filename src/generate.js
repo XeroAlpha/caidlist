@@ -1,19 +1,19 @@
-const CommentJSON = require('comment-json');
-const { analyzePackageDataEnumsCached } = require('./sources/applicationPackage');
-const { analyzeAutocompletionEnumsCached } = require('./sources/autocompletion');
-const { fetchStandardizedTranslation } = require('./sources/wiki');
-const { fetchJavaEditionLangData } = require('./sources/javaEdition');
-const { fetchDocumentationIds, doSchemaTranslation } = require('./sources/documentation');
-const { loadUserTranslation, saveUserTranslation } = require('./sources/userTranslation');
-const { analyzeGameTestEnumsCached } = require('./sources/gametest');
-const support = require('./sources/support');
-const { matchTranslations } = require('./util/templateMatch');
-const { writeTransMapsExcel } = require('./generate/excel');
-const { writeTransMapClib } = require('./generate/clib');
-const { writeTransMapTextZip } = require('./generate/text');
-const { writeTransMapJson, writeTransMapIndexJson } = require('./generate/json');
-const { writeLangParityPack, compareEditionLangs } = require('./generate/langParity');
-const {
+import * as CommentJSON from 'comment-json';
+import analyzePackageDataEnumsCached from './sources/applicationPackage.js';
+import analyzeAutocompletionEnumsCached from './sources/autocompletion.js';
+import fetchStandardizedTranslation from './sources/wiki.js';
+import fetchJavaEditionLangData from './sources/javaEdition.js';
+import { fetchDocumentationIds, doSchemaTranslation } from './sources/documentation.js';
+import { loadUserTranslation, saveUserTranslation } from './sources/userTranslation.js';
+import analyzeGameTestEnumsCached from './sources/gametest.js';
+import * as support from './sources/support.js';
+import { matchTranslations } from './util/templateMatch.js';
+import writeTransMapsExcel from './generators/excel.js';
+import writeTransMapClib from './generators/clib.js';
+import { writeTransMapTextZip } from './generators/text.js';
+import { writeTransMapJson, writeTransMapIndexJson } from './generators/json.js';
+import { writeLangParityPack, compareEditionLangs } from './generators/langParity.js';
+import {
     projectPath,
     cachedOutput,
     forEachObject,
@@ -23,7 +23,7 @@ const {
     removeMinecraftNamespace,
     setInlineCommentAfterField,
     deepCopy
-} = require('./util/common');
+} from './util/common.js';
 
 const BASE_LANG_ID = 'en_us';
 const USER_LANG_ID = 'zh_cn';
@@ -562,7 +562,8 @@ const branchInfoMap = {
         hideOnWeb: true
     }
 };
-function generateOutputIndex(cx) {
+
+export function generateOutputIndex(cx) {
     const { version } = cx;
     cx.packageInfo = cx.packageVersions[version];
     if (!cx.packageInfo) throw new Error(`Unknown version: ${version}`);
@@ -587,7 +588,7 @@ function generateOutputIndex(cx) {
     return branchList;
 }
 
-async function generateOutputFiles(cx) {
+export async function generateOutputFiles(cx) {
     if (cx.branch.id === 'translator') {
         return generateTranslatorHelperFiles(cx);
     }
@@ -602,8 +603,3 @@ async function generateOutputFiles(cx) {
     }
     return generateBranchedOutputFiles(cx);
 }
-
-module.exports = {
-    generateOutputIndex,
-    generateOutputFiles
-};

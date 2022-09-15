@@ -1,5 +1,5 @@
-const { cachedOutput } = require('../util/common');
-const { fetchText } = require('../util/network');
+import { cachedOutput } from '../util/common.js';
+import { fetchText } from '../util/network.js';
 
 async function fetchMZHWikiRaw(word) {
     return fetchText(`https://minecraft.fandom.com/zh/wiki/${encodeURIComponent(word)}?action=raw`);
@@ -106,7 +106,7 @@ function extendEnumMap(enumMaps) {
     return enumMaps;
 }
 
-async function fetchStandardizedTranslation() {
+export default async function fetchStandardizedTranslation() {
     return cachedOutput('version.common.wiki.standardized_translation', async () => {
         console.log('Fetching MCWZH:ST/Autolink/Block...');
         const block = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Block'));
@@ -142,7 +142,3 @@ async function fetchStandardizedTranslation() {
         });
     });
 }
-
-module.exports = {
-    fetchStandardizedTranslation
-};

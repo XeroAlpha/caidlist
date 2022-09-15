@@ -1,5 +1,5 @@
-const http = require('http');
-const { URL } = require('url');
+import { createServer } from 'http';
+import { URL } from 'url';
 
 const tokenCharset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
 function randomToken(length) {
@@ -10,7 +10,7 @@ function randomToken(length) {
     return r.join('');
 }
 
-class AutocompletionScreen {
+export default class AutocompletionScreen {
     constructor() {
         this.updateSession();
         this.start();
@@ -53,7 +53,7 @@ class AutocompletionScreen {
     }
 
     start() {
-        this.server = http.createServer((req, res) => {
+        this.server = createServer((req, res) => {
             const url = new URL(req.url, 'http://localhost:19333');
             res.setHeader('Access-Control-Allow-Origin', '*');
             if (this.server) {
@@ -94,5 +94,3 @@ class AutocompletionScreen {
         });
     }
 }
-
-module.exports = { AutocompletionScreen };

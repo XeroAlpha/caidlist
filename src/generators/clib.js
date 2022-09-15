@@ -1,7 +1,7 @@
-const fs = require('fs');
-const { replaceObjectKey, excludeObjectEntry } = require('../util/common');
+import { writeFileSync } from 'fs';
+import { replaceObjectKey, excludeObjectEntry } from '../util/common.js';
 
-function writeTransMapClib(cx, options) {
+export default function writeTransMapClib(cx, options) {
     const branchName = cx.branch.name;
     const { packageVersion, coreVersion, versionInfo } = cx;
     const { outputFile, translationResultMaps } = options;
@@ -15,7 +15,7 @@ function writeTransMapClib(cx, options) {
         ['enchant', 'enchant_type'],
         ['location', 'structure']
     ]);
-    fs.writeFileSync(
+    writeFileSync(
         outputFile,
         JSON.stringify(
             {
@@ -39,7 +39,3 @@ function writeTransMapClib(cx, options) {
         )
     );
 }
-
-module.exports = {
-    writeTransMapClib
-};

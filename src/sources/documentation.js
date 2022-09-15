@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
-const AdmZip = require('adm-zip');
-const { parse: parseHtml, TextNode, HTMLElement } = require('node-html-parser');
-const CommentJSON = require('comment-json');
-const prettier = require('prettier');
-const { cachedOutput, forEachObject, deepCopy } = require('../util/common');
-const { fetchFile, fetchRedirect } = require('../util/network');
-const { CommentLocation, addJSONComment } = require('../util/comment');
+import AdmZip from 'adm-zip';
+import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
+import * as CommentJSON from 'comment-json';
+import * as prettier from 'prettier';
+import { cachedOutput, forEachObject, deepCopy } from '../util/common.js';
+import { fetchFile, fetchRedirect } from '../util/network.js';
+import { CommentLocation, addJSONComment } from '../util/comment.js';
 
 const TemplatePackLink = {
     release: {
@@ -644,7 +644,7 @@ function extractDocumentationIds(docMap) {
     return target;
 }
 
-async function fetchDocumentationIds(cx) {
+export async function fetchDocumentationIds(cx) {
     const { version } = cx;
     const cacheKey = `version.common.documentation.${version}`;
     let cache = cachedOutput(cacheKey);
@@ -785,7 +785,7 @@ function generateTypedJSON(schema, name, target) {
     }
 }
 
-function doSchemaTranslation(schemaMap, onTranslate) {
+export function doSchemaTranslation(schemaMap, onTranslate) {
     const flatMap = {};
     forEachObject(schemaMap, (schema, mapKey) => {
         visitSchema(schema, (type, schemaNode, path) => {
@@ -835,8 +835,3 @@ function doSchemaTranslation(schemaMap, onTranslate) {
     });
     return translatedMap;
 }
-
-module.exports = {
-    fetchDocumentationIds,
-    doSchemaTranslation
-};

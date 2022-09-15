@@ -1,8 +1,17 @@
-const { adbShell, extractFromShell, getSystemProp, pushWithSync, getDeviceSurfaceOrientation } = require('./adb');
-const { sleepAsync } = require('./common');
-const { StateTransform } = require('./stateStream');
+import { createRequire } from 'node:module';
+import {
+    adbShell,
+    extractFromShell,
+    getSystemProp,
+    pushWithSync,
+    getDeviceSurfaceOrientation
+} from './adb.js';
+import { sleepAsync } from './common.js';
+import StateTransform from './stateStream.js';
 
-async function install(device) {
+const require = createRequire(import.meta.url);
+
+export async function install(device) {
     const prebuiltRoot = '@devicefarmer/minicap-prebuilt/prebuilt';
     const remoteTempDir = '/data/local/tmp';
     const abi = await getSystemProp(device, 'ro.product.cpu.abi');
@@ -21,7 +30,7 @@ async function install(device) {
     sync.end();
 }
 
-async function uninstall(device) {
+export async function uninstall(device) {
     const remoteTempDir = '/data/local/tmp';
     await adbShell(device, `rm -f ${remoteTempDir}/minicap`);
     await adbShell(device, `rm -f ${remoteTempDir}/minicap.so`);
@@ -58,7 +67,7 @@ class MinicapStream extends StateTransform {
     }
 }
 
-async function start(device, options) {
+export async function start(device, options) {
     const args = ['LD_LIBRARY_PATH=/data/local/tmp', '/data/local/tmp/minicap'];
     let socketName = 'minicap';
     const opt = options ?? {};
@@ -103,14 +112,7 @@ async function start(device, options) {
     throw new Error('Unable to establish connection to minicap');
 }
 
-async function stop(device, handler) {
+export async function stop(device, handler) {
     await adbShell(device, `kill -9 ${handler.pid}`);
     handler.minicapProc.destroy();
 }
-
-module.exports = {
-    install,
-    uninstall,
-    start,
-    stop
-};

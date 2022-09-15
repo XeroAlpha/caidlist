@@ -1,10 +1,13 @@
-// #region 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
+import nodePath from 'path';
+import { projectRoot } from '../src/util/common.js';
+
+// 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
 const commonOCROptions = {
     tesseractOptions: {
         // Tesseract 安装路径
         binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
         // 训练数据路径
-        'tessdata-dir': `${__dirname}/tesstrain/tessdata`
+        'tessdata-dir': nodePath.resolve(projectRoot, 'data/tesstrain/tessdata')
     },
     // 命令区域大小
     commandAreaRect: {
@@ -57,9 +60,8 @@ const neteaseOCROptions = {
         '/sUmmOn raVager': '/summon ravager'
     }
 };
-// #endregion
 
-exports.packageVersions = {
+export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
@@ -101,7 +103,7 @@ exports.packageVersions = {
     }
 };
 
-exports.proxyConfig = {
+export const proxyConfig = {
     http: 'http://localhost:7890',
     https: 'http://localhost:7890'
 };

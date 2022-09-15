@@ -1,6 +1,6 @@
-const { Transform } = require('stream');
+import { Transform } from 'stream';
 
-class StateTransform extends Transform {
+export default class StateTransform extends Transform {
     constructor() {
         super({
             readableObjectMode: true,
@@ -44,5 +44,3 @@ class StateTransform extends Transform {
         done();
     }
 }
-
-module.exports = { StateTransform };

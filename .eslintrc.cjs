@@ -54,7 +54,8 @@ module.exports = {
         'no-multi-assign': ['error', { ignoreNonDeclaration: true }],
         'no-cond-assign': ['error', 'except-parens'],
         'no-return-assign': ['error', 'except-parens'],
-        'no-nested-ternary': 'off'
+        'no-nested-ternary': 'off',
+        'import/extensions': ['error', 'ignorePackages']
     },
     overrides: [
         {
@@ -66,5 +67,22 @@ module.exports = {
                 es2021: true
             }
         }
-    ]
+    ],
+    settings: {
+        'import/resolver': {
+            node: {
+                readPackageSync(readFileSync, pkgfile) {
+                    const body = readFileSync(pkgfile);
+                    try {
+                        const pkg = JSON.parse(body);
+                        if (typeof pkg.exports === 'string') {
+                            pkg.main = pkg.exports;
+                        }
+                        return pkg;
+                    } catch (jsonErr) { /* ignored */ }
+                    return null;
+                }
+            }
+        }
+    }
 };

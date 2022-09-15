@@ -1,8 +1,8 @@
-const { Transform } = require('stream');
-const sharp = require('sharp');
-const assert = require('assert').strict;
-const tesseract = require('node-tesseract-ocr');
-const {
+import { Transform } from 'stream';
+import sharp from 'sharp';
+import { strict as assert } from 'assert';
+import { recognize } from 'node-tesseract-ocr';
+import {
     newAdbClient,
     getAnyOnlineDevice,
     waitForAnyDevice,
@@ -10,9 +10,9 @@ const {
     getDeviceSurfaceOrientation,
     openMonkey,
     sendMonkeyCommand
-} = require('../util/adb');
-const { openMinicap, stopMinicap } = require('../util/captureScreen');
-const {
+} from '../util/adb.js';
+import { openMinicap, stopMinicap } from '../util/captureScreen.js';
+import {
     cachedOutput,
     pause,
     retryUntilComplete,
@@ -20,14 +20,14 @@ const {
     forEachObject,
     readStreamOnce,
     sleepAsync
-} = require('../util/common');
-const support = require('./support');
-const { AutocompletionScreen } = require('../live/autocompletionScreen');
-const { doWSRelatedJobsCached } = require('./wsconnect');
+} from '../util/common.js';
+import * as support from './support.js';
+import AutocompletionScreen from '../live/autocompletionScreen.js';
+import doWSRelatedJobsCached from './wsconnect.js';
 
 function guessTruncatedString(truncatedStr, startsWith) {
-    let spos; let
-        tpos;
+    let spos;
+    let tpos;
     for (spos = 0; spos < startsWith.length; spos++) {
         tpos = truncatedStr.indexOf(startsWith.slice(spos));
         if (tpos >= 0 && tpos <= 3) {
@@ -118,7 +118,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                         .png()
                         .toBuffer()
                         .then((pngData) => {
-                            const promise = tesseract.recognize(pngData, {
+                            const promise = recognize(pngData, {
                                 ...cx.tesseractOptions,
                                 lang: 'eng',
                                 psm: 7,
@@ -254,7 +254,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
     return (target[id] = result);
 }
 
-async function analyzeAutocompletionEnumsCached(cx) {
+export default async function analyzeAutocompletionEnumsCached(cx) {
     const { version, branch, packageVersion, coreVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}`;
     const cache = cachedOutput(cacheId);
@@ -327,7 +327,3 @@ async function analyzeAutocompletionEnumsCached(cx) {
     await screen.stop();
     return cachedOutput(cacheId, target);
 }
-
-module.exports = {
-    analyzeAutocompletionEnumsCached
-};

@@ -1,7 +1,7 @@
-const { URL } = require('url');
-const AdmZip = require('adm-zip');
-const { cachedOutput, filterObjectMap } = require('../util/common');
-const { fetchFile, fetchJSON } = require('../util/network');
+import { URL } from 'url';
+import AdmZip from 'adm-zip';
+import { cachedOutput, filterObjectMap } from '../util/common.js';
+import { fetchFile, fetchJSON } from '../util/network.js';
 
 const releaseApiHost = 'https://piston-data.mojang.com/';
 const metaApiHost = 'https://piston-meta.mojang.com';
@@ -59,7 +59,7 @@ async function fetchVersionsManifestCached() {
     return manifestCache;
 }
 
-async function fetchJavaEditionLangData() {
+export default async function fetchJavaEditionLangData() {
     let cache = cachedOutput('version.common.java.lang');
     try {
         const manifest = await fetchVersionsManifestCached();
@@ -87,7 +87,3 @@ async function fetchJavaEditionLangData() {
     }
     return filterObjectMap(cache, (k) => !(k.startsWith('__') && k.endsWith('__')));
 }
-
-module.exports = {
-    fetchJavaEditionLangData
-};

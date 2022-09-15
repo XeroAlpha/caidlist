@@ -1,8 +1,8 @@
-const fs = require('fs');
-const { filterRedundantEnums, fixEntityRelatedIds } = require('./text');
-const { deepCopy, forEachObject } = require('../util/common');
+import { writeFileSync, existsSync, readFileSync } from 'fs';
+import { filterRedundantEnums, fixEntityRelatedIds } from './text.js';
+import { deepCopy, forEachObject } from '../util/common.js';
 
-function writeTransMapJson(_, options) {
+export function writeTransMapJson(_, options) {
     const {
         outputFile, originalEnums, transMaps, transMapNames
     } = options;
@@ -28,7 +28,7 @@ function writeTransMapJson(_, options) {
             }
         });
     }
-    fs.writeFileSync(
+    writeFileSync(
         outputFile,
         JSON.stringify({
             enums,
@@ -37,7 +37,7 @@ function writeTransMapJson(_, options) {
     );
 }
 
-function writeTransMapIndexJson(cx, options) {
+export function writeTransMapIndexJson(cx, options) {
     const {
         version, packageVersion, coreVersion, versionInfo
     } = cx;
@@ -56,12 +56,12 @@ function writeTransMapIndexJson(cx, options) {
             }))
     };
     if (outputFile) {
-        fs.writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
+        writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
     }
     if (mergedFile) {
         let mergedList = null;
-        if (fs.existsSync(mergedFile)) {
-            const mergedFileContent = fs.readFileSync(mergedFile, 'utf-8');
+        if (existsSync(mergedFile)) {
+            const mergedFileContent = readFileSync(mergedFile, 'utf-8');
             mergedList = JSON.parse(mergedFileContent);
         }
         if (!Array.isArray(mergedList)) {
@@ -75,11 +75,6 @@ function writeTransMapIndexJson(cx, options) {
             ...indexData
         };
         mergedList.sort((a, b) => a.sortOrder - b.sortOrder);
-        fs.writeFileSync(mergedFile, JSON.stringify(mergedList, null, 4));
+        writeFileSync(mergedFile, JSON.stringify(mergedList, null, 4));
     }
 }
-
-module.exports = {
-    writeTransMapJson,
-    writeTransMapIndexJson
-};
