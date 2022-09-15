@@ -1,12 +1,36 @@
+import { createHash } from 'crypto';
 import AdmZip from 'adm-zip';
 import * as CommentJSON from 'comment-json';
 import {
     cachedOutput,
     forEachObject,
     filterObjectMap,
+    stringComparator,
     compareMinecraftVersion,
     uniqueAndSort
 } from '../util/common.js';
+
+function generatePackageFileMeta(packageZip) {
+    const entries = packageZip.getEntries();
+    const files = [];
+    console.log('Analyzing package entries for hash...');
+    entries.forEach((entry) => {
+        if (entry.isDirectory) {
+            files.push({ name: entry.entryName, directory: true });
+        } else {
+            const buffer = entry.getData();
+            const digest = createHash('sha1');
+            digest.update(buffer);
+            files.push({
+                name: entry.entryName,
+                size: buffer.length,
+                sha1: digest.digest().toString('hex')
+            });
+        }
+    });
+    files.sort((a, b) => stringComparator(a.name, b.name));
+    return files;
+}
 
 function parseMinecraftLang(target, langContent) {
     langContent.split(/(?:\n|\r)+/).forEach((line) => {
@@ -444,6 +468,7 @@ export default function analyzePackageDataEnumsCached(cx) {
         };
     }
     const installPack = extractInstallPack(packageInfo.path);
+    const packageFiles = generatePackageFileMeta(installPack);
     const lang = analyzeApkPackageLang(installPack);
     const data = {
         vanilla: analyzeApkPackageDataEnums(installPack, 'vanilla'),
@@ -456,7 +481,8 @@ export default function analyzePackageDataEnumsCached(cx) {
         ...cachedOutput(`version.${version}.package.info`, {
             packageVersion,
             packageType: packageInfo.type,
-            packagePath: packageInfo.path
+            packagePath: packageInfo.path,
+            packageFiles
         })
     };
 }

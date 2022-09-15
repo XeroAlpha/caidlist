@@ -18,6 +18,7 @@ import {
     waitForAnyDevice,
     adbShell
 } from '../util/adb.js';
+import doWSRelatedJobsCached from './wsconnect.js';
 
 /**
  * Only used in QuickJSDebugSession.evaluate
@@ -141,6 +142,21 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
 }
 
 const Extractors = [
+    {
+        name: 'commands',
+        async extract(target, frame) {
+            target.commands = parseOrThrow(await frame.evaluate(() => {
+                const player = [...Minecraft.world.getPlayers()][0];
+                const helpMeta = player.runCommand('help');
+                const result = helpMeta.body.split('\n');
+                for (let i = helpMeta.page + 1; i <= helpMeta.pageCount; i++) {
+                    const data = player.runCommand(`help ${i}`);
+                    result.push(...data.body.split('\n'));
+                }
+                return JSON.stringify(result);
+            }));
+        }
+    },
     {
         name: 'blocks',
         async extract(target, frame) {
@@ -359,6 +375,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     const session = new QuickJSDebugSession(protocol);
     const target = { packageVersion };
     await evaluateExtractors(cx, target, session);
+    await doWSRelatedJobsCached(cx, device, {});
     protocol.close();
     server.close();
     return cachedOutput(cacheId, target);

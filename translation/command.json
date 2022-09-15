@@ -22,6 +22,7 @@
     "enchant.withEnum": "对实体手持的物品进行附魔。",
     "enchant.withInt": "对实体手持的物品进行附魔。",
     "event.entity": "为实体触发实体事件。",
+    "execute.align": "将执行坐标的指定分量向下取整，并执行后续子命令。",
     "execute.as": "改变执行者，并执行后续子命令。",
     "execute.at": "改变执行位置，并执行后续子命令。",
     "execute.conditional.block.withBlockState": "当指定坐标的方块满足条件时，执行后续子命令。",
@@ -31,6 +32,8 @@
     "execute.conditional.entity": "当实体满足条件时，执行后续子命令。",
     "execute.conditional.score.compare": "当记分项分数满足条件时，执行后续子命令。",
     "execute.conditional.score.matches": "当记分项分数满足条件时，执行后续子命令。",
+    "execute.facing.default": "改变执行朝向为面向指定坐标，并执行后续子命令。",
+    "execute.facing.entity": "改变执行朝向为面向指定实体，并执行后续子命令。",
     "execute.legacy.default": "改变执行位置与执行者，并执行后续命令。",
     "execute.legacy.detect": "改变执行位置与执行者，并仅当特定方块满足条件时执行命令。",
     "execute.positioned.default": "改变执行坐标为指定坐标，并执行后续子命令。",
@@ -406,5 +409,9 @@
     "loot replace block <position: x y z> slot.container <slotId: int> kill <entity: target> [<tool>|mainhand|offhand: string]": "this: loot.replace.block.default.from.kill", // 将指定方块的部分槽位替换为特定实体被击杀所能获得的战利品。
     "loot replace block <position: x y z> slot.container <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.block.default.from.loot", // 将指定方块的部分槽位替换为通过特定战利品表所能获得的战利品。
     "execute rotated <yaw: value> <pitch: value> <chainedCommand: ExecuteChainedOption_0>": "this: execute.rotated.default", // 改变执行朝向为指定朝向，并执行后续子命令。
-    "execute rotated as <origin: target> <chainedCommand: ExecuteChainedOption_0>": "this: execute.rotated.as" // 改变执行朝向为指定实体的朝向，并执行后续子命令。
+    "execute rotated as <origin: target> <chainedCommand: ExecuteChainedOption_0>": "this: execute.rotated.as", // 改变执行朝向为指定实体的朝向，并执行后续子命令。
+    "summon <entityType: EntityType> [spawnPos: x y z] [yRot: value] [xRot: value] [spawnEvent: string] [nameTag: string]": "this: summon.withSpawnEvent", // 生成指定的实体。
+    "execute align <axes: string> <chainedCommand: ExecuteChainedOption_0>": "this: execute.align", // 将执行坐标的指定分量向下取整，并执行后续子命令。
+    "execute facing <position: x y z> <chainedCommand: ExecuteChainedOption_0>": "this: execute.facing.default", // 改变执行朝向为面向指定坐标，并执行后续子命令。
+    "execute facing entity <origin: target> <eyes|feet> <chainedCommand: ExecuteChainedOption_0>": "this: execute.facing.entity" // 改变执行朝向为面向指定实体，并执行后续子命令。
 }
