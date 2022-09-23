@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.40.21",
+    "version": "1.19.40.22",
     "content": [],
     "sections": [
         {
@@ -770,6 +770,142 @@
             ],
             "sections": [
                 {
+                    "name": "bool_property",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the bool actor property matches the value provided.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The property name to look for"
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"bool_property\", \"subject\": \"self\", \"domain\": \"minecraft:can_climb\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"bool_property\", \"domain\": \"minecraft:can_climb\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "clock_time",
                     "level": 2,
                     "content": [
@@ -1024,6 +1160,278 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"distance_to_nearest_player\", \"value\": \"0.00\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "enum_property",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the enum actor property matches the value provided.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The property name to look for"
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) A string value."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"enum_property\", \"subject\": \"self\", \"domain\": \"minecraft:can_climb\", \"operator\": \"equals\", \"value\": \"\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"enum_property\", \"domain\": \"minecraft:can_climb\", \"value\": \"\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "float_property",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the float actor property matches the value provided.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The property name to look for"
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"float_property\", \"subject\": \"self\", \"domain\": \"minecraft:can_climb\", \"operator\": \"equals\", \"value\": \"0.00\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"float_property\", \"domain\": \"minecraft:can_climb\", \"value\": \"0.00\" }"
                                 }
                             ]
                         }
@@ -2267,6 +2675,136 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"has_nametag\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "has_property",
+                    "level": 2,
+                    "content": [
+                        "Tests for the presence of a property of the subject entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The property name to look for"
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"has_property\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"minecraft:can_climb\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"has_property\", \"value\": \"minecraft:can_climb\" }"
                                 }
                             ]
                         }
@@ -4217,6 +4755,142 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"inactivity_timer\", \"value\": \"0\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "int_property",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the int actor property matches the value provided.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The property name to look for"
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Integer",
+                                    "Default": "",
+                                    "Description": "(Required) An integer value."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"int_property\", \"subject\": \"self\", \"domain\": \"minecraft:can_climb\", \"operator\": \"equals\", \"value\": \"0\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"int_property\", \"domain\": \"minecraft:can_climb\", \"value\": \"0\" }"
                                 }
                             ]
                         }
@@ -11037,7 +11711,7 @@
                             "name": "minecraft:behavior.croak",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Allows the entity to croak at a random time interval with configurable conditions.",
+                                "Allows the entity to croak at a random time interval with configurable conditions.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -11338,7 +12012,7 @@
                             "name": "minecraft:behavior.dig",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Activates the \"DIGGING\" actor flag during the specified duration. Currently only Warden can use the Dig goal",
+                                "Allows this entity to dig into the ground before despawning.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -11813,7 +12487,7 @@
                             "name": "minecraft:behavior.eat_mob",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Allows the entity to eat a specified Mob.",
+                                "Allows the entity to eat a specified Mob.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -11861,7 +12535,7 @@
                             "name": "minecraft:behavior.emerge",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Activates the \"EMERGING\" actor flag during the specified duration and triggers \"on_done\" at the end",
+                                "Allows this entity to emerge from the ground",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -12412,7 +13086,7 @@
                             "name": "minecraft:behavior.go_and_give_items_to_noteblock",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
+                                "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -12466,7 +13140,7 @@
                             "name": "minecraft:behavior.go_and_give_items_to_owner",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to its owner.",
+                                "The entity will attempt to toss the items from its inventory to its owner.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -12869,7 +13543,7 @@
                             "name": "minecraft:behavior.investigate_suspicious_location",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] The entity moves towards a \"suspicious\" position based on data gathered in minecraft:suspect_tracking",
+                                "Allows this entity to move towards a \"suspicious\" position based on data gathered in minecraft:suspect_tracking",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -13075,13 +13749,13 @@
                                             "Name": "allow_laying_from_below",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "[EXPERIMENTAL] Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water."
+                                            "Description": "Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water."
                                         },
                                         {
                                             "Name": "egg_type",
                                             "Type": "String",
                                             "Default Value": "minecraft:turtle_egg",
-                                            "Description": "[EXPERIMENTAL] Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set."
+                                            "Description": "Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set."
                                         },
                                         {
                                             "Name": "goal_radius",
@@ -13093,13 +13767,13 @@
                                             "Name": "lay_egg_sound",
                                             "Type": "String",
                                             "Default Value": "lay_egg",
-                                            "Description": "[EXPERIMENTAL] Sound event name for laying egg. Defaulted to lay_egg which is used for Turtles."
+                                            "Description": "Name of the sound event played when laying the egg. Defaults to lay_egg, which is used for Turtles."
                                         },
                                         {
                                             "Name": "lay_seconds",
                                             "Type": "Decimal",
                                             "Default Value": "10.0f",
-                                            "Description": "[EXPERIMENTAL] Duration of the laying egg process in seconds."
+                                            "Description": "Duration of the laying egg process in seconds."
                                         },
                                         {
                                             "Name": "on_lay",
@@ -13129,19 +13803,19 @@
                                             "Name": "target_blocks",
                                             "Type": "Array",
                                             "Default Value": "[ minecraft:sand ]",
-                                            "Description": "[EXPERIMENTAL] Blocks that the mob can lay its eggs on top of."
+                                            "Description": "Blocks that the mob can lay its eggs on top of."
                                         },
                                         {
                                             "Name": "target_materials_above_block",
                                             "Type": "Array",
                                             "Default Value": "[ Air ]",
-                                            "Description": "[EXPERIMENTAL] Types of materials that can exist above the target block. Valid types are Air, Water, and Lava."
+                                            "Description": "Types of materials that can exist above the target block. Valid types are Air, Water, and Lava."
                                         },
                                         {
                                             "Name": "use_default_animation",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "[EXPERIMENTAL] Specifies if the default lay-egg animation should be played when the egg is placed or not."
+                                            "Description": "Specifies if the default lay-egg animation should be played when the egg is placed or not."
                                         }
                                     ]
                                 }
@@ -15484,7 +16158,7 @@
                             "name": "minecraft:behavior.roar",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Plays the provided sound and activates the \"ROARING\" actor flag during the specified duration",
+                                "Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -15492,7 +16166,7 @@
                                             "Name": "duration",
                                             "Type": "Decimal",
                                             "Default Value": "0.0",
-                                            "Description": "Goal duration in seconds"
+                                            "Description": "The amount of time to roar for."
                                         }
                                     ]
                                 }
@@ -16047,7 +16721,7 @@
                             "name": "minecraft:behavior.sniff",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] The entity detects the nearest player within \"sniffing_radius\" and updates its \"minecraft:suspect_tracking\" component state",
+                                "Allows this entity to detect the nearest player within \"sniffing_radius\" and update its \"minecraft:suspect_tracking\" component state",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -16089,7 +16763,7 @@
                             "name": "minecraft:behavior.sonic_boom",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] Plays the provided sounds and activates the \"SONIC BOOM\" actor flag during the specified duration",
+                                "Allows this entity to perform a 'sonic boom' ranged attack",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -16274,7 +16948,7 @@
                             "name": "minecraft:behavior.stay_near_noteblock",
                             "level": 12,
                             "content": [
-                                "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
+                                "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -19449,7 +20123,26 @@
                         {
                             "name": "minecraft:heartbeat",
                             "level": 12,
-                            "content": []
+                            "content": [
+                                "Defines the entity's heartbeat.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "interval",
+                                            "Type": "Molang",
+                                            "Default Value": "1.00",
+                                            "Description": "A Molang expression defining the inter-beat interval in seconds. A value of zero or less means no heartbeat."
+                                        },
+                                        {
+                                            "Name": "sound_event",
+                                            "Type": "String",
+                                            "Default Value": "heartbeat",
+                                            "Description": "Level sound event to be played as the heartbeat sound."
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "name": "minecraft:home",

@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.19.20.2",
+    "version": "1.19.30.4",
     "content": [],
     "sections": [
         {
@@ -41,13 +41,13 @@
                                                     "Name": "origin",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position Bounds of the collision box. Origin is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive"
+                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
                                                 },
                                                 {
                                                     "Name": "size",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[16.0, 16.0, 16.0]",
-                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. Origin + size must be in the range (-8, 0, -8) to (8, 16, 8), inclusive"
+                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
                                                 }
                                             ]
                                         }
@@ -58,7 +58,7 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Describes the component of a custom crafting table. This component supports only \"recipe_shaped\" and \"recipe_shapeless\" typed recipes and not others like \"recipe_furnace\" or \"recipe_brewing_mix\". If there are two recipes for one item, the recipe book will pick the first that was parsed. If two input recipes are the same, crafting may assert and the resulting item may vary.",
+                                        "Makes your block into a custom crafting table which enables the crafting table UI and the ability to craft recipes. This component supports only \"recipe_shaped\" and \"recipe_shapeless\" typed recipes and not others like \"recipe_furnace\" or \"recipe_brewing_mix\". If there are two recipes for one item, the recipe book will pick the first that was parsed. If two input recipes are the same, crafting may assert and the resulting item may vary.",
                                         "Experimental toggles required: Holiday Creator Features",
                                         {
                                             "section": "crafting_tags",
@@ -69,31 +69,16 @@
                                         {
                                             "section": "table_name",
                                             "content": [
-                                                "Specifies the language file key that maps to what text will be displayed in the UI of this table. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this field is omitted, the name displayed will default to the name specified in the display_name component. If this block has no display_name component, the name displayed will default to the name of the block."
+                                                "Specifies the language file key that maps to what text will be displayed in the UI of this table. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this field is omitted, the name displayed will default to the name specified in the \"display_name\" component. If this block has no \"display_name\" component, the name displayed will default to the name of the block."
                                             ]
                                         }
                                     ]
                                 },
                                 {
-                                    "Name": "minecraft:creative_category",
-                                    "Type": "String",
+                                    "Name": "",
+                                    "Type": "",
                                     "Default Value": "",
-                                    "Description": [
-                                        "Specifies the menu category and group for the block, which determine where this block is placed in the inventory and crafting table container screens. If this component is omitted, the block will not appear in the inventory or crafting table container screens.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "category",
-                                            "content": [
-                                                "Determines which category this block will be placed under in the inventory and crafting table container screens. Options are \"construction\", \"nature\", \"equipment\", \"items\", and \"none\". If omitted or \"none\" is specified, the block will not appear in the inventory or crafting table container screens."
-                                            ]
-                                        },
-                                        {
-                                            "section": "group",
-                                            "content": [
-                                                "Specifies the language file key that maps to which expandable/collapsible group this block will be a part of within a category. If the string given can not be resolved as a loc string, then we will check if there is an existing group whose name matches the raw string. If this field is omitted, or there is no group whose name matches the loc string or the raw string, this block will be placed standalone in the given category."
-                                            ]
-                                        }
-                                    ]
+                                    "Description": "Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:destructible_by_explosion",
@@ -119,7 +104,7 @@
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "true",
                                     "Description": [
-                                        "Describes the destructible by mining properties for this block. If set to true, the block will have the default destroy time. If set to false, this block is indestructible by mining. If the component is omitted, the block will have the default destroy time.",
+                                        "Describes the destructible by mining properties for this block. If set to true, the block will take the default number of seconds to destroy. If set to false, this block is indestructible by mining. If the component is omitted, the block will take the default number of seconds to destroy.",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -137,14 +122,14 @@
                                     "Name": "minecraft:display_name",
                                     "Type": "Localization String",
                                     "Default Value": "",
-                                    "Description": "Specifies the language file key that maps to what text will be displayed when you hover over the block. Key is limited to 256 characters.Experimental toggles required: Holiday Creator Features"
+                                    "Description": "Specifies the language file key that maps to what text will be displayed when you hover over the block in your inventory and hotbar. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this component is omitted, the name of the block will be used as the display name.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:flammable",
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Describes the flammable properties for this block. If set to true, default values are used. If set to false, this block will not be able to catch on fire. If this component is omitted, the block will not be able to catch on fire naturally from neighbors or lava, but it can still be directly ignited, and that fire will be able to spread to neighbor blocks.",
+                                        "Describes the flammable properties for this block. If set to true, default values are used. If set to false, or if this component is omitted, the block will not be able to catch on fire naturally from neighbors, but it can still be directly ignited.",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -152,13 +137,13 @@
                                                     "Name": "catch_chance_modifier",
                                                     "Type": "Integer",
                                                     "Default Value": "5",
-                                                    "Description": "A modifier affecting the chance that this block will catch flame when next to a fire. Values are greater than or equal to 0, with a higher number meaning more likely to catch on fire. For a catch_chance_modifier greater than 0, the fire will continue to burn until the block is destroyed (or it will burn forever if the destroy_chance_modifier is 0). If the catch_chance_modifier is 0, and the block is directly ignited, the fire will eventually burn out without destroying the block (or it will have a chance to be destroyed if destroy_chance_modifier is greater than 0). The default value of 5 is the same as that of Planks."
+                                                    "Description": "A modifier affecting the chance that this block will catch flame when next to a fire. Values are greater than or equal to 0, with a higher number meaning more likely to catch on fire. For a \"catch_chance_modifier\" greater than 0, the fire will continue to burn until the block is destroyed (or it will burn forever if the \"destroy_chance_modifier\" is 0). If the \"catch_chance_modifier\" is 0, and the block is directly ignited, the fire will eventually burn out without destroying the block (or it will have a chance to be destroyed if \"destroy_chance_modifier\" is greater than 0). The default value of 5 is the same as that of Planks."
                                                 },
                                                 {
                                                     "Name": "destroy_chance_modifier",
                                                     "Type": "Integer",
                                                     "Default Value": "20",
-                                                    "Description": "A modifier affecting the chance that this block will be destroyed by flames when on fire. Values are greater than or equal to 0, with a higher number meaning more likely to be destroyed by fire. For a destroy_chance_modifier of 0, the block will never be destroyed by fire, and the fire will burn forever if the catch_chance_modifier is greater than 0. The default value of 20 is the same as that of Planks."
+                                                    "Description": "A modifier affecting the chance that this block will be destroyed by flames when on fire. Values are greater than or equal to 0, with a higher number meaning more likely to be destroyed by fire. For a \"destroy_chance_modifier\" of 0, the block will never be destroyed by fire, and the fire will burn forever if the \"catch_chance_modifier\" is greater than 0. The default value of 20 is the same as that of Planks."
                                                 }
                                             ]
                                         }
@@ -174,7 +159,7 @@
                                     "Name": "minecraft:geometry",
                                     "Type": "Identifier String",
                                     "Default Value": "",
-                                    "Description": "The geometry description identifier to use, this identifier must match an existing geometry identifier in any of the currently loaded resource packs.Experimental toggles required: Holiday Creator Features"
+                                    "Description": "The description identifier of the geometry file to use to render this block. This identifier must match an existing geometry identifier in any of the currently loaded resource packs.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:light_emission",
@@ -199,12 +184,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "The material instances for a block. Maps face or material_instance names in a geometry file to an actual material instance. You can assign a material instance object to any of these faces: 'up', 'down', 'north', 'south', 'east', 'west', or '*'. You can also give an instance the name of your choosing such as 'my_instance', and then assign it to a face by doing 'north':'my_instance'.",
+                                        "The material instances for a block. Maps face or material_instance names in a geometry file to an actual material instance. You can assign a material instance object to any of these faces: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\", or \"*\". You can also give an instance the name of your choosing such as \"my_instance\", and then assign it to a face by doing \"north\":\"my_instance\".",
                                         "Experimental toggles required: Holiday Creator Features",
                                         {
                                             "section": "Material Instance",
                                             "content": [
-                                                "A material instance definition to map to a material instance in a geometry file. The material instance '*' will be used for any materials that don't have a match.",
+                                                "A material instance definition to map to a material instance in a geometry file. The material instance \"*\" will be used for any materials that don't have a match.",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -224,7 +209,7 @@
                                                             "Name": "render_method",
                                                             "Type": "String",
                                                             "Default Value": "opaque",
-                                                            "Description": "The render method to use. Must be one of these options:'opaque' - Used for a regular block texture without an alpha layer. Does not allow for transparency or translucency.'double_sided' - Used for completely disabling backface culling.'blend' - Used for a block like stained glass. Allows for transparency and translucency (slightly transparent textures).'alpha_test' - Used for a block like the vanilla (unstained) glass. Does not allow for translucency, only fully opaque or fully transparent textures. Also disables backface culling."
+                                                            "Description": "The render method to use. Must be one of these options:\"opaque\" - Used for a regular block texture without an alpha layer. Does not allow for transparency or translucency.\"double_sided\" - Used for completely disabling backface culling.\"blend\" - Used for a block like stained glass. Allows for transparency and translucency (slightly transparent textures).\"alpha_test\" - Used for a block like the vanilla (unstained) glass. Does not allow for translucency, only fully opaque or fully transparent textures. Also disables backface culling."
                                                         },
                                                         {
                                                             "Name": "texture",
@@ -276,13 +261,38 @@
                                                             "Name": "allowed_faces",
                                                             "Type": "Array",
                                                             "Default Value": "",
-                                                            "Description": "List of any of the following strings: up, down, north, south, east, west, side, all. Limited to 6 faces."
+                                                            "Description": "List of any of the following strings describing which face(s) this block can be placed on: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\", \"side\", \"all\". Limited to 6 faces."
                                                         },
                                                         {
                                                             "Name": "block_filter",
                                                             "Type": "Array",
                                                             "Default Value": "",
-                                                            "Description": "List of blocks (can use tags to specify them) that this block can be placed against in the allowed_faces direction. Limited to 64 blocks."
+                                                            "Description": [
+                                                                "List of blocks that this block can be placed against in the \"allowed_faces\" direction. Limited to 64 blocks. Each block in this list can either be specified as a String (block name) or as a BlockDescriptor. A BlockDescriptor is an object that allows you to reference a block (or multiple blocks) based on its tags, or based on its name and states. The fields of a BlockDescriptor are described below.",
+                                                                {
+                                                                    "type": "table",
+                                                                    "rows": [
+                                                                        {
+                                                                            "Name": "name",
+                                                                            "Type": "String",
+                                                                            "Default Value": "",
+                                                                            "Description": "The name of a block."
+                                                                        },
+                                                                        {
+                                                                            "Name": "states",
+                                                                            "Type": "Array",
+                                                                            "Default Value": "",
+                                                                            "Description": "The list of Vanilla block states and their values that the block can have, expressed in key/value pairs."
+                                                                        },
+                                                                        {
+                                                                            "Name": "tags",
+                                                                            "Type": "String",
+                                                                            "Default Value": "1",
+                                                                            "Description": "A condition using Molang queries that results to true/false that can be used to query for blocks with certain tags."
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -396,14 +406,14 @@
                                     "Name": "minecraft:rotation",
                                     "Type": "Vector [a, b, c]",
                                     "Default Value": "rotation[0, 0, 0]",
-                                    "Description": "This is the block's rotation around the center of the cube in degrees. The rotation order is x-y-z. Angles need to be in factors of 90.Experimental toggles required: Holiday Creator Features"
+                                    "Description": "The block's rotation around the center of the cube in degrees. The rotation is specified as [x, y, z]. Angles need to be in factors of 90.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:selection_box",
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Defines the area of the block that is selected by the player's cursor. If set to true, default values are used. If set to false, this block is not selectable by the player's cursor. If this component is omitted, default values are used",
+                                        "Defines the area of the block that is selected by the player's cursor. If set to true, default values are used. If set to false, this block is not selectable by the player's cursor. If this component is omitted, default values are used.",
                                         "Experimental toggles required: Holiday Creator Features",
                                         {
                                             "type": "table",
@@ -412,13 +422,13 @@
                                                     "Name": "origin",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position Bounds of the selection box. Origin is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive"
+                                                    "Description": "Minimal position of the bounds of the selection box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
                                                 },
                                                 {
                                                     "Name": "size",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[16.0, 16.0, 16.0]",
-                                                    "Description": "Size of each side of the selection box. Size is specified as [x, y, z]. Origin + size must be in the range (-8, 0, -8) to (8, 16, 8), inclusive"
+                                                    "Description": "Size of each side of the selection box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
                                                 }
                                             ]
                                         }
@@ -429,6 +439,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:unwalkable",
+                                    "Type": "Boolean",
+                                    "Default Value": "false",
+                                    "Description": "Sets the block as unwalkable. Mobs would not attempt to path over top of it when the value is set to true."
                                 }
                             ]
                         }
@@ -459,7 +475,7 @@
                                 "Example",
                                 {
                                     "type": "code",
-                                    "content": "{\n  \"format_version\": \"1.19.20\",\n  \"minecraft:block\": {\n    \"description\": {\n      \"identifier\": \"design:lavenderstone\"\n    },\n    \"components\": {\n      \"minecraft:loot\": \"loot_tables/chests/simple_dungeon.json\",\n      \"minecraft:destroy_time\": 4.0,\n      \"minecraft:friction\": 0.6,\n      \"minecraft:map_color\": \"#00ff00\",\n      \"minecraft:flammable\": {\n        \"flame_odds\": 50,\n        \"burn_odds\": 0\n    },\n      \"minecraft:light_emission\": 1\n    }\n  }\n}"
+                                    "content": "{\n  \"format_version\": \"1.19.30\",\n  \"minecraft:block\": {\n    \"description\": {\n      \"identifier\": \"design:lavenderstone\"\n    },\n    \"components\": {\n      \"minecraft:loot\": \"loot_tables/chests/simple_dungeon.json\",\n      \"minecraft:destroy_time\": 4.0,\n      \"minecraft:friction\": 0.6,\n      \"minecraft:map_color\": \"#00ff00\",\n      \"minecraft:flammable\": {\n        \"flame_odds\": 50,\n        \"burn_odds\": 0\n    },\n      \"minecraft:light_emission\": 1\n    }\n  }\n}"
                                 }
                             ]
                         }

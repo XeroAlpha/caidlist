@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.40.21",
-    "__URL__": "https://meedownloads.blob.core.windows.net/add-ons/Vanilla_Behavior_Pack_Preview_1.19.40.21.zip",
+    "__VERSION__": "1.19.40.22",
+    "__URL__": "https://meedownloads.blob.core.windows.net/add-ons/Vanilla_Behavior_Pack_Preview_1.19.40.22.zip",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -290,6 +290,14 @@
                     "name": "Filters",
                     "sections": [
                         {
+                            "name": "bool_property",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
                             "name": "clock_time",
                             "sections": [
                                 {
@@ -299,6 +307,22 @@
                         },
                         {
                             "name": "distance_to_nearest_player",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "enum_property",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "float_property",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -363,6 +387,14 @@
                         },
                         {
                             "name": "has_nametag",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "has_property",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -483,6 +515,14 @@
                         },
                         {
                             "name": "inactivity_timer",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "int_property",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -4560,8 +4600,11 @@
         "minecraft:weight": "This component allows players to give a priority to how often that mob should spawn. Mobs with lower weight values have a higher chance to spawn than mobs with higher weight values."
     },
     "entityFilter": {
+        "bool_property": "Returns true when the bool actor property matches the value provided.",
         "clock_time": "Compares the current time with a float value in the range (0.0, 1.0).",
         "distance_to_nearest_player": "Compares the distance to the nearest Player with a float value.",
+        "enum_property": "Returns true when the enum actor property matches the value provided.",
+        "float_property": "Returns true when the float actor property matches the value provided.",
         "has_ability": "Returns true when the subject entity has the named ability.",
         "has_biome_tag": "Tests whether the biome the subject is in has the specified tag.",
         "has_component": "Returns true when the subject entity contains the named component.",
@@ -4570,6 +4613,7 @@
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
         "has_nametag": "Tests if the subject has been given a custom name.",
+        "has_property": "Tests for the presence of a property of the subject entity.",
         "has_ranged_weapon": "Returns true when the subject entity is holding a ranged weapon like a bow or crossbow.",
         "has_silk_touch": "Tests if the subject is holding an item with silk touch.",
         "has_tag": "Returns true if the subject entity has the tag provided.",
@@ -4585,6 +4629,7 @@
         "in_water": "Returns true when the subject entity is in water.",
         "in_water_or_rain": "Returns true when the subject entity is in water or rain.",
         "inactivity_timer": "Tests if the specified duration in seconds of inactivity for despawning has been reached.",
+        "int_property": "Returns true when the int actor property matches the value provided.",
         "is_altitude": "Tests the current altitude against a provided value. 0= bedrock elevation.",
         "is_avoiding_mobs": "Returns true if the subject entity is fleeing from other mobs.",
         "is_baby": "Returns true when the subject entity is a baby.",
@@ -5020,7 +5065,7 @@
             ]
         },
         "minecraft:behavior.croak": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Allows the entity to croak at a random time interval with configurable conditions.",
+            "description": "Allows the entity to croak at a random time interval with configurable conditions.",
             "children": [
                 {
                     "name": "duration",
@@ -5288,7 +5333,7 @@
             ]
         },
         "minecraft:behavior.dig": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Activates the \"DIGGING\" actor flag during the specified duration. Currently only Warden can use the Dig goal",
+            "description": "Allows this entity to dig into the ground before despawning.",
             "children": [
                 {
                     "name": "allow_dig_when_named",
@@ -5653,7 +5698,7 @@
             ]
         },
         "minecraft:behavior.eat_mob": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Allows the entity to eat a specified Mob.",
+            "description": "Allows the entity to eat a specified Mob.",
             "children": [
                 {
                     "name": "eat_animation_time",
@@ -5694,7 +5739,7 @@
             ]
         },
         "minecraft:behavior.emerge": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Activates the \"EMERGING\" actor flag during the specified duration and triggers \"on_done\" at the end",
+            "description": "Allows this entity to emerge from the ground",
             "children": [
                 {
                     "name": "cooldown_time",
@@ -6121,7 +6166,7 @@
             ]
         },
         "minecraft:behavior.go_and_give_items_to_noteblock": {
-            "description": "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
+            "description": "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
             "children": [
                 {
                     "name": "listen_time",
@@ -6168,7 +6213,7 @@
             ]
         },
         "minecraft:behavior.go_and_give_items_to_owner": {
-            "description": "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to its owner.",
+            "description": "The entity will attempt to toss the items from its inventory to its owner.",
             "children": [
                 {
                     "name": "on_item_throw",
@@ -6510,7 +6555,7 @@
             ]
         },
         "minecraft:behavior.investigate_suspicious_location": {
-            "description": "[EXPERIMENTAL BEHAVIOR] The entity moves towards a \"suspicious\" position based on data gathered in minecraft:suspect_tracking",
+            "description": "Allows this entity to move towards a \"suspicious\" position based on data gathered in minecraft:suspect_tracking",
             "children": [
                 {
                     "name": "goal_radius",
@@ -6686,13 +6731,13 @@
                     "name": "allow_laying_from_below",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "[EXPERIMENTAL] Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water."
+                    "description": "Allows the mob to lay its eggs from below the target if it can't get there. This is useful if the target block is water with air above, since mobs may not be able to get to the air block above water."
                 },
                 {
                     "name": "egg_type",
                     "type": "String",
                     "defaultValue": "minecraft:turtle_egg",
-                    "description": "[EXPERIMENTAL] Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set."
+                    "description": "Block type for the egg to lay. If this is a turtle egg, the number of eggs in the block is randomly set."
                 },
                 {
                     "name": "goal_radius",
@@ -6704,13 +6749,13 @@
                     "name": "lay_egg_sound",
                     "type": "String",
                     "defaultValue": "lay_egg",
-                    "description": "[EXPERIMENTAL] Sound event name for laying egg. Defaulted to lay_egg which is used for Turtles."
+                    "description": "Name of the sound event played when laying the egg. Defaults to lay_egg, which is used for Turtles."
                 },
                 {
                     "name": "lay_seconds",
                     "type": "Decimal",
                     "defaultValue": "10.0f",
-                    "description": "[EXPERIMENTAL] Duration of the laying egg process in seconds."
+                    "description": "Duration of the laying egg process in seconds."
                 },
                 {
                     "name": "on_lay",
@@ -6740,19 +6785,19 @@
                     "name": "target_blocks",
                     "type": "Array",
                     "defaultValue": "[ minecraft:sand ]",
-                    "description": "[EXPERIMENTAL] Blocks that the mob can lay its eggs on top of."
+                    "description": "Blocks that the mob can lay its eggs on top of."
                 },
                 {
                     "name": "target_materials_above_block",
                     "type": "Array",
                     "defaultValue": "[ Air ]",
-                    "description": "[EXPERIMENTAL] Types of materials that can exist above the target block. Valid types are Air, Water, and Lava."
+                    "description": "Types of materials that can exist above the target block. Valid types are Air, Water, and Lava."
                 },
                 {
                     "name": "use_default_animation",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "[EXPERIMENTAL] Specifies if the default lay-egg animation should be played when the egg is placed or not."
+                    "description": "Specifies if the default lay-egg animation should be played when the egg is placed or not."
                 }
             ]
         },
@@ -8692,13 +8737,13 @@
             ]
         },
         "minecraft:behavior.roar": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Plays the provided sound and activates the \"ROARING\" actor flag during the specified duration",
+            "description": "Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.",
             "children": [
                 {
                     "name": "duration",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Goal duration in seconds"
+                    "description": "The amount of time to roar for."
                 }
             ]
         },
@@ -9128,7 +9173,7 @@
             ]
         },
         "minecraft:behavior.sniff": {
-            "description": "[EXPERIMENTAL BEHAVIOR] The entity detects the nearest player within \"sniffing_radius\" and updates its \"minecraft:suspect_tracking\" component state",
+            "description": "Allows this entity to detect the nearest player within \"sniffing_radius\" and update its \"minecraft:suspect_tracking\" component state",
             "children": [
                 {
                     "name": "cooldown_range",
@@ -9163,7 +9208,7 @@
             ]
         },
         "minecraft:behavior.sonic_boom": {
-            "description": "[EXPERIMENTAL BEHAVIOR] Plays the provided sounds and activates the \"SONIC BOOM\" actor flag during the specified duration",
+            "description": "Allows this entity to perform a 'sonic boom' ranged attack",
             "children": [
                 {
                     "name": "attack_cooldown",
@@ -9299,7 +9344,7 @@
             ]
         },
         "minecraft:behavior.stay_near_noteblock": {
-            "description": "[EXPERIMENTAL BEHAVIOR] The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
+            "description": "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
             "children": [
                 {
                     "name": "listen_time",
@@ -11807,6 +11852,23 @@
                             "description": "Item identifier that can be used to heal this entity."
                         }
                     ]
+                }
+            ]
+        },
+        "minecraft:heartbeat": {
+            "description": "Defines the entity's heartbeat.",
+            "children": [
+                {
+                    "name": "interval",
+                    "type": "Molang",
+                    "defaultValue": "1.00",
+                    "description": "A Molang expression defining the inter-beat interval in seconds. A value of zero or less means no heartbeat."
+                },
+                {
+                    "name": "sound_event",
+                    "type": "String",
+                    "defaultValue": "heartbeat",
+                    "description": "Level sound event to be played as the heartbeat sound."
                 }
             ]
         },
