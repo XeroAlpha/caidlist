@@ -36,50 +36,95 @@ function parseOrThrow(result) {
 /**
  * @template {string | number} StateName
  * @template {string | number | boolean} StateType
- * @param {Record<StateName,StateType[]>} stateValues
- * @param {Record<StateName,StateType>[]} states
- * @param {Record<StateName,StateType>[]} invalidStates
- * @returns {Record<StateName,StateType>[]}
+ * @param {Record<StateName,StateType[]>} stateValues 属性可取值列表
+ * @param {Record<StateName,StateType>[]} states 最小项列表
+ * @param {Record<StateName,StateType>[]} invalidStates 无关项列表（最简状态组列表）
+ * @returns {Record<StateName,StateType>[]} 最简状态组列表
  */
 function simplifyState(stateValues, states, invalidStates) {
-    const propEntries = [...Object.entries(stateValues)];
+    // 下一代迭代状态组列表
     const updateStates = states.slice();
-    for (const [propName, propValues] of propEntries) {
+    // 循环每个属性
+    for (const [propName, propValues] of Object.entries(stateValues)) {
+        // isExtendFrom(o, p) 可以简单粗暴地认为 o 代表的最小项集合 包含于 p 代表的最小项集合
+        // 在此我们定义 o 是 p 的子状态组，而 p 是 o 的父状态组
+
+        // 一个表，键是公共状态组，值是除去当前属性外公共状态组的父状态组列表
+        // 一个状态组可以重复出现在不同的父状态组列表中
+        // 由于属性遍历在最外层，因此此时所有的状态组（最小项）都必然持有当前属性
+        // 所以只要父状态组列表中出现当前属性的值都来了一遍
+        // 那说明公共状态组就是父状态组列表中所有状态简化的结果
+        // 退一步说，就算真的有星际码农往里面传的不是最小项而是有重叠的状态组
+        // 导致某个状态已经被合并过不存在这个属性（即【任意值】）
+        // 那请看下文
         const parentMap = new Map();
+        // 遍历所有状态组
         for (const state of updateStates) {
+            // 去除当前属性的状态组（即当前属性可为任何值的状态组）
             const stateWithoutProp = filterObjectMap(state, (k) => k !== propName);
+            // 从公共状态组中寻找 stateWithoutProp 子状态组们
             let foundParents = [...parentMap.keys()].filter((parent) => isExtendFrom(parent, stateWithoutProp));
             if (!foundParents.length) {
+                // 很显然，到这里没有找到任何一个公共状态组，使得 stateWithoutProp 是它的父状态组
+                // 不过没关系，我们可以把 stateWithoutProp 当成公共状态组
+                // 之后找一找新的公共状态组（stateWithoutProp）的父状态组
+                // 感谢 parentMap，父状态组的父状态组还是父状态组
+                // 只要在 parentMap 中找到某个键是新的公共状态组的父状态组
+                // 那么它的值肯定都是新的公共状态组的父状态组
+                // 我他妈好像忘记去重了 不过不影响
                 const foundValues = [...parentMap.keys()]
                     .filter((parent) => isExtendFrom(stateWithoutProp, parent))
                     .map((key) => parentMap.get(key))
                     .flat(1);
+                // 加进去了，好耶
+                // 所以 parentMap 的键不存在说靠前的公共状态组是靠后的公共状态组的父状态组的情况
                 foundParents = [stateWithoutProp];
                 parentMap.set(stateWithoutProp, foundValues);
             }
             for (const parent of foundParents) {
+                // 把自己这个状态组加到父状态组列表里去
                 const foundValues = parentMap.get(parent);
                 foundValues.push(state);
             }
         }
+        // 清空状态组列表
         updateStates.length = 0;
+        // 未被合并的状态组列表
         const primeStates = [];
         for (const [parent, childStates] of parentMap.entries()) {
+            // 一个集合，用来验证是不是该有的值都有了
             const validValues = new Set(propValues);
+            // 从无关项列表中找到所有除去当前属性外的公共状态组的父状态组
             const invalidChildren = invalidStates.filter((state) => {
+                // 去除当前属性的状态组（即当前属性可为任何值的状态组）
                 const stateWithoutProp = filterObjectMap(state, (k) => k !== propName);
+                // 是公共状态组的父状态组了
                 return isExtendFrom(parent, stateWithoutProp);
             });
+            // 检查是否该有的值都有了
+            // childStates 中重复的值不影响
+            // 接上文，如果出现任意值，就表示所有值都出现过了，因此直接清空
+            // invalidChildren 中不可能出现任意值，因为无关项列表与最小项列表不可重叠
             childStates
                 .concat(invalidChildren)
-                .forEach((state) => validValues.delete(state[propName]));
+                .forEach((state) => {
+                    if (propName in state) {
+                        validValues.delete(state[propName]);
+                    } else {
+                        validValues.clear();
+                    }
+                });
             if (validValues.size > 0) {
+                // 不是全都有
                 primeStates.push(...childStates);
             } else {
                 updateStates.push(parent);
             }
         }
         for (const primeState of primeStates) {
+            // 确认一下这个状态组是否已经被合并掉了
+            // 顺带去个重（我怎么感觉这个才是重点）
+            // 应该可以替换成标记的形式？
             if (!updateStates.find((state) => isExtendFrom(primeState, state))) {
                 updateStates.push(primeState);
             }
@@ -312,11 +357,11 @@ const Extractors = [
 ];
 
 const ImportEnvironments = {
-    Minecraft: 'mojang-minecraft',
-    GameTest: 'mojang-gametest',
-    MinecraftUI: 'mojang-minecraft-ui',
-    MinecraftServerAdmin: 'mojang-minecraft-server-admin',
-    MinecraftNet: 'mojang-minecraft-net'
+    Minecraft: ['Minecraft', 'mojang-minecraft', '@minecraft/server'],
+    GameTest: ['GameTest', 'mojang-gametest', '@minecraft/server-gametest'],
+    MinecraftUI: ['mojang-minecraft-ui', '@minecraft/server-ui'],
+    MinecraftServerAdmin: ['mojang-minecraft-server-admin', '@minecraft/server-admin'],
+    MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net']
 };
 /**
  * @param {QuickJSDebugSession} session
@@ -327,8 +372,13 @@ async function evaluateExtractors(cx, target, session) {
     const topFrame = await session.getTopStack();
     await topFrame.evaluate((envKeys) => {
         Promise.allSettled(envKeys.map(
-            ([keyName, moduleName]) => import(moduleName).then((module) => {
-                globalThis[keyName] = module;
+            ([keyName, moduleNames]) => Promise.allSettled(moduleNames.map(
+                (moduleName) => import(moduleName)
+            )).then((resolutions) => {
+                const found = resolutions.find((e) => e.status === 'fulfilled');
+                if (found) {
+                    globalThis[keyName] = found.value;
+                }
             })
         )).then(() => {
             console.info('PREPARE_ENV_OK');

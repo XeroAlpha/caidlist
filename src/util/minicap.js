@@ -67,6 +67,9 @@ class MinicapStream extends StateTransform {
     }
 }
 
+/**
+ * @returns {import("stream").Readable}
+ */
 export async function start(device, options) {
     const args = ['LD_LIBRARY_PATH=/data/local/tmp', '/data/local/tmp/minicap'];
     let socketName = 'minicap';

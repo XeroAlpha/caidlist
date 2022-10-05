@@ -90,3 +90,7 @@ export function sendMonkeyCommand(monkey, command) {
         });
     });
 }
+
+export function isMonkeyAlive(monkey) {
+    return monkey && monkey.stream && monkey.stream.readable && monkey.stream.writable;
+}

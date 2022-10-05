@@ -358,7 +358,12 @@ async function generateBranchedOutputFiles(cx) {
     cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);
     writeTransMapClib(cx, {
         outputFile: projectPath(`output.clib.${version}.${branch.id}`),
-        translationResultMaps
+        translationResultMaps,
+        patchOptions: branch.patch ? {
+            sourceFile: projectPath(`output.clib.${version}.${branch.patch.from}`),
+            patchFile: projectPath(`output.clib.${version}.patch.${branch.id}`),
+            uuid: branch.patch.uuid
+        } : undefined
     });
     writeTransMapsExcel(projectPath(`output.translation.${version}.${branch.id}`, 'xlsx'), translationResultMaps);
     writeTransMapTextZip(cx, {
@@ -537,11 +542,13 @@ const branchInfoMap = {
     },
     education: {
         name: '教育版',
-        description: '启用了教育版选项后创建的世界的ID表'
+        description: '启用了教育版选项后创建的世界的ID表',
+        patch: { from: 'vanilla', uuid: 'fa5e8807-b1e9-402f-aafa-0376e1b79ee2' }
     },
     experiment: {
         name: '实验性玩法',
-        description: '启用了所有实验性玩法选项后创建的世界的ID表'
+        description: '启用了所有实验性玩法选项后创建的世界的ID表',
+        patch: { from: 'vanilla', uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962' }
     },
     gametest: {
         name: 'GameTest',

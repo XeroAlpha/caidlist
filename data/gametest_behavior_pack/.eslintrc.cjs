@@ -14,6 +14,6 @@ module.exports = {
         quotes: ["error", "double"],
         semi: ["error", "always"],
         "comma-dangle": ["error", "never"],
-        "import/no-unresolved": ["error", { ignore: ["mojang-minecraft", "mojang-gametest"] }]
+        "import/no-unresolved": ["error", { ignore: ["mojang-minecraft", "mojang-gametest", "@minecraft"] }]
     }
 };

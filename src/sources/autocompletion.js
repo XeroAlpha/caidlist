@@ -9,7 +9,8 @@ import {
     adbShell,
     getDeviceSurfaceOrientation,
     openMonkey,
-    sendMonkeyCommand
+    sendMonkeyCommand,
+    isMonkeyAlive
 } from '../util/adb.js';
 import { openMinicap, stopMinicap } from '../util/captureScreen.js';
 import {
@@ -54,10 +55,10 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     screen.log(`Input ${command}`);
     await adbShell(device, `input text ${JSON.stringify(command)}`);
 
-    let reactInterval = 0; let
-        reactFrameCount = 0;
+    let reactInterval = 0;
+    let reactFrameCount = 0;
     const imageStream = await openMinicap(device);
-    const pipeline = imageStream
+    const imagePipeline = imageStream
         .pipe(
             new Transform({
                 objectMode: true,
@@ -94,7 +95,9 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                         .then((image) => {
                             if (!this.lastImage || !image.data.equals(this.lastImage.data)) {
                                 const now = Date.now();
-                                sendMonkeyCommand(monkey, 'press KEYCODE_TAB'); // async
+                                if (isMonkeyAlive(monkey)) {
+                                    sendMonkeyCommand(monkey, 'press KEYCODE_TAB'); // async
+                                }
                                 if (this.lastImageTime) {
                                     reactFrameCount = this.framesBeforeChange;
                                     reactInterval = now - this.lastImageTime;
@@ -153,7 +156,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
 
     let autocompletedCommand = command.trim();
     let recogizedCommand = await retryUntilComplete(10, 0, async () => {
-        const pickedCommand = await readStreamOnce(pipeline, 0);
+        const pickedCommand = await readStreamOnce(imagePipeline, 0);
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
@@ -164,7 +167,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     for (;;) {
         recogizedCommand = await retryUntilComplete(10, 500, async () => {
             try {
-                return await readStreamOnce(pipeline, 1000);
+                return await readStreamOnce(imagePipeline, 1000);
             } catch (err) {
                 // 跳过重复ID
                 await sendMonkeyCommand(monkey, 'press KEYCODE_TAB');
@@ -216,13 +219,13 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         }
     }
 
+    await stopMinicap(device, imageStream);
+
     // 退出聊天栏
     await sendMonkeyCommand(monkey, 'press KEYCODE_ESCAPE');
     await sendMonkeyCommand(monkey, 'press KEYCODE_ESCAPE');
     await sendMonkeyCommand(monkey, 'quit');
     monkey.end();
-
-    await stopMinicap(device, imageStream);
 
     return autocompletions;
 }
