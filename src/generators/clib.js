@@ -78,6 +78,7 @@ export default function writeTransMapClib(cx, options) {
         outputFile,
         JSON.stringify(
             {
+                $schema: 'https://ca.projectxero.top/clib/schema_v1.json',
                 name: `ID表补丁包（${versionInfo.name}|${branch.name}）`,
                 author: 'CA制作组',
                 description: [
@@ -109,6 +110,7 @@ export default function writeTransMapClib(cx, options) {
             patchFile,
             JSON.stringify(
                 {
+                    $schema: 'https://ca.projectxero.top/clib/schema_v1.json',
                     name: `ID表补丁包增量包（${versionUpdateText}|${branchUpdateText}）`,
                     author: 'CA制作组',
                     description: [
