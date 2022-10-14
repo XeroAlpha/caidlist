@@ -6,7 +6,7 @@ async function fetchMZHWikiRaw(word) {
 }
 
 async function fetchBEDevWikiRaw(word) {
-    return fetchText(`https://wiki.bedev.cn/${encodeURIComponent(word)}?action=raw`);
+    return fetchText(`https://wiki.mcbe-dev.net/p/${encodeURIComponent(word)}?action=raw`);
 }
 
 function parseEnumMapLua(luaContent) {

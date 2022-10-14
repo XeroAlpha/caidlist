@@ -189,17 +189,37 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
 const Extractors = [
     {
         name: 'commands',
-        async extract(target, frame) {
-            target.commands = parseOrThrow(await frame.evaluate(() => {
+        async extract(target, frame, session) {
+            parseOrThrow(await frame.evaluate(() => {
                 const player = [...Minecraft.world.getPlayers()][0];
-                const helpMeta = player.runCommand('help');
-                const result = helpMeta.body.split('\n');
-                for (let i = helpMeta.page + 1; i <= helpMeta.pageCount; i++) {
-                    const data = player.runCommand(`help ${i}`);
-                    result.push(...data.body.split('\n'));
+                async function asyncOp() {
+                    const helpMeta = await player.runCommandAsync('help');
+                    if (helpMeta.body) {
+                        const result = helpMeta.body.split('\n');
+                        for (let i = helpMeta.page + 1; i <= helpMeta.pageCount; i++) {
+                            const data = await player.runCommandAsync(`help ${i}`);
+                            result.push(...data.body.split('\n'));
+                        }
+                        return result;
+                    }
+                    return null;
                 }
-                return JSON.stringify(result);
+                asyncOp().then((result) => {
+                    console.info(`[Command Extractor]${JSON.stringify(result)}`);
+                }).catch((error) => {
+                    console.info(`[Command Extractor]ERROR: ${error}`);
+                });
+                return 'null';
             }));
+            session.continue();
+            const res = await pEvent(session, 'log', (ev) => ev.message.startsWith('[Command Extractor]'));
+            session.pause();
+            const ret = res.message.replace('[Command Extractor]', '');
+            if (ret.startsWith('ERROR')) {
+                throw new Error(ret);
+            } else {
+                target.commands = JSON.parse(ret);
+            }
         }
     },
     {
@@ -391,7 +411,12 @@ async function evaluateExtractors(cx, target, session) {
     await session.pause();
     for (const extractor of Extractors) {
         if (extractor.match && !extractor.match(coreVersion)) continue;
-        await extractor.extract(target, topFrame, session, cx);
+        try {
+            console.log(`Extracting ${extractor.name} from GameTest`);
+            await extractor.extract(target, topFrame, session, cx);
+        } catch (err) {
+            console.error(`Failed to extract ${extractor.name}`, err);
+        }
     }
     await session.continue();
 }
