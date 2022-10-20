@@ -1,5 +1,6 @@
 import nodePath from 'path';
 import { projectRoot } from '../src/util/common.js';
+import secret from './secret.js';
 
 // 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
 const commonOCROptions = {
@@ -107,3 +108,6 @@ export const proxyConfig = {
     http: 'http://localhost:7890',
     https: 'http://localhost:7890'
 };
+
+// 留 null 表示不使用 token（每小时只允许60次请求）
+export const githubToken = secret.githubAccessToken;

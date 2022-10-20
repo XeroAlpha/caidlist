@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 import AdmZip from 'adm-zip';
-import * as CommentJSON from 'comment-json';
+import * as CommentJSON from '@projectxero/comment-json';
 import {
     cachedOutput,
     forEachObject,

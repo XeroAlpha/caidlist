@@ -1,51 +1,10 @@
 /* eslint-disable consistent-return */
-import AdmZip from 'adm-zip';
 import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
-import * as CommentJSON from 'comment-json';
+import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
 import { cachedOutput, forEachObject, deepCopy } from '../util/common.js';
-import { fetchFile, fetchRedirect } from '../util/network.js';
 import { CommentLocation, addJSONComment } from '../util/comment.js';
-
-const TemplatePackLink = {
-    release: {
-        behaviorPack: 'https://aka.ms/behaviorpacktemplate',
-        resourcePack: 'https://aka.ms/resourcepacktemplate'
-    },
-    beta: {
-        behaviorPack: 'https://aka.ms/MinecraftBetaBehaviors',
-        resourcePack: 'https://aka.ms/MinecraftBetaResources'
-    }
-};
-
-/**
- * Try every path in `pathList` until corresponding entry found
- * @param {import("adm-zip")} zip
- * @param {string[]} pathList
- */
-function getEntryDataByPathList(zip, pathList, encoding) {
-    for (const path of pathList) {
-        const entry = zip.getEntry(path);
-        if (entry) {
-            const buffer = entry.getData();
-            if (encoding) {
-                return buffer.toString(encoding);
-            }
-            return buffer;
-        }
-    }
-    throw new Error(`Cannot find entry by name: ${pathList.join(', ')}`);
-}
-
-const VersionRegExp = /Version:\s*([\d.]+)/;
-function extractVersionString(zip) {
-    const indexPageData = getEntryDataByPathList(zip, ['documentation/Index.html']);
-    const versionMatch = VersionRegExp.exec(indexPageData.toString('utf-8'));
-    if (!versionMatch) {
-        throw new Error('Cannot find version title');
-    }
-    return versionMatch[1];
-}
+import { octokit, fetchGitBlob } from '../util/network.js';
 
 /**
  * @param {import("node-html-parser").Node} el
@@ -268,22 +227,6 @@ function parseBedrockDoc(content) {
     const meta = {};
     processDocStateMachine(root.childNodes, 'initial', { meta, state: {} });
     return meta;
-}
-
-function parseBehaviorPack(pathOrData, cacheKey) {
-    const zip = new AdmZip(pathOrData);
-    const version = extractVersionString(zip);
-    const map = { __VERSION__: version };
-    for (const entry of zip.getEntries()) {
-        const fn = entry.entryName;
-        const fnMatch = /documentation\/(.+)\.html/i.exec(fn);
-        if (fnMatch && fnMatch[1] !== 'Index') {
-            const parsed = parseBedrockDoc(entry.getData().toString('utf-8'));
-            cachedOutput(`${cacheKey}.${fnMatch[1].toLowerCase().replace(/\s/g, '_')}`, parsed);
-            map[fnMatch[1]] = parsed;
-        }
-    }
-    return map;
 }
 
 function findSection(node, sectionName, ...restNames) {
@@ -644,18 +587,50 @@ function extractDocumentationIds(docMap) {
     return target;
 }
 
+const repoConfig = {
+    owner: 'Mojang',
+    repo: 'bedrock-samples'
+};
+
+const branchMap = {
+    release: 'main',
+    beta: 'preview'
+};
+
+async function fetchBehaviorPack(treeSHA, cacheKey) {
+    const tree = (await octokit.git.getTree({ ...repoConfig, tree_sha: treeSHA, recursive: 1 })).data;
+    const versionNode = tree.tree.find((e) => e.path === 'version.json');
+    console.log('Fetching version for documentation...');
+    const versionJSON = JSON.parse(await fetchGitBlob(versionNode, 'utf-8'));
+    const map = { __VERSION__: versionJSON.latest.version };
+    for (const blob of tree.tree) {
+        const fnMatch = /documentation\/(.+)\.html/i.exec(blob.path);
+        if (fnMatch && fnMatch[1] !== 'Index') {
+            const blobCacheKey = `${cacheKey}.${fnMatch[1].toLowerCase().replace(/\s/g, '_')}`;
+            let cache = cachedOutput(blobCacheKey);
+            if (!cache || cache.__OBJECTHASH__ !== blob.sha) {
+                cache = parseBedrockDoc(await fetchGitBlob(blob, 'utf-8'));
+                cache.__OBJECTHASH__ = blob.sha;
+                cachedOutput(blobCacheKey, cache);
+            }
+            map[fnMatch[1]] = cache;
+        }
+    }
+    return map;
+}
+
 export async function fetchDocumentationIds(cx) {
     const { version } = cx;
     const cacheKey = `version.common.documentation.${version}`;
     let cache = cachedOutput(cacheKey);
     try {
-        const behaviorPackUrl = await fetchRedirect(TemplatePackLink[version].behaviorPack);
-        if (!cache || cache.__URL__ !== behaviorPackUrl) {
-            const behaviorPackData = await fetchFile(behaviorPackUrl);
-            const behaviorPackParsed = parseBehaviorPack(behaviorPackData, cacheKey);
+        const repoBranch = (await octokit.repos.getBranch({ ...repoConfig, branch: branchMap[version] })).data;
+        const commitHash = repoBranch.commit.sha;
+        if (!cache || cache.__COMMITHASH__ !== commitHash) {
+            const behaviorPackParsed = await fetchBehaviorPack(repoBranch.commit.commit.tree.sha, cacheKey);
             cache = cachedOutput(cacheKey, {
                 __VERSION__: behaviorPackParsed.__VERSION__,
-                __URL__: behaviorPackUrl,
+                __COMMITHASH__: commitHash,
                 ...extractDocumentationIds(behaviorPackParsed)
             });
         }

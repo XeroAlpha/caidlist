@@ -3,7 +3,7 @@ import nodePath from 'path';
 import { createInterface } from 'readline';
 import { URL, fileURLToPath } from 'url';
 import notifier from 'node-notifier';
-import * as CommentJSON from 'comment-json';
+import * as CommentJSON from '@projectxero/comment-json';
 import { CommentLocation, setJSONComment, clearJSONComment } from './comment.js';
 
 export const projectRoot = fileURLToPath(new URL('../..', import.meta.url));

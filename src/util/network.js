@@ -1,12 +1,20 @@
+import { Octokit } from '@octokit/rest';
 import { createHash } from 'crypto';
 import { got } from 'got';
 import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
-import { proxyConfig } from '../../data/config.js';
+import { proxyConfig, githubToken } from '../../data/config.js';
 
 export const proxiedGot = got.extend({
     agent: {
         http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
         https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
+    }
+});
+
+export const octokit = new Octokit({
+    auth: githubToken,
+    request: {
+        agent: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
     }
 });
 
@@ -16,25 +24,27 @@ function digestBufferHex(algorithm, buffer) {
     return digest.digest().toString('hex');
 }
 
-export async function fetchRedirect(url) {
+export async function fetchRedirect(url, opts) {
     const response = await proxiedGot.head(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
             secureConnect: 30000
         },
-        followRedirect: false
+        followRedirect: false,
+        ...opts
     });
     return response.headers.location || url;
 }
 
-export async function fetchFile(url, size, sha1) {
+export async function fetchFile(url, size, sha1, opts) {
     const request = proxiedGot(url, {
         timeout: {
             lookup: 30000,
             connect: 30000,
             secureConnect: 30000
-        }
+        },
+        ...opts
     });
     let lastProgressPrompt = Date.now();
     request.on('downloadProgress', (progress) => {
@@ -46,21 +56,37 @@ export async function fetchFile(url, size, sha1) {
         }
     });
     const content = await request.buffer();
-    if (size != null && content.length !== size) {
+    if (typeof size === 'number' && content.length !== size) {
         throw new Error(`Size mismatch: ${url}`);
     }
-    if (sha1 != null && digestBufferHex('sha1', content) !== sha1) {
+    if (typeof sha1 === 'string' && digestBufferHex('sha1', content) !== sha1) {
         throw new Error(`SHA1 mismatch: ${url}`);
     }
     return content;
 }
 
-export async function fetchText(url, size, sha1) {
-    const content = await fetchFile(url, size, sha1);
+export async function fetchText(url, size, sha1, opts) {
+    const content = await fetchFile(url, size, sha1, opts);
     return content.toString();
 }
 
-export async function fetchJSON(url, size, sha1) {
-    const content = await fetchText(url, size, sha1);
+export async function fetchJSON(url, size, sha1, opts) {
+    const content = await fetchText(url, size, sha1, opts);
     return JSON.parse(content);
+}
+
+export async function fetchGitBlob(blobNode, encoding) {
+    const blobContent = await fetchJSON(blobNode.url, null, null, {
+        headers: {
+            authorization: githubToken ? `token ${githubToken}` : undefined
+        }
+    });
+    const blobData = Buffer.from(blobContent.content, 'base64');
+    if (blobContent.size != null && blobData.length !== blobContent.size) {
+        throw new Error(`Size mismatch: ${blobNode.url}`);
+    }
+    if (encoding) {
+        return blobData.toString(encoding);
+    }
+    return blobData;
 }

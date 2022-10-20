@@ -10,7 +10,7 @@ const assetApiHost = 'https://resources.download.minecraft.net';
 function replaceUrlHost(url, host) {
     const urlObj = new URL(url, host);
     const hostObj = new URL(host);
-    urlObj.origin = hostObj.origin;
+    urlObj.host = hostObj.host;
     return urlObj.toString();
 }
 

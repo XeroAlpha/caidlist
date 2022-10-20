@@ -1,4 +1,4 @@
-import * as CommentJSON from 'comment-json';
+import * as CommentJSON from '@projectxero/comment-json';
 import analyzePackageDataEnumsCached from './sources/applicationPackage.js';
 import analyzeAutocompletionEnumsCached from './sources/autocompletion.js';
 import fetchStandardizedTranslation from './sources/wiki.js';
