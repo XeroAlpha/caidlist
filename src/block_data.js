@@ -7,15 +7,23 @@ const BASE = [0, -59, 0];
 
 async function generate(session, blockIds) {
     await session.command(`tp @s ${BASE[0]} ${BASE[1] + 2} ${BASE[2]}`);
-    await session.command(`fill ${BASE[0] - 1} ${BASE[1] - 1} ${BASE[2] + 1} ${BASE[0] + MAX_BLOCK_DATA_VALUE * 2 + 1} ${BASE[1] + 1} ${BASE[2] + 2} air`);
+    try {
+        await session.command(`fill ${BASE[0] - 1} ${BASE[1] - 1} ${BASE[2] + 1} ${BASE[0] + MAX_BLOCK_DATA_VALUE * 2 + 1} ${BASE[1] + 1} ${BASE[2] + 2} air`);
+    } catch (e) {
+        // No blocks to fill air
+    }
     for (let i = 0; i < blockIds.length; i++) {
         const promises = [];
-        await session.command(`fill ${BASE[0] - 1} ${BASE[1] - 1} ${BASE[2] + i * 2 - 1} ${BASE[0] + MAX_BLOCK_DATA_VALUE * 2 + 1} ${BASE[1] + 1} ${BASE[2] + i * 2 + 1} barrier`);
+        try {
+            await session.command(`fill ${BASE[0] - 1} ${BASE[1] - 1} ${BASE[2] + i * 2 - 1} ${BASE[0] + MAX_BLOCK_DATA_VALUE * 2 + 1} ${BASE[1] + 1} ${BASE[2] + i * 2 + 1} barrier`);
+        } catch (e) {
+            // No blocks to fill air
+        }
         promises.push(session.command(`fill ${BASE[0] - 1} ${BASE[1] - 1} ${BASE[2] + i * 2 + 2} ${BASE[0] + MAX_BLOCK_DATA_VALUE * 2 + 1} ${BASE[1] + 1} ${BASE[2] + i * 2 + 2} air`));
         for (let j = 0; j <= MAX_BLOCK_DATA_VALUE; j++) {
             promises.push(session.command(`setblock ${BASE[0] + j * 2} ${BASE[1]} ${BASE[2] + i * 2} ${blockIds[i]} ${j}`));
         }
-        await Promise.all(promises);
+        await Promise.allSettled(promises);
     }
 }
 
