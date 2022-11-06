@@ -597,12 +597,15 @@ const branchMap = {
     beta: 'preview'
 };
 
+const versionRegExp = /"latest"[\s\n\r]*:[\s\n\r]*{[^"]*?"version"[\s\n\r]*:[\s\n\r]*"([\w.]+)"/;
+
 async function fetchBehaviorPack(treeSHA, cacheKey) {
     const tree = (await octokit.git.getTree({ ...repoConfig, tree_sha: treeSHA, recursive: 1 })).data;
     const versionNode = tree.tree.find((e) => e.path === 'version.json');
     console.log('Fetching version for documentation...');
-    const versionJSON = JSON.parse(await fetchGitBlob(versionNode, 'utf-8'));
-    const map = { __VERSION__: versionJSON.latest.version };
+    const versionJSON = await fetchGitBlob(versionNode, 'utf-8');
+    const versionJSONMatch = versionJSON.match(versionRegExp);
+    const map = { __VERSION__: versionJSONMatch && versionJSONMatch[1] };
     for (const blob of tree.tree) {
         const fnMatch = /documentation\/(.+)\.html/i.exec(blob.path);
         if (fnMatch && fnMatch[1] !== 'Index') {

@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.19.30.4",
+    "version": "1.19.40.2",
     "content": [],
     "sections": [
         {
@@ -15,12 +15,6 @@
                         {
                             "type": "table",
                             "rows": [
-                                {
-                                    "Name": "minecraft:block_light_filter",
-                                    "Type": "Integer",
-                                    "Default Value": "15",
-                                    "Description": "The amount that light will be dampened when it passes through the block, in a range (0-15). Higher value means the light will be dampened more."
-                                },
                                 {
                                     "Name": "minecraft:breathability",
                                     "Type": "Enumerator",
@@ -160,6 +154,12 @@
                                     "Type": "Identifier String",
                                     "Default Value": "",
                                     "Description": "The description identifier of the geometry file to use to render this block. This identifier must match an existing geometry identifier in any of the currently loaded resource packs.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:light_dampening",
+                                    "Type": "Integer",
+                                    "Default Value": "15",
+                                    "Description": "The amount that light will be dampened when it passes through the block, in a range (0-15). Higher value means the light will be dampened more."
                                 },
                                 {
                                     "Name": "minecraft:light_emission",
@@ -475,7 +475,7 @@
                                 "Example",
                                 {
                                     "type": "code",
-                                    "content": "{\n  \"format_version\": \"1.19.30\",\n  \"minecraft:block\": {\n    \"description\": {\n      \"identifier\": \"design:lavenderstone\"\n    },\n    \"components\": {\n      \"minecraft:loot\": \"loot_tables/chests/simple_dungeon.json\",\n      \"minecraft:destroy_time\": 4.0,\n      \"minecraft:friction\": 0.6,\n      \"minecraft:map_color\": \"#00ff00\",\n      \"minecraft:flammable\": {\n        \"flame_odds\": 50,\n        \"burn_odds\": 0\n    },\n      \"minecraft:light_emission\": 1\n    }\n  }\n}"
+                                    "content": "{\n  \"format_version\": \"1.19.40\",\n  \"minecraft:block\": {\n    \"description\": {\n      \"identifier\": \"design:lavenderstone\"\n    },\n    \"components\": {\n      \"minecraft:loot\": \"loot_tables/chests/simple_dungeon.json\",\n      \"minecraft:destroy_time\": 4.0,\n      \"minecraft:friction\": 0.6,\n      \"minecraft:map_color\": \"#00ff00\",\n      \"minecraft:flammable\": {\n        \"flame_odds\": 50,\n        \"burn_odds\": 0\n    },\n      \"minecraft:light_emission\": 1\n    }\n  }\n}"
                                 }
                             ]
                         }
@@ -878,7 +878,7 @@
                                 "Event Response Example",
                                 {
                                     "type": "code",
-                                    "content": "\"minecraft:block\": {\n      \"description\": {\n        \"identifier\": \"test:on_interact_change_state_block\",\n        \"properties\": {\n          \"minecraft:direction\": {\n          }\n        }\n      },\n      \"components\": {\n        \"minecraft:on_interact\": {\n          \"event\": \"test_event\"\n        }\n      },\n      \"events\": {\n        \"test_event\": {\n          \"set_block_property\": {\n            \"minecraft:direction\": \"1\"\n          }\n        }\n      }\n    }"
+                                    "content": "\"minecraft:block\": {\n      \"description\": {\n        \"identifier\": \"test:on_interact_change_state_block\",\n        \"properties\": {\n          \"custom:direction\": [0, 1, 2, 3]\n        }\n      },\n      \"components\": {\n        \"minecraft:on_interact\": {\n          \"event\": \"test_event\"\n        }\n      },\n      \"events\": {\n        \"test_event\": {\n          \"set_block_property\": {\n            \"custom:direction\": \"1\"\n          }\n        }\n      }\n    }"
                                 }
                             ]
                         }
@@ -1121,5 +1121,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "fffcf73f0811b5863858d3ba95b3d5271f45f5b1"
+    "__OBJECTHASH__": "e17ccf7b1ed275d39d401a934381d0c44306af71"
 }
