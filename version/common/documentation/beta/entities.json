@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.50.22",
+    "version": "1.19.50.23",
     "content": [],
     "sections": [
         {
@@ -12832,7 +12832,18 @@
                             "name": "minecraft:behavior.float",
                             "level": 12,
                             "content": [
-                                "Allows the mob to stay afloat while swimming."
+                                "Allows the mob to stay afloat while swimming. Passengers will be kicked out the moment the mob's head goes underwater, which may not happen for tall mobs.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "sink_with_passengers",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the mob will keep sinking as long as it has passengers."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -25761,5 +25772,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "e9ebcd1384bf7c7773946166f54128de8357064c"
+    "__OBJECTHASH__": "9253ee91f03de885f07494cb0df600ef9c667ad4"
 }

@@ -1,6 +1,6 @@
 {
     "__VERSION__": "1.19.50.22",
-    "__COMMITHASH__": "453cef6529b4db92c2a51dbbf8654c4aa0f29536",
+    "__COMMITHASH__": "7c6d0bd736848a8c81a22b758ce74f74b8edbeef",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -3749,6 +3749,7 @@
         "tripod_camera": "0x00000318 (0x62)",
         "tropicalfish": "0x00009071 (0x111)",
         "turtle": "0x00004938 (0x74)",
+        "undefined_test_only": "0x00000001 (0x01)",
         "vex": "0x00002921 (0x105)",
         "villager": "0x16777999 (0x15)",
         "villager_v2": "0x16778099 (0x115)",
@@ -5992,6 +5993,17 @@
                     "type": "Decimal",
                     "defaultValue": "1.0",
                     "description": "Movement speed multiplier of the mob when using this AI Goal"
+                }
+            ]
+        },
+        "minecraft:behavior.float": {
+            "description": "Allows the mob to stay afloat while swimming. Passengers will be kicked out the moment the mob's head goes underwater, which may not happen for tall mobs.",
+            "children": [
+                {
+                    "name": "sink_with_passengers",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob will keep sinking as long as it has passengers."
                 }
             ]
         },
