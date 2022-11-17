@@ -24,4 +24,5 @@ async function main(args) {
 main(process.argv.slice(2)).catch((err) => {
     console.error(err);
     debugger;
+    process.exit(1);
 });
