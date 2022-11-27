@@ -22,7 +22,7 @@ import doWSRelatedJobsCached from './wsconnect.js';
 
 /**
  * Only used in QuickJSDebugSession.evaluate
- * @type {import("mojang-minecraft")}
+ * @type {import("@minecraft/server")}
  */
 const Minecraft = {};
 
@@ -187,6 +187,119 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
 }
 
 const Extractors = [
+    {
+        name: 'scope',
+        async extract(target, frame) {
+            const { tree, flatMap } = parseOrThrow(await frame.evaluate(() => {
+                const flatDescMap = {};
+                const root = { path: '', value: globalThis, desc: {}, doNotSort: true };
+                const nodeQueue = [root];
+                const objects = [];
+                const objectDesc = [];
+                const functionOwnNames = ['name', 'length', 'arguments', 'caller'];
+                const defaultProto = {
+                    object: Object.prototype,
+                    function: Function.prototype
+                };
+                while (nodeQueue.length) {
+                    const { path, value, desc, doNotSort } = nodeQueue.shift();
+                    const childPathPrefix = path === '' ? '' : `${path}.`;
+                    const type = typeof value;
+                    desc.type = type;
+                    if (type === 'object' || type === 'function') {
+                        if (value === null) {
+                            desc.value = null;
+                            continue;
+                        }
+                        const ref = objects.indexOf(value);
+                        if (ref >= 0) {
+                            delete desc.type;
+                            desc.ref = objectDesc[ref].path;
+                            flatDescMap[path] = objectDesc[ref].path;
+                            continue;
+                        }
+                        if (type === 'function') {
+                            desc.name = value.name;
+                            desc.value = String(value);
+                            desc.length = value.length;
+                        }
+                        flatDescMap[path] = { ...desc };
+                        const proto = Object.getPrototypeOf(value);
+                        const keys = Object.getOwnPropertyNames(value);
+                        if (!doNotSort) keys.sort();
+                        keys.push(...Object.getOwnPropertySymbols(value));
+                        keys.forEach((key) => {
+                            if (type === 'function' && functionOwnNames.indexOf(key) >= 0) return;
+                            const child = {};
+                            const descriptor = Object.getOwnPropertyDescriptor(value, key);
+                            if (typeof key === 'symbol') {
+                                if (!desc.symbolProperties) desc.symbolProperties = {};
+                                desc.symbolProperties[key.toString()] = child;
+                            } else if (descriptor && descriptor.enumerable) {
+                                if (!desc.enumerableProperties) desc.enumerableProperties = {};
+                                desc.enumerableProperties[key] = child;
+                            } else {
+                                if (!desc.properties) desc.properties = {};
+                                desc.properties[key] = child;
+                            }
+                            if (descriptor) {
+                                if ('value' in descriptor) {
+                                    child.value = {};
+                                    nodeQueue.push({
+                                        path: `${childPathPrefix}${String(key)}`,
+                                        value: descriptor.value,
+                                        desc: child.value
+                                    });
+                                }
+                                if (descriptor.writable === false) {
+                                    child.readOnly = true;
+                                }
+                                if (descriptor.get !== undefined) {
+                                    child.getter = {};
+                                    nodeQueue.push({
+                                        path: `${childPathPrefix}${String(key)}.[[Get]]`,
+                                        value: descriptor.get,
+                                        desc: child.getter
+                                    });
+                                }
+                                if (descriptor.set !== undefined) {
+                                    child.setter = {};
+                                    nodeQueue.push({
+                                        path: `${childPathPrefix}${String(key)}.[[Set]]`,
+                                        value: descriptor.set,
+                                        desc: child.setter
+                                    });
+                                }
+                                if (!descriptor.configurable) {
+                                    child.configurable = false;
+                                }
+                            }
+                        });
+                        if (proto === null) {
+                            desc.prototype = null;
+                        } else if (proto !== defaultProto[type]) {
+                            desc.prototype = {};
+                            nodeQueue.push({
+                                path: `${childPathPrefix}[[Prototype]]`,
+                                value: proto,
+                                desc: desc.prototype
+                            });
+                        }
+                        objects.push(value);
+                        objectDesc.push({ path, desc });
+                        continue;
+                    }
+                    desc.value = value;
+                    flatDescMap[path] = desc;
+                }
+                return JSON.stringify({ tree: root.desc, flatMap: flatDescMap });
+            }));
+            delete tree.enumerableProperties.totalTicks;
+            delete flatMap.totalTicks;
+            target.scopeTree = tree;
+            // target.scopeFlatMap = sortObjectKey(flatMap);
+        }
+    },
     {
         name: 'commands',
         async extract(target, frame, session) {
