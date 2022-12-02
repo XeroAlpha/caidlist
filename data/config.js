@@ -66,9 +66,9 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.19.41.01',
+        version: '1.19.50.02',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.41.01.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.50.02.apk',
         // 可用分支
         branches: ['vanilla', 'education', 'experiment', 'documentation'],
         config: smallestGUIOCROptions
@@ -76,9 +76,9 @@ export const packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: '1.19.60.20',
+        version: '1.19.60.22',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.60.20.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.60.22.apk',
         // 可用分支
         branches: [
             'vanilla',

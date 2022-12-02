@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.40.2",
+    "version": "1.19.50.2",
     "content": [],
     "sections": [
         {
@@ -12832,7 +12832,18 @@
                             "name": "minecraft:behavior.float",
                             "level": 12,
                             "content": [
-                                "Allows the mob to stay afloat while swimming."
+                                "Allows the mob to stay afloat while swimming. Passengers will be kicked out the moment the mob's head goes underwater, which may not happen for tall mobs.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "sink_with_passengers",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the mob will keep sinking as long as it has passengers."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -15142,7 +15153,48 @@
                             "name": "minecraft:behavior.offer_flower",
                             "level": 12,
                             "content": [
-                                "Allows the mob to offer the player a flower like the Iron Golem does."
+                                "Allows the mob to offer a flower to another mob with the minecraft:take_flower behavior.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "chance_to_start",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.00",
+                                            "Description": "Percent chance that the mob will start this goal from 0.0 to 1.0 (where 1.0 = 100%)."
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start."
+                                        },
+                                        {
+                                            "Name": "max_head_rotation_y",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target."
+                                        },
+                                        {
+                                            "Name": "max_offer_flower_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "20.00",
+                                            "Description": "The max amount of time (in seconds) that the mob will offer the flower for before exiting the Goal."
+                                        },
+                                        {
+                                            "Name": "max_rotation_x",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target."
+                                        },
+                                        {
+                                            "Name": "search_area",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[6, 2, 6]",
+                                            "Description": "The dimensions of the AABB used to search for a potential mob to offer flower to."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -15834,6 +15886,18 @@
                                             "Type": "Range [a, b]",
                                             "Default Value": "[2, 4]",
                                             "Description": "The range of time in seconds the mob will stay looking in a random direction before looking elsewhere"
+                                        },
+                                        {
+                                            "Name": "max_angle_of_view_horizontal",
+                                            "Type": "Integer",
+                                            "Default Value": "30",
+                                            "Description": "The rightmost angle a mob can look at on the horizontal plane with respect to its initial facing direction."
+                                        },
+                                        {
+                                            "Name": "min_angle_of_view_horizontal",
+                                            "Type": "Integer",
+                                            "Default Value": "-30",
+                                            "Description": "The leftmost angle a mob can look at on the horizontal plane with respect to its initial facing direction."
                                         }
                                     ]
                                 }
@@ -15848,6 +15912,18 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "continue_if_leashed",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If the goal should continue to be used as long as the mob is leashed."
+                                        },
+                                        {
+                                            "Name": "max_angle_of_view_horizontal",
+                                            "Type": "Decimal",
+                                            "Default Value": "30.0",
+                                            "Description": "The rightmost angle a mob can look at on the horizontal plane with respect to its initial facing direction."
+                                        },
+                                        {
                                             "Name": "max_look_count",
                                             "Type": "Integer",
                                             "Default Value": "2",
@@ -15858,6 +15934,12 @@
                                             "Type": "Integer",
                                             "Default Value": "40",
                                             "Description": "The max amount of time (in ticks) a mob will stay looking at a direction while looking around."
+                                        },
+                                        {
+                                            "Name": "min_angle_of_view_horizontal",
+                                            "Type": "Decimal",
+                                            "Default Value": "-30.0",
+                                            "Description": "The leftmost angle a mob can look at on the horizontal plane with respect to its initial facing direction."
                                         },
                                         {
                                             "Name": "min_look_count",
@@ -15873,9 +15955,15 @@
                                         },
                                         {
                                             "Name": "probability",
-                                            "Type": "Integer",
+                                            "Type": "Decimal",
                                             "Default Value": "0.02",
                                             "Description": "The probability of randomly looking around/sitting."
+                                        },
+                                        {
+                                            "Name": "random_look_around_cooldown",
+                                            "Type": "Integer",
+                                            "Default Value": "0",
+                                            "Description": "The cooldown in seconds before the goal can be used again."
                                         }
                                     ]
                                 }
@@ -17575,7 +17663,60 @@
                             "name": "minecraft:behavior.take_flower",
                             "level": 12,
                             "content": [
-                                "Can only be used by Villagers. Allows the mob to accept flowers from Iron Golems."
+                                "Allows the mob to accept flowers from another mob with the minecraft:offer_flower behavior.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start."
+                                        },
+                                        {
+                                            "Name": "max_head_rotation_y",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target."
+                                        },
+                                        {
+                                            "Name": "max_rotation_x",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target."
+                                        },
+                                        {
+                                            "Name": "max_wait_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "20.00",
+                                            "Description": "The maximum amount of time (in seconds) for the mob to randomly wait for before taking the flower."
+                                        },
+                                        {
+                                            "Name": "min_distance_to_target",
+                                            "Type": "Decimal",
+                                            "Default Value": "2.00",
+                                            "Description": "Minimum distance (in blocks) for the entity to be considered having reached its target."
+                                        },
+                                        {
+                                            "Name": "min_wait_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "4.00",
+                                            "Description": "The minimum amount of time (in seconds) for the mob to randomly wait for before taking the flower."
+                                        },
+                                        {
+                                            "Name": "search_area",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[6, 2, 6]",
+                                            "Description": "The dimensions of the AABB used to search for a potential mob to take a flower from."
+                                        },
+                                        {
+                                            "Name": "speed_multiplier",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.50",
+                                            "Description": "Movement speed multiplier of the mob when using this AI Goal."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -18423,6 +18564,12 @@
                                             "Description": "The type of damage that is applied to entities that enter the damage range."
                                         },
                                         {
+                                            "Name": "damage_cooldown",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "Attack cooldown (in seconds) for how often this entity can attack a target."
+                                        },
+                                        {
                                             "Name": "damage_per_tick",
                                             "Type": "Integer",
                                             "Default Value": "2",
@@ -18439,6 +18586,12 @@
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
                                             "Description": "The set of entities that are valid to apply the damage to when within range."
+                                        },
+                                        {
+                                            "Name": "play_attack_sound",
+                                            "Type": "Boolean",
+                                            "Default Value": "4.94066e-324",
+                                            "Description": "If the entity should play their attack sound when attacking a target."
                                         }
                                     ]
                                 }
@@ -19232,6 +19385,36 @@
                                                     ]
                                                 }
                                             ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "minecraft:dash",
+                            "level": 12,
+                            "content": [
+                                "Ability for a ridable entity to dash.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.00",
+                                            "Description": "The dash cooldown in seconds. Default value is 1.000000."
+                                        },
+                                        {
+                                            "Name": "horizontal_momentum",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.00",
+                                            "Description": "Horizontal momentum of the dash."
+                                        },
+                                        {
+                                            "Name": "vertical_momentum",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.00",
+                                            "Description": "Vertical momentum of the dash."
                                         }
                                     ]
                                 }
@@ -23114,6 +23297,30 @@
                             ]
                         },
                         {
+                            "name": "minecraft:variable_max_auto_step",
+                            "level": 12,
+                            "content": [
+                                "Entities with this component will have a maximum auto step height that is different depending on wether they are on a block that prevents jumping. Incompatible with \"runtime_identifier\": \"minecraft:horse\".",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "base_value",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5625",
+                                            "Description": "The maximum auto step height when on any other block."
+                                        },
+                                        {
+                                            "Name": "jump_prevented_value",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5625",
+                                            "Description": "The maximum auto step height when on a block that prevents jumping."
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "minecraft:vibration_damper",
                             "level": 12,
                             "content": [
@@ -23684,7 +23891,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.offer_flower",
-                                            "ID": "-885387854"
+                                            "ID": "14523794672066366898"
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.open_door",
@@ -23928,7 +24135,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.take_flower",
-                                            "ID": "1218648257"
+                                            "ID": "16066043784359778497"
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.tempt",
@@ -24107,6 +24314,10 @@
                                         {
                                             "JSON Name": "minecraft:damage_sensor",
                                             "ID": "-82616534"
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:dash",
+                                            "ID": "-51257122"
                                         },
                                         {
                                             "JSON Name": "minecraft:despawn",
@@ -24419,6 +24630,10 @@
                                         {
                                             "JSON Name": "minecraft:trusting",
                                             "ID": "936499892"
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:variable_max_auto_step",
+                                            "ID": "-368684982"
                                         },
                                         {
                                             "JSON Name": "minecraft:vibration_damper",
@@ -24929,7 +25144,7 @@
                             "name": "minecraft:input_ground_controlled",
                             "level": 12,
                             "content": [
-                                "When configured as a rideable entity, the entity will be controlled using WASD controls."
+                                "When configured as a rideable entity, the entity will be controlled using WASD controls. Beginning with 1.19.50 the default auto step height for rideable entities is half a block. Consider adding the `variable_max_auto_step` component to increase it."
                             ]
                         },
                         {
@@ -25551,5 +25766,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "81949891aeb7f8445d0beeeea8f41360a8f19467"
+    "__OBJECTHASH__": "723e3cc55c51dfad4baedccbdb132bf9fb775f64"
 }

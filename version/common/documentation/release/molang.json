@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.19.40.2",
+    "version": "1.19.50.2",
     "content": [],
     "sections": [
         {
@@ -813,6 +813,10 @@
                                     "Description": "Returns 1.0 if the entity can damage nearby mobs, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.can_dash",
+                                    "Description": "Returns 1.0 if the entity can dash, else it returns 0.0"
+                                },
+                                {
                                     "Name": "query.can_fly",
                                     "Description": "Returns 1.0 if the entity can fly, else it returns 0.0."
                                 },
@@ -859,6 +863,10 @@
                                 {
                                     "Name": "query.current_squish_value",
                                     "Description": "Returns the squish value for the current entity, or 0.0 if this doesn't make sense."
+                                },
+                                {
+                                    "Name": "query.dash_cooldown_progress",
+                                    "Description": "Returns dash cooldown progress if the entity can dash, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.day",
@@ -981,12 +989,20 @@
                                     "Description": "Returns 1.0 if the entity has collisions enabled, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.has_dash_cooldown",
+                                    "Description": "Returns 1.0 if the entity has cooldown on its dash, else it returns 0.0"
+                                },
+                                {
                                     "Name": "query.has_gravity",
                                     "Description": "Returns 1.0 if the entity is affected by gravity, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.has_owner",
                                     "Description": "Returns true if the entity has an owner ID else it returns false"
+                                },
+                                {
+                                    "Name": "query.has_property",
+                                    "Description": "Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise."
                                 },
                                 {
                                     "Name": "query.has_rider",
@@ -1369,6 +1385,10 @@
                                     "Description": "Returns 1.0 if the entity is using sonic boom, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.is_spectator",
+                                    "Description": "Returns 1.0 if the entity is spectator, else it returns 0.0."
+                                },
+                                {
                                     "Name": "query.is_sprinting",
                                     "Description": "Returns 1.0 if the entity is sprinting, else it returns 0.0."
                                 },
@@ -1551,6 +1571,10 @@
                                 {
                                     "Name": "query.previous_squish_value",
                                     "Description": "Returns the previous squish value for the current entity, or 0.0 if this doesn't make sense."
+                                },
+                                {
+                                    "Name": "query.property",
+                                    "Description": "Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not."
                                 },
                                 {
                                     "Name": "query.remaining_durability",
@@ -1776,24 +1800,12 @@
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0."
                                 },
                                 {
-                                    "Name": "query.has_property",
-                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise."
-                                },
-                                {
                                     "Name": "query.is_attached",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the actor is attached to another actor (such as being held or worn), else it will return 0.0."
                                 },
                                 {
                                     "Name": "query.is_cooldown_type",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the specified held or worn item has the specified cooldown type name, otherwise returns 0.0. First argument is the cooldown name to check for, second argument is the equipment slot name, and optional third argument is the numerical slot id. For second and third arguments, uses the same name and id that the replaceitem command takes when querying entities."
-                                },
-                                {
-                                    "Name": "query.is_spectator",
-                                    "Description": "(EXPERIMENTAL. Enable 'Spectator Mode' to use.) Returns 1.0 if the entity is spectator, else it returns 0.0."
-                                },
-                                {
-                                    "Name": "query.property",
-                                    "Description": "(EXPERIMENTAL. Enable 'Holiday Creator Features' AND 'Upcoming Creator Features' to use.) Takes one argument: the name of the property on the entity. Returns the value of that property if it exists, else 0.0 if not."
                                 },
                                 {
                                     "Name": "query.relative_block_has_all_tags",
@@ -1877,5 +1889,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "1377401fc34ff475a27081f95a645e6bc3df7b93"
+    "__OBJECTHASH__": "a94e1be091186e5f873a61d9c693fdd89547d354"
 }
