@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.60.22",
-    "__COMMITHASH__": "f230231c7c59c6461ba112df4ccdca7c0c990a3c",
+    "__VERSION__": "1.19.60.23",
+    "__COMMITHASH__": "898e6eaaf8deaadcb35e8fc5e73c1d678b4d996f",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2856,7 +2856,6 @@
         "infiniburn_bit": "Determines if a block should burn infinitely",
         "item_frame_map_bit": "Describes if an item frame block has a map in it",
         "item_frame_photo_bit": "Describes if an item frame block has a photo in it",
-        "last_interacted_slot": "Determines the redstone signal that represents the last book interacted in the chiseled bookshelf",
         "liquid_depth": "Determines the level of liquid blocks",
         "lit": "Determines if a block is lit or not",
         "moisturized_amount": "Determines the moisture level of crops",
@@ -8771,7 +8770,7 @@
             ]
         },
         "minecraft:behavior.ranged_attack": {
-            "description": "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks.",
+            "description": "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.",
             "children": [
                 {
                     "name": "attack_interval",
@@ -13973,19 +13972,43 @@
             ]
         },
         "minecraft:shooter": {
-            "description": "Defines the entity's ranged attack behavior.",
+            "description": "Defines the entity's ranged attack behavior. The \"minecraft:behavior.ranged_attack\" goal uses this component to determine which projectiles to shoot.",
             "children": [
                 {
                     "name": "aux_val",
                     "type": "Integer",
                     "defaultValue": "-1",
-                    "description": "ID of the Potion effect to be applied on hit"
+                    "description": "ID of the Potion effect for the default projectile to be applied on hit."
                 },
                 {
                     "name": "def",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Actor definition to use as projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile"
+                    "description": "Actor definition to use as the default projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile."
+                },
+                {
+                    "name": "magic",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Sets whether the projectiles being used are flagged as magic. If set, the ranged attack goal will not be used at the same time as other magic goals, such as minecraft:behavior.drink_potion"
+                },
+                {
+                    "name": "power",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Velocity in which the projectiles will be shot at. A power of 0 will be overwritten by the default projectile throw power."
+                },
+                {
+                    "name": "projectiles",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of projectiles that can be used by the shooter. Projectiles are evaluated in the order of the list; After a projectile is chosen, the rest of the list is ignored."
+                },
+                {
+                    "name": "sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound that is played when the shooter shoots a projectile."
                 }
             ]
         },

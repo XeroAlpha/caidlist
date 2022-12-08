@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.60.22",
+    "version": "1.19.60.23",
     "content": [],
     "sections": [
         {
@@ -16611,7 +16611,7 @@
                             "name": "minecraft:behavior.ranged_attack",
                             "level": 12,
                             "content": [
-                                "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks.",
+                                "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -23164,7 +23164,7 @@
                             "name": "minecraft:shooter",
                             "level": 12,
                             "content": [
-                                "Defines the entity's ranged attack behavior.",
+                                "Defines the entity's ranged attack behavior. The \"minecraft:behavior.ranged_attack\" goal uses this component to determine which projectiles to shoot.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -23172,13 +23172,37 @@
                                             "Name": "aux_val",
                                             "Type": "Integer",
                                             "Default Value": "-1",
-                                            "Description": "ID of the Potion effect to be applied on hit"
+                                            "Description": "ID of the Potion effect for the default projectile to be applied on hit."
                                         },
                                         {
                                             "Name": "def",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile"
+                                            "Description": "Actor definition to use as the default projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile."
+                                        },
+                                        {
+                                            "Name": "magic",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Sets whether the projectiles being used are flagged as magic. If set, the ranged attack goal will not be used at the same time as other magic goals, such as minecraft:behavior.drink_potion"
+                                        },
+                                        {
+                                            "Name": "power",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.00",
+                                            "Description": "Velocity in which the projectiles will be shot at. A power of 0 will be overwritten by the default projectile throw power."
+                                        },
+                                        {
+                                            "Name": "projectiles",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of projectiles that can be used by the shooter. Projectiles are evaluated in the order of the list; After a projectile is chosen, the rest of the list is ignored."
+                                        },
+                                        {
+                                            "Name": "sound",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "Sound that is played when the shooter shoots a projectile."
                                         }
                                     ]
                                 }
@@ -26319,5 +26343,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "82a556d617a39d618c85576cfa0ce9828f349aee"
+    "__OBJECTHASH__": "4ac6bd4d32a42d4cc2e9cde6054818ac4582159c"
 }

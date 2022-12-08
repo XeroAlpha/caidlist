@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.19.60.22",
+    "version": "1.19.60.23",
     "content": [],
     "sections": [
         {
@@ -1885,6 +1885,10 @@
                                 {
                                     "Pack min_engine_version": "1.18.20",
                                     "Description": "Fixed Logical AND to evaluate before Logical OR, and for comparison operators to evaluate before equality operators. For example `A && B || C` now evaluates as `(A && B) || C` instead of `A && (B || C)`. And `A < B == C > D` now evalutes as `(A < B) == (C > D)` instead of `((A < B) == C) > D`."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.19.60",
+                                    "Description": "Fixed error where dividing by a dynamically determined negative variable resulted in a division by the absolute (positive) value of the number instead."
                                 }
                             ]
                         }
@@ -1893,5 +1897,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "97206a865d99097f7fbbbc90fa6c55896d7ce8af"
+    "__OBJECTHASH__": "cd941f47c0f7494c2f8c3128a0521b9eb7d7f8a1"
 }
