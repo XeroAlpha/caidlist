@@ -1,6 +1,6 @@
 {
     "title": "RECIPES DOCUMENTATION",
-    "version": "1.19.60.24",
+    "version": "1.19.60.25",
     "content": [],
     "sections": [
         {
@@ -8,15 +8,14 @@
             "level": 1,
             "content": [
                 "Recipes are setup in Json files under the behavior_packs /'name of pack'/ recipes directory.",
-                "Recipe JSON files have different structures dependent on their type.",
-                "There are 3 types of recipes, Furnace, Shaped and Shapeless."
+                "Recipe JSON files have different structures dependent on their type."
             ],
             "sections": [
                 {
                     "name": "Furnace Recipe",
                     "level": 2,
                     "content": [
-                        "Represents a furnace recipe for a furnace.'Input' items will burn and transform into items specified in 'output'.."
+                        "Represents a furnace recipe for a furnace.'Input' items will burn and transform into items specified in 'output'."
                     ],
                     "sections": [
                         {
@@ -58,7 +57,7 @@
                     "name": "Potion Brewing Container Recipe",
                     "level": 2,
                     "content": [
-                        "Represents a Potion Brewing Container Recipe.."
+                        "Represents a Potion Brewing Container Recipe."
                     ],
                     "sections": [
                         {
@@ -98,7 +97,7 @@
                                     "content": [
                                         {
                                             "type": "code",
-                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_container\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_potion_sulphur\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion\",\n  \"reagent\": \"minecraft:gunpowder\",\n  \"output\": \"minecraft:splash_potion\",\n \n  }\n}"
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_container\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_potion_sulphur\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion\",\n  \"reagent\": \"minecraft:gunpowder\",\n  \"output\": \"minecraft:splash_potion\"\n  }\n}"
                                         }
                                     ]
                                 }
@@ -110,7 +109,7 @@
                     "name": "Potion Brewing Mix",
                     "level": 2,
                     "content": [
-                        "Represents a Potion Brewing Mix.."
+                        "Represents a Potion Brewing Mix."
                     ],
                     "sections": [
                         {
@@ -150,7 +149,7 @@
                                     "content": [
                                         {
                                             "type": "code",
-                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_mix\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_awkward_blaze_powder\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion_type:awkward\",\n  \"reagent\": \"minecraft:blaze_powder\",\n  \"output\": \"minecraft:potion_type:strength\",\n \n  }\n}"
+                                            "content": "{\n\"format_version\": \"1.12\",\n\"minecraft:recipe_brewing_mix\": {\n\"description\": {\n  \"identifier\": \"minecraft:brew_awkward_blaze_powder\"\n  },\n \n \"tags\": [ \"brewing_stand\" ],\n \n  \"input\": \"minecraft:potion_type:awkward\",\n  \"reagent\": \"minecraft:blaze_powder\",\n  \"output\": \"minecraft:potion_type:strength\"\n  }\n}"
                                         }
                                     ]
                                 }
@@ -163,7 +162,7 @@
                     "level": 2,
                     "content": [
                         "Represents a shaped crafting recipe for a crafting table.",
-                        "The key used in the pattern may be any single character except the 'space' character, which is reserved for empty slots in a recipe.."
+                        "The key used in the pattern may be any single character except the 'space' character, which is reserved for empty slots in a recipe."
                     ],
                     "sections": [
                         {
@@ -220,7 +219,7 @@
                     "name": "Shapeless Recipe",
                     "level": 2,
                     "content": [
-                        "Represents a shapeless crafting recipe.."
+                        "Represents a shapeless crafting recipe."
                     ],
                     "sections": [
                         {
@@ -267,9 +266,62 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Smithing Transform Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a Smithing Transform Recipe for the Smithing Table.",
+                        "This recipe transforms an item into another one, while retaining its properties."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "addition",
+                                            "Type": "item name or item tag",
+                                            "Description": "The item needed to perform the transform operation. In case of stackable items, only 1 item is consumed. The only accepted value is \"minecraft:netherite_ingot\"."
+                                        },
+                                        {
+                                            "Name": "base",
+                                            "Type": "item name or item tag",
+                                            "Description": "The item to transform. It's properties will be copied to \"result\". The only accepted values are armor and tools."
+                                        },
+                                        {
+                                            "Name": "result",
+                                            "Type": "item name",
+                                            "Description": "The item to transform to."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "The crafting stations the recipe is compatible with. The only accepted value is \"smithing_table\"."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Smithing Transform Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n \"format_version\": \"1.12\",\n \"minecraft:recipe_smithing_transform\": {\n  \"description\": {\n    \"identifier\": \"minecraft:smithing_netherite_boots\"\n   },\n  \n  \"tags\": [ \"smithing_table\" ],\n  \n   \"base\": \"minecraft:diamond_boots\",\n   \"addition\": \"minecraft:netherite_ingot\",\n   \"result\": \"minecraft:netherite_boots\"\n }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
     ],
-    "__OBJECTHASH__": "3f1574a6d2008293aa9130c71f79755b6e87f1ef"
+    "__OBJECTHASH__": "646862ebb5fa5a921cdebf20cd48f4af4ac1effc"
 }

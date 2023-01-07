@@ -297,7 +297,7 @@ const Extractors = [
             delete tree.enumerableProperties.totalTicks;
             delete flatMap.totalTicks;
             target.scopeTree = tree;
-            // target.scopeFlatMap = sortObjectKey(flatMap);
+            target.scopeKeys = Object.keys(flatMap).sort();
         }
     },
     {
@@ -456,6 +456,161 @@ const Extractors = [
             target.blockTags = sortObjectKey(blockTags);
         }
     },
+    // {
+    //     name: 'blockData',
+    //     async extract(target, frame, session) {
+    //         parseOrThrow(await frame.evaluate(() => {
+    //             const tickQueue = [];
+    //             const tickHandle = Minecraft.world.events.tick.subscribe(() => {
+    //                 while (tickQueue.length) {
+    //                     tickQueue.shift()();
+    //                 }
+    //             });
+    //             const player = [...Minecraft.world.getPlayers()][0];
+    //             const { dimension } = player;
+    //             const blockTypes = Minecraft.MinecraftBlockTypes.getAllBlockTypes();
+    //             const playerLocation = player.location;
+    //             const base = [Math.floor(playerLocation.x), Math.floor(playerLocation.y), Math.floor(playerLocation.z)];
+    //             const blockDataCount = 16;
+    //             async function asyncOp() {
+    //                 const result = {};
+    //                 const fillCommand = [
+    //                     'fill',
+    //                     base[0] + 1, base[1], base[2] - 1,
+    //                     base[0] + blockDataCount * 2 + 1, base[1] + 2, base[2] + 1,
+    //                     'barrier'
+    //                 ].join(' ');
+    //                 for (let i = 0; i < blockTypes.length; i++) {
+    //                     const blockType = blockTypes[i];
+    //                     const statusPromptCommand = [
+    //                         'title', '@s', 'actionbar', `${i}/${blockTypes.length}:${blockType.id}`
+    //                     ].join(' ');
+    //                     player.runCommandAsync(statusPromptCommand);
+    //                     try {
+    //                         await player.runCommandAsync(fillCommand);
+    //                     } catch (err) {
+    //                         // No blocks to fill barriar
+    //                     }
+    //                     const promises = [];
+    //                     for (let j = 0; j < blockDataCount; j++) {
+    //                         const blockLocation = new Minecraft.BlockLocation(base[0] + j * 2 + 2, base[1] + 1, base[2]);
+    //                         const setBlockCommand = [
+    //                             'setblock',
+    //                             blockLocation.x, blockLocation.y, blockLocation.z,
+    //                             blockType.id, j
+    //                         ].join(' ');
+    //                         const promise = player.runCommandAsync(setBlockCommand)
+    //                             .then(() => new Promise((resolve) => { tickQueue.push(resolve); }))
+    //                             .then(() => dimension.getBlock(blockLocation));
+    //                         promises.push(promise);
+    //                     }
+    //                     const setBlockResults = await Promise.allSettled(promises);
+    //                     result[blockType.id] = setBlockResults.map((e) => {
+    //                         if (e.status === 'rejected') {
+    //                             return String(e.reason);
+    //                         }
+    //                         if (e.value.typeId === blockType.id) {
+    //                             const properties = {};
+    //                             const blockProperties = e.value.permutation.getAllProperties();
+    //                             blockProperties.forEach((prop) => {
+    //                                 properties[prop.name] = prop.value;
+    //                             });
+    //                             return properties;
+    //                         }
+    //                         return `converted to ${e.value.typeId}`;
+    //                     });
+    //                 }
+    //                 const cleanCommand = [
+    //                     'fill',
+    //                     base[0] + 1, base[1], base[2] - 1,
+    //                     base[0] + blockDataCount * 2 + 1, base[1] + 2, base[2] + 1,
+    //                     'air'
+    //                 ].join(' ');
+    //                 try {
+    //                     await player.runCommandAsync(cleanCommand);
+    //                 } catch (err) {
+    //                     // No blocks to fill air
+    //                 }
+    //                 return result;
+    //             }
+    //             asyncOp().then((result) => {
+    //                 console.info(`[BlockData Extractor]${JSON.stringify(result)}`);
+    //             }).catch((error) => {
+    //                 console.info(`[BlockData Extractor]ERROR: ${error}`);
+    //             }).finally(() => {
+    //                 Minecraft.world.events.tick.unsubscribe(tickHandle);
+    //             });
+    //             return 'null';
+    //         }));
+    //         session.continue();
+    //         const res = await pEvent(session, 'log', (ev) => ev.message.startsWith('[BlockData Extractor]'));
+    //         session.pause();
+    //         const ret = res.message.replace('[BlockData Extractor]', '');
+    //         if (ret.startsWith('ERROR')) {
+    //             throw new Error(ret);
+    //         } else {
+    //             const blockDataMap = JSON.parse(ret);
+    //             for (const [id, states] of Object.entries(blockDataMap)) {
+    //                 const blockDescription = target.blocks[id];
+    //                 const defaultState = states[0];
+    //                 if (typeof defaultState === 'object') {
+    //                     const filteredStates = states.map((e, i) => {
+    //                         if (i === 0) return e;
+    //                         if (typeof e === 'object') {
+    //                             return e;
+    //                         }
+    //                         return null;
+    //                     });
+    //                     const nonNullCount = filteredStates.reduce((acc, e) => acc + (e !== null ? 1 : 0));
+    //                     if (nonNullCount <= 1) continue;
+    //                     const allDataBitValues = [];
+    //                     let bitCount = 0;
+    //                     // eslint-disable-next-line no-bitwise
+    //                     for (let i = 1, j = 1; j < filteredStates.length; i += 1, j <<= 1) {
+    //                         allDataBitValues.push([0, 1]);
+    //                         bitCount = i;
+    //                     }
+    //                     for (const property of blockDescription.properties) {
+    //                         const dataValueMap = {};
+    //                         for (const validValue of property.validValues) {
+    //                             const statedDataBits = [];
+    //                             const invalidDataBits = [];
+    //                             for (let i = 0; i < filteredStates.length; i++) {
+    //                                 const bits = [];
+    //                                 // eslint-disable-next-line no-bitwise
+    //                                 for (let j = 1; j < filteredStates.length; j <<= 1) {
+    //                                     // eslint-disable-next-line no-bitwise
+    //                                     bits.push((i & j) === j ? 1 : 0);
+    //                                 }
+    //                                 if (!filteredStates[i]) {
+    //                                     invalidDataBits.push(bits);
+    //                                 } else if (filteredStates[i][property.name] === validValue) {
+    //                                     statedDataBits.push(bits);
+    //                                 }
+    //                             }
+    //                             const simplifiedState = simplifyStateAndCheck(allDataBitValues, statedDataBits, invalidDataBits);
+    //                             const stateBitsExpr = [];
+    //                             for (const state of simplifiedState) {
+    //                                 const bitExpr = [];
+    //                                 for (let i = 0; i < bitCount; i++) {
+    //                                     if (i in state) {
+    //                                         bitExpr.push(state[i]);
+    //                                     } else {
+    //                                         bitExpr.push('x');
+    //                                     }
+    //                                 }
+    //                                 bitExpr.reverse();
+    //                                 stateBitsExpr.push(bitExpr.join(''));
+    //                             }
+    //                             dataValueMap[validValue] = stateBitsExpr.join(' | ');
+    //                         }
+    //                         property.dataValueMap = dataValueMap;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // },
     {
         name: 'items',
         async extract(target, frame) {
