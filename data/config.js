@@ -76,9 +76,9 @@ export const packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: '1.19.60.25',
+        version: '1.19.60.26',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.60.25.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.60.26.apk',
         // 可用分支
         branches: [
             'vanilla',
