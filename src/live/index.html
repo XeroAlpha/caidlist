@@ -231,7 +231,7 @@
                     const speed = (1000 / hb.stepSpent).toFixed(1);
                     const fps = ((hb.reactFrameCount / hb.reactInterval) * 1000).toFixed(1);
                     text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}张/条 ${fps} fps）`);
-                    if (hb.approxLength) {
+                    if (hb.approxLength > 0) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
                         text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
                         text.push(`剩余时间：约${timeLeftString(hb.timeLeft / 1000)} - 平均${averageSpeed}条/秒`);

@@ -1,4 +1,4 @@
-import { mkdirSync, existsSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
+import { mkdirSync, existsSync, readFileSync, unlinkSync, writeFileSync, statSync } from 'fs';
 import nodePath from 'path';
 import { createInterface } from 'readline';
 import { URL, fileURLToPath } from 'url';
@@ -27,7 +27,7 @@ export const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve,
 
 /**
  * Examples:
- * 1. cachedOutput(id [, nullValue = undefined]) => cache ?? nullValue
+ * 1. cachedOutput(id [, nullValue = undefined], expires) => cache ?? nullValue
  *
  * 2. cachedOutput(id, nonNullValue) => nonNullValue
  *    cache = nonNullValue
@@ -35,23 +35,34 @@ export const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve,
  * 3. cachedOutput(id, Promise.resolve(any)) => Promise resolves any
  *    cache = await valueOrProcessor();
  *
- * 4. cachedOutput(id, () => any) => cache ?? any
+ * 4. cachedOutput(id, () => any, expires) => cache ?? any
  *    cache = cache ?? valueOrProcessor()
  *
- * 5. cachedOutput(id, () => Promise.resolve(any)) => cache ?? Promise resolves any
+ * 5. cachedOutput(id, () => Promise.resolve(any), expires) => cache ?? Promise resolves any
  *    cache = cache ?? await valueOrProcessor()
+ *
+ * When `expires` is `Date`, it refers to the expire timestamp (cache will expire after it),
+ * otherwise it refers to the milliseconds the cache takes to expire.
  */
-export function cachedOutput(id, valueOrProcessor) {
+export function cachedOutput(id, valueOrProcessor, expires) {
     const path = projectPath(id, 'json');
     let useCache = existsSync(path);
     let processor;
-    if (valueOrProcessor == null) {
+    if (valueOrProcessor === undefined) {
         if (!useCache) return null;
     } else if (valueOrProcessor instanceof Function) {
         processor = valueOrProcessor;
     } else {
         useCache = false;
         processor = () => valueOrProcessor;
+    }
+    if (useCache && expires !== undefined) {
+        const { mtime } = statSync(path);
+        if (expires instanceof Date) {
+            useCache = mtime < expires;
+        } else if (typeof expires === 'number') {
+            useCache = Date.now() - mtime.getTime() < expires;
+        }
     }
     if (useCache) {
         try {
@@ -68,7 +79,8 @@ export function cachedOutput(id, valueOrProcessor) {
             writeFileSync(path, CommentJSON.stringify(outputResolve, null, 4));
             return outputResolve;
         });
-    } if (output !== undefined) {
+    }
+    if (output !== undefined) {
         writeFileSync(path, CommentJSON.stringify(output, null, 4));
     }
     return output;

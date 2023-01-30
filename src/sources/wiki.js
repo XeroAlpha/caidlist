@@ -140,5 +140,5 @@ export default async function fetchStandardizedTranslation() {
             ...bedwOthers,
             ...mcwzhOthers
         });
-    });
+    }, 24 * 60 * 60 * 1000);
 }

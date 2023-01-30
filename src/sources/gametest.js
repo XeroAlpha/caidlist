@@ -339,10 +339,22 @@ const Extractors = [
         name: 'blocks',
         async extract(target, frame) {
             const blockInfoList = parseOrThrow(await frame.evaluate(() => {
+                const compat = {
+                    newBlockPos(x, y, z) {
+                        if (Minecraft.BlockLocation) {
+                            return new Minecraft.BlockLocation(x, y, z);
+                        }
+                        return { x, y, z };
+                    },
+                    getBlockValidValues(p) {
+                        if (p.getValidValues) return p.getValidValues();
+                        return p.validValues;
+                    }
+                };
                 const blockTypes = Minecraft.MinecraftBlockTypes.getAllBlockTypes();
                 const player = [...Minecraft.world.getPlayers()][0];
                 const playerPos = player.location;
-                const playerBlockPos = new Minecraft.BlockLocation(playerPos.x, playerPos.y, playerPos.z);
+                const playerBlockPos = compat.newBlockPos(playerPos.x, playerPos.y, playerPos.z);
                 const currentBlock = player.dimension.getBlock(playerBlockPos);
                 const originPermutation = currentBlock.permutation;
                 const result = {};
@@ -353,7 +365,7 @@ const Extractors = [
                     const basePermutation = blockType.createDefaultBlockPermutation();
                     const properties = basePermutation.getAllProperties().map((property) => ({
                         name: property.name,
-                        validValues: property.validValues.slice(),
+                        validValues: compat.getBlockValidValues(property),
                         defaultValue: property.value
                     }));
                     const loopFields = properties.map((property) => ({

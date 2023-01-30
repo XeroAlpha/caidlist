@@ -38,6 +38,87 @@ function guessTruncatedString(truncatedStr, startsWith) {
     return null;
 }
 
+/**
+ * Only deletions both in A and B are accepted.
+ * @param {string[]} base
+ * @param {string[]} listA
+ * @param {string[]} listB
+ */
+function mergeOrderedList(base, listA, listB) {
+    const chunks = [];
+    let ai = 0;
+    let bi = 0;
+    let ci = 0;
+    for (;;) {
+        if (ci >= base.length) {
+            if (ai < listA.length || bi < listB.length) {
+                chunks.push({
+                    a: listA.slice(ai),
+                    b: listB.slice(bi),
+                    c: []
+                });
+            }
+            break;
+        }
+        const a = listA[ai];
+        const b = listB[bi];
+        const c = base[ci];
+        if (a === b && b === c) {
+            ai++; bi++; ci++;
+            chunks.push({
+                common: true,
+                c
+            });
+        } else {
+            const startCi = ci;
+            for (;;) {
+                if (ci >= base.length) {
+                    chunks.push({
+                        a: listA.slice(ai),
+                        b: listB.slice(bi),
+                        c: []
+                    });
+                    ai = listA.length;
+                    bi = listB.length;
+                    break;
+                }
+                const current = base[ci];
+                const commonA = listA.indexOf(current, ai);
+                const commonB = listB.indexOf(current, bi);
+                if (commonA >= 0 && commonB >= 0) {
+                    chunks.push({
+                        a: listA.slice(ai, commonA),
+                        b: listB.slice(bi, commonB),
+                        c: base.slice(startCi, ci)
+                    });
+                    ai = commonA; bi = commonB;
+                    break;
+                }
+                ci++;
+            }
+        }
+    }
+    const merged = [];
+    const conflicts = [];
+    chunks.forEach((e) => {
+        if (e.common) {
+            merged.push(e.c);
+        } else if (e.a.length && e.b.length) {
+            if (e.a.length === e.b.length && e.a.every((k, i) => e.b[i] === k)) {
+                merged.push(...e.a);
+            } else {
+                conflicts.push(e);
+                merged.push(...e.c);
+            }
+        } else if (e.a.length) {
+            merged.push(...e.a);
+        } else if (e.b.length) {
+            merged.push(...e.b);
+        }
+    });
+    return { merged, conflicts, hasConflicts: conflicts.length > 0 };
+}
+
 async function analyzeCommandAutocompletionFast(cx, device, screen, command, progressName, approxLength) {
     // 初始状态：游戏HUD
     const autocompletions = [];
@@ -202,7 +283,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
             });
             screen.log(`Recognized: ${recogizedCommand}`);
             autocompletions.push(autocompletion);
-            if (approxLength) {
+            if (approxLength > 0) {
                 const stepSpentAvg = (now - timeStart) / stepCount;
                 const percentage = ((autocompletions.length / approxLength) * 100).toFixed(1);
                 const timeLeft = (approxLength - autocompletions.length) * stepSpentAvg;
@@ -243,15 +324,30 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
     if (!result) {
         const progressName = `${version}.${branch.id}.${name.replace(/\s+/g, '_')}`;
         screen.updateStatus({ enumId: name, commandPrefix });
-        result = await analyzeCommandAutocompletionFast(
-            cx,
-            device,
-            screen,
-            commandPrefix,
-            progressName,
-            cache && cache.length
-        );
-        if (exclusion) result = result.filter((e) => !exclusion.includes(e));
+
+        const cachedResult = cache ? cache.result : [];
+        for (;;) {
+            const previousResult = result || cachedResult;
+            let resultSample = await analyzeCommandAutocompletionFast(
+                cx,
+                device,
+                screen,
+                commandPrefix,
+                progressName,
+                previousResult.length
+            );
+            if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
+            const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);
+            result = mergedResult.merged;
+            if (!mergedResult.hasConflicts) {
+                const additions = mergedResult.merged.filter((e) => !previousResult.includes(e));
+                const deletions = previousResult.filter((e) => !mergedResult.merged.includes(e));
+                if (additions.length === 0 && deletions.length === 0) break;
+                console.log('Changes detected, retry to confirm...');
+            } else {
+                console.log('Conflicts detected, retrying...');
+            }
+        }
         cachedOutput(cacheId, { packageVersion, result, length: result.length });
     }
     return (target[id] = result);
