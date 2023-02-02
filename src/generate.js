@@ -24,6 +24,7 @@ import {
     setInlineCommentAfterField,
     deepCopy
 } from './util/common.js';
+import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockState.js';
 
 const BASE_LANG_ID = 'en_us';
 const USER_LANG_ID = 'zh_cn';
@@ -82,6 +83,13 @@ const documentationMapNames = [
     ['entityTrigger', '实体触发器'],
     ['featureType', '地物类型'],
     ['molangQuery', 'Molang查询函数']
+];
+const gtMapNames = [
+    ['block', '方块'],
+    ['item', '物品'],
+    ['entity', '实体'],
+    ['blockState', '方块状态'],
+    ['blockTag', '方块标签']
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, coreVersion } = cx;
@@ -491,7 +499,107 @@ async function generateDocumentationOutputFiles(cx) {
 }
 
 async function generateGameTestOutputFiles(cx) {
-    await analyzeGameTestEnumsCached(cx);
+    const { version, branch } = cx;
+    const ids = await analyzeGameTestEnumsCached(cx);
+    const standardizedTranslation = await fetchStandardizedTranslation();
+    const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
+    const userTranslation = loadUserTranslation();
+    console.log('Matching translations...');
+    const translationResultMaps = {};
+    const commonOptions = {
+        resultMaps: translationResultMaps,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true),
+        javaEditionLangMap: javaEditionLang,
+        autoMatch: ['stdTrans']
+    };
+    matchTranslations({
+        ...commonOptions,
+        name: 'glossary',
+        originalArray: Object.keys(userTranslation.glossary),
+        translationMap: userTranslation.glossary,
+        stdTransMap: cascadeMap(standardizedTranslation, [], true),
+        autoMatch: null
+    });
+    const removePrefix = (s) => s.replace(/^minecraft:/, '');
+    const blockIds = Object.keys(ids.blocks);
+    const itemIds = ids.items;
+    const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e));
+    const entityIds = ids.entities;
+    matchTranslations({
+        ...commonOptions,
+        name: 'block',
+        originalArray: blockIds.map(removePrefix),
+        translationMap: userTranslation.block,
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        postProcessor(result) {
+            const mergedResult = {};
+            blockIds.forEach((key) => {
+                mergedResult[key] = result[removePrefix(key)];
+            });
+            return mergedResult;
+        }
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: 'item',
+        originalArray: itemIdsExclusive.map(removePrefix),
+        translationMap: userTranslation.item,
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'BlockSprite'], true),
+        postProcessor(result) {
+            const mergedResult = {};
+            const { block } = translationResultMaps;
+            itemIds.forEach((key) => {
+                if (key in block) {
+                    CommentJSON.assign(mergedResult, block, [key]);
+                } else {
+                    mergedResult[key] = result[removePrefix(key)];
+                }
+            });
+            return mergedResult;
+        }
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: 'entity',
+        originalArray: entityIds,
+        translationMap: userTranslation.entity,
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true)
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: 'blockState',
+        originalArray: buildBSTransKeys(ids.blockProperties),
+        translationMap: userTranslation.blockState,
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        autoMatch: [],
+        postProcessor(result) {
+            const { block } = translationResultMaps;
+            return buildBSDocFromTransMap(ids.blockProperties, result, block);
+        }
+    });
+    const blockTagIds = Object.keys(ids.blockTags);
+    matchTranslations({
+        ...commonOptions,
+        name: 'blockTag',
+        originalArray: blockTagIds,
+        translationMap: userTranslation.blockTag,
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        autoMatch: []
+    });
+    delete translationResultMaps.glossary;
+
+    console.log('Exporting files...');
+    writeTransMapTextZip(cx, {
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, 'zip'),
+        transMaps: translationResultMaps,
+        transMapNames: gtMapNames
+    });
+    writeTransMapJson(cx, {
+        outputFile: projectPath(`output.web.${version}.${branch.id}`, 'json'),
+        transMaps: translationResultMaps,
+        transMapNames: gtMapNames
+    });
+    saveUserTranslation(userTranslation);
 }
 
 const versionInfoMap = {
@@ -551,9 +659,8 @@ const branchInfoMap = {
         patch: { from: 'vanilla', uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962' }
     },
     gametest: {
-        name: 'GameTest',
-        description: '通过GameTest创建的ID表',
-        hideOnWeb: true
+        name: 'Script API',
+        description: '通过 Script API / GameTest 获取的ID表'
     },
     translator: {
         name: '翻译专用',
