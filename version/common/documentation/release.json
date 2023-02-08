@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.50.2",
-    "__COMMITHASH__": "311d63c93481965ccdf29f80d5f5b2fbdde0930d",
+    "__VERSION__": "1.19.60.3",
+    "__COMMITHASH__": "cb24cd72bbb9c54729a1b0506ef4d47c53e950cc",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -289,6 +289,14 @@
                 {
                     "name": "Filters",
                     "sections": [
+                        {
+                            "name": "actor_health",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
                         {
                             "name": "bool_property",
                             "sections": [
@@ -842,7 +850,23 @@
                             ]
                         },
                         {
+                            "name": "on_fire",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
                             "name": "on_ground",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "on_hot_block",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -875,6 +899,14 @@
                         },
                         {
                             "name": "surface_mob",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "target_distance",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -2575,6 +2607,9 @@
                     ]
                 },
                 {
+                    "name": "Materials"
+                },
+                {
                     "name": "Molang integration"
                 },
                 {
@@ -2676,6 +2711,19 @@
                                     "sections": [
                                         {
                                             "name": "Shapeless Recipe Example:"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Smithing Transform Recipe",
+                            "sections": [
+                                {
+                                    "name": "Parameters",
+                                    "sections": [
+                                        {
+                                            "name": "Smithing Transform Recipe Example:"
                                         }
                                     ]
                                 }
@@ -2824,7 +2872,6 @@
         "infiniburn_bit": "Determines if a block should burn infinitely",
         "item_frame_map_bit": "Describes if an item frame block has a map in it",
         "item_frame_photo_bit": "Describes if an item frame block has a photo in it",
-        "last_interacted_slot": "Determines the redstone signal that represents the last book interacted in the chiseled bookshelf",
         "liquid_depth": "Determines the level of liquid blocks",
         "lit": "Determines if a block is lit or not",
         "moisturized_amount": "Determines the moisture level of crops",
@@ -2903,6 +2950,7 @@
         "minecraft:azalea_leaves": "",
         "minecraft:azalea_leaves_flowered": "",
         "minecraft:bamboo": "",
+        "minecraft:bamboo_block": "",
         "minecraft:bamboo_button": "",
         "minecraft:bamboo_door": "",
         "minecraft:bamboo_double_slab": "",
@@ -3544,6 +3592,7 @@
         "minecraft:stonecutter": "",
         "minecraft:stonecutter_block": "",
         "minecraft:stripped_acacia_log": "",
+        "minecraft:stripped_bamboo_block": "",
         "minecraft:stripped_birch_log": "",
         "minecraft:stripped_crimson_hyphae": "",
         "minecraft:stripped_crimson_stem": "",
@@ -3734,6 +3783,7 @@
         "skeleton_horse": "0x02186010 (0x26)",
         "slime": "0x00002853 (0x37)",
         "small_fireball": "0x04194398 (0x94)",
+        "sniffer": "0x00005003 (0x139)",
         "snow_golem": "0x00000789 (0x21)",
         "snowball": "0x04194385 (0x81)",
         "spider": "0x00264995 (0x35)",
@@ -4631,6 +4681,7 @@
         "minecraft:weight": "This component allows players to give a priority to how often that mob should spawn. Mobs with lower weight values have a higher chance to spawn than mobs with higher weight values."
     },
     "entityFilter": {
+        "actor_health": "Tests the health of an actor.",
         "bool_property": "Returns true when the bool actor property matches the value provided.",
         "clock_time": "Compares the current time with a float value in the range (0.0, 1.0).",
         "distance_to_nearest_player": "Compares the distance to the nearest Player with a float value.",
@@ -4700,11 +4751,14 @@
         "light_level": "Tests is the mob is outside of the specified light level range (0, 16).",
         "moon_intensity": "Compares the current moon intensity with a float value in the range (0.0, 1.0)",
         "moon_phase": "Compares the current moon phase with an integer value in the range (0, 7).",
+        "on_fire": "Tests if the subject is on fire.",
         "on_ground": "Returns true when the subject entity is on ground.",
+        "on_hot_block": "Tests if the subject is on a hot block.",
         "on_ladder": "Returns true when the subject entity is on a ladder.",
         "random_chance": "Returns true if the random chance rolls 0 out of a specified max range.",
         "rider_count": "Returns the number of riders on this entity.",
         "surface_mob": "Tests if the subject is a surface mob.",
+        "target_distance": "Tests the distance between the calling entity and its target.",
         "trusts": "Returns true if the subject is trusted by entity.",
         "weather": "Tests the current weather in the dimension against a provided weather value.",
         "weather_at_position": "Tests the current weather, at the actor's position, against a provided weather value."
@@ -8732,7 +8786,7 @@
             ]
         },
         "minecraft:behavior.ranged_attack": {
-            "description": "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks.",
+            "description": "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.",
             "children": [
                 {
                     "name": "attack_interval",
@@ -10140,6 +10194,23 @@
                     "type": "Decimal",
                     "defaultValue": "0.0",
                     "description": "Distance in blocks this mob can be interested by a player holding an item they like"
+                }
+            ]
+        },
+        "minecraft:behavior.trade_with_player": {
+            "description": "Allows the player to trade with this mob. When the goal starts, it will stop the mob's navigation.",
+            "children": [
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Conditions that need to be met for the behavior to start."
+                },
+                {
+                    "name": "max_distance_from_player",
+                    "type": "Decimal",
+                    "defaultValue": "8.00",
+                    "description": "The max distance that the mob can be from the player before exiting the goal."
                 }
             ]
         },
@@ -12169,6 +12240,12 @@
                     "description": "Time in seconds before this entity can be interacted with after being attacked."
                 },
                 {
+                    "name": "equip_item_slot",
+                    "type": "Integer",
+                    "defaultValue": "-1",
+                    "description": "The entity's equipment slot to equip the item to, if any, upon successful interaction."
+                },
+                {
                     "name": "health_amount",
                     "type": "Integer",
                     "defaultValue": "0",
@@ -13437,6 +13514,12 @@
                     "type": "Boolean",
                     "defaultValue": "true",
                     "description": "Whether or not the entity is affected by gravity."
+                },
+                {
+                    "name": "push_towards_closest_space",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Whether or not the entity should be pushed towards the nearest open area when stuck inside a block."
                 }
             ]
         },
@@ -13672,7 +13755,7 @@
                     "name": "triggered_event",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Event to run we attempt to trigger a raid on the village."
+                    "description": "Event to run when a raid is triggered on the village."
                 }
             ]
         },
@@ -13905,19 +13988,43 @@
             ]
         },
         "minecraft:shooter": {
-            "description": "Defines the entity's ranged attack behavior.",
+            "description": "Defines the entity's ranged attack behavior. The \"minecraft:behavior.ranged_attack\" goal uses this component to determine which projectiles to shoot.",
             "children": [
                 {
                     "name": "aux_val",
                     "type": "Integer",
                     "defaultValue": "-1",
-                    "description": "ID of the Potion effect to be applied on hit"
+                    "description": "ID of the Potion effect for the default projectile to be applied on hit."
                 },
                 {
                     "name": "def",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Actor definition to use as projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile"
+                    "description": "Actor definition to use as the default projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile."
+                },
+                {
+                    "name": "magic",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Sets whether the projectiles being used are flagged as magic. If set, the ranged attack goal will not be used at the same time as other magic goals, such as minecraft:behavior.drink_potion"
+                },
+                {
+                    "name": "power",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Velocity in which the projectiles will be shot at. A power of 0 will be overwritten by the default projectile throw power."
+                },
+                {
+                    "name": "projectiles",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of projectiles that can be used by the shooter. Projectiles are evaluated in the order of the list; After a projectile is chosen, the rest of the list is ignored."
+                },
+                {
+                    "name": "sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound that is played when the shooter shoots a projectile."
                 }
             ]
         },
@@ -14469,13 +14576,19 @@
             ]
         },
         "minecraft:variable_max_auto_step": {
-            "description": "Entities with this component will have a maximum auto step height that is different depending on wether they are on a block that prevents jumping. Incompatible with \"runtime_identifier\": \"minecraft:horse\".",
+            "description": "Entities with this component will have a maximum auto step height that is different depending on whether they are on a block that prevents jumping. Incompatible with \"runtime_identifier\": \"minecraft:horse\".",
             "children": [
                 {
                     "name": "base_value",
                     "type": "Decimal",
                     "defaultValue": "0.5625",
                     "description": "The maximum auto step height when on any other block."
+                },
+                {
+                    "name": "controlled_value",
+                    "type": "Decimal",
+                    "defaultValue": "0.5625",
+                    "description": "The maximum auto step height when on any other block and controlled by the player."
                 },
                 {
                     "name": "jump_prevented_value",
@@ -14994,6 +15107,7 @@
         "query.is_leashed": "Returns 1.0 if the entity is leashed to something, else it returns 0.0.",
         "query.is_levitating": "Returns 1.0 if the entity is levitating, else it returns 0.0.",
         "query.is_lingering": "Returns 1.0 if the entity is lingering, else it returns 0.0.",
+        "query.is_local_player": "Takes no arguments. Returns 1.0 if the entity is the local player for the current game window, else it returns 0.0. In splitscreen returns 0.0 for the other local players for other views. Always returns 0.0 if used in a behavior pack.",
         "query.is_moving": "Returns 1.0 if the entity is moving, else it returns 0.0.",
         "query.is_name_any": "Takes one or more arguments. If the entity's name is any of the specified string values, returns 1.0. Otherwise returns 0.0. A preferred query to query.get_name, as it can be adjusted by Mojang to avoid breaking content if names are changed.",
         "query.is_on_fire": "Returns 1.0 if the entity is on fire, else it returns 0.0.",

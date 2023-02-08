@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.19.50.2",
+    "version": "1.19.60.3",
     "content": [],
     "sections": [
         {
@@ -1261,6 +1261,10 @@
                                     "Description": "Returns 1.0 if the entity is lingering, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.is_local_player",
+                                    "Description": "Takes no arguments. Returns 1.0 if the entity is the local player for the current game window, else it returns 0.0. In splitscreen returns 0.0 for the other local players for other views. Always returns 0.0 if used in a behavior pack."
+                                },
+                                {
                                     "Name": "query.is_moving",
                                     "Description": "Returns 1.0 if the entity is moving, else it returns 0.0."
                                 },
@@ -1881,6 +1885,10 @@
                                 {
                                     "Pack min_engine_version": "1.18.20",
                                     "Description": "Fixed Logical AND to evaluate before Logical OR, and for comparison operators to evaluate before equality operators. For example `A && B || C` now evaluates as `(A && B) || C` instead of `A && (B || C)`. And `A < B == C > D` now evalutes as `(A < B) == (C > D)` instead of `((A < B) == C) > D`."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.19.60",
+                                    "Description": "Fixed error where dividing by a dynamically determined negative variable resulted in a division by the absolute (positive) value of the number instead."
                                 }
                             ]
                         }
@@ -1889,5 +1897,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "a94e1be091186e5f873a61d9c693fdd89547d354"
+    "__OBJECTHASH__": "5a77bb593006aafddfdd023a71cacb54bffe1deb"
 }

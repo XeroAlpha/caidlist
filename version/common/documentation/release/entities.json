@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.50.2",
+    "version": "1.19.60.3",
     "content": [],
     "sections": [
         {
@@ -769,6 +769,136 @@
                 "All tests in a 'none_of' group must fail in order for the group to pass."
             ],
             "sections": [
+                {
+                    "name": "actor_health",
+                    "level": 2,
+                    "content": [
+                        "Tests the health of an actor.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Integer",
+                                    "Default": "",
+                                    "Description": "(Required) An integer value."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"actor_health\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"actor_health\", \"value\": \"0\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
                 {
                     "name": "bool_property",
                     "level": 2,
@@ -2284,6 +2414,10 @@
                                                 },
                                                 {
                                                     "Options": "head",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "inventory",
                                                     "Description": ""
                                                 },
                                                 {
@@ -10169,6 +10303,136 @@
                     ]
                 },
                 {
+                    "name": "on_fire",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is on fire.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"on_fire\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"on_fire\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "on_ground",
                     "level": 2,
                     "content": [
@@ -10293,6 +10557,136 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"on_ground\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "on_hot_block",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is on a hot block.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"on_hot_block\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"on_hot_block\" }"
                                 }
                             ]
                         }
@@ -10813,6 +11207,136 @@
                                 {
                                     "type": "code",
                                     "content": "{ \"test\": \"surface_mob\" }"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "target_distance",
+                    "level": 2,
+                    "content": [
+                        "Tests the distance between the calling entity and its target.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 22,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"target_distance\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0.00\" }"
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": "{ \"test\": \"target_distance\", \"value\": \"0.00\" }"
                                 }
                             ]
                         }
@@ -16087,7 +16611,7 @@
                             "name": "minecraft:behavior.ranged_attack",
                             "level": 12,
                             "content": [
-                                "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks.",
+                                "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -17825,7 +18349,24 @@
                             "name": "minecraft:behavior.trade_with_player",
                             "level": 12,
                             "content": [
-                                "Allows the player to trade with this mob."
+                                "Allows the player to trade with this mob. When the goal starts, it will stop the mob's navigation.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start."
+                                        },
+                                        {
+                                            "Name": "max_distance_from_player",
+                                            "Type": "Decimal",
+                                            "Default Value": "8.00",
+                                            "Description": "The max distance that the mob can be from the player before exiting the goal."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -20487,6 +21028,12 @@
                                             "Description": "Time in seconds before this entity can be interacted with after being attacked."
                                         },
                                         {
+                                            "Name": "equip_item_slot",
+                                            "Type": "Integer",
+                                            "Default Value": "-1",
+                                            "Description": "The entity's equipment slot to equip the item to, if any, upon successful interaction."
+                                        },
+                                        {
                                             "Name": "health_amount",
                                             "Type": "Integer",
                                             "Default Value": "0",
@@ -21982,6 +22529,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "true",
                                             "Description": "Whether or not the entity is affected by gravity."
+                                        },
+                                        {
+                                            "Name": "push_towards_closest_space",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether or not the entity should be pushed towards the nearest open area when stuck inside a block."
                                         }
                                     ]
                                 }
@@ -22245,7 +22798,7 @@
                                             "Name": "triggered_event",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Event to run we attempt to trigger a raid on the village."
+                                            "Description": "Event to run when a raid is triggered on the village."
                                         }
                                     ]
                                 }
@@ -22611,7 +23164,7 @@
                             "name": "minecraft:shooter",
                             "level": 12,
                             "content": [
-                                "Defines the entity's ranged attack behavior.",
+                                "Defines the entity's ranged attack behavior. The \"minecraft:behavior.ranged_attack\" goal uses this component to determine which projectiles to shoot.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -22619,13 +23172,37 @@
                                             "Name": "aux_val",
                                             "Type": "Integer",
                                             "Default Value": "-1",
-                                            "Description": "ID of the Potion effect to be applied on hit"
+                                            "Description": "ID of the Potion effect for the default projectile to be applied on hit."
                                         },
                                         {
                                             "Name": "def",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile"
+                                            "Description": "Actor definition to use as the default projectile for the ranged attack. The actor definition must have the projectile component to be able to be shot as a projectile."
+                                        },
+                                        {
+                                            "Name": "magic",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Sets whether the projectiles being used are flagged as magic. If set, the ranged attack goal will not be used at the same time as other magic goals, such as minecraft:behavior.drink_potion"
+                                        },
+                                        {
+                                            "Name": "power",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.00",
+                                            "Description": "Velocity in which the projectiles will be shot at. A power of 0 will be overwritten by the default projectile throw power."
+                                        },
+                                        {
+                                            "Name": "projectiles",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of projectiles that can be used by the shooter. Projectiles are evaluated in the order of the list; After a projectile is chosen, the rest of the list is ignored."
+                                        },
+                                        {
+                                            "Name": "sound",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "Sound that is played when the shooter shoots a projectile."
                                         }
                                     ]
                                 }
@@ -23300,7 +23877,7 @@
                             "name": "minecraft:variable_max_auto_step",
                             "level": 12,
                             "content": [
-                                "Entities with this component will have a maximum auto step height that is different depending on wether they are on a block that prevents jumping. Incompatible with \"runtime_identifier\": \"minecraft:horse\".",
+                                "Entities with this component will have a maximum auto step height that is different depending on whether they are on a block that prevents jumping. Incompatible with \"runtime_identifier\": \"minecraft:horse\".",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -23309,6 +23886,12 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.5625",
                                             "Description": "The maximum auto step height when on any other block."
+                                        },
+                                        {
+                                            "Name": "controlled_value",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5625",
+                                            "Description": "The maximum auto step height when on any other block and controlled by the player."
                                         },
                                         {
                                             "Name": "jump_prevented_value",
@@ -24147,7 +24730,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.trade_with_player",
-                                            "ID": "-2048563493"
+                                            "ID": "13082946109325010651"
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.vex_copy_owner_target",
@@ -25766,5 +26349,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "723e3cc55c51dfad4baedccbdb132bf9fb775f64"
+    "__OBJECTHASH__": "d8b899d2642833a8a0cb3194d3ebcc707c6f0296"
 }
