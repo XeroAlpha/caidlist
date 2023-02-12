@@ -1,5 +1,23 @@
 [
     {
+        "source": "Water",
+        "bedrockLookup": {
+            "水": [
+                "item.compound.water.name",
+                "tile.flowing_water.name",
+                "tile.water.name"
+            ]
+        },
+        "javaLookup": {
+            "水": [
+                "block.minecraft.water"
+            ],
+            "": [
+                "painting.minecraft.water.title"
+            ]
+        }
+    },
+    {
         "source": "Lead",
         "bedrockLookup": {
             "铅": [
@@ -109,7 +127,7 @@
     {
         "source": "Warped Hanging Sign",
         "bedrockLookup": {
-            "诡异悬挂告示牌": [
+            "翘曲悬挂告示牌": [
                 "item.warped_hanging_sign.name"
             ]
         },
@@ -405,38 +423,6 @@
         }
     },
     {
-        "source": "Select",
-        "bedrockLookup": {
-            "选择": [
-                "hbui.CreateNewWorld.dlcCheckErrorModal.buttonSelectInputLegend",
-                "hbui.CreateNewWorldSideMenu.inputLegendSelect",
-                "hbui.EditorExpander.select",
-                "hbui.EditorTab.select",
-                "hbui.EditorToggleButton.select",
-                "hbui.EditorToggleContainerSample.selectToggle",
-                "hbui.EditorSelectionToolPanel.transformOriginSelect",
-                "hbui.PlayScreen.select",
-                "hbui.RealmsStories.imagePicker.select",
-                "hbui.TouchControlSelectionRoute.select",
-                "hbui.DropdownItem.select",
-                "hbui.EmptyStateMessage.buttonSelectInputLegend",
-                "hbui.RadioBox.select",
-                "hbui.Toggle.select",
-                "hbui.BaseTextField.select",
-                "controller.buttonTip.select",
-                "gui.select"
-            ],
-            "": [
-                "hbui.PlayScreen.designPreviewInputLegend"
-            ]
-        },
-        "javaLookup": {
-            "选择": [
-                "mco.template.button.select"
-            ]
-        }
-    },
-    {
         "source": "Hostile mobs spawn but deal less damage. Hunger bar depletes and drains health down to 5 hearts.",
         "bedrockLookup": {
             "会生成敌对生物，但其造成的伤害较少。饥饿条会消耗，且生命值降低至 5 颗心。": [
@@ -445,7 +431,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "敌对生物会生成，但伤害较低。生命值在饥饿值耗尽后最终会降至5颗心。": [
                 "options.difficulty.easy.info"
             ]
         }
@@ -458,7 +444,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "敌对生物会生成，伤害较高。饥饿值耗尽后最终会饿死。": [
                 "options.difficulty.hard.info"
             ]
         }
@@ -471,7 +457,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "敌对生物会生成，伤害适中。生命值在饥饿值耗尽后最终会降至半颗心。": [
                 "options.difficulty.normal.info"
             ]
         }
@@ -484,7 +470,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "不会生成绝大多数敌对生物。饥饿值不会消耗，且生命值自然恢复。": [
                 "options.difficulty.peaceful.info"
             ]
         }
@@ -497,7 +483,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "无拘无束地探索创造。可以飞行，材料取之不尽，且不受怪物伤害。": [
                 "selectWorld.gameMode.creative.info"
             ]
         }
@@ -510,7 +496,7 @@
             ]
         },
         "javaLookup": {
-            "": [
+            "探索未知的世界，尽情建造、收集、合成并与怪物战斗。": [
                 "selectWorld.gameMode.survival.info"
             ]
         }
@@ -542,6 +528,20 @@
         "javaLookup": {
             "正在下载": [
                 "mco.download.downloading"
+            ]
+        }
+    },
+    {
+        "source": "Experiments",
+        "bedrockLookup": {
+            "实验性游戏内容": [
+                "hbui.CreateNewWorldSideMenu.experimentalFeaturesTabLabel",
+                "createWorldScreen.experimentalgameplay"
+            ]
+        },
+        "javaLookup": {
+            "": [
+                "selectWorld.experiments"
             ]
         }
     },
@@ -610,12 +610,10 @@
     {
         "source": "Disabled",
         "bedrockLookup": {
-            "": [
-                "hbui.EditorDropdown.disabled",
-                "hbui.EditorTextField.disabled"
-            ],
             "已禁用": [
+                "hbui.EditorDropdown.disabled",
                 "hbui.EditorToggleContainerSample.disabledTitle",
+                "hbui.EditorTextField.disabled",
                 "hbui.Dropdown.narrationDisabled",
                 "hbui.Dropdown.stateDisabled",
                 "hbui.TextField.disabled",
@@ -632,10 +630,8 @@
     {
         "source": "Selected",
         "bedrockLookup": {
-            "": [
-                "hbui.EditorDropdown.selected"
-            ],
             "已选": [
+                "hbui.EditorDropdown.selected",
                 "hbui.TouchControlSelectionRoute.selected"
             ],
             "已选择": [
@@ -679,23 +675,6 @@
         "javaLookup": {
             "右手": [
                 "options.mainHand.right"
-            ]
-        }
-    },
-    {
-        "source": "Menu",
-        "bedrockLookup": {
-            "": [
-                "hbui.EditorMenuItem.menu"
-            ],
-            "菜单": [
-                "hbui.MenuButton.menu",
-                "feed.return"
-            ]
-        },
-        "javaLookup": {
-            "菜单": [
-                "key.keyboard.menu"
             ]
         }
     },
@@ -745,27 +724,6 @@
         "javaLookup": {
             "移除": [
                 "mco.configure.world.invites.remove.tooltip"
-            ]
-        }
-    },
-    {
-        "source": "World",
-        "bedrockLookup": {
-            "世界": [
-                "hbui.WorldCard.narration.componentRole",
-                "hbui.WorldListItem.narration.componentRole",
-                "realmsSettingsScreen.worldSectionTitle",
-                "storageManager.contentType.world",
-                "selectWorld.world",
-                "store.mashup.world"
-            ]
-        },
-        "javaLookup": {
-            "世界": [
-                "selectWorld.world"
-            ],
-            "": [
-                "createWorld.tab.world.title"
             ]
         }
     },
@@ -2287,6 +2245,28 @@
         "javaLookup": {
             "潜影弹": [
                 "entity.minecraft.shulker_bullet"
+            ]
+        }
+    },
+    {
+        "source": "Wither",
+        "bedrockLookup": {
+            "凋灵": [
+                "entity.wither.name"
+            ],
+            "凋零": [
+                "potion.wither"
+            ]
+        },
+        "javaLookup": {
+            "凋灵": [
+                "entity.minecraft.wither"
+            ],
+            "凋零": [
+                "effect.minecraft.wither"
+            ],
+            "": [
+                "painting.minecraft.wither.title"
             ]
         }
     },
@@ -4873,6 +4853,19 @@
         }
     },
     {
+        "source": "Burst",
+        "bedrockLookup": {
+            "爆裂状": [
+                "item.fireworksCharge.type.4"
+            ]
+        },
+        "javaLookup": {
+            "喷发状": [
+                "item.minecraft.firework_star.shape.burst"
+            ]
+        }
+    },
+    {
         "source": "Netherite Axe",
         "bedrockLookup": {
             "下界合金斧头": [
@@ -5346,20 +5339,6 @@
         "javaLookup": {
             "%s（之前被称为%s）加入了游戏": [
                 "multiplayer.player.joined.renamed"
-            ]
-        }
-    },
-    {
-        "source": "Game",
-        "bedrockLookup": {
-            "游戏": [
-                "options.category.game",
-                "options.group.game"
-            ]
-        },
-        "javaLookup": {
-            "": [
-                "createWorld.tab.game.title"
             ]
         }
     },
@@ -6555,9 +6534,7 @@
         },
         "javaLookup": {
             "你可以旁观，但不能互动": [
-                "selectWorld.gameMode.spectator.line1"
-            ],
-            "": [
+                "selectWorld.gameMode.spectator.line1",
                 "selectWorld.gameMode.spectator.info"
             ]
         }
@@ -6852,6 +6829,20 @@
         }
     },
     {
+        "source": "Bundles",
+        "bedrockLookup": {
+            "同捆包": [
+                "store.search.filters.bundles",
+                "store.search.filter.offer_type.bundles"
+            ]
+        },
+        "javaLookup": {
+            "": [
+                "dataPack.bundle.name"
+            ]
+        }
+    },
+    {
         "source": "Primary Power",
         "bedrockLookup": {
             "主要效果": [
@@ -7031,6 +7022,19 @@
         "javaLookup": {
             "干海带块": [
                 "block.minecraft.dried_kelp_block"
+            ]
+        }
+    },
+    {
+        "source": "Carrots",
+        "bedrockLookup": {
+            "": [
+                "tile.carrots.name"
+            ]
+        },
+        "javaLookup": {
+            "胡萝卜": [
+                "block.minecraft.carrots"
             ]
         }
     },
@@ -7890,6 +7894,22 @@
         "javaLookup": {
             "耕地": [
                 "block.minecraft.farmland"
+            ]
+        }
+    },
+    {
+        "source": "Fire",
+        "bedrockLookup": {
+            "火": [
+                "tile.fire.name"
+            ]
+        },
+        "javaLookup": {
+            "火": [
+                "block.minecraft.fire"
+            ],
+            "": [
+                "painting.minecraft.fire.title"
             ]
         }
     },
