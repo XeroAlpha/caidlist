@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.70.22",
-    "__COMMITHASH__": "15c1f335de4275212de8374b5e68ae579f556509",
+    "__VERSION__": "1.19.70.23",
+    "__COMMITHASH__": "61296b44d7b2895a34736f6796388cd02e0c0352",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1277,6 +1277,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.random_look_around_and_sit"
+                                },
+                                {
+                                    "name": "minecraft:behavior.random_search_and_dig"
                                 },
                                 {
                                     "name": "minecraft:behavior.random_sitting"
@@ -2834,6 +2837,7 @@
         "brewing_stand_slot_a_bit": "Determines if a bottle is shown in slot a of the brewing stand",
         "brewing_stand_slot_b_bit": "Determines if a bottle is shown in slot b of the brewing stand",
         "brewing_stand_slot_c_bit": "Determines if a bottle is shown in slot c of the brewing stand",
+        "brushed_progress": "Describes how \"brushed\" a block is",
         "button_pressed_bit": "Determines if a button is in the pressed state or not",
         "candles": "Describes how many extra candles are in the same block space",
         "cauldron_liquid": "Determines the type of liquid in a cauldron",
@@ -3116,6 +3120,7 @@
         "minecraft:daylight_detector": "",
         "minecraft:daylight_detector_inverted": "",
         "minecraft:deadbush": "",
+        "minecraft:decorated_pot": "",
         "minecraft:deepslate": "",
         "minecraft:deepslate_brick_double_slab": "",
         "minecraft:deepslate_brick_slab": "",
@@ -3620,12 +3625,15 @@
         "minecraft:stripped_warped_stem": "",
         "minecraft:structure_block": "",
         "minecraft:structure_void": "",
+        "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
         "minecraft:tallgrass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
         "minecraft:tnt": "",
         "minecraft:torch": "",
+        "minecraft:torchflower": "",
+        "minecraft:torchflower_crop": "",
         "minecraft:trapdoor": "",
         "minecraft:trapped_chest": "",
         "minecraft:trip_wire": "",
@@ -8707,6 +8715,107 @@
                 }
             ]
         },
+        "minecraft:behavior.random_search_and_dig": {
+            "description": "[EXPERIMENTAL] Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Valid target block type: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
+            "children": [
+                {
+                    "name": "cooldown_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0.000000, 0.000000]",
+                    "description": "Goal cooldown range in seconds."
+                },
+                {
+                    "name": "digging_duration_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0.000000, 0.000000]",
+                    "description": "Digging duration in seconds."
+                },
+                {
+                    "name": "find_valid_position_retries",
+                    "type": "Decimal",
+                    "defaultValue": "0.000000",
+                    "description": "Amount of retries to find a valid target position within search range."
+                },
+                {
+                    "name": "goal_radius",
+                    "type": "Decimal",
+                    "defaultValue": "1.500000",
+                    "description": "Distance in blocks within the entity to considers it has reached it's target position."
+                },
+                {
+                    "name": "item",
+                    "type": "Item Description Properties",
+                    "defaultValue": "",
+                    "description": "The item to spawn on successful dig. Format: itemName:auxValue"
+                },
+                {
+                    "name": "on_digging_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when the goal ends searching has begins digging."
+                },
+                {
+                    "name": "on_fail_during_digging",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when the goal failed while in digging state."
+                },
+                {
+                    "name": "on_fail_during_searching",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when the goal failed while in searching state."
+                },
+                {
+                    "name": "on_item_found",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when the goal find a item."
+                },
+                {
+                    "name": "on_searching_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when the goal starts searching."
+                },
+                {
+                    "name": "on_success",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when searching and digging has ended."
+                },
+                {
+                    "name": "search_range_xz",
+                    "type": "Decimal",
+                    "defaultValue": "0.000000",
+                    "description": "Width and length of the volume around the entity used to find a valid target position"
+                },
+                {
+                    "name": "search_range_y",
+                    "type": "Decimal",
+                    "defaultValue": "0.000000",
+                    "description": "Height of the volume around the entity used to find a valid target position"
+                },
+                {
+                    "name": "spawn_item_after_seconds",
+                    "type": "Decimal",
+                    "defaultValue": "0.000000",
+                    "description": "Digging duration before spawning item in seconds."
+                },
+                {
+                    "name": "spawn_item_pos_offset",
+                    "type": "Decimal",
+                    "defaultValue": "0.000000",
+                    "description": "Distance to offset the item's spawn location in the direction the mob is facing."
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Searching movement speed multiplier."
+                }
+            ]
+        },
         "minecraft:behavior.random_sitting": {
             "description": "Allows the mob to randomly sit for a duration.",
             "children": [
@@ -11030,7 +11139,7 @@
                     "name": "blend_attributes",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, the entities will blend their attributes in the offspring after they breed. For example, horses blend their health, movement, and jump_strength in their offspring."
+                    "description": "If true, the entities will blend their attributes in the offspring after they breed."
                 },
                 {
                     "name": "breed_cooldown",
@@ -11156,6 +11265,12 @@
                     "type": "String",
                     "defaultValue": "none",
                     "description": "Strategy used for mutating variants and extra variants for offspring. Current valid alternatives are 'random' and 'none'."
+                },
+                {
+                    "name": "parent_centric_attribute_blending",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "[EXPERIMENTAL] List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring."
                 },
                 {
                     "name": "random_extra_variant_mutation_interval",
@@ -14957,7 +15072,6 @@
         "minecraft:food": "When an item has a food component, it becomes edible to the player.",
         "minecraft:fuel": "Allows this item to be used as fuel in a furnace to 'cook' other items.",
         "minecraft:icon": "The icon item component determines the icon to represent the item.",
-        "minecraft:item_storage": "The Storage Item Component is used for storing Items within an Item's User Data",
         "minecraft:knockback_resistance": "Knockback Resistance Item. Component put on items that provide knockback resistance.",
         "minecraft:on_use": "The on_use item component allows you to receive an event when the item is used.",
         "minecraft:on_use_on": "The on_use_on item component allows you to receive an event when the item is used on a block in the world.",
@@ -15277,6 +15391,10 @@
         "query.has_player_rider": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0.",
         "query.is_attached": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the actor is attached to another actor (such as being held or worn), else it will return 0.0.",
         "query.is_cooldown_type": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the specified held or worn item has the specified cooldown type name, otherwise returns 0.0. First argument is the cooldown name to check for, second argument is the equipment slot name, and optional third argument is the numerical slot id. For second and third arguments, uses the same name and id that the replaceitem command takes when querying entities.",
+        "query.is_feeling_happy": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is feeling happy, else it returns 0.0.",
+        "query.is_rising": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is rising, else it returns 0.0.",
+        "query.is_scenting": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is scenting, else it returns 0.0.",
+        "query.is_searching": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is searching, else it returns 0.0.",
         "query.relative_block_has_all_tags": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.",
         "query.relative_block_has_any_tag": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.",
         "query.scoreboard": "(EXPERIMENTAL. Enable 'Molang Features' to use.) DEPRECATED (The coming Actor Property feature will replace the need for querying hidden scoreboard data. Current client-side scoreboard code is only meant for supporting the standard UI elements.) Takes one argument - the name of the scoreboard entry for this entity.  Returns the specified scoreboard value for this entity.",

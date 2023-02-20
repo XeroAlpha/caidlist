@@ -132,7 +132,6 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     await sleepAsync(500);
 
     console.log(`Starting ${progressName}: ${command}`);
-    screen.clearLog();
     screen.log(`Input ${command}`);
     await adbShell(device, `input text ${JSON.stringify(command)}`);
 
@@ -326,8 +325,10 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
         screen.updateStatus({ enumId: name, commandPrefix });
 
         const cachedResult = cache ? cache.result : [];
+        let retryCount = 0;
         for (;;) {
             const previousResult = result || cachedResult;
+            screen.updateStatus({ retryCount });
             let resultSample = await analyzeCommandAutocompletionFast(
                 cx,
                 device,
@@ -343,11 +344,15 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 const additions = mergedResult.merged.filter((e) => !previousResult.includes(e));
                 const deletions = previousResult.filter((e) => !mergedResult.merged.includes(e));
                 if (additions.length === 0 && deletions.length === 0) break;
-                console.log('Changes detected, retry to confirm...');
+                console.log(`${additions.length} addition(s) and ${deletions.length} deletion(s) detected`);
+                screen.log(`Result check failed: changed (${additions.length}++/${deletions.length}--)`);
             } else {
-                console.log('Conflicts detected, retrying...');
+                console.log(`${mergedResult.conflicts.length} conflict(s) detected`);
+                screen.log(`Result check failed: conflicted (${mergedResult.conflicts.length} conflicts)`);
             }
+            retryCount++;
         }
+        screen.log('Result check passed');
         cachedOutput(cacheId, { packageVersion, result, length: result.length });
     }
     return (target[id] = result);

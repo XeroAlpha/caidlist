@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.70.22",
+    "version": "1.19.70.23",
     "content": [],
     "sections": [
         {
@@ -16494,6 +16494,114 @@
                             ]
                         },
                         {
+                            "name": "minecraft:behavior.random_search_and_dig",
+                            "level": 12,
+                            "content": [
+                                "[EXPERIMENTAL] Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Valid target block type: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[0.000000, 0.000000]",
+                                            "Description": "Goal cooldown range in seconds."
+                                        },
+                                        {
+                                            "Name": "digging_duration_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[0.000000, 0.000000]",
+                                            "Description": "Digging duration in seconds."
+                                        },
+                                        {
+                                            "Name": "find_valid_position_retries",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.000000",
+                                            "Description": "Amount of retries to find a valid target position within search range."
+                                        },
+                                        {
+                                            "Name": "goal_radius",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.500000",
+                                            "Description": "Distance in blocks within the entity to considers it has reached it's target position."
+                                        },
+                                        {
+                                            "Name": "item",
+                                            "Type": "Item Description Properties",
+                                            "Default Value": "",
+                                            "Description": "The item to spawn on successful dig. Format: itemName:auxValue"
+                                        },
+                                        {
+                                            "Name": "on_digging_start",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when the goal ends searching has begins digging."
+                                        },
+                                        {
+                                            "Name": "on_fail_during_digging",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when the goal failed while in digging state."
+                                        },
+                                        {
+                                            "Name": "on_fail_during_searching",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when the goal failed while in searching state."
+                                        },
+                                        {
+                                            "Name": "on_item_found",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when the goal find a item."
+                                        },
+                                        {
+                                            "Name": "on_searching_start",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when the goal starts searching."
+                                        },
+                                        {
+                                            "Name": "on_success",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to run when searching and digging has ended."
+                                        },
+                                        {
+                                            "Name": "search_range_xz",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.000000",
+                                            "Description": "Width and length of the volume around the entity used to find a valid target position"
+                                        },
+                                        {
+                                            "Name": "search_range_y",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.000000",
+                                            "Description": "Height of the volume around the entity used to find a valid target position"
+                                        },
+                                        {
+                                            "Name": "spawn_item_after_seconds",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.000000",
+                                            "Description": "Digging duration before spawning item in seconds."
+                                        },
+                                        {
+                                            "Name": "spawn_item_pos_offset",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.000000",
+                                            "Description": "Distance to offset the item's spawn location in the direction the mob is facing."
+                                        },
+                                        {
+                                            "Name": "speed_multiplier",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.000000",
+                                            "Description": "Searching movement speed multiplier."
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "minecraft:behavior.random_sitting",
                             "level": 12,
                             "content": [
@@ -19416,7 +19524,7 @@
                                             "Name": "blend_attributes",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "If true, the entities will blend their attributes in the offspring after they breed. For example, horses blend their health, movement, and jump_strength in their offspring."
+                                            "Description": "If true, the entities will blend their attributes in the offspring after they breed."
                                         },
                                         {
                                             "Name": "breed_cooldown",
@@ -19578,6 +19686,12 @@
                                             "Type": "String",
                                             "Default Value": "none",
                                             "Description": "Strategy used for mutating variants and extra variants for offspring. Current valid alternatives are 'random' and 'none'."
+                                        },
+                                        {
+                                            "Name": "parent_centric_attribute_blending",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "[EXPERIMENTAL] List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring."
                                         },
                                         {
                                             "Name": "random_extra_variant_mutation_interval",
@@ -24563,6 +24677,10 @@
                                             "ID": "-1368070166"
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.random_search_and_dig",
+                                            "ID": "9274891347700307903"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.random_sitting",
                                             "ID": "1722716662"
                                         },
@@ -26367,5 +26485,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "ecfc680cacbb07ba2da2022bb6e6716aba879f20"
+    "__OBJECTHASH__": "875285a49b21128b2c188f7c07cd01c0548ba501"
 }

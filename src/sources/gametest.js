@@ -339,58 +339,43 @@ const Extractors = [
         name: 'blocks',
         async extract(target, frame) {
             const blockInfoList = parseOrThrow(await frame.evaluate(() => {
-                const compat = {
-                    newBlockPos(x, y, z) {
-                        if (Minecraft.BlockLocation) {
-                            return new Minecraft.BlockLocation(x, y, z);
-                        }
-                        return { x, y, z };
-                    },
-                    getBlockValidValues(p) {
-                        if (p.getValidValues) return p.getValidValues();
-                        return p.validValues;
-                    }
-                };
                 const blockTypes = Minecraft.MinecraftBlockTypes.getAllBlockTypes();
-                const player = [...Minecraft.world.getPlayers()][0];
-                const playerPos = player.location;
-                const playerBlockPos = compat.newBlockPos(playerPos.x, playerPos.y, playerPos.z);
-                const currentBlock = player.dimension.getBlock(playerBlockPos);
-                const originPermutation = currentBlock.permutation;
                 const result = {};
                 for (const blockType of blockTypes) {
                     const states = [];
                     const invalidStates = [];
-                    const { canBeWaterlogged } = blockType;
-                    const basePermutation = blockType.createDefaultBlockPermutation();
-                    const properties = basePermutation.getAllProperties().map((property) => ({
-                        name: property.name,
-                        validValues: compat.getBlockValidValues(property),
-                        defaultValue: property.value
+                    const { id: blockId, canBeWaterlogged } = blockType;
+                    const basePermutation = Minecraft.BlockPermutation.resolve(blockId);
+                    const properties = Object.entries(basePermutation.getAllProperties()).map(([name, defaultValue]) => ({
+                        name,
+                        validValues: Minecraft.BlockProperties.get(name).validValues,
+                        defaultValue
                     }));
+                    properties.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
                     const loopFields = properties.map((property) => ({
                         ...property,
                         loopIndex: 0,
                         loopCount: property.validValues.length
                     }));
                     for (;;) {
-                        const permutation = basePermutation.clone();
                         const state = {};
                         for (const loopField of loopFields) {
                             const value = loopField.validValues[loopField.loopIndex];
                             state[loopField.name] = value;
                         }
-                        let applicable = false;
+                        let permutation = null;
                         try {
-                            for (const property of permutation.getAllProperties()) {
-                                property.value = state[property.name];
+                            permutation = Minecraft.BlockPermutation.resolve(blockId, state);
+                            for (const k of Object.keys(state)) {
+                                if (permutation.getProperty(k) !== state[k]) {
+                                    throw new Error('State property invalid');
+                                }
                             }
-                            applicable = true;
                         } catch (err) {
                             invalidStates.push(state);
                         }
                         console.log(`Dumping ${blockType.id}${JSON.stringify(state)}`);
-                        if (applicable) {
+                        if (permutation) {
                             const tags = permutation.getTags().slice();
                             const components = [];
                             states.push({ state, tags, components });
@@ -410,13 +395,13 @@ const Extractors = [
                     }
                     result[blockType.id] = { properties, states, invalidStates, canBeWaterlogged };
                 }
-                currentBlock.setPermutation(originPermutation);
                 return JSON.stringify(result);
             }));
             const blocks = {};
             const blockProperties = {};
             const blockTags = {};
-            for (const [blockId, blockType] of Object.entries(blockInfoList).sort(stringComparator)) {
+            const blockInfoEntries = Object.entries(blockInfoList).sort((a, b) => stringComparator(a[0], b[0]));
+            for (const [blockId, blockType] of blockInfoEntries) {
                 const { properties, states, invalidStates, canBeWaterlogged } = blockType;
                 const tagMap = {};
                 const stateValues = kvArrayToObject(properties.map((e) => [e.name, e.validValues]));

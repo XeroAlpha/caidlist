@@ -997,6 +997,7 @@
             "random.glass",
             "random.hurt",
             "random.levelup",
+            "random.lever_click",
             "random.orb",
             "random.pop",
             "random.pop2",
@@ -1005,6 +1006,7 @@
             "random.shulkerboxclosed",
             "random.shulkerboxopen",
             "random.splash",
+            "random.stone_click",
             "random.swim",
             "random.toast",
             "random.totem",
@@ -7506,6 +7508,7 @@
             "random.glass",
             "random.hurt",
             "random.levelup",
+            "random.lever_click",
             "random.orb",
             "random.pop",
             "random.pop2",
@@ -7514,6 +7517,7 @@
             "random.shulkerboxclosed",
             "random.shulkerboxopen",
             "random.splash",
+            "random.stone_click",
             "random.swim",
             "random.toast",
             "random.totem",
@@ -13149,6 +13153,7 @@
             "break.big_dripleaf",
             "break.calcite",
             "break.chiseled_bookshelf",
+            "break.decorated_pot",
             "break.dirt_with_roots",
             "break.dripstone_block",
             "break.frog_spawn",
@@ -13166,7 +13171,10 @@
             "break.sculk_vein",
             "break.small_amethyst_bud",
             "break.spore_blossom",
+            "break.suspicious_sand",
             "break.tuff",
+            "brush.suspicious_sand",
+            "brush_completed.suspicious_sand",
             "bubble.down",
             "bubble.downinside",
             "bubble.pop",
@@ -13393,6 +13401,7 @@
             "hit.spore_blossom",
             "hit.stem",
             "hit.stone",
+            "hit.suspicious_sand",
             "hit.tuff",
             "hit.vines",
             "hit.wood",
@@ -13821,6 +13830,18 @@
             "mob.slime.jump",
             "mob.slime.small",
             "mob.slime.squish",
+            "mob.sniffer.death",
+            "mob.sniffer.digging",
+            "mob.sniffer.drop_seed",
+            "mob.sniffer.eat",
+            "mob.sniffer.happy",
+            "mob.sniffer.hurt",
+            "mob.sniffer.idle",
+            "mob.sniffer.long_sniff",
+            "mob.sniffer.searching",
+            "mob.sniffer.sniffsniff",
+            "mob.sniffer.stand_up",
+            "mob.sniffer.step",
             "mob.snowgolem.death",
             "mob.snowgolem.hurt",
             "mob.snowgolem.shoot",
@@ -14030,6 +14051,7 @@
             "place.sculk_shrieker",
             "place.small_amethyst_bud",
             "place.spore_blossom",
+            "place.suspicious_sand",
             "place.tuff",
             "portal.portal",
             "portal.travel",
@@ -14060,6 +14082,7 @@
             "random.glass",
             "random.hurt",
             "random.levelup",
+            "random.lever_click",
             "random.orb",
             "random.pop",
             "random.pop2",
@@ -14068,6 +14091,7 @@
             "random.shulkerboxclosed",
             "random.shulkerboxopen",
             "random.splash",
+            "random.stone_click",
             "random.swim",
             "random.toast",
             "random.totem",
@@ -14092,6 +14116,7 @@
             "respawn_anchor.deplete",
             "respawn_anchor.set_spawn",
             "scrape",
+            "shatter.decorated_pot",
             "shriek.sculk_shrieker",
             "sign.dye.use",
             "sign.ink_sac.use",
@@ -14114,6 +14139,7 @@
             "step.cloth",
             "step.copper",
             "step.coral",
+            "step.decorated_pot",
             "step.deepslate",
             "step.deepslate_bricks",
             "step.dirt_with_roots",
@@ -14152,6 +14178,7 @@
             "step.spore_blossom",
             "step.stem",
             "step.stone",
+            "step.suspicious_sand",
             "step.tuff",
             "step.vines",
             "step.wood",
@@ -14485,11 +14512,14 @@
             "entities/clownfish",
             "entities/cow",
             "entities/creeper",
+            "entities/desert_pyramid_suspicious_sand",
+            "entities/desert_well_suspicious_sand",
             "entities/dolphin",
             "entities/drowned",
             "entities/drowned_equipment",
             "entities/drowned_ranged_equipment",
             "entities/elder_guardian",
+            "entities/empty_suspicious_sand",
             "entities/enderman",
             "entities/endermite",
             "entities/evocation_illager",
@@ -14948,6 +14978,9 @@
             "geometry.camel": [
                 "minecraft:camel<default>"
             ],
+            "geometry.sniffer": [
+                "minecraft:sniffer<default>"
+            ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>"
             ],
@@ -15377,6 +15410,282 @@
             "animation.camel.sit": [
                 "minecraft:camel<sitting>"
             ],
+            "animation.humanoid.attack.rotations": [
+                "minecraft:enderman<attack.rotations>",
+                "minecraft:husk<attack.rotations>",
+                "minecraft:pillager<attack.rotations>",
+                "minecraft:skeleton<attack.rotations>",
+                "minecraft:stray<attack.rotations>",
+                "minecraft:vex<attack.rotations>",
+                "minecraft:wither_skeleton<attack.rotations>",
+                "minecraft:zombie<attack.rotations>",
+                "minecraft:zombie_pigman<attack.rotations>",
+                "minecraft:zombie_villager<attack.rotations>",
+                "minecraft:zombie_villager_v2<attack.rotations>"
+            ],
+            "animation.humanoid.base_pose": [
+                "minecraft:pillager<humanoid_base_pose>",
+                "minecraft:player<humanoid_base_pose>",
+                "minecraft:zombie_pigman<humanoid_base_pose>",
+                "minecraft:zombie_villager<humanoid_base_pose>",
+                "minecraft:zombie_villager_v2<humanoid_base_pose>"
+            ],
+            "animation.humanoid.big_head": [
+                "minecraft:drowned<humanoid_big_head>",
+                "minecraft:husk<humanoid_big_head>",
+                "minecraft:piglin<humanoid_big_head>",
+                "minecraft:piglin_brute<humanoid_big_head>",
+                "minecraft:zombie<humanoid_big_head>",
+                "minecraft:zombie_pigman<humanoid_big_head>",
+                "minecraft:zombie_villager<humanoid_big_head>",
+                "minecraft:zombie_villager_v2<humanoid_big_head>"
+            ],
+            "animation.humanoid.bob": [
+                "minecraft:drowned<bob>",
+                "minecraft:enderman<bob>",
+                "minecraft:husk<bob>",
+                "minecraft:piglin<bob>",
+                "minecraft:piglin_brute<bob>",
+                "minecraft:pillager<bob>",
+                "minecraft:skeleton<bob>",
+                "minecraft:stray<bob>",
+                "minecraft:vex<bob>",
+                "minecraft:wither_skeleton<bob>",
+                "minecraft:zombie<bob>",
+                "minecraft:zombie_pigman<bob>",
+                "minecraft:zombie_villager<bob>",
+                "minecraft:zombie_villager_v2<bob>"
+            ],
+            "animation.humanoid.bow_and_arrow": [
+                "minecraft:husk<bow_and_arrow>",
+                "minecraft:player<bow_and_arrow>",
+                "minecraft:skeleton<bow_and_arrow>",
+                "minecraft:stray<bow_and_arrow>",
+                "minecraft:vex<bow_and_arrow>",
+                "minecraft:wither_skeleton<bow_and_arrow>",
+                "minecraft:zombie<bow_and_arrow>",
+                "minecraft:zombie_pigman<bow_and_arrow>",
+                "minecraft:zombie_villager<bow_and_arrow>",
+                "minecraft:zombie_villager_v2<bow_and_arrow>"
+            ],
+            "animation.humanoid.brandish_spear": [
+                "minecraft:drowned<brandish_spear>",
+                "minecraft:husk<brandish_spear>",
+                "minecraft:player<brandish_spear>",
+                "minecraft:skeleton<brandish_spear>",
+                "minecraft:stray<brandish_spear>",
+                "minecraft:vex<brandish_spear>",
+                "minecraft:wither_skeleton<brandish_spear>",
+                "minecraft:zombie<brandish_spear>",
+                "minecraft:zombie_pigman<brandish_spear>",
+                "minecraft:zombie_villager<brandish_spear>",
+                "minecraft:zombie_villager_v2<brandish_spear>"
+            ],
+            "animation.humanoid.holding_spyglass": [
+                "minecraft:player<holding_spyglass>"
+            ],
+            "animation.humanoid.tooting_goat_horn": [
+                "minecraft:player<tooting_goat_horn>"
+            ],
+            "animation.humanoid.holding_brush": [
+                "minecraft:player<holding_brush>"
+            ],
+            "animation.humanoid.brushing": [
+                "minecraft:player<brushing>"
+            ],
+            "animation.humanoid.celebrating": [
+                "minecraft:evocation_illager<celebrating>",
+                "minecraft:pillager<celebrating>",
+                "minecraft:vindicator<celebrating>"
+            ],
+            "animation.humanoid.charging": [
+                "minecraft:drowned<charging>",
+                "minecraft:husk<charging>",
+                "minecraft:player<charging>",
+                "minecraft:skeleton<charging>",
+                "minecraft:stray<charging>",
+                "minecraft:vex<charging>",
+                "minecraft:wither_skeleton<charging>",
+                "minecraft:zombie<charging>",
+                "minecraft:zombie_pigman<charging>",
+                "minecraft:zombie_villager<charging>",
+                "minecraft:zombie_villager_v2<charging>"
+            ],
+            "animation.humanoid.damage_nearby_mobs": [
+                "minecraft:drowned<damage_nearby_mobs>",
+                "minecraft:husk<damage_nearby_mobs>",
+                "minecraft:player<damage_nearby_mobs>",
+                "minecraft:skeleton<damage_nearby_mobs>",
+                "minecraft:stray<damage_nearby_mobs>",
+                "minecraft:vex<damage_nearby_mobs>",
+                "minecraft:wither_skeleton<damage_nearby_mobs>",
+                "minecraft:zombie<damage_nearby_mobs>",
+                "minecraft:zombie_pigman<damage_nearby_mobs>",
+                "minecraft:zombie_villager<damage_nearby_mobs>",
+                "minecraft:zombie_villager_v2<damage_nearby_mobs>"
+            ],
+            "animation.humanoid.holding": [
+                "minecraft:drowned<holding>",
+                "minecraft:husk<holding>",
+                "minecraft:pillager<holding>",
+                "minecraft:skeleton<holding>",
+                "minecraft:stray<holding>",
+                "minecraft:vex<holding>",
+                "minecraft:wither_skeleton<holding>",
+                "minecraft:zombie<holding>",
+                "minecraft:zombie_pigman<holding>",
+                "minecraft:zombie_villager<holding>",
+                "minecraft:zombie_villager_v2<holding>"
+            ],
+            "animation.humanoid.look_at_target.default": [
+                "minecraft:drowned<look_at_target_default>",
+                "minecraft:enderman<look_at_target_default>",
+                "minecraft:husk<look_at_target_default>",
+                "minecraft:piglin<look_at_target_default>",
+                "minecraft:piglin_brute<look_at_target_default>",
+                "minecraft:pillager<look_at_target_default>",
+                "minecraft:player<look_at_target_default>",
+                "minecraft:skeleton<look_at_target_default>",
+                "minecraft:stray<look_at_target_default>",
+                "minecraft:vex<look_at_target_default>",
+                "minecraft:vindicator<look_at_target_default>",
+                "minecraft:wither_skeleton<look_at_target_default>",
+                "minecraft:zombie<look_at_target_default>",
+                "minecraft:zombie_pigman<look_at_target_default>",
+                "minecraft:zombie_villager<look_at_target_default>",
+                "minecraft:zombie_villager_v2<look_at_target_default>"
+            ],
+            "animation.humanoid.look_at_target.gliding": [
+                "minecraft:drowned<look_at_target_gliding>",
+                "minecraft:enderman<look_at_target_gliding>",
+                "minecraft:husk<look_at_target_gliding>",
+                "minecraft:piglin<look_at_target_gliding>",
+                "minecraft:piglin_brute<look_at_target_gliding>",
+                "minecraft:pillager<look_at_target_gliding>",
+                "minecraft:player<look_at_target_gliding>",
+                "minecraft:skeleton<look_at_target_gliding>",
+                "minecraft:stray<look_at_target_gliding>",
+                "minecraft:vex<look_at_target_gliding>",
+                "minecraft:vindicator<look_at_target_gliding>",
+                "minecraft:wither_skeleton<look_at_target_gliding>",
+                "minecraft:zombie<look_at_target_gliding>",
+                "minecraft:zombie_pigman<look_at_target_gliding>",
+                "minecraft:zombie_villager<look_at_target_gliding>",
+                "minecraft:zombie_villager_v2<look_at_target_gliding>"
+            ],
+            "animation.humanoid.look_at_target.swimming": [
+                "minecraft:drowned<look_at_target_swimming>",
+                "minecraft:enderman<look_at_target_swimming>",
+                "minecraft:husk<look_at_target_swimming>",
+                "minecraft:piglin<look_at_target_swimming>",
+                "minecraft:piglin_brute<look_at_target_swimming>",
+                "minecraft:pillager<look_at_target_swimming>",
+                "minecraft:player<look_at_target_swimming>",
+                "minecraft:skeleton<look_at_target_swimming>",
+                "minecraft:stray<look_at_target_swimming>",
+                "minecraft:vex<look_at_target_swimming>",
+                "minecraft:vindicator<look_at_target_swimming>",
+                "minecraft:wither_skeleton<look_at_target_swimming>",
+                "minecraft:zombie<look_at_target_swimming>",
+                "minecraft:zombie_pigman<look_at_target_swimming>",
+                "minecraft:zombie_villager<look_at_target_swimming>",
+                "minecraft:zombie_villager_v2<look_at_target_swimming>"
+            ],
+            "animation.humanoid.move": [
+                "minecraft:drowned<move>",
+                "minecraft:enderman<move>",
+                "minecraft:husk<move>",
+                "minecraft:pillager<move>",
+                "minecraft:skeleton<move>",
+                "minecraft:stray<move>",
+                "minecraft:vex<move>",
+                "minecraft:wither_skeleton<move>",
+                "minecraft:zombie<move>",
+                "minecraft:zombie_pigman<move>",
+                "minecraft:zombie_villager<move>",
+                "minecraft:zombie_villager_v2<move>"
+            ],
+            "animation.humanoid.riding.arms": [
+                "minecraft:drowned<riding.arms>",
+                "minecraft:husk<riding.arms>",
+                "minecraft:piglin<riding.arms>",
+                "minecraft:piglin_brute<riding.arms>",
+                "minecraft:pillager<riding.arms>",
+                "minecraft:skeleton<riding.arms>",
+                "minecraft:stray<riding.arms>",
+                "minecraft:vex<riding.arms>",
+                "minecraft:wither_skeleton<riding.arms>",
+                "minecraft:zombie<riding.arms>",
+                "minecraft:zombie_pigman<riding.arms>",
+                "minecraft:zombie_villager<riding.arms>",
+                "minecraft:zombie_villager_v2<riding.arms>"
+            ],
+            "animation.humanoid.riding.legs": [
+                "minecraft:drowned<riding.legs>",
+                "minecraft:husk<riding.legs>",
+                "minecraft:piglin<riding.legs>",
+                "minecraft:piglin_brute<riding.legs>",
+                "minecraft:pillager<riding.legs>",
+                "minecraft:skeleton<riding.legs>",
+                "minecraft:stray<riding.legs>",
+                "minecraft:vex<riding.legs>",
+                "minecraft:wither_skeleton<riding.legs>",
+                "minecraft:zombie<riding.legs>",
+                "minecraft:zombie_pigman<riding.legs>",
+                "minecraft:zombie_villager<riding.legs>",
+                "minecraft:zombie_villager_v2<riding.legs>"
+            ],
+            "animation.humanoid.sneaking": [
+                "minecraft:husk<sneaking>",
+                "minecraft:skeleton<sneaking>",
+                "minecraft:stray<sneaking>",
+                "minecraft:vex<sneaking>",
+                "minecraft:wither_skeleton<sneaking>",
+                "minecraft:zombie<sneaking>",
+                "minecraft:zombie_pigman<sneaking>",
+                "minecraft:zombie_villager<sneaking>",
+                "minecraft:zombie_villager_v2<sneaking>"
+            ],
+            "animation.humanoid.swimming": [
+                "minecraft:vex<swimming>"
+            ],
+            "animation.humanoid.use_item_progress": [
+                "minecraft:drowned<use_item_progress>",
+                "minecraft:husk<use_item_progress>",
+                "minecraft:player<use_item_progress>",
+                "minecraft:skeleton<use_item_progress>",
+                "minecraft:stray<use_item_progress>",
+                "minecraft:vex<use_item_progress>",
+                "minecraft:wither_skeleton<use_item_progress>",
+                "minecraft:zombie<use_item_progress>",
+                "minecraft:zombie_pigman<use_item_progress>",
+                "minecraft:zombie_villager<use_item_progress>",
+                "minecraft:zombie_villager_v2<use_item_progress>"
+            ],
+            "animation.sniffer.baby_transform": [
+                "minecraft:sniffer<baby_transform>"
+            ],
+            "animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "animation.sniffer.longsniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ],
             "animation.actor.billboard": [
                 "minecraft:dragon_fireball<face_player>",
                 "minecraft:egg<flying>",
@@ -15671,246 +15980,6 @@
                 "minecraft:skeleton_horse<walk>",
                 "minecraft:zombie_horse<walk>"
             ],
-            "animation.humanoid.attack.rotations": [
-                "minecraft:enderman<attack.rotations>",
-                "minecraft:husk<attack.rotations>",
-                "minecraft:pillager<attack.rotations>",
-                "minecraft:skeleton<attack.rotations>",
-                "minecraft:stray<attack.rotations>",
-                "minecraft:vex<attack.rotations>",
-                "minecraft:wither_skeleton<attack.rotations>",
-                "minecraft:zombie<attack.rotations>",
-                "minecraft:zombie_pigman<attack.rotations>",
-                "minecraft:zombie_villager<attack.rotations>",
-                "minecraft:zombie_villager_v2<attack.rotations>"
-            ],
-            "animation.humanoid.base_pose": [
-                "minecraft:pillager<humanoid_base_pose>",
-                "minecraft:player<humanoid_base_pose>",
-                "minecraft:zombie_pigman<humanoid_base_pose>",
-                "minecraft:zombie_villager<humanoid_base_pose>",
-                "minecraft:zombie_villager_v2<humanoid_base_pose>"
-            ],
-            "animation.humanoid.big_head": [
-                "minecraft:drowned<humanoid_big_head>",
-                "minecraft:husk<humanoid_big_head>",
-                "minecraft:piglin<humanoid_big_head>",
-                "minecraft:piglin_brute<humanoid_big_head>",
-                "minecraft:zombie<humanoid_big_head>",
-                "minecraft:zombie_pigman<humanoid_big_head>",
-                "minecraft:zombie_villager<humanoid_big_head>",
-                "minecraft:zombie_villager_v2<humanoid_big_head>"
-            ],
-            "animation.humanoid.bob": [
-                "minecraft:drowned<bob>",
-                "minecraft:enderman<bob>",
-                "minecraft:husk<bob>",
-                "minecraft:piglin<bob>",
-                "minecraft:piglin_brute<bob>",
-                "minecraft:pillager<bob>",
-                "minecraft:skeleton<bob>",
-                "minecraft:stray<bob>",
-                "minecraft:vex<bob>",
-                "minecraft:wither_skeleton<bob>",
-                "minecraft:zombie<bob>",
-                "minecraft:zombie_pigman<bob>",
-                "minecraft:zombie_villager<bob>",
-                "minecraft:zombie_villager_v2<bob>"
-            ],
-            "animation.humanoid.bow_and_arrow": [
-                "minecraft:husk<bow_and_arrow>",
-                "minecraft:player<bow_and_arrow>",
-                "minecraft:skeleton<bow_and_arrow>",
-                "minecraft:stray<bow_and_arrow>",
-                "minecraft:vex<bow_and_arrow>",
-                "minecraft:wither_skeleton<bow_and_arrow>",
-                "minecraft:zombie<bow_and_arrow>",
-                "minecraft:zombie_pigman<bow_and_arrow>",
-                "minecraft:zombie_villager<bow_and_arrow>",
-                "minecraft:zombie_villager_v2<bow_and_arrow>"
-            ],
-            "animation.humanoid.brandish_spear": [
-                "minecraft:drowned<brandish_spear>",
-                "minecraft:husk<brandish_spear>",
-                "minecraft:player<brandish_spear>",
-                "minecraft:skeleton<brandish_spear>",
-                "minecraft:stray<brandish_spear>",
-                "minecraft:vex<brandish_spear>",
-                "minecraft:wither_skeleton<brandish_spear>",
-                "minecraft:zombie<brandish_spear>",
-                "minecraft:zombie_pigman<brandish_spear>",
-                "minecraft:zombie_villager<brandish_spear>",
-                "minecraft:zombie_villager_v2<brandish_spear>"
-            ],
-            "animation.humanoid.celebrating": [
-                "minecraft:evocation_illager<celebrating>",
-                "minecraft:pillager<celebrating>",
-                "minecraft:vindicator<celebrating>"
-            ],
-            "animation.humanoid.charging": [
-                "minecraft:drowned<charging>",
-                "minecraft:husk<charging>",
-                "minecraft:player<charging>",
-                "minecraft:skeleton<charging>",
-                "minecraft:stray<charging>",
-                "minecraft:vex<charging>",
-                "minecraft:wither_skeleton<charging>",
-                "minecraft:zombie<charging>",
-                "minecraft:zombie_pigman<charging>",
-                "minecraft:zombie_villager<charging>",
-                "minecraft:zombie_villager_v2<charging>"
-            ],
-            "animation.humanoid.damage_nearby_mobs": [
-                "minecraft:drowned<damage_nearby_mobs>",
-                "minecraft:husk<damage_nearby_mobs>",
-                "minecraft:player<damage_nearby_mobs>",
-                "minecraft:skeleton<damage_nearby_mobs>",
-                "minecraft:stray<damage_nearby_mobs>",
-                "minecraft:vex<damage_nearby_mobs>",
-                "minecraft:wither_skeleton<damage_nearby_mobs>",
-                "minecraft:zombie<damage_nearby_mobs>",
-                "minecraft:zombie_pigman<damage_nearby_mobs>",
-                "minecraft:zombie_villager<damage_nearby_mobs>",
-                "minecraft:zombie_villager_v2<damage_nearby_mobs>"
-            ],
-            "animation.humanoid.holding": [
-                "minecraft:drowned<holding>",
-                "minecraft:husk<holding>",
-                "minecraft:pillager<holding>",
-                "minecraft:skeleton<holding>",
-                "minecraft:stray<holding>",
-                "minecraft:vex<holding>",
-                "minecraft:wither_skeleton<holding>",
-                "minecraft:zombie<holding>",
-                "minecraft:zombie_pigman<holding>",
-                "minecraft:zombie_villager<holding>",
-                "minecraft:zombie_villager_v2<holding>"
-            ],
-            "animation.humanoid.look_at_target.default": [
-                "minecraft:drowned<look_at_target_default>",
-                "minecraft:enderman<look_at_target_default>",
-                "minecraft:husk<look_at_target_default>",
-                "minecraft:piglin<look_at_target_default>",
-                "minecraft:piglin_brute<look_at_target_default>",
-                "minecraft:pillager<look_at_target_default>",
-                "minecraft:player<look_at_target_default>",
-                "minecraft:skeleton<look_at_target_default>",
-                "minecraft:stray<look_at_target_default>",
-                "minecraft:vex<look_at_target_default>",
-                "minecraft:vindicator<look_at_target_default>",
-                "minecraft:wither_skeleton<look_at_target_default>",
-                "minecraft:zombie<look_at_target_default>",
-                "minecraft:zombie_pigman<look_at_target_default>",
-                "minecraft:zombie_villager<look_at_target_default>",
-                "minecraft:zombie_villager_v2<look_at_target_default>"
-            ],
-            "animation.humanoid.look_at_target.gliding": [
-                "minecraft:drowned<look_at_target_gliding>",
-                "minecraft:enderman<look_at_target_gliding>",
-                "minecraft:husk<look_at_target_gliding>",
-                "minecraft:piglin<look_at_target_gliding>",
-                "minecraft:piglin_brute<look_at_target_gliding>",
-                "minecraft:pillager<look_at_target_gliding>",
-                "minecraft:player<look_at_target_gliding>",
-                "minecraft:skeleton<look_at_target_gliding>",
-                "minecraft:stray<look_at_target_gliding>",
-                "minecraft:vex<look_at_target_gliding>",
-                "minecraft:vindicator<look_at_target_gliding>",
-                "minecraft:wither_skeleton<look_at_target_gliding>",
-                "minecraft:zombie<look_at_target_gliding>",
-                "minecraft:zombie_pigman<look_at_target_gliding>",
-                "minecraft:zombie_villager<look_at_target_gliding>",
-                "minecraft:zombie_villager_v2<look_at_target_gliding>"
-            ],
-            "animation.humanoid.look_at_target.swimming": [
-                "minecraft:drowned<look_at_target_swimming>",
-                "minecraft:enderman<look_at_target_swimming>",
-                "minecraft:husk<look_at_target_swimming>",
-                "minecraft:piglin<look_at_target_swimming>",
-                "minecraft:piglin_brute<look_at_target_swimming>",
-                "minecraft:pillager<look_at_target_swimming>",
-                "minecraft:player<look_at_target_swimming>",
-                "minecraft:skeleton<look_at_target_swimming>",
-                "minecraft:stray<look_at_target_swimming>",
-                "minecraft:vex<look_at_target_swimming>",
-                "minecraft:vindicator<look_at_target_swimming>",
-                "minecraft:wither_skeleton<look_at_target_swimming>",
-                "minecraft:zombie<look_at_target_swimming>",
-                "minecraft:zombie_pigman<look_at_target_swimming>",
-                "minecraft:zombie_villager<look_at_target_swimming>",
-                "minecraft:zombie_villager_v2<look_at_target_swimming>"
-            ],
-            "animation.humanoid.move": [
-                "minecraft:drowned<move>",
-                "minecraft:enderman<move>",
-                "minecraft:husk<move>",
-                "minecraft:pillager<move>",
-                "minecraft:skeleton<move>",
-                "minecraft:stray<move>",
-                "minecraft:vex<move>",
-                "minecraft:wither_skeleton<move>",
-                "minecraft:zombie<move>",
-                "minecraft:zombie_pigman<move>",
-                "minecraft:zombie_villager<move>",
-                "minecraft:zombie_villager_v2<move>"
-            ],
-            "animation.humanoid.riding.arms": [
-                "minecraft:drowned<riding.arms>",
-                "minecraft:husk<riding.arms>",
-                "minecraft:piglin<riding.arms>",
-                "minecraft:piglin_brute<riding.arms>",
-                "minecraft:pillager<riding.arms>",
-                "minecraft:skeleton<riding.arms>",
-                "minecraft:stray<riding.arms>",
-                "minecraft:vex<riding.arms>",
-                "minecraft:wither_skeleton<riding.arms>",
-                "minecraft:zombie<riding.arms>",
-                "minecraft:zombie_pigman<riding.arms>",
-                "minecraft:zombie_villager<riding.arms>",
-                "minecraft:zombie_villager_v2<riding.arms>"
-            ],
-            "animation.humanoid.riding.legs": [
-                "minecraft:drowned<riding.legs>",
-                "minecraft:husk<riding.legs>",
-                "minecraft:piglin<riding.legs>",
-                "minecraft:piglin_brute<riding.legs>",
-                "minecraft:pillager<riding.legs>",
-                "minecraft:skeleton<riding.legs>",
-                "minecraft:stray<riding.legs>",
-                "minecraft:vex<riding.legs>",
-                "minecraft:wither_skeleton<riding.legs>",
-                "minecraft:zombie<riding.legs>",
-                "minecraft:zombie_pigman<riding.legs>",
-                "minecraft:zombie_villager<riding.legs>",
-                "minecraft:zombie_villager_v2<riding.legs>"
-            ],
-            "animation.humanoid.sneaking": [
-                "minecraft:husk<sneaking>",
-                "minecraft:skeleton<sneaking>",
-                "minecraft:stray<sneaking>",
-                "minecraft:vex<sneaking>",
-                "minecraft:wither_skeleton<sneaking>",
-                "minecraft:zombie<sneaking>",
-                "minecraft:zombie_pigman<sneaking>",
-                "minecraft:zombie_villager<sneaking>",
-                "minecraft:zombie_villager_v2<sneaking>"
-            ],
-            "animation.humanoid.swimming": [
-                "minecraft:vex<swimming>"
-            ],
-            "animation.humanoid.use_item_progress": [
-                "minecraft:drowned<use_item_progress>",
-                "minecraft:husk<use_item_progress>",
-                "minecraft:player<use_item_progress>",
-                "minecraft:skeleton<use_item_progress>",
-                "minecraft:stray<use_item_progress>",
-                "minecraft:vex<use_item_progress>",
-                "minecraft:wither_skeleton<use_item_progress>",
-                "minecraft:zombie<use_item_progress>",
-                "minecraft:zombie_pigman<use_item_progress>",
-                "minecraft:zombie_villager<use_item_progress>",
-                "minecraft:zombie_villager_v2<use_item_progress>"
-            ],
             "animation.iron_golem.attack": [
                 "minecraft:iron_golem<attack>"
             ],
@@ -15962,6 +16031,7 @@
                 "minecraft:ravager<look_at_target>",
                 "minecraft:sheep<look_at_target>",
                 "minecraft:shulker<look_at_target>",
+                "minecraft:sniffer<look_at_target>",
                 "minecraft:snow_golem<look_at_target>",
                 "minecraft:trader_llama<look_at_target>",
                 "minecraft:turtle<look_at_target>",
@@ -16154,21 +16224,15 @@
             "animation.player.first_person.attack_rotation": [
                 "minecraft:player<first_person_attack_rotation>"
             ],
-            "animation.player.first_person.attack_rotation_item": [
-                "minecraft:player<first_person_attack_rotation_item>"
-            ],
+            "animation.player.first_person.attack_rotation_item": [],
             "animation.player.first_person.base_pose": [
                 "minecraft:player<first_person_base_pose>"
             ],
             "animation.player.first_person.crossbow_equipped": [
                 "minecraft:player<first_person_crossbow_equipped>"
             ],
-            "animation.player.first_person.crossbow_hold": [
-                "minecraft:player<first_person_crossbow_hold>"
-            ],
-            "animation.player.first_person.breathing_bob": [
-                "minecraft:player<first_person_breathing_bob>"
-            ],
+            "animation.player.first_person.crossbow_hold": [],
+            "animation.player.first_person.breathing_bob": [],
             "animation.player.first_person.empty_hand": [
                 "minecraft:player<first_person_empty_hand>"
             ],
@@ -16596,10 +16660,11 @@
             "animation.goat.ram_attack": [
                 "minecraft:goat<ram_attack>"
             ],
-            "animation.humanoid.holding_spyglass": [],
             "animation.spyglass.holding": [],
             "animation.spyglass.scoping": [],
-            "animation.player.first_person.shield_block": [],
+            "animation.player.first_person.shield_block": [
+                "minecraft:player<first_person_shield_block>"
+            ],
             "animation.allay.idle": [
                 "minecraft:allay<idle>"
             ],
@@ -16664,7 +16729,6 @@
                 "minecraft:warden<sonic_boom>"
             ],
             "animation.allay.dance": [],
-            "animation.humanoid.tooting_goat_horn": [],
             "animation.allay.look_at_target.default": [],
             "animation.allay.hold_item_fly": [],
             "animation.vex.idle": [],
@@ -16680,6 +16744,45 @@
             ],
             "controller.animation.camel.look_at_player": [
                 "minecraft:camel<look_at_player>"
+            ],
+            "controller.animation.player.crossbow": [
+                "minecraft:player<crossbow_controller>"
+            ],
+            "controller.animation.player.first_person_attack": [
+                "minecraft:player<first_person_attack_controller>"
+            ],
+            "controller.animation.player.first_person_map": [
+                "minecraft:player<first_person_map_controller>"
+            ],
+            "controller.animation.player.root": [
+                "minecraft:player<root>"
+            ],
+            "controller.animation.sniffer.baby": [
+                "minecraft:sniffer<baby>"
+            ],
+            "controller.animation.sniffer.general": [
+                "minecraft:sniffer<general>"
+            ],
+            "controller.animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "controller.animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "controller.animation.sniffer.long_sniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "controller.animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "controller.animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "controller.animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "controller.animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
             ],
             "controller.animation.agent.move": [
                 "minecraft:agent<move_controller>"
@@ -16991,18 +17094,6 @@
             "controller.animation.pillager.root": [
                 "minecraft:pillager<pillager_root_controller>"
             ],
-            "controller.animation.player.crossbow": [
-                "minecraft:player<crossbow_controller>"
-            ],
-            "controller.animation.player.first_person_attack": [
-                "minecraft:player<first_person_attack_controller>"
-            ],
-            "controller.animation.player.first_person_map": [
-                "minecraft:player<first_person_map_controller>"
-            ],
-            "controller.animation.player.root": [
-                "minecraft:player<root>"
-            ],
             "controller.animation.polarbear.baby": [
                 "minecraft:polar_bear<baby>"
             ],
@@ -17222,6 +17313,9 @@
         "renderControllerMap": {
             "controller.render.camel": [
                 "minecraft:camel"
+            ],
+            "controller.render.sniffer": [
+                "minecraft:sniffer"
             ],
             "controller.render.agent": [
                 "minecraft:agent"
@@ -17642,6 +17736,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:spider",
                 "minecraft:squid",
                 "minecraft:stray",
@@ -17691,6 +17786,7 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:pig",
+                "minecraft:sniffer",
                 "minecraft:trader_llama"
             ],
             "minecraft:entity_born": [
@@ -17715,6 +17811,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -17743,6 +17840,7 @@
                 "minecraft:pig",
                 "minecraft:polar_bear",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -17762,6 +17860,30 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel"
+            ],
+            "on_scenting_success": [
+                "minecraft:sniffer"
+            ],
+            "on_digging_start": [
+                "minecraft:sniffer"
+            ],
+            "on_item_found": [
+                "minecraft:sniffer"
+            ],
+            "on_feeling_happy_end": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_searching": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_digging": [
+                "minecraft:sniffer"
+            ],
+            "on_search_and_digging_success": [
+                "minecraft:sniffer"
+            ],
+            "on_rising_end": [
+                "minecraft:sniffer"
             ],
             "become_witch": [
                 "minecraft:villager",
@@ -18911,6 +19033,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:snow_golem",
                 "minecraft:spider",
                 "minecraft:squid",
@@ -18993,6 +19116,9 @@
                 "minecraft:zombie_villager_v2<toolsmith>",
                 "minecraft:zombie_villager_v2<unskilled>",
                 "minecraft:zombie_villager_v2<weaponsmith>"
+            ],
+            "sniffer": [
+                "minecraft:sniffer"
             ],
             "villager": [
                 "minecraft:villager",
