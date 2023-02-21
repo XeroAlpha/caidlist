@@ -94,10 +94,10 @@ export const packageVersions = {
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: '2.4beta-211748',
+        version: '2.4beta-212941',
         coreVersion: '1.18.2.0.0',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.4.100.211748.apk',
+        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.4.100.212941.apk',
         // 可用分支
         branches: ['vanilla', 'experiment'],
         config: neteaseOCROptions
