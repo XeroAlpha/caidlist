@@ -1,4 +1,5 @@
-import { cachedOutput } from '../util/common.js';
+import { addJSONComment, CommentLocation } from '../util/comment.js';
+import { cachedOutput, forEachObject, kvArrayToObject } from '../util/common.js';
 import { fetchText } from '../util/network.js';
 
 async function fetchMZHWikiRaw(word) {
@@ -38,7 +39,7 @@ function parseEnumMapLua(luaContent) {
 }
 
 // Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink?action=history
-// Last update:  2021/8/5 07:19 by MysticNebula70
+// Last update:  2023/2/2 21:04 by Anterdc99
 const enumMapColors = {
     'black ': '黑色',
     'blue ': '蓝色',
@@ -117,28 +118,61 @@ export default async function fetchStandardizedTranslation() {
         console.log('Fetching MCWZH:ST/Autolink/Exclusive...');
         const exclusive = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Exclusive'));
 
-        console.log('Fetching MCWZH:ST/Autolink/Others...');
-        const mcwzhOthers = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Other'));
+        console.log('Fetching MCWZH:ST/Autolink/Entity...');
+        const entity = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Entity'));
 
-        let bedwOthers;
+        console.log('Fetching MCWZH:ST/Autolink/Biome...');
+        const biome = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Biome'));
+
+        console.log('Fetching MCWZH:ST/Autolink/Effect...');
+        const effect = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Effect'));
+
+        console.log('Fetching MCWZH:ST/Autolink/Other...');
+        const mcwzhOther = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Other'));
+
+        let bedwOther;
         let bedwGlossary;
         try {
             console.log('Fetching BEDW:ST/Autolink/Others...');
-            bedwOthers = parseEnumMapLua(await fetchBEDevWikiRaw('模块:Autolink/Other'));
+            bedwOther = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Other'));
 
             console.log('Fetching BEDW:ST/Autolink/Glossary...');
-            bedwGlossary = parseEnumMapLua(await fetchBEDevWikiRaw('模块:Autolink/Glossary'));
+            bedwGlossary = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Glossary'));
         } catch (err) {
             console.error('Unable to connect to BEDW', err);
         }
 
-        return extendEnumMap({
+        const groupReference = (obj, ref) => {
+            if (!obj) return undefined;
+            return kvArrayToObject(Object.keys(obj).map((k) => [k, ref]));
+        };
+
+        const result = extendEnumMap({
+            // Keep them in order. 'Sprite' is just a common suffix here
             BlockSprite: block,
             ItemSprite: item,
             Exclusive: exclusive,
             ...bedwGlossary,
-            ...bedwOthers,
-            ...mcwzhOthers
+            ...bedwOther,
+            BiomeSprite: biome,
+            EffectSprite: effect,
+            EntitySprite: entity,
+            ...mcwzhOther
         });
+        const referenceMap = {
+            BlockSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Block',
+            ItemSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Item',
+            Exclusive: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Exclusive',
+            ...groupReference(bedwGlossary, 'https://wiki.mcbe-dev.net/p/Module:Autolink/Glossary'),
+            ...groupReference(bedwOther, 'https://wiki.mcbe-dev.net/p/Module:Autolink/Other'),
+            BiomeSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Biome',
+            EffectSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Effect',
+            EntitySprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Entity',
+            ...groupReference(mcwzhOther, 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Other')
+        };
+        forEachObject(referenceMap, (v, k) => {
+            addJSONComment(result, CommentLocation.before(k), 'line', `Reference: ${v}`);
+        });
+        return result;
     }, 24 * 60 * 60 * 1000);
 }
