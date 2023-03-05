@@ -18,18 +18,28 @@ export function matchTranslation(options) {
         langKeyPrefix,
         langKeySuffix,
         autoMatch,
+        context,
         translateCached
     } = options;
     let userTranslation = translationMap[originalValue];
     if (userTranslation) {
         if (userTranslation.includes('{{') && userTranslation.includes('}}')) { // 拼接模板
+            const interpretFailedKeys = [];
             userTranslation = runTemplate(userTranslation, (key) => {
                 let realKey = key;
                 if (key.startsWith('#')) {
                     realKey = `${originalValue}.${key.slice(1)}`;
                 }
-                return translateCached(realKey, originalValue, true).translation;
+                const state = translateCached(realKey, `${context}/${originalValue}`, true);
+                if (state.state !== 'provided') {
+                    interpretFailedKeys.push(key);
+                }
+                return state.translation;
             });
+            if (interpretFailedKeys.length) {
+                console.warn(`[${context}] Should provide inline references: ${originalValue}(${interpretFailedKeys.join(',')})`);
+                userTranslation = '';
+            }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         } else if (refTemplateRegex.test(userTranslation)) { // 直接引用
             const colonPos = userTranslation.indexOf(':');
@@ -44,7 +54,7 @@ export function matchTranslation(options) {
             } else if (langMap && source.toLowerCase() === 'be') { // 基岩版语言文件
                 userTranslation = langMap[key];
             } else if (source.toLowerCase() === 'this') { // 当前列表
-                userTranslation = translateCached(key, originalValue).translation;
+                userTranslation = translateCached(key, `${context}/${originalValue}`).translation;
             } else if (source.toLowerCase() === 'missing') { // 暂缺译名
                 const tempTranslationMap = {};
                 tempTranslationMap[originalValue] = key;
@@ -56,9 +66,9 @@ export function matchTranslation(options) {
                 }).translation;
                 if (userTranslation.toLowerCase() in stdTransMap) {
                     userTranslation = stdTransMap[userTranslation.toLowerCase()];
-                    console.warn(`Translation Found: ${originalValue} -> ${userTranslation}`);
+                    console.warn(`[${context}] Translation Found: ${originalValue} -> ${userTranslation}`);
                 } else {
-                    console.warn(`Missing Translation: ${originalValue} -> ${userTranslation}`);
+                    console.warn(`[${context}] Missing Translation: ${originalValue} -> ${userTranslation}`);
                 }
             } else if (source in resultMaps) { // 其他翻译
                 userTranslation = resultMaps[source][key];
@@ -66,7 +76,7 @@ export function matchTranslation(options) {
                 userTranslation = undefined;
             }
             if (!userTranslation) {
-                console.warn(`Incorrect Ref: ${originalValue}(${source}: ${key})`);
+                console.warn(`[${context}] Failed to resolve reference: ${originalValue}(${source}: ${key})`);
             }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         }
@@ -159,11 +169,13 @@ export function matchTranslations(options) {
         guessFromLang: [],
         notFound: []
     };
-    const translateCached = (originalValue, rootKey, insideTemplate) => {
+    const translateCached = (originalValue, context, insideTemplate) => {
         const cache = translateCacheMap[originalValue];
         if (cache) {
             return cache;
-        } if (insideTemplate && originalValue.includes('|')) { // 拼接模板
+        }
+        if (insideTemplate && originalValue.includes('|')) { // 拼接模板
+            const failedRefs = [];
             const refs = originalValue.split('|').map((ref) => {
                 const trimedRef = ref.trim();
                 if (trimedRef.startsWith('\'')) { // 原始字符，原样传递
@@ -172,25 +184,36 @@ export function matchTranslations(options) {
                     }
                     return trimedRef.slice(1);
                 }
-                const result = translateCached(trimedRef, rootKey, true);
+                const result = translateCached(trimedRef, context, true);
+                if (result.state !== 'provided') {
+                    failedRefs.push(trimedRef);
+                }
                 return result.translation;
             });
+            if (failedRefs.length) {
+                console.warn(`[${context}] Should provide inline references: ${originalValue}(${failedRefs.join(',')})`);
+            }
             return {
+                state: failedRefs.length > 0 ? 'notFound' : 'provided',
                 translation: format(...refs)
             };
-        } if (insideTemplate && originalValue.includes('!')) { // 外部引用
+        }
+        if (insideTemplate && originalValue.includes('!')) { // 外部引用
             const translationMap = {};
-            translationMap[rootKey] = originalValue.replace('!', ':');
+            translationMap[''] = originalValue.replace('!', ':');
             return matchTranslation({
                 ...options,
-                originalValue: rootKey,
+                originalValue: '',
+                context,
                 translationMap,
                 translateCached
             });
-        } // 内部引用
+        }
+        // 内部引用
         translateCacheMap[originalValue] = CircularTranslationResult;
         const result = matchTranslation({
             ...options,
+            context,
             translateCached,
             originalValue
         });
@@ -198,7 +221,7 @@ export function matchTranslations(options) {
         return result;
     };
     originalArray.forEach((originalValue) => {
-        const result = translateCached(originalValue, originalValue);
+        const result = translateCached(originalValue, name);
         translateStates[result.state].push(originalValue);
         translateResultMap[originalValue] = result.translation;
         setInlineCommentAfterField(translateResultMap, originalValue, result.comment);

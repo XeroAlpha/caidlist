@@ -1,5 +1,6 @@
 import { addJSONComment, CommentLocation } from '../util/comment.js';
 import { cachedOutput, forEachObject, kvArrayToObject } from '../util/common.js';
+import { parseLSON } from '../util/lson.js';
 import { fetchText } from '../util/network.js';
 
 async function fetchMZHWikiRaw(word) {
@@ -11,99 +12,47 @@ async function fetchBEDevWikiRaw(word) {
 }
 
 function parseEnumMapLua(luaContent) {
-    const enumMapStack = [{}];
-    const itemRegExp = /\['(.*)'\](?:\s*)=(?:\s*)'(.*)'/;
-    const groupStartRegExp = /\['(.*)'\](?:\s*)=(?:\s*){/;
-    const groupEndRegExp = /\}(?:,)?/;
-    const zhHansRegExp = /-\{(.+?)\}-/g;
-    luaContent.split('\n').forEach((line) => {
-        const trimmedLine = line.trim();
-        if (trimmedLine.startsWith('--')) return;
-        let matchResult;
-        if ((matchResult = itemRegExp.exec(trimmedLine))) {
-            const key = matchResult[1].replace(/\\/g, ''); // 处理 Lua 字符串转义
-            const value = matchResult[2].split('|').slice(-1)[0];
-            enumMapStack[0][key] = value.replace(zhHansRegExp, '$1');
-        } else if ((matchResult = groupStartRegExp.exec(trimmedLine))) {
-            const key = matchResult[1].replace(/\\/g, ''); // 处理 Lua 字符串转义
-            const group = {};
-            enumMapStack[0][key] = group;
-            enumMapStack.unshift(group);
-        } else if (groupEndRegExp.test(trimmedLine)) {
-            if (enumMapStack.length > 1) {
-                enumMapStack.shift();
-            }
-        }
-    });
-    return enumMapStack[0];
+    const match = /return([^]+)/.exec(luaContent);
+    if (!match) {
+        throw new Error('Illegal LSON');
+    }
+    const result = parseLSON(match[1]);
+    if (Array.isArray(result) && result.length === 0) {
+        return {};
+    }
+    return result;
 }
 
 // Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink?action=history
-// Last update:  2023/2/2 21:04 by Anterdc99
-const enumMapColors = {
-    'black ': '黑色',
-    'blue ': '蓝色',
-    'brown ': '棕色',
-    'cyan ': '青色',
-    'gray ': '灰色',
-    'green ': '绿色',
-    'light blue ': '淡蓝色',
-    'light gray ': '淡灰色',
-    'lime ': '黄绿色',
-    'magenta ': '品红色',
-    'orange ': '橙色',
-    'pink ': '粉红色',
-    'purple ': '紫色',
-    'red ': '红色',
-    'silver ': '淡灰色',
-    'white ': '白色',
-    'yellow ': '黄色'
-};
-const enumMapColoredItems = [
-    'firework star',
-    'hardened clay',
-    'stained clay',
-    'banner',
-    'carpet',
-    'concrete',
-    'concrete powder',
-    'glazed terracotta',
-    'terracotta',
-    'shield',
-    'shulker box',
-    'stained glass',
-    'stained glass pane',
-    'wool',
-    'bed',
-    'hardened glass',
-    'hardened stained glass',
-    'balloon',
-    'glow stick',
-    'hardened glass pane',
-    'hardened glass',
-    'sparkler',
-    'candle'
-];
-function extendEnumMap(enumMaps) {
-    enumMapColoredItems.forEach((item) => {
-        ['BlockSprite', 'ItemSprite', 'Exclusive'].forEach((mapName) => {
-            const enumMap = enumMaps[mapName];
-            const translatedSuffix = enumMap[item];
-            if (translatedSuffix) {
-                for (const color in enumMapColors) {
-                    if (!enumMap[color + item]) {
-                        enumMap[color + item] = enumMapColors[color] + translatedSuffix;
-                    }
+// Last update:  2023/3/3 13:31 by Anterdc99
+function postprocessEnumMap(enumMaps, compatibleMode) {
+    forEachObject(enumMaps, (enumMap) => {
+        let prevKey;
+        Object.keys(enumMap).forEach((k) => {
+            let v = enumMap[k];
+            let hidden;
+            if (Array.isArray(v)) {
+                [v, hidden] = v;
+            }
+            const verticalBar = v.lastIndexOf('|');
+            if (verticalBar >= 0) {
+                v = v.slice(verticalBar + 1);
+            }
+            v = v.replace(/-\{(.*?)\}-/, '$1');
+            enumMap[k] = v;
+            if (compatibleMode) {
+                if (hidden) {
+                    addJSONComment(enumMap, CommentLocation.after(k), 'inlineLine', ' Hidden');
                 }
+            } else if (hidden) {
+                const commentLoc = prevKey ? CommentLocation.after(prevKey) : CommentLocation.before();
+                addJSONComment(enumMap, commentLoc, 'line', ` ${JSON.stringify(k)}: ${JSON.stringify(v)},`);
+                delete enumMap[k];
+            } else {
+                prevKey = k;
             }
         });
     });
-    const entityMap = enumMaps.EntitySprite;
-    const itemMap = enumMaps.ItemSprite;
-    for (const [baseName, targetName] of Object.entries(entityMap)) {
-        itemMap[`${baseName} spawn egg`] = `${targetName}刷怪蛋`;
-        itemMap[`spawn ${baseName}`] = `生成${targetName}`;
-    }
     return enumMaps;
 }
 
@@ -130,24 +79,18 @@ export default async function fetchStandardizedTranslation() {
         console.log('Fetching MCWZH:ST/Autolink/Other...');
         const mcwzhOther = parseEnumMapLua(await fetchMZHWikiRaw('模块:Autolink/Other'));
 
-        let bedwOther;
-        let bedwGlossary;
-        try {
-            console.log('Fetching BEDW:ST/Autolink/Others...');
-            bedwOther = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Other'));
+        console.log('Fetching BEDW:ST/Autolink/Others...');
+        const bedwOther = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Other'));
 
-            console.log('Fetching BEDW:ST/Autolink/Glossary...');
-            bedwGlossary = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Glossary'));
-        } catch (err) {
-            console.error('Unable to connect to BEDW', err);
-        }
+        console.log('Fetching BEDW:ST/Autolink/Glossary...');
+        const bedwGlossary = parseEnumMapLua(await fetchBEDevWikiRaw('Module:Autolink/Glossary'));
 
         const groupReference = (obj, ref) => {
             if (!obj) return undefined;
             return kvArrayToObject(Object.keys(obj).map((k) => [k, ref]));
         };
 
-        const result = extendEnumMap({
+        const result = postprocessEnumMap({
             // Keep them in order. 'Sprite' is just a common suffix here
             BlockSprite: block,
             ItemSprite: item,
@@ -158,7 +101,7 @@ export default async function fetchStandardizedTranslation() {
             EffectSprite: effect,
             EntitySprite: entity,
             ...mcwzhOther
-        });
+        }, false);
         const referenceMap = {
             BlockSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Block',
             ItemSprite: 'https://minecraft.fandom.com/zh/wiki/%E6%A8%A1%E5%9D%97:Autolink/Item',
