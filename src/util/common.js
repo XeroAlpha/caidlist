@@ -248,16 +248,23 @@ export async function retryUntilComplete(maxRetryCount, retryInterval, f) {
 }
 
 export function cascadeMap(mapOfMap, priority, includeAll) {
-    const result = {};
-    let i;
+    const mapKeys = [...priority];
     if (includeAll) {
-        for (const value of Object.values(mapOfMap)) {
-            CommentJSON.assign(result, value);
+        for (const key of Object.keys(mapOfMap)) {
+            if (!mapKeys.includes(key)) {
+                mapKeys.push(key);
+            }
         }
     }
-    for (i = priority.length - 1; i >= 0; i--) {
-        CommentJSON.assign(result, mapOfMap[priority[i]]);
-    }
+    const result = {};
+    mapKeys.forEach((mapKey) => {
+        forEachObject(mapOfMap[mapKey], (v, k) => {
+            result[`${k} (${mapKey})`] = v;
+            if (!(k in result)) {
+                result[k] = v;
+            }
+        });
+    });
     return result;
 }
 
@@ -284,6 +291,12 @@ export function setInlineCommentAfterField(obj, fieldName, comment) {
     }
 }
 
+/**
+ * @template T, This
+ * @param {T[]} arr
+ * @param {(this: This, e: T, i: number, a: T[]) => void} f
+ * @param {This} thisArg
+ */
 export async function forEachArray(arr, f, thisArg) {
     const len = arr.length;
     for (let i = 0; i < len; i++) {

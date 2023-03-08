@@ -127,7 +127,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'block',
         originalArray: enums.blocks,
         translationMap: userTranslation.block,
-        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ExclusiveBlockSprite'], true),
         langKeyPrefix: 'tile.',
         langKeySuffix: '.name'
     });
@@ -136,7 +136,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'item',
         originalArray: enums.items.filter((item) => !enums.blocks.includes(item)),
         translationMap: userTranslation.item,
-        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'BlockSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         langKeyPrefix: 'item.',
         langKeySuffix: '.name',
         postProcessor(item) {
@@ -157,7 +157,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entity',
         originalArray: removeMinecraftNamespace(enums.entities),
         translationMap: userTranslation.entity,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
         langKeyPrefix: 'entity.',
         langKeySuffix: '.name',
         postProcessor(entity) {
@@ -183,7 +183,8 @@ async function generateBranchedOutputFiles(cx) {
         ...commonOptions,
         name: 'enchant',
         originalArray: enums.enchantments,
-        translationMap: userTranslation.enchant
+        translationMap: userTranslation.enchant,
+        stdTransMap: cascadeMap(standardizedTranslation, ['EnchantmentSprite'], true)
     });
     matchTranslations({
         ...commonOptions,
@@ -213,7 +214,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entityEvent',
         originalArray: Object.keys(enums.entityEventsMap),
         translationMap: userTranslation.entityEvent,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
         postProcessor(entityEvent) {
             forEachObject(entityEvent, (value, key) => {
                 if (value) return;
@@ -227,7 +228,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entityFamily',
         originalArray: Object.keys(enums.entityFamilyMap),
         translationMap: userTranslation.entityFamily,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
         postProcessor(entityFamily) {
             forEachObject(entityFamily, (value, key) => {
                 if (value) return;
@@ -241,7 +242,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'animation',
         originalArray: Object.keys(enums.animationMap),
         translationMap: userTranslation.animation,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
         postProcessor(animation) {
             forEachObject(animation, (value, key) => {
                 if (value) return;
@@ -258,7 +259,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'animationController',
         originalArray: Object.keys(enums.animationControllerMap),
         translationMap: userTranslation.animationController,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
         postProcessor(animationController) {
             forEachObject(animationController, (value, key) => {
                 if (value) return;
@@ -530,7 +531,7 @@ async function generateGameTestOutputFiles(cx) {
         name: 'block',
         originalArray: blockIds.map(removePrefix),
         translationMap: userTranslation.block,
-        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ExclusiveBlockSprite'], true),
         postProcessor(result) {
             const mergedResult = {};
             blockIds.forEach((key) => {
@@ -544,7 +545,7 @@ async function generateGameTestOutputFiles(cx) {
         name: 'item',
         originalArray: itemIdsExclusive.map(removePrefix),
         translationMap: userTranslation.item,
-        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'BlockSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         postProcessor(result) {
             const mergedResult = {};
             const { block } = translationResultMaps;
@@ -563,14 +564,14 @@ async function generateGameTestOutputFiles(cx) {
         name: 'entity',
         originalArray: entityIds,
         translationMap: userTranslation.entity,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ItemSprite'], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true)
     });
     matchTranslations({
         ...commonOptions,
         name: 'blockState',
         originalArray: buildBSTransKeys(ids.blockProperties),
         translationMap: userTranslation.blockState,
-        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite'], true),
         autoMatch: [],
         postProcessor(result) {
             const { block } = translationResultMaps;
@@ -583,7 +584,7 @@ async function generateGameTestOutputFiles(cx) {
         name: 'blockTag',
         originalArray: blockTagIds,
         translationMap: userTranslation.blockTag,
-        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ItemSprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ExclusiveBlockSprite'], true),
         autoMatch: []
     });
     delete translationResultMaps.glossary;
