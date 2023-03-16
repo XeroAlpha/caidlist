@@ -113,8 +113,8 @@
     "ride.evictRiders": "为坐骑取消骑乘关系。",
     "ride.startRiding": "在骑手与坐骑间建立骑乘关系。",
     "ride.stopRiding": "为骑手取消骑乘关系。",
-    "ride.summonRide": "为骑手召唤坐骑。",
-    "ride.summonRider": "为坐骑召唤骑手。",
+    "ride.summonRide": "为骑手生成坐骑。",
+    "ride.summonRider": "为坐骑生成骑手。",
     "say.default": "向所有玩家广播消息。",
     "schedule.onAreaLoad.add.box": "添加在区域被加载时计划执行的函数。",
     "schedule.onAreaLoad.add.circle": "添加在区域被加载时计划执行的函数。",
@@ -150,7 +150,9 @@
     "structure.save.default": "将结构以指定名称存储。",
     "structure.save.short": "将结构以指定名称存储。",
     "summon.default": "生成指定的实体。",
-    "summon.withSpawnEvent": "生成指定的实体。",
+    "summon.withNameTag": "生成指定的实体并为其命名。",
+    "summon.facing.entity": "生成指定的实体并使其面向另一实体。",
+    "summon.facing.position": "生成指定的实体并使其面向指定位置。",
     "tag.list": "列出实体拥有的标签。",
     "tag.modify": "修改实体拥有的标签。",
     "teleport.entity.toEntity": "将指定实体传送至另一实体所在位置。",
@@ -271,9 +273,9 @@
     "replaceitem entity <target: target> <slotType: EntityEquipmentSlot> <slotId: int> <oldItemHandling: ReplaceMode> <itemName: Item> [amount: int] [data: int] [components: json]": "this: replaceitem.entity.withOldItemHandling", // 替换指定实体特定槽位中的物品。
     "ride <riders: target> start_riding <ride: target> [teleportRules: TeleportRules] [howToFill: FillType]": "this: ride.startRiding", // 在骑手与坐骑间建立骑乘关系。
     "ride <riders: target> stop_riding": "this: ride.stopRiding", // 为骑手取消骑乘关系。
-    "ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]": "this: ride.summonRide", // 为骑手召唤坐骑。
+    "ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]": "this: ride.summonRide", // 为骑手生成坐骑。
     "ride <rides: target> evict_riders": "this: ride.evictRiders", // 为坐骑取消骑乘关系。
-    "ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]": "this: ride.summonRider", // 为坐骑召唤骑手。
+    "ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]": "this: ride.summonRider", // 为坐骑生成骑手。
     "say <message: message>": "this: say.default", // 向所有玩家广播消息。
     "schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>": "this: schedule.onAreaLoad.add.box", // 添加在区域被加载时计划执行的函数。
     "schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath>": "this: schedule.onAreaLoad.add.circle", // 添加在区域被加载时计划执行的函数。
@@ -301,8 +303,8 @@
     "structure load <name: string> <to: x y z> [rotation: Rotation] [mirror: Mirror] [includeEntities: Boolean] [includeBlocks: Boolean] [integrity: float] [seed: string]": "this: structure.load.default", // 从存储中加载指定的结构。
     "structure save <name: string> <from: x y z> <to: x y z> [includeEntities: Boolean] [saveMode: StructureSaveMode] [includeBlocks: Boolean]": "this: structure.save.default", // 将结构以指定名称存储。
     "structure save <name: string> <from: x y z> <to: x y z> [saveMode: StructureSaveMode]": "this: structure.save.short", // 将结构以指定名称存储。
-    "summon <entityType: EntityType> <nameTag: string> [spawnPos: x y z]": "this: summon.default", // 生成指定的实体。
-    "summon <entityType: EntityType> [spawnPos: x y z] [spawnEvent: string] [nameTag: string]": "this: summon.withSpawnEvent", // 生成指定的实体。
+    "summon <entityType: EntityType> <nameTag: string> [spawnPos: x y z]": "this: summon.withNameTag", // 生成指定的实体并为其命名。
+    "summon <entityType: EntityType> [spawnPos: x y z] [spawnEvent: string] [nameTag: string]": "this: summon.default", // 生成指定的实体。
     "tag <entity: target> <add|remove> <name: string>": "this: tag.modify", // 修改实体拥有的标签。
     "tag <entity: target> list": "this: tag.list", // 列出实体拥有的标签。
     "teleport <destination: target> [checkForBlocks: Boolean]": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
@@ -413,11 +415,13 @@
     "loot replace block <position: x y z> slot.container <slotId: int> loot <loot_table: string> [<tool>|mainhand|offhand: string]": "this: loot.replace.block.default.from.loot", // 将指定方块的部分槽位替换为通过特定战利品表所能获得的战利品。
     "execute rotated <yaw: value> <pitch: value> <chainedCommand: ExecuteChainedOption_0>": "this: execute.rotated.default", // 改变执行朝向为指定朝向，并执行后续子命令。
     "execute rotated as <origin: target> <chainedCommand: ExecuteChainedOption_0>": "this: execute.rotated.as", // 改变执行朝向为指定实体的朝向，并执行后续子命令。
-    "summon <entityType: EntityType> [spawnPos: x y z] [yRot: value] [xRot: value] [spawnEvent: string] [nameTag: string]": "this: summon.withSpawnEvent", // 生成指定的实体。
+    "summon <entityType: EntityType> [spawnPos: x y z] [yRot: value] [xRot: value] [spawnEvent: string] [nameTag: string]": "this: summon.default", // 生成指定的实体。
     "execute align <axes: string> <chainedCommand: ExecuteChainedOption_0>": "this: execute.align", // 将执行坐标的指定分量向下取整，并执行后续子命令。
     "execute facing <position: x y z> <chainedCommand: ExecuteChainedOption_0>": "this: execute.facing.default", // 改变执行朝向为面向指定坐标，并执行后续子命令。
     "execute facing entity <origin: target> <eyes|feet> <chainedCommand: ExecuteChainedOption_0>": "this: execute.facing.entity", // 改变执行朝向为面向指定实体，并执行后续子命令。
     "execute anchored <eyes|feet> <chainedCommand: ExecuteChainedOption_0>": "this: execute.anchored", // 改变执行定位基准点，并执行后续子命令。
     "execute in <dimension: Dimension> <chainedCommand: ExecuteChainedOption_0>": "this: execute.in", // 改变执行维度与执行坐标系，并执行后续子命令。
-    "scriptevent <messageId: string> <message: message>": "this: scriptevent.default" // 向 Script API 模块广播消息事件。
+    "scriptevent <messageId: string> <message: message>": "this: scriptevent.default", // 向 Script API 模块广播消息事件。
+    "summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtEntity: target> [spawnEvent: string] [nameTag: string]": "this: summon.facing.entity", // 生成指定的实体并使其面向另一实体。
+    "summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtPosition: x y z> [spawnEvent: string] [nameTag: string]": "this: summon.facing.position" // 生成指定的实体并使其面向指定位置。
 }

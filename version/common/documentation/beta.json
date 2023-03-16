@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.19.70.26",
-    "__COMMITHASH__": "651b26e3e0ded6c8f99c84d0e0b2745f69a2a62f",
+    "__VERSION__": "1.19.80.20",
+    "__COMMITHASH__": "3ec7fde6244f3c0954a2eb5cbd325354aa910d2a",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -707,6 +707,14 @@
                         },
                         {
                             "name": "is_persistent",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "is_raider",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -2731,6 +2739,19 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "name": "Smithing Trim Recipe",
+                            "sections": [
+                                {
+                                    "name": "Parameters",
+                                    "sections": [
+                                        {
+                                            "name": "Smithing Trim Recipe Example:"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -2937,6 +2958,7 @@
         "minecraft:acacia_door": "",
         "minecraft:acacia_fence_gate": "",
         "minecraft:acacia_hanging_sign": "",
+        "minecraft:acacia_log": "",
         "minecraft:acacia_pressure_plate": "",
         "minecraft:acacia_stairs": "",
         "minecraft:acacia_standing_sign": "",
@@ -2988,6 +3010,7 @@
         "minecraft:birch_door": "",
         "minecraft:birch_fence_gate": "",
         "minecraft:birch_hanging_sign": "",
+        "minecraft:birch_log": "",
         "minecraft:birch_pressure_plate": "",
         "minecraft:birch_stairs": "",
         "minecraft:birch_standing_sign": "",
@@ -3041,6 +3064,23 @@
         "minecraft:chain_command_block": "",
         "minecraft:chemical_heat": "",
         "minecraft:chemistry_table": "",
+        "minecraft:cherry_button": "",
+        "minecraft:cherry_door": "",
+        "minecraft:cherry_double_slab": "",
+        "minecraft:cherry_fence": "",
+        "minecraft:cherry_fence_gate": "",
+        "minecraft:cherry_hanging_sign": "",
+        "minecraft:cherry_leaves": "",
+        "minecraft:cherry_log": "",
+        "minecraft:cherry_planks": "",
+        "minecraft:cherry_pressure_plate": "",
+        "minecraft:cherry_sapling": "",
+        "minecraft:cherry_slab": "",
+        "minecraft:cherry_stairs": "",
+        "minecraft:cherry_standing_sign": "",
+        "minecraft:cherry_trapdoor": "",
+        "minecraft:cherry_wall_sign": "",
+        "minecraft:cherry_wood": "",
         "minecraft:chest": "",
         "minecraft:chiseled_bookshelf": "",
         "minecraft:chiseled_deepslate": "",
@@ -3111,6 +3151,7 @@
         "minecraft:dark_oak_door": "",
         "minecraft:dark_oak_fence_gate": "",
         "minecraft:dark_oak_hanging_sign": "",
+        "minecraft:dark_oak_log": "",
         "minecraft:dark_oak_pressure_plate": "",
         "minecraft:dark_oak_stairs": "",
         "minecraft:dark_oak_trapdoor": "",
@@ -3357,6 +3398,7 @@
         "minecraft:jungle_door": "",
         "minecraft:jungle_fence_gate": "",
         "minecraft:jungle_hanging_sign": "",
+        "minecraft:jungle_log": "",
         "minecraft:jungle_pressure_plate": "",
         "minecraft:jungle_stairs": "",
         "minecraft:jungle_standing_sign": "",
@@ -3396,8 +3438,6 @@
         "minecraft:lit_redstone_ore": "",
         "minecraft:lit_smoker": "",
         "minecraft:lodestone": "",
-        "minecraft:log": "",
-        "minecraft:log2": "",
         "minecraft:loom": "",
         "minecraft:magenta_candle": "",
         "minecraft:magenta_candle_cake": "",
@@ -3454,6 +3494,7 @@
         "minecraft:normal_stone_stairs": "",
         "minecraft:noteblock": "",
         "minecraft:oak_hanging_sign": "",
+        "minecraft:oak_log": "",
         "minecraft:oak_stairs": "",
         "minecraft:observer": "",
         "minecraft:obsidian": "",
@@ -3473,6 +3514,7 @@
         "minecraft:pink_candle": "",
         "minecraft:pink_candle_cake": "",
         "minecraft:pink_glazed_terracotta": "",
+        "minecraft:pink_petals": "",
         "minecraft:pink_wool": "",
         "minecraft:piston": "",
         "minecraft:piston_arm_collision": "",
@@ -3586,6 +3628,7 @@
         "minecraft:spruce_door": "",
         "minecraft:spruce_fence_gate": "",
         "minecraft:spruce_hanging_sign": "",
+        "minecraft:spruce_log": "",
         "minecraft:spruce_pressure_plate": "",
         "minecraft:spruce_stairs": "",
         "minecraft:spruce_standing_sign": "",
@@ -3613,6 +3656,8 @@
         "minecraft:stripped_acacia_log": "",
         "minecraft:stripped_bamboo_block": "",
         "minecraft:stripped_birch_log": "",
+        "minecraft:stripped_cherry_log": "",
+        "minecraft:stripped_cherry_wood": "",
         "minecraft:stripped_crimson_hyphae": "",
         "minecraft:stripped_crimson_stem": "",
         "minecraft:stripped_dark_oak_log": "",
@@ -3883,6 +3928,12 @@
             "description": "",
             "children": [
                 {
+                    "name": "bone_visibility",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value)."
+                },
+                {
                     "name": "minecraft:collision_box",
                     "type": "Boolean / JSON Object",
                     "defaultValue": "true",
@@ -4009,20 +4060,6 @@
                     "defaultValue": ""
                 },
                 {
-                    "name": "minecraft:part_visibility",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "Sets conditions for when the block's different parts are visible.",
-                    "children": [
-                        {
-                            "name": "conditions",
-                            "type": "JSON Object",
-                            "defaultValue": "",
-                            "description": "A JSON object that contains a list of key/value pairs that map from bone name in a geometry file (key) to a condition that turns their rendering on/off (value). The condition should be a Molang query that uses block properties to determine true/false. Supported queries include 'has_block_property', 'block_property', and other queries that can evaluate without knowledge of the block's in-game positional or player affected data."
-                        }
-                    ]
-                },
-                {
                     "name": "minecraft:placement_filter",
                     "type": "JSON Object",
                     "defaultValue": ""
@@ -4132,6 +4169,12 @@
                             "description": "Size of each side of the selection box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive."
                         }
                     ]
+                },
+                {
+                    "name": "minecraft:transformation",
+                    "type": "Vector [a, b, c]",
+                    "defaultValue": "translation",
+                    "description": "The block's translationExperimental toggles required: Holiday Creator Features"
                 },
                 {
                     "name": "minecraft:unit_cube",
@@ -4704,7 +4747,7 @@
         "minecraft:weight": "This component allows players to give a priority to how often that mob should spawn. Mobs with lower weight values have a higher chance to spawn than mobs with higher weight values."
     },
     "entityFilter": {
-        "actor_health": "Tests the health of an actor.",
+        "actor_health": "Tests the health of the subject.",
         "bool_property": "Returns true when the bool actor property matches the value provided.",
         "clock_time": "Compares the current time with a float value in the range (0.0, 1.0).",
         "distance_to_nearest_player": "Compares the distance to the nearest Player with a float value.",
@@ -4757,6 +4800,7 @@
         "is_moving": "Returns true if the subject entity is moving.",
         "is_owner": "Returns true if the subject entity is the owner of the calling entity.",
         "is_persistent": "Tests if the subject's persistence matches the bool value passed in.",
+        "is_raider": "Tests if the subject is a raider.",
         "is_riding": "Returns true if the subject entity is riding on another entity.",
         "is_skin_id": "Returns true if the subject entity is the skin id number provided.",
         "is_sleeping": "Tests whether the Subject is sleeping.",
@@ -14008,6 +14052,12 @@
                     "type": "String",
                     "defaultValue": "",
                     "description": "The text to display when the player can interact with the entity when playing with Touch-screen controls"
+                },
+                {
+                    "name": "passenger_max_width",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "The max width a mob can be to be a passenger. A value of 0 ignores this parameter."
                 },
                 {
                     "name": "priority",

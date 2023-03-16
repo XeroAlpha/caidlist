@@ -371,7 +371,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (!device) {
         console.log('Please plug in the device...');
         device = await waitForAnyDevice(adbClient);
+        await sleepAsync(1000);
     }
+    console.log(`Device connected: ${device.serial}`);
     const screen = new AutocompletionScreen();
     screen.updateStatus({
         version,

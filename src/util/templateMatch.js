@@ -101,6 +101,9 @@ export function matchTranslation(options) {
             const stdTranslationKey = originalValue.replace(/^minecraft:/i, '').replace(/_/g, ' ');
             const stdTranslation = stdTransMap[stdTranslationKey];
             if (stdTranslation) {
+                if (!(originalValue in translationMap)) {
+                    console.warn(`[${context}] New entry has been added: ${originalValue} (ST) -> ${stdTranslation}`);
+                }
                 translationMap[originalValue] = `ST: ${stdTranslationKey}`;
                 setInlineCommentAfterField(translationMap, originalValue, `${stdTranslation}`);
                 return {
@@ -115,6 +118,9 @@ export function matchTranslation(options) {
                 const langKeyExact = langKeyPrefix + originalValue + langKeySuffix;
                 if (langMap[langKeyExact]) {
                     const translation = langMap[langKeyExact];
+                    if (!(originalValue in translationMap)) {
+                        console.warn(`[${context}] New entry has been added: ${originalValue} (lang) -> ${translation}`);
+                    }
                     translationMap[originalValue] = '';
                     if (langKeyExact !== originalValue) {
                         setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
@@ -131,6 +137,9 @@ export function matchTranslation(options) {
                     .filter((key) => key.startsWith(langKeyPrefix) && key.includes(originalValue) && key.endsWith(langKeySuffix));
                 if (langKeyLikely.length) {
                     const translation = langKeyLikely.map((key) => langMap[key]).join('/');
+                    if (!(originalValue in translationMap)) {
+                        console.warn(`[${context}] New entry has been added: ${originalValue} (langLikely) -> ${translation}`);
+                    }
                     translationMap[originalValue] = '';
                     setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
                     return {
@@ -142,6 +151,9 @@ export function matchTranslation(options) {
             }
         }
         if (!translationMap[originalValue]) {
+            if (!(originalValue in translationMap)) {
+                console.warn(`[${context}] New entry has been added: ${originalValue} (untranslated)`);
+            }
             translationMap[originalValue] = '';
         }
         setInlineCommentAfterField(translationMap, originalValue, null);

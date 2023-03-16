@@ -3,19 +3,38 @@ import { sleepAsync } from './common.js';
 
 const { Adb } = AdbKit;
 
+/**
+ * @typedef {import('@devicefarmer/adbkit').Client} Client
+ * @typedef {import('@devicefarmer/adbkit').DeviceClient} DeviceClient
+ * @typedef {ReturnType<DeviceClient['syncService']> extends Promise<infer R> ? R : never} Sync
+ */
+
+/** @returns {Client} */
 export function newAdbClient() {
     return Adb.createClient();
 }
 
+/** @param {Client} adbClient */
 export async function getAnyOnlineDevice(adbClient) {
     const devices = await adbClient.listDevices();
     const onlineDevices = devices.filter((device) => device.type !== 'offline');
     if (onlineDevices.length !== 0) {
-        return adbClient.getDevice(onlineDevices[0].id);
+        const preferDeviceSerial = process.env.DEVICE_SERIAL;
+        let preferDevice = onlineDevices[0];
+        if (preferDeviceSerial) {
+            preferDevice = onlineDevices.find((device) => device.id === preferDeviceSerial);
+        }
+        if (preferDevice) {
+            return adbClient.getDevice(preferDevice.id);
+        }
     }
-    return null;
+    return undefined;
 }
 
+/**
+ * @param {Client} adbClient
+ * @returns {Promise<DeviceClient>}
+ */
 export async function waitForAnyDevice(adbClient) {
     const onlineDevice = await getAnyOnlineDevice(adbClient);
     if (!onlineDevice) {
@@ -25,8 +44,15 @@ export async function waitForAnyDevice(adbClient) {
                 let checkingDevices = [...changes.added, ...changes.changed];
                 checkingDevices = checkingDevices.filter((device) => device.type !== 'offline');
                 if (checkingDevices.length !== 0) {
-                    resolve(adbClient.getDevice(checkingDevices[0].id));
-                    tracker.end();
+                    const preferDeviceSerial = process.env.DEVICE_SERIAL;
+                    let foundDevice = checkingDevices[0];
+                    if (preferDeviceSerial) {
+                        foundDevice = checkingDevices.find((device) => device.id === preferDeviceSerial);
+                    }
+                    if (foundDevice) {
+                        resolve(adbClient.getDevice(foundDevice.id));
+                        tracker.end();
+                    }
                 }
             });
             tracker.on('error', (err) => reject(err));
@@ -35,6 +61,11 @@ export async function waitForAnyDevice(adbClient) {
     return onlineDevice;
 }
 
+/**
+ * @param {DeviceClient} device
+ * @param {string} command
+ * @returns {Promise<Buffer>}
+ */
 export async function adbShell(device, command) {
     const stream = await device.shell(command);
     const output = await Adb.util.readAll(stream);
@@ -42,27 +73,48 @@ export async function adbShell(device, command) {
     return output;
 }
 
+/**
+ * @param {DeviceClient} device
+ * @param {string} command
+ * @param {RegExp} regExp
+ * @param {number} [index]
+ */
 export async function extractFromShell(device, command, regExp, index) {
     const output = await adbShell(device, command);
     const match = output.toString().match(regExp);
     if (match) {
-        return arguments.length > 3 ? match[index] : match;
+        return index !== undefined ? match[index] : match;
     }
     return null;
 }
 
+/**
+ * @param {DeviceClient} device
+ */
 export async function getDeviceSurfaceOrientation(device) {
     return Number(await extractFromShell(device, 'dumpsys input', /SurfaceOrientation: (\d+)/, 1));
 }
 
+/**
+ * @param {DeviceClient} device
+ * @param {string} propertyName
+ */
 export async function getSystemProp(device, propertyName) {
     const output = await adbShell(device, `getprop ${propertyName}`);
     return output.toString().trim();
 }
 
-export async function pushWithSync(sync, content, path, mode, onProgress) {
+/**
+ * @typedef {ReturnType<Sync['push']>['stats']} PushTransfer.Stat
+ * @param {Sync} sync
+ * @param {string} sourcePath
+ * @param {string} destPath
+ * @param {number} mode
+ * @param {(stats: PushTransfer.Stat) => void} onProgress
+ */
+export async function pushWithSync(sync, sourcePath, destPath, mode, onProgress) {
     return new Promise((resolve, reject) => {
-        const pushTransfer = sync.push(content, path, mode);
+        const pushTransfer = sync.push(sourcePath, destPath, mode);
         if (onProgress) pushTransfer.on('progress', onProgress);
         pushTransfer.on('error', reject);
         pushTransfer.on('end', resolve);

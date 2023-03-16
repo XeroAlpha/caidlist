@@ -1,6 +1,6 @@
 {
     "title": "RECIPES DOCUMENTATION",
-    "version": "1.19.70.26",
+    "version": "1.19.80.20",
     "content": [],
     "sections": [
         {
@@ -284,13 +284,13 @@
                                     "rows": [
                                         {
                                             "Name": "addition",
-                                            "Type": "item name or item tag",
-                                            "Description": "The item needed to perform the transform operation. In case of stackable items, only 1 item is consumed. The only accepted value is \"minecraft:netherite_ingot\"."
+                                            "Type": "item name",
+                                            "Description": "The material needed to perform the transform operation. In case of stackable items, only 1 item is consumed. The only accepted item is \"minecraft:netherite_ingot\". Items must have the \"minecraft:transform_materials\" tag to be accepted into the respective UI slot."
                                         },
                                         {
                                             "Name": "base",
-                                            "Type": "item name or item tag",
-                                            "Description": "The item to transform. It's properties will be copied to \"result\". The only accepted values are armor and tools."
+                                            "Type": "item name",
+                                            "Description": "The item to transform. Its properties will be copied to \"result\". The only accepted items are armor and tools. Items must have the \"minecraft:transformable_items\" tag to be accepted into the respective UI slot."
                                         },
                                         {
                                             "Name": "result",
@@ -301,6 +301,11 @@
                                             "Name": "tags",
                                             "Type": "array of strings",
                                             "Description": "The crafting stations the recipe is compatible with. The only accepted value is \"smithing_table\"."
+                                        },
+                                        {
+                                            "Name": "template",
+                                            "Type": "item name",
+                                            "Description": "The template needed to perform the transform operation. In case of stackable items, only 1 item is consumed. Items must have the \"minecraft:transform_templates\" tag to be accepted into the respective UI slot."
                                         }
                                     ]
                                 }
@@ -312,7 +317,60 @@
                                     "content": [
                                         {
                                             "type": "code",
-                                            "content": "{\n \"format_version\": \"1.12\",\n \"minecraft:recipe_smithing_transform\": {\n  \"description\": {\n    \"identifier\": \"minecraft:smithing_netherite_boots\"\n   },\n  \n  \"tags\": [ \"smithing_table\" ],\n  \n   \"base\": \"minecraft:diamond_boots\",\n   \"addition\": \"minecraft:netherite_ingot\",\n   \"result\": \"minecraft:netherite_boots\"\n }\n}"
+                                            "content": "{\n \"format_version\": \"1.12\",\n \"minecraft:recipe_smithing_transform\": {\n  \"description\": {\n    \"identifier\": \"minecraft:smithing_netherite_boots\"\n   },\n  \n  \"tags\": [ \"smithing_table\" ],\n  \n   \"template\": \"minecraft:netherite_upgrade_smithing_template\",\n   \"base\": \"minecraft:diamond_boots\",\n   \"addition\": \"minecraft:netherite_ingot\",\n   \"result\": \"minecraft:netherite_boots\"\n }\n}"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Smithing Trim Recipe",
+                    "level": 2,
+                    "content": [
+                        "Represents a Smithing Trim Recipe for the Smithing Table.",
+                        "This recipe applies a colored trim pattern to an item, while preserving its other properties."
+                    ],
+                    "sections": [
+                        {
+                            "name": "Parameters",
+                            "level": 12,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "addition",
+                                            "Type": "item name or item tag",
+                                            "Description": "The material needed to perform the trim operation. It defines the color in which the pattern will be applied to the item. In case of stackable items, only 1 item is consumed. Items must have the \"minecraft:trim_materials\" tag to be accepted into the respective UI slot."
+                                        },
+                                        {
+                                            "Name": "base",
+                                            "Type": "item name or item tag",
+                                            "Description": "The item to trim. Its properties will be preserved. The only accepted items are armors. Items must have the \"minecraft:trimmable_armors\" tag to be accepted into the respective UI slot."
+                                        },
+                                        {
+                                            "Name": "tags",
+                                            "Type": "array of strings",
+                                            "Description": "The crafting stations the recipe is compatible with. The only accepted value is \"smithing_table\"."
+                                        },
+                                        {
+                                            "Name": "template",
+                                            "Type": "item name or item tag",
+                                            "Description": "The template needed to perform the trim operation. It defines the pattern which will be applied to the item. In case of stackable items, only 1 item is consumed. Items must have the \"minecraft:trim_templates\" tag to be accepted into the respective UI slot."
+                                        }
+                                    ]
+                                }
+                            ],
+                            "sections": [
+                                {
+                                    "name": "Smithing Trim Recipe Example:",
+                                    "level": 22,
+                                    "content": [
+                                        {
+                                            "type": "code",
+                                            "content": "{\n \"format_version\": \"1.12\",\n \"minecraft:recipe_smithing_trim\": {\n  \"description\": {\n    \"identifier\": \"minecraft:smithing_diamond_boots_jungle_quartz_trim\"\n   },\n  \n  \"tags\": [ \"smithing_table\" ],\n  \n   \"template\": \"minecraft:jungle_temple_smithing_template\",\n   \"base\": \"minecraft:diamond_boots\",\n   \"addition\": \"minecraft:quartz\",\n }\n}"
                                         }
                                     ]
                                 }
@@ -323,5 +381,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "d1be096b545caba662e2e08742f2c7e8bfffa911"
+    "__OBJECTHASH__": "c5a4e9a46d95d503a3b13eb92fa6b66c60302b95"
 }

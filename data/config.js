@@ -66,9 +66,9 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.19.63.01',
+        version: '1.19.70.02',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.63.01.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.70.02.apk',
         // 可用分支
         branches: ['vanilla', 'education', 'experiment', 'documentation'],
         config: smallestGUIOCROptions
@@ -76,9 +76,9 @@ export const packageVersions = {
     // 测试版
     beta: {
         // 安装包版本
-        version: '1.19.70.26',
+        version: '1.19.80.20',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.70.26.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.80.20.apk',
         // 可用分支
         branches: [
             'vanilla',
@@ -94,10 +94,10 @@ export const packageVersions = {
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: '2.5beta-218677',
-        coreVersion: '1.18.30.0.0',
+        version: '2.6beta-221292',
+        coreVersion: '1.18.31.0.0',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.5.100.218677.apk',
+        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.221292.apk',
         // 可用分支
         branches: ['vanilla', 'experiment'],
         config: neteaseOCROptions
