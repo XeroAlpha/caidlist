@@ -1,10 +1,13 @@
 {
-    "__VERSION__": "1.19.80.20",
-    "__COMMITHASH__": "3ec7fde6244f3c0954a2eb5cbd325354aa910d2a",
+    "__VERSION__": "1.19.80.21",
+    "__COMMITHASH__": "4566e02cbc1359ccf396e026c0805744f5f0aea4",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
             "sections": [
+                {
+                    "name": "AuxValueToBlockStatesMap"
+                },
                 {
                     "name": "BlockStates"
                 },
@@ -2956,6 +2959,7 @@
     "block": {
         "minecraft:acacia_button": "",
         "minecraft:acacia_door": "",
+        "minecraft:acacia_fence": "",
         "minecraft:acacia_fence_gate": "",
         "minecraft:acacia_hanging_sign": "",
         "minecraft:acacia_log": "",
@@ -3008,6 +3012,7 @@
         "minecraft:big_dripleaf": "",
         "minecraft:birch_button": "",
         "minecraft:birch_door": "",
+        "minecraft:birch_fence": "",
         "minecraft:birch_fence_gate": "",
         "minecraft:birch_hanging_sign": "",
         "minecraft:birch_log": "",
@@ -3149,6 +3154,7 @@
         "minecraft:cyan_wool": "",
         "minecraft:dark_oak_button": "",
         "minecraft:dark_oak_door": "",
+        "minecraft:dark_oak_fence": "",
         "minecraft:dark_oak_fence_gate": "",
         "minecraft:dark_oak_hanging_sign": "",
         "minecraft:dark_oak_log": "",
@@ -3336,7 +3342,6 @@
         "minecraft:exposed_cut_copper_stairs": "",
         "minecraft:exposed_double_cut_copper_slab": "",
         "minecraft:farmland": "",
-        "minecraft:fence": "",
         "minecraft:fence_gate": "",
         "minecraft:fire": "",
         "minecraft:fletching_table": "",
@@ -3396,6 +3401,7 @@
         "minecraft:jukebox": "",
         "minecraft:jungle_button": "",
         "minecraft:jungle_door": "",
+        "minecraft:jungle_fence": "",
         "minecraft:jungle_fence_gate": "",
         "minecraft:jungle_hanging_sign": "",
         "minecraft:jungle_log": "",
@@ -3493,6 +3499,7 @@
         "minecraft:netherreactor": "",
         "minecraft:normal_stone_stairs": "",
         "minecraft:noteblock": "",
+        "minecraft:oak_fence": "",
         "minecraft:oak_hanging_sign": "",
         "minecraft:oak_log": "",
         "minecraft:oak_stairs": "",
@@ -3626,6 +3633,7 @@
         "minecraft:spore_blossom": "",
         "minecraft:spruce_button": "",
         "minecraft:spruce_door": "",
+        "minecraft:spruce_fence": "",
         "minecraft:spruce_fence_gate": "",
         "minecraft:spruce_hanging_sign": "",
         "minecraft:spruce_log": "",
@@ -3670,6 +3678,7 @@
         "minecraft:stripped_warped_stem": "",
         "minecraft:structure_block": "",
         "minecraft:structure_void": "",
+        "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
         "minecraft:tallgrass": "",
@@ -5261,6 +5270,12 @@
                     "description": "List of entity types that this mob considers valid targets",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -5280,7 +5295,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -6185,6 +6200,12 @@
                     "description": "List of entity types that this mob can follow in a caravan",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -6204,7 +6225,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -6631,6 +6652,12 @@
                     "description": "List of entity types that this mob can target when hurt by them",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -6650,7 +6677,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -7888,11 +7915,23 @@
                     "description": "Time in seconds before selecting a target"
                 },
                 {
+                    "name": "cooldown",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                },
+                {
                     "name": "entity_types",
                     "type": "JSON Object",
                     "defaultValue": "",
                     "description": "List of entity types that this mob considers valid targets",
                     "children": [
+                        {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
                         {
                             "name": "filters",
                             "type": "Minecraft Filter",
@@ -7913,7 +7952,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -8137,6 +8176,12 @@
                     "description": "List of entity types that this mob can target if they hurt their owner",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -8156,7 +8201,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -8192,6 +8237,12 @@
                     "description": "List of entity types that this entity can target if the potential target is hurt by this mob's owner",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -8211,7 +8262,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -9174,6 +9225,12 @@
                     "description": "List of entities this mob will share items with",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -9193,7 +9250,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -9432,6 +9489,12 @@
                     "description": "List of entity types this mob will startle (cause to jump) when it sneezes.",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -9451,7 +9514,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -10392,6 +10455,12 @@
                     "description": "List of entities this mob can copy the owner from",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -10411,7 +10480,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
@@ -10447,6 +10516,12 @@
                     "description": "List of entity types the wither takes into account to find who dealt the most damage to it",
                     "children": [
                         {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                        },
+                        {
                             "name": "filters",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
@@ -10466,7 +10541,7 @@
                         },
                         {
                             "name": "must_see_forget_duration",
-                            "type": "Boolean",
+                            "type": "Decimal",
                             "defaultValue": "3.0",
                             "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                         },
