@@ -2,10 +2,16 @@ import { writeFileSync, existsSync, readFileSync } from 'fs';
 import { filterRedundantEnums, fixEntityRelatedIds } from './text.js';
 import { deepCopy, forEachObject } from '../util/common.js';
 
-export function writeTransMapJson(_, options) {
+export function writeTransMapJson(cx, options) {
+    const {
+        versionInfo, branch
+    } = cx;
     const {
         outputFile, originalEnums, transMaps, transMapNames
     } = options;
+    if (versionInfo.hidden || branch.hidden) {
+        return;
+    }
     const enums = deepCopy(filterRedundantEnums(transMaps));
     if (originalEnums) {
         fixEntityRelatedIds(enums.entityEvent, originalEnums.entityEventsMap, enums.entity);
@@ -45,16 +51,25 @@ export function writeTransMapIndexJson(cx, options) {
         outputFile, mergedFile, rootUrl, branchList
     } = options;
     const indexData = {
+        id: version,
+        name: versionInfo.name,
+        description: versionInfo.description,
+        sortOrder: versionInfo.sortOrder,
         dataVersion: packageVersion,
         coreVersion,
         branchList: branchList
-            .filter((branch) => !branch.hideOnWeb)
+            .filter((branch) => !branch.hidden)
             .map((branch) => ({
-                ...branch,
+                id: branch.id,
+                name: branch.name,
+                description: branch.description,
                 dataUrl: `${rootUrl}/${version}/${branch.id}.json`,
                 offlineUrl: `${rootUrl}/${version}/${branch.id}.zip`
             }))
     };
+    if (versionInfo.hidden) {
+        return;
+    }
     if (outputFile) {
         writeFileSync(outputFile, JSON.stringify(indexData, null, 4));
     }
@@ -69,11 +84,7 @@ export function writeTransMapIndexJson(cx, options) {
         }
         let mergeIndex = mergedList.findIndex((e) => e.id === version);
         if (mergeIndex < 0) mergeIndex = mergedList.length;
-        mergedList[mergeIndex] = {
-            id: version,
-            ...versionInfo,
-            ...indexData
-        };
+        mergedList[mergeIndex] = indexData;
         mergedList.sort((a, b) => a.sortOrder - b.sortOrder);
         writeFileSync(mergedFile, JSON.stringify(mergedList, null, 4));
     }

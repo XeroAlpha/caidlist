@@ -51,34 +51,44 @@ function listCommandsLegacy(session) {
     });
 }
 
-async function doWSRelatedJobs(cx, device) {
-    const wsServer = new WSServer(0);
-    const sessionPromise = pEvent(wsServer, 'client');
-    await device.reverse('tcp:19134', `tcp:${wsServer.address().port}`);
-    await adbShell(device, 'input keyevent 48'); // KEYCODE_T
-    await sleepAsync(500);
-    await adbShell(device, `input text ${JSON.stringify('/connect 127.0.0.1:19134')}`);
-    await adbShell(device, 'input keyevent 66'); // KEYCODE_ENTER
-    const { session } = await sessionPromise;
+async function doWSRelatedJobs(cx, session) {
     let commandList;
     if (testMinecraftVersionInRange(cx.coreVersion, '1.2', '*')) {
         commandList = await listCommands(session);
     } else {
         commandList = await listCommandsLegacy(session);
     }
-    wsServer.disconnectAll();
-    wsServer.close();
     return { commandList };
 }
 
-export default async function doWSRelatedJobsCached(cx, device, target) {
+/** @returns {Promise<import('mcpews').Session>} */
+export async function createExclusiveWSSession(device) {
+    const wsServer = new WSServer(19134);
+    const sessionPromise = pEvent(wsServer, 'client');
+    if (device) {
+        await device.reverse('tcp:19134', 'tcp:19134');
+        await adbShell(device, 'input keyevent 48'); // KEYCODE_T
+        await sleepAsync(500);
+        await adbShell(device, `input text ${JSON.stringify('/connect 127.0.0.1:19134')}`);
+        await adbShell(device, 'input keyevent 66'); // KEYCODE_ENTER
+    } else {
+        console.log('Type "/connect 127.0.0.1:19134" in game console to continue analyzing...');
+    }
+    const { session } = await sessionPromise;
+    session.on('disconnect', () => {
+        wsServer.close();
+    });
+    return session;
+}
+
+export async function doWSRelatedJobsCached(cx, session, target) {
     const { version, branch, packageVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}.mcpews`;
     const cache = cachedOutput(cacheId);
     let result;
     if (cache && packageVersion === cache.packageVersion) result = cache.result;
     if (!result) {
-        result = await doWSRelatedJobs(cx, device);
+        result = await doWSRelatedJobs(cx, session);
         cachedOutput(cacheId, { packageVersion, result });
     }
     Object.assign(target, result);

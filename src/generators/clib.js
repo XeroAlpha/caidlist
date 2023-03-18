@@ -56,6 +56,9 @@ function asUpdateText(from, to) {
 export default function writeTransMapClib(cx, options) {
     const { packageVersion, coreVersion, version, versionInfo, branch } = cx;
     const { outputFile, translationResultMaps, patchOptions } = options;
+    if (versionInfo.hidden || branch.hidden) {
+        return;
+    }
     const filteredTranslationResultMaps = excludeObjectEntry(translationResultMaps, [
         'gamerule',
         'command',

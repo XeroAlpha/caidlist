@@ -61,6 +61,18 @@ export async function waitForAnyDevice(adbClient) {
     return onlineDevice;
 }
 
+export async function getDeviceOrWait() {
+    const adbClient = newAdbClient();
+    let device = await getAnyOnlineDevice(adbClient);
+    if (!device) {
+        console.log('Please plug in the device...');
+        device = await waitForAnyDevice(adbClient);
+        await sleepAsync(1000);
+    }
+    console.log(`Device connected: ${device.serial}`);
+    return device;
+}
+
 /**
  * @param {DeviceClient} device
  * @param {string} command

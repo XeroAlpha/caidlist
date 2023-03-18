@@ -3,9 +3,7 @@ import sharp from 'sharp';
 import { strict as assert } from 'assert';
 import { recognize } from 'node-tesseract-ocr';
 import {
-    newAdbClient,
-    getAnyOnlineDevice,
-    waitForAnyDevice,
+    getDeviceOrWait,
     adbShell,
     getDeviceSurfaceOrientation,
     openMonkey,
@@ -24,7 +22,7 @@ import {
 } from '../util/common.js';
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
-import doWSRelatedJobsCached from './wsconnect.js';
+import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
 
 function guessTruncatedString(truncatedStr, startsWith) {
     let spos;
@@ -364,16 +362,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     const cache = cachedOutput(cacheId);
     if (cache && packageVersion === cache.packageVersion) return cache;
 
-    console.log('Connecting ADB host...');
-    const adbClient = newAdbClient();
-    console.log('Connecting to device...');
-    let device = await getAnyOnlineDevice(adbClient);
-    if (!device) {
-        console.log('Please plug in the device...');
-        device = await waitForAnyDevice(adbClient);
-        await sleepAsync(1000);
-    }
-    console.log(`Device connected: ${device.serial}`);
+    const device = await getDeviceOrWait();
     const screen = new AutocompletionScreen();
     screen.updateStatus({
         version,
@@ -390,7 +379,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     };
 
     if (support.mcpews(version)) {
-        await doWSRelatedJobsCached(cx, device, target);
+        const session = await createExclusiveWSSession(device);
+        await doWSRelatedJobsCached(cx, session, target);
+        session.disconnect();
     }
 
     await analyzeAutocompletionEnumCached(cx, options, 'blocks', '/testforblock ~ ~ ~ ');

@@ -81,9 +81,12 @@ export function generateTextFromMapTree(map, treeDepth) {
 }
 
 export function writeTransMapTextZip(cx, options) {
-    const branchName = cx.branch.name;
-    const { packageVersion, versionInfo } = cx;
+    const { packageVersion, versionInfo, branch } = cx;
+    const { name: branchName } = branch;
     const { outputFile, originalEnums, transMaps, transMapNames, stdTransMap, stdTransMapNames } = options;
+    if (versionInfo.hidden || branch.hidden) {
+        return;
+    }
     const gameVersionText = `${versionInfo.name}（${packageVersion}）- ${branchName}`;
     const footText = [
         `※此ID表是MCBEID表的一部分，对应游戏版本为${gameVersionText}`,

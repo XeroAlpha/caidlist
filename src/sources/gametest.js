@@ -3,7 +3,6 @@ import { pEvent } from 'p-event';
 import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
 import {
     cachedOutput,
-    sleepAsync,
     filterObjectMap,
     isExtendFrom,
     isArraySetEqual,
@@ -12,13 +11,8 @@ import {
     kvArrayToObject,
     pause
 } from '../util/common.js';
-import {
-    newAdbClient,
-    getAnyOnlineDevice,
-    waitForAnyDevice,
-    adbShell
-} from '../util/adb.js';
-import doWSRelatedJobsCached from './wsconnect.js';
+import { getDeviceOrWait } from '../util/adb.js';
+import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
 
 /**
  * Only used in QuickJSDebugSession.evaluate
@@ -532,38 +526,33 @@ async function evaluateExtractors(cx, target, session) {
 }
 
 export default async function analyzeGameTestEnumsCached(cx) {
-    const { version, packageVersion } = cx;
+    const { version, packageVersion, versionInfo } = cx;
     const cacheId = `version.${version}.gametest.all`;
     const cache = cachedOutput(cacheId);
     if (cache && packageVersion === cache.packageVersion) return cache;
 
-    console.log('Connecting ADB host...');
-    const adbClient = newAdbClient();
-    console.log('Connecting to device...');
-    let device = await getAnyOnlineDevice(adbClient);
-    if (!device) {
-        console.log('Please plug in the device...');
-        device = await waitForAnyDevice(adbClient);
-        await sleepAsync(1000);
+    let device;
+    if (!versionInfo.disableAdb) {
+        device = await getDeviceOrWait();
     }
-    console.log(`Device connected: ${device.serial}`);
     await pause('Please switch to branch: gametest\nInteract if the device is ready');
 
+    const wsSession = await createExclusiveWSSession(device);
     const server = createServer();
-    server.listen(0);
+    server.listen(19144);
     const socketPromise = pEvent(server, 'connection');
-    await device.reverse('tcp:19144', `tcp:${server.address().port}`);
-    await adbShell(device, 'input keyevent 48'); // KEYCODE_T
-    await sleepAsync(500);
-    await adbShell(device, `input text ${JSON.stringify('/script debugger connect 127.0.0.1 19144')}`);
-    await adbShell(device, 'input keyevent 66'); // KEYCODE_ENTER
+    if (device) {
+        await device.reverse('tcp:19144', 'tcp:19144');
+    }
+    wsSession.sendCommand('script debugger connect 127.0.0.1 19144');
     const socket = await socketPromise;
-    const protocol = new QuickJSDebugProtocol(socket);
-    const session = new QuickJSDebugSession(protocol);
+    const debugProtocol = new QuickJSDebugProtocol(socket);
+    const debugSession = new QuickJSDebugSession(debugProtocol);
     const target = { packageVersion };
-    await evaluateExtractors(cx, target, session);
-    await doWSRelatedJobsCached(cx, device, {});
-    protocol.close();
+    await evaluateExtractors(cx, target, debugSession);
+    await doWSRelatedJobsCached(cx, wsSession, {});
+    debugProtocol.close();
     server.close();
+    wsSession.disconnect();
     return cachedOutput(cacheId, target);
 }

@@ -604,25 +604,39 @@ async function generateGameTestOutputFiles(cx) {
 }
 
 const versionInfoMap = {
-    preview: {
-        name: '预览版',
-        description: '更新速度快，包含较多不稳定的新特性的版本',
-        sortOrder: 0
-    },
     beta: {
         name: '测试版',
         description: '更新速度快，包含较多不稳定的新特性的版本',
-        sortOrder: 0
+        sortOrder: 0,
+        branches: [
+            'vanilla',
+            'education',
+            'experiment',
+            'gametest',
+            'translator',
+            'documentation',
+            'langParity'
+        ]
     },
     release: {
         name: '正式版',
         description: '更新速度慢，向所有人开放的稳定版本',
-        sortOrder: 1
+        sortOrder: 1,
+        branches: [
+            'vanilla',
+            'education',
+            'experiment',
+            'documentation'
+        ]
     },
     netease: {
         name: '中国版',
         description: '由网易推出的中国本地化版本，通常落后于正式版',
-        sortOrder: 2
+        sortOrder: 2,
+        branches: [
+            'vanilla',
+            'experiment'
+        ]
     },
     netease_dev: {
         // name: "中国版测试版",
@@ -630,18 +644,45 @@ const versionInfoMap = {
         name: '中国版',
         description:
             '由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。',
-        sortOrder: 3
+        sortOrder: 3,
+        branches: [
+            'vanilla',
+            'experiment'
+        ]
     },
     education: {
         name: '教育版',
         description: '为教室使用而设计的教学版本',
-        sortOrder: 4
+        sortOrder: 4,
+        branches: [
+            'vanilla'
+        ]
     },
-    bds: {
-        name: '专用服务器',
-        description: '与正式版同步更新',
+    preview_win: {
+        name: '预览版（Windows）',
+        description: '更新速度比 Android 端快，但仅包含 WebSocket 与 Scripting API 相关内容',
         sortOrder: 5,
-        disablePackageInspect: true
+        disableAdb: true,
+        hidden: true,
+        branches: [
+            'gametest'
+        ]
+    },
+    bds_preview: {
+        name: '专用服务器预览版',
+        description: '与预览版同步更新',
+        sortOrder: 6,
+        branches: [
+            'bds'
+        ]
+    },
+    bds_release: {
+        name: '专用服务器正式版',
+        description: '与正式版同步更新',
+        sortOrder: 7,
+        branches: [
+            'bds'
+        ]
     }
 };
 const branchInfoMap = {
@@ -674,7 +715,7 @@ const branchInfoMap = {
     langParity: {
         name: '译名比较',
         description: '比较基岩版翻译与标准化译名，展示两者的差异',
-        hideOnWeb: true
+        hidden: true
     }
 };
 
@@ -690,8 +731,16 @@ export function generateOutputIndex(cx) {
         });
     }
     cx.versionInfo = versionInfoMap[version];
-    const branchList = cx.packageInfo.branches.map((id) => ({
+    const { branches } = cx.versionInfo;
+    const rewriteHiddenBranches = [];
+    if (cx.versionInfo.hidden) {
+        rewriteHiddenBranches.push(...branches);
+    } else if (cx.versionInfo.hiddenBranches) {
+        rewriteHiddenBranches.push(...cx.versionInfo.hiddenBranches);
+    }
+    const branchList = branches.map((id) => ({
         id,
+        hidden: rewriteHiddenBranches.includes(id),
         ...branchInfoMap[id]
     }));
     writeTransMapIndexJson(cx, {
