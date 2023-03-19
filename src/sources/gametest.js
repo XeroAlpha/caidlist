@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { createServer } from 'net';
 import { pEvent } from 'p-event';
 import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
@@ -371,8 +372,12 @@ const Extractors = [
                         console.log(`Dumping ${blockType.id}${JSON.stringify(state)}`);
                         if (permutation) {
                             const tags = permutation.getTags().slice();
-                            const components = [];
-                            states.push({ state, tags, components });
+                            const itemStack = permutation.getItemStack();
+                            let itemId = itemStack && itemStack.typeId;
+                            if (itemId === blockId) {
+                                itemId = '<same>';
+                            }
+                            states.push({ state, tags, itemId });
                         }
                         let cursor = loopFields.length - 1;
                         while (cursor >= 0) {
@@ -398,12 +403,8 @@ const Extractors = [
             for (const [blockId, blockType] of blockInfoEntries) {
                 const { properties, states, invalidStates, canBeWaterlogged } = blockType;
                 const tagMap = {};
+                const itemIdMap = {};
                 const stateValues = kvArrayToObject(properties.map((e) => [e.name, e.validValues]));
-                blocks[blockId] = {
-                    properties,
-                    invalidStates: simplifyStateAndCheck(stateValues, invalidStates, []),
-                    canBeWaterlogged
-                };
                 for (const property of properties) {
                     let propertyDescriptors = blockProperties[property.name];
                     if (!propertyDescriptors) {
@@ -428,7 +429,24 @@ const Extractors = [
                         }
                         tagList.push(state.state);
                     }
+                    if (state.itemId) {
+                        let itemIdStates = itemIdMap[state.itemId];
+                        if (!itemIdStates) {
+                            itemIdStates = itemIdMap[state.itemId] = [];
+                        }
+                        itemIdStates.push(state.state);
+                    }
                 }
+                const itemIds = Object.keys(itemIdMap);
+                for (const key of itemIds) {
+                    itemIdMap[key] = simplifyStateAndCheck(stateValues, itemIdMap[key], invalidStates);
+                }
+                blocks[blockId] = {
+                    properties,
+                    invalidStates: simplifyStateAndCheck(stateValues, invalidStates, []),
+                    itemId: itemIds.length > 1 ? itemIdMap : itemIds[0],
+                    canBeWaterlogged
+                };
                 for (const [tagName, tagStates] of Object.entries(tagMap)) {
                     const simplifiedState = simplifyStateAndCheck(stateValues, tagStates, invalidStates);
                     let tagInfo = blockTags[tagName];
@@ -452,16 +470,76 @@ const Extractors = [
         async extract(target, frame) {
             const ItemInfoList = parseOrThrow(await frame.evaluate(() => {
                 const result = {};
+                const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
+                const enchantSlots = Object.entries(Minecraft.EnchantmentSlot).filter(([, bit]) => bit > 0);
                 for (const itemType of Minecraft.ItemTypes.getAll()) {
                     const itemStack = new Minecraft.ItemStack(itemType);
-                    const components = itemStack.getComponents()
-                        .map((component) => component.constructor.id);
-                    result[itemType.id] = { components };
+                    const componentInstances = itemStack.getComponents();
+                    const commonComponents = {};
+                    const components = {};
+                    let hasComponents = false;
+                    componentInstances.forEach((component) => {
+                        const componentData = {};
+                        if (component.typeId === Minecraft.ItemEnchantsComponent.componentId) {
+                            let enchantSlotBits = component.enchantments.slot;
+                            if (enchantSlotBits !== 0) {
+                                commonComponents.enchantSlot = [];
+                                enchantSlots.forEach(([key, bit]) => {
+                                    if (enchantSlotBits & bit) {
+                                        commonComponents.enchantSlot.push(key);
+                                        enchantSlotBits &= ~bit;
+                                    }
+                                });
+                                if (enchantSlotBits > 0) {
+                                    commonComponents.enchantSlot.push(enchantSlotBits);
+                                }
+                            }
+                            return;
+                        }
+                        if (component.typeId === Minecraft.ItemCooldownComponent.componentId) {
+                            if (component.cooldownTicks > 0) {
+                                assign(commonComponents, component, ['cooldownCategory', 'cooldownTicks']);
+                            }
+                            return;
+                        }
+                        if (component.typeId === Minecraft.ItemDurabilityComponent.componentId) {
+                            assign(componentData, component, ['maxDurability']);
+                        }
+                        if (component.typeId === Minecraft.ItemFoodComponent.componentId) {
+                            assign(componentData, component, [
+                                'canAlwaysEat',
+                                'nutrition',
+                                'saturationModifier',
+                                'usingConvertsTo'
+                            ]);
+                        }
+                        components[component.typeId] = componentData;
+                        hasComponents = true;
+                    });
+                    const maxAmountDefault = itemStack.isStackable ? 64 : 1;
+                    result[itemType.id] = {
+                        unstackable: itemStack.isStackable ? undefined : true,
+                        maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
+                        tags: itemStack.getTags().slice(),
+                        components: hasComponents ? components : undefined,
+                        ...commonComponents
+                    };
                 }
                 return JSON.stringify(result);
             }));
-            const items = Object.keys(ItemInfoList).sort();
-            target.items = items;
+            const itemIds = Object.keys(ItemInfoList).sort();
+            const itemTags = {};
+            itemIds.forEach((itemId) => {
+                ItemInfoList[itemId].tags.forEach((itemTag) => {
+                    let itemTagIds = itemTags[itemTag];
+                    if (!itemTagIds) {
+                        itemTagIds = itemTags[itemTag] = [];
+                    }
+                    itemTagIds.push(itemId);
+                });
+            });
+            target.items = sortObjectKey(ItemInfoList);
+            target.itemTags = sortObjectKey(itemTags);
         }
     },
     {

@@ -89,7 +89,8 @@ const gtMapNames = [
     ['item', '物品'],
     ['entity', '实体'],
     ['blockState', '方块状态'],
-    ['blockTag', '方块标签']
+    ['blockTag', '方块标签'],
+    ['itemTag', '物品标签']
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, coreVersion } = cx;
@@ -523,7 +524,7 @@ async function generateGameTestOutputFiles(cx) {
     });
     const removePrefix = (s) => s.replace(/^minecraft:/, '');
     const blockIds = Object.keys(ids.blocks);
-    const itemIds = ids.items;
+    const itemIds = Object.keys(ids.items);
     const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e));
     const entityIds = ids.entities;
     matchTranslations({
@@ -585,6 +586,15 @@ async function generateGameTestOutputFiles(cx) {
         originalArray: blockTagIds,
         translationMap: userTranslation.blockTag,
         stdTransMap: cascadeMap(standardizedTranslation, ['BlockSprite', 'ExclusiveBlockSprite'], true),
+        autoMatch: []
+    });
+    const itemTagIds = Object.keys(ids.itemTags);
+    matchTranslations({
+        ...commonOptions,
+        name: 'itemTag',
+        originalArray: itemTagIds,
+        translationMap: userTranslation.itemTag,
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         autoMatch: []
     });
     delete translationResultMaps.glossary;

@@ -7,6 +7,7 @@ const userTranslationStorageKey = {
     blockState: 'translation.block_state',
     blockTag: 'translation.block_tag',
     item: 'translation.item',
+    itemTag: 'translation.item_tag',
     sound: 'translation.sound',
     entity: 'translation.entity',
     entityEvent: 'translation.entity_event',
