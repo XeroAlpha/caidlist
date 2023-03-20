@@ -1,5 +1,6 @@
 import { WSServer } from 'mcpews';
 import { pEvent } from 'p-event';
+import getPort from 'get-port';
 import { cachedOutput, testMinecraftVersionInRange, sleepAsync } from '../util/common.js';
 import { adbShell } from '../util/adb.js';
 
@@ -63,16 +64,17 @@ async function doWSRelatedJobs(cx, session) {
 
 /** @returns {Promise<import('mcpews').Session>} */
 export async function createExclusiveWSSession(device) {
-    const wsServer = new WSServer(19134);
+    const port = await getPort({ port: 19134 });
+    const wsServer = new WSServer(port);
     const sessionPromise = pEvent(wsServer, 'client');
     if (device) {
-        await device.reverse('tcp:19134', 'tcp:19134');
+        await device.reverse('tcp:19134', `tcp:${port}`);
         await adbShell(device, 'input keyevent 48'); // KEYCODE_T
         await sleepAsync(500);
         await adbShell(device, `input text ${JSON.stringify('/connect 127.0.0.1:19134')}`);
         await adbShell(device, 'input keyevent 66'); // KEYCODE_ENTER
     } else {
-        console.log('Type "/connect 127.0.0.1:19134" in game console to continue analyzing...');
+        console.log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
     }
     const { session } = await sessionPromise;
     session.on('disconnect', () => {

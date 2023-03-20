@@ -34,6 +34,10 @@ export function newLocateCommand(coreVersion) {
     );
 }
 
+export function inputpermissionCommand(coreVersion) {
+    return testMinecraftVersionInRange(coreVersion, '1.19.80.21', '*');
+}
+
 export function mcpews(versionType) {
     return versionType !== 'netease' && versionType !== 'netease_dev';
 }

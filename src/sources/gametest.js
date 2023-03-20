@@ -1,6 +1,7 @@
 /* eslint-disable no-bitwise */
 import { createServer } from 'net';
 import { pEvent } from 'p-event';
+import getPort from 'get-port';
 import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
 import {
     cachedOutput,
@@ -617,12 +618,15 @@ export default async function analyzeGameTestEnumsCached(cx) {
 
     const wsSession = await createExclusiveWSSession(device);
     const server = createServer();
-    server.listen(19144);
+    const port = await getPort({ port: 19144 });
+    server.listen(port);
     const socketPromise = pEvent(server, 'connection');
     if (device) {
-        await device.reverse('tcp:19144', 'tcp:19144');
+        await device.reverse('tcp:19144', `tcp:${port}`);
+        wsSession.sendCommand('script debugger connect 127.0.0.1 19144');
+    } else {
+        wsSession.sendCommand(`script debugger connect 127.0.0.1 ${port}`);
     }
-    wsSession.sendCommand('script debugger connect 127.0.0.1 19144');
     const socket = await socketPromise;
     const debugProtocol = new QuickJSDebugProtocol(socket);
     const debugSession = new QuickJSDebugSession(debugProtocol);

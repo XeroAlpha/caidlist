@@ -43,8 +43,10 @@
     "execute.rotated.default": "改变执行朝向为指定朝向，并执行后续子命令。",
     "execute.rotated.as": "改变执行朝向为指定实体的朝向，并执行后续子命令。",
     "execute.run": "执行命令。",
+    "fill.default.default": "用指定方块填充区域。",
     "fill.default.withBlockState": "用指定方块填充区域。",
     "fill.default.withDataValue": "用指定方块填充区域。",
+    "fill.replace.default": "用指定方块替换区域中的特定方块。",
     "fill.replace.withBlockState": "用指定方块替换区域中的特定方块。",
     "fill.replace.withDataValue": "用指定方块替换区域中的特定方块。",
     "fog.delete": "从玩家的迷雾栈中移除迷雾。",
@@ -67,6 +69,8 @@
     "help.withCommand": "按命令名列出命令用法。",
     "help.withPage": "按页数列出命令用法。",
     "immutableworld.default": "查询或设置世界是否不可更改。",
+    "inputpermission.query": "查询选中玩家的会话的操作输入权限。",
+    "inputpermission.set": "设置选中玩家的会话的操作输入权限。",
     "kick.default": "踢出特定玩家。",
     "kill.default": "击杀或移除实体。",
     "list.default": "列出在线玩家。",
@@ -137,6 +141,7 @@
     "script.profiler.stop": "停止脚本性能分析。",
     "script.watchdog.exportStats": "导出看门狗计时器统计数据。",
     "scriptevent.default": "向 Script API 模块广播消息事件。",
+    "setblock.default": "更改指定坐标位置的方块。",
     "setblock.withBlockState": "更改指定坐标位置的方块。",
     "setblock.withDataValue": "更改指定坐标位置的方块。",
     "setmaxplayers.default": "设置世界的最大可加入玩家数。",
@@ -423,5 +428,15 @@
     "execute in <dimension: Dimension> <chainedCommand: ExecuteChainedOption_0>": "this: execute.in", // 改变执行维度与执行坐标系，并执行后续子命令。
     "scriptevent <messageId: string> <message: message>": "this: scriptevent.default", // 向 Script API 模块广播消息事件。
     "summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtEntity: target> [spawnEvent: string] [nameTag: string]": "this: summon.facing.entity", // 生成指定的实体并使其面向另一实体。
-    "summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtPosition: x y z> [spawnEvent: string] [nameTag: string]": "this: summon.facing.position" // 生成指定的实体并使其面向指定位置。
+    "summon <entityType: EntityType> [spawnPos: x y z] facing <lookAtPosition: x y z> [spawnEvent: string] [nameTag: string]": "this: summon.facing.position", // 生成指定的实体并使其面向指定位置。
+    "clone <begin: x y z> <end: x y z> <destination: x y z> filtered <cloneMode: CloneMode> <tileName: Block> [blockStates: block states]": "this: clone.filtered.withBlockState", // 在区域间复制方块。
+    "fill <from: x y z> <to: x y z> <tileName: Block> <blockStates: block states> [oldBlockHandling: FillMode]": "this: fill.default.withBlockState", // 用指定方块填充区域。
+    "fill <from: x y z> <to: x y z> <tileName: Block> [oldBlockHandling: FillMode]": "this: fill.default.default", // 用指定方块填充区域。
+    "fill <from: x y z> <to: x y z> <tileName: Block> replace [replaceTileName: Block] [replaceBlockStates: block states]": "this: fill.replace.default", // 用指定方块替换区域中的特定方块。
+    "inputpermission query <targets: target> <permission: permission> [state: state]": "this: inputpermission.query", // 查询选中玩家的会话的操作输入权限。
+    "inputpermission set <targets: target> <permission: permission> <state: state>": "this: inputpermission.set", // 设置选中玩家的会话的操作输入权限。
+    "setblock <position: x y z> <tileName: Block> <blockStates: block states> [replace|destroy|keep]": "this: setblock.withBlockState", // 更改指定坐标位置的方块。
+    "setblock <position: x y z> <tileName: Block> [replace|destroy|keep]": "this: setblock.default", // 更改指定坐标位置的方块。
+    "teleport <destination: target>": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
+    "tp <destination: target>": "this: teleport.self.toEntity" // 将自身传送至指定实体所在位置。
 }

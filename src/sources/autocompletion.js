@@ -416,6 +416,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.placefeatureCommand(coreVersion)) {
         await analyzeAutocompletionEnumCached(cx, options, 'features and rules', '/placefeature ');
     }
+    if (support.inputpermissionCommand(coreVersion)) {
+        await analyzeAutocompletionEnumCached(cx, options, 'input permissions', '/inputpermission query @s ', ['[']);
+    }
 
     if (branch.id === 'education') {
         await analyzeAutocompletionEnumCached(cx, options, 'abilities', '/ability @s ', ['[']);
