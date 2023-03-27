@@ -225,8 +225,8 @@
                 const text = [];
                 text.push(`时间：${dateTimeString(new Date())}`);
                 if (hb.version) {
-                    const versionName = versionNameMap[hb.version];
-                    const branchName = branchNameMap[hb.branch];
+                    const versionName = versionNameMap[hb.version] || '未知版本';
+                    const branchName = branchNameMap[hb.branch] || '未知分支';
                     text.push(`项目：${versionName}（${hb.packageVersion}）- ${branchName}`);
                 }
                 if (hb.enumId) {

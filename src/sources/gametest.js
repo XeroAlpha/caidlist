@@ -185,6 +185,7 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
 const Extractors = [
     {
         name: 'scope',
+        timeout: 10000,
         async extract(target, frame) {
             const { tree, flatMap } = parseOrThrow(await frame.evaluate(() => {
                 const flatDescMap = {};
@@ -298,6 +299,7 @@ const Extractors = [
     },
     {
         name: 'commands',
+        timeout: 10000,
         async extract(target, frame, session) {
             parseOrThrow(await frame.evaluate(() => {
                 const player = [...Minecraft.world.getPlayers()][0];
@@ -333,6 +335,7 @@ const Extractors = [
     },
     {
         name: 'blocks',
+        timeout: 60000,
         async extract(target, frame) {
             const blockInfoList = parseOrThrow(await frame.evaluate(() => {
                 const blockTypes = Minecraft.MinecraftBlockTypes.getAllBlockTypes();
@@ -468,6 +471,7 @@ const Extractors = [
     },
     {
         name: 'items',
+        timeout: 60000,
         async extract(target, frame) {
             const ItemInfoList = parseOrThrow(await frame.evaluate(() => {
                 const result = {};
@@ -545,6 +549,7 @@ const Extractors = [
     },
     {
         name: 'entities',
+        timeout: 10000,
         async extract(target, frame) {
             const EntityInfoList = parseOrThrow(await frame.evaluate(() => {
                 const result = {};
@@ -592,10 +597,12 @@ async function evaluateExtractors(cx, target, session) {
         session.continue()
     ]);
     await session.pause();
+    const defaultTimeout = session.protocol.requestTimeout;
     for (const extractor of Extractors) {
         if (extractor.match && !extractor.match(coreVersion)) continue;
         try {
             console.log(`Extracting ${extractor.name} from GameTest`);
+            session.protocol.requestTimeout = extractor.timeout || defaultTimeout;
             await extractor.extract(target, topFrame, session, cx);
         } catch (err) {
             console.error(`Failed to extract ${extractor.name}`, err);

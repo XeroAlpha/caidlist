@@ -93,7 +93,7 @@ const gtMapNames = [
     ['itemTag', '物品标签']
 ];
 async function generateBranchedOutputFiles(cx) {
-    const { version, branch, coreVersion } = cx;
+    const { version, branch, coreVersion, versionInfo } = cx;
     const packageDataEnums = analyzePackageDataEnumsCached(cx);
     const autocompletedEnums = await analyzeAutocompletionEnumsCached(cx);
     const enums = {
@@ -115,6 +115,9 @@ async function generateBranchedOutputFiles(cx) {
         langMap: lang,
         autoMatch: ['stdTrans', 'lang', 'langLikely']
     };
+    if (versionInfo.disableAutoMatch) {
+        commonOptions.autoMatch = null;
+    }
     matchTranslations({
         ...commonOptions,
         name: 'glossary',
@@ -501,7 +504,7 @@ async function generateDocumentationOutputFiles(cx) {
 }
 
 async function generateGameTestOutputFiles(cx) {
-    const { version, branch } = cx;
+    const { version, branch, versionInfo } = cx;
     const ids = await analyzeGameTestEnumsCached(cx);
     const standardizedTranslation = await fetchStandardizedTranslation();
     const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
@@ -514,6 +517,9 @@ async function generateGameTestOutputFiles(cx) {
         javaEditionLangMap: javaEditionLang,
         autoMatch: ['stdTrans']
     };
+    if (versionInfo.disableAutoMatch) {
+        commonOptions.autoMatch = null;
+    }
     matchTranslations({
         ...commonOptions,
         name: 'glossary',
@@ -692,6 +698,17 @@ const versionInfoMap = {
         sortOrder: 7,
         branches: [
             'bds'
+        ]
+    },
+    dev: {
+        sortOrder: 8,
+        disableAutoMatch: true,
+        hidden: true,
+        branches: [
+            'vanilla',
+            'education',
+            'experiment',
+            'gametest'
         ]
     }
 };

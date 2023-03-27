@@ -69,7 +69,8 @@ export default class AutocompletionScreen {
                         })
                     );
                     return;
-                } if (url.pathname === '/screenshot') {
+                }
+                if (url.pathname === '/screenshot') {
                     if (this.screenshot) {
                         res.writeHead(200, { 'Content-Type': 'image/png' });
                         res.end(this.screenshot);

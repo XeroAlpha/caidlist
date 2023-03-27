@@ -63,8 +63,10 @@
     "gametest.run.default": "运行指定的 GameTest 测试。",
     "gametest.run.short": "运行指定的 GameTest 测试。",
     "gametest.runset": "运行指定的 GameTest 测试集合。",
+    "gametest.runsetuntilfail": "运行指定的 GameTest 测试集合，若有一个测试未通过则立即停止。",
     "gametest.runthese": "运行附近所有的 GameTest 测试。",
     "gametest.runthis": "运行最近的 GameTest 测试。",
+    "gametest.stopall": "停止全部 GameTest 测试。",
     "give.default": "给予玩家特定物品。",
     "help.withCommand": "按命令名列出命令用法。",
     "help.withPage": "按页数列出命令用法。",
@@ -438,5 +440,7 @@
     "setblock <position: x y z> <tileName: Block> <blockStates: block states> [replace|destroy|keep]": "this: setblock.withBlockState", // 更改指定坐标位置的方块。
     "setblock <position: x y z> <tileName: Block> [replace|destroy|keep]": "this: setblock.default", // 更改指定坐标位置的方块。
     "teleport <destination: target>": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
-    "tp <destination: target>": "this: teleport.self.toEntity" // 将自身传送至指定实体所在位置。
+    "tp <destination: target>": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
+    "gametest runsetuntilfail [tag: string] [rotationSteps: int]": "this: gametest.runsetuntilfail", // 运行指定的 GameTest 测试集合，若有一个测试未通过则立即停止。
+    "gametest stopall": "this: gametest.stopall" // 停止全部 GameTest 测试。
 }
