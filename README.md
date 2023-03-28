@@ -1,16 +1,126 @@
 # 命令助手ID表生成工具
 ## 简介
-命令助手作者 [ProjectXero](https://gitee.com/projectxero) 使用此工具生成ID表。
+命令助手作者 [ProjectXero](https://github.com/XeroAlpha) 使用此工具生成ID表。
 
-[MCBEID表](https://ca.projectxero.top/idlist/) 是基于此工具的数据制作的可离线使用的ID表查询网站。
+[MCBEID表](https://ca.projectxero.top/idlist/)（[仓库](https://github.com/XeroAlpha/caidlistweb)）是基于此工具的数据制作的可离线使用的ID表查询网站。
 
 [MCBEID表 在线搜索API](./backend/API.md) 是基于此工具的数据制作的在线ID表搜索接口。
+
+本仓库中包含了用于生成ID表的原始数据与部分导出数据，请参见[目录结构](#目录结构)。
+
+如果您希望使用此工具生成特定版本的数据，请参见 [工作流](#工作流)。
+
+如果您希望改善此工具的数据中的翻译部分，请参见 [翻译指南](./translation/README.md)。
+
+如果您希望数据中包含更多的内容或版本，欢迎提出 Issue。
+
+## 目录结构
+
+### 原始数据
+
+原始数据均存储在 `version` 目录中。
+
+`version/common` 目录下存储了与工作流无关的数据。
+
+|路径|内容|
+| - | - |
+|`version/common/wiki/standardized_translation.json`|[Minecraft Wiki](https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 与 [基岩版开发Wiki](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中的标准译名表。|
+|`version/java/lang.json`|最新Java版（含快照）的简体中文与英文语言文件。|
+|`version/documentation/`|基岩版官方内容包文档，提取自[官方示例内容包仓库](https://github.com/Mojang/bedrock-samples)。|
+|`version/documentation/<edition>.json`|从对应版本的文档中提取的数据。|
+|`version/documentation/<edition>/<name>.json`|文档解析成的 JSON。|
+
+`version/<edition>` 目录下存储了可通过 `data/config.js` 配置版本的相关数据。
+
+|路径|内容|
+| - | - |
+|`version/<edition>/autocompletion/`|通过扫描自动补全列表获取的数据。|
+|`version/<edition>/autocompletion/<branch>.json`|在对应分支下扫描自动补全列表的结果。|
+|`version/<edition>/autocompletion/<branch>/<id>.json`|对上一条的细分。|
+|`version/<edition>/autocompletion/<branch>/mcpews.json`|通过 [mcpews](https://github.com/mcpews/mcpews) 获取的数据。|
+|`version/<edition>/gametest/`|通过 [quickjs-debugger](https://github.com/XeroAlpha/quickjs-debugger) 从 Script API 获取的数据。|
+|`version/<edition>/package/`|对安装包进行静态分析所获得的数据。|
+|`version/<edition>/package/info.json`| 安装包的基础信息。|
+|`version/<edition>/package/lang.json`| 安装包的简体中文与英文语言文件。|
+|`version/<edition>/package/data.json`| 对安装包的内置内容包进行分析所获得的数据。|
+
+### 导出数据
+
+导出数据均存储在 `output` 目录中。
+
+|路径|内容|
+| - | - |
+|`output/clib/<edition>/<branch>.json`|对应分支的命令库。|
+|`output/clib/<edition>/patch/<branch>.json`|对应分支在原版分支基础上的增量命令库。|
+|`output/langParity/<edition>/difference.json`|列出同一个英文在Java版与基岩版对应的不同英文。|
+|`output/langParity/<edition>/output.lang`|基于上述分析制作的译名修正语言文件。|
+|`output/langParity/<edition>/output.mcpack`|基于上述分析制作的译名修正语言包。|
+|`output/translation/<edition>/<branch>.json`|列出对应分支下的翻译状态。|
+|`output/translation/<edition>/<branch>.xlsx`|列出对应分支下的翻译状态。|
+|`output/web/`| 由MCBEID表与在线搜索API使用的数据。|
+
+### 翻译
+
+请参见 [翻译指南](./translation/README.md)。
+
+### 版本
+
+|`<edition>`|名称|备注|
+| - | - | - |
+|beta|测试版/预览版|更新速度快，包含较多不稳定的新特性的版本。|
+|release|正式版|更新速度慢，向所有人开放的稳定版本。|
+|netease|中国版|由网易推出的中国本地化版本，通常落后于正式版。|
+|netease_dev|中国版测试版|面向中国版开发者开放的测试版本。|
+|education|教育版|为教室使用而设计的教学版本。|
+|preview_win|预览版（Windows）|同预览版，但仅在 Android 平台延迟发布时使用。|
+|bds_preview|专用服务器预览版|预览版的专用服务器版本。|
+|bds|专用服务器正式版|正式版的专用服务器版本。|
+|dev|预览版开发版|同预览版，但包含部分开发者独有功能与开发中的新功能。|
+|release_dev|正式版开发版|同正式版，但包含部分开发者独有功能与开发中的新功能。|
+|education_dev|教育版开发版|同教育版，但包含部分开发者独有功能与开发中的新功能。|
+|bds_dev|专用服务器预览版开发版|同专用服务器预览版，但包含部分开发者独有功能与开发中的新功能。|
+|bds_release_dev|专用服务器正式版开发版|同专用服务器预览版，但包含部分开发者独有功能与开发中的新功能。|
+
+### 分支
+
+|`<branch>`|名称|类型|备注|
+| - | - | - | - |
+|vanilla|原版|自动补全|使用默认设置创建的世界|
+|education|教育版|自动补全|启用了教育版选项后创建的世界|
+|experiment|实验性玩法|自动补全|启用了所有实验性玩法选项后创建的世界|
+|gametest|Script API|Script API|启用了教育版选项与所有实验性玩法选项后创建的世界<br>（开发版中需要打开“显示所有命令”）|
+|translator|翻译专用|翻译专用|标准译名表与两个版本的双语语言文件|
+|documentation|文档|文档|开发者文档中出现的ID及其描述|
+|langParity|译名比较|语言包修正|比较基岩版翻译与标准化译名，生成语言修正包|
+
+### 自动补全
+
+|`<id>`|名称|备注|
+| - | - | - |
+|blocks|方块|用于 setblock、fill 等命令的方块 ID。|
+|items|物品|用于 give、clear 等命令的物品 ID。|
+|entities|实体|用于 type 选择器的实体 ID。|
+|summonable_entities|可召唤实体|用于 summon 命令的实体 ID。|
+|effects|状态效果|用于 effect 命令的状态效果 ID。|
+|enchantments|魔咒|用于 enchant 命令的魔咒 ID。|
+|gamerules|游戏规则|用于 gamerule 命令的游戏规则 ID。|
+|locations|结构|用于 locate 命令的结构 ID。|
+|biomes|生物群系|用于 locate 命令的生物群系 ID。|
+|mobevents|生物事件|用于 mobevent 命令的生物事件 ID。|
+|entity_slots|槽位|用于 replaceitem 命令等的槽位 ID。|
+|selectors|目标选择器参数|用于选择实体时指定条件。|
+|loot_tools|战利品工具表|用于 loot 命令的工具选项。|
+|damage_causes|伤害类型|用于 damage 命令的伤害类型 ID。|
+|item_with_aliases|物品|包含别名，可用于 give、clear 等命令。|
+|features_and_rules|地物与地物规则|用于 placefeature 命令。|
+|input_permissions|操作输入权限|用于 inputpermission 命令。|
+|abilities|能力|用于教育版 ability 命令的能力 ID。|
 
 ## 工作流
 请视情况选择工作流。
 
 - 仅导出自带版本：准备、运行、校对
-- 导出任意版本：准备、准备 OCR、清空导出数据、运行（仅OCR）、运行、校对
+- 导出任意版本：准备、准备 OCR、运行（仅OCR）、运行、校对
 
 ### 准备
 1. 确认已安装 Node.js 最新版。
@@ -25,12 +135,6 @@
     - 如果您的 Minecraft 使用的字体不是默认的像素字体（即 Mojangles / Minecraft Seven），请使用 Minecraft 正在使用的字体进行训练。
 6. 按文件中的注释修改 `data/config.js`。
 
-### 清空导出数据
-1. 删除 `output` 目录下的所有文件。
-2. 如果不想使用仓库内自带的翻译，请删除 `translation` 目录下的所有文件。
-3. 如果需要强制刷新标准化译名表的缓存，请删除 `version/common/wiki` 目录下的所有文件。
-4. 如果需要强制刷新Java版语言数据的缓存，请删除 `version/common/java` 目录下的所有文件。
-
 ### 运行
 1. 运行 `npm run generate-release` 或 `npm run generate-beta`，取决于你要生成哪种版本的数据。
 
@@ -41,66 +145,4 @@
 
 ### 校对
 1. 检查输出的 `output/xxx/clib/xxx.json`（拓展包）与 `output/xxx/translation/xxx.xlsx`（ID-翻译对照表）。发现错译、漏译时请修改对应的 `translation/xxx.json`，随后从“运行”工作流继续。
-2. `translation/xxx.json` 支持引用标准化译名表数据与Java版语言数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。具体格式请参见 [翻译流程介绍](#翻译流程介绍) 一节。
-
-## 翻译流程介绍
-
-ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用户自定义译名表、标准化译名表、基岩版语言文件。
-
-用户自定义译名表即为 `translation/xxx.json`，为可带有注释的 JSON（即 JSONC）键值对。其中键通常为 ID，值为 ID 对应的翻译。当从用户自定义译名表中加载翻译时，生成工具会根据对应的 ID 在用户自定义译名表中搜索对应的翻译。
-
-当从 [标准化译名表](https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中加载翻译时，生成工具会将 ID 转换为自然英语形式（全部小写，将下划线“_”替换为空格）后在标准化译名表中搜索。
-
-> 您也可以从 [基岩版开发Wiki标准译名表](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中加载翻译。
-
-当从基岩版语言文件中加载翻译时，生成工具会先尝试搜索ID为 `<前缀>.<ID>.<后缀>` 形式的条目，随后尝试搜索所有满足 `<前缀>.<含有ID的字符串>.<后缀>` 条件的条目。
-
-如果通过以上流程均无法找到翻译，则置空。
-
-用户自定义译名表的值支持为以下格式：
-
-- 字面量。例如 `僵尸`。
-    - 可在前面加上冒号，用于与下方用法相区分。例如 `:ST: zombie` 表示 `ST: zombie`。
-- 直接引用。格式为 `<引用来源ID>: <引用ID>`。目前支持以下引用来源：
-    - 内部引用，引用来源 ID 为 `this`，等效于拼接模板的内部引用。例如 `this: a` 会引用当前翻译表中 ID 为 `a` 的翻译。
-    - 标准化译名表，引用 ID 为表中条目对应的英语。引用来源 ID 为 `ST`，例如 `ST: zombie` 可以表示 `僵尸`。
-    - Java版语言文件，引用 ID 为条目 ID。引用来源 ID 为 `JE`，例如 `JE: entity.minecraft.zombie` 也可表示 `僵尸`。
-    - 基岩版语言文件，引用 ID 为条目 ID，如非必要请勿使用此项。引用来源 ID 为 `BE`，例如 `BE: entity.zombie.name` 也可表示 `僵尸`。
-    - 其他翻译。例如 `entity: zombie` 会引用实体翻译中僵尸的翻译。
-        - 注意，翻译条目只能引用在此之前翻译完成的列表中的条目。
-    - 暂定翻译。用于标记某个条目为暂定翻译。引用来源 ID 为 `Missing`，例如 `Missing: BE: tile.sculk.name` 会展示警告，表示这是个暂定翻译，暂时使用 `BE: tile.sculk.name` 的结果代替。
-- 拼接模板。在字面量中穿插 `{{模板表达式}}`，生成工具会自动解释模板表达式并将模板表达式与字面量拼接起来。模板表达式支持以下格式：
-    - 内部引用。格式为 `{{<ID>}}`，通过此方法可直接引用已有的翻译。例如 `{{zombie}}{{villager}}` 可以表示为 `僵尸村民`（并不推荐这么做）。
-    - 外部引用。格式为 `{{<引用来源ID>!<引用ID>}}`。例如 `{{ST!zombie}}` 可以表示 `僵尸`。
-    - 模板引用。格式为 `{{模板|参数1|参数2|...}}`。例如：
-        - `{{JE!record.nowPlaying|JE!item.minecraft.music_disc_strad.desc}}` 表示 `正在播放：C418 - strad`。
-        - `{{JE!record.nowPlaying|'My Music}}` 表示 `正在播放：My Music`。
-
-翻译顺序为：
-
-|顺序|枚举名|ID|枚举来源|
-|---|---|---|---|
-|1|术语表|glossary|自定义|
-|2|方块|block|`/testforblock ~ ~ ~ <Tab>`|
-|3|物品|item|`/clear @s <Tab>`|
-|4|实体|entity|`/testfor @e[type=<Tab>`|
-|5|状态效果|effect|`/effect @s <Tab>`|
-|6|附魔类型|enchant|`/enchant @s <Tab>`|
-|7|迷雾|fog|/assets/resource_packs/?/fogs/*.json|
-|8|结构|location|`/locate structure <Tab>`|
-|9|生物群系|biome|`/locate biome <Tab>`|
-|10|实体事件|entityEvent|/assets/behavior_packs/?/entities/*.json|
-|11|实体族|entityFamily|/assets/behavior_packs/?/entities/*.json|
-|12|动画|animation|/assets/resource_packs/?/animations/*.json|
-|13|动画控制器|animationController|/assets/resource_packs/?/animation_controllers/*.json|
-|14|粒子发射器|particleEmitter|/assets/resource_packs/?/particles/*.json|
-|15|声音|sound|/assets/resource_packs/?/sounds/sound_definitions.json|
-|16|游戏规则|gamerule|`/gamerule <Tab>`|
-|17|槽位类型|entitySlot|`/replaceitem entity @s <Tab>`|
-|18|命令|command|`/help <page>` 的返回内容|
-|19|战利品表|lootTable|/assets/behavior_packs/?/loot_tables/*.json|
-|20|伤害来源|damageCause|`/damage @s 0 <Tab>`|
-|21|地物与地物规则|featureAndRule|`/placefeature <Tab>`|
-|22|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
-|23|可生成的实体|summonableEntity|`/summon <Tab>`|
-|24|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
+2. `translation/xxx.json` 支持引用标准化译名表数据与Java版语言数据，并且支持从其他译名拼接出新的译名。请尽量使用标准化译名或者由标准化译名拼接而来的翻译。具体格式请参见 [翻译流程](./translation/README.md#流程)。

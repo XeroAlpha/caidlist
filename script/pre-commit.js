@@ -14,6 +14,7 @@ const Restrictions = [
             /^output\/([^/]+)\/dev\//,
             /^version\/dev\//
         ],
+        ignoreMerge: true,
         pass: ({ current }) => current !== 'nda-restricted',
         message: 'No need to commit non-nda-restricted content to nda-restricted.'
     }
@@ -22,6 +23,12 @@ const Restrictions = [
 async function main() {
     const git = simpleGit();
     const status = await git.status();
+    const mergeHead = await git.revparse('MERGE_HEAD').catch(() => null);
+    const mergingFiles = [];
+    if (mergeHead) {
+        const diffWithMergeAndBase = await git.diffSummary(`HEAD...${mergeHead}`);
+        mergingFiles.push(...diffWithMergeAndBase.files.map((file) => file.file));
+    }
     let failed = false;
     status.files.forEach((file) => {
         if (!'MTADRC'.includes(file.index)) return;
@@ -30,6 +37,9 @@ async function main() {
                 return;
             }
             if (restriction.except && restriction.except.some((pattern) => pattern.test(file.path))) {
+                return;
+            }
+            if (restriction.ignoreMerge && mergingFiles.includes(file.path)) {
                 return;
             }
             if (!restriction.pass(status)) {
