@@ -55,7 +55,10 @@ module.exports = {
         'no-cond-assign': ['error', 'except-parens'],
         'no-return-assign': ['error', 'except-parens'],
         'no-nested-ternary': 'off',
-        'import/extensions': ['error', 'ignorePackages']
+        'import/extensions': ['error', 'ignorePackages'],
+        'import/no-extraneous-dependencies': ['error', {
+            devDependencies: ['script/*.js']
+        }]
     },
     overrides: [
         {
