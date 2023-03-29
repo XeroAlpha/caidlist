@@ -1,7 +1,7 @@
 export const CommentLocation = {
     beforeAll() { return Symbol.for('before-all'); },
     before(prop) {
-        if (prop) {
+        if (prop !== undefined) {
             return Symbol.for(`before:${prop}`);
         }
         return Symbol.for('before');
@@ -10,13 +10,42 @@ export const CommentLocation = {
     afterColon(prop) { return Symbol.for(`after-colon:${prop}`); },
     afterValue(prop) { return Symbol.for(`after-value:${prop}`); },
     after(prop) {
-        if (prop) {
+        if (prop !== undefined) {
             return Symbol.for(`after:${prop}`);
         }
         return Symbol.for('after');
     },
     afterAll() { return Symbol.for('after-all'); }
 };
+
+const clPropKeyPrefixes = [
+    'before',
+    'after-prop',
+    'after-colon',
+    'after-value',
+    'after'
+];
+const clPropKey = [
+    'before-all',
+    'before',
+    'after',
+    'after-all'
+];
+export function extractCommentLocation(symbol) {
+    const key = Symbol.keyFor(symbol);
+    if (!key) return undefined;
+    const colonPos = key.indexOf(':');
+    if (colonPos >= 0) {
+        const type = key.slice(0, colonPos);
+        const prop = key.slice(colonPos + 1);
+        if (clPropKeyPrefixes.includes(type)) {
+            return { type, prop };
+        }
+    } else if (clPropKey.includes(key)) {
+        return { type: key };
+    }
+    return undefined;
+}
 
 function parseJSONComment(type, comment) {
     return {

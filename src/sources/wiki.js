@@ -1,4 +1,5 @@
-import { addJSONComment, CommentLocation, setJSONComment } from '../util/comment.js';
+import * as CommentJSON from '@projectxero/comment-json';
+import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
 import { cachedOutput, forEachArray, forEachObject } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
 import { fetchFile } from '../util/network.js';
@@ -116,7 +117,7 @@ const dataPages = [
 
 // Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink?action=history
 // Last update:  2023/3/8 09:32 by Anterdc99
-function postprocessEnumMap(enumMaps, compatibleMode) {
+function postprocessEnumMap(enumMaps) {
     forEachObject(enumMaps, (enumMap, enumMapKey) => {
         let prevKey;
         if (Array.isArray(enumMap) && enumMap.length === 0) {
@@ -135,11 +136,7 @@ function postprocessEnumMap(enumMaps, compatibleMode) {
             }
             v = v.replace(/-\{(.*?)\}-/, '$1');
             enumMap[k] = v;
-            if (compatibleMode) {
-                if (hidden) {
-                    addJSONComment(enumMap, CommentLocation.after(k), 'inlineLine', ' Hidden');
-                }
-            } else if (hidden) {
+            if (hidden) {
                 const commentLoc = prevKey ? CommentLocation.after(prevKey) : CommentLocation.before();
                 addJSONComment(enumMap, commentLoc, 'line', ` ${JSON.stringify(k)}: ${JSON.stringify(v)},`);
                 delete enumMap[k];
@@ -150,9 +147,51 @@ function postprocessEnumMap(enumMaps, compatibleMode) {
     });
     return enumMaps;
 }
+const hiddenEntryLogSymbol = Symbol('hiddenEntryLog');
+function restoreHiddenEntries(enumMaps) {
+    const hiddenEntryLog = {};
+    forEachObject(enumMaps, (enumMap, enumMapKey) => {
+        const symbolKeys = Object.getOwnPropertySymbols(enumMap);
+        symbolKeys.forEach((symbolKey) => {
+            const commentLoc = extractCommentLocation(symbolKey);
+            if (!commentLoc) return;
+            if (commentLoc.type === 'before' || commentLoc.type === 'after') {
+                let comments = enumMap[symbolKey];
+                comments = comments.filter((comment) => {
+                    let parsedEntryObj;
+                    try {
+                        parsedEntryObj = CommentJSON.parse(`{${comment.value}}`);
+                    } catch (err) {
+                        return false;
+                    }
+                    Object.entries(parsedEntryObj).forEach(([key, value]) => {
+                        Object.defineProperty(enumMap, key, {
+                            get() {
+                                let hiddenEntryLogMap = hiddenEntryLog[enumMapKey];
+                                if (!hiddenEntryLogMap) {
+                                    hiddenEntryLogMap = hiddenEntryLog[enumMapKey] = {};
+                                }
+                                hiddenEntryLogMap[key] = value;
+                                return value;
+                            }
+                        });
+                    });
+                    return true;
+                });
+                if (comments.length) {
+                    enumMap[symbolKey] = comments;
+                } else {
+                    delete enumMap[symbolKey];
+                }
+            }
+        });
+    });
+    enumMaps[hiddenEntryLogSymbol] = hiddenEntryLog;
+    return enumMaps;
+}
 
-export default async function fetchStandardizedTranslation() {
-    return cachedOutput('version.common.wiki.standardized_translation', async () => {
+export async function fetchStandardizedTranslation() {
+    const cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
         const result = {};
         await forEachArray(dataPages, async (e) => {
             console.log(`Fetching ${e.source}:${e.name}`);
@@ -178,6 +217,13 @@ export default async function fetchStandardizedTranslation() {
                 });
             }
         });
-        return postprocessEnumMap(result, false);
+        return postprocessEnumMap(result);
     }, 24 * 60 * 60 * 1000);
+    const restoredResult = restoreHiddenEntries(cache);
+    return restoredResult;
+}
+
+export function writeHiddenEntryLog(cx, enumMaps) {
+    const { version, branch } = cx;
+    cachedOutput(`output.wiki.deprecated.${version}.${branch.id}`, enumMaps[hiddenEntryLogSymbol]);
 }

@@ -258,10 +258,10 @@ export function cascadeMap(mapOfMap, priority, includeAll) {
     }
     const result = {};
     mapKeys.forEach((mapKey) => {
-        forEachObject(mapOfMap[mapKey], (v, k) => {
-            result[`${k} (${mapKey})`] = v;
+        forEachObject(Object.getOwnPropertyDescriptors(mapOfMap[mapKey]), (desc, k) => {
+            Object.defineProperty(result, `${k} (${mapKey})`, desc);
             if (!(k in result)) {
-                result[k] = v;
+                Object.defineProperty(result, k, desc);
             }
         });
     });

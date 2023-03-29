@@ -1,7 +1,7 @@
 import * as CommentJSON from '@projectxero/comment-json';
 import analyzePackageDataEnumsCached from './sources/applicationPackage.js';
 import analyzeAutocompletionEnumsCached from './sources/autocompletion.js';
-import fetchStandardizedTranslation from './sources/wiki.js';
+import { fetchStandardizedTranslation, writeHiddenEntryLog } from './sources/wiki.js';
 import fetchJavaEditionLangData from './sources/javaEdition.js';
 import { fetchDocumentationIds, doSchemaTranslation } from './sources/documentation.js';
 import { loadUserTranslation, saveUserTranslation } from './sources/userTranslation.js';
@@ -394,6 +394,7 @@ async function generateBranchedOutputFiles(cx) {
         transMapNames: defaultTransMapNames
     });
     saveUserTranslation(userTranslation);
+    writeHiddenEntryLog(cx, standardizedTranslation);
 }
 
 async function generateLangParityPack(cx) {
@@ -429,6 +430,7 @@ async function generateLangParityPack(cx) {
         }),
         overrideMap: overrideMapResult.LangParity
     });
+    writeHiddenEntryLog(cx, standardizedTranslation);
 }
 
 async function generateTranslatorHelperFiles(cx) {
@@ -501,6 +503,7 @@ async function generateDocumentationOutputFiles(cx) {
         transMapNames: documentationMapNames
     });
     saveUserTranslation({ documentation: userTranslation });
+    writeHiddenEntryLog(cx, standardizedTranslation);
 }
 
 async function generateGameTestOutputFiles(cx) {
@@ -617,6 +620,7 @@ async function generateGameTestOutputFiles(cx) {
         transMapNames: gtMapNames
     });
     saveUserTranslation(userTranslation);
+    writeHiddenEntryLog(cx, standardizedTranslation);
 }
 
 const versionInfoMap = {
