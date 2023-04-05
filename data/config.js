@@ -66,36 +66,36 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.19.71.02',
+        version: '1.19.73.02',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.71.02.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.73.02.apk',
         config: smallestGUIOCROptions
     },
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.19.80.22',
+        version: '1.19.80.23',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.80.22.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.19.80.23.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: '2.6beta-221292',
+        version: '2.6beta-222120',
         coreVersion: '1.18.31.0.0',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.221292.apk',
+        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.222120.apk',
         config: neteaseOCROptions
     },
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.19.80.22'
+        version: '1.19.80.23'
     },
     dev: {
-        version: '1.19.80.22',
-        path: 'H:\\BedrockVersions\\Dev\\1.19.80.22.apk',
+        version: '1.19.80.23',
+        path: 'H:\\BedrockVersions\\Dev\\1.19.80.23.apk',
         config: smallestGUIOCROptions
     }
 };

@@ -132,34 +132,55 @@
             const statusBarEl = document.querySelector('.statusbar');
             const danmakuEl = document.querySelector('.danmaku');
             const versionNameMap = {
-                beta: '测试版',
+                beta: '测试版/预览版',
                 release: '正式版',
-                netease_dev: '中国版测试版'
+                netease: '中国版',
+                netease_dev: '中国版测试版',
+                education: '教育版',
+                preview_win: '预览版（Windows）',
+                bds_preview: '专用服务器预览版',
+                bds: '专用服务器正式版',
+                dev: '预览版开发版',
+                release_dev: '正式版开发版',
+                education_dev: '教育版开发版',
+                bds_dev: '专用服务器预览版开发版',
+                bds_release_dev: '专用服务器正式版开发版'
             };
             const branchNameMap = {
                 vanilla: '原版',
                 education: '教育版',
-                experiment: '实验性玩法'
+                experiment: '实验性玩法',
+                gametest: 'Script API',
+                translator: '翻译专用',
+                documentation: '文档',
+                langParity: '译名比较'
             };
             const enumNameMap = {
-                blocks: '方块（用于 setblock、fill 等命令的方块 ID）',
-                items: '物品（用于 give、clear 等命令的物品 ID）',
-                entities: '实体（用于 type 选择器的实体 ID）',
-                'summonable entities': '可召唤实体（用于 summon 命令的实体 ID）',
-                effects: '状态效果（用于 effect 命令的状态效果 ID）',
-                enchantments: '魔咒（用于 enchant 命令的魔咒 ID）',
-                gamerules: '游戏规则（用于 gamerule 命令的游戏规则 ID）',
-                locations: '结构（用于 locate 命令的结构 ID）',
-                biomes: '生物群系（用于 locate 命令的生物群系 ID）',
-                mobevents: '生物事件（用于 mobevent 命令的生物事件 ID）',
-                'entity slots': '槽位（用于 replaceitem 命令等的槽位 ID）',
+                blocks: '方块（用于 setblock、fill 等命令的方块 ID。）',
+                items: '物品（用于 give、clear 等命令的物品 ID。）',
+                entities: '实体（用于 type 选择器的实体 ID。）',
+                summonable_entities: '可召唤实体（用于 summon 命令的实体 ID。）',
+                effects: '状态效果（用于 effect 命令的状态效果 ID。）',
+                enchantments: '魔咒（用于 enchant 命令的魔咒 ID。）',
+                gamerules: '游戏规则（用于 gamerule 命令的游戏规则 ID。）',
+                locations: '结构（用于 locate 命令的结构 ID。）',
+                biomes: '生物群系（用于 locate 命令的生物群系 ID。）',
+                mobevents: '生物事件（用于 mobevent 命令的生物事件 ID。）',
+                entity_slots: '槽位（用于 replaceitem 命令等的槽位 ID。）',
                 selectors: '目标选择器参数',
-                'loot tools': '战利品工具表（用于 loot 命令的工具选项）',
-                'damage causes': '伤害类型（用于 damage 命令的伤害类型 ID）',
-                'item with aliases': '物品（包含别名，可用于 give、clear 等命令）',
-                'features and rules': '地物与地物规则（用于 placefeature 命令）',
-                'input permissions': '操作输入权限（用于 inputpermission 命令）',
-                abilities: '能力（用于教育版 ability 命令的能力 ID）'
+                loot_tools: '战利品工具表（用于 loot 命令的工具选项。）',
+                damage_causes: '伤害类型（用于 damage 命令的伤害类型 ID。）',
+                item_with_aliases: '物品（包含别名，可用于 give、clear 等命令。）',
+                features_and_rules: '地物与地物规则（用于 placefeature 命令。）',
+                input_permissions: '操作输入权限（用于 inputpermission 命令。）',
+                abilities: '能力（用于教育版 ability 命令的能力 ID。）',
+                options: '选项',
+                particle_types: '粒子类型',
+                features: '地物',
+                feature_rules: '地物规则',
+                server_tests: '服务器测试',
+                unit_tests: '单元测试',
+                functional_tests: '功能测试'
             };
             let sessionId = null;
             let screenshotId = null;
@@ -230,7 +251,7 @@
                     text.push(`项目：${versionName}（${hb.packageVersion}）- ${branchName}`);
                 }
                 if (hb.enumId) {
-                    text.push(`条目：${enumNameMap[hb.enumId]}`);
+                    text.push(`条目：${enumNameMap[hb.enumId.replace(/\s+/g, '_')] || '未知条目'}`);
                 }
                 if (hb.autocompletion) {
                     text.push(`识别结果：${hb.autocompletion}`);

@@ -41,3 +41,15 @@ export function inputpermissionCommand(coreVersion) {
 export function mcpews(versionType) {
     return versionType !== 'netease' && versionType !== 'netease_dev';
 }
+
+export function eduCommands(branchType) {
+    return branchType === 'education';
+}
+
+export function devCommands(versionType) {
+    return versionType === 'dev' || versionType === 'release_dev';
+}
+
+export function devCommandsGameSpace(branchType) {
+    return branchType === 'experiment';
+}

@@ -115,6 +115,13 @@
 |features_and_rules|地物与地物规则|用于 placefeature 命令。|
 |input_permissions|操作输入权限|用于 inputpermission 命令。|
 |abilities|能力|用于教育版 ability 命令的能力 ID。|
+|options|选项|仅开发版|
+|particle_types|粒子类型|仅开发版|
+|features|地物|仅开发版|
+|feature_rules|地物规则|仅开发版|
+|server_tests|服务器测试|仅开发版|
+|unit_tests|单元测试|仅开发版|
+|functional_tests|功能测试|仅开发版|
 
 ## 工作流
 请视情况选择工作流。

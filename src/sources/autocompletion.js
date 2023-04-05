@@ -420,8 +420,20 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
         await analyzeAutocompletionEnumCached(cx, options, 'input permissions', '/inputpermission query @s ', ['[']);
     }
 
-    if (branch.id === 'education') {
+    if (support.eduCommands(branch.id)) {
         await analyzeAutocompletionEnumCached(cx, options, 'abilities', '/ability @s ', ['[']);
+    }
+
+    if (support.devCommands(version)) {
+        await analyzeAutocompletionEnumCached(cx, options, 'particle types', '/particlelegacy ');
+        await analyzeAutocompletionEnumCached(cx, options, 'features', '/placefeature feature ');
+        await analyzeAutocompletionEnumCached(cx, options, 'feature rules', '/placefeature rule ');
+        if (support.devCommandsGameSpace(branch.id)) {
+            await analyzeAutocompletionEnumCached(cx, options, 'options', '/option set ');
+            await analyzeAutocompletionEnumCached(cx, options, 'server tests', '/test servertests ');
+            await analyzeAutocompletionEnumCached(cx, options, 'unit tests', '/test unittests ');
+            await analyzeAutocompletionEnumCached(cx, options, 'functional tests', '/test functionaltests ');
+        }
     }
 
     await screen.stop();

@@ -7,6 +7,15 @@ const releaseApiHost = 'https://piston-data.mojang.com/';
 const metaApiHost = 'https://piston-meta.mojang.com';
 const assetApiHost = 'https://resources.download.minecraft.net';
 
+const skipVersions = [
+    '15w14a',
+    '1.RV-Pre1',
+    '3D Shareware v1.34',
+    '20w14infinite',
+    '22w13oneblockatatime',
+    '23w13a_or_b'
+];
+
 function replaceUrlHost(url, host) {
     const urlObj = new URL(url, host);
     const hostObj = new URL(host);
@@ -19,7 +28,18 @@ async function fetchVersionsManifest(apiHost) {
 }
 
 function getLatestSnapshotVersionId(manifest) {
-    return manifest.latest.snapshot;
+    const latest = manifest.latest.snapshot;
+    if (skipVersions.includes(latest)) {
+        const filtered = manifest.versions.filter((v) => !skipVersions.includes(v.id));
+        const maxVersion = filtered.reduce((max, v) => {
+            if (Date.parse(v.releaseTime) > Date.parse(max.releaseTime)) {
+                return v;
+            }
+            return max;
+        });
+        return maxVersion.id;
+    }
+    return latest;
 }
 
 async function fetchVersionMeta(apiHost, manifest, versionId) {
