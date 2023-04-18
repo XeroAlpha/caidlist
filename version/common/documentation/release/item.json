@@ -5,6 +5,7 @@
     "sections": [
         {
             "name": "Items",
+            "id": "Items",
             "level": 1,
             "content": [
                 "To define an item, the item definition must be defined in the behavior pack in a JSON file.",
@@ -13,6 +14,7 @@
             "sections": [
                 {
                     "name": "Item Components",
+                    "id": "Item Components",
                     "level": 2,
                     "content": [
                         "Below are the various components for item functionality.",
@@ -626,6 +628,7 @@
                 },
                 {
                     "name": "Item Definition Properties",
+                    "id": "Item Definition Properties",
                     "level": 2,
                     "content": [
                         "The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item."
@@ -633,20 +636,41 @@
                     "sections": [
                         {
                             "name": "format_version",
-                            "level": 12,
+                            "id": "format_version",
+                            "level": 4,
                             "content": [
                                 "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
-                            ],
-                            "sections": [
+                            ]
+                        },
+                        {
+                            "name": "Code Example",
+                            "level": 4,
+                            "content": [
+                                "Example",
                                 {
-                                    "name": "Code Example",
-                                    "level": 22,
+                                    "type": "code",
                                     "content": [
-                                        "Example",
-                                        {
-                                            "type": "code",
-                                            "content": "{\n  \"format_version\": \"1.16.1\",\n  \"minecraft:item\": {\n    \"description\": {\n      \"identifier\": \"minecraft:blaze_rod\"\n    },\n    \"components\": {\n      \"minecraft:fuel\": {\n        \"duration\": 120.0\n      },\n      \"minecraft:max_stack_size\": 64,\n      \"minecraft:icon\": {\n        \"texture\": \"blaze_rod\"\n      },\n      \"minecraft:hand_equipped\": true,\n      \"minecraft:display_name\": {\n        \"value\": \"Blaze Rod\"\n      }\n    }\n  }\n}"
-                                        }
+                                        "{",
+                                        "  \"format_version\": \"1.16.1\",",
+                                        "  \"minecraft:item\": {",
+                                        "    \"description\": {",
+                                        "      \"identifier\": \"minecraft:blaze_rod\"",
+                                        "    },",
+                                        "    \"components\": {",
+                                        "      \"minecraft:fuel\": {",
+                                        "        \"duration\": 120.0",
+                                        "      },",
+                                        "      \"minecraft:max_stack_size\": 64,",
+                                        "      \"minecraft:icon\": {",
+                                        "        \"texture\": \"blaze_rod\"",
+                                        "      },",
+                                        "      \"minecraft:hand_equipped\": true,",
+                                        "      \"minecraft:display_name\": {",
+                                        "        \"value\": \"Blaze Rod\"",
+                                        "      }",
+                                        "    }",
+                                        "  }",
+                                        "}"
                                     ]
                                 }
                             ]
@@ -655,6 +679,7 @@
                 },
                 {
                     "name": "Item Description Properties",
+                    "id": "Item Description Properties",
                     "level": 2,
                     "content": [
                         {

@@ -5,11 +5,13 @@
     "sections": [
         {
             "name": "This describes the structure of the Events section.",
+            "id": "This describes the structure of the Events section.",
             "level": 1,
             "content": []
         },
         {
             "name": "Overview",
+            "id": "Overview",
             "level": 1,
             "content": [
                 "Entity events can be structured by a combination of 'sequence' and 'randomize' nodes.",
@@ -31,6 +33,7 @@
         },
         {
             "name": "Versioned Changes",
+            "id": "Versioned Changes",
             "level": 1,
             "content": [
                 "A 'format_version' of '1.19.20' or higher is required to properly evaluate filters specified on an entity event definition",
@@ -40,6 +43,7 @@
         },
         {
             "name": "Randomize Node",
+            "id": "Randomize Node",
             "level": 1,
             "content": [
                 "The 'randomize' node is an array node that will pick one entry to execute, based on a weight.",
@@ -48,54 +52,111 @@
                 "Example:",
                 {
                     "type": "code",
-                    "content": "\"randomize\": [\n      {\n        \"weight\": <float>\n        // actions like 'add' or 'remove'\n      }\n    ]"
+                    "content": [
+                        "\"randomize\": [",
+                        "      {",
+                        "        \"weight\": <float>",
+                        "        // actions like 'add' or 'remove'",
+                        "      }",
+                        "    ]"
+                    ]
                 }
             ]
         },
         {
             "name": "Sequence Node",
+            "id": "Sequence Node",
             "level": 1,
             "content": [
                 "Example:",
                 {
                     "type": "code",
-                    "content": "\"sequence\": [\n      {\n        // I will execute first! c:\n      },\n      {\n        // I will execute last! :c\n      }\n    ]"
+                    "content": [
+                        "\"sequence\": [",
+                        "      {",
+                        "        // I will execute first! c:",
+                        "      },",
+                        "      {",
+                        "        // I will execute last! :c",
+                        "      }",
+                        "    ]"
+                    ]
                 }
             ]
         },
         {
             "name": "Trigger",
+            "id": "Trigger",
             "level": 1,
             "content": [
                 "Triggers additional entity events when hit. For example, you could use a randomize node in minecraft:entity_spawned to choose either an adult or baby event for adding component groups.",
                 "Example:",
                 {
                     "type": "code",
-                    "content": "\"sample:spawn_adult\": {\n      // add adult component groups\n    },\n    \"sample:spawn_baby\": {\n      // add baby component groups\n    },\n    \"minecraft:entity_spawned\": {\n      \"randomize\": [\n        {\n          \"weight\": 50.0,\n          \"trigger\": \"sample:spawn_adult\"\n        },\n        {\n          \"weight\": 50.0,\n          \"trigger\": \"sample:spawn_baby\"\n        }\n      ]\n    }"
+                    "content": [
+                        "\"sample:spawn_adult\": {",
+                        "      // add adult component groups",
+                        "    },",
+                        "    \"sample:spawn_baby\": {",
+                        "      // add baby component groups",
+                        "    },",
+                        "    \"minecraft:entity_spawned\": {",
+                        "      \"randomize\": [",
+                        "        {",
+                        "          \"weight\": 50.0,",
+                        "          \"trigger\": \"sample:spawn_adult\"",
+                        "        },",
+                        "        {",
+                        "          \"weight\": 50.0,",
+                        "          \"trigger\": \"sample:spawn_baby\"",
+                        "        }",
+                        "      ]",
+                        "    }"
+                    ]
                 }
             ]
         },
         {
             "name": "Add Component Group",
+            "id": "Add Component Group",
             "level": 1,
             "content": [
                 "Adds component groups to the current entity. These groups must be defined in the 'component_groups' section of the file. As entities can only have one component of each type active, any components in a group that is being added will replace previously added components. Additionally, adding a component group that is already active will cause those components to be re-initialized. For some types of components like minecraft:is_baby, re-initializing an already active component has no effect, but for other component types the associated logic will start over. For example, an already-added minecraft:timer that is added again will start its timing logic over.",
                 "Example:",
                 {
                     "type": "code",
-                    "content": "\"sequence\": [\n      {\n        \"add\": { \"component_groups\": [ \"one\" ] }\n      },\n      {\n        \"add\": { \"component_groups\": [ \"two\", \"five\", \"etc..\" ] }\n      }\n    ]"
+                    "content": [
+                        "\"sequence\": [",
+                        "      {",
+                        "        \"add\": { \"component_groups\": [ \"one\" ] }",
+                        "      },",
+                        "      {",
+                        "        \"add\": { \"component_groups\": [ \"two\", \"five\", \"etc..\" ] }",
+                        "      }",
+                        "    ]"
+                    ]
                 }
             ]
         },
         {
             "name": "Remove Component Group",
+            "id": "Remove Component Group",
             "level": 1,
             "content": [
                 "Removes component groups from the current entity. This can be any group you have defined in the 'component_groups' section of the file.",
                 "Example:",
                 {
                     "type": "code",
-                    "content": "\"sequence\": [\n      {\n        \"remove\": { \"component_groups\": [ \"one\" ] }\n      },\n      {\n        \"remove\": { \"component_groups\": [ \"two\", \"five\", \"etc..\" ] }\n      }\n    ]"
+                    "content": [
+                        "\"sequence\": [",
+                        "      {",
+                        "        \"remove\": { \"component_groups\": [ \"one\" ] }",
+                        "      },",
+                        "      {",
+                        "        \"remove\": { \"component_groups\": [ \"two\", \"five\", \"etc..\" ] }",
+                        "      }",
+                        "    ]"
+                    ]
                 }
             ]
         }

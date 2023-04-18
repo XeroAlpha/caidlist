@@ -107,6 +107,8 @@
             "block.scaffolding.place",
             "block.scaffolding.step",
             "block.smoker.smoke",
+            "block.sniffer_egg.crack",
+            "block.sniffer_egg.hatch",
             "block.stonecutter.use",
             "block.sweet_berry_bush.break",
             "block.sweet_berry_bush.hurt",
@@ -771,6 +773,18 @@
             "mob.slime.jump",
             "mob.slime.small",
             "mob.slime.squish",
+            "mob.sniffer.death",
+            "mob.sniffer.digging",
+            "mob.sniffer.drop_seed",
+            "mob.sniffer.eat",
+            "mob.sniffer.happy",
+            "mob.sniffer.hurt",
+            "mob.sniffer.idle",
+            "mob.sniffer.long_sniff",
+            "mob.sniffer.searching",
+            "mob.sniffer.sniffsniff",
+            "mob.sniffer.stand_up",
+            "mob.sniffer.step",
             "mob.snowgolem.death",
             "mob.snowgolem.hurt",
             "mob.snowgolem.shoot",
@@ -2280,6 +2294,9 @@
             "geometry.warden": [
                 "minecraft:warden<default>"
             ],
+            "geometry.sniffer": [
+                "minecraft:sniffer<default>"
+            ],
             "geometry.boat": [
                 "minecraft:boat<default>"
             ],
@@ -2873,6 +2890,7 @@
                 "minecraft:ravager<look_at_target>",
                 "minecraft:sheep<look_at_target>",
                 "minecraft:shulker<look_at_target>",
+                "minecraft:sniffer<look_at_target>",
                 "minecraft:snow_golem<look_at_target>",
                 "minecraft:trader_llama<look_at_target>",
                 "minecraft:turtle<look_at_target>",
@@ -3580,7 +3598,31 @@
             "animation.allay.hold_item_fly": [],
             "animation.vex.idle": [],
             "animation.vex.charge": [],
-            "animation.evoker.move": []
+            "animation.evoker.move": [],
+            "animation.sniffer.baby_transform": [
+                "minecraft:sniffer<baby_transform>"
+            ],
+            "animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "animation.sniffer.longsniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ]
         },
         "animationControllerMap": {
             "controller.animation.agent.move": [
@@ -4117,6 +4159,33 @@
             "controller.animation.vex.idle": [],
             "controller.animation.vex.charge": [],
             "controller.animation.humanoid.riding_legs_only": [],
+            "controller.animation.sniffer.baby": [
+                "minecraft:sniffer<baby>"
+            ],
+            "controller.animation.sniffer.general": [
+                "minecraft:sniffer<general>"
+            ],
+            "controller.animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "controller.animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "controller.animation.sniffer.long_sniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "controller.animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "controller.animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "controller.animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "controller.animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ],
             "controller.animation.player.base": [
                 "minecraft:player<base_controller>"
             ]
@@ -4483,6 +4552,10 @@
             ],
             "controller.render.player.first_person_spectator": [],
             "controller.render.player.third_person_spectator": [],
+            "controller.render.shield": [],
+            "controller.render.sniffer": [
+                "minecraft:sniffer"
+            ],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -4548,6 +4621,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:spider",
                 "minecraft:squid",
                 "minecraft:stray",
@@ -4605,6 +4679,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -4652,6 +4727,7 @@
                 "minecraft:pig",
                 "minecraft:polar_bear",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -5604,6 +5680,7 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:pig",
+                "minecraft:sniffer",
                 "minecraft:trader_llama"
             ],
             "minecraft:add_attributes": [
@@ -5712,6 +5789,36 @@
             ],
             "on_not_riding_parent": [
                 "minecraft:strider"
+            ],
+            "on_pregnant": [
+                "minecraft:sniffer"
+            ],
+            "on_egg_spawned": [
+                "minecraft:sniffer"
+            ],
+            "on_scenting_success": [
+                "minecraft:sniffer"
+            ],
+            "on_digging_start": [
+                "minecraft:sniffer"
+            ],
+            "on_item_found": [
+                "minecraft:sniffer"
+            ],
+            "on_feeling_happy_end": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_searching": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_digging": [
+                "minecraft:sniffer"
+            ],
+            "on_search_and_digging_success": [
+                "minecraft:sniffer"
+            ],
+            "on_rising_end": [
+                "minecraft:sniffer"
             ]
         },
         "entityFamilyMap": {
@@ -6097,6 +6204,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:snow_golem",
                 "minecraft:spider",
                 "minecraft:squid",
@@ -6504,6 +6612,9 @@
             ],
             "trader_llama": [
                 "minecraft:trader_llama"
+            ],
+            "sniffer": [
+                "minecraft:sniffer"
             ]
         }
     },
@@ -6616,6 +6727,8 @@
             "block.scaffolding.place",
             "block.scaffolding.step",
             "block.smoker.smoke",
+            "block.sniffer_egg.crack",
+            "block.sniffer_egg.hatch",
             "block.stonecutter.use",
             "block.sweet_berry_bush.break",
             "block.sweet_berry_bush.hurt",
@@ -7282,6 +7395,18 @@
             "mob.slime.jump",
             "mob.slime.small",
             "mob.slime.squish",
+            "mob.sniffer.death",
+            "mob.sniffer.digging",
+            "mob.sniffer.drop_seed",
+            "mob.sniffer.eat",
+            "mob.sniffer.happy",
+            "mob.sniffer.hurt",
+            "mob.sniffer.idle",
+            "mob.sniffer.long_sniff",
+            "mob.sniffer.searching",
+            "mob.sniffer.sniffsniff",
+            "mob.sniffer.stand_up",
+            "mob.sniffer.step",
             "mob.snowgolem.death",
             "mob.snowgolem.hurt",
             "mob.snowgolem.shoot",
@@ -8796,6 +8921,9 @@
             "geometry.warden": [
                 "minecraft:warden<default>"
             ],
+            "geometry.sniffer": [
+                "minecraft:sniffer<default>"
+            ],
             "geometry.boat": [
                 "minecraft:boat<default>"
             ],
@@ -9390,6 +9518,7 @@
                 "minecraft:ravager<look_at_target>",
                 "minecraft:sheep<look_at_target>",
                 "minecraft:shulker<look_at_target>",
+                "minecraft:sniffer<look_at_target>",
                 "minecraft:snow_golem<look_at_target>",
                 "minecraft:trader_llama<look_at_target>",
                 "minecraft:turtle<look_at_target>",
@@ -10097,7 +10226,31 @@
             "animation.allay.hold_item_fly": [],
             "animation.vex.idle": [],
             "animation.vex.charge": [],
-            "animation.evoker.move": []
+            "animation.evoker.move": [],
+            "animation.sniffer.baby_transform": [
+                "minecraft:sniffer<baby_transform>"
+            ],
+            "animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "animation.sniffer.longsniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ]
         },
         "animationControllerMap": {
             "controller.animation.agent.move": [
@@ -10634,6 +10787,33 @@
             "controller.animation.vex.idle": [],
             "controller.animation.vex.charge": [],
             "controller.animation.humanoid.riding_legs_only": [],
+            "controller.animation.sniffer.baby": [
+                "minecraft:sniffer<baby>"
+            ],
+            "controller.animation.sniffer.general": [
+                "minecraft:sniffer<general>"
+            ],
+            "controller.animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "controller.animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "controller.animation.sniffer.long_sniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "controller.animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "controller.animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "controller.animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "controller.animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ],
             "controller.animation.player.base": [
                 "minecraft:player<base_controller>"
             ]
@@ -11004,6 +11184,10 @@
             ],
             "controller.render.player.first_person_spectator": [],
             "controller.render.player.third_person_spectator": [],
+            "controller.render.shield": [],
+            "controller.render.sniffer": [
+                "minecraft:sniffer"
+            ],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -11069,6 +11253,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:spider",
                 "minecraft:squid",
                 "minecraft:stray",
@@ -11126,6 +11311,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -11173,6 +11359,7 @@
                 "minecraft:pig",
                 "minecraft:polar_bear",
                 "minecraft:sheep",
+                "minecraft:sniffer",
                 "minecraft:strider",
                 "minecraft:trader_llama",
                 "minecraft:turtle",
@@ -12125,6 +12312,7 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:pig",
+                "minecraft:sniffer",
                 "minecraft:trader_llama"
             ],
             "minecraft:add_attributes": [
@@ -12233,6 +12421,36 @@
             ],
             "on_not_riding_parent": [
                 "minecraft:strider"
+            ],
+            "on_pregnant": [
+                "minecraft:sniffer"
+            ],
+            "on_egg_spawned": [
+                "minecraft:sniffer"
+            ],
+            "on_scenting_success": [
+                "minecraft:sniffer"
+            ],
+            "on_digging_start": [
+                "minecraft:sniffer"
+            ],
+            "on_item_found": [
+                "minecraft:sniffer"
+            ],
+            "on_feeling_happy_end": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_searching": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_digging": [
+                "minecraft:sniffer"
+            ],
+            "on_search_and_digging_success": [
+                "minecraft:sniffer"
+            ],
+            "on_rising_end": [
+                "minecraft:sniffer"
             ]
         },
         "entityFamilyMap": {
@@ -12618,6 +12836,7 @@
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
                 "minecraft:slime",
+                "minecraft:sniffer",
                 "minecraft:snow_golem",
                 "minecraft:spider",
                 "minecraft:squid",
@@ -13025,6 +13244,9 @@
             ],
             "trader_llama": [
                 "minecraft:trader_llama"
+            ],
+            "sniffer": [
+                "minecraft:sniffer"
             ]
         }
     },
@@ -13136,6 +13358,8 @@
             "block.scaffolding.place",
             "block.scaffolding.step",
             "block.smoker.smoke",
+            "block.sniffer_egg.crack",
+            "block.sniffer_egg.hatch",
             "block.stonecutter.use",
             "block.sweet_berry_bush.break",
             "block.sweet_berry_bush.hurt",
@@ -13150,6 +13374,7 @@
             "break.amethyst_cluster",
             "break.azalea",
             "break.bamboo_wood",
+            "break.bamboo_wood_hanging_sign",
             "break.big_dripleaf",
             "break.calcite",
             "break.cherry_leaves",
@@ -13166,6 +13391,7 @@
             "break.large_amethyst_bud",
             "break.medium_amethyst_bud",
             "break.nether_wood",
+            "break.nether_wood_hanging_sign",
             "break.pink_petals",
             "break.pointed_dripstone",
             "break.sculk",
@@ -13178,6 +13404,7 @@
             "break.suspicious_gravel",
             "break.suspicious_sand",
             "break.tuff",
+            "brush.generic",
             "brush.suspicious_gravel",
             "brush.suspicious_sand",
             "brush_completed.suspicious_gravel",
@@ -14157,6 +14384,7 @@
             "step.azalea",
             "step.azalea_leaves",
             "step.bamboo_wood",
+            "step.bamboo_wood_hanging_sign",
             "step.basalt",
             "step.big_dripleaf",
             "step.bone_block",
@@ -14190,6 +14418,7 @@
             "step.nether_sprouts",
             "step.nether_wart",
             "step.nether_wood",
+            "step.nether_wood_hanging_sign",
             "step.netherite",
             "step.netherrack",
             "step.nylium",
@@ -15025,9 +15254,6 @@
             "geometry.camel": [
                 "minecraft:camel<default>"
             ],
-            "geometry.sniffer": [
-                "minecraft:sniffer<default>"
-            ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>"
             ],
@@ -15428,6 +15654,9 @@
             "geometry.warden": [
                 "minecraft:warden<default>"
             ],
+            "geometry.sniffer": [
+                "minecraft:sniffer<default>"
+            ],
             "geometry.boat": [
                 "minecraft:boat<default>"
             ],
@@ -15436,9 +15665,6 @@
             ]
         },
         "animationMap": {
-            "animation.camel.look_at_player": [
-                "minecraft:camel<look_at_player>"
-            ],
             "animation.camel.walk": [
                 "minecraft:camel<moving>"
             ],
@@ -15708,30 +15934,6 @@
                 "minecraft:zombie_pigman<use_item_progress>",
                 "minecraft:zombie_villager<use_item_progress>",
                 "minecraft:zombie_villager_v2<use_item_progress>"
-            ],
-            "animation.sniffer.baby_transform": [
-                "minecraft:sniffer<baby_transform>"
-            ],
-            "animation.sniffer.walk": [
-                "minecraft:sniffer<walk>"
-            ],
-            "animation.sniffer.sniffsniff": [
-                "minecraft:sniffer<sniffsniff>"
-            ],
-            "animation.sniffer.longsniff": [
-                "minecraft:sniffer<long_sniff>"
-            ],
-            "animation.sniffer.search": [
-                "minecraft:sniffer<search>"
-            ],
-            "animation.sniffer.dig": [
-                "minecraft:sniffer<dig>"
-            ],
-            "animation.sniffer.stand_up": [
-                "minecraft:sniffer<stand_up>"
-            ],
-            "animation.sniffer.feeling_happy": [
-                "minecraft:sniffer<feeling_happy>"
             ],
             "animation.actor.billboard": [
                 "minecraft:dragon_fireball<face_player>",
@@ -16780,17 +16982,41 @@
             "animation.allay.hold_item_fly": [],
             "animation.vex.idle": [],
             "animation.vex.charge": [],
-            "animation.evoker.move": []
+            "animation.evoker.move": [],
+            "animation.sniffer.baby_transform": [
+                "minecraft:sniffer<baby_transform>"
+            ],
+            "animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "animation.sniffer.longsniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ],
+            "animation.camel.look_at_target": [
+                "minecraft:camel<look_at_target>"
+            ]
         },
         "animationControllerMap": {
             "controller.animation.camel.general": [
                 "minecraft:camel<general>"
             ],
             "controller.animation.camel.idle": [
-                "minecraft:camel<idling>"
-            ],
-            "controller.animation.camel.look_at_player": [
-                "minecraft:camel<look_at_player>"
+                "minecraft:camel<idle>"
             ],
             "controller.animation.player.crossbow": [
                 "minecraft:player<crossbow_controller>"
@@ -16803,33 +17029,6 @@
             ],
             "controller.animation.player.root": [
                 "minecraft:player<root>"
-            ],
-            "controller.animation.sniffer.baby": [
-                "minecraft:sniffer<baby>"
-            ],
-            "controller.animation.sniffer.general": [
-                "minecraft:sniffer<general>"
-            ],
-            "controller.animation.sniffer.walk": [
-                "minecraft:sniffer<walk>"
-            ],
-            "controller.animation.sniffer.sniffsniff": [
-                "minecraft:sniffer<sniffsniff>"
-            ],
-            "controller.animation.sniffer.long_sniff": [
-                "minecraft:sniffer<long_sniff>"
-            ],
-            "controller.animation.sniffer.search": [
-                "minecraft:sniffer<search>"
-            ],
-            "controller.animation.sniffer.dig": [
-                "minecraft:sniffer<dig>"
-            ],
-            "controller.animation.sniffer.stand_up": [
-                "minecraft:sniffer<stand_up>"
-            ],
-            "controller.animation.sniffer.feeling_happy": [
-                "minecraft:sniffer<feeling_happy>"
             ],
             "controller.animation.agent.move": [
                 "minecraft:agent<move_controller>"
@@ -17353,6 +17552,33 @@
             "controller.animation.vex.idle": [],
             "controller.animation.vex.charge": [],
             "controller.animation.humanoid.riding_legs_only": [],
+            "controller.animation.sniffer.baby": [
+                "minecraft:sniffer<baby>"
+            ],
+            "controller.animation.sniffer.general": [
+                "minecraft:sniffer<general>"
+            ],
+            "controller.animation.sniffer.walk": [
+                "minecraft:sniffer<walk>"
+            ],
+            "controller.animation.sniffer.sniffsniff": [
+                "minecraft:sniffer<sniffsniff>"
+            ],
+            "controller.animation.sniffer.long_sniff": [
+                "minecraft:sniffer<long_sniff>"
+            ],
+            "controller.animation.sniffer.search": [
+                "minecraft:sniffer<search>"
+            ],
+            "controller.animation.sniffer.dig": [
+                "minecraft:sniffer<dig>"
+            ],
+            "controller.animation.sniffer.stand_up": [
+                "minecraft:sniffer<stand_up>"
+            ],
+            "controller.animation.sniffer.feeling_happy": [
+                "minecraft:sniffer<feeling_happy>"
+            ],
             "controller.animation.player.base": [
                 "minecraft:player<base_controller>"
             ]
@@ -17364,9 +17590,6 @@
             ],
             "controller.render.camel": [
                 "minecraft:camel"
-            ],
-            "controller.render.sniffer": [
-                "minecraft:sniffer"
             ],
             "controller.render.agent": [
                 "minecraft:agent"
@@ -17725,6 +17948,10 @@
             ],
             "controller.render.player.first_person_spectator": [],
             "controller.render.player.third_person_spectator": [],
+            "controller.render.shield": [],
+            "controller.render.sniffer": [
+                "minecraft:sniffer"
+            ],
             "[object Object]": [
                 "minecraft:ender_dragon",
                 "minecraft:player",
@@ -17980,30 +18207,6 @@
             ],
             "laid_egg": [
                 "minecraft:frog"
-            ],
-            "on_scenting_success": [
-                "minecraft:sniffer"
-            ],
-            "on_digging_start": [
-                "minecraft:sniffer"
-            ],
-            "on_item_found": [
-                "minecraft:sniffer"
-            ],
-            "on_feeling_happy_end": [
-                "minecraft:sniffer"
-            ],
-            "on_fail_during_searching": [
-                "minecraft:sniffer"
-            ],
-            "on_fail_during_digging": [
-                "minecraft:sniffer"
-            ],
-            "on_search_and_digging_success": [
-                "minecraft:sniffer"
-            ],
-            "on_rising_end": [
-                "minecraft:sniffer"
             ],
             "become_witch": [
                 "minecraft:villager",
@@ -19003,6 +19206,36 @@
             ],
             "on_not_riding_parent": [
                 "minecraft:strider"
+            ],
+            "on_pregnant": [
+                "minecraft:sniffer"
+            ],
+            "on_egg_spawned": [
+                "minecraft:sniffer"
+            ],
+            "on_scenting_success": [
+                "minecraft:sniffer"
+            ],
+            "on_digging_start": [
+                "minecraft:sniffer"
+            ],
+            "on_item_found": [
+                "minecraft:sniffer"
+            ],
+            "on_feeling_happy_end": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_searching": [
+                "minecraft:sniffer"
+            ],
+            "on_fail_during_digging": [
+                "minecraft:sniffer"
+            ],
+            "on_search_and_digging_success": [
+                "minecraft:sniffer"
+            ],
+            "on_rising_end": [
+                "minecraft:sniffer"
             ]
         },
         "entityFamilyMap": {
@@ -19181,9 +19414,6 @@
             ],
             "frog": [
                 "minecraft:frog"
-            ],
-            "sniffer": [
-                "minecraft:sniffer"
             ],
             "villager": [
                 "minecraft:villager",
@@ -19803,6 +20033,9 @@
             ],
             "trader_llama": [
                 "minecraft:trader_llama"
+            ],
+            "sniffer": [
+                "minecraft:sniffer"
             ]
         }
     }

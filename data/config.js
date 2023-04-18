@@ -74,9 +74,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.19.80.24',
+        version: '1.20.0.20',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.80.24.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.0.20.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
@@ -91,11 +91,11 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.19.80.24'
+        version: '1.20.0.20'
     },
     dev: {
-        version: '1.19.80.24',
-        path: 'H:\\BedrockVersions\\Dev\\1.19.80.24.apk',
+        version: '1.20.0.20',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.0.20.apk',
         config: smallestGUIOCROptions
     }
 };

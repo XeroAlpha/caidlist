@@ -1,10 +1,11 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.19.80.24",
+    "version": "1.20.0.20",
     "content": [],
     "sections": [
         {
             "name": "Why Does Molang Exist?",
+            "id": "Why Does Molang Exist?",
             "level": 1,
             "content": [
                 "Molang is a simple expression-based language designed for fast, data-driven calculation of values at run-time, and with a direct connection to in-game values and systems.  Its focus is to enable low-level systems like animation to support flexible data-driven behavior for both internal and external creators, while staying highly performant."
@@ -12,6 +13,7 @@
         },
         {
             "name": "Lexical Structure",
+            "id": "Lexical Structure",
             "level": 1,
             "content": [
                 "The language structure is largely based on simple 'C' language family style syntax.  An expression can be made of either one simple value or math calculation, or can be made of several sub-expressions where more complicated code is required.",
@@ -21,6 +23,7 @@
             "sections": [
                 {
                     "name": "Case Sensitivity",
+                    "id": "Case Sensitivity",
                     "level": 2,
                     "content": [
                         "All things in Molang are case-INsensitive, with the exception of strings, which maintain the case provided."
@@ -28,6 +31,7 @@
                 },
                 {
                     "name": "Keywords",
+                    "id": "Keywords",
                     "level": 2,
                     "content": [
                         "All identifiers not in a scope listed below are reserved for future use",
@@ -136,6 +140,7 @@
                 },
                 {
                     "name": "Operator Precedence",
+                    "id": "Operator Precedence",
                     "level": 2,
                     "content": [
                         "Molang Operators follow this order to determine which thing is evaluated first when no parentheses are used. This should match the behavior of C or C++. Operators that are higher in this table are evaluated first, while operators on the same row are evaluated with the same priority. When operators have the same priority, they are evaluated left-to-right, except for the Ternary conditional operator, which is evaluated right-to-left. Using parentheses will allow direct control of order of evaluation, and is recommended for more complex expressions.",
@@ -192,6 +197,7 @@
                 },
                 {
                     "name": "Variables",
+                    "id": "Variables",
                     "level": 2,
                     "content": [
                         "There are three variable lifetimes a variable may belong to: Temporary, Entity, and Context:",
@@ -202,6 +208,7 @@
                 },
                 {
                     "name": "Values",
+                    "id": "Values",
                     "level": 2,
                     "content": [
                         "- All numerical values are floats.",
@@ -211,13 +218,22 @@
                         "- Other supported types are:",
                         {
                             "type": "code",
-                            "content": "Geometry\nTexture\nMaterial\nActor Reference\nActor Reference Array\nString\nStruct (see 'structs' section below)"
+                            "content": [
+                                "Geometry",
+                                "Texture",
+                                "Material",
+                                "Actor Reference",
+                                "Actor Reference Array",
+                                "String",
+                                "Struct (see 'structs' section below)"
+                            ]
                         },
                         "- Errors (such as divide by zero, missing variables, null references, etc) generally return a value of 0.0."
                     ]
                 },
                 {
                     "name": "Query Functions",
+                    "id": "Query Functions",
                     "level": 2,
                     "content": [
                         "Query functions (eg: `query.is_baby` or `query.is_item_equipped('main_hand')`) allow expressions to read game data.  If a query function takes no arguments, do not use parentheses. Otherwise, use parentheses and separate arguments with commas. For a full list of query functions, see below."
@@ -225,6 +241,7 @@
                 },
                 {
                     "name": "Aliases",
+                    "id": "Aliases",
                     "level": 2,
                     "content": [
                         "To reduce typing burden and increase clarity when reading and writing Molang, the following keyword aliases can make life a bit easier.  Note that left and right sides function identically."
@@ -232,7 +249,8 @@
                     "sections": [
                         {
                             "name": "Alias Mapping",
-                            "level": 12,
+                            "id": "Alias Mapping",
+                            "level": 4,
                             "content": [
                                 {
                                     "type": "table",
@@ -258,17 +276,23 @@
                                 "As an example...",
                                 {
                                     "type": "code",
-                                    "content": "math.cos(query.anim_time * 38) * variable.rotation_scale + variable.x * variable.x * query.life_time;"
+                                    "content": [
+                                        "math.cos(query.anim_time * 38) * variable.rotation_scale + variable.x * variable.x * query.life_time;"
+                                    ]
                                 },
                                 "...can also be written as:",
                                 {
                                     "type": "code",
-                                    "content": "math.cos(q.anim_time * 38) * v.rotation_scale + v.x * v.x * q.life_time"
+                                    "content": [
+                                        "math.cos(q.anim_time * 38) * v.rotation_scale + v.x * v.x * q.life_time"
+                                    ]
                                 },
                                 "Either syntax will work, and can be intermixed as desired. eg:",
                                 {
                                     "type": "code",
-                                    "content": "math.cos(q.anim_time * 38) * variable.rotation_scale + v.x * variable.x * query.life_time"
+                                    "content": [
+                                        "math.cos(q.anim_time * 38) * variable.rotation_scale + v.x * variable.x * query.life_time"
+                                    ]
                                 }
                             ]
                         }
@@ -276,39 +300,56 @@
                 },
                 {
                     "name": "Structs",
+                    "id": "Structs",
                     "level": 2,
                     "content": [
                         "Structures of data, unlike C, are implicitly defined by usage.  Their purpose is to more efficiently pass data around, such as passing `v.location` rather than `v.x`, `v.y`, and `v.z`.  eg:",
                         {
                             "type": "code",
-                            "content": "v.location.x = 1;\nv.location.y = 2;\nv.location.z = 3;\nv.another_mobs_location = v.another_mob_set_elsewhere->v.location;"
+                            "content": [
+                                "v.location.x = 1;",
+                                "v.location.y = 2;",
+                                "v.location.z = 3;",
+                                "v.another_mobs_location = v.another_mob_set_elsewhere->v.location;"
+                            ]
                         },
                         "For some more usage examples, each of the following expressions return 1.23",
                         {
                             "type": "code",
-                            "content": "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; return v.cowcow.friend->v.test.a.b.c;"
+                            "content": [
+                                "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; return v.cowcow.friend->v.test.a.b.c;"
+                            ]
                         },
                         {
                             "type": "code",
-                            "content": "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test; return v.moo.a.b.c;"
+                            "content": [
+                                "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test; return v.moo.a.b.c;"
+                            ]
                         },
                         {
                             "type": "code",
-                            "content": "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a; return v.moo.b.c;"
+                            "content": [
+                                "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a; return v.moo.b.c;"
+                            ]
                         },
                         {
                             "type": "code",
-                            "content": "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a.b; return v.moo.c;"
+                            "content": [
+                                "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a.b; return v.moo.c;"
+                            ]
                         },
                         {
                             "type": "code",
-                            "content": "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a.b.c; return v.moo;"
+                            "content": [
+                                "v.cowcow.friend = v.pigpig; v.pigpig->v.test.a.b.c = 1.23; v.moo = v.cowcow.friend->v.test.a.b.c; return v.moo;"
+                            ]
                         },
                         "Note that structures can be arbitrarily deep in their nesting/recursiveness.  That said, it is recommended that you don't copy full structures inside other structures to avoid exploding memory, and not making structures too deep as there is a slight performance cost for each layer."
                     ]
                 },
                 {
                     "name": "Strings",
+                    "id": "Strings",
                     "level": 2,
                     "content": [
                         "Strings in Molang are surrounded by single quotes, eg: `'minecraft:pig'` or `'hello world!'`. An empty string is defined as two consecutive single quotes.  String operations only support `==` and `!=` at this time.",
@@ -317,6 +358,7 @@
                 },
                 {
                     "name": "Math Functions",
+                    "id": "Math Functions",
                     "level": 2,
                     "content": [
                         {
@@ -440,24 +482,50 @@
                 },
                 {
                     "name": "->  Arrow Operator",
+                    "id": "->  Arrow Operator",
                     "level": 2,
                     "content": [
                         "Some return values of query function, or values stored in temp/entity/context variables can be a reference to another entity.  The `->` operator allows an expression to access variables or run queries on that entity.  For example, the example below will find all pigs within four meters of the current entity (including itself if it's a pig), and increment a variable `v.x` on itself if the block immediately above each pig is flammable (such as an oak button) :",
                         "Note that in the case where the left-hand side of the `->` operator has an error (value is null, the entity was killed previously, or some other issue), the expression will not evaluate the right-hand side and will return 0. This implementation style was a choice between performance and not requiring content creators to overly worry about checking for potentially bad values everywhere.",
                         {
                             "type": "code",
-                            "content": "\"v.x = 0;\nfor_each(v.pig, query.get_nearby_entities(4, 'minecraft:pig'), {\n    v.x = v.x + v.pig->query.get_relative_block_state(0, 1, 0, 'flammable');\n});\""
+                            "content": [
+                                "\"v.x = 0;",
+                                "for_each(v.pig, query.get_nearby_entities(4, 'minecraft:pig'), {",
+                                "    v.x = v.x + v.pig->query.get_relative_block_state(0, 1, 0, 'flammable');",
+                                "});\""
+                            ]
                         }
                     ],
                     "sections": [
                         {
                             "name": "Public Variables",
-                            "level": 12,
+                            "id": "Public Variables",
+                            "level": 4,
                             "content": [
                                 "In general, variables of a mob are considered private to that mob and cannot be accessed by another.  To expose read-only access of a variable to other mobs, you need to set the 'public' setting on that variable in the owning entity's resource definition.  It is also recommended to default-initialize the variable.",
                                 {
                                     "type": "code",
-                                    "content": "{\n  \"format_version\": \"1.10.0\",\n  \"minecraft:client_entity\": {\n    \"description\": {\n      ...\n      \"scripts\": {\n        \"variables\": {\n          \"variable.oink\": \"public\"\n        },\n        \"initialize\": [\n          \"variable.oink = 0;\"\n        ],\n        ...\n      },\n      ...\n    }\n  }\n}"
+                                    "content": [
+                                        "{",
+                                        "  \"format_version\": \"1.10.0\",",
+                                        "  \"minecraft:client_entity\": {",
+                                        "    \"description\": {",
+                                        "      ...",
+                                        "      \"scripts\": {",
+                                        "        \"variables\": {",
+                                        "          \"variable.oink\": \"public\"",
+                                        "        },",
+                                        "        \"initialize\": [",
+                                        "          \"variable.oink = 0;\"",
+                                        "        ],",
+                                        "        ...",
+                                        "      },",
+                                        "      ...",
+                                        "    }",
+                                        "  }",
+                                        "}"
+                                    ]
                                 }
                             ]
                         }
@@ -465,17 +533,27 @@
                 },
                 {
                     "name": "{ } Brace Scope Delimiters",
+                    "id": "{ } Brace Scope Delimiters",
                     "level": 2,
                     "content": [
                         "One can group a series of statements into a single group by wrapping them in `{` and `}` symbols.  This is used primarily in loops and conditional statements:",
                         {
                             "type": "code",
-                            "content": "(v.moo > 0) ? {\n  v.x = math.sin(q.life_time * 45);\n  v.x = v.x * v.x + 17.3;\n  t.sin_x = math.sin(v.x);\n  v.x = t.sin_x * t.sin_x + v.x * v.x;\n  v.x = math.sqrt(v.x) * v.x * math.pi;\n}"
+                            "content": [
+                                "(v.moo > 0) ? {",
+                                "  v.x = math.sin(q.life_time * 45);",
+                                "  v.x = v.x * v.x + 17.3;",
+                                "  t.sin_x = math.sin(v.x);",
+                                "  v.x = t.sin_x * t.sin_x + v.x * v.x;",
+                                "  v.x = math.sqrt(v.x) * v.x * math.pi;",
+                                "}"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "Conditionals",
+                    "id": "Conditionals",
                     "level": 2,
                     "content": [
                         "The conditional '?' operator allows for two convenient ways to implement simple branching logic.",
@@ -485,69 +563,106 @@
                         "Conditional Examples",
                         {
                             "type": "code",
-                            "content": "v.should_reset_a ? { v.a = 0; }\n\nv.larger_value = (v.a > v.b) ? v.a : v.b;"
+                            "content": [
+                                "v.should_reset_a ? { v.a = 0; }",
+                                "",
+                                "v.larger_value = (v.a > v.b) ? v.a : v.b;"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "loop",
+                    "id": "loop",
                     "level": 2,
                     "content": [
                         "Sometimes you want to execute an expression multiple times.  Rather than copy-pasting it a bunch, you can use `loop(<count>, <expression>);`.  We have placed some arbitrary restrictions on these for safety for now. The maximum loop counter is (as of this document being written) 1024.  Also, note that while you can nest loops inside loops pretty much as deep as you want, be careful you don't make a loop so long it will hang your game.",
                         "A Fibonacci Calculator",
                         {
                             "type": "code",
-                            "content": "v.x = 1;\nv.y = 1;\nloop(10, {\n  t.x = v.x + v.y;\n  v.x = v.y;\n  v.y = t.x;\n});"
+                            "content": [
+                                "v.x = 1;",
+                                "v.y = 1;",
+                                "loop(10, {",
+                                "  t.x = v.x + v.y;",
+                                "  v.x = v.y;",
+                                "  v.y = t.x;",
+                                "});"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "for_each",
+                    "id": "for_each",
                     "level": 2,
                     "content": [
                         "`query.get_nearby_entities` (see below) returns an array of entities.  In order to iterate through them, you can use the following new built-in function `for_each`.  It takes three parameters: `for_each(<variable>, <array>, <expression>);`  The variable can be any variable, either a `temp.` or `variable.`, although I'd recommend using `temp.` to not pollute the entity's variable space.  The expression is any Molang expression you want to execute for each entry in the array)",
                         {
                             "type": "code",
-                            "content": "\"v.x = 0;\nfor_each(t.pig, query.get_nearby_entities(4, 'minecraft:pig'), {\n    v.x = v.x + 1;\n});\""
+                            "content": [
+                                "\"v.x = 0;",
+                                "for_each(t.pig, query.get_nearby_entities(4, 'minecraft:pig'), {",
+                                "    v.x = v.x + 1;",
+                                "});\""
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "break",
+                    "id": "break",
                     "level": 2,
                     "content": [
                         "This will exit out of a `loop` or `for_each` early.  Eg:",
                         {
                             "type": "code",
-                            "content": "v.x = 1;\nv.y = 1;\nloop(10, {t.x = v.x + v.y; v.x = v.y; v.y = t.x; (v.y > 20) ? break;});"
+                            "content": [
+                                "v.x = 1;",
+                                "v.y = 1;",
+                                "loop(10, {t.x = v.x + v.y; v.x = v.y; v.y = t.x; (v.y > 20) ? break;});"
+                            ]
                         },
                         "This will immediately exit the inner-most active loop, as per C-style language rules.  If you have:",
                         {
                             "type": "code",
-                            "content": "v.x = 0;\nloop(10, {loop(10, {v.x = v.x + 1; (v.x > 5) ? break;});});"
+                            "content": [
+                                "v.x = 0;",
+                                "loop(10, {loop(10, {v.x = v.x + 1; (v.x > 5) ? break;});});"
+                            ]
                         },
                         "The `break` statement will terminate the inner loop when `v.x > 5`, and continue processing the outer loop's expression.  Note that as v.x is not reset between the outer loops, the second time into the inner loop this will add one more to `v.x` and then exit the inner loop again, resulting in a final value of `v.x` of `6 + 1 + 1 + 1 + ... + 1` = `15`.)"
                     ]
                 },
                 {
                     "name": "continue",
+                    "id": "continue",
                     "level": 2,
                     "content": [
                         "`continue` functions as per C-style language rules.  Currently only supported in `loop` and `for_each`, this will skip to the next iteration of the current loop.  See `break` above for more details on inner/outer loops.  The following example will result in v.x becoming 6.0, as the increment will be skipped once it reaches that value.  Note that it is better to break out of the loop in this contrived example, as it would be more performant than continuing to perform all 10 iterations.",
                         {
                             "type": "code",
-                            "content": "v.x = 0;\nloop(10, {\n  (v.x > 5) ? continue;\n  v.x = v.x + 1;\n});"
+                            "content": [
+                                "v.x = 0;",
+                                "loop(10, {",
+                                "  (v.x > 5) ? continue;",
+                                "  v.x = v.x + 1;",
+                                "});"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "?? Null Coalescing Operator",
+                    "id": "?? Null Coalescing Operator",
                     "level": 2,
                     "content": [
                         "Similar to how the null-coalescing operator works in C#, one can now reference a variable that may or may not exist without seeing a content error.  If it doesn't, you can now provide a default value to use.  Previously, if a variable didn't exist you would get a content error.  This was to make sure variables were always initialized correctly to avoid uninitialized variable bugs.  Unfortunately this then required initialize scripts, or in some cases some complex work-arounds to make sure variables were initialized.  Now, if you know a variable won't be initialized in the first run of a script, you can use the following:",
                         {
                             "type": "code",
-                            "content": "variable.x = (variable.x ?? 1.2) + 0.3;"
+                            "content": [
+                                "variable.x = (variable.x ?? 1.2) + 0.3;"
+                            ]
                         },
                         "This will use the value of `variable.x` if it is valid, or else 1.2 if `variable.x`:",
                         "- has not yet been initialized",
@@ -560,17 +675,24 @@
                 },
                 {
                     "name": "Simple vs Complex Expressions",
+                    "id": "Simple vs Complex Expressions",
                     "level": 2,
                     "content": [
                         "A simple expression is a single statement, the value of which is returned to the system that evaluated the expression.  eg:",
                         {
                             "type": "code",
-                            "content": "math.sin(query.anim_time * 1.23)"
+                            "content": [
+                                "math.sin(query.anim_time * 1.23)"
+                            ]
                         },
                         "A complex expression is one with multiple statements, each ending in a ';'.  Each statement is evaluated in order.  In the current implementation, the last statement requires the use of the return keyword and defines the resulting value of the expression.  eg:",
                         {
                             "type": "code",
-                            "content": "temp.moo = math.sin(query.anim_time * 1.23);\ntemp.baa = math.cos(query.life_time + 2.0);\nreturn temp.moo * temp.moo + temp.baa;"
+                            "content": [
+                                "temp.moo = math.sin(query.anim_time * 1.23);",
+                                "temp.baa = math.cos(query.life_time + 2.0);",
+                                "return temp.moo * temp.moo + temp.baa;"
+                            ]
                         },
                         "Note that in a simple expression, `;` is not allowed, whereas in a complex expression, each statement requires a `;` including the last.  Also, note that if you don't `return` a value from a complex expression, the expression will evaluate to 0.0."
                     ]
@@ -579,22 +701,32 @@
         },
         {
             "name": "Domain Examples",
+            "id": "Domain Examples",
             "level": 1,
             "content": [],
             "sections": [
                 {
                     "name": "Entity Definition Scripts",
+                    "id": "Entity Definition Scripts",
                     "level": 2,
                     "content": [
                         "In the definition file there is a section for pre-computing values.  These are executed immediately before animation and render controllers are processed, and stored in the entity.  The purpose is to pre-compute any expensive and complex values you may want to reuse in your scripts, long-living index variable updates, or generally any one-off computation per render tick.",
                         {
                             "type": "code",
-                            "content": "\"scripts\": {\n    \"pre_animation\": [\n      \"variable.my_constant = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed;\",\n      \"variable.my_constant2 = Math.exp(1.5);\",\n    ]\n  },"
+                            "content": [
+                                "\"scripts\": {",
+                                "    \"pre_animation\": [",
+                                "      \"variable.my_constant = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed;\",",
+                                "      \"variable.my_constant2 = Math.exp(1.5);\",",
+                                "    ]",
+                                "  },"
+                            ]
                         }
                     ]
                 },
                 {
                     "name": "Animation and Animation Controller Files",
+                    "id": "Animation and Animation Controller Files",
                     "level": 2,
                     "content": [
                         "These are numerical operations to control which animations are playing and how to animate bones.  \"variable.variable_name\" and \"query.function_name\" refer to the entity currently being rendered.  They have access to everything in the language except material, texture, and geometry types."
@@ -602,6 +734,7 @@
                 },
                 {
                     "name": "Render Controllers",
+                    "id": "Render Controllers",
                     "level": 2,
                     "content": [
                         "There are a few different kinds of expressions here, where context implies what is allowed.  As with animations, the entity accessors refer to the current entity, however depending on the context one also has access to materials, textures, and geometries.  There are two sections in a render controller:",
@@ -612,69 +745,103 @@
                     "sections": [
                         {
                             "name": "Array Expressions",
-                            "level": 12,
+                            "id": "Array Expressions",
+                            "level": 4,
                             "content": [
                                 "For each of the three resource types (materials, textures, and geometry), you can define an array of resources.  The name of the resource is the nice-name from the definition file.  Using materials as an example:",
                                 {
                                     "type": "code",
-                                    "content": "\"arrays\":\n{\n  \"materials\": {\n    \"array.my_array_1\": [\"material.a\", \"material.b\", \"material.c\"],\n    \"array.my_array_2\" : [\"material.d\", \"material.e\"],\n    \"array.my_array_3\" : [\"array.my_array_1\", \"material.my_array_2\"],\n    \"array.my_array_4\" : [\"array.my_array_2\", \"material.my_array_3\"],\n    \"array.my_array_5\" : [\"array.my_array_1\", \"material.my_array_1\", \"material.my_array_4\"],\n    \"array.my_array_6\" : [\"array.my_array_1\", \"material.f\"],\n    ...\n  },"
+                                    "content": [
+                                        "\"arrays\":",
+                                        "{",
+                                        "  \"materials\": {",
+                                        "    \"array.my_array_1\": [\"material.a\", \"material.b\", \"material.c\"],",
+                                        "    \"array.my_array_2\" : [\"material.d\", \"material.e\"],",
+                                        "    \"array.my_array_3\" : [\"array.my_array_1\", \"material.my_array_2\"],",
+                                        "    \"array.my_array_4\" : [\"array.my_array_2\", \"material.my_array_3\"],",
+                                        "    \"array.my_array_5\" : [\"array.my_array_1\", \"material.my_array_1\", \"material.my_array_4\"],",
+                                        "    \"array.my_array_6\" : [\"array.my_array_1\", \"material.f\"],",
+                                        "    ...",
+                                        "  },"
+                                    ]
                                 },
                                 "Note that all elements of an array must be of the same type.  eg: a texture array must only contain textures.",
                                 "An array can reference any combination of zero or more arrays (including duplicates if desired) and/or zero or more materials (again, including duplicates if you like), and you can have as many arrays as you like, each with as many elements as you like.  If an array includes arrays in its members, they do not need to be the same length.  When indexing into an array in the resource usage section, you use numerical expressions.  If the resulting number is negative, it will use zero as the index.  Any non - negative index will converted to an integer, and will wrap based on the size of the array:",
                                 {
                                     "type": "code",
-                                    "content": "index = max(0, expression_result) % array_size"
+                                    "content": [
+                                        "index = max(0, expression_result) % array_size"
+                                    ]
                                 }
                             ]
                         },
                         {
                             "name": "Resource Expression",
-                            "level": 12,
+                            "id": "Resource Expression",
+                            "level": 4,
                             "content": [
                                 "A resource expression must return a single resource of a specific type depending on the context.",
                                 "For example, in the \"geometry\" section, you must produce an expression that will result in a single geometry.  Some examples:",
                                 "Cycle through an array of geometries at a rate of one per second",
                                 {
                                     "type": "code",
-                                    "content": "\"geometry\": \"array.my_geometries[query.anim_time]\""
+                                    "content": [
+                                        "\"geometry\": \"array.my_geometries[query.anim_time]\""
+                                    ]
                                 },
                                 "Pick a geo based on an entity flag",
                                 {
                                     "type": "code",
-                                    "content": "\"geometry\": \"query.is_sheared ? geometry.sheared : geometry.woolly\""
+                                    "content": [
+                                        "\"geometry\": \"query.is_sheared ? geometry.sheared : geometry.woolly\""
+                                    ]
                                 },
                                 "Use a specific geometry",
                                 {
                                     "type": "code",
-                                    "content": "\"geometry\": \"geometry.my_geo\""
+                                    "content": [
+                                        "\"geometry\": \"geometry.my_geo\""
+                                    ]
                                 },
                                 "Use specific geo when sleeping, otherwise flip through an array based on a cosine curve, using index zero for almost half the time while the cosine curve is negative",
                                 {
                                     "type": "code",
-                                    "content": "\"geometry\": \"query.is_sleeping ? geometry.my_sleeping_geo : array.my_geos[math.cos(query.anim_time * 12.3 + 41.9) * 10 + 0.6]\""
+                                    "content": [
+                                        "\"geometry\": \"query.is_sleeping ? geometry.my_sleeping_geo : array.my_geos[math.cos(query.anim_time * 12.3 + 41.9) * 10 + 0.6]\""
+                                    ]
                                 }
                             ]
                         },
                         {
                             "name": "Resource Sections",
-                            "level": 12,
+                            "id": "Resource Sections",
+                            "level": 4,
                             "content": [],
                             "sections": [
                                 {
                                     "name": "Geometry",
-                                    "level": 13,
+                                    "id": "Geometry",
+                                    "level": 5,
                                     "content": [
                                         "The geometry section specifies which geometry to use when rendering.  As you can specify as many render controllers as you like in the definition file, a single render controller is only concerned with how to render a single geometry.  Note that a geometry can be arbitrarily complex using any number of bones and polygons."
                                     ]
                                 },
                                 {
                                     "name": "Materials",
-                                    "level": 13,
+                                    "id": "Materials",
+                                    "level": 5,
                                     "content": [
                                         "The materials section specifies how to map what material to what bone of the geometry.  A single material is mapped to a whole bone.  Material expressions are evaluated in the order listed.  The first part of each statement is the name of the model part to apply the material to, and the second part is the material to use.  The model part name can use * for wild - card matching of characters.  For example:",
                                         {
                                             "type": "code",
-                                            "content": "\"materials\": [\n      { \"*\": \"Material.default\" },\n      { \"TailA\": \"array.hair_colors[variable.hair_color]\" },\n      { \"Mane\": \"array.hair_colors[variable.hair_color]\" },\n      { \"*Saddle*\": \"variable.is_leather_saddle ? material.leather_saddle : material.iron_saddle\" }\n    ],"
+                                            "content": [
+                                                "\"materials\": [",
+                                                "      { \"*\": \"Material.default\" },",
+                                                "      { \"TailA\": \"array.hair_colors[variable.hair_color]\" },",
+                                                "      { \"Mane\": \"array.hair_colors[variable.hair_color]\" },",
+                                                "      { \"*Saddle*\": \"variable.is_leather_saddle ? material.leather_saddle : material.iron_saddle\" }",
+                                                "    ],"
+                                            ]
                                         },
                                         "- This will start by applying Material.default to all model parts.",
                                         "- Next, it will set the material on a model part named \"TailA\" to the result of the expression \"Array.hairColors[variable.hair_color]\".  This will look up some previously created variable on the entity named hair_color and use that to index into a material array called \"array.hair_colors\" defined in this render controller.  This will overwrite the Material.default material set in the line above.",
@@ -685,20 +852,26 @@
                             ]
                         }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "name": "Query Functions",
+            "id": "Query Functions",
+            "level": 1,
+            "content": [
+                "Query Functions are operators that access a wide variety of information. They can return simple true or false values (1.0 or 0.0) or more complex data. See the list of functions below for per-query documentation. Query Functions might not take any parameters. In that case, just `query.function_name` is used. Otherwise parentheses with commas separating arguments should be used, ie `query.function_name(1, 2, 'three')`. For example:",
                 {
-                    "name": "Query Functions",
-                    "level": 2,
+                    "type": "code",
                     "content": [
-                        "Query Functions are operators that access a wide variety of information. They can return simple true or false values (1.0 or 0.0) or more complex data. See the list of functions below for per-query documentation. Query Functions might not take any parameters. In that case, just `query.function_name` is used. Otherwise parentheses with commas separating arguments should be used, ie `query.function_name(1, 2, 'three')`. For example:",
-                        {
-                            "type": "code",
-                            "content": "\"position\": [ 0.0, \"query.is_baby ? -8.0 : 0.0\", \"query.is_baby ? 4.0 : 0.0\" ]"
-                        }
+                        "\"position\": [ 0.0, \"query.is_baby ? -8.0 : 0.0\", \"query.is_baby ? 4.0 : 0.0\" ]"
                     ]
-                },
+                }
+            ],
+            "sections": [
                 {
                     "name": "List of Entity Queries",
+                    "id": "List of Entity Queries",
                     "level": 2,
                     "content": [
                         {
@@ -1165,6 +1338,10 @@
                                     "Description": "Returns 1.0 if the entity is enchanted, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.is_feeling_happy",
+                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is feeling happy, else it returns 0.0."
+                                },
+                                {
                                     "Name": "query.is_fire_immune",
                                     "Description": "Returns 1.0 if the entity is immune to fire, else it returns 0.0."
                                 },
@@ -1325,6 +1502,10 @@
                                     "Description": "Returns 1.0 if the entity is riding, else it returns 0.0."
                                 },
                                 {
+                                    "Name": "query.is_rising",
+                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is rising, else it returns 0.0."
+                                },
+                                {
                                     "Name": "query.is_roaring",
                                     "Description": "Returns 1.0 if the entity is currently roaring, else it returns 0.0."
                                 },
@@ -1339,6 +1520,14 @@
                                 {
                                     "Name": "query.is_scared",
                                     "Description": "Returns 1.0 if the entity is scared, else it returns 0.0."
+                                },
+                                {
+                                    "Name": "query.is_scenting",
+                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is scenting, else it returns 0.0."
+                                },
+                                {
+                                    "Name": "query.is_searching",
+                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is searching, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_selected_item",
@@ -1734,6 +1923,7 @@
                 },
                 {
                     "name": "List of Experimental Entity Queries",
+                    "id": "List of Experimental Entity Queries",
                     "level": 2,
                     "content": [
                         {
@@ -1812,22 +2002,6 @@
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the specified held or worn item has the specified cooldown type name, otherwise returns 0.0. First argument is the cooldown name to check for, second argument is the equipment slot name, and optional third argument is the numerical slot id. For second and third arguments, uses the same name and id that the replaceitem command takes when querying entities."
                                 },
                                 {
-                                    "Name": "query.is_feeling_happy",
-                                    "Description": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is feeling happy, else it returns 0.0."
-                                },
-                                {
-                                    "Name": "query.is_rising",
-                                    "Description": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is rising, else it returns 0.0."
-                                },
-                                {
-                                    "Name": "query.is_scenting",
-                                    "Description": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is scenting, else it returns 0.0."
-                                },
-                                {
-                                    "Name": "query.is_searching",
-                                    "Description": "(EXPERIMENTAL. Enable 'Sniffer' to use.) Returns 1.0 if the entity is searching, else it returns 0.0."
-                                },
-                                {
                                     "Name": "query.relative_block_has_all_tags",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes an entity-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided."
                                 },
@@ -1855,6 +2029,7 @@
         },
         {
             "name": "Experimental Operators",
+            "id": "Experimental Operators",
             "level": 1,
             "content": [
                 "Some operators may be behind experimental gameplay toggles (see list below).  After getting feedback, we can adjust them further or move them into general availability.",
@@ -1863,6 +2038,7 @@
         },
         {
             "name": "Versioned Changes",
+            "id": "Versioned Changes",
             "level": 1,
             "content": [
                 "Molang uses the `\"min_engine_version\"` from the `manifest.json` of the resource or behavior pack that contains each Molang expression to determine which version of the rules to apply. This allows for changes to how Molang works without breaking existing content.",
@@ -1873,6 +2049,7 @@
             "sections": [
                 {
                     "name": "Versioned Change Versions",
+                    "id": "Versioned Change Versions",
                     "level": 2,
                     "content": [
                         {
@@ -1905,6 +2082,10 @@
                                 {
                                     "Pack min_engine_version": "1.19.60",
                                     "Description": "Fixed error where dividing by a dynamically determined negative variable resulted in a division by the absolute (positive) value of the number instead."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.20.0",
+                                    "Description": "Fixed query.cape_flap_amount using the wrong player rotation (head rotation instead of body rotation)."
                                 }
                             ]
                         }
@@ -1913,5 +2094,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "0d764f3b2bc9db7e411e53d237bb60959f7b9594"
+    "__OBJECTHASH__": "51a68c8a460313c266753d27c7732c2fc88413d6"
 }

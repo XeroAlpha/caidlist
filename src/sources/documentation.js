@@ -2,7 +2,7 @@
 import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
 import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
-import { cachedOutput, forEachObject, deepCopy } from '../util/common.js';
+import { cachedOutput, forEachObject, deepCopy, testMinecraftVersionInRange } from '../util/common.js';
 import { CommentLocation, addJSONComment } from '../util/comment.js';
 import { octokit, fetchGitBlob } from '../util/network.js';
 
@@ -28,11 +28,83 @@ function processDocStateMachine(elements, initialState, target) {
     return target;
 }
 
+/**
+ * @typedef {{ name: string; id: string; level: number; sections?: any[] }} Section
+ * @param {Array<{ name: string; href: string; level: number }>} index
+ * @param {Array<Section>} sections
+ */
+function treeifyDocument(index, sections) {
+    if (sections.length === 0) return [];
+    const hrefMap = sections.reduce((/** @type {Record<string, number[]>} */map, e, i) => {
+        const k = `#${e.id}`;
+        if (!map[k]) map[k] = [];
+        map[k].push(i);
+        return map;
+    }, {});
+    const maxIndexLevel = index.reduce((max, e) => Math.max(e.level, max), 0);
+    const indexSectionMap = index.map((e) => hrefMap[e.href]);
+    /** @type {(startVec: Array<number | null>, startSectionPos: number) => Array<{ score: number, indexSections: Array<Section | undefined> }>} */
+    const listAllSolutions = (startVec, startSectionPos) => {
+        if (startVec.length >= indexSectionMap.length) {
+            /** @type {Array<Section | undefined>} */
+            const indexSections = startVec.map((e) => sections[e]);
+            const grouped = indexSections.reduce((/** @type {Record<string, number[]>} */map, e, i) => {
+                const k = index[i].level;
+                if (!map[k]) map[k] = [];
+                map[k].push(Math.abs(e.level - k));
+                return map;
+            }, {});
+            const stdev = Object.entries(grouped).map(([, v]) => {
+                const avg = v.reduce((s, e) => s + e, 0) / v.length;
+                const dev = v.reduce((s, e) => s + (e - avg) ** 2, 0);
+                return Math.sqrt(dev);
+            });
+            const score = stdev.reduce((s, e) => s + e, 0);
+            return [{ score, indexSections }];
+        }
+        const choices = indexSectionMap[startVec.length];
+        if (choices) {
+            return choices.flatMap((e) => {
+                if (e < startSectionPos) return [];
+                return listAllSolutions([...startVec, e], e + 1);
+            });
+        }
+        return listAllSolutions([...startVec, null], startSectionPos);
+    };
+    const solutions = listAllSolutions([], 0);
+    solutions.sort((a, b) => a.score - b.score);
+    const best = solutions.length ? solutions[0].indexSections : [];
+    sections.forEach((e) => {
+        const contentLevel = e.level;
+        const indexPos = best.indexOf(e);
+        const indexLevel = indexPos >= 0 ? index[indexPos].level : NaN;
+        e.level = Number.isNaN(indexLevel) ? contentLevel + maxIndexLevel + 1 : indexLevel;
+    });
+    const root = { sections: [], level: 0 };
+    /** @type {Section[]} */
+    const sectionStack = [root];
+    sections.forEach((e) => {
+        while (sectionStack.length) {
+            if (sectionStack[0].level >= e.level) {
+                sectionStack.shift();
+            } else {
+                break;
+            }
+        }
+        if (!sectionStack[0].sections) {
+            sectionStack[0].sections = [];
+        }
+        sectionStack[0].sections.push(e);
+        sectionStack.unshift(e);
+    });
+    return root.sections;
+}
+
 BedrockDocStates.set('end', () => undefined);
-BedrockDocStates.set('initial', (el, { meta }) => {
+BedrockDocStates.set('initial', (el, { document }) => {
     if (el instanceof HTMLElement && el.tagName === 'H1') {
         const match = /(.+?)\s*Version:\s*([\d.]+)/.exec(el.innerText.trim());
-        [, meta.title, meta.version] = match;
+        [, document.title, document.version] = match;
         return 'index.title';
     }
 });
@@ -41,70 +113,37 @@ BedrockDocStates.set('index.title', (el) => {
         return 'index.table';
     }
 });
-BedrockDocStates.set('index.table', (el, { meta, state }) => {
+BedrockDocStates.set('index.table', (el, { document, index, state }) => {
     if (el instanceof HTMLElement && el.tagName === 'TABLE') {
         const tableRows = el.querySelectorAll('tr > :is(th,td) > a');
-        const sections = [];
-        const content = [];
-        meta.content = content;
-        meta.sections = sections;
-        state.indexedSections = tableRows.map((a) => ({
+        document.content = [];
+        const indexSections = tableRows.map((a) => ({
             name: a.text.trim(),
             href: a.getAttribute('href'),
-            level: a.parentNode.tagName === 'TH' ? 1 : -1
-        }));
-        state.sectionStack = [{
-            name: '(document root)',
-            level: 0,
-            sections,
-            content
-        }];
+            level: a.parentNode.tagName === 'TH' ? 1 : 2
+        })).filter((e) => e.name.length > 0);
+        index.push(...indexSections);
+        state.currentSection = document;
         return 'section';
     }
 });
-BedrockDocStates.set('section', (el, { state: { indexedSections, sectionStack } }) => {
+BedrockDocStates.set('section', (el, { sections, state }) => {
     let content;
     if (el instanceof HTMLElement) {
         const level = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].indexOf(el.tagName);
         if (level >= 0) {
-            let currentSection;
             const p = el.querySelector('p');
-            if (p && p.id) {
-                const sectionIndex = indexedSections.find((section) => section.href === `#${p.id}`);
-                if (!sectionIndex) {
-                    currentSection = {
-                        name: elText(p),
-                        level: level + 11,
-                        content: []
-                    };
-                } else {
-                    currentSection = {
-                        name: sectionIndex.name,
-                        level: sectionIndex.level === -1 ? 2 + level : sectionIndex.level,
-                        content: []
-                    };
-                }
-            } else {
-                currentSection = {
-                    name: elText(el),
-                    level: 21 + level,
-                    content: []
-                };
-            }
-            if (currentSection.name.trim().length === 0) {
+            const newSection = {
+                name: elText(el),
+                id: p && p.id ? p.id : undefined,
+                level,
+                content: []
+            };
+            if (newSection.name.trim().length === 0) {
                 return;
             }
-            while (sectionStack.length) {
-                if (sectionStack[0].level < currentSection.level) {
-                    break;
-                }
-                sectionStack.shift();
-            }
-            if (!sectionStack[0].sections) {
-                sectionStack[0].sections = [];
-            }
-            sectionStack[0].sections.push(currentSection);
-            sectionStack.unshift(currentSection);
+            sections.push(newSection);
+            state.currentSection = newSection;
             return;
         }
 
@@ -117,10 +156,10 @@ BedrockDocStates.set('section', (el, { state: { indexedSections, sectionStack } 
                 content: elText(el),
                 href: el.getAttribute('href')
             };
-        } else if (el.tagName === 'TEXTAREA') {
+        } else if (el.tagName === 'TEXTAREA' || el.tagName === 'PRE') {
             content = {
                 type: 'code',
-                content: elText(el)
+                content: elText(el).split('\n')
             };
         } else if (el.tagName === 'TABLE') {
             const rows = [];
@@ -139,14 +178,11 @@ BedrockDocStates.set('section', (el, { state: { indexedSections, sectionStack } 
                 content: elText(el)
             };
         }
-        if (content.type || content.length) {
-            sectionStack[0].content.push(content);
-        }
     } else {
         content = elText(el);
     }
-    if (content.length) {
-        sectionStack[0].content.push(content);
+    if (content) {
+        state.currentSection.content.push(content);
     }
 });
 BedrockDocStates.set('table.row', (el, { columnNames, rows }) => {
@@ -166,16 +202,17 @@ BedrockDocStates.set('table.row', (el, { columnNames, rows }) => {
                         row[columnName] = elText(columnNodes[i]);
                     } else {
                         const cellRoot = {
-                            name: '(cell root)',
-                            level: 10,
                             content: []
                         };
+                        const sections = [];
                         processDocStateMachine(columnNodes[i].childNodes, 'section', {
+                            index: [],
+                            sections,
                             state: {
-                                indexedSections: [],
-                                sectionStack: [cellRoot]
+                                currentSection: cellRoot
                             }
                         });
+                        cellRoot.sections = treeifyDocument([], sections);
                         const sectionMapper = (section) => {
                             const mergedContent = [...section.content];
                             if (section.sections) {
@@ -202,17 +239,18 @@ const NormalTagNames = [
     'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
     'TABLE', 'TH', 'TR', 'TD',
     'A', 'P', 'BR',
-    'TEXTAREA', 'OL', 'LI'
+    'TEXTAREA', 'OL', 'LI', 'PRE'
 ];
 /** @param {string} htmlContent */
 function cleanHtml(htmlContent) {
-    return htmlContent.replace(/<a\b(?:.*?)>Back to top<\/a>/g, '')
-        .replace(/```([^]*?)```/g, '<textarea>$1</textarea>')
-        .replace(/<textarea\b(?:.*?)>([^]*?)<\/textarea>/g, (match, content) => {
-            const escapedContent = content.replace(/<br\s*(?:\/)?\s*>/g, '\n')
+    return htmlContent.replace(/<a\b(?:.*?)>Back to top<\/a>/ig, '')
+        .replace(/```([^]*?)```/g, '<pre>$1</pre>')
+        .replace(/<(textarea|pre)\b(?:.*?)>([^]*?)<\/\1>/ig, (match, tag, content) => {
+            const escapedContent = content.replace(/<(?:\/)?br\s*(?:\/)?\s*>/g, '\n')
+                .replace(/<(?:\/)?pre>/g, '```')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
-            return `<textarea>${escapedContent}</textarea>`;
+            return `<${tag}>${escapedContent}</${tag}>`;
         })
         .replace(/<([\w]+)\b(?:.*?)>/g, (match, tagName) => {
             if (NormalTagNames.includes(tagName.toUpperCase())) {
@@ -224,21 +262,27 @@ function cleanHtml(htmlContent) {
 
 function parseBedrockDoc(content) {
     const root = parseHtml(cleanHtml(content));
-    const meta = {};
-    processDocStateMachine(root.childNodes, 'initial', { meta, state: {} });
-    return meta;
+    const document = {};
+    const index = [];
+    const sections = [];
+    const state = {};
+    processDocStateMachine(root.childNodes, 'initial', { document, index, sections, state });
+    document.sections = treeifyDocument(index, sections);
+    return document;
 }
 
-function findSection(node, sectionName, ...restNames) {
-    const sections = node.sections || [];
-    const section = sections.find((e) => e.name === sectionName);
-    if (section) {
-        if (restNames.length) {
-            return findSection(section, ...restNames);
+function findSection(node, ...path) {
+    let cursor = [node];
+    const sectionPath = path.slice();
+    while (sectionPath.length) {
+        const children = cursor.flatMap((e) => e.sections || []);
+        const sectionName = sectionPath.shift();
+        cursor = children.filter((e) => e.name === sectionName);
+        if (!cursor.length) {
+            throw new Error(`Section not found: ${path.join('/')}`);
         }
-        return section;
     }
-    throw new Error(`Section not found: ${sectionName}`);
+    return cursor[0];
 }
 
 function contentToPlain(content) {
@@ -289,10 +333,9 @@ function generateSchema(content) {
     return schema;
 }
 
-function createSectionSummaryAnalyzer({ name, documentation, path, withSchema }) {
+function createSectionSummaryAnalyzer({ path, withSchema, ...args }) {
     return {
-        name,
-        documentation,
+        ...args,
         extract(doc) {
             const section = findSection(doc, ...path);
             const result = {};
@@ -309,23 +352,24 @@ function createSectionSummaryAnalyzer({ name, documentation, path, withSchema })
 }
 
 function createSectionTableAnalyzer({
-    name,
-    documentation,
     path,
     tableIndex,
     idKey,
     getId,
     descriptionKey,
     getDescription,
-    withSchema
+    withSchema,
+    ...args
 }) {
     return {
-        name,
-        documentation,
+        ...args,
         extract(doc) {
             const section = findSection(doc, ...path);
             const tables = section.content.filter((e) => typeof e === 'object' && e.type === 'table');
             const table = tables[tableIndex >= 0 ? tableIndex : tables.length + tableIndex];
+            if (!table) {
+                throw new Error(`Cannot find table in section ${path.join('/')}`);
+            }
             const result = {};
             const idGetter = (row) => {
                 if (getId) {
@@ -362,17 +406,20 @@ function createSectionTableAnalyzer({
 function createSchemeTableAnalyzer({
     name,
     target,
-    documentation,
     path,
-    tableIndex
+    tableIndex,
+    ...args
 }) {
     return {
+        ...args,
         name: target,
-        documentation,
         extract(doc) {
             const section = findSection(doc, ...path);
             const tables = section.content.filter((e) => typeof e === 'object' && e.type === 'table');
             const table = tables[tableIndex >= 0 ? tableIndex : tables.length + tableIndex];
+            if (!table) {
+                throw new Error(`Cannot find table in section ${path.join('/')}`);
+            }
             const result = {};
             result[name] = generateSchema([table]);
             return result;
@@ -381,9 +428,11 @@ function createSchemeTableAnalyzer({
 }
 
 const pageAnalyzer = [
+    // before 1.20
     createSectionTableAnalyzer({
         name: 'blockState',
         documentation: 'Addons',
+        precondition: ({ version }) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
         path: ['BlockStates'],
         tableIndex: 0,
         idKey: 'Block State Name',
@@ -392,10 +441,31 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'block',
         documentation: 'Addons',
+        precondition: ({ version }) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
         path: ['Blocks'],
         tableIndex: 0,
         idKey: 'Name'
     }),
+
+    // since 1.20
+    createSectionTableAnalyzer({
+        name: 'blockState',
+        documentation: 'Addons',
+        precondition: ({ version }) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
+        path: ['Blocks', 'BlockStates', 'List of all BlockStates'],
+        tableIndex: 0,
+        idKey: 'BlockState Name',
+        descriptionKey: 'Description'
+    }),
+    createSectionTableAnalyzer({
+        name: 'block',
+        documentation: 'Addons',
+        precondition: ({ version }) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
+        path: ['Blocks', 'Blocks', 'List of fully-qualified block names'],
+        tableIndex: 0,
+        idKey: 'Name'
+    }),
+
     createSectionTableAnalyzer({
         name: 'entity',
         documentation: 'Addons',
@@ -446,7 +516,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'entitySpawnRuleConditionComponent',
         documentation: 'Entities',
-        path: ['Data-Driven Spawning', 'Spawn Rules', 'Components'],
+        path: ['Data-Driven Spawning', 'Spawn Rules', 'Conditions', 'Components'],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
@@ -519,7 +589,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'molangQuery',
         documentation: 'Molang',
-        path: ['Domain Examples', 'List of Entity Queries'],
+        path: ['Query Functions', 'List of Entity Queries'],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
@@ -527,7 +597,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'molangQueryExperimental',
         documentation: 'Molang',
-        path: ['Domain Examples', 'List of Experimental Entity Queries'],
+        path: ['Query Functions', 'List of Experimental Entity Queries'],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
@@ -577,11 +647,21 @@ function extractDocumentationIds(docMap) {
         if (!doc) {
             throw new Error(`Documentation not found: ${analyzer.documentation}`);
         }
-        const extractResult = analyzer.extract(doc);
-        if (analyzer.name in target) {
-            Object.assign(target[analyzer.name], extractResult);
-        } else {
-            target[analyzer.name] = extractResult;
+        if (analyzer.precondition) {
+            if (!analyzer.precondition(doc)) {
+                return;
+            }
+        }
+        try {
+            const extractResult = analyzer.extract(doc);
+            if (analyzer.name in target) {
+                Object.assign(target[analyzer.name], extractResult);
+            } else {
+                target[analyzer.name] = extractResult;
+            }
+        } catch (err) {
+            console.error(`Failed to extract ${analyzer.name}: ${err}`);
+            throw err;
         }
     });
     return target;
@@ -641,7 +721,8 @@ export async function fetchDocumentationIds(cx) {
         if (!cache) {
             throw err;
         }
-        console.error(`Failed to fetch template behavior pack, use cache instead: ${err}`);
+        console.error('Failed to fetch template behavior pack, use cache instead');
+        console.error(err);
     }
     const target = {};
     remapIdTable.forEach(([name, targetName]) => {

@@ -5,6 +5,7 @@
     "sections": [
         {
             "name": "BlockStates",
+            "id": "BlockStates",
             "level": 1,
             "content": [
                 {
@@ -664,6 +665,7 @@
         },
         {
             "name": "Blocks",
+            "id": "Blocks",
             "level": 1,
             "content": [
                 {
@@ -3021,6 +3023,7 @@
         },
         {
             "name": "Entities",
+            "id": "Entities",
             "level": 1,
             "content": [
                 {
@@ -3662,6 +3665,7 @@
         },
         {
             "name": "Entity Damage Source",
+            "id": "Entity Damage Source",
             "level": 1,
             "content": [
                 {
@@ -3801,138 +3805,142 @@
         },
         {
             "name": "Geometry",
+            "id": "Geometry",
             "level": 1,
-            "content": []
-        },
-        {
-            "name": "Blocks",
-            "level": 1,
-            "content": [
+            "content": [],
+            "sections": [
                 {
-                    "type": "table",
-                    "rows": [
+                    "name": "Blocks",
+                    "id": "Blocks",
+                    "level": 2,
+                    "content": [
                         {
-                            "Name": "elements",
-                            "Type": "List",
-                            "Default Value": "",
-                            "Description": [
-                                "List of elements that make up the geometry of this block",
+                            "type": "table",
+                            "rows": [
                                 {
-                                    "type": "table",
-                                    "rows": [
+                                    "Name": "elements",
+                                    "Type": "List",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "List of elements that make up the geometry of this block",
                                         {
-                                            "Name": "boxes",
-                                            "Type": "List",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "List of cubes that make up the geometry of this element",
+                                            "type": "table",
+                                            "rows": [
                                                 {
-                                                    "type": "table",
-                                                    "rows": [
+                                                    "Name": "boxes",
+                                                    "Type": "List",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "List of cubes that make up the geometry of this element",
                                                         {
-                                                            "Name": "faces",
-                                                            "Type": "List",
-                                                            "Default Value": "",
-                                                            "Description": [
-                                                                "List of the 6 faces of the box. If specified, there MUST be 6 faces (front, back, left side, right side, top, bottom)",
+                                                            "type": "table",
+                                                            "rows": [
                                                                 {
-                                                                    "type": "table",
-                                                                    "rows": [
+                                                                    "Name": "faces",
+                                                                    "Type": "List",
+                                                                    "Default Value": "",
+                                                                    "Description": [
+                                                                        "List of the 6 faces of the box. If specified, there MUST be 6 faces (front, back, left side, right side, top, bottom)",
                                                                         {
-                                                                            "Name": "material",
-                                                                            "Type": "String",
-                                                                            "Default Value": "",
-                                                                            "Description": "The material of this face if different from the box's"
-                                                                        },
-                                                                        {
-                                                                            "Name": "rotation",
-                                                                            "Type": "Decimal",
-                                                                            "Default Value": "0.0",
-                                                                            "Description": "UV Rotation of this face. Only acceptable values are 0, 90 and 270 degrees. This allows reusing a texture and just rotating it for different faces"
-                                                                        },
-                                                                        {
-                                                                            "Name": "uv",
-                                                                            "Type": "Vector [a, b, c, d]",
-                                                                            "Default Value": "[ 0.0, 0.0, 1.0, 1.0 ]",
-                                                                            "Description": "Texture coordinates of this face, given as min x, min y, max x, max y withg values between 0.0 and 1.0"
+                                                                            "type": "table",
+                                                                            "rows": [
+                                                                                {
+                                                                                    "Name": "material",
+                                                                                    "Type": "String",
+                                                                                    "Default Value": "",
+                                                                                    "Description": "The material of this face if different from the box's"
+                                                                                },
+                                                                                {
+                                                                                    "Name": "rotation",
+                                                                                    "Type": "Decimal",
+                                                                                    "Default Value": "0.0",
+                                                                                    "Description": "UV Rotation of this face. Only acceptable values are 0, 90 and 270 degrees. This allows reusing a texture and just rotating it for different faces"
+                                                                                },
+                                                                                {
+                                                                                    "Name": "uv",
+                                                                                    "Type": "Vector [a, b, c, d]",
+                                                                                    "Default Value": "[ 0.0, 0.0, 1.0, 1.0 ]",
+                                                                                    "Description": "Texture coordinates of this face, given as min x, min y, max x, max y withg values between 0.0 and 1.0"
+                                                                                }
+                                                                            ]
                                                                         }
                                                                     ]
+                                                                },
+                                                                {
+                                                                    "Name": "material",
+                                                                    "Type": "String",
+                                                                    "Default Value": "",
+                                                                    "Description": "The material of this box if different from the element's"
+                                                                },
+                                                                {
+                                                                    "Name": "origin",
+                                                                    "Type": "Vector [a, b, c]",
+                                                                    "Default Value": "[ 0.0, 0.0, 0.0 ]",
+                                                                    "Description": "The position of the center of the box relative to the geometry"
+                                                                },
+                                                                {
+                                                                    "Name": "size",
+                                                                    "Type": "Vector [a, b, c]",
+                                                                    "Default Value": "[ 0, 0, 0 ]",
+                                                                    "Description": "Scale of the box in the x, y and z coordinates. A typical block is of scale 1, 1, 1"
                                                                 }
                                                             ]
-                                                        },
-                                                        {
-                                                            "Name": "material",
-                                                            "Type": "String",
-                                                            "Default Value": "",
-                                                            "Description": "The material of this box if different from the element's"
-                                                        },
-                                                        {
-                                                            "Name": "origin",
-                                                            "Type": "Vector [a, b, c]",
-                                                            "Default Value": "[ 0.0, 0.0, 0.0 ]",
-                                                            "Description": "The position of the center of the box relative to the geometry"
-                                                        },
-                                                        {
-                                                            "Name": "size",
-                                                            "Type": "Vector [a, b, c]",
-                                                            "Default Value": "[ 0, 0, 0 ]",
-                                                            "Description": "Scale of the box in the x, y and z coordinates. A typical block is of scale 1, 1, 1"
                                                         }
                                                     ]
+                                                },
+                                                {
+                                                    "Name": "material",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The material of this element if different from the block's"
+                                                },
+                                                {
+                                                    "Name": "name",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "Name of the element"
+                                                },
+                                                {
+                                                    "Name": "parent",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "Name of the parent element of this element. Pivot and box positions are made relative to the parent element's pivot"
+                                                },
+                                                {
+                                                    "Name": "pivot",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[ 0.0, 0.0, 0.0 ]",
+                                                    "Description": "Position in model space of the pivot point of the element. This is used as the \"center\" position of the element, as well as the point around which to rotate"
+                                                },
+                                                {
+                                                    "Name": "rotation",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[ 0.0, 0.0, 0.0 ]",
+                                                    "Description": "The rotation of this element about its pivot"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "Name": "material",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The material of this element if different from the block's"
-                                        },
-                                        {
-                                            "Name": "name",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Name of the element"
-                                        },
-                                        {
-                                            "Name": "parent",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Name of the parent element of this element. Pivot and box positions are made relative to the parent element's pivot"
-                                        },
-                                        {
-                                            "Name": "pivot",
-                                            "Type": "Vector [a, b, c]",
-                                            "Default Value": "[ 0.0, 0.0, 0.0 ]",
-                                            "Description": "Position in model space of the pivot point of the element. This is used as the \"center\" position of the element, as well as the point around which to rotate"
-                                        },
-                                        {
-                                            "Name": "rotation",
-                                            "Type": "Vector [a, b, c]",
-                                            "Default Value": "[ 0.0, 0.0, 0.0 ]",
-                                            "Description": "The rotation of this element about its pivot"
                                         }
                                     ]
+                                },
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Default Value": "0.0.0.0",
+                                    "Description": "Version of the block geometry being used. This is used to determine if backwards compatibility is needed"
+                                },
+                                {
+                                    "Name": "materials",
+                                    "Type": "List",
+                                    "Default Value": "#0",
+                                    "Description": "List of materials used by this model"
+                                },
+                                {
+                                    "Name": "parent",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Parent model of this model"
                                 }
                             ]
-                        },
-                        {
-                            "Name": "format_version",
-                            "Type": "String",
-                            "Default Value": "0.0.0.0",
-                            "Description": "Version of the block geometry being used. This is used to determine if backwards compatibility is needed"
-                        },
-                        {
-                            "Name": "materials",
-                            "Type": "List",
-                            "Default Value": "#0",
-                            "Description": "List of materials used by this model"
-                        },
-                        {
-                            "Name": "parent",
-                            "Type": "String",
-                            "Default Value": "",
-                            "Description": "Parent model of this model"
                         }
                     ]
                 }
@@ -3940,6 +3948,7 @@
         },
         {
             "name": "Items",
+            "id": "Items",
             "level": 1,
             "content": [
                 {
@@ -9931,6 +9940,7 @@
         },
         {
             "name": "manifest.json",
+            "id": "manifest.json",
             "level": 1,
             "content": [
                 "The manifest file contains all the basic information about the pack that Minecraft needs to identify it. The tables below contain all the components of the manifest, their individual properties, and what they mean.",
@@ -10098,17 +10108,67 @@
             "sections": [
                 {
                     "name": "Examples",
-                    "level": 22,
+                    "level": 4,
                     "content": [
                         "Behavior Pack",
                         {
                             "type": "code",
-                            "content": "{\n    \"format_version\": 1,\n    \"header\": {\n        \"description\": \"Example vanilla behavior pack\",\n        \"name\": \"Vanilla Behavior Pack\",\n        \"uuid\": \"ee649bcf-256c-4013-9068-6a802b89d756\",\n        \"version\": [0, 0, 1]\n    },\n    \"modules\": [\n        {\n            \"description\": \"Example behavior pack module\",\n            \"type\": \"data\",\n            \"uuid\": \"fa6e90c8-c925-460f-8155-c8a60b753caa\",\n            \"version\": [0, 0, 1]\n        },\n        {\n            \"description\": \"Example client scripts module\",\n            \"type\": \"client_data\",\n            \"uuid\": \"c05a992e-482a-455f-898c-58bbb4975e47\",\n            \"version\": [0, 0, 1]\n        }\n    ],\n    \"dependencies\": [\n        {\n            \"uuid\": \"66c6e9a8-3093-462a-9c36-dbb052165822\",\n            \"version\": [0, 0, 1]\n        }\n    ]\n}"
+                            "content": [
+                                "{",
+                                "    \"format_version\": 1,",
+                                "    \"header\": {",
+                                "        \"description\": \"Example vanilla behavior pack\",",
+                                "        \"name\": \"Vanilla Behavior Pack\",",
+                                "        \"uuid\": \"ee649bcf-256c-4013-9068-6a802b89d756\",",
+                                "        \"version\": [0, 0, 1]",
+                                "    },",
+                                "    \"modules\": [",
+                                "        {",
+                                "            \"description\": \"Example behavior pack module\",",
+                                "            \"type\": \"data\",",
+                                "            \"uuid\": \"fa6e90c8-c925-460f-8155-c8a60b753caa\",",
+                                "            \"version\": [0, 0, 1]",
+                                "        },",
+                                "        {",
+                                "            \"description\": \"Example client scripts module\",",
+                                "            \"type\": \"client_data\",",
+                                "            \"uuid\": \"c05a992e-482a-455f-898c-58bbb4975e47\",",
+                                "            \"version\": [0, 0, 1]",
+                                "        }",
+                                "    ],",
+                                "    \"dependencies\": [",
+                                "        {",
+                                "            \"uuid\": \"66c6e9a8-3093-462a-9c36-dbb052165822\",",
+                                "            \"version\": [0, 0, 1]",
+                                "        }",
+                                "    ]",
+                                "}"
+                            ]
                         },
                         "Resource Pack",
                         {
                             "type": "code",
-                            "content": "{\n    \"format_version\": 1,\n    \"header\": {\n        \"description\": \"Example vanilla resource pack\",\n        \"name\": \"Vanilla Resource Pack\",\n        \"uuid\": \"66c6e9a8-3093-462a-9c36-dbb052165822\",\n        \"version\": [0, 0, 1],\n        \"min_engine_version\": [1, 2, 6]\n        \"vanilla\": [1, 12, 0]\n    },\n    \"modules\": [\n        {\n            \"description\": \"Example vanilla resource pack\",\n            \"type\": \"resources\",\n            \"uuid\": \"743f6949-53be-44b6-b326-398005028819\",\n            \"version\": [0, 0, 1]\n        }\n    ]\n}"
+                            "content": [
+                                "{",
+                                "    \"format_version\": 1,",
+                                "    \"header\": {",
+                                "        \"description\": \"Example vanilla resource pack\",",
+                                "        \"name\": \"Vanilla Resource Pack\",",
+                                "        \"uuid\": \"66c6e9a8-3093-462a-9c36-dbb052165822\",",
+                                "        \"version\": [0, 0, 1],",
+                                "        \"min_engine_version\": [1, 2, 6]",
+                                "        \"vanilla\": [1, 12, 0]",
+                                "    },",
+                                "    \"modules\": [",
+                                "        {",
+                                "            \"description\": \"Example vanilla resource pack\",",
+                                "            \"type\": \"resources\",",
+                                "            \"uuid\": \"743f6949-53be-44b6-b326-398005028819\",",
+                                "            \"version\": [0, 0, 1]",
+                                "        }",
+                                "    ]",
+                                "}"
+                            ]
                         }
                     ]
                 }
