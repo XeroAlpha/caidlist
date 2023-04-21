@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.0.20",
+    "version": "1.20.0.21",
     "content": [],
     "sections": [
         {
@@ -1027,6 +1027,354 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"actor_health\", \"value\": \"0\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "all_slots_empty",
+                    "id": "all_slots_empty",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the designated equipment location for the subject entity is completely empty.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"all_slots_empty\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"any\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"all_slots_empty\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "any_slot_empty",
+                    "id": "any_slot_empty",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the designated equipment location for the subject entity has any empty slot.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"any_slot_empty\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"any\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"any_slot_empty\" }"
                                     ]
                                 }
                             ]
@@ -20547,14 +20895,14 @@
                                         {
                                             "Name": "duration",
                                             "Type": "Decimal",
-                                            "Default Value": "3.0",
+                                            "Default Value": "3.00",
                                             "Description": "Time in seconds for the boost."
                                         },
                                         {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast."
+                                            "Default Value": "1.35",
+                                            "Description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast. Requires \"format_version\" of 1.20 or more, otherwise the value 1.35 will be used."
                                         }
                                     ]
                                 }
@@ -23876,6 +24224,14 @@
                             ]
                         },
                         {
+                            "name": "minecraft:persist_sit",
+                            "id": "minecraft:persist_sit",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity 'sit' state to persist. Not needed if the entity already has a sittable component."
+                            ]
+                        },
+                        {
                             "name": "minecraft:persistent",
                             "id": "minecraft:persistent",
                             "level": 4,
@@ -26558,6 +26914,10 @@
                                             "ID": "-863721039"
                                         },
                                         {
+                                            "JSON Name": "minecraft:persist_sit",
+                                            "ID": "-1147388747"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:persistent",
                                             "ID": "1435858387"
                                         },
@@ -27867,5 +28227,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "ec7ac3d05d6ebf5d21e0171ce90c1b8a193d9cdc"
+    "__OBJECTHASH__": "baf4d5fe0e0e131976ae64f7f9a50e7125d7fa29"
 }

@@ -1,6 +1,6 @@
 {
     "title": "ADDONS DOCUMENTATION",
-    "version": "1.20.0.20",
+    "version": "1.20.0.21",
     "content": [],
     "sections": [
         {
@@ -24032,6 +24032,12 @@
                                             "Description": "Defines the cardinal placement direction of a block. 0 = South, 1 = West, 2 = North, 3 = East"
                                         },
                                         {
+                                            "BlockState Name": "minecraft:facing_direction",
+                                            "Type": "Integer",
+                                            "Valid Values": "0 - 5",
+                                            "Description": "Defines all placement directions of a block. 0 = Down, 1 = Up, 2 = South, 3 = West, 4 = North, 5 = East"
+                                        },
+                                        {
                                             "BlockState Name": "moisturized_amount",
                                             "Type": "Integer",
                                             "Valid Values": "0 - 7",
@@ -24375,7 +24381,7 @@
                                             "Block Trait": "\"minecraft:placement_direction\"",
                                             "Type": "JSON Object",
                                             "Description": [
-                                                "Adds the \"minecraft:cardinal_direction\" state and setter function to the block. The value of this state is set when the block is placed.",
+                                                "Adds the \"minecraft:cardinal_direction\" and/or \"minecraft:facing_direction\" states and setter function to the block. The values of these states are set when the block is placed.",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -24393,6 +24399,12 @@
                                                                             "Type": "Integer",
                                                                             "Default Value": "0 - 3",
                                                                             "Description": "Defines the cardinal placement direction of a block. 0 = South, 1 = West, 2 = North, 3 = East"
+                                                                        },
+                                                                        {
+                                                                            "Name": "minecraft:facing_direction",
+                                                                            "Type": "Integer",
+                                                                            "Default Value": "0 - 5",
+                                                                            "Description": "Defines all placement directions of a block. 0 = Down, 1 = Up, 2 = South, 3 = West, 4 = North, 5 = East"
                                                                         }
                                                                     ]
                                                                 }
@@ -24402,12 +24414,39 @@
                                                             "Name": "y_rotation_offset",
                                                             "Type": "Decimal",
                                                             "Default Value": "0.0 - 360.0",
-                                                            "Description": "The y rotation offset to apply to the block. Must be [0.0, 90.0, 180.0, 270.0]. Default is 0, meaning if the player is facing north, the \"minecraft:cardinal_direction\" state will be north."
+                                                            "Description": "The y rotation offset to apply to the block. Must be [0.0, 90.0, 180.0, 270.0]. Default is 0, meaning if the player is facing north, the \"minecraft:cardinal_direction\" and/or minecraft:facing_direction state will be north."
                                                         }
                                                     ]
                                                 }
                                             ]
                                         }
+                                    ]
+                                },
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{",
+                                        "        \"format_version\": \"1.20.0\",",
+                                        "        \"minecraft:block\": {",
+                                        "          \"description\": {",
+                                        "            \"identifier\": \"test:placement_direction_trait_block\",",
+                                        "            \"traits\" : {",
+                                        "              \"minecraft:placement_direction\": {",
+                                        "                \"enabled_states\": [\"minecraft:cardinal_direction\"], // 4 permutations",
+                                        "                \"y_rotation_offset\": 0.0 // 0.0-360.0",
+                                        "              }",
+                                        "            }",
+                                        "          },",
+                                        "          \"permutations\": [",
+                                        "            {",
+                                        "              \"condition\": \"query.block_property('minecraft:cardinal_direction') == 1\", // west",
+                                        "              \"components\": {",
+                                        "                // ...  ",
+                                        "              }",
+                                        "            }",
+                                        "          ]",
+                                        "        }",
+                                        "            }"
                                     ]
                                 }
                             ]
@@ -34606,5 +34645,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "993712cf93e56cc9c60459928a14fee990452db6"
+    "__OBJECTHASH__": "1884f32cb8dbf69f06707352a2ae2c361c5a4b1c"
 }

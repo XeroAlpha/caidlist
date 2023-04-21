@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.0.20",
+    "packageVersion": "1.20.0.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5302,6 +5302,14 @@
                                                 }
                                             },
                                             "enumerableProperties": {
+                                                "explodedBlockPermutation": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "value": "function () {\n    [native code]\n}",
+                                                        "length": 0
+                                                    }
+                                                },
                                                 "source": {
                                                     "getter": {
                                                         "type": "function",
@@ -5532,7 +5540,7 @@
                                                         "length": 0
                                                     }
                                                 },
-                                                "getAllProperties": {
+                                                "getAllStates": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -5548,7 +5556,7 @@
                                                         "length": 0
                                                     }
                                                 },
-                                                "getProperty": {
+                                                "getState": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -5588,7 +5596,7 @@
                                                         "length": 0
                                                     }
                                                 },
-                                                "withProperty": {
+                                                "withState": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -5822,49 +5830,6 @@
                             },
                             "configurable": false
                         },
-                        "BlockProperties": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockProperties",
-                                "value": "function BlockProperties() {\n    [native code]\n}",
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "get": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "value": "function () {\n    [native code]\n}",
-                                            "length": 0
-                                        }
-                                    },
-                                    "getAll": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "value": "function () {\n    [native code]\n}",
-                                            "length": 0
-                                        }
-                                    }
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockProperties"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false
-                                    }
-                                }
-                            },
-                            "configurable": false
-                        },
                         "BlockProperty": {
                             "value": {
                                 "type": "function",
@@ -5884,49 +5849,6 @@
                                             },
                                             "enumerableProperties": {
                                                 "name": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "value": "function () {\n    [native code]\n}",
-                                                        "length": 0
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false
-                                    }
-                                }
-                            },
-                            "configurable": false
-                        },
-                        "BlockPropertyType": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockPropertyType",
-                                "value": "function BlockPropertyType() {\n    [native code]\n}",
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockPropertyType"
-                                                    }
-                                                }
-                                            },
-                                            "enumerableProperties": {
-                                                "id": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "value": "function () {\n    [native code]\n}",
-                                                        "length": 0
-                                                    }
-                                                },
-                                                "validValues": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -6113,6 +6035,92 @@
                                             },
                                             "prototype": {
                                                 "ref": "Minecraft.BlockLiquidContainerComponent.prototype"
+                                            }
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "BlockStateType": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockStateType",
+                                "value": "function BlockStateType() {\n    [native code]\n}",
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockStateType"
+                                                    }
+                                                }
+                                            },
+                                            "enumerableProperties": {
+                                                "id": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "value": "function () {\n    [native code]\n}",
+                                                        "length": 0
+                                                    }
+                                                },
+                                                "validValues": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "value": "function () {\n    [native code]\n}",
+                                                        "length": 0
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "BlockStates": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockStates",
+                                "value": "function BlockStates() {\n    [native code]\n}",
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "get": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "value": "function () {\n    [native code]\n}",
+                                            "length": 0
+                                        }
+                                    },
+                                    "getAll": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "value": "function () {\n    [native code]\n}",
+                                            "length": 0
+                                        }
+                                    }
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockStates"
+                                                    }
+                                                }
                                             }
                                         },
                                         "readOnly": true,
@@ -9452,6 +9460,16 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.EntityComponent"
+                                                    }
+                                                }
+                                            },
+                                            "enumerableProperties": {
+                                                "entity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "value": "function () {\n    [native code]\n}",
+                                                        "length": 0
                                                     }
                                                 }
                                             },
@@ -14771,11 +14789,11 @@
                             },
                             "configurable": false
                         },
-                        "ILeverActionEventSignalAfterEventSignal": {
+                        "ILeverActionAfterEventSignal": {
                             "value": {
                                 "type": "function",
-                                "name": "ILeverActionEventSignalAfterEventSignal",
-                                "value": "function ILeverActionEventSignalAfterEventSignal() {\n    [native code]\n}",
+                                "name": "ILeverActionAfterEventSignal",
+                                "value": "function ILeverActionAfterEventSignal() {\n    [native code]\n}",
                                 "length": 0,
                                 "properties": {
                                     "prototype": {
@@ -14784,7 +14802,7 @@
                                             "properties": {
                                                 "constructor": {
                                                     "value": {
-                                                        "ref": "Minecraft.ILeverActionEventSignalAfterEventSignal"
+                                                        "ref": "Minecraft.ILeverActionAfterEventSignal"
                                                     }
                                                 }
                                             },
@@ -16867,41 +16885,6 @@
                             },
                             "configurable": false
                         },
-                        "Items": {
-                            "value": {
-                                "type": "function",
-                                "name": "Items",
-                                "value": "function Items() {\n    [native code]\n}",
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "get": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "value": "function () {\n    [native code]\n}",
-                                            "length": 0
-                                        }
-                                    }
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.Items"
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false
-                                    }
-                                }
-                            },
-                            "configurable": false
-                        },
                         "LeverActionAfterEvent": {
                             "value": {
                                 "type": "function",
@@ -16966,7 +16949,7 @@
                                                 }
                                             },
                                             "prototype": {
-                                                "ref": "Minecraft.ILeverActionEventSignalAfterEventSignal.prototype"
+                                                "ref": "Minecraft.ILeverActionAfterEventSignal.prototype"
                                             }
                                         },
                                         "readOnly": true,
@@ -39417,6 +39400,7 @@
         "Minecraft.BlockExplodeAfterEvent.prototype",
         "Minecraft.BlockExplodeAfterEvent.prototype.[[Prototype]]",
         "Minecraft.BlockExplodeAfterEvent.prototype.constructor",
+        "Minecraft.BlockExplodeAfterEvent.prototype.explodedBlockPermutation.[[Get]]",
         "Minecraft.BlockExplodeAfterEvent.prototype.source.[[Get]]",
         "Minecraft.BlockExplodeAfterEventSignal_deprecated",
         "Minecraft.BlockExplodeAfterEventSignal_deprecated.prototype",
@@ -39447,14 +39431,14 @@
         "Minecraft.BlockPermutation.prototype",
         "Minecraft.BlockPermutation.prototype.clone",
         "Minecraft.BlockPermutation.prototype.constructor",
-        "Minecraft.BlockPermutation.prototype.getAllProperties",
+        "Minecraft.BlockPermutation.prototype.getAllStates",
         "Minecraft.BlockPermutation.prototype.getItemStack",
-        "Minecraft.BlockPermutation.prototype.getProperty",
+        "Minecraft.BlockPermutation.prototype.getState",
         "Minecraft.BlockPermutation.prototype.getTags",
         "Minecraft.BlockPermutation.prototype.hasTag",
         "Minecraft.BlockPermutation.prototype.matches",
         "Minecraft.BlockPermutation.prototype.type.[[Get]]",
-        "Minecraft.BlockPermutation.prototype.withProperty",
+        "Minecraft.BlockPermutation.prototype.withState",
         "Minecraft.BlockPermutation.resolve",
         "Minecraft.BlockPistonComponent",
         "Minecraft.BlockPistonComponent.componentId",
@@ -39482,20 +39466,10 @@
         "Minecraft.BlockPotionContainerComponent.prototype.[[Prototype]]",
         "Minecraft.BlockPotionContainerComponent.prototype.constructor",
         "Minecraft.BlockPotionContainerComponent.prototype.setPotionType",
-        "Minecraft.BlockProperties",
-        "Minecraft.BlockProperties.get",
-        "Minecraft.BlockProperties.getAll",
-        "Minecraft.BlockProperties.prototype",
-        "Minecraft.BlockProperties.prototype.constructor",
         "Minecraft.BlockProperty",
         "Minecraft.BlockProperty.prototype",
         "Minecraft.BlockProperty.prototype.constructor",
         "Minecraft.BlockProperty.prototype.name.[[Get]]",
-        "Minecraft.BlockPropertyType",
-        "Minecraft.BlockPropertyType.prototype",
-        "Minecraft.BlockPropertyType.prototype.constructor",
-        "Minecraft.BlockPropertyType.prototype.id.[[Get]]",
-        "Minecraft.BlockPropertyType.prototype.validValues.[[Get]]",
         "Minecraft.BlockRecordPlayerComponent",
         "Minecraft.BlockRecordPlayerComponent.componentId",
         "Minecraft.BlockRecordPlayerComponent.prototype",
@@ -39519,6 +39493,16 @@
         "Minecraft.BlockSnowContainerComponent.prototype",
         "Minecraft.BlockSnowContainerComponent.prototype.[[Prototype]]",
         "Minecraft.BlockSnowContainerComponent.prototype.constructor",
+        "Minecraft.BlockStateType",
+        "Minecraft.BlockStateType.prototype",
+        "Minecraft.BlockStateType.prototype.constructor",
+        "Minecraft.BlockStateType.prototype.id.[[Get]]",
+        "Minecraft.BlockStateType.prototype.validValues.[[Get]]",
+        "Minecraft.BlockStates",
+        "Minecraft.BlockStates.get",
+        "Minecraft.BlockStates.getAll",
+        "Minecraft.BlockStates.prototype",
+        "Minecraft.BlockStates.prototype.constructor",
         "Minecraft.BlockType",
         "Minecraft.BlockType.prototype",
         "Minecraft.BlockType.prototype.canBeWaterlogged.[[Get]]",
@@ -39946,6 +39930,7 @@
         "Minecraft.EntityComponent.prototype",
         "Minecraft.EntityComponent.prototype.[[Prototype]]",
         "Minecraft.EntityComponent.prototype.constructor",
+        "Minecraft.EntityComponent.prototype.entity.[[Get]]",
         "Minecraft.EntityDamageCause",
         "Minecraft.EntityDamageCause.anvil",
         "Minecraft.EntityDamageCause.blockExplosion",
@@ -40620,11 +40605,11 @@
         "Minecraft.IItemUseOnBeforeEventSignal.prototype.constructor",
         "Minecraft.IItemUseOnBeforeEventSignal.prototype.subscribe",
         "Minecraft.IItemUseOnBeforeEventSignal.prototype.unsubscribe",
-        "Minecraft.ILeverActionEventSignalAfterEventSignal",
-        "Minecraft.ILeverActionEventSignalAfterEventSignal.prototype",
-        "Minecraft.ILeverActionEventSignalAfterEventSignal.prototype.constructor",
-        "Minecraft.ILeverActionEventSignalAfterEventSignal.prototype.subscribe",
-        "Minecraft.ILeverActionEventSignalAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.ILeverActionAfterEventSignal",
+        "Minecraft.ILeverActionAfterEventSignal.prototype",
+        "Minecraft.ILeverActionAfterEventSignal.prototype.constructor",
+        "Minecraft.ILeverActionAfterEventSignal.prototype.subscribe",
+        "Minecraft.ILeverActionAfterEventSignal.prototype.unsubscribe",
         "Minecraft.IPistonActivateAfterEventSignal",
         "Minecraft.IPistonActivateAfterEventSignal.prototype",
         "Minecraft.IPistonActivateAfterEventSignal.prototype.constructor",
@@ -40883,10 +40868,6 @@
         "Minecraft.ItemUseOnBeforeEventSignal.prototype",
         "Minecraft.ItemUseOnBeforeEventSignal.prototype.[[Prototype]]",
         "Minecraft.ItemUseOnBeforeEventSignal.prototype.constructor",
-        "Minecraft.Items",
-        "Minecraft.Items.get",
-        "Minecraft.Items.prototype",
-        "Minecraft.Items.prototype.constructor",
         "Minecraft.LeverActionAfterEvent",
         "Minecraft.LeverActionAfterEvent.prototype",
         "Minecraft.LeverActionAfterEvent.prototype.[[Prototype]]",
@@ -46096,7 +46077,7 @@
         "minecraft:carved_pumpkin": {
             "properties": [
                 {
-                    "name": "direction",
+                    "name": "minecraft:cardinal_direction",
                     "validValues": [
                         0,
                         1,
@@ -52101,7 +52082,7 @@
         "minecraft:lit_pumpkin": {
             "properties": [
                 {
-                    "name": "direction",
+                    "name": "minecraft:cardinal_direction",
                     "validValues": [
                         0,
                         1,
@@ -54350,7 +54331,7 @@
         "minecraft:pumpkin": {
             "properties": [
                 {
-                    "name": "direction",
+                    "name": "minecraft:cardinal_direction",
                     "validValues": [
                         0,
                         1,
@@ -59152,7 +59133,6 @@
                     "minecraft:birch_trapdoor": 0,
                     "minecraft:calibrated_sculk_sensor": 0,
                     "minecraft:campfire": 0,
-                    "minecraft:carved_pumpkin": 0,
                     "minecraft:chemistry_table": 0,
                     "minecraft:cherry_door": 0,
                     "minecraft:cherry_fence_gate": 0,
@@ -59175,7 +59155,6 @@
                     "minecraft:jungle_fence_gate": 0,
                     "minecraft:jungle_trapdoor": 0,
                     "minecraft:lectern": 0,
-                    "minecraft:lit_pumpkin": 0,
                     "minecraft:loom": 0,
                     "minecraft:mangrove_door": 0,
                     "minecraft:mangrove_fence_gate": 0,
@@ -59183,7 +59162,6 @@
                     "minecraft:pink_petals": 0,
                     "minecraft:powered_comparator": 0,
                     "minecraft:powered_repeater": 0,
-                    "minecraft:pumpkin": 0,
                     "minecraft:small_dripleaf_block": 3,
                     "minecraft:soul_campfire": 0,
                     "minecraft:spruce_door": 0,
@@ -59839,6 +59817,21 @@
                     "minecraft:white_candle_cake": false,
                     "minecraft:yellow_candle": false,
                     "minecraft:yellow_candle_cake": false
+                }
+            }
+        ],
+        "minecraft:cardinal_direction": [
+            {
+                "validValues": [
+                    0,
+                    1,
+                    2,
+                    3
+                ],
+                "defaultValue": {
+                    "minecraft:carved_pumpkin": 0,
+                    "minecraft:lit_pumpkin": 0,
+                    "minecraft:pumpkin": 0
                 }
             }
         ],
@@ -61469,7 +61462,8 @@
         "minecraft:acacia_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:acacia_log": {
@@ -61605,7 +61599,8 @@
         "minecraft:bamboo_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:bamboo_mosaic": {
@@ -61751,7 +61746,8 @@
         "minecraft:birch_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:birch_log": {
@@ -62174,7 +62170,8 @@
         "minecraft:cherry_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:cherry_leaves": {
@@ -62490,7 +62487,8 @@
         "minecraft:crimson_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:crimson_hyphae": {
@@ -62616,7 +62614,8 @@
         "minecraft:dark_oak_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:dark_oak_log": {
@@ -63669,6 +63668,7 @@
             "tags": [
                 "minecraft:is_armor",
                 "minecraft:golden_tier",
+                "minecraft:transformable_items",
                 "minecraft:trimmable_armors"
             ],
             "components": {
@@ -64177,7 +64177,8 @@
         "minecraft:jungle_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:jungle_log": {
@@ -64481,7 +64482,8 @@
         "minecraft:mangrove_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:mangrove_leaves": {
@@ -64951,7 +64953,8 @@
         "minecraft:oak_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:oak_log": {
@@ -65752,7 +65755,8 @@
         "minecraft:spruce_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:spruce_log": {
@@ -66244,7 +66248,8 @@
         "minecraft:warped_hanging_sign": {
             "maxAmount": 16,
             "tags": [
-                "minecraft:sign"
+                "minecraft:sign",
+                "minecraft:hanging_sign"
             ]
         },
         "minecraft:warped_hyphae": {
@@ -66753,6 +66758,19 @@
         "minecraft:hanging_actor": [
             "minecraft:painting"
         ],
+        "minecraft:hanging_sign": [
+            "minecraft:acacia_hanging_sign",
+            "minecraft:bamboo_hanging_sign",
+            "minecraft:birch_hanging_sign",
+            "minecraft:cherry_hanging_sign",
+            "minecraft:crimson_hanging_sign",
+            "minecraft:dark_oak_hanging_sign",
+            "minecraft:jungle_hanging_sign",
+            "minecraft:mangrove_hanging_sign",
+            "minecraft:oak_hanging_sign",
+            "minecraft:spruce_hanging_sign",
+            "minecraft:warped_hanging_sign"
+        ],
         "minecraft:horse_armor": [
             "minecraft:diamond_horse_armor",
             "minecraft:golden_horse_armor",
@@ -67197,7 +67215,8 @@
             "minecraft:diamond_leggings",
             "minecraft:diamond_pickaxe",
             "minecraft:diamond_shovel",
-            "minecraft:diamond_sword"
+            "minecraft:diamond_sword",
+            "minecraft:golden_boots"
         ],
         "minecraft:trim_materials": [
             "minecraft:amethyst_shard",

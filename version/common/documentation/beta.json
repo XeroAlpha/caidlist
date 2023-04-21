@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.0.20",
-    "__COMMITHASH__": "afa8e4ce84daa44088e416895523b85bceadc792",
+    "__VERSION__": "1.20.0.21",
+    "__COMMITHASH__": "fe4ec494a770dc490275eff93a1f82565264c91f",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -324,6 +324,22 @@
                     "sections": [
                         {
                             "name": "actor_health",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "all_slots_empty",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "any_slot_empty",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -1752,6 +1768,9 @@
                                     "name": "minecraft:peek"
                                 },
                                 {
+                                    "name": "minecraft:persist_sit"
+                                },
+                                {
                                     "name": "minecraft:persistent"
                                 },
                                 {
@@ -2935,6 +2954,7 @@
         "liquid_depth": "Determines the level of liquid blocks",
         "lit": "Determines if a block is lit or not",
         "minecraft:cardinal_direction": "Defines the cardinal placement direction of a block. 0 = South, 1 = West, 2 = North, 3 = East",
+        "minecraft:facing_direction": "Defines all placement directions of a block. 0 = Down, 1 = Up, 2 = South, 3 = West, 4 = North, 5 = East",
         "moisturized_amount": "Determines the moisture level of crops",
         "monster_egg_stone_type": "Determines the stone type of a monster egg block",
         "new_leaf_type": "Determines the leaf type of some blocks",
@@ -4811,6 +4831,8 @@
     },
     "entityFilter": {
         "actor_health": "Tests the health of the subject.",
+        "all_slots_empty": "Returns true when the designated equipment location for the subject entity is completely empty.",
+        "any_slot_empty": "Returns true when the designated equipment location for the subject entity has any empty slot.",
         "bool_property": "Returns true when the bool actor property matches the value provided.",
         "clock_time": "Compares the current time with a float value in the range (0.0, 1.0).",
         "distance_to_nearest_player": "Compares the distance to the nearest Player with a float value.",
@@ -11277,14 +11299,14 @@
                 {
                     "name": "duration",
                     "type": "Decimal",
-                    "defaultValue": "3.0",
+                    "defaultValue": "3.00",
                     "description": "Time in seconds for the boost."
                 },
                 {
                     "name": "speed_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast."
+                    "defaultValue": "1.35",
+                    "description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast. Requires \"format_version\" of 1.20 or more, otherwise the value 1.35 will be used."
                 }
             ]
         },

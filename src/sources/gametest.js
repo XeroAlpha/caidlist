@@ -345,9 +345,9 @@ const Extractors = [
                     const invalidStates = [];
                     const { id: blockId, canBeWaterlogged } = blockType;
                     const basePermutation = Minecraft.BlockPermutation.resolve(blockId);
-                    const properties = Object.entries(basePermutation.getAllProperties()).map(([name, defaultValue]) => ({
+                    const properties = Object.entries(basePermutation.getAllStates()).map(([name, defaultValue]) => ({
                         name,
-                        validValues: Minecraft.BlockProperties.get(name).validValues,
+                        validValues: Minecraft.BlockStates.get(name).validValues,
                         defaultValue
                     }));
                     properties.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
@@ -366,7 +366,7 @@ const Extractors = [
                         try {
                             permutation = Minecraft.BlockPermutation.resolve(blockId, state);
                             for (const k of Object.keys(state)) {
-                                if (permutation.getProperty(k) !== state[k]) {
+                                if (permutation.getState(k) !== state[k]) {
                                     throw new Error('State property invalid');
                                 }
                             }
@@ -598,6 +598,7 @@ async function evaluateExtractors(cx, target, session) {
     ]);
     await session.pause();
     const defaultTimeout = session.protocol.requestTimeout;
+    let lastError = null;
     for (const extractor of Extractors) {
         if (extractor.match && !extractor.match(coreVersion)) continue;
         try {
@@ -606,9 +607,14 @@ async function evaluateExtractors(cx, target, session) {
             await extractor.extract(target, topFrame, session, cx);
         } catch (err) {
             console.error(`Failed to extract ${extractor.name}`, err);
+            lastError = err;
+            break;
         }
     }
     await session.continue();
+    if (lastError) {
+        throw lastError;
+    }
 }
 
 export default async function analyzeGameTestEnumsCached(cx) {
