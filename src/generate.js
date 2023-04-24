@@ -705,9 +705,10 @@ const versionInfoMap = {
         ]
     },
     dev: {
+        name: '预览版开发版',
+        description: '包含部分开发者独有功能与开发中的新功能',
         sortOrder: 8,
         disableAutoMatch: true,
-        hidden: true,
         branches: [
             'vanilla',
             'education',
