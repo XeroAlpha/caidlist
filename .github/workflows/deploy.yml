@@ -54,5 +54,5 @@ jobs:
       run: |
         echo "${{ secrets.SSH_KEY }}" > key.txt
         chmod 400 key.txt
-        scp -pqrvO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ./web/dist/* "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":${{ secrets.TARGET_PATH }}
+        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ./web/dist/* "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":${{ secrets.TARGET_PATH }}
         rm key.txt
