@@ -100,10 +100,5 @@ export const packageVersions = {
     }
 };
 
-export const proxyConfig = {
-    http: 'http://localhost:7890',
-    https: 'http://localhost:7890'
-};
-
 // 留 null 表示不使用 token（每小时只允许60次请求）
 export const githubToken = secret.githubAccessToken;

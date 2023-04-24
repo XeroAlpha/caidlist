@@ -2,19 +2,22 @@ import { Octokit } from '@octokit/rest';
 import { createHash } from 'crypto';
 import { got } from 'got';
 import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
-import { proxyConfig, githubToken } from '../../data/config.js';
+import { githubToken } from '../../data/config.js';
+
+const httpProxy = process.env.http_proxy;
+const httpsProxy = process.env.https_proxy;
 
 export const proxiedGot = got.extend({
     agent: {
-        http: proxyConfig.http && new HttpProxyAgent({ proxy: proxyConfig.http }),
-        https: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
+        http: httpProxy && new HttpProxyAgent({ proxy: httpProxy }),
+        https: httpsProxy && new HttpsProxyAgent({ proxy: httpsProxy })
     }
 });
 
 export const octokit = new Octokit({
     auth: githubToken,
     request: {
-        agent: proxyConfig.https && new HttpsProxyAgent({ proxy: proxyConfig.https })
+        agent: httpsProxy && new HttpsProxyAgent({ proxy: httpsProxy })
     }
 });
 
