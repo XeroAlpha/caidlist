@@ -1,0 +1,61 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+
+    - name: Checkout database
+      uses: actions/checkout@v3
+      with:
+        path: database
+
+    - name: Install dependencies for database
+      working-directory: ./database
+      run: |
+        npm install
+
+    - name: Export database as json
+      working-directory: ./database
+      run: |
+        npm run generate-all
+    
+    - name: Checkout web
+      uses: actions/checkout@v3
+      with:
+        repository: XeroAlpha/caidlistweb
+        path: web
+
+    - name: Install dependencies for web
+      working-directory: ./web
+      run: |
+        yarn install
+
+    - name: Copy files
+      run: |
+        cp -r ./database/output/web ./web/public/data
+        cp ./database/output/web/index.json ./web/src/asset/dataIndex.json
+
+    - name: Build web
+      working-directory: ./web
+      run: |
+        yarn build
+
+    - name: Deploy to personal site
+      uses: moonpathbg/scp_uploader@latest
+      with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key : ${{ secrets.SSH_KEY }}
+          source: "./web/dist/"
+          target: "${{ secrets.TARGET_PATH }}"
