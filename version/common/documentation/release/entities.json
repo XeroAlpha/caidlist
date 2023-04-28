@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.70.2",
+    "version": "1.19.80.2",
     "content": [],
     "sections": [
         {
@@ -903,7 +903,7 @@
                     "id": "actor_health",
                     "level": 2,
                     "content": [
-                        "Tests the health of an actor.",
+                        "Tests the health of the subject.",
                         {
                             "type": "table",
                             "rows": [
@@ -8464,6 +8464,141 @@
                     ]
                 },
                 {
+                    "name": "is_raider",
+                    "id": "is_raider",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is a raider.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_raider\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_raider\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "is_riding",
                     "id": "is_riding",
                     "level": 2,
@@ -11727,6 +11862,141 @@
                     ]
                 },
                 {
+                    "name": "taking_fire_damage",
+                    "id": "taking_fire_damage",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is taking fire damage. Requires the damage_sensor component",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"taking_fire_damage\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"taking_fire_damage\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "target_distance",
                     "id": "target_distance",
                     "level": 2,
@@ -12850,6 +13120,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -12869,7 +13145,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -14032,6 +14308,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -14051,7 +14333,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -14579,6 +14861,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -14598,7 +14886,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -16099,6 +16387,12 @@
                                             "Description": "Time in seconds before selecting a target"
                                         },
                                         {
+                                            "Name": "cooldown",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.0",
+                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                        },
+                                        {
                                             "Name": "entity_types",
                                             "Type": "JSON Object",
                                             "Default Value": "",
@@ -16107,6 +16401,12 @@
                                                 {
                                                     "type": "table",
                                                     "rows": [
+                                                        {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
                                                         {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
@@ -16127,7 +16427,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -16396,6 +16696,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -16415,7 +16721,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -16464,6 +16770,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -16483,7 +16795,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -17688,6 +18000,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -17707,7 +18025,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -18031,6 +18349,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -18050,7 +18374,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -19198,6 +19522,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -19217,7 +19547,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -19282,6 +19612,12 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0.0",
+                                                            "Description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again"
+                                                        },
+                                                        {
                                                             "Name": "filters",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
@@ -19301,7 +19637,7 @@
                                                         },
                                                         {
                                                             "Name": "must_see_forget_duration",
-                                                            "Type": "Boolean",
+                                                            "Type": "Decimal",
                                                             "Default Value": "3.0",
                                                             "Description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more"
                                                         },
@@ -23867,6 +24203,12 @@
                                             "Description": "The text to display when the player can interact with the entity when playing with Touch-screen controls"
                                         },
                                         {
+                                            "Name": "passenger_max_width",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.00",
+                                            "Description": "The max width a mob can be to be a passenger. A value of 0 ignores this parameter."
+                                        },
+                                        {
                                             "Name": "priority",
                                             "Type": "Integer",
                                             "Default Value": "0",
@@ -27384,5 +27726,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "9908ebcf74a21a6f3ae073a9ba539001e7dc474b"
+    "__OBJECTHASH__": "50351a910f8b8908354e7b8e516aa20a8e1acd1c"
 }

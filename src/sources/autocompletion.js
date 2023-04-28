@@ -357,7 +357,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
 }
 
 export default async function analyzeAutocompletionEnumsCached(cx) {
-    const { version, branch, packageVersion, coreVersion } = cx;
+    const { version, branch, packageVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}`;
     const cache = cachedOutput(cacheId);
     if (cache && packageVersion === cache.packageVersion) return cache;
@@ -378,7 +378,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
         screen
     };
 
-    if (support.mcpews(version)) {
+    if (support.mcpews(cx)) {
         const session = await createExclusiveWSSession(device);
         await doWSRelatedJobsCached(cx, session, target);
         session.disconnect();
@@ -391,7 +391,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, 'effects', '/effect @s ', ['[', 'clear']);
     await analyzeAutocompletionEnumCached(cx, options, 'enchantments', '/enchant @s ', ['[']);
     await analyzeAutocompletionEnumCached(cx, options, 'gamerules', '/gamerule ');
-    if (support.newLocateCommand(coreVersion)) {
+    if (support.newLocateCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'locations', '/locate structure ');
         await analyzeAutocompletionEnumCached(cx, options, 'biomes', '/locate biome ');
     } else {
@@ -401,34 +401,37 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     await analyzeAutocompletionEnumCached(cx, options, 'entity slots', '/replaceitem entity @s ', ['[']);
     await analyzeAutocompletionEnumCached(cx, options, 'selectors', '/testfor @e[');
 
-    if (support.lootCommand(coreVersion)) {
+    if (support.lootCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'loot tools', '/loot spawn ~ ~ ~ loot empty ', [
             'mainhand',
             'offhand'
         ]);
     }
-    if (support.damageCommand(coreVersion)) {
+    if (support.damageCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'damage causes', '/damage @s 0 ');
     }
-    if (support.hasItemSelectorParam(coreVersion)) {
+    if (support.hasItemSelectorParam(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'item with aliases', '/testfor @e[hasitem={item=');
     }
-    if (support.placefeatureCommand(coreVersion)) {
+    if (support.placefeatureCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'features and rules', '/placefeature ');
     }
-    if (support.inputpermissionCommand(coreVersion)) {
+    if (support.inputpermissionCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'input permissions', '/inputpermission query @s ', ['[']);
     }
+    if (support.cameraCommand(cx)) {
+        await analyzeAutocompletionEnumCached(cx, options, 'camera presets', '/camera @s set ');
+    }
 
-    if (support.eduCommands(branch.id)) {
+    if (support.eduCommands(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'abilities', '/ability @s ', ['[']);
     }
 
-    if (support.devCommands(version)) {
+    if (support.devCommands(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'particle types', '/particlelegacy ');
         await analyzeAutocompletionEnumCached(cx, options, 'features', '/placefeature feature ');
         await analyzeAutocompletionEnumCached(cx, options, 'feature rules', '/placefeature rule ');
-        if (support.devCommandsGameSpace(branch.id)) {
+        if (support.devCommandsGameSpace(cx)) {
             await analyzeAutocompletionEnumCached(cx, options, 'options', '/option set ');
             await analyzeAutocompletionEnumCached(cx, options, 'server tests', '/test servertests ');
             await analyzeAutocompletionEnumCached(cx, options, 'unit tests', '/test unittests ');

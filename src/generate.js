@@ -93,7 +93,7 @@ const gtMapNames = [
     ['itemTag', '物品标签']
 ];
 async function generateBranchedOutputFiles(cx) {
-    const { version, branch, coreVersion, versionInfo } = cx;
+    const { version, branch, versionInfo } = cx;
     const packageDataEnums = analyzePackageDataEnumsCached(cx);
     const autocompletedEnums = await analyzeAutocompletionEnumsCached(cx);
     const enums = {
@@ -204,7 +204,7 @@ async function generateBranchedOutputFiles(cx) {
         translationMap: userTranslation.location,
         stdTransMap: cascadeMap(standardizedTranslation, ['EnvSprite'], true)
     });
-    if (support.newLocateCommand(coreVersion)) {
+    if (support.newLocateCommand(cx)) {
         matchTranslations({
             ...commonOptions,
             name: 'biome',
@@ -300,7 +300,7 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: enums.entitySlots,
         translationMap: userTranslation.entitySlot
     });
-    if (support.mcpews(version)) {
+    if (support.mcpews(cx)) {
         matchTranslations({
             ...commonOptions,
             name: 'command',
@@ -309,7 +309,7 @@ async function generateBranchedOutputFiles(cx) {
             stdTransMap: cascadeMap(standardizedTranslation, [], true)
         });
     }
-    if (support.lootTable(coreVersion)) {
+    if (support.lootTable(cx)) {
         matchTranslations({
             ...commonOptions,
             name: 'lootTable',
@@ -331,7 +331,7 @@ async function generateBranchedOutputFiles(cx) {
         translationResultMaps.lootTable = {};
         translationResultMaps.lootTableWrapped = {};
     }
-    if (support.damageCommand(coreVersion)) {
+    if (support.damageCommand(cx)) {
         matchTranslations({
             ...commonOptions,
             name: 'damageCause',
@@ -339,12 +339,28 @@ async function generateBranchedOutputFiles(cx) {
             translationMap: userTranslation.damageCause
         });
     }
-    if (support.placefeatureCommand(coreVersion)) {
+    if (support.placefeatureCommand(cx)) {
         matchTranslations({
             ...commonOptions,
             name: 'featureAndRule',
             originalArray: enums.featuresAndRules,
             translationMap: userTranslation.feature
+        });
+    }
+    if (support.inputpermissionCommand(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'inputPermission',
+            originalArray: enums.inputPermissions,
+            translationMap: userTranslation.inputPermission
+        });
+    }
+    if (support.cameraCommand(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'cameraPreset',
+            originalArray: enums.cameraPresets.filter((e) => !e.startsWith('example:')),
+            translationMap: userTranslation.cameraPreset
         });
     }
     translationResultMaps.music = filterObjectMap(

@@ -2,6 +2,19 @@
     // Help text
     "ability.get": "查询玩家拥有的能力。",
     "ability.set": "设置玩家拥有的能力。",
+    "camera.clear": "重置玩家的摄像机。",
+    "camera.fade.default": "使玩家视角逐渐变为黑色，随后恢复。",
+    "camera.fade.color": "使玩家视角逐渐变为指定的颜色，随后恢复。",
+    "camera.fade.time": "使玩家视角按指定的时间设置逐渐变为黑色，随后恢复。",
+    "camera.fade.time.color": "使玩家视角按指定的时间设置逐渐变为指定的颜色，随后恢复。",
+    "camera.set.default": "将玩家的摄像机设置为指定预设。",
+    "camera.set.ease.default": "将玩家的摄像机平滑变换为指定预设。",
+    "camera.set.ease.pos": "将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置。",
+    "camera.set.ease.pos.rot": "将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度。",
+    "camera.set.ease.rot": "将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度。",
+    "camera.set.pos": "将玩家的摄像机设置为指定预设，并覆盖该预设的位置。",
+    "camera.set.pos.rot": "将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度。",
+    "camera.set.rot": "将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度。",
     "camerashake.add": "为玩家应用镜头摇晃效果。",
     "camerashake.stop": "为玩家移除镜头摇晃效果。",
     "clear.default": "清除玩家物品栏中的物品。",
@@ -442,5 +455,19 @@
     "teleport <destination: target>": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
     "tp <destination: target>": "this: teleport.self.toEntity", // 将自身传送至指定实体所在位置。
     "gametest runsetuntilfail [tag: string] [rotationSteps: int]": "this: gametest.runsetuntilfail", // 运行指定的 GameTest 测试集合，若有一个测试未通过则立即停止。
-    "gametest stopall": "this: gametest.stopall" // 停止全部 GameTest 测试。
+    "gametest stopall": "this: gametest.stopall", // 停止全部 GameTest 测试。
+    "camera <players: target> clear": "this: camera.clear", // 重置玩家的摄像机。
+    "camera <players: target> fade": "this: camera.fade.default", // 使玩家视角逐渐变为黑色，随后恢复。
+    "camera <players: target> fade color <red: float> <green: float> <blue: float>": "this: camera.fade.color", // 使玩家视角逐渐变为指定的颜色，随后恢复。
+    "camera <players: target> fade time <fadeInSeconds: float> <holdSeconds: float> <fadeOutSeconds: float>": "this: camera.fade.time", // 使玩家视角按指定的时间设置逐渐变为黑色，随后恢复。
+    "camera <players: target> fade time <fadeInSeconds: float> <holdSeconds: float> <fadeOutSeconds: float> color <red: float> <green: float> <blue: float>": "this: camera.fade.time.color", // 使玩家视角按指定的时间设置逐渐变为指定的颜色，随后恢复。
+    "camera <players: target> set <preset: string> [default: default]": "this: camera.set.default", // 将玩家的摄像机设置为指定预设。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> [default: default]": "this: camera.set.ease.default", // 将玩家的摄像机平滑变换为指定预设。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z>": "this: camera.set.ease.pos", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z> rot <xRot: value> <yRot: value>": "this: camera.set.ease.pos.rot", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> rot <xRot: value> <yRot: value>": "this: camera.set.ease.rot", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度。
+    "camera <players: target> set <preset: string> pos <position: x y z>": "this: camera.set.pos", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置。
+    "camera <players: target> set <preset: string> pos <position: x y z> rot <xRot: value> <yRot: value>": "this: camera.set.pos.rot", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度。
+    "camera <players: target> set <preset: string> rot <xRot: value> <yRot: value>": "this: camera.set.rot", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度。
+    "scoreboard players <set|add|remove> <player: target> <objective: string> <count: int>": "this: scoreboard.players.modify" // 修改记分板对象的分数。
 }

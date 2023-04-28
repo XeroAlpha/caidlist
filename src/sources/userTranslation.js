@@ -24,6 +24,8 @@ const userTranslationStorageKey = {
     gamerule: 'translation.gamerule',
     entitySlot: 'translation.entity_slot',
     feature: 'translation.feature',
+    inputPermission: 'translation.input_permission',
+    cameraPreset: 'translation.camera_preset',
     lootTable: 'translation.loot_table',
     langParity: 'translation.lang_parity',
     documentation: 'translation.documentation'

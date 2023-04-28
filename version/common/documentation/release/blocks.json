@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.19.70.2",
+    "version": "1.19.80.2",
     "content": [],
     "sections": [
         {
@@ -17,6 +17,12 @@
                         {
                             "type": "table",
                             "rows": [
+                                {
+                                    "Name": "bone_visibility",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value)."
+                                },
                                 {
                                     "Name": "minecraft:collision_box",
                                     "Type": "Boolean / JSON Object",
@@ -220,26 +226,6 @@
                                     ]
                                 },
                                 {
-                                    "Name": "minecraft:part_visibility",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Sets conditions for when the block's different parts are visible.",
-                                        "Experimental toggles required: Upcoming Creator Features",
-                                        {
-                                            "type": "table",
-                                            "rows": [
-                                                {
-                                                    "Name": "conditions",
-                                                    "Type": "JSON Object",
-                                                    "Default Value": "",
-                                                    "Description": "A JSON object that contains a list of key/value pairs that map from bone name in a geometry file (key) to a condition that turns their rendering on/off (value). The condition should be a Molang query that uses block properties to determine true/false. Supported queries include 'has_block_property', 'block_property', and other queries that can evaluate without knowledge of the block's in-game positional or player affected data."
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
                                     "Name": "minecraft:placement_filter",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -431,6 +417,12 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:transformation",
+                                    "Type": "Vector [a, b, c]",
+                                    "Default Value": "translation",
+                                    "Description": "The block's translationExperimental toggles required: Holiday Creator Features"
+                                },
+                                {
                                     "Name": "minecraft:unit_cube",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -474,7 +466,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.19.70\",",
+                                        "  \"format_version\": \"1.19.80\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1162,5 +1154,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "4755b867779d4da8aed8b157f6adb75974bfa991"
+    "__OBJECTHASH__": "7b0a1878a8fa81e3dc39ca552bcebd1a7c2023a7"
 }
