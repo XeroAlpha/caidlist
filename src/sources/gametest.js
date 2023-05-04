@@ -561,6 +561,21 @@ const Extractors = [
             const entities = Object.keys(EntityInfoList).sort();
             target.entities = entities;
         }
+    },
+    {
+        name: 'effects',
+        timeout: 10000,
+        async extract(target, frame) {
+            const EffectList = parseOrThrow(await frame.evaluate(() => {
+                const result = [];
+                for (const effectType of Minecraft.EffectTypes.getAll()) {
+                    result.push(effectType.getName());
+                }
+                return JSON.stringify(result);
+            }));
+            const effects = EffectList.sort();
+            target.effects = effects;
+        }
     }
 ];
 

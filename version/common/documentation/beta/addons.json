@@ -1,6 +1,6 @@
 {
     "title": "ADDONS DOCUMENTATION",
-    "version": "1.20.0.22",
+    "version": "1.20.0.23",
     "content": [],
     "sections": [
         {
@@ -24026,6 +24026,12 @@
                                             "Description": "Determines if a block is lit or not"
                                         },
                                         {
+                                            "BlockState Name": "minecraft:block_face",
+                                            "Type": "String",
+                                            "Valid Values": "down, up, north, south, east, west",
+                                            "Description": "Which blockface the player placed the block on."
+                                        },
+                                        {
                                             "BlockState Name": "minecraft:cardinal_direction",
                                             "Type": "String",
                                             "Valid Values": "north, south, east, west",
@@ -24036,6 +24042,12 @@
                                             "Type": "String",
                                             "Valid Values": "down, up, north, south, east, west",
                                             "Description": "Defines all placement directions of a block."
+                                        },
+                                        {
+                                            "BlockState Name": "minecraft:vertical_half",
+                                            "Type": "String",
+                                            "Valid Values": "bottom, top",
+                                            "Description": "Which vertical half of the space the block is placed in."
                                         },
                                         {
                                             "BlockState Name": "moisturized_amount",
@@ -24421,6 +24433,43 @@
                                                             "Type": "Decimal",
                                                             "Default Value": "0.0 - 360.0",
                                                             "Description": "The y rotation offset to apply to the block. Must be [0.0, 90.0, 180.0, 270.0]. Default is 0, meaning if the player is facing north, the \"minecraft:cardinal_direction\" and/or minecraft:facing_direction state will be north."
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "Block Trait": "PlacementPosition",
+                                            "Type": "\"minecraft:placement_position\"",
+                                            "Description": [
+                                                "Adds the \"minecraft:block_face\" and/or \"minecraft:vertical_half\" BlockStates. The value of these state(s) are set when the block is placed.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "enabled_states",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": [
+                                                                "Which states to enable. Must specify at least one.",
+                                                                {
+                                                                    "type": "table",
+                                                                    "rows": [
+                                                                        {
+                                                                            "Name": "minecraft:block_face",
+                                                                            "Type": "String",
+                                                                            "Default Value": "down, up, north, south, east, west",
+                                                                            "Description": "Which blockface the player placed the block on."
+                                                                        },
+                                                                        {
+                                                                            "Name": "minecraft:vertical_half",
+                                                                            "Type": "String",
+                                                                            "Default Value": "bottom, top",
+                                                                            "Description": "Which vertical half of the space the block is placed in."
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
                                                         }
                                                     ]
                                                 }
@@ -34656,5 +34705,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "ac34c5dd220f38300c3e9eecf3a535842125ba2a"
+    "__OBJECTHASH__": "4d994f49302c2674b53e1d3878bd8737ddcd5bf6"
 }
