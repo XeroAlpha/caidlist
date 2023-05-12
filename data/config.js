@@ -74,28 +74,28 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.0.23',
+        version: '1.20.0.24',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.0.23.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.0.24.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
     netease_dev: {
         // 安装包版本
-        version: '2.6beta-222842',
+        version: '2.6beta-224553',
         coreVersion: '1.18.31.0.0',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.222842.apk',
+        path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.224553.apk',
         config: neteaseOCROptions
     },
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.20.0.23'
+        version: '1.20.0.24'
     },
     dev: {
-        version: '1.20.0.23',
-        path: 'H:\\BedrockVersions\\Dev\\1.20.0.23.apk',
+        version: '1.20.0.24',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.0.24.apk',
         config: smallestGUIOCROptions
     }
 };

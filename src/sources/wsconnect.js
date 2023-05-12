@@ -69,10 +69,10 @@ export async function createExclusiveWSSession(device) {
     const sessionPromise = pEvent(wsServer, 'client');
     if (device) {
         await device.reverse('tcp:19134', `tcp:${port}`);
-        await adbShell(device, 'input keyevent 48'); // KEYCODE_T
+        await adbShell(device, 'input keyevent KEYCODE_SLASH');
         await sleepAsync(500);
-        await adbShell(device, `input text ${JSON.stringify('/connect 127.0.0.1:19134')}`);
-        await adbShell(device, 'input keyevent 66'); // KEYCODE_ENTER
+        await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
+        await adbShell(device, 'input keyevent KEYCODE_ENTER');
     } else {
         console.log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
     }

@@ -126,12 +126,12 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     screen.updateStatus({ approxLength });
 
     // 打开聊天栏
-    await sendMonkeyCommand(monkey, 'press KEYCODE_T');
+    await sendMonkeyCommand(monkey, 'press KEYCODE_SLASH');
     await sleepAsync(500);
 
     console.log(`Starting ${progressName}: ${command}`);
     screen.log(`Input ${command}`);
-    await adbShell(device, `input text ${JSON.stringify(command)}`);
+    await adbShell(device, `input text ${JSON.stringify(command.replace(/^\//, ''))}`);
 
     let reactInterval = 0;
     let reactFrameCount = 0;
