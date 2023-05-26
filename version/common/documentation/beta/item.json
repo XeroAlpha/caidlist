@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.0.25",
+    "version": "1.20.10.20",
     "content": [],
     "sections": [
         {
@@ -95,19 +95,19 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Cool down time for a component. After you use an item it becomes unusable for the duration specified by the 'cool down time' setting in this component.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "category",
                                             "content": [
-                                                "The type of cool down for this item.",
+                                                "The type of cool down for this item. All items with a cool down component with the same category are put on cool down when one is used.",
                                                 "Type: category"
                                             ]
                                         },
                                         {
                                             "section": "duration",
                                             "content": [
-                                                "The duration of time this item will spend cooling down before becoming usable again.",
+                                                "The duration of time (in seconds) items with a matching category will spend cooling down before becoming usable again.",
                                                 "Type: float"
                                             ]
                                         }
@@ -148,8 +148,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Display Name item component. Display Names set the name to display when an item is in use or hovered over.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Display Name item component. Determines the text shown whenever an item's name is displayed (ex. hover text).",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "value",
                                             "content": [
@@ -164,8 +164,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "A property that determines when an item will break from use. The durability of an item is potentially depleted upon use based on the damage chance.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Durability item component. Determines how much damage this item takes before breaking and allows the item to be combined in crafting.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "damage_chance",
                                             "content": [
@@ -176,7 +176,7 @@
                                         {
                                             "section": "max_durability",
                                             "content": [
-                                                "Max durability is the amount of damage that this item can take before breaking.",
+                                                "Max durability is the amount of damage that this item can take before breaking. This is a required parameter and has a minimum of 0.",
                                                 "Type: integer"
                                             ]
                                         }
@@ -188,7 +188,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "dispense_on",
                                             "content": [
@@ -261,8 +261,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Allows this item to be used as fuel in a furnace to 'cook' other items.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "duration",
                                             "content": [
@@ -277,12 +277,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "The icon item component determines the icon to represent the item.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "texture",
                                             "content": [
-                                                "The key for the object contain the expected textures, from file 'resource_pack/textures/item_texture.json'.",
+                                                "The key from the resource_pack/textures/item_texture.json 'texture_data' object associated with the texture file.",
                                                 "Type: string"
                                             ]
                                         }
@@ -401,12 +401,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Repairable item component: how much damage can this item repair, what items can repair it.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "repair_items",
                                             "content": [
-                                                "Repair item entries.",
+                                                "List of repair item entries. Each entry needs to define a list of strings for `items` that can be used for the repair and an optional `repair_amount` for how much durability is repaired.",
                                                 "Type: array of repair_items"
                                             ]
                                         }
@@ -434,24 +434,10 @@
                                             ]
                                         },
                                         {
-                                            "section": "launch_power_scale",
-                                            "content": [
-                                                "Launch power scale. Default is set to 1.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
                                             "section": "max_draw_duration",
                                             "content": [
                                                 "Draw Duration. Default is set to 0.",
                                                 "Type: max_draw_duration"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_launch_power",
-                                            "content": [
-                                                "Launch power. Default is set to 1.0.",
-                                                "Type: float"
                                             ]
                                         },
                                         {
@@ -648,5 +634,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "1b086b3ceaeca22a5ad911e87e8759200f26d5da"
+    "__OBJECTHASH__": "036ea988101f9f0b14aee03ee7b858d762bb397f"
 }
