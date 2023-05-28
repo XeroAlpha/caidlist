@@ -194,6 +194,7 @@ const Extractors = [
                 const objects = [];
                 const objectDesc = [];
                 const functionOwnNames = ['name', 'length', 'arguments', 'caller'];
+                const nativeFunctionRegex = /\{\s*\[native code\]\s*\}/;
                 const defaultProto = {
                     object: Object.prototype,
                     function: Function.prototype
@@ -217,7 +218,11 @@ const Extractors = [
                         }
                         if (type === 'function') {
                             desc.name = value.name;
-                            desc.value = String(value);
+                            if (nativeFunctionRegex.test(String(value))) {
+                                desc.native = true;
+                            } else {
+                                desc.value = String(value);
+                            }
                             desc.length = value.length;
                         }
                         flatDescMap[path] = { ...desc };
@@ -282,11 +287,28 @@ const Extractors = [
                                 desc: desc.prototype
                             });
                         }
+                        try {
+                            if (!Object.isExtensible(value)) {
+                                if (Object.isFrozen(value)) {
+                                    desc.integrity = 'frozen';
+                                } else if (Object.isSealed(value)) {
+                                    desc.integrity = 'sealed';
+                                } else {
+                                    desc.integrity = 'preventExtensible';
+                                }
+                            }
+                        } catch (err) {
+                            desc.integrity = 'non-object';
+                        }
                         objects.push(value);
                         objectDesc.push({ path, desc });
                         continue;
                     }
-                    desc.value = value;
+                    if (type === 'bigint' || type === 'symbol') {
+                        desc.value = value.toString();
+                    } else {
+                        desc.value = value;
+                    }
                     flatDescMap[path] = desc;
                 }
                 return JSON.stringify({ tree: root.desc, flatMap: flatDescMap });
