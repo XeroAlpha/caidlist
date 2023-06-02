@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.10.20",
-    "__COMMITHASH__": "30eac910e05a1cbf5556a699bd8fe272c11c028a",
+    "__VERSION__": "1.20.10.21",
+    "__COMMITHASH__": "c59c6a2c81ceacbc108c06dad7a117e5679732ed",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -9050,6 +9050,12 @@
                     "type": "Decimal",
                     "defaultValue": "1.000000",
                     "description": "Searching movement speed multiplier."
+                },
+                {
+                    "name": "target_dig_position_offset",
+                    "type": "Decimal",
+                    "defaultValue": "2.250000",
+                    "description": "Dig target position offset from the feet position of the mob in their facing direction."
                 }
             ]
         },
@@ -15375,7 +15381,7 @@
     },
     "itemComponent": {
         "minecraft:armor": "The armor item component determines the amount of protection you have in your armor item.",
-        "minecraft:block_placer": "Planter item component. planter items are items that can be planted.",
+        "minecraft:block_placer": "Block Placer item component. Items with this component will place a block when used.",
         "minecraft:chargeable": "Allows an item to be used over a duration.",
         "minecraft:cooldown": "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.",
         "minecraft:digger": "Digger item. Component put on items that dig.",
@@ -15385,10 +15391,11 @@
         "minecraft:food": "When an item has a food component, it becomes edible to the player.",
         "minecraft:fuel": "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
         "minecraft:icon": "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
+        "minecraft:max_stack_size": "The max stack size component determines how many of the item can be stacked together.",
         "minecraft:on_use": "The on_use item component allows you to receive an event when the item is used.",
         "minecraft:on_use_on": "The on_use_on item component allows you to receive an event when the item is used on a block in the world.",
         "minecraft:projectile": "Projectile item component. projectile items shoot out, like an arrow.",
-        "minecraft:record": "Record Item Component.  Used by record items to play music.",
+        "minecraft:record": "Record Item Component. Used by record items to play music.",
         "minecraft:render_offsets": "Render offsets component: optional values can be given to offset the way the item is rendered.",
         "minecraft:repairable": "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
         "minecraft:shooter": "Shooter Item Component.",

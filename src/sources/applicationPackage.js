@@ -339,6 +339,38 @@ const entryAnalyzer = [
             }
         },
         versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
+    },
+    {
+        name: 'recipe',
+        type: 'json',
+        regex: /^assets\/behavior_packs\/(?:[^/]+)\/recipes\/(?:[^/]+)\.json$/,
+        analyze(results, entryName, recipe) {
+            const { recipes } = results;
+            const formatVersion = recipe.format_version;
+            if (this.versionsGroups[0].includes(formatVersion)) {
+                for (const [key, value] of Object.entries(recipe)) {
+                    if (key === 'format_version') continue;
+                    if (this.recipeTypes.includes(key)) {
+                        recipes.push(value.description.identifier);
+                    } else {
+                        console.warn(`Unknown recipe type: ${key} - ${entryName}`);
+                    }
+                }
+            } else {
+                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+            }
+        },
+        recipeTypes: [
+            'minecraft:recipe_brewing_mix',
+            'minecraft:recipe_brewing_container',
+            'minecraft:recipe_furnace',
+            'minecraft:recipe_material_reduction',
+            'minecraft:recipe_shaped',
+            'minecraft:recipe_shapeless',
+            'minecraft:recipe_smithing_transform',
+            'minecraft:recipe_smithing_trim'
+        ],
+        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10']]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {
@@ -356,6 +388,7 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         lootTables: [],
         features: [],
         featureRules: [],
+        recipes: [],
         geometryMap: {},
         animationMap: {},
         animationControllerMap: {},
@@ -397,9 +430,15 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             if (!geometryMap[ref]) {
                 geometryMap[ref] = [];
             }
+            if (typeof action !== 'string') {
+                console.warn(`Unexpected geometry category for ${entityId}: ${action}`);
+            }
             geometryMap[ref].push(`${entityId}<${action}>`);
         });
         forEachObject(definition.animationRefs, (ref, action) => {
+            if (typeof action !== 'string') {
+                console.warn(`Unexpected animation reference for ${entityId}: ${action}`);
+            }
             if (ref.startsWith('controller')) {
                 if (!animationControllerMap[ref]) {
                     animationControllerMap[ref] = [];
@@ -413,7 +452,13 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             }
         });
         definition.animationControllers.forEach((controllerGroup) => {
+            if (typeof controllerGroup !== 'object') {
+                console.warn(`Unexpected animation controller map for ${entityId}: ${controllerGroup}`);
+            }
             forEachObject(controllerGroup, (ref, action) => {
+                if (typeof action !== 'string') {
+                    console.warn(`Unexpected animation controller for ${entityId}: ${action}`);
+                }
                 if (!animationControllerMap[ref]) {
                     animationControllerMap[ref] = [];
                 }
@@ -421,10 +466,20 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             });
         });
         definition.renderControllers.forEach((renderController) => {
-            if (!renderControllerMap[renderController]) {
-                renderControllerMap[renderController] = [];
+            const flattenedList = [];
+            if (typeof renderController === 'string') {
+                flattenedList.push(renderController);
+            } else if (typeof renderController === 'object') {
+                flattenedList.push(...Object.keys(renderController));
+            } else {
+                console.warn(`Unexpected render controller for ${entityId}: ${renderController}`);
             }
-            renderControllerMap[renderController].push(`${entityId}`);
+            flattenedList.forEach((e) => {
+                if (!renderControllerMap[e]) {
+                    renderControllerMap[e] = [];
+                }
+                renderControllerMap[e].push(`${entityId}`);
+            });
         });
     });
     forEachObject(results, (v, k) => {
