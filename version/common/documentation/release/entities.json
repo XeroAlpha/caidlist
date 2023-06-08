@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.19.80.2",
+    "version": "1.20.0.1",
     "content": [],
     "sections": [
         {
@@ -1027,6 +1027,354 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"actor_health\", \"value\": \"0\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "all_slots_empty",
+                    "id": "all_slots_empty",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the designated equipment location for the subject entity is completely empty.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"all_slots_empty\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"any\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"all_slots_empty\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "any_slot_empty",
+                    "id": "any_slot_empty",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the designated equipment location for the subject entity has any empty slot.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": ""
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": ""
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"any_slot_empty\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"any\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"any_slot_empty\" }"
                                     ]
                                 }
                             ]
@@ -14043,6 +14391,43 @@
                             ]
                         },
                         {
+                            "name": "minecraft:behavior.feeling_happy",
+                            "id": "minecraft:behavior.feeling_happy",
+                            "level": 4,
+                            "content": [
+                                "[EXPERIMENTAL] Allows this entity to feel happy for a specified duration",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[10.000000, 10.000000]",
+                                            "Description": "Goal cooldown range in seconds"
+                                        },
+                                        {
+                                            "Name": "duration_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[2.000000, 2.000000]",
+                                            "Description": "Goal duration range in seconds"
+                                        },
+                                        {
+                                            "Name": "on_end",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal end."
+                                        },
+                                        {
+                                            "Name": "on_start",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal starts."
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "minecraft:behavior.fertilize_farm_block",
                             "id": "minecraft:behavior.fertilize_farm_block",
                             "level": 4,
@@ -17493,10 +17878,10 @@
                                             "Description": "Distance in blocks within the entity to considers it has reached it's target position."
                                         },
                                         {
-                                            "Name": "item",
-                                            "Type": "Item Description Properties",
+                                            "Name": "items",
+                                            "Type": "List",
                                             "Default Value": "",
-                                            "Description": "The item to spawn on successful dig. Format: itemName:auxValue"
+                                            "Description": "Weighted list of item(s) to spawn on successful dig"
                                         },
                                         {
                                             "Name": "on_digging_start",
@@ -17850,6 +18235,43 @@
                             ]
                         },
                         {
+                            "name": "minecraft:behavior.rising",
+                            "id": "minecraft:behavior.rising",
+                            "level": 4,
+                            "content": [
+                                "[EXPERIMENTAL] Allows this entity to rise for a specified duration",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[10.000000, 10.000000]",
+                                            "Description": "Goal cooldown range in seconds"
+                                        },
+                                        {
+                                            "Name": "duration_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[2.000000, 2.000000]",
+                                            "Description": "Goal duration range in seconds"
+                                        },
+                                        {
+                                            "Name": "on_end",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal end."
+                                        },
+                                        {
+                                            "Name": "on_start",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal starts."
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "minecraft:behavior.roar",
                             "id": "minecraft:behavior.roar",
                             "level": 4,
@@ -17920,6 +18342,43 @@
                                             "Type": "Integer",
                                             "Default Value": "0",
                                             "Description": "The interval in which a sound will play when active in a 1/delay chance to kick off"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "minecraft:behavior.scenting",
+                            "id": "minecraft:behavior.scenting",
+                            "level": 4,
+                            "content": [
+                                "[EXPERIMENTAL] Allows this entity to scent for a specified duration",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[10.000000, 10.000000]",
+                                            "Description": "Goal cooldown range in seconds"
+                                        },
+                                        {
+                                            "Name": "duration_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[2.000000, 2.000000]",
+                                            "Description": "Goal duration range in seconds"
+                                        },
+                                        {
+                                            "Name": "on_end",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal end."
+                                        },
+                                        {
+                                            "Name": "on_start",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event(s) to run when the goal starts."
                                         }
                                     ]
                                 }
@@ -20436,14 +20895,14 @@
                                         {
                                             "Name": "duration",
                                             "Type": "Decimal",
-                                            "Default Value": "3.0",
+                                            "Default Value": "3.00",
                                             "Description": "Time in seconds for the boost."
                                         },
                                         {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast."
+                                            "Default Value": "1.35",
+                                            "Description": "Factor by which the entity's normal speed increases. E.g. 2.0 means go twice as fast. Requires \"format_version\" of 1.20 or more, otherwise the value 1.35 will be used."
                                         }
                                     ]
                                 }
@@ -21134,37 +21593,6 @@
                                                     ]
                                                 }
                                             ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "name": "minecraft:dash",
-                            "id": "minecraft:dash",
-                            "level": 4,
-                            "content": [
-                                "Ability for a ridable entity to dash.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "cooldown_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.00",
-                                            "Description": "The dash cooldown in seconds. Default value is 1.000000."
-                                        },
-                                        {
-                                            "Name": "horizontal_momentum",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.00",
-                                            "Description": "Horizontal momentum of the dash."
-                                        },
-                                        {
-                                            "Name": "vertical_momentum",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.00",
-                                            "Description": "Vertical momentum of the dash."
                                         }
                                     ]
                                 }
@@ -24569,13 +24997,19 @@
                                             "Name": "spawn_event",
                                             "Type": "String",
                                             "Default Value": "minecraft:entity_born",
-                                            "Description": "Event to call when the entity is spawned."
+                                            "Description": "Event to call on the spawned entity when it spawns."
                                         },
                                         {
                                             "Name": "spawn_item",
                                             "Type": "String",
                                             "Default Value": "egg",
                                             "Description": "Item identifier of the item to spawn."
+                                        },
+                                        {
+                                            "Name": "spawn_item_event",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event to call on this entity when the item is spawned."
                                         },
                                         {
                                             "Name": "spawn_method",
@@ -25573,6 +26007,10 @@
                                             "ID": "-1955198366"
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.feeling_happy",
+                                            "ID": "8645000647498549987"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.fertilize_farm_block",
                                             "ID": "9206289212958280677"
                                         },
@@ -25897,6 +26335,10 @@
                                             "ID": "-950950337"
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.rising",
+                                            "ID": "1216537393397581032"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.roar",
                                             "ID": "8169564995138049594"
                                         },
@@ -25911,6 +26353,10 @@
                                         {
                                             "JSON Name": "minecraft:behavior.scared",
                                             "ID": "-1643945926"
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:behavior.scenting",
+                                            "ID": "6172150932649653379"
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.send_event",
@@ -26219,10 +26665,6 @@
                                         {
                                             "JSON Name": "minecraft:damage_sensor",
                                             "ID": "-82616534"
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:dash",
-                                            "ID": "-51257122"
                                         },
                                         {
                                             "JSON Name": "minecraft:despawn",
@@ -26671,6 +27113,10 @@
                                         {
                                             "JSON Name": "minecraft:is_illager_captain",
                                             "ID": "921912694"
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:is_pregnant",
+                                            "ID": "-1253700046"
                                         },
                                         {
                                             "JSON Name": "minecraft:is_saddled",
@@ -27136,6 +27582,14 @@
                             "level": 4,
                             "content": [
                                 "Sets that this entity is an illager captain."
+                            ]
+                        },
+                        {
+                            "name": "minecraft:is_pregnant",
+                            "id": "minecraft:is_pregnant",
+                            "level": 4,
+                            "content": [
+                                "Sets that this entity is currently pregnant."
                             ]
                         },
                         {
@@ -27726,5 +28180,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "50351a910f8b8908354e7b8e516aa20a8e1acd1c"
+    "__OBJECTHASH__": "26a3b1b3723dfedef0172409afb74d2275b60c82"
 }

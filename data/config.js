@@ -66,9 +66,9 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.19.83.01',
+        version: '1.20.0.01',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.19.83.01.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.0.01.apk',
         config: smallestGUIOCROptions
     },
     // 测试版/预览版
