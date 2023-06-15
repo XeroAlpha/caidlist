@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.10.21",
+    "version": "1.20.10.23",
     "content": [],
     "sections": [
         {
@@ -63,6 +63,21 @@
                                             "content": [
                                                 "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.",
                                                 "Type: array of use_on"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:can_destroy_in_creative",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The can destroy in creative component determines if the item will break blocks in creative when swinging.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "Whether the item can destroy blocks while in creative.",
+                                                "Type: boolean"
                                             ]
                                         }
                                     ]
@@ -273,6 +288,21 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:hover_text_color",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The hover text color component determines the color of the item name when hovering over it.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "The color of the item's hover text.",
+                                                "Type: value"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
                                     "Name": "minecraft:icon",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -292,7 +322,16 @@
                                     "Name": "minecraft:max_stack_size",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "The max stack size component determines how many of the item can be stacked together."
+                                    "Description": [
+                                        "The max stack size component determines how many of the item can be stacked together.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "How many of the item that can be stacked.",
+                                                "Type: integer"
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     "Name": "minecraft:on_use",
@@ -332,7 +371,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Projectile item component. projectile items shoot out, like an arrow.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "minimum_critical_power",
                                             "content": [
@@ -424,7 +463,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Shooter Item Component.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "ammunition",
                                             "content": [
@@ -461,7 +500,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Throwable item component. Throwable items, such as a snowball.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "do_swing_animation",
                                             "content": [
@@ -561,17 +600,26 @@
                     "id": "Item Definition Properties",
                     "level": 2,
                     "content": [
-                        "The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item."
+                        "The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
+                                },
+                                {
+                                    "Name": "minecraft:item",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Item definition, which includes the \"description\" and \"components\" sections."
+                                }
+                            ]
+                        }
                     ],
                     "sections": [
-                        {
-                            "name": "format_version",
-                            "id": "format_version",
-                            "level": 4,
-                            "content": [
-                                "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
-                            ]
-                        },
                         {
                             "name": "Code Example",
                             "level": 4,
@@ -608,30 +656,50 @@
                     ]
                 },
                 {
-                    "name": "Item Description Properties",
-                    "id": "Item Description Properties",
+                    "name": "description v1.20",
+                    "id": "description v1.20",
                     "level": 2,
                     "content": [
+                        "List of characters of an item. The description MUST contain an identifier; the other fields are optional.",
                         {
                             "type": "table",
                             "rows": [
                                 {
                                     "Name": "category",
-                                    "Type": "String",
+                                    "Type": "\"all\", \"construction\", \"nature\", \"equipment\", \"items\", \"commands\", \"none\"",
                                     "Default Value": "",
-                                    "Description": "The category for this item. Categories are used to control high level properties of how the item is integrated into the bedrock engine, such as whether it can be used in slash commands."
+                                    "Description": "The Creative Category that this item belongs to. Defaults to \"items\"."
                                 },
                                 {
                                     "Name": "identifier",
                                     "Type": "String",
                                     "Default Value": "",
                                     "Description": "The identifier for this item. The name must include a namespace and must not use the Minecraft namespace unless overriding a Vanilla item."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:item v1.20",
+                    "id": "minecraft:item v1.20",
+                    "level": 2,
+                    "content": [
+                        "Item definition, which includes the \"description\" and \"components\" sections.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "components",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "List of all components that used in this item."
                                 },
                                 {
-                                    "Name": "is_experimental",
-                                    "Type": "Boolean",
-                                    "Default Value": "false",
-                                    "Description": "If this item is experimental, it will only be registered if the world is marked as experimental."
+                                    "Name": "description",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "List of characters of an item. The description MUST contain an identifier; the other fields are optional."
                                 }
                             ]
                         }
@@ -640,5 +708,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "579c0c2e178a00321a696c64816258397a1176c9"
+    "__OBJECTHASH__": "40ec86fb8d51183bcae202d1b211f7d6d37397f3"
 }

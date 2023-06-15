@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.10.21",
+    "packageVersion": "1.20.10.23",
     "commandList": [
         "/? <page: int>",
         "/? [command: CommandName]",
@@ -11,10 +11,18 @@
         "/camera <players: target> fade time <fadeInSeconds: float> <holdSeconds: float> <fadeOutSeconds: float> color <red: int> <green: int> <blue: int>",
         "/camera <players: target> set <preset: string> [default: default]",
         "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> [default: default]",
+        "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> facing <lookAtEntity: target>",
+        "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> facing <lookAtPosition: x y z>",
         "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z>",
+        "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z> facing <lookAtEntity: target>",
+        "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z> facing <lookAtPosition: x y z>",
         "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> pos <position: x y z> rot <xRot: value> <yRot: value>",
         "/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> rot <xRot: value> <yRot: value>",
+        "/camera <players: target> set <preset: string> facing <lookAtEntity: target>",
+        "/camera <players: target> set <preset: string> facing <lookAtPosition: x y z>",
         "/camera <players: target> set <preset: string> pos <position: x y z>",
+        "/camera <players: target> set <preset: string> pos <position: x y z> facing <lookAtEntity: target>",
+        "/camera <players: target> set <preset: string> pos <position: x y z> facing <lookAtPosition: x y z>",
         "/camera <players: target> set <preset: string> pos <position: x y z> rot <xRot: value> <yRot: value>",
         "/camera <players: target> set <preset: string> rot <xRot: value> <yRot: value>",
         "/camerashake add <player: target> [intensity: float] [seconds: float] [shakeType: CameraShakeType]",
@@ -6199,6 +6207,7 @@
     ],
     "cameraPresets": [
         "example:example_free",
+        "example:example_player_effects",
         "example:example_player_listener",
         "minecraft:first_person",
         "minecraft:free",

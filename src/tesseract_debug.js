@@ -38,7 +38,7 @@ async function recogizeCommandDebug(cx, screenImage, surfaceOrientation) {
     return commandText;
 }
 
-async function tesseractDebug([versionType]) {
+async function tesseractDebug(versionType) {
     const cx = packageVersions[versionType].config;
     const adbClient = newAdbClient();
     const device = await getAnyOnlineDevice(adbClient);
@@ -51,7 +51,7 @@ async function tesseractDebug([versionType]) {
     await stopMinicap(device, minicap);
 }
 
-tesseractDebug(process.argv.slice(2)).catch((err) => {
+tesseractDebug(...process.argv.slice(2)).catch((err) => {
     console.error(err);
     debugger;
 });

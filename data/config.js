@@ -22,18 +22,19 @@ const commonOCROptions = {
     }
 };
 
-// const smallerGUIOCROptions = { // GUI Scale = -1
-//     ...commonOCROptions,
-//     // 命令区域大小
-//     commandAreaRect: {
-//         1: [397, 976, 1784, 100], // <- phone
-//         3: [328, 976, 1784, 100] // phone ->
-//     },
-//     tesseractMistakes: {
-//         '\'/sUmmOn Creeper': '/summon creeper',
-//         '\'/sUmmOn raVager': '/summon ravager'
-//     }
-// };
+// eslint-disable-next-line no-unused-vars
+const smallerGUIOCROptions = { // GUI Scale = -1
+    ...commonOCROptions,
+    // 命令区域大小
+    commandAreaRect: {
+        1: [397, 976, 1784, 100], // <- phone
+        3: [328, 976, 1784, 100] // phone ->
+    },
+    tesseractMistakes: {
+        '\'/sUmmOn Creeper': '/summon creeper',
+        '\'/sUmmOn raVager': '/summon ravager'
+    }
+};
 
 const smallestGUIOCROptions = { // GUI Scale = -2
     ...commonOCROptions,
@@ -74,9 +75,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.10.21',
+        version: '1.20.10.23',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.10.21.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.10.23.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
@@ -91,11 +92,11 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.20.10.21'
+        version: '1.20.10.23'
     },
     dev: {
-        version: '1.20.10.21',
-        path: 'H:\\BedrockVersions\\Dev\\1.20.10.21.apk',
+        version: '1.20.10.23',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.10.23.apk',
         config: smallestGUIOCROptions
     }
 };
