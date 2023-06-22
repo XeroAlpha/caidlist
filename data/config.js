@@ -12,7 +12,7 @@ const commonOCROptions = {
     },
     // 命令区域大小
     commandAreaRect: {
-        1: [479, 950, 1650, 125], // <- phone
+        1: [410, 950, 1650, 125], // <- phone
         3: [410, 950, 1650, 125] // phone ->
     },
     // OCR识别错误手动校正
@@ -27,7 +27,7 @@ const smallerGUIOCROptions = { // GUI Scale = -1
     ...commonOCROptions,
     // 命令区域大小
     commandAreaRect: {
-        1: [397, 976, 1784, 100], // <- phone
+        1: [328, 976, 1784, 100], // <- phone
         3: [328, 976, 1784, 100] // phone ->
     },
     tesseractMistakes: {
@@ -40,8 +40,8 @@ const smallestGUIOCROptions = { // GUI Scale = -2
     ...commonOCROptions,
     // 命令区域大小
     commandAreaRect: {
-        1: [315, 1002, 1920, 75], // <- phone
-        3: [246, 1002, 1920, 75] // phone ->
+        1: [246, 1002, 1989, 75], // <- phone
+        3: [246, 1002, 1989, 75] // phone ->
     },
     tesseractMistakes: {
         '\'/summon Creeper': '/summon creeper',
@@ -67,17 +67,17 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.20.0.01',
+        version: '1.20.1.02',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.0.01.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.1.02.apk',
         config: smallestGUIOCROptions
     },
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.10.23',
+        version: '1.20.10.24',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.10.23.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.10.24.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
@@ -92,11 +92,11 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.20.10.23'
+        version: '1.20.10.24'
     },
     dev: {
-        version: '1.20.10.23',
-        path: 'H:\\BedrockVersions\\Dev\\1.20.10.23.apk',
+        version: '1.20.10.24',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.10.24.apk',
         config: smallestGUIOCROptions
     }
 };
