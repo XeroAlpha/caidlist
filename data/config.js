@@ -75,9 +75,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.10.24',
+        version: '1.20.10.25',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.10.24.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.10.25.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
