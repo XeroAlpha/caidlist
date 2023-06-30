@@ -45,6 +45,9 @@ const defaultTransMapNames = [
     ['entityEvent', '实体事件', '用于 summon 等命令的实体事件 ID'],
     ['entityEventSplit', '根据实体类型分类的实体事件表'],
     ['entityFamily', '实体族', '用于 family 选择器参数的实体族 ID'],
+    ['inputPermission', '操作输入权限', '用于 inputpermission 命令的输入权限 ID'],
+    ['cameraPreset', '摄像机预设', '用于 camera 命令的摄像机预设 ID'],
+    ['recipe', '配方', '用于 recipe 命令的配方 ID'],
     ['animation', '动画', '用于 playanimation 命令的动画 ID'],
     ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
     ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
@@ -361,6 +364,15 @@ async function generateBranchedOutputFiles(cx) {
             name: 'cameraPreset',
             originalArray: enums.cameraPresets.filter((e) => !e.startsWith('example:')),
             translationMap: userTranslation.cameraPreset
+        });
+    }
+    if (support.recipeNewCommand(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'recipe',
+            originalArray: enums.recipes,
+            translationMap: userTranslation.recipe,
+            autoMatch: ['lang']
         });
     }
     translationResultMaps.music = filterObjectMap(

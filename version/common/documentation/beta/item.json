@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.10.24",
+    "version": "1.20.20.20",
     "content": [],
     "sections": [
         {
@@ -288,6 +288,36 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:glint",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The glint component determines whether the item has the enchanted glint render effect on it.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "Whether the item has the glint effect.",
+                                                "Type: boolean"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:hand_equipped",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "This component determines if an item is rendered like a tool while in hand.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "If the item is rendered like a tool while in hand.",
+                                                "Type: boolean"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
                                     "Name": "minecraft:hover_text_color",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -495,6 +525,21 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:stacked_by_data",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "Whether the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
+                                                "Type: boolean"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
                                     "Name": "minecraft:throwable",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -546,6 +591,21 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:use_duration",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "How long the item takes to use in seconds.",
+                                                "Type: float"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
                                     "Name": "minecraft:weapon",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -583,10 +643,17 @@
                                         "Wearable item component.",
                                         "Experimental toggles required: Holiday Creator Features",
                                         {
+                                            "section": "protection",
+                                            "content": [
+                                                "How much protection the wearable item has. Default is set to 0.",
+                                                "Type: integer"
+                                            ]
+                                        },
+                                        {
                                             "section": "slot",
                                             "content": [
-                                                "equipment_slot: slot.weapon.mainhand, slot.weapon.offhand, slot.armor.head, slot.armor.chest, slot.armor.legs, slot.armor.feet, slot.hotbar, slot.inventory, slot.enderchest, slot.saddle, slot.armor, slot.chest, slot.equippable",
-                                                "Accepted values: \"slot.weapon.mainhand\", \"none\", \"slot.weapon.offhand\", \"slot.armor.head\", \"slot.armor.chest\", \"slot.armor.legs\", \"slot.armor.feet\", \"slot.hotbar\", \"slot.inventory\", \"slot.enderchest\", \"slot.saddle\", \"slot.armor\", \"slot.chest\", \"slot.equippable\""
+                                                "Determines where the item can be worn. If any non-hand slot is chosen, the max stack size is set to 1.",
+                                                "Accepted values: \"slot.saddle\", \"slot.weapon.offhand\", \"slot.armor\", \"slot.armor.head\", \"slot.chest\", \"slot.armor.chest\", \"slot.armor.legs\", \"slot.armor.feet\""
                                             ]
                                         }
                                     ]
@@ -629,7 +696,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.16.1\",",
+                                        "  \"format_version\": \"1.20.20\",",
                                         "  \"minecraft:item\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"minecraft:blaze_rod\"",
@@ -656,8 +723,8 @@
                     ]
                 },
                 {
-                    "name": "description v1.20",
-                    "id": "description v1.20",
+                    "name": "description v1.20.10",
+                    "id": "description v1.20.10",
                     "level": 2,
                     "content": [
                         "List of characters of an item. The description MUST contain an identifier; the other fields are optional.",
@@ -665,24 +732,55 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "category",
-                                    "Type": "\"all\", \"construction\", \"nature\", \"equipment\", \"items\", \"commands\", \"none\"",
-                                    "Default Value": "",
-                                    "Description": "The Creative Category that this item belongs to. Defaults to \"items\"."
-                                },
-                                {
                                     "Name": "identifier",
                                     "Type": "String",
                                     "Default Value": "",
                                     "Description": "The identifier for this item. The name must include a namespace and must not use the Minecraft namespace unless overriding a Vanilla item."
+                                },
+                                {
+                                    "Name": "menu_category",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The creative group name and category for this item."
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    "name": "minecraft:item v1.20",
-                    "id": "minecraft:item v1.20",
+                    "name": "menu_category v1.20.10",
+                    "id": "menu_category v1.20.10",
+                    "level": 2,
+                    "content": [
+                        "The creative group name and category for this item.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "category",
+                                    "Type": "\"construction\", \"nature\", \"equipment\", \"items\", \"none\"",
+                                    "Default Value": "",
+                                    "Description": "The Creative Category that this item belongs to. Defaults to \"items\"."
+                                },
+                                {
+                                    "Name": "group",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "The Creative Group that this item belongs to. Group name is limited to 256 characters."
+                                },
+                                {
+                                    "Name": "is_hidden_in_commands",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Determines whether or not this item can be used with commands. Commands can use items by default."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:item v1.20.10",
+                    "id": "minecraft:item v1.20.10",
                     "level": 2,
                     "content": [
                         "Item definition, which includes the \"description\" and \"components\" sections.",
@@ -708,5 +806,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "bea16d46aa385191903dabebcae8afe0ff5e2698"
+    "__OBJECTHASH__": "6a84bf5824bc0afa762f1037447b577f13d8afdc"
 }

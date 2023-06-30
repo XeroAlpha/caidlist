@@ -48,7 +48,17 @@ export function cameraCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
         return (
             testMinecraftVersionInRange(coreVersion, '1.20.0.22', '*')
-            || testMinecraftVersionInRange(coreVersion, '1.20.0', '1.20.0.21') // TODO: Change it when released
+            || testMinecraftVersionInRange(coreVersion, '1.20.0.01', '1.20.0.01')
+        );
+    }
+    return false;
+}
+
+export function recipeNewCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.20.20.20', '*')
+            || testMinecraftVersionInRange(coreVersion, '1.20.20', '1.20.20.19') // TODO: Change it when released
         );
     }
     return false;

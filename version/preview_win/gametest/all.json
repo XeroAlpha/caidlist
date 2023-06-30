@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.10.24",
+    "packageVersion": "1.20.20.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -7955,6 +7955,14 @@
                                                     }
                                                 },
                                                 "defineString": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                },
+                                                "defineVector": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -38016,6 +38024,14 @@
                                                         "length": 0
                                                     }
                                                 },
+                                                "dropSelectedItem": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                },
                                                 "fly": {
                                                     "value": {
                                                         "type": "function",
@@ -39714,6 +39730,7 @@
         "GameTest.SimulatedPlayer.prototype.breakBlock",
         "GameTest.SimulatedPlayer.prototype.constructor",
         "GameTest.SimulatedPlayer.prototype.disconnect",
+        "GameTest.SimulatedPlayer.prototype.dropSelectedItem",
         "GameTest.SimulatedPlayer.prototype.fly",
         "GameTest.SimulatedPlayer.prototype.giveItem",
         "GameTest.SimulatedPlayer.prototype.glide",
@@ -40346,6 +40363,7 @@
         "Minecraft.DynamicPropertiesDefinition.prototype.defineBoolean",
         "Minecraft.DynamicPropertiesDefinition.prototype.defineNumber",
         "Minecraft.DynamicPropertiesDefinition.prototype.defineString",
+        "Minecraft.DynamicPropertiesDefinition.prototype.defineVector",
         "Minecraft.Effect",
         "Minecraft.Effect.prototype",
         "Minecraft.Effect.prototype.amplifier.[[Get]]",
@@ -44924,16 +44942,16 @@
         "minecraft:amethyst_cluster": {
             "properties": [
                 {
-                    "name": "facing_direction",
+                    "name": "minecraft:block_face",
                     "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        "down",
+                        "up",
+                        "north",
+                        "south",
+                        "west",
+                        "east"
                     ],
-                    "defaultValue": 1
+                    "defaultValue": "up"
                 }
             ],
             "invalidStates": [],
@@ -45169,12 +45187,12 @@
         "minecraft:bamboo_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -45286,12 +45304,12 @@
         "minecraft:bamboo_mosaic_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -45301,12 +45319,12 @@
         "minecraft:bamboo_mosaic_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -45403,12 +45421,12 @@
         "minecraft:bamboo_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -46180,12 +46198,12 @@
         "minecraft:blackstone_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -46195,12 +46213,12 @@
         "minecraft:blackstone_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -47175,12 +47193,12 @@
         "minecraft:cherry_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -47375,12 +47393,12 @@
         "minecraft:cherry_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -47740,12 +47758,12 @@
         "minecraft:cobbled_deepslate_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -47755,12 +47773,12 @@
         "minecraft:cobbled_deepslate_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -48460,12 +48478,12 @@
         "minecraft:crimson_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -48640,12 +48658,12 @@
         "minecraft:crimson_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -48789,12 +48807,12 @@
         "minecraft:cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49379,12 +49397,12 @@
         "minecraft:deepslate_brick_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49394,12 +49412,12 @@
         "minecraft:deepslate_brick_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49539,12 +49557,12 @@
         "minecraft:deepslate_tile_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49554,12 +49572,12 @@
         "minecraft:deepslate_tile_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49786,12 +49804,12 @@
         "minecraft:double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -49828,6 +49846,14 @@
         "minecraft:double_stone_block_slab": {
             "properties": [
                 {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
+                {
                     "name": "stone_slab_type",
                     "validValues": [
                         "smooth_stone",
@@ -49840,14 +49866,6 @@
                         "nether_brick"
                     ],
                     "defaultValue": "smooth_stone"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -49856,6 +49874,14 @@
         },
         "minecraft:double_stone_block_slab2": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_2",
                     "validValues": [
@@ -49869,14 +49895,6 @@
                         "red_nether_brick"
                     ],
                     "defaultValue": "red_sandstone"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -49885,6 +49903,14 @@
         },
         "minecraft:double_stone_block_slab3": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_3",
                     "validValues": [
@@ -49898,14 +49924,6 @@
                         "polished_granite"
                     ],
                     "defaultValue": "end_stone_brick"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -49914,6 +49932,14 @@
         },
         "minecraft:double_stone_block_slab4": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_4",
                     "validValues": [
@@ -49924,14 +49950,6 @@
                         "cut_red_sandstone"
                     ],
                     "defaultValue": "mossy_stone_brick"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -49941,12 +49959,12 @@
         "minecraft:double_wooden_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 },
                 {
                     "name": "wood_type",
@@ -50867,12 +50885,12 @@
         "minecraft:exposed_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -50907,12 +50925,12 @@
         "minecraft:exposed_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -52401,16 +52419,16 @@
         "minecraft:large_amethyst_bud": {
             "properties": [
                 {
-                    "name": "facing_direction",
+                    "name": "minecraft:block_face",
                     "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        "down",
+                        "up",
+                        "north",
+                        "south",
+                        "west",
+                        "east"
                     ],
-                    "defaultValue": 1
+                    "defaultValue": "up"
                 }
             ],
             "invalidStates": [],
@@ -53144,12 +53162,12 @@
         "minecraft:mangrove_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -53361,12 +53379,12 @@
         "minecraft:mangrove_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -53506,16 +53524,16 @@
         "minecraft:medium_amethyst_bud": {
             "properties": [
                 {
-                    "name": "facing_direction",
+                    "name": "minecraft:block_face",
                     "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        "down",
+                        "up",
+                        "north",
+                        "south",
+                        "west",
+                        "east"
                     ],
-                    "defaultValue": 1
+                    "defaultValue": "up"
                 }
             ],
             "invalidStates": [],
@@ -53668,12 +53686,12 @@
         "minecraft:mud_brick_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -53683,12 +53701,12 @@
         "minecraft:mud_brick_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54220,12 +54238,12 @@
         "minecraft:oxidized_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54260,12 +54278,12 @@
         "minecraft:oxidized_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54597,12 +54615,12 @@
         "minecraft:polished_blackstone_brick_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54612,12 +54630,12 @@
         "minecraft:polished_blackstone_brick_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54736,12 +54754,12 @@
         "minecraft:polished_blackstone_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54780,12 +54798,12 @@
         "minecraft:polished_blackstone_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54877,12 +54895,12 @@
         "minecraft:polished_deepslate_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -54892,12 +54910,12 @@
         "minecraft:polished_deepslate_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -56256,16 +56274,16 @@
         "minecraft:small_amethyst_bud": {
             "properties": [
                 {
-                    "name": "facing_direction",
+                    "name": "minecraft:block_face",
                     "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
+                        "down",
+                        "up",
+                        "north",
+                        "south",
+                        "west",
+                        "east"
                     ],
-                    "defaultValue": 1
+                    "defaultValue": "up"
                 }
             ],
             "invalidStates": [],
@@ -57101,6 +57119,14 @@
         "minecraft:stone_block_slab": {
             "properties": [
                 {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
+                {
                     "name": "stone_slab_type",
                     "validValues": [
                         "smooth_stone",
@@ -57113,14 +57139,6 @@
                         "nether_brick"
                     ],
                     "defaultValue": "smooth_stone"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -57129,6 +57147,14 @@
         },
         "minecraft:stone_block_slab2": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_2",
                     "validValues": [
@@ -57142,14 +57168,6 @@
                         "red_nether_brick"
                     ],
                     "defaultValue": "red_sandstone"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -57158,6 +57176,14 @@
         },
         "minecraft:stone_block_slab3": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_3",
                     "validValues": [
@@ -57171,14 +57197,6 @@
                         "polished_granite"
                     ],
                     "defaultValue": "end_stone_brick"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -57187,6 +57205,14 @@
         },
         "minecraft:stone_block_slab4": {
             "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                },
                 {
                     "name": "stone_slab_type_4",
                     "validValues": [
@@ -57197,14 +57223,6 @@
                         "cut_red_sandstone"
                     ],
                     "defaultValue": "mossy_stone_brick"
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true
-                    ],
-                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -58266,12 +58284,12 @@
         "minecraft:warped_double_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58446,12 +58464,12 @@
         "minecraft:warped_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58635,12 +58653,12 @@
         "minecraft:waxed_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58675,12 +58693,12 @@
         "minecraft:waxed_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58702,12 +58720,12 @@
         "minecraft:waxed_exposed_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58742,12 +58760,12 @@
         "minecraft:waxed_exposed_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58769,12 +58787,12 @@
         "minecraft:waxed_oxidized_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58809,12 +58827,12 @@
         "minecraft:waxed_oxidized_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58836,12 +58854,12 @@
         "minecraft:waxed_weathered_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58876,12 +58894,12 @@
         "minecraft:waxed_weathered_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58903,12 +58921,12 @@
         "minecraft:weathered_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -58943,12 +58961,12 @@
         "minecraft:weathered_double_cut_copper_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 }
             ],
             "invalidStates": [],
@@ -59246,12 +59264,12 @@
         "minecraft:wooden_slab": {
             "properties": [
                 {
-                    "name": "top_slot_bit",
+                    "name": "minecraft:vertical_half",
                     "validValues": [
-                        false,
-                        true
+                        "bottom",
+                        "top"
                     ],
-                    "defaultValue": false
+                    "defaultValue": "bottom"
                 },
                 {
                     "name": "wood_type",
@@ -60198,7 +60216,6 @@
                     "minecraft:acacia_button": 0,
                     "minecraft:acacia_hanging_sign": 0,
                     "minecraft:acacia_wall_sign": 0,
-                    "minecraft:amethyst_cluster": 1,
                     "minecraft:bamboo_button": 0,
                     "minecraft:bamboo_hanging_sign": 0,
                     "minecraft:bamboo_wall_sign": 0,
@@ -60238,7 +60255,6 @@
                     "minecraft:jungle_hanging_sign": 0,
                     "minecraft:jungle_wall_sign": 0,
                     "minecraft:ladder": 0,
-                    "minecraft:large_amethyst_bud": 1,
                     "minecraft:light_blue_glazed_terracotta": 0,
                     "minecraft:lightning_rod": 0,
                     "minecraft:lime_glazed_terracotta": 0,
@@ -60249,7 +60265,6 @@
                     "minecraft:mangrove_button": 0,
                     "minecraft:mangrove_hanging_sign": 0,
                     "minecraft:mangrove_wall_sign": 0,
-                    "minecraft:medium_amethyst_bud": 1,
                     "minecraft:melon_stem": 0,
                     "minecraft:oak_hanging_sign": 0,
                     "minecraft:orange_glazed_terracotta": 0,
@@ -60263,7 +60278,6 @@
                     "minecraft:repeating_command_block": 0,
                     "minecraft:silver_glazed_terracotta": 0,
                     "minecraft:skull": 0,
-                    "minecraft:small_amethyst_bud": 1,
                     "minecraft:smoker": 0,
                     "minecraft:spruce_button": 0,
                     "minecraft:spruce_hanging_sign": 0,
@@ -60707,6 +60721,24 @@
                 }
             }
         ],
+        "minecraft:block_face": [
+            {
+                "validValues": [
+                    "down",
+                    "up",
+                    "north",
+                    "south",
+                    "west",
+                    "east"
+                ],
+                "defaultValue": {
+                    "minecraft:amethyst_cluster": "up",
+                    "minecraft:large_amethyst_bud": "up",
+                    "minecraft:medium_amethyst_bud": "up",
+                    "minecraft:small_amethyst_bud": "up"
+                }
+            }
+        ],
         "minecraft:cardinal_direction": [
             {
                 "validValues": [
@@ -60734,6 +60766,70 @@
                 ],
                 "defaultValue": {
                     "minecraft:observer": "down"
+                }
+            }
+        ],
+        "minecraft:vertical_half": [
+            {
+                "validValues": [
+                    "bottom",
+                    "top"
+                ],
+                "defaultValue": {
+                    "minecraft:bamboo_double_slab": "bottom",
+                    "minecraft:bamboo_mosaic_double_slab": "bottom",
+                    "minecraft:bamboo_mosaic_slab": "bottom",
+                    "minecraft:bamboo_slab": "bottom",
+                    "minecraft:blackstone_double_slab": "bottom",
+                    "minecraft:blackstone_slab": "bottom",
+                    "minecraft:cherry_double_slab": "bottom",
+                    "minecraft:cherry_slab": "bottom",
+                    "minecraft:cobbled_deepslate_double_slab": "bottom",
+                    "minecraft:cobbled_deepslate_slab": "bottom",
+                    "minecraft:crimson_double_slab": "bottom",
+                    "minecraft:crimson_slab": "bottom",
+                    "minecraft:cut_copper_slab": "bottom",
+                    "minecraft:deepslate_brick_double_slab": "bottom",
+                    "minecraft:deepslate_brick_slab": "bottom",
+                    "minecraft:deepslate_tile_double_slab": "bottom",
+                    "minecraft:deepslate_tile_slab": "bottom",
+                    "minecraft:double_cut_copper_slab": "bottom",
+                    "minecraft:double_stone_block_slab": "bottom",
+                    "minecraft:double_stone_block_slab2": "bottom",
+                    "minecraft:double_stone_block_slab3": "bottom",
+                    "minecraft:double_stone_block_slab4": "bottom",
+                    "minecraft:double_wooden_slab": "bottom",
+                    "minecraft:exposed_cut_copper_slab": "bottom",
+                    "minecraft:exposed_double_cut_copper_slab": "bottom",
+                    "minecraft:mangrove_double_slab": "bottom",
+                    "minecraft:mangrove_slab": "bottom",
+                    "minecraft:mud_brick_double_slab": "bottom",
+                    "minecraft:mud_brick_slab": "bottom",
+                    "minecraft:oxidized_cut_copper_slab": "bottom",
+                    "minecraft:oxidized_double_cut_copper_slab": "bottom",
+                    "minecraft:polished_blackstone_brick_double_slab": "bottom",
+                    "minecraft:polished_blackstone_brick_slab": "bottom",
+                    "minecraft:polished_blackstone_double_slab": "bottom",
+                    "minecraft:polished_blackstone_slab": "bottom",
+                    "minecraft:polished_deepslate_double_slab": "bottom",
+                    "minecraft:polished_deepslate_slab": "bottom",
+                    "minecraft:stone_block_slab": "bottom",
+                    "minecraft:stone_block_slab2": "bottom",
+                    "minecraft:stone_block_slab3": "bottom",
+                    "minecraft:stone_block_slab4": "bottom",
+                    "minecraft:warped_double_slab": "bottom",
+                    "minecraft:warped_slab": "bottom",
+                    "minecraft:waxed_cut_copper_slab": "bottom",
+                    "minecraft:waxed_double_cut_copper_slab": "bottom",
+                    "minecraft:waxed_exposed_cut_copper_slab": "bottom",
+                    "minecraft:waxed_exposed_double_cut_copper_slab": "bottom",
+                    "minecraft:waxed_oxidized_cut_copper_slab": "bottom",
+                    "minecraft:waxed_oxidized_double_cut_copper_slab": "bottom",
+                    "minecraft:waxed_weathered_cut_copper_slab": "bottom",
+                    "minecraft:waxed_weathered_double_cut_copper_slab": "bottom",
+                    "minecraft:weathered_cut_copper_slab": "bottom",
+                    "minecraft:weathered_double_cut_copper_slab": "bottom",
+                    "minecraft:wooden_slab": "bottom"
                 }
             }
         ],
@@ -61466,70 +61562,6 @@
                 "defaultValue": {
                     "minecraft:bell": false,
                     "minecraft:hopper": false
-                }
-            }
-        ],
-        "top_slot_bit": [
-            {
-                "validValues": [
-                    false,
-                    true
-                ],
-                "defaultValue": {
-                    "minecraft:bamboo_double_slab": false,
-                    "minecraft:bamboo_mosaic_double_slab": false,
-                    "minecraft:bamboo_mosaic_slab": false,
-                    "minecraft:bamboo_slab": false,
-                    "minecraft:blackstone_double_slab": false,
-                    "minecraft:blackstone_slab": false,
-                    "minecraft:cherry_double_slab": false,
-                    "minecraft:cherry_slab": false,
-                    "minecraft:cobbled_deepslate_double_slab": false,
-                    "minecraft:cobbled_deepslate_slab": false,
-                    "minecraft:crimson_double_slab": false,
-                    "minecraft:crimson_slab": false,
-                    "minecraft:cut_copper_slab": false,
-                    "minecraft:deepslate_brick_double_slab": false,
-                    "minecraft:deepslate_brick_slab": false,
-                    "minecraft:deepslate_tile_double_slab": false,
-                    "minecraft:deepslate_tile_slab": false,
-                    "minecraft:double_cut_copper_slab": false,
-                    "minecraft:double_stone_block_slab": false,
-                    "minecraft:double_stone_block_slab2": false,
-                    "minecraft:double_stone_block_slab3": false,
-                    "minecraft:double_stone_block_slab4": false,
-                    "minecraft:double_wooden_slab": false,
-                    "minecraft:exposed_cut_copper_slab": false,
-                    "minecraft:exposed_double_cut_copper_slab": false,
-                    "minecraft:mangrove_double_slab": false,
-                    "minecraft:mangrove_slab": false,
-                    "minecraft:mud_brick_double_slab": false,
-                    "minecraft:mud_brick_slab": false,
-                    "minecraft:oxidized_cut_copper_slab": false,
-                    "minecraft:oxidized_double_cut_copper_slab": false,
-                    "minecraft:polished_blackstone_brick_double_slab": false,
-                    "minecraft:polished_blackstone_brick_slab": false,
-                    "minecraft:polished_blackstone_double_slab": false,
-                    "minecraft:polished_blackstone_slab": false,
-                    "minecraft:polished_deepslate_double_slab": false,
-                    "minecraft:polished_deepslate_slab": false,
-                    "minecraft:stone_block_slab": false,
-                    "minecraft:stone_block_slab2": false,
-                    "minecraft:stone_block_slab3": false,
-                    "minecraft:stone_block_slab4": false,
-                    "minecraft:warped_double_slab": false,
-                    "minecraft:warped_slab": false,
-                    "minecraft:waxed_cut_copper_slab": false,
-                    "minecraft:waxed_double_cut_copper_slab": false,
-                    "minecraft:waxed_exposed_cut_copper_slab": false,
-                    "minecraft:waxed_exposed_double_cut_copper_slab": false,
-                    "minecraft:waxed_oxidized_cut_copper_slab": false,
-                    "minecraft:waxed_oxidized_double_cut_copper_slab": false,
-                    "minecraft:waxed_weathered_cut_copper_slab": false,
-                    "minecraft:waxed_weathered_double_cut_copper_slab": false,
-                    "minecraft:weathered_cut_copper_slab": false,
-                    "minecraft:weathered_double_cut_copper_slab": false,
-                    "minecraft:wooden_slab": false
                 }
             }
         ],

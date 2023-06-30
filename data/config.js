@@ -45,7 +45,8 @@ const smallestGUIOCROptions = { // GUI Scale = -2
     },
     tesseractMistakes: {
         '\'/summon Creeper': '/summon creeper',
-        '\'/summon ravager': '/summon ravager'
+        '\'/summon ravager': '/summon ravager',
+        '/recipe take @s ^\'*^\'': '/recipe take @s "*"'
     }
 };
 
@@ -75,9 +76,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.10.25',
+        version: '1.20.20.20',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.10.25.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.20.20.apk',
         config: smallestGUIOCROptions
     },
     // 中国版测试版
@@ -92,11 +93,11 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.20.10.24'
+        version: '1.20.20.20'
     },
     dev: {
-        version: '1.20.10.24',
-        path: 'H:\\BedrockVersions\\Dev\\1.20.10.24.apk',
+        version: '1.20.20.20',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.20.20.apk',
         config: smallestGUIOCROptions
     }
 };

@@ -422,6 +422,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.cameraCommand(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'camera presets', '/camera @s set ');
     }
+    if (support.recipeNewCommand(cx)) {
+        await analyzeAutocompletionEnumCached(cx, options, 'recipes', '/recipe take @s ', ['"*"', '[']);
+    }
 
     if (support.eduCommands(cx)) {
         await analyzeAutocompletionEnumCached(cx, options, 'abilities', '/ability @s ', ['[']);

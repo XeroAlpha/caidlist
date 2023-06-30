@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.10.24",
-    "__COMMITHASH__": "0478ac97056b8ca4293810706b54af59252342b3",
+    "__VERSION__": "1.20.20.20",
+    "__COMMITHASH__": "5f340b3e5cfa14df746a8434338a647b6ab36bf7",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2372,10 +2372,13 @@
                             ]
                         },
                         {
-                            "name": "description v1.20"
+                            "name": "description v1.20.10"
                         },
                         {
-                            "name": "minecraft:item v1.20"
+                            "name": "menu_category v1.20.10"
+                        },
+                        {
+                            "name": "minecraft:item v1.20.10"
                         }
                     ]
                 }
@@ -4221,7 +4224,7 @@
                                 {
                                     "name": "event",
                                     "type": "String",
-                                    "defaultValue": "set_block_property",
+                                    "defaultValue": "set_block_state",
                                     "description": "The event that will be triggered."
                                 },
                                 {
@@ -4255,7 +4258,7 @@
                                 {
                                     "name": "event",
                                     "type": "String",
-                                    "defaultValue": "set_block_property",
+                                    "defaultValue": "set_block_state",
                                     "description": "The event that will be triggered."
                                 },
                                 {
@@ -4522,16 +4525,16 @@
                     ]
                 },
                 {
-                    "name": "set_block_property",
+                    "name": "set_block_state",
                     "type": "JSON Object",
                     "defaultValue": "",
-                    "description": "Sets a block property on this block.",
+                    "description": "Sets a block state on this block.",
                     "children": [
                         {
-                            "name": "property",
+                            "name": "state",
                             "type": "Molang",
                             "defaultValue": "",
-                            "description": "Block property to set on the block."
+                            "description": "Block state to set on the block."
                         }
                     ]
                 },
@@ -15391,6 +15394,8 @@
         "minecraft:entity_placer": "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.",
         "minecraft:food": "When an item has a food component, it becomes edible to the player.",
         "minecraft:fuel": "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
+        "minecraft:glint": "The glint component determines whether the item has the enchanted glint render effect on it.",
+        "minecraft:hand_equipped": "This component determines if an item is rendered like a tool while in hand.",
         "minecraft:hover_text_color": "The hover text color component determines the color of the item name when hovering over it.",
         "minecraft:icon": "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
         "minecraft:max_stack_size": "The max stack size component determines how many of the item can be stacked together.",
@@ -15401,7 +15406,9 @@
         "minecraft:render_offsets": "Render offsets component: optional values can be given to offset the way the item is rendered.",
         "minecraft:repairable": "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
         "minecraft:shooter": "Shooter Item Component.",
+        "minecraft:stacked_by_data": "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
         "minecraft:throwable": "Throwable item component. Throwable items, such as a snowball.",
+        "minecraft:use_duration": "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
         "minecraft:weapon": "Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.",
         "minecraft:wearable": "Wearable item component."
     },
@@ -15693,7 +15700,7 @@
         "query.unhappy_counter": "Returns how unhappy the entity is.",
         "query.variant": "Returns the entity's variant index",
         "query.vertical_speed": "Returns the speed of the entity up or down in meters/second, where positive is up.",
-        "query.walk_distance": "Returns the walk distance of the entity.",
+        "query.walk_distance": "Returns the total distance traveled by an entity while on the ground and not sneaking.",
         "query.wing_flap_position": "Returns the wing flap position of the entity, or 0.0 if this doesn't make sense.",
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed"

@@ -7,7 +7,8 @@ import {
     filterObjectMap,
     stringComparator,
     compareMinecraftVersion,
-    uniqueAndSort
+    uniqueAndSort,
+    sortObjectKey
 } from '../util/common.js';
 
 function generatePackageFileMeta(packageZip) {
@@ -341,17 +342,18 @@ const entryAnalyzer = [
         versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
     },
     {
-        name: 'recipe',
+        name: 'dataDrivenRecipes',
         type: 'json',
         regex: /^assets\/behavior_packs\/(?:[^/]+)\/recipes\/(?:[^/]+)\.json$/,
         analyze(results, entryName, recipe) {
-            const { recipes } = results;
+            const { dataDrivenRecipes } = results;
             const formatVersion = recipe.format_version;
             if (this.versionsGroups[0].includes(formatVersion)) {
                 for (const [key, value] of Object.entries(recipe)) {
                     if (key === 'format_version') continue;
-                    if (this.recipeTypes.includes(key)) {
-                        recipes.push(value.description.identifier);
+                    const parser = this.recipeTypes[key];
+                    if (parser) {
+                        dataDrivenRecipes.push(value.description.identifier);
                     } else {
                         console.warn(`Unknown recipe type: ${key} - ${entryName}`);
                     }
@@ -360,16 +362,52 @@ const entryAnalyzer = [
                 console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        recipeTypes: [
-            'minecraft:recipe_brewing_mix',
-            'minecraft:recipe_brewing_container',
-            'minecraft:recipe_furnace',
-            'minecraft:recipe_material_reduction',
-            'minecraft:recipe_shaped',
-            'minecraft:recipe_shapeless',
-            'minecraft:recipe_smithing_transform',
-            'minecraft:recipe_smithing_trim'
-        ],
+        recipeTypes: {
+            'minecraft:recipe_brewing_mix': (json) => {
+                const { input, output, reagent } = json;
+                return { input, output, reagent };
+            },
+            'minecraft:recipe_brewing_container': (json) => {
+                const { input, output, reagent } = json;
+                return { input, output, reagent };
+            },
+            'minecraft:recipe_furnace': (json) => {
+                const { input, output } = json;
+                return { input, output };
+            },
+            'minecraft:recipe_material_reduction': (json) => {
+                const { input, output } = json;
+                return { input, output };
+            },
+            'minecraft:recipe_shaped': (json) => {
+                const patternCount = {};
+                json.pattern.forEach((row) => {
+                    row.split('').forEach((slot) => {
+                        if (slot in patternCount) {
+                            patternCount[slot]++;
+                        } else {
+                            patternCount[slot] = 1;
+                        }
+                    });
+                });
+                forEachObject(json.key, (v, k) => {
+                    v.count = patternCount[k];
+                });
+                return {
+                    input: Object.values(json.key),
+                    output: json.result
+                };
+            },
+            'minecraft:recipe_shapeless': (json) => ({
+                input: json.ingredients,
+                output: json.result
+            }),
+            'minecraft:recipe_smithing_transform': (json) => {
+                const { base, result, addition } = json;
+                return { input: [base, addition], output: result };
+            },
+            'minecraft:recipe_smithing_trim': () => null
+        },
         versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10']]
     }
 ];
@@ -388,7 +426,7 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         lootTables: [],
         features: [],
         featureRules: [],
-        recipes: [],
+        dataDrivenRecipes: [],
         geometryMap: {},
         animationMap: {},
         animationControllerMap: {},
@@ -483,11 +521,17 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         });
     });
     forEachObject(results, (v, k) => {
+        if (k === 'dataDrivenRecipeData') {
+            results[k] = sortObjectKey(v);
+            return;
+        }
         if (k.endsWith('Map')) {
             forEachObject(v, (value) => {
                 uniqueAndSort(value);
             });
-        } else if (k !== 'internal') {
+            return;
+        }
+        if (k !== 'internal') {
             uniqueAndSort(v);
         }
     });
