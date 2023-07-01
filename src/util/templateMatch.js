@@ -18,6 +18,8 @@ export function matchTranslation(options) {
         langKeyPrefix,
         langKeySuffix,
         autoMatch,
+        resolveReference,
+        customAutoMatch,
         context,
         translateCached
     } = options;
@@ -45,7 +47,10 @@ export function matchTranslation(options) {
             const colonPos = userTranslation.indexOf(':');
             const source = userTranslation.slice(0, colonPos).trim();
             const key = userTranslation.slice(colonPos + 1).trim();
-            if (source === '') { // 直接使用
+            const customResolution = resolveReference ? resolveReference(source, key) : null;
+            if (customResolution) {
+                userTranslation = customResolution;
+            } else if (source === '') { // 直接使用
                 userTranslation = userTranslation.slice(colonPos + 1);
             } else if (stdTransMap && source.toLowerCase() === 'st') { // 标准化译名
                 userTranslation = stdTransMap[key];
@@ -97,6 +102,16 @@ export function matchTranslation(options) {
         };
     }
     if (autoMatch && Array.isArray(autoMatch)) {
+        if (autoMatch.includes('custom') && customAutoMatch) {
+            const translation = customAutoMatch(originalValue);
+            if (translation) {
+                if (!(originalValue in translationMap)) {
+                    console.warn(`[${context}] New entry has been added: ${originalValue} (custom) -> ${translation}`);
+                }
+                translationMap[originalValue] = translation;
+                return matchTranslation(options);
+            }
+        }
         if (autoMatch.includes('stdTrans') && stdTransMap) {
             const stdTranslationKey = originalValue.replace(/^minecraft:/i, '').replace(/_/g, ' ');
             const stdTranslation = stdTransMap[stdTranslationKey];

@@ -372,7 +372,40 @@ async function generateBranchedOutputFiles(cx) {
             name: 'recipe',
             originalArray: enums.recipes,
             translationMap: userTranslation.recipe,
-            autoMatch: ['lang']
+            autoMatch: ['custom'],
+            customAutoMatch(originalValue) {
+                if (enums.dataDrivenRecipeData[originalValue]) {
+                    return `dataDriven: ${originalValue}`;
+                }
+                return null;
+            },
+            resolveReference(source, key) {
+                if (source === 'dataDriven') {
+                    const untranslated = enums.dataDrivenRecipeData[key];
+                    if (untranslated) {
+                        return untranslated.replace(/[A-Za-z][A-Za-z_:0-9]*/g, (match) => {
+                            const resultContainer = { ...translationResultMaps };
+                            const k = `$${match}`;
+                            matchTranslations({
+                                ...commonOptions,
+                                resultMaps: resultContainer,
+                                name: 'recipe',
+                                originalArray: [k],
+                                translationMap: userTranslation.recipe,
+                                autoMatch: ['custom'],
+                                customAutoMatch(originalValue) {
+                                    if (originalValue.startsWith('$')) {
+                                        return `item: ${originalValue.slice(1)}`;
+                                    }
+                                    return null;
+                                }
+                            });
+                            return resultContainer.recipe[k];
+                        });
+                    }
+                }
+                return null;
+            }
         });
     }
     translationResultMaps.music = filterObjectMap(
