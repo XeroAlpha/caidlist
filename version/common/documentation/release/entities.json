@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.0.1",
+    "version": "1.20.10.1",
     "content": [],
     "sections": [
         {
@@ -9352,6 +9352,141 @@
                     ]
                 },
                 {
+                    "name": "is_sneak_held",
+                    "id": "is_sneak_held",
+                    "level": 2,
+                    "content": [
+                        "Returns true if the subject entity has the sneak input held.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value."
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality."
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value."
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value."
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality."
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller."
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent."
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction."
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test"
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target."
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false."
+                                }
+                            ]
+                        }
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sneak_held\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }"
+                                    ]
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sneak_held\" }"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "name": "is_sneaking",
                     "id": "is_sneaking",
                     "level": 2,
@@ -16731,19 +16866,19 @@
                                         {
                                             "Name": "target_invisible_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "0.7",
+                                            "Default Value": "0.70",
                                             "Description": "Multiplied with the target's armor coverage percentage to modify \"max_dist\" when detecting an invisible target."
                                         },
                                         {
                                             "Name": "target_search_height",
                                             "Type": "Decimal",
-                                            "Default Value": "-1.0",
+                                            "Default Value": "-1.00",
                                             "Description": "Maximum vertical target-search distance, if it's greater than the target type's \"max_dist\". A negative value defaults to \"entity_types\" greatest \"max_dist\"."
                                         },
                                         {
                                             "Name": "target_sneak_visibility_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "0.8",
+                                            "Default Value": "0.80",
                                             "Description": "Multiplied with the target type's \"max_dist\" when trying to detect a sneaking target."
                                         },
                                         {
@@ -17948,6 +18083,12 @@
                                             "Type": "Decimal",
                                             "Default Value": "1.000000",
                                             "Description": "Searching movement speed multiplier."
+                                        },
+                                        {
+                                            "Name": "target_dig_position_offset",
+                                            "Type": "Decimal",
+                                            "Default Value": "2.250000",
+                                            "Description": "Dig target position offset from the feet position of the mob in their facing direction."
                                         }
                                     ]
                                 }
@@ -21385,6 +21526,31 @@
                                             "Type": "Range [a, b]",
                                             "Default Value": "0",
                                             "Description": "The range of time in seconds to randomly wait before playing the sound again"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "minecraft:collision_box",
+                            "id": "minecraft:collision_box",
+                            "level": 4,
+                            "content": [
+                                "Sets the width and height of the Entity's collision box.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "height",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.0",
+                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0."
+                                        },
+                                        {
+                                            "Name": "width",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.0",
+                                            "Description": "Width of the collision box in blocks. A negative value will be assumed to be 0."
                                         }
                                     ]
                                 }
@@ -24863,6 +25029,12 @@
                                                     ]
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "Name": "singular_pickup",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Controls if the mob is able to pick up more of the same item if it is already holding that item"
                                         }
                                     ]
                                 }
@@ -26647,6 +26819,10 @@
                                             "ID": "-789611239"
                                         },
                                         {
+                                            "JSON Name": "minecraft:collision_box",
+                                            "ID": "-1277663508"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:combat_regeneration",
                                             "ID": "-315365016"
                                         },
@@ -27043,10 +27219,6 @@
                                             "ID": "-763124853"
                                         },
                                         {
-                                            "JSON Name": "minecraft:collision_box",
-                                            "ID": "-1277663508"
-                                        },
-                                        {
                                             "JSON Name": "minecraft:color",
                                             "ID": "1069623177"
                                         },
@@ -27327,31 +27499,6 @@
                             "level": 4,
                             "content": [
                                 "Allows the entity to power jump like the horse does in vanilla."
-                            ]
-                        },
-                        {
-                            "name": "minecraft:collision_box",
-                            "id": "minecraft:collision_box",
-                            "level": 4,
-                            "content": [
-                                "Sets the width and height of the Entity's collision box.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "height",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0."
-                                        },
-                                        {
-                                            "Name": "width",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Width and Depth of the collision box in blocks. A negative value will be assumed to be 0."
-                                        }
-                                    ]
-                                }
                             ]
                         },
                         {
@@ -28180,5 +28327,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "26a3b1b3723dfedef0172409afb74d2275b60c82"
+    "__OBJECTHASH__": "7b74c91564b688ba5aca63081b7c1c944e9e5f87"
 }

@@ -156,24 +156,26 @@
                 langParity: '译名比较'
             };
             const enumNameMap = {
-                blocks: '方块（用于 setblock、fill 等命令的方块 ID。）',
-                items: '物品（用于 give、clear 等命令的物品 ID。）',
-                entities: '实体（用于 type 选择器的实体 ID。）',
-                summonable_entities: '可召唤实体（用于 summon 命令的实体 ID。）',
-                effects: '状态效果（用于 effect 命令的状态效果 ID。）',
-                enchantments: '魔咒（用于 enchant 命令的魔咒 ID。）',
-                gamerules: '游戏规则（用于 gamerule 命令的游戏规则 ID。）',
-                locations: '结构（用于 locate 命令的结构 ID。）',
-                biomes: '生物群系（用于 locate 命令的生物群系 ID。）',
-                mobevents: '生物事件（用于 mobevent 命令的生物事件 ID。）',
-                entity_slots: '槽位（用于 replaceitem 命令等的槽位 ID。）',
+                blocks: '方块（用于 setblock、fill 等命令的方块 ID）',
+                items: '物品（用于 give、clear 等命令的物品 ID）',
+                entities: '实体（用于 type 选择器的实体 ID）',
+                summonable_entities: '可召唤实体（用于 summon 命令的实体 ID）',
+                effects: '状态效果（用于 effect 命令的状态效果 ID）',
+                enchantments: '魔咒（用于 enchant 命令的魔咒 ID）',
+                gamerules: '游戏规则（用于 gamerule 命令的游戏规则 ID）',
+                locations: '结构（用于 locate 命令的结构 ID）',
+                biomes: '生物群系（用于 locate 命令的生物群系 ID）',
+                mobevents: '生物事件（用于 mobevent 命令的生物事件 ID）',
+                entity_slots: '槽位（用于 replaceitem 命令等的槽位 ID）',
                 selectors: '目标选择器参数',
-                loot_tools: '战利品工具表（用于 loot 命令的工具选项。）',
-                damage_causes: '伤害类型（用于 damage 命令的伤害类型 ID。）',
-                item_with_aliases: '物品（包含别名，可用于 give、clear 等命令。）',
-                features_and_rules: '地物与地物规则（用于 placefeature 命令。）',
-                input_permissions: '操作输入权限（用于 inputpermission 命令。）',
-                abilities: '能力（用于教育版 ability 命令的能力 ID。）',
+                loot_tools: '战利品工具表（用于 loot 命令的工具选项）',
+                damage_causes: '伤害类型（用于 damage 命令的伤害类型 ID）',
+                item_with_aliases: '物品（包含别名，可用于 give、clear 等命令）',
+                features_and_rules: '地物与地物规则（用于 placefeature 命令的地物 ID 和地物规则 ID）',
+                input_permissions: '操作输入权限（用于 inputpermission 命令的输入权限 ID）',
+                camera_presets: '摄像机预设（用于 camera 命令的摄像机预设 ID）',
+                recipes: '配方（用于 recipe 命令的配方 ID）',
+                abilities: '能力（用于教育版 ability 命令的能力 ID）',
                 options: '选项',
                 particle_types: '粒子类型',
                 features: '地物',
@@ -206,6 +208,21 @@
                     return `${min}分${sec.padStart(2, '0')}秒`;
                 }
                 return `${sec}秒`;
+            }
+            async function fetchJSON(input, timeout, options) {
+                const controller = new AbortController();
+                let handle;
+                if (timeout > 0) {
+                    handle = setTimeout(() => controller.abort(new Error(`Request timeout exceeded ${timeout}ms.`)));
+                }
+                try {
+                    const res = await fetch(input, { ...options, signal: controller.signal });
+                    return await res.json();
+                } finally {
+                    if (handle) {
+                        clearTimeout(handle);
+                    }
+                }
             }
             async function tryInitOBS() {
                 try {
@@ -240,7 +257,7 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await (await fetch(`http://localhost:19333/heartbeat?since=${logs.length}`)).json();
+                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 1000);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -317,7 +334,7 @@
             async function updateDanmaku() {
                 let lines = [];
                 try {
-                    lines = await (await fetch(`http://localhost:19334/lines?since=${danmakus.length}`)).json();
+                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 1000);
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;
@@ -365,14 +382,14 @@
                 ],
                 [
                     '这个是每周的常驻节目吗？',
-                    '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播两个小时左右。'
+                    '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播三个小时左右。'
                 ],
                 [
                     '我能来这个直播间干什么？',
                     '<span style="text-decoration: line-through">了解ID的变化情况。</span>欢迎来弹幕聊天啊，听听歌也行。',
                     '但<span style="font-weight: bold">请不要在直播间里赠送付费的礼物或者上舰</span>。'
                 ],
-                ['命令助手呢？你啥时候更新？', '已经更新了哦，请参见UP主的爱发电主页~'],
+                ['命令助手呢？啥时候更新？', '已经更新了哦，请参见原作者的爱发电主页~'],
                 ['你的手机还能同时玩别的游戏的吗？', '这只是电脑画面的映射。给枯燥的直播加点趣味。']
             ];
             dynamicMarquee.loop(

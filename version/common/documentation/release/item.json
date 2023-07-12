@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.0.1",
+    "version": "1.20.10.1",
     "content": [],
     "sections": [
         {
@@ -49,12 +49,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Planter item component. planter items are items that can be planted.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Block Placer item component. Items with this component will place a block when used.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "block",
                                             "content": [
-                                                "block:  Set the placement block name for the planter item.",
+                                                "Defines the block that will be placed.",
                                                 "Type: block"
                                             ]
                                         },
@@ -63,6 +63,21 @@
                                             "content": [
                                                 "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.",
                                                 "Type: array of use_on"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:can_destroy_in_creative",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The can destroy in creative component determines if the item will break blocks in creative when swinging.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "Whether the item can destroy blocks while in creative.",
+                                                "Type: boolean"
                                             ]
                                         }
                                     ]
@@ -95,19 +110,19 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Cool down time for a component. After you use an item it becomes unusable for the duration specified by the 'cool down time' setting in this component.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "category",
                                             "content": [
-                                                "The type of cool down for this item.",
+                                                "The type of cool down for this item. All items with a cool down component with the same category are put on cool down when one is used.",
                                                 "Type: category"
                                             ]
                                         },
                                         {
                                             "section": "duration",
                                             "content": [
-                                                "The duration of time this item will spend cooling down before becoming usable again.",
+                                                "The duration of time (in seconds) items with a matching category will spend cooling down before becoming usable again.",
                                                 "Type: float"
                                             ]
                                         }
@@ -148,8 +163,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Display Name item component. Display Names set the name to display when an item is in use or hovered over.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Display Name item component. Determines the text shown whenever an item's name is displayed (ex. hover text).",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "value",
                                             "content": [
@@ -164,8 +179,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "A property that determines when an item will break from use. The durability of an item is potentially depleted upon use based on the damage chance.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Durability item component. Determines how much damage this item takes before breaking and allows the item to be combined in crafting.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "damage_chance",
                                             "content": [
@@ -176,7 +191,7 @@
                                         {
                                             "section": "max_durability",
                                             "content": [
-                                                "Max durability is the amount of damage that this item can take before breaking.",
+                                                "Max durability is the amount of damage that this item can take before breaking. This is a required parameter and has a minimum of 0.",
                                                 "Type: integer"
                                             ]
                                         }
@@ -188,7 +203,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "dispense_on",
                                             "content": [
@@ -261,8 +276,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Allows this item to be used as fuel in a furnace to 'cook' other items.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "duration",
                                             "content": [
@@ -273,16 +288,31 @@
                                     ]
                                 },
                                 {
+                                    "Name": "minecraft:hover_text_color",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The hover text color component determines the color of the item name when hovering over it.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "The color of the item's hover text.",
+                                                "Type: value"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
                                     "Name": "minecraft:icon",
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "The icon item component determines the icon to represent the item.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
                                         {
                                             "section": "texture",
                                             "content": [
-                                                "The key for the object contain the expected textures, from file 'resource_pack/textures/item_texture.json'.",
+                                                "The key from the resource_pack/textures/item_texture.json 'texture_data' object associated with the texture file.",
                                                 "Type: string"
                                             ]
                                         }
@@ -299,6 +329,21 @@
                                             "section": "capacity",
                                             "content": [
                                                 "The max capacity of the item, default is 64",
+                                                "Type: integer"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "Name": "minecraft:max_stack_size",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The max stack size component determines how many of the item can be stacked together.",
+                                        {
+                                            "section": "value",
+                                            "content": [
+                                                "How many of the item that can be stacked.",
                                                 "Type: integer"
                                             ]
                                         }
@@ -342,7 +387,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Projectile item component. projectile items shoot out, like an arrow.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "minimum_critical_power",
                                             "content": [
@@ -364,8 +409,8 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Record Item Component.  Used by record items to play music.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Record Item Component. Used by record items to play music.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "comparator_signal",
                                             "content": [
@@ -417,12 +462,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Repairable item component: how much damage can this item repair, what items can repair it.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "repair_items",
                                             "content": [
-                                                "Repair item entries.",
+                                                "List of repair item entries. Each entry needs to define a list of strings for `items` that can be used for the repair and an optional `repair_amount` for how much durability is repaired.",
                                                 "Type: array of repair_items"
                                             ]
                                         }
@@ -434,7 +479,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Shooter Item Component.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "ammunition",
                                             "content": [
@@ -450,24 +495,10 @@
                                             ]
                                         },
                                         {
-                                            "section": "launch_power_scale",
-                                            "content": [
-                                                "Launch power scale. Default is set to 1.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
                                             "section": "max_draw_duration",
                                             "content": [
                                                 "Draw Duration. Default is set to 0.",
                                                 "Type: max_draw_duration"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_launch_power",
-                                            "content": [
-                                                "Launch power. Default is set to 1.0.",
-                                                "Type: float"
                                             ]
                                         },
                                         {
@@ -485,7 +516,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Throwable item component. Throwable items, such as a snowball.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                                         {
                                             "section": "do_swing_animation",
                                             "content": [
@@ -585,17 +616,26 @@
                     "id": "Item Definition Properties",
                     "level": 2,
                     "content": [
-                        "The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item."
+                        "The properties are part of the Item Definition. This helps the system determine how to parse and initialize this item.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
+                                },
+                                {
+                                    "Name": "minecraft:item",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Item definition, which includes the \"description\" and \"components\" sections."
+                                }
+                            ]
+                        }
                     ],
                     "sections": [
-                        {
-                            "name": "format_version",
-                            "id": "format_version",
-                            "level": 4,
-                            "content": [
-                                "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it."
-                            ]
-                        },
                         {
                             "name": "Code Example",
                             "level": 4,
@@ -632,30 +672,50 @@
                     ]
                 },
                 {
-                    "name": "Item Description Properties",
-                    "id": "Item Description Properties",
+                    "name": "description v1.20",
+                    "id": "description v1.20",
                     "level": 2,
                     "content": [
+                        "List of characters of an item. The description MUST contain an identifier; the other fields are optional.",
                         {
                             "type": "table",
                             "rows": [
                                 {
                                     "Name": "category",
-                                    "Type": "String",
+                                    "Type": "\"all\", \"construction\", \"nature\", \"equipment\", \"items\", \"commands\", \"none\"",
                                     "Default Value": "",
-                                    "Description": "The category for this item. Categories are used to control high level properties of how the item is integrated into the bedrock engine, such as whether it can be used in slash commands."
+                                    "Description": "The Creative Category that this item belongs to. Defaults to \"items\"."
                                 },
                                 {
                                     "Name": "identifier",
                                     "Type": "String",
                                     "Default Value": "",
                                     "Description": "The identifier for this item. The name must include a namespace and must not use the Minecraft namespace unless overriding a Vanilla item."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:item v1.20",
+                    "id": "minecraft:item v1.20",
+                    "level": 2,
+                    "content": [
+                        "Item definition, which includes the \"description\" and \"components\" sections.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "components",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "List of all components that used in this item."
                                 },
                                 {
-                                    "Name": "is_experimental",
-                                    "Type": "Boolean",
-                                    "Default Value": "false",
-                                    "Description": "If this item is experimental, it will only be registered if the world is marked as experimental."
+                                    "Name": "description",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "List of characters of an item. The description MUST contain an identifier; the other fields are optional."
                                 }
                             ]
                         }
@@ -664,5 +724,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "1212e70599a070f08891d0b5b6278948b78cc542"
+    "__OBJECTHASH__": "6ab97549378f1dc119a28ee73e471278481a80bd"
 }
