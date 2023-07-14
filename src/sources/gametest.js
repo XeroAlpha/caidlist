@@ -547,7 +547,7 @@ const Extractors = [
                     result[itemType.id] = {
                         unstackable: itemStack.isStackable ? undefined : true,
                         maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
-                        tags: itemStack.getTags().slice(),
+                        tags: [...new Set(itemStack.getTags())],
                         components: hasComponents ? components : undefined,
                         ...commonComponents
                     };

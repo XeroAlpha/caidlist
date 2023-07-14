@@ -213,7 +213,7 @@
                 const controller = new AbortController();
                 let handle;
                 if (timeout > 0) {
-                    handle = setTimeout(() => controller.abort(new Error(`Request timeout exceeded ${timeout}ms.`)));
+                    handle = setTimeout(() => controller.abort(new Error(`Request timeout exceeded ${timeout}ms.`)), timeout);
                 }
                 try {
                     const res = await fetch(input, { ...options, signal: controller.signal });
@@ -257,7 +257,7 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 1000);
+                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 300);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -334,7 +334,7 @@
             async function updateDanmaku() {
                 let lines = [];
                 try {
-                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 1000);
+                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 300);
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;

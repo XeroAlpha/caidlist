@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.20.20",
+    "version": "1.20.20.21",
     "content": [],
     "sections": [
         {
@@ -943,7 +943,11 @@
                                 },
                                 {
                                     "Name": "query.block_property",
-                                    "Description": "Returns the value of the associated Blocks Block State."
+                                    "Description": "Returns the value of the associated block's Block State."
+                                },
+                                {
+                                    "Name": "query.block_state",
+                                    "Description": "Returns the value of the associated block's Block State."
                                 },
                                 {
                                     "Name": "query.blocking",
@@ -1151,7 +1155,11 @@
                                 },
                                 {
                                     "Name": "query.has_block_property",
-                                    "Description": "Returns 1.0 if the associated block has the given block property or 0.0 if not"
+                                    "Description": "Returns 1.0 if the associated block has the given block state or 0.0 if not."
+                                },
+                                {
+                                    "Name": "query.has_block_state",
+                                    "Description": "Returns 1.0 if the associated block has the given block state or 0.0 if not."
                                 },
                                 {
                                     "Name": "query.has_cape",
@@ -2090,6 +2098,10 @@
                                 {
                                     "Pack min_engine_version": "1.20.0",
                                     "Description": "Fixed query.cape_flap_amount using the wrong player rotation (head rotation instead of body rotation)."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.20.10",
+                                    "Description": "Renamed block_property and has_block_property to block_state and has_block_state post this version."
                                 }
                             ]
                         }
@@ -2098,5 +2110,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "70d05f47dddfc388e43d594a65f1a201fcdb1d38"
+    "__OBJECTHASH__": "9790dcdc43320de925b678545542a3cd0d3c948f"
 }
