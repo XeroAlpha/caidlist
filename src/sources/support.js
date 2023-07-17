@@ -61,7 +61,13 @@ export function recipeNewCommand({ coreVersion, branch }) {
             || testMinecraftVersionInRange(coreVersion, '1.20.20', '1.20.20.19') // TODO: Change it when released
         );
     }
-    return false;
+    if (branch.id === 'education') {
+        return false;
+    }
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.20.20.21', '*')
+        || testMinecraftVersionInRange(coreVersion, '1.20.20', '1.20.20.19') // TODO: Change it when released
+    );
 }
 
 export function mcpews({ version }) {
