@@ -51,7 +51,10 @@ export function cameraCommand({ coreVersion, branch }) {
             || testMinecraftVersionInRange(coreVersion, '1.20.0.01', '1.20.0.01')
         );
     }
-    return false;
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.20.20.22', '*')
+        || testMinecraftVersionInRange(coreVersion, '1.20.20', '1.20.20.19') // TODO: Change it when released
+    );
 }
 
 export function recipeNewCommand({ coreVersion, branch }) {

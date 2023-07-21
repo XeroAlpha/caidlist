@@ -360,7 +360,7 @@ const Extractors = [
         timeout: 60000,
         async extract(target, frame) {
             const blockInfoList = parseOrThrow(await frame.evaluate(() => {
-                const blockTypes = Minecraft.MinecraftBlockTypes.getAllBlockTypes();
+                const blockTypes = Minecraft.BlockTypes.getAll();
                 const result = {};
                 for (const blockType of blockTypes) {
                     const states = [];
@@ -597,6 +597,21 @@ const Extractors = [
             }));
             const effects = EffectList.sort();
             target.effects = effects;
+        }
+    },
+    {
+        name: 'dimensions',
+        timeout: 10000,
+        async extract(target, frame) {
+            const DimensionList = parseOrThrow(await frame.evaluate(() => {
+                const result = [];
+                for (const dimensionType of Minecraft.DimensionTypes.getAll()) {
+                    result.push(dimensionType.typeId);
+                }
+                return JSON.stringify(result);
+            }));
+            const dimensions = DimensionList.sort();
+            target.dimensions = dimensions;
         }
     }
 ];

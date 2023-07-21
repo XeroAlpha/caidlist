@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.20.21",
+    "version": "1.20.20.22",
     "content": [],
     "sections": [
         {
@@ -40,24 +40,7 @@
                                     "Name": "minecraft:armor",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": [
-                                        "The armor item component determines the amount of protection you have in your armor item.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "protection",
-                                            "content": [
-                                                "How much protection does the armor item have.",
-                                                "Type: integer"
-                                            ]
-                                        },
-                                        {
-                                            "section": "texture_type",
-                                            "content": [
-                                                "Texture Type to apply for the armor. Note that Horse armor is restricted to leather, iron, gold, or diamond.",
-                                                "Accepted values: \"leather\", \"none\", \"chain\", \"iron\", \"diamond\", \"gold\", \"elytra\", \"turtle\", \"netherite\""
-                                            ]
-                                        }
-                                    ]
+                                    "Description": "The armor item component determines the amount of protection you have in your armor item.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:block_placer",
@@ -163,26 +146,26 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Digger item. Component put on items that dig.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Digger item component. You can specify how quickly this item can dig specific blocks.",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
                                         {
                                             "section": "destroy_speeds",
                                             "content": [
-                                                "Destroy speed per block.",
+                                                "A list of blocks to dig with correlating speeds of digging.",
                                                 "Type: array of destroy_speeds"
                                             ]
                                         },
                                         {
                                             "section": "on_dig",
                                             "content": [
-                                                "Trigger for when you dig a block that isn't listed in destroy_speeds",
+                                                "In format versions before 1.20.20, trigger for when you dig a block that isn't listed in destroy_speeds",
                                                 "Type: on_dig"
                                             ]
                                         },
                                         {
                                             "section": "use_efficiency",
                                             "content": [
-                                                "Use efficiency? Default is set to false.",
+                                                "Whether this item should be impacted if the efficiency enchant is applied to it.",
                                                 "Type: boolean"
                                             ]
                                         }
@@ -716,7 +699,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Wearable item component.",
-                                        "Experimental toggles required: Holiday Creator Features",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
                                         {
                                             "section": "protection",
                                             "content": [
@@ -881,5 +864,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "709e1f0a754b0926d492039b8fe26b5f35c62fd8"
+    "__OBJECTHASH__": "566beae5ca441734e5f91531d761d6391d7b5eca"
 }
