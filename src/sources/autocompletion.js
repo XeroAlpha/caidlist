@@ -384,62 +384,78 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
         session.disconnect();
     }
 
-    await analyzeAutocompletionEnumCached(cx, options, 'blocks', '/testforblock ~ ~ ~ ');
-    await analyzeAutocompletionEnumCached(cx, options, 'items', '/clear @s ', ['[']);
-    await analyzeAutocompletionEnumCached(cx, options, 'entities', '/testfor @e[type=', ['!']);
-    await analyzeAutocompletionEnumCached(cx, options, 'summonable entities', '/summon ');
-    await analyzeAutocompletionEnumCached(cx, options, 'effects', '/effect @s ', ['[', 'clear']);
-    await analyzeAutocompletionEnumCached(cx, options, 'enchantments', '/enchant @s ', ['[']);
-    await analyzeAutocompletionEnumCached(cx, options, 'gamerules', '/gamerule ');
+    const jobs = [];
+    const postJob = (name, commandPrefix, exclusion) => {
+        jobs.push(async () => {
+            await analyzeAutocompletionEnumCached(cx, options, name, commandPrefix, exclusion);
+        });
+    };
+    postJob('blocks', '/testforblock ~ ~ ~ ');
+    postJob('items', '/clear @s ', ['[']);
+    postJob('entities', '/testfor @e[type=', ['!']);
+    postJob('summonable entities', '/summon ');
+    postJob('effects', '/effect @s ', ['[', 'clear']);
+    postJob('enchantments', '/enchant @s ', ['[']);
+    postJob('gamerules', '/gamerule ');
     if (support.newLocateCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'locations', '/locate structure ');
-        await analyzeAutocompletionEnumCached(cx, options, 'biomes', '/locate biome ');
+        postJob('locations', '/locate structure ');
+        postJob('biomes', '/locate biome ');
     } else {
-        await analyzeAutocompletionEnumCached(cx, options, 'locations', '/locate ');
+        postJob('locations', '/locate ');
     }
-    await analyzeAutocompletionEnumCached(cx, options, 'mobevents', '/mobevent ');
-    await analyzeAutocompletionEnumCached(cx, options, 'entity slots', '/replaceitem entity @s ', ['[']);
-    await analyzeAutocompletionEnumCached(cx, options, 'selectors', '/testfor @e[');
+    postJob('mobevents', '/mobevent ');
+    postJob('entity slots', '/replaceitem entity @s ', ['[']);
+    postJob('selectors', '/testfor @e[');
 
     if (support.lootCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'loot tools', '/loot spawn ~ ~ ~ loot empty ', [
+        postJob('loot tools', '/loot spawn ~ ~ ~ loot empty ', [
             'mainhand',
             'offhand'
         ]);
     }
     if (support.damageCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'damage causes', '/damage @s 0 ');
+        postJob('damage causes', '/damage @s 0 ');
     }
     if (support.hasItemSelectorParam(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'item with aliases', '/testfor @e[hasitem={item=');
+        postJob('item with aliases', '/testfor @e[hasitem={item=');
     }
     if (support.placefeatureCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'features and rules', '/placefeature ');
+        postJob('features and rules', '/placefeature ');
     }
     if (support.inputpermissionCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'input permissions', '/inputpermission query @s ', ['[']);
+        postJob('input permissions', '/inputpermission query @s ', ['[']);
     }
     if (support.cameraCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'camera presets', '/camera @s set ');
+        postJob('camera presets', '/camera @s set ');
     }
     if (support.recipeNewCommand(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'recipes', '/recipe take @s ', ['"*"', '[']);
+        postJob('recipes', '/recipe take @s ', ['"*"', '[']);
     }
 
     if (support.eduCommands(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'abilities', '/ability @s ', ['[']);
+        postJob('abilities', '/ability @s ', ['[']);
     }
 
     if (support.devCommands(cx)) {
-        await analyzeAutocompletionEnumCached(cx, options, 'particle types', '/particlelegacy ');
-        await analyzeAutocompletionEnumCached(cx, options, 'features', '/placefeature feature ');
-        await analyzeAutocompletionEnumCached(cx, options, 'feature rules', '/placefeature rule ');
+        postJob('particle types', '/particlelegacy ');
+        postJob('features', '/placefeature feature ');
+        postJob('feature rules', '/placefeature rule ');
         if (support.devCommandsGameSpace(cx)) {
-            await analyzeAutocompletionEnumCached(cx, options, 'options', '/option set ');
-            await analyzeAutocompletionEnumCached(cx, options, 'server tests', '/test servertests ');
-            await analyzeAutocompletionEnumCached(cx, options, 'unit tests', '/test unittests ');
-            await analyzeAutocompletionEnumCached(cx, options, 'functional tests', '/test functionaltests ');
+            postJob('options', '/option set ');
+            postJob('server tests', '/test servertests ');
+            postJob('unit tests', '/test unittests ');
+            postJob('functional tests', '/test functionaltests ');
         }
+    }
+
+    screen.updateStatus({
+        jobCount: jobs.length
+    });
+    for (let i = 0; i < jobs.length; i++) {
+        screen.updateStatus({
+            jobIndex: i
+        });
+        await jobs[i]();
     }
 
     await screen.stop();
