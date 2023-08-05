@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.20.20.23",
+    "version": "1.20.30.20",
     "content": [],
     "sections": [
         {
@@ -22,6 +22,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value)."
+                                },
+                                {
+                                    "Name": "minecraft:breathability",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:collision_box",
@@ -412,9 +418,18 @@
                                 },
                                 {
                                     "Name": "minecraft:transformation",
-                                    "Type": "Vector [a, b, c]",
-                                    "Default Value": "translation",
-                                    "Description": "The block's translationExperimental toggles required: Holiday Creator Features (in format versions before 1.19.80)"
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The block's translation, rotation and scale with respect to the center of its world position",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.80)",
+                                        {
+                                            "section": "minecraft:transformation",
+                                            "content": [
+                                                "The block's translation"
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     "Name": "minecraft:unit_cube",
@@ -460,7 +475,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.20.20\",",
+                                        "  \"format_version\": \"1.20.30\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1148,5 +1163,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "82501a3075c59e7a487587aede5d289bb3229ca2"
+    "__OBJECTHASH__": "462084379a2a249320c89067c02cbfe399d1d4ab"
 }
