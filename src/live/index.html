@@ -109,12 +109,13 @@
             });
         </script>
         <script type="text/javascript" src="https://projectxero.top/js/dynamic-marquee.2.3.4.js"></script>
+        <script type="text/javascript" src="https://projectxero.top/js/jmuxer.js"></script>
     </head>
     <body>
         <div class="leftbar">
             <div class="screenshot-container bar">
                 <div class="screenshot-nosignal">正在生成世界</div>
-                <img class="screenshot" src="" alt="screenshot">
+                <video class="screenshot" src="" alt="screenshot"></video>
             </div>
             <div class="logs bar mojangles"></div>
         </div>
@@ -123,10 +124,10 @@
             <div class="statusbar bar"></div>
             <div class="danmaku bar"></div>
         </div>
-        <script>
+        <script type="module">
             /* global dynamicMarquee */
-            const screenshotContainer = document.querySelector('.screenshot-container');
-            const screenshotEl = document.querySelector('.screenshot');
+            // const screenshotContainer = document.querySelector('.screenshot-container');
+            // const screenshotEl = document.querySelector('.screenshot');
             const logsEl = document.querySelector('.logs');
             const explanationEl = document.querySelector('.explanation');
             const statusBarEl = document.querySelector('.statusbar');
@@ -185,7 +186,6 @@
                 functional_tests: '功能测试'
             };
             let sessionId = null;
-            let screenshotId = null;
             const logs = [];
             let lastLogTime = Date.now();
             let lastActiveTime = Date.now();
@@ -257,7 +257,7 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 300);
+                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 1000);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -276,7 +276,7 @@
                 if (hb.resultLength) {
                     const speed = (1000 / hb.stepSpent).toFixed(1);
                     const fps = ((hb.reactFrameCount / hb.reactInterval) * 1000).toFixed(1);
-                    text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}张/条 ${fps} fps）`);
+                    text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}帧/条 ${fps} fps 滞后${hb.droppedCount}条）`);
                     if (hb.approxLength > 0) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
                         text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
@@ -290,17 +290,8 @@
                     text.push(`上次识别校验失败，正在进行第${hb.retryCount + 1}次识别`);
                 }
                 if (hb.sessionId !== sessionId) {
-                    screenshotId = null;
                     logs.length = 0;
                     sessionId = hb.sessionId;
-                    screenshotContainer.classList.remove('screenshot-available');
-                }
-                if (hb.screenshotId && hb.screenshotId !== screenshotId) {
-                    if (screenshotId == null) {
-                        screenshotContainer.classList.add('screenshot-available');
-                    }
-                    screenshotId = hb.screenshotId;
-                    screenshotEl.src = `http://localhost:19333/screenshot?id=${screenshotId}`;
                 }
                 if (hb.logs && hb.logs.length) {
                     logs.push(...hb.logs);
@@ -355,8 +346,42 @@
                 }
                 setTimeout(updateDanmaku, danmakuOnline ? 1000 : 10000);
             }
+            function loadVideo() {
+                // Broken codes
+                //
+                // const converter = new H264Converter(screenshotEl, 30, 6);
+                // const abortController = new AbortController();
+                // fetch('http://localhost:19333/stream', { signal: abortController.signal }).then((res) => {
+                //     if (res.body) {
+                //         screenshotContainer.classList.add('screenshot-available');
+                //         const reader = res.body.getReader();
+                //         const promise = reader.read().then(function processResult(result) {
+                //             function decode(value) {
+                //                 converter.appendRawData(value);
+                //             }
+                //             if (result.done) {
+                //                 decode([]);
+                //                 console.log('Video Stream is done.');
+                //                 return Promise.resolve();
+                //             }
+                //             decode(result.value);
+                //             return reader.read().then(processResult);
+                //         });
+                //         converter.play();
+                //         return promise;
+                //     }
+                //     return null;
+                // }).catch((err) => {
+                //     console.error('Video Stream Request error', err);
+                //     abortController.abort(err);
+                // }).finally(() => {
+                //     screenshotContainer.classList.remove('screenshot-available');
+                //     setTimeout(loadVideo, 3000);
+                // });
+            }
             updateStatus();
             updateDanmaku();
+            loadVideo();
             const marquee = new dynamicMarquee.Marquee(explanationEl, {
                 rate: -20 / devicePixelRatio,
                 upDown: true,

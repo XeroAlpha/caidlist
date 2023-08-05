@@ -136,7 +136,7 @@
 2. 运行命令 `npm install` 开始安装。
 
 ### 准备 OCR
-1. 确认已安装 Tesseract 与 adb。
+1. 确认已安装 ffmpeg、Tesseract 与 adb，并已将 ffmpeg 可执行文件所在目录设为路径环境变量。
 2. 将支持 USB 调试的手机连接至电脑。
 3. 准备一个 Minecraft 安装包（支持 apks 格式和 apk 格式）。
 4. 将上述 Minecraft 安装包安装到手机上。

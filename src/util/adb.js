@@ -1,12 +1,13 @@
-import AdbKit from '@devicefarmer/adbkit';
+import AdbKit from '@u4/adbkit';
 import { sleepAsync } from './common.js';
 
 const { Adb } = AdbKit;
 
 /**
- * @typedef {import('@devicefarmer/adbkit').Client} Client
- * @typedef {import('@devicefarmer/adbkit').DeviceClient} DeviceClient
- * @typedef {ReturnType<DeviceClient['syncService']> extends Promise<infer R> ? R : never} Sync
+ * @typedef {import('@u4/adbkit').Client} Client
+ * @typedef {import('@u4/adbkit').DeviceClient} DeviceClient
+ * @typedef {import('@u4/adbkit').Sync} Sync
+ * @typedef {import('@u4/adbkit').Pushtransfer} PushTransfer
  */
 
 /** @returns {Client} */
@@ -101,6 +102,7 @@ export async function extractFromShell(device, command, regExp, index) {
 }
 
 /**
+ * @deprecated
  * @param {DeviceClient} device
  */
 export async function getDeviceSurfaceOrientation(device) {
@@ -117,20 +119,16 @@ export async function getSystemProp(device, propertyName) {
 }
 
 /**
- * @typedef {ReturnType<Sync['push']>['stats']} PushTransfer.Stat
  * @param {Sync} sync
  * @param {string} sourcePath
  * @param {string} destPath
  * @param {number} mode
- * @param {(stats: PushTransfer.Stat) => void} onProgress
+ * @param {(stats: PushTransfer['stats']) => void} onProgress
  */
 export async function pushWithSync(sync, sourcePath, destPath, mode, onProgress) {
-    return new Promise((resolve, reject) => {
-        const pushTransfer = sync.push(sourcePath, destPath, mode);
-        if (onProgress) pushTransfer.on('progress', onProgress);
-        pushTransfer.on('error', reject);
-        pushTransfer.on('end', resolve);
-    });
+    const pushTransfer = await sync.push(sourcePath, destPath, mode);
+    if (onProgress) pushTransfer.on('progress', onProgress);
+    return pushTransfer.waitForEnd();
 }
 
 export async function openMonkey(device) {

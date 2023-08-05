@@ -17,7 +17,9 @@ export function projectPath(id, suffix) {
     } else {
         pathSegments = id.split('.');
     }
-    pathSegments[pathSegments.length - 1] += `.${suffix || 'json'}`;
+    if (suffix !== '') {
+        pathSegments[pathSegments.length - 1] += `.${suffix || 'json'}`;
+    }
     const path = nodePath.resolve(projectRoot, ...pathSegments);
     mkdirSync(nodePath.resolve(path, '..'), { recursive: true });
     return path;

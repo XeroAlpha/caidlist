@@ -3,6 +3,8 @@ import { createServer } from 'net';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
 import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
+import { resolve as resolvePath } from 'path';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
 import {
     cachedOutput,
     filterObjectMap,
@@ -11,7 +13,9 @@ import {
     sortObjectKey,
     stringComparator,
     kvArrayToObject,
-    pause
+    pause,
+    projectRoot,
+    testMinecraftVersionInRange
 } from '../util/common.js';
 import { getDeviceOrWait } from '../util/adb.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
@@ -669,6 +673,32 @@ async function evaluateExtractors(cx, target, session) {
     }
 }
 
+function generateBehaviorPack(cx) {
+    const { coreVersion } = cx;
+    const basePath = resolvePath(projectRoot, 'data', 'gametest_behavior_pack');
+    const outPath = resolvePath(projectRoot, 'output', 'scripting_injector');
+    const options = JSON.parse(readFileSync(resolvePath(basePath, 'generator.json'), 'utf-8'));
+    if (existsSync(outPath)) {
+        rmSync(outPath, { recursive: true });
+    }
+    mkdirSync(outPath);
+    const fileMap = {};
+    options.staticFiles.forEach((e) => {
+        fileMap[e] = e;
+    });
+    options.versionRelatedFiles.forEach((e) => {
+        if (testMinecraftVersionInRange(coreVersion, ...e.range)) {
+            fileMap[e.target] = e.path;
+        }
+    });
+    Object.entries(fileMap).forEach(([target, source]) => {
+        const targetPath = resolvePath(outPath, target);
+        mkdirSync(resolvePath(targetPath, '..'), { recursive: true });
+        cpSync(resolvePath(basePath, source), targetPath, { recursive: true });
+    });
+    return outPath;
+}
+
 export default async function analyzeGameTestEnumsCached(cx) {
     const { version, packageVersion, versionInfo } = cx;
     const cacheId = `version.${version}.gametest.all`;
@@ -676,6 +706,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     if (cache && packageVersion === cache.packageVersion) return cache;
 
     let device;
+    generateBehaviorPack(cx);
     if (!versionInfo.disableAdb) {
         device = await getDeviceOrWait();
     }

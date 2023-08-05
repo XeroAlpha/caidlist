@@ -2,15 +2,7 @@ import { Transform } from 'stream';
 import sharp from 'sharp';
 import { strict as assert } from 'assert';
 import { recognize } from 'node-tesseract-ocr';
-import {
-    getDeviceOrWait,
-    adbShell,
-    getDeviceSurfaceOrientation,
-    openMonkey,
-    sendMonkeyCommand,
-    isMonkeyAlive
-} from '../util/adb.js';
-import { openMinicap, stopMinicap } from '../util/captureScreen.js';
+import { getDeviceOrWait } from '../util/adb.js';
 import {
     cachedOutput,
     pause,
@@ -23,6 +15,7 @@ import {
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
+import { ScrcpyPNGStream, openScrcpy, press, waitForScrcpyReady, stopScrcpy, isScrcpyStopped } from '../util/scrcpy.js';
 
 function guessTruncatedString(truncatedStr, startsWith) {
     let spos;
@@ -117,64 +110,48 @@ function mergeOrderedList(base, listA, listB) {
     return { merged, conflicts, hasConflicts: conflicts.length > 0 };
 }
 
-async function analyzeCommandAutocompletionFast(cx, device, screen, command, progressName, approxLength) {
+async function analyzeCommandAutocompletionFast(cx, device, screen, command, progressName, approxLength, aggressiveMode) {
     // 初始状态：游戏HUD
     const autocompletions = [];
-    const surfaceOrientation = await getDeviceSurfaceOrientation(device);
-    const commandAreaRect = cx.commandAreaRect[surfaceOrientation];
-    const monkey = await openMonkey(device);
+    const { commandAreaRect: rect } = cx;
+    const scrcpy = openScrcpy(device);
+    const imageStream = new ScrcpyPNGStream(scrcpy, [
+        '-filter:v', [
+            `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
+            'format=pix_fmts=gray',
+            'negate',
+            'maskfun=low=60:high=60:fill=0:sum=256'
+        ].join(',')
+    ]);
     screen.updateStatus({ approxLength });
 
-    // 打开聊天栏
-    await sendMonkeyCommand(monkey, 'press KEYCODE_SLASH');
-    await sleepAsync(500);
-
     console.log(`Starting ${progressName}: ${command}`);
+    await waitForScrcpyReady(scrcpy);
+
+    // 打开聊天栏
+    await press(scrcpy, 'KEYCODE_SLASH');
+    await sleepAsync(3000);
     screen.log(`Input ${command}`);
-    await adbShell(device, `input text ${JSON.stringify(command.replace(/^\//, ''))}`);
+    await scrcpy.injectText(command.replace(/^\//, ''));
 
     let reactInterval = 0;
     let reactFrameCount = 0;
-    const imageStream = await openMinicap(device);
+    let droppedCount = 0;
+    let tabWhenChanged = false;
     const imagePipeline = imageStream
         .pipe(
             new Transform({
                 objectMode: true,
                 transform(imageData, encoding, done) {
-                    screen.updateScreenshot(imageData);
-                    done(null, imageData);
-                }
-            })
-        )
-        .pipe(
-            new Transform({
-                objectMode: true,
-                transform(imageData, encoding, done) {
                     const pipe = sharp(imageData);
-                    pipe.removeAlpha()
-                        .extract({
-                            left: commandAreaRect[0],
-                            top: commandAreaRect[1],
-                            width: commandAreaRect[2],
-                            height: commandAreaRect[3]
-                        })
-                        .negate()
-                        .threshold(60);
-                    if (cx.dpiScale) {
-                        pipe.resize({
-                            width: commandAreaRect[2] * cx.dpiScale,
-                            height: commandAreaRect[3] * cx.dpiScale,
-                            fit: 'fill',
-                            kernel: 'nearest'
-                        });
-                    }
                     pipe.raw()
                         .toBuffer({ resolveWithObject: true })
-                        .then((image) => {
-                            if (!this.lastImage || !image.data.equals(this.lastImage.data)) {
+                        .then((raw) => {
+                            if (!this.lastImage || !raw.data.equals(this.lastImage.data)) {
                                 const now = Date.now();
-                                if (isMonkeyAlive(monkey)) {
-                                    sendMonkeyCommand(monkey, 'press KEYCODE_TAB'); // async
+                                if (!aggressiveMode && tabWhenChanged && !isScrcpyStopped(scrcpy)) {
+                                    press(scrcpy, 'KEYCODE_TAB'); // async
+                                    droppedCount++;
                                 }
                                 if (this.lastImageTime) {
                                     reactFrameCount = this.framesBeforeChange;
@@ -182,12 +159,19 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                                 }
                                 this.lastImageTime = now;
                                 this.framesBeforeChange = 1;
-                                done(null, (this.lastImage = image));
+                                this.lastImage = raw;
+                                done(null, imageData);
                             } else {
                                 this.framesBeforeChange++;
                                 done();
                             }
                         });
+                    if (aggressiveMode && this.framesBeforeChange > Math.max(droppedCount ** 2, 4)) {
+                        if (tabWhenChanged && !isScrcpyStopped(scrcpy)) {
+                            press(scrcpy, 'KEYCODE_TAB'); // async
+                            droppedCount++;
+                        }
+                    }
                 }
             })
         )
@@ -195,24 +179,12 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
             new Transform({
                 objectMode: true,
                 transform(image, encoding, done) {
-                    sharp(image.data, { raw: image.info })
-                        .png()
-                        .toBuffer()
-                        .then((pngData) => {
-                            const promise = recognize(pngData, {
-                                ...cx.tesseractOptions,
-                                lang: 'eng',
-                                psm: 7,
-                                oem: 3
-                            });
-                            done(null, promise);
-                        });
-                }
-            })
-        ).pipe(
-            new Transform({
-                objectMode: true,
-                transform(promise, encoding, done) {
+                    const promise = recognize(image, {
+                        ...cx.tesseractOptions,
+                        lang: 'eng',
+                        psm: 7,
+                        oem: 3
+                    });
                     promise.then((text) => {
                         let commandText = text.trim();
                         forEachObject(cx.tesseractMistakes, (v, k) => {
@@ -223,6 +195,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                             }
                         });
                         if (commandText.length && (!this.last || this.last !== commandText)) {
+                            if (tabWhenChanged) droppedCount--;
                             done(null, (this.last = commandText));
                         } else {
                             done();
@@ -233,8 +206,9 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         );
 
     let autocompletedCommand = command.trim();
-    let recogizedCommand = await retryUntilComplete(10, 0, async () => {
-        const pickedCommand = await readStreamOnce(imagePipeline, 0);
+    let recogizedCommand = await retryUntilComplete(50, 0, async () => {
+        const pickedCommand = await readStreamOnce(imagePipeline, 5000);
+        console.log(`Detecting start: ${pickedCommand}`);
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
@@ -242,13 +216,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let stepStart = timeStart;
     let stepCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
+    tabWhenChanged = true;
     for (;;) {
-        recogizedCommand = await retryUntilComplete(10, 500, async () => {
+        recogizedCommand = await retryUntilComplete(10, 0, async () => {
             try {
                 return await readStreamOnce(imagePipeline, 1000);
             } catch (err) {
                 // 跳过重复ID
-                await sendMonkeyCommand(monkey, 'press KEYCODE_TAB');
+                await press(scrcpy, 'KEYCODE_TAB');
                 throw err;
             }
         });
@@ -276,7 +251,8 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 stepSpent,
                 resultLength: autocompletions.length,
                 reactInterval,
-                reactFrameCount
+                reactFrameCount,
+                droppedCount
             });
             screen.log(`Recognized: ${recogizedCommand}`);
             autocompletions.push(autocompletion);
@@ -297,13 +273,23 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         }
     }
 
-    await stopMinicap(device, imageStream);
-
     // 退出聊天栏
-    await sendMonkeyCommand(monkey, 'press KEYCODE_ESCAPE');
-    await sendMonkeyCommand(monkey, 'press KEYCODE_ESCAPE');
-    await sendMonkeyCommand(monkey, 'quit');
-    monkey.end();
+    tabWhenChanged = false;
+    await press(scrcpy, 'KEYCODE_ESCAPE');
+    await press(scrcpy, 'KEYCODE_ESCAPE');
+    await retryUntilComplete(50, 0, async () => {
+        try {
+            const recogizedResult = await readStreamOnce(imagePipeline, 2000);
+            const nextResult = guessTruncatedString(recogizedResult, command);
+            console.log(`Waiting for end: ${recogizedResult}`);
+            return nextResult == null;
+        } catch (err) {
+            await press(scrcpy, 'KEYCODE_ESCAPE');
+            return false;
+        }
+    });
+
+    stopScrcpy(scrcpy);
 
     return autocompletions;
 }
@@ -333,7 +319,8 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 screen,
                 commandPrefix,
                 progressName,
-                previousResult.length
+                previousResult.length,
+                retryCount < 2
             );
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
             const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);
@@ -364,6 +351,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
 
     const device = await getDeviceOrWait();
     const screen = new AutocompletionScreen();
+    screen.attachDevice(device);
     screen.updateStatus({
         version,
         branch: branch.id,

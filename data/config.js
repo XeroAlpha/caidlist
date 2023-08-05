@@ -3,18 +3,17 @@ import { projectRoot } from '../src/util/common.js';
 import secret from './secret.js';
 
 // 此部分仅 OCR 需要使用，无需 OCR 则请勿修改
-const commonOCROptions = {
+const commonOptions = {
     tesseractOptions: {
         // Tesseract 安装路径
         binary: '"C:\\Program Files\\Tesseract-OCR\\tesseract.exe"',
         // 训练数据路径
         'tessdata-dir': nodePath.resolve(projectRoot, 'data/tesstrain/tessdata')
     },
+    // 屏幕大小
+    screenSize: [2400, 1080],
     // 命令区域大小
-    commandAreaRect: {
-        1: [410, 950, 1650, 125], // <- phone
-        3: [410, 950, 1650, 125] // phone ->
-    },
+    commandAreaRect: [410, 950, 1650, 125], // <- phone
     // OCR识别错误手动校正
     tesseractMistakes: {
         '\'n"\'sUmmOn Creeper': '/summon creeper',
@@ -23,26 +22,20 @@ const commonOCROptions = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const smallerGUIOCROptions = { // GUI Scale = -1
-    ...commonOCROptions,
+const smallerGUIOptions = { // GUI Scale = -1
+    ...commonOptions,
     // 命令区域大小
-    commandAreaRect: {
-        1: [328, 976, 1784, 100], // <- phone
-        3: [328, 976, 1784, 100] // phone ->
-    },
+    commandAreaRect: [328, 976, 1784, 100],
     tesseractMistakes: {
         '\'/sUmmOn Creeper': '/summon creeper',
         '\'/sUmmOn raVager': '/summon ravager'
     }
 };
 
-const smallestGUIOCROptions = { // GUI Scale = -2
-    ...commonOCROptions,
+const smallestGUIOptions = { // GUI Scale = -2
+    ...commonOptions,
     // 命令区域大小
-    commandAreaRect: {
-        1: [246, 1002, 1989, 75], // <- phone
-        3: [246, 1002, 1989, 75] // phone ->
-    },
+    commandAreaRect: [246, 1002, 1989, 75],
     tesseractMistakes: {
         '\'/summon Creeper': '/summon creeper',
         '\'/summon ravager': '/summon ravager',
@@ -50,13 +43,10 @@ const smallestGUIOCROptions = { // GUI Scale = -2
     }
 };
 
-const neteaseOCROptions = {
-    ...commonOCROptions,
+const neteaseOptions = {
+    ...commonOptions,
     // 命令区域大小
-    commandAreaRect: {
-        1: [424, 922, 1660, 100], // <- phone
-        3: [424, 922, 1660, 100] // phone ->
-    },
+    commandAreaRect: [424, 922, 1660, 100],
     // OCR识别错误手动校正
     tesseractMistakes: {
         '/sUmmOn Creeper': '/summon creeper',
@@ -71,7 +61,7 @@ export const packageVersions = {
         version: '1.20.12.01',
         // 安装包路径
         path: 'H:\\BedrockVersions\\Latest\\1.20.12.01.apk',
-        config: smallestGUIOCROptions
+        config: smallestGUIOptions
     },
     // 测试版/预览版
     beta: {
@@ -79,7 +69,7 @@ export const packageVersions = {
         version: '1.20.20.23',
         // 安装包路径
         path: 'H:\\BedrockVersions\\Latest\\1.20.20.23.apk',
-        config: smallestGUIOCROptions
+        config: smallestGUIOptions
     },
     // 中国版测试版
     netease_dev: {
@@ -88,7 +78,7 @@ export const packageVersions = {
         coreVersion: '1.18.31.0.0',
         // 安装包路径
         path: 'H:\\BedrockVersions\\NeteaseDev\\dev_launcher_2.6.100.224553.apk',
-        config: neteaseOCROptions
+        config: neteaseOptions
     },
     // 预览版（Windows 端）
     preview_win: {
@@ -98,7 +88,7 @@ export const packageVersions = {
     dev: {
         version: '1.20.20.23',
         path: 'H:\\BedrockVersions\\Dev\\1.20.20.23.apk',
-        config: smallestGUIOCROptions
+        config: smallestGUIOptions
     }
 };
 

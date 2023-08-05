@@ -12,7 +12,7 @@ import StateTransform from './stateStream.js';
 const require = createRequire(import.meta.url);
 
 export async function install(device) {
-    const prebuiltRoot = '@devicefarmer/minicap-prebuilt/prebuilt';
+    const prebuiltRoot = '@u4/minicap-prebuilt/prebuilt';
     const remoteTempDir = '/data/local/tmp';
     const abi = await getSystemProp(device, 'ro.product.cpu.abi');
     const sdk = Number(await getSystemProp(device, 'ro.build.version.sdk'));

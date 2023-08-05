@@ -58,7 +58,8 @@ module.exports = {
         'import/extensions': ['error', 'ignorePackages'],
         'import/no-extraneous-dependencies': ['error', {
             devDependencies: ['script/*.js']
-        }]
+        }],
+        'max-classes-per-file': 'off'
     },
     overrides: [
         {
