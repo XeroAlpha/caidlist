@@ -138,6 +138,12 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let reactFrameCount = 0;
     let droppedCount = 0;
     let tabWhenChanged = false;
+    const pressTab = async () => {
+        if (tabWhenChanged && !isScrcpyStopped(scrcpy)) {
+            droppedCount++;
+            await press(scrcpy, 'KEYCODE_TAB'); // async
+        }
+    };
     const imagePipeline = imageStream
         .pipe(
             new Transform({
@@ -149,9 +155,8 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                         .then((raw) => {
                             if (!this.lastImage || !raw.data.equals(this.lastImage.data)) {
                                 const now = Date.now();
-                                if (!aggressiveMode && tabWhenChanged && !isScrcpyStopped(scrcpy)) {
-                                    press(scrcpy, 'KEYCODE_TAB'); // async
-                                    droppedCount++;
+                                if (!aggressiveMode) {
+                                    pressTab();
                                 }
                                 if (this.lastImageTime) {
                                     reactFrameCount = this.framesBeforeChange;
@@ -167,10 +172,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                             }
                         });
                     if (aggressiveMode && this.framesBeforeChange > Math.max(droppedCount ** 2, 4)) {
-                        if (tabWhenChanged && !isScrcpyStopped(scrcpy)) {
-                            press(scrcpy, 'KEYCODE_TAB'); // async
-                            droppedCount++;
-                        }
+                        pressTab();
                     }
                 }
             })
@@ -223,7 +225,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 return await readStreamOnce(imagePipeline, 1000);
             } catch (err) {
                 // 跳过重复ID
-                await press(scrcpy, 'KEYCODE_TAB');
+                await pressTab();
                 throw err;
             }
         });

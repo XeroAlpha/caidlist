@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.30.20",
+    "version": "1.20.30.21",
     "content": [],
     "sections": [
         {
@@ -21905,8 +21905,8 @@
                                         {
                                             "Name": "cured_discount",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[-5, -20]",
-                                            "Description": "How much should the discount be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (low-tier trade discount and high-tier trade discount)"
+                                            "Default Value": "[-25, -20]",
+                                            "Description": "How much should the discount be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)"
                                         },
                                         {
                                             "Name": "display_name",
@@ -21923,19 +21923,19 @@
                                         {
                                             "Name": "max_cured_discount",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[-25, -63]",
-                                            "Description": "The max the discount can be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (low-tier trade discount and high-tier trade discount)"
+                                            "Default Value": "[-25, -20]",
+                                            "Description": "The max the discount can be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)"
                                         },
                                         {
                                             "Name": "max_nearby_cured_discount",
                                             "Type": "Integer",
                                             "Default Value": "-200",
-                                            "Description": "The max the discount can be modified by when the player has cured a nearby Zombie Villager"
+                                            "Description": "The max the discount can be modified by when the player has cured a nearby Zombie Villager. Only used when use_legacy_price_formula is true, otherwise max_cured_discount (low) is used."
                                         },
                                         {
                                             "Name": "nearby_cured_discount",
                                             "Type": "Integer",
-                                            "Default Value": "-25",
+                                            "Default Value": "-20",
                                             "Description": "How much should the discount be modified by when the player has cured a nearby Zombie Villager"
                                         },
                                         {
@@ -28338,5 +28338,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "05f499ffd0a8d223010d01e26cdf11501811f959"
+    "__OBJECTHASH__": "b8748945de77fdeabda0323c1e89421f3484438d"
 }

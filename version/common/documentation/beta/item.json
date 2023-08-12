@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.30.20",
+    "version": "1.20.30.21",
     "content": [],
     "sections": [
         {
@@ -12,736 +12,6 @@
                 "All attributes, including item names, must be defined using item components."
             ],
             "sections": [
-                {
-                    "name": "Item Components",
-                    "id": "Item Components",
-                    "level": 2,
-                    "content": [
-                        "Below are the various components for item functionality.",
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "minecraft:allow_off_hand",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The allow off hand component determines whether the item can be placed in the off hand slot of the inventory.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the item can be placed in the off hand slot.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:armor",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": "The armor item component determines the amount of protection you have in your armor item.Experimental toggles required: Holiday Creator Features"
-                                },
-                                {
-                                    "Name": "minecraft:block_placer",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Block Placer item component. Items with this component will place a block when used.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "block",
-                                            "content": [
-                                                "Defines the block that will be placed.",
-                                                "Type: block"
-                                            ]
-                                        },
-                                        {
-                                            "section": "use_on",
-                                            "content": [
-                                                "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.",
-                                                "Type: array of use_on"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:can_destroy_in_creative",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The can destroy in creative component determines if the item will break blocks in creative when swinging.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the item can destroy blocks while in creative.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:chargeable",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Allows an item to be used over a duration.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "movement_modifier",
-                                            "content": [
-                                                "Modifier value to scale the players movement speed when item is in use.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "on_complete",
-                                            "content": [
-                                                "Event trigger for when the item has completed its use duration.",
-                                                "Type: on_complete"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:cooldown",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "category",
-                                            "content": [
-                                                "The type of cool down for this item. All items with a cool down component with the same category are put on cool down when one is used.",
-                                                "Type: category"
-                                            ]
-                                        },
-                                        {
-                                            "section": "duration",
-                                            "content": [
-                                                "The duration of time (in seconds) items with a matching category will spend cooling down before becoming usable again.",
-                                                "Type: float"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:damage",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The damage component determines how much extra damage the item does on attack.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "How much extra damage the item does, must be a positive number.",
-                                                "Type: integer"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:digger",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Digger item component. You can specify how quickly this item can dig specific blocks.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
-                                        {
-                                            "section": "destroy_speeds",
-                                            "content": [
-                                                "A list of blocks to dig with correlating speeds of digging.",
-                                                "Type: array of destroy_speeds"
-                                            ]
-                                        },
-                                        {
-                                            "section": "on_dig",
-                                            "content": [
-                                                "In format versions before 1.20.20, trigger for when you dig a block that isn't listed in destroy_speeds",
-                                                "Type: on_dig"
-                                            ]
-                                        },
-                                        {
-                                            "section": "use_efficiency",
-                                            "content": [
-                                                "Whether this item should be impacted if the efficiency enchant is applied to it.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:display_name",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Display Name item component. Determines the text shown whenever an item's name is displayed (ex. hover text).",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "The display name for an item.",
-                                                "Type: string"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:durability",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Durability item component. Determines how much damage this item takes before breaking and allows the item to be combined in crafting.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
-                                        {
-                                            "section": "damage_chance",
-                                            "content": [
-                                                "Damage chance is the percentage chance of this item losing durability. Default is set to 100. Defined as an int range with min and max value.",
-                                                "Type: damage_chance"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_durability",
-                                            "content": [
-                                                "Max durability is the amount of damage that this item can take before breaking. This is a required parameter and has a minimum of 0.",
-                                                "Type: integer"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:enchantable",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The enchantable component determines what enchantments can be applied to the item. Not all enchantments will have an effect on all item components.",
-                                        {
-                                            "section": "slot",
-                                            "content": [
-                                                "What enchantments can be applied (ex. Using `bow` would allow this item to be enchanted as if it were a bow).",
-                                                "Type: string"
-                                            ]
-                                        },
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "The value of the enchantment (minimum of 0).",
-                                                "Type: integer"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:entity_placer",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
-                                        {
-                                            "section": "dispense_on",
-                                            "content": [
-                                                "List of block descriptors that contain blocks that this item can be dispensed on. If left empty, all blocks will be allowed.",
-                                                "Type: array of dispense_on"
-                                            ]
-                                        },
-                                        {
-                                            "section": "entity",
-                                            "content": [
-                                                "The entity to be placed in the world.",
-                                                "Type: entity"
-                                            ]
-                                        },
-                                        {
-                                            "section": "use_on",
-                                            "content": [
-                                                "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.",
-                                                "Type: array of use_on"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:food",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "When an item has a food component, it becomes edible to the player.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "can_always_eat",
-                                            "content": [
-                                                "If true you can always eat this item (even when not hungry). Default is set to false.",
-                                                "Type: boolean"
-                                            ]
-                                        },
-                                        {
-                                            "section": "nutrition",
-                                            "content": [
-                                                "The value that is added to the actor's nutrition when the item is used. Default is set to 0.",
-                                                "Type: integer"
-                                            ]
-                                        },
-                                        {
-                                            "section": "on_consume",
-                                            "content": [
-                                                "Event trigger for when the item is consumed.",
-                                                "Type: on_consume"
-                                            ]
-                                        },
-                                        {
-                                            "section": "saturation_modifier",
-                                            "content": [
-                                                "Saturation Modifier is used in this formula: (nutrition * saturation_modifier * 2) when applying the saturation buff. Default is set to 0.6.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "using_converts_to",
-                                            "content": [
-                                                "When used, converts to the item specified by the string in this field. Default does not convert item.",
-                                                "Type: using_converts_to"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:fuel",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
-                                        {
-                                            "section": "duration",
-                                            "content": [
-                                                "How long in seconds will this fuel cook items for.",
-                                                "Type: float"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:glint",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The glint component determines whether the item has the enchanted glint render effect on it.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the item has the glint effect.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:hand_equipped",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "This component determines if an item is rendered like a tool while in hand.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "If the item is rendered like a tool while in hand.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:hover_text_color",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The hover text color component determines the color of the item name when hovering over it.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "The color of the item's hover text.",
-                                                "Type: value"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:icon",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
-                                        {
-                                            "section": "texture",
-                                            "content": [
-                                                "The key from the resource_pack/textures/item_texture.json 'texture_data' object associated with the texture file.",
-                                                "Type: string"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:liquid_clipped",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The liquid clipped component determines whether the item interacts with liquid blocks on use.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the item interacts with liquid blocks on use.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:max_stack_size",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The max stack size component determines how many of the item can be stacked together.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "How many of the item that can be stacked.",
-                                                "Type: integer"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:on_use",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The on_use item component allows you to receive an event when the item is used.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "on_use",
-                                            "content": [
-                                                "Event trigger for when the item is used.",
-                                                "Type: on_use"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:on_use_on",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The on_use_on item component allows you to receive an event when the item is used on a block in the world.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "on_use_on",
-                                            "content": [
-                                                "Event trigger for when the item is used.",
-                                                "Type: on_use_on"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:projectile",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Projectile item component. projectile items shoot out, like an arrow.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "minimum_critical_power",
-                                            "content": [
-                                                "How long you must charge a projectile for it to critically hit.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "projectile_entity",
-                                            "content": [
-                                                "The entity to be fired as a projectile.",
-                                                "Type: projectile_entity"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:record",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Record Item Component. Used by record items to play music.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "comparator_signal",
-                                            "content": [
-                                                "Signal strength for comparator blocks to use, from 1 - 13.",
-                                                "Type: integer"
-                                            ]
-                                        },
-                                        {
-                                            "section": "duration",
-                                            "content": [
-                                                "Duration of sound event in seconds, float value.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "sound_event",
-                                            "content": [
-                                                "Sound event type: 13, cat, blocks, chirp, far, mall, mellohi, stal, strad, ward, 11, wait, pigstep, otherside, 5, relic.",
-                                                "Accepted values: \"death.to.zombie\", \"jump.prevent\", \"item.use.on\", \"hit\", \"step\", \"break\", \"swim\", \"mob.player.hurt_drown\", \"step.baby\", \"fly\", \"horn_call4\", \"jump\", \"place\", \"heavy.step\", \"gallop\", \"fall\", \"hurt\", \"fizz\", \"ambient.screamer\", \"hurt.baby\", \"hurt.in.water\", \"death\", \"flap\", \"death.baby\", \"death.in.water\", \"ambient\", \"ambient.baby\", \"ambient.in.water\", \"ignite\", \"ambient.tame\", \"thunder\", \"random.anvil_use\", \"ambient.pollinate\", \"breathe\", \"mad\", \"boost\", \"bow\", \"squish.big\", \"squish.small\", \"fall.big\", \"fall.small\", \"splash\", \"drink\", \"shear\", \"block.end_portal_frame.fill\", \"drink.honey\", \"drink.milk\", \"pick_berries.cave_vines\", \"born\", \"eat\", \"reappeared\", \"takeoff\", \"shake\", \"plop\", \"land\", \"saddle\", \"armor\", \"item_taken\", \"mob.armor_stand.place\", \"add.chest\", \"record.5\", \"throw\", \"attack\", \"block.frog_spawn.hatch\", \"attack.nodamage\", \"attack.strong\", \"listening_angry\", \"warn\", \"sonic_charge\", \"milk\", \"bundle.remove_one\", \"explode\", \"fire\", \"fuse\", \"block.frog_spawn.break\", \"stare\", \"spawn\", \"bundle.drop_contents\", \"shoot\", \"break.block\", \"launch\", \"blast\", \"horn_call2\", \"large.blast\", \"twinkle\", \"step_sand\", \"remedy\", \"unfect\", \"copper.wax.off\", \"convert_to_drowned\", \"horn_call6\", \"levelup\", \"bow.hit\", \"brush_completed\", \"bullet.hit\", \"extinguish.fire\", \"fence_gate.close\", \"item.fizz\", \"chest.open\", \"button.click_on\", \"chest.closed\", \"shulkerbox.open\", \"pickup_enchanted\", \"shulkerbox.closed\", \"enderchest.open\", \"undefined\", \"enderchest.closed\", \"power.on\", \"break_pot\", \"power.off\", \"attach\", \"pickup\", \"detach\", \"deny\", \"record.relic\", \"tripod\", \"pop\", \"drop.slot\", \"note\", \"thorns\", \"piston.in\", \"block.sniffer_egg.hatch\", \"piston.out\", \"portal\", \"water\", \"lava.pop\", \"lava\", \"celebrate\", \"beacon.activate\", \"beacon.ambient\", \"block.smithing_table.use\", \"beacon.deactivate\", \"beacon.power\", \"pre_ram.screamer\", \"conduit.activate\", \"conduit.ambient\", \"block.click.fail\", \"conduit.attack\", \"conduit.deactivate\", \"glow_squid.ink_squirt\", \"conduit.short\", \"bubble.pop\", \"bubble.up\", \"tilt_up.big_dripleaf\", \"bubble.upinside\", \"power.on.sculk_sensor\", \"bubble.down\", \"bubble.downinside\", \"burp\", \"bucket.fill.water\", \"bucket.empty.water\", \"bucket.fill.lava\", \"bucket.empty.lava\", \"bucket.fill.fish\", \"drip.water.pointed_dripstone\", \"bucket.empty.fish\", \"armor.equip_chain\", \"armor.equip_diamond\", \"armor.equip_elytra\", \"armor.equip_generic\", \"armor.equip_gold\", \"armor.equip_iron\", \"armor.equip_leather\", \"armor.equip_netherite\", \"record.13\", \"record.cat\", \"record.blocks\", \"record.chirp\", \"record.far\", \"record.mall\", \"record.mellohi\", \"record.stal\", \"record.strad\", \"record.ward\", \"record.11\", \"record.wait\", \"cast.spell\", \"record.pigstep\", \"record.otherside\", \"flop\", \"elderguardian.curse\", \"teleport\", \"shulker.open\", \"trapdoor.close\", \"shulker.close\", \"mob.warning\", \"mob.warning.baby\", \"haggle\", \"pressure_plate.click_on\", \"haggle.yes\", \"haggle.no\", \"haggle.idle\", \"disappeared\", \"chorusgrow\", \"door.close\", \"chorusdeath\", \"glass\", \"potion.brewed\", \"prepare.attack\", \"roar\", \"prepare.summon\", \"prepare.wololo\", \"ambient.warped_forest.loop\", \"fang\", \"charge\", \"particle.soul_escape.quiet\", \"camera.take_picture\", \"block.bell.hit\", \"leashknot.break\", \"leashknot.place\", \"growl\", \"block.composter.fill_success\", \"whine\", \"pant\", \"block.sweet_berry_bush.hurt\", \"purr\", \"purreow\", \"item.book.put\", \"death.min.volume\", \"death.mid.volume\", \"block.composter.empty\", \"imitate.blaze\", \"imitate.cave_spider\", \"ui.stonecutter.take_result\", \"imitate.creeper\", \"imitate.elder_guardian\", \"block.barrel.open\", \"imitate.ender_dragon\", \"imitate.enderman\", \"imitate.evocation_illager\", \"ambient.in.raid\", \"imitate.ghast\", \"imitate.husk\", \"convert_mooshroom\", \"imitate.illusion_illager\", \"imitate.magma_cube\", \"block.smoker.smoke\", \"imitate.polar_bear\", \"imitate.shulker\", \"raid.horn\", \"imitate.silverfish\", \"imitate.skeleton\", \"imitate.slime\", \"imitate.spider\", \"block.beehive.work\", \"imitate.stray\", \"imitate.vex\", \"imitate.vindication_illager\", \"imitate.witch\", \"imitate.wither\", \"imitate.wither_skeleton\", \"block.beehive.enter\", \"imitate.wolf\", \"imitate.zombie\", \"tempt\", \"imitate.zombie_pigman\", \"imitate.zombie_villager\", \"block.end_portal.spawn\", \"bottle.dragonbreath\", \"balloonpop\", \"sparkler.active\", \"item.trident.hit\", \"respawn_anchor.basalt_deltas.mood\", \"item.trident.hit_ground\", \"respawn_anchor.charge\", \"item.trident.return\", \"item.trident.riptide_1\", \"angry\", \"item.trident.riptide_2\", \"item.trident.riptide_3\", \"retreat\", \"item.trident.throw\", \"item.trident.thunder\", \"smithing_table.use\", \"block.fletching_table.use\", \"elemconstruct.open\", \"respawn_anchor.set_spawn\", \"icebomb.hit\", \"ambient.soulsand_valley.mood\", \"lt.reaction.icebomb\", \"lt.reaction.bleach\", \"lt.reaction.epaste\", \"lt.reaction.epaste2\", \"heartbeat\", \"lt.reaction.fertilizer\", \"lt.reaction.fireball\", \"ambient.crimson_forest.loop\", \"lt.reaction.mgsalt\", \"lt.reaction.miscfire\", \"cauldron_drip.water.pointed_dripstone\", \"lt.reaction.fire\", \"lt.reaction.miscexplosion\", \"ambient.basalt_deltas.additions\", \"lt.reaction.miscmystical\", \"lt.reaction.miscmystical2\", \"ambient.nether_wastes.loop\", \"lt.reaction.product\", \"sparkler.use\", \"bucket.fill.powder_snow\", \"glowstick.use\", \"block.turtle_egg.break\", \"sleep\", \"block.turtle_egg.crack\", \"block.turtle_egg.hatch\", \"block.turtle_egg.attack\", \"block.sniffer_egg.crack\", \"swoop\", \"presneeze\", \"ambient.candle\", \"sneeze\", \"tongue\", \"scared\", \"ambient.aggressive\", \"irongolem.repair\", \"ambient.worried\", \"cant_breed\", \"block.scaffolding.climb\", \"jump_to_block\", \"block.bamboo_sapling.place\", \"block.sculk_shrieker.shriek\", \"crossbow.loading.start\", \"crossbow.loading.middle\", \"cake.add_candle\", \"crossbow.loading.end\", \"crossbow.shoot\", \"agitated\", \"crossbow.quick_charge.start\", \"crossbow.quick_charge.middle\", \"charge.sculk\", \"crossbow.quick_charge.end\", \"nearby_closer\", \"item.shield.block\", \"admire\", \"portal.travel\", \"block.grindstone.use\", \"block.campfire.crackle\", \"block.sweet_berry_bush.pick\", \"block.stonecutter.use\", \"block.cartography_table.use\", \"block.composter.fill\", \"block.composter.ready\", \"stun\", \"block.barrel.close\", \"ui.cartography_table.take_result\", \"ui.loom.take_result\", \"block.blastfurnace.fire_crackle\", \"block.loom.use\", \"screech\", \"block.furnace.lit\", \"milk_suspiciously\", \"block.beehive.exit\", \"block.beehive.shear\", \"block.beehive.drip\", \"ambient.cave\", \"converted_to_zombified\", \"step_lava\", \"panic\", \"particle.soul_escape.loud\", \"respawn_anchor.deplete\", \"respawn_anchor.ambient\", \"ambient.crimson_forest.mood\", \"ambient.warped_forest.mood\", \"ambient.nether_wastes.mood\", \"ambient.crimson_forest.additions\", \"ambient.warped_forest.additions\", \"ambient.soulsand_valley.additions\", \"ambient.nether_wastes.additions\", \"ambient.soulsand_valley.loop\", \"ambient.basalt_deltas.loop\", \"lodestone_compass.link_compass_to_lodestone\", \"power.off.sculk_sensor\", \"default\", \"ram_impact.screamer\", \"lay_egg\", \"lay_spawn\", \"bucket.empty.powder_snow\", \"cauldron_drip.lava.pointed_dripstone\", \"tilt_down.big_dripleaf\", \"drip.lava.pointed_dripstone\", \"copper.wax.on\", \"scrape\", \"item.spyglass.use\", \"item.spyglass.stop_using\", \"chime.amethyst_block\", \"mob.player.hurt_on_fire\", \"mob.player.hurt_freeze\", \"hurt.screamer\", \"death.screamer\", \"milk.screamer\", \"pre_ram\", \"ram_impact\", \"squid.ink_squirt\", \"convert_to_stray\", \"extinguish.candle\", \"block.click\", \"block.sculk_catalyst.bloom\", \"nearby_close\", \"nearby_closest\", \"listening\", \"item_given\", \"item_thrown\", \"irongolem.crack\", \"horn_break\", \"horn_call0\", \"horn_call1\", \"horn_call3\", \"horn_call5\", \"horn_call7\", \"imitate.warden\", \"sonic_boom\", \"convert_to_frog\", \"block.sculk.spread\", \"block.sculk_sensor.place\", \"block.sculk_shrieker.place\", \"block.enchanting_table.use\", \"bundle.insert\", \"dash_ready\", \"pressure_plate.click_off\", \"button.click_off\", \"door.open\", \"trapdoor.open\", \"fence_gate.open\", \"insert\", \"insert_enchanted\", \"shatter_pot\", \"brush\", \"block.sign.waxed_interact_fail\", \"note.bass\""
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:render_offsets",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Render offsets component: optional values can be given to offset the way the item is rendered.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "main_hand",
-                                            "content": [
-                                                "Main hand transform data.",
-                                                "Type: main_hand"
-                                            ]
-                                        },
-                                        {
-                                            "section": "off_hand",
-                                            "content": [
-                                                "Offhand hand transform data.",
-                                                "Type: off_hand"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:repairable",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "repair_items",
-                                            "content": [
-                                                "List of repair item entries. Each entry needs to define a list of strings for `items` that can be used for the repair and an optional `repair_amount` for how much durability is repaired.",
-                                                "Type: array of repair_items"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:shooter",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Shooter Item Component.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "ammunition",
-                                            "content": [
-                                                "Ammunition.",
-                                                "Type: array of ammunition"
-                                            ]
-                                        },
-                                        {
-                                            "section": "charge_on_draw",
-                                            "content": [
-                                                "Charge on draw? Default is set to false.",
-                                                "Type: boolean"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_draw_duration",
-                                            "content": [
-                                                "Draw Duration. Default is set to 0.",
-                                                "Type: max_draw_duration"
-                                            ]
-                                        },
-                                        {
-                                            "section": "scale_power_by_draw_duration",
-                                            "content": [
-                                                "Scale power by draw duration? Default is set to false.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:should_despawn",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Should despawn component determines if the item should eventually despawn while floating in the world",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the item should eventually despawn while floating in the world",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:stacked_by_data",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Whether the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:throwable",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Throwable item component. Throwable items, such as a snowball.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-                                        {
-                                            "section": "do_swing_animation",
-                                            "content": [
-                                                "Whether the item should use the swing animation when thrown. Default is set to false.",
-                                                "Type: boolean"
-                                            ]
-                                        },
-                                        {
-                                            "section": "launch_power_scale",
-                                            "content": [
-                                                "The scale at which the power of the throw increases. Default is set to 1.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_draw_duration",
-                                            "content": [
-                                                "The maximum duration to draw a throwable item. Default is set to 0.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "max_launch_power",
-                                            "content": [
-                                                "The maximum power to launch the throwable item. Default is set to 1.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "min_draw_duration",
-                                            "content": [
-                                                "The minimum duration to draw a throwable item. Default is set to 0.0.",
-                                                "Type: float"
-                                            ]
-                                        },
-                                        {
-                                            "section": "scale_power_by_draw_duration",
-                                            "content": [
-                                                "Whether or not the power of the throw increases with duration charged. Default is set to false.",
-                                                "Type: boolean"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:use_animation",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "This component determines which animation plays when using the item.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "Which animation to play when using the item.",
-                                                "Accepted values:"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:use_duration",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
-                                        {
-                                            "section": "value",
-                                            "content": [
-                                                "How long the item takes to use in seconds.",
-                                                "Type: float"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:weapon",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.",
-                                        "Experimental toggles required: Holiday Creator Features",
-                                        {
-                                            "section": "on_hit_block",
-                                            "content": [
-                                                "Trigger for letting you know when this item is used to hit a block",
-                                                "Type: on_hit_block"
-                                            ]
-                                        },
-                                        {
-                                            "section": "on_hurt_entity",
-                                            "content": [
-                                                "Trigger for letting you know when this item is used to hurt another mob",
-                                                "Type: on_hurt_entity"
-                                            ]
-                                        },
-                                        {
-                                            "section": "on_not_hurt_entity",
-                                            "content": [
-                                                "Trigger for letting you know when this item hit another actor, but didn't do damage",
-                                                "Type: on_not_hurt_entity"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "Name": "minecraft:wearable",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": [
-                                        "Wearable item component.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
-                                        {
-                                            "section": "protection",
-                                            "content": [
-                                                "How much protection the wearable item has. Default is set to 0.",
-                                                "Type: integer"
-                                            ]
-                                        },
-                                        {
-                                            "section": "slot",
-                                            "content": [
-                                                "Determines where the item can be worn. If any non-hand slot is chosen, the max stack size is set to 1.",
-                                                "Accepted values: \"slot.weapon.offhand\", \"slot.armor.head\", \"slot.armor.chest\", \"slot.armor.legs\", \"slot.armor.feet\""
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                },
                 {
                     "name": "Item Definition Properties",
                     "id": "Item Definition Properties",
@@ -797,6 +67,223 @@
                                         "  }",
                                         "}"
                                     ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "components v1.20.30",
+                    "id": "components v1.20.30",
+                    "level": 2,
+                    "content": [
+                        "List of all components that used in this item.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minecraft:allow_off_hand",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The allow off hand component determines whether the item can be placed in the off hand slot of the inventory."
+                                },
+                                {
+                                    "Name": "minecraft:block_placer",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Block Placer item component. Items with this component will place a block when used.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:can_destroy_in_creative",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The can destroy in creative component determines if the item will break blocks in creative when swinging."
+                                },
+                                {
+                                    "Name": "minecraft:chargeable",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Allows an item to be used over a duration.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:cooldown",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:damage",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The damage component determines how much extra damage the item does on attack."
+                                },
+                                {
+                                    "Name": "minecraft:digger",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Digger item component. You can specify how quickly this item can dig specific blocks.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)"
+                                },
+                                {
+                                    "Name": "minecraft:display_name",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Display Name item component. Determines the text shown whenever an item's name is displayed (ex. hover text).Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:durability",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Durability item component. Determines how much damage this item takes before breaking and allows the item to be combined in crafting.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:enchantable",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The enchantable component determines what enchantments can be applied to the item. Not all enchantments will have an effect on all item components."
+                                },
+                                {
+                                    "Name": "minecraft:entity_placer",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:food",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "When an item has a food component, it becomes edible to the player.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:fuel",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:glint",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The glint component determines whether the item has the enchanted glint render effect on it."
+                                },
+                                {
+                                    "Name": "minecraft:hand_equipped",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "This component determines if an item is rendered like a tool while in hand."
+                                },
+                                {
+                                    "Name": "minecraft:hover_text_color",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The hover text color component determines the color of the item name when hovering over it."
+                                },
+                                {
+                                    "Name": "minecraft:icon",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Icon item component. Determines the icon to represent the item in the UI and elsewhere.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:item_storage",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": ""
+                                },
+                                {
+                                    "Name": "minecraft:liquid_clipped",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The liquid clipped component determines whether the item interacts with liquid blocks on use."
+                                },
+                                {
+                                    "Name": "minecraft:max_stack_size",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The max stack size component determines how many of the item can be stacked together."
+                                },
+                                {
+                                    "Name": "minecraft:on_use",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The on_use item component allows you to receive an event when the item is used.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:on_use_on",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The on_use_on item component allows you to receive an event when the item is used on a block in the world.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:projectile",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Projectile item component. projectile items shoot out, like an arrow.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:record",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Record Item Component. Used by record items to play music. Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:render_offsets",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Render offsets component: optional values can be given to offset the way the item is rendered.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:repairable",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:shooter",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Shooter Item Component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:should_despawn",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Should despawn component determines if the item should eventually despawn while floating in the world"
+                                },
+                                {
+                                    "Name": "minecraft:stacked_by_data",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world."
+                                },
+                                {
+                                    "Name": "minecraft:throwable",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Throwable item component. Throwable items, such as a snowball.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                },
+                                {
+                                    "Name": "minecraft:use_animation",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "This component determines which animation plays when using the item."
+                                },
+                                {
+                                    "Name": "minecraft:use_duration",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food."
+                                },
+                                {
+                                    "Name": "minecraft:weapon",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.Experimental toggles required: Holiday Creator Features"
+                                },
+                                {
+                                    "Name": "minecraft:wearable",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Wearable item component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)"
                                 }
                             ]
                         }
@@ -859,8 +346,419 @@
                     ]
                 },
                 {
-                    "name": "minecraft:item v1.20.10",
-                    "id": "minecraft:item v1.20.10",
+                    "name": "minecraft:allow_off_hand",
+                    "id": "minecraft:allow_off_hand",
+                    "level": 2,
+                    "content": [
+                        "The allow off hand component determines whether the item can be placed in the off hand slot of the inventory.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item can be placed in the off hand slot."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:block_placer",
+                    "id": "minecraft:block_placer",
+                    "level": 2,
+                    "content": [
+                        "Block Placer item component. Items with this component will place a block when used.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "block",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Defines the block that will be placed."
+                                },
+                                {
+                                    "Name": "use_on",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:can_destroy_in_creative",
+                    "id": "minecraft:can_destroy_in_creative",
+                    "level": 2,
+                    "content": [
+                        "The can destroy in creative component determines if the item will break blocks in creative when swinging.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item can destroy blocks while in creative."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:chargeable",
+                    "id": "minecraft:chargeable",
+                    "level": 2,
+                    "content": [
+                        "Allows an item to be used over a duration.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "movement_modifier",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "Modifier value to scale the players movement speed when item is in use."
+                                },
+                                {
+                                    "Name": "on_complete",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Event trigger for when the item has completed its use duration."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:cooldown",
+                    "id": "minecraft:cooldown",
+                    "level": 2,
+                    "content": [
+                        "Cool down time for a component. After you use an item, all items specified with the same `cool down category` setting becomes unusable for the duration specified by the 'cool down time' setting in this component.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "category",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The type of cool down for this item. All items with a cool down component with the same category are put on cool down when one is used."
+                                },
+                                {
+                                    "Name": "duration",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "The duration of time (in seconds) items with a matching category will spend cooling down before becoming usable again."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:damage",
+                    "id": "minecraft:damage",
+                    "level": 2,
+                    "content": [
+                        "The damage component determines how much extra damage the item does on attack.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "How much extra damage the item does, must be a positive number."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:digger",
+                    "id": "minecraft:digger",
+                    "level": 2,
+                    "content": [
+                        "Digger item component. You can specify how quickly this item can dig specific blocks.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "destroy_speeds",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "A list of blocks to dig with correlating speeds of digging."
+                                },
+                                {
+                                    "Name": "on_dig",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "In format versions before 1.20.20, trigger for when you dig a block that isn't listed in destroy_speeds"
+                                },
+                                {
+                                    "Name": "use_efficiency",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether this item should be impacted if the efficiency enchant is applied to it."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:display_name",
+                    "id": "minecraft:display_name",
+                    "level": 2,
+                    "content": [
+                        "Display Name item component. Determines the text shown whenever an item's name is displayed (ex. hover text).",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "The display name for an item."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:durability",
+                    "id": "minecraft:durability",
+                    "level": 2,
+                    "content": [
+                        "Durability item component. Determines how much damage this item takes before breaking and allows the item to be combined in crafting.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "damage_chance",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Damage chance is the percentage chance of this item losing durability. Default is set to 100. Defined as an int range with min and max value."
+                                },
+                                {
+                                    "Name": "max_durability",
+                                    "Type": "Integer",
+                                    "Default Value": "",
+                                    "Description": "Max durability is the amount of damage that this item can take before breaking. This is a required parameter and has a minimum of 0."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:enchantable",
+                    "id": "minecraft:enchantable",
+                    "level": 2,
+                    "content": [
+                        "The enchantable component determines what enchantments can be applied to the item. Not all enchantments will have an effect on all item components.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "slot",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "What enchantments can be applied (ex. Using `bow` would allow this item to be enchanted as if it were a bow)."
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "The value of the enchantment (minimum of 0)."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:entity_placer",
+                    "id": "minecraft:entity_placer",
+                    "level": 2,
+                    "content": [
+                        "Entity placer item component. You can specifiy allowed blocks that the item is restricted to.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "dispense_on",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "List of block descriptors that contain blocks that this item can be dispensed on. If left empty, all blocks will be allowed."
+                                },
+                                {
+                                    "Name": "entity",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The entity to be placed in the world."
+                                },
+                                {
+                                    "Name": "use_on",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:food",
+                    "id": "minecraft:food",
+                    "level": 2,
+                    "content": [
+                        "When an item has a food component, it becomes edible to the player.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "can_always_eat",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "If true you can always eat this item (even when not hungry). Default is set to false."
+                                },
+                                {
+                                    "Name": "nutrition",
+                                    "Type": "Integer",
+                                    "Default Value": "",
+                                    "Description": "The value that is added to the actor's nutrition when the item is used. Default is set to 0."
+                                },
+                                {
+                                    "Name": "on_consume",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Event trigger for when the item is consumed."
+                                },
+                                {
+                                    "Name": "saturation_modifier",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "Saturation Modifier is used in this formula: (nutrition * saturation_modifier * 2) when applying the saturation buff. Default is set to 0.6."
+                                },
+                                {
+                                    "Name": "using_converts_to",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "When used, converts to the item specified by the string in this field. Default does not convert item."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:fuel",
+                    "id": "minecraft:fuel",
+                    "level": 2,
+                    "content": [
+                        "Fuel item component. Allows this item to be used as fuel in a furnace to 'cook' other items.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "duration",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "How long in seconds will this fuel cook items for."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:glint",
+                    "id": "minecraft:glint",
+                    "level": 2,
+                    "content": [
+                        "The glint component determines whether the item has the enchanted glint render effect on it.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item has the glint effect."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:hand_equipped",
+                    "id": "minecraft:hand_equipped",
+                    "level": 2,
+                    "content": [
+                        "This component determines if an item is rendered like a tool while in hand.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "If the item is rendered like a tool while in hand."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:hover_text_color",
+                    "id": "minecraft:hover_text_color",
+                    "level": 2,
+                    "content": [
+                        "The hover text color component determines the color of the item name when hovering over it.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The color of the item's hover text."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:icon",
+                    "id": "minecraft:icon",
+                    "level": 2,
+                    "content": [
+                        "Icon item component. Determines the icon to represent the item in the UI and elsewhere.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "texture",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "The key from the resource_pack/textures/item_texture.json 'texture_data' object associated with the texture file."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:item v1.20.30",
+                    "id": "minecraft:item v1.20.30",
                     "level": 2,
                     "content": [
                         "Item definition, which includes the \"description\" and \"components\" sections.",
@@ -882,9 +780,413 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "minecraft:liquid_clipped",
+                    "id": "minecraft:liquid_clipped",
+                    "level": 2,
+                    "content": [
+                        "The liquid clipped component determines whether the item interacts with liquid blocks on use.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item interacts with liquid blocks on use."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:max_stack_size",
+                    "id": "minecraft:max_stack_size",
+                    "level": 2,
+                    "content": [
+                        "The max stack size component determines how many of the item can be stacked together.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "How many of the item that can be stacked."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:on_use",
+                    "id": "minecraft:on_use",
+                    "level": 2,
+                    "content": [
+                        "The on_use item component allows you to receive an event when the item is used.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "on_use",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Event trigger for when the item is used."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:on_use_on",
+                    "id": "minecraft:on_use_on",
+                    "level": 2,
+                    "content": [
+                        "The on_use_on item component allows you to receive an event when the item is used on a block in the world.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "on_use_on",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Event trigger for when the item is used."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:projectile",
+                    "id": "minecraft:projectile",
+                    "level": 2,
+                    "content": [
+                        "Projectile item component. projectile items shoot out, like an arrow.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minimum_critical_power",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "How long you must charge a projectile for it to critically hit."
+                                },
+                                {
+                                    "Name": "projectile_entity",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "The entity to be fired as a projectile."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:record",
+                    "id": "minecraft:record",
+                    "level": 2,
+                    "content": [
+                        "Record Item Component. Used by record items to play music.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "comparator_signal",
+                                    "Type": "Integer",
+                                    "Default Value": "",
+                                    "Description": "Signal strength for comparator blocks to use, from 1 - 13."
+                                },
+                                {
+                                    "Name": "duration",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "Duration of sound event in seconds, float value."
+                                },
+                                {
+                                    "Name": "sound_event",
+                                    "Type": "\"death.to.zombie\", \"jump.prevent\", \"item.use.on\", \"hit\", \"step\", \"break\", \"swim\", \"mob.player.hurt_drown\", \"step.baby\", \"fly\", \"horn_call4\", \"jump\", \"place\", \"heavy.step\", \"gallop\", \"fall\", \"hurt\", \"fizz\", \"ambient.screamer\", \"hurt.baby\", \"hurt.in.water\", \"death\", \"flap\", \"death.baby\", \"death.in.water\", \"ambient\", \"ambient.baby\", \"ambient.in.water\", \"ignite\", \"ambient.tame\", \"thunder\", \"random.anvil_use\", \"ambient.pollinate\", \"breathe\", \"mad\", \"boost\", \"bow\", \"squish.big\", \"squish.small\", \"fall.big\", \"fall.small\", \"splash\", \"drink\", \"shear\", \"block.end_portal_frame.fill\", \"drink.honey\", \"drink.milk\", \"pick_berries.cave_vines\", \"born\", \"eat\", \"reappeared\", \"takeoff\", \"shake\", \"plop\", \"land\", \"saddle\", \"armor\", \"item_taken\", \"mob.armor_stand.place\", \"add.chest\", \"record.5\", \"throw\", \"attack\", \"block.frog_spawn.hatch\", \"attack.nodamage\", \"attack.strong\", \"listening_angry\", \"warn\", \"sonic_charge\", \"milk\", \"bundle.remove_one\", \"explode\", \"fire\", \"fuse\", \"block.frog_spawn.break\", \"stare\", \"spawn\", \"bundle.drop_contents\", \"shoot\", \"break.block\", \"launch\", \"blast\", \"horn_call2\", \"large.blast\", \"twinkle\", \"step_sand\", \"remedy\", \"unfect\", \"copper.wax.off\", \"convert_to_drowned\", \"horn_call6\", \"levelup\", \"bow.hit\", \"brush_completed\", \"bullet.hit\", \"extinguish.fire\", \"fence_gate.close\", \"item.fizz\", \"chest.open\", \"button.click_on\", \"chest.closed\", \"shulkerbox.open\", \"pickup_enchanted\", \"shulkerbox.closed\", \"enderchest.open\", \"pumpkin.carve\", \"enderchest.closed\", \"power.on\", \"break_pot\", \"power.off\", \"attach\", \"pickup\", \"detach\", \"deny\", \"record.relic\", \"tripod\", \"pop\", \"drop.slot\", \"note\", \"mob.pig.death\", \"thorns\", \"piston.in\", \"block.sniffer_egg.hatch\", \"piston.out\", \"portal\", \"water\", \"lava.pop\", \"lava\", \"celebrate\", \"beacon.activate\", \"beacon.ambient\", \"block.smithing_table.use\", \"beacon.deactivate\", \"beacon.power\", \"pre_ram.screamer\", \"conduit.activate\", \"conduit.ambient\", \"block.click.fail\", \"conduit.attack\", \"conduit.deactivate\", \"glow_squid.ink_squirt\", \"conduit.short\", \"bubble.pop\", \"bubble.up\", \"tilt_up.big_dripleaf\", \"bubble.upinside\", \"power.on.sculk_sensor\", \"bubble.down\", \"bubble.downinside\", \"burp\", \"bucket.fill.water\", \"undefined\", \"bucket.empty.water\", \"bucket.fill.lava\", \"bucket.empty.lava\", \"bucket.fill.fish\", \"drip.water.pointed_dripstone\", \"bucket.empty.fish\", \"armor.equip_chain\", \"armor.equip_diamond\", \"armor.equip_elytra\", \"armor.equip_generic\", \"armor.equip_gold\", \"armor.equip_iron\", \"armor.equip_leather\", \"armor.equip_netherite\", \"record.13\", \"record.cat\", \"record.blocks\", \"record.chirp\", \"record.far\", \"record.mall\", \"record.mellohi\", \"record.stal\", \"record.strad\", \"record.ward\", \"record.11\", \"record.wait\", \"cast.spell\", \"record.pigstep\", \"record.otherside\", \"flop\", \"elderguardian.curse\", \"teleport\", \"shulker.open\", \"trapdoor.close\", \"shulker.close\", \"mob.warning\", \"mob.warning.baby\", \"haggle\", \"pressure_plate.click_on\", \"haggle.yes\", \"haggle.no\", \"haggle.idle\", \"disappeared\", \"chorusgrow\", \"door.close\", \"chorusdeath\", \"glass\", \"potion.brewed\", \"prepare.attack\", \"roar\", \"prepare.summon\", \"prepare.wololo\", \"ambient.warped_forest.loop\", \"fang\", \"charge\", \"particle.soul_escape.quiet\", \"camera.take_picture\", \"block.bell.hit\", \"leashknot.break\", \"leashknot.place\", \"growl\", \"block.composter.fill_success\", \"whine\", \"pant\", \"block.sweet_berry_bush.hurt\", \"purr\", \"purreow\", \"item.book.put\", \"death.min.volume\", \"death.mid.volume\", \"block.composter.empty\", \"imitate.blaze\", \"imitate.cave_spider\", \"ui.stonecutter.take_result\", \"imitate.creeper\", \"imitate.elder_guardian\", \"block.barrel.open\", \"imitate.ender_dragon\", \"imitate.enderman\", \"imitate.evocation_illager\", \"ambient.in.raid\", \"imitate.ghast\", \"imitate.husk\", \"convert_mooshroom\", \"imitate.illusion_illager\", \"imitate.magma_cube\", \"block.smoker.smoke\", \"imitate.polar_bear\", \"imitate.shulker\", \"raid.horn\", \"imitate.silverfish\", \"imitate.skeleton\", \"imitate.slime\", \"imitate.spider\", \"block.beehive.work\", \"imitate.stray\", \"imitate.vex\", \"imitate.vindication_illager\", \"imitate.witch\", \"imitate.wither\", \"imitate.wither_skeleton\", \"block.beehive.enter\", \"imitate.wolf\", \"imitate.zombie\", \"tempt\", \"imitate.zombie_pigman\", \"imitate.zombie_villager\", \"block.end_portal.spawn\", \"bottle.dragonbreath\", \"balloonpop\", \"sparkler.active\", \"item.trident.hit\", \"respawn_anchor.basalt_deltas.mood\", \"item.trident.hit_ground\", \"respawn_anchor.charge\", \"item.trident.return\", \"item.trident.riptide_1\", \"angry\", \"item.trident.riptide_2\", \"item.trident.riptide_3\", \"retreat\", \"item.trident.throw\", \"item.trident.thunder\", \"smithing_table.use\", \"block.fletching_table.use\", \"elemconstruct.open\", \"respawn_anchor.set_spawn\", \"icebomb.hit\", \"ambient.soulsand_valley.mood\", \"lt.reaction.icebomb\", \"lt.reaction.bleach\", \"lt.reaction.epaste\", \"lt.reaction.epaste2\", \"heartbeat\", \"lt.reaction.fertilizer\", \"lt.reaction.fireball\", \"ambient.crimson_forest.loop\", \"lt.reaction.mgsalt\", \"lt.reaction.miscfire\", \"cauldron_drip.water.pointed_dripstone\", \"lt.reaction.fire\", \"lt.reaction.miscexplosion\", \"ambient.basalt_deltas.additions\", \"lt.reaction.miscmystical\", \"lt.reaction.miscmystical2\", \"ambient.nether_wastes.loop\", \"lt.reaction.product\", \"sparkler.use\", \"bucket.fill.powder_snow\", \"glowstick.use\", \"block.turtle_egg.break\", \"sleep\", \"block.turtle_egg.crack\", \"block.turtle_egg.hatch\", \"block.turtle_egg.attack\", \"block.sniffer_egg.crack\", \"swoop\", \"presneeze\", \"ambient.candle\", \"sneeze\", \"tongue\", \"scared\", \"ambient.aggressive\", \"irongolem.repair\", \"ambient.worried\", \"cant_breed\", \"block.scaffolding.climb\", \"jump_to_block\", \"block.bamboo_sapling.place\", \"block.sculk_shrieker.shriek\", \"crossbow.loading.start\", \"crossbow.loading.middle\", \"cake.add_candle\", \"crossbow.loading.end\", \"crossbow.shoot\", \"agitated\", \"crossbow.quick_charge.start\", \"crossbow.quick_charge.middle\", \"charge.sculk\", \"crossbow.quick_charge.end\", \"nearby_closer\", \"item.shield.block\", \"admire\", \"portal.travel\", \"block.grindstone.use\", \"block.campfire.crackle\", \"block.sweet_berry_bush.pick\", \"block.stonecutter.use\", \"block.cartography_table.use\", \"block.composter.fill\", \"block.composter.ready\", \"stun\", \"block.barrel.close\", \"ui.cartography_table.take_result\", \"ui.loom.take_result\", \"block.blastfurnace.fire_crackle\", \"block.loom.use\", \"screech\", \"block.furnace.lit\", \"milk_suspiciously\", \"block.beehive.exit\", \"block.beehive.shear\", \"block.beehive.drip\", \"ambient.cave\", \"converted_to_zombified\", \"step_lava\", \"panic\", \"particle.soul_escape.loud\", \"respawn_anchor.deplete\", \"respawn_anchor.ambient\", \"ambient.crimson_forest.mood\", \"ambient.warped_forest.mood\", \"ambient.nether_wastes.mood\", \"ambient.crimson_forest.additions\", \"ambient.warped_forest.additions\", \"ambient.soulsand_valley.additions\", \"ambient.nether_wastes.additions\", \"ambient.soulsand_valley.loop\", \"ambient.basalt_deltas.loop\", \"lodestone_compass.link_compass_to_lodestone\", \"power.off.sculk_sensor\", \"default\", \"ram_impact.screamer\", \"lay_egg\", \"lay_spawn\", \"bucket.empty.powder_snow\", \"cauldron_drip.lava.pointed_dripstone\", \"tilt_down.big_dripleaf\", \"drip.lava.pointed_dripstone\", \"copper.wax.on\", \"scrape\", \"item.spyglass.use\", \"item.spyglass.stop_using\", \"chime.amethyst_block\", \"mob.player.hurt_on_fire\", \"mob.player.hurt_freeze\", \"hurt.screamer\", \"death.screamer\", \"milk.screamer\", \"pre_ram\", \"ram_impact\", \"squid.ink_squirt\", \"convert_to_stray\", \"extinguish.candle\", \"block.click\", \"block.sculk_catalyst.bloom\", \"nearby_close\", \"nearby_closest\", \"listening\", \"item_given\", \"item_thrown\", \"irongolem.crack\", \"horn_break\", \"horn_call0\", \"horn_call1\", \"horn_call3\", \"horn_call5\", \"horn_call7\", \"imitate.warden\", \"sonic_boom\", \"convert_to_frog\", \"block.sculk.spread\", \"block.sculk_sensor.place\", \"block.sculk_shrieker.place\", \"block.enchanting_table.use\", \"bundle.insert\", \"dash_ready\", \"pressure_plate.click_off\", \"button.click_off\", \"door.open\", \"trapdoor.open\", \"fence_gate.open\", \"insert\", \"insert_enchanted\", \"shatter_pot\", \"brush\", \"block.sign.waxed_interact_fail\", \"note.bass\", \"mob.husk.convert_to_zombie\", \"mob.hoglin.converted_to_zombified\"",
+                                    "Default Value": "",
+                                    "Description": "Sound event type: 13, cat, blocks, chirp, far, mall, mellohi, stal, strad, ward, 11, wait, pigstep, otherside, 5, relic."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:render_offsets",
+                    "id": "minecraft:render_offsets",
+                    "level": 2,
+                    "content": [
+                        "Render offsets component: optional values can be given to offset the way the item is rendered.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "main_hand",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Main hand transform data."
+                                },
+                                {
+                                    "Name": "off_hand",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Offhand hand transform data."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:repairable",
+                    "id": "minecraft:repairable",
+                    "level": 2,
+                    "content": [
+                        "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "repair_items",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "List of repair item entries. Each entry needs to define a list of strings for `items` that can be used for the repair and an optional `repair_amount` for how much durability is repaired."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:shooter",
+                    "id": "minecraft:shooter",
+                    "level": 2,
+                    "content": [
+                        "Shooter Item Component.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "ammunition",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "Ammunition."
+                                },
+                                {
+                                    "Name": "charge_on_draw",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Charge on draw? Default is set to false."
+                                },
+                                {
+                                    "Name": "max_draw_duration",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Draw Duration. Default is set to 0."
+                                },
+                                {
+                                    "Name": "scale_power_by_draw_duration",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Scale power by draw duration? Default is set to false."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:should_despawn",
+                    "id": "minecraft:should_despawn",
+                    "level": 2,
+                    "content": [
+                        "Should despawn component determines if the item should eventually despawn while floating in the world",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item should eventually despawn while floating in the world"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:stacked_by_data",
+                    "id": "minecraft:stacked_by_data",
+                    "level": 2,
+                    "content": [
+                        "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:throwable",
+                    "id": "minecraft:throwable",
+                    "level": 2,
+                    "content": [
+                        "Throwable item component. Throwable items, such as a snowball.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "do_swing_animation",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether the item should use the swing animation when thrown. Default is set to false."
+                                },
+                                {
+                                    "Name": "launch_power_scale",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "The scale at which the power of the throw increases. Default is set to 1.0."
+                                },
+                                {
+                                    "Name": "max_draw_duration",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "The maximum duration to draw a throwable item. Default is set to 0.0."
+                                },
+                                {
+                                    "Name": "max_launch_power",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "The maximum power to launch the throwable item. Default is set to 1.0."
+                                },
+                                {
+                                    "Name": "min_draw_duration",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "The minimum duration to draw a throwable item. Default is set to 0.0."
+                                },
+                                {
+                                    "Name": "scale_power_by_draw_duration",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether or not the power of the throw increases with duration charged. Default is set to false."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:use_animation",
+                    "id": "minecraft:use_animation",
+                    "level": 2,
+                    "content": [
+                        "This component determines which animation plays when using the item.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "",
+                                    "Default Value": "",
+                                    "Description": "Which animation to play when using the item."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:use_duration",
+                    "id": "minecraft:use_duration",
+                    "level": 2,
+                    "content": [
+                        "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "value",
+                                    "Type": "Float",
+                                    "Default Value": "",
+                                    "Description": "How long the item takes to use in seconds."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:weapon",
+                    "id": "minecraft:weapon",
+                    "level": 2,
+                    "content": [
+                        "Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.",
+                        "Experimental toggles required: Holiday Creator Features",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "on_hit_block",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Trigger for letting you know when this item is used to hit a block"
+                                },
+                                {
+                                    "Name": "on_hurt_entity",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Trigger for letting you know when this item is used to hurt another mob"
+                                },
+                                {
+                                    "Name": "on_not_hurt_entity",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "Trigger for letting you know when this item hit another actor, but didn't do damage"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "minecraft:wearable",
+                    "id": "minecraft:wearable",
+                    "level": 2,
+                    "content": [
+                        "Wearable item component.",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "protection",
+                                    "Type": "Integer",
+                                    "Default Value": "",
+                                    "Description": "How much protection the wearable item has. Default is set to 0."
+                                },
+                                {
+                                    "Name": "slot",
+                                    "Type": "\"slot.weapon.offhand\", \"slot.armor.head\", \"slot.armor.chest\", \"slot.armor.legs\", \"slot.armor.feet\"",
+                                    "Default Value": "",
+                                    "Description": "Determines where the item can be worn. If any non-hand slot is chosen, the max stack size is set to 1."
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
     ],
-    "__OBJECTHASH__": "cb97c65bd5794b44ac97939878fffbdc0991871b"
+    "__OBJECTHASH__": "ae15608025de73a02275e5173d6e46bc6484d977"
 }
