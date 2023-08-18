@@ -1,6 +1,6 @@
 {
     "title": "FEATURES DOCUMENTATION",
-    "version": "1.20.30.21",
+    "version": "1.20.30.22",
     "content": [],
     "sections": [
         {
@@ -829,7 +829,51 @@
                     "id": "minecraft:vegetation_patch_feature",
                     "level": 2,
                     "content": [
-                        "Feature type 'minecraft:vegetation_patch_feature' has not yet been documented."
+                        "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
+                        "Succeeds if: At least one ground base block was placed.",
+                        "Fails if: No ground base blocks were placed.",
+                        "Example: A pool of clay with dripleaves.",
+                        {
+                            "type": "code",
+                            "content": [
+                                "{",
+                                "        \"format_version\": \"1.16.0\",",
+                                "        \"minecraft:vegetation_patch_feature\": {",
+                                "          \"description\": {",
+                                "            \"identifier\": \"custom:clay_pool_with_dripleaves_feature\"",
+                                "          },",
+                                "          \"replaceable_blocks\": [",
+                                "            \"minecraft:clay\",",
+                                "            \"minecraft:moss_block\",",
+                                "            \"minecraft:sand\",",
+                                "            \"minecraft:gravel\",",
+                                "            \"minecraft:dirt\",",
+                                "            \"minecraft:podzol\",",
+                                "            \"minecraft:dirt_with_roots\",",
+                                "            \"minecraft:grass\",",
+                                "            \"minecraft:mycelium\",",
+                                "            \"minecraft:stone\",",
+                                "            \"minecraft:cave_vines\",",
+                                "            \"minecraft:cave_vines_body_with_berries\",",
+                                "            \"minecraft:cave_vines_head_with_berries\"",
+                                "          ],",
+                                "          \"ground_block\": \"minecraft:clay\",",
+                                "          \"vegetation_feature\": \"minecraft:dripleaf_feature\",",
+                                "          \"surface\": \"floor\",",
+                                "          \"depth\": 3,",
+                                "          \"vertical_range\": 5,",
+                                "          \"vegetation_chance\": 0.1,",
+                                "          \"horizontal_radius\": {",
+                                "            \"range_min\": 4,",
+                                "            \"range_max\": 8",
+                                "          },",
+                                "          \"extra_deep_block_chance\": 0.8,",
+                                "          \"extra_edge_column_chance\": 0.7,",
+                                "          \"waterlogged\": true",
+                                "        }",
+                                "      }"
+                            ]
+                        }
                     ]
                 },
                 {
@@ -2025,18 +2069,18 @@
                                         "          }",
                                         "          array \"replaceable_blocks\"",
                                         "          {",
-                                        "               \"<any array element>\" : opt",
+                                        "               \"<any array element>\" : opt // Blocks that can be replaced by the ground blocks on the patch.",
                                         "          }",
-                                        "           \"ground_block\"",
-                                        "          feature_reference \"vegetation_feature\"",
-                                        "          string \"surface\" : opt",
-                                        "           \"depth\"",
-                                        "          float \"extra_deep_block_chance\" : opt",
-                                        "          int \"vertical_range\"",
-                                        "          float \"vegetation_chance\" : opt",
-                                        "           \"horizontal_radius\"",
-                                        "          float \"extra_edge_column_chance\"<0.000000-*> : opt",
-                                        "          bool \"waterlogged\" : opt",
+                                        "           \"ground_block\" // Block used to create a base for the vegetation patch.",
+                                        "          feature_reference \"vegetation_feature\" // Feature that will be placed by the patch.",
+                                        "          string \"surface\" : opt // Determines if a vegetation patch will grow from the ceiling or the floor.",
+                                        "           \"depth\" // Depth of the base covered by the ground blocks.",
+                                        "          float \"extra_deep_block_chance\" : opt // Probability of putting the ground blocks one block deeper. Adds some randomness to the bottom of the patch.",
+                                        "          int \"vertical_range\" // Vertical range used to determine a suitable surface position for the patch.",
+                                        "          float \"vegetation_chance\" : opt // Probability of spawning vegetation on the patch. Larger numbers create a denser vegetation patch.",
+                                        "           \"horizontal_radius\" // Horizontal area that the vegetation patch will cover.",
+                                        "          float \"extra_edge_column_chance\"<0.000000-*> : opt // Probability of spawning vegetation on the edge of the patch radius.",
+                                        "          bool \"waterlogged\" : opt // If true, waterlogs the positions occupied by the ground blocks.",
                                         "      }",
                                         "      object \"minecraft:weighted_random_feature\" : opt",
                                         "      {",
@@ -2209,5 +2253,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "fa4235837074dfd80aea7fbcbccf4f7e1e348ac4"
+    "__OBJECTHASH__": "9d53812256e417b78eaef76e4c0710d431844209"
 }

@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.30.21",
+    "version": "1.20.30.22",
     "content": [],
     "sections": [
         {
@@ -151,7 +151,7 @@
                                     "Name": "minecraft:food",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "When an item has a food component, it becomes edible to the player.Experimental toggles required: Holiday Creator Features"
+                                    "Description": "When an item has a food component, it becomes edible to the player.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.30)"
                                 },
                                 {
                                     "Name": "minecraft:fuel",
@@ -182,6 +182,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": "Icon item component. Determines the icon to represent the item in the UI and elsewhere.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.0)"
+                                },
+                                {
+                                    "Name": "minecraft:interact_button",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": "This component is a boolean or string that determines if the interact button is shown in touch controls and what text is displayed on the button. When set as true, default \"Use Item\" text will be used."
                                 },
                                 {
                                     "Name": "minecraft:item_storage",
@@ -616,12 +622,12 @@
                     ]
                 },
                 {
-                    "name": "minecraft:food",
-                    "id": "minecraft:food",
+                    "name": "minecraft:food v1.20.30",
+                    "id": "minecraft:food v1.20.30",
                     "level": 2,
                     "content": [
                         "When an item has a food component, it becomes edible to the player.",
-                        "Experimental toggles required: Holiday Creator Features",
+                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.30)",
                         {
                             "type": "table",
                             "rows": [
@@ -636,12 +642,6 @@
                                     "Type": "Integer",
                                     "Default Value": "",
                                     "Description": "The value that is added to the actor's nutrition when the item is used. Default is set to 0."
-                                },
-                                {
-                                    "Name": "on_consume",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": "Event trigger for when the item is consumed."
                                 },
                                 {
                                     "Name": "saturation_modifier",
@@ -754,6 +754,14 @@
                                 }
                             ]
                         }
+                    ]
+                },
+                {
+                    "name": "minecraft:interact_button",
+                    "id": "minecraft:interact_button",
+                    "level": 2,
+                    "content": [
+                        "This component is a boolean or string that determines if the interact button is shown in touch controls and what text is displayed on the button. When set as true, default \"Use Item\" text will be used."
                     ]
                 },
                 {
@@ -1188,5 +1196,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "ae15608025de73a02275e5173d6e46bc6484d977"
+    "__OBJECTHASH__": "5ae5f43d4ce6b3d870b2429c102bb18ca98f3dd7"
 }
