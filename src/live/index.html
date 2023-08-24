@@ -20,6 +20,9 @@
                 font-size: 20px;
                 background: center/cover url(https://projectxero.top/ca/img/background2.png);
             }
+            body.no-background {
+                background: white;
+            }
             .leftbar {
                 display: flex;
                 flex: 0 0 auto;
@@ -425,6 +428,9 @@
                     return el;
                 })
             );
+            if (new URLSearchParams(window.location.search).has('nobg')) {
+                document.body.classList.add('no-background');
+            }
         </script>
     </body>
 </html>
