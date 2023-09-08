@@ -37,7 +37,6 @@
         "source": "Back",
         "bedrockLookup": {
             "返回": [
-                "hbui.PlayScreen.launchFailedModal.back",
                 "hbui.PlayScreen.experimentalWorldLoadingModal.back",
                 "hbui.PlayScreen.nonMultiplayerSkinModal.back",
                 "hbui.InboxMessageDetailsRoute.back",
@@ -125,6 +124,7 @@
                 "hbui.InboxListItem.delete",
                 "hbui.CreateNewWorld.deleteWorldModal.deleteInputLegend",
                 "hbui.FriendListItem.delete",
+                "hbui.PlayScreen.serverTab.confirmDeletion.deleteButtonInputLegend",
                 "createWorldScreen.delete",
                 "edu.templates.delete_confirm",
                 "feed.delete",
@@ -507,6 +507,26 @@
         "javaLookup": {
             "实验性": [
                 "selectWorld.experimental"
+            ]
+        }
+    },
+    {
+        "source": "Save",
+        "bedrockLookup": {
+            "保存": [
+                "hbui.PlayScreen.serverTab.unsavedChanges.saveChangesButtonInputLegend",
+                "controllerLayoutScreen.save",
+                "addExternalServerScreen.saveButtonLabel",
+                "structure_block.mode.save",
+                "structure_block.save"
+            ]
+        },
+        "javaLookup": {
+            "保存": [
+                "selectWorld.edit.save"
+            ],
+            "储存模式": [
+                "structure_block.mode.save"
             ]
         }
     },
@@ -1486,6 +1506,19 @@
         }
     },
     {
+        "source": "Chat Settings",
+        "bedrockLookup": {
+            "聊天设置": [
+                "chat.settings"
+            ]
+        },
+        "javaLookup": {
+            "聊天设置…": [
+                "options.chat.title"
+            ]
+        }
+    },
+    {
         "source": "Line Spacing",
         "bedrockLookup": {
             "行间距": [
@@ -1774,25 +1807,6 @@
         "javaLookup": {
             "重置为默认": [
                 "dataPack.validation.reset"
-            ]
-        }
-    },
-    {
-        "source": "Save",
-        "bedrockLookup": {
-            "保存": [
-                "controllerLayoutScreen.save",
-                "addExternalServerScreen.saveButtonLabel",
-                "structure_block.mode.save",
-                "structure_block.save"
-            ]
-        },
-        "javaLookup": {
-            "保存": [
-                "selectWorld.edit.save"
-            ],
-            "储存模式": [
-                "structure_block.mode.save"
             ]
         }
     },
@@ -2174,19 +2188,6 @@
         }
     },
     {
-        "source": "%1$s walked into a cactus whilst trying to escape %2$s",
-        "bedrockLookup": {
-            "%1$s 在试图逃离 %2$s 时撞入了仙人掌中": [
-                "death.attack.cactus.player"
-            ]
-        },
-        "javaLookup": {
-            "%1$s在试图逃离%2$s时撞上了仙人掌": [
-                "death.attack.cactus.player"
-            ]
-        }
-    },
-    {
         "source": "%1$s was fireballed by %2$s",
         "bedrockLookup": {
             "%1$s 被 %2$s 用火球烤死了": [
@@ -2239,32 +2240,6 @@
         }
     },
     {
-        "source": "%1$s walked into fire whilst fighting %2$s",
-        "bedrockLookup": {
-            "%1$s 在与 %2$s 战斗中不慎走入了火中": [
-                "death.attack.inFire.player"
-            ]
-        },
-        "javaLookup": {
-            "%1$s在与%2$s战斗时踏入了火中": [
-                "death.attack.inFire.player"
-            ]
-        }
-    },
-    {
-        "source": "%1$s was burnt to a crisp whilst fighting %2$s",
-        "bedrockLookup": {
-            "%1$s 在试图与 %2$s 战斗时被烤的酥脆": [
-                "death.attack.onFire.player"
-            ]
-        },
-        "javaLookup": {
-            "%1$s在与%2$s战斗时被烤得酥脆": [
-                "death.attack.onFire.player"
-            ]
-        }
-    },
-    {
         "source": "%1$s was poked to death by a sweet berry bush",
         "bedrockLookup": {
             "%1$s 被甜浆果灌木丛刺死了": [
@@ -2313,19 +2288,6 @@
         "javaLookup": {
             "%1$s被一道音波尖啸抹除了": [
                 "death.attack.sonic_boom"
-            ]
-        }
-    },
-    {
-        "source": "%1$s was obliterated by a sonically-charged shriek whilst trying to escape %2$s",
-        "bedrockLookup": {
-            "%1$s 在试图逃离 %2$s 时被一声尖锐的尖叫声摧毁了": [
-                "death.attack.sonicBoom.player"
-            ]
-        },
-        "javaLookup": {
-            "%1$s在试图逃离%2$s时被一道音波尖啸抹除了": [
-                "death.attack.sonic_boom.player"
             ]
         }
     },
@@ -4465,6 +4427,97 @@
         }
     },
     {
+        "source": "Snowy Village Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.village_snowy.name"
+            ]
+        },
+        "javaLookup": {
+            "雪原村庄地图": [
+                "filled_map.village_snowy"
+            ]
+        }
+    },
+    {
+        "source": "Taiga Village Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.village_taiga.name"
+            ]
+        },
+        "javaLookup": {
+            "针叶林村庄地图": [
+                "filled_map.village_taiga"
+            ]
+        }
+    },
+    {
+        "source": "Plains Village Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.village_plains.name"
+            ]
+        },
+        "javaLookup": {
+            "平原村庄地图": [
+                "filled_map.village_plains"
+            ]
+        }
+    },
+    {
+        "source": "Savanna Village Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.village_savanna.name"
+            ]
+        },
+        "javaLookup": {
+            "热带草原村庄地图": [
+                "filled_map.village_savanna"
+            ]
+        }
+    },
+    {
+        "source": "Desert Village Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.village_desert.name"
+            ]
+        },
+        "javaLookup": {
+            "沙漠村庄地图": [
+                "filled_map.village_desert"
+            ]
+        }
+    },
+    {
+        "source": "Jungle Explorer Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.jungle_temple.name"
+            ]
+        },
+        "javaLookup": {
+            "丛林探险家地图": [
+                "filled_map.explorer_jungle"
+            ]
+        }
+    },
+    {
+        "source": "Swamp Explorer Map",
+        "bedrockLookup": {
+            "": [
+                "item.map.exploration.swamp_hut.name"
+            ]
+        },
+        "javaLookup": {
+            "沼泽探险家地图": [
+                "filled_map.explorer_swamp"
+            ]
+        }
+    },
+    {
         "source": "Melon",
         "bedrockLookup": {
             "西瓜片": [
@@ -4909,8 +4962,8 @@
             ]
         },
         "javaLookup": {
-            "聊天设置…": [
-                "options.chat.title"
+            "": [
+                "options.chat"
             ]
         }
     },
@@ -5044,6 +5097,22 @@
         }
     },
     {
+        "source": "Language",
+        "bedrockLookup": {
+            "语言": [
+                "options.language"
+            ]
+        },
+        "javaLookup": {
+            "语言": [
+                "narrator.button.language"
+            ],
+            "": [
+                "options.language.title"
+            ]
+        }
+    },
+    {
         "source": "Jacket",
         "bedrockLookup": {
             "衣物": [
@@ -5093,6 +5162,19 @@
         "javaLookup": {
             "辅助功能": [
                 "narrator.button.accessibility"
+            ]
+        }
+    },
+    {
+        "source": "Accessibility Settings",
+        "bedrockLookup": {
+            "可访问性设置": [
+                "options.accessibility.title"
+            ]
+        },
+        "javaLookup": {
+            "辅助功能设置…": [
+                "options.accessibility.title"
             ]
         }
     },

@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.30.25",
+    "version": "1.20.40.20",
     "content": [],
     "sections": [
         {
@@ -943,7 +943,7 @@
                                 },
                                 {
                                     "Name": "query.block_property",
-                                    "Description": "Returns the value of the associated block's Block State."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.40.) Returns the value of the associated block's Block State."
                                 },
                                 {
                                     "Name": "query.block_state",
@@ -1043,7 +1043,7 @@
                                 },
                                 {
                                     "Name": "query.dash_cooldown_progress",
-                                    "Description": "Returns dash cooldown progress if the entity can dash, else it returns 0.0."
+                                    "Description": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.day",
@@ -1155,7 +1155,7 @@
                                 },
                                 {
                                     "Name": "query.has_block_property",
-                                    "Description": "Returns 1.0 if the associated block has the given block state or 0.0 if not."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not."
                                 },
                                 {
                                     "Name": "query.has_block_state",
@@ -2102,6 +2102,10 @@
                                 {
                                     "Pack min_engine_version": "1.20.10",
                                     "Description": "Renamed block_property and has_block_property to block_state and has_block_state post this version."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.20.40",
+                                    "Description": "Deprecated block_property and has_block_property."
                                 }
                             ]
                         }
@@ -2110,5 +2114,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "2632bfe38e1946a3252096ef3075ff1a7ac898fd"
+    "__OBJECTHASH__": "5c63e7ccbfa058a836d6c185c763e70b87d453d3"
 }

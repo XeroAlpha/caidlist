@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.30.25",
-    "__COMMITHASH__": "4e3d1345dc5dc83e3546db0a72aa153078a1111c",
+    "__VERSION__": "1.20.40.20",
+    "__COMMITHASH__": "303f6dbbec1a7ab79a824dd72d88164cd567a49f",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -548,6 +548,14 @@
                         },
                         {
                             "name": "in_nether",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "in_overworld",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -1624,6 +1632,9 @@
                                 },
                                 {
                                     "name": "minecraft:damage_sensor"
+                                },
+                                {
+                                    "name": "minecraft:dash"
                                 },
                                 {
                                     "name": "minecraft:despawn"
@@ -4182,6 +4193,7 @@
         "all": "",
         "anvil": "",
         "block_explosion": "",
+        "campfire": "",
         "charging": "",
         "contact": "",
         "drowning": "",
@@ -4202,6 +4214,9 @@
         "override": "",
         "piston": "",
         "projectile": "",
+        "ram_attack": "",
+        "sonic_boom": "",
+        "soul_campfire": "",
         "stalactite": "",
         "stalagmite": "",
         "starve": "",
@@ -4469,12 +4484,6 @@
                     "type": "JSON Object",
                     "defaultValue": "",
                     "description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features"
-                },
-                {
-                    "name": "minecraft:unwalkable",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Sets the block as unwalkable. Mobs would not attempt to path over top of it when the value is set to true."
                 }
             ]
         },
@@ -5064,6 +5073,7 @@
         "in_contact_with_water": "Returns true when the subject entity in contact with any water: water, rain, splash water bottle.",
         "in_lava": "Returns true when the subject entity is in lava.",
         "in_nether": "Returns true when the subject entity is in Nether.",
+        "in_overworld": "Returns true when the subject entity is in Overworld.",
         "in_water": "Returns true when the subject entity is in water.",
         "in_water_or_rain": "Returns true when the subject entity is in water or rain.",
         "inactivity_timer": "Tests if the specified duration in seconds of inactivity for despawning has been reached.",
@@ -12054,6 +12064,29 @@
                 }
             ]
         },
+        "minecraft:dash": {
+            "description": "Ability for a rideable entity to dash.",
+            "children": [
+                {
+                    "name": "cooldown_time",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "The dash cooldown in seconds. Default value is 1.000000."
+                },
+                {
+                    "name": "horizontal_momentum",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "Horizontal momentum of the dash."
+                },
+                {
+                    "name": "vertical_momentum",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "Vertical momentum of the dash."
+                }
+            ]
+        },
         "minecraft:despawn": {
             "description": "Despawns the Actor when the despawn rules or optional filters evaluate to true.",
             "children": [
@@ -15185,6 +15218,18 @@
                             "description": "List of blocks that can help the transformation of this entity"
                         },
                         {
+                            "name": "range_max",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Time in seconds to be added to value to have the maximum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)"
+                        },
+                        {
+                            "name": "range_min",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Time in seconds to be added to value to have the minimum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)"
+                        },
+                        {
                             "name": "value",
                             "type": "Decimal",
                             "defaultValue": "0",
@@ -15662,7 +15707,7 @@
         "query.armor_texture_slot": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot.",
         "query.average_frame_time": "Returns the time in *seconds* of the average frame time over the last 'n' frames.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.average_frame_time' (or the equivalent 'query.average_frame_time(0)') will return the frame time of the frame before the current one.  'query.average_frame_time(1)' will return the average frame time of the previous two frames.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Asking for more frames will result in only sampling the number of frames stored.",
         "query.block_face": "Returns the block face for this (only valid for certain triggers such as placing blocks, or interacting with block) (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
-        "query.block_property": "Returns the value of the associated block's Block State.",
+        "query.block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns the value of the associated block's Block State.",
         "query.block_state": "Returns the value of the associated block's Block State.",
         "query.blocking": "Returns 1.0 if the entity is blocking, else it returns 0.0.",
         "query.body_x_rotation": "Returns the body pitch rotation if called on an actor, else it returns 0.0.",
@@ -15687,7 +15732,7 @@
         "query.combine_entities": "Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.",
         "query.count": "Counts the number of things passed to it (arrays are counted as the number of elements they contain; non-arrays count as 1).",
         "query.current_squish_value": "Returns the squish value for the current entity, or 0.0 if this doesn't make sense.",
-        "query.dash_cooldown_progress": "Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
+        "query.dash_cooldown_progress": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
         "query.day": "Returns the day of the current level.",
         "query.death_ticks": "Returns the elapsed ticks since the mob started dying.",
         "query.debug_output": "debug log a value to the output debug window for builds that have one",
@@ -15715,7 +15760,7 @@
         "query.has_any_family": "Returns 1 if the entity has any of the specified families, else 0.",
         "query.has_armor_slot": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0",
         "query.has_biome_tag": "Returns whether or not a Block Placement Target has a specific biome tag",
-        "query.has_block_property": "Returns 1.0 if the associated block has the given block state or 0.0 if not.",
+        "query.has_block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_block_state": "Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_cape": "Returns 1.0 if the player has a cape, else it returns 0.0.",
         "query.has_collision": "Returns 1.0 if the entity has collisions enabled, else it returns 0.0.",
