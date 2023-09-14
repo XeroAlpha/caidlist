@@ -53,7 +53,11 @@ jobs:
 
     - name: Deploy
       run: |
+        cd ./web/dist/
+        tar -cvzf ../../idlist.tar.gz *
+        cd ../..
         echo "${{ secrets.SSH_KEY }}" > key.txt
         chmod 400 key.txt
-        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ./web/dist/* "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":${{ secrets.TARGET_PATH }}
+        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ./idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":${{ secrets.TARGET_PATH }}/idlist.tar.gz
+        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "cd ${{ secrets.TARGET_PATH }} && tar -xvzf ./idlist.tar.gz && rm ./idlist.tar.gz"
         rm key.txt
