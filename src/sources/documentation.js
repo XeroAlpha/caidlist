@@ -571,7 +571,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'itemComponent',
         documentation: 'Item',
-        path: ['Items', 'components v1.20.30'],
+        path: ['Items', 'components v1.20.40'],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
