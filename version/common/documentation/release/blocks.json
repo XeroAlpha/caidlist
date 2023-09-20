@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.20.10.1",
+    "version": "1.20.30.1",
     "content": [],
     "sections": [
         {
@@ -22,6 +22,12 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value)."
+                                },
+                                {
+                                    "Name": "minecraft:breathability",
+                                    "Type": "String",
+                                    "Default Value": "",
+                                    "Description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.Experimental toggles required: Holiday Creator Features"
                                 },
                                 {
                                     "Name": "minecraft:collision_box",
@@ -322,7 +328,7 @@
                                                                 {
                                                                     "Name": "event",
                                                                     "Type": "String",
-                                                                    "Default Value": "set_block_property",
+                                                                    "Default Value": "set_block_state",
                                                                     "Description": "The event that will be triggered."
                                                                 },
                                                                 {
@@ -367,7 +373,7 @@
                                                                 {
                                                                     "Name": "event",
                                                                     "Type": "String",
-                                                                    "Default Value": "set_block_property",
+                                                                    "Default Value": "set_block_state",
                                                                     "Description": "The event that will be triggered."
                                                                 },
                                                                 {
@@ -412,9 +418,18 @@
                                 },
                                 {
                                     "Name": "minecraft:transformation",
-                                    "Type": "Vector [a, b, c]",
-                                    "Default Value": "translation",
-                                    "Description": "The block's translationExperimental toggles required: Holiday Creator Features (in format versions before 1.19.80)"
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The block's translation, rotation and scale with respect to the center of its world position",
+                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.80)",
+                                        {
+                                            "section": "minecraft:transformation",
+                                            "content": [
+                                                "The block's translation"
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     "Name": "minecraft:unit_cube",
@@ -460,7 +475,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.20.10\",",
+                                        "  \"format_version\": \"1.20.30\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -767,19 +782,19 @@
                                     ]
                                 },
                                 {
-                                    "Name": "set_block_property",
+                                    "Name": "set_block_state",
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "Sets a block property on this block.",
+                                        "Sets a block state on this block.",
                                         {
                                             "type": "table",
                                             "rows": [
                                                 {
-                                                    "Name": "property",
+                                                    "Name": "state",
                                                     "Type": "Molang",
                                                     "Default Value": "",
-                                                    "Description": "Block property to set on the block."
+                                                    "Description": "Block state to set on the block."
                                                 }
                                             ]
                                         }
@@ -898,7 +913,7 @@
                                         "      },",
                                         "      \"events\": {",
                                         "        \"test_event\": {",
-                                        "          \"set_block_property\": {",
+                                        "          \"set_block_state\": {",
                                         "            \"custom:direction\": \"1\"",
                                         "          }",
                                         "        }",
@@ -1148,5 +1163,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "0e9653c0e5f54c033a0953910a0841d38ad377d8"
+    "__OBJECTHASH__": "47c1e01d6e1750f2eec05e0c001a4ad3729cafa3"
 }

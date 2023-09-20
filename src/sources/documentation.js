@@ -277,7 +277,12 @@ function findSection(node, ...path) {
     while (sectionPath.length) {
         const children = cursor.flatMap((e) => e.sections || []);
         const sectionName = sectionPath.shift();
-        cursor = children.filter((e) => e.name === sectionName);
+        cursor = children.filter((e) => {
+            if (sectionName instanceof RegExp) {
+                return sectionName.test(e.name);
+            }
+            return e.name === sectionName;
+        });
         if (!cursor.length) {
             throw new Error(`Section not found: ${path.join('/')}`);
         }
@@ -571,7 +576,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'itemComponent',
         documentation: 'Item',
-        path: ['Items', 'components v1.20.40'],
+        path: ['Items', /components v[\d.]+/],
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'

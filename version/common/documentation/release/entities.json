@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.10.1",
+    "version": "1.20.30.1",
     "content": [],
     "sections": [
         {
@@ -13723,6 +13723,12 @@
                                             "Description": "Defines the entity types this entity will attack."
                                         },
                                         {
+                                            "Name": "can_spread_on_fire",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit."
+                                        },
+                                        {
                                             "Name": "cooldown_time",
                                             "Type": "Decimal",
                                             "Default Value": "1",
@@ -16009,6 +16015,12 @@
                                             "Type": "String",
                                             "Default Value": "N/A",
                                             "Description": "Defines the entity types this entity will attack."
+                                        },
+                                        {
+                                            "Name": "can_spread_on_fire",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit."
                                         },
                                         {
                                             "Name": "cooldown_time",
@@ -19342,6 +19354,12 @@
                                             "Description": "Defines the entity types this entity will attack."
                                         },
                                         {
+                                            "Name": "can_spread_on_fire",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit."
+                                        },
+                                        {
                                             "Name": "cooldown_time",
                                             "Type": "Decimal",
                                             "Default Value": "1",
@@ -21905,8 +21923,8 @@
                                         {
                                             "Name": "cured_discount",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[-5, -20]",
-                                            "Description": "How much should the discount be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (low-tier trade discount and high-tier trade discount)"
+                                            "Default Value": "[-25, -20]",
+                                            "Description": "How much should the discount be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)"
                                         },
                                         {
                                             "Name": "display_name",
@@ -21923,19 +21941,19 @@
                                         {
                                             "Name": "max_cured_discount",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[-25, -63]",
-                                            "Description": "The max the discount can be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (low-tier trade discount and high-tier trade discount)"
+                                            "Default Value": "[-25, -20]",
+                                            "Description": "The max the discount can be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)"
                                         },
                                         {
                                             "Name": "max_nearby_cured_discount",
                                             "Type": "Integer",
                                             "Default Value": "-200",
-                                            "Description": "The max the discount can be modified by when the player has cured a nearby Zombie Villager"
+                                            "Description": "The max the discount can be modified by when the player has cured a nearby Zombie Villager. Only used when use_legacy_price_formula is true, otherwise max_cured_discount (low) is used."
                                         },
                                         {
                                             "Name": "nearby_cured_discount",
                                             "Type": "Integer",
-                                            "Default Value": "-25",
+                                            "Default Value": "-20",
                                             "Description": "How much should the discount be modified by when the player has cured a nearby Zombie Villager"
                                         },
                                         {
@@ -22051,7 +22069,18 @@
                             "id": "minecraft:equip_item",
                             "level": 4,
                             "content": [
-                                "The entity puts on the desired equipment."
+                                "The entity puts on the desired equipment.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "excluded_items",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of items that the entity should not equip."
+                                        }
+                                    ]
+                                }
                             ]
                         },
                         {
@@ -28327,5 +28356,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "7b74c91564b688ba5aca63081b7c1c944e9e5f87"
+    "__OBJECTHASH__": "c4fd56691535c7fc79eb660075485d72f0fbc8bb"
 }
