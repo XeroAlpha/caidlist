@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.40.21",
-    "__COMMITHASH__": "03069cd21347f9cb541489478b9072acffc06366",
+    "__VERSION__": "1.20.40.22",
+    "__COMMITHASH__": "16499e1415810407ec8275edbf01141b74020927",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -9054,6 +9054,12 @@
                     "description": "If the goal should continue to be used as long as the mob is leashed."
                 },
                 {
+                    "name": "continue_sitting_on_reload",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "The mob will stay sitting on reload."
+                },
+                {
                     "name": "max_angle_of_view_horizontal",
                     "type": "Decimal",
                     "defaultValue": "30.0",
@@ -10699,7 +10705,7 @@
             ]
         },
         "minecraft:behavior.timer_flag_1": {
-            "description": "[EXPERIMENTAL] Allows this entity to scent for a specified duration",
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_1 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
@@ -10728,7 +10734,7 @@
             ]
         },
         "minecraft:behavior.timer_flag_2": {
-            "description": "[EXPERIMENTAL] Allows this entity to rise for a specified duration",
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_2 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
@@ -10757,7 +10763,7 @@
             ]
         },
         "minecraft:behavior.timer_flag_3": {
-            "description": "[EXPERIMENTAL] Allows this entity to feel happy for a specified duration",
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_3 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
@@ -15803,6 +15809,7 @@
         "query.is_ignited": "Returns 1.0 if the entity is ignited, else it returns 0.0.",
         "query.is_illager_captain": "Returns 1.0 if the entity is an illager captain, else it returns 0.0.",
         "query.is_in_contact_with_water": "Returns 1.0 if the entity is in contact with any water (water, rain, splash water bottle), else it returns 0.0.",
+        "query.is_in_lava": "Returns 1.0 if the entity is in lava, else it returns 0.0.",
         "query.is_in_love": "Returns 1.0 if the entity is in love, else it returns 0.0.",
         "query.is_in_ui": "Returns 1.0 if the entity is rendered as part of the UI, else it returns 0.0.",
         "query.is_in_water": "Returns 1.0 if the entity is in water, else it returns 0.0.",

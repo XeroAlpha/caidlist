@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.40.21",
+    "packageVersion": "1.20.40.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -7676,6 +7676,42 @@
                             },
                             "configurable": false
                         },
+                        "Difficulty": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Easy": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Hard": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 3
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Normal": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Peaceful": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 0
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
                         "Dimension": {
                             "value": {
                                 "type": "function",
@@ -7751,6 +7787,14 @@
                                                     }
                                                 },
                                                 "getPlayers": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                },
+                                                "getWeather": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -22675,6 +22719,13 @@
                                             "value": "suite:disabled"
                                         },
                                         "readOnly": true
+                                    },
+                                    "suiteNextUpdate": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "suite:nextupdate"
+                                        },
+                                        "readOnly": true
                                     }
                                 }
                             },
@@ -24047,6 +24098,7 @@
         "GameTest.Tags.suiteDebug",
         "GameTest.Tags.suiteDefault",
         "GameTest.Tags.suiteDisabled",
+        "GameTest.Tags.suiteNextUpdate",
         "GameTest.Test",
         "GameTest.Test.prototype",
         "GameTest.Test.prototype.assert",
@@ -24584,6 +24636,11 @@
         "Minecraft.DefinitionModifier.prototype.setComponentGroupsToAdd",
         "Minecraft.DefinitionModifier.prototype.setComponentGroupsToRemove",
         "Minecraft.DefinitionModifier.prototype.setTriggers",
+        "Minecraft.Difficulty",
+        "Minecraft.Difficulty.Easy",
+        "Minecraft.Difficulty.Hard",
+        "Minecraft.Difficulty.Normal",
+        "Minecraft.Difficulty.Peaceful",
         "Minecraft.Dimension",
         "Minecraft.Dimension.prototype",
         "Minecraft.Dimension.prototype.constructor",
@@ -24595,6 +24652,7 @@
         "Minecraft.Dimension.prototype.getEntitiesAtBlockLocation",
         "Minecraft.Dimension.prototype.getEntitiesFromRay",
         "Minecraft.Dimension.prototype.getPlayers",
+        "Minecraft.Dimension.prototype.getWeather",
         "Minecraft.Dimension.prototype.heightRange.[[Get]]",
         "Minecraft.Dimension.prototype.id",
         "Minecraft.Dimension.prototype.runCommand",
