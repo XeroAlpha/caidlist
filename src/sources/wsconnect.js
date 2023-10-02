@@ -1,9 +1,12 @@
-import { WSServer } from 'mcpews';
+import { WSServer, MinecraftDataType } from 'mcpews';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { cachedOutput, testMinecraftVersionInRange, sleepAsync } from '../util/common.js';
+import { cachedOutput, testMinecraftVersionInRange, sleepAsync, sortObjectKey } from '../util/common.js';
 import { adbShell } from '../util/adb.js';
 
+/**
+ * @param {import('mcpews').ServerSession} session
+ */
 function listCommands(session) {
     return new Promise((resolve) => {
         const list = [];
@@ -28,6 +31,9 @@ function listCommands(session) {
     });
 }
 
+/**
+ * @param {import('mcpews').ServerSession} session
+ */
 function listCommandsLegacy(session) {
     return new Promise((resolve) => {
         const list = [];
@@ -52,6 +58,21 @@ function listCommandsLegacy(session) {
     });
 }
 
+/**
+ * @param {import('mcpews').ServerSession} session
+ * @param {import('mcpews').MinecraftDataType} type
+ */
+function fetchData(session, type) {
+    return new Promise((resolve) => {
+        session.fetchData(type, ({ body }) => {
+            resolve(body);
+        });
+    });
+}
+
+/**
+ * @param {import('mcpews').ServerSession} session
+ */
 async function doWSRelatedJobs(cx, session) {
     let commandList;
     if (testMinecraftVersionInRange(cx.coreVersion, '1.2', '*')) {
@@ -59,10 +80,30 @@ async function doWSRelatedJobs(cx, session) {
     } else {
         commandList = await listCommandsLegacy(session);
     }
-    return { commandList };
+    const wsBlockData = (await fetchData(session, MinecraftDataType.Block))
+        .reduce((obj, block) => {
+            obj[`${block.id}:${block.aux}`] = block.name;
+            return obj;
+        }, {});
+    const wsItemData = (await fetchData(session, MinecraftDataType.Item))
+        .reduce((obj, item) => {
+            obj[`${item.id}:${item.aux}`] = item.name;
+            return obj;
+        }, {});
+    const wsMobData = (await fetchData(session, MinecraftDataType.Mob))
+        .reduce((obj, mob) => {
+            obj[mob.id] = mob.name;
+            return obj;
+        }, {});
+    return {
+        commandList,
+        wsBlockData: sortObjectKey(wsBlockData),
+        wsItemData: sortObjectKey(wsItemData),
+        wsMobData: sortObjectKey(wsMobData)
+    };
 }
 
-/** @returns {Promise<import('mcpews').Session>} */
+/** @returns {Promise<import('mcpews').ServerSession>} */
 export async function createExclusiveWSSession(device) {
     const port = await getPort({ port: 19134 });
     const wsServer = new WSServer(port);

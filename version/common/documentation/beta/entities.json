@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.40.22",
+    "version": "1.20.40.23",
     "content": [],
     "sections": [
         {
@@ -18100,7 +18100,7 @@
                             "id": "minecraft:behavior.random_search_and_dig",
                             "level": 4,
                             "content": [
-                                "[EXPERIMENTAL] Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Valid target block type: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
+                                "Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Default target block types: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -18129,10 +18129,10 @@
                                             "Description": "Distance in blocks within the entity to considers it has reached it's target position."
                                         },
                                         {
-                                            "Name": "items",
-                                            "Type": "List",
+                                            "Name": "item_table",
+                                            "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Weighted list of item(s) to spawn on successful dig"
+                                            "Description": "File path relative to the resource pack root for items to spawn list (loot table format)."
                                         },
                                         {
                                             "Name": "on_digging_start",
@@ -18199,6 +18199,12 @@
                                             "Type": "Decimal",
                                             "Default Value": "1.000000",
                                             "Description": "Searching movement speed multiplier."
+                                        },
+                                        {
+                                            "Name": "target_blocks",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of target block types the goal will look to dig on. Overrides the default list."
                                         },
                                         {
                                             "Name": "target_dig_position_offset",
@@ -28544,5 +28550,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "e568fc2c9959dcb358d41b989d59f7fb3e9ad88b"
+    "__OBJECTHASH__": "4a5fee4131ad8da55ec8400342c74cf3656b2706"
 }
