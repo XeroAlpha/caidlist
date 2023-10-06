@@ -59,7 +59,7 @@ export function recipeNewCommand({ coreVersion, branch }) {
         return testMinecraftVersionInRange(coreVersion, '1.20.20.20', '*');
     }
     if (branch.id === 'education') {
-        return testMinecraftVersionInRange(coreVersion, '1.20.40.23', '*');
+        return testMinecraftVersionInRange(coreVersion, '1.20.40.23', '1.20.40.23');
     }
     return testMinecraftVersionInRange(coreVersion, '1.20.20.21', '*');
 }
