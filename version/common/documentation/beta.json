@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.40.24",
-    "__COMMITHASH__": "f432fe7a2e793f6eda4b8988666185f0266ad3b9",
+    "__VERSION__": "1.20.50.20",
+    "__COMMITHASH__": "02b8a95e7b41d34ac7ed548a1df43baf0bf56048",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1243,6 +1243,9 @@
                                     "name": "minecraft:behavior.melee_attack"
                                 },
                                 {
+                                    "name": "minecraft:behavior.melee_box_attack"
+                                },
+                                {
                                     "name": "minecraft:behavior.mingle"
                                 },
                                 {
@@ -1611,6 +1614,9 @@
                                 },
                                 {
                                     "name": "minecraft:burns_in_daylight"
+                                },
+                                {
+                                    "name": "minecraft:can_join_raid"
                                 },
                                 {
                                     "name": "minecraft:celebrate_hunt"
@@ -2380,7 +2386,7 @@
                             ]
                         },
                         {
-                            "name": "components v1.20.40"
+                            "name": "components v1.20.50"
                         },
                         {
                             "name": "description v1.20.10"
@@ -2443,7 +2449,7 @@
                             "name": "minecraft:interact_button"
                         },
                         {
-                            "name": "minecraft:item v1.20.40"
+                            "name": "minecraft:item v1.20.50"
                         },
                         {
                             "name": "minecraft:liquid_clipped"
@@ -2468,6 +2474,9 @@
                         },
                         {
                             "name": "minecraft:stacked_by_data"
+                        },
+                        {
+                            "name": "minecraft:tags"
                         },
                         {
                             "name": "minecraft:throwable"
@@ -3125,6 +3134,7 @@
         "minecraft:acacia_fence_gate": "",
         "minecraft:acacia_hanging_sign": "",
         "minecraft:acacia_log": "",
+        "minecraft:acacia_planks": "",
         "minecraft:acacia_pressure_plate": "",
         "minecraft:acacia_stairs": "",
         "minecraft:acacia_standing_sign": "",
@@ -3136,6 +3146,7 @@
         "minecraft:amethyst_block": "",
         "minecraft:amethyst_cluster": "",
         "minecraft:ancient_debris": "",
+        "minecraft:andesite": "",
         "minecraft:andesite_stairs": "",
         "minecraft:anvil": "",
         "minecraft:azalea": "",
@@ -3178,6 +3189,7 @@
         "minecraft:birch_fence_gate": "",
         "minecraft:birch_hanging_sign": "",
         "minecraft:birch_log": "",
+        "minecraft:birch_planks": "",
         "minecraft:birch_pressure_plate": "",
         "minecraft:birch_stairs": "",
         "minecraft:birch_standing_sign": "",
@@ -3347,6 +3359,7 @@
         "minecraft:dark_oak_fence_gate": "",
         "minecraft:dark_oak_hanging_sign": "",
         "minecraft:dark_oak_log": "",
+        "minecraft:dark_oak_planks": "",
         "minecraft:dark_oak_pressure_plate": "",
         "minecraft:dark_oak_stairs": "",
         "minecraft:dark_oak_trapdoor": "",
@@ -3385,6 +3398,7 @@
         "minecraft:detector_rail": "",
         "minecraft:diamond_block": "",
         "minecraft:diamond_ore": "",
+        "minecraft:diorite": "",
         "minecraft:diorite_stairs": "",
         "minecraft:dirt": "",
         "minecraft:dirt_with_roots": "",
@@ -3558,6 +3572,7 @@
         "minecraft:gold_block": "",
         "minecraft:gold_ore": "",
         "minecraft:golden_rail": "",
+        "minecraft:granite": "",
         "minecraft:granite_stairs": "",
         "minecraft:grass": "",
         "minecraft:grass_path": "",
@@ -3615,6 +3630,7 @@
         "minecraft:jungle_fence_gate": "",
         "minecraft:jungle_hanging_sign": "",
         "minecraft:jungle_log": "",
+        "minecraft:jungle_planks": "",
         "minecraft:jungle_pressure_plate": "",
         "minecraft:jungle_stairs": "",
         "minecraft:jungle_standing_sign": "",
@@ -3739,6 +3755,7 @@
         "minecraft:oak_fence": "",
         "minecraft:oak_hanging_sign": "",
         "minecraft:oak_log": "",
+        "minecraft:oak_planks": "",
         "minecraft:oak_stairs": "",
         "minecraft:observer": "",
         "minecraft:obsidian": "",
@@ -3778,9 +3795,9 @@
         "minecraft:piston_arm_collision": "",
         "minecraft:pitcher_crop": "",
         "minecraft:pitcher_plant": "",
-        "minecraft:planks": "",
         "minecraft:podzol": "",
         "minecraft:pointed_dripstone": "",
+        "minecraft:polished_andesite": "",
         "minecraft:polished_andesite_stairs": "",
         "minecraft:polished_basalt": "",
         "minecraft:polished_blackstone": "",
@@ -3800,7 +3817,9 @@
         "minecraft:polished_deepslate_slab": "",
         "minecraft:polished_deepslate_stairs": "",
         "minecraft:polished_deepslate_wall": "",
+        "minecraft:polished_diorite": "",
         "minecraft:polished_diorite_stairs": "",
+        "minecraft:polished_granite": "",
         "minecraft:polished_granite_stairs": "",
         "minecraft:portal": "",
         "minecraft:potatoes": "",
@@ -3904,6 +3923,7 @@
         "minecraft:spruce_fence_gate": "",
         "minecraft:spruce_hanging_sign": "",
         "minecraft:spruce_log": "",
+        "minecraft:spruce_planks": "",
         "minecraft:spruce_pressure_plate": "",
         "minecraft:spruce_stairs": "",
         "minecraft:spruce_standing_sign": "",
@@ -7545,6 +7565,149 @@
                     "type": "Decimal",
                     "defaultValue": "2",
                     "description": "Used with the base size of the entity to determine minimum target-distance before trying to deal attack damage."
+                },
+                {
+                    "name": "require_complete_path",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior."
+                },
+                {
+                    "name": "set_persistent",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Allows the actor to be set to persist upon targeting a player"
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "This multiplier modifies the attacking entity's speed when moving toward the target."
+                },
+                {
+                    "name": "target_dist",
+                    "type": "Decimal",
+                    "defaultValue": "N/a",
+                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\"."
+                },
+                {
+                    "name": "track_target",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Allows the entity to track the attack target, even if the entity has no sensing."
+                },
+                {
+                    "name": "x_max_rotation",
+                    "type": "Decimal",
+                    "defaultValue": "30",
+                    "description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target."
+                },
+                {
+                    "name": "y_max_head_rotation",
+                    "type": "Decimal",
+                    "defaultValue": "30",
+                    "description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target."
+                }
+            ]
+        },
+        "minecraft:behavior.melee_box_attack": {
+            "description": "Allows an entity to deal damage through a melee attack with reach calculations based on bounding boxes.",
+            "children": [
+                {
+                    "name": "attack_once",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Allows the entity to use this attack behavior, only once EVER."
+                },
+                {
+                    "name": "attack_types",
+                    "type": "String",
+                    "defaultValue": "N/A",
+                    "description": "Defines the entity types this entity will attack."
+                },
+                {
+                    "name": "can_spread_on_fire",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit."
+                },
+                {
+                    "name": "cooldown_time",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "Cooldown time (in seconds) between attacks."
+                },
+                {
+                    "name": "horizontal_reach",
+                    "type": "Decimal",
+                    "defaultValue": "0.8",
+                    "description": "The attack reach of the mob will be a box with the size of the mobs bounds increased by this value in all horizontal directions."
+                },
+                {
+                    "name": "inner_boundary_time_increase",
+                    "type": "Decimal",
+                    "defaultValue": "0.25",
+                    "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\"."
+                },
+                {
+                    "name": "max_dist",
+                    "type": "Decimal",
+                    "defaultValue": "N/A",
+                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\"."
+                },
+                {
+                    "name": "max_path_time",
+                    "type": "Decimal",
+                    "defaultValue": "0.55",
+                    "description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied)."
+                },
+                {
+                    "name": "melee_fov",
+                    "type": "Decimal",
+                    "defaultValue": "90",
+                    "description": "Field of view (in degrees) when using the sensing component to detect an attack target."
+                },
+                {
+                    "name": "min_path_time",
+                    "type": "Decimal",
+                    "defaultValue": "0.2",
+                    "description": "Minimum base time (in seconds) to recalculate new attack path to target (before increases applied)."
+                },
+                {
+                    "name": "on_attack",
+                    "type": "Trigger",
+                    "defaultValue": "N/A",
+                    "description": "Defines the event to trigger when this entity successfully attacks."
+                },
+                {
+                    "name": "outer_boundary_time_increase",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_outer_boundary\"."
+                },
+                {
+                    "name": "path_fail_time_increase",
+                    "type": "Decimal",
+                    "defaultValue": "0.75",
+                    "description": "Time (in seconds) to add to attack path recalculation when this entity cannot move along the current path."
+                },
+                {
+                    "name": "path_inner_boundary",
+                    "type": "Decimal",
+                    "defaultValue": "16",
+                    "description": "Distance at which to increase attack path recalculation by \"inner_boundary_tick_increase\"."
+                },
+                {
+                    "name": "path_outer_boundary",
+                    "type": "Decimal",
+                    "defaultValue": "32",
+                    "description": "Distance at which to increase attack path recalculation by \"outer_boundary_tick_increase\"."
+                },
+                {
+                    "name": "random_stop_interval",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "This entity will have a 1 in N chance to stop it's current attack, where N = \"random_stop_interval\"."
                 },
                 {
                     "name": "require_complete_path",
@@ -15651,6 +15814,7 @@
         "minecraft:shooter": "Shooter Item Component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:should_despawn": "Should despawn component determines if the item should eventually despawn while floating in the world",
         "minecraft:stacked_by_data": "The stacked by data component determines if the same item with different aux values can stack. Also defines whether the item actors can merge while floating in the world.",
+        "minecraft:tags": "The tags component determines which tags an item has on it.",
         "minecraft:throwable": "Throwable item component. Throwable items, such as a snowball.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:use_animation": "This component determines which animation plays when using the item.",
         "minecraft:use_duration": "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
@@ -15728,7 +15892,7 @@
         "query.combine_entities": "Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.",
         "query.count": "Counts the number of things passed to it (arrays are counted as the number of elements they contain; non-arrays count as 1).",
         "query.current_squish_value": "Returns the squish value for the current entity, or 0.0 if this doesn't make sense.",
-        "query.dash_cooldown_progress": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
+        "query.dash_cooldown_progress": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED. DO NOT USE AFTER 1.20.40. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown. Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
         "query.day": "Returns the day of the current level.",
         "query.death_ticks": "Returns the elapsed ticks since the mob started dying.",
         "query.debug_output": "debug log a value to the output debug window for builds that have one",
@@ -15805,7 +15969,7 @@
         "query.is_emerging": "Returns 1.0 if the entity is emerging, else it returns 0.0.",
         "query.is_emoting": "Returns 1.0 if the entity is emoting, else it returns 0.0.",
         "query.is_enchanted": "Returns 1.0 if the entity is enchanted, else it returns 0.0.",
-        "query.is_feeling_happy": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
+        "query.is_feeling_happy": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_fire_immune": "Returns 1.0 if the entity is immune to fire, else it returns 0.0.",
         "query.is_first_person": "Returns 1.0 if the entity is being rendered in first person mode, else it returns 0.0.",
         "query.is_ghost": "Returns 1.0 if an entity is a ghost, else it returns 0.0.",
@@ -15847,13 +16011,13 @@
         "query.is_ram_attacking": "Returns 1.0 if the entity is using a ram attack, else it returns 0.0.",
         "query.is_resting": "Returns 1.0 if the entity is resting, else it returns 0.0.",
         "query.is_riding": "Returns 1.0 if the entity is riding, else it returns 0.0.",
-        "query.is_rising": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
+        "query.is_rising": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_roaring": "Returns 1.0 if the entity is currently roaring, else it returns 0.0.",
         "query.is_rolling": "Returns 1.0 if the entity is rolling, else it returns 0.0.",
         "query.is_saddled": "Returns 1.0 if the entity has a saddle, else it returns 0.0.",
         "query.is_scared": "Returns 1.0 if the entity is scared, else it returns 0.0.",
-        "query.is_scenting": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.",
-        "query.is_searching": "[EXPERIMENTAL] Returns 1.0 if the entity is searching, else it returns 0.0.",
+        "query.is_scenting": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.",
+        "query.is_searching": "Returns 1.0 if the entity is searching, else it returns 0.0.",
         "query.is_selected_item": "Returns true if the player has selected an item in the inventory, else it returns 0.0.",
         "query.is_shaking": "Returns 1.0 if the entity is casting, else it returns 0.0.",
         "query.is_shaking_wetness": "Returns 1.0 if the entity is shaking water off, else it returns 0.0.",

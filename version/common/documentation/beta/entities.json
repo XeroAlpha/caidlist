@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.40.24",
+    "version": "1.20.50.20",
     "content": [],
     "sections": [
         {
@@ -16245,6 +16245,157 @@
                             ]
                         },
                         {
+                            "name": "minecraft:behavior.melee_box_attack",
+                            "id": "minecraft:behavior.melee_box_attack",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to deal damage through a melee attack with reach calculations based on bounding boxes.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "attack_once",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Allows the entity to use this attack behavior, only once EVER."
+                                        },
+                                        {
+                                            "Name": "attack_types",
+                                            "Type": "String",
+                                            "Default Value": "N/A",
+                                            "Description": "Defines the entity types this entity will attack."
+                                        },
+                                        {
+                                            "Name": "can_spread_on_fire",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit."
+                                        },
+                                        {
+                                            "Name": "cooldown_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "1",
+                                            "Description": "Cooldown time (in seconds) between attacks."
+                                        },
+                                        {
+                                            "Name": "horizontal_reach",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.8",
+                                            "Description": "The attack reach of the mob will be a box with the size of the mobs bounds increased by this value in all horizontal directions."
+                                        },
+                                        {
+                                            "Name": "inner_boundary_time_increase",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.25",
+                                            "Description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\"."
+                                        },
+                                        {
+                                            "Name": "max_dist",
+                                            "Type": "Decimal",
+                                            "Default Value": "N/A",
+                                            "Description": "Unused. No effect on \"minecraft:behavior.melee_attack\"."
+                                        },
+                                        {
+                                            "Name": "max_path_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.55",
+                                            "Description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied)."
+                                        },
+                                        {
+                                            "Name": "melee_fov",
+                                            "Type": "Decimal",
+                                            "Default Value": "90",
+                                            "Description": "Field of view (in degrees) when using the sensing component to detect an attack target."
+                                        },
+                                        {
+                                            "Name": "min_path_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.2",
+                                            "Description": "Minimum base time (in seconds) to recalculate new attack path to target (before increases applied)."
+                                        },
+                                        {
+                                            "Name": "on_attack",
+                                            "Type": "Trigger",
+                                            "Default Value": "N/A",
+                                            "Description": "Defines the event to trigger when this entity successfully attacks."
+                                        },
+                                        {
+                                            "Name": "outer_boundary_time_increase",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5",
+                                            "Description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_outer_boundary\"."
+                                        },
+                                        {
+                                            "Name": "path_fail_time_increase",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.75",
+                                            "Description": "Time (in seconds) to add to attack path recalculation when this entity cannot move along the current path."
+                                        },
+                                        {
+                                            "Name": "path_inner_boundary",
+                                            "Type": "Decimal",
+                                            "Default Value": "16",
+                                            "Description": "Distance at which to increase attack path recalculation by \"inner_boundary_tick_increase\"."
+                                        },
+                                        {
+                                            "Name": "path_outer_boundary",
+                                            "Type": "Decimal",
+                                            "Default Value": "32",
+                                            "Description": "Distance at which to increase attack path recalculation by \"outer_boundary_tick_increase\"."
+                                        },
+                                        {
+                                            "Name": "random_stop_interval",
+                                            "Type": "Integer",
+                                            "Default Value": "0",
+                                            "Description": "This entity will have a 1 in N chance to stop it's current attack, where N = \"random_stop_interval\"."
+                                        },
+                                        {
+                                            "Name": "require_complete_path",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior."
+                                        },
+                                        {
+                                            "Name": "set_persistent",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Allows the actor to be set to persist upon targeting a player"
+                                        },
+                                        {
+                                            "Name": "speed_multiplier",
+                                            "Type": "Decimal",
+                                            "Default Value": "1",
+                                            "Description": "This multiplier modifies the attacking entity's speed when moving toward the target."
+                                        },
+                                        {
+                                            "Name": "target_dist",
+                                            "Type": "Decimal",
+                                            "Default Value": "N/a",
+                                            "Description": "Unused. No effect on \"minecraft:behavior.melee_attack\"."
+                                        },
+                                        {
+                                            "Name": "track_target",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Allows the entity to track the attack target, even if the entity has no sensing."
+                                        },
+                                        {
+                                            "Name": "x_max_rotation",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target."
+                                        },
+                                        {
+                                            "Name": "y_max_head_rotation",
+                                            "Type": "Decimal",
+                                            "Default Value": "30",
+                                            "Description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate its head while trying to look at the target."
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "name": "minecraft:behavior.mingle",
                             "id": "minecraft:behavior.mingle",
                             "level": 4,
@@ -21648,6 +21799,14 @@
                             ]
                         },
                         {
+                            "name": "minecraft:can_join_raid",
+                            "id": "minecraft:can_join_raid",
+                            "level": 4,
+                            "content": [
+                                "Determines that this entity can join an existing raid."
+                            ]
+                        },
+                        {
                             "name": "minecraft:celebrate_hunt",
                             "id": "minecraft:celebrate_hunt",
                             "level": 4,
@@ -26530,6 +26689,10 @@
                                             "ID": "11509785650956819759"
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.melee_box_attack",
+                                            "ID": "16943510645914782909"
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.mingle",
                                             "ID": "385775952"
                                         },
@@ -27032,6 +27195,10 @@
                                         {
                                             "JSON Name": "minecraft:burns_in_daylight",
                                             "ID": "1256874605"
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:can_join_raid",
+                                            "ID": "-1847990870"
                                         },
                                         {
                                             "JSON Name": "minecraft:celebrate_hunt",
@@ -28550,5 +28717,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "d97b616ed615bb63d4cc9acbb0e31d0350eedbe4"
+    "__OBJECTHASH__": "b1e4367350cc1929c3a5decb32fdd07e87df7734"
 }

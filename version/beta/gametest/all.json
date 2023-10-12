@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.40.24",
+    "packageVersion": "1.20.50.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5174,6 +5174,70 @@
                             },
                             "configurable": false
                         },
+                        "BlockComponentTypes": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Inventory": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:inventory"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "LavaContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:lavaContainer"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Piston": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:piston"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "PotionContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:potionContainer"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "RecordPlayer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:recordPlayer"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Sign": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:sign"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "SnowContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:snowContainer"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "WaterContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:waterContainer"
+                                        },
+                                        "readOnly": true
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
                         "BlockEvent": {
                             "value": {
                                 "type": "function",
@@ -8479,20 +8543,6 @@
                                                         "length": 1
                                                     }
                                                 },
-                                                "effectState": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1
-                                                    }
-                                                },
                                                 "entity": {
                                                     "getter": {
                                                         "type": "function",
@@ -8530,6 +8580,118 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.EffectAddAfterEventSignal"
+                                                    }
+                                                }
+                                            },
+                                            "enumerableProperties": {
+                                                "subscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                },
+                                                "unsubscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "EffectAddBeforeEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "EffectAddBeforeEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "cancel": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1
+                                                    }
+                                                },
+                                                "duration": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1
+                                                    }
+                                                },
+                                                "effectType": {
+                                                    "value": {
+                                                        "type": "undefined"
+                                                    },
+                                                    "readOnly": true
+                                                },
+                                                "entity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                }
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EffectAddBeforeEvent"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false
+                                    }
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "EffectAddBeforeEventSignal": {
+                            "value": {
+                                "type": "function",
+                                "name": "EffectAddBeforeEventSignal",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EffectAddBeforeEventSignal"
                                                     }
                                                 }
                                             },
@@ -10162,6 +10324,441 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.Component"
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "EntityComponentTypes": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "AddRider": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:addrider"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Ageable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:ageable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Breathable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:breathable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "CanClimb": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:can_climb"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "CanFly": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:can_fly"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "CanPowerJump": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:can_power_jump"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Color": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:color"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Equippable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:equippable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "FireImmune": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:fire_immune"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "FloatsInLiquid": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:floats_in_liquid"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "FlyingSpeed": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:flying_speed"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "FrictionModifier": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:friction_modifier"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "GroundOffset": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:ground_offset"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Healable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:healable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Health": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:health"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Inventory": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:inventory"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsBaby": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_baby"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsCharged": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_charged"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsChested": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_chested"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsDyeable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_dyeable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsHiddenWhenInvisible": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_hidden_when_invisible"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsIgnited": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_ignited"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsIllagerCaptain": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_illager_captain"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsSaddled": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_saddled"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsShaking": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_shaking"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsSheared": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_sheared"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsStackable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_stackable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsStunned": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_stunned"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "IsTamed": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:is_tamed"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Item": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:item"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "LavaMovement": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:lava_movement"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Leashable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:leashable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MarkVariant": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:mark_variant"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MountTaming": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:tamemount"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Movement": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementAmphibious": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.amphibious"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementBasic": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.basic"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementFly": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.fly"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementGeneric": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.generic"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementGlide": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.glide"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementHover": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.hover"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementJump": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.jump"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementSkip": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.skip"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "MovementSway": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:movement.sway"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationClimb": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.climb"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationFloat": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.float"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationFly": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.fly"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationGeneric": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.generic"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationHover": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.hover"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "NavigationWalk": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:navigation.walk"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "OnFire": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:onfire"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "PushThrough": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:push_through"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Rideable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:rideable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Riding": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:riding"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Scale": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:scale"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "SkinId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:skin_id"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Strength": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:strength"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Tameable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:tameable"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "UnderwaterMovement": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:underwater_movement"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Variant": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:variant"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "WantsJockey": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:wants_jockey"
+                                        },
+                                        "readOnly": true
+                                    }
                                 }
                             },
                             "configurable": false
@@ -15098,6 +15695,42 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.Component"
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "ItemComponentTypes": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Cooldown": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:cooldown"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Durability": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:durability"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Enchants": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:enchantments"
+                                        },
+                                        "readOnly": true
+                                    },
+                                    "Food": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:food"
+                                        },
+                                        "readOnly": true
+                                    }
                                 }
                             },
                             "configurable": false
@@ -21597,6 +22230,14 @@
                                                         "length": 0
                                                     }
                                                 },
+                                                "effectAdd": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
+                                                },
                                                 "entityRemove": {
                                                     "getter": {
                                                         "type": "function",
@@ -24292,6 +24933,15 @@
         "Minecraft.BlockComponent.prototype.[[Prototype]]",
         "Minecraft.BlockComponent.prototype.block.[[Get]]",
         "Minecraft.BlockComponent.prototype.constructor",
+        "Minecraft.BlockComponentTypes",
+        "Minecraft.BlockComponentTypes.Inventory",
+        "Minecraft.BlockComponentTypes.LavaContainer",
+        "Minecraft.BlockComponentTypes.Piston",
+        "Minecraft.BlockComponentTypes.PotionContainer",
+        "Minecraft.BlockComponentTypes.RecordPlayer",
+        "Minecraft.BlockComponentTypes.Sign",
+        "Minecraft.BlockComponentTypes.SnowContainer",
+        "Minecraft.BlockComponentTypes.WaterContainer",
         "Minecraft.BlockEvent",
         "Minecraft.BlockEvent.prototype",
         "Minecraft.BlockEvent.prototype.block.[[Get]]",
@@ -24720,8 +25370,6 @@
         "Minecraft.EffectAddAfterEvent.prototype.constructor",
         "Minecraft.EffectAddAfterEvent.prototype.effect.[[Get]]",
         "Minecraft.EffectAddAfterEvent.prototype.effect.[[Set]]",
-        "Minecraft.EffectAddAfterEvent.prototype.effectState.[[Get]]",
-        "Minecraft.EffectAddAfterEvent.prototype.effectState.[[Set]]",
         "Minecraft.EffectAddAfterEvent.prototype.entity.[[Get]]",
         "Minecraft.EffectAddAfterEvent.prototype.entity.[[Set]]",
         "Minecraft.EffectAddAfterEventSignal",
@@ -24729,6 +25377,20 @@
         "Minecraft.EffectAddAfterEventSignal.prototype.constructor",
         "Minecraft.EffectAddAfterEventSignal.prototype.subscribe",
         "Minecraft.EffectAddAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.EffectAddBeforeEvent",
+        "Minecraft.EffectAddBeforeEvent.prototype",
+        "Minecraft.EffectAddBeforeEvent.prototype.cancel.[[Get]]",
+        "Minecraft.EffectAddBeforeEvent.prototype.cancel.[[Set]]",
+        "Minecraft.EffectAddBeforeEvent.prototype.constructor",
+        "Minecraft.EffectAddBeforeEvent.prototype.duration.[[Get]]",
+        "Minecraft.EffectAddBeforeEvent.prototype.duration.[[Set]]",
+        "Minecraft.EffectAddBeforeEvent.prototype.effectType",
+        "Minecraft.EffectAddBeforeEvent.prototype.entity.[[Get]]",
+        "Minecraft.EffectAddBeforeEventSignal",
+        "Minecraft.EffectAddBeforeEventSignal.prototype",
+        "Minecraft.EffectAddBeforeEventSignal.prototype.constructor",
+        "Minecraft.EffectAddBeforeEventSignal.prototype.subscribe",
+        "Minecraft.EffectAddBeforeEventSignal.prototype.unsubscribe",
         "Minecraft.EffectType",
         "Minecraft.EffectType.prototype",
         "Minecraft.EffectType.prototype.constructor",
@@ -24940,6 +25602,68 @@
         "Minecraft.EntityComponent.prototype.[[Prototype]]",
         "Minecraft.EntityComponent.prototype.constructor",
         "Minecraft.EntityComponent.prototype.entity.[[Get]]",
+        "Minecraft.EntityComponentTypes",
+        "Minecraft.EntityComponentTypes.AddRider",
+        "Minecraft.EntityComponentTypes.Ageable",
+        "Minecraft.EntityComponentTypes.Breathable",
+        "Minecraft.EntityComponentTypes.CanClimb",
+        "Minecraft.EntityComponentTypes.CanFly",
+        "Minecraft.EntityComponentTypes.CanPowerJump",
+        "Minecraft.EntityComponentTypes.Color",
+        "Minecraft.EntityComponentTypes.Equippable",
+        "Minecraft.EntityComponentTypes.FireImmune",
+        "Minecraft.EntityComponentTypes.FloatsInLiquid",
+        "Minecraft.EntityComponentTypes.FlyingSpeed",
+        "Minecraft.EntityComponentTypes.FrictionModifier",
+        "Minecraft.EntityComponentTypes.GroundOffset",
+        "Minecraft.EntityComponentTypes.Healable",
+        "Minecraft.EntityComponentTypes.Health",
+        "Minecraft.EntityComponentTypes.Inventory",
+        "Minecraft.EntityComponentTypes.IsBaby",
+        "Minecraft.EntityComponentTypes.IsCharged",
+        "Minecraft.EntityComponentTypes.IsChested",
+        "Minecraft.EntityComponentTypes.IsDyeable",
+        "Minecraft.EntityComponentTypes.IsHiddenWhenInvisible",
+        "Minecraft.EntityComponentTypes.IsIgnited",
+        "Minecraft.EntityComponentTypes.IsIllagerCaptain",
+        "Minecraft.EntityComponentTypes.IsSaddled",
+        "Minecraft.EntityComponentTypes.IsShaking",
+        "Minecraft.EntityComponentTypes.IsSheared",
+        "Minecraft.EntityComponentTypes.IsStackable",
+        "Minecraft.EntityComponentTypes.IsStunned",
+        "Minecraft.EntityComponentTypes.IsTamed",
+        "Minecraft.EntityComponentTypes.Item",
+        "Minecraft.EntityComponentTypes.LavaMovement",
+        "Minecraft.EntityComponentTypes.Leashable",
+        "Minecraft.EntityComponentTypes.MarkVariant",
+        "Minecraft.EntityComponentTypes.MountTaming",
+        "Minecraft.EntityComponentTypes.Movement",
+        "Minecraft.EntityComponentTypes.MovementAmphibious",
+        "Minecraft.EntityComponentTypes.MovementBasic",
+        "Minecraft.EntityComponentTypes.MovementFly",
+        "Minecraft.EntityComponentTypes.MovementGeneric",
+        "Minecraft.EntityComponentTypes.MovementGlide",
+        "Minecraft.EntityComponentTypes.MovementHover",
+        "Minecraft.EntityComponentTypes.MovementJump",
+        "Minecraft.EntityComponentTypes.MovementSkip",
+        "Minecraft.EntityComponentTypes.MovementSway",
+        "Minecraft.EntityComponentTypes.NavigationClimb",
+        "Minecraft.EntityComponentTypes.NavigationFloat",
+        "Minecraft.EntityComponentTypes.NavigationFly",
+        "Minecraft.EntityComponentTypes.NavigationGeneric",
+        "Minecraft.EntityComponentTypes.NavigationHover",
+        "Minecraft.EntityComponentTypes.NavigationWalk",
+        "Minecraft.EntityComponentTypes.OnFire",
+        "Minecraft.EntityComponentTypes.PushThrough",
+        "Minecraft.EntityComponentTypes.Rideable",
+        "Minecraft.EntityComponentTypes.Riding",
+        "Minecraft.EntityComponentTypes.Scale",
+        "Minecraft.EntityComponentTypes.SkinId",
+        "Minecraft.EntityComponentTypes.Strength",
+        "Minecraft.EntityComponentTypes.Tameable",
+        "Minecraft.EntityComponentTypes.UnderwaterMovement",
+        "Minecraft.EntityComponentTypes.Variant",
+        "Minecraft.EntityComponentTypes.WantsJockey",
         "Minecraft.EntityDamageCause",
         "Minecraft.EntityDamageCause.anvil",
         "Minecraft.EntityDamageCause.blockExplosion",
@@ -25607,6 +26331,11 @@
         "Minecraft.ItemComponent.prototype",
         "Minecraft.ItemComponent.prototype.[[Prototype]]",
         "Minecraft.ItemComponent.prototype.constructor",
+        "Minecraft.ItemComponentTypes",
+        "Minecraft.ItemComponentTypes.Cooldown",
+        "Minecraft.ItemComponentTypes.Durability",
+        "Minecraft.ItemComponentTypes.Enchants",
+        "Minecraft.ItemComponentTypes.Food",
         "Minecraft.ItemCooldownComponent",
         "Minecraft.ItemCooldownComponent.[[Prototype]]",
         "Minecraft.ItemCooldownComponent.componentId",
@@ -26433,6 +27162,7 @@
         "Minecraft.WorldBeforeEvents.prototype.chatSend.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.constructor",
         "Minecraft.WorldBeforeEvents.prototype.dataDrivenEntityTriggerEvent.[[Get]]",
+        "Minecraft.WorldBeforeEvents.prototype.effectAdd.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.entityRemove.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.explosion.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.itemDefinitionEvent.[[Get]]",
@@ -27047,6 +27777,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:acacia_planks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:acacia_pressure_plate": {
             "properties": [
                 {
@@ -27263,6 +27999,12 @@
             "canBeWaterlogged": true
         },
         "minecraft:ancient_debris": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:andesite": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -28271,6 +29013,12 @@
                     "defaultValue": "y"
                 }
             ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:birch_planks": {
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
@@ -31474,6 +32222,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:dark_oak_planks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:dark_oak_pressure_plate": {
             "properties": [
                 {
@@ -32090,6 +32844,12 @@
             "canBeWaterlogged": false
         },
         "minecraft:diamond_ore": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:diorite": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -33794,6 +34554,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": true
         },
+        "minecraft:granite": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:granite_stairs": {
             "properties": [
                 {
@@ -34603,6 +35369,12 @@
                     "defaultValue": "y"
                 }
             ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:jungle_planks": {
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
@@ -36567,6 +37339,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:oak_planks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:oak_stairs": {
             "properties": [
                 {
@@ -37063,25 +37841,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
-        "minecraft:planks": {
-            "properties": [
-                {
-                    "name": "wood_type",
-                    "validValues": [
-                        "oak",
-                        "spruce",
-                        "birch",
-                        "jungle",
-                        "acacia",
-                        "dark_oak"
-                    ],
-                    "defaultValue": "oak"
-                }
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false
-        },
         "minecraft:podzol": {
             "properties": [],
             "invalidStates": [],
@@ -37113,6 +37872,12 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true
+        },
+        "minecraft:polished_andesite": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
         },
         "minecraft:polished_andesite_stairs": {
             "properties": [
@@ -37547,6 +38312,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": true
         },
+        "minecraft:polished_diorite": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:polished_diorite_stairs": {
             "properties": [
                 {
@@ -37571,6 +38342,12 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true
+        },
+        "minecraft:polished_granite": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
         },
         "minecraft:polished_granite_stairs": {
             "properties": [
@@ -39373,6 +40150,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:spruce_planks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:spruce_pressure_plate": {
             "properties": [
                 {
@@ -39605,21 +40388,7 @@
             "canBeWaterlogged": true
         },
         "minecraft:stone": {
-            "properties": [
-                {
-                    "name": "stone_type",
-                    "validValues": [
-                        "stone",
-                        "granite",
-                        "granite_smooth",
-                        "diorite",
-                        "diorite_smooth",
-                        "andesite",
-                        "andesite_smooth"
-                    ],
-                    "defaultValue": "stone"
-                }
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
@@ -44022,22 +44791,6 @@
                 }
             }
         ],
-        "stone_type": [
-            {
-                "validValues": [
-                    "stone",
-                    "granite",
-                    "granite_smooth",
-                    "diorite",
-                    "diorite_smooth",
-                    "andesite",
-                    "andesite_smooth"
-                ],
-                "defaultValue": {
-                    "minecraft:stone": "stone"
-                }
-            }
-        ],
         "stripped_bit": [
             {
                 "validValues": [
@@ -44576,7 +45329,6 @@
                 ],
                 "defaultValue": {
                     "minecraft:double_wooden_slab": "oak",
-                    "minecraft:planks": "oak",
                     "minecraft:wood": "oak",
                     "minecraft:wooden_slab": "oak"
                 }
@@ -44728,12 +45480,18 @@
             "minecraft:spruce_log": {}
         },
         "stone": {
+            "minecraft:andesite": {},
             "minecraft:brick_block": {},
             "minecraft:cobblestone": {},
             "minecraft:cobblestone_wall": {},
+            "minecraft:diorite": {},
             "minecraft:double_stone_block_slab": {},
             "minecraft:dripstone_block": {},
+            "minecraft:granite": {},
             "minecraft:mossy_cobblestone": {},
+            "minecraft:polished_andesite": {},
+            "minecraft:polished_diorite": {},
+            "minecraft:polished_granite": {},
             "minecraft:stone": {},
             "minecraft:stone_block_slab": {},
             "minecraft:stone_button": {},
@@ -44817,6 +45575,7 @@
             "minecraft:acacia_fence_gate": {},
             "minecraft:acacia_hanging_sign": {},
             "minecraft:acacia_log": {},
+            "minecraft:acacia_planks": {},
             "minecraft:acacia_pressure_plate": {},
             "minecraft:acacia_stairs": {},
             "minecraft:acacia_standing_sign": {},
@@ -44836,6 +45595,7 @@
             "minecraft:birch_fence_gate": {},
             "minecraft:birch_hanging_sign": {},
             "minecraft:birch_log": {},
+            "minecraft:birch_planks": {},
             "minecraft:birch_pressure_plate": {},
             "minecraft:birch_stairs": {},
             "minecraft:birch_standing_sign": {},
@@ -44857,6 +45617,7 @@
             "minecraft:dark_oak_fence_gate": {},
             "minecraft:dark_oak_hanging_sign": {},
             "minecraft:dark_oak_log": {},
+            "minecraft:dark_oak_planks": {},
             "minecraft:dark_oak_pressure_plate": {},
             "minecraft:dark_oak_stairs": {},
             "minecraft:dark_oak_trapdoor": {},
@@ -44871,6 +45632,7 @@
             "minecraft:jungle_fence_gate": {},
             "minecraft:jungle_hanging_sign": {},
             "minecraft:jungle_log": {},
+            "minecraft:jungle_planks": {},
             "minecraft:jungle_pressure_plate": {},
             "minecraft:jungle_stairs": {},
             "minecraft:jungle_standing_sign": {},
@@ -44889,8 +45651,8 @@
             "minecraft:oak_fence": {},
             "minecraft:oak_hanging_sign": {},
             "minecraft:oak_log": {},
+            "minecraft:oak_planks": {},
             "minecraft:oak_stairs": {},
-            "minecraft:planks": {},
             "minecraft:smithing_table": {},
             "minecraft:spruce_button": {},
             "minecraft:spruce_door": {},
@@ -44898,6 +45660,7 @@
             "minecraft:spruce_fence_gate": {},
             "minecraft:spruce_hanging_sign": {},
             "minecraft:spruce_log": {},
+            "minecraft:spruce_planks": {},
             "minecraft:spruce_pressure_plate": {},
             "minecraft:spruce_stairs": {},
             "minecraft:spruce_standing_sign": {},
@@ -44966,6 +45729,11 @@
                 "minecraft:logs_that_burn"
             ]
         },
+        "minecraft:acacia_planks": {
+            "tags": [
+                "minecraft:planks"
+            ]
+        },
         "minecraft:acacia_pressure_plate": {
             "tags": []
         },
@@ -45004,6 +45772,9 @@
             ]
         },
         "minecraft:ancient_debris": {
+            "tags": []
+        },
+        "minecraft:andesite": {
             "tags": []
         },
         "minecraft:andesite_stairs": {
@@ -45248,6 +46019,11 @@
             "tags": [
                 "minecraft:logs",
                 "minecraft:logs_that_burn"
+            ]
+        },
+        "minecraft:birch_planks": {
+            "tags": [
+                "minecraft:planks"
             ]
         },
         "minecraft:birch_pressure_plate": {
@@ -46194,6 +46970,11 @@
                 "minecraft:logs_that_burn"
             ]
         },
+        "minecraft:dark_oak_planks": {
+            "tags": [
+                "minecraft:planks"
+            ]
+        },
         "minecraft:dark_oak_pressure_plate": {
             "tags": []
         },
@@ -46234,7 +47015,6 @@
             "tags": []
         },
         "minecraft:decorated_pot": {
-            "unstackable": true,
             "tags": []
         },
         "minecraft:deepslate": {
@@ -46467,6 +47247,9 @@
             "enchantSlot": [
                 "sword"
             ]
+        },
+        "minecraft:diorite": {
+            "tags": []
         },
         "minecraft:diorite_stairs": {
             "tags": []
@@ -47379,6 +48162,9 @@
                 "sword"
             ]
         },
+        "minecraft:granite": {
+            "tags": []
+        },
         "minecraft:granite_stairs": {
             "tags": []
         },
@@ -47793,6 +48579,11 @@
             "tags": [
                 "minecraft:logs",
                 "minecraft:logs_that_burn"
+            ]
+        },
+        "minecraft:jungle_planks": {
+            "tags": [
+                "minecraft:planks"
             ]
         },
         "minecraft:jungle_pressure_plate": {
@@ -48653,6 +49444,11 @@
                 "minecraft:logs_that_burn"
             ]
         },
+        "minecraft:oak_planks": {
+            "tags": [
+                "minecraft:planks"
+            ]
+        },
         "minecraft:oak_sign": {
             "maxAmount": 16,
             "tags": [
@@ -48861,6 +49657,9 @@
                 "minecraft:spawn_egg"
             ]
         },
+        "minecraft:polished_andesite": {
+            "tags": []
+        },
         "minecraft:polished_andesite_stairs": {
             "tags": []
         },
@@ -48909,7 +49708,13 @@
         "minecraft:polished_deepslate_wall": {
             "tags": []
         },
+        "minecraft:polished_diorite": {
+            "tags": []
+        },
         "minecraft:polished_diorite_stairs": {
+            "tags": []
+        },
+        "minecraft:polished_granite": {
             "tags": []
         },
         "minecraft:polished_granite_stairs": {
@@ -49529,6 +50334,11 @@
             "tags": [
                 "minecraft:logs",
                 "minecraft:logs_that_burn"
+            ]
+        },
+        "minecraft:spruce_planks": {
+            "tags": [
+                "minecraft:planks"
             ]
         },
         "minecraft:spruce_pressure_plate": {
@@ -50867,11 +51677,17 @@
             "minecraft:netherite_sword"
         ],
         "minecraft:planks": [
+            "minecraft:acacia_planks",
             "minecraft:bamboo_planks",
+            "minecraft:birch_planks",
             "minecraft:cherry_planks",
             "minecraft:crimson_planks",
+            "minecraft:dark_oak_planks",
+            "minecraft:jungle_planks",
             "minecraft:mangrove_planks",
+            "minecraft:oak_planks",
             "minecraft:planks",
+            "minecraft:spruce_planks",
             "minecraft:warped_planks"
         ],
         "minecraft:sand": [

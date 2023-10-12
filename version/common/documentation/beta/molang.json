@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.40.24",
+    "version": "1.20.50.20",
     "content": [],
     "sections": [
         {
@@ -1043,7 +1043,7 @@
                                 },
                                 {
                                     "Name": "query.dash_cooldown_progress",
-                                    "Description": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED. DO NOT USE AFTER 1.20.40. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown. Returns dash cooldown progress if the entity can dash, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.day",
@@ -1351,7 +1351,7 @@
                                 },
                                 {
                                     "Name": "query.is_feeling_happy",
-                                    "Description": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_fire_immune",
@@ -1519,7 +1519,7 @@
                                 },
                                 {
                                     "Name": "query.is_rising",
-                                    "Description": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_roaring",
@@ -1539,11 +1539,11 @@
                                 },
                                 {
                                     "Name": "query.is_scenting",
-                                    "Description": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_searching",
-                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is searching, else it returns 0.0."
+                                    "Description": "Returns 1.0 if the entity is searching, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_selected_item",
@@ -2122,6 +2122,10 @@
                                 {
                                     "Pack min_engine_version": "1.20.40",
                                     "Description": "Deprecated block_property and has_block_property."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.20.50",
+                                    "Description": "dash_cooldown_progress is no longer supported, as that logic is done in the animation. Additionally is_scenting, is_rising, and is_feelingHappy queries are no longer available, and timer_flag_1, timer_flag_2, and timer_flag_3 can be used instead."
                                 }
                             ]
                         }
@@ -2130,5 +2134,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "15d9065b7fc60368b6377affd798cc0d016b4564"
+    "__OBJECTHASH__": "ac2484a5b2b6ed8f79f6727b654782f6da7ad04c"
 }
