@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.50.20",
+    "packageVersion": "1.20.50.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -6031,10 +6031,12 @@
                                                     "readOnly": true
                                                 },
                                                 "validValues": {
-                                                    "value": {
-                                                        "type": "undefined"
-                                                    },
-                                                    "readOnly": true
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    }
                                                 }
                                             }
                                         },
@@ -25048,7 +25050,7 @@
         "Minecraft.BlockStateType.prototype",
         "Minecraft.BlockStateType.prototype.constructor",
         "Minecraft.BlockStateType.prototype.id",
-        "Minecraft.BlockStateType.prototype.validValues",
+        "Minecraft.BlockStateType.prototype.validValues.[[Get]]",
         "Minecraft.BlockStates",
         "Minecraft.BlockStates.get",
         "Minecraft.BlockStates.getAll",
@@ -31488,6 +31490,47 @@
         },
         "minecraft:cracked_polished_blackstone_bricks": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:crafter": {
+            "properties": [
+                {
+                    "name": "crafting",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "orientation",
+                    "validValues": [
+                        "down_east",
+                        "down_north",
+                        "down_south",
+                        "down_west",
+                        "up_east",
+                        "up_north",
+                        "up_south",
+                        "up_west",
+                        "west_up",
+                        "east_up",
+                        "north_up",
+                        "south_up"
+                    ],
+                    "defaultValue": "down_east"
+                },
+                {
+                    "name": "triggered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
@@ -43288,6 +43331,17 @@
                 }
             }
         ],
+        "crafting": [
+            {
+                "validValues": [
+                    false,
+                    true
+                ],
+                "defaultValue": {
+                    "minecraft:crafter": false
+                }
+            }
+        ],
         "damage": [
             {
                 "validValues": [
@@ -44338,6 +44392,27 @@
                 }
             }
         ],
+        "orientation": [
+            {
+                "validValues": [
+                    "down_east",
+                    "down_north",
+                    "down_south",
+                    "down_west",
+                    "up_east",
+                    "up_north",
+                    "up_south",
+                    "up_west",
+                    "west_up",
+                    "east_up",
+                    "north_up",
+                    "south_up"
+                ],
+                "defaultValue": {
+                    "minecraft:crafter": "down_east"
+                }
+            }
+        ],
         "output_lit_bit": [
             {
                 "validValues": [
@@ -44894,6 +44969,7 @@
                     true
                 ],
                 "defaultValue": {
+                    "minecraft:crafter": false,
                     "minecraft:dispenser": false,
                     "minecraft:dropper": false
                 }
@@ -45791,7 +45867,15 @@
         "minecraft:apple": {
             "tags": [
                 "minecraft:is_food"
-            ]
+            ],
+            "components": {
+                "minecraft:food": {
+                    "canAlwaysEat": false,
+                    "nutrition": 4,
+                    "saturationModifier": 0.30000001192092896,
+                    "usingConvertsTo": ""
+                }
+            }
         },
         "minecraft:archer_pottery_sherd": {
             "tags": [
@@ -46780,6 +46864,9 @@
             "tags": []
         },
         "minecraft:cracked_polished_blackstone_bricks": {
+            "tags": []
+        },
+        "minecraft:crafter": {
             "tags": []
         },
         "minecraft:crafting_table": {

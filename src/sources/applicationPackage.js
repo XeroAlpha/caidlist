@@ -57,10 +57,10 @@ function analyzeApkPackageLang(packageZip) {
     console.log('Analyzing package entries for language file...');
     entries.forEach((entry) => {
         const { entryName } = entry;
-        if (entryName.match(/^assets\/resource_packs\/(?:[^/]+)\/texts\/zh_CN\.lang$/)) {
+        if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/zh_CN\.lang$/)) {
             parseMinecraftLang(langZh, entry.getData().toString('utf-8'));
         }
-        if (entryName.match(/^assets\/resource_packs\/(?:[^/]+)\/texts\/en_US\.lang$/)) {
+        if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/en_US\.lang$/)) {
             parseMinecraftLang(langEn, entry.getData().toString('utf-8'));
         }
     });
@@ -79,7 +79,7 @@ const entryAnalyzer = [
     {
         name: 'soundDefinition',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/sounds\/sound_definitions\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/sounds\/sound_definitions\.json$/,
         analyze(results, entryName, soundDefinition) {
             const { sounds } = results;
             const formatVersion = soundDefinition.format_version;
@@ -95,7 +95,7 @@ const entryAnalyzer = [
     {
         name: 'particle',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/particles\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/particles\/(?:[^/]+)\.json$/,
         analyze(results, entryName, particle) {
             const { particleEmitters } = results;
             const formatVersion = particle.format_version;
@@ -109,7 +109,7 @@ const entryAnalyzer = [
     {
         name: 'entityDefinition',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/entity\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/entity\/(?:[^/]+)\.json$/,
         analyze(results, entryName, clientEntity) {
             const { entityDefinitionMap } = results.internal;
             const formatVersion = clientEntity.format_version;
@@ -139,7 +139,7 @@ const entryAnalyzer = [
     {
         name: 'geometry',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/models\/(?:[^]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/models\/(?:[^]+)\.json$/,
         analyze(results, entryName, geometry) {
             const { geometryMap } = results;
             const formatVersion = geometry.format_version;
@@ -171,7 +171,7 @@ const entryAnalyzer = [
     {
         name: 'animation',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/animations\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/animations\/(?:[^/]+)\.json$/,
         analyze(results, entryName, animations) {
             const { animationMap } = results;
             const formatVersion = animations.format_version;
@@ -187,7 +187,7 @@ const entryAnalyzer = [
     {
         name: 'animationController',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/animation_controllers\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/animation_controllers\/(?:[^/]+)\.json$/,
         analyze(results, entryName, animationControllers) {
             const { animationControllerMap } = results;
             const formatVersion = animationControllers.format_version;
@@ -203,7 +203,7 @@ const entryAnalyzer = [
     {
         name: 'renderController',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/render_controllers\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/render_controllers\/(?:[^/]+)\.json$/,
         analyze(results, entryName, renderControllers) {
             const { renderControllerMap } = results;
             const formatVersion = renderControllers.format_version;
@@ -220,7 +220,7 @@ const entryAnalyzer = [
     {
         name: 'fog',
         type: 'json',
-        regex: /^assets\/resource_packs\/(?:[^/]+)\/fogs\/(?:[^/]+)\.json$/,
+        regex: /assets\/resource_packs\/(?:[^/]+)\/fogs\/(?:[^/]+)\.json$/,
         analyze(results, entryName, fog) {
             const { fogs } = results;
             const formatVersion = fog.format_version;
@@ -234,7 +234,7 @@ const entryAnalyzer = [
     {
         name: 'entityBehavior',
         type: 'json',
-        regex: /^assets\/behavior_packs\/(?:[^/]+)\/entities\/(?:[^/]+)\.json$/,
+        regex: /assets\/behavior_packs\/(?:[^/]+)\/entities\/(?:[^/]+)\.json$/,
         analyze(results, entryName, entity) {
             const { entityEventsMap, entityFamilyMap } = results;
             const formatVersion = entity.format_version;
@@ -293,7 +293,7 @@ const entryAnalyzer = [
     },
     {
         name: 'lootTable',
-        regex: /^assets\/behavior_packs\/(?:[^/]+)\/loot_tables\/(.+)\.json$/,
+        regex: /assets\/behavior_packs\/(?:[^/]+)\/loot_tables\/(.+)\.json$/,
         analyze(results, entryName) {
             const { lootTables } = results;
             const match = this.regex.exec(entryName);
@@ -306,8 +306,8 @@ const entryAnalyzer = [
         name: 'feature',
         type: 'json',
         regexList: [
-            /^assets\/definitions\/features\/(?:[^/]+)\.json$/,
-            /^assets\/behavior_packs\/(?:[^/]+)\/features\/(.+)\.json$/
+            /assets\/definitions\/features\/(?:[^/]+)\.json$/,
+            /assets\/behavior_packs\/(?:[^/]+)\/features\/(.+)\.json$/
         ],
         analyze(results, entryName, feature) {
             const { features } = results;
@@ -328,8 +328,8 @@ const entryAnalyzer = [
         name: 'featureRule',
         type: 'json',
         regexList: [
-            /^assets\/definitions\/feature_rules\/(?:[^/]+)\.json$/,
-            /^assets\/behavior_packs\/(?:[^/]+)\/feature_rules\/(.+)\.json$/
+            /assets\/definitions\/feature_rules\/(?:[^/]+)\.json$/,
+            /assets\/behavior_packs\/(?:[^/]+)\/feature_rules\/(.+)\.json$/
         ],
         analyze(results, entryName, featureRule) {
             const { featureRules } = results;
@@ -345,7 +345,7 @@ const entryAnalyzer = [
     {
         name: 'dataDrivenRecipes',
         type: 'json',
-        regex: /^assets\/behavior_packs\/(?:[^/]+)\/recipes\/(?:[^/]+)\.json$/,
+        regex: /assets\/behavior_packs\/(?:[^/]+)\/recipes\/(?:[^/]+)\.json$/,
         analyze(results, entryName, recipe) {
             const { dataDrivenRecipeData } = results;
             const formatVersion = recipe.format_version;
