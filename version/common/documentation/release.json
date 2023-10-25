@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.30.1",
-    "__COMMITHASH__": "c7755281ab8c69d7e61d35856ad5a05813e2b853",
+    "__VERSION__": "1.20.40.1",
+    "__COMMITHASH__": "d7cb43ab0ae696c52ef7597654ab8ba96dc994ac",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -548,6 +548,14 @@
                         },
                         {
                             "name": "in_nether",
+                            "sections": [
+                                {
+                                    "name": "Examples"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "in_overworld",
                             "sections": [
                                 {
                                     "name": "Examples"
@@ -1136,9 +1144,6 @@
                                     "name": "minecraft:behavior.explore_outskirts"
                                 },
                                 {
-                                    "name": "minecraft:behavior.feeling_happy"
-                                },
-                                {
                                     "name": "minecraft:behavior.fertilize_farm_block"
                                 },
                                 {
@@ -1382,9 +1387,6 @@
                                     "name": "minecraft:behavior.rise_to_liquid_level"
                                 },
                                 {
-                                    "name": "minecraft:behavior.rising"
-                                },
-                                {
                                     "name": "minecraft:behavior.roar"
                                 },
                                 {
@@ -1395,9 +1397,6 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.scared"
-                                },
-                                {
-                                    "name": "minecraft:behavior.scenting"
                                 },
                                 {
                                     "name": "minecraft:behavior.send_event"
@@ -1497,6 +1496,15 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.tempt"
+                                },
+                                {
+                                    "name": "minecraft:behavior.timer_flag_1"
+                                },
+                                {
+                                    "name": "minecraft:behavior.timer_flag_2"
+                                },
+                                {
+                                    "name": "minecraft:behavior.timer_flag_3"
                                 },
                                 {
                                     "name": "minecraft:behavior.trade_interest"
@@ -1624,6 +1632,9 @@
                                 },
                                 {
                                     "name": "minecraft:damage_sensor"
+                                },
+                                {
+                                    "name": "minecraft:dash"
                                 },
                                 {
                                     "name": "minecraft:despawn"
@@ -2369,7 +2380,7 @@
                             ]
                         },
                         {
-                            "name": "components v1.20.30"
+                            "name": "components v1.20.40"
                         },
                         {
                             "name": "description v1.20.10"
@@ -2432,7 +2443,7 @@
                             "name": "minecraft:interact_button"
                         },
                         {
-                            "name": "minecraft:item v1.20.30"
+                            "name": "minecraft:item v1.20.40"
                         },
                         {
                             "name": "minecraft:item_storage"
@@ -2444,19 +2455,10 @@
                             "name": "minecraft:max_stack_size"
                         },
                         {
-                            "name": "minecraft:on_use"
-                        },
-                        {
-                            "name": "minecraft:on_use_on"
-                        },
-                        {
                             "name": "minecraft:projectile"
                         },
                         {
                             "name": "minecraft:record"
-                        },
-                        {
-                            "name": "minecraft:render_offsets"
                         },
                         {
                             "name": "minecraft:repairable"
@@ -2478,9 +2480,6 @@
                         },
                         {
                             "name": "minecraft:use_duration"
-                        },
-                        {
-                            "name": "minecraft:weapon"
                         },
                         {
                             "name": "minecraft:wearable"
@@ -4185,6 +4184,7 @@
         "all": "",
         "anvil": "",
         "block_explosion": "",
+        "campfire": "",
         "charging": "",
         "contact": "",
         "drowning": "",
@@ -4205,6 +4205,9 @@
         "override": "",
         "piston": "",
         "projectile": "",
+        "ram_attack": "",
+        "sonic_boom": "",
+        "soul_campfire": "",
         "stalactite": "",
         "stalagmite": "",
         "starve": "",
@@ -4472,12 +4475,6 @@
                     "type": "JSON Object",
                     "defaultValue": "",
                     "description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features"
-                },
-                {
-                    "name": "minecraft:unwalkable",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Sets the block as unwalkable. Mobs would not attempt to path over top of it when the value is set to true."
                 }
             ]
         },
@@ -5067,6 +5064,7 @@
         "in_contact_with_water": "Returns true when the subject entity in contact with any water: water, rain, splash water bottle.",
         "in_lava": "Returns true when the subject entity is in lava.",
         "in_nether": "Returns true when the subject entity is in Nether.",
+        "in_overworld": "Returns true when the subject entity is in Overworld.",
         "in_water": "Returns true when the subject entity is in water.",
         "in_water_or_rain": "Returns true when the subject entity is in water or rain.",
         "inactivity_timer": "Tests if the specified duration in seconds of inactivity for despawning has been reached.",
@@ -6288,35 +6286,6 @@
                     "type": "Decimal",
                     "defaultValue": "2.0",
                     "description": "Each new explore point will be chosen on a random interval between the minimum and the maximum wait time, divided by this value. This does not apply to the first explore point chosen when the goal runs."
-                }
-            ]
-        },
-        "minecraft:behavior.feeling_happy": {
-            "description": "[EXPERIMENTAL] Allows this entity to feel happy for a specified duration",
-            "children": [
-                {
-                    "name": "cooldown_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
-                    "description": "Goal cooldown range in seconds"
-                },
-                {
-                    "name": "duration_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
-                    "description": "Goal duration range in seconds"
-                },
-                {
-                    "name": "on_end",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal end."
-                },
-                {
-                    "name": "on_start",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal starts."
                 }
             ]
         },
@@ -9088,6 +9057,12 @@
                     "description": "If the goal should continue to be used as long as the mob is leashed."
                 },
                 {
+                    "name": "continue_sitting_on_reload",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "The mob will stay sitting on reload."
+                },
+                {
                     "name": "max_angle_of_view_horizontal",
                     "type": "Decimal",
                     "defaultValue": "30.0",
@@ -9138,7 +9113,7 @@
             ]
         },
         "minecraft:behavior.random_search_and_dig": {
-            "description": "[EXPERIMENTAL] Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Valid target block type: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
+            "description": "Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Default target block types: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
             "children": [
                 {
                     "name": "cooldown_range",
@@ -9165,10 +9140,10 @@
                     "description": "Distance in blocks within the entity to considers it has reached it's target position."
                 },
                 {
-                    "name": "items",
-                    "type": "List",
+                    "name": "item_table",
+                    "type": "String",
                     "defaultValue": "",
-                    "description": "Weighted list of item(s) to spawn on successful dig"
+                    "description": "File path relative to the resource pack root for items to spawn list (loot table format)."
                 },
                 {
                     "name": "on_digging_start",
@@ -9235,6 +9210,12 @@
                     "type": "Decimal",
                     "defaultValue": "1.000000",
                     "description": "Searching movement speed multiplier."
+                },
+                {
+                    "name": "target_blocks",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of target block types the goal will look to dig on. Overrides the default list."
                 },
                 {
                     "name": "target_dig_position_offset",
@@ -9461,35 +9442,6 @@
                 }
             ]
         },
-        "minecraft:behavior.rising": {
-            "description": "[EXPERIMENTAL] Allows this entity to rise for a specified duration",
-            "children": [
-                {
-                    "name": "cooldown_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
-                    "description": "Goal cooldown range in seconds"
-                },
-                {
-                    "name": "duration_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
-                    "description": "Goal duration range in seconds"
-                },
-                {
-                    "name": "on_end",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal end."
-                },
-                {
-                    "name": "on_start",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal starts."
-                }
-            ]
-        },
         "minecraft:behavior.roar": {
             "description": "Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.",
             "children": [
@@ -9531,35 +9483,6 @@
                     "type": "Integer",
                     "defaultValue": "0",
                     "description": "The interval in which a sound will play when active in a 1/delay chance to kick off"
-                }
-            ]
-        },
-        "minecraft:behavior.scenting": {
-            "description": "[EXPERIMENTAL] Allows this entity to scent for a specified duration",
-            "children": [
-                {
-                    "name": "cooldown_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
-                    "description": "Goal cooldown range in seconds"
-                },
-                {
-                    "name": "duration_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
-                    "description": "Goal duration range in seconds"
-                },
-                {
-                    "name": "on_end",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal end."
-                },
-                {
-                    "name": "on_start",
-                    "type": "Trigger",
-                    "defaultValue": "",
-                    "description": "Event(s) to run when the goal starts."
                 }
             ]
         },
@@ -10787,6 +10710,93 @@
                     "type": "Decimal",
                     "defaultValue": "0.0",
                     "description": "Distance in blocks this mob can get tempted by a player holding an item they like"
+                }
+            ]
+        },
+        "minecraft:behavior.timer_flag_1": {
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_1 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
+            "children": [
+                {
+                    "name": "cooldown_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[10.000000, 10.000000]",
+                    "description": "Goal cooldown range in seconds"
+                },
+                {
+                    "name": "duration_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[2.000000, 2.000000]",
+                    "description": "Goal duration range in seconds"
+                },
+                {
+                    "name": "on_end",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal end."
+                },
+                {
+                    "name": "on_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal starts."
+                }
+            ]
+        },
+        "minecraft:behavior.timer_flag_2": {
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_2 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
+            "children": [
+                {
+                    "name": "cooldown_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[10.000000, 10.000000]",
+                    "description": "Goal cooldown range in seconds"
+                },
+                {
+                    "name": "duration_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[2.000000, 2.000000]",
+                    "description": "Goal duration range in seconds"
+                },
+                {
+                    "name": "on_end",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal end."
+                },
+                {
+                    "name": "on_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal starts."
+                }
+            ]
+        },
+        "minecraft:behavior.timer_flag_3": {
+            "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_3 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
+            "children": [
+                {
+                    "name": "cooldown_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[10.000000, 10.000000]",
+                    "description": "Goal cooldown range in seconds"
+                },
+                {
+                    "name": "duration_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[2.000000, 2.000000]",
+                    "description": "Goal duration range in seconds"
+                },
+                {
+                    "name": "on_end",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal end."
+                },
+                {
+                    "name": "on_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event(s) to run when the goal starts."
                 }
             ]
         },
@@ -12054,6 +12064,29 @@
                             "description": "Defines what sound to play, if any, when the on_damage filters are met."
                         }
                     ]
+                }
+            ]
+        },
+        "minecraft:dash": {
+            "description": "Ability for a rideable entity to dash.",
+            "children": [
+                {
+                    "name": "cooldown_time",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "The dash cooldown in seconds. Default value is 1.000000."
+                },
+                {
+                    "name": "horizontal_momentum",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "Horizontal momentum of the dash."
+                },
+                {
+                    "name": "vertical_momentum",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "Vertical momentum of the dash."
                 }
             ]
         },
@@ -15188,6 +15221,18 @@
                             "description": "List of blocks that can help the transformation of this entity"
                         },
                         {
+                            "name": "range_max",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Time in seconds to be added to value to have the maximum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)"
+                        },
+                        {
+                            "name": "range_min",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Time in seconds to be added to value to have the minimum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)"
+                        },
+                        {
                             "name": "value",
                             "type": "Decimal",
                             "defaultValue": "0",
@@ -15603,11 +15648,8 @@
         "minecraft:item_storage": "The Storage Item Component is used for storing Items within an Item's User DataExperimental toggles required: Vanilla Experiments Internal (NON_LOC)",
         "minecraft:liquid_clipped": "The liquid clipped component determines whether the item interacts with liquid blocks on use.",
         "minecraft:max_stack_size": "The max stack size component determines how many of the item can be stacked together.",
-        "minecraft:on_use": "The on_use item component allows you to receive an event when the item is used.Experimental toggles required: Holiday Creator Features",
-        "minecraft:on_use_on": "The on_use_on item component allows you to receive an event when the item is used on a block in the world.Experimental toggles required: Holiday Creator Features",
         "minecraft:projectile": "Projectile item component. projectile items shoot out, like an arrow.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:record": "Record Item Component. Used by record items to play music. Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
-        "minecraft:render_offsets": "Render offsets component: optional values can be given to offset the way the item is rendered.Experimental toggles required: Holiday Creator Features",
         "minecraft:repairable": "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:shooter": "Shooter Item Component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:should_despawn": "Should despawn component determines if the item should eventually despawn while floating in the world",
@@ -15615,7 +15657,6 @@
         "minecraft:throwable": "Throwable item component. Throwable items, such as a snowball.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
         "minecraft:use_animation": "This component determines which animation plays when using the item.",
         "minecraft:use_duration": "This component determines how long the item takes to use when used in combination with components like Shooter, Throwable or Food.",
-        "minecraft:weapon": "Weapon Item Component. Added to every weapon item such as axe, sword, trident, bow, crossbow.Experimental toggles required: Holiday Creator Features",
         "minecraft:wearable": "Wearable item component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)"
     },
     "molangMath": {
@@ -15665,7 +15706,7 @@
         "query.armor_texture_slot": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot.",
         "query.average_frame_time": "Returns the time in *seconds* of the average frame time over the last 'n' frames.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.average_frame_time' (or the equivalent 'query.average_frame_time(0)') will return the frame time of the frame before the current one.  'query.average_frame_time(1)' will return the average frame time of the previous two frames.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Asking for more frames will result in only sampling the number of frames stored.",
         "query.block_face": "Returns the block face for this (only valid for certain triggers such as placing blocks, or interacting with block) (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
-        "query.block_property": "Returns the value of the associated block's Block State.",
+        "query.block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns the value of the associated block's Block State.",
         "query.block_state": "Returns the value of the associated block's Block State.",
         "query.blocking": "Returns 1.0 if the entity is blocking, else it returns 0.0.",
         "query.body_x_rotation": "Returns the body pitch rotation if called on an actor, else it returns 0.0.",
@@ -15690,7 +15731,7 @@
         "query.combine_entities": "Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.",
         "query.count": "Counts the number of things passed to it (arrays are counted as the number of elements they contain; non-arrays count as 1).",
         "query.current_squish_value": "Returns the squish value for the current entity, or 0.0 if this doesn't make sense.",
-        "query.dash_cooldown_progress": "Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
+        "query.dash_cooldown_progress": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0.",
         "query.day": "Returns the day of the current level.",
         "query.death_ticks": "Returns the elapsed ticks since the mob started dying.",
         "query.debug_output": "debug log a value to the output debug window for builds that have one",
@@ -15718,7 +15759,7 @@
         "query.has_any_family": "Returns 1 if the entity has any of the specified families, else 0.",
         "query.has_armor_slot": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0",
         "query.has_biome_tag": "Returns whether or not a Block Placement Target has a specific biome tag",
-        "query.has_block_property": "Returns 1.0 if the associated block has the given block state or 0.0 if not.",
+        "query.has_block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_block_state": "Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_cape": "Returns 1.0 if the player has a cape, else it returns 0.0.",
         "query.has_collision": "Returns 1.0 if the entity has collisions enabled, else it returns 0.0.",
@@ -15767,7 +15808,7 @@
         "query.is_emerging": "Returns 1.0 if the entity is emerging, else it returns 0.0.",
         "query.is_emoting": "Returns 1.0 if the entity is emoting, else it returns 0.0.",
         "query.is_enchanted": "Returns 1.0 if the entity is enchanted, else it returns 0.0.",
-        "query.is_feeling_happy": "[EXPERIMENTAL] Returns 1.0 if the entity is feeling happy, else it returns 0.0.",
+        "query.is_feeling_happy": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_fire_immune": "Returns 1.0 if the entity is immune to fire, else it returns 0.0.",
         "query.is_first_person": "Returns 1.0 if the entity is being rendered in first person mode, else it returns 0.0.",
         "query.is_ghost": "Returns 1.0 if an entity is a ghost, else it returns 0.0.",
@@ -15777,6 +15818,7 @@
         "query.is_ignited": "Returns 1.0 if the entity is ignited, else it returns 0.0.",
         "query.is_illager_captain": "Returns 1.0 if the entity is an illager captain, else it returns 0.0.",
         "query.is_in_contact_with_water": "Returns 1.0 if the entity is in contact with any water (water, rain, splash water bottle), else it returns 0.0.",
+        "query.is_in_lava": "Returns 1.0 if the entity is in lava, else it returns 0.0.",
         "query.is_in_love": "Returns 1.0 if the entity is in love, else it returns 0.0.",
         "query.is_in_ui": "Returns 1.0 if the entity is rendered as part of the UI, else it returns 0.0.",
         "query.is_in_water": "Returns 1.0 if the entity is in water, else it returns 0.0.",
@@ -15808,12 +15850,12 @@
         "query.is_ram_attacking": "Returns 1.0 if the entity is using a ram attack, else it returns 0.0.",
         "query.is_resting": "Returns 1.0 if the entity is resting, else it returns 0.0.",
         "query.is_riding": "Returns 1.0 if the entity is riding, else it returns 0.0.",
-        "query.is_rising": "[EXPERIMENTAL] Returns 1.0 if the entity is rising, else it returns 0.0.",
+        "query.is_rising": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_roaring": "Returns 1.0 if the entity is currently roaring, else it returns 0.0.",
         "query.is_rolling": "Returns 1.0 if the entity is rolling, else it returns 0.0.",
         "query.is_saddled": "Returns 1.0 if the entity has a saddle, else it returns 0.0.",
         "query.is_scared": "Returns 1.0 if the entity is scared, else it returns 0.0.",
-        "query.is_scenting": "[EXPERIMENTAL] Returns 1.0 if the entity is scenting, else it returns 0.0.",
+        "query.is_scenting": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.",
         "query.is_searching": "[EXPERIMENTAL] Returns 1.0 if the entity is searching, else it returns 0.0.",
         "query.is_selected_item": "Returns true if the player has selected an item in the inventory, else it returns 0.0.",
         "query.is_shaking": "Returns 1.0 if the entity is casting, else it returns 0.0.",
@@ -15902,6 +15944,9 @@
         "query.time_of_day": "Returns the time of day (midnight=0.0, sunrise=0.25, noon=0.5, sunset=0.75) of the dimension the entity is in.",
         "query.time_since_last_vibration_detection": "Returns the time in seconds since the last vibration detected by the actor. On errors or if no vibration has been detected yet, returns -1. Available on the Client (Resource Packs) only.",
         "query.time_stamp": "Returns the current time stamp of the level",
+        "query.timer_flag_1": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0.",
+        "query.timer_flag_2": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
+        "query.timer_flag_3": "Returns 1.0 if behavior.timer_flag_3 is running, else it returns 0.0.",
         "query.total_emitter_count": "Returns the total number of active emitters in the world.",
         "query.total_particle_count": "Returns the total number of active particles in the world.",
         "query.trade_tier": "Returns the trade tier of the entity if it makes sense, else it returns 0.0",

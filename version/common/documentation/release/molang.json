@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.30.1",
+    "version": "1.20.40.1",
     "content": [],
     "sections": [
         {
@@ -943,7 +943,7 @@
                                 },
                                 {
                                     "Name": "query.block_property",
-                                    "Description": "Returns the value of the associated block's Block State."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.40.) Returns the value of the associated block's Block State."
                                 },
                                 {
                                     "Name": "query.block_state",
@@ -1043,7 +1043,7 @@
                                 },
                                 {
                                     "Name": "query.dash_cooldown_progress",
-                                    "Description": "Returns dash cooldown progress if the entity can dash, else it returns 0.0."
+                                    "Description": "DEPRECATED. DO NOT USE AFTER 1.20.3. Please see camel.entity.json script.pre_animation for example of how to now process dash cooldown.  OLD: Returns dash cooldown progress if the entity can dash, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.day",
@@ -1155,7 +1155,7 @@
                                 },
                                 {
                                     "Name": "query.has_block_property",
-                                    "Description": "Returns 1.0 if the associated block has the given block state or 0.0 if not."
+                                    "Description": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not."
                                 },
                                 {
                                     "Name": "query.has_block_state",
@@ -1351,7 +1351,7 @@
                                 },
                                 {
                                     "Name": "query.is_feeling_happy",
-                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is feeling happy, else it returns 0.0."
+                                    "Description": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_fire_immune",
@@ -1388,6 +1388,10 @@
                                 {
                                     "Name": "query.is_in_contact_with_water",
                                     "Description": "Returns 1.0 if the entity is in contact with any water (water, rain, splash water bottle), else it returns 0.0."
+                                },
+                                {
+                                    "Name": "query.is_in_lava",
+                                    "Description": "Returns 1.0 if the entity is in lava, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_in_love",
@@ -1515,7 +1519,7 @@
                                 },
                                 {
                                     "Name": "query.is_rising",
-                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is rising, else it returns 0.0."
+                                    "Description": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_roaring",
@@ -1535,7 +1539,7 @@
                                 },
                                 {
                                     "Name": "query.is_scenting",
-                                    "Description": "[EXPERIMENTAL] Returns 1.0 if the entity is scenting, else it returns 0.0."
+                                    "Description": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0."
                                 },
                                 {
                                     "Name": "query.is_searching",
@@ -1890,6 +1894,18 @@
                                     "Description": "Returns the current time stamp of the level"
                                 },
                                 {
+                                    "Name": "query.timer_flag_1",
+                                    "Description": "Returns 1.0 if behavior.timer_flag_1 is running, else it returns 0.0."
+                                },
+                                {
+                                    "Name": "query.timer_flag_2",
+                                    "Description": "Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0."
+                                },
+                                {
+                                    "Name": "query.timer_flag_3",
+                                    "Description": "Returns 1.0 if behavior.timer_flag_3 is running, else it returns 0.0."
+                                },
+                                {
                                     "Name": "query.total_emitter_count",
                                     "Description": "Returns the total number of active emitters in the world."
                                 },
@@ -2102,6 +2118,10 @@
                                 {
                                     "Pack min_engine_version": "1.20.10",
                                     "Description": "Renamed block_property and has_block_property to block_state and has_block_state post this version."
+                                },
+                                {
+                                    "Pack min_engine_version": "1.20.40",
+                                    "Description": "Deprecated block_property and has_block_property."
                                 }
                             ]
                         }
@@ -2110,5 +2130,5 @@
             ]
         }
     ],
-    "__OBJECTHASH__": "3a352e955964cf8c09a437921de300e88f821cdf"
+    "__OBJECTHASH__": "c1c21d9aaabc5f171d680c7fd18a83c19b0c0eff"
 }
