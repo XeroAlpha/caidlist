@@ -8,6 +8,8 @@ API：`https://ca.projectxero.top/idlist/`
 GET /search
 ```
 
+[Apifox 文档](https://caidlist.apifox.cn/)
+
 ### 请求参数
 
 |参数名|类型|描述|
@@ -19,6 +21,7 @@ GET /search
 |`scope`|字符串|可为 `all`（默认）、`key`、`value`。表示搜索的范围|
 |`match`|字符串|可为 `keyword`（默认，关键词匹配，忽略大小写）、`contains`（包含即匹配）、`startswith`（以之开头即匹配）、`equals`（相等才匹配）。表示匹配的算法|
 |`limit`|数字|搜索返回结果数量的上限，介于 1 到 1000 的整数，默认为 1|
+|`format`|字符串|可为 `json`（默认，以JSON形式返回）或者 `text`（以可读形式返回）。表示返回的格式|
 
 ### 返回内容
 

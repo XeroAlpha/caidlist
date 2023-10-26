@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.50.21",
+    "packageVersion": "1.20.50.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -10684,6 +10684,13 @@
                                         },
                                         "readOnly": true
                                     },
+                                    "Npc": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:npc"
+                                        },
+                                        "readOnly": true
+                                    },
                                     "OnFire": {
                                         "value": {
                                             "type": "string",
@@ -13848,6 +13855,90 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.EntityNavigationComponent"
+                                }
+                            },
+                            "configurable": false
+                        },
+                        "EntityNpcComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "EntityNpcComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:npc"
+                                        },
+                                        "readOnly": true
+                                    }
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EntityNpcComponent"
+                                                    }
+                                                }
+                                            },
+                                            "enumerableProperties": {
+                                                "defaultScene": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1
+                                                    }
+                                                },
+                                                "name": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1
+                                                    }
+                                                },
+                                                "skinIndex": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1
+                                                    }
+                                                }
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.EntityComponent.prototype"
+                                            }
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false
+                                    }
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.EntityComponent"
                                 }
                             },
                             "configurable": false
@@ -25655,6 +25746,7 @@
         "Minecraft.EntityComponentTypes.NavigationGeneric",
         "Minecraft.EntityComponentTypes.NavigationHover",
         "Minecraft.EntityComponentTypes.NavigationWalk",
+        "Minecraft.EntityComponentTypes.Npc",
         "Minecraft.EntityComponentTypes.OnFire",
         "Minecraft.EntityComponentTypes.PushThrough",
         "Minecraft.EntityComponentTypes.Rideable",
@@ -26095,6 +26187,18 @@
         "Minecraft.EntityNavigationWalkComponent.prototype",
         "Minecraft.EntityNavigationWalkComponent.prototype.[[Prototype]]",
         "Minecraft.EntityNavigationWalkComponent.prototype.constructor",
+        "Minecraft.EntityNpcComponent",
+        "Minecraft.EntityNpcComponent.[[Prototype]]",
+        "Minecraft.EntityNpcComponent.componentId",
+        "Minecraft.EntityNpcComponent.prototype",
+        "Minecraft.EntityNpcComponent.prototype.[[Prototype]]",
+        "Minecraft.EntityNpcComponent.prototype.constructor",
+        "Minecraft.EntityNpcComponent.prototype.defaultScene.[[Get]]",
+        "Minecraft.EntityNpcComponent.prototype.defaultScene.[[Set]]",
+        "Minecraft.EntityNpcComponent.prototype.name.[[Get]]",
+        "Minecraft.EntityNpcComponent.prototype.name.[[Set]]",
+        "Minecraft.EntityNpcComponent.prototype.skinIndex.[[Get]]",
+        "Minecraft.EntityNpcComponent.prototype.skinIndex.[[Set]]",
         "Minecraft.EntityOnFireComponent",
         "Minecraft.EntityOnFireComponent.[[Prototype]]",
         "Minecraft.EntityOnFireComponent.componentId",
@@ -30763,6 +30867,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:chiseled_deepslate": {
             "properties": [],
             "invalidStates": [],
@@ -30776,6 +30886,18 @@
             "canBeWaterlogged": false
         },
         "minecraft:chiseled_polished_blackstone": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:chiseled_tuff": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:chiseled_tuff_bricks": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -31254,11 +31376,114 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:copper_ore": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:coral_block": {
             "properties": [
@@ -34038,11 +34263,120 @@
             "itemId": "<same>",
             "canBeWaterlogged": true
         },
+        "minecraft:exposed_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:exposed_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:exposed_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:exposed_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:exposed_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:exposed_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:exposed_cut_copper": {
             "properties": [],
@@ -37569,11 +37903,120 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:oxidized_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:oxidized_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:oxidized_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:oxidized_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:oxidized_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:oxidized_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:oxidized_cut_copper": {
             "properties": [],
@@ -38411,6 +38854,118 @@
                         3
                     ],
                     "defaultValue": 0
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:polished_tuff": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:polished_tuff_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:polished_tuff_slab",
+            "canBeWaterlogged": false
+        },
+        "minecraft:polished_tuff_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:polished_tuff_stairs": {
+            "properties": [
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "weirdo_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:polished_tuff_wall": {
+            "properties": [
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
                 }
             ],
             "invalidStates": [],
@@ -41271,6 +41826,224 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:tuff_brick_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:tuff_brick_slab",
+            "canBeWaterlogged": false
+        },
+        "minecraft:tuff_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:tuff_brick_stairs": {
+            "properties": [
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "weirdo_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:tuff_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:tuff_bricks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:tuff_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:tuff_slab",
+            "canBeWaterlogged": false
+        },
+        "minecraft:tuff_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top"
+                    ],
+                    "defaultValue": "bottom"
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:tuff_stairs": {
+            "properties": [
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "weirdo_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:tuff_wall": {
+            "properties": [
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall"
+                    ],
+                    "defaultValue": "none"
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
         "minecraft:turtle_egg": {
             "properties": [
                 {
@@ -41954,11 +42727,120 @@
             "itemId": "<same>",
             "canBeWaterlogged": false
         },
+        "minecraft:waxed_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:waxed_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:waxed_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:waxed_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:waxed_cut_copper": {
             "properties": [],
@@ -42021,11 +42903,120 @@
             "itemId": "minecraft:waxed_cut_copper_slab",
             "canBeWaterlogged": false
         },
+        "minecraft:waxed_exposed_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:waxed_exposed_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:waxed_exposed_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_exposed_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:waxed_exposed_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_exposed_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:waxed_exposed_cut_copper": {
             "properties": [],
@@ -42088,11 +43079,120 @@
             "itemId": "minecraft:waxed_exposed_cut_copper_slab",
             "canBeWaterlogged": false
         },
+        "minecraft:waxed_oxidized_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:waxed_oxidized_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:waxed_oxidized_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_oxidized_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:waxed_oxidized_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_oxidized_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:waxed_oxidized_cut_copper": {
             "properties": [],
@@ -42155,11 +43255,120 @@
             "itemId": "minecraft:waxed_oxidized_cut_copper_slab",
             "canBeWaterlogged": false
         },
+        "minecraft:waxed_weathered_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:waxed_weathered_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:waxed_weathered_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_weathered_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:waxed_weathered_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:waxed_weathered_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:waxed_weathered_cut_copper": {
             "properties": [],
@@ -42222,11 +43431,120 @@
             "itemId": "minecraft:waxed_weathered_cut_copper_slab",
             "canBeWaterlogged": false
         },
+        "minecraft:weathered_chiseled_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
         "minecraft:weathered_copper": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false
+        },
+        "minecraft:weathered_copper_bulb": {
+            "properties": [
+                {
+                    "name": "lit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:weathered_copper_door": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "door_hinge_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
+        },
+        "minecraft:weathered_copper_grate": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false
+        },
+        "minecraft:weathered_copper_trapdoor": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "defaultValue": 0
+                },
+                {
+                    "name": "open_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true
+                    ],
+                    "defaultValue": false
+                }
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true
         },
         "minecraft:weathered_cut_copper": {
             "properties": [],
@@ -43412,6 +44730,8 @@
                     "minecraft:cherry_trapdoor": 0,
                     "minecraft:chiseled_bookshelf": 0,
                     "minecraft:cocoa": 0,
+                    "minecraft:copper_door": 0,
+                    "minecraft:copper_trapdoor": 0,
                     "minecraft:crimson_door": 0,
                     "minecraft:crimson_fence_gate": 0,
                     "minecraft:crimson_trapdoor": 0,
@@ -43419,6 +44739,8 @@
                     "minecraft:dark_oak_fence_gate": 0,
                     "minecraft:dark_oak_trapdoor": 0,
                     "minecraft:decorated_pot": 0,
+                    "minecraft:exposed_copper_door": 0,
+                    "minecraft:exposed_copper_trapdoor": 0,
                     "minecraft:fence_gate": 0,
                     "minecraft:grindstone": 0,
                     "minecraft:iron_door": 0,
@@ -43430,6 +44752,8 @@
                     "minecraft:mangrove_door": 0,
                     "minecraft:mangrove_fence_gate": 0,
                     "minecraft:mangrove_trapdoor": 0,
+                    "minecraft:oxidized_copper_door": 0,
+                    "minecraft:oxidized_copper_trapdoor": 0,
                     "minecraft:spruce_door": 0,
                     "minecraft:spruce_fence_gate": 0,
                     "minecraft:spruce_trapdoor": 0,
@@ -43438,6 +44762,16 @@
                     "minecraft:warped_door": 0,
                     "minecraft:warped_fence_gate": 0,
                     "minecraft:warped_trapdoor": 0,
+                    "minecraft:waxed_copper_door": 0,
+                    "minecraft:waxed_copper_trapdoor": 0,
+                    "minecraft:waxed_exposed_copper_door": 0,
+                    "minecraft:waxed_exposed_copper_trapdoor": 0,
+                    "minecraft:waxed_oxidized_copper_door": 0,
+                    "minecraft:waxed_oxidized_copper_trapdoor": 0,
+                    "minecraft:waxed_weathered_copper_door": 0,
+                    "minecraft:waxed_weathered_copper_trapdoor": 0,
+                    "minecraft:weathered_copper_door": 0,
+                    "minecraft:weathered_copper_trapdoor": 0,
                     "minecraft:wooden_door": 0
                 }
             }
@@ -43475,13 +44809,21 @@
                     "minecraft:bamboo_door": false,
                     "minecraft:birch_door": false,
                     "minecraft:cherry_door": false,
+                    "minecraft:copper_door": false,
                     "minecraft:crimson_door": false,
                     "minecraft:dark_oak_door": false,
+                    "minecraft:exposed_copper_door": false,
                     "minecraft:iron_door": false,
                     "minecraft:jungle_door": false,
                     "minecraft:mangrove_door": false,
+                    "minecraft:oxidized_copper_door": false,
                     "minecraft:spruce_door": false,
                     "minecraft:warped_door": false,
+                    "minecraft:waxed_copper_door": false,
+                    "minecraft:waxed_exposed_copper_door": false,
+                    "minecraft:waxed_oxidized_copper_door": false,
+                    "minecraft:waxed_weathered_copper_door": false,
+                    "minecraft:weathered_copper_door": false,
                     "minecraft:wooden_door": false
                 }
             }
@@ -44040,8 +45382,10 @@
                     "minecraft:brown_candle_cake": false,
                     "minecraft:candle": false,
                     "minecraft:candle_cake": false,
+                    "minecraft:copper_bulb": false,
                     "minecraft:cyan_candle": false,
                     "minecraft:cyan_candle_cake": false,
+                    "minecraft:exposed_copper_bulb": false,
                     "minecraft:gray_candle": false,
                     "minecraft:gray_candle_cake": false,
                     "minecraft:green_candle": false,
@@ -44056,12 +45400,18 @@
                     "minecraft:magenta_candle_cake": false,
                     "minecraft:orange_candle": false,
                     "minecraft:orange_candle_cake": false,
+                    "minecraft:oxidized_copper_bulb": false,
                     "minecraft:pink_candle": false,
                     "minecraft:pink_candle_cake": false,
                     "minecraft:purple_candle": false,
                     "minecraft:purple_candle_cake": false,
                     "minecraft:red_candle": false,
                     "minecraft:red_candle_cake": false,
+                    "minecraft:waxed_copper_bulb": false,
+                    "minecraft:waxed_exposed_copper_bulb": false,
+                    "minecraft:waxed_oxidized_copper_bulb": false,
+                    "minecraft:waxed_weathered_copper_bulb": false,
+                    "minecraft:weathered_copper_bulb": false,
                     "minecraft:white_candle": false,
                     "minecraft:white_candle_cake": false,
                     "minecraft:yellow_candle": false,
@@ -44184,10 +45534,16 @@
                     "minecraft:polished_blackstone_slab": "bottom",
                     "minecraft:polished_deepslate_double_slab": "bottom",
                     "minecraft:polished_deepslate_slab": "bottom",
+                    "minecraft:polished_tuff_double_slab": "bottom",
+                    "minecraft:polished_tuff_slab": "bottom",
                     "minecraft:stone_block_slab": "bottom",
                     "minecraft:stone_block_slab2": "bottom",
                     "minecraft:stone_block_slab3": "bottom",
                     "minecraft:stone_block_slab4": "bottom",
+                    "minecraft:tuff_brick_double_slab": "bottom",
+                    "minecraft:tuff_brick_slab": "bottom",
+                    "minecraft:tuff_double_slab": "bottom",
+                    "minecraft:tuff_slab": "bottom",
                     "minecraft:warped_double_slab": "bottom",
                     "minecraft:warped_slab": "bottom",
                     "minecraft:waxed_cut_copper_slab": "bottom",
@@ -44365,12 +45721,16 @@
                     "minecraft:cherry_door": false,
                     "minecraft:cherry_fence_gate": false,
                     "minecraft:cherry_trapdoor": false,
+                    "minecraft:copper_door": false,
+                    "minecraft:copper_trapdoor": false,
                     "minecraft:crimson_door": false,
                     "minecraft:crimson_fence_gate": false,
                     "minecraft:crimson_trapdoor": false,
                     "minecraft:dark_oak_door": false,
                     "minecraft:dark_oak_fence_gate": false,
                     "minecraft:dark_oak_trapdoor": false,
+                    "minecraft:exposed_copper_door": false,
+                    "minecraft:exposed_copper_trapdoor": false,
                     "minecraft:fence_gate": false,
                     "minecraft:iron_door": false,
                     "minecraft:iron_trapdoor": false,
@@ -44381,6 +45741,8 @@
                     "minecraft:mangrove_door": false,
                     "minecraft:mangrove_fence_gate": false,
                     "minecraft:mangrove_trapdoor": false,
+                    "minecraft:oxidized_copper_door": false,
+                    "minecraft:oxidized_copper_trapdoor": false,
                     "minecraft:spruce_door": false,
                     "minecraft:spruce_fence_gate": false,
                     "minecraft:spruce_trapdoor": false,
@@ -44388,6 +45750,16 @@
                     "minecraft:warped_door": false,
                     "minecraft:warped_fence_gate": false,
                     "minecraft:warped_trapdoor": false,
+                    "minecraft:waxed_copper_door": false,
+                    "minecraft:waxed_copper_trapdoor": false,
+                    "minecraft:waxed_exposed_copper_door": false,
+                    "minecraft:waxed_exposed_copper_trapdoor": false,
+                    "minecraft:waxed_oxidized_copper_door": false,
+                    "minecraft:waxed_oxidized_copper_trapdoor": false,
+                    "minecraft:waxed_weathered_copper_door": false,
+                    "minecraft:waxed_weathered_copper_trapdoor": false,
+                    "minecraft:weathered_copper_door": false,
+                    "minecraft:weathered_copper_trapdoor": false,
                     "minecraft:wooden_door": false
                 }
             }
@@ -44527,10 +45899,18 @@
                     true
                 ],
                 "defaultValue": {
+                    "minecraft:copper_bulb": false,
+                    "minecraft:exposed_copper_bulb": false,
                     "minecraft:lectern": false,
                     "minecraft:observer": false,
+                    "minecraft:oxidized_copper_bulb": false,
                     "minecraft:trip_wire": false,
-                    "minecraft:tripwire_hook": false
+                    "minecraft:tripwire_hook": false,
+                    "minecraft:waxed_copper_bulb": false,
+                    "minecraft:waxed_exposed_copper_bulb": false,
+                    "minecraft:waxed_oxidized_copper_bulb": false,
+                    "minecraft:waxed_weathered_copper_bulb": false,
+                    "minecraft:weathered_copper_bulb": false
                 }
             }
         ],
@@ -45051,17 +46431,25 @@
                     "minecraft:bamboo_door": false,
                     "minecraft:birch_door": false,
                     "minecraft:cherry_door": false,
+                    "minecraft:copper_door": false,
                     "minecraft:crimson_door": false,
                     "minecraft:dark_oak_door": false,
                     "minecraft:double_plant": false,
+                    "minecraft:exposed_copper_door": false,
                     "minecraft:iron_door": false,
                     "minecraft:jungle_door": false,
                     "minecraft:mangrove_door": false,
+                    "minecraft:oxidized_copper_door": false,
                     "minecraft:pitcher_crop": false,
                     "minecraft:pitcher_plant": false,
                     "minecraft:small_dripleaf_block": true,
                     "minecraft:spruce_door": false,
                     "minecraft:warped_door": false,
+                    "minecraft:waxed_copper_door": false,
+                    "minecraft:waxed_exposed_copper_door": false,
+                    "minecraft:waxed_oxidized_copper_door": false,
+                    "minecraft:waxed_weathered_copper_door": false,
+                    "minecraft:weathered_copper_door": false,
                     "minecraft:wooden_door": false
                 }
             }
@@ -45086,6 +46474,7 @@
                     "minecraft:cherry_stairs": false,
                     "minecraft:cherry_trapdoor": false,
                     "minecraft:cobbled_deepslate_stairs": false,
+                    "minecraft:copper_trapdoor": false,
                     "minecraft:crimson_stairs": false,
                     "minecraft:crimson_trapdoor": false,
                     "minecraft:cut_copper_stairs": false,
@@ -45096,6 +46485,7 @@
                     "minecraft:deepslate_tile_stairs": false,
                     "minecraft:diorite_stairs": false,
                     "minecraft:end_brick_stairs": false,
+                    "minecraft:exposed_copper_trapdoor": false,
                     "minecraft:exposed_cut_copper_stairs": false,
                     "minecraft:granite_stairs": false,
                     "minecraft:iron_trapdoor": false,
@@ -45109,6 +46499,7 @@
                     "minecraft:nether_brick_stairs": false,
                     "minecraft:normal_stone_stairs": false,
                     "minecraft:oak_stairs": false,
+                    "minecraft:oxidized_copper_trapdoor": false,
                     "minecraft:oxidized_cut_copper_stairs": false,
                     "minecraft:polished_andesite_stairs": false,
                     "minecraft:polished_blackstone_brick_stairs": false,
@@ -45116,6 +46507,7 @@
                     "minecraft:polished_deepslate_stairs": false,
                     "minecraft:polished_diorite_stairs": false,
                     "minecraft:polished_granite_stairs": false,
+                    "minecraft:polished_tuff_stairs": false,
                     "minecraft:prismarine_bricks_stairs": false,
                     "minecraft:prismarine_stairs": false,
                     "minecraft:purpur_stairs": false,
@@ -45131,12 +46523,19 @@
                     "minecraft:stone_brick_stairs": false,
                     "minecraft:stone_stairs": false,
                     "minecraft:trapdoor": false,
+                    "minecraft:tuff_brick_stairs": false,
+                    "minecraft:tuff_stairs": false,
                     "minecraft:warped_stairs": false,
                     "minecraft:warped_trapdoor": false,
+                    "minecraft:waxed_copper_trapdoor": false,
                     "minecraft:waxed_cut_copper_stairs": false,
+                    "minecraft:waxed_exposed_copper_trapdoor": false,
                     "minecraft:waxed_exposed_cut_copper_stairs": false,
+                    "minecraft:waxed_oxidized_copper_trapdoor": false,
                     "minecraft:waxed_oxidized_cut_copper_stairs": false,
+                    "minecraft:waxed_weathered_copper_trapdoor": false,
                     "minecraft:waxed_weathered_cut_copper_stairs": false,
+                    "minecraft:weathered_copper_trapdoor": false,
                     "minecraft:weathered_cut_copper_stairs": false
                 }
             }
@@ -45206,7 +46605,10 @@
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
-                    "minecraft:polished_deepslate_wall": "none"
+                    "minecraft:polished_deepslate_wall": "none",
+                    "minecraft:polished_tuff_wall": "none",
+                    "minecraft:tuff_brick_wall": "none",
+                    "minecraft:tuff_wall": "none"
                 }
             }
         ],
@@ -45227,7 +46629,10 @@
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
-                    "minecraft:polished_deepslate_wall": "none"
+                    "minecraft:polished_deepslate_wall": "none",
+                    "minecraft:polished_tuff_wall": "none",
+                    "minecraft:tuff_brick_wall": "none",
+                    "minecraft:tuff_wall": "none"
                 }
             }
         ],
@@ -45248,7 +46653,10 @@
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
-                    "minecraft:polished_deepslate_wall": "none"
+                    "minecraft:polished_deepslate_wall": "none",
+                    "minecraft:polished_tuff_wall": "none",
+                    "minecraft:tuff_brick_wall": "none",
+                    "minecraft:tuff_wall": "none"
                 }
             }
         ],
@@ -45269,7 +46677,10 @@
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
-                    "minecraft:polished_deepslate_wall": "none"
+                    "minecraft:polished_deepslate_wall": "none",
+                    "minecraft:polished_tuff_wall": "none",
+                    "minecraft:tuff_brick_wall": "none",
+                    "minecraft:tuff_wall": "none"
                 }
             }
         ],
@@ -45289,7 +46700,10 @@
                     "minecraft:mud_brick_wall": false,
                     "minecraft:polished_blackstone_brick_wall": false,
                     "minecraft:polished_blackstone_wall": false,
-                    "minecraft:polished_deepslate_wall": false
+                    "minecraft:polished_deepslate_wall": false,
+                    "minecraft:polished_tuff_wall": false,
+                    "minecraft:tuff_brick_wall": false,
+                    "minecraft:tuff_wall": false
                 }
             }
         ],
@@ -45371,6 +46785,7 @@
                     "minecraft:polished_deepslate_stairs": 0,
                     "minecraft:polished_diorite_stairs": 0,
                     "minecraft:polished_granite_stairs": 0,
+                    "minecraft:polished_tuff_stairs": 0,
                     "minecraft:prismarine_bricks_stairs": 0,
                     "minecraft:prismarine_stairs": 0,
                     "minecraft:purpur_stairs": 0,
@@ -45384,6 +46799,8 @@
                     "minecraft:spruce_stairs": 0,
                     "minecraft:stone_brick_stairs": 0,
                     "minecraft:stone_stairs": 0,
+                    "minecraft:tuff_brick_stairs": 0,
+                    "minecraft:tuff_stairs": 0,
                     "minecraft:warped_stairs": 0,
                     "minecraft:waxed_cut_copper_stairs": 0,
                     "minecraft:waxed_exposed_cut_copper_stairs": 0,
@@ -45575,33 +46992,57 @@
             "minecraft:stone_stairs": {}
         },
         "stone_pick_diggable": {
+            "minecraft:chiseled_copper": {},
             "minecraft:copper_block": {},
+            "minecraft:copper_bulb": {},
+            "minecraft:copper_grate": {},
             "minecraft:copper_ore": {},
             "minecraft:cut_copper": {},
             "minecraft:cut_copper_stairs": {},
             "minecraft:deepslate_copper_ore": {},
+            "minecraft:exposed_chiseled_copper": {},
             "minecraft:exposed_copper": {},
+            "minecraft:exposed_copper_bulb": {},
+            "minecraft:exposed_copper_grate": {},
             "minecraft:exposed_cut_copper": {},
             "minecraft:exposed_cut_copper_stairs": {},
+            "minecraft:oxidized_chiseled_copper": {},
             "minecraft:oxidized_copper": {},
+            "minecraft:oxidized_copper_bulb": {},
+            "minecraft:oxidized_copper_grate": {},
             "minecraft:oxidized_cut_copper": {},
             "minecraft:oxidized_cut_copper_stairs": {},
             "minecraft:raw_copper_block": {},
+            "minecraft:waxed_chiseled_copper": {},
             "minecraft:waxed_copper": {},
+            "minecraft:waxed_copper_bulb": {},
+            "minecraft:waxed_copper_grate": {},
             "minecraft:waxed_cut_copper": {},
             "minecraft:waxed_cut_copper_stairs": {},
+            "minecraft:waxed_exposed_chiseled_copper": {},
             "minecraft:waxed_exposed_copper": {},
+            "minecraft:waxed_exposed_copper_bulb": {},
+            "minecraft:waxed_exposed_copper_grate": {},
             "minecraft:waxed_exposed_cut_copper": {},
             "minecraft:waxed_exposed_cut_copper_stairs": {},
+            "minecraft:waxed_oxidized_chiseled_copper": {},
             "minecraft:waxed_oxidized_copper": {},
+            "minecraft:waxed_oxidized_copper_bulb": {},
+            "minecraft:waxed_oxidized_copper_grate": {},
             "minecraft:waxed_oxidized_cut_copper": {},
             "minecraft:waxed_oxidized_cut_copper_slab": {},
             "minecraft:waxed_oxidized_cut_copper_stairs": {},
             "minecraft:waxed_oxidized_double_cut_copper_slab": {},
+            "minecraft:waxed_weathered_chiseled_copper": {},
             "minecraft:waxed_weathered_copper": {},
+            "minecraft:waxed_weathered_copper_bulb": {},
+            "minecraft:waxed_weathered_copper_grate": {},
             "minecraft:waxed_weathered_cut_copper": {},
             "minecraft:waxed_weathered_cut_copper_stairs": {},
+            "minecraft:weathered_chiseled_copper": {},
             "minecraft:weathered_copper": {},
+            "minecraft:weathered_copper_bulb": {},
+            "minecraft:weathered_copper_grate": {},
             "minecraft:weathered_cut_copper": {},
             "minecraft:weathered_cut_copper_stairs": {}
         },
@@ -46406,9 +47847,6 @@
         "minecraft:cake": {
             "tags": []
         },
-        "minecraft:calcite": {
-            "tags": []
-        },
         "minecraft:calibrated_sculk_sensor": {
             "tags": []
         },
@@ -46650,6 +48088,9 @@
         "minecraft:chiseled_bookshelf": {
             "tags": []
         },
+        "minecraft:chiseled_copper": {
+            "tags": []
+        },
         "minecraft:chiseled_deepslate": {
             "tags": []
         },
@@ -46657,6 +48098,12 @@
             "tags": []
         },
         "minecraft:chiseled_polished_blackstone": {
+            "tags": []
+        },
+        "minecraft:chiseled_tuff": {
+            "tags": []
+        },
+        "minecraft:chiseled_tuff_bricks": {
             "tags": []
         },
         "minecraft:chorus_flower": {
@@ -46821,12 +48268,26 @@
         "minecraft:copper_block": {
             "tags": []
         },
+        "minecraft:copper_bulb": {
+            "tags": []
+        },
+        "minecraft:copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:copper_grate": {
+            "tags": []
+        },
         "minecraft:copper_ingot": {
             "tags": [
                 "minecraft:trim_materials"
             ]
         },
         "minecraft:copper_ore": {
+            "tags": []
+        },
+        "minecraft:copper_trapdoor": {
             "tags": []
         },
         "minecraft:coral": {
@@ -47518,7 +48979,24 @@
                 "minecraft:decorated_pot_sherds"
             ]
         },
+        "minecraft:exposed_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:exposed_copper": {
+            "tags": []
+        },
+        "minecraft:exposed_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:exposed_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:exposed_copper_grate": {
+            "tags": []
+        },
+        "minecraft:exposed_copper_trapdoor": {
             "tags": []
         },
         "minecraft:exposed_cut_copper": {
@@ -49228,7 +50706,24 @@
                 "minecraft:wool"
             ]
         },
+        "minecraft:oxidized_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:oxidized_copper": {
+            "tags": []
+        },
+        "minecraft:oxidized_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:oxidized_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:oxidized_copper_grate": {
+            "tags": []
+        },
+        "minecraft:oxidized_copper_trapdoor": {
             "tags": []
         },
         "minecraft:oxidized_cut_copper": {
@@ -49435,6 +50930,18 @@
             "tags": []
         },
         "minecraft:polished_granite_stairs": {
+            "tags": []
+        },
+        "minecraft:polished_tuff": {
+            "tags": []
+        },
+        "minecraft:polished_tuff_slab": {
+            "tags": []
+        },
+        "minecraft:polished_tuff_stairs": {
+            "tags": []
+        },
+        "minecraft:polished_tuff_wall": {
             "tags": []
         },
         "minecraft:popped_chorus_fruit": {
@@ -50438,6 +51945,27 @@
         "minecraft:tuff": {
             "tags": []
         },
+        "minecraft:tuff_brick_slab": {
+            "tags": []
+        },
+        "minecraft:tuff_brick_stairs": {
+            "tags": []
+        },
+        "minecraft:tuff_brick_wall": {
+            "tags": []
+        },
+        "minecraft:tuff_bricks": {
+            "tags": []
+        },
+        "minecraft:tuff_slab": {
+            "tags": []
+        },
+        "minecraft:tuff_stairs": {
+            "tags": []
+        },
+        "minecraft:tuff_wall": {
+            "tags": []
+        },
         "minecraft:turtle_egg": {
             "tags": []
         },
@@ -50598,7 +52126,24 @@
         "minecraft:waterlily": {
             "tags": []
         },
+        "minecraft:waxed_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:waxed_copper": {
+            "tags": []
+        },
+        "minecraft:waxed_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:waxed_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:waxed_copper_grate": {
+            "tags": []
+        },
+        "minecraft:waxed_copper_trapdoor": {
             "tags": []
         },
         "minecraft:waxed_cut_copper": {
@@ -50610,7 +52155,24 @@
         "minecraft:waxed_cut_copper_stairs": {
             "tags": []
         },
+        "minecraft:waxed_exposed_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:waxed_exposed_copper": {
+            "tags": []
+        },
+        "minecraft:waxed_exposed_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:waxed_exposed_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:waxed_exposed_copper_grate": {
+            "tags": []
+        },
+        "minecraft:waxed_exposed_copper_trapdoor": {
             "tags": []
         },
         "minecraft:waxed_exposed_cut_copper": {
@@ -50622,7 +52184,24 @@
         "minecraft:waxed_exposed_cut_copper_stairs": {
             "tags": []
         },
+        "minecraft:waxed_oxidized_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:waxed_oxidized_copper": {
+            "tags": []
+        },
+        "minecraft:waxed_oxidized_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:waxed_oxidized_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:waxed_oxidized_copper_grate": {
+            "tags": []
+        },
+        "minecraft:waxed_oxidized_copper_trapdoor": {
             "tags": []
         },
         "minecraft:waxed_oxidized_cut_copper": {
@@ -50634,7 +52213,24 @@
         "minecraft:waxed_oxidized_cut_copper_stairs": {
             "tags": []
         },
+        "minecraft:waxed_weathered_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:waxed_weathered_copper": {
+            "tags": []
+        },
+        "minecraft:waxed_weathered_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:waxed_weathered_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:waxed_weathered_copper_grate": {
+            "tags": []
+        },
+        "minecraft:waxed_weathered_copper_trapdoor": {
             "tags": []
         },
         "minecraft:waxed_weathered_cut_copper": {
@@ -50651,7 +52247,24 @@
                 "minecraft:trim_templates"
             ]
         },
+        "minecraft:weathered_chiseled_copper": {
+            "tags": []
+        },
         "minecraft:weathered_copper": {
+            "tags": []
+        },
+        "minecraft:weathered_copper_bulb": {
+            "tags": []
+        },
+        "minecraft:weathered_copper_door": {
+            "tags": [
+                "minecraft:door"
+            ]
+        },
+        "minecraft:weathered_copper_grate": {
+            "tags": []
+        },
+        "minecraft:weathered_copper_trapdoor": {
             "tags": []
         },
         "minecraft:weathered_cut_copper": {
@@ -51066,13 +52679,21 @@
             "minecraft:bamboo_door",
             "minecraft:birch_door",
             "minecraft:cherry_door",
+            "minecraft:copper_door",
             "minecraft:crimson_door",
             "minecraft:dark_oak_door",
+            "minecraft:exposed_copper_door",
             "minecraft:iron_door",
             "minecraft:jungle_door",
             "minecraft:mangrove_door",
+            "minecraft:oxidized_copper_door",
             "minecraft:spruce_door",
             "minecraft:warped_door",
+            "minecraft:waxed_copper_door",
+            "minecraft:waxed_exposed_copper_door",
+            "minecraft:waxed_oxidized_copper_door",
+            "minecraft:waxed_weathered_copper_door",
+            "minecraft:weathered_copper_door",
             "minecraft:wooden_door"
         ],
         "minecraft:golden_tier": [
