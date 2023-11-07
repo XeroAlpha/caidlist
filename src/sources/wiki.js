@@ -1,6 +1,6 @@
 import * as CommentJSON from '@projectxero/comment-json';
 import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
-import { cachedOutput, forEachArray, forEachObject } from '../util/common.js';
+import { cachedOutput, forEachArray, forEachObject, log } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
 import { fetchFile } from '../util/network.js';
 
@@ -194,7 +194,7 @@ export async function fetchStandardizedTranslation() {
     const cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
         const result = {};
         await forEachArray(dataPages, async (e) => {
-            console.log(`Fetching ${e.source}:${e.name}`);
+            log(`Fetching ${e.source}:${e.name}`);
             const source = sources[e.source];
             const resolver = resolvers[e.resolver];
             const url = source.getUrl(e.name);

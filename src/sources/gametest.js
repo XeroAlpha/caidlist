@@ -15,7 +15,9 @@ import {
     kvArrayToObject,
     pause,
     projectRoot,
-    testMinecraftVersionInRange
+    testMinecraftVersionInRange,
+    log,
+    warn
 } from '../util/common.js';
 import { getDeviceOrWait } from '../util/adb.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
@@ -342,8 +344,10 @@ const Extractors = [
                     return null;
                 }
                 asyncOp().then((result) => {
+                    // eslint-disable-next-line no-console
                     console.info(`[Command Extractor]${JSON.stringify(result)}`);
                 }).catch((error) => {
+                    // eslint-disable-next-line no-console
                     console.info(`[Command Extractor]ERROR: ${error}`);
                 });
                 return 'null';
@@ -399,7 +403,8 @@ const Extractors = [
                         } catch (err) {
                             invalidStates.push(state);
                         }
-                        console.log(`Dumping ${blockType.id}${JSON.stringify(state)}`);
+                        // Uncomment to discover where the game crashes
+                        // console.info(`Dumping ${blockType.id}${JSON.stringify(state)}`);
                         if (permutation) {
                             const tags = permutation.getTags().slice();
                             const itemStack = permutation.getItemStack();
@@ -645,6 +650,7 @@ async function evaluateExtractors(cx, target, session) {
                 }
             })
         )).then(() => {
+            // eslint-disable-next-line no-console
             console.info('PREPARE_ENV_OK');
         });
     }, [...Object.entries(ImportEnvironments)]);
@@ -654,22 +660,22 @@ async function evaluateExtractors(cx, target, session) {
     ]);
     await session.pause();
     const defaultTimeout = session.protocol.requestTimeout;
-    let lastError = null;
+    const errors = [];
     for (const extractor of Extractors) {
         if (extractor.match && !extractor.match(coreVersion)) continue;
         try {
-            console.log(`Extracting ${extractor.name} from GameTest`);
+            log(`Extracting ${extractor.name} from GameTest`);
             session.protocol.requestTimeout = extractor.timeout || defaultTimeout;
             await extractor.extract(target, topFrame, session, cx);
         } catch (err) {
-            console.error(`Failed to extract ${extractor.name}`, err);
-            lastError = err;
+            warn(`Failed to extract ${extractor.name}`, err);
+            errors.push(err);
             break;
         }
     }
     await session.continue();
-    if (lastError) {
-        throw lastError;
+    if (errors.length) {
+        throw new AggregateError(errors);
     }
 }
 

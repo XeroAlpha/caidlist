@@ -6,7 +6,7 @@ import {
     pushWithSync,
     getDeviceSurfaceOrientation
 } from './adb.js';
-import { sleepAsync } from './common.js';
+import { sleepAsync, warn } from './common.js';
 import StateTransform from './stateStream.js';
 
 const require = createRequire(import.meta.url);
@@ -109,7 +109,7 @@ export async function start(device, options) {
             const localStream = await device.openLocal(`localabstract:${socketName}`);
             return localStream.pipe(new MinicapStream(minicapProc));
         } catch (err) {
-            console.error(err);
+            warn('Cannot connect to minimap', err);
         }
     }
     throw new Error('Unable to establish connection to minicap');

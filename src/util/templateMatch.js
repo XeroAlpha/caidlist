@@ -1,5 +1,5 @@
 import { format } from 'util';
-import { setInlineCommentAfterField } from './common.js';
+import { setInlineCommentAfterField, warn } from './common.js';
 
 function runTemplate(template, getter) {
     return template.replace(/\{\{\s*([^}]+?)\s*\}\}/g, (_, templateName) => getter(templateName));
@@ -39,7 +39,7 @@ export function matchTranslation(options) {
                 return state.translation;
             });
             if (interpretFailedKeys.length) {
-                console.warn(`[${context}] Should provide inline references: ${originalValue}(${interpretFailedKeys.join(',')})`);
+                warn(`[${context}] Should provide inline references: ${originalValue}(${interpretFailedKeys.join(',')})`);
                 userTranslation = '';
             }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
@@ -71,9 +71,9 @@ export function matchTranslation(options) {
                 }).translation;
                 if (userTranslation.toLowerCase() in stdTransMap) {
                     userTranslation = stdTransMap[userTranslation.toLowerCase()];
-                    console.warn(`[${context}] Translation Found: ${originalValue} -> ${userTranslation}`);
+                    warn(`[${context}] Translation Found: ${originalValue} -> ${userTranslation}`);
                 } else {
-                    console.warn(`[${context}] Missing Translation: ${originalValue} -> ${userTranslation}`);
+                    warn(`[${context}] Missing Translation: ${originalValue} -> ${userTranslation}`);
                 }
             } else if (source in resultMaps) { // 其他翻译
                 userTranslation = resultMaps[source][key];
@@ -81,7 +81,7 @@ export function matchTranslation(options) {
                 userTranslation = undefined;
             }
             if (!userTranslation) {
-                console.warn(`[${context}] Failed to resolve reference: ${originalValue}(${source}: ${key})`);
+                warn(`[${context}] Failed to resolve reference: ${originalValue}(${source}: ${key})`);
             }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         }
@@ -106,7 +106,7 @@ export function matchTranslation(options) {
             const translation = customAutoMatch(originalValue);
             if (translation) {
                 if (!(originalValue in translationMap)) {
-                    console.warn(`[${context}] New entry has been added: ${originalValue} (custom) -> ${translation}`);
+                    warn(`[${context}] New entry has been added: ${originalValue} (custom) -> ${translation}`);
                 }
                 translationMap[originalValue] = translation;
                 return matchTranslation(options);
@@ -117,7 +117,7 @@ export function matchTranslation(options) {
             const stdTranslation = stdTransMap[stdTranslationKey];
             if (stdTranslation) {
                 if (!(originalValue in translationMap)) {
-                    console.warn(`[${context}] New entry has been added: ${originalValue} (ST) -> ${stdTranslation}`);
+                    warn(`[${context}] New entry has been added: ${originalValue} (ST) -> ${stdTranslation}`);
                 }
                 translationMap[originalValue] = `ST: ${stdTranslationKey}`;
                 setInlineCommentAfterField(translationMap, originalValue, `${stdTranslation}`);
@@ -134,7 +134,7 @@ export function matchTranslation(options) {
                 if (langMap[langKeyExact]) {
                     const translation = langMap[langKeyExact];
                     if (!(originalValue in translationMap)) {
-                        console.warn(`[${context}] New entry has been added: ${originalValue} (lang) -> ${translation}`);
+                        warn(`[${context}] New entry has been added: ${originalValue} (lang) -> ${translation}`);
                     }
                     translationMap[originalValue] = '';
                     if (langKeyExact !== originalValue) {
@@ -153,7 +153,7 @@ export function matchTranslation(options) {
                 if (langKeyLikely.length) {
                     const translation = langKeyLikely.map((key) => langMap[key]).join('/');
                     if (!(originalValue in translationMap)) {
-                        console.warn(`[${context}] New entry has been added: ${originalValue} (langLikely) -> ${translation}`);
+                        warn(`[${context}] New entry has been added: ${originalValue} (langLikely) -> ${translation}`);
                     }
                     translationMap[originalValue] = '';
                     setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
@@ -167,7 +167,7 @@ export function matchTranslation(options) {
         }
         if (!translationMap[originalValue]) {
             if (!(originalValue in translationMap)) {
-                console.warn(`[${context}] New entry has been added: ${originalValue} (untranslated)`);
+                warn(`[${context}] New entry has been added: ${originalValue} (untranslated)`);
             }
             translationMap[originalValue] = '';
         }
@@ -218,7 +218,7 @@ export function matchTranslations(options) {
                 return result.translation;
             });
             if (failedRefs.length) {
-                console.warn(`[${context}] Should provide inline references: ${originalValue}(${failedRefs.join(',')})`);
+                warn(`[${context}] Should provide inline references: ${originalValue}(${failedRefs.join(',')})`);
             }
             return {
                 state: failedRefs.length > 0 ? 'notFound' : 'provided',

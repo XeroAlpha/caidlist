@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { simpleGit } from 'simple-git';
 
 const Restrictions = [

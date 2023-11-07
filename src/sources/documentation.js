@@ -2,7 +2,7 @@
 import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
 import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
-import { cachedOutput, forEachObject, deepCopy, testMinecraftVersionInRange } from '../util/common.js';
+import { cachedOutput, forEachObject, deepCopy, testMinecraftVersionInRange, warn, log } from '../util/common.js';
 import { CommentLocation, addJSONComment } from '../util/comment.js';
 import { octokit, fetchGitBlob } from '../util/network.js';
 
@@ -172,7 +172,7 @@ BedrockDocStates.set('section', (el, { sections, state }) => {
                 rows
             };
         } else {
-            console.warn(`Unexpected tag: ${el.tagName}`);
+            warn(`Unexpected tag: ${el.tagName}`);
             content = {
                 type: el.tagName.toLowerCase(),
                 content: elText(el)
@@ -332,7 +332,7 @@ function generateSchema(content) {
                 ...generateSchema(row.Description)
             }));
         } else {
-            console.warn('Unexpected table');
+            warn('Unexpected table');
         }
     }
     return schema;
@@ -665,7 +665,7 @@ function extractDocumentationIds(docMap) {
                 target[analyzer.name] = extractResult;
             }
         } catch (err) {
-            console.error(`Failed to extract ${analyzer.name}: ${err}`);
+            warn(`Failed to extract ${analyzer.name}`, err);
             throw err;
         }
     });
@@ -687,7 +687,7 @@ const versionRegExp = /"latest"[\s\n\r]*:[\s\n\r]*{[^"]*?"version"[\s\n\r]*:[\s\
 async function fetchBehaviorPack(treeSHA, cacheKey) {
     const tree = (await octokit.git.getTree({ ...repoConfig, tree_sha: treeSHA, recursive: 1 })).data;
     const versionNode = tree.tree.find((e) => e.path === 'version.json');
-    console.log('Fetching version for documentation...');
+    log('Fetching version for documentation...');
     const versionJSON = await fetchGitBlob(versionNode, 'utf-8');
     const versionJSONMatch = versionJSON.match(versionRegExp);
     const map = { __VERSION__: versionJSONMatch && versionJSONMatch[1] };
@@ -726,8 +726,7 @@ export async function fetchDocumentationIds(cx) {
         if (!cache) {
             throw err;
         }
-        console.error('Failed to fetch template behavior pack, use cache instead');
-        console.error(err);
+        warn('Failed to fetch template behavior pack, use cache instead', err);
     }
     const target = {};
     remapIdTable.forEach(([name, targetName]) => {
@@ -830,7 +829,7 @@ function generateTypedJSON(schema, name, target) {
     if (schema.children) {
         let parent = target[name];
         if (typeof parent !== 'object' || parent == null) {
-            console.warn(`Unexpected non-object type: ${name}`);
+            warn(`Unexpected non-object type: ${name}`);
             parent = {};
         }
         if (Array.isArray(parent)) {
@@ -855,7 +854,7 @@ export function doSchemaTranslation(schemaMap, onTranslate) {
         visitSchema(schema, (type, schemaNode, path) => {
             const k = path.join('|>');
             if (k in flatMap) {
-                console.warn(`Duplicated path: ${k}`);
+                warn(`Duplicated path: ${k}`);
             }
             flatMap[k] = schemaNode.description || '';
         }, [mapKey]);

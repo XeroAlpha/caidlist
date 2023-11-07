@@ -2,6 +2,7 @@ import { mkdirSync, existsSync, readFileSync, unlinkSync, writeFileSync, statSyn
 import nodePath from 'path';
 import { createInterface } from 'readline';
 import { URL, fileURLToPath } from 'url';
+import { inspect } from 'util';
 import notifier from 'node-notifier';
 import * as CommentJSON from '@projectxero/comment-json';
 import { CommentLocation, setJSONComment, clearJSONComment } from './comment.js';
@@ -9,6 +10,39 @@ import { CommentLocation, setJSONComment, clearJSONComment } from './comment.js'
 export const projectRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 export const projectInfo = JSON.parse(readFileSync(nodePath.resolve(projectRoot, 'package.json')));
+
+function toShortTimeString(date) {
+    const hh = date.getHours().toString().padStart(2, '0');
+    const mm = date.getMinutes().toString().padStart(2, '0');
+    const ss = date.getSeconds().toString().padStart(2, '0');
+    return `${hh}:${mm}:${ss}`;
+}
+
+let isLineDirty = false;
+export function setStatus(statusText) {
+    if (process.stdout.isTTY) {
+        const [width] = process.stdout.getWindowSize();
+        process.stdout.clearLine(1);
+        process.stdout.write(statusText.slice(0, width));
+        process.stdout.cursorTo(0);
+    } else {
+        process.stdout.write(`${statusText}  \r`);
+    }
+    isLineDirty = statusText.length > 0;
+}
+
+export function log(text) {
+    if (isLineDirty) setStatus('');
+    process.stdout.write(`[${toShortTimeString(new Date())}] ${text}\n`);
+}
+
+export function warn(text, error) {
+    if (isLineDirty) setStatus('');
+    process.stderr.write(`[${toShortTimeString(new Date())}] ${text}\n`);
+    if (error) {
+        process.stderr.write(`${inspect(error)}\n`);
+    }
+}
 
 export function projectPath(id, suffix) {
     let pathSegments;
@@ -70,7 +104,7 @@ export function cachedOutput(id, valueOrProcessor, expires) {
         try {
             return CommentJSON.parse(readFileSync(path, 'utf-8'));
         } catch (e) {
-            console.error(`Cannot use cache: ${path}`);
+            process.stderr.write(`Cannot use cache: ${path}`, e);
         }
         unlinkSync(path);
         return cachedOutput(id, valueOrProcessor);
@@ -340,14 +374,4 @@ export function readStreamOnce(stream, timeout) {
         });
     }
     return data;
-}
-
-export function updateTTYStatus(statusText) {
-    if (process.stdout.isTTY) {
-        process.stdout.clearLine(1);
-        process.stdout.write(statusText);
-        process.stdout.cursorTo(0);
-    } else {
-        process.stdout.write(`${statusText}  \r`);
-    }
 }

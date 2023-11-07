@@ -11,7 +11,8 @@ import {
     forEachObject,
     readStreamOnce,
     sleepAsync,
-    updateTTYStatus
+    setStatus,
+    log
 } from '../util/common.js';
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
@@ -126,7 +127,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     ]);
     screen.updateStatus({ approxLength });
 
-    process.stdout.write(`[${new Date().toLocaleTimeString()}] Starting ${progressName}: ${command}\n`);
+    log(`Starting ${progressName}: ${command}`);
     await waitForScrcpyReady(scrcpy);
 
     // 打开聊天栏
@@ -211,13 +212,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let autocompletedCommand = command.trim();
     let recogizedCommand = await retryUntilComplete(50, 0, async () => {
         const pickedCommand = await readStreamOnce(imagePipeline, 5000);
-        updateTTYStatus(`Detecting start: ${pickedCommand}`);
+        setStatus(`Detecting start: ${pickedCommand}`);
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
     const timeStart = Date.now();
     let stepStart = timeStart;
     let stepCount = 0;
+    let duplicatedCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     tabWhenChanged = true;
     for (;;) {
@@ -239,9 +241,12 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
 
         const autocompletion = autocompletedCommand.slice(command.length);
         if (autocompletions.includes(autocompletion)) {
-            process.stdout.write(`\nExit condition: ${autocompletion}\n`);
-            screen.log(`Exit condition: ${autocompletion}`);
-            break;
+            duplicatedCount++;
+            setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            screen.log(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            if (duplicatedCount >= 5) {
+                break;
+            }
         } else {
             const now = Date.now();
             const stepSpent = now - stepStart;
@@ -267,9 +272,9 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 const timeLeftStr = formatTimeLeft(timeLeft / 1000);
                 const estTimeStr = new Date(estTime).toLocaleTimeString();
                 screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
-                updateTTYStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`);
+                setStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`);
             } else {
-                updateTTYStatus(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
+                setStatus(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
             }
         }
     }
@@ -282,14 +287,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         try {
             const recogizedResult = await readStreamOnce(imagePipeline, 2000);
             const nextResult = guessTruncatedString(recogizedResult, command);
-            updateTTYStatus(`Waiting for end: ${recogizedResult}`);
+            setStatus(`Waiting for end: ${recogizedResult}`);
             return nextResult == null;
         } catch (err) {
             await press(scrcpy, 'KEYCODE_ESCAPE');
             return false;
         }
     });
-    process.stdout.write('\n');
+    setStatus('');
 
     stopScrcpy(scrcpy);
 
@@ -331,10 +336,10 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 const additions = mergedResult.merged.filter((e) => !previousResult.includes(e));
                 const deletions = previousResult.filter((e) => !mergedResult.merged.includes(e));
                 if (additions.length === 0 && deletions.length === 0) break;
-                console.log(`${additions.length} addition(s) and ${deletions.length} deletion(s) detected`);
+                log(`${additions.length} addition(s) and ${deletions.length} deletion(s) detected`);
                 screen.log(`Result check failed: changed (${additions.length}++/${deletions.length}--)`);
             } else {
-                console.log(`${mergedResult.conflicts.length} conflict(s) detected`);
+                log(`${mergedResult.conflicts.length} conflict(s) detected`);
                 screen.log(`Result check failed: conflicted (${mergedResult.conflicts.length} conflicts)`);
             }
             retryCount++;

@@ -1,6 +1,6 @@
 import { URL } from 'url';
 import AdmZip from 'adm-zip';
-import { cachedOutput, filterObjectMap } from '../util/common.js';
+import { cachedOutput, filterObjectMap, log, warn } from '../util/common.js';
 import { fetchFile, fetchJSON } from '../util/network.js';
 
 const releaseApiHost = 'https://piston-data.mojang.com/';
@@ -85,7 +85,7 @@ export default async function fetchJavaEditionLangData() {
         const manifest = await fetchVersionsManifestCached();
         const versionId = getLatestSnapshotVersionId(manifest);
         if (!cache || cache.__VERSION__ !== versionId) {
-            console.log('Fetching Java Edition language data...');
+            log('Fetching Java Edition language data...');
             const versionMeta = await fetchVersionMeta(metaApiHost, manifest, versionId);
             const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, 'client');
             const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);
@@ -103,7 +103,7 @@ export default async function fetchJavaEditionLangData() {
         if (!cache) {
             throw err;
         }
-        console.error(`Failed to fetch version manifest of java edition, use cache instead: ${err}`);
+        warn('Failed to fetch version manifest of java edition, use cache instead', err);
     }
     return filterObjectMap(cache, (k) => !(k.startsWith('__') && k.endsWith('__')));
 }

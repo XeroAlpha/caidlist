@@ -1,7 +1,7 @@
 import { WSServer, MinecraftDataType } from 'mcpews';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { cachedOutput, testMinecraftVersionInRange, sleepAsync, sortObjectKey } from '../util/common.js';
+import { cachedOutput, testMinecraftVersionInRange, sleepAsync, sortObjectKey, log } from '../util/common.js';
 import { adbShell } from '../util/adb.js';
 
 /**
@@ -115,7 +115,7 @@ export async function createExclusiveWSSession(device) {
         await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
         await adbShell(device, 'input keyevent KEYCODE_ENTER');
     } else {
-        console.log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
+        log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
     }
     const { session } = await sessionPromise;
     session.on('disconnect', () => {

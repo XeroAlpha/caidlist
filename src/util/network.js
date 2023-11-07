@@ -3,6 +3,7 @@ import { createHash } from 'crypto';
 import { got } from 'got';
 import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
 import { githubToken } from '../../data/config.js';
+import { setStatus } from './common.js';
 
 const httpProxy = process.env.http_proxy;
 const httpsProxy = process.env.https_proxy;
@@ -49,16 +50,13 @@ export async function fetchFile(url, size, sha1, opts) {
         },
         ...opts
     });
-    let lastProgressPrompt = Date.now();
     request.on('downloadProgress', (progress) => {
-        const now = Date.now();
-        if (progress.transferred !== 0 && now - lastProgressPrompt > 1000) {
-            lastProgressPrompt = now;
-            const progressPercent = `${(progress.percent * 100).toFixed(1)}%`;
-            console.log(`${progressPercent} ${url}`);
-        }
+        const progressPercent = `${(progress.percent * 100).toFixed(1).padStart(5)}%`;
+        setStatus(`${progressPercent} ${url}`);
     });
+    setStatus(`       ${url}`);
     const content = await request.buffer();
+    setStatus('');
     if (typeof size === 'number' && content.length !== size) {
         throw new Error(`Size mismatch: ${url}`);
     }

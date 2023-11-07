@@ -8,24 +8,43 @@ import {
     stringComparator,
     compareMinecraftVersion,
     uniqueAndSort,
-    sortObjectKey
+    sortObjectKey,
+    log,
+    setStatus,
+    warn
 } from '../util/common.js';
 import { RecipeDataParser } from '../generators/recipe.js';
 
+function iteratePackageEntries(packageZip, filter, processor) {
+    const entries = packageZip.getEntries()
+        .map((entry) => [entry, filter(entry)])
+        .filter(([, extra]) => extra !== undefined);
+    let nextStatusTime = Date.now();
+    for (let i = 0; i < entries.length; i++) {
+        const [entry, extra] = entries[i];
+        const now = Date.now();
+        if (nextStatusTime <= now) {
+            const pct = ((i / entries.length) * 100).toFixed(1).padStart(5);
+            setStatus(`${pct}% ${entry.entryName}`);
+            nextStatusTime = now + 100;
+        }
+        processor(entry, entry.isDirectory ? null : entry.getData(), extra);
+    }
+    setStatus('');
+}
+
 function generatePackageFileMeta(packageZip) {
-    const entries = packageZip.getEntries();
     const files = [];
-    console.log('Analyzing package entries for hash...');
-    entries.forEach((entry) => {
+    log('Analyzing package entries for hash...');
+    iteratePackageEntries(packageZip, () => true, (entry, data) => {
         if (entry.isDirectory) {
             files.push({ name: entry.entryName, directory: true });
         } else {
-            const buffer = entry.getData();
             const digest = createHash('sha1');
-            digest.update(buffer);
+            digest.update(data);
             files.push({
                 name: entry.entryName,
-                size: buffer.length,
+                size: data.length,
                 sha1: digest.digest().toString('hex')
             });
         }
@@ -51,18 +70,20 @@ function parseMinecraftLang(target, langContent) {
 }
 
 function analyzeApkPackageLang(packageZip) {
-    const entries = packageZip.getEntries();
     const langZh = {};
     const langEn = {};
-    console.log('Analyzing package entries for language file...');
-    entries.forEach((entry) => {
+    log('Analyzing package entries for language file...');
+    iteratePackageEntries(packageZip, (entry) => {
         const { entryName } = entry;
         if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/zh_CN\.lang$/)) {
-            parseMinecraftLang(langZh, entry.getData().toString('utf-8'));
+            return langZh;
         }
         if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/en_US\.lang$/)) {
-            parseMinecraftLang(langEn, entry.getData().toString('utf-8'));
+            return langEn;
         }
+        return undefined;
+    }, (_, data, langObj) => {
+        parseMinecraftLang(langObj, data.toString('utf-8'));
     });
     return {
         zh_cn: langZh,
@@ -88,7 +109,7 @@ const entryAnalyzer = [
             } else if (!formatVersion) {
                 sounds.push(...Object.keys(soundDefinition));
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         }
     },
@@ -102,7 +123,7 @@ const entryAnalyzer = [
             if (formatVersion === '1.10.0') {
                 particleEmitters.push(particle.particle_effect.description.identifier);
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         }
     },
@@ -131,7 +152,7 @@ const entryAnalyzer = [
                     entityDefinitionMap[id] = defData;
                 }
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [['1.8.0', '1.10.0']]
@@ -160,7 +181,7 @@ const entryAnalyzer = [
                     });
                 }
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [
@@ -180,7 +201,7 @@ const entryAnalyzer = [
                     animationMap[animationId] = [];
                 });
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         }
     },
@@ -196,7 +217,7 @@ const entryAnalyzer = [
                     animationControllerMap[controllerId] = [];
                 });
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         }
     },
@@ -212,7 +233,7 @@ const entryAnalyzer = [
                     renderControllerMap[controllerId] = [];
                 });
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [['1.8.0', '1.10', '1.10.0']]
@@ -227,7 +248,7 @@ const entryAnalyzer = [
             if (formatVersion === '1.16.100') {
                 fogs.push(fog['minecraft:fog_settings'].description.identifier);
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         }
     },
@@ -262,7 +283,7 @@ const entryAnalyzer = [
                     });
                 });
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [
@@ -319,7 +340,7 @@ const entryAnalyzer = [
                     }
                 });
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
@@ -337,7 +358,7 @@ const entryAnalyzer = [
             if (this.versionsGroups[0].includes(formatVersion)) {
                 featureRules.push(featureRule['minecraft:feature_rules'].description.identifier);
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
@@ -356,18 +377,17 @@ const entryAnalyzer = [
                     if (parser) {
                         dataDrivenRecipeData[value.description.identifier] = parser(value);
                     } else {
-                        console.warn(`Unknown recipe type: ${key} - ${entryName}`);
+                        warn(`Unknown recipe type: ${key} - ${entryName}`);
                     }
                 }
             } else {
-                console.warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
         versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10']]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {
-    const entries = packageZip.getEntries();
     const entryNameKeywords = branchEntryNameKeywords[branchId] || [];
     const entryNameAllowKeywords = entryNameKeywords.filter((e) => !e.startsWith('~'));
     const entryNameDenyKeywords = entryNameKeywords.filter((e) => e.startsWith('~')).map((e) => e.slice(1));
@@ -389,8 +409,8 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         entityEventsMap: {},
         entityFamilyMap: {}
     };
-    console.log(`[${branchId}]Analyzing package entries for data enums...`);
-    entries.forEach((entry) => {
+    log('Analyzing package entries for data enums...');
+    iteratePackageEntries(packageZip, (entry) => {
         const { entryName } = entry;
         const analyzer = entryAnalyzer.find((e) => {
             if (e.regex) {
@@ -402,19 +422,19 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             }
             return false;
         });
-        if (analyzer) {
-            if (entryNameDenyKeywords.some((keyword) => entryName.includes(keyword))) return;
-            if (entryNameAllowKeywords.every((keyword) => !entryName.includes(keyword))) return;
-            let entryData = entry.getData();
-            if (analyzer.type === 'json') {
-                entryData = CommentJSON.parse(entryData.toString('utf8'));
-            }
-            try {
-                analyzer.analyze(results, entryName, entryData);
-            } catch (err) {
-                console.error(`Analyze Error: ${entryName}`);
-                console.error(err);
-            }
+        if (entryNameDenyKeywords.some((keyword) => entryName.includes(keyword))) return undefined;
+        if (entryNameAllowKeywords.every((keyword) => !entryName.includes(keyword))) return undefined;
+        return analyzer;
+    }, (entry, data, analyzer) => {
+        const { entryName } = entry;
+        let entryData = data;
+        if (analyzer.type === 'json') {
+            entryData = CommentJSON.parse(entryData.toString('utf8'));
+        }
+        try {
+            analyzer.analyze(results, entryName, entryData);
+        } catch (err) {
+            warn(`Analyze Error: ${entryName}`, err);
         }
     });
     forEachObject(results.internal.entityDefinitionMap, (definition, entityId) => {
@@ -424,13 +444,13 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
                 geometryMap[ref] = [];
             }
             if (typeof action !== 'string') {
-                console.warn(`Unexpected geometry category for ${entityId}: ${action}`);
+                warn(`Unexpected geometry category for ${entityId}: ${action}`);
             }
             geometryMap[ref].push(`${entityId}<${action}>`);
         });
         forEachObject(definition.animationRefs, (ref, action) => {
             if (typeof action !== 'string') {
-                console.warn(`Unexpected animation reference for ${entityId}: ${action}`);
+                warn(`Unexpected animation reference for ${entityId}: ${action}`);
             }
             if (ref.startsWith('controller')) {
                 if (!animationControllerMap[ref]) {
@@ -446,11 +466,11 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         });
         definition.animationControllers.forEach((controllerGroup) => {
             if (typeof controllerGroup !== 'object') {
-                console.warn(`Unexpected animation controller map for ${entityId}: ${controllerGroup}`);
+                warn(`Unexpected animation controller map for ${entityId}: ${controllerGroup}`);
             }
             forEachObject(controllerGroup, (ref, action) => {
                 if (typeof action !== 'string') {
-                    console.warn(`Unexpected animation controller for ${entityId}: ${action}`);
+                    warn(`Unexpected animation controller for ${entityId}: ${action}`);
                 }
                 if (!animationControllerMap[ref]) {
                     animationControllerMap[ref] = [];
@@ -465,7 +485,7 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             } else if (typeof renderController === 'object') {
                 flattenedList.push(...Object.keys(renderController));
             } else {
-                console.warn(`Unexpected render controller for ${entityId}: ${renderController}`);
+                warn(`Unexpected render controller for ${entityId}: ${renderController}`);
             }
             flattenedList.forEach((e) => {
                 if (!renderControllerMap[e]) {
@@ -498,7 +518,7 @@ const apksInstallPack = ['install_pack.apk', 'split_install_pack.apk', 'com.moja
 function extractInstallPack(packagePath) {
     if (packagePath.endsWith('.apks')) {
         const packageZip = new AdmZip(packagePath);
-        console.log('Unpacking install pack...');
+        log('Unpacking install pack...');
         let installPackApkEntry = null;
         for (let i = 0; i < apksInstallPack.length; i++) {
             installPackApkEntry = packageZip.getEntry(apksInstallPack[i]);

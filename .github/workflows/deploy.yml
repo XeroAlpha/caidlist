@@ -62,8 +62,8 @@ jobs:
         popd
         echo "${{ secrets.SSH_KEY }}" > ${{ github.workspace }}/key.txt
         chmod 400 ${{ github.workspace }}/key.txt
-        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ${{ github.workspace }}/idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":/tmp/idlist.tar.gz
-        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "rm -rf ${{ secrets.TARGET_PATH }}/* && tar -xvzf /tmp/idlist.tar.gz -C ${{ secrets.TARGET_PATH }} && rm -f /tmp/idlist.tar.gz"
+        scp -q -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i ${{ github.workspace }}/key.txt ${{ github.workspace }}/idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":/tmp/idlist.tar.gz
+        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i ${{ github.workspace }}/key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "rm -rf ${{ secrets.TARGET_PATH }}/* && tar -xvzf /tmp/idlist.tar.gz -C ${{ secrets.TARGET_PATH }} && rm -f /tmp/idlist.tar.gz"
         rm ${{ github.workspace }}/key.txt
 
     - name: Setup GitHub Pages

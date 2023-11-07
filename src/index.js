@@ -1,5 +1,5 @@
 import { generateOutputFiles, generateOutputIndex } from './generate.js';
-import { forEachArray } from './util/common.js';
+import { forEachArray, log, warn } from './util/common.js';
 import * as config from '../data/config.js';
 
 async function main(args) {
@@ -9,10 +9,10 @@ async function main(args) {
         await forEachArray(versionIds, async (versionId) => {
             context.version = versionId;
             const branches = generateOutputIndex(context);
-            console.log(`Current version: ${versionId} (${context.packageVersions[versionId].version})`);
+            log(`Current version: ${versionId} (${context.packageVersions[versionId].version})`);
             await forEachArray(branches, async (branch) => {
                 context.branch = branch;
-                console.log(`Generating output files for ${versionId}/${branch.id}...`);
+                log(`Generating output files for ${versionId}/${branch.id}...`);
                 await generateOutputFiles(context);
             });
         });
@@ -22,7 +22,7 @@ async function main(args) {
 }
 
 main(process.argv.slice(2)).catch((err) => {
-    console.error(err);
+    warn('Fatal error', err);
     debugger;
     process.exit(1);
 });

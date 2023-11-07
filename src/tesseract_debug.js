@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { writeFileSync } from 'fs';
 import { recognize } from 'node-tesseract-ocr';
 import { pEvent } from 'p-event';

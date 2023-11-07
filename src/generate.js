@@ -22,7 +22,8 @@ import {
     cascadeMap,
     removeMinecraftNamespace,
     setInlineCommentAfterField,
-    deepCopy
+    deepCopy,
+    log
 } from './util/common.js';
 import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockState.js';
 
@@ -107,7 +108,7 @@ async function generateBranchedOutputFiles(cx) {
     const standardizedTranslation = await fetchStandardizedTranslation();
     const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
     const userTranslation = loadUserTranslation();
-    console.log('Matching translations...');
+    log('Matching translations...');
     const translationResultMaps = {};
     const translationStateMaps = {};
     const commonOptions = {
@@ -428,7 +429,7 @@ async function generateBranchedOutputFiles(cx) {
     delete translationResultMaps.glossary;
     delete translationStateMaps.glossary;
 
-    console.log('Exporting files...');
+    log('Exporting files...');
     cachedOutput(`output.translation.${version}.${branch.id}`, translationStateMaps);
     writeTransMapClib(cx, {
         outputFile: projectPath(`output.clib.${version}.${branch.id}`),
@@ -573,7 +574,7 @@ async function generateGameTestOutputFiles(cx) {
     const standardizedTranslation = await fetchStandardizedTranslation();
     const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
     const userTranslation = loadUserTranslation();
-    console.log('Matching translations...');
+    log('Matching translations...');
     const translationResultMaps = {};
     const commonOptions = {
         resultMaps: translationResultMaps,
@@ -669,7 +670,7 @@ async function generateGameTestOutputFiles(cx) {
     });
     delete translationResultMaps.glossary;
 
-    console.log('Exporting files...');
+    log('Exporting files...');
     writeTransMapTextZip(cx, {
         outputFile: projectPath(`output.web.${version}.${branch.id}`, 'zip'),
         transMaps: translationResultMaps,

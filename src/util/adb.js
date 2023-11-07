@@ -1,5 +1,5 @@
 import AdbKit from '@u4/adbkit';
-import { sleepAsync } from './common.js';
+import { setStatus, log, sleepAsync } from './common.js';
 
 const { Adb } = AdbKit;
 
@@ -66,11 +66,12 @@ export async function getDeviceOrWait() {
     const adbClient = newAdbClient();
     let device = await getAnyOnlineDevice(adbClient);
     if (!device) {
-        console.log('Please plug in the device...');
+        setStatus('Please plug in the device...');
         device = await waitForAnyDevice(adbClient);
+        setStatus('');
         await sleepAsync(1000);
     }
-    console.log(`Device connected: ${device.serial}`);
+    log(`Device connected: ${device.serial}`);
     return device;
 }
 

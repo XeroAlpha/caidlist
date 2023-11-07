@@ -1,6 +1,7 @@
 import { createServer } from 'http';
 import { URL } from 'url';
 import { openScrcpy, stopScrcpy } from '../util/scrcpy.js';
+import { log } from '../util/common.js';
 
 const tokenCharset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
 function randomToken(length) {
@@ -115,7 +116,7 @@ export default class AutocompletionScreen {
             }
         });
         this.server.listen(19333);
-        console.log('Live screen: http://localhost:19333');
+        log('Live screen: http://localhost:19333');
     }
 
     stop() {

@@ -2,6 +2,7 @@ import AdbKit from '@u4/adbkit';
 import { spawn } from 'child_process';
 import PNGSplitStream from 'png-split-stream';
 import { Readable } from 'stream';
+import { warn } from './common.js';
 
 const { KeyCodes } = AdbKit;
 
@@ -20,7 +21,7 @@ export class ScrcpyRawStream extends Readable {
             this.destroy();
         });
         scrcpy.on('error', (err) => {
-            console.error(err);
+            warn('scrcpy stream error', err);
         });
         this.ffmpeg = spawn('ffmpeg', [
             '-f', 'h264',
@@ -133,7 +134,7 @@ export class ScrcpyPNGStream extends Readable {
             this.destroy();
         });
         scrcpy.on('error', (err) => {
-            console.error(err);
+            warn('scrcpy stream error', err);
         });
         this.ffmpeg = spawn('ffmpeg', [
             '-f', 'h264',
