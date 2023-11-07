@@ -25,6 +25,7 @@ export class ScrcpyRawStream extends Readable {
         });
         this.ffmpeg = spawn('ffmpeg', [
             '-f', 'h264',
+            '-hwaccel', 'auto',
             '-i', '-',
             ...(ffmpegArgs || []),
             '-f', 'rawvideo',
@@ -138,6 +139,7 @@ export class ScrcpyPNGStream extends Readable {
         });
         this.ffmpeg = spawn('ffmpeg', [
             '-f', 'h264',
+            '-hwaccel', 'auto',
             '-i', '-',
             ...(ffmpegArgs || []),
             '-c:v', 'png',

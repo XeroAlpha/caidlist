@@ -2,6 +2,8 @@ import { Transform } from 'stream';
 import sharp from 'sharp';
 import { strict as assert } from 'assert';
 import { recognize } from 'node-tesseract-ocr';
+import { PerformanceObserver, performance } from 'perf_hooks';
+import { createWriteStream } from 'fs';
 import { getDeviceOrWait } from '../util/adb.js';
 import {
     cachedOutput,
@@ -136,29 +138,41 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     screen.log(`Input ${command}`);
     await scrcpy.injectText(command.replace(/^\//, ''));
 
+    let typeahead = aggressiveMode;
     let reactInterval = 0;
     let reactFrameCount = 0;
     let droppedCount = 0;
     let tabWhenChanged = false;
     const pressTab = async () => {
-        if (tabWhenChanged && !isScrcpyStopped(scrcpy)) {
+        if (!isScrcpyStopped(scrcpy)) {
             droppedCount++;
+            performance.mark('press-tab', { detail: droppedCount });
             await press(scrcpy, 'KEYCODE_TAB'); // async
         }
     };
+    let sharpProcessCounter = 0;
+    let ocrProcessCounter = 0;
+    const ocrPendingPromises = new Set();
     const imagePipeline = imageStream
         .pipe(
             new Transform({
                 objectMode: true,
                 transform(imageData, encoding, done) {
+                    const start = performance.now();
                     const pipe = sharp(imageData);
                     pipe.raw()
                         .toBuffer({ resolveWithObject: true })
                         .then((raw) => {
+                            sharpProcessCounter++;
+                            performance.measure(`sharp-resolve-${sharpProcessCounter}`, { start });
                             if (!this.lastImage || !raw.data.equals(this.lastImage.data)) {
                                 const now = Date.now();
-                                if (!aggressiveMode) {
-                                    pressTab();
+                                if (tabWhenChanged) {
+                                    if (!typeahead) {
+                                        pressTab();
+                                    } else {
+                                        typeahead = false;
+                                    }
                                 }
                                 if (this.lastImageTime) {
                                     reactFrameCount = this.framesBeforeChange;
@@ -173,7 +187,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                                 done();
                             }
                         });
-                    if (aggressiveMode && this.framesBeforeChange > Math.max(droppedCount ** 2, 4)) {
+                    if (typeahead && tabWhenChanged && this.framesBeforeChange % 2 === 0) {
                         pressTab();
                     }
                 }
@@ -183,14 +197,24 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
             new Transform({
                 objectMode: true,
                 transform(image, encoding, done) {
-                    const promise = recognize(image, {
+                    const start = performance.now();
+                    let promise = recognize(image, {
                         ...cx.tesseractOptions,
                         lang: 'eng',
                         psm: 7,
                         oem: 3
                     });
+                    const beforePromises = [...ocrPendingPromises];
+                    promise = promise.then(async (text) => {
+                        ocrPendingPromises.delete(promise);
+                        await Promise.all(beforePromises);
+                        return text;
+                    });
+                    ocrPendingPromises.add(promise);
                     promise.then((text) => {
                         let commandText = text.trim();
+                        ocrProcessCounter++;
+                        performance.measure(`ocr-${ocrProcessCounter}`, { start, detail: commandText });
                         forEachObject(cx.tesseractMistakes, (v, k) => {
                             let index = 0;
                             while ((index = commandText.indexOf(k, index)) >= 0) {
@@ -200,11 +224,10 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                         });
                         if (commandText.length && (!this.last || this.last !== commandText)) {
                             if (tabWhenChanged) droppedCount--;
-                            done(null, (this.last = commandText));
-                        } else {
-                            done();
+                            this.push(this.last = commandText);
                         }
                     });
+                    done();
                 }
             })
         );
@@ -283,7 +306,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     tabWhenChanged = false;
     await press(scrcpy, 'KEYCODE_ESCAPE');
     await press(scrcpy, 'KEYCODE_ESCAPE');
-    await retryUntilComplete(50, 0, async () => {
+    await retryUntilComplete(50 + droppedCount, 0, async () => {
         try {
             const recogizedResult = await readStreamOnce(imagePipeline, 2000);
             const nextResult = guessTruncatedString(recogizedResult, command);
@@ -455,4 +478,29 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
 
     await screen.stop();
     return cachedOutput(cacheId, target);
+}
+
+export function measureAutocompletion() {
+    const logStream = createWriteStream('./perf.csv');
+    logStream.write('seqType,seqIndex,entryType,startTime,endTime,duration,extra\n');
+    const obs = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+            const dashPos = entry.name.lastIndexOf('-');
+            const cells = [
+                dashPos >= 0 ? entry.name.slice(0, dashPos) : entry.name,
+                dashPos >= 0 ? entry.name.slice(dashPos + 1) : entry.name,
+                entry.entryType,
+                entry.startTime,
+                entry.startTime + entry.duration,
+                entry.duration,
+                JSON.stringify(entry.detail)
+            ];
+            logStream.write(`${cells.join(',')}\n`);
+        }
+    });
+    obs.observe({ entryTypes: ['mark', 'measure'] });
+    process.on('exit', () => {
+        obs.disconnect();
+        logStream.end();
+    });
 }
