@@ -10,7 +10,8 @@ import {
     formatTimeLeft,
     forEachObject,
     readStreamOnce,
-    sleepAsync
+    sleepAsync,
+    updateTTYStatus
 } from '../util/common.js';
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
@@ -125,7 +126,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     ]);
     screen.updateStatus({ approxLength });
 
-    console.log(`Starting ${progressName}: ${command}`);
+    process.stdout.write(`[${new Date().toLocaleTimeString()}] Starting ${progressName}: ${command}\n`);
     await waitForScrcpyReady(scrcpy);
 
     // 打开聊天栏
@@ -210,7 +211,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     let autocompletedCommand = command.trim();
     let recogizedCommand = await retryUntilComplete(50, 0, async () => {
         const pickedCommand = await readStreamOnce(imagePipeline, 5000);
-        console.log(`Detecting start: ${pickedCommand}`);
+        updateTTYStatus(`Detecting start: ${pickedCommand}`);
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
@@ -238,7 +239,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
 
         const autocompletion = autocompletedCommand.slice(command.length);
         if (autocompletions.includes(autocompletion)) {
-            console.log(`Exit condition: ${autocompletion}`);
+            process.stdout.write(`\nExit condition: ${autocompletion}\n`);
             screen.log(`Exit condition: ${autocompletion}`);
             break;
         } else {
@@ -266,11 +267,9 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 const timeLeftStr = formatTimeLeft(timeLeft / 1000);
                 const estTimeStr = new Date(estTime).toLocaleTimeString();
                 screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
-                console.log(
-                    `[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`
-                );
+                updateTTYStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`);
             } else {
-                console.log(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
+                updateTTYStatus(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
             }
         }
     }
@@ -283,13 +282,14 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         try {
             const recogizedResult = await readStreamOnce(imagePipeline, 2000);
             const nextResult = guessTruncatedString(recogizedResult, command);
-            console.log(`Waiting for end: ${recogizedResult}`);
+            updateTTYStatus(`Waiting for end: ${recogizedResult}`);
             return nextResult == null;
         } catch (err) {
             await press(scrcpy, 'KEYCODE_ESCAPE');
             return false;
         }
     });
+    process.stdout.write('\n');
 
     stopScrcpy(scrcpy);
 

@@ -32,14 +32,10 @@ jobs:
       with:
         path: database
 
-    - name: Install dependencies for database
-      working-directory: ./database
+    - name: Install and export database
+      working-directory: ${{ github.workspace }}/database
       run: |
         npm install
-
-    - name: Export database as json
-      working-directory: ./database
-      run: |
         npm run generate-all
     
     - name: Checkout web
@@ -48,31 +44,27 @@ jobs:
         repository: XeroAlpha/caidlistweb
         path: web
 
-    - name: Install dependencies for web
-      working-directory: ./web
+    - name: Copy database files
+      run: |
+        cp -r ${{ github.workspace }}/database/output/web ${{ github.workspace }}/web/public/data
+        cp ${{ github.workspace }}/database/output/web/index.json ${{ github.workspace }}/web/src/assets/dataIndex.json
+
+    - name: Install and build web
+      working-directory: ${{ github.workspace }}/web
       run: |
         yarn install
-
-    - name: Copy files
-      run: |
-        cp -r ./database/output/web ./web/public/data
-        cp ./database/output/web/index.json ./web/src/assets/dataIndex.json
-
-    - name: Build web
-      working-directory: ./web
-      run: |
         yarn build
 
     - name: Deploy to self-hosted site
       run: |
-        cd ./web/dist/
-        tar -cvzf ../../idlist.tar.gz *
-        cd ../..
-        echo "${{ secrets.SSH_KEY }}" > key.txt
-        chmod 400 key.txt
-        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ./idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":${{ secrets.TARGET_PATH }}/idlist.tar.gz
-        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "cd ${{ secrets.TARGET_PATH }} && tar -xvzf ./idlist.tar.gz && rm ./idlist.tar.gz"
-        rm key.txt
+        pushd ${{ github.workspace }}/web/dist
+        tar -cvzf ${{ github.workspace }}/idlist.tar.gz *
+        popd
+        echo "${{ secrets.SSH_KEY }}" > ${{ github.workspace }}/key.txt
+        chmod 400 ${{ github.workspace }}/key.txt
+        scp -pqrO -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt ${{ github.workspace }}/idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":/tmp/idlist.tar.gz
+        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "rm -rf ${{ secrets.TARGET_PATH }}/* && tar -xvzf /tmp/idlist.tar.gz -C ${{ secrets.TARGET_PATH }} && rm -f /tmp/idlist.tar.gz"
+        rm ${{ github.workspace }}/key.txt
 
     - name: Setup GitHub Pages
       uses: actions/configure-pages@v3
@@ -80,7 +72,7 @@ jobs:
     - name: Upload artifact to GitHub pages
       uses: actions/upload-pages-artifact@v2
       with:
-        path: './web/dist'
+        path: ${{ github.workspace }}/web/dist
 
     - name: Deploy to GitHub Pages
       id: deployment

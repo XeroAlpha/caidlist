@@ -1,6 +1,6 @@
 {
     "title": "ITEM DOCUMENTATION",
-    "version": "1.20.50.22",
+    "version": "1.20.50.23",
     "content": [],
     "sections": [
         {
@@ -115,7 +115,7 @@
                                     "Name": "minecraft:digger",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "Digger item component. You can specify how quickly this item can dig specific blocks.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)"
+                                    "Description": "Digger item component. You can specify how quickly this item can dig specific blocks."
                                 },
                                 {
                                     "Name": "minecraft:display_name",
@@ -145,7 +145,7 @@
                                     "Name": "minecraft:food",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "When an item has a food component, it becomes edible to the player.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.30)"
+                                    "Description": "When an item has a food component, it becomes edible to the player. Must have the 'minecraft:use_duration' component in order to function properly.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.30)"
                                 },
                                 {
                                     "Name": "minecraft:fuel",
@@ -223,7 +223,7 @@
                                     "Name": "minecraft:shooter",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "Shooter Item Component.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
+                                    "Description": "Shooter Item Component. Must have the 'minecraft:use_duration' component in order to function properly.Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)"
                                 },
                                 {
                                     "Name": "minecraft:should_despawn",
@@ -437,38 +437,6 @@
                     ]
                 },
                 {
-                    "name": "minecraft:digger",
-                    "id": "minecraft:digger",
-                    "level": 2,
-                    "content": [
-                        "Digger item component. You can specify how quickly this item can dig specific blocks.",
-                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.20)",
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "destroy_speeds",
-                                    "Type": "Array",
-                                    "Default Value": "",
-                                    "Description": "A list of blocks to dig with correlating speeds of digging."
-                                },
-                                {
-                                    "Name": "on_dig",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": "In format versions before 1.20.20, trigger for when you dig a block that isn't listed in destroy_speeds"
-                                },
-                                {
-                                    "Name": "use_efficiency",
-                                    "Type": "Boolean",
-                                    "Default Value": "",
-                                    "Description": "Whether this item should be impacted if the efficiency enchant is applied to it."
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
                     "name": "minecraft:display_name",
                     "id": "minecraft:display_name",
                     "level": 2,
@@ -576,7 +544,7 @@
                     "id": "minecraft:food v1.20.30",
                     "level": 2,
                     "content": [
-                        "When an item has a food component, it becomes edible to the player.",
+                        "When an item has a food component, it becomes edible to the player. Must have the 'minecraft:use_duration' component in order to function properly.",
                         "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.30)",
                         {
                             "type": "table",
@@ -860,7 +828,7 @@
                     "id": "minecraft:shooter",
                     "level": 2,
                     "content": [
-                        "Shooter Item Component.",
+                        "Shooter Item Component. Must have the 'minecraft:use_duration' component in order to function properly.",
                         "Experimental toggles required: Holiday Creator Features (in format versions before 1.20.10)",
                         {
                             "type": "table",
@@ -1069,9 +1037,34 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "struct Puv::v1_20_50::DiggerItemComponent",
+                    "id": "struct Puv::v1_20_50::DiggerItemComponent",
+                    "level": 2,
+                    "content": [
+                        "Digger item component. You can specify how quickly this item can dig specific blocks.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "destroy_speeds",
+                                    "Type": "Array",
+                                    "Default Value": "",
+                                    "Description": "A list of blocks to dig with correlating speeds of digging."
+                                },
+                                {
+                                    "Name": "use_efficiency",
+                                    "Type": "Boolean",
+                                    "Default Value": "",
+                                    "Description": "Whether this item should be impacted if the efficiency enchant is applied to it."
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
     ],
-    "__OBJECTHASH__": "41f56c021bc5c59b421326a38cb973578d53822d"
+    "__OBJECTHASH__": "1e7b3af20c76546745fe65e5d20667d9d93c9ee4"
 }

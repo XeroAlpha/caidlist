@@ -341,3 +341,13 @@ export function readStreamOnce(stream, timeout) {
     }
     return data;
 }
+
+export function updateTTYStatus(statusText) {
+    if (process.stdout.isTTY) {
+        process.stdout.clearLine(1);
+        process.stdout.write(statusText);
+        process.stdout.cursorTo(0);
+    } else {
+        process.stdout.write(`${statusText}  \r`);
+    }
+}
