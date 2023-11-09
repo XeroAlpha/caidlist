@@ -24,7 +24,7 @@
 
 |路径|内容|
 | - | - |
-|`version/common/wiki/standardized_translation.json`|[Minecraft Wiki](https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 与 [基岩版开发Wiki](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中的标准译名表。|
+|`version/common/wiki/standardized_translation.json`|[Minecraft Wiki](https://zh.minecraft.wiki/w/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 与 [基岩版开发Wiki](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中的标准译名表。|
 |`version/java/lang.json`|最新Java版（含快照）的简体中文与英文语言文件。|
 |`version/documentation/`|基岩版官方内容包文档，提取自[官方示例内容包仓库](https://github.com/Mojang/bedrock-samples)。|
 |`version/documentation/<edition>.json`|从对应版本的文档中提取的数据。|

@@ -7,7 +7,7 @@ import { fetchFile } from '../util/network.js';
 const sources = {
     mcwzh: {
         getUrl(name) {
-            return `https://minecraft.fandom.com/zh/wiki/${encodeURIComponent(name)}`;
+            return `https://zh.minecraft.wiki/w/${encodeURIComponent(name)}`;
         },
         getRawUrl(name) {
             return `${this.getUrl(name)}?action=raw`;
@@ -47,55 +47,55 @@ const resolvers = {
 const dataPages = [
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Block',
+        name: 'Module:Autolink/Block',
         resolver: 'enumMapLua',
         target: 'BlockSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Item',
+        name: 'Module:Autolink/Item',
         resolver: 'enumMapLua',
         target: 'ItemSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Entity',
+        name: 'Module:Autolink/Entity',
         resolver: 'enumMapLua',
         target: 'EntitySprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Biome',
+        name: 'Module:Autolink/Biome',
         resolver: 'enumMapLua',
         target: 'BiomeSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Effect',
+        name: 'Module:Autolink/Effect',
         resolver: 'enumMapLua',
         target: 'EffectSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Enchantment',
+        name: 'Module:Autolink/Enchantment',
         resolver: 'enumMapLua',
         target: 'EnchantmentSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Environment',
+        name: 'Module:Autolink/Environment',
         resolver: 'enumMapLua',
         target: 'EnvSprite'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Other',
+        name: 'Module:Autolink/Other',
         resolver: 'enumMapLua',
         target: 'Other'
     },
     {
         source: 'mcwzh',
-        name: '模块:Autolink/Exclusive',
+        name: 'Module:Autolink/Exclusive',
         resolver: 'enumMapLua',
         prefix: 'Exclusive'
     },
@@ -115,8 +115,8 @@ const dataPages = [
     }
 ];
 
-// Refer: https://minecraft.fandom.com/zh/wiki/模块:Autolink?action=history
-// Last update:  2023/3/8 09:32 by Anterdc99
+// Reference: https://zh.minecraft.wiki/w/Module:Autolink?action=history
+// Last update:  2023/4/26 22:09 UTC+8 by Anterdc99
 function postprocessEnumMap(enumMaps) {
     forEachObject(enumMaps, (enumMap, enumMapKey) => {
         let prevKey;
