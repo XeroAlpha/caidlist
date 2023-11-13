@@ -53,6 +53,7 @@ const defaultTransMapNames = [
     ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
     ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
     ['featureAndRule', '地物与地物规则', '用于 placefeature 命令的地物 ID 和地物规则 ID'],
+    ['ability', '能力', '用于 ability 命令的能力 ID'],
     ['sound', '声音', '用于 playsound 命令的声音 ID'],
     ['lootTable', '战利品表', '用于 loot 命令的战利品表选项'],
     ['command', '命令', '可见的命令列表'],
@@ -407,6 +408,14 @@ async function generateBranchedOutputFiles(cx) {
                 }
                 return null;
             }
+        });
+    }
+    if (support.eduCommands(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'ability',
+            originalArray: enums.abilities,
+            translationMap: userTranslation.ability
         });
     }
     translationResultMaps.music = filterObjectMap(

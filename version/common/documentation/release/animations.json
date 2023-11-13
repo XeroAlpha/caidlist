@@ -35,9 +35,9 @@
                         "      }",
                         "    }",
                         "  }",
-                        "}"
-                    ]
-                }
+                        "}",
+                    ],
+                },
             ],
             "sections": [
                 {
@@ -66,10 +66,10 @@
                                 "      ]",
                                 "    }",
                                 "  }",
-                                "}"
-                            ]
-                        }
-                    ]
+                                "}",
+                            ],
+                        },
+                    ],
                 },
                 {
                     "name": "State Transitions",
@@ -95,8 +95,8 @@
                                 "    }",
                                 "  },",
                                 "  ...",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "For example:",
                         {
@@ -124,17 +124,17 @@
                                 "      ]",
                                 "    }",
                                 "  }",
-                                "}"
-                            ]
-                        }
-                    ]
+                                "}",
+                            ],
+                        },
+                    ],
                 },
                 {
                     "name": "States",
                     "id": "States",
                     "level": 2,
                     "content": [
-                        "A state defines a group of animations to process (each of which can have it's own blend value). Each state has an optional variables section, listing any number of variables that referenced animations can use.  Each state also has one or more animations, using the name given in the entity's definition json."
+                        "A state defines a group of animations to process (each of which can have it's own blend value). Each state has an optional variables section, listing any number of variables that referenced animations can use.  Each state also has one or more animations, using the name given in the entity's definition json.",
                     ],
                     "sections": [
                         {
@@ -142,7 +142,7 @@
                             "id": "State Variables",
                             "level": 4,
                             "content": [
-                                "Variables are either set by the game or by a user defined script that can be found in the entity definition json found in definitions/entity/<entity_name>.json.  Variables have their value set by a Molang Expression.  They can also have their value remapped via a linearly-interpolated curve."
+                                "Variables are either set by the game or by a user defined script that can be found in the entity definition json found in definitions/entity/<entity_name>.json.  Variables have their value set by a Molang Expression.  They can also have their value remapped via a linearly-interpolated curve.",
                             ],
                             "sections": [
                                 {
@@ -179,12 +179,12 @@
                                                 "    }",
                                                 "  }",
                                                 "}",
-                                                "```"
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
+                                                "```",
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ],
                         },
                         {
                             "name": "User-Defined Script Example",
@@ -209,9 +209,9 @@
                                         "      ]",
                                         "    }",
                                         "  }",
-                                        "}"
-                                    ]
-                                }
+                                        "}",
+                                    ],
+                                },
                             ],
                             "sections": [
                                 {
@@ -230,24 +230,24 @@
                                                 "      }",
                                                 "    }",
                                                 "  }",
-                                                "}"
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+                                                "}",
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
         {
             "name": "Channels (Rotation, Position, Scale)",
             "id": "Channels (Rotation, Position, Scale)",
             "level": 1,
             "content": [
-                "The engine tracks the animation of rotation, position, and scale separately.  Within a channel, one or more key frames are specified at arbitrary times, in seconds, from the start of the animation.  If no key frames are specified, a single key frame is created at t=0.0 and all channel data is stored within that key frame."
-            ]
+                "The engine tracks the animation of rotation, position, and scale separately.  Within a channel, one or more key frames are specified at arbitrary times, in seconds, from the start of the animation.  If no key frames are specified, a single key frame is created at t=0.0 and all channel data is stored within that key frame.",
+            ],
         },
         {
             "name": "Entity Animation Format Examples",
@@ -308,10 +308,10 @@
                         "    }",
                         "  ]",
                         "}",
-                        "```"
-                    ]
-                }
-            ]
+                        "```",
+                    ],
+                },
+            ],
         },
         {
             "name": "Getting Started",
@@ -360,17 +360,17 @@
                                         "      }",
                                         "    }",
                                         "  }",
-                                        "}"
-                                    ]
-                                }
-                            ]
+                                        "}",
+                                    ],
+                                },
+                            ],
                         },
                         {
                             "name": "Animations",
                             "id": "Animations",
                             "level": 4,
                             "content": [
-                                "At the beginning of each frame, the skeleton is reset to its default pose from its geometry definition and then animations are applied per-channel-additively in order.  Note that the channels (x, y, and z) are added separately across animations first, then converted to a transform once all animations have been cumulatively applied."
+                                "At the beginning of each frame, the skeleton is reset to its default pose from its geometry definition and then animations are applied per-channel-additively in order.  Note that the channels (x, y, and z) are added separately across animations first, then converted to a transform once all animations have been cumulatively applied.",
                             ],
                             "sections": [
                                 {
@@ -382,10 +382,10 @@
                                         {
                                             "type": "code",
                                             "content": [
-                                                "\"rotation\": [90.0, 0.0, 0.0]"
-                                            ]
-                                        }
-                                    ]
+                                                "\"rotation\": [90.0, 0.0, 0.0]",
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "name": "or a run-time interpreted script:",
@@ -395,8 +395,8 @@
                                         {
                                             "type": "code",
                                             "content": [
-                                                "\"rotation\": [\"cos(query.anim_pos * 38.17) * 80.0 * query.anim_speed\", 0.0, 0.0]"
-                                            ]
+                                                "\"rotation\": [\"cos(query.anim_pos * 38.17) * 80.0 * query.anim_speed\", 0.0, 0.0]",
+                                            ],
                                         },
                                         "Here is an example from quadruped.animation.json in the vanilla resource pack's animation folder:",
                                         {
@@ -416,12 +416,12 @@
                                                 "      }",
                                                 "    }",
                                                 "  }",
-                                                "}"
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
+                                                "}",
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ],
                         },
                         {
                             "name": "Entity Definition",
@@ -470,12 +470,12 @@
                                         "      }",
                                         "    }",
                                         "  }",
-                                        "}"
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
+                                        "}",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
                 },
                 {
                     "name": "Animation Hierarchy",
@@ -487,8 +487,8 @@
                         "__BoneAnimation[]: bone name to animation for this animation",
                         "____AnimationChannel[]: rotation, scale, or translation to animate",
                         "______KeyFrame[]: the value for the channel to be at, at a specific time",
-                        "All of the above concepts are described in a detailed, bottom-up approach below"
-                    ]
+                        "All of the above concepts are described in a detailed, bottom-up approach below",
+                    ],
                 },
                 {
                     "name": "Upgrade from v1.10 to v1.17.30",
@@ -496,8 +496,8 @@
                     "level": 2,
                     "content": [
                         "The major change with 1.17.30 is:",
-                        "- Molang expressions inside transitions that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected."
-                    ]
+                        "- Molang expressions inside transitions that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected.",
+                    ],
                 },
                 {
                     "name": "Upgrade from v1.17.30 to v1.18.10",
@@ -505,8 +505,8 @@
                     "level": 2,
                     "content": [
                         "The major change with 1.18.10 is:",
-                        "- Fixed an issue where animation controller events defined in the default state would get skipped if the controller immediately transitioned to another state."
-                    ]
+                        "- Fixed an issue where animation controller events defined in the default state would get skipped if the controller immediately transitioned to another state.",
+                    ],
                 },
                 {
                     "name": "Upgrade from v1.18.10 to v1.18.20",
@@ -514,8 +514,8 @@
                     "level": 2,
                     "content": [
                         "The major change with 1.18.20 is:",
-                        "- Molang expressions inside animation scripts for actor resource definition (pre_animation and initialize) that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected."
-                    ]
+                        "- Molang expressions inside animation scripts for actor resource definition (pre_animation and initialize) that contain capital letters are properly evaluated now. Strings inside such expressions are not forced to lowercase anymore and work as expected.",
+                    ],
                 },
                 {
                     "name": "Upgrade from v1.7 Beta to v1.8",
@@ -529,8 +529,8 @@
                         "4) params.foo --> global.foo",
                         "5) The general rule is that 'query' represents read-only values from the entity the script is running on, and 'variable' represents read-write data created by the user.",
                         "6) We've adopted snake_case for all names of things.  You are welcome to use upper-case letters if you wish as we are case-insensitive, however we recommend snake_case in general.",
-                        "7) Several variables previously set on mobs have been changed to use the query.foo format.  Look through the updated list below to see what has been added and changed."
-                    ]
+                        "7) Several variables previously set on mobs have been changed to use the query.foo format.  Look through the updated list below to see what has been added and changed.",
+                    ],
                 },
                 {
                     "name": "Upgrade from v1.8 Beta to v1.10",
@@ -541,10 +541,10 @@
                         "- the ability to have animations reference other animations in an arbitrarily deep hierarchy.",
                         "- the parameters section of animation controllers has been replaced with the `variables` section.",
                         "- in the entity definition file, animation controllers are now listed in the `animations` section, and a `scripts\u0007nimate` section has been added to define which root animations to play.",
-                        "The v1.8 file format is backwards-compatible with v1.10 so you don't _need_ to change anything (although we recommend refactoring your files in the spirit of v1.10 as there is a slight performance win with the new format, as well as it being simpler to understand."
-                    ]
-                }
-            ]
+                        "The v1.8 file format is backwards-compatible with v1.10 so you don't _need_ to change anything (although we recommend refactoring your files in the spirit of v1.10 as there is a slight performance win with the new format, as well as it being simpler to understand.",
+                    ],
+                },
+            ],
         },
         {
             "name": "Key Frames",
@@ -552,7 +552,7 @@
             "level": 1,
             "content": [
                 "A key frame defines two values for a channel-specific transform to a specific bone at a specified time, one as time approaches the key frame time, and the second from that key frame time onwards.",
-                "As such, when interpolating between two key frames, one can define the slope of the animation curve in either a continuous or discontinuous manner."
+                "As such, when interpolating between two key frames, one can define the slope of the animation curve in either a continuous or discontinuous manner.",
             ],
             "sections": [
                 {
@@ -560,7 +560,7 @@
                     "id": "Interpolation",
                     "level": 2,
                     "content": [
-                        "Currently only linear interpolation is supported.  Key frame \"pre\" and \"post\" settings allow control of the interpolation curve at any key frame."
+                        "Currently only linear interpolation is supported.  Key frame \"pre\" and \"post\" settings allow control of the interpolation curve at any key frame.",
                     ],
                     "sections": [
                         {
@@ -579,10 +579,10 @@
                                         "    \"0.5\": [ 0, 180, 0],",
                                         "    \"1.0\": [0, 360, 0]",
                                         "  }",
-                                        "}"
-                                    ]
-                                }
-                            ]
+                                        "}",
+                                    ],
+                                },
+                            ],
                         },
                         {
                             "name": "Discontinuous Example",
@@ -606,22 +606,22 @@
                                         "    }",
                                         "    \"1.0\": [ 1.0 ]",
                                         "  }",
-                                        "}"
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+                                        "}",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
         {
             "name": "Names",
             "id": "Names",
             "level": 1,
             "content": [
-                "All names: animations, bones, states, etc, must all start with a letter and contain only alphanumerics, underscore, or period.  It is recommended to use names in all lower-case"
-            ]
+                "All names: animations, bones, states, etc, must all start with a letter and contain only alphanumerics, underscore, or period.  It is recommended to use names in all lower-case",
+            ],
         },
         {
             "name": "Overview",
@@ -630,8 +630,8 @@
             "content": [
                 "The follows the current Minecraft JSON paradigms:",
                 "- Fields should be lower-case and use underscores (no spaces)",
-                "- All JSON files in the definitions directory and subtree will be read into and interpreted by the animation system"
-            ]
+                "- All JSON files in the definitions directory and subtree will be read into and interpreted by the animation system",
+            ],
         },
         {
             "name": "Render Controllers",
@@ -639,7 +639,7 @@
             "level": 1,
             "content": [
                 "The Render Controller needs an identifier and needs to follow the format of \"controller.render.<name>\".  This name needs to match the name set in the Client Entity Definitions JSON.",
-                "Render Controllers are a way for the player to determine what renders on the entity.  Players can set the geometry, materials, textures, and part visibility of the entity.  In addition to setting the keys directly, players can use arrays to have the entity choose between different options."
+                "Render Controllers are a way for the player to determine what renders on the entity.  Players can set the geometry, materials, textures, and part visibility of the entity.  In addition to setting the keys directly, players can use arrays to have the entity choose between different options.",
             ],
             "sections": [
                 {
@@ -656,8 +656,8 @@
                                 "    \"Array.geos\": [\"Geometry.default\", \"Geometry.sheared\"]",
                                 "  }",
                                 "},",
-                                "\"geometry\": \"Array.geos[query.is_sheared]\","
-                            ]
+                                "\"geometry\": \"Array.geos[query.is_sheared]\",",
+                            ],
                         },
                         "Example Array for materials from the spider JSON",
                         {
@@ -668,8 +668,8 @@
                                 "    \"Array.materials\": [\"Material.default\", \"Material.invisible\"]",
                                 "  }",
                                 "},",
-                                "\"materials\": [{ \"*\": \"Array.materials[query.is_invisible]\" }],"
-                            ]
+                                "\"materials\": [{ \"*\": \"Array.materials[query.is_invisible]\" }],",
+                            ],
                         },
                         "Example Array for textures from the villager JSON",
                         {
@@ -680,8 +680,8 @@
                                 "    \"Array.skins\": [\"Texture.farmer\", \"Texture.librarian\", \"Texture.priest\", \"Texture.smith\", \"Texture.butcher\"]",
                                 "  }",
                                 "},",
-                                "\"textures\": [\"Array.skins[query.variant]\"]"
-                            ]
+                                "\"textures\": [\"Array.skins[query.variant]\"]",
+                            ],
                         },
                         "Example with color for tinting of parts from Armor 1.0 render controller JSON:",
                         {
@@ -729,8 +729,8 @@
                                 "        },",
                                 "        \"textures\": [\"array.armor_texture[query.armor_texture_slot(1)]\", \"texture.enchanted\"]",
                                 "    }",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "Example with is_hurt_color from Creeper render controller JSON:",
                         {
@@ -749,8 +749,8 @@
                                 "          \"a\": 0.5,",
                                 "        }",
                                 "    }",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "Example with on_fire_color from Fireball render controller JSON:",
                         {
@@ -769,8 +769,8 @@
                                 "          \"a\": 0.0,",
                                 "        }",
                                 "    }",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "Example with overlay_color from Wither Boss render controller JSON:",
                         {
@@ -794,8 +794,8 @@
                                 "          \"a\": \"variable.is_invulnerable ? query.overlay_alpha : this\"",
                                 "        }",
                                 "    }",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "Example with part_visibility for turning on and off visibility of parts from Llama JSON:",
                         {
@@ -819,8 +819,8 @@
                                 "      \"Texture.decor_none\"",
                                 "    ]",
                                 "  }",
-                                "}"
-                            ]
+                                "}",
+                            ],
                         },
                         "Material array example from Horse render controllers.  Saddle will override Mane, which will override TailA, etc.:",
                         {
@@ -831,10 +831,10 @@
                                 "  { \"TailA\": \"Material.horse_hair\" },",
                                 "  { \"Mane\": \"Material.horse_hair\" },",
                                 "  { \"*Saddle*\": \"Material.horse_saddle\" }",
-                                "],"
-                            ]
-                        }
-                    ]
+                                "],",
+                            ],
+                        },
+                    ],
                 },
                 {
                     "name": "Getting Started",
@@ -858,12 +858,12 @@
                                 "    \"materials\": [{ \"*\": \"Material.default\" }],",
                                 "    \"textures\": [\"Array.skins[query.variant]\"]",
                                 "  }",
-                                "}"
-                            ]
-                        }
-                    ]
-                }
-            ]
+                                "}",
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
         {
             "name": "Transforms",
@@ -880,11 +880,11 @@
                     "content": [
                         "\"scale\": [2.0, 2.0, 2.0]",
                         "\"scale\": 2.0",
-                        "\"scale\": [2.0]"
-                    ]
-                }
-            ]
-        }
+                        "\"scale\": [2.0]",
+                    ],
+                },
+            ],
+        },
     ],
-    "__OBJECTHASH__": "b000d909dd72f53065b2b631540069d8816ffba6"
+    "__OBJECTHASH__": "b000d909dd72f53065b2b631540069d8816ffba6",
 }

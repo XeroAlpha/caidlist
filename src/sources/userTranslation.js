@@ -23,6 +23,7 @@ const userTranslationStorageKey = {
     damageCause: 'translation.damage_cause',
     gamerule: 'translation.gamerule',
     entitySlot: 'translation.entity_slot',
+    ability: 'translation.ability',
     feature: 'translation.feature',
     inputPermission: 'translation.input_permission',
     cameraPreset: 'translation.camera_preset',
