@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.50.24",
+    "packageVersion": "1.20.60.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -18240,6 +18240,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "spawnParticle": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "startItemCooldown": {
                                                     "value": {
                                                         "type": "function",
@@ -19436,18 +19444,12 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "itemStack": {
+                                                "permutationBeingPlaced": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
                                                     },
                                                 },
                                                 "player": {
@@ -26680,6 +26682,7 @@
         "Minecraft.Player.prototype.sendMessage",
         "Minecraft.Player.prototype.setOp",
         "Minecraft.Player.prototype.setSpawnPoint",
+        "Minecraft.Player.prototype.spawnParticle",
         "Minecraft.Player.prototype.startItemCooldown",
         "Minecraft.Player.prototype.stopMusic",
         "Minecraft.Player.prototype.totalXpNeededForNextLevel.[[Get]]",
@@ -26831,8 +26834,7 @@
         "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.constructor",
         "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.face",
         "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.faceLocation.[[Get]]",
-        "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.itemStack.[[Get]]",
-        "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.itemStack.[[Set]]",
+        "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.permutationBeingPlaced.[[Get]]",
         "Minecraft.PlayerPlaceBlockBeforeEvent.prototype.player.[[Get]]",
         "Minecraft.PlayerPlaceBlockBeforeEventSignal",
         "Minecraft.PlayerPlaceBlockBeforeEventSignal.prototype",
@@ -41658,6 +41660,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:trial_spawner": {
+            "properties": [
+                {
+                    "name": "trial_spawner_state",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:trip_wire": {
             "properties": [
                 {
@@ -46258,6 +46279,21 @@
                 },
             },
         ],
+        "trial_spawner_state": [
+            {
+                "validValues": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                ],
+                "defaultValue": {
+                    "minecraft:trial_spawner": 0,
+                },
+            },
+        ],
         "triggered_bit": [
             {
                 "validValues": [
@@ -46857,6 +46893,7 @@
             "minecraft:chiseled_bookshelf": {},
             "minecraft:end_portal_frame": {},
             "minecraft:mob_spawner": {},
+            "minecraft:trial_spawner": {},
         },
         "oak": {
             "minecraft:oak_log": {},
@@ -47664,6 +47701,11 @@
         "minecraft:bread": {
             "tags": [
                 "minecraft:is_food",
+            ],
+        },
+        "minecraft:breeze_spawn_egg": {
+            "tags": [
+                "minecraft:spawn_egg",
             ],
         },
         "minecraft:brewer_pottery_sherd": {
@@ -51827,6 +51869,12 @@
         "minecraft:trapped_chest": {
             "tags": [],
         },
+        "minecraft:trial_key": {
+            "tags": [],
+        },
+        "minecraft:trial_spawner": {
+            "tags": [],
+        },
         "minecraft:trident": {
             "unstackable": true,
             "tags": [
@@ -52984,6 +53032,7 @@
             "minecraft:bat_spawn_egg",
             "minecraft:bee_spawn_egg",
             "minecraft:blaze_spawn_egg",
+            "minecraft:breeze_spawn_egg",
             "minecraft:camel_spawn_egg",
             "minecraft:cat_spawn_egg",
             "minecraft:cave_spider_spawn_egg",
@@ -53241,6 +53290,7 @@
         "minecraft:bee",
         "minecraft:blaze",
         "minecraft:boat",
+        "minecraft:breeze",
         "minecraft:camel",
         "minecraft:cat",
         "minecraft:cave_spider",
@@ -53331,6 +53381,7 @@
         "minecraft:vindicator",
         "minecraft:wandering_trader",
         "minecraft:warden",
+        "minecraft:wind_charge_projectile",
         "minecraft:witch",
         "minecraft:wither",
         "minecraft:wither_skeleton",

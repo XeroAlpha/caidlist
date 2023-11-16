@@ -16843,6 +16843,7 @@
             "drip.water.pointed_dripstone",
             "elytra.loop",
             "entity.generic.splash",
+            "entity.wind_burst.burst",
             "entity.wither_skeleton.ambient",
             "entity.wither_skeleton.death",
             "entity.wither_skeleton.hurt",
@@ -17120,6 +17121,15 @@
             "mob.blaze.death",
             "mob.blaze.hit",
             "mob.blaze.shoot",
+            "mob.breeze.charge",
+            "mob.breeze.death",
+            "mob.breeze.hurt",
+            "mob.breeze.idle_air",
+            "mob.breeze.idle_ground",
+            "mob.breeze.jump",
+            "mob.breeze.land",
+            "mob.breeze.shoot",
+            "mob.breeze.slide",
             "mob.camel.ambient",
             "mob.camel.dash",
             "mob.camel.dash_ready",
@@ -17795,6 +17805,16 @@
             "tile.piston.out",
             "tilt_down.big_dripleaf",
             "tilt_up.big_dripleaf",
+            "trial_spawner.ambient",
+            "trial_spawner.break",
+            "trial_spawner.close_shutter",
+            "trial_spawner.detect_player",
+            "trial_spawner.eject_item",
+            "trial_spawner.hit",
+            "trial_spawner.open_shutter",
+            "trial_spawner.place",
+            "trial_spawner.spawn_mob",
+            "trial_spawner.step",
             "ui.cartography_table.take_result",
             "ui.loom.select_pattern",
             "ui.loom.take_result",
@@ -17856,6 +17876,7 @@
             "minecraft:blue_flame_particle",
             "minecraft:breaking_item_icon",
             "minecraft:breaking_item_terrain",
+            "minecraft:breeze_ground_particle",
             "minecraft:bubble_column_bubble",
             "minecraft:bubble_column_down_particle",
             "minecraft:bubble_column_up_particle",
@@ -17970,6 +17991,7 @@
             "minecraft:stunned_emitter",
             "minecraft:totem_manual",
             "minecraft:totem_particle",
+            "minecraft:trial_spawner_detection",
             "minecraft:underwater_torch_particle",
             "minecraft:vibration_signal",
             "minecraft:villager_angry",
@@ -17984,6 +18006,7 @@
             "minecraft:water_wake_particle",
             "minecraft:wax_particle",
             "minecraft:white_smoke_particle",
+            "minecraft:wind_explosion_emitter",
             "minecraft:wither_boss_invulnerable",
         ],
         "fogs": [
@@ -18087,6 +18110,12 @@
             "chests/stronghold_corridor",
             "chests/stronghold_crossing",
             "chests/stronghold_library",
+            "chests/trial_chambers/corridor",
+            "chests/trial_chambers/entrance",
+            "chests/trial_chambers/intersection",
+            "chests/trial_chambers/intersection_barrel",
+            "chests/trial_chambers/reward",
+            "chests/trial_chambers/supply",
             "chests/underwater_ruin_big",
             "chests/underwater_ruin_small",
             "chests/village/village_armorer",
@@ -18107,6 +18136,9 @@
             "chests/village_blacksmith",
             "chests/village_two_room_house",
             "chests/woodland_mansion",
+            "dispensers/trial_chambers/chamber",
+            "dispensers/trial_chambers/corridor",
+            "dispensers/trial_chambers/water",
             "empty",
             "entities/armor_set_chain",
             "entities/armor_set_diamond",
@@ -18223,6 +18255,9 @@
             "gameplay/fishing/junk",
             "gameplay/fishing/treasure",
             "gameplay/jungle_fishing",
+            "pots/trial_chambers/corridor",
+            "spawners/trial_chamber/consumables",
+            "spawners/trial_chamber/key",
         ],
         "features": [
             "minecraft:amethyst_geode_feature",
@@ -20110,6 +20145,21 @@
             "geometry.bow_pulling_1": [],
             "geometry.bow_pulling_2": [],
             "geometry.bow_standby": [],
+            "geometry.breeze": [
+                "minecraft:breeze<default>",
+            ],
+            "geometry.breeze_eyes": [
+                "minecraft:breeze<breeze_eyes>",
+            ],
+            "geometry.breeze_wind_bottom": [
+                "minecraft:breeze<breeze_wind_bottom>",
+            ],
+            "geometry.breeze_wind_mid": [
+                "minecraft:breeze<breeze_wind_mid>",
+            ],
+            "geometry.breeze_wind_top": [
+                "minecraft:breeze<breeze_wind_top>",
+            ],
             "geometry.camel": [
                 "minecraft:camel<default>",
             ],
@@ -20454,6 +20504,9 @@
             "geometry.warden": [
                 "minecraft:warden<default>",
             ],
+            "geometry.wind_charge": [
+                "minecraft:wind_charge_projectile<default>",
+            ],
             "geometry.witherBoss": [
                 "minecraft:wither<default>",
             ],
@@ -20619,6 +20672,24 @@
             ],
             "animation.bow.wield": [],
             "animation.bow.wield_first_person_pull": [],
+            "animation.breeze.idle": [
+                "minecraft:breeze<idle>",
+            ],
+            "animation.breeze.idle_ground_particles": [
+                "minecraft:breeze<idle_ground_particles>",
+            ],
+            "animation.breeze.jump": [
+                "minecraft:breeze<jump>",
+            ],
+            "animation.breeze.shoot": [
+                "minecraft:breeze<shoot>",
+            ],
+            "animation.breeze.slide": [
+                "minecraft:breeze<slide>",
+            ],
+            "animation.breeze.slide_ground_particles": [
+                "minecraft:breeze<slide_ground_particles>",
+            ],
             "animation.camel.dash": [
                 "minecraft:camel<dashing>",
             ],
@@ -20681,6 +20752,7 @@
                 "minecraft:agent<look_at_target>",
                 "minecraft:axolotl<look_at_target>",
                 "minecraft:blaze<look_at_target>",
+                "minecraft:breeze<look_at>",
                 "minecraft:cat<look_at_target>",
                 "minecraft:chicken<look_at_target>",
                 "minecraft:cow<look_at_target>",
@@ -21881,6 +21953,24 @@
             "controller.animation.blaze.move": [
                 "minecraft:blaze<move>",
             ],
+            "controller.animation.breeze.ground_particles": [
+                "minecraft:breeze<ground_particles_controller>",
+            ],
+            "controller.animation.breeze.idle": [
+                "minecraft:breeze<idle_controller>",
+            ],
+            "controller.animation.breeze.jump": [
+                "minecraft:breeze<jump_controller>",
+            ],
+            "controller.animation.breeze.look_at": [
+                "minecraft:breeze<look_at_controller>",
+            ],
+            "controller.animation.breeze.move": [
+                "minecraft:breeze<move_controller>",
+            ],
+            "controller.animation.breeze.shoot": [
+                "minecraft:breeze<shoot_controller>",
+            ],
             "controller.animation.camel.general": [
                 "minecraft:camel<general>",
             ],
@@ -22439,6 +22529,21 @@
                 "minecraft:blaze",
             ],
             "controller.render.bow": [],
+            "controller.render.breeze": [
+                "minecraft:breeze",
+            ],
+            "controller.render.breeze_eyes": [
+                "minecraft:breeze",
+            ],
+            "controller.render.breeze_wind_bottom": [
+                "minecraft:breeze",
+            ],
+            "controller.render.breeze_wind_mid": [
+                "minecraft:breeze",
+            ],
+            "controller.render.breeze_wind_top": [
+                "minecraft:breeze",
+            ],
             "controller.render.camel": [
                 "minecraft:camel",
             ],
@@ -22752,6 +22857,9 @@
             ],
             "controller.render.warden_tendrils": [
                 "minecraft:warden",
+            ],
+            "controller.render.wind_charge": [
+                "minecraft:wind_charge_projectile",
             ],
             "controller.render.witch": [
                 "minecraft:witch",
@@ -24145,6 +24253,9 @@
                 "minecraft:boat",
                 "minecraft:chest_boat",
             ],
+            "breeze": [
+                "minecraft:breeze",
+            ],
             "butcher": [
                 "minecraft:villager<butcher>",
                 "minecraft:villager_v2<butcher>",
@@ -24336,6 +24447,7 @@
                 "minecraft:bee",
                 "minecraft:bee<countdown_to_perish>",
                 "minecraft:blaze",
+                "minecraft:breeze",
                 "minecraft:camel",
                 "minecraft:cat",
                 "minecraft:cave_spider",
@@ -24468,6 +24580,7 @@
             ],
             "monster": [
                 "minecraft:blaze",
+                "minecraft:breeze",
                 "minecraft:cave_spider",
                 "minecraft:creeper",
                 "minecraft:drowned",

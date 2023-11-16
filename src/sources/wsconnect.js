@@ -95,11 +95,18 @@ async function doWSRelatedJobs(cx, session) {
             obj[mob.id] = mob.name;
             return obj;
         }, {});
-    return {
-        commandList,
+    /**
+     * It depends on launch instance instead of world, so we
+     * decide to extract them only in preview-win.
+     */
+    const wsExtras = {
         wsBlockData: sortObjectKey(wsBlockData),
         wsItemData: sortObjectKey(wsItemData),
         wsMobData: sortObjectKey(wsMobData)
+    };
+    return {
+        commandList,
+        ...(cx.version === 'preview_win' ? wsExtras : null)
     };
 }
 

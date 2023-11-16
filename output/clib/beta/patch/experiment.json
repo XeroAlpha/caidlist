@@ -2,7 +2,7 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.50.24）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.60.20）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		0,
@@ -12,7 +12,7 @@
 	"require": [
 		"4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7"
 	],
-	"minSupportVer": "1.20.50.24",
+	"minSupportVer": "1.20.60.20",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -38,6 +38,7 @@
 			"polished_tuff_slab": "磨制凝灰岩台阶",
 			"polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"polished_tuff_wall": "磨制凝灰岩墙",
+			"trial_spawner": "试炼刷怪笼",
 			"tuff_brick_double_slab": "双层凝灰岩砖台阶",
 			"tuff_brick_slab": "凝灰岩砖台阶",
 			"tuff_brick_stairs": "凝灰岩砖楼梯",
@@ -74,6 +75,7 @@
 			"weathered_copper_trapdoor": "锈蚀的铜活板门"
 		},
 		"item": {
+			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
 			"chiseled_tuff_bricks": "雕纹凝灰岩砖",
@@ -96,6 +98,8 @@
 			"polished_tuff_slab": "磨制凝灰岩台阶",
 			"polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"polished_tuff_wall": "磨制凝灰岩墙",
+			"trial_key": "试炼钥匙",
+			"trial_spawner": "试炼刷怪笼",
 			"tuff_brick_slab": "凝灰岩砖台阶",
 			"tuff_brick_stairs": "凝灰岩砖楼梯",
 			"tuff_brick_wall": "凝灰岩砖墙",
@@ -129,8 +133,33 @@
 			"weathered_copper_grate": "锈蚀的铜格栅",
 			"weathered_copper_trapdoor": "锈蚀的铜活板门"
 		},
+		"structure": {
+			"trial_chambers": "Trail Chambers"
+		},
+		"entity_family": {
+			"breeze": "旋风人"
+		},
+		"animation": {
+			"animation.breeze.idle": "",
+			"animation.breeze.idle_ground_particles": "",
+			"animation.breeze.jump": "",
+			"animation.breeze.shoot": "",
+			"animation.breeze.slide": "",
+			"animation.breeze.slide_ground_particles": ""
+		},
+		"animation_controller": {
+			"controller.animation.breeze.ground_particles": "",
+			"controller.animation.breeze.idle": "",
+			"controller.animation.breeze.jump": "",
+			"controller.animation.breeze.look_at": "",
+			"controller.animation.breeze.move": "",
+			"controller.animation.breeze.shoot": ""
+		},
 		"particle_emitter": {
-			"minecraft:white_smoke_particle": ""
+			"minecraft:breeze_ground_particle": "",
+			"minecraft:trial_spawner_detection": "",
+			"minecraft:white_smoke_particle": "",
+			"minecraft:wind_explosion_emitter": ""
 		},
 		"sound": {
 			"block.copper_bulb.turn_off": "",
@@ -141,15 +170,63 @@
 			"crafter.craft": "",
 			"crafter.disable_slot": "",
 			"crafter.fail": "",
+			"entity.wind_burst.burst": "",
 			"fall.copper_bulb": "",
 			"hit.copper_bulb": "",
+			"mob.breeze.charge": "",
+			"mob.breeze.death": "",
+			"mob.breeze.hurt": "",
+			"mob.breeze.idle_air": "",
+			"mob.breeze.idle_ground": "",
+			"mob.breeze.jump": "",
+			"mob.breeze.land": "",
+			"mob.breeze.shoot": "",
+			"mob.breeze.slide": "",
 			"open_door.copper": "",
 			"open_trapdoor.copper": "",
 			"place.copper_bulb": "",
 			"place.tuff_bricks": "",
 			"step.copper_bulb": "",
 			"step.copper_grate": "",
-			"step.tuff_bricks": ""
+			"step.tuff_bricks": "",
+			"trial_spawner.ambient": "",
+			"trial_spawner.break": "",
+			"trial_spawner.close_shutter": "",
+			"trial_spawner.detect_player": "",
+			"trial_spawner.eject_item": "",
+			"trial_spawner.hit": "",
+			"trial_spawner.open_shutter": "",
+			"trial_spawner.place": "",
+			"trial_spawner.spawn_mob": "",
+			"trial_spawner.step": ""
+		},
+		"loot_table": {
+			"chests/trial_chambers/corridor": "",
+			"chests/trial_chambers/entrance": "",
+			"chests/trial_chambers/intersection": "",
+			"chests/trial_chambers/intersection_barrel": "",
+			"chests/trial_chambers/reward": "",
+			"chests/trial_chambers/supply": "",
+			"dispensers/trial_chambers/chamber": "",
+			"dispensers/trial_chambers/corridor": "",
+			"dispensers/trial_chambers/water": "",
+			"pots/trial_chambers/corridor": "",
+			"spawners/trial_chamber/consumables": "",
+			"spawners/trial_chamber/key": ""
+		},
+		"loot_table_wrapped": {
+			"\"chests/trial_chambers/corridor\"": "",
+			"\"chests/trial_chambers/entrance\"": "",
+			"\"chests/trial_chambers/intersection\"": "",
+			"\"chests/trial_chambers/intersection_barrel\"": "",
+			"\"chests/trial_chambers/reward\"": "",
+			"\"chests/trial_chambers/supply\"": "",
+			"\"dispensers/trial_chambers/chamber\"": "",
+			"\"dispensers/trial_chambers/corridor\"": "",
+			"\"dispensers/trial_chambers/water\"": "",
+			"\"pots/trial_chambers/corridor\"": "",
+			"\"spawners/trial_chamber/consumables\"": "",
+			"\"spawners/trial_chamber/key\"": ""
 		},
 		"recipe": {
 			"minecraft:chiseled_tuff": "<工作台>凝灰岩台阶*2->雕纹凝灰岩",
@@ -213,7 +290,12 @@
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
 			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2"
 		},
+		"summonable_entity": {
+			"breeze": "旋风人",
+			"minecraft:breeze": "旋风人"
+		},
 		"loot_tool": {
+			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
 			"minecraft:chiseled_tuff_bricks": "雕纹凝灰岩砖",
@@ -236,6 +318,8 @@
 			"minecraft:polished_tuff_slab": "磨制凝灰岩台阶",
 			"minecraft:polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"minecraft:polished_tuff_wall": "磨制凝灰岩墙",
+			"minecraft:trial_key": "试炼钥匙",
+			"minecraft:trial_spawner": "试炼刷怪笼",
 			"minecraft:tuff_brick_slab": "凝灰岩砖台阶",
 			"minecraft:tuff_brick_stairs": "凝灰岩砖楼梯",
 			"minecraft:tuff_brick_wall": "凝灰岩砖墙",
@@ -276,16 +360,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.50.24",
-			"packageVersion": "1.20.50.24"
+			"coreVersion": "1.20.60.20",
+			"packageVersion": "1.20.60.20"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.50.24",
-			"packageVersion": "1.20.50.24"
+			"coreVersion": "1.20.60.20",
+			"packageVersion": "1.20.60.20"
 		}
 	}
 }
