@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.60.20",
+    "version": "1.20.60.21",
     "content": [],
     "sections": [
         {
@@ -8812,6 +8812,141 @@
                     ],
                 },
                 {
+                    "name": "is_panicking",
+                    "id": "is_panicking",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is panicking.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_panicking\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_panicking\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_persistent",
                     "id": "is_persistent",
                     "level": 2,
@@ -9885,6 +10020,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"is_snow_covered\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "is_sprinting",
+                    "id": "is_sprinting",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is sprinting.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sprinting\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sprinting\" }",
                                     ],
                                 },
                             ],
@@ -22332,51 +22602,70 @@
                             "id": "minecraft:entity_sensor",
                             "level": 4,
                             "content": [
-                                "A component that fires an event when a set of conditions are met by other entities within the defined range.",
+                                "A component that owns multiple subsensors, each one firing an event when a set of conditions are met by other entities within the defined range.",
                                 {
                                     "type": "table",
                                     "rows": [
                                         {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Event to fire when the conditions are met.",
-                                        },
-                                        {
-                                            "Name": "event_filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The set of conditions that must be satisfied to fire the event.",
-                                        },
-                                        {
-                                            "Name": "maximum_count",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "The maximum number of entities that must pass the filter conditions for the event to send.",
-                                        },
-                                        {
-                                            "Name": "minimum_count",
-                                            "Type": "Integer",
-                                            "Default Value": "1",
-                                            "Description": "The minimum number of entities that must pass the filter conditions for the event to send.",
-                                        },
-                                        {
                                             "Name": "relative_range",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "If true the sensor range is additive on top of the entity's size.",
+                                            "Description": "If true the subsensors' range is additive on top of the entity's size.",
                                         },
                                         {
-                                            "Name": "require_all",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true requires all nearby entities to pass the filter conditions for the event to send.",
-                                        },
-                                        {
-                                            "Name": "sensor_range",
-                                            "Type": "Decimal",
-                                            "Default Value": "10",
-                                            "Description": "The maximum distance another entity can be from this and have the filters checked against it.",
+                                            "Name": "subsensors",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": [
+                                                "The list of subsensors which sense for entities and emit events when all their conditions are met.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "cooldown",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "-1",
+                                                            "Description": "How many seconds should elapse before the subsensor can once again sense for entities. The cooldown is applied on top of the base 1 tick (0.05 seconds) delay. Negative values will result in no cooldown being used.",
+                                                        },
+                                                        {
+                                                            "Name": "event",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "Event to fire when the conditions are met.",
+                                                        },
+                                                        {
+                                                            "Name": "event_filters",
+                                                            "Type": "Minecraft Filter",
+                                                            "Default Value": "",
+                                                            "Description": "The set of conditions that must be satisfied to fire the event.",
+                                                        },
+                                                        {
+                                                            "Name": "maximum_count",
+                                                            "Type": "Integer",
+                                                            "Default Value": "-1",
+                                                            "Description": "The maximum number of entities that must pass the filter conditions for the event to send.",
+                                                        },
+                                                        {
+                                                            "Name": "minimum_count",
+                                                            "Type": "Integer",
+                                                            "Default Value": "1",
+                                                            "Description": "The minimum number of entities that must pass the filter conditions for the event to send.",
+                                                        },
+                                                        {
+                                                            "Name": "range",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "10",
+                                                            "Description": "The maximum distance another entity can be from this and have the filters checked against it.",
+                                                        },
+                                                        {
+                                                            "Name": "require_all",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "false",
+                                                            "Description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                                                        },
+                                                    ],
+                                                },
+                                            ],
                                         },
                                     ],
                                 },
@@ -28717,5 +29006,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "bbd71a879674abab55d2a3326fbd9f9a78c055a8",
+    "__OBJECTHASH__": "0a244bac820ca8695b36f7105ddfbc83e3727f15",
 }

@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.60.20",
-    "__COMMITHASH__": "83f807475c0ff3fa1b563af0199d5800c07a4ca5",
+    "__VERSION__": "1.20.60.21",
+    "__COMMITHASH__": "fb0960c5b049e4a82026cb828159b3c1c2b0ceb2",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -763,6 +763,14 @@
                             ],
                         },
                         {
+                            "name": "is_panicking",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "is_persistent",
                             "sections": [
                                 {
@@ -820,6 +828,14 @@
                         },
                         {
                             "name": "is_snow_covered",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_sprinting",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -5174,6 +5190,7 @@
         "is_missing_health": "Tests if the subject is not at full health.",
         "is_moving": "Returns true if the subject entity is moving.",
         "is_owner": "Returns true if the subject entity is the owner of the calling entity.",
+        "is_panicking": "Tests if the subject is panicking.",
         "is_persistent": "Tests if the subject's persistence matches the bool value passed in.",
         "is_raider": "Tests if the subject is a raider.",
         "is_riding": "Returns true if the subject entity is riding on another entity.",
@@ -5182,6 +5199,7 @@
         "is_sneak_held": "Returns true if the subject entity has the sneak input held.",
         "is_sneaking": "Returns true if the subject entity is sneaking.",
         "is_snow_covered": "Tests whether the Subject is in an area with snow cover",
+        "is_sprinting": "Tests if the subject is sprinting.",
         "is_target": "Returns true if the subject entity is the target of the calling entity.",
         "is_temperature_type": "Tests whether the current temperature is a given type.",
         "is_temperature_value": "Tests the current temperature against a provided value in the range (0.0, 1.0) where 0.0f is the coldest temp and 1.0f is the hottest.",
@@ -12497,49 +12515,63 @@
             ],
         },
         "minecraft:entity_sensor": {
-            "description": "A component that fires an event when a set of conditions are met by other entities within the defined range.",
+            "description": "A component that owns multiple subsensors, each one firing an event when a set of conditions are met by other entities within the defined range.",
             "children": [
-                {
-                    "name": "event",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Event to fire when the conditions are met.",
-                },
-                {
-                    "name": "event_filters",
-                    "type": "Minecraft Filter",
-                    "defaultValue": "",
-                    "description": "The set of conditions that must be satisfied to fire the event.",
-                },
-                {
-                    "name": "maximum_count",
-                    "type": "Integer",
-                    "defaultValue": "-1",
-                    "description": "The maximum number of entities that must pass the filter conditions for the event to send.",
-                },
-                {
-                    "name": "minimum_count",
-                    "type": "Integer",
-                    "defaultValue": "1",
-                    "description": "The minimum number of entities that must pass the filter conditions for the event to send.",
-                },
                 {
                     "name": "relative_range",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true the sensor range is additive on top of the entity's size.",
+                    "description": "If true the subsensors' range is additive on top of the entity's size.",
                 },
                 {
-                    "name": "require_all",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true requires all nearby entities to pass the filter conditions for the event to send.",
-                },
-                {
-                    "name": "sensor_range",
-                    "type": "Decimal",
-                    "defaultValue": "10",
-                    "description": "The maximum distance another entity can be from this and have the filters checked against it.",
+                    "name": "subsensors",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "The list of subsensors which sense for entities and emit events when all their conditions are met.",
+                    "children": [
+                        {
+                            "name": "cooldown",
+                            "type": "Decimal",
+                            "defaultValue": "-1",
+                            "description": "How many seconds should elapse before the subsensor can once again sense for entities. The cooldown is applied on top of the base 1 tick (0.05 seconds) delay. Negative values will result in no cooldown being used.",
+                        },
+                        {
+                            "name": "event",
+                            "type": "String",
+                            "defaultValue": "",
+                            "description": "Event to fire when the conditions are met.",
+                        },
+                        {
+                            "name": "event_filters",
+                            "type": "Minecraft Filter",
+                            "defaultValue": "",
+                            "description": "The set of conditions that must be satisfied to fire the event.",
+                        },
+                        {
+                            "name": "maximum_count",
+                            "type": "Integer",
+                            "defaultValue": "-1",
+                            "description": "The maximum number of entities that must pass the filter conditions for the event to send.",
+                        },
+                        {
+                            "name": "minimum_count",
+                            "type": "Integer",
+                            "defaultValue": "1",
+                            "description": "The minimum number of entities that must pass the filter conditions for the event to send.",
+                        },
+                        {
+                            "name": "range",
+                            "type": "Decimal",
+                            "defaultValue": "10",
+                            "description": "The maximum distance another entity can be from this and have the filters checked against it.",
+                        },
+                        {
+                            "name": "require_all",
+                            "type": "Boolean",
+                            "defaultValue": "false",
+                            "description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                        },
+                    ],
                 },
             ],
         },

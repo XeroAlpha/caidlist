@@ -350,7 +350,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 commandPrefix,
                 progressName,
                 previousResult.length,
-                retryCount < 2
+                retryCount < 4
             );
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
             const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);

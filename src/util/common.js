@@ -21,9 +21,8 @@ function toShortTimeString(date) {
 let isLineDirty = false;
 export function setStatus(statusText) {
     if (process.stdout.isTTY) {
-        const [width] = process.stdout.getWindowSize();
         process.stdout.clearLine(1);
-        process.stdout.write(statusText.slice(0, width));
+        process.stdout.write(statusText.slice(0, process.stdout.columns));
         process.stdout.cursorTo(0);
     } else {
         process.stdout.write(`${statusText}  \r`);
