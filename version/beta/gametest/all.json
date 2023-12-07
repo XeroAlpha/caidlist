@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.60.21",
+    "packageVersion": "1.20.60.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5697,16 +5697,8 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "isExpanded": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "isExpanding": {
-                                                    "getter": {
+                                                "getAttachedBlocksLocations": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -5721,15 +5713,7 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "isRetracted": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "isRetracting": {
+                                                "state": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -5748,6 +5732,42 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.BlockComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockPistonState": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Expanded": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Expanded",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Expanding": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Expanding",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Retracted": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Retracted",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Retracting": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Retracting",
+                                        },
+                                        "readOnly": true,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -8698,10 +8718,10 @@
                             },
                             "configurable": false,
                         },
-                        "Enchantment": {
+                        "EnchantmentLevelOutOfBoundsError": {
                             "value": {
                                 "type": "function",
-                                "name": "Enchantment",
+                                "name": "EnchantmentLevelOutOfBoundsError",
                                 "native": true,
                                 "length": 0,
                                 "properties": {
@@ -8711,313 +8731,12 @@
                                             "properties": {
                                                 "constructor": {
                                                     "value": {
-                                                        "ref": "Minecraft.Enchantment",
+                                                        "ref": "Minecraft.EnchantmentLevelOutOfBoundsError",
                                                     },
                                                 },
                                             },
-                                            "enumerableProperties": {
-                                                "level": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "type": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "EnchantmentList": {
-                            "value": {
-                                "type": "function",
-                                "name": "EnchantmentList",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "enumerableProperties": {
-                                                "addEnchantment": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "canAddEnchantment": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "getEnchantment": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "hasEnchantment": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "removeEnchantment": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "slot": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.EnchantmentList",
-                                                    },
-                                                },
-                                            },
-                                            "symbolProperties": {
-                                                "Symbol(Symbol.iterator)": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "EnchantmentSlot": {
-                            "value": {
-                                "type": "function",
-                                "name": "EnchantmentSlot",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "all": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": -1,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "armorFeet": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 4,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "armorHead": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 1,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "armorLegs": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 8,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "armorTorso": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 2,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "axe": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 512,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "bow": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 32,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "carrotStick": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 8192,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "cosmeticHead": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 262144,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "crossbow": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 65536,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "elytra": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 16384,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "fishingRod": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 4096,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "flintsteel": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 256,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "gArmor": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 15,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "gDigging": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 3648,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "gTool": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 131520,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "hoe": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 64,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "none": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 0,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "pickaxe": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 1024,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "shears": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 128,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "shield": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 131072,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "shovel": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 2048,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "spear": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 32768,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "sword": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 16,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.EnchantmentSlot",
-                                                    },
-                                                },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
                                             },
                                         },
                                         "readOnly": true,
@@ -9059,6 +8778,62 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "EnchantmentTypeNotCompatibleError": {
+                            "value": {
+                                "type": "function",
+                                "name": "EnchantmentTypeNotCompatibleError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EnchantmentTypeNotCompatibleError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "EnchantmentTypeUnknownIdError": {
+                            "value": {
+                                "type": "function",
+                                "name": "EnchantmentTypeUnknownIdError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EnchantmentTypeUnknownIdError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
                                             },
                                         },
                                         "readOnly": true,
@@ -15707,10 +15482,10 @@
                                         },
                                         "readOnly": true,
                                     },
-                                    "Enchants": {
+                                    "Enchantable": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:enchantments",
+                                            "value": "minecraft:enchantable",
                                         },
                                         "readOnly": true,
                                     },
@@ -16059,17 +15834,17 @@
                             },
                             "configurable": false,
                         },
-                        "ItemEnchantsComponent": {
+                        "ItemEnchantableComponent": {
                             "value": {
                                 "type": "function",
-                                "name": "ItemEnchantsComponent",
+                                "name": "ItemEnchantableComponent",
                                 "native": true,
                                 "length": 0,
                                 "enumerableProperties": {
                                     "componentId": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:enchantments",
+                                            "value": "minecraft:enchantable",
                                         },
                                         "readOnly": true,
                                     },
@@ -16078,26 +15853,53 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.ItemEnchantsComponent",
-                                                    },
-                                                },
-                                            },
                                             "enumerableProperties": {
-                                                "enchantments": {
-                                                    "getter": {
+                                                "addEnchantment": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
                                                     },
-                                                    "setter": {
+                                                },
+                                                "addEnchantments": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
-                                                        "length": 1,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "canAddEnchantment": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getEnchantment": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getEnchantments": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "hasEnchantment": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                                 "removeAllEnchantments": {
@@ -16106,6 +15908,21 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                                "removeEnchantment": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemEnchantableComponent",
                                                     },
                                                 },
                                             },
@@ -17748,49 +17565,6 @@
                             },
                             "configurable": false,
                         },
-                        "NavigationResult": {
-                            "value": {
-                                "type": "function",
-                                "name": "NavigationResult",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.NavigationResult",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "getPath": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "isFullPath": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
                         "ObjectiveSortOrder": {
                             "value": {
                                 "type": "object",
@@ -17905,112 +17679,6 @@
                             },
                             "configurable": false,
                         },
-                        "PistonActivateBeforeEvent": {
-                            "value": {
-                                "type": "function",
-                                "name": "PistonActivateBeforeEvent",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "enumerableProperties": {
-                                                "cancel": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "isExpanding": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "piston": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.PistonActivateBeforeEvent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockEvent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockEvent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "PistonActivateBeforeEventSignal": {
-                            "value": {
-                                "type": "function",
-                                "name": "PistonActivateBeforeEventSignal",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.PistonActivateBeforeEventSignal",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "subscribe": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "unsubscribe": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
                         "Player": {
                             "value": {
                                 "type": "function",
@@ -18040,6 +17708,14 @@
                                                 },
                                                 "camera": {
                                                     "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "eatItem": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -22270,14 +21946,6 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "pistonActivate": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
                                                 "playerBreakBlock": {
                                                     "getter": {
                                                         "type": "function",
@@ -22745,6 +22413,49 @@
                                             "value": "UntilMove",
                                         },
                                         "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "NavigationResult": {
+                            "value": {
+                                "type": "function",
+                                "name": "NavigationResult",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "GameTest.NavigationResult",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "getPath": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "isFullPath": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
                                     },
                                 },
                             },
@@ -24678,6 +24389,11 @@
         "GameTest.LookDuration.Continuous",
         "GameTest.LookDuration.Instant",
         "GameTest.LookDuration.UntilMove",
+        "GameTest.NavigationResult",
+        "GameTest.NavigationResult.prototype",
+        "GameTest.NavigationResult.prototype.constructor",
+        "GameTest.NavigationResult.prototype.getPath",
+        "GameTest.NavigationResult.prototype.isFullPath.[[Get]]",
         "GameTest.RegistrationBuilder",
         "GameTest.RegistrationBuilder.prototype",
         "GameTest.RegistrationBuilder.prototype.batch",
@@ -25047,11 +24763,14 @@
         "Minecraft.BlockPistonComponent.prototype.[[Prototype]]",
         "Minecraft.BlockPistonComponent.prototype.constructor",
         "Minecraft.BlockPistonComponent.prototype.getAttachedBlocks",
-        "Minecraft.BlockPistonComponent.prototype.isExpanded.[[Get]]",
-        "Minecraft.BlockPistonComponent.prototype.isExpanding.[[Get]]",
+        "Minecraft.BlockPistonComponent.prototype.getAttachedBlocksLocations",
         "Minecraft.BlockPistonComponent.prototype.isMoving.[[Get]]",
-        "Minecraft.BlockPistonComponent.prototype.isRetracted.[[Get]]",
-        "Minecraft.BlockPistonComponent.prototype.isRetracting.[[Get]]",
+        "Minecraft.BlockPistonComponent.prototype.state.[[Get]]",
+        "Minecraft.BlockPistonState",
+        "Minecraft.BlockPistonState.Expanded",
+        "Minecraft.BlockPistonState.Expanding",
+        "Minecraft.BlockPistonState.Retracted",
+        "Minecraft.BlockPistonState.Retracting",
         "Minecraft.BlockPotionContainerComponent",
         "Minecraft.BlockPotionContainerComponent.[[Prototype]]",
         "Minecraft.BlockPotionContainerComponent.componentId",
@@ -25428,54 +25147,23 @@
         "Minecraft.EffectTypes.getAll",
         "Minecraft.EffectTypes.prototype",
         "Minecraft.EffectTypes.prototype.constructor",
-        "Minecraft.Enchantment",
-        "Minecraft.Enchantment.prototype",
-        "Minecraft.Enchantment.prototype.constructor",
-        "Minecraft.Enchantment.prototype.level.[[Get]]",
-        "Minecraft.Enchantment.prototype.level.[[Set]]",
-        "Minecraft.Enchantment.prototype.type.[[Get]]",
-        "Minecraft.EnchantmentList",
-        "Minecraft.EnchantmentList.prototype",
-        "Minecraft.EnchantmentList.prototype.Symbol(Symbol.iterator)",
-        "Minecraft.EnchantmentList.prototype.addEnchantment",
-        "Minecraft.EnchantmentList.prototype.canAddEnchantment",
-        "Minecraft.EnchantmentList.prototype.constructor",
-        "Minecraft.EnchantmentList.prototype.getEnchantment",
-        "Minecraft.EnchantmentList.prototype.hasEnchantment",
-        "Minecraft.EnchantmentList.prototype.removeEnchantment",
-        "Minecraft.EnchantmentList.prototype.slot.[[Get]]",
-        "Minecraft.EnchantmentSlot",
-        "Minecraft.EnchantmentSlot.all",
-        "Minecraft.EnchantmentSlot.armorFeet",
-        "Minecraft.EnchantmentSlot.armorHead",
-        "Minecraft.EnchantmentSlot.armorLegs",
-        "Minecraft.EnchantmentSlot.armorTorso",
-        "Minecraft.EnchantmentSlot.axe",
-        "Minecraft.EnchantmentSlot.bow",
-        "Minecraft.EnchantmentSlot.carrotStick",
-        "Minecraft.EnchantmentSlot.cosmeticHead",
-        "Minecraft.EnchantmentSlot.crossbow",
-        "Minecraft.EnchantmentSlot.elytra",
-        "Minecraft.EnchantmentSlot.fishingRod",
-        "Minecraft.EnchantmentSlot.flintsteel",
-        "Minecraft.EnchantmentSlot.gArmor",
-        "Minecraft.EnchantmentSlot.gDigging",
-        "Minecraft.EnchantmentSlot.gTool",
-        "Minecraft.EnchantmentSlot.hoe",
-        "Minecraft.EnchantmentSlot.none",
-        "Minecraft.EnchantmentSlot.pickaxe",
-        "Minecraft.EnchantmentSlot.prototype",
-        "Minecraft.EnchantmentSlot.prototype.constructor",
-        "Minecraft.EnchantmentSlot.shears",
-        "Minecraft.EnchantmentSlot.shield",
-        "Minecraft.EnchantmentSlot.shovel",
-        "Minecraft.EnchantmentSlot.spear",
-        "Minecraft.EnchantmentSlot.sword",
+        "Minecraft.EnchantmentLevelOutOfBoundsError",
+        "Minecraft.EnchantmentLevelOutOfBoundsError.prototype",
+        "Minecraft.EnchantmentLevelOutOfBoundsError.prototype.[[Prototype]]",
+        "Minecraft.EnchantmentLevelOutOfBoundsError.prototype.constructor",
         "Minecraft.EnchantmentType",
         "Minecraft.EnchantmentType.prototype",
         "Minecraft.EnchantmentType.prototype.constructor",
         "Minecraft.EnchantmentType.prototype.id",
         "Minecraft.EnchantmentType.prototype.maxLevel.[[Get]]",
+        "Minecraft.EnchantmentTypeNotCompatibleError",
+        "Minecraft.EnchantmentTypeNotCompatibleError.prototype",
+        "Minecraft.EnchantmentTypeNotCompatibleError.prototype.[[Prototype]]",
+        "Minecraft.EnchantmentTypeNotCompatibleError.prototype.constructor",
+        "Minecraft.EnchantmentTypeUnknownIdError",
+        "Minecraft.EnchantmentTypeUnknownIdError.prototype",
+        "Minecraft.EnchantmentTypeUnknownIdError.prototype.[[Prototype]]",
+        "Minecraft.EnchantmentTypeUnknownIdError.prototype.constructor",
         "Minecraft.EnchantmentTypes",
         "Minecraft.EnchantmentTypes.get",
         "Minecraft.EnchantmentTypes.prototype",
@@ -26375,7 +26063,7 @@
         "Minecraft.ItemComponentTypes",
         "Minecraft.ItemComponentTypes.Cooldown",
         "Minecraft.ItemComponentTypes.Durability",
-        "Minecraft.ItemComponentTypes.Enchants",
+        "Minecraft.ItemComponentTypes.Enchantable",
         "Minecraft.ItemComponentTypes.Food",
         "Minecraft.ItemCooldownComponent",
         "Minecraft.ItemCooldownComponent.[[Prototype]]",
@@ -26421,15 +26109,20 @@
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChance",
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChanceRange",
         "Minecraft.ItemDurabilityComponent.prototype.maxDurability.[[Get]]",
-        "Minecraft.ItemEnchantsComponent",
-        "Minecraft.ItemEnchantsComponent.[[Prototype]]",
-        "Minecraft.ItemEnchantsComponent.componentId",
-        "Minecraft.ItemEnchantsComponent.prototype",
-        "Minecraft.ItemEnchantsComponent.prototype.[[Prototype]]",
-        "Minecraft.ItemEnchantsComponent.prototype.constructor",
-        "Minecraft.ItemEnchantsComponent.prototype.enchantments.[[Get]]",
-        "Minecraft.ItemEnchantsComponent.prototype.enchantments.[[Set]]",
-        "Minecraft.ItemEnchantsComponent.prototype.removeAllEnchantments",
+        "Minecraft.ItemEnchantableComponent",
+        "Minecraft.ItemEnchantableComponent.[[Prototype]]",
+        "Minecraft.ItemEnchantableComponent.componentId",
+        "Minecraft.ItemEnchantableComponent.prototype",
+        "Minecraft.ItemEnchantableComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemEnchantableComponent.prototype.addEnchantment",
+        "Minecraft.ItemEnchantableComponent.prototype.addEnchantments",
+        "Minecraft.ItemEnchantableComponent.prototype.canAddEnchantment",
+        "Minecraft.ItemEnchantableComponent.prototype.constructor",
+        "Minecraft.ItemEnchantableComponent.prototype.getEnchantment",
+        "Minecraft.ItemEnchantableComponent.prototype.getEnchantments",
+        "Minecraft.ItemEnchantableComponent.prototype.hasEnchantment",
+        "Minecraft.ItemEnchantableComponent.prototype.removeAllEnchantments",
+        "Minecraft.ItemEnchantableComponent.prototype.removeEnchantment",
         "Minecraft.ItemFoodComponent",
         "Minecraft.ItemFoodComponent.[[Prototype]]",
         "Minecraft.ItemFoodComponent.componentId",
@@ -26636,11 +26329,6 @@
         "Minecraft.MoonPhase.WaxingCrescent",
         "Minecraft.MoonPhase.WaxingGibbous",
         "Minecraft.MoonPhaseCount",
-        "Minecraft.NavigationResult",
-        "Minecraft.NavigationResult.prototype",
-        "Minecraft.NavigationResult.prototype.constructor",
-        "Minecraft.NavigationResult.prototype.getPath",
-        "Minecraft.NavigationResult.prototype.isFullPath.[[Get]]",
         "Minecraft.ObjectiveSortOrder",
         "Minecraft.ObjectiveSortOrder.Ascending",
         "Minecraft.ObjectiveSortOrder.Descending",
@@ -26656,20 +26344,6 @@
         "Minecraft.PistonActivateAfterEventSignal.prototype.constructor",
         "Minecraft.PistonActivateAfterEventSignal.prototype.subscribe",
         "Minecraft.PistonActivateAfterEventSignal.prototype.unsubscribe",
-        "Minecraft.PistonActivateBeforeEvent",
-        "Minecraft.PistonActivateBeforeEvent.[[Prototype]]",
-        "Minecraft.PistonActivateBeforeEvent.prototype",
-        "Minecraft.PistonActivateBeforeEvent.prototype.[[Prototype]]",
-        "Minecraft.PistonActivateBeforeEvent.prototype.cancel.[[Get]]",
-        "Minecraft.PistonActivateBeforeEvent.prototype.cancel.[[Set]]",
-        "Minecraft.PistonActivateBeforeEvent.prototype.constructor",
-        "Minecraft.PistonActivateBeforeEvent.prototype.isExpanding.[[Get]]",
-        "Minecraft.PistonActivateBeforeEvent.prototype.piston.[[Get]]",
-        "Minecraft.PistonActivateBeforeEventSignal",
-        "Minecraft.PistonActivateBeforeEventSignal.prototype",
-        "Minecraft.PistonActivateBeforeEventSignal.prototype.constructor",
-        "Minecraft.PistonActivateBeforeEventSignal.prototype.subscribe",
-        "Minecraft.PistonActivateBeforeEventSignal.prototype.unsubscribe",
         "Minecraft.Player",
         "Minecraft.Player.[[Prototype]]",
         "Minecraft.Player.prototype",
@@ -26678,6 +26352,7 @@
         "Minecraft.Player.prototype.addLevels",
         "Minecraft.Player.prototype.camera.[[Get]]",
         "Minecraft.Player.prototype.constructor",
+        "Minecraft.Player.prototype.eatItem",
         "Minecraft.Player.prototype.getItemCooldown",
         "Minecraft.Player.prototype.getSpawnPoint",
         "Minecraft.Player.prototype.getTotalXp",
@@ -27209,7 +26884,6 @@
         "Minecraft.WorldBeforeEvents.prototype.itemDefinitionEvent.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.itemUse.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.itemUseOn.[[Get]]",
-        "Minecraft.WorldBeforeEvents.prototype.pistonActivate.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.playerBreakBlock.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.playerInteractWithBlock.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.playerInteractWithEntity.[[Get]]",
@@ -47671,25 +47345,45 @@
             "tags": [
                 "minecraft:bookshelf_books",
             ],
-            "enchantSlot": [
-                "cosmeticHead",
-                "elytra",
-                "pickaxe",
-                "axe",
-                "gDigging",
-                "shield",
-                "shears",
-                "spear",
-                "bow",
-                "flintsteel",
-                "sword",
-                "fishingRod",
-                "armorLegs",
-                "armorFeet",
-                "carrotStick",
-                "armorTorso",
-                "armorHead",
-                "crossbow",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "bane_of_arthropods",
+                "binding",
+                "blast_protection",
+                "channeling",
+                "depth_strider",
+                "efficiency",
+                "feather_falling",
+                "fire_aspect",
+                "fire_protection",
+                "flame",
+                "fortune",
+                "frost_walker",
+                "impaling",
+                "infinity",
+                "knockback",
+                "looting",
+                "loyalty",
+                "luck_of_the_sea",
+                "lure",
+                "mending",
+                "multishot",
+                "piercing",
+                "power",
+                "projectile_protection",
+                "protection",
+                "punch",
+                "quick_charge",
+                "respiration",
+                "riptide",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "soul_speed",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:bookshelf": {
@@ -47710,8 +47404,14 @@
                     "maxDurability": 384,
                 },
             },
-            "enchantSlot": [
-                "bow",
+            "applicableEnchantments": [
+                "flame",
+                "infinity",
+                "mending",
+                "power",
+                "punch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:bowl": {
@@ -47802,8 +47502,10 @@
                     "maxDurability": 64,
                 },
             },
-            "enchantSlot": [
-                2097152,
+            "applicableEnchantments": [
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:bubble_coral": {
@@ -47862,8 +47564,10 @@
                     "maxDurability": 26,
                 },
             },
-            "enchantSlot": [
-                "carrotStick",
+            "applicableEnchantments": [
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:cartography_table": {
@@ -47871,8 +47575,9 @@
         },
         "minecraft:carved_pumpkin": {
             "tags": [],
-            "enchantSlot": [
-                "cosmeticHead",
+            "applicableEnchantments": [
+                "binding",
+                "vanishing",
             ],
         },
         "minecraft:cat_spawn_egg": {
@@ -47906,8 +47611,20 @@
                     "maxDurability": 195,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:chainmail_chestplate": {
@@ -47922,8 +47639,16 @@
                     "maxDurability": 240,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:chainmail_helmet": {
@@ -47938,8 +47663,18 @@
                     "maxDurability": 165,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:chainmail_leggings": {
@@ -47954,8 +47689,17 @@
                     "maxDurability": 225,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:charcoal": {
@@ -48183,8 +47927,8 @@
         },
         "minecraft:compass": {
             "tags": [],
-            "enchantSlot": [
-                524288,
+            "applicableEnchantments": [
+                "vanishing",
             ],
         },
         "minecraft:composter": {
@@ -48395,8 +48139,13 @@
                     "maxDurability": 464,
                 },
             },
-            "enchantSlot": [
-                "crossbow",
+            "applicableEnchantments": [
+                "mending",
+                "multishot",
+                "piercing",
+                "quick_charge",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:crying_obsidian": {
@@ -48619,8 +48368,16 @@
                     "maxDurability": 1561,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_block": {
@@ -48639,8 +48396,20 @@
                     "maxDurability": 429,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_chestplate": {
@@ -48656,8 +48425,16 @@
                     "maxDurability": 528,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_helmet": {
@@ -48673,8 +48450,18 @@
                     "maxDurability": 363,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_hoe": {
@@ -48691,8 +48478,13 @@
                     "maxDurability": 1561,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_horse_armor": {
@@ -48714,8 +48506,17 @@
                     "maxDurability": 495,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_ore": {
@@ -48735,8 +48536,13 @@
                     "maxDurability": 1561,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_shovel": {
@@ -48753,8 +48559,13 @@
                     "maxDurability": 1561,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diamond_sword": {
@@ -48770,8 +48581,16 @@
                     "maxDurability": 1561,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:diorite": {
@@ -49217,8 +49036,11 @@
                     "maxDurability": 432,
                 },
             },
-            "enchantSlot": [
-                "elytra",
+            "applicableEnchantments": [
+                "binding",
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:emerald": {
@@ -49240,25 +49062,45 @@
             "tags": [
                 "minecraft:bookshelf_books",
             ],
-            "enchantSlot": [
-                "cosmeticHead",
-                "elytra",
-                "pickaxe",
-                "axe",
-                "gDigging",
-                "shield",
-                "shears",
-                "spear",
-                "bow",
-                "flintsteel",
-                "sword",
-                "fishingRod",
-                "armorLegs",
-                "armorFeet",
-                "carrotStick",
-                "armorTorso",
-                "armorHead",
-                "crossbow",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "bane_of_arthropods",
+                "binding",
+                "blast_protection",
+                "channeling",
+                "depth_strider",
+                "efficiency",
+                "feather_falling",
+                "fire_aspect",
+                "fire_protection",
+                "flame",
+                "fortune",
+                "frost_walker",
+                "impaling",
+                "infinity",
+                "knockback",
+                "looting",
+                "loyalty",
+                "luck_of_the_sea",
+                "lure",
+                "mending",
+                "multishot",
+                "piercing",
+                "power",
+                "projectile_protection",
+                "protection",
+                "punch",
+                "quick_charge",
+                "respiration",
+                "riptide",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "soul_speed",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:enchanted_golden_apple": {
@@ -49403,8 +49245,12 @@
                     "maxDurability": 384,
                 },
             },
-            "enchantSlot": [
-                "fishingRod",
+            "applicableEnchantments": [
+                "luck_of_the_sea",
+                "lure",
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:fletching_table": {
@@ -49421,8 +49267,10 @@
                     "maxDurability": 64,
                 },
             },
-            "enchantSlot": [
-                "flintsteel",
+            "applicableEnchantments": [
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:flower_banner_pattern": {
@@ -49555,8 +49403,16 @@
                     "maxDurability": 32,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_boots": {
@@ -49572,8 +49428,20 @@
                     "maxDurability": 91,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_carrot": {
@@ -49593,8 +49461,16 @@
                     "maxDurability": 112,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_helmet": {
@@ -49609,8 +49485,18 @@
                     "maxDurability": 77,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_hoe": {
@@ -49626,8 +49512,13 @@
                     "maxDurability": 32,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_horse_armor": {
@@ -49648,8 +49539,17 @@
                     "maxDurability": 105,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_pickaxe": {
@@ -49665,8 +49565,13 @@
                     "maxDurability": 32,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_rail": {
@@ -49685,8 +49590,13 @@
                     "maxDurability": 32,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:golden_sword": {
@@ -49701,8 +49611,16 @@
                     "maxDurability": 32,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:granite": {
@@ -49906,8 +49824,16 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_bars": {
@@ -49928,8 +49854,20 @@
                     "maxDurability": 195,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_chestplate": {
@@ -49944,8 +49882,16 @@
                     "maxDurability": 240,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_door": {
@@ -49970,8 +49916,18 @@
                     "maxDurability": 165,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_hoe": {
@@ -49987,8 +49943,13 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_horse_armor": {
@@ -50014,8 +49975,17 @@
                     "maxDurability": 225,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_nugget": {
@@ -50037,8 +50007,13 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_shovel": {
@@ -50054,8 +50029,13 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_sword": {
@@ -50070,8 +50050,16 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:iron_trapdoor": {
@@ -50189,8 +50177,20 @@
                     "maxDurability": 65,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:leather_chestplate": {
@@ -50205,8 +50205,16 @@
                     "maxDurability": 80,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:leather_helmet": {
@@ -50221,8 +50229,18 @@
                     "maxDurability": 55,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:leather_horse_armor": {
@@ -50243,8 +50261,17 @@
                     "maxDurability": 75,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:leaves": {
@@ -50400,8 +50427,8 @@
         "minecraft:lodestone_compass": {
             "unstackable": true,
             "tags": [],
-            "enchantSlot": [
-                524288,
+            "applicableEnchantments": [
+                "vanishing",
             ],
         },
         "minecraft:log": {
@@ -50796,8 +50823,16 @@
                     "maxDurability": 2031,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_block": {
@@ -50815,8 +50850,20 @@
                     "maxDurability": 481,
                 },
             },
-            "enchantSlot": [
-                "armorFeet",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "depth_strider",
+                "feather_falling",
+                "fire_protection",
+                "frost_walker",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "soul_speed",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_chestplate": {
@@ -50831,8 +50878,16 @@
                     "maxDurability": 592,
                 },
             },
-            "enchantSlot": [
-                "armorTorso",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_helmet": {
@@ -50847,8 +50902,18 @@
                     "maxDurability": 407,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_hoe": {
@@ -50864,8 +50929,13 @@
                     "maxDurability": 2031,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_ingot": {
@@ -50886,8 +50956,17 @@
                     "maxDurability": 555,
                 },
             },
-            "enchantSlot": [
-                "armorLegs",
+            "applicableEnchantments": [
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "swift_sneak",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_pickaxe": {
@@ -50903,8 +50982,13 @@
                     "maxDurability": 2031,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_scrap": {
@@ -50923,8 +51007,13 @@
                     "maxDurability": 2031,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_sword": {
@@ -50939,8 +51028,16 @@
                     "maxDurability": 2031,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:netherite_upgrade_smithing_template": {
@@ -51479,8 +51576,8 @@
         },
         "minecraft:recovery_compass": {
             "tags": [],
-            "enchantSlot": [
-                524288,
+            "applicableEnchantments": [
+                "vanishing",
             ],
         },
         "minecraft:red_candle": {
@@ -51668,8 +51765,12 @@
                     "maxDurability": 238,
                 },
             },
-            "enchantSlot": [
-                "shears",
+            "applicableEnchantments": [
+                "efficiency",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:sheep_spawn_egg": {
@@ -51690,8 +51791,10 @@
                     "maxDurability": 336,
                 },
             },
-            "enchantSlot": [
-                "shield",
+            "applicableEnchantments": [
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
             "cooldownCategory": "shield",
             "cooldownTicks": 100,
@@ -51736,8 +51839,9 @@
         },
         "minecraft:skull": {
             "tags": [],
-            "enchantSlot": [
-                "cosmeticHead",
+            "applicableEnchantments": [
+                "binding",
+                "vanishing",
             ],
         },
         "minecraft:skull_banner_pattern": {
@@ -51968,8 +52072,16 @@
                     "maxDurability": 131,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:stone_block_slab": {
@@ -52003,8 +52115,13 @@
                     "maxDurability": 131,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:stone_pickaxe": {
@@ -52020,8 +52137,13 @@
                     "maxDurability": 131,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:stone_pressure_plate": {
@@ -52040,8 +52162,13 @@
                     "maxDurability": 131,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:stone_stairs": {
@@ -52059,8 +52186,16 @@
                     "maxDurability": 131,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:stonebrick": {
@@ -52272,8 +52407,14 @@
                     "maxDurability": 250,
                 },
             },
-            "enchantSlot": [
-                "spear",
+            "applicableEnchantments": [
+                "channeling",
+                "impaling",
+                "loyalty",
+                "mending",
+                "riptide",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:tripwire_hook": {
@@ -52334,8 +52475,18 @@
                     "maxDurability": 275,
                 },
             },
-            "enchantSlot": [
-                "armorHead",
+            "applicableEnchantments": [
+                "aqua_affinity",
+                "binding",
+                "blast_protection",
+                "fire_protection",
+                "mending",
+                "projectile_protection",
+                "protection",
+                "respiration",
+                "thorns",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:turtle_spawn_egg": {
@@ -52416,8 +52567,10 @@
                     "maxDurability": 100,
                 },
             },
-            "enchantSlot": [
-                1048576,
+            "applicableEnchantments": [
+                "mending",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:warped_hanging_sign": {
@@ -52728,8 +52881,16 @@
                     "maxDurability": 59,
                 },
             },
-            "enchantSlot": [
-                "axe",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "efficiency",
+                "fortune",
+                "mending",
+                "sharpness",
+                "silk_touch",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:wooden_button": {
@@ -52753,8 +52914,13 @@
                     "maxDurability": 59,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:wooden_pickaxe": {
@@ -52770,8 +52936,13 @@
                     "maxDurability": 59,
                 },
             },
-            "enchantSlot": [
-                "pickaxe",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:wooden_pressure_plate": {
@@ -52790,8 +52961,13 @@
                     "maxDurability": 59,
                 },
             },
-            "enchantSlot": [
-                "gDigging",
+            "applicableEnchantments": [
+                "efficiency",
+                "fortune",
+                "mending",
+                "silk_touch",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:wooden_slab": {
@@ -52811,8 +52987,16 @@
                     "maxDurability": 59,
                 },
             },
-            "enchantSlot": [
-                "sword",
+            "applicableEnchantments": [
+                "bane_of_arthropods",
+                "fire_aspect",
+                "knockback",
+                "looting",
+                "mending",
+                "sharpness",
+                "smite",
+                "unbreaking",
+                "vanishing",
             ],
         },
         "minecraft:wool": {

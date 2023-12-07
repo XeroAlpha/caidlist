@@ -507,7 +507,48 @@ const Extractors = [
             const ItemInfoList = parseOrThrow(await frame.evaluate(() => {
                 const result = {};
                 const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
-                const enchantSlots = Object.entries(Minecraft.EnchantmentSlot).filter(([, bit]) => bit > 0);
+                const enchantmentIds = [
+                    'aqua_affinity',
+                    'bane_of_arthropods',
+                    'binding',
+                    'blast_protection',
+                    'channeling',
+                    'depth_strider',
+                    'efficiency',
+                    'feather_falling',
+                    'fire_aspect',
+                    'fire_protection',
+                    'flame',
+                    'fortune',
+                    'frost_walker',
+                    'impaling',
+                    'infinity',
+                    'knockback',
+                    'looting',
+                    'loyalty',
+                    'luck_of_the_sea',
+                    'lure',
+                    'mending',
+                    'multishot',
+                    'piercing',
+                    'power',
+                    'projectile_protection',
+                    'protection',
+                    'punch',
+                    'quick_charge',
+                    'respiration',
+                    'riptide',
+                    'sharpness',
+                    'silk_touch',
+                    'smite',
+                    'soul_speed',
+                    'swift_sneak',
+                    'thorns',
+                    'unbreaking',
+                    'vanishing'
+                ];
+                const enchantmentTypes = enchantmentIds.map((id) => Minecraft.EnchantmentTypes.get(id));
+                const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
                 for (const itemType of Minecraft.ItemTypes.getAll()) {
                     const itemStack = new Minecraft.ItemStack(itemType);
                     const componentInstances = itemStack.getComponents();
@@ -516,32 +557,36 @@ const Extractors = [
                     let hasComponents = false;
                     componentInstances.forEach((component) => {
                         const componentData = {};
-                        if (component.typeId === Minecraft.ItemEnchantsComponent.componentId) {
-                            let enchantSlotBits = component.enchantments.slot;
-                            if (enchantSlotBits !== 0) {
-                                commonComponents.enchantSlot = [];
-                                enchantSlots.forEach(([key, bit]) => {
-                                    if (enchantSlotBits & bit) {
-                                        commonComponents.enchantSlot.push(key);
-                                        enchantSlotBits &= ~bit;
-                                    }
-                                });
-                                if (enchantSlotBits > 0) {
-                                    commonComponents.enchantSlot.push(enchantSlotBits);
-                                }
+                        let componentId = '';
+                        if (component instanceof Minecraft.ItemEnchantableComponent) {
+                            componentId = Minecraft.ItemEnchantableComponent.componentId;
+                            const existedEnchantments = component.getEnchantments();
+                            const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
+                            if (existedEnchantments.length > 0) {
+                                commonComponents.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
+                            }
+                            if (applicableEnchantments.length > 0) {
+                                commonComponents.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
                             }
                             return;
                         }
-                        if (component.typeId === Minecraft.ItemCooldownComponent.componentId) {
+                        if (component instanceof Minecraft.ItemCooldownComponent) {
+                            componentId = Minecraft.ItemCooldownComponent.componentId;
                             if (component.cooldownTicks > 0) {
                                 assign(commonComponents, component, ['cooldownCategory', 'cooldownTicks']);
                             }
                             return;
                         }
-                        if (component.typeId === Minecraft.ItemDurabilityComponent.componentId) {
+                        if (component instanceof Minecraft.ItemDurabilityComponent) {
+                            componentId = Minecraft.ItemDurabilityComponent.componentId;
                             assign(componentData, component, ['maxDurability']);
+                            const damageChance = component.getDamageChance();
+                            if (damageChance !== 100) {
+                                componentData.damageChance = damageChance;
+                            }
                         }
-                        if (component.typeId === Minecraft.ItemFoodComponent.componentId) {
+                        if (component instanceof Minecraft.ItemFoodComponent) {
+                            componentId = Minecraft.ItemFoodComponent.componentId;
                             assign(componentData, component, [
                                 'canAlwaysEat',
                                 'nutrition',
@@ -549,7 +594,7 @@ const Extractors = [
                                 'usingConvertsTo'
                             ]);
                         }
-                        components[component.typeId] = componentData;
+                        components[componentId] = componentData;
                         hasComponents = true;
                     });
                     const maxAmountDefault = itemStack.isStackable ? 64 : 1;
