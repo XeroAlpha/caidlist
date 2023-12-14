@@ -2,7 +2,7 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.60.22）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.60.23）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		0,
@@ -12,7 +12,7 @@
 	"require": [
 		"4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7"
 	],
-	"minSupportVer": "1.20.60.22",
+	"minSupportVer": "1.20.60.23",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -75,6 +75,8 @@
 			"weathered_copper_trapdoor": "锈蚀的铜活板门"
 		},
 		"item": {
+			"armadillo_scute": "Armadillo Scute",
+			"armadillo_spawn_egg": "Armadillo Spawn Egg",
 			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
@@ -131,25 +133,58 @@
 			"weathered_copper_bulb": "锈蚀的铜灯",
 			"weathered_copper_door": "锈蚀的铜门",
 			"weathered_copper_grate": "锈蚀的铜格栅",
-			"weathered_copper_trapdoor": "锈蚀的铜活板门"
+			"weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"wolf_armor": "Wolf Armor"
+		},
+		"entity": {
+			"armadillo": "Armadillo",
+			"minecraft:armadillo": "Armadillo"
 		},
 		"structure": {
 			"trial_chambers": "试炼室"
 		},
+		"entity_event": {
+			"minecraft:become_armorable": "",
+			"minecraft:no_threat_detected": "",
+			"minecraft:on_armor_equip": "",
+			"minecraft:on_armor_unequip": "",
+			"minecraft:relax": "",
+			"minecraft:roll_up": "",
+			"minecraft:spawn_tame_adult": "",
+			"minecraft:spawn_tame_baby": "",
+			"minecraft:spawn_wild_adult": "",
+			"minecraft:spawn_wild_baby": "",
+			"minecraft:start_playing_idle_ground_sound": "",
+			"minecraft:start_trying_to_relax": "",
+			"minecraft:stop_playing_idle_ground_sound": "",
+			"minecraft:stop_trying_to_relax": "",
+			"minecraft:threat_detected": ""
+		},
 		"entity_family": {
+			"armadillo": "",
 			"breeze": "旋风人"
 		},
 		"animation": {
+			"animation.armadillo.look_at_target": "",
+			"animation.armadillo.roll_up": "",
+			"animation.armadillo.rolled_up": "",
+			"animation.armadillo.unroll": "",
+			"animation.armadillo.walk": "",
 			"animation.breeze.idle": "",
 			"animation.breeze.idle_ground_particles": "",
+			"animation.breeze.idle_ground_sound": "",
 			"animation.breeze.jump": "",
 			"animation.breeze.shoot": "",
 			"animation.breeze.slide": "",
-			"animation.breeze.slide_ground_particles": ""
+			"animation.breeze.slide_ground_particles": "",
+			"animation.breeze.whirl_sound": ""
 		},
 		"animation_controller": {
+			"controller.animation.armadillo.roll_up": "",
+			"controller.animation.armadillo.walk": "",
 			"controller.animation.breeze.ground_particles": "",
 			"controller.animation.breeze.idle": "",
+			"controller.animation.breeze.idle_ground_sound": "",
 			"controller.animation.breeze.jump": "",
 			"controller.animation.breeze.look_at": "",
 			"controller.animation.breeze.move": "",
@@ -162,6 +197,8 @@
 			"minecraft:wind_explosion_emitter": ""
 		},
 		"sound": {
+			"armor.equip_wolf": "",
+			"armor.unequip_wolf": "",
 			"block.copper_bulb.turn_off": "",
 			"block.copper_bulb.turn_on": "",
 			"break.copper_bulb": "",
@@ -173,15 +210,27 @@
 			"entity.wind_burst.burst": "",
 			"fall.copper_bulb": "",
 			"hit.copper_bulb": "",
+			"mob.armadillo.ambient": "",
+			"mob.armadillo.brush": "",
+			"mob.armadillo.death": "",
+			"mob.armadillo.eat": "",
+			"mob.armadillo.hurt": "",
+			"mob.armadillo.land": "",
+			"mob.armadillo.roll": "",
+			"mob.armadillo.scute_drop": "",
+			"mob.armadillo.step": "",
+			"mob.armadillo.unroll": "",
 			"mob.breeze.charge": "",
 			"mob.breeze.death": "",
 			"mob.breeze.hurt": "",
 			"mob.breeze.idle_air": "",
 			"mob.breeze.idle_ground": "",
+			"mob.breeze.inhale": "",
 			"mob.breeze.jump": "",
 			"mob.breeze.land": "",
 			"mob.breeze.shoot": "",
 			"mob.breeze.slide": "",
+			"mob.breeze.whirl": "",
 			"open_door.copper": "",
 			"open_trapdoor.copper": "",
 			"place.copper_bulb": "",
@@ -210,6 +259,7 @@
 			"dispensers/trial_chambers/chamber": "",
 			"dispensers/trial_chambers/corridor": "",
 			"dispensers/trial_chambers/water": "",
+			"entities/armadillo_brush": "",
 			"pots/trial_chambers/corridor": "",
 			"spawners/trial_chamber/consumables": "",
 			"spawners/trial_chamber/key": ""
@@ -224,6 +274,7 @@
 			"\"dispensers/trial_chambers/chamber\"": "",
 			"\"dispensers/trial_chambers/corridor\"": "",
 			"\"dispensers/trial_chambers/water\"": "",
+			"\"entities/armadillo_brush\"": "",
 			"\"pots/trial_chambers/corridor\"": "",
 			"\"spawners/trial_chamber/consumables\"": "",
 			"\"spawners/trial_chamber/key\"": ""
@@ -288,13 +339,32 @@
 			"minecraft:weathered_copper_bulb": "<工作台>红石粉+锈蚀的铜块*3+烈焰棒->锈蚀的铜灯*4",
 			"minecraft:weathered_copper_door": "<工作台>锈蚀的铜块*6->锈蚀的铜门*3",
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
-			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2"
+			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2",
+			"minecraft:wolf_armor": "<工作台>Armadillo Scute*6->Wolf Armor"
+		},
+		"hud_element": {
+			"air_bubbles": "氧气槽",
+			"all": "全部",
+			"armor": "盔甲条",
+			"crosshair": "十字准星",
+			"health": "生命条",
+			"horse_health": "骑乘生物生命条",
+			"hotbar": "快捷栏",
+			"hunger": "饥饿条",
+			"paperdoll": "纸娃娃",
+			"progress_bar": "经验条",
+			"tooltips": "提示消息",
+			"touch_controls": "触屏按键"
 		},
 		"summonable_entity": {
+			"armadillo": "Armadillo",
 			"breeze": "旋风人",
+			"minecraft:armadillo": "Armadillo",
 			"minecraft:breeze": "旋风人"
 		},
 		"loot_tool": {
+			"minecraft:armadillo_scute": "Armadillo Scute",
+			"minecraft:armadillo_spawn_egg": "Armadillo Spawn Egg",
 			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
@@ -351,7 +421,8 @@
 			"minecraft:weathered_copper_bulb": "锈蚀的铜灯",
 			"minecraft:weathered_copper_door": "锈蚀的铜门",
 			"minecraft:weathered_copper_grate": "锈蚀的铜格栅",
-			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门"
+			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"minecraft:wolf_armor": "Wolf Armor"
 		}
 	},
 	"metadata": {
@@ -360,16 +431,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.60.22",
-			"packageVersion": "1.20.60.22"
+			"coreVersion": "1.20.60.23",
+			"packageVersion": "1.20.60.23"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.60.22",
-			"packageVersion": "1.20.60.22"
+			"coreVersion": "1.20.60.23",
+			"packageVersion": "1.20.60.23"
 		}
 	}
 }

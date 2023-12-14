@@ -28,6 +28,7 @@ const userTranslationStorageKey = {
     inputPermission: 'translation.input_permission',
     cameraPreset: 'translation.camera_preset',
     recipe: 'translation.recipe',
+    hudElement: 'translation.hud_element',
     lootTable: 'translation.loot_table',
     langParity: 'translation.lang_parity',
     documentation: 'translation.documentation'

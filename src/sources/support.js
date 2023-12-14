@@ -64,6 +64,13 @@ export function recipeNewCommand({ coreVersion, branch }) {
     return testMinecraftVersionInRange(coreVersion, '1.20.20.21', '*');
 }
 
+export function hudCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return testMinecraftVersionInRange(coreVersion, '1.20.60.23', '*');
+    }
+    return false;
+}
+
 export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';
 }

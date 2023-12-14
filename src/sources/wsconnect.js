@@ -118,7 +118,7 @@ export async function createExclusiveWSSession(device) {
     if (device) {
         await device.reverse('tcp:19134', `tcp:${port}`);
         await adbShell(device, 'input keyevent KEYCODE_SLASH');
-        await sleepAsync(500);
+        await sleepAsync(3000);
         await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
         await adbShell(device, 'input keyevent KEYCODE_ENTER');
     } else {

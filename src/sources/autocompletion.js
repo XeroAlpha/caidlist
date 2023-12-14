@@ -449,6 +449,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.recipeNewCommand(cx)) {
         postJob('recipes', '/recipe take @s ', ['"*"', '[']);
     }
+    if (support.hudCommand(cx)) {
+        postJob('hud elements', '/hud @s hide ');
+    }
 
     if (support.eduCommands(cx)) {
         postJob('abilities', '/ability @s ', ['[']);

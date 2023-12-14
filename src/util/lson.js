@@ -278,11 +278,8 @@ function visitNode(node) {
         }
         /** @type {[string | number | boolean | null | undefined, any][]} */
         const fields = children.field.map((e) => visitNode(e));
-        const isArray = fields.every((e) => e[0] === undefined);
-        if (isArray) {
-            return fields.map((e) => e[1]);
-        }
-        const ret = {};
+        const isArray = fields.some((e) => e[0] === undefined);
+        const ret = isArray ? [] : {};
         let counter = 1;
         fields.forEach(([k, v]) => {
             if (k === undefined) {
@@ -292,6 +289,9 @@ function visitNode(node) {
                 ret[k] = v;
             }
         });
+        if (isArray) {
+            ret.shift();
+        }
         return ret;
     }
     if (name === 'primitive') {

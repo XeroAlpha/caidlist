@@ -49,6 +49,7 @@ const defaultTransMapNames = [
     ['inputPermission', '操作输入权限', '用于 inputpermission 命令的输入权限 ID'],
     ['cameraPreset', '摄像机预设', '用于 camera 命令的摄像机预设 ID'],
     ['recipe', '配方', '用于 recipe 命令的配方 ID'],
+    ['hudElement', 'HUD界面元素', '用于 hud 命令的界面元素 ID'],
     ['animation', '动画', '用于 playanimation 命令的动画 ID'],
     ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
     ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
@@ -408,6 +409,15 @@ async function generateBranchedOutputFiles(cx) {
                 }
                 return null;
             }
+        });
+    }
+    if (support.hudCommand(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'hudElement',
+            originalArray: enums.hudElements,
+            translationMap: userTranslation.hudElement,
+            autoMatch: null
         });
     }
     if (support.eduCommands(cx)) {

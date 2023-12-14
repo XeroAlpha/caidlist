@@ -16586,6 +16586,8 @@
             "armor.equip_iron",
             "armor.equip_leather",
             "armor.equip_netherite",
+            "armor.equip_wolf",
+            "armor.unequip_wolf",
             "beacon.activate",
             "beacon.ambient",
             "beacon.deactivate",
@@ -17100,6 +17102,16 @@
             "mob.allay.item_given",
             "mob.allay.item_taken",
             "mob.allay.item_thrown",
+            "mob.armadillo.ambient",
+            "mob.armadillo.brush",
+            "mob.armadillo.death",
+            "mob.armadillo.eat",
+            "mob.armadillo.hurt",
+            "mob.armadillo.land",
+            "mob.armadillo.roll",
+            "mob.armadillo.scute_drop",
+            "mob.armadillo.step",
+            "mob.armadillo.unroll",
             "mob.armor_stand.break",
             "mob.armor_stand.hit",
             "mob.armor_stand.land",
@@ -17130,10 +17142,12 @@
             "mob.breeze.hurt",
             "mob.breeze.idle_air",
             "mob.breeze.idle_ground",
+            "mob.breeze.inhale",
             "mob.breeze.jump",
             "mob.breeze.land",
             "mob.breeze.shoot",
             "mob.breeze.slide",
+            "mob.breeze.whirl",
             "mob.camel.ambient",
             "mob.camel.dash",
             "mob.camel.dash_ready",
@@ -18146,6 +18160,7 @@
             "dispensers/trial_chambers/corridor",
             "dispensers/trial_chambers/water",
             "empty",
+            "entities/armadillo_brush",
             "entities/armor_set_chain",
             "entities/armor_set_diamond",
             "entities/armor_set_gold",
@@ -20088,6 +20103,7 @@
             "minecraft:white_stained_hardened_clay": "<crafting_table>hardened_clay*8+dye:19->stained_hardened_clay:0*8",
             "minecraft:white_stained_hardened_clay_from_bonemeal": "<crafting_table>hardened_clay*8+dye:15->stained_hardened_clay:0*8",
             "minecraft:wild_armor_trim_smithing_template_duplicate": "<crafting_table>wild_armor_trim_smithing_template+diamond*7+mossy_cobblestone->wild_armor_trim_smithing_template*2",
+            "minecraft:wolf_armor": "<crafting_table>armadillo_scute*6->wolf_armor",
             "minecraft:wooden_axe": "<crafting_table>stick*2+tag:planks*3->wooden_axe",
             "minecraft:wooden_axe_from_crimson_planks": "<crafting_table>crimson_planks*3+stick*2->wooden_axe",
             "minecraft:wooden_axe_from_mangrove_planks": "<crafting_table>mangrove_planks*3+stick*2->wooden_axe",
@@ -20129,6 +20145,9 @@
             ],
             "geometry.allay": [
                 "minecraft:allay<default>",
+            ],
+            "geometry.armadillo": [
+                "minecraft:armadillo<default>",
             ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>",
@@ -20535,6 +20554,9 @@
             "geometry.wolf": [
                 "minecraft:wolf<default>",
             ],
+            "geometry.wolf.armor": [
+                "minecraft:wolf<overlay>",
+            ],
             "geometry.zombie": [],
             "geometry.zombie.drowned": [],
             "geometry.zombie.drowned.v1.16": [
@@ -20590,6 +20612,21 @@
                 "minecraft:allay<idle>",
             ],
             "animation.allay.look_at_target.default": [],
+            "animation.armadillo.look_at_target": [
+                "minecraft:armadillo<look_at_target>",
+            ],
+            "animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up>",
+            ],
+            "animation.armadillo.rolled_up": [
+                "minecraft:armadillo<rolled_up>",
+            ],
+            "animation.armadillo.unroll": [
+                "minecraft:armadillo<unroll>",
+            ],
+            "animation.armadillo.walk": [
+                "minecraft:armadillo<walk>",
+            ],
             "animation.armor.boots.offset": [],
             "animation.armor.chestplate.offset": [],
             "animation.armor.helmet.offset": [],
@@ -20692,6 +20729,9 @@
             "animation.breeze.idle_ground_particles": [
                 "minecraft:breeze<idle_ground_particles>",
             ],
+            "animation.breeze.idle_ground_sound": [
+                "minecraft:breeze<idle_ground_sound>",
+            ],
             "animation.breeze.jump": [
                 "minecraft:breeze<jump>",
             ],
@@ -20703,6 +20743,9 @@
             ],
             "animation.breeze.slide_ground_particles": [
                 "minecraft:breeze<slide_ground_particles>",
+            ],
+            "animation.breeze.whirl_sound": [
+                "minecraft:breeze<whirl_sound>",
             ],
             "animation.camel.dash": [
                 "minecraft:camel<dashing>",
@@ -21937,6 +21980,12 @@
                 "minecraft:allay<holding>",
             ],
             "controller.animation.allay.look_at_target": [],
+            "controller.animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up_controller>",
+            ],
+            "controller.animation.armadillo.walk": [
+                "minecraft:armadillo<walk_controller>",
+            ],
             "controller.animation.armor_stand.pose": [
                 "minecraft:armor_stand<controller.pose>",
             ],
@@ -21972,6 +22021,9 @@
             ],
             "controller.animation.breeze.idle": [
                 "minecraft:breeze<idle_controller>",
+            ],
+            "controller.animation.breeze.idle_ground_sound": [
+                "minecraft:breeze<idle_ground_sound_controller>",
             ],
             "controller.animation.breeze.jump": [
                 "minecraft:breeze<jump_controller>",
@@ -22522,6 +22574,9 @@
             "controller.render.allay": [
                 "minecraft:allay",
             ],
+            "controller.render.armadillo": [
+                "minecraft:armadillo",
+            ],
             "controller.render.armor": [],
             "controller.render.armor.leather": [],
             "controller.render.armor_stand": [
@@ -22898,6 +22953,9 @@
             "controller.render.wolf": [
                 "minecraft:wolf",
             ],
+            "controller.render.wolf_armor": [
+                "minecraft:wolf",
+            ],
             "controller.render.zoglin": [
                 "minecraft:zoglin",
             ],
@@ -23064,6 +23122,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:ageable_grow_up": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -23173,6 +23232,9 @@
                 "minecraft:trader_llama",
                 "minecraft:wolf",
                 "minecraft:zombie_pigman",
+            ],
+            "minecraft:become_armorable": [
+                "minecraft:wolf",
             ],
             "minecraft:become_armorer": [
                 "minecraft:villager_v2",
@@ -23384,6 +23446,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:entity_born": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -23418,6 +23481,7 @@
             ],
             "minecraft:entity_spawned": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:arrow",
                 "minecraft:axolotl",
                 "minecraft:bee",
@@ -23632,8 +23696,17 @@
             "minecraft:navigation_on_land": [
                 "minecraft:dolphin",
             ],
+            "minecraft:no_threat_detected": [
+                "minecraft:armadillo",
+            ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
+            ],
+            "minecraft:on_armor_equip": [
+                "minecraft:wolf",
+            ],
+            "minecraft:on_armor_unequip": [
+                "minecraft:wolf",
             ],
             "minecraft:on_calm": [
                 "minecraft:cave_spider",
@@ -23755,6 +23828,9 @@
                 "minecraft:skeleton",
                 "minecraft:stray",
             ],
+            "minecraft:relax": [
+                "minecraft:armadillo",
+            ],
             "minecraft:remove_persistence": [
                 "minecraft:llama",
                 "minecraft:trader_llama",
@@ -23764,6 +23840,9 @@
             ],
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
+            ],
+            "minecraft:roll_up": [
+                "minecraft:armadillo",
             ],
             "minecraft:schedule_bed_villager": [
                 "minecraft:villager_v2",
@@ -23803,6 +23882,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:spawn_adult": [
+                "minecraft:armadillo",
                 "minecraft:bee",
                 "minecraft:camel",
                 "minecraft:chicken",
@@ -23829,6 +23909,7 @@
                 "minecraft:zombie_pigman",
             ],
             "minecraft:spawn_baby": [
+                "minecraft:armadillo",
                 "minecraft:llama",
                 "minecraft:trader_llama",
             ],
@@ -23876,6 +23957,18 @@
             ],
             "minecraft:spawn_skilled_adult": [
                 "minecraft:zombie_villager_v2",
+            ],
+            "minecraft:spawn_tame_adult": [
+                "minecraft:wolf",
+            ],
+            "minecraft:spawn_tame_baby": [
+                "minecraft:wolf",
+            ],
+            "minecraft:spawn_wild_adult": [
+                "minecraft:wolf",
+            ],
+            "minecraft:spawn_wild_baby": [
+                "minecraft:wolf",
             ],
             "minecraft:spawn_with_pillager_captain_rider": [
                 "minecraft:ravager",
@@ -23932,6 +24025,9 @@
             "minecraft:start_land": [
                 "minecraft:ender_dragon",
             ],
+            "minecraft:start_playing_idle_ground_sound": [
+                "minecraft:breeze",
+            ],
             "minecraft:start_roar": [
                 "minecraft:ravager",
             ],
@@ -23941,6 +24037,9 @@
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
+            ],
+            "minecraft:start_trying_to_relax": [
+                "minecraft:armadillo",
             ],
             "minecraft:stop_aggro": [
                 "minecraft:vindicator",
@@ -23963,12 +24062,18 @@
             "minecraft:stop_johnny": [
                 "minecraft:vindicator",
             ],
+            "minecraft:stop_playing_idle_ground_sound": [
+                "minecraft:breeze",
+            ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
+            ],
+            "minecraft:stop_trying_to_relax": [
+                "minecraft:armadillo",
             ],
             "minecraft:switch_to_melee": [
                 "minecraft:drowned",
@@ -23981,6 +24086,9 @@
             ],
             "minecraft:target_too_close": [
                 "minecraft:guardian",
+            ],
+            "minecraft:threat_detected": [
+                "minecraft:armadillo",
             ],
             "minecraft:to_full_puff": [
                 "minecraft:pufferfish",
@@ -24214,6 +24322,9 @@
             ],
             "animal": [
                 "minecraft:goat",
+            ],
+            "armadillo": [
+                "minecraft:armadillo",
             ],
             "armor_stand": [
                 "minecraft:armor_stand",
@@ -24455,6 +24566,7 @@
             ],
             "mob": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:armor_stand",
                 "minecraft:axolotl",
                 "minecraft:bat",

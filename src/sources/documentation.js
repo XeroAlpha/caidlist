@@ -693,7 +693,7 @@ async function fetchBehaviorPack(treeSHA, cacheKey) {
     const map = { __VERSION__: versionJSONMatch && versionJSONMatch[1] };
     for (const blob of tree.tree) {
         const fnMatch = /documentation\/(.+)\.html/i.exec(blob.path);
-        if (fnMatch && fnMatch[1] !== 'Index') {
+        if (fnMatch && fnMatch[1].toLowerCase() !== 'index') {
             const blobCacheKey = `${cacheKey}.${fnMatch[1].toLowerCase().replace(/\s/g, '_')}`;
             let cache = cachedOutput(blobCacheKey);
             if (!cache || cache.__OBJECTHASH__ !== blob.sha) {
