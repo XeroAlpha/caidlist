@@ -1,8 +1,9 @@
 import { WSServer, MinecraftDataType } from 'mcpews';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { cachedOutput, testMinecraftVersionInRange, sleepAsync, sortObjectKey, log } from '../util/common.js';
+import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus } from '../util/common.js';
 import { adbShell } from '../util/adb.js';
+import * as support from './support.js';
 
 /**
  * @param {import('mcpews').ServerSession} session
@@ -16,16 +17,20 @@ function listCommands(session) {
             list.push(...body.body.split('\n'));
             i++;
             if (i > count) {
+                setStatus('');
                 resolve(list);
             } else {
+                setStatus(`[${i + 1}/${count}] Listing commands...`);
                 session.sendCommand(['help', i], processBody);
             }
         }
+        setStatus('[1/?] Listing commands...');
         session.sendCommand('help', ({ body }) => {
             list.push(...body.body.split('\n'));
             i = body.page;
             count = body.pageCount;
             i++;
+            setStatus(`[${i + 1}/${count}] Listing commands...`);
             session.sendCommand(['help', i], processBody);
         });
     });
@@ -43,16 +48,20 @@ function listCommandsLegacy(session) {
             list.push(...body.body.split('\n'));
             i++;
             if (i > count) {
+                setStatus('');
                 resolve(list);
             } else {
+                setStatus(`[${i + 1}/${count}] Listing commands...`);
                 session.sendCommandLegacy('help', 'byPage', { page: i }, processBody);
             }
         }
+        setStatus('[1/?] Listing commands...');
         session.sendCommandLegacy('help', 'byPage', {}, ({ body }) => {
             list.push(...body.body.split('\n'));
             i = body.page;
             count = body.pageCount;
             i++;
+            setStatus(`[${i + 1}/${count}] Listing commands...`);
             session.sendCommandLegacy('help', 'byPage', { page: i }, processBody);
         });
     });
@@ -64,7 +73,9 @@ function listCommandsLegacy(session) {
  */
 function fetchData(session, type) {
     return new Promise((resolve) => {
+        setStatus(`Fetching data from websocket: ${type}`);
         session.fetchData(type, ({ body }) => {
+            setStatus('');
             resolve(body);
         });
     });
@@ -75,11 +86,18 @@ function fetchData(session, type) {
  */
 async function doWSRelatedJobs(cx, session) {
     let commandList;
-    if (testMinecraftVersionInRange(cx.coreVersion, '1.2', '*')) {
+    if (support.textCommandWebSocketFormat(cx)) {
         commandList = await listCommands(session);
     } else {
         commandList = await listCommandsLegacy(session);
     }
+    if (cx.version !== 'preview_win') {
+        return { commandList };
+    }
+    /**
+     * It depends on launch instance instead of world, so we
+     * decide to extract them only in preview-win.
+     */
     const wsBlockData = (await fetchData(session, MinecraftDataType.Block))
         .reduce((obj, block) => {
             obj[`${block.id}:${block.aux}`] = block.name;
@@ -95,18 +113,11 @@ async function doWSRelatedJobs(cx, session) {
             obj[mob.id] = mob.name;
             return obj;
         }, {});
-    /**
-     * It depends on launch instance instead of world, so we
-     * decide to extract them only in preview-win.
-     */
-    const wsExtras = {
+    return {
+        commandList,
         wsBlockData: sortObjectKey(wsBlockData),
         wsItemData: sortObjectKey(wsItemData),
         wsMobData: sortObjectKey(wsMobData)
-    };
-    return {
-        commandList,
-        ...(cx.version === 'preview_win' ? wsExtras : null)
     };
 }
 
@@ -116,7 +127,9 @@ export async function createExclusiveWSSession(device) {
     const wsServer = new WSServer(port);
     const sessionPromise = pEvent(wsServer, 'client');
     if (device) {
+        log('Connecting to wsserver: /connect 127.0.0.1:19134');
         await device.reverse('tcp:19134', `tcp:${port}`);
+        setStatus('Simulating user actions...');
         await adbShell(device, 'input keyevent KEYCODE_SLASH');
         await sleepAsync(3000);
         await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
@@ -124,7 +137,9 @@ export async function createExclusiveWSSession(device) {
     } else {
         log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
     }
+    setStatus('Waiting for client...');
     const { session } = await sessionPromise;
+    setStatus('');
     session.on('disconnect', () => {
         wsServer.close();
     });

@@ -1,5 +1,9 @@
 import { testMinecraftVersionInRange } from '../util/common.js';
 
+export function textCommandWebSocketFormat({ coreVersion }) {
+    return testMinecraftVersionInRange(coreVersion, '1.2', '*');
+}
+
 export function lootCommand({ coreVersion }) {
     return (
         testMinecraftVersionInRange(coreVersion, '1.18.0.21', '1.18.0.21')
