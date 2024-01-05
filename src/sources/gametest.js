@@ -667,6 +667,21 @@ const Extractors = [
             const dimensions = DimensionList.sort();
             target.dimensions = dimensions;
         }
+    },
+    {
+        name: 'biomes',
+        timeout: 10000,
+        async extract(target, frame) {
+            const BiomeList = parseOrThrow(await frame.evaluate(() => {
+                const result = [];
+                for (const biomeType of Minecraft.BiomeTypes.getAll()) {
+                    result.push(biomeType.id);
+                }
+                return JSON.stringify(result);
+            }));
+            const biomes = BiomeList.sort();
+            target.biomes = biomes;
+        }
     }
 ];
 

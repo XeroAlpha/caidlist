@@ -77,6 +77,7 @@ export default function writeTransMapClib(cx, options) {
         coreVersion,
         packageVersion
     };
+    const versionArray = coreVersion.split('.').map((e) => Number(e));
     writeFileSync(
         outputFile,
         JSON.stringify(
@@ -90,8 +91,9 @@ export default function writeTransMapClib(cx, options) {
                     '\n该命令库将旧ID表替换为对应的版本。'
                 ].join('\n'),
                 uuid: '4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7',
-                version: [0, 0, 1],
+                version: versionArray,
                 require: [],
+                minCAVersion: '2023-11-15',
                 minSupportVer: '0.7.4',
                 mode: 'overwrite',
                 enums: renamedTranslationResultMaps,
@@ -122,8 +124,9 @@ export default function writeTransMapClib(cx, options) {
                         '\n该命令库将旧ID表更新到对应的版本。'
                     ].join('\n'),
                     uuid,
-                    version: [0, 0, 1],
-                    require: [source.uuid],
+                    version: versionArray,
+                    require: [{ uuid: source.uuid, min: versionArray }],
+                    minCAVersion: '2023-11-15',
                     minSupportVer: coreVersion,
                     enums: merged,
                     versionPack: Object.keys(removed).length ? {

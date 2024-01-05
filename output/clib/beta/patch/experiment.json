@@ -2,17 +2,27 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.60.23）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.60.24）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
-		0,
-		0,
-		1
+		1,
+		20,
+		60,
+		24
 	],
 	"require": [
-		"4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7"
+		{
+			"uuid": "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
+			"min": [
+				1,
+				20,
+				60,
+				24
+			]
+		}
 	],
-	"minSupportVer": "1.20.60.23",
+	"minCAVersion": "2023-11-15",
+	"minSupportVer": "1.20.60.24",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -75,8 +85,8 @@
 			"weathered_copper_trapdoor": "锈蚀的铜活板门"
 		},
 		"item": {
-			"armadillo_scute": "Armadillo Scute",
-			"armadillo_spawn_egg": "Armadillo Spawn Egg",
+			"armadillo_scute": "犰狳鳞甲",
+			"armadillo_spawn_egg": "犰狳刷怪蛋",
 			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
@@ -134,11 +144,11 @@
 			"weathered_copper_door": "锈蚀的铜门",
 			"weathered_copper_grate": "锈蚀的铜格栅",
 			"weathered_copper_trapdoor": "锈蚀的铜活板门",
-			"wolf_armor": "Wolf Armor"
+			"wolf_armor": "狼铠"
 		},
 		"entity": {
-			"armadillo": "Armadillo",
-			"minecraft:armadillo": "Armadillo"
+			"armadillo": "犰狳",
+			"minecraft:armadillo": "犰狳"
 		},
 		"structure": {
 			"trial_chambers": "试炼室"
@@ -161,7 +171,7 @@
 			"minecraft:threat_detected": ""
 		},
 		"entity_family": {
-			"armadillo": "",
+			"armadillo": "犰狳",
 			"breeze": "旋风人"
 		},
 		"animation": {
@@ -192,6 +202,7 @@
 		},
 		"particle_emitter": {
 			"minecraft:breeze_ground_particle": "",
+			"minecraft:small_flame_particle": "",
 			"minecraft:trial_spawner_detection": "",
 			"minecraft:white_smoke_particle": "",
 			"minecraft:wind_explosion_emitter": ""
@@ -222,6 +233,7 @@
 			"mob.armadillo.unroll": "",
 			"mob.breeze.charge": "",
 			"mob.breeze.death": "",
+			"mob.breeze.deflect": "",
 			"mob.breeze.hurt": "",
 			"mob.breeze.idle_air": "",
 			"mob.breeze.idle_ground": "",
@@ -340,7 +352,7 @@
 			"minecraft:weathered_copper_door": "<工作台>锈蚀的铜块*6->锈蚀的铜门*3",
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
 			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2",
-			"minecraft:wolf_armor": "<工作台>Armadillo Scute*6->Wolf Armor"
+			"minecraft:wolf_armor": "<工作台>犰狳鳞甲*6->狼铠"
 		},
 		"hud_element": {
 			"air_bubbles": "氧气槽",
@@ -357,14 +369,14 @@
 			"touch_controls": "触屏按键"
 		},
 		"summonable_entity": {
-			"armadillo": "Armadillo",
+			"armadillo": "犰狳",
 			"breeze": "旋风人",
-			"minecraft:armadillo": "Armadillo",
+			"minecraft:armadillo": "犰狳",
 			"minecraft:breeze": "旋风人"
 		},
 		"loot_tool": {
-			"minecraft:armadillo_scute": "Armadillo Scute",
-			"minecraft:armadillo_spawn_egg": "Armadillo Spawn Egg",
+			"minecraft:armadillo_scute": "犰狳鳞甲",
+			"minecraft:armadillo_spawn_egg": "犰狳刷怪蛋",
 			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
@@ -422,7 +434,7 @@
 			"minecraft:weathered_copper_door": "锈蚀的铜门",
 			"minecraft:weathered_copper_grate": "锈蚀的铜格栅",
 			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门",
-			"minecraft:wolf_armor": "Wolf Armor"
+			"minecraft:wolf_armor": "狼铠"
 		}
 	},
 	"metadata": {
@@ -431,16 +443,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.60.23",
-			"packageVersion": "1.20.60.23"
+			"coreVersion": "1.20.60.24",
+			"packageVersion": "1.20.60.24"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.60.23",
-			"packageVersion": "1.20.60.23"
+			"coreVersion": "1.20.60.24",
+			"packageVersion": "1.20.60.24"
 		}
 	}
 }

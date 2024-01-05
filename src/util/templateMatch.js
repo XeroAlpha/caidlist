@@ -186,6 +186,31 @@ const CircularTranslationResult = {
     comment: 'This is a place holder'
 };
 
+const formatInnerFunc = ({ context, originalValue, refs }, ...resolvedRefs) => {
+    let state = 'provided';
+    resolvedRefs.forEach((resolvedRef, i) => {
+        if (resolvedRef.state !== 'provided') {
+            state = 'notFound';
+            warn(`[${context}] Should provide inline references: ${originalValue}(${refs[i]})`);
+        }
+    });
+    const [fmt, ...items] = resolvedRefs.map((e) => e.translation);
+    return {
+        state,
+        translation: format(fmt, ...items)
+    };
+};
+const innerFunctions = {
+    '': formatInnerFunc,
+    format: formatInnerFunc,
+    pick: ({ context, originalValue, refs }, ...items) => {
+        const picked = items.find((e) => e.state === 'provided');
+        if (picked) return picked;
+        warn(`[${context}] All items are not provided: ${originalValue}(${refs.join(',')})`);
+        return items[items.length - 1];
+    }
+};
+
 export function matchTranslations(options) {
     const { resultMaps, stateMaps, name, originalArray, postProcessor } = options;
     const translateResultMap = {};
@@ -202,28 +227,23 @@ export function matchTranslations(options) {
             return cache;
         }
         if (insideTemplate && originalValue.includes('|')) { // 拼接模板
-            const failedRefs = [];
-            const refs = originalValue.split('|').map((ref) => {
-                const trimedRef = ref.trim();
-                if (trimedRef.startsWith('\'')) { // 原始字符，原样传递
-                    if (trimedRef.endsWith('\'')) {
-                        return trimedRef.slice(1, -1);
-                    }
-                    return trimedRef.slice(1);
-                }
-                const result = translateCached(trimedRef, context, true);
-                if (result.state !== 'provided') {
-                    failedRefs.push(trimedRef);
-                }
-                return result.translation;
-            });
-            if (failedRefs.length) {
-                warn(`[${context}] Should provide inline references: ${originalValue}(${failedRefs.join(',')})`);
+            const [first, ...refs] = originalValue.split('|').map((e) => e.trim());
+            let func = innerFunctions[first.toLowerCase()];
+            if (!innerFunctions[first.toLowerCase()]) {
+                refs.unshift(first);
+                func = formatInnerFunc;
             }
-            return {
-                state: failedRefs.length > 0 ? 'notFound' : 'provided',
-                translation: format(...refs)
-            };
+            const resolvedRefs = refs.map((ref) => {
+                if (ref.startsWith('\'')) { // 原始字符，原样传递
+                    let raw = ref.slice(1);
+                    if (raw.endsWith('\'')) {
+                        raw = raw.slice(0, -1);
+                    }
+                    return { state: 'provided', translation: raw };
+                }
+                return translateCached(ref, context, true);
+            });
+            return func({ context, originalValue, options, refs }, ...resolvedRefs);
         }
         if (insideTemplate && originalValue.includes('!')) { // 外部引用
             const translationMap = {};

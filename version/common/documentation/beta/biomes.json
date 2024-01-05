@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.20.60.23",
+    "version": "1.20.60.24",
     "content": [],
     "sections": [
         {
@@ -330,12 +330,18 @@
                         "          float \"weight\" : opt // Weight with which this biome should selected, relative to other biomes.",
                         "      }",
                         "      object \"minecraft:legacy_world_generation_rules\" : opt // Additional world generation control applicable only to legacy limited worlds.",
-                        "      object \"[a-z0-9_.:]+\" : opt // Attach arbitrary string tags to this biome",
+                        "      object \"minecraft:tags\"[0,1] : opt // Attach arbitrary string tags to this biome",
+                        "      {",
+                        "          array \"tags\"[0,18446744073709551615] // String tags to apply to this biome.",
+                        "          {",
+                        "              string \"<any array element>\" : opt",
+                        "          }",
+                        "      }",
                         "  }",
                     ],
                 },
             ],
         },
     ],
-    "__OBJECTHASH__": "d6922a49163425455aa01bd09fb41edc67810eb3",
+    "__OBJECTHASH__": "09ed41ce5858bca9e5e106e0669f84205b5d7b53",
 }
