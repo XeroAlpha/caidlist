@@ -81,6 +81,19 @@ function fetchData(session, type) {
     });
 }
 
+function verifySupport(cx, commandList) {
+    for (const key in support) {
+        if (typeof support[key] === 'function' && support[key].associatedCommands) {
+            const f = support[key];
+            const result = f(cx);
+            const commandMatches = f.associatedCommands.some((andGroup) => andGroup.every((e) => commandList.includes(e)));
+            if (result !== commandMatches) {
+                throw new Error(`support.${key} should be updated, excepted ${commandMatches}, actually got ${result}`);
+            }
+        }
+    }
+}
+
 /**
  * @param {import('mcpews').ServerSession} session
  */
@@ -155,6 +168,9 @@ export async function doWSRelatedJobsCached(cx, session, target) {
     if (!result) {
         result = await doWSRelatedJobs(cx, session);
         cachedOutput(cacheId, { packageVersion, result });
+    }
+    if (branch.id !== 'gametest') {
+        verifySupport(cx, result.commandList);
     }
     Object.assign(target, result);
 }
