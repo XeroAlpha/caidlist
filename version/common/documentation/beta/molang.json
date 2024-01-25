@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.60.26",
+    "version": "1.20.70.20",
     "content": [],
     "sections": [
         {
@@ -1235,7 +1235,7 @@
                                 },
                                 {
                                     "Name": "query.head_y_rotation",
-                                    "Description": "Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0.",
+                                    "Description": "Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.",
                                 },
                                 {
                                     "Name": "query.health",
@@ -1834,6 +1834,38 @@
                                     "Description": "Returns how much durability an item has remaining.",
                                 },
                                 {
+                                    "Name": "query.ride_body_x_rotation",
+                                    "Description": "Returns the body pitch world-rotation of the ride an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_body_y_rotation",
+                                    "Description": "Returns the body yaw world-rotation of the ride of on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_head_x_rotation",
+                                    "Description": "Returns the head x world-rotation of the ride of an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_head_y_rotation",
+                                    "Description": "Takes one optional argument as a parameter. Returns the head y world-rotation of the ride of an entity, else it returns 0.0. First parameter only for horses, zombie horses, skeleton horses, donkeys and mules that clamps rotation in degrees.",
+                                },
+                                {
+                                    "Name": "query.rider_body_x_rotation",
+                                    "Description": "Returns the body pitch world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_body_y_rotation",
+                                    "Description": "Returns the body yaw world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_head_x_rotation",
+                                    "Description": "Takes one argument as a parameter. Returns the head x world-rotation of the rider entity at the provided index, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_head_y_rotation",
+                                    "Description": "Takes one or two arguments as parameters. Returns the head y world-rotation of the rider entity at the provided index, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.",
+                                },
+                                {
                                     "Name": "query.roll_counter",
                                     "Description": "Returns the roll counter of the entity.",
                                 },
@@ -2002,26 +2034,6 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "query.biome_has_all_tags",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if all of them exist in the biome, else it returns 0.  Eg: query.biome_has_all_tags('is_cold', 'has_trees').",
-                                },
-                                {
-                                    "Name": "query.biome_has_any_tag",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if any of them exist in the biome, else it returns 0.  Eg: query.biome_has_any_tag('is_cold', 'has_trees').",
-                                },
-                                {
-                                    "Name": "query.client_input_type",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns either 'mouse', 'touch', 'gamepad', or 'motion_controller' depending on the type of input used by the current client.",
-                                },
-                                {
-                                    "Name": "query.get_nearby_entities",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').",
-                                },
-                                {
-                                    "Name": "query.get_nearby_entities_except_self",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').",
-                                },
-                                {
                                     "Name": "query.get_ride",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the entity this entity is riding if it is riding something, else it returns 0.",
                                 },
@@ -2040,14 +2052,6 @@
                                 {
                                     "Name": "query.scoreboard",
                                     "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) DEPRECATED (The coming Actor Property feature will replace the need for querying hidden scoreboard data. Current client-side scoreboard code is only meant for supporting the standard UI elements.) Takes one argument - the name of the scoreboard entry for this entity.  Returns the specified scoreboard value for this entity.",
-                                },
-                                {
-                                    "Name": "query.self",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the current entity.",
-                                },
-                                {
-                                    "Name": "query.target",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the target of the current entity if one exists.",
                                 },
                             ],
                         },
@@ -2134,5 +2138,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "1dc2e3c43183b18d4db9b910d31b68bdbeb54a4c",
+    "__OBJECTHASH__": "95a58a8e4b560358fa8be7f8e6278b745957b6e4",
 }

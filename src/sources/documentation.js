@@ -252,7 +252,7 @@ function cleanHtml(htmlContent) {
                 .replace(/>/g, '&gt;');
             return `<${tag}>${escapedContent}</${tag}>`;
         })
-        .replace(/<([\w]+)\b(?:.*?)>/g, (match, tagName) => {
+        .replace(/<([\w]+)\b(?:(?:".+?"|.)*?)>/g, (match, tagName) => {
             if (NormalTagNames.includes(tagName.toUpperCase())) {
                 return match;
             }
@@ -795,6 +795,8 @@ function getDefaultValue(schema) {
             return result;
         case 'Range [a, b]':
             return tryParseJSON(schema.defaultValue, 0);
+        case 'Vector [a, b]':
+            return tryParseJSON(schema.defaultValue, [0, 0]);
         case 'Vector [a, b, c]':
             return tryParseJSON(schema.defaultValue, [0, 0, 0]);
         case 'Minecraft Filter':

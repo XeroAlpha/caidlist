@@ -689,8 +689,10 @@ const ImportEnvironments = {
     Minecraft: ['Minecraft', 'mojang-minecraft', '@minecraft/server'],
     GameTest: ['GameTest', 'mojang-gametest', '@minecraft/server-gametest'],
     MinecraftUI: ['mojang-minecraft-ui', '@minecraft/server-ui'],
-    MinecraftServerAdmin: ['mojang-minecraft-server-admin', '@minecraft/server-admin'],
-    MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net']
+    MinecraftAdmin: ['mojang-minecraft-server-admin', '@minecraft/server-admin'],
+    MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net'],
+    MinecraftEditor: ['@minecraft/server-editor'],
+    MinecraftDebugUtilities: ['@minecraft/debug-utilities']
 };
 /**
  * @param {QuickJSDebugSession} session
