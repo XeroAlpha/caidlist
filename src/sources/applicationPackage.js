@@ -256,8 +256,8 @@ const entryAnalyzer = [
         name: 'entityBehavior',
         type: 'json',
         regex: /assets\/behavior_packs\/(?:[^/]+)\/entities\/(?:[^/]+)\.json$/,
-        analyze(results, entryName, entity) {
-            const { entityEventsMap, entityFamilyMap } = results;
+        analyze(results, entryName, entity) { // TODO: only use newest version
+            const { entityEventsMap, entityFamilyMap, entityPropertyDescMap } = results;
             const formatVersion = entity.format_version;
             if (this.versionsGroups[0].includes(formatVersion)) {
                 const entityDescription = entity['minecraft:entity'].description;
@@ -282,6 +282,22 @@ const entryAnalyzer = [
                         familyMembers.push(groupId);
                     });
                 });
+                const entityProperties = entityDescription.properties;
+                if (entityProperties) {
+                    Object.entries(entityProperties).forEach(([propertyName, propertyDesc]) => {
+                        let propertyEntityMap = entityPropertyDescMap[propertyName];
+                        if (!propertyEntityMap) {
+                            propertyEntityMap = entityPropertyDescMap[propertyName] = {};
+                        }
+                        const filteredPropertyDesc = {};
+                        Object.entries(propertyDesc).forEach(([descKey, descValue]) => {
+                            if (descKey === 'type') {
+                                filteredPropertyDesc[descKey] = descValue;
+                            }
+                        });
+                        propertyEntityMap[id] = filteredPropertyDesc;
+                    });
+                }
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
@@ -409,7 +425,8 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         animationControllerMap: {},
         renderControllerMap: {},
         entityEventsMap: {},
-        entityFamilyMap: {}
+        entityFamilyMap: {},
+        entityPropertyDescMap: {}
     };
     log('Analyzing package entries for data enums...');
     iteratePackageEntries(packageZip, (entry) => {
@@ -500,6 +517,13 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
     forEachObject(results, (v, k) => {
         if (k === 'dataDrivenRecipeData') {
             results[k] = sortObjectKey(v);
+            return;
+        }
+        if (k === 'entityPropertyDescMap') {
+            results[k] = sortObjectKey(v);
+            forEachObject(v, (value) => {
+                sortObjectKey(value);
+            });
             return;
         }
         if (k.endsWith('Map')) {

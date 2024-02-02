@@ -452,6 +452,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.hudCommand(cx)) {
         postJob('hud elements', '/hud @s hide ');
     }
+    if (support.hasPropertySelectorParam(cx)) {
+        postJob('entity properties', '/testfor @e[has_property={', ['property', '!']);
+    }
 
     if (support.eduCommands(cx)) {
         postJob('abilities', '/ability @s ', ['[']);

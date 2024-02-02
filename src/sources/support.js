@@ -108,6 +108,10 @@ hudCommand.associatedCommands = [
     ['/hud <target: target> <visible: HudVisibility> [hud_element: HudElement]']
 ];
 
+export function hasPropertySelectorParam({ coreVersion }) {
+    return testMinecraftVersionInRange(coreVersion, '1.20.70.21', '*');
+}
+
 export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';
 }
