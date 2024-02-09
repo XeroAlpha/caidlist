@@ -364,6 +364,7 @@ function createSectionTableAnalyzer({
     descriptionKey,
     getDescription,
     withSchema,
+    errorWhenNoTable,
     ...args
 }) {
     return {
@@ -373,7 +374,10 @@ function createSectionTableAnalyzer({
             const tables = section.content.filter((e) => typeof e === 'object' && e.type === 'table');
             const table = tables[tableIndex >= 0 ? tableIndex : tables.length + tableIndex];
             if (!table) {
-                throw new Error(`Cannot find table in section ${path.join('/')}`);
+                if (errorWhenNoTable) {
+                    throw new Error(`Cannot find table in section ${path.join('/')}`);
+                }
+                return {};
             }
             const result = {};
             const idGetter = (row) => {

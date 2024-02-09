@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（正式版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：正式版（1.20.51.01）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：正式版（1.20.60.04）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		20,
-		51,
-		1
+		60,
+		4
 	],
 	"require": [
 		{
@@ -16,13 +16,13 @@
 			"min": [
 				1,
 				20,
-				51,
-				1
+				60,
+				4
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.20.51.01",
+	"minSupportVer": "1.20.60.04",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -48,6 +48,7 @@
 			"polished_tuff_slab": "磨制凝灰岩台阶",
 			"polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"polished_tuff_wall": "磨制凝灰岩墙",
+			"trial_spawner": "试炼刷怪笼",
 			"tuff_brick_double_slab": "双层凝灰岩砖台阶",
 			"tuff_brick_slab": "凝灰岩砖台阶",
 			"tuff_brick_stairs": "凝灰岩砖楼梯",
@@ -84,6 +85,9 @@
 			"weathered_copper_trapdoor": "锈蚀的铜活板门"
 		},
 		"item": {
+			"armadillo_scute": "犰狳鳞甲",
+			"armadillo_spawn_egg": "犰狳刷怪蛋",
+			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
 			"chiseled_tuff_bricks": "雕纹凝灰岩砖",
@@ -106,6 +110,8 @@
 			"polished_tuff_slab": "磨制凝灰岩台阶",
 			"polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"polished_tuff_wall": "磨制凝灰岩墙",
+			"trial_key": "试炼钥匙",
+			"trial_spawner": "试炼刷怪笼",
 			"tuff_brick_slab": "凝灰岩砖台阶",
 			"tuff_brick_stairs": "凝灰岩砖楼梯",
 			"tuff_brick_wall": "凝灰岩砖墙",
@@ -137,12 +143,73 @@
 			"weathered_copper_bulb": "锈蚀的铜灯",
 			"weathered_copper_door": "锈蚀的铜门",
 			"weathered_copper_grate": "锈蚀的铜格栅",
-			"weathered_copper_trapdoor": "锈蚀的铜活板门"
+			"weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"wolf_armor": "狼铠"
+		},
+		"entity": {
+			"armadillo": "犰狳",
+			"minecraft:armadillo": "犰狳"
+		},
+		"structure": {
+			"trial_chambers": "试炼室"
+		},
+		"entity_event": {
+			"minecraft:become_armorable": "",
+			"minecraft:no_threat_detected": "",
+			"minecraft:on_armor_equip": "",
+			"minecraft:on_armor_unequip": "",
+			"minecraft:relax": "",
+			"minecraft:roll_up": "",
+			"minecraft:spawn_tame_adult": "",
+			"minecraft:spawn_tame_baby": "",
+			"minecraft:spawn_wild_adult": "",
+			"minecraft:spawn_wild_baby": "",
+			"minecraft:start_playing_idle_ground_sound": "",
+			"minecraft:start_trying_to_relax": "",
+			"minecraft:stop_playing_idle_ground_sound": "",
+			"minecraft:stop_trying_to_relax": "",
+			"minecraft:threat_detected": ""
+		},
+		"entity_family": {
+			"armadillo": "犰狳",
+			"breeze": "旋风人"
+		},
+		"animation": {
+			"animation.armadillo.look_at_target": "",
+			"animation.armadillo.roll_up": "",
+			"animation.armadillo.rolled_up": "",
+			"animation.armadillo.unroll": "",
+			"animation.armadillo.walk": "",
+			"animation.breeze.idle": "",
+			"animation.breeze.idle_ground_particles": "",
+			"animation.breeze.idle_ground_sound": "",
+			"animation.breeze.jump": "",
+			"animation.breeze.shoot": "",
+			"animation.breeze.slide": "",
+			"animation.breeze.slide_ground_particles": "",
+			"animation.breeze.whirl_sound": ""
+		},
+		"animation_controller": {
+			"controller.animation.armadillo.roll_up": "",
+			"controller.animation.armadillo.walk": "",
+			"controller.animation.breeze.ground_particles": "",
+			"controller.animation.breeze.idle": "",
+			"controller.animation.breeze.idle_ground_sound": "",
+			"controller.animation.breeze.jump": "",
+			"controller.animation.breeze.look_at": "",
+			"controller.animation.breeze.move": "",
+			"controller.animation.breeze.shoot": ""
 		},
 		"particle_emitter": {
-			"minecraft:white_smoke_particle": ""
+			"minecraft:breeze_ground_particle": "",
+			"minecraft:small_flame_particle": "",
+			"minecraft:trial_spawner_detection": "",
+			"minecraft:white_smoke_particle": "",
+			"minecraft:wind_explosion_emitter": ""
 		},
 		"sound": {
+			"armor.equip_wolf": "",
+			"armor.unequip_wolf": "",
 			"block.copper_bulb.turn_off": "",
 			"block.copper_bulb.turn_on": "",
 			"break.copper_bulb": "",
@@ -151,15 +218,78 @@
 			"crafter.craft": "",
 			"crafter.disable_slot": "",
 			"crafter.fail": "",
+			"entity.wind_burst.burst": "",
 			"fall.copper_bulb": "",
 			"hit.copper_bulb": "",
+			"mob.armadillo.ambient": "",
+			"mob.armadillo.brush": "",
+			"mob.armadillo.death": "",
+			"mob.armadillo.eat": "",
+			"mob.armadillo.hurt": "",
+			"mob.armadillo.land": "",
+			"mob.armadillo.roll": "",
+			"mob.armadillo.scute_drop": "",
+			"mob.armadillo.step": "",
+			"mob.armadillo.unroll": "",
+			"mob.breeze.charge": "",
+			"mob.breeze.death": "",
+			"mob.breeze.deflect": "",
+			"mob.breeze.hurt": "",
+			"mob.breeze.idle_air": "",
+			"mob.breeze.idle_ground": "",
+			"mob.breeze.inhale": "",
+			"mob.breeze.jump": "",
+			"mob.breeze.land": "",
+			"mob.breeze.shoot": "",
+			"mob.breeze.slide": "",
+			"mob.breeze.whirl": "",
 			"open_door.copper": "",
 			"open_trapdoor.copper": "",
 			"place.copper_bulb": "",
 			"place.tuff_bricks": "",
 			"step.copper_bulb": "",
 			"step.copper_grate": "",
-			"step.tuff_bricks": ""
+			"step.tuff_bricks": "",
+			"trial_spawner.ambient": "",
+			"trial_spawner.break": "",
+			"trial_spawner.close_shutter": "",
+			"trial_spawner.detect_player": "",
+			"trial_spawner.eject_item": "",
+			"trial_spawner.hit": "",
+			"trial_spawner.open_shutter": "",
+			"trial_spawner.place": "",
+			"trial_spawner.spawn_mob": "",
+			"trial_spawner.step": ""
+		},
+		"loot_table": {
+			"chests/trial_chambers/corridor": "",
+			"chests/trial_chambers/entrance": "",
+			"chests/trial_chambers/intersection": "",
+			"chests/trial_chambers/intersection_barrel": "",
+			"chests/trial_chambers/reward": "",
+			"chests/trial_chambers/supply": "",
+			"dispensers/trial_chambers/chamber": "",
+			"dispensers/trial_chambers/corridor": "",
+			"dispensers/trial_chambers/water": "",
+			"entities/armadillo_brush": "",
+			"pots/trial_chambers/corridor": "",
+			"spawners/trial_chamber/consumables": "",
+			"spawners/trial_chamber/key": ""
+		},
+		"loot_table_wrapped": {
+			"\"chests/trial_chambers/corridor\"": "",
+			"\"chests/trial_chambers/entrance\"": "",
+			"\"chests/trial_chambers/intersection\"": "",
+			"\"chests/trial_chambers/intersection_barrel\"": "",
+			"\"chests/trial_chambers/reward\"": "",
+			"\"chests/trial_chambers/supply\"": "",
+			"\"dispensers/trial_chambers/chamber\"": "",
+			"\"dispensers/trial_chambers/corridor\"": "",
+			"\"dispensers/trial_chambers/water\"": "",
+			"\"entities/armadillo_brush\"": "",
+			"\"pots/trial_chambers/corridor\"": "",
+			"\"spawners/trial_chamber/consumables\"": "",
+			"\"spawners/trial_chamber/key\"": ""
 		},
 		"recipe": {
 			"minecraft:chiseled_tuff": "<工作台>凝灰岩台阶*2->雕纹凝灰岩",
@@ -221,9 +351,33 @@
 			"minecraft:weathered_copper_bulb": "<工作台>红石粉+锈蚀的铜块*3+烈焰棒->锈蚀的铜灯*4",
 			"minecraft:weathered_copper_door": "<工作台>锈蚀的铜块*6->锈蚀的铜门*3",
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
-			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2"
+			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2",
+			"minecraft:wolf_armor": "<工作台>犰狳鳞甲*6->狼铠"
+		},
+		"hud_element": {
+			"air_bubbles": "氧气槽",
+			"all": "全部",
+			"armor": "盔甲条",
+			"crosshair": "十字准星",
+			"health": "生命条",
+			"horse_health": "骑乘生物生命条",
+			"hotbar": "快捷栏",
+			"hunger": "饥饿条",
+			"paperdoll": "纸娃娃",
+			"progress_bar": "经验条",
+			"tooltips": "提示消息",
+			"touch_controls": "触屏按键"
+		},
+		"summonable_entity": {
+			"armadillo": "犰狳",
+			"breeze": "旋风人",
+			"minecraft:armadillo": "犰狳",
+			"minecraft:breeze": "旋风人"
 		},
 		"loot_tool": {
+			"minecraft:armadillo_scute": "犰狳鳞甲",
+			"minecraft:armadillo_spawn_egg": "犰狳刷怪蛋",
+			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
 			"minecraft:chiseled_tuff_bricks": "雕纹凝灰岩砖",
@@ -246,6 +400,8 @@
 			"minecraft:polished_tuff_slab": "磨制凝灰岩台阶",
 			"minecraft:polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"minecraft:polished_tuff_wall": "磨制凝灰岩墙",
+			"minecraft:trial_key": "试炼钥匙",
+			"minecraft:trial_spawner": "试炼刷怪笼",
 			"minecraft:tuff_brick_slab": "凝灰岩砖台阶",
 			"minecraft:tuff_brick_stairs": "凝灰岩砖楼梯",
 			"minecraft:tuff_brick_wall": "凝灰岩砖墙",
@@ -277,7 +433,8 @@
 			"minecraft:weathered_copper_bulb": "锈蚀的铜灯",
 			"minecraft:weathered_copper_door": "锈蚀的铜门",
 			"minecraft:weathered_copper_grate": "锈蚀的铜格栅",
-			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门"
+			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"minecraft:wolf_armor": "狼铠"
 		}
 	},
 	"metadata": {
@@ -286,16 +443,16 @@
 			"versionName": "正式版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.51.01",
-			"packageVersion": "1.20.51.01"
+			"coreVersion": "1.20.60.04",
+			"packageVersion": "1.20.60.04"
 		},
 		"to": {
 			"version": "release",
 			"versionName": "正式版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.51.01",
-			"packageVersion": "1.20.51.01"
+			"coreVersion": "1.20.60.04",
+			"packageVersion": "1.20.60.04"
 		}
 	}
 }

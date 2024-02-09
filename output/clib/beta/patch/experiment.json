@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.70.21）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.70.22）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		20,
 		70,
-		21
+		22
 	],
 	"require": [
 		{
@@ -17,12 +17,12 @@
 				1,
 				20,
 				70,
-				21
+				22
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.20.70.21",
+	"minSupportVer": "1.20.70.22",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -150,7 +150,9 @@
 		},
 		"entity": {
 			"armadillo": "犰狳",
-			"minecraft:armadillo": "犰狳"
+			"breeze": "旋风人",
+			"minecraft:armadillo": "犰狳",
+			"minecraft:breeze": "旋风人"
 		},
 		"structure": {
 			"trial_chambers": "试炼室"
@@ -160,13 +162,14 @@
 			"minecraft:no_threat_detected": "",
 			"minecraft:on_armor_equip": "",
 			"minecraft:on_armor_unequip": "",
-			"minecraft:relax": "",
 			"minecraft:roll_up": "",
+			"minecraft:start_peeking": "",
 			"minecraft:start_playing_idle_ground_sound": "",
-			"minecraft:start_trying_to_relax": "",
+			"minecraft:start_unrolling": "",
+			"minecraft:stop_peeking": "",
 			"minecraft:stop_playing_idle_ground_sound": "",
-			"minecraft:stop_trying_to_relax": "",
-			"minecraft:threat_detected": ""
+			"minecraft:threat_detected": "",
+			"minecraft:unroll": ""
 		},
 		"entity_family": {
 			"armadillo": "犰狳",
@@ -176,9 +179,11 @@
 		},
 		"animation": {
 			"animation.armadillo.look_at_target": "",
+			"animation.armadillo.peek": "",
 			"animation.armadillo.roll_up": "",
 			"animation.armadillo.rolled_up": "",
 			"animation.armadillo.unroll": "",
+			"animation.armadillo.unroll_fast": "",
 			"animation.armadillo.walk": "",
 			"animation.breeze.idle": "",
 			"animation.breeze.idle_ground_particles": "",
@@ -230,10 +235,12 @@
 			"mob.armadillo.hurt": "",
 			"mob.armadillo.hurt_reduced": "",
 			"mob.armadillo.land": "",
+			"mob.armadillo.peek": "",
 			"mob.armadillo.roll": "",
 			"mob.armadillo.scute_drop": "",
 			"mob.armadillo.step": "",
-			"mob.armadillo.unroll": "",
+			"mob.armadillo.unroll_finish": "",
+			"mob.armadillo.unroll_start": "",
 			"mob.breeze.charge": "",
 			"mob.breeze.death": "",
 			"mob.breeze.deflect": "",
@@ -459,16 +466,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.70.21",
-			"packageVersion": "1.20.70.21"
+			"coreVersion": "1.20.70.22",
+			"packageVersion": "1.20.70.22"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.70.21",
-			"packageVersion": "1.20.70.21"
+			"coreVersion": "1.20.70.22",
+			"packageVersion": "1.20.70.22"
 		}
 	}
 }

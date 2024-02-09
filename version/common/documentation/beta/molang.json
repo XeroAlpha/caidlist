@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.70.21",
+    "version": "1.20.70.22",
     "content": [],
     "sections": [
         {
@@ -1214,6 +1214,10 @@
                                     "Description": "Returns true if the entity has an owner ID else it returns false",
                                 },
                                 {
+                                    "Name": "query.has_player_rider",
+                                    "Description": "Returns 1 if the entity has a player riding it in any seat, else it returns 0.",
+                                },
+                                {
                                     "Name": "query.has_property",
                                     "Description": "Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise.",
                                 },
@@ -1280,6 +1284,10 @@
                                 {
                                     "Name": "query.is_angry",
                                     "Description": "Returns 1.0 if the entity is angry, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.is_attached",
+                                    "Description": "Returns 1.0 if the entity is attached to another entity (such as being held or worn), else it will return 0.0. Available only with resource packs.",
                                 },
                                 {
                                     "Name": "query.is_attached_to_entity",
@@ -1874,6 +1882,10 @@
                                     "Description": "Returns the rotation required to aim at the camera.  Requires one argument representing the rotation axis you would like (0 for x, 1 for y).",
                                 },
                                 {
+                                    "Name": "query.scoreboard",
+                                    "Description": "Takes one argument - the name of the scoreboard entry for this entity. Returns the specified scoreboard value for this entity. Available only with behavior packs.",
+                                },
+                                {
                                     "Name": "query.shake_angle",
                                     "Description": "Returns the shaking angle of the entity if it makes sense, else it returns 0.0.",
                                 },
@@ -2029,33 +2041,7 @@
                     "name": "List of Experimental Entity Queries",
                     "id": "List of Experimental Entity Queries",
                     "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "query.get_ride",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the entity this entity is riding if it is riding something, else it returns 0.",
-                                },
-                                {
-                                    "Name": "query.get_riders",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the array of entities that are riding this entity.",
-                                },
-                                {
-                                    "Name": "query.has_player_rider",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0.",
-                                },
-                                {
-                                    "Name": "query.is_attached",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the actor is attached to another actor (such as being held or worn), else it will return 0.0.",
-                                },
-                                {
-                                    "Name": "query.scoreboard",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) DEPRECATED (The coming Actor Property feature will replace the need for querying hidden scoreboard data. Current client-side scoreboard code is only meant for supporting the standard UI elements.) Takes one argument - the name of the scoreboard entry for this entity.  Returns the specified scoreboard value for this entity.",
-                                },
-                            ],
-                        },
-                    ],
+                    "content": [],
                 },
             ],
         },
@@ -2142,5 +2128,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "c65728787d75bb9ad7b9cd3d474805bc64fa076d",
+    "__OBJECTHASH__": "30ba923cddbea26613a701a8f4b6d0d5a5fbaf1f",
 }

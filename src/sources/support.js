@@ -100,7 +100,10 @@ recipeNewCommand.associatedCommands = [
 
 export function hudCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
-        return testMinecraftVersionInRange(coreVersion, '1.20.60.23', '*');
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.20.60.23', '*')
+            || testMinecraftVersionInRange(coreVersion, '1.20.60.04', '1.20.60.04')
+        );
     }
     return false;
 }
