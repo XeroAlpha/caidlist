@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.70.22）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.70.24）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		20,
 		70,
-		22
+		24
 	],
 	"require": [
 		{
@@ -17,12 +17,12 @@
 				1,
 				20,
 				70,
-				22
+				24
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.20.70.22",
+	"minSupportVer": "1.20.70.24",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -88,6 +88,7 @@
 		"item": {
 			"armadillo_scute": "犰狳鳞甲",
 			"armadillo_spawn_egg": "犰狳刷怪蛋",
+			"bogged_spawn_egg": "Bogged Spawn Egg",
 			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
@@ -146,13 +147,20 @@
 			"weathered_copper_door": "锈蚀的铜门",
 			"weathered_copper_grate": "锈蚀的铜格栅",
 			"weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"wind_charge": "风弹",
 			"wolf_armor": "狼铠"
 		},
 		"entity": {
 			"armadillo": "犰狳",
+			"bogged": "Bogged",
 			"breeze": "旋风人",
+			"breeze_wind_charge_projectile": "风弹",
 			"minecraft:armadillo": "犰狳",
-			"minecraft:breeze": "旋风人"
+			"minecraft:bogged": "Bogged",
+			"minecraft:breeze": "旋风人",
+			"minecraft:breeze_wind_charge_projectile": "风弹",
+			"minecraft:wind_charge_projectile": "风弹",
+			"wind_charge_projectile": "风弹"
 		},
 		"structure": {
 			"trial_chambers": "试炼室"
@@ -173,6 +181,7 @@
 		},
 		"entity_family": {
 			"armadillo": "犰狳",
+			"bogged": "",
 			"breeze": "旋风人",
 			"wind_charge": "风弹",
 			"wind_charge_projectile": "风弹"
@@ -208,6 +217,7 @@
 		},
 		"particle_emitter": {
 			"minecraft:breeze_ground_particle": "",
+			"minecraft:breeze_wind_explosion_emitter": "",
 			"minecraft:small_flame_particle": "",
 			"minecraft:trial_spawner_detection": "",
 			"minecraft:vault_connection_particle": "",
@@ -221,11 +231,11 @@
 			"block.copper_bulb.turn_on": "",
 			"break.copper_bulb": "",
 			"break.copper_grate": "",
+			"breeze_wind_charge.burst": "",
 			"close_door.copper": "",
 			"crafter.craft": "",
 			"crafter.disable_slot": "",
 			"crafter.fail": "",
-			"entity.wind_burst.burst": "",
 			"fall.copper_bulb": "",
 			"hit.copper_bulb": "",
 			"mob.armadillo.ambient": "",
@@ -241,6 +251,10 @@
 			"mob.armadillo.step": "",
 			"mob.armadillo.unroll_finish": "",
 			"mob.armadillo.unroll_start": "",
+			"mob.bogged.ambient": "",
+			"mob.bogged.death": "",
+			"mob.bogged.hurt": "",
+			"mob.bogged.step": "",
 			"mob.breeze.charge": "",
 			"mob.breeze.death": "",
 			"mob.breeze.deflect": "",
@@ -281,7 +295,8 @@
 			"vault.insert_item_fail": "",
 			"vault.open_shutter": "",
 			"vault.place": "",
-			"vault.step": ""
+			"vault.step": "",
+			"wind_charge.burst": ""
 		},
 		"loot_table": {
 			"chests/trial_chambers/corridor": "",
@@ -294,6 +309,8 @@
 			"dispensers/trial_chambers/corridor": "",
 			"dispensers/trial_chambers/water": "",
 			"entities/armadillo_brush": "",
+			"entities/bogged": "",
+			"entities/breeze": "",
 			"pots/trial_chambers/corridor": "",
 			"spawners/trial_chamber/consumables": "",
 			"spawners/trial_chamber/key": ""
@@ -309,6 +326,8 @@
 			"\"dispensers/trial_chambers/corridor\"": "",
 			"\"dispensers/trial_chambers/water\"": "",
 			"\"entities/armadillo_brush\"": "",
+			"\"entities/bogged\"": "",
+			"\"entities/breeze\"": "",
 			"\"pots/trial_chambers/corridor\"": "",
 			"\"spawners/trial_chamber/consumables\"": "",
 			"\"spawners/trial_chamber/key\"": ""
@@ -392,13 +411,16 @@
 		},
 		"summonable_entity": {
 			"armadillo": "犰狳",
+			"bogged": "Bogged",
 			"breeze": "旋风人",
 			"minecraft:armadillo": "犰狳",
+			"minecraft:bogged": "Bogged",
 			"minecraft:breeze": "旋风人"
 		},
 		"loot_tool": {
 			"minecraft:armadillo_scute": "犰狳鳞甲",
 			"minecraft:armadillo_spawn_egg": "犰狳刷怪蛋",
+			"minecraft:bogged_spawn_egg": "Bogged Spawn Egg",
 			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
@@ -457,6 +479,7 @@
 			"minecraft:weathered_copper_door": "锈蚀的铜门",
 			"minecraft:weathered_copper_grate": "锈蚀的铜格栅",
 			"minecraft:weathered_copper_trapdoor": "锈蚀的铜活板门",
+			"minecraft:wind_charge": "风弹",
 			"minecraft:wolf_armor": "狼铠"
 		}
 	},
@@ -466,16 +489,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.70.22",
-			"packageVersion": "1.20.70.22"
+			"coreVersion": "1.20.70.24",
+			"packageVersion": "1.20.70.24"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.70.22",
-			"packageVersion": "1.20.70.22"
+			"coreVersion": "1.20.70.24",
+			"packageVersion": "1.20.70.24"
 		}
 	}
 }

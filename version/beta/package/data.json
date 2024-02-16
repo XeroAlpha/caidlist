@@ -16778,6 +16778,7 @@
             "break.suspicious_gravel",
             "break.suspicious_sand",
             "break.tuff",
+            "breeze_wind_charge.burst",
             "brush.generic",
             "brush.suspicious_gravel",
             "brush.suspicious_sand",
@@ -16905,7 +16906,6 @@
             "drip.water.pointed_dripstone",
             "elytra.loop",
             "entity.generic.splash",
-            "entity.wind_burst.burst",
             "entity.wither_skeleton.ambient",
             "entity.wither_skeleton.death",
             "entity.wither_skeleton.hurt",
@@ -17196,6 +17196,10 @@
             "mob.blaze.death",
             "mob.blaze.hit",
             "mob.blaze.shoot",
+            "mob.bogged.ambient",
+            "mob.bogged.death",
+            "mob.bogged.hurt",
+            "mob.bogged.step",
             "mob.breeze.charge",
             "mob.breeze.death",
             "mob.breeze.deflect",
@@ -17952,6 +17956,7 @@
             "vault.place",
             "vault.step",
             "vr.stutterturn",
+            "wind_charge.burst",
         ],
         "particleEmitters": [
             "minecraft:arrow_spell_emitter",
@@ -17969,6 +17974,7 @@
             "minecraft:breaking_item_icon",
             "minecraft:breaking_item_terrain",
             "minecraft:breeze_ground_particle",
+            "minecraft:breeze_wind_explosion_emitter",
             "minecraft:bubble_column_bubble",
             "minecraft:bubble_column_down_particle",
             "minecraft:bubble_column_up_particle",
@@ -18243,6 +18249,8 @@
             "entities/bat",
             "entities/blaze",
             "entities/boat",
+            "entities/bogged",
+            "entities/breeze",
             "entities/brown_mooshroom_shear",
             "entities/cat",
             "entities/cat_gift",
@@ -20247,6 +20255,9 @@
             "geometry.boat": [
                 "minecraft:boat<default>",
             ],
+            "geometry.bogged.armor": [
+                "minecraft:bogged<overlay>",
+            ],
             "geometry.bow_pulling_0": [],
             "geometry.bow_pulling_1": [],
             "geometry.bow_pulling_2": [],
@@ -20528,6 +20539,9 @@
                 "minecraft:silverfish<default>",
             ],
             "geometry.skeleton": [],
+            "geometry.skeleton.bogged": [
+                "minecraft:bogged<default>",
+            ],
             "geometry.skeleton.stray": [],
             "geometry.skeleton.stray.v1.8": [
                 "minecraft:stray<default>",
@@ -20611,6 +20625,7 @@
                 "minecraft:warden<default>",
             ],
             "geometry.wind_charge": [
+                "minecraft:breeze_wind_charge_projectile<default>",
                 "minecraft:wind_charge_projectile<default>",
             ],
             "geometry.witherBoss": [
@@ -21150,6 +21165,7 @@
             ],
             "animation.horse.walk": [],
             "animation.humanoid.attack.rotations": [
+                "minecraft:bogged<attack.rotations>",
                 "minecraft:enderman<attack.rotations>",
                 "minecraft:husk<attack.rotations>",
                 "minecraft:pillager<attack.rotations>",
@@ -21185,6 +21201,7 @@
             ],
             "animation.humanoid.big_head.v1.0": [],
             "animation.humanoid.bob": [
+                "minecraft:bogged<bob>",
                 "minecraft:drowned<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob>",
@@ -21202,6 +21219,7 @@
             ],
             "animation.humanoid.bob.v1.0": [],
             "animation.humanoid.bow_and_arrow": [
+                "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow>",
                 "minecraft:player<bow_and_arrow>",
                 "minecraft:skeleton<bow_and_arrow>",
@@ -21215,6 +21233,7 @@
             ],
             "animation.humanoid.bow_and_arrow.v1.0": [],
             "animation.humanoid.brandish_spear": [
+                "minecraft:bogged<brandish_spear>",
                 "minecraft:drowned<brandish_spear>",
                 "minecraft:husk<brandish_spear>",
                 "minecraft:player<brandish_spear>",
@@ -21235,6 +21254,7 @@
                 "minecraft:vindicator<celebrating>",
             ],
             "animation.humanoid.charging": [
+                "minecraft:bogged<charging>",
                 "minecraft:drowned<charging>",
                 "minecraft:husk<charging>",
                 "minecraft:player<charging>",
@@ -21249,6 +21269,7 @@
             ],
             "animation.humanoid.charging.v1.0": [],
             "animation.humanoid.damage_nearby_mobs": [
+                "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:drowned<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs>",
                 "minecraft:player<damage_nearby_mobs>",
@@ -21264,6 +21285,7 @@
             "animation.humanoid.damage_nearby_mobs.v1.0": [],
             "animation.humanoid.fishing_rod": [],
             "animation.humanoid.holding": [
+                "minecraft:bogged<holding>",
                 "minecraft:drowned<holding>",
                 "minecraft:husk<holding>",
                 "minecraft:pillager<holding>",
@@ -21280,6 +21302,7 @@
             "animation.humanoid.holding_brush": [],
             "animation.humanoid.holding_spyglass": [],
             "animation.humanoid.look_at_target.default": [
+                "minecraft:bogged<look_at_target_default>",
                 "minecraft:drowned<look_at_target_default>",
                 "minecraft:enderman<look_at_target_default>",
                 "minecraft:husk<look_at_target_default>",
@@ -21299,6 +21322,7 @@
             ],
             "animation.humanoid.look_at_target.default.v1.0": [],
             "animation.humanoid.look_at_target.gliding": [
+                "minecraft:bogged<look_at_target_gliding>",
                 "minecraft:drowned<look_at_target_gliding>",
                 "minecraft:enderman<look_at_target_gliding>",
                 "minecraft:husk<look_at_target_gliding>",
@@ -21318,6 +21342,7 @@
             ],
             "animation.humanoid.look_at_target.gliding.v1.0": [],
             "animation.humanoid.look_at_target.swimming": [
+                "minecraft:bogged<look_at_target_swimming>",
                 "minecraft:drowned<look_at_target_swimming>",
                 "minecraft:enderman<look_at_target_swimming>",
                 "minecraft:husk<look_at_target_swimming>",
@@ -21337,6 +21362,7 @@
             ],
             "animation.humanoid.look_at_target.swimming.v1.0": [],
             "animation.humanoid.move": [
+                "minecraft:bogged<move>",
                 "minecraft:drowned<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move>",
@@ -21352,6 +21378,7 @@
             ],
             "animation.humanoid.move.v1.0": [],
             "animation.humanoid.riding.arms": [
+                "minecraft:bogged<riding.arms>",
                 "minecraft:drowned<riding.arms>",
                 "minecraft:husk<riding.arms>",
                 "minecraft:piglin<riding.arms>",
@@ -21368,6 +21395,7 @@
             ],
             "animation.humanoid.riding.arms.v1.0": [],
             "animation.humanoid.riding.legs": [
+                "minecraft:bogged<riding.legs>",
                 "minecraft:drowned<riding.legs>",
                 "minecraft:husk<riding.legs>",
                 "minecraft:piglin<riding.legs>",
@@ -21384,6 +21412,7 @@
             ],
             "animation.humanoid.riding.legs.v1.0": [],
             "animation.humanoid.sneaking": [
+                "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
@@ -21403,6 +21432,7 @@
             ],
             "animation.humanoid.tooting_goat_horn": [],
             "animation.humanoid.use_item_progress": [
+                "minecraft:bogged<use_item_progress>",
                 "minecraft:drowned<use_item_progress>",
                 "minecraft:husk<use_item_progress>",
                 "minecraft:player<use_item_progress>",
@@ -21813,6 +21843,7 @@
                 "minecraft:silverfish<move>",
             ],
             "animation.skeleton.attack": [
+                "minecraft:bogged<skeleton_attack>",
                 "minecraft:player<skeleton_attack>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
@@ -21985,6 +22016,7 @@
                 "minecraft:warden<sonic_boom>",
             ],
             "animation.wind_charge.rotate": [
+                "minecraft:breeze_wind_charge_projectile<rotate>",
                 "minecraft:wind_charge_projectile<rotate>",
             ],
             "animation.witch.general": [
@@ -22039,6 +22071,7 @@
                 "minecraft:zombie_villager_v2<zombie_attack_bare_hand>",
             ],
             "animation.zombie.swimming": [
+                "minecraft:bogged<swimming>",
                 "minecraft:drowned<swimming>",
                 "minecraft:husk<swimming>",
                 "minecraft:skeleton<swimming>",
@@ -22204,6 +22237,7 @@
                 "minecraft:hoglin<walk>",
             ],
             "controller.animation.humanoid.attack": [
+                "minecraft:bogged<attack>",
                 "minecraft:enderman<attack>",
                 "minecraft:husk<attack>",
                 "minecraft:pillager<controller_attack>",
@@ -22230,6 +22264,7 @@
                 "minecraft:zombie_villager_v2<humanoid_base_pose>",
             ],
             "controller.animation.humanoid.bob": [
+                "minecraft:bogged<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob>",
                 "minecraft:pillager<controller_bob>",
@@ -22242,6 +22277,7 @@
                 "minecraft:zombie_villager_v2<bob>",
             ],
             "controller.animation.humanoid.bow_and_arrow": [
+                "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
@@ -22253,6 +22289,7 @@
                 "minecraft:zombie_villager_v2<bow_and_arrow>",
             ],
             "controller.animation.humanoid.brandish_spear": [
+                "minecraft:bogged<brandish_spear>",
                 "minecraft:husk<brandish_spear>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
@@ -22264,6 +22301,7 @@
                 "minecraft:zombie_villager_v2<brandish_spear>",
             ],
             "controller.animation.humanoid.charging": [
+                "minecraft:bogged<charging>",
                 "minecraft:husk<charging>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
@@ -22275,6 +22313,7 @@
                 "minecraft:zombie_villager_v2<charging>",
             ],
             "controller.animation.humanoid.damage_nearby_mobs": [
+                "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
@@ -22286,6 +22325,7 @@
                 "minecraft:zombie_villager_v2<damage_nearby_mobs>",
             ],
             "controller.animation.humanoid.holding": [
+                "minecraft:bogged<holding>",
                 "minecraft:husk<holding>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
@@ -22298,6 +22338,7 @@
             ],
             "controller.animation.humanoid.holding_spyglass": [],
             "controller.animation.humanoid.look_at_target": [
+                "minecraft:bogged<look_at_target>",
                 "minecraft:drowned<look_at_target>",
                 "minecraft:enderman<look_at_target>",
                 "minecraft:husk<look_at_target>",
@@ -22316,6 +22357,7 @@
                 "minecraft:zombie_villager_v2<look_at_target>",
             ],
             "controller.animation.humanoid.move": [
+                "minecraft:bogged<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move>",
                 "minecraft:pillager<controller_move>",
@@ -22329,6 +22371,7 @@
                 "minecraft:zombie_villager_v2<move>",
             ],
             "controller.animation.humanoid.riding": [
+                "minecraft:bogged<riding>",
                 "minecraft:husk<riding>",
                 "minecraft:piglin<riding_controller>",
                 "minecraft:piglin_brute<riding_controller>",
@@ -22345,6 +22388,7 @@
             ],
             "controller.animation.humanoid.riding_legs_only": [],
             "controller.animation.humanoid.sneaking": [
+                "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
@@ -22359,6 +22403,7 @@
                 "minecraft:vex<swimming>",
             ],
             "controller.animation.humanoid.use_item_progress": [
+                "minecraft:bogged<use_item_progress>",
                 "minecraft:husk<use_item_progress>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
@@ -22495,6 +22540,7 @@
                 "minecraft:silverfish<move>",
             ],
             "controller.animation.skeleton.attack": [
+                "minecraft:bogged<skeleton_attack>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
             "controller.animation.sniffer.baby": [
@@ -22639,6 +22685,7 @@
                 "minecraft:zombie_villager_v2<zombie_attack_bare_hand>",
             ],
             "controller.animation.zombie.swimming": [
+                "minecraft:bogged<swimming>",
                 "minecraft:husk<swimming>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
@@ -22678,6 +22725,12 @@
             ],
             "controller.render.blaze": [
                 "minecraft:blaze",
+            ],
+            "controller.render.bogged": [
+                "minecraft:bogged",
+            ],
+            "controller.render.bogged_clothes": [
+                "minecraft:bogged",
             ],
             "controller.render.bow": [],
             "controller.render.breeze": [
@@ -23010,6 +23063,7 @@
                 "minecraft:warden",
             ],
             "controller.render.wind_charge": [
+                "minecraft:breeze_wind_charge_projectile",
                 "minecraft:wind_charge_projectile",
             ],
             "controller.render.witch": [
@@ -23569,6 +23623,7 @@
                 "minecraft:bee",
                 "minecraft:blaze",
                 "minecraft:boat",
+                "minecraft:bogged",
                 "minecraft:camel",
                 "minecraft:cat",
                 "minecraft:cave_spider",
@@ -23765,6 +23820,7 @@
                 "minecraft:horse",
             ],
             "minecraft:melee_mode": [
+                "minecraft:bogged",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -23909,6 +23965,7 @@
                 "minecraft:witch",
             ],
             "minecraft:ranged_mode": [
+                "minecraft:bogged",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -24466,6 +24523,9 @@
                 "minecraft:boat",
                 "minecraft:chest_boat",
             ],
+            "bogged": [
+                "minecraft:bogged",
+            ],
             "breeze": [
                 "minecraft:breeze",
             ],
@@ -24661,6 +24721,7 @@
                 "minecraft:bee",
                 "minecraft:bee<countdown_to_perish>",
                 "minecraft:blaze",
+                "minecraft:bogged",
                 "minecraft:breeze",
                 "minecraft:camel",
                 "minecraft:cat",
@@ -24794,6 +24855,7 @@
             ],
             "monster": [
                 "minecraft:blaze",
+                "minecraft:bogged",
                 "minecraft:breeze",
                 "minecraft:cave_spider",
                 "minecraft:creeper",
@@ -24958,6 +25020,7 @@
                 "minecraft:silverfish",
             ],
             "skeleton": [
+                "minecraft:bogged",
                 "minecraft:skeleton",
                 "minecraft:stray",
                 "minecraft:wither",
@@ -25026,6 +25089,7 @@
                 "minecraft:turtle<minecraft:baby>",
             ],
             "undead": [
+                "minecraft:bogged",
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:phantom",
@@ -25125,9 +25189,11 @@
                 "minecraft:zombie_villager_v2<weaponsmith>",
             ],
             "wind_charge": [
+                "minecraft:breeze_wind_charge_projectile",
                 "minecraft:wind_charge_projectile",
             ],
             "wind_charge_projectile": [
+                "minecraft:breeze_wind_charge_projectile",
                 "minecraft:wind_charge_projectile",
             ],
             "witch": [

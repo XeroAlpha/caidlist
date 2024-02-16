@@ -1,7 +1,7 @@
 import { WSServer, MinecraftDataType } from 'mcpews';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus } from '../util/common.js';
+import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus, pause } from '../util/common.js';
 import { adbShell } from '../util/adb.js';
 import * as support from './support.js';
 
@@ -138,20 +138,31 @@ async function doWSRelatedJobs(cx, session) {
 export async function createExclusiveWSSession(device) {
     const port = await getPort({ port: 19134 });
     const wsServer = new WSServer(port);
-    const sessionPromise = pEvent(wsServer, 'client');
+    let session;
     if (device) {
         log('Connecting to wsserver: /connect 127.0.0.1:19134');
-        await device.reverse('tcp:19134', `tcp:${port}`);
-        setStatus('Simulating user actions...');
-        await adbShell(device, 'input keyevent KEYCODE_SLASH');
-        await sleepAsync(5000);
-        await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
-        await adbShell(device, 'input keyevent KEYCODE_ENTER');
+        for (;;) {
+            try {
+                const sessionPromise = pEvent(wsServer, 'client', { timeout: 10000 });
+                await device.reverse('tcp:19134', `tcp:${port}`);
+                setStatus('Simulating user actions...');
+                await adbShell(device, 'input keyevent KEYCODE_SLASH');
+                await sleepAsync(3000);
+                await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
+                await adbShell(device, 'input keyevent KEYCODE_ENTER');
+                ({ session } = await sessionPromise);
+                break;
+            } catch (err) {
+                setStatus('');
+                log(`Device connect failed: ${err}`);
+                await pause('Please reset UI to initial state and retry');
+            }
+        }
     } else {
         log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
+        setStatus('Waiting for client...');
+        ({ session } = await pEvent(wsServer, 'client'));
     }
-    setStatus('Waiting for client...');
-    const { session } = await sessionPromise;
     setStatus('');
     session.on('disconnect', () => {
         wsServer.close();
