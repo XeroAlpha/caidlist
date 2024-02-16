@@ -96,7 +96,8 @@ const gtMapNames = [
     ['entity', '实体'],
     ['blockState', '方块状态'],
     ['blockTag', '方块标签'],
-    ['itemTag', '物品标签']
+    ['itemTag', '物品标签'],
+    ['cooldownCategory', '物品冷却类别']
 ];
 async function generateBranchedOutputFiles(cx) {
     const { version, branch, versionInfo } = cx;
@@ -686,6 +687,33 @@ async function generateGameTestOutputFiles(cx) {
         translationMap: userTranslation.itemTag,
         stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         autoMatch: []
+    });
+    const cooldownCategories = {};
+    Object.entries(ids.items).forEach(([itemId, item]) => {
+        const { cooldownCategory } = item;
+        if (cooldownCategory) {
+            let categoryMap = cooldownCategories[cooldownCategory];
+            if (!categoryMap) {
+                categoryMap = [];
+                cooldownCategories[cooldownCategory] = categoryMap;
+            }
+            categoryMap.push(itemId);
+        }
+    });
+    matchTranslations({
+        ...commonOptions,
+        name: 'cooldownCategory',
+        originalArray: Object.keys(cooldownCategories),
+        translationMap: userTranslation.cooldownCategory,
+        stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
+        autoMatch: [],
+        postProcessor(cooldownCategoryItems) {
+            forEachObject(cooldownCategoryItems, (value, key) => {
+                if (value) return;
+                const comment = `from: ${cooldownCategories[key].join(', ')}`;
+                setInlineCommentAfterField(userTranslation.cooldownCategory, key, comment);
+            });
+        }
     });
     delete translationResultMaps.glossary;
 

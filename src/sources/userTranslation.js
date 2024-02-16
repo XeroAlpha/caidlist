@@ -30,6 +30,7 @@ const userTranslationStorageKey = {
     recipe: 'translation.recipe',
     hudElement: 'translation.hud_element',
     lootTable: 'translation.loot_table',
+    cooldownCategory: 'translation.cooldown_category',
     langParity: 'translation.lang_parity',
     documentation: 'translation.documentation'
 };
