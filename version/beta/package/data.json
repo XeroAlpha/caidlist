@@ -23,6 +23,9 @@
             "ambient.weather.lightning.impact",
             "ambient.weather.rain",
             "ambient.weather.thunder",
+            "armor.break_wolf",
+            "armor.crack_wolf",
+            "armor.damage_wolf",
             "armor.equip_chain",
             "armor.equip_diamond",
             "armor.equip_generic",
@@ -30,6 +33,9 @@
             "armor.equip_iron",
             "armor.equip_leather",
             "armor.equip_netherite",
+            "armor.equip_wolf",
+            "armor.repair_wolf",
+            "armor.unequip_wolf",
             "beacon.activate",
             "beacon.ambient",
             "beacon.deactivate",
@@ -533,6 +539,19 @@
             "mob.allay.item_given",
             "mob.allay.item_taken",
             "mob.allay.item_thrown",
+            "mob.armadillo.ambient",
+            "mob.armadillo.brush",
+            "mob.armadillo.death",
+            "mob.armadillo.eat",
+            "mob.armadillo.hurt",
+            "mob.armadillo.hurt_reduced",
+            "mob.armadillo.land",
+            "mob.armadillo.peek",
+            "mob.armadillo.roll",
+            "mob.armadillo.scute_drop",
+            "mob.armadillo.step",
+            "mob.armadillo.unroll_finish",
+            "mob.armadillo.unroll_start",
             "mob.armor_stand.break",
             "mob.armor_stand.hit",
             "mob.armor_stand.land",
@@ -1539,6 +1558,7 @@
             "chests/village_two_room_house",
             "chests/woodland_mansion",
             "empty",
+            "entities/armadillo_brush",
             "entities/armor_set_chain",
             "entities/armor_set_diamond",
             "entities/armor_set_gold",
@@ -2043,6 +2063,7 @@
             "minecraft:Torch_charcoal_recipeId": "<crafting_table>stick+charcoal->torch*4",
             "minecraft:Torch_recipeId": "<crafting_table>stick+coal->torch*4",
             "minecraft:WorkBench_recipeId": "<crafting_table>tag:planks*4->crafting_table",
+            "minecraft:WorkBench_recipeId_from_oak": "<crafting_table>oak_planks*4->crafting_table",
             "minecraft:acacia_boat": "<crafting_table>planks:4*5->boat:4",
             "minecraft:acacia_chest_boat": "<crafting_table>chest+boat:4~>chest_boat:4",
             "minecraft:acacia_door": "<crafting_table>planks:4*6->acacia_door*3",
@@ -3381,6 +3402,7 @@
             "minecraft:white_stained_hardened_clay": "<crafting_table>hardened_clay*8+dye:19->stained_hardened_clay:0*8",
             "minecraft:white_stained_hardened_clay_from_bonemeal": "<crafting_table>hardened_clay*8+dye:15->stained_hardened_clay:0*8",
             "minecraft:wild_armor_trim_smithing_template_duplicate": "<crafting_table>wild_armor_trim_smithing_template+diamond*7+mossy_cobblestone->wild_armor_trim_smithing_template*2",
+            "minecraft:wolf_armor": "<crafting_table>armadillo_scute*6->wolf_armor",
             "minecraft:wooden_axe": "<crafting_table>stick*2+tag:planks*3->wooden_axe",
             "minecraft:wooden_axe_from_crimson_planks": "<crafting_table>crimson_planks*3+stick*2->wooden_axe",
             "minecraft:wooden_axe_from_mangrove_planks": "<crafting_table>mangrove_planks*3+stick*2->wooden_axe",
@@ -3422,6 +3444,9 @@
             ],
             "geometry.allay": [
                 "minecraft:allay<default>",
+            ],
+            "geometry.armadillo": [
+                "minecraft:armadillo<default>",
             ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>",
@@ -3810,6 +3835,7 @@
             "geometry.wolf": [
                 "minecraft:wolf<default>",
             ],
+            "geometry.wolf.armor": [],
             "geometry.zombie": [],
             "geometry.zombie.drowned": [],
             "geometry.zombie.drowned.v1.16": [
@@ -3865,6 +3891,27 @@
                 "minecraft:allay<idle>",
             ],
             "animation.allay.look_at_target.default": [],
+            "animation.armadillo.look_at_target": [
+                "minecraft:armadillo<look_at_target>",
+            ],
+            "animation.armadillo.peek": [
+                "minecraft:armadillo<peek>",
+            ],
+            "animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up>",
+            ],
+            "animation.armadillo.rolled_up": [
+                "minecraft:armadillo<rolled_up>",
+            ],
+            "animation.armadillo.unroll": [
+                "minecraft:armadillo<unroll>",
+            ],
+            "animation.armadillo.unroll_fast": [
+                "minecraft:armadillo<unroll_fast>",
+            ],
+            "animation.armadillo.walk": [
+                "minecraft:armadillo<walk>",
+            ],
             "animation.armor.boots.offset": [],
             "animation.armor.chestplate.offset": [],
             "animation.armor.helmet.offset": [],
@@ -5193,6 +5240,12 @@
                 "minecraft:allay<holding>",
             ],
             "controller.animation.allay.look_at_target": [],
+            "controller.animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up_controller>",
+            ],
+            "controller.animation.armadillo.walk": [
+                "minecraft:armadillo<walk_controller>",
+            ],
             "controller.animation.armor_stand.pose": [
                 "minecraft:armor_stand<controller.pose>",
             ],
@@ -5760,6 +5813,9 @@
             "controller.render.allay": [
                 "minecraft:allay",
             ],
+            "controller.render.armadillo": [
+                "minecraft:armadillo",
+            ],
             "controller.render.armor": [],
             "controller.render.armor.leather": [],
             "controller.render.armor_stand": [
@@ -6118,6 +6174,7 @@
             "controller.render.wolf": [
                 "minecraft:wolf",
             ],
+            "controller.render.wolf_armor": [],
             "controller.render.zoglin": [
                 "minecraft:zoglin",
             ],
@@ -6284,6 +6341,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:ageable_grow_up": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -6393,6 +6451,9 @@
                 "minecraft:trader_llama",
                 "minecraft:wolf",
                 "minecraft:zombie_pigman",
+            ],
+            "minecraft:become_armorable": [
+                "minecraft:wolf",
             ],
             "minecraft:become_armorer": [
                 "minecraft:villager_v2",
@@ -6604,6 +6665,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:entity_born": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -6638,6 +6700,7 @@
             ],
             "minecraft:entity_spawned": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:arrow",
                 "minecraft:axolotl",
                 "minecraft:bee",
@@ -6855,6 +6918,9 @@
             "minecraft:navigation_on_land": [
                 "minecraft:dolphin",
             ],
+            "minecraft:no_threat_detected": [
+                "minecraft:armadillo",
+            ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
             ],
@@ -6988,6 +7054,9 @@
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
             ],
+            "minecraft:roll_up": [
+                "minecraft:armadillo",
+            ],
             "minecraft:schedule_bed_villager": [
                 "minecraft:villager_v2",
             ],
@@ -7026,6 +7095,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:spawn_adult": [
+                "minecraft:armadillo",
                 "minecraft:bee",
                 "minecraft:camel",
                 "minecraft:chicken",
@@ -7052,6 +7122,7 @@
                 "minecraft:zombie_pigman",
             ],
             "minecraft:spawn_baby": [
+                "minecraft:armadillo",
                 "minecraft:llama",
                 "minecraft:trader_llama",
             ],
@@ -7167,6 +7238,9 @@
             "minecraft:start_land": [
                 "minecraft:ender_dragon",
             ],
+            "minecraft:start_peeking": [
+                "minecraft:armadillo",
+            ],
             "minecraft:start_roar": [
                 "minecraft:ravager",
             ],
@@ -7176,6 +7250,9 @@
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
+            ],
+            "minecraft:start_unrolling": [
+                "minecraft:armadillo",
             ],
             "minecraft:stop_aggro": [
                 "minecraft:vindicator",
@@ -7198,6 +7275,9 @@
             "minecraft:stop_johnny": [
                 "minecraft:vindicator",
             ],
+            "minecraft:stop_peeking": [
+                "minecraft:armadillo",
+            ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
             ],
@@ -7216,6 +7296,9 @@
             ],
             "minecraft:target_too_close": [
                 "minecraft:guardian",
+            ],
+            "minecraft:threat_detected": [
+                "minecraft:armadillo",
             ],
             "minecraft:to_full_puff": [
                 "minecraft:pufferfish",
@@ -7270,6 +7353,9 @@
             ],
             "minecraft:turn_yellow": [
                 "minecraft:shulker",
+            ],
+            "minecraft:unroll": [
+                "minecraft:armadillo",
             ],
             "navigation_off_land": [
                 "minecraft:dolphin",
@@ -7449,6 +7535,9 @@
             ],
             "animal": [
                 "minecraft:goat",
+            ],
+            "armadillo": [
+                "minecraft:armadillo",
             ],
             "armor_stand": [
                 "minecraft:armor_stand",
@@ -7687,6 +7776,7 @@
             ],
             "mob": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:armor_stand",
                 "minecraft:axolotl",
                 "minecraft:bat",
@@ -8243,6 +8333,11 @@
             ],
         },
         "entityPropertyDescMap": {
+            "minecraft:armadillo_state": {
+                "minecraft:armadillo": {
+                    "type": "enum",
+                },
+            },
             "minecraft:has_increased_max_health": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -8250,6 +8345,11 @@
             },
             "minecraft:has_nectar": {
                 "minecraft:bee": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:is_armorable": {
+                "minecraft:wolf": {
                     "type": "bool",
                 },
             },
@@ -8279,6 +8379,9 @@
             "ambient.weather.lightning.impact",
             "ambient.weather.rain",
             "ambient.weather.thunder",
+            "armor.break_wolf",
+            "armor.crack_wolf",
+            "armor.damage_wolf",
             "armor.equip_chain",
             "armor.equip_diamond",
             "armor.equip_generic",
@@ -8286,6 +8389,9 @@
             "armor.equip_iron",
             "armor.equip_leather",
             "armor.equip_netherite",
+            "armor.equip_wolf",
+            "armor.repair_wolf",
+            "armor.unequip_wolf",
             "balloon.pop",
             "beacon.activate",
             "beacon.ambient",
@@ -8792,6 +8898,19 @@
             "mob.allay.item_given",
             "mob.allay.item_taken",
             "mob.allay.item_thrown",
+            "mob.armadillo.ambient",
+            "mob.armadillo.brush",
+            "mob.armadillo.death",
+            "mob.armadillo.eat",
+            "mob.armadillo.hurt",
+            "mob.armadillo.hurt_reduced",
+            "mob.armadillo.land",
+            "mob.armadillo.peek",
+            "mob.armadillo.roll",
+            "mob.armadillo.scute_drop",
+            "mob.armadillo.step",
+            "mob.armadillo.unroll_finish",
+            "mob.armadillo.unroll_start",
             "mob.armor_stand.break",
             "mob.armor_stand.hit",
             "mob.armor_stand.land",
@@ -9799,6 +9918,7 @@
             "chests/village_two_room_house",
             "chests/woodland_mansion",
             "empty",
+            "entities/armadillo_brush",
             "entities/armor_set_chain",
             "entities/armor_set_diamond",
             "entities/armor_set_gold",
@@ -10303,6 +10423,7 @@
             "minecraft:Torch_charcoal_recipeId": "<crafting_table>stick+charcoal->torch*4",
             "minecraft:Torch_recipeId": "<crafting_table>stick+coal->torch*4",
             "minecraft:WorkBench_recipeId": "<crafting_table>tag:planks*4->crafting_table",
+            "minecraft:WorkBench_recipeId_from_oak": "<crafting_table>oak_planks*4->crafting_table",
             "minecraft:acacia_boat": "<crafting_table>planks:4*5->boat:4",
             "minecraft:acacia_chest_boat": "<crafting_table>chest+boat:4~>chest_boat:4",
             "minecraft:acacia_door": "<crafting_table>planks:4*6->acacia_door*3",
@@ -11725,6 +11846,7 @@
             "minecraft:white_stained_hardened_clay": "<crafting_table>hardened_clay*8+dye:19->stained_hardened_clay:0*8",
             "minecraft:white_stained_hardened_clay_from_bonemeal": "<crafting_table>hardened_clay*8+dye:15->stained_hardened_clay:0*8",
             "minecraft:wild_armor_trim_smithing_template_duplicate": "<crafting_table>wild_armor_trim_smithing_template+diamond*7+mossy_cobblestone->wild_armor_trim_smithing_template*2",
+            "minecraft:wolf_armor": "<crafting_table>armadillo_scute*6->wolf_armor",
             "minecraft:wood": "<material_reducer>wood->element_6*49+element_1*6+element_8*44+element_7",
             "minecraft:wooden_axe": "<crafting_table>stick*2+tag:planks*3->wooden_axe",
             "minecraft:wooden_axe_from_crimson_planks": "<crafting_table>crimson_planks*3+stick*2->wooden_axe",
@@ -11769,6 +11891,9 @@
             ],
             "geometry.allay": [
                 "minecraft:allay<default>",
+            ],
+            "geometry.armadillo": [
+                "minecraft:armadillo<default>",
             ],
             "geometry.armor_stand": [
                 "minecraft:armor_stand<default>",
@@ -12161,6 +12286,7 @@
             "geometry.wolf": [
                 "minecraft:wolf<default>",
             ],
+            "geometry.wolf.armor": [],
             "geometry.zombie": [],
             "geometry.zombie.drowned": [],
             "geometry.zombie.drowned.v1.16": [
@@ -12217,6 +12343,27 @@
                 "minecraft:allay<idle>",
             ],
             "animation.allay.look_at_target.default": [],
+            "animation.armadillo.look_at_target": [
+                "minecraft:armadillo<look_at_target>",
+            ],
+            "animation.armadillo.peek": [
+                "minecraft:armadillo<peek>",
+            ],
+            "animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up>",
+            ],
+            "animation.armadillo.rolled_up": [
+                "minecraft:armadillo<rolled_up>",
+            ],
+            "animation.armadillo.unroll": [
+                "minecraft:armadillo<unroll>",
+            ],
+            "animation.armadillo.unroll_fast": [
+                "minecraft:armadillo<unroll_fast>",
+            ],
+            "animation.armadillo.walk": [
+                "minecraft:armadillo<walk>",
+            ],
             "animation.armor.boots.offset": [],
             "animation.armor.chestplate.offset": [],
             "animation.armor.helmet.offset": [],
@@ -13545,6 +13692,12 @@
                 "minecraft:allay<holding>",
             ],
             "controller.animation.allay.look_at_target": [],
+            "controller.animation.armadillo.roll_up": [
+                "minecraft:armadillo<roll_up_controller>",
+            ],
+            "controller.animation.armadillo.walk": [
+                "minecraft:armadillo<walk_controller>",
+            ],
             "controller.animation.armor_stand.pose": [
                 "minecraft:armor_stand<controller.pose>",
             ],
@@ -14112,6 +14265,9 @@
             "controller.render.allay": [
                 "minecraft:allay",
             ],
+            "controller.render.armadillo": [
+                "minecraft:armadillo",
+            ],
             "controller.render.armor": [],
             "controller.render.armor.leather": [],
             "controller.render.armor_stand": [
@@ -14474,6 +14630,7 @@
             "controller.render.wolf": [
                 "minecraft:wolf",
             ],
+            "controller.render.wolf_armor": [],
             "controller.render.zoglin": [
                 "minecraft:zoglin",
             ],
@@ -14640,6 +14797,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:ageable_grow_up": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -14749,6 +14907,9 @@
                 "minecraft:trader_llama",
                 "minecraft:wolf",
                 "minecraft:zombie_pigman",
+            ],
+            "minecraft:become_armorable": [
+                "minecraft:wolf",
             ],
             "minecraft:become_armorer": [
                 "minecraft:villager_v2",
@@ -14960,6 +15121,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:entity_born": [
+                "minecraft:armadillo",
                 "minecraft:axolotl",
                 "minecraft:bee",
                 "minecraft:camel",
@@ -14994,6 +15156,7 @@
             ],
             "minecraft:entity_spawned": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:arrow",
                 "minecraft:axolotl",
                 "minecraft:bee",
@@ -15211,6 +15374,9 @@
             "minecraft:navigation_on_land": [
                 "minecraft:dolphin",
             ],
+            "minecraft:no_threat_detected": [
+                "minecraft:armadillo",
+            ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
             ],
@@ -15344,6 +15510,9 @@
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
             ],
+            "minecraft:roll_up": [
+                "minecraft:armadillo",
+            ],
             "minecraft:schedule_bed_villager": [
                 "minecraft:villager_v2",
             ],
@@ -15382,6 +15551,7 @@
                 "minecraft:chest_boat",
             ],
             "minecraft:spawn_adult": [
+                "minecraft:armadillo",
                 "minecraft:bee",
                 "minecraft:camel",
                 "minecraft:chicken",
@@ -15408,6 +15578,7 @@
                 "minecraft:zombie_pigman",
             ],
             "minecraft:spawn_baby": [
+                "minecraft:armadillo",
                 "minecraft:llama",
                 "minecraft:trader_llama",
             ],
@@ -15523,6 +15694,9 @@
             "minecraft:start_land": [
                 "minecraft:ender_dragon",
             ],
+            "minecraft:start_peeking": [
+                "minecraft:armadillo",
+            ],
             "minecraft:start_roar": [
                 "minecraft:ravager",
             ],
@@ -15532,6 +15706,9 @@
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
+            ],
+            "minecraft:start_unrolling": [
+                "minecraft:armadillo",
             ],
             "minecraft:stop_aggro": [
                 "minecraft:vindicator",
@@ -15554,6 +15731,9 @@
             "minecraft:stop_johnny": [
                 "minecraft:vindicator",
             ],
+            "minecraft:stop_peeking": [
+                "minecraft:armadillo",
+            ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
             ],
@@ -15572,6 +15752,9 @@
             ],
             "minecraft:target_too_close": [
                 "minecraft:guardian",
+            ],
+            "minecraft:threat_detected": [
+                "minecraft:armadillo",
             ],
             "minecraft:to_full_puff": [
                 "minecraft:pufferfish",
@@ -15626,6 +15809,9 @@
             ],
             "minecraft:turn_yellow": [
                 "minecraft:shulker",
+            ],
+            "minecraft:unroll": [
+                "minecraft:armadillo",
             ],
             "navigation_off_land": [
                 "minecraft:dolphin",
@@ -15805,6 +15991,9 @@
             ],
             "animal": [
                 "minecraft:goat",
+            ],
+            "armadillo": [
+                "minecraft:armadillo",
             ],
             "armor_stand": [
                 "minecraft:armor_stand",
@@ -16043,6 +16232,7 @@
             ],
             "mob": [
                 "minecraft:allay",
+                "minecraft:armadillo",
                 "minecraft:armor_stand",
                 "minecraft:axolotl",
                 "minecraft:bat",
@@ -16599,6 +16789,11 @@
             ],
         },
         "entityPropertyDescMap": {
+            "minecraft:armadillo_state": {
+                "minecraft:armadillo": {
+                    "type": "enum",
+                },
+            },
             "minecraft:has_increased_max_health": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -16606,6 +16801,11 @@
             },
             "minecraft:has_nectar": {
                 "minecraft:bee": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:is_armorable": {
+                "minecraft:wolf": {
                     "type": "bool",
                 },
             },
@@ -16635,6 +16835,9 @@
             "ambient.weather.lightning.impact",
             "ambient.weather.rain",
             "ambient.weather.thunder",
+            "armor.break_wolf",
+            "armor.crack_wolf",
+            "armor.damage_wolf",
             "armor.equip_chain",
             "armor.equip_diamond",
             "armor.equip_generic",
@@ -16643,6 +16846,7 @@
             "armor.equip_leather",
             "armor.equip_netherite",
             "armor.equip_wolf",
+            "armor.repair_wolf",
             "armor.unequip_wolf",
             "beacon.activate",
             "beacon.ambient",
@@ -18749,6 +18953,7 @@
             "minecraft:Torch_charcoal_recipeId": "<crafting_table>stick+charcoal->torch*4",
             "minecraft:Torch_recipeId": "<crafting_table>stick+coal->torch*4",
             "minecraft:WorkBench_recipeId": "<crafting_table>tag:planks*4->crafting_table",
+            "minecraft:WorkBench_recipeId_from_oak": "<crafting_table>oak_planks*4->crafting_table",
             "minecraft:acacia_boat": "<crafting_table>planks:4*5->boat:4",
             "minecraft:acacia_chest_boat": "<crafting_table>chest+boat:4~>chest_boat:4",
             "minecraft:acacia_door": "<crafting_table>planks:4*6->acacia_door*3",
@@ -20642,9 +20847,7 @@
             "geometry.wolf": [
                 "minecraft:wolf<default>",
             ],
-            "geometry.wolf.armor": [
-                "minecraft:wolf<overlay>",
-            ],
+            "geometry.wolf.armor": [],
             "geometry.zombie": [],
             "geometry.zombie.drowned": [],
             "geometry.zombie.drowned.v1.16": [
@@ -23089,9 +23292,7 @@
             "controller.render.wolf": [
                 "minecraft:wolf",
             ],
-            "controller.render.wolf_armor": [
-                "minecraft:wolf",
-            ],
+            "controller.render.wolf_armor": [],
             "controller.render.zoglin": [
                 "minecraft:zoglin",
             ],
@@ -23842,12 +24043,6 @@
             ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
-            ],
-            "minecraft:on_armor_equip": [
-                "minecraft:wolf",
-            ],
-            "minecraft:on_armor_unequip": [
-                "minecraft:wolf",
             ],
             "minecraft:on_calm": [
                 "minecraft:cave_spider",
@@ -25288,11 +25483,6 @@
             "minecraft:armadillo_state": {
                 "minecraft:armadillo": {
                     "type": "enum",
-                },
-            },
-            "minecraft:has_armor": {
-                "minecraft:wolf": {
-                    "type": "bool",
                 },
             },
             "minecraft:has_increased_max_health": {

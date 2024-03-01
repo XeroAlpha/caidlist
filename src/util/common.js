@@ -21,9 +21,9 @@ function toShortTimeString(date) {
 let isLineDirty = false;
 export function setStatus(statusText) {
     if (process.stdout.isTTY) {
-        process.stdout.clearLine(1);
-        process.stdout.write(statusText.slice(0, process.stdout.columns));
         process.stdout.cursorTo(0);
+        process.stdout.write(statusText.slice(0, process.stdout.columns));
+        process.stdout.clearLine(1);
     } else {
         process.stdout.write(`${statusText}  \r`);
     }

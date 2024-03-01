@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.70.25",
+    "version": "1.20.80.20",
     "content": [],
     "sections": [
         {
@@ -2905,6 +2905,186 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"has_damage\", \"value\": \"fatal\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "has_damaged_equipment",
+                    "id": "has_damaged_equipment",
+                    "level": 2,
+                    "content": [
+                        "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": "",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The item name to look for",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_damaged_equipment\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"dirt\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_damaged_equipment\", \"value\": \"dirt\" }",
                                     ],
                                 },
                             ],
@@ -9345,6 +9525,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"is_riding\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "is_sitting",
+                    "id": "is_sitting",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is sitting.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sitting\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_sitting\" }",
                                     ],
                                 },
                             ],
@@ -23654,21 +23969,21 @@
                                         },
                                         {
                                             "Name": "drop_item_slot",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "The entity's equipment slot to remove and drop the item from, if any, upon successful interaction.",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
                                         },
                                         {
                                             "Name": "equip_item_slot",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "The entity's equipment slot to equip the item to, if any, upon successful interaction.",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
                                         },
                                         {
                                             "Name": "health_amount",
                                             "Type": "Integer",
                                             "Default Value": "0",
-                                            "Description": "The amount of health this entity will recover or hurt when interacting with this item. Negative values will harm the entity.",
+                                            "Description": "The amount of health this entity will recover or lose when interacting with this item. Negative values will harm the entity.",
                                         },
                                         {
                                             "Name": "hurt_item",
@@ -23719,6 +24034,31 @@
                                             "Type": "String",
                                             "Default Value": "",
                                             "Description": "List of sounds to play when the interaction occurs.",
+                                        },
+                                        {
+                                            "Name": "repair_entity_item",
+                                            "Type": "JSON Object",
+                                            "Default Value": "",
+                                            "Description": [
+                                                "Allows to repair one of the entity's items.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "amount",
+                                                            "Type": "Integer",
+                                                            "Default Value": "",
+                                                            "Description": "How much of the item durability should be restored upon interaction.",
+                                                        },
+                                                        {
+                                                            "Name": "slot",
+                                                            "Type": "Integer",
+                                                            "Default Value": "",
+                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                                        },
+                                                    ],
+                                                },
+                                            ],
                                         },
                                         {
                                             "Name": "spawn_entities",
@@ -29153,5 +29493,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "ecaa6f9564ef5d04087061d4f6817c44ac7d5030",
+    "__OBJECTHASH__": "2c9b00fc759f42bd1706c8a312468d55d4923bd2",
 }

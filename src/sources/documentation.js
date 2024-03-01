@@ -577,14 +577,14 @@ const pageAnalyzer = [
         documentation: 'Features',
         path: ['Supported features']
     }),
-    createSectionTableAnalyzer({
-        name: 'itemComponent',
-        documentation: 'Item',
-        path: ['Items', /components v[\d.]+/],
-        tableIndex: 0,
-        idKey: 'Name',
-        descriptionKey: 'Description'
-    }),
+    // createSectionTableAnalyzer({
+    //     name: 'itemComponent',
+    //     documentation: 'Item',
+    //     path: ['Items', /components v[\d.]+/],
+    //     tableIndex: 0,
+    //     idKey: 'Name',
+    //     descriptionKey: 'Description'
+    // }),
     createSectionTableAnalyzer({
         name: 'molangMath',
         documentation: 'Molang',
