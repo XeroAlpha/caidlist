@@ -1,5 +1,4 @@
 import { Transform } from 'stream';
-import sharp from 'sharp';
 import { strict as assert } from 'assert';
 import { recognize } from 'node-tesseract-ocr';
 import { PerformanceObserver, performance } from 'perf_hooks';
@@ -19,7 +18,7 @@ import {
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
-import { ScrcpyPNGStream, openScrcpy, press, waitForScrcpyReady, stopScrcpy, isScrcpyStopped } from '../util/scrcpy.js';
+import { ScrcpyPNGStream, openScrcpy, press, stopScrcpy, isScrcpyStopped, injectText } from '../util/scrcpy.js';
 
 function guessTruncatedString(truncatedStr, startsWith) {
     let spos;
@@ -118,7 +117,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     // 初始状态：游戏HUD
     const autocompletions = [];
     const { commandAreaRect: rect } = cx;
-    const scrcpy = openScrcpy(device);
+    const scrcpy = await openScrcpy(device);
     const imageStream = new ScrcpyPNGStream(scrcpy, [
         '-filter:v', [
             `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
@@ -130,13 +129,13 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
     screen.updateStatus({ approxLength });
 
     log(`Starting ${progressName}: ${command}`);
-    await waitForScrcpyReady(scrcpy);
+    await imageStream.ready;
 
     // 打开聊天栏
     await press(scrcpy, 'KEYCODE_SLASH');
     await sleepAsync(3000);
     screen.log(`Input ${command}`);
-    await scrcpy.injectText(command.replace(/^\//, ''));
+    await injectText(scrcpy, command.replace(/^\//, ''));
 
     let typeahead = aggressiveMode;
     let reactInterval = 0;
@@ -150,7 +149,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
             await press(scrcpy, 'KEYCODE_TAB'); // async
         }
     };
-    let sharpProcessCounter = 0;
+    let imageDiffCounter = 0;
     let ocrProcessCounter = 0;
     const ocrPendingPromises = new Set();
     const imagePipeline = imageStream
@@ -159,34 +158,32 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 objectMode: true,
                 transform(imageData, encoding, done) {
                     const start = performance.now();
-                    const pipe = sharp(imageData);
-                    pipe.raw()
-                        .toBuffer({ resolveWithObject: true })
-                        .then((raw) => {
-                            sharpProcessCounter++;
-                            performance.measure(`sharp-resolve-${sharpProcessCounter}`, { start });
-                            if (!this.lastImage || !raw.data.equals(this.lastImage.data)) {
-                                const now = Date.now();
-                                if (tabWhenChanged) {
-                                    if (!typeahead) {
-                                        pressTab();
-                                    } else {
-                                        typeahead = false;
-                                    }
-                                }
-                                if (this.lastImageTime) {
-                                    reactFrameCount = this.framesBeforeChange;
-                                    reactInterval = now - this.lastImageTime;
-                                }
-                                this.lastImageTime = now;
-                                this.framesBeforeChange = 1;
-                                this.lastImage = raw;
-                                done(null, imageData);
+                    if (!this.lastImage || !imageData.equals(this.lastImage)) {
+                        const now = Date.now();
+                        if (tabWhenChanged) {
+                            if (!typeahead) {
+                                pressTab();
                             } else {
-                                this.framesBeforeChange++;
-                                done();
+                                typeahead = false;
                             }
+                        }
+                        if (this.lastImageTime) {
+                            reactFrameCount = this.framesBeforeChange;
+                            reactInterval = now - this.lastImageTime;
+                        }
+                        this.lastImageTime = now;
+                        this.framesBeforeChange = 1;
+                        this.lastImage = imageData;
+                        imageDiffCounter++;
+                        performance.measure(`image-diff-${imageDiffCounter}`, {
+                            start,
+                            detail: imageData.toString('base64')
                         });
+                        done(null, imageData);
+                    } else {
+                        this.framesBeforeChange++;
+                        done();
+                    }
                     if (typeahead && tabWhenChanged && this.framesBeforeChange % 2 === 0) {
                         pressTab();
                     }

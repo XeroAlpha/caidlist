@@ -131,7 +131,7 @@ async function generateBranchedOutputFiles(cx) {
         originalArray: Object.keys(userTranslation.glossary),
         translationMap: userTranslation.glossary,
         stdTransMap: cascadeMap(standardizedTranslation, [], true),
-        autoMatch: null
+        autoMatch: []
     });
     matchTranslations({
         ...commonOptions,
@@ -287,7 +287,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'particleEmitter',
         originalArray: enums.particleEmitters,
         translationMap: userTranslation.particleEmitter,
-        autoMatch: null
+        autoMatch: []
     });
     matchTranslations({
         ...commonOptions,
@@ -418,7 +418,7 @@ async function generateBranchedOutputFiles(cx) {
             name: 'hudElement',
             originalArray: enums.hudElements,
             translationMap: userTranslation.hudElement,
-            autoMatch: null
+            autoMatch: []
         });
     }
     if (support.eduCommands(cx)) {

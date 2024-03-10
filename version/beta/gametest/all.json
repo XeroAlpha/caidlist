@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.80.20",
+    "packageVersion": "1.20.80.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5260,47 +5260,6 @@
                             },
                             "configurable": false,
                         },
-                        "BlockComponentStepOnEvent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockComponentStepOnEvent",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockComponentStepOnEvent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "entity": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockEvent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockEvent",
-                                },
-                            },
-                            "configurable": false,
-                        },
                         "BlockComponentTypes": {
                             "value": {
                                 "type": "object",
@@ -6267,41 +6226,6 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.BlockType",
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockTypeRegistry": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockTypeRegistry",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockTypeRegistry",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "registerCustomComponent": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -10589,13 +10513,6 @@
                                         },
                                         "readOnly": true,
                                     },
-                                    "MountTaming": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:tamemount",
-                                        },
-                                        "readOnly": true,
-                                    },
                                     "Movement": {
                                         "value": {
                                             "type": "string",
@@ -10768,6 +10685,13 @@
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:strength",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "TameMount": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:tamemount",
                                         },
                                         "readOnly": true,
                                     },
@@ -11727,6 +11651,14 @@
                                                     },
                                                 },
                                                 "hitBlock": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "hitBlockPermutation": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -12968,56 +12900,6 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 1,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.EntityComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.EntityComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "EntityMountTamingComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "EntityMountTamingComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:tamemount",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.EntityMountTamingComponent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "setTamed": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -14940,6 +14822,56 @@
                             },
                             "configurable": false,
                         },
+                        "EntityTameMountComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "EntityTameMountComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:tamemount",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EntityTameMountComponent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "tame": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.EntityComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.EntityComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "EntityTameableComponent": {
                             "value": {
                                 "type": "function",
@@ -16704,6 +16636,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "ItemText": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 12,
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "PaperDoll": {
                                         "value": {
                                             "type": "number",
@@ -16715,6 +16654,13 @@
                                         "value": {
                                             "type": "number",
                                             "value": 7,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "StatusEffects": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 11,
                                         },
                                         "readOnly": true,
                                     },
@@ -16739,7 +16685,7 @@
                         "HudElementsCount": {
                             "value": {
                                 "type": "number",
-                                "value": 11,
+                                "value": 13,
                             },
                             "configurable": false,
                         },
@@ -22398,6 +22344,30 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "saveAs": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "saveToWorld": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setBlockPermutation": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "size": {
                                                     "getter": {
                                                         "type": "function",
@@ -23062,253 +23032,6 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "Vector": {
-                            "value": {
-                                "type": "function",
-                                "name": "Vector",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "add": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "back": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "cross": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "distance": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "divide": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "down": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "forward": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "left": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "lerp": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "max": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "min": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "multiply": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "one": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "right": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "slerp": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "subtract": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "up": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                    "zero": {
-                                        "getter": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.Vector",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "equals": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "length": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "lengthSquared": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "normalized": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "x": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "y": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "z": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
                                                     },
                                                 },
                                             },
@@ -24412,14 +24135,6 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "worldInitialize": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
                                             },
                                             "properties": {
                                                 "constructor": {
@@ -24475,84 +24190,6 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.WorldInitializeAfterEventSignal",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "subscribe": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "unsubscribe": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "WorldInitializeBeforeEvent": {
-                            "value": {
-                                "type": "function",
-                                "name": "WorldInitializeBeforeEvent",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "enumerableProperties": {
-                                                "blockTypeRegistry": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.WorldInitializeBeforeEvent",
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "WorldInitializeBeforeEventSignal": {
-                            "value": {
-                                "type": "function",
-                                "name": "WorldInitializeBeforeEventSignal",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.WorldInitializeBeforeEventSignal",
                                                     },
                                                 },
                                             },
@@ -26574,6 +26211,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "submitButton": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "textField": {
                                                     "value": {
                                                         "type": "function",
@@ -27233,12 +26878,6 @@
         "Minecraft.BlockComponent.prototype.[[Prototype]]",
         "Minecraft.BlockComponent.prototype.block.[[Get]]",
         "Minecraft.BlockComponent.prototype.constructor",
-        "Minecraft.BlockComponentStepOnEvent",
-        "Minecraft.BlockComponentStepOnEvent.[[Prototype]]",
-        "Minecraft.BlockComponentStepOnEvent.prototype",
-        "Minecraft.BlockComponentStepOnEvent.prototype.[[Prototype]]",
-        "Minecraft.BlockComponentStepOnEvent.prototype.constructor",
-        "Minecraft.BlockComponentStepOnEvent.prototype.entity.[[Get]]",
         "Minecraft.BlockComponentTypes",
         "Minecraft.BlockComponentTypes.Inventory",
         "Minecraft.BlockComponentTypes.LavaContainer",
@@ -27368,10 +27007,6 @@
         "Minecraft.BlockType.prototype.canBeWaterlogged.[[Get]]",
         "Minecraft.BlockType.prototype.constructor",
         "Minecraft.BlockType.prototype.id",
-        "Minecraft.BlockTypeRegistry",
-        "Minecraft.BlockTypeRegistry.prototype",
-        "Minecraft.BlockTypeRegistry.prototype.constructor",
-        "Minecraft.BlockTypeRegistry.prototype.registerCustomComponent",
         "Minecraft.BlockTypes",
         "Minecraft.BlockTypes.get",
         "Minecraft.BlockTypes.getAll",
@@ -27929,7 +27564,6 @@
         "Minecraft.EntityComponentTypes.LavaMovement",
         "Minecraft.EntityComponentTypes.Leashable",
         "Minecraft.EntityComponentTypes.MarkVariant",
-        "Minecraft.EntityComponentTypes.MountTaming",
         "Minecraft.EntityComponentTypes.Movement",
         "Minecraft.EntityComponentTypes.MovementAmphibious",
         "Minecraft.EntityComponentTypes.MovementBasic",
@@ -27955,6 +27589,7 @@
         "Minecraft.EntityComponentTypes.Scale",
         "Minecraft.EntityComponentTypes.SkinId",
         "Minecraft.EntityComponentTypes.Strength",
+        "Minecraft.EntityComponentTypes.TameMount",
         "Minecraft.EntityComponentTypes.Tameable",
         "Minecraft.EntityComponentTypes.TypeFamily",
         "Minecraft.EntityComponentTypes.UnderwaterMovement",
@@ -28088,6 +27723,7 @@
         "Minecraft.EntityHitBlockAfterEvent.prototype.constructor",
         "Minecraft.EntityHitBlockAfterEvent.prototype.damagingEntity.[[Get]]",
         "Minecraft.EntityHitBlockAfterEvent.prototype.hitBlock.[[Get]]",
+        "Minecraft.EntityHitBlockAfterEvent.prototype.hitBlockPermutation.[[Get]]",
         "Minecraft.EntityHitBlockAfterEventSignal",
         "Minecraft.EntityHitBlockAfterEventSignal.prototype",
         "Minecraft.EntityHitBlockAfterEventSignal.prototype.constructor",
@@ -28258,13 +27894,6 @@
         "Minecraft.EntityMarkVariantComponent.prototype.constructor",
         "Minecraft.EntityMarkVariantComponent.prototype.value.[[Get]]",
         "Minecraft.EntityMarkVariantComponent.prototype.value.[[Set]]",
-        "Minecraft.EntityMountTamingComponent",
-        "Minecraft.EntityMountTamingComponent.[[Prototype]]",
-        "Minecraft.EntityMountTamingComponent.componentId",
-        "Minecraft.EntityMountTamingComponent.prototype",
-        "Minecraft.EntityMountTamingComponent.prototype.[[Prototype]]",
-        "Minecraft.EntityMountTamingComponent.prototype.constructor",
-        "Minecraft.EntityMountTamingComponent.prototype.setTamed",
         "Minecraft.EntityMovementAmphibiousComponent",
         "Minecraft.EntityMovementAmphibiousComponent.[[Prototype]]",
         "Minecraft.EntityMovementAmphibiousComponent.componentId",
@@ -28530,6 +28159,13 @@
         "Minecraft.EntityStrengthComponent.prototype.constructor",
         "Minecraft.EntityStrengthComponent.prototype.max.[[Get]]",
         "Minecraft.EntityStrengthComponent.prototype.value.[[Get]]",
+        "Minecraft.EntityTameMountComponent",
+        "Minecraft.EntityTameMountComponent.[[Prototype]]",
+        "Minecraft.EntityTameMountComponent.componentId",
+        "Minecraft.EntityTameMountComponent.prototype",
+        "Minecraft.EntityTameMountComponent.prototype.[[Prototype]]",
+        "Minecraft.EntityTameMountComponent.prototype.constructor",
+        "Minecraft.EntityTameMountComponent.prototype.tame",
         "Minecraft.EntityTameableComponent",
         "Minecraft.EntityTameableComponent.[[Prototype]]",
         "Minecraft.EntityTameableComponent.componentId",
@@ -28768,8 +28404,10 @@
         "Minecraft.HudElement.HorseHealth",
         "Minecraft.HudElement.Hotbar",
         "Minecraft.HudElement.Hunger",
+        "Minecraft.HudElement.ItemText",
         "Minecraft.HudElement.PaperDoll",
         "Minecraft.HudElement.ProgressBar",
+        "Minecraft.HudElement.StatusEffects",
         "Minecraft.HudElement.ToolTips",
         "Minecraft.HudElement.TouchControls",
         "Minecraft.HudElementsCount",
@@ -29492,6 +29130,9 @@
         "Minecraft.Structure.prototype.getIsWaterlogged",
         "Minecraft.Structure.prototype.id.[[Get]]",
         "Minecraft.Structure.prototype.isValid",
+        "Minecraft.Structure.prototype.saveAs",
+        "Minecraft.Structure.prototype.saveToWorld",
+        "Minecraft.Structure.prototype.setBlockPermutation",
         "Minecraft.Structure.prototype.size.[[Get]]",
         "Minecraft.StructureAnimationMode",
         "Minecraft.StructureAnimationMode.Blocks",
@@ -29579,37 +29220,6 @@
         "Minecraft.TripWireTripAfterEventSignal.prototype.constructor",
         "Minecraft.TripWireTripAfterEventSignal.prototype.subscribe",
         "Minecraft.TripWireTripAfterEventSignal.prototype.unsubscribe",
-        "Minecraft.Vector",
-        "Minecraft.Vector.add",
-        "Minecraft.Vector.back.[[Get]]",
-        "Minecraft.Vector.cross",
-        "Minecraft.Vector.distance",
-        "Minecraft.Vector.divide",
-        "Minecraft.Vector.down.[[Get]]",
-        "Minecraft.Vector.forward.[[Get]]",
-        "Minecraft.Vector.left.[[Get]]",
-        "Minecraft.Vector.lerp",
-        "Minecraft.Vector.max",
-        "Minecraft.Vector.min",
-        "Minecraft.Vector.multiply",
-        "Minecraft.Vector.one.[[Get]]",
-        "Minecraft.Vector.prototype",
-        "Minecraft.Vector.prototype.constructor",
-        "Minecraft.Vector.prototype.equals",
-        "Minecraft.Vector.prototype.length",
-        "Minecraft.Vector.prototype.lengthSquared",
-        "Minecraft.Vector.prototype.normalized",
-        "Minecraft.Vector.prototype.x.[[Get]]",
-        "Minecraft.Vector.prototype.x.[[Set]]",
-        "Minecraft.Vector.prototype.y.[[Get]]",
-        "Minecraft.Vector.prototype.y.[[Set]]",
-        "Minecraft.Vector.prototype.z.[[Get]]",
-        "Minecraft.Vector.prototype.z.[[Set]]",
-        "Minecraft.Vector.right.[[Get]]",
-        "Minecraft.Vector.slerp",
-        "Minecraft.Vector.subtract",
-        "Minecraft.Vector.up.[[Get]]",
-        "Minecraft.Vector.zero.[[Get]]",
         "Minecraft.WatchdogTerminateBeforeEvent",
         "Minecraft.WatchdogTerminateBeforeEvent.prototype",
         "Minecraft.WatchdogTerminateBeforeEvent.prototype.cancel.[[Get]]",
@@ -29748,7 +29358,6 @@
         "Minecraft.WorldBeforeEvents.prototype.playerLeave.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.playerPlaceBlock.[[Get]]",
         "Minecraft.WorldBeforeEvents.prototype.weatherChange.[[Get]]",
-        "Minecraft.WorldBeforeEvents.prototype.worldInitialize.[[Get]]",
         "Minecraft.WorldInitializeAfterEvent",
         "Minecraft.WorldInitializeAfterEvent.prototype",
         "Minecraft.WorldInitializeAfterEvent.prototype.constructor",
@@ -29757,15 +29366,6 @@
         "Minecraft.WorldInitializeAfterEventSignal.prototype.constructor",
         "Minecraft.WorldInitializeAfterEventSignal.prototype.subscribe",
         "Minecraft.WorldInitializeAfterEventSignal.prototype.unsubscribe",
-        "Minecraft.WorldInitializeBeforeEvent",
-        "Minecraft.WorldInitializeBeforeEvent.prototype",
-        "Minecraft.WorldInitializeBeforeEvent.prototype.blockTypeRegistry.[[Get]]",
-        "Minecraft.WorldInitializeBeforeEvent.prototype.constructor",
-        "Minecraft.WorldInitializeBeforeEventSignal",
-        "Minecraft.WorldInitializeBeforeEventSignal.prototype",
-        "Minecraft.WorldInitializeBeforeEventSignal.prototype.constructor",
-        "Minecraft.WorldInitializeBeforeEventSignal.prototype.subscribe",
-        "Minecraft.WorldInitializeBeforeEventSignal.prototype.unsubscribe",
         "Minecraft.system",
         "Minecraft.system.[[Prototype]]",
         "Minecraft.world",
@@ -29824,6 +29424,7 @@
         "MinecraftUI.ModalFormData.prototype.dropdown",
         "MinecraftUI.ModalFormData.prototype.show",
         "MinecraftUI.ModalFormData.prototype.slider",
+        "MinecraftUI.ModalFormData.prototype.submitButton",
         "MinecraftUI.ModalFormData.prototype.textField",
         "MinecraftUI.ModalFormData.prototype.title",
         "MinecraftUI.ModalFormData.prototype.toggle",

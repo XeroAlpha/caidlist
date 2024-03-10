@@ -2,139 +2,30 @@ import AdbKit from '@u4/adbkit';
 import { spawn } from 'child_process';
 import PNGSplitStream from 'png-split-stream';
 import { Readable } from 'stream';
-import { warn } from './common.js';
+import { log, retryUntilComplete, sleepAsync, warn } from './common.js';
+import scrcpyServer from '../../data/scrcpy-server/index.js';
 
 const { KeyCodes } = AdbKit;
 
-const ScrcpyBuffer = Symbol('ScrcpyBuffer');
-
-export class ScrcpyRawStream extends Readable {
-    /**
-     * @param {import('@u4/adbkit').Scrcpy} scrcpy
-     */
-    constructor(scrcpy, ffmpegArgs, debug) {
-        super({
-            objectMode: true
-        });
-        this.scrcpy = scrcpy;
-        scrcpy.on('disconnect', () => {
-            this.destroy();
-        });
-        scrcpy.on('error', (err) => {
-            warn('scrcpy stream error', err);
-        });
-        this.ffmpeg = spawn('ffmpeg', [
-            '-f', 'h264',
-            '-hwaccel', 'auto',
-            '-i', '-',
-            ...(ffmpegArgs || []),
-            '-f', 'rawvideo',
-            '-pix_fmt', 'rgb24',
-            '-'
-        ], {
-            stdio: ['pipe', 'pipe', debug ? 'inherit' : 'ignore']
-        });
-        this.frameBuffer = null;
-        this.bufferedSize = 0;
-        this.perFrameSize = 0;
-        this.ffmpeg.on('exit', () => {
-            this.destroy();
-        });
-        this.ffmpeg.stdin.on('error', () => {});
-        this.ffmpeg.stdout.on('data', (/** @type {Buffer} */ data) => {
-            data.copy(this.frameBuffer, this.bufferedSize, 0);
-            this.bufferedSize += data.length;
-            while (this.bufferedSize >= this.perFrameSize) {
-                const newBuffer = this.acquireBuffer();
-                if (newBuffer && this.pushingImages) {
-                    this.pushingImages = this.push(this.frameBuffer);
-                    this.frameBuffer = newBuffer;
-                }
-                this.bufferedSize -= this.frameBuffer.length;
-                data.copy(this.frameBuffer, 0, data.length - this.bufferedSize);
-            }
-        });
-        const firstPacketBuffer = [];
-        let firstPacketByteLeft = 64 + 4;
-        const firstPacketListener = (data) => {
-            firstPacketByteLeft -= data.length;
-            firstPacketBuffer.push(data);
-            if (firstPacketByteLeft <= 0) {
-                const firstPacket = Buffer.concat(firstPacketBuffer);
-                this.width = firstPacket.readUint16BE(64);
-                this.height = firstPacket.readUint16BE(66);
-                scrcpy.setWidth(this.width);
-                scrcpy.setHeight(this.height);
-                this.perFrameSize = this.width * this.height * 3;
-                this.frameBuffer = this.acquireBuffer();
-                if (this.ffmpeg.stdin.writable) {
-                    this.ffmpeg.stdin.write(firstPacket.subarray(firstPacketByteLeft));
-                }
-                scrcpy.off('raw', firstPacketListener);
-                scrcpy.on('raw', (d) => {
-                    if (this.ffmpeg.stdin.writable) {
-                        this.ffmpeg.stdin.write(d);
-                    }
-                });
-            }
-        };
-        scrcpy.on('raw', firstPacketListener);
-        this.bufferPool = [];
-        this.totalAllocBufferCount = 0;
-    }
-
-    _read() {
-        this.pushingImages = true;
-    }
-
-    _destroy() {
-        this.ffmpeg.kill();
-    }
-
-    get info() {
-        return {
-            width: this.width,
-            height: this.height,
-            channels: 3
-        };
-    }
-
-    acquireBuffer() {
-        const buffer = this.bufferPool.pop();
-        if (buffer) {
-            return buffer;
-        }
-        if (this.totalAllocBufferCount <= 512) {
-            this.totalAllocBufferCount++;
-            const newAllocBuffer = Buffer.allocUnsafe(this.perFrameSize);
-            newAllocBuffer[ScrcpyBuffer] = true;
-            return newAllocBuffer;
-        }
-        return null;
-    }
-
-    releaseBuffer(buffer) {
-        if (!buffer[ScrcpyBuffer]) {
-            throw new Error('This buffer is not created by scrcpy stream.');
-        }
-        this.totalAllocBufferCount--;
-        this.bufferPool.push(buffer);
-    }
-}
+/**
+ * @typedef {import('net').Socket} Socket
+ * @typedef {{ serverProcess: Socket, videoSocket: Socket, controlSocket: Socket }} Scrcpy
+ */
 
 export class ScrcpyPNGStream extends Readable {
     /**
-     * @param {import('@u4/adbkit').Scrcpy} scrcpy
+     * @param {Scrcpy} scrcpy
      */
     constructor(scrcpy, ffmpegArgs, debug) {
         super({
             objectMode: true
         });
-        this.scrcpy = scrcpy;
-        scrcpy.on('disconnect', () => {
+        const { videoSocket } = scrcpy;
+        this.videoSocket = videoSocket;
+        videoSocket.on('close', this._videoSocketCloseListener = () => {
             this.destroy();
         });
-        scrcpy.on('error', (err) => {
+        videoSocket.on('error', this._videoSocketErrorListener = (err) => {
             warn('scrcpy stream error', err);
         });
         this.ffmpeg = spawn('ffmpeg', [
@@ -158,29 +49,14 @@ export class ScrcpyPNGStream extends Readable {
                     this.pushingImages = this.push(image);
                 }
             });
-        const firstPacketBuffer = [];
-        let firstPacketByteLeft = 64 + 4;
-        const firstPacketListener = (data) => {
-            firstPacketByteLeft -= data.length;
-            firstPacketBuffer.push(data);
-            if (firstPacketByteLeft <= 0) {
-                const firstPacket = Buffer.concat(firstPacketBuffer);
-                this.width = firstPacket.readUint16BE(64);
-                this.height = firstPacket.readUint16BE(66);
-                scrcpy.setWidth(this.width);
-                scrcpy.setHeight(this.height);
-                if (this.ffmpeg.stdin.writable) {
-                    this.ffmpeg.stdin.write(firstPacket.subarray(firstPacketByteLeft));
-                }
-                scrcpy.off('raw', firstPacketListener);
-                scrcpy.on('raw', (d) => {
-                    if (this.ffmpeg.stdin.writable) {
-                        this.ffmpeg.stdin.write(d);
-                    }
-                });
+        let readyResolve;
+        this.ready = new Promise((resolve) => { readyResolve = resolve; });
+        videoSocket.on('data', this._videoSocketDataListener = (d) => {
+            if (this.ffmpeg.stdin.writable) {
+                this.ffmpeg.stdin.write(d);
             }
-        };
-        scrcpy.on('raw', firstPacketListener);
+        });
+        videoSocket.once('data', () => readyResolve());
     }
 
     _read() {
@@ -189,49 +65,117 @@ export class ScrcpyPNGStream extends Readable {
 
     _destroy() {
         this.ffmpeg.kill();
+        this.videoSocket.off('close', this._videoSocketCloseListener);
+        this.videoSocket.off('error', this._videoSocketErrorListener);
+        this.videoSocket.off('data', this._videoSocketDataListener);
     }
 }
 
 /**
  * @param {import('@u4/adbkit').DeviceClient} device
- * @param {Partial<import('@u4/adbkit').ScrcpyOptions>} options
+ * @returns {Promise<Scrcpy>}
  */
-export function openScrcpy(device, options) {
-    const scrcpy = device.scrcpy({
-        maxSize: 8192,
-        sendFrameMeta: false,
-        ...options
+export async function openScrcpy(device, options) {
+    const jarDest = '/data/local/tmp/scrcpy-server.jar';
+    const scid = Math.floor(Math.random() * 2147483648).toString(16).padStart(8, '0');
+    await device.push(scrcpyServer.path, jarDest);
+    const parts = [
+        `CLASSPATH=${jarDest}`,
+        'app_process',
+        '/',
+        'com.genymobile.scrcpy.Server',
+        scrcpyServer.version,
+        `scid=${scid}`,
+        'tunnel_forward=true',
+        'log_level=info',
+        'video_bit_rate=24000000',
+        'max_size=8192',
+        'audio=false',
+        'raw_stream=true',
+        options?.crop ? `crop=${options.crop}` : null
+    ];
+    const commandLine = parts.filter((e) => e !== null).join(' ');
+    const serverProcess = await device.shell(commandLine);
+    let readyToConnectResolve;
+    const readyToConnectPromise = new Promise((resolve) => { readyToConnectResolve = resolve; });
+    serverProcess.on('data', (text) => {
+        const lines = text.toString('utf-8').split('\n');
+        lines.forEach((ln) => {
+            if (ln.startsWith('[server] INFO: Device: ')) {
+                readyToConnectResolve();
+                return;
+            }
+            if (ln.length) log(`[scrcpy-server] ${ln.replace(/^\[server\] /, '')}`);
+        });
     });
-    scrcpy.start();
-    return scrcpy;
+    await readyToConnectPromise;
+    await sleepAsync(options?.delay ?? 1500);
+    const videoSocket = await retryUntilComplete(30, 100, () => device.openLocal(`localabstract:scrcpy_${scid}`));
+    const controlSocket = await device.openLocal(`localabstract:scrcpy_${scid}`);
+    return { serverProcess, videoSocket, controlSocket };
+}
+
+const TYPE_INJECT_KEYCODE = 0;
+const TYPE_INJECT_TEXT = 1;
+
+/**
+ * @param {import('net').Socket} socket
+ */
+function writeSocket(socket, data) {
+    return new Promise((resolve, reject) => {
+        socket.write(data, (err) => {
+            if (err) return reject(err);
+            return resolve();
+        });
+    });
 }
 
 /**
- * @param {import('@u4/adbkit').Scrcpy} scrcpy
+ * @param {Scrcpy} scrcpy
  */
-export async function waitForScrcpyReady(scrcpy) {
-    await scrcpy.height;
+export async function injectKeyCode(scrcpy, action, keyCode, repeat, metaState) {
+    const msg = Buffer.allocUnsafe(14);
+    msg.writeUInt8(TYPE_INJECT_KEYCODE, 0);
+    msg.writeUInt8(action, 1);
+    msg.writeUInt32BE(keyCode, 2);
+    msg.writeUInt32BE(repeat ?? 0, 6);
+    msg.writeUInt32BE(metaState ?? 0, 10);
+    await writeSocket(scrcpy.controlSocket, msg);
+}
+
+/**
+ * @param {Scrcpy} scrcpy
+ */
+export async function injectText(scrcpy, text) {
+    const textBuffer = Buffer.from(text, 'utf-8');
+    const msg = Buffer.allocUnsafe(textBuffer.length + 1 + 4);
+    msg.writeUInt8(TYPE_INJECT_TEXT, 0);
+    msg.writeUInt32BE(textBuffer.length, 1);
+    textBuffer.copy(msg, 5);
+    await writeSocket(scrcpy.controlSocket, msg);
 }
 
 const ACTION_DOWN = 0;
 const ACTION_UP = 1;
 
 /**
- * @param {import('@u4/adbkit').Scrcpy} scrcpy
+ * @param {Scrcpy} scrcpy
  * @param {keyof typeof import('@u4/adbkit').KeyCodes} keycode
  */
 export async function press(scrcpy, keycode) {
-    await scrcpy.injectKeycodeEvent(ACTION_DOWN, KeyCodes[keycode]);
-    await scrcpy.injectKeycodeEvent(ACTION_UP, KeyCodes[keycode]);
+    await injectKeyCode(scrcpy, ACTION_DOWN, KeyCodes[keycode]);
+    await injectKeyCode(scrcpy, ACTION_UP, KeyCodes[keycode]);
 }
 
 const ScrcpyPendingStopped = Symbol('ScrcpyPendingStopped');
 
 /**
- * @param {import('@u4/adbkit').Scrcpy} scrcpy
+ * @param {Scrcpy} scrcpy
  */
 export function stopScrcpy(scrcpy) {
-    scrcpy.stop();
+    scrcpy.videoSocket.destroy();
+    scrcpy.controlSocket.destroy();
+    scrcpy.serverProcess.destroy();
     scrcpy[ScrcpyPendingStopped] = true;
 }
 

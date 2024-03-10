@@ -116,6 +116,7 @@
 |input_permissions|操作输入权限|用于 inputpermission 命令的输入权限 ID。|
 |camera_presets|摄像机预设|用于 camera 命令的摄像机预设 ID。|
 |recipes|配方|用于 recipe 命令的配方 ID。|
+|hud_elements|HUD界面元素|用于 hud 命令的界面元素 ID。|
 |abilities|能力|用于教育版 ability 命令的能力 ID。|
 |options|选项|仅开发版|
 |particle_types|粒子类型|仅开发版|
@@ -138,11 +139,12 @@
 ### 准备 OCR
 1. 确认已安装 ffmpeg、Tesseract 与 adb，并已将 ffmpeg 可执行文件所在目录设为路径环境变量。
 2. 将支持 USB 调试的手机连接至电脑。
-3. 准备一个 Minecraft 安装包（支持 apks 格式和 apk 格式）。
-4. 将上述 Minecraft 安装包安装到手机上。
-5. 从安装包中找到 Mojangles 字体，使用 Tesseract 训练出模型（如已训练过可直接使用训练过的模型）。
+3. 从 [Genymobile/scrcpy](https://github.com/Genymobile/scrcpy/releases/latest) Release 页面下载对应的 server，放入 `data/scrcpy-server` 文件夹，并修改 `data/scrcpy-server/index.js`。
+4. 准备一个 Minecraft 安装包（支持 apks 格式和 apk 格式）。
+5. 将上述 Minecraft 安装包安装到手机上。
+6. 从安装包中找到 Mojangles 字体，使用 Tesseract 训练出模型（如已训练过可直接使用训练过的模型）。
     - 如果您的 Minecraft 使用的字体不是默认的像素字体（即 Mojangles / Minecraft Seven），请使用 Minecraft 正在使用的字体进行训练。
-6. 按文件中的注释修改 `data/config.js`。
+7. 按文件中的注释修改 `data/config.js`。
 
 ### 运行
 1. 运行 `npm run generate-release` 或 `npm run generate-beta`，取决于你要生成哪种版本的数据。

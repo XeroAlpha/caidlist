@@ -261,7 +261,7 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 1000);
+                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 500);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -317,14 +317,16 @@
                 if (obsStreaming) {
                     const unresponsibleSeconds = (Date.now() - lastActiveTime) / 1000;
                     if (unresponsibleSeconds > 60) {
-                        text.push(`将在${timeLeftString(360 - unresponsibleSeconds)}后自动结束直播`);
+                        text.push('');
+                        text.push('无人值守直播中，正在等待主播确认……');
+                        text.push(`若未确认将在${timeLeftString(360 - unresponsibleSeconds)}后自动结束直播`);
                     }
                     if (unresponsibleSeconds > 360) {
                         window.obsstudio.stopStreaming();
                     }
                 }
                 statusBarEl.innerHTML = text.join('\n');
-                setTimeout(updateStatus, success ? 100 : 1000);
+                setTimeout(updateStatus, success ? 100 : 500);
             }
             async function updateDanmaku() {
                 let lines = [];
@@ -406,10 +408,6 @@
                     '<span style="text-decoration: line-through">MCBEID表的关于页面有写。</span> 自己爬。'
                 ],
                 [
-                    '你手机卡成这样了，没事吗？',
-                    '这个只是截图帧率低，大概低于10fps，实际上手机非常流畅，30fps不在话下。'
-                ],
-                [
                     '这个是每周的常驻节目吗？',
                     '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播三个小时左右。'
                 ],
@@ -417,6 +415,10 @@
                     '我能来这个直播间干什么？',
                     '<span style="text-decoration: line-through">了解ID的变化情况。</span>欢迎来弹幕聊天啊，听听歌也行。',
                     '但<span style="font-weight: bold">请不要在直播间里赠送付费的礼物或者上舰</span>。'
+                ],
+                [
+                    '有的时候画面卡住是什么原因？',
+                    '因为这是一个无人值守直播，所以我会经常不在。不过我会在倒计时结束前赶到的，大概。'
                 ],
                 ['命令助手呢？啥时候更新？', '已经更新了哦，请参见原作者的爱发电主页~'],
                 ['你的手机还能同时玩别的游戏的吗？', '这只是电脑画面的映射。给枯燥的直播加点趣味。']

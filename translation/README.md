@@ -28,8 +28,14 @@
 |damage_cause|伤害类型|
 |gamerule|游戏规则|
 |entity_slot|实体槽位类型|
+|ability|能力|
 |feature|地物|
+|input_permission|操作输入权限|
+|camera_preset|摄像机预设|
+|recipe|配方|
+|hud_element|HUD界面元素|
 |loot_table|战利品工具表|
+|cooldown_category|物品冷却类别|
 |lang_parity|译名修正表|
 |documentation|文档翻译|
 
@@ -99,9 +105,10 @@ ID 表生成工具在生成时会尝试依次从以下途径加载翻译：用�
 |22|操作输入权限|inputPermission|`/inputpermission query @s <Tab>`|
 |23|摄像机预设|cameraPreset|`/camera @s set <Tab>`|
 |24|配方|recipe|`/recipe take @s <Tab>`|
-|25|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
-|26|可生成的实体|summonableEntity|`/summon <Tab>`|
-|27|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
+|25|HUD界面元素|hudElement|`/hud @s hide <Tab>`|
+|26|音乐|music|sound 中以 `record` 或 `music` 开头的条目|
+|27|可生成的实体|summonableEntity|`/summon <Tab>`|
+|28|战利品使用工具|lootTool|`/loot spawn ~ ~ ~ loot empty <Tab>`|
 
 ## 标准译名表未收录条目
 
