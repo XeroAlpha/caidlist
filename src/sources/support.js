@@ -35,6 +35,9 @@ damageCommand.associatedCommands = [
 export function hasItemSelectorParam({ coreVersion }) {
     return testMinecraftVersionInRange(coreVersion, '1.18.20.21', '*');
 }
+hasItemSelectorParam.associatedSelectors = [
+    ['hasitem']
+];
 
 export function placefeatureCommand({ coreVersion }) {
     return testMinecraftVersionInRange(coreVersion, '1.18.20.25', '1.18.20.26');
@@ -114,6 +117,9 @@ hudCommand.associatedCommands = [
 export function hasPropertySelectorParam({ coreVersion }) {
     return testMinecraftVersionInRange(coreVersion, '1.20.70.21', '*');
 }
+hasPropertySelectorParam.associatedSelectors = [
+    ['has_property']
+];
 
 export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';

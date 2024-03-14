@@ -142,9 +142,13 @@ export function notify(message) {
     });
 }
 
-export function pause(message) {
-    notify(message);
-    return input(message);
+export async function pause(message) {
+    let timeout = setTimeout(() => {
+        timeout = null;
+        notify(message);
+    }, 1000);
+    await input(message);
+    if (timeout) clearTimeout(timeout);
 }
 
 export async function runJobsAndReturn(mainJob, ...concurrentJobs) {

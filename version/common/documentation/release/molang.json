@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.60.4",
+    "version": "1.20.70.6",
     "content": [],
     "sections": [
         {
@@ -1214,6 +1214,10 @@
                                     "Description": "Returns true if the entity has an owner ID else it returns false",
                                 },
                                 {
+                                    "Name": "query.has_player_rider",
+                                    "Description": "Returns 1 if the entity has a player riding it in any seat, else it returns 0.",
+                                },
+                                {
                                     "Name": "query.has_property",
                                     "Description": "Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise.",
                                 },
@@ -1235,7 +1239,7 @@
                                 },
                                 {
                                     "Name": "query.head_y_rotation",
-                                    "Description": "Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0.",
+                                    "Description": "Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.",
                                 },
                                 {
                                     "Name": "query.health",
@@ -1280,6 +1284,10 @@
                                 {
                                     "Name": "query.is_angry",
                                     "Description": "Returns 1.0 if the entity is angry, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.is_attached",
+                                    "Description": "Returns 1.0 if the entity is attached to another entity (such as being held or worn), else it will return 0.0. Available only with resource packs.",
                                 },
                                 {
                                     "Name": "query.is_attached_to_entity",
@@ -1834,12 +1842,48 @@
                                     "Description": "Returns how much durability an item has remaining.",
                                 },
                                 {
+                                    "Name": "query.ride_body_x_rotation",
+                                    "Description": "Returns the body pitch world-rotation of the ride an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_body_y_rotation",
+                                    "Description": "Returns the body yaw world-rotation of the ride of on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_head_x_rotation",
+                                    "Description": "Returns the head x world-rotation of the ride of an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.ride_head_y_rotation",
+                                    "Description": "Takes one optional argument as a parameter. Returns the head y world-rotation of the ride of an entity, else it returns 0.0. First parameter only for horses, zombie horses, skeleton horses, donkeys and mules that clamps rotation in degrees.",
+                                },
+                                {
+                                    "Name": "query.rider_body_x_rotation",
+                                    "Description": "Returns the body pitch world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_body_y_rotation",
+                                    "Description": "Returns the body yaw world-rotation of a valid rider at the provided index if called on an entity, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_head_x_rotation",
+                                    "Description": "Takes one argument as a parameter. Returns the head x world-rotation of the rider entity at the provided index, else it returns 0.0.",
+                                },
+                                {
+                                    "Name": "query.rider_head_y_rotation",
+                                    "Description": "Takes one or two arguments as parameters. Returns the head y world-rotation of the rider entity at the provided index, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.",
+                                },
+                                {
                                     "Name": "query.roll_counter",
                                     "Description": "Returns the roll counter of the entity.",
                                 },
                                 {
                                     "Name": "query.rotation_to_camera",
                                     "Description": "Returns the rotation required to aim at the camera.  Requires one argument representing the rotation axis you would like (0 for x, 1 for y).",
+                                },
+                                {
+                                    "Name": "query.scoreboard",
+                                    "Description": "Takes one argument - the name of the scoreboard entry for this entity. Returns the specified scoreboard value for this entity. Available only with behavior packs.",
                                 },
                                 {
                                     "Name": "query.shake_angle",
@@ -1997,61 +2041,7 @@
                     "name": "List of Experimental Entity Queries",
                     "id": "List of Experimental Entity Queries",
                     "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "query.biome_has_all_tags",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if all of them exist in the biome, else it returns 0.  Eg: query.biome_has_all_tags('is_cold', 'has_trees').",
-                                },
-                                {
-                                    "Name": "query.biome_has_any_tag",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Takes either no position (assumes the current entity position) or three parameters: x, y, z (representing the world-origin-relative position), followed by whatever tags you want to query for, and returns 1 if any of them exist in the biome, else it returns 0.  Eg: query.biome_has_any_tag('is_cold', 'has_trees').",
-                                },
-                                {
-                                    "Name": "query.client_input_type",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns either 'mouse', 'touch', 'gamepad', or 'motion_controller' depending on the type of input used by the current client.",
-                                },
-                                {
-                                    "Name": "query.get_nearby_entities",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').",
-                                },
-                                {
-                                    "Name": "query.get_nearby_entities_except_self",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the list of entities within the specified distance, taking an optional second argument as a filter for which mob types to accept (eg: 'minecraft:pig').",
-                                },
-                                {
-                                    "Name": "query.get_ride",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the entity this entity is riding if it is riding something, else it returns 0.",
-                                },
-                                {
-                                    "Name": "query.get_riders",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the array of entities that are riding this entity.",
-                                },
-                                {
-                                    "Name": "query.has_player_rider",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1 if the entity has a player riding it, else it returns 0.",
-                                },
-                                {
-                                    "Name": "query.is_attached",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns 1.0 if the actor is attached to another actor (such as being held or worn), else it will return 0.0.",
-                                },
-                                {
-                                    "Name": "query.scoreboard",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) DEPRECATED (The coming Actor Property feature will replace the need for querying hidden scoreboard data. Current client-side scoreboard code is only meant for supporting the standard UI elements.) Takes one argument - the name of the scoreboard entry for this entity.  Returns the specified scoreboard value for this entity.",
-                                },
-                                {
-                                    "Name": "query.self",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the current entity.",
-                                },
-                                {
-                                    "Name": "query.target",
-                                    "Description": "(EXPERIMENTAL. Enable 'Molang Features' to use.) Returns the target of the current entity if one exists.",
-                                },
-                            ],
-                        },
-                    ],
+                    "content": [],
                 },
             ],
         },
@@ -2127,6 +2117,10 @@
                                     "Pack min_engine_version": "1.20.50",
                                     "Description": "dash_cooldown_progress is no longer supported, as that logic is done in the animation. Additionally is_scenting, is_rising, and is_feelingHappy queries are no longer available, and timer_flag_1, timer_flag_2, and timer_flag_3 can be used instead.",
                                 },
+                                {
+                                    "Pack min_engine_version": "1.20.70",
+                                    "Description": "Queries surface_particle_texture_size, surface_particle_texture_coordinate, and surface_particle_texture_size now register leaf blocks as supporting for step particles",
+                                },
                             ],
                         },
                     ],
@@ -2134,5 +2128,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "06b3c9951e0440d4687784e309fe6a610b48435e",
+    "__OBJECTHASH__": "fe8f147987285d99ff303423753e22ae0b8c7a26",
 }

@@ -189,8 +189,8 @@
                 functional_tests: '功能测试'
             };
             let sessionId = null;
+            let logSince = 0;
             const logs = [];
-            let lastLogTime = Date.now();
             let lastActiveTime = Date.now();
             const danmakus = [];
             let danmakuOnline = false;
@@ -257,11 +257,78 @@
             } else {
                 document.body.classList.add('no-obs');
             }
+            function secondOrderScroller(dom, { f, z, r }) {
+                const w = 2 * Math.PI * f;
+                const d = w * Math.sqrt(Math.abs(z * z - 1));
+                const k1 = z / (Math.PI * f);
+                const k2 = 1 / (w * w);
+                const k3 = (r * z) / w;
+                let xp;
+                let x;
+                let y;
+                let yd;
+                const scrollTo = (pos, mode) => {
+                    x = [...pos];
+                    if (mode === 'instant') {
+                        xp = [...pos];
+                        y = [...pos];
+                        yd = [0, 0];
+                    }
+                };
+                const scrollBy = (pos, mode) => {
+                    x = [x[0] + pos[0], x[1] + pos[1]];
+                    if (mode === 'instant') {
+                        xp = [...x];
+                        y = [...x];
+                        yd = [0, 0];
+                    } else if (mode === 'keepSpeed') {
+                        xp = [xp[0] + pos[0], xp[1] + pos[1]];
+                        y = [y[0] + pos[0], y[1] + pos[1]];
+                    }
+                };
+                scrollTo([dom.scrollLeft, dom.scrollTop], 'instant');
+                let lastAnimate = Date.now();
+                const animate = () => {
+                    const now = Date.now();
+                    const T = (now - lastAnimate) / 1000;
+                    const xd = [(x[0] - xp[0]) / T, (x[1] - xp[1]) / T];
+                    xp = x;
+                    let k1Stable;
+                    let k2Stable;
+                    if (w * T < z) {
+                        k1Stable = k1;
+                        k2Stable = Math.max(k2, (T * T) / 2 + (T * k1) / 2, T * k1);
+                    } else {
+                        const t1 = Math.exp(-z * w * T);
+                        const alpha = 2 * t1 * (z <= 1 ? Math.cos : Math.cosh)(T * d);
+                        const beta = t1 * t1;
+                        const t2 = T / (1 + beta - alpha);
+                        k1Stable = (1 - beta) * t2;
+                        k2Stable = T * t2;
+                    }
+                    const boundWidth = Math.max(0, dom.scrollWidth - dom.clientWidth);
+                    const boundHeight = Math.max(0, dom.scrollHeight - dom.clientHeight);
+                    y = [
+                        Math.max(0, Math.min(boundWidth, y[0] + T * yd[0])),
+                        Math.max(0, Math.min(boundHeight, y[1] + T * yd[1]))
+                    ];
+                    yd = [
+                        yd[0] + ((x[0] - y[0]) + k3 * xd[0] - k1Stable * yd[0]) * (T / k2Stable),
+                        yd[1] + ((x[1] - y[1]) + k3 * xd[1] - k1Stable * yd[1]) * (T / k2Stable)
+                    ];
+                    dom.scrollTo({ left: y[0], top: y[1], behavior: 'instant' });
+                    lastAnimate = now;
+                    requestAnimationFrame(animate);
+                };
+                requestAnimationFrame(animate);
+                return { scrollTo, scrollBy };
+            }
+            const logScroller = secondOrderScroller(logsEl, { f: 1.0, z: 1.5, r: 0.0 });
             async function updateStatus() {
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logs.length}`, 500);
+                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logSince}`, 500);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -284,7 +351,7 @@
                     if (hb.approxLength > 0) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
                         text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
-                        text.push(`剩余时间：约${timeLeftString(hb.timeLeft / 1000)} - 平均${averageSpeed}条/秒`);
+                        text.push(`剩余时间：约${timeLeftString(Math.max(0, hb.timeLeft / 1000))} - 平均${averageSpeed}条/秒`);
                         text.push(`预计结束时间：${dateTimeString(new Date(hb.estTime))}`);
                     } else {
                         text.push(`已识别：${hb.resultLength} 条目`);
@@ -295,17 +362,22 @@
                 }
                 if (hb.sessionId !== sessionId) {
                     logs.length = 0;
+                    logSince = 0;
                     sessionId = hb.sessionId;
                 }
                 if (hb.logs && hb.logs.length) {
+                    const firstLog = logSince === 0;
                     logs.push(...hb.logs);
-                    logsEl.innerHTML = logs.slice(Math.max(logs.length - (logs.length % 100) - 30, 0)).join('\n');
-                    logsEl.scroll({
-                        top: logsEl.scrollHeight,
-                        left: 0,
-                        behavior: Date.now() - lastLogTime < 200 || hb.logs.length > 10 ? 'auto' : 'smooth'
-                    });
-                    lastLogTime = Date.now();
+                    logSince += hb.logs.length;
+                    logsEl.innerHTML = logs.join('\n');
+                    if (logs.length > 60) {
+                        const oldHeight = logsEl.scrollHeight;
+                        logs.splice(0, logs.length - 30);
+                        logsEl.innerHTML = logs.join('\n');
+                        const newHeight = logsEl.scrollHeight;
+                        logScroller.scrollBy([0, newHeight - oldHeight], 'keepSpeed');
+                    }
+                    logScroller.scrollTo([0, Math.max(0, logsEl.scrollHeight - logsEl.clientHeight)], firstLog ? 'instant' : 'smooth');
                     lastActiveTime = Date.now();
                 }
                 if (!sessionId) {

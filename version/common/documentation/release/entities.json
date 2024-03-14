@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.60.4",
+    "version": "1.20.70.6",
     "content": [],
     "sections": [
         {
@@ -2846,6 +2846,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "self_destruct",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "sonic_boom",
                                                     "Description": "",
                                                 },
@@ -2863,10 +2867,6 @@
                                                 },
                                                 {
                                                     "Options": "suffocation",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "suicide",
                                                     "Description": "",
                                                 },
                                                 {
@@ -13155,6 +13155,141 @@
                     ],
                 },
                 {
+                    "name": "was_last_hurt_by",
+                    "id": "was_last_hurt_by",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is the last player who attacked the entity in the last 400 seconds, or the last mob to do so in the last 60 seconds.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"was_last_hurt_by\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"was_last_hurt_by\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "weather",
                     "id": "weather",
                     "level": 2,
@@ -22659,9 +22794,9 @@
                                                         },
                                                         {
                                                             "Name": "range",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "10",
-                                                            "Description": "The maximum distance another entity can be from this and have the filters checked against it.",
+                                                            "Type": "Vector [a, b]",
+                                                            "Default Value": "[10, 10]",
+                                                            "Description": "The maximum horizontal and vertical distance another entity can be from this and have the filters checked against it.",
                                                         },
                                                         {
                                                             "Name": "require_all",
@@ -29018,5 +29153,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "538f4e53bb05087323544ed038fb192d4daa9a18",
+    "__OBJECTHASH__": "7e72b3b7633772177ae425ba3d21277cc09a3950",
 }

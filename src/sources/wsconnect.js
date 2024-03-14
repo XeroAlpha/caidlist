@@ -81,7 +81,7 @@ function fetchData(session, type) {
     });
 }
 
-function verifySupport(cx, commandList) {
+function verifySupportForCommands(cx, commandList) {
     for (const key in support) {
         if (typeof support[key] === 'function' && support[key].associatedCommands) {
             const f = support[key];
@@ -181,7 +181,7 @@ export async function doWSRelatedJobsCached(cx, session, target) {
         cachedOutput(cacheId, { packageVersion, result });
     }
     if (branch.id !== 'gametest') {
-        verifySupport(cx, result.commandList);
+        verifySupportForCommands(cx, result.commandList);
     }
     Object.assign(target, result);
 }

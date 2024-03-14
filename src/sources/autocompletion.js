@@ -370,6 +370,19 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
     return (target[id] = result);
 }
 
+function verifySupportForSelectors(cx, selectors) {
+    for (const key in support) {
+        if (typeof support[key] === 'function' && support[key].associatedSelectors) {
+            const f = support[key];
+            const result = f(cx);
+            const commandMatches = f.associatedSelectors.some((andGroup) => andGroup.every((e) => selectors.includes(e)));
+            if (result !== commandMatches) {
+                throw new Error(`support.${key} should be updated, excepted ${commandMatches}, actually got ${result}`);
+            }
+        }
+    }
+}
+
 export default async function analyzeAutocompletionEnumsCached(cx) {
     const { version, branch, packageVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}`;
@@ -480,6 +493,8 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     }
 
     await screen.stop();
+
+    verifySupportForSelectors(cx, target.selectors);
     return cachedOutput(cacheId, target);
 }
 
