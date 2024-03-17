@@ -829,33 +829,40 @@ const versionInfoMap = {
 const branchInfoMap = {
     vanilla: {
         name: '原版',
-        description: '使用默认设置创建的世界的ID表'
+        description: '使用默认设置创建的世界的ID表',
+        sortOrder: 0
     },
     education: {
         name: '教育版',
         description: '启用了教育版选项后创建的世界的ID表',
-        patch: { from: 'vanilla', uuid: 'fa5e8807-b1e9-402f-aafa-0376e1b79ee2' }
+        patch: { from: 'vanilla', uuid: 'fa5e8807-b1e9-402f-aafa-0376e1b79ee2' },
+        sortOrder: 1
     },
     experiment: {
         name: '实验性玩法',
         description: '启用了所有实验性玩法选项后创建的世界的ID表',
-        patch: { from: 'vanilla', uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962' }
+        patch: { from: 'vanilla', uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962' },
+        sortOrder: 2
     },
     gametest: {
         name: 'Script API',
-        description: '通过 Script API / GameTest 获取的ID表'
+        description: '通过 Script API / GameTest 获取的ID表',
+        sortOrder: 3
     },
     translator: {
         name: '翻译专用',
-        description: '为翻译英文文本设计，包含了标准化译名表与语言文件'
+        description: '为翻译英文文本设计，包含了标准化译名表与语言文件',
+        sortOrder: 4
     },
     documentation: {
         name: '文档',
-        description: '开发者文档中出现的ID及其描述'
+        description: '开发者文档中出现的ID及其描述',
+        sortOrder: 5
     },
     langParity: {
         name: '译名比较',
         description: '比较基岩版翻译与标准化译名，展示两者的差异',
+        sortOrder: 6,
         hidden: true
     }
 };

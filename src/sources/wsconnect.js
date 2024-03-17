@@ -104,12 +104,12 @@ async function doWSRelatedJobs(cx, session) {
     } else {
         commandList = await listCommandsLegacy(session);
     }
-    if (cx.version !== 'preview_win') {
+    if (cx.branch.id !== 'gametest') {
         return { commandList };
     }
     /**
      * It depends on launch instance instead of world, so we
-     * decide to extract them only in preview-win.
+     * decide to extract them only in gametest branch.
      */
     const wsBlockData = (await fetchData(session, MinecraftDataType.Block))
         .reduce((obj, block) => {

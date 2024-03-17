@@ -557,28 +557,30 @@ const Extractors = [
                     let hasComponents = false;
                     componentInstances.forEach((component) => {
                         const componentData = {};
-                        let componentId = '';
+                        const componentId = component.typeId;
                         if (component instanceof Minecraft.ItemEnchantableComponent) {
-                            componentId = Minecraft.ItemEnchantableComponent.componentId;
+                            const enchantmentSlots = component.slots.filter((e) => e);
                             const existedEnchantments = component.getEnchantments();
                             const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
+                            if (enchantmentSlots.length > 0) {
+                                componentData.enchantmentSlots = enchantmentSlots;
+                            }
                             if (existedEnchantments.length > 0) {
-                                commonComponents.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
+                                componentData.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
                             }
                             if (applicableEnchantments.length > 0) {
-                                commonComponents.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
+                                componentData.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
                             }
-                            return;
                         }
                         if (component instanceof Minecraft.ItemCooldownComponent) {
-                            componentId = Minecraft.ItemCooldownComponent.componentId;
                             if (component.cooldownTicks > 0) {
-                                assign(commonComponents, component, ['cooldownCategory', 'cooldownTicks']);
+                                assign(componentData, component, ['cooldownCategory', 'cooldownTicks']);
                             }
-                            return;
                         }
                         if (component instanceof Minecraft.ItemDurabilityComponent) {
-                            componentId = Minecraft.ItemDurabilityComponent.componentId;
+                            if (component.damage > 0) {
+                                componentData.defaultDamage = component.damage;
+                            }
                             assign(componentData, component, ['maxDurability']);
                             const damageChance = component.getDamageChance();
                             if (damageChance !== 100) {
@@ -586,7 +588,6 @@ const Extractors = [
                             }
                         }
                         if (component instanceof Minecraft.ItemFoodComponent) {
-                            componentId = Minecraft.ItemFoodComponent.componentId;
                             assign(componentData, component, [
                                 'canAlwaysEat',
                                 'nutrition',
@@ -686,8 +687,8 @@ const Extractors = [
 ];
 
 const ImportEnvironments = {
-    Minecraft: ['Minecraft', 'mojang-minecraft', '@minecraft/server'],
-    GameTest: ['GameTest', 'mojang-gametest', '@minecraft/server-gametest'],
+    Minecraft: ['mojang-minecraft', '@minecraft/server'],
+    GameTest: ['mojang-gametest', '@minecraft/server-gametest'],
     MinecraftUI: ['mojang-minecraft-ui', '@minecraft/server-ui'],
     MinecraftAdmin: ['mojang-minecraft-server-admin', '@minecraft/server-admin'],
     MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net'],

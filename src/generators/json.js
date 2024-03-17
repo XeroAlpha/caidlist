@@ -59,6 +59,7 @@ export function writeTransMapIndexJson(cx, options) {
         coreVersion,
         branchList: branchList
             .filter((branch) => !branch.hidden)
+            .sort((a, b) => a.sortOrder - b.sortOrder)
             .map((branch) => ({
                 id: branch.id,
                 name: branch.name,
