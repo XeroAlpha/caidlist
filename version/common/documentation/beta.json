@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.80.21",
-    "__COMMITHASH__": "eee71f7fb08194d3f0cb26d80b4eb2b15122183e",
+    "__VERSION__": "1.20.80.22",
+    "__COMMITHASH__": "ecdf9d696cb58858e7b38f1d80ebf8144da7a1ca",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -3602,6 +3602,7 @@
         "minecraft:hard_yellow_stained_glass_pane": "",
         "minecraft:hardened_clay": "",
         "minecraft:hay_block": "",
+        "minecraft:heavy_core": "",
         "minecraft:heavy_weighted_pressure_plate": "",
         "minecraft:honey_block": "",
         "minecraft:honeycomb_block": "",
@@ -4345,6 +4346,12 @@
                     "type": "",
                     "defaultValue": "",
                     "description": "Experimental toggles required: Holiday Creator Features",
+                },
+                {
+                    "name": "minecraft:custom_components",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "Sets an ordered list of custom component names which are bound in script to be executed upon a block event.Experimental toggles required: Beta APIs",
                 },
                 {
                     "name": "minecraft:destructible_by_explosion",
@@ -16215,7 +16222,7 @@
         "query.total_emitter_count": "Returns the total number of active emitters in the world.",
         "query.total_particle_count": "Returns the total number of active particles in the world.",
         "query.trade_tier": "Returns the trade tier of the entity if it makes sense, else it returns 0.0",
-        "query.unhappy_counter": "Returns how unhappy the entity is.",
+        "query.unhappy_counter": "Always returns zero. (Was originally meant to indicate Panda unhappiness but due to an early code change it has always only returned zero)",
         "query.variant": "Returns the entity's variant index",
         "query.vertical_speed": "Returns the speed of the entity up or down in meters/second, where positive is up.",
         "query.walk_distance": "Returns the total distance traveled by an entity while on the ground and not sneaking.",

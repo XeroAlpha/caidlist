@@ -738,10 +738,10 @@ const versionInfoMap = {
         description: '更新速度快，包含较多不稳定的新特性的版本',
         sortOrder: 0,
         branches: [
+            'gametest',
             'vanilla',
             'education',
             'experiment',
-            'gametest',
             'translator',
             'documentation',
             'langParity'
@@ -819,10 +819,10 @@ const versionInfoMap = {
         sortOrder: 8,
         disableAutoMatch: true,
         branches: [
+            'gametest',
             'vanilla',
             'education',
-            'experiment',
-            'gametest'
+            'experiment'
         ]
     }
 };

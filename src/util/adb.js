@@ -1,5 +1,7 @@
 import AdbKit from '@u4/adbkit';
-import { setStatus, log, sleepAsync } from './common.js';
+import { join as joinPath, posix } from 'path';
+import { readdirSync, statSync } from 'fs';
+import { log, setStatus, sleepAsync } from './common.js';
 
 const { Adb } = AdbKit;
 
@@ -130,6 +132,34 @@ export async function pushWithSync(sync, sourcePath, destPath, mode, onProgress)
     const pushTransfer = await sync.push(sourcePath, destPath, mode);
     if (onProgress) pushTransfer.on('progress', onProgress);
     return pushTransfer.waitForEnd();
+}
+
+/**
+ * @param {DeviceClient} device
+ * @param {string} sourcePath
+ * @param {string} destPath
+ * @param {number} mode
+ */
+export async function pushRecursively(device, sourcePath, destPath, mode) {
+    const fileMapping = [];
+    const walk = async (src, dest) => {
+        const srcStat = statSync(src);
+        if (srcStat.isDirectory()) {
+            const files = readdirSync(src);
+            await adbShell(device, `mkdir -p ${dest}`);
+            for (const fileName of files) {
+                const srcChild = joinPath(src, fileName);
+                const destChild = posix.join(dest, fileName);
+                await walk(srcChild, destChild);
+            }
+        } else {
+            fileMapping.push([src, dest]);
+        }
+    };
+    await walk(sourcePath, destPath);
+    for (const [src, dest] of fileMapping) {
+        await device.push(src, dest, mode);
+    }
 }
 
 export async function openMonkey(device) {

@@ -3,7 +3,7 @@ import { createServer } from 'net';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
 import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
-import { resolve as resolvePath } from 'path';
+import { resolve as resolvePath, posix } from 'path';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
 import {
     cachedOutput,
@@ -19,7 +19,7 @@ import {
     log,
     warn
 } from '../util/common.js';
-import { getDeviceOrWait } from '../util/adb.js';
+import { getDeviceOrWait, pushRecursively } from '../util/adb.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
 
 /**
@@ -774,9 +774,23 @@ export default async function analyzeGameTestEnumsCached(cx) {
     if (cache && packageVersion === cache.packageVersion) return cache;
 
     let device;
-    generateBehaviorPack(cx);
     if (!versionInfo.disableAdb) {
         device = await getDeviceOrWait();
+    }
+    const packPath = generateBehaviorPack(cx);
+    if (cx.devBehaviorPackPath) {
+        try {
+            if (device) {
+                await pushRecursively(device, packPath, posix.join(cx.devBehaviorPackPath, 'gametest_behavior_pack'));
+            } else {
+                const packDest = resolvePath(cx.devBehaviorPackPath, 'gametest_behavior_pack');
+                mkdirSync(packDest, { recursive: true });
+                cpSync(packPath, packDest, { recursive: true });
+            }
+        } catch (err) {
+            warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
+            warn('[GameTest] You may need to clear all the data of Minecraft');
+        }
     }
     await pause('Please switch to branch: gametest\nInteract if the device is ready');
 

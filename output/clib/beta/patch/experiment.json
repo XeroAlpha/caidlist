@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.80.21）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.20.80.22）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		20,
 		80,
-		21
+		22
 	],
 	"require": [
 		{
@@ -17,12 +17,12 @@
 				1,
 				20,
 				80,
-				21
+				22
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.20.80.21",
+	"minSupportVer": "1.20.80.22",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -38,6 +38,7 @@
 			"exposed_copper_door": "斑驳的铜门",
 			"exposed_copper_grate": "斑驳的铜格栅",
 			"exposed_copper_trapdoor": "斑驳的铜活板门",
+			"heavy_core": "Heavy Core",
 			"oxidized_chiseled_copper": "氧化的雕纹铜块",
 			"oxidized_copper_bulb": "氧化的铜灯",
 			"oxidized_copper_door": "氧化的铜门",
@@ -87,6 +88,8 @@
 		},
 		"item": {
 			"bogged_spawn_egg": "沼骸刷怪蛋",
+			"bolt_armor_trim_smithing_template": "镶铆盔甲纹饰锻造模板",
+			"breeze_rod": "旋风棒",
 			"breeze_spawn_egg": "旋风人刷怪蛋",
 			"chiseled_copper": "雕纹铜块",
 			"chiseled_tuff": "雕纹凝灰岩",
@@ -101,6 +104,13 @@
 			"exposed_copper_door": "斑驳的铜门",
 			"exposed_copper_grate": "斑驳的铜格栅",
 			"exposed_copper_trapdoor": "斑驳的铜活板门",
+			"flow_armor_trim_smithing_template": "涡流盔甲纹饰锻造模板",
+			"flow_banner_pattern": "",
+			"flow_pottery_sherd": "涡流纹样陶片",
+			"guster_banner_pattern": "",
+			"guster_pottery_sherd": "旋风纹样陶片",
+			"heavy_core": "Heavy Core",
+			"mace": "Mace",
 			"oxidized_chiseled_copper": "氧化的雕纹铜块",
 			"oxidized_copper_bulb": "氧化的铜灯",
 			"oxidized_copper_door": "氧化的铜门",
@@ -110,6 +120,7 @@
 			"polished_tuff_slab": "磨制凝灰岩台阶",
 			"polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"polished_tuff_wall": "磨制凝灰岩墙",
+			"scrape_pottery_sherd": "刮削纹样陶片",
 			"trial_key": "试炼钥匙",
 			"trial_spawner": "试炼刷怪笼",
 			"tuff_brick_slab": "凝灰岩砖台阶",
@@ -205,6 +216,7 @@
 			"block.copper_bulb.turn_on": "",
 			"break.copper_bulb": "",
 			"break.copper_grate": "",
+			"break.heavy_core": "",
 			"breeze_wind_charge.burst": "",
 			"close_door.copper": "",
 			"crafter.craft": "",
@@ -234,6 +246,7 @@
 			"place.tuff_bricks": "",
 			"step.copper_bulb": "",
 			"step.copper_grate": "",
+			"step.heavy_core": "",
 			"step.tuff_bricks": "",
 			"trial_spawner.ambient": "",
 			"trial_spawner.break": "",
@@ -257,7 +270,9 @@
 			"vault.open_shutter": "",
 			"vault.place": "",
 			"vault.step": "",
-			"wind_charge.burst": ""
+			"wind_charge.burst": "",
+			"windswept_mace.smash_air": "",
+			"windswept_mace.smash_ground": ""
 		},
 		"loot_table": {
 			"chests/trial_chambers/corridor": "",
@@ -265,6 +280,9 @@
 			"chests/trial_chambers/intersection": "",
 			"chests/trial_chambers/intersection_barrel": "",
 			"chests/trial_chambers/reward": "",
+			"chests/trial_chambers/reward_common": "",
+			"chests/trial_chambers/reward_rare": "",
+			"chests/trial_chambers/reward_unique": "",
 			"chests/trial_chambers/supply": "",
 			"dispensers/trial_chambers/chamber": "",
 			"dispensers/trial_chambers/corridor": "",
@@ -282,6 +300,9 @@
 			"\"chests/trial_chambers/intersection\"": "",
 			"\"chests/trial_chambers/intersection_barrel\"": "",
 			"\"chests/trial_chambers/reward\"": "",
+			"\"chests/trial_chambers/reward_common\"": "",
+			"\"chests/trial_chambers/reward_rare\"": "",
+			"\"chests/trial_chambers/reward_unique\"": "",
 			"\"chests/trial_chambers/supply\"": "",
 			"\"dispensers/trial_chambers/chamber\"": "",
 			"\"dispensers/trial_chambers/corridor\"": "",
@@ -294,6 +315,8 @@
 			"\"spawners/trial_chamber/key\"": ""
 		},
 		"recipe": {
+			"minecraft:bolt_armor_trim_smithing_template_duplicate": "<工作台>镶铆盔甲纹饰锻造模板+钻石*7+铜块->镶铆盔甲纹饰锻造模板*2",
+			"minecraft:bolt_armor_trim_smithing_template_duplicate_waxed": "<工作台>镶铆盔甲纹饰锻造模板+钻石*7+涂蜡的铜块->镶铆盔甲纹饰锻造模板*2",
 			"minecraft:chiseled_tuff": "<工作台>凝灰岩台阶*2->雕纹凝灰岩",
 			"minecraft:chiseled_tuff_bricks": "<工作台>凝灰岩砖台阶*2->雕纹凝灰岩砖",
 			"minecraft:copper_bulb": "<工作台>红石粉+铜块*3+烈焰棒->铜灯*4",
@@ -315,6 +338,8 @@
 			"minecraft:exposed_copper_door": "<工作台>斑驳的铜块*6->斑驳的铜门*3",
 			"minecraft:exposed_copper_grate": "<工作台>斑驳的铜块*4->斑驳的铜格栅*4",
 			"minecraft:exposed_copper_trapdoor": "<工作台>斑驳的铜块*6->斑驳的铜活板门*2",
+			"minecraft:flow_armor_trim_smithing_template_duplicate": "<工作台>涡流盔甲纹饰锻造模板+钻石*7+旋风棒->涡流盔甲纹饰锻造模板*2",
+			"minecraft:mace": "<工作台>旋风棒+Heavy Core->Mace",
 			"minecraft:oxidized_copper_bulb": "<工作台>红石粉+氧化的铜块*3+烈焰棒->氧化的铜灯*4",
 			"minecraft:oxidized_copper_door": "<工作台>氧化的铜块*6->氧化的铜门*3",
 			"minecraft:oxidized_copper_grate": "<工作台>氧化的铜块*4->氧化的铜格栅*4",
@@ -353,7 +378,8 @@
 			"minecraft:weathered_copper_bulb": "<工作台>红石粉+锈蚀的铜块*3+烈焰棒->锈蚀的铜灯*4",
 			"minecraft:weathered_copper_door": "<工作台>锈蚀的铜块*6->锈蚀的铜门*3",
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
-			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2"
+			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2",
+			"minecraft:wind_charge": "<工作台>旋风棒~>风弹*4"
 		},
 		"hud_element": {
 			"air_bubbles": "氧气槽",
@@ -379,6 +405,8 @@
 		},
 		"loot_tool": {
 			"minecraft:bogged_spawn_egg": "沼骸刷怪蛋",
+			"minecraft:bolt_armor_trim_smithing_template": "镶铆盔甲纹饰锻造模板",
+			"minecraft:breeze_rod": "旋风棒",
 			"minecraft:breeze_spawn_egg": "旋风人刷怪蛋",
 			"minecraft:chiseled_copper": "雕纹铜块",
 			"minecraft:chiseled_tuff": "雕纹凝灰岩",
@@ -393,6 +421,11 @@
 			"minecraft:exposed_copper_door": "斑驳的铜门",
 			"minecraft:exposed_copper_grate": "斑驳的铜格栅",
 			"minecraft:exposed_copper_trapdoor": "斑驳的铜活板门",
+			"minecraft:flow_armor_trim_smithing_template": "涡流盔甲纹饰锻造模板",
+			"minecraft:flow_pottery_sherd": "涡流纹样陶片",
+			"minecraft:guster_pottery_sherd": "旋风纹样陶片",
+			"minecraft:heavy_core": "Heavy Core",
+			"minecraft:mace": "Mace",
 			"minecraft:oxidized_chiseled_copper": "氧化的雕纹铜块",
 			"minecraft:oxidized_copper_bulb": "氧化的铜灯",
 			"minecraft:oxidized_copper_door": "氧化的铜门",
@@ -402,6 +435,7 @@
 			"minecraft:polished_tuff_slab": "磨制凝灰岩台阶",
 			"minecraft:polished_tuff_stairs": "磨制凝灰岩楼梯",
 			"minecraft:polished_tuff_wall": "磨制凝灰岩墙",
+			"minecraft:scrape_pottery_sherd": "刮削纹样陶片",
 			"minecraft:trial_key": "试炼钥匙",
 			"minecraft:trial_spawner": "试炼刷怪笼",
 			"minecraft:tuff_brick_slab": "凝灰岩砖台阶",
@@ -446,16 +480,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.80.21",
-			"packageVersion": "1.20.80.21"
+			"coreVersion": "1.20.80.22",
+			"packageVersion": "1.20.80.22"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.80.21",
-			"packageVersion": "1.20.80.21"
+			"coreVersion": "1.20.80.22",
+			"packageVersion": "1.20.80.22"
 		}
 	}
 }

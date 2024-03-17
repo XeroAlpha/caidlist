@@ -179,6 +179,7 @@
                 input_permissions: '操作输入权限(用于 inputpermission 命令的输入权限 ID)',
                 camera_presets: '摄像机预设(用于 camera 命令的摄像机预设 ID)',
                 recipes: '配方(用于 recipe 命令的配方 ID)',
+                hud_elements: 'HUD界面元素(用于 hud 命令的界面元素 ID)',
                 abilities: '能力(用于教育版 ability 命令的能力 ID)',
                 options: '选项',
                 particle_types: '粒子类型',
@@ -398,7 +399,7 @@
                     }
                 }
                 statusBarEl.innerHTML = text.join('\n');
-                setTimeout(updateStatus, success ? 100 : 500);
+                setTimeout(updateStatus, success ? Math.min(100, hb.stepSpentAvg ?? 100) : 500);
             }
             async function updateDanmaku() {
                 let lines = [];

@@ -403,7 +403,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10']]
+        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.60']]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {
