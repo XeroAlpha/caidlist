@@ -690,8 +690,9 @@ async function generateGameTestOutputFiles(cx) {
     });
     const cooldownCategories = {};
     Object.entries(ids.items).forEach(([itemId, item]) => {
-        const { cooldownCategory } = item;
-        if (cooldownCategory) {
+        const cooldownComponent = item.components?.['minecraft:cooldown'];
+        if (cooldownComponent) {
+            const { cooldownCategory } = cooldownComponent;
             let categoryMap = cooldownCategories[cooldownCategory];
             if (!categoryMap) {
                 categoryMap = [];
