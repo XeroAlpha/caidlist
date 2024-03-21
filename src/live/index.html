@@ -387,6 +387,9 @@
                 if (!danmakuOnline) {
                     text.push('弹幕姬：离线');
                 }
+                if (hb.livePrompt) {
+                    text.push(hb.livePrompt);
+                }
                 if (obsStreaming) {
                     const unresponsibleSeconds = (Date.now() - lastActiveTime) / 1000;
                     if (unresponsibleSeconds > 60) {
@@ -482,7 +485,7 @@
                 ],
                 [
                     '这个是每周的常驻节目吗？',
-                    '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播三个小时左右。'
+                    '测试版一般会在每周的周三或周四发布，我会在更新当天或次日进行直播爬ID表，一次直播一个小时左右。'
                 ],
                 [
                     '我能来这个直播间干什么？',

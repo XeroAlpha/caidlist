@@ -68,9 +68,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.20.80.22',
+        version: '1.20.80.23',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.80.22.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.80.23.apk',
         config: smallestGUIOptions
     },
     // 中国版测试版
@@ -85,14 +85,14 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.20.80.22',
+        version: '1.20.80.23',
         config: {
             devBehaviorPackPath: `${process.env.LOCALAPPDATA}\\Packages\\Microsoft.MinecraftWindowsBeta_8wekyb3d8bbwe\\LocalState\\games\\com.mojang\\development_behavior_packs`
         }
     },
     dev: {
-        version: '1.20.80.22',
-        path: 'H:\\BedrockVersions\\Dev\\1.20.80.22.apk',
+        version: '1.20.80.23',
+        path: 'H:\\BedrockVersions\\Dev\\1.20.80.23.apk',
         config: smallestGUIOptions
     }
 };

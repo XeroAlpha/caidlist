@@ -391,7 +391,6 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
 
     const device = await getDeviceOrWait();
     const screen = new AutocompletionScreen();
-    screen.attachDevice(device);
     screen.updateStatus({
         version,
         branch: branch.id,
