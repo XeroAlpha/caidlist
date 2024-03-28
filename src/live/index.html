@@ -97,6 +97,12 @@
             .hidden {
                 display: none;
             }
+            .promptbar {
+                margin: 0px 20px 20px 10px;
+                flex: 0 0 auto;
+                overflow: hidden;
+                white-space: pre-wrap;
+            }
             .statusbar {
                 margin: 10px 20px 20px 10px;
                 flex: 0 0 auto;
@@ -125,6 +131,7 @@
         <div class="rightbar">
             <div class="explanation bar"></div>
             <div class="statusbar bar"></div>
+            <div class="promptbar bar"></div>
             <div class="danmaku bar"></div>
         </div>
         <script type="module">
@@ -134,6 +141,7 @@
             const logsEl = document.querySelector('.logs');
             const explanationEl = document.querySelector('.explanation');
             const statusBarEl = document.querySelector('.statusbar');
+            const promptBarEl = document.querySelector('.promptbar');
             const danmakuEl = document.querySelector('.danmaku');
             const versionNameMap = {
                 beta: '测试版/预览版',
@@ -388,7 +396,10 @@
                     text.push('弹幕姬：离线');
                 }
                 if (hb.livePrompt) {
-                    text.push(hb.livePrompt);
+                    promptBarEl.classList.remove('hidden');
+                    promptBarEl.innerHTML = hb.livePrompt;
+                } else {
+                    promptBarEl.classList.add('hidden');
                 }
                 if (obsStreaming) {
                     const unresponsibleSeconds = (Date.now() - lastActiveTime) / 1000;
