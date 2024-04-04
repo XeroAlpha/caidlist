@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.80.24",
-    "__COMMITHASH__": "8e4ff6dc5e6450e2ce81887278ff27f9a4151ebb",
+    "__VERSION__": "1.21.0.20",
+    "__COMMITHASH__": "ecdfdb2cf129a7f7d1b9fc5fdc44d6fab18074ea",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -3017,6 +3017,7 @@
         "occupied_bit": "Determines if a bed block is occupied",
         "old_leaf_type": "Determines the leaf type of some blocks",
         "old_log_type": "Determines the wood type of some blocks",
+        "ominous": "Determines if the block is the ominous version",
         "open_bit": "Determines if a door, gate, or trapdoor is open",
         "orientation": "12 variant orientation",
         "output_lit_bit": "Determines if a Comparator's output is lit",
@@ -3526,6 +3527,7 @@
         "minecraft:exposed_double_cut_copper_slab": "",
         "minecraft:farmland": "",
         "minecraft:fence_gate": "",
+        "minecraft:fern": "",
         "minecraft:fire": "",
         "minecraft:fire_coral": "",
         "minecraft:fire_coral_fan": "",
@@ -3923,6 +3925,7 @@
         "minecraft:sea_lantern": "",
         "minecraft:sea_pickle": "",
         "minecraft:seagrass": "",
+        "minecraft:short_grass": "",
         "minecraft:shroomlight": "",
         "minecraft:silver_glazed_terracotta": "",
         "minecraft:skull": "",
@@ -4006,7 +4009,6 @@
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
-        "minecraft:tallgrass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
         "minecraft:tnt": "",
@@ -14611,6 +14613,12 @@
                     "description": "If true, the projectile homes in to the nearest entity",
                 },
                 {
+                    "name": "ignored_entities",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "[EXPERIMENTAL] An array of strings defining the types of entities that this entity does not collide with.",
+                },
+                {
                     "name": "inertia",
                     "type": "Decimal",
                     "defaultValue": "0.99",
@@ -16247,5 +16255,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.state_time": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Only valid in an animation controller. Returns the time in seconds in the current animation controller state.",
+    },
 }

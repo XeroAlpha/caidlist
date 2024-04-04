@@ -2,27 +2,27 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.20.80.24）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.21.0.20）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
-		20,
-		80,
-		24
+		21,
+		0,
+		20
 	],
 	"require": [
 		{
 			"uuid": "4b2612c7-3d53-46b5-9b0c-dd1f447d3ee7",
 			"min": [
 				1,
-				20,
-				80,
-				24
+				21,
+				0,
+				20
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.20.80.24",
+	"minSupportVer": "1.21.0.20",
 	"enums": {
 		"block": {
 			"chiseled_copper": "雕纹铜块",
@@ -111,6 +111,8 @@
 			"guster_pottery_sherd": "旋风纹样陶片",
 			"heavy_core": "沉重核心",
 			"mace": "重锤",
+			"ominous_bottle": "不祥之瓶",
+			"ominous_trial_key": "不祥试炼钥匙",
 			"oxidized_chiseled_copper": "氧化的雕纹铜块",
 			"oxidized_copper_bulb": "氧化的铜灯",
 			"oxidized_copper_door": "氧化的铜门",
@@ -168,6 +170,13 @@
 			"minecraft:wind_charge_projectile": "风弹",
 			"wind_charge_projectile": "风弹"
 		},
+		"effect": {
+			"infested": "寄生",
+			"oozing": "渗浆",
+			"trial_omen": "试炼之兆",
+			"weaving": "盘丝",
+			"wind_charged": "蓄风"
+		},
 		"structure": {
 			"trial_chambers": "试炼密室"
 		},
@@ -206,7 +215,9 @@
 			"minecraft:breeze_ground_particle": "",
 			"minecraft:breeze_wind_explosion_emitter": "",
 			"minecraft:small_flame_particle": "",
+			"minecraft:small_soul_fire_flame": "",
 			"minecraft:trial_spawner_detection": "",
+			"minecraft:trial_spawner_detection_ominous": "",
 			"minecraft:vault_connection_particle": "",
 			"minecraft:white_smoke_particle": "",
 			"minecraft:wind_explosion_emitter": ""
@@ -217,6 +228,7 @@
 			"break.copper_bulb": "",
 			"break.copper_grate": "",
 			"break.heavy_core": "",
+			"break.web": "",
 			"breeze_wind_charge.burst": "",
 			"close_door.copper": "",
 			"crafter.craft": "",
@@ -243,6 +255,7 @@
 			"mob.breeze.shoot": "",
 			"mob.breeze.slide": "",
 			"mob.breeze.whirl": "",
+			"ominous_bottle.end_use": "",
 			"open_door.copper": "",
 			"open_trapdoor.copper": "",
 			"place.copper_bulb": "",
@@ -251,14 +264,18 @@
 			"step.copper_grate": "",
 			"step.heavy_core": "",
 			"step.tuff_bricks": "",
+			"step.web": "",
 			"trial_spawner.ambient": "",
+			"trial_spawner.ambient_ominous": "",
 			"trial_spawner.break": "",
+			"trial_spawner.charge_activate": "",
 			"trial_spawner.close_shutter": "",
 			"trial_spawner.detect_player": "",
 			"trial_spawner.eject_item": "",
 			"trial_spawner.hit": "",
 			"trial_spawner.open_shutter": "",
 			"trial_spawner.place": "",
+			"trial_spawner.spawn_item": "",
 			"trial_spawner.spawn_mob": "",
 			"trial_spawner.step": "",
 			"vault.activate": "",
@@ -282,8 +299,12 @@
 			"chests/trial_chambers/intersection_barrel": "",
 			"chests/trial_chambers/reward": "",
 			"chests/trial_chambers/reward_common": "",
+			"chests/trial_chambers/reward_common_ominous": "",
+			"chests/trial_chambers/reward_ominous": "",
 			"chests/trial_chambers/reward_rare": "",
+			"chests/trial_chambers/reward_rare_ominous": "",
 			"chests/trial_chambers/reward_unique": "",
+			"chests/trial_chambers/reward_unique_ominous": "",
 			"chests/trial_chambers/supply": "",
 			"dispensers/trial_chambers/chamber": "",
 			"dispensers/trial_chambers/corridor": "",
@@ -291,8 +312,16 @@
 			"entities/bogged": "",
 			"entities/bogged_shear": "",
 			"entities/breeze": "",
+			"entities/pillager_captain": "",
+			"equipment/trial_chamber": "",
+			"equipment/trial_chamber_chainmail": "",
+			"equipment/trial_chamber_diamond": "",
+			"equipment/trial_chamber_iron": "",
 			"pots/trial_chambers/corridor": "",
+			"spawners/ominous/trial_chamber/consumables": "",
+			"spawners/ominous/trial_chamber/key": "",
 			"spawners/trial_chamber/consumables": "",
+			"spawners/trial_chamber/items_to_drop_when_ominous": "",
 			"spawners/trial_chamber/key": ""
 		},
 		"loot_table_wrapped": {
@@ -302,8 +331,12 @@
 			"\"chests/trial_chambers/intersection_barrel\"": "",
 			"\"chests/trial_chambers/reward\"": "",
 			"\"chests/trial_chambers/reward_common\"": "",
+			"\"chests/trial_chambers/reward_common_ominous\"": "",
+			"\"chests/trial_chambers/reward_ominous\"": "",
 			"\"chests/trial_chambers/reward_rare\"": "",
+			"\"chests/trial_chambers/reward_rare_ominous\"": "",
 			"\"chests/trial_chambers/reward_unique\"": "",
+			"\"chests/trial_chambers/reward_unique_ominous\"": "",
 			"\"chests/trial_chambers/supply\"": "",
 			"\"dispensers/trial_chambers/chamber\"": "",
 			"\"dispensers/trial_chambers/corridor\"": "",
@@ -311,8 +344,16 @@
 			"\"entities/bogged\"": "",
 			"\"entities/bogged_shear\"": "",
 			"\"entities/breeze\"": "",
+			"\"entities/pillager_captain\"": "",
+			"\"equipment/trial_chamber\"": "",
+			"\"equipment/trial_chamber_chainmail\"": "",
+			"\"equipment/trial_chamber_diamond\"": "",
+			"\"equipment/trial_chamber_iron\"": "",
 			"\"pots/trial_chambers/corridor\"": "",
+			"\"spawners/ominous/trial_chamber/consumables\"": "",
+			"\"spawners/ominous/trial_chamber/key\"": "",
 			"\"spawners/trial_chamber/consumables\"": "",
+			"\"spawners/trial_chamber/items_to_drop_when_ominous\"": "",
 			"\"spawners/trial_chamber/key\"": ""
 		},
 		"recipe": {
@@ -417,7 +458,11 @@
 			"minecraft:weathered_copper_door": "<工作台>锈蚀的铜块*6->锈蚀的铜门*3",
 			"minecraft:weathered_copper_grate": "<工作台>锈蚀的铜块*4->锈蚀的铜格栅*4",
 			"minecraft:weathered_copper_trapdoor": "<工作台>锈蚀的铜块*6->锈蚀的铜活板门*2",
-			"minecraft:wind_charge": "<工作台>旋风棒~>风弹*4"
+			"minecraft:wind_charge": "<工作台>旋风棒~>风弹*4",
+			"weapon_arrow_recipe_43": "",
+			"weapon_arrow_recipe_44": "",
+			"weapon_arrow_recipe_45": "",
+			"weapon_arrow_recipe_46": ""
 		},
 		"summonable_entity": {
 			"bogged": "沼骸",
@@ -450,6 +495,8 @@
 			"minecraft:guster_pottery_sherd": "旋风纹样陶片",
 			"minecraft:heavy_core": "沉重核心",
 			"minecraft:mace": "重锤",
+			"minecraft:ominous_bottle": "不祥之瓶",
+			"minecraft:ominous_trial_key": "不祥试炼钥匙",
 			"minecraft:oxidized_chiseled_copper": "氧化的雕纹铜块",
 			"minecraft:oxidized_copper_bulb": "氧化的铜灯",
 			"minecraft:oxidized_copper_door": "氧化的铜门",
@@ -504,16 +551,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.20.80.24",
-			"packageVersion": "1.20.80.24"
+			"coreVersion": "1.21.0.20",
+			"packageVersion": "1.21.0.20"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.20.80.24",
-			"packageVersion": "1.20.80.24"
+			"coreVersion": "1.21.0.20",
+			"packageVersion": "1.21.0.20"
 		}
 	}
 }

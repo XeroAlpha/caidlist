@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.20.80.24",
+    "packageVersion": "1.21.0.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -6024,15 +6024,14 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "enumerableProperties": {
-                                                "clone": {
+                                            "properties": {
+                                                "constructor": {
                                                     "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
+                                                        "ref": "Minecraft.BlockPermutation",
                                                     },
                                                 },
+                                            },
+                                            "enumerableProperties": {
                                                 "getAllStates": {
                                                     "value": {
                                                         "type": "function",
@@ -6095,13 +6094,6 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockPermutation",
                                                     },
                                                 },
                                             },
@@ -9504,6 +9496,14 @@
                                 "length": 0,
                                 "enumerableProperties": {
                                     "get": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                    "getAll": {
                                         "value": {
                                             "type": "function",
                                             "name": "",
@@ -16426,6 +16426,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "TntExplosionDropDecay": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "tntExplosionDropDecay",
+                                        },
+                                        "readOnly": true,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -17017,6 +17024,20 @@
                                                         "length": 1,
                                                     },
                                                 },
+                                                "tntExplosionDropDecay": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
                                             },
                                             "properties": {
                                                 "constructor": {
@@ -17383,6 +17404,28 @@
                             },
                             "configurable": false,
                         },
+                        "InputPermissionCategory": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Camera": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Movement": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "InvalidContainerSlotError": {
                             "value": {
                                 "type": "function",
@@ -17558,6 +17601,195 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.Component",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemComponentBeforeDurabilityDamageEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemComponentBeforeDurabilityDamageEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "attackingEntity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "durabilityDamage": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "hitEntity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemComponentBeforeDurabilityDamageEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemComponentHitEntityEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemComponentHitEntityEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "attackingEntity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "hadEffect": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "hitEntity": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemComponentHitEntityEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemComponentMineBlockEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemComponentMineBlockEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "block": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "minedBlockPermutation": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "source": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemComponentMineBlockEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -20115,6 +20347,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "inputPermissions": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "isEmoting": {
                                                     "getter": {
                                                         "type": "function",
@@ -20854,6 +21094,155 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerInputPermissionCategoryChangeAfterEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerInputPermissionCategoryChangeAfterEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "category": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "enabled": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "player": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerInputPermissionCategoryChangeAfterEventSignal": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerInputPermissionCategoryChangeAfterEventSignal",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "subscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "unsubscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerInputPermissions": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerInputPermissions",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "cameraEnabled": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "movementEnabled": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerInputPermissions",
                                                     },
                                                 },
                                             },
@@ -24604,6 +24993,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "playerInputPermissionCategoryChange": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "playerInteractWithBlock": {
                                                     "getter": {
                                                         "type": "function",
@@ -27114,11 +27511,204 @@
                     "integrity": "sealed",
                 },
             },
+            "MinecraftCommon": {
+                "value": {
+                    "type": "object",
+                    "enumerableProperties": {
+                        "ArgumentOutOfBoundsError": {
+                            "value": {
+                                "type": "function",
+                                "name": "ArgumentOutOfBoundsError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftCommon.ArgumentOutOfBoundsError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "maxValue": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "minValue": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "value": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "EngineError": {
+                            "value": {
+                                "type": "function",
+                                "name": "EngineError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftCommon.EngineError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "InvalidArgumentError": {
+                            "value": {
+                                "type": "function",
+                                "name": "InvalidArgumentError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftCommon.InvalidArgumentError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "index": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PropertyOutOfBoundsError": {
+                            "value": {
+                                "type": "function",
+                                "name": "PropertyOutOfBoundsError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftCommon.PropertyOutOfBoundsError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "maxValue": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "minValue": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "value": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                    },
+                    "symbolProperties": {
+                        "Symbol(Symbol.toStringTag)": {
+                            "value": {
+                                "type": "string",
+                                "value": "Module",
+                            },
+                            "readOnly": true,
+                            "configurable": false,
+                        },
+                    },
+                    "prototype": null,
+                    "integrity": "sealed",
+                },
+            },
             "MinecraftDebugUtilities": {
                 "value": {
                     "type": "object",
                     "enumerableProperties": {
-                        "disableWatchdog": {
+                        "disableWatchdogTimingWarnings": {
                             "value": {
                                 "type": "function",
                                 "name": "",
@@ -27792,7 +28382,6 @@
         "Minecraft.BlockLocationIterator.prototype.constructor",
         "Minecraft.BlockPermutation",
         "Minecraft.BlockPermutation.prototype",
-        "Minecraft.BlockPermutation.prototype.clone",
         "Minecraft.BlockPermutation.prototype.constructor",
         "Minecraft.BlockPermutation.prototype.getAllStates",
         "Minecraft.BlockPermutation.prototype.getItemStack",
@@ -28241,6 +28830,7 @@
         "Minecraft.EnchantmentTypeUnknownIdError.prototype.constructor",
         "Minecraft.EnchantmentTypes",
         "Minecraft.EnchantmentTypes.get",
+        "Minecraft.EnchantmentTypes.getAll",
         "Minecraft.EnchantmentTypes.prototype",
         "Minecraft.EnchantmentTypes.prototype.constructor",
         "Minecraft.Entity",
@@ -29186,6 +29776,7 @@
         "Minecraft.GameRule.ShowTags",
         "Minecraft.GameRule.SpawnRadius",
         "Minecraft.GameRule.TntExplodes",
+        "Minecraft.GameRule.TntExplosionDropDecay",
         "Minecraft.GameRuleChangeAfterEvent",
         "Minecraft.GameRuleChangeAfterEvent.prototype",
         "Minecraft.GameRuleChangeAfterEvent.prototype.constructor",
@@ -29269,6 +29860,8 @@
         "Minecraft.GameRules.prototype.spawnRadius.[[Set]]",
         "Minecraft.GameRules.prototype.tntExplodes.[[Get]]",
         "Minecraft.GameRules.prototype.tntExplodes.[[Set]]",
+        "Minecraft.GameRules.prototype.tntExplosionDropDecay.[[Get]]",
+        "Minecraft.GameRules.prototype.tntExplosionDropDecay.[[Set]]",
         "Minecraft.HudElement",
         "Minecraft.HudElement.AirBubbles",
         "Minecraft.HudElement.Armor",
@@ -29313,6 +29906,9 @@
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.constructor",
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.subscribe",
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.InputPermissionCategory",
+        "Minecraft.InputPermissionCategory.Camera",
+        "Minecraft.InputPermissionCategory.Movement",
         "Minecraft.InvalidContainerSlotError",
         "Minecraft.InvalidContainerSlotError.prototype",
         "Minecraft.InvalidContainerSlotError.prototype.[[Prototype]]",
@@ -29337,6 +29933,29 @@
         "Minecraft.ItemComponent.prototype",
         "Minecraft.ItemComponent.prototype.[[Prototype]]",
         "Minecraft.ItemComponent.prototype.constructor",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.attackingEntity.[[Get]]",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.constructor",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.durabilityDamage.[[Get]]",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.durabilityDamage.[[Set]]",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.hitEntity.[[Get]]",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Set]]",
+        "Minecraft.ItemComponentHitEntityEvent",
+        "Minecraft.ItemComponentHitEntityEvent.prototype",
+        "Minecraft.ItemComponentHitEntityEvent.prototype.attackingEntity.[[Get]]",
+        "Minecraft.ItemComponentHitEntityEvent.prototype.constructor",
+        "Minecraft.ItemComponentHitEntityEvent.prototype.hadEffect.[[Get]]",
+        "Minecraft.ItemComponentHitEntityEvent.prototype.hitEntity.[[Get]]",
+        "Minecraft.ItemComponentHitEntityEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.ItemComponentMineBlockEvent",
+        "Minecraft.ItemComponentMineBlockEvent.prototype",
+        "Minecraft.ItemComponentMineBlockEvent.prototype.block.[[Get]]",
+        "Minecraft.ItemComponentMineBlockEvent.prototype.constructor",
+        "Minecraft.ItemComponentMineBlockEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.ItemComponentMineBlockEvent.prototype.minedBlockPermutation.[[Get]]",
+        "Minecraft.ItemComponentMineBlockEvent.prototype.source.[[Get]]",
         "Minecraft.ItemComponentRegistry",
         "Minecraft.ItemComponentRegistry.prototype",
         "Minecraft.ItemComponentRegistry.prototype.constructor",
@@ -29671,6 +30290,7 @@
         "Minecraft.Player.prototype.getItemCooldown",
         "Minecraft.Player.prototype.getSpawnPoint",
         "Minecraft.Player.prototype.getTotalXp",
+        "Minecraft.Player.prototype.inputPermissions.[[Get]]",
         "Minecraft.Player.prototype.isEmoting.[[Get]]",
         "Minecraft.Player.prototype.isFlying.[[Get]]",
         "Minecraft.Player.prototype.isGliding.[[Get]]",
@@ -29762,6 +30382,24 @@
         "Minecraft.PlayerGameModeChangeBeforeEventSignal.prototype.constructor",
         "Minecraft.PlayerGameModeChangeBeforeEventSignal.prototype.subscribe",
         "Minecraft.PlayerGameModeChangeBeforeEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent.prototype",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent.prototype.category.[[Get]]",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent.prototype.constructor",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent.prototype.enabled.[[Get]]",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEvent.prototype.player.[[Get]]",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal.prototype",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal.prototype.constructor",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal.prototype.subscribe",
+        "Minecraft.PlayerInputPermissionCategoryChangeAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerInputPermissions",
+        "Minecraft.PlayerInputPermissions.prototype",
+        "Minecraft.PlayerInputPermissions.prototype.cameraEnabled.[[Get]]",
+        "Minecraft.PlayerInputPermissions.prototype.cameraEnabled.[[Set]]",
+        "Minecraft.PlayerInputPermissions.prototype.constructor",
+        "Minecraft.PlayerInputPermissions.prototype.movementEnabled.[[Get]]",
+        "Minecraft.PlayerInputPermissions.prototype.movementEnabled.[[Set]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.block.[[Get]]",
@@ -30236,6 +30874,7 @@
         "Minecraft.WorldAfterEvents.prototype.playerBreakBlock.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerDimensionChange.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerGameModeChange.[[Get]]",
+        "Minecraft.WorldAfterEvents.prototype.playerInputPermissionCategoryChange.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerInteractWithBlock.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerInteractWithEntity.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerJoin.[[Get]]",
@@ -30289,9 +30928,34 @@
         "Minecraft.system.[[Prototype]]",
         "Minecraft.world",
         "Minecraft.world.[[Prototype]]",
+        "MinecraftCommon",
+        "MinecraftCommon.ArgumentOutOfBoundsError",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype.[[Prototype]]",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype.constructor",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype.maxValue.[[Get]]",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype.minValue.[[Get]]",
+        "MinecraftCommon.ArgumentOutOfBoundsError.prototype.value.[[Get]]",
+        "MinecraftCommon.EngineError",
+        "MinecraftCommon.EngineError.prototype",
+        "MinecraftCommon.EngineError.prototype.[[Prototype]]",
+        "MinecraftCommon.EngineError.prototype.constructor",
+        "MinecraftCommon.InvalidArgumentError",
+        "MinecraftCommon.InvalidArgumentError.prototype",
+        "MinecraftCommon.InvalidArgumentError.prototype.[[Prototype]]",
+        "MinecraftCommon.InvalidArgumentError.prototype.constructor",
+        "MinecraftCommon.InvalidArgumentError.prototype.index.[[Get]]",
+        "MinecraftCommon.PropertyOutOfBoundsError",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype.[[Prototype]]",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype.constructor",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype.maxValue.[[Get]]",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype.minValue.[[Get]]",
+        "MinecraftCommon.PropertyOutOfBoundsError.prototype.value.[[Get]]",
+        "MinecraftCommon.Symbol(Symbol.toStringTag)",
         "MinecraftDebugUtilities",
         "MinecraftDebugUtilities.Symbol(Symbol.toStringTag)",
-        "MinecraftDebugUtilities.disableWatchdog",
+        "MinecraftDebugUtilities.disableWatchdogTimingWarnings",
         "MinecraftUI",
         "MinecraftUI.ActionFormData",
         "MinecraftUI.ActionFormData.prototype",
@@ -44627,6 +45291,47 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:fern": {
+            "properties": [
+                {
+                    "name": "tall_grass_type",
+                    "validValues": [
+                        "default",
+                        "tall",
+                        "fern",
+                        "snow",
+                    ],
+                    "defaultValue": "fern",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "tall_grass_type": "tall",
+                },
+                {
+                    "tall_grass_type": "snow",
+                },
+            ],
+            "itemId": {
+                "minecraft:short_grass": [
+                    {
+                        "tall_grass_type": "default",
+                    },
+                    {
+                        "tall_grass_type": "tall",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "tall_grass_type": "fern",
+                    },
+                    {
+                        "tall_grass_type": "snow",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
         },
         "minecraft:fire": {
             "properties": [
@@ -65173,6 +65878,47 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:short_grass": {
+            "properties": [
+                {
+                    "name": "tall_grass_type",
+                    "validValues": [
+                        "default",
+                        "tall",
+                        "fern",
+                        "snow",
+                    ],
+                    "defaultValue": "default",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "tall_grass_type": "tall",
+                },
+                {
+                    "tall_grass_type": "snow",
+                },
+            ],
+            "itemId": {
+                "<same>": [
+                    {
+                        "tall_grass_type": "default",
+                    },
+                    {
+                        "tall_grass_type": "tall",
+                    },
+                ],
+                "minecraft:fern": [
+                    {
+                        "tall_grass_type": "fern",
+                    },
+                    {
+                        "tall_grass_type": "snow",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:shroomlight": {
             "properties": [],
             "invalidStates": [],
@@ -68221,23 +68967,6 @@
             "itemId": "minecraft:sweet_berries",
             "canBeWaterlogged": false,
         },
-        "minecraft:tallgrass": {
-            "properties": [
-                {
-                    "name": "tall_grass_type",
-                    "validValues": [
-                        "default",
-                        "tall",
-                        "fern",
-                        "snow",
-                    ],
-                    "defaultValue": "default",
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:target": {
             "properties": [],
             "invalidStates": [],
@@ -68438,6 +69167,14 @@
         },
         "minecraft:trial_spawner": {
             "properties": [
+                {
+                    "name": "ominous",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
                 {
                     "name": "trial_spawner_state",
                     "validValues": [
@@ -69194,6 +69931,14 @@
                         "east",
                     ],
                     "defaultValue": "south",
+                },
+                {
+                    "name": "ominous",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
                 {
                     "name": "vault_state",
@@ -74860,6 +75605,18 @@
                 },
             },
         ],
+        "ominous": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {
+                    "minecraft:trial_spawner": false,
+                    "minecraft:vault": false,
+                },
+            },
+        ],
         "open_bit": [
             {
                 "validValues": [
@@ -75517,7 +76274,8 @@
                     "snow",
                 ],
                 "defaultValue": {
-                    "minecraft:tallgrass": "default",
+                    "minecraft:fern": "fern",
+                    "minecraft:short_grass": "default",
                 },
             },
         ],
@@ -79300,6 +80058,9 @@
         "minecraft:fermented_spider_eye": {
             "tags": [],
         },
+        "minecraft:fern": {
+            "tags": [],
+        },
         "minecraft:field_masoned_banner_pattern": {
             "unstackable": true,
             "tags": [],
@@ -81461,6 +82222,12 @@
         "minecraft:ochre_froglight": {
             "tags": [],
         },
+        "minecraft:ominous_bottle": {
+            "tags": [],
+        },
+        "minecraft:ominous_trial_key": {
+            "tags": [],
+        },
         "minecraft:orange_candle": {
             "tags": [],
         },
@@ -82180,6 +82947,9 @@
                     "cooldownTicks": 100,
                 },
             },
+        },
+        "minecraft:short_grass": {
+            "tags": [],
         },
         "minecraft:shroomlight": {
             "tags": [],
@@ -84559,6 +85329,7 @@
         "haste",
         "health_boost",
         "hunger",
+        "infested",
         "instant_damage",
         "instant_health",
         "invisibility",
@@ -84567,6 +85338,7 @@
         "mining_fatigue",
         "nausea",
         "night_vision",
+        "oozing",
         "poison",
         "regeneration",
         "resistance",
@@ -84575,9 +85347,12 @@
         "slowness",
         "speed",
         "strength",
+        "trial_omen",
         "village_hero",
         "water_breathing",
         "weakness",
+        "weaving",
+        "wind_charged",
         "wither",
     ],
     "dimensions": [
@@ -84673,4 +85448,120 @@
         "minecraft:warm_ocean",
         "minecraft:warped_forest",
     ],
+    "enchantments": {
+        "aqua_affinity": {
+            "maxLevel": 1,
+        },
+        "bane_of_arthropods": {
+            "maxLevel": 5,
+        },
+        "binding": {
+            "maxLevel": 1,
+        },
+        "blast_protection": {
+            "maxLevel": 4,
+        },
+        "channeling": {
+            "maxLevel": 1,
+        },
+        "depth_strider": {
+            "maxLevel": 3,
+        },
+        "efficiency": {
+            "maxLevel": 5,
+        },
+        "feather_falling": {
+            "maxLevel": 4,
+        },
+        "fire_aspect": {
+            "maxLevel": 2,
+        },
+        "fire_protection": {
+            "maxLevel": 4,
+        },
+        "flame": {
+            "maxLevel": 1,
+        },
+        "fortune": {
+            "maxLevel": 3,
+        },
+        "frost_walker": {
+            "maxLevel": 2,
+        },
+        "impaling": {
+            "maxLevel": 5,
+        },
+        "infinity": {
+            "maxLevel": 1,
+        },
+        "knockback": {
+            "maxLevel": 2,
+        },
+        "looting": {
+            "maxLevel": 3,
+        },
+        "loyalty": {
+            "maxLevel": 3,
+        },
+        "luck_of_the_sea": {
+            "maxLevel": 3,
+        },
+        "lure": {
+            "maxLevel": 3,
+        },
+        "mending": {
+            "maxLevel": 1,
+        },
+        "multishot": {
+            "maxLevel": 1,
+        },
+        "piercing": {
+            "maxLevel": 4,
+        },
+        "power": {
+            "maxLevel": 5,
+        },
+        "projectile_protection": {
+            "maxLevel": 4,
+        },
+        "protection": {
+            "maxLevel": 4,
+        },
+        "punch": {
+            "maxLevel": 2,
+        },
+        "quick_charge": {
+            "maxLevel": 3,
+        },
+        "respiration": {
+            "maxLevel": 3,
+        },
+        "riptide": {
+            "maxLevel": 3,
+        },
+        "sharpness": {
+            "maxLevel": 5,
+        },
+        "silk_touch": {
+            "maxLevel": 1,
+        },
+        "smite": {
+            "maxLevel": 5,
+        },
+        "soul_speed": {
+            "maxLevel": 3,
+        },
+        "swift_sneak": {
+            "maxLevel": 3,
+        },
+        "thorns": {
+            "maxLevel": 3,
+        },
+        "unbreaking": {
+            "maxLevel": 3,
+        },
+        "vanishing": {
+            "maxLevel": 1,
+        },
+    },
 }

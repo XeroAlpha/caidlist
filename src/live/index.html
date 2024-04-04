@@ -23,6 +23,12 @@
             body.no-background {
                 background: white;
             }
+            code {
+                font-family: "JetBrains Mono", "Lucida Console", "思源黑体", monospace;
+            }
+            samp {
+                font-family: "Mojangles", "HYWenHei 65W", "思源黑体", monospace;
+            }
             .leftbar {
                 display: flex;
                 flex: 0 0 auto;
@@ -90,7 +96,7 @@
             .danmaku {
                 margin: 0px 20px 20px 10px;
                 flex: 0 0 auto;
-                height: 30vh;
+                height: 20vh;
                 overflow: hidden;
                 white-space: pre-wrap;
             }
@@ -418,7 +424,7 @@
             async function updateDanmaku() {
                 let lines = [];
                 try {
-                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 300);
+                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 5000);
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;
