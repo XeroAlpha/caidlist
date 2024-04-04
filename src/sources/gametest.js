@@ -507,48 +507,9 @@ const Extractors = [
             const ItemInfoList = parseOrThrow(await frame.evaluate(() => {
                 const result = {};
                 const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
-                const enchantmentIds = [
-                    'aqua_affinity',
-                    'bane_of_arthropods',
-                    'binding',
-                    'blast_protection',
-                    'channeling',
-                    'depth_strider',
-                    'efficiency',
-                    'feather_falling',
-                    'fire_aspect',
-                    'fire_protection',
-                    'flame',
-                    'fortune',
-                    'frost_walker',
-                    'impaling',
-                    'infinity',
-                    'knockback',
-                    'looting',
-                    'loyalty',
-                    'luck_of_the_sea',
-                    'lure',
-                    'mending',
-                    'multishot',
-                    'piercing',
-                    'power',
-                    'projectile_protection',
-                    'protection',
-                    'punch',
-                    'quick_charge',
-                    'respiration',
-                    'riptide',
-                    'sharpness',
-                    'silk_touch',
-                    'smite',
-                    'soul_speed',
-                    'swift_sneak',
-                    'thorns',
-                    'unbreaking',
-                    'vanishing'
-                ];
-                const enchantmentTypes = enchantmentIds.map((id) => Minecraft.EnchantmentTypes.get(id));
+                const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
                 const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
+                enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
                 for (const itemType of Minecraft.ItemTypes.getAll()) {
                     const itemStack = new Minecraft.ItemStack(itemType);
                     const componentInstances = itemStack.getComponents();
@@ -683,6 +644,22 @@ const Extractors = [
             const biomes = BiomeList.sort();
             target.biomes = biomes;
         }
+    },
+    {
+        name: 'enchantments',
+        timeout: 10000,
+        async extract(target, frame) {
+            const EnchantmentList = parseOrThrow(await frame.evaluate(() => {
+                const result = {};
+                for (const enchantmentType of Minecraft.EnchantmentTypes.getAll()) {
+                    result[enchantmentType.id] = {
+                        maxLevel: enchantmentType.maxLevel
+                    };
+                }
+                return JSON.stringify(result);
+            }));
+            target.enchantments = sortObjectKey(EnchantmentList);
+        }
     }
 ];
 
@@ -692,6 +669,7 @@ const ImportEnvironments = {
     MinecraftUI: ['mojang-minecraft-ui', '@minecraft/server-ui'],
     MinecraftAdmin: ['mojang-minecraft-server-admin', '@minecraft/server-admin'],
     MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net'],
+    MinecraftCommon: ['@minecraft/common'],
     MinecraftEditor: ['@minecraft/server-editor'],
     MinecraftDebugUtilities: ['@minecraft/debug-utilities']
 };
@@ -714,11 +692,11 @@ async function evaluateExtractors(cx, target, session) {
             })
         )).then(() => {
             // eslint-disable-next-line no-console
-            console.info('PREPARE_ENV_OK');
+            console.info('###PREPARE_ENV_OK###');
         });
     }, [...Object.entries(ImportEnvironments)]);
     await Promise.all([
-        pEvent(session, 'log', (ev) => ev.message === 'PREPARE_ENV_OK'),
+        pEvent(session, 'log', (ev) => ev.message.includes('###PREPARE_ENV_OK###')),
         session.continue()
     ]);
     await session.pause();

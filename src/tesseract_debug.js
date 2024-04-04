@@ -1,19 +1,19 @@
 /* eslint-disable no-console */
 import { writeFileSync } from 'fs';
-import { recognize } from 'node-tesseract-ocr';
+import { OEM, createWorker } from 'tesseract.js';
 import { pEvent } from 'p-event';
 import { packageVersions } from '../data/config.js';
 import { newAdbClient, getAnyOnlineDevice } from './util/adb.js';
 import { ScrcpyPNGStream, openScrcpy, stopScrcpy } from './util/scrcpy.js';
 
 async function recogizeCommandDebug(cx, commandTextImage) {
-    let commandText = await recognize(commandTextImage, {
+    const worker = await createWorker('eng', OEM.DEFAULT, {
         ...cx.tesseractOptions,
-        lang: 'eng',
-        psm: 7,
-        oem: 3
+        cacheMethod: 'none'
     });
+    let { data: { text: commandText } } = await worker.recognize(commandTextImage);
     commandText = commandText.trim();
+    await worker.terminate();
     return commandText;
 }
 

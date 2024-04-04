@@ -1,15 +1,15 @@
 import { Transform } from 'stream';
 import { strict as assert } from 'assert';
-import { recognize } from 'node-tesseract-ocr';
 import { PerformanceObserver, performance } from 'perf_hooks';
 import { createWriteStream } from 'fs';
+import { cpus } from 'os';
+import { createScheduler, createWorker } from 'tesseract.js';
 import { getDeviceOrWait } from '../util/adb.js';
 import {
     cachedOutput,
     pause,
     retryUntilComplete,
     formatTimeLeft,
-    forEachObject,
     readStreamOnce,
     sleepAsync,
     setStatus,
@@ -113,7 +113,16 @@ function mergeOrderedList(base, listA, listB) {
     return { merged, conflicts, hasConflicts: conflicts.length > 0 };
 }
 
-async function analyzeCommandAutocompletionFast(cx, device, screen, command, progressName, approxLength, aggressiveMode) {
+async function analyzeCommandAutocompletionFast(
+    cx,
+    device,
+    screen,
+    tesseractScheduler,
+    command,
+    progressName,
+    approxLength,
+    aggressiveMode
+) {
     // 初始状态：游戏HUD
     const autocompletions = [];
     const { commandAreaRect: rect } = cx;
@@ -159,7 +168,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 transform(imageData, encoding, done) {
                     const start = performance.now();
                     if (!this.lastImage || !imageData.equals(this.lastImage)) {
-                        const now = Date.now();
+                        const now = performance.now();
                         if (tabWhenChanged) {
                             if (!typeahead) {
                                 pressTab();
@@ -195,29 +204,20 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 objectMode: true,
                 transform(image, encoding, done) {
                     const start = performance.now();
-                    let promise = recognize(image, {
-                        ...cx.tesseractOptions,
-                        lang: 'eng',
-                        psm: 7,
-                        oem: 3
-                    });
+                    let promise = tesseractScheduler.addJob('recognize', image);
                     const beforePromises = [...ocrPendingPromises];
-                    promise = promise.then(async (text) => {
+                    promise = promise.then(async (result) => {
                         ocrPendingPromises.delete(promise);
                         await Promise.all(beforePromises);
-                        return text;
+                        return result.data.text;
                     });
                     ocrPendingPromises.add(promise);
                     promise.then((text) => {
                         let commandText = text.trim();
                         ocrProcessCounter++;
                         performance.measure(`ocr-${ocrProcessCounter}`, { start, detail: commandText });
-                        forEachObject(cx.tesseractMistakes, (v, k) => {
-                            let index = 0;
-                            while ((index = commandText.indexOf(k, index)) >= 0) {
-                                commandText = commandText.slice(0, index) + v + commandText.slice(index + k.length);
-                                index += k.length;
-                            }
+                        cx.tesseractMistakes.forEach(([pattern, replacement]) => {
+                            commandText = commandText.replace(pattern, replacement);
                         });
                         if (commandText.length && (!this.last || this.last !== commandText)) {
                             if (tabWhenChanged) droppedCount--;
@@ -236,7 +236,8 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
-    const timeStart = Date.now();
+    const timeStart = performance.now();
+    const performanceTimeOffset = Date.now() - timeStart;
     let stepStart = timeStart;
     let stepCount = 0;
     let duplicatedCount = 0;
@@ -268,7 +269,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 break;
             }
         } else {
-            const now = Date.now();
+            const now = performance.now();
             const stepSpent = now - stepStart;
             stepStart = now;
             stepCount++;
@@ -288,7 +289,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
                 const stepSpentAvg = (now - timeStart) / stepCount;
                 const percentage = ((autocompletions.length / approxLength) * 100).toFixed(1);
                 const timeLeft = (approxLength - autocompletions.length) * stepSpentAvg;
-                const estTime = now + timeLeft;
+                const estTime = performanceTimeOffset + now + timeLeft;
                 const timeLeftStr = formatTimeLeft(timeLeft / 1000);
                 const estTimeStr = new Date(estTime).toLocaleTimeString();
                 screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
@@ -323,7 +324,7 @@ async function analyzeCommandAutocompletionFast(cx, device, screen, command, pro
 
 async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix, exclusion) {
     const { version, branch, packageVersion } = cx;
-    const { device, target, screen } = options;
+    const { device, target, screen, tesseractScheduler } = options;
     const id = name.replace(/\s+(\S)/g, (_, ch) => ch.toUpperCase());
     const cacheId = `version.${version}.autocompletion.${branch.id}.${name.replace(/\s+/g, '_')}`;
     let cache = cachedOutput(cacheId);
@@ -344,6 +345,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 cx,
                 device,
                 screen,
+                tesseractScheduler,
                 commandPrefix,
                 progressName,
                 previousResult.length,
@@ -397,12 +399,23 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
         packageVersion
     });
 
+    const tesseractScheduler = createScheduler();
+    const workerCount = Math.max(1, Math.floor(cpus().length / 2));
+    for (let i = 0; i < workerCount; i++) {
+        const worker = await createWorker('eng', 3, {
+            ...cx.tesseractOptions,
+            cacheMethod: 'none'
+        });
+        tesseractScheduler.addWorker(worker);
+    }
+
     await pause(`Please switch to branch: ${branch.id}\nInteract if the device is ready`);
     const target = { packageVersion };
     const options = {
         device,
         target,
-        screen
+        screen,
+        tesseractScheduler
     };
 
     if (support.mcpews(cx)) {
@@ -492,6 +505,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     }
 
     await screen.stop();
+    await tesseractScheduler.terminate();
 
     verifySupportForSelectors(cx, target.selectors);
     return cachedOutput(cacheId, target);
