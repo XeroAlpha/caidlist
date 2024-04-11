@@ -213,7 +213,7 @@ async function analyzeCommandAutocompletionFast(
                     });
                     ocrPendingPromises.add(promise);
                     promise.then((text) => {
-                        let commandText = text.trim();
+                        let commandText = text.trim().replace(/\n/g, '');
                         ocrProcessCounter++;
                         performance.measure(`ocr-${ocrProcessCounter}`, { start, detail: commandText });
                         cx.tesseractMistakes.forEach(([pattern, replacement]) => {
@@ -258,6 +258,9 @@ async function analyzeCommandAutocompletionFast(
         if (!autocompletedCommand) {
             screen.log(`Assert failed: ${recogizedCommand}`);
             throw new Error(`Auto-completed command test failed: ${recogizedCommand}`);
+        }
+        if (droppedCount > 50) {
+            throw new Error(`Too many dropped events: ${droppedCount} dropped.`);
         }
 
         const autocompletion = autocompletedCommand.slice(command.length);
@@ -318,6 +321,7 @@ async function analyzeCommandAutocompletionFast(
     setStatus('');
 
     stopScrcpy(scrcpy);
+    await Promise.allSettled([...ocrPendingPromises]);
 
     return autocompletions;
 }

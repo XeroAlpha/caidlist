@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.21.0.20",
-    "__COMMITHASH__": "ecdfdb2cf129a7f7d1b9fc5fdc44d6fab18074ea",
+    "__VERSION__": "1.21.0.21",
+    "__COMMITHASH__": "7e03661f29ae812c1b36fd2420ae3fd8daecdd1d",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -124,6 +124,11 @@
                                 },
                                 {
                                     "name": "Entity Definition",
+                                    "sections": [
+                                        {
+                                            "name": "Note",
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -174,6 +179,11 @@
                     "sections": [
                         {
                             "name": "Examples",
+                            "sections": [
+                                {
+                                    "name": "Note",
+                                },
+                            ],
                         },
                         {
                             "name": "Getting Started",
@@ -245,6 +255,14 @@
                     "sections": [
                         {
                             "name": "Spawn Egg",
+                            "sections": [
+                                {
+                                    "name": "Hex Value",
+                                },
+                                {
+                                    "name": "Texture",
+                                },
+                            ],
                         },
                         {
                             "name": "animation_controllers",
@@ -1873,9 +1891,6 @@
                                     "name": "minecraft:spawn_entity",
                                 },
                                 {
-                                    "name": "minecraft:strength",
-                                },
-                                {
                                     "name": "minecraft:suspect_tracking",
                                 },
                                 {
@@ -2752,13 +2767,22 @@
                             "name": "Animation Controller effects",
                         },
                         {
+                            "name": "Animation Controller effects (continued)",
+                        },
+                        {
                             "name": "Animation Timeline effects",
+                        },
+                        {
+                            "name": "Animation Timeline effects (continued)",
                         },
                         {
                             "name": "Effect Event",
                         },
                         {
                             "name": "Effect List",
+                        },
+                        {
+                            "name": "Effect List (continued)",
                         },
                     ],
                 },
@@ -3181,6 +3205,7 @@
         "minecraft:bookshelf": "",
         "minecraft:border_block": "",
         "minecraft:brain_coral": "",
+        "minecraft:brain_coral_block": "",
         "minecraft:brain_coral_fan": "",
         "minecraft:brewing_stand": "",
         "minecraft:brick_block": "",
@@ -3200,6 +3225,7 @@
         "minecraft:brown_wool": "",
         "minecraft:bubble_column": "",
         "minecraft:bubble_coral": "",
+        "minecraft:bubble_coral_block": "",
         "minecraft:bubble_coral_fan": "",
         "minecraft:budding_amethyst": "",
         "minecraft:cactus": "",
@@ -3271,7 +3297,6 @@
         "minecraft:copper_grate": "",
         "minecraft:copper_ore": "",
         "minecraft:copper_trapdoor": "",
-        "minecraft:coral_block": "",
         "minecraft:coral_fan_hang": "",
         "minecraft:coral_fan_hang2": "",
         "minecraft:coral_fan_hang3": "",
@@ -3336,14 +3361,19 @@
         "minecraft:daylight_detector": "",
         "minecraft:daylight_detector_inverted": "",
         "minecraft:dead_brain_coral": "",
+        "minecraft:dead_brain_coral_block": "",
         "minecraft:dead_brain_coral_fan": "",
         "minecraft:dead_bubble_coral": "",
+        "minecraft:dead_bubble_coral_block": "",
         "minecraft:dead_bubble_coral_fan": "",
         "minecraft:dead_fire_coral": "",
+        "minecraft:dead_fire_coral_block": "",
         "minecraft:dead_fire_coral_fan": "",
         "minecraft:dead_horn_coral": "",
+        "minecraft:dead_horn_coral_block": "",
         "minecraft:dead_horn_coral_fan": "",
         "minecraft:dead_tube_coral": "",
+        "minecraft:dead_tube_coral_block": "",
         "minecraft:dead_tube_coral_fan": "",
         "minecraft:deadbush": "",
         "minecraft:decorated_pot": "",
@@ -3530,6 +3560,7 @@
         "minecraft:fern": "",
         "minecraft:fire": "",
         "minecraft:fire_coral": "",
+        "minecraft:fire_coral_block": "",
         "minecraft:fire_coral_fan": "",
         "minecraft:fletching_table": "",
         "minecraft:flower_pot": "",
@@ -3621,6 +3652,7 @@
         "minecraft:honeycomb_block": "",
         "minecraft:hopper": "",
         "minecraft:horn_coral": "",
+        "minecraft:horn_coral_block": "",
         "minecraft:horn_coral_fan": "",
         "minecraft:ice": "",
         "minecraft:infested_deepslate": "",
@@ -4021,6 +4053,7 @@
         "minecraft:trip_wire": "",
         "minecraft:tripwire_hook": "",
         "minecraft:tube_coral": "",
+        "minecraft:tube_coral_block": "",
         "minecraft:tube_coral_fan": "",
         "minecraft:tuff": "",
         "minecraft:tuff_brick_double_slab": "",
@@ -4219,6 +4252,7 @@
         "mule": "0x02118425 (0x25)",
         "npc": "0x00000307 (0x51)",
         "ocelot": "0x00021270 (0x22)",
+        "ominous_item_spawner": "0x00000145 (0x145)",
         "painting": "0x00000083 (0x83)",
         "panda": "0x00004977 (0x113)",
         "parrot": "0x00021278 (0x30)",
@@ -4359,12 +4393,6 @@
                     "name": "minecraft:crafting_table",
                     "type": "JSON Object",
                     "defaultValue": "",
-                },
-                {
-                    "name": "",
-                    "type": "",
-                    "defaultValue": "",
-                    "description": "Experimental toggles required: Holiday Creator Features",
                 },
                 {
                     "name": "minecraft:custom_components",
@@ -5774,12 +5802,6 @@
                     "description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit.",
                 },
                 {
-                    "name": "cooldown_time",
-                    "type": "Decimal",
-                    "defaultValue": "1",
-                    "description": "Cooldown time (in seconds) between attacks.",
-                },
-                {
                     "name": "hit_delay_pct",
                     "type": "Decimal",
                     "defaultValue": "0.5",
@@ -5854,7 +5876,7 @@
                 {
                     "name": "reach_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "2",
+                    "defaultValue": "1.5",
                     "description": "Used with the base size of the entity to determine minimum target-distance before trying to deal attack damage.",
                 },
                 {
@@ -5884,7 +5906,7 @@
                 {
                     "name": "track_target",
                     "type": "Boolean",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "description": "Allows the entity to track the attack target, even if the entity has no sensing.",
                 },
                 {
@@ -5954,7 +5976,7 @@
                 {
                     "name": "active_speed",
                     "type": "Decimal",
-                    "defaultValue": "1",
+                    "defaultValue": "3",
                     "description": "The speed this entity moves when this behavior has started or while it's active.",
                 },
                 {
@@ -6018,7 +6040,7 @@
                 {
                     "name": "active_speed",
                     "type": "Decimal",
-                    "defaultValue": "1",
+                    "defaultValue": "0.6",
                     "description": "The speed this entity moves when this behavior has started or while it's active.",
                 },
                 {
@@ -9225,6 +9247,12 @@
                     "description": "If true, the mob can stop flying and land on a tree instead of the ground",
                 },
                 {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Movement speed multiplier of the mob when using this AI Goal",
+                },
+                {
                     "name": "xz_dist",
                     "type": "Integer",
                     "defaultValue": "10",
@@ -10391,12 +10419,6 @@
                     "description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied).",
                 },
                 {
-                    "name": "melee_fov",
-                    "type": "Decimal",
-                    "defaultValue": "90",
-                    "description": "Field of view (in degrees) when using the sensing component to detect an attack target.",
-                },
-                {
                     "name": "min_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.2",
@@ -11338,18 +11360,6 @@
                     "type": "Trigger",
                     "defaultValue": "",
                     "description": "Event to run when the mob reaches their jobsite.",
-                },
-                {
-                    "name": "sound_delay_max",
-                    "type": "Integer",
-                    "defaultValue": "N/A",
-                    "description": "Unused.",
-                },
-                {
-                    "name": "sound_delay_min",
-                    "type": "Integer",
-                    "defaultValue": "N/A",
-                    "description": "Unused.",
                 },
                 {
                     "name": "speed_multiplier",
@@ -15140,23 +15150,6 @@
                     "type": "String",
                     "defaultValue": "plop",
                     "description": "Identifier of the sound effect to play when the entity is spawned.",
-                },
-            ],
-        },
-        "minecraft:strength": {
-            "description": "Defines the entity's strength to carry items.",
-            "children": [
-                {
-                    "name": "max",
-                    "type": "Integer",
-                    "defaultValue": "5",
-                    "description": "The maximum strength of this entity",
-                },
-                {
-                    "name": "value",
-                    "type": "Integer",
-                    "defaultValue": "1",
-                    "description": "The initial value of the strength",
                 },
             ],
         },

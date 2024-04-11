@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.0.20",
+    "version": "1.21.0.21",
     "content": [],
     "sections": [
         {
@@ -59,25 +59,42 @@
                     "level": 2,
                     "content": [
                         "This sets the color or texture used for the entity Spawn Egg. There are 2 ways to do this. The first is to use the hex value for the base color and the overlay color.",
-                        "When there are more than one texture associated with a texture name you can use an index to pick the one that you want. If no index is specified than it is assumed to be 0 and the first texture in the list is used.",
-                        "Example Spawn Egg specifying a texture",
+                    ],
+                    "sections": [
                         {
-                            "type": "code",
+                            "name": "Hex Value",
+                            "id": "Hex Value",
+                            "level": 4,
                             "content": [
-                                "\"spawn_egg\": {",
-                                "  \"texture\": \"spawn_egg\", ",
-                                "  \"texture_index\": 2",
-                                "}",
+                                "Example Spawn Egg using hex value",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "\"spawn_egg\": {",
+                                        "  \"base_color\": \"#53443E\",",
+                                        "  \"overlay_color\": \"#2E6854\"",
+                                        "}",
+                                    ],
+                                },
                             ],
                         },
-                        "Example Spawn Egg using hex value",
                         {
-                            "type": "code",
+                            "name": "Texture",
+                            "id": "Texture",
+                            "level": 4,
                             "content": [
-                                "\"spawn_egg\": {",
-                                "  \"base_color\": \"#53443E\",",
-                                "  \"overlay_color\": \"#2E6854\"",
-                                "}",
+                                "The other way is to specify a texture.",
+                                "Example Spawn Egg specifying a texture. The texture is located in the \"items_texture\" JSON in the textures folder of the Resource Pack. When there are more than one texture associated with a texture name you can use an index to pick the one that you want. If no index is specified than it is assumed to be 0 and the first texture in the list is used.",
+                                "Example Spawn Egg specifying a texture",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "\"spawn_egg\": {",
+                                        "  \"texture\": \"spawn_egg\", ",
+                                        "  \"texture_index\": 2",
+                                        "}",
+                                    ],
+                                },
                             ],
                         },
                     ],
@@ -633,7 +650,7 @@
                                         },
                                         {
                                             "Biome": "Frozen Ocean",
-                                            "Tags": "ocean, frozen",
+                                            "Tags": "ocean, frozen, monster",
                                         },
                                         {
                                             "Biome": "Frozen River",
@@ -14584,12 +14601,6 @@
                                             "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit.",
                                         },
                                         {
-                                            "Name": "cooldown_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "Cooldown time (in seconds) between attacks.",
-                                        },
-                                        {
                                             "Name": "hit_delay_pct",
                                             "Type": "Decimal",
                                             "Default Value": "0.5",
@@ -14664,7 +14675,7 @@
                                         {
                                             "Name": "reach_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "2",
+                                            "Default Value": "1.5",
                                             "Description": "Used with the base size of the entity to determine minimum target-distance before trying to deal attack damage.",
                                         },
                                         {
@@ -14694,7 +14705,7 @@
                                         {
                                             "Name": "track_target",
                                             "Type": "Boolean",
-                                            "Default Value": "false",
+                                            "Default Value": "true",
                                             "Description": "Allows the entity to track the attack target, even if the entity has no sensing.",
                                         },
                                         {
@@ -14788,7 +14799,7 @@
                                         {
                                             "Name": "active_speed",
                                             "Type": "Decimal",
-                                            "Default Value": "1",
+                                            "Default Value": "3",
                                             "Description": "The speed this entity moves when this behavior has started or while it's active.",
                                         },
                                         {
@@ -14900,7 +14911,7 @@
                                         {
                                             "Name": "active_speed",
                                             "Type": "Decimal",
-                                            "Default Value": "1",
+                                            "Default Value": "0.6",
                                             "Description": "The speed this entity moves when this behavior has started or while it's active.",
                                         },
                                         {
@@ -18798,6 +18809,12 @@
                                             "Description": "If true, the mob can stop flying and land on a tree instead of the ground",
                                         },
                                         {
+                                            "Name": "speed_multiplier",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.0",
+                                            "Description": "Movement speed multiplier of the mob when using this AI Goal",
+                                        },
+                                        {
                                             "Name": "xz_dist",
                                             "Type": "Integer",
                                             "Default Value": "10",
@@ -20291,12 +20308,6 @@
                                             "Description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied).",
                                         },
                                         {
-                                            "Name": "melee_fov",
-                                            "Type": "Decimal",
-                                            "Default Value": "90",
-                                            "Description": "Field of view (in degrees) when using the sensing component to detect an attack target.",
-                                        },
-                                        {
                                             "Name": "min_path_time",
                                             "Type": "Decimal",
                                             "Default Value": "0.2",
@@ -21426,18 +21437,6 @@
                                             "Type": "Trigger",
                                             "Default Value": "",
                                             "Description": "Event to run when the mob reaches their jobsite.",
-                                        },
-                                        {
-                                            "Name": "sound_delay_max",
-                                            "Type": "Integer",
-                                            "Default Value": "N/A",
-                                            "Description": "Unused.",
-                                        },
-                                        {
-                                            "Name": "sound_delay_min",
-                                            "Type": "Integer",
-                                            "Default Value": "N/A",
-                                            "Description": "Unused.",
                                         },
                                         {
                                             "Name": "speed_multiplier",
@@ -23847,6 +23846,33 @@
                                                         {
                                                             "type": "code",
                                                             "content": [
+                                                                "Valid damage causes. An invalid value will result in the default cause of \"none\" being selected.",
+                                                                "override",
+                                                                "contact",
+                                                                "entity_attack",
+                                                                "projectile",
+                                                                "suffocation",
+                                                                "fall",
+                                                                "fire",
+                                                                "fire_tick",
+                                                                "lava",
+                                                                "drowning",
+                                                                "block_explosion",
+                                                                "entity_explosion",
+                                                                "void",
+                                                                "SelfDestruct",
+                                                                "magic",
+                                                                "wither",
+                                                                "starve",
+                                                                "anvil",
+                                                                "thorns",
+                                                                "falling_block",
+                                                                "piston",
+                                                                "magma",
+                                                                "fireworks",
+                                                                "charging",
+                                                                "temperature",
+                                                                "all",
                                                                 "none",
                                                             ],
                                                         },
@@ -26348,31 +26374,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:strength",
-                            "id": "minecraft:strength",
-                            "level": 4,
-                            "content": [
-                                "Defines the entity's strength to carry items.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max",
-                                            "Type": "Integer",
-                                            "Default Value": "5",
-                                            "Description": "The maximum strength of this entity",
-                                        },
-                                        {
-                                            "Name": "value",
-                                            "Type": "Integer",
-                                            "Default Value": "1",
-                                            "Description": "The initial value of the strength",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:suspect_tracking",
                             "id": "minecraft:suspect_tracking",
                             "level": 4,
@@ -27336,7 +27337,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.explore_outskirts",
-                                            "ID": "-1955198366",
+                                            "ID": "1573426610843290210",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.fertilize_farm_block",
@@ -27708,7 +27709,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.slime_attack",
-                                            "ID": "-1315951081",
+                                            "ID": "9939462702916185623",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.slime_float",
@@ -29511,5 +29512,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "12e8ba2552111d72e6ff356255e8ddf6b025de49",
+    "__OBJECTHASH__": "2c0a19c46ad1223b63ca2316ffcba6369a52266d",
 }

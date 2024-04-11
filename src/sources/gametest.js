@@ -511,6 +511,11 @@ const Extractors = [
                 const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
                 enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
                 for (const itemType of Minecraft.ItemTypes.getAll()) {
+                    if (itemType.id === 'minecraft:air') {
+                        continue;
+                    }
+                    // Uncomment to discover where the game crashes
+                    // console.warn(`Dumping ${itemType.id}`);
                     const itemStack = new Minecraft.ItemStack(itemType);
                     const componentInstances = itemStack.getComponents();
                     const commonComponents = {};
