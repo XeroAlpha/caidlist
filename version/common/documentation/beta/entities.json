@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.0.21",
+    "version": "1.21.0.22",
     "content": [],
     "sections": [
         {
@@ -24373,6 +24373,25 @@
                             ],
                         },
                         {
+                            "name": "minecraft:mob_effect_immunity",
+                            "id": "minecraft:mob_effect_immunity",
+                            "level": 4,
+                            "content": [
+                                "Entities with this component will have an immunity to the provided mob effects.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "mob_effects",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "List of names of effects the entity is immune to.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:movement.amphibious",
                             "id": "minecraft:movement.amphibious",
                             "level": 4,
@@ -25932,6 +25951,49 @@
                                             "Type": "List",
                                             "Default Value": "[ ]",
                                             "Description": "A list of weighted responses to the melee attack being blocked",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:reflect_projectiles",
+                            "id": "minecraft:reflect_projectiles",
+                            "level": 4,
+                            "content": [
+                                "[EXPERIMENTAL] Allows an entity to reflect projectiles.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "azimuth_angle",
+                                            "Type": "Molang",
+                                            "Default Value": "0",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's y axis rotation.",
+                                        },
+                                        {
+                                            "Name": "elevation_angle",
+                                            "Type": "Molang",
+                                            "Default Value": "0",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's x axis rotation.",
+                                        },
+                                        {
+                                            "Name": "reflected_projectiles",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "[EXPERIMENTAL] An array of strings defining the types of projectiles that are reflected when they hit the entity.",
+                                        },
+                                        {
+                                            "Name": "reflection_scale",
+                                            "Type": "Molang",
+                                            "Default Value": "1",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the velocity scaling of the reflected projectile. Values below 1 decrease the projectile's velocity, and values above 1 increase it.",
+                                        },
+                                        {
+                                            "Name": "reflection_sound",
+                                            "Type": "String",
+                                            "Default Value": "reflect",
+                                            "Description": "[EXPERIMENTAL] A string defining the name of the sound event to be played when a projectile is reflected. \"reflect\" unless specified.",
                                         },
                                     ],
                                 },
@@ -28144,6 +28206,10 @@
                                             "ID": "490430596",
                                         },
                                         {
+                                            "JSON Name": "minecraft:mob_effect_immunity",
+                                            "ID": "1589547531",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:movement.amphibious",
                                             "ID": "-500784850",
                                         },
@@ -28254,6 +28320,10 @@
                                         {
                                             "JSON Name": "minecraft:ravager_blocked",
                                             "ID": "-1417579541",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:reflect_projectiles",
+                                            "ID": "-2073986952",
                                         },
                                         {
                                             "JSON Name": "minecraft:rideable",
@@ -29512,5 +29582,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "2c0a19c46ad1223b63ca2316ffcba6369a52266d",
+    "__OBJECTHASH__": "ea3ddeb2c449b2ca6671d88f1cc92d7712fba421",
 }

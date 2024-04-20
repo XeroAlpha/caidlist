@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.21.0.21",
-    "__COMMITHASH__": "7e03661f29ae812c1b36fd2420ae3fd8daecdd1d",
+    "__VERSION__": "1.21.0.22",
+    "__COMMITHASH__": "e6aa0d8657f4b57e35c93b773ecd5e80154ee267",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1789,6 +1789,9 @@
                                     "name": "minecraft:mob_effect",
                                 },
                                 {
+                                    "name": "minecraft:mob_effect_immunity",
+                                },
+                                {
                                     "name": "minecraft:movement.amphibious",
                                 },
                                 {
@@ -1868,6 +1871,9 @@
                                 },
                                 {
                                     "name": "minecraft:ravager_blocked",
+                                },
+                                {
+                                    "name": "minecraft:reflect_projectiles",
                                 },
                                 {
                                     "name": "minecraft:rideable",
@@ -3406,7 +3412,6 @@
         "minecraft:dirt_with_roots": "",
         "minecraft:dispenser": "",
         "minecraft:double_cut_copper_slab": "",
-        "minecraft:double_plant": "",
         "minecraft:double_stone_block_slab": "",
         "minecraft:double_stone_block_slab2": "",
         "minecraft:double_stone_block_slab3": "",
@@ -3689,6 +3694,7 @@
         "minecraft:lapis_block": "",
         "minecraft:lapis_ore": "",
         "minecraft:large_amethyst_bud": "",
+        "minecraft:large_fern": "",
         "minecraft:lava": "",
         "minecraft:lectern": "",
         "minecraft:lever": "",
@@ -3716,6 +3722,7 @@
         "minecraft:light_gray_wool": "",
         "minecraft:light_weighted_pressure_plate": "",
         "minecraft:lightning_rod": "",
+        "minecraft:lilac": "",
         "minecraft:lily_of_the_valley": "",
         "minecraft:lime_candle": "",
         "minecraft:lime_candle_cake": "",
@@ -3837,6 +3844,7 @@
         "minecraft:packed_ice": "",
         "minecraft:packed_mud": "",
         "minecraft:pearlescent_froglight": "",
+        "minecraft:peony": "",
         "minecraft:pink_candle": "",
         "minecraft:pink_candle_cake": "",
         "minecraft:pink_carpet": "",
@@ -3945,6 +3953,7 @@
         "minecraft:repeating_command_block": "",
         "minecraft:reserved6": "",
         "minecraft:respawn_anchor": "",
+        "minecraft:rose_bush": "",
         "minecraft:sand": "",
         "minecraft:sandstone": "",
         "minecraft:sandstone_stairs": "",
@@ -4038,9 +4047,11 @@
         "minecraft:stripped_warped_stem": "",
         "minecraft:structure_block": "",
         "minecraft:structure_void": "",
+        "minecraft:sunflower": "",
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
+        "minecraft:tall_grass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
         "minecraft:tnt": "",
@@ -13508,6 +13519,17 @@
                 },
             ],
         },
+        "minecraft:mob_effect_immunity": {
+            "description": "Entities with this component will have an immunity to the provided mob effects.",
+            "children": [
+                {
+                    "name": "mob_effects",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "List of names of effects the entity is immune to.",
+                },
+            ],
+        },
         "minecraft:movement.amphibious": {
             "description": "This move control allows the mob to swim in water and walk on land.",
             "children": [
@@ -14850,6 +14872,41 @@
                     "type": "List",
                     "defaultValue": "[ ]",
                     "description": "A list of weighted responses to the melee attack being blocked",
+                },
+            ],
+        },
+        "minecraft:reflect_projectiles": {
+            "description": "[EXPERIMENTAL] Allows an entity to reflect projectiles.",
+            "children": [
+                {
+                    "name": "azimuth_angle",
+                    "type": "Molang",
+                    "defaultValue": "0",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's y axis rotation.",
+                },
+                {
+                    "name": "elevation_angle",
+                    "type": "Molang",
+                    "defaultValue": "0",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's x axis rotation.",
+                },
+                {
+                    "name": "reflected_projectiles",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "[EXPERIMENTAL] An array of strings defining the types of projectiles that are reflected when they hit the entity.",
+                },
+                {
+                    "name": "reflection_scale",
+                    "type": "Molang",
+                    "defaultValue": "1",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the velocity scaling of the reflected projectile. Values below 1 decrease the projectile's velocity, and values above 1 increase it.",
+                },
+                {
+                    "name": "reflection_sound",
+                    "type": "String",
+                    "defaultValue": "reflect",
+                    "description": "[EXPERIMENTAL] A string defining the name of the sound event to be played when a projectile is reflected. \"reflect\" unless specified.",
                 },
             ],
         },

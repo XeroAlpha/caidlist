@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.0.21",
+    "packageVersion": "1.21.0.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -15638,6 +15638,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isTamed": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "probability": {
                                                     "getter": {
                                                         "type": "function",
@@ -15647,6 +15655,22 @@
                                                     },
                                                 },
                                                 "tame": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "tamedToPlayer": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "tamedToPlayerId": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -17855,6 +17879,49 @@
                             },
                             "configurable": false,
                         },
+                        "ItemCompleteUseEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemCompleteUseEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemCompleteUseEvent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "source": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "ItemComponent": {
                             "value": {
                                 "type": "function",
@@ -17953,6 +18020,37 @@
                                         "readOnly": true,
                                         "configurable": false,
                                     },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemComponentCompleteUseEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemComponentCompleteUseEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemComponentCompleteUseEvent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemCompleteUseEvent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemCompleteUseEvent",
                                 },
                             },
                             "configurable": false,
@@ -23924,7 +24022,7 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "getIds": {
+                                                "getWorldStructureIds": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -24119,6 +24217,14 @@
                                                     },
                                                 },
                                                 "runTimeout": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "waitTick": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -30056,8 +30162,11 @@
         "Minecraft.EntityTameableComponent.prototype.[[Prototype]]",
         "Minecraft.EntityTameableComponent.prototype.constructor",
         "Minecraft.EntityTameableComponent.prototype.getTameItems",
+        "Minecraft.EntityTameableComponent.prototype.isTamed",
         "Minecraft.EntityTameableComponent.prototype.probability.[[Get]]",
         "Minecraft.EntityTameableComponent.prototype.tame",
+        "Minecraft.EntityTameableComponent.prototype.tamedToPlayer",
+        "Minecraft.EntityTameableComponent.prototype.tamedToPlayerId",
         "Minecraft.EntityType",
         "Minecraft.EntityType.prototype",
         "Minecraft.EntityType.prototype.constructor",
@@ -30348,6 +30457,11 @@
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.constructor",
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.subscribe",
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.ItemCompleteUseEvent",
+        "Minecraft.ItemCompleteUseEvent.prototype",
+        "Minecraft.ItemCompleteUseEvent.prototype.constructor",
+        "Minecraft.ItemCompleteUseEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.ItemCompleteUseEvent.prototype.source.[[Get]]",
         "Minecraft.ItemComponent",
         "Minecraft.ItemComponent.[[Prototype]]",
         "Minecraft.ItemComponent.prototype",
@@ -30362,6 +30476,11 @@
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.hitEntity.[[Get]]",
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Get]]",
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Set]]",
+        "Minecraft.ItemComponentCompleteUseEvent",
+        "Minecraft.ItemComponentCompleteUseEvent.[[Prototype]]",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype.[[Prototype]]",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype.constructor",
         "Minecraft.ItemComponentHitEntityEvent",
         "Minecraft.ItemComponentHitEntityEvent.prototype",
         "Minecraft.ItemComponentHitEntityEvent.prototype.attackingEntity.[[Get]]",
@@ -31121,7 +31240,7 @@
         "Minecraft.StructureManager.prototype.createFromWorld",
         "Minecraft.StructureManager.prototype.delete",
         "Minecraft.StructureManager.prototype.get",
-        "Minecraft.StructureManager.prototype.getIds",
+        "Minecraft.StructureManager.prototype.getWorldStructureIds",
         "Minecraft.StructureManager.prototype.place",
         "Minecraft.StructureMirrorAxis",
         "Minecraft.StructureMirrorAxis.None",
@@ -31149,6 +31268,7 @@
         "Minecraft.System.prototype.runInterval",
         "Minecraft.System.prototype.runJob",
         "Minecraft.System.prototype.runTimeout",
+        "Minecraft.System.prototype.waitTick",
         "Minecraft.SystemAfterEvents",
         "Minecraft.SystemAfterEvents.prototype",
         "Minecraft.SystemAfterEvents.prototype.constructor",
@@ -39842,6 +39962,7 @@
         "minecraft:chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:chiseled_deepslate": {
@@ -39865,11 +39986,13 @@
         "minecraft:chiseled_tuff": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:chiseled_tuff_bricks": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:chorus_flower": {
@@ -40399,6 +40522,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:copper_door": {
@@ -40439,11 +40563,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:copper_ore": {
@@ -40482,6 +40608,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:coral_fan_hang": {
@@ -40786,6 +40913,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:crafting_table": {
@@ -44823,33 +44951,6 @@
             "itemId": "minecraft:cut_copper_slab",
             "canBeWaterlogged": false,
         },
-        "minecraft:double_plant": {
-            "properties": [
-                {
-                    "name": "double_plant_type",
-                    "validValues": [
-                        "sunflower",
-                        "syringa",
-                        "grass",
-                        "fern",
-                        "rose",
-                        "paeonia",
-                    ],
-                    "defaultValue": "sunflower",
-                },
-                {
-                    "name": "upper_block_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:double_stone_block_slab": {
             "properties": [
                 {
@@ -46045,6 +46146,7 @@
         "minecraft:exposed_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:exposed_copper": {
@@ -46073,6 +46175,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:exposed_copper_door": {
@@ -46113,11 +46216,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:exposed_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:exposed_copper_trapdoor": {
@@ -46150,6 +46255,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:exposed_cut_copper": {
@@ -52644,6 +52750,7 @@
         "minecraft:heavy_core": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:heavy_weighted_pressure_plate": {
@@ -54154,6 +54261,64 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:large_fern": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "fern",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
         },
         "minecraft:lava": {
             "properties": [
@@ -56230,6 +56395,64 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:lilac": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "syringa",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
         },
         "minecraft:lily_of_the_valley": {
             "properties": [
@@ -61545,6 +61768,7 @@
         "minecraft:oxidized_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:oxidized_copper": {
@@ -61573,6 +61797,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:oxidized_copper_door": {
@@ -61613,11 +61838,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:oxidized_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:oxidized_copper_trapdoor": {
@@ -61650,6 +61877,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:oxidized_cut_copper": {
@@ -61773,6 +62001,64 @@
             ],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:peony": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "paeonia",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:pink_candle": {
@@ -63754,6 +64040,7 @@
         "minecraft:polished_tuff": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:polished_tuff_double_slab": {
@@ -63768,6 +64055,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "minecraft:polished_tuff_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:polished_tuff_slab": {
@@ -63782,6 +64070,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:polished_tuff_stairs": {
@@ -63806,6 +64095,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:polished_tuff_wall": {
@@ -63856,6 +64146,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:poppy": {
@@ -66757,6 +67048,64 @@
             ],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:rose_bush": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "rose",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:sand": {
@@ -70070,6 +70419,64 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:sunflower": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "sunflower",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "<same>": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:suspicious_gravel": {
             "properties": [
                 {
@@ -70137,6 +70544,64 @@
             ],
             "invalidStates": [],
             "itemId": "minecraft:sweet_berries",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:tall_grass": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "grass",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:target": {
@@ -70361,6 +70826,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:trip_wire": {
@@ -70679,6 +71145,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "minecraft:tuff_brick_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:tuff_brick_slab": {
@@ -70693,6 +71160,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff_brick_stairs": {
@@ -70717,6 +71185,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff_brick_wall": {
@@ -70767,11 +71236,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff_bricks": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:tuff_double_slab": {
@@ -70786,6 +71257,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "minecraft:tuff_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:tuff_slab": {
@@ -70800,6 +71272,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff_stairs": {
@@ -70824,6 +71297,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff_wall": {
@@ -70874,6 +71348,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:turtle_egg": {
@@ -71201,6 +71676,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:verdant_froglight": {
@@ -71748,6 +72224,7 @@
         "minecraft:waxed_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_copper": {
@@ -71776,6 +72253,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_copper_door": {
@@ -71816,11 +72294,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_copper_trapdoor": {
@@ -71853,6 +72333,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_cut_copper": {
@@ -71953,6 +72434,7 @@
         "minecraft:waxed_exposed_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_exposed_copper": {
@@ -71981,6 +72463,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_exposed_copper_door": {
@@ -72021,11 +72504,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_exposed_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_exposed_copper_trapdoor": {
@@ -72058,6 +72543,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_exposed_cut_copper": {
@@ -72158,6 +72644,7 @@
         "minecraft:waxed_oxidized_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_oxidized_copper": {
@@ -72186,6 +72673,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_oxidized_copper_door": {
@@ -72226,11 +72714,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_oxidized_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_oxidized_copper_trapdoor": {
@@ -72263,6 +72753,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_oxidized_cut_copper": {
@@ -72363,6 +72854,7 @@
         "minecraft:waxed_weathered_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_weathered_copper": {
@@ -72391,6 +72883,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:waxed_weathered_copper_door": {
@@ -72431,11 +72924,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_weathered_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_weathered_copper_trapdoor": {
@@ -72468,6 +72963,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:waxed_weathered_cut_copper": {
@@ -72568,6 +73064,7 @@
         "minecraft:weathered_chiseled_copper": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:weathered_copper": {
@@ -72596,6 +73093,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:weathered_copper_door": {
@@ -72636,11 +73134,13 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:weathered_copper_grate": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:weathered_copper_trapdoor": {
@@ -72673,6 +73173,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
             "canBeWaterlogged": true,
         },
         "minecraft:weathered_cut_copper": {
@@ -75916,7 +76417,12 @@
                     "paeonia",
                 ],
                 "defaultValue": {
-                    "minecraft:double_plant": "sunflower",
+                    "minecraft:large_fern": "fern",
+                    "minecraft:lilac": "syringa",
+                    "minecraft:peony": "paeonia",
+                    "minecraft:rose_bush": "rose",
+                    "minecraft:sunflower": "sunflower",
+                    "minecraft:tall_grass": "grass",
                 },
             },
         ],
@@ -77738,16 +78244,21 @@
                     "minecraft:copper_door": false,
                     "minecraft:crimson_door": false,
                     "minecraft:dark_oak_door": false,
-                    "minecraft:double_plant": false,
                     "minecraft:exposed_copper_door": false,
                     "minecraft:iron_door": false,
                     "minecraft:jungle_door": false,
+                    "minecraft:large_fern": false,
+                    "minecraft:lilac": false,
                     "minecraft:mangrove_door": false,
                     "minecraft:oxidized_copper_door": false,
+                    "minecraft:peony": false,
                     "minecraft:pitcher_crop": false,
                     "minecraft:pitcher_plant": false,
+                    "minecraft:rose_bush": false,
                     "minecraft:small_dripleaf_block": true,
                     "minecraft:spruce_door": false,
+                    "minecraft:sunflower": false,
+                    "minecraft:tall_grass": false,
                     "minecraft:warped_door": false,
                     "minecraft:waxed_copper_door": false,
                     "minecraft:waxed_exposed_copper_door": false,
@@ -78354,12 +78865,17 @@
             "minecraft:acacia_sapling": {},
             "minecraft:birch_sapling": {},
             "minecraft:dark_oak_sapling": {},
-            "minecraft:double_plant": {},
             "minecraft:jungle_sapling": {},
+            "minecraft:large_fern": {},
+            "minecraft:lilac": {},
             "minecraft:oak_sapling": {},
+            "minecraft:peony": {},
             "minecraft:pitcher_crop": {},
             "minecraft:pitcher_plant": {},
+            "minecraft:rose_bush": {},
             "minecraft:spruce_sapling": {},
+            "minecraft:sunflower": {},
+            "minecraft:tall_grass": {},
         },
         "pumpkin": {
             "minecraft:carved_pumpkin": {},
@@ -79192,6 +79708,16 @@
                 "minecraft:wool",
             ],
         },
+        "minecraft:bogged_spawn_egg": {
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
+        },
+        "minecraft:bolt_armor_trim_smithing_template": {
+            "tags": [
+                "minecraft:trim_templates",
+            ],
+        },
         "minecraft:bone": {
             "tags": [],
         },
@@ -79322,6 +79848,14 @@
         "minecraft:bread": {
             "tags": [
                 "minecraft:is_food",
+            ],
+        },
+        "minecraft:breeze_rod": {
+            "tags": [],
+        },
+        "minecraft:breeze_spawn_egg": {
+            "tags": [
+                "minecraft:spawn_egg",
             ],
         },
         "minecraft:brewer_pottery_sherd": {
@@ -79737,6 +80271,9 @@
         "minecraft:chiseled_bookshelf": {
             "tags": [],
         },
+        "minecraft:chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:chiseled_deepslate": {
             "tags": [],
         },
@@ -79744,6 +80281,12 @@
             "tags": [],
         },
         "minecraft:chiseled_polished_blackstone": {
+            "tags": [],
+        },
+        "minecraft:chiseled_tuff": {
+            "tags": [],
+        },
+        "minecraft:chiseled_tuff_bricks": {
             "tags": [],
         },
         "minecraft:chorus_flower": {
@@ -79910,12 +80453,26 @@
         "minecraft:copper_block": {
             "tags": [],
         },
+        "minecraft:copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:copper_grate": {
+            "tags": [],
+        },
         "minecraft:copper_ingot": {
             "tags": [
                 "minecraft:trim_materials",
             ],
         },
         "minecraft:copper_ore": {
+            "tags": [],
+        },
+        "minecraft:copper_trapdoor": {
             "tags": [],
         },
         "minecraft:cornflower": {
@@ -79936,6 +80493,9 @@
             "tags": [],
         },
         "minecraft:cracked_polished_blackstone_bricks": {
+            "tags": [],
+        },
+        "minecraft:crafter": {
             "tags": [],
         },
         "minecraft:crafting_table": {
@@ -80604,9 +81164,6 @@
                 "minecraft:spawn_egg",
             ],
         },
-        "minecraft:double_plant": {
-            "tags": [],
-        },
         "minecraft:dragon_breath": {
             "tags": [],
         },
@@ -80829,7 +81386,24 @@
                 "minecraft:decorated_pot_sherds",
             ],
         },
+        "minecraft:exposed_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:exposed_copper": {
+            "tags": [],
+        },
+        "minecraft:exposed_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:exposed_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:exposed_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:exposed_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:exposed_cut_copper": {
@@ -80931,6 +81505,20 @@
                     "maxDurability": 64,
                 },
             },
+        },
+        "minecraft:flow_armor_trim_smithing_template": {
+            "tags": [
+                "minecraft:trim_templates",
+            ],
+        },
+        "minecraft:flow_banner_pattern": {
+            "unstackable": true,
+            "tags": [],
+        },
+        "minecraft:flow_pottery_sherd": {
+            "tags": [
+                "minecraft:decorated_pot_sherds",
+            ],
         },
         "minecraft:flower_banner_pattern": {
             "unstackable": true,
@@ -81435,6 +82023,15 @@
         "minecraft:gunpowder": {
             "tags": [],
         },
+        "minecraft:guster_banner_pattern": {
+            "unstackable": true,
+            "tags": [],
+        },
+        "minecraft:guster_pottery_sherd": {
+            "tags": [
+                "minecraft:decorated_pot_sherds",
+            ],
+        },
         "minecraft:hanging_roots": {
             "tags": [],
         },
@@ -81456,6 +82053,9 @@
             "tags": [
                 "minecraft:decorated_pot_sherds",
             ],
+        },
+        "minecraft:heavy_core": {
+            "tags": [],
         },
         "minecraft:heavy_weighted_pressure_plate": {
             "tags": [],
@@ -81931,6 +82531,9 @@
         "minecraft:large_amethyst_bud": {
             "tags": [],
         },
+        "minecraft:large_fern": {
+            "tags": [],
+        },
         "minecraft:lava_bucket": {
             "unstackable": true,
             "tags": [],
@@ -82160,6 +82763,9 @@
         "minecraft:lightning_rod": {
             "tags": [],
         },
+        "minecraft:lilac": {
+            "tags": [],
+        },
         "minecraft:lily_of_the_valley": {
             "tags": [],
         },
@@ -82230,6 +82836,28 @@
         },
         "minecraft:loom": {
             "tags": [],
+        },
+        "minecraft:mace": {
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_sword",
+                "minecraft:is_tool",
+                "minecraft:diamond_tier",
+            ],
+            "components": {
+                "minecraft:enchantable": {
+                    "applicableEnchantments": [
+                        "breach",
+                        "density",
+                        "mending",
+                        "vanishing",
+                        "wind_burst",
+                    ],
+                },
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
+            },
         },
         "minecraft:magenta_candle": {
             "tags": [],
@@ -82959,6 +83587,12 @@
         "minecraft:ochre_froglight": {
             "tags": [],
         },
+        "minecraft:ominous_bottle": {
+            "tags": [],
+        },
+        "minecraft:ominous_trial_key": {
+            "tags": [],
+        },
         "minecraft:orange_candle": {
             "tags": [],
         },
@@ -83004,7 +83638,24 @@
         "minecraft:oxeye_daisy": {
             "tags": [],
         },
+        "minecraft:oxidized_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:oxidized_copper": {
+            "tags": [],
+        },
+        "minecraft:oxidized_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:oxidized_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:oxidized_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:oxidized_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:oxidized_cut_copper": {
@@ -83041,6 +83692,9 @@
             ],
         },
         "minecraft:pearlescent_froglight": {
+            "tags": [],
+        },
+        "minecraft:peony": {
             "tags": [],
         },
         "minecraft:phantom_membrane": {
@@ -83209,6 +83863,18 @@
             "tags": [],
         },
         "minecraft:polished_granite_stairs": {
+            "tags": [],
+        },
+        "minecraft:polished_tuff": {
+            "tags": [],
+        },
+        "minecraft:polished_tuff_slab": {
+            "tags": [],
+        },
+        "minecraft:polished_tuff_stairs": {
+            "tags": [],
+        },
+        "minecraft:polished_tuff_wall": {
             "tags": [],
         },
         "minecraft:popped_chorus_fruit": {
@@ -83503,6 +84169,9 @@
                 "minecraft:trim_templates",
             ],
         },
+        "minecraft:rose_bush": {
+            "tags": [],
+        },
         "minecraft:rotten_flesh": {
             "tags": [
                 "minecraft:is_food",
@@ -83540,6 +84209,11 @@
         },
         "minecraft:scaffolding": {
             "tags": [],
+        },
+        "minecraft:scrape_pottery_sherd": {
+            "tags": [
+                "minecraft:decorated_pot_sherds",
+            ],
         },
         "minecraft:sculk": {
             "tags": [],
@@ -84225,6 +84899,9 @@
         "minecraft:sugar_cane": {
             "tags": [],
         },
+        "minecraft:sunflower": {
+            "tags": [],
+        },
         "minecraft:suspicious_gravel": {
             "tags": [],
         },
@@ -84248,6 +84925,9 @@
             "tags": [
                 "minecraft:spawn_egg",
             ],
+        },
+        "minecraft:tall_grass": {
+            "tags": [],
         },
         "minecraft:target": {
             "tags": [],
@@ -84291,6 +84971,12 @@
             "tags": [],
         },
         "minecraft:trapped_chest": {
+            "tags": [],
+        },
+        "minecraft:trial_key": {
+            "tags": [],
+        },
+        "minecraft:trial_spawner": {
             "tags": [],
         },
         "minecraft:trident": {
@@ -84347,6 +85033,27 @@
         "minecraft:tuff": {
             "tags": [],
         },
+        "minecraft:tuff_brick_slab": {
+            "tags": [],
+        },
+        "minecraft:tuff_brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:tuff_brick_wall": {
+            "tags": [],
+        },
+        "minecraft:tuff_bricks": {
+            "tags": [],
+        },
+        "minecraft:tuff_slab": {
+            "tags": [],
+        },
+        "minecraft:tuff_stairs": {
+            "tags": [],
+        },
+        "minecraft:tuff_wall": {
+            "tags": [],
+        },
         "minecraft:turtle_egg": {
             "tags": [],
         },
@@ -84393,6 +85100,9 @@
         },
         "minecraft:undyed_shulker_box": {
             "unstackable": true,
+            "tags": [],
+        },
+        "minecraft:vault": {
             "tags": [],
         },
         "minecraft:verdant_froglight": {
@@ -84529,7 +85239,24 @@
         "minecraft:waterlily": {
             "tags": [],
         },
+        "minecraft:waxed_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:waxed_copper": {
+            "tags": [],
+        },
+        "minecraft:waxed_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:waxed_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:waxed_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:waxed_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:waxed_cut_copper": {
@@ -84541,7 +85268,24 @@
         "minecraft:waxed_cut_copper_stairs": {
             "tags": [],
         },
+        "minecraft:waxed_exposed_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:waxed_exposed_copper": {
+            "tags": [],
+        },
+        "minecraft:waxed_exposed_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:waxed_exposed_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:waxed_exposed_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:waxed_exposed_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:waxed_exposed_cut_copper": {
@@ -84553,7 +85297,24 @@
         "minecraft:waxed_exposed_cut_copper_stairs": {
             "tags": [],
         },
+        "minecraft:waxed_oxidized_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:waxed_oxidized_copper": {
+            "tags": [],
+        },
+        "minecraft:waxed_oxidized_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:waxed_oxidized_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:waxed_oxidized_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:waxed_oxidized_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:waxed_oxidized_cut_copper": {
@@ -84565,7 +85326,24 @@
         "minecraft:waxed_oxidized_cut_copper_stairs": {
             "tags": [],
         },
+        "minecraft:waxed_weathered_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:waxed_weathered_copper": {
+            "tags": [],
+        },
+        "minecraft:waxed_weathered_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:waxed_weathered_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:waxed_weathered_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:waxed_weathered_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:waxed_weathered_cut_copper": {
@@ -84582,7 +85360,24 @@
                 "minecraft:trim_templates",
             ],
         },
+        "minecraft:weathered_chiseled_copper": {
+            "tags": [],
+        },
         "minecraft:weathered_copper": {
+            "tags": [],
+        },
+        "minecraft:weathered_copper_bulb": {
+            "tags": [],
+        },
+        "minecraft:weathered_copper_door": {
+            "tags": [
+                "minecraft:door",
+            ],
+        },
+        "minecraft:weathered_copper_grate": {
+            "tags": [],
+        },
+        "minecraft:weathered_copper_trapdoor": {
             "tags": [],
         },
         "minecraft:weathered_cut_copper": {
@@ -84652,6 +85447,15 @@
             "tags": [
                 "minecraft:trim_templates",
             ],
+        },
+        "minecraft:wind_charge": {
+            "tags": [],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:wind_charge",
+                    "cooldownTicks": 10,
+                },
+            },
         },
         "minecraft:witch_spawn_egg": {
             "tags": [
@@ -84989,7 +85793,9 @@
             "minecraft:burn_pottery_sherd",
             "minecraft:danger_pottery_sherd",
             "minecraft:explorer_pottery_sherd",
+            "minecraft:flow_pottery_sherd",
             "minecraft:friend_pottery_sherd",
+            "minecraft:guster_pottery_sherd",
             "minecraft:heart_pottery_sherd",
             "minecraft:heartbreak_pottery_sherd",
             "minecraft:howl_pottery_sherd",
@@ -84997,6 +85803,7 @@
             "minecraft:mourner_pottery_sherd",
             "minecraft:plenty_pottery_sherd",
             "minecraft:prize_pottery_sherd",
+            "minecraft:scrape_pottery_sherd",
             "minecraft:sheaf_pottery_sherd",
             "minecraft:shelter_pottery_sherd",
             "minecraft:skull_pottery_sherd",
@@ -85012,6 +85819,7 @@
             "minecraft:diamond_pickaxe",
             "minecraft:diamond_shovel",
             "minecraft:diamond_sword",
+            "minecraft:mace",
         ],
         "minecraft:digger": [
             "minecraft:diamond_axe",
@@ -85044,13 +85852,21 @@
             "minecraft:bamboo_door",
             "minecraft:birch_door",
             "minecraft:cherry_door",
+            "minecraft:copper_door",
             "minecraft:crimson_door",
             "minecraft:dark_oak_door",
+            "minecraft:exposed_copper_door",
             "minecraft:iron_door",
             "minecraft:jungle_door",
             "minecraft:mangrove_door",
+            "minecraft:oxidized_copper_door",
             "minecraft:spruce_door",
             "minecraft:warped_door",
+            "minecraft:waxed_copper_door",
+            "minecraft:waxed_exposed_copper_door",
+            "minecraft:waxed_oxidized_copper_door",
+            "minecraft:waxed_weathered_copper_door",
+            "minecraft:weathered_copper_door",
             "minecraft:wooden_door",
         ],
         "minecraft:golden_tier": [
@@ -85230,6 +86046,7 @@
             "minecraft:diamond_sword",
             "minecraft:golden_sword",
             "minecraft:iron_sword",
+            "minecraft:mace",
             "minecraft:netherite_sword",
             "minecraft:stone_sword",
             "minecraft:wooden_sword",
@@ -85250,6 +86067,7 @@
             "minecraft:iron_pickaxe",
             "minecraft:iron_shovel",
             "minecraft:iron_sword",
+            "minecraft:mace",
             "minecraft:netherite_axe",
             "minecraft:netherite_hoe",
             "minecraft:netherite_pickaxe",
@@ -85440,6 +86258,8 @@
             "minecraft:bat_spawn_egg",
             "minecraft:bee_spawn_egg",
             "minecraft:blaze_spawn_egg",
+            "minecraft:bogged_spawn_egg",
+            "minecraft:breeze_spawn_egg",
             "minecraft:camel_spawn_egg",
             "minecraft:cat_spawn_egg",
             "minecraft:cave_spider_spawn_egg",
@@ -85564,9 +86384,11 @@
             "minecraft:redstone",
         ],
         "minecraft:trim_templates": [
+            "minecraft:bolt_armor_trim_smithing_template",
             "minecraft:coast_armor_trim_smithing_template",
             "minecraft:dune_armor_trim_smithing_template",
             "minecraft:eye_armor_trim_smithing_template",
+            "minecraft:flow_armor_trim_smithing_template",
             "minecraft:host_armor_trim_smithing_template",
             "minecraft:raiser_armor_trim_smithing_template",
             "minecraft:rib_armor_trim_smithing_template",
@@ -85699,6 +86521,9 @@
         "minecraft:bee",
         "minecraft:blaze",
         "minecraft:boat",
+        "minecraft:bogged",
+        "minecraft:breeze",
+        "minecraft:breeze_wind_charge_projectile",
         "minecraft:camel",
         "minecraft:cat",
         "minecraft:cave_spider",
@@ -85746,6 +86571,7 @@
         "minecraft:mule",
         "minecraft:npc",
         "minecraft:ocelot",
+        "minecraft:ominous_item_spawner",
         "minecraft:panda",
         "minecraft:parrot",
         "minecraft:phantom",
@@ -85789,6 +86615,7 @@
         "minecraft:vindicator",
         "minecraft:wandering_trader",
         "minecraft:warden",
+        "minecraft:wind_charge_projectile",
         "minecraft:witch",
         "minecraft:wither",
         "minecraft:wither_skeleton",
@@ -85816,6 +86643,7 @@
         "haste",
         "health_boost",
         "hunger",
+        "infested",
         "instant_damage",
         "instant_health",
         "invisibility",
@@ -85824,7 +86652,9 @@
         "mining_fatigue",
         "nausea",
         "night_vision",
+        "oozing",
         "poison",
+        "raid_omen",
         "regeneration",
         "resistance",
         "saturation",
@@ -85832,9 +86662,12 @@
         "slowness",
         "speed",
         "strength",
+        "trial_omen",
         "village_hero",
         "water_breathing",
         "weakness",
+        "weaving",
+        "wind_charged",
         "wither",
     ],
     "dimensions": [

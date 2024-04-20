@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.0.21",
+    "packageVersion": "1.21.0.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -15638,6 +15638,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isTamed": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "probability": {
                                                     "getter": {
                                                         "type": "function",
@@ -15647,6 +15655,22 @@
                                                     },
                                                 },
                                                 "tame": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "tamedToPlayer": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "tamedToPlayerId": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -17855,6 +17879,49 @@
                             },
                             "configurable": false,
                         },
+                        "ItemCompleteUseEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemCompleteUseEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemCompleteUseEvent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "source": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "ItemComponent": {
                             "value": {
                                 "type": "function",
@@ -17953,6 +18020,37 @@
                                         "readOnly": true,
                                         "configurable": false,
                                     },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemComponentCompleteUseEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemComponentCompleteUseEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemComponentCompleteUseEvent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemCompleteUseEvent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemCompleteUseEvent",
                                 },
                             },
                             "configurable": false,
@@ -23924,7 +24022,7 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "getIds": {
+                                                "getWorldStructureIds": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -24119,6 +24217,14 @@
                                                     },
                                                 },
                                                 "runTimeout": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "waitTick": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -30056,8 +30162,11 @@
         "Minecraft.EntityTameableComponent.prototype.[[Prototype]]",
         "Minecraft.EntityTameableComponent.prototype.constructor",
         "Minecraft.EntityTameableComponent.prototype.getTameItems",
+        "Minecraft.EntityTameableComponent.prototype.isTamed",
         "Minecraft.EntityTameableComponent.prototype.probability.[[Get]]",
         "Minecraft.EntityTameableComponent.prototype.tame",
+        "Minecraft.EntityTameableComponent.prototype.tamedToPlayer",
+        "Minecraft.EntityTameableComponent.prototype.tamedToPlayerId",
         "Minecraft.EntityType",
         "Minecraft.EntityType.prototype",
         "Minecraft.EntityType.prototype.constructor",
@@ -30348,6 +30457,11 @@
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.constructor",
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.subscribe",
         "Minecraft.ItemCompleteUseAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.ItemCompleteUseEvent",
+        "Minecraft.ItemCompleteUseEvent.prototype",
+        "Minecraft.ItemCompleteUseEvent.prototype.constructor",
+        "Minecraft.ItemCompleteUseEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.ItemCompleteUseEvent.prototype.source.[[Get]]",
         "Minecraft.ItemComponent",
         "Minecraft.ItemComponent.[[Prototype]]",
         "Minecraft.ItemComponent.prototype",
@@ -30362,6 +30476,11 @@
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.hitEntity.[[Get]]",
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Get]]",
         "Minecraft.ItemComponentBeforeDurabilityDamageEvent.prototype.itemStack.[[Set]]",
+        "Minecraft.ItemComponentCompleteUseEvent",
+        "Minecraft.ItemComponentCompleteUseEvent.[[Prototype]]",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype.[[Prototype]]",
+        "Minecraft.ItemComponentCompleteUseEvent.prototype.constructor",
         "Minecraft.ItemComponentHitEntityEvent",
         "Minecraft.ItemComponentHitEntityEvent.prototype",
         "Minecraft.ItemComponentHitEntityEvent.prototype.attackingEntity.[[Get]]",
@@ -31121,7 +31240,7 @@
         "Minecraft.StructureManager.prototype.createFromWorld",
         "Minecraft.StructureManager.prototype.delete",
         "Minecraft.StructureManager.prototype.get",
-        "Minecraft.StructureManager.prototype.getIds",
+        "Minecraft.StructureManager.prototype.getWorldStructureIds",
         "Minecraft.StructureManager.prototype.place",
         "Minecraft.StructureMirrorAxis",
         "Minecraft.StructureMirrorAxis.None",
@@ -31149,6 +31268,7 @@
         "Minecraft.System.prototype.runInterval",
         "Minecraft.System.prototype.runJob",
         "Minecraft.System.prototype.runTimeout",
+        "Minecraft.System.prototype.waitTick",
         "Minecraft.SystemAfterEvents",
         "Minecraft.SystemAfterEvents.prototype",
         "Minecraft.SystemAfterEvents.prototype.constructor",
@@ -44831,33 +44951,6 @@
             "itemId": "minecraft:cut_copper_slab",
             "canBeWaterlogged": false,
         },
-        "minecraft:double_plant": {
-            "properties": [
-                {
-                    "name": "double_plant_type",
-                    "validValues": [
-                        "sunflower",
-                        "syringa",
-                        "grass",
-                        "fern",
-                        "rose",
-                        "paeonia",
-                    ],
-                    "defaultValue": "sunflower",
-                },
-                {
-                    "name": "upper_block_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:double_stone_block_slab": {
             "properties": [
                 {
@@ -54169,6 +54262,64 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:large_fern": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "fern",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:lava": {
             "properties": [
                 {
@@ -56244,6 +56395,64 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:lilac": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "syringa",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
         },
         "minecraft:lily_of_the_valley": {
             "properties": [
@@ -61794,6 +62003,64 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:peony": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "paeonia",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:pink_candle": {
             "properties": [
                 {
@@ -66783,6 +67050,64 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:rose_bush": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "rose",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:sand": {
             "properties": [
                 {
@@ -70094,6 +70419,64 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:sunflower": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "sunflower",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "<same>": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "minecraft:tall_grass": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
+            "canBeWaterlogged": false,
+        },
         "minecraft:suspicious_gravel": {
             "properties": [
                 {
@@ -70161,6 +70544,64 @@
             ],
             "invalidStates": [],
             "itemId": "minecraft:sweet_berries",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:tall_grass": {
+            "properties": [
+                {
+                    "name": "double_plant_type",
+                    "validValues": [
+                        "sunflower",
+                        "syringa",
+                        "grass",
+                        "fern",
+                        "rose",
+                        "paeonia",
+                    ],
+                    "defaultValue": "grass",
+                },
+                {
+                    "name": "upper_block_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": {
+                "minecraft:sunflower": [
+                    {
+                        "double_plant_type": "sunflower",
+                    },
+                ],
+                "minecraft:lilac": [
+                    {
+                        "double_plant_type": "syringa",
+                    },
+                ],
+                "<same>": [
+                    {
+                        "double_plant_type": "grass",
+                    },
+                ],
+                "minecraft:large_fern": [
+                    {
+                        "double_plant_type": "fern",
+                    },
+                ],
+                "minecraft:rose_bush": [
+                    {
+                        "double_plant_type": "rose",
+                    },
+                ],
+                "minecraft:peony": [
+                    {
+                        "double_plant_type": "paeonia",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:target": {
@@ -75976,7 +76417,12 @@
                     "paeonia",
                 ],
                 "defaultValue": {
-                    "minecraft:double_plant": "sunflower",
+                    "minecraft:large_fern": "fern",
+                    "minecraft:lilac": "syringa",
+                    "minecraft:peony": "paeonia",
+                    "minecraft:rose_bush": "rose",
+                    "minecraft:sunflower": "sunflower",
+                    "minecraft:tall_grass": "grass",
                 },
             },
         ],
@@ -77798,16 +78244,21 @@
                     "minecraft:copper_door": false,
                     "minecraft:crimson_door": false,
                     "minecraft:dark_oak_door": false,
-                    "minecraft:double_plant": false,
                     "minecraft:exposed_copper_door": false,
                     "minecraft:iron_door": false,
                     "minecraft:jungle_door": false,
+                    "minecraft:large_fern": false,
+                    "minecraft:lilac": false,
                     "minecraft:mangrove_door": false,
                     "minecraft:oxidized_copper_door": false,
+                    "minecraft:peony": false,
                     "minecraft:pitcher_crop": false,
                     "minecraft:pitcher_plant": false,
+                    "minecraft:rose_bush": false,
                     "minecraft:small_dripleaf_block": true,
                     "minecraft:spruce_door": false,
+                    "minecraft:sunflower": false,
+                    "minecraft:tall_grass": false,
                     "minecraft:warped_door": false,
                     "minecraft:waxed_copper_door": false,
                     "minecraft:waxed_exposed_copper_door": false,
@@ -78414,12 +78865,17 @@
             "minecraft:acacia_sapling": {},
             "minecraft:birch_sapling": {},
             "minecraft:dark_oak_sapling": {},
-            "minecraft:double_plant": {},
             "minecraft:jungle_sapling": {},
+            "minecraft:large_fern": {},
+            "minecraft:lilac": {},
             "minecraft:oak_sapling": {},
+            "minecraft:peony": {},
             "minecraft:pitcher_crop": {},
             "minecraft:pitcher_plant": {},
+            "minecraft:rose_bush": {},
             "minecraft:spruce_sapling": {},
+            "minecraft:sunflower": {},
+            "minecraft:tall_grass": {},
         },
         "pumpkin": {
             "minecraft:carved_pumpkin": {},
@@ -80729,9 +81185,6 @@
                 "minecraft:spawn_egg",
             ],
         },
-        "minecraft:double_plant": {
-            "tags": [],
-        },
         "minecraft:dragon_breath": {
             "tags": [],
         },
@@ -82577,6 +83030,9 @@
         "minecraft:large_amethyst_bud": {
             "tags": [],
         },
+        "minecraft:large_fern": {
+            "tags": [],
+        },
         "minecraft:lava_bucket": {
             "unstackable": true,
             "tags": [],
@@ -82804,6 +83260,9 @@
             "tags": [],
         },
         "minecraft:lightning_rod": {
+            "tags": [],
+        },
+        "minecraft:lilac": {
             "tags": [],
         },
         "minecraft:lily_of_the_valley": {
@@ -83738,6 +84197,9 @@
         "minecraft:pearlescent_froglight": {
             "tags": [],
         },
+        "minecraft:peony": {
+            "tags": [],
+        },
         "minecraft:phantom_membrane": {
             "tags": [],
         },
@@ -84212,6 +84674,9 @@
             "tags": [
                 "minecraft:trim_templates",
             ],
+        },
+        "minecraft:rose_bush": {
+            "tags": [],
         },
         "minecraft:rotten_flesh": {
             "tags": [
@@ -84949,6 +85414,9 @@
         "minecraft:sugar_cane": {
             "tags": [],
         },
+        "minecraft:sunflower": {
+            "tags": [],
+        },
         "minecraft:suspicious_gravel": {
             "tags": [],
         },
@@ -84972,6 +85440,9 @@
             "tags": [
                 "minecraft:spawn_egg",
             ],
+        },
+        "minecraft:tall_grass": {
+            "tags": [],
         },
         "minecraft:target": {
             "tags": [],
