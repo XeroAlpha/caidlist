@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.21.0.22",
-    "__COMMITHASH__": "e6aa0d8657f4b57e35c93b773ecd5e80154ee267",
+    "__VERSION__": "1.21.0.23",
+    "__COMMITHASH__": "e8bbbc0c246d365430e55b0e4630124c2515b5ea",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -202,13 +202,90 @@
                     "name": "Overview",
                 },
                 {
-                    "name": "JSON format",
+                    "name": "JSON Format",
                 },
                 {
-                    "name": "Adding biomes",
+                    "name": "Adding Biomes",
                 },
                 {
                     "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "Biome Components",
+                        },
+                        {
+                            "name": "Biome Definition",
+                        },
+                        {
+                            "name": "Biome Description",
+                        },
+                        {
+                            "name": "Biome JSON File",
+                        },
+                        {
+                            "name": "Block Specifier",
+                        },
+                        {
+                            "name": "Molang Expression",
+                        },
+                        {
+                            "name": "minecraft:capped_surface",
+                        },
+                        {
+                            "name": "minecraft:climate",
+                        },
+                        {
+                            "name": "minecraft:frozen_ocean_surface",
+                        },
+                        {
+                            "name": "minecraft:mesa_surface",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - steep_material_adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - top_slide settings",
+                        },
+                        {
+                            "name": "minecraft:multinoise_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted biome names settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted climate categories settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_height",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment materials settings",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:surface_parameters",
+                        },
+                        {
+                            "name": "minecraft:swamp_surface",
+                        },
+                        {
+                            "name": "minecraft:tags",
+                        },
+                        {
+                            "name": "minecraft:the_end_surface",
+                        },
+                    ],
                 },
             ],
         },
@@ -3215,6 +3292,7 @@
         "minecraft:brain_coral_fan": "",
         "minecraft:brewing_stand": "",
         "minecraft:brick_block": "",
+        "minecraft:brick_slab": "",
         "minecraft:brick_stairs": "",
         "minecraft:brown_candle": "",
         "minecraft:brown_candle_cake": "",
@@ -3290,6 +3368,7 @@
         "minecraft:cobbled_deepslate_stairs": "",
         "minecraft:cobbled_deepslate_wall": "",
         "minecraft:cobblestone": "",
+        "minecraft:cobblestone_slab": "",
         "minecraft:cobblestone_wall": "",
         "minecraft:cocoa": "",
         "minecraft:colored_torch_bp": "",
@@ -3795,6 +3874,7 @@
         "minecraft:mycelium": "",
         "minecraft:nether_brick": "",
         "minecraft:nether_brick_fence": "",
+        "minecraft:nether_brick_slab": "",
         "minecraft:nether_brick_stairs": "",
         "minecraft:nether_gold_ore": "",
         "minecraft:nether_sprouts": "",
@@ -3920,6 +4000,7 @@
         "minecraft:quartz_block": "",
         "minecraft:quartz_bricks": "",
         "minecraft:quartz_ore": "",
+        "minecraft:quartz_slab": "",
         "minecraft:quartz_stairs": "",
         "minecraft:rail": "",
         "minecraft:raw_copper_block": "",
@@ -3956,6 +4037,7 @@
         "minecraft:rose_bush": "",
         "minecraft:sand": "",
         "minecraft:sandstone": "",
+        "minecraft:sandstone_slab": "",
         "minecraft:sandstone_stairs": "",
         "minecraft:scaffolding": "",
         "minecraft:sculk": "",
@@ -3980,6 +4062,7 @@
         "minecraft:smooth_red_sandstone_stairs": "",
         "minecraft:smooth_sandstone_stairs": "",
         "minecraft:smooth_stone": "",
+        "minecraft:smooth_stone_slab": "",
         "minecraft:sniffer_egg": "",
         "minecraft:snow": "",
         "minecraft:snow_layer": "",
@@ -4013,10 +4096,10 @@
         "minecraft:sticky_piston": "",
         "minecraft:sticky_piston_arm_collision": "",
         "minecraft:stone": "",
-        "minecraft:stone_block_slab": "",
         "minecraft:stone_block_slab2": "",
         "minecraft:stone_block_slab3": "",
         "minecraft:stone_block_slab4": "",
+        "minecraft:stone_brick_slab": "",
         "minecraft:stone_brick_stairs": "",
         "minecraft:stone_button": "",
         "minecraft:stone_pressure_plate": "",
@@ -7456,13 +7539,13 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "filters",
@@ -7474,19 +7557,19 @@
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the nearest entity.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the nearest entity.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7497,31 +7580,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the nearest player.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the nearest player.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7532,31 +7615,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at this mob's current target.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at this mob's current target.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7567,31 +7650,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the player this mob is trading with.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the player this mob is trading with.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -8878,7 +8961,7 @@
                 {
                     "name": "damage_sources",
                     "type": "List",
-                    "defaultValue": "all",
+                    "defaultValue": "[campfire, entity_attack, entity_explosion, fire, fire_tick, fireworks, freezing, lava, lightning, magic, magma, projectile, ram_attack, sonic_boom, soul_campfire, temperature, wither]",
                     "description": "The list of Entity Damage Sources that will cause this mob to panic",
                 },
                 {
@@ -14631,6 +14714,12 @@
                     "type": "Decimal",
                     "defaultValue": "0.05",
                     "description": "The gravity applied to this entity when thrown. The higher the value, the faster the entity falls",
+                },
+                {
+                    "name": "hit_nearest_passenger",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, when hitting a vehicle, and there's at least one passenger in the vehicle, the damage will be dealt to the passenger closest to the projectile impact point. If there are no passengers, this setting does nothing.",
                 },
                 {
                     "name": "hit_sound",

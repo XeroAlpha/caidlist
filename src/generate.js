@@ -26,6 +26,7 @@ import {
     log
 } from './util/common.js';
 import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockState.js';
+import { writeWikiBlockStateValuesBE, writeWikiBlockPropertyValuesBE, writeWikiBlockIdValuesBE } from './generators/wiki.js';
 
 const BASE_LANG_ID = 'en_us';
 const USER_LANG_ID = 'zh_cn';
@@ -731,6 +732,9 @@ async function generateGameTestOutputFiles(cx) {
     });
     saveUserTranslation(userTranslation);
     writeHiddenEntryLog(cx, standardizedTranslation);
+    writeWikiBlockStateValuesBE(cx, projectPath('output.wiki.module.blockStateValues', 'lua'), ids.blocks);
+    writeWikiBlockPropertyValuesBE(cx, projectPath('output.wiki.module.blockPropertyValues', 'lua'), ids.blockProperties);
+    writeWikiBlockIdValuesBE(cx, projectPath('output.wiki.module.blockIdValues', 'lua'), translationResultMaps.block);
 }
 
 const versionInfoMap = {

@@ -15,6 +15,8 @@ const commonOptions = {
     screenSize: [2400, 1080],
     // 命令区域大小
     commandAreaRect: [410, 950, 1650, 125], // <- phone
+    // 使用输入法
+    ime: 'com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME',
     // OCR识别错误手动校正
     tesseractMistakes: [
         ['\'n"\'sUmmOn Creeper', '/summon creeper'],
@@ -57,17 +59,17 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.20.73.01',
+        version: '1.20.80.05',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.20.73.01.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.20.80.05.apk',
         config: smallestGUIOptions
     },
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.21.0.22',
+        version: '1.21.0.23',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.21.0.22.apk',
+        path: 'H:\\BedrockVersions\\Latest\\1.21.0.23.apk',
         config: smallestGUIOptions
     },
     // 中国版测试版
@@ -82,14 +84,14 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.21.0.22',
+        version: '1.21.0.23',
         config: {
             devBehaviorPackPath: `${process.env.LOCALAPPDATA}\\Packages\\Microsoft.MinecraftWindowsBeta_8wekyb3d8bbwe\\LocalState\\games\\com.mojang\\development_behavior_packs`
         }
     },
     dev: {
-        version: '1.21.0.22',
-        path: 'H:\\BedrockVersions\\Dev\\1.21.0.22.apk',
+        version: '1.21.0.23',
+        path: 'H:\\BedrockVersions\\Dev\\1.21.0.23.apk',
         config: smallestGUIOptions
     }
 };

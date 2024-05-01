@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.20.70.6",
+    "version": "1.20.80.5",
     "content": [],
     "sections": [
         {
@@ -923,15 +923,19 @@
                                 },
                                 {
                                     "Name": "query.armor_color_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot.",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
+                                },
+                                {
+                                    "Name": "query.armor_damage_slot",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the damage value of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet). Support for entities other than players may be limited, as the damage value is not always available on clients.",
                                 },
                                 {
                                     "Name": "query.armor_material_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot.",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
                                 },
                                 {
                                     "Name": "query.armor_texture_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot.",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
                                 },
                                 {
                                     "Name": "query.average_frame_time",
@@ -1179,7 +1183,7 @@
                                 },
                                 {
                                     "Name": "query.has_armor_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0",
+                                    "Description": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
                                 },
                                 {
                                     "Name": "query.has_biome_tag",
@@ -2007,7 +2011,7 @@
                                 },
                                 {
                                     "Name": "query.unhappy_counter",
-                                    "Description": "Returns how unhappy the entity is.",
+                                    "Description": "Always returns zero. (Was originally meant to indicate Panda unhappiness but due to an early code change it has always only returned zero)",
                                 },
                                 {
                                     "Name": "query.variant",
@@ -2128,5 +2132,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "fe8f147987285d99ff303423753e22ae0b8c7a26",
+    "__OBJECTHASH__": "a71548ca0695071cb2149b5096fa7bc576cf9ce3",
 }

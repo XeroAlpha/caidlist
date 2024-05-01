@@ -108,7 +108,10 @@ export function hudCommand({ coreVersion, branch }) {
             || testMinecraftVersionInRange(coreVersion, '1.20.60.04', '1.20.60.04')
         );
     }
-    return testMinecraftVersionInRange(coreVersion, '1.20.80.23', '*');
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.20.80.23', '*')
+        || testMinecraftVersionInRange(coreVersion, '1.20.80.05', '1.20.80.05')
+    );
 }
 hudCommand.associatedCommands = [
     ['/hud <target: target> <visible: HudVisibility> [hud_element: HudElement]']

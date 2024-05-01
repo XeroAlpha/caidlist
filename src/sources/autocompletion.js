@@ -390,7 +390,7 @@ function verifySupportForSelectors(cx, selectors) {
 }
 
 export default async function analyzeAutocompletionEnumsCached(cx) {
-    const { version, branch, packageVersion } = cx;
+    const { version, branch, packageVersion, ime } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}`;
     const cache = cachedOutput(cacheId);
     if (cache && packageVersion === cache.packageVersion) return cache;
@@ -413,6 +413,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
         tesseractScheduler.addWorker(worker);
     }
 
+    if (ime) {
+        await device.execOut(`ime set ${ime}`);
+    }
     await pause(`Please switch to branch: ${branch.id}\nInteract if the device is ready`);
     const target = { packageVersion };
     const options = {
