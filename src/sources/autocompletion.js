@@ -379,7 +379,7 @@ async function analyzeCommandAutocompletionFastWin10(
     for (;;) {
         const oldClipboardText = clipboardText;
         await pressTab();
-        clipboardText = await retryUntilComplete(10, 0, async () => {
+        clipboardText = await retryUntilComplete(20, 0, async () => {
             try {
                 return await retryUntilComplete(20, 0, async () => {
                     await pressCopy();
