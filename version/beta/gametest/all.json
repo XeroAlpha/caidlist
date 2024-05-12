@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.0.23",
+    "packageVersion": "1.21.0.24",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -8502,6 +8502,22 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getBlockAbove": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getBlockBelow": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getBlockFromRay": {
                                                     "value": {
                                                         "type": "function",
@@ -8543,6 +8559,14 @@
                                                     },
                                                 },
                                                 "getPlayers": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getTopmostBlock": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -29292,12 +29316,15 @@
         "Minecraft.Dimension.prototype.fillBlocks",
         "Minecraft.Dimension.prototype.findClosestBiome",
         "Minecraft.Dimension.prototype.getBlock",
+        "Minecraft.Dimension.prototype.getBlockAbove",
+        "Minecraft.Dimension.prototype.getBlockBelow",
         "Minecraft.Dimension.prototype.getBlockFromRay",
         "Minecraft.Dimension.prototype.getBlocks",
         "Minecraft.Dimension.prototype.getEntities",
         "Minecraft.Dimension.prototype.getEntitiesAtBlockLocation",
         "Minecraft.Dimension.prototype.getEntitiesFromRay",
         "Minecraft.Dimension.prototype.getPlayers",
+        "Minecraft.Dimension.prototype.getTopmostBlock",
         "Minecraft.Dimension.prototype.getWeather",
         "Minecraft.Dimension.prototype.heightRange.[[Get]]",
         "Minecraft.Dimension.prototype.id",
@@ -75714,7 +75741,7 @@
             ],
             "components": {
                 "minecraft:durability": {
-                    "maxDurability": 250,
+                    "maxDurability": 500,
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -75997,6 +76024,18 @@
                 "minecraft:music_disc",
             ],
         },
+        "minecraft:music_disc_creator": {
+            "unstackable": true,
+            "tags": [
+                "minecraft:music_disc",
+            ],
+        },
+        "minecraft:music_disc_creator_music_box": {
+            "unstackable": true,
+            "tags": [
+                "minecraft:music_disc",
+            ],
+        },
         "minecraft:music_disc_far": {
             "unstackable": true,
             "tags": [
@@ -76022,6 +76061,12 @@
             ],
         },
         "minecraft:music_disc_pigstep": {
+            "unstackable": true,
+            "tags": [
+                "minecraft:music_disc",
+            ],
+        },
+        "minecraft:music_disc_precipice": {
             "unstackable": true,
             "tags": [
                 "minecraft:music_disc",
@@ -79088,11 +79133,14 @@
             "minecraft:music_disc_blocks",
             "minecraft:music_disc_cat",
             "minecraft:music_disc_chirp",
+            "minecraft:music_disc_creator",
+            "minecraft:music_disc_creator_music_box",
             "minecraft:music_disc_far",
             "minecraft:music_disc_mall",
             "minecraft:music_disc_mellohi",
             "minecraft:music_disc_otherside",
             "minecraft:music_disc_pigstep",
+            "minecraft:music_disc_precipice",
             "minecraft:music_disc_relic",
             "minecraft:music_disc_stal",
             "minecraft:music_disc_strad",

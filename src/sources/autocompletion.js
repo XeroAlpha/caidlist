@@ -141,8 +141,11 @@ async function analyzeCommandAutocompletionFast(
     await imageStream.ready;
 
     // 打开聊天栏
-    await press(scrcpy, 'KEYCODE_SLASH');
+    await press(scrcpy, 'KEYCODE_T');
     await sleepAsync(3000);
+    await press(scrcpy, 'KEYCODE_SLASH');
+    await sleepAsync(1000);
+    await press(scrcpy, 'KEYCODE_MOVE_END');
     screen.log(`Input ${command}`);
     await injectText(scrcpy, command.replace(/^\//, ''));
 
@@ -326,8 +329,122 @@ async function analyzeCommandAutocompletionFast(
     return autocompletions;
 }
 
+async function analyzeCommandAutocompletionFastWin10(
+    cx,
+    screen,
+    command,
+    progressName,
+    approxLength
+) {
+    // 初始状态：游戏HUD
+    const autocompletions = [];
+    const {
+        Keys,
+        sendKeys,
+        sendText,
+        getClipboardText,
+        emptyClipboard
+    } = await import('../util/win32api.js');
+
+    screen.updateStatus({ approxLength });
+
+    log(`Starting ${progressName}: ${command}`);
+
+    // 打开聊天栏
+    sendKeys('T');
+    await sleepAsync(3000);
+    sendText('/');
+    screen.log(`Input ${command}`);
+    sendText(command.replace(/^\//, ''));
+    emptyClipboard();
+    await sleepAsync(1000);
+
+    const pressTab = async () => {
+        sendKeys(Keys.Tab);
+    };
+    const pressCopy = async () => {
+        sendKeys(Keys.Ctrl, 'A');
+        sendKeys(Keys.Ctrl, 'C');
+        await sleepAsync(50);
+        sendKeys(Keys.End);
+        await sleepAsync(50);
+    };
+
+    let clipboardText = `/${command.replace(/^\//, '')}`;
+    const timeStart = performance.now();
+    const performanceTimeOffset = Date.now() - timeStart;
+    let stepStart = timeStart;
+    let stepCount = 0;
+    let duplicatedCount = 0;
+    for (;;) {
+        const oldClipboardText = clipboardText;
+        await pressTab();
+        clipboardText = await retryUntilComplete(10, 0, async () => {
+            try {
+                return await retryUntilComplete(20, 0, async () => {
+                    await pressCopy();
+                    const newClipboardText = getClipboardText() ?? oldClipboardText;
+                    if (newClipboardText === oldClipboardText) {
+                        throw new Error(`Clipboard text is not changed: ${newClipboardText}`);
+                    }
+                    return newClipboardText;
+                });
+            } catch (err) {
+                await pressTab();
+                throw err;
+            }
+        });
+
+        const autocompletion = clipboardText.slice(command.length);
+        if (autocompletions.includes(autocompletion)) {
+            duplicatedCount++;
+            setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            screen.log(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            if (duplicatedCount >= 5) {
+                break;
+            }
+        } else {
+            const now = performance.now();
+            const stepSpent = now - stepStart;
+            stepStart = now;
+            stepCount++;
+            screen.updateStatus({
+                autocompletedCommand: clipboardText,
+                recogizedCommand: clipboardText,
+                autocompletion,
+                stepSpent,
+                resultLength: autocompletions.length
+            });
+            screen.log(`Got: ${clipboardText}`);
+            autocompletions.push(autocompletion);
+            if (approxLength > 0) {
+                const stepSpentAvg = (now - timeStart) / stepCount;
+                const percentage = ((autocompletions.length / approxLength) * 100).toFixed(1);
+                const timeLeft = (approxLength - autocompletions.length) * stepSpentAvg;
+                const estTime = performanceTimeOffset + now + timeLeft;
+                const timeLeftStr = formatTimeLeft(timeLeft / 1000);
+                const estTimeStr = new Date(estTime).toLocaleTimeString();
+                screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
+                setStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${clipboardText}`);
+            } else {
+                setStatus(`[${autocompletions.length}/?]${progressName} ${clipboardText}`);
+            }
+        }
+    }
+
+    // 退出聊天栏
+    await sleepAsync(1000);
+    sendKeys(Keys.Esc);
+    await sleepAsync(1000);
+    sendKeys(Keys.Esc);
+    await sleepAsync(1000);
+    setStatus('');
+
+    return autocompletions;
+}
+
 async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix, exclusion) {
-    const { version, branch, packageVersion } = cx;
+    const { version, branch, packageVersion, useWin10Edition } = cx;
     const { device, target, screen, tesseractScheduler } = options;
     const id = name.replace(/\s+(\S)/g, (_, ch) => ch.toUpperCase());
     const cacheId = `version.${version}.autocompletion.${branch.id}.${name.replace(/\s+/g, '_')}`;
@@ -345,16 +462,27 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
         for (;;) {
             const previousResult = result || cachedResult;
             screen.updateStatus({ retryCount });
-            let resultSample = await analyzeCommandAutocompletionFast(
-                cx,
-                device,
-                screen,
-                tesseractScheduler,
-                commandPrefix,
-                progressName,
-                previousResult.length,
-                retryCount < 8
-            );
+            let resultSample;
+            if (useWin10Edition) {
+                resultSample = await analyzeCommandAutocompletionFastWin10(
+                    cx,
+                    screen,
+                    commandPrefix,
+                    progressName,
+                    previousResult.length
+                );
+            } else {
+                resultSample = await analyzeCommandAutocompletionFast(
+                    cx,
+                    device,
+                    screen,
+                    tesseractScheduler,
+                    commandPrefix,
+                    progressName,
+                    previousResult.length,
+                    retryCount < 8
+                );
+            }
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
             const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);
             result = mergedResult.merged;

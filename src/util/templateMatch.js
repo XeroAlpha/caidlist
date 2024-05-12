@@ -32,14 +32,17 @@ export function matchTranslation(options) {
                 if (key.startsWith('#')) {
                     realKey = `${originalValue}.${key.slice(1)}`;
                 }
-                const state = translateCached(realKey, `${context}/${originalValue}`, true);
+                const state = translateCached(realKey, {
+                    ...context,
+                    name: `${context.name}/${originalValue}`
+                }, true);
                 if (state.state !== 'provided') {
                     interpretFailedKeys.push(key);
                 }
                 return state.translation;
             });
             if (interpretFailedKeys.length) {
-                warn(`[${context}] Should provide inline references: ${originalValue}(${interpretFailedKeys.join(',')})`);
+                context.warnings.push(`[${context.name}] Should provide inline references: ${originalValue}(${interpretFailedKeys.join(',')})`);
                 userTranslation = '';
             }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
@@ -59,7 +62,10 @@ export function matchTranslation(options) {
             } else if (langMap && source.toLowerCase() === 'be') { // 基岩版语言文件
                 userTranslation = langMap[key];
             } else if (source.toLowerCase() === 'this') { // 当前列表
-                userTranslation = translateCached(key, `${context}/${originalValue}`).translation;
+                userTranslation = translateCached(key, {
+                    ...context,
+                    name: `${context.name}/${originalValue}`
+                }).translation;
             } else if (source.toLowerCase() === 'missing') { // 暂缺译名
                 const tempTranslationMap = {};
                 tempTranslationMap[originalValue] = key;
@@ -71,9 +77,9 @@ export function matchTranslation(options) {
                 }).translation;
                 if (userTranslation.toLowerCase() in stdTransMap) {
                     userTranslation = stdTransMap[userTranslation.toLowerCase()];
-                    warn(`[${context}] Translation Found: ${originalValue} -> ${userTranslation}`);
+                    context.warnings.push(`[${context.name}] Translation Found: ${originalValue} -> ${userTranslation}`);
                 } else {
-                    warn(`[${context}] Missing Translation: ${originalValue} -> ${userTranslation}`);
+                    context.warnings.push(`[${context.name}] Missing Translation: ${originalValue} -> ${userTranslation}`);
                 }
             } else if (source in resultMaps) { // 其他翻译
                 userTranslation = resultMaps[source][key];
@@ -81,7 +87,7 @@ export function matchTranslation(options) {
                 userTranslation = undefined;
             }
             if (!userTranslation) {
-                warn(`[${context}] Failed to resolve reference: ${originalValue}(${source}: ${key})`);
+                context.warnings.push(`[${context.name}] Failed to resolve reference: ${originalValue}(${source}: ${key})`);
             }
             setInlineCommentAfterField(translationMap, originalValue, userTranslation);
         }
@@ -106,7 +112,7 @@ export function matchTranslation(options) {
             const translation = customAutoMatch(originalValue);
             if (translation) {
                 if (!(originalValue in translationMap)) {
-                    warn(`[${context}] New entry has been added: ${originalValue} (custom) -> ${translation}`);
+                    context.warnings.push(`[${context.name}] New entry has been added: ${originalValue} (custom) -> ${translation}`);
                 }
                 translationMap[originalValue] = translation;
                 return matchTranslation(options);
@@ -117,7 +123,7 @@ export function matchTranslation(options) {
             const stdTranslation = stdTransMap[stdTranslationKey];
             if (stdTranslation) {
                 if (!(originalValue in translationMap)) {
-                    warn(`[${context}] New entry has been added: ${originalValue} (ST) -> ${stdTranslation}`);
+                    context.warnings.push(`[${context.name}] New entry has been added: ${originalValue} (ST) -> ${stdTranslation}`);
                 }
                 translationMap[originalValue] = `ST: ${stdTranslationKey}`;
                 setInlineCommentAfterField(translationMap, originalValue, `${stdTranslation}`);
@@ -134,7 +140,7 @@ export function matchTranslation(options) {
                 if (langMap[langKeyExact]) {
                     const translation = langMap[langKeyExact];
                     if (!(originalValue in translationMap)) {
-                        warn(`[${context}] New entry has been added: ${originalValue} (lang) -> ${translation}`);
+                        context.warnings.push(`[${context.name}] New entry has been added: ${originalValue} (lang) -> ${translation}`);
                     }
                     translationMap[originalValue] = '';
                     if (langKeyExact !== originalValue) {
@@ -153,7 +159,7 @@ export function matchTranslation(options) {
                 if (langKeyLikely.length) {
                     const translation = langKeyLikely.map((key) => langMap[key]).join('/');
                     if (!(originalValue in translationMap)) {
-                        warn(`[${context}] New entry has been added: ${originalValue} (langLikely) -> ${translation}`);
+                        context.warnings.push(`[${context.name}] New entry has been added: ${originalValue} (langLikely) -> ${translation}`);
                     }
                     translationMap[originalValue] = '';
                     setInlineCommentAfterField(translationMap, originalValue, `lang: ${translation}`);
@@ -167,7 +173,7 @@ export function matchTranslation(options) {
         }
         if (!translationMap[originalValue]) {
             if (!(originalValue in translationMap)) {
-                warn(`[${context}] New entry has been added: ${originalValue} (untranslated)`);
+                context.warnings.push(`[${context.name}] New entry has been added: ${originalValue} (untranslated)`);
             }
             translationMap[originalValue] = '';
         }
@@ -186,12 +192,13 @@ const CircularTranslationResult = {
     comment: 'This is a place holder'
 };
 
-const formatInnerFunc = ({ context, originalValue, refs }, ...resolvedRefs) => {
+const formatInnerFunc = ({ context, originalValue, refs }, ...refResolvers) => {
     let state = 'provided';
+    const resolvedRefs = refResolvers.map((resolver) => resolver());
     resolvedRefs.forEach((resolvedRef, i) => {
         if (resolvedRef.state !== 'provided') {
             state = 'notFound';
-            warn(`[${context}] Should provide inline references: ${originalValue}(${refs[i]})`);
+            context.warnings.push(`[${context.name}] Should provide inline references: ${originalValue}(${refs[i]})`);
         }
     });
     const [fmt, ...items] = resolvedRefs.map((e) => e.translation);
@@ -203,11 +210,19 @@ const formatInnerFunc = ({ context, originalValue, refs }, ...resolvedRefs) => {
 const innerFunctions = {
     '': formatInnerFunc,
     format: formatInnerFunc,
-    pick: ({ context, originalValue, refs }, ...items) => {
-        const picked = items.find((e) => e.state === 'provided');
-        if (picked) return picked;
-        warn(`[${context}] All items are not provided: ${originalValue}(${refs.join(',')})`);
-        return items[items.length - 1];
+    pick: ({ context, originalValue, refs }, ...refResolvers) => {
+        const warnings = [];
+        for (const resolver of refResolvers) {
+            warnings.length = 0;
+            const resolved = resolver({ warnings });
+            if (resolved.state === 'provided') {
+                context.warnings.push(...warnings);
+                return resolved;
+            }
+        }
+        context.warnings.push(...warnings);
+        context.warnings.push(`[${context.name}] None of items is provided: ${originalValue}(${refs.join(',')})`);
+        return refResolvers[refResolvers.length - 1];
     }
 };
 
@@ -233,17 +248,17 @@ export function matchTranslations(options) {
                 refs.unshift(first);
                 func = formatInnerFunc;
             }
-            const resolvedRefs = refs.map((ref) => {
+            const refResolvers = refs.map((ref) => {
                 if (ref.startsWith('\'')) { // 原始字符，原样传递
                     let raw = ref.slice(1);
                     if (raw.endsWith('\'')) {
                         raw = raw.slice(0, -1);
                     }
-                    return { state: 'provided', translation: raw };
+                    return () => ({ state: 'provided', translation: raw });
                 }
-                return translateCached(ref, context, true);
+                return (cx) => translateCached(ref, { ...context, ...cx }, true);
             });
-            return func({ context, originalValue, options, refs }, ...resolvedRefs);
+            return func({ context, originalValue, options, refs }, ...refResolvers);
         }
         if (insideTemplate && originalValue.includes('!')) { // 外部引用
             const translationMap = {};
@@ -268,7 +283,9 @@ export function matchTranslations(options) {
         return result;
     };
     originalArray.forEach((originalValue) => {
-        const result = translateCached(originalValue, name);
+        const warnings = [];
+        const result = translateCached(originalValue, { name, warnings });
+        warnings.forEach((text) => warn(text));
         translateStates[result.state].push(originalValue);
         translateResultMap[originalValue] = result.translation;
         setInlineCommentAfterField(translateResultMap, originalValue, result.comment);

@@ -584,7 +584,7 @@ const Extractors = [
                     return JSON.stringify(result);
                 }));
             } catch (err) {
-                warn('Cannot evaluate code for ItemRegistry', err);
+                warn(`Cannot evaluate code for ItemRegistry: ${err.message}`);
                 parseOrThrow(await frame.evaluate(() => {
                     const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
                     const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
@@ -669,7 +669,7 @@ const Extractors = [
                             ItemInfoList[id] = value;
                         }
                     } catch (err2) {
-                        warn(`Cannot evaluate code for Item #${i}`, err.message);
+                        warn(`Cannot evaluate code for Item #${i}: ${err.message}`);
                     }
                 }
             }
@@ -861,17 +861,20 @@ export default async function analyzeGameTestEnumsCached(cx) {
     }
     const packPath = generateBehaviorPack(cx);
     if (cx.devBehaviorPackPath) {
-        try {
-            if (device) {
-                await pushRecursively(device, packPath, posix.join(cx.devBehaviorPackPath, 'gametest_behavior_pack'));
-            } else {
-                const packDest = resolvePath(cx.devBehaviorPackPath, 'gametest_behavior_pack');
-                mkdirSync(packDest, { recursive: true });
-                cpSync(packPath, packDest, { recursive: true });
+        for (;;) {
+            try {
+                if (device) {
+                    await pushRecursively(device, packPath, posix.join(cx.devBehaviorPackPath, 'gametest_behavior_pack'));
+                } else {
+                    const packDest = resolvePath(cx.devBehaviorPackPath, 'gametest_behavior_pack');
+                    mkdirSync(packDest, { recursive: true });
+                    cpSync(packPath, packDest, { recursive: true });
+                }
+                break;
+            } catch (err) {
+                warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
+                await pause('[GameTest] Please clear all the data of Minecraft');
             }
-        } catch (err) {
-            warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
-            warn('[GameTest] You may need to clear all the data of Minecraft');
         }
     }
     await pause('Please switch to branch: gametest\nInteract if the device is ready');

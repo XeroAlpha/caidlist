@@ -20,8 +20,9 @@
                 font-size: 20px;
                 background: center/cover url(https://projectxero.top/ca/img/background2.png);
             }
-            body.no-background {
+            body.dashboard {
                 background: white;
+                font-size: 16px;
             }
             code {
                 font-family: "JetBrains Mono", "Lucida Console", "思源黑体", monospace;
@@ -203,6 +204,8 @@
                 unit_tests: '单元测试',
                 functional_tests: '功能测试'
             };
+            const locationSearchParams = new URLSearchParams(window.location.search);
+            const controlHost = locationSearchParams.get('host') ?? 'localhost';
             let sessionId = null;
             let logSince = 0;
             const logs = [];
@@ -323,6 +326,12 @@
                     }
                     const boundWidth = Math.max(0, dom.scrollWidth - dom.clientWidth);
                     const boundHeight = Math.max(0, dom.scrollHeight - dom.clientHeight);
+                    if (!Number.isFinite(y[0]) || !Number.isFinite(y[1])) {
+                        y = [...x];
+                    }
+                    if (!Number.isFinite(yd[0]) || !Number.isFinite(yd[1])) {
+                        yd = [0, 0];
+                    }
                     y = [
                         Math.max(0, Math.min(boundWidth, y[0] + T * yd[0])),
                         Math.max(0, Math.min(boundHeight, y[1] + T * yd[1]))
@@ -343,7 +352,7 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://localhost:19333/heartbeat?since=${logSince}`, 500);
+                    hb = await fetchJSON(`http://${controlHost}:19333/heartbeat?since=${logSince}`, 500);
                     success = true;
                 } catch (err) { /* ignore */ }
                 const text = [];
@@ -361,8 +370,12 @@
                 }
                 if (hb.resultLength) {
                     const speed = (1000 / hb.stepSpent).toFixed(1);
-                    const fps = ((hb.reactFrameCount / hb.reactInterval) * 1000).toFixed(1);
-                    text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}帧/条 ${fps} fps 滞后${hb.droppedCount}条）`);
+                    if (hb.reactInterval > 0) {
+                        const fps = ((hb.reactFrameCount / hb.reactInterval) * 1000).toFixed(1);
+                        text.push(`识别速度：${speed}条/秒（${hb.reactFrameCount}帧/条 ${fps} fps 滞后${hb.droppedCount}条）`);
+                    } else {
+                        text.push(`识别速度：${speed}条/秒（滞后${hb.droppedCount ?? 0}条）`);
+                    }
                     if (hb.approxLength > 0) {
                         const averageSpeed = (1000 / hb.stepSpentAvg).toFixed(2);
                         text.push(`条目进度：${hb.percentage}% (${hb.resultLength}/${hb.approxLength})`);
@@ -409,12 +422,12 @@
                 }
                 if (obsStreaming) {
                     const unresponsibleSeconds = (Date.now() - lastActiveTime) / 1000;
-                    if (unresponsibleSeconds > 60) {
+                    if (unresponsibleSeconds > 300) {
                         text.push('');
                         text.push('无人值守直播中，正在等待主播确认……');
-                        text.push(`若未确认将在${timeLeftString(360 - unresponsibleSeconds)}后自动结束直播`);
+                        text.push(`若未确认将在${timeLeftString(600 - unresponsibleSeconds)}后自动结束直播`);
                     }
-                    if (unresponsibleSeconds > 360) {
+                    if (unresponsibleSeconds > 600) {
                         window.obsstudio.stopStreaming();
                     }
                 }
@@ -424,7 +437,7 @@
             async function updateDanmaku() {
                 let lines = [];
                 try {
-                    lines = await fetchJSON(`http://localhost:19334/lines?since=${danmakus.length}`, 5000);
+                    lines = await fetchJSON(`http://${controlHost}:19334/lines?since=${danmakus.length}`, 5000);
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;
@@ -450,7 +463,7 @@
                 //
                 // const converter = new H264Converter(screenshotEl, 30, 6);
                 // const abortController = new AbortController();
-                // fetch('http://localhost:19333/stream', { signal: abortController.signal }).then((res) => {
+                // fetch(`http://${controlHost}:19333/stream`, { signal: abortController.signal }).then((res) => {
                 //     if (res.body) {
                 //         screenshotContainer.classList.add('screenshot-available');
                 //         const reader = res.body.getReader();
@@ -524,8 +537,8 @@
                     return el;
                 })
             );
-            if (new URLSearchParams(window.location.search).has('nobg')) {
-                document.body.classList.add('no-background');
+            if (locationSearchParams.has('dashboard')) {
+                document.body.classList.add('dashboard');
             }
         </script>
     </body>

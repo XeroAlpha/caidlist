@@ -686,6 +686,8 @@ const branchMap = {
     beta: 'preview'
 };
 
+const overwriteCommitHashMap = {};
+
 const versionRegExp = /"latest"[\s\n\r]*:[\s\n\r]*{[^"]*?"version"[\s\n\r]*:[\s\n\r]*"([\w.]+)"/;
 
 async function fetchBehaviorPack(treeSHA, cacheKey) {
@@ -716,10 +718,20 @@ export async function fetchDocumentationIds(cx) {
     const cacheKey = `version.common.documentation.${version}`;
     let cache = cachedOutput(cacheKey);
     try {
-        const repoBranch = (await octokit.repos.getBranch({ ...repoConfig, branch: branchMap[version] })).data;
-        const commitHash = repoBranch.commit.sha;
+        const overwriteCommitHash = overwriteCommitHashMap[version];
+        let commitHash;
+        let commitTreeSHA;
+        if (overwriteCommitHash) {
+            const commitTree = (await octokit.repos.getCommit({ ...repoConfig, ref: overwriteCommitHash })).data;
+            commitHash = overwriteCommitHash;
+            commitTreeSHA = commitTree.commit.tree.sha;
+        } else {
+            const repoBranch = (await octokit.repos.getBranch({ ...repoConfig, branch: branchMap[version] })).data;
+            commitHash = repoBranch.commit.sha;
+            commitTreeSHA = repoBranch.commit.commit.tree.sha;
+        }
         if (!cache || cache.__COMMITHASH__ !== commitHash) {
-            const behaviorPackParsed = await fetchBehaviorPack(repoBranch.commit.commit.tree.sha, cacheKey);
+            const behaviorPackParsed = await fetchBehaviorPack(commitTreeSHA, cacheKey);
             cache = cachedOutput(cacheKey, {
                 __VERSION__: behaviorPackParsed.__VERSION__,
                 __COMMITHASH__: commitHash,

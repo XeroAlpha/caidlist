@@ -146,8 +146,14 @@ export async function createExclusiveWSSession(device) {
                 const sessionPromise = pEvent(wsServer, 'client', { timeout: 10000 });
                 await device.reverse('tcp:19134', `tcp:${port}`);
                 setStatus('Simulating user actions...');
-                await adbShell(device, 'input keyevent KEYCODE_SLASH');
+                // 打开聊天栏
+                await adbShell(device, 'input keyevent KEYCODE_T');
                 await sleepAsync(3000);
+                // 唤起输入法
+                await adbShell(device, 'input keyevent KEYCODE_SLASH');
+                await sleepAsync(1000);
+                // 确保光标在末尾
+                await adbShell(device, 'input keyevent KEYCODE_MOVE_END');
                 await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
                 await adbShell(device, 'input keyevent KEYCODE_ENTER');
                 ({ session } = await sessionPromise);

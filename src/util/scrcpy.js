@@ -117,6 +117,7 @@ export async function openScrcpy(device, options) {
 
 const TYPE_INJECT_KEYCODE = 0;
 const TYPE_INJECT_TEXT = 1;
+const TYPE_SET_SCREEN_POWER_MODE = 10;
 
 /**
  * @param {import('net').Socket} socket
@@ -155,6 +156,16 @@ export async function injectText(scrcpy, text) {
     await writeSocket(scrcpy.controlSocket, msg);
 }
 
+/**
+ * @param {Scrcpy} scrcpy
+ */
+export async function injectSetScreenPowerMode(scrcpy, mode) {
+    const msg = Buffer.allocUnsafe(2);
+    msg.writeUInt8(TYPE_SET_SCREEN_POWER_MODE, 0);
+    msg.writeUInt8(mode, 1);
+    await writeSocket(scrcpy.controlSocket, msg);
+}
+
 const ACTION_DOWN = 0;
 const ACTION_UP = 1;
 
@@ -165,6 +176,15 @@ const ACTION_UP = 1;
 export async function press(scrcpy, keycode) {
     await injectKeyCode(scrcpy, ACTION_DOWN, KeyCodes[keycode]);
     await injectKeyCode(scrcpy, ACTION_UP, KeyCodes[keycode]);
+}
+
+const POWER_MODE_OFF = 0;
+
+/**
+ * @param {Scrcpy} scrcpy
+ */
+export async function powerOffScreen(scrcpy) {
+    await injectSetScreenPowerMode(scrcpy, POWER_MODE_OFF);
 }
 
 const ScrcpyPendingStopped = Symbol('ScrcpyPendingStopped');
