@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.0.26",
+    "version": "1.21.10.20",
     "content": [],
     "sections": [
         {
@@ -1171,6 +1171,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "feet",
                                                     "Description": "",
                                                 },
@@ -1342,6 +1346,10 @@
                                                 },
                                                 {
                                                     "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
                                                     "Description": "",
                                                 },
                                                 {
@@ -2955,6 +2963,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "feet",
                                                     "Description": "",
                                                 },
@@ -3132,6 +3144,10 @@
                                                 },
                                                 {
                                                     "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
                                                     "Description": "",
                                                 },
                                                 {
@@ -23053,6 +23069,25 @@
                             ],
                         },
                         {
+                            "name": "minecraft:entity_armor_equipment_slot_mapping",
+                            "id": "minecraft:entity_armor_equipment_slot_mapping",
+                            "level": 4,
+                            "content": [
+                                "It defines to which armor slot an item equipped to 'minecraft:equippable''s second slot should be equipped to. It is automatically applied to all entities for worlds with a version greater than or equal to 1.21.10. For older worlds, 'slot.armor.torso' will be used. It is strongly advised not to explicitly use this component, as no backwards compatibility for it will be provided.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "armor_slot",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The armor slot an item equipped to 'minecraft:equippable''s second slot should be equipped to. It defaults to 'slot.armor.torso' for entities with a format version prior to 1.21.10, and to 'slot.armor.body' otherwise.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:entity_sensor",
                             "id": "minecraft:entity_sensor",
                             "level": 4,
@@ -23997,13 +24032,13 @@
                                             "Name": "drop_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "equip_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "health_amount",
@@ -24080,7 +24115,7 @@
                                                             "Name": "slot",
                                                             "Type": "Integer",
                                                             "Default Value": "",
-                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                                         },
                                                     ],
                                                 },
@@ -28096,6 +28131,10 @@
                                             "ID": "1705466896",
                                         },
                                         {
+                                            "JSON Name": "minecraft:entity_armor_equipment_slot_mapping",
+                                            "ID": "388041038",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:entity_sensor",
                                             "ID": "-406052184",
                                         },
@@ -29588,5 +29627,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "c658b0bb346cec8206bbdf658e0437d7375ea497",
+    "__OBJECTHASH__": "7779d5783c0424ad52b655fa0ed2bf53acee46da",
 }

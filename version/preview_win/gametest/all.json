@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.0.26",
+    "packageVersion": "1.21.10.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5935,7 +5935,7 @@
                                     "RecordPlayer": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:recordPlayer",
+                                            "value": "minecraft:record_player",
                                         },
                                         "readOnly": true,
                                     },
@@ -6550,7 +6550,7 @@
                                     "componentId": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:recordPlayer",
+                                            "value": "minecraft:record_player",
                                         },
                                         "readOnly": true,
                                     },
@@ -6559,8 +6559,23 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockRecordPlayerComponent",
+                                                    },
+                                                },
+                                            },
                                             "enumerableProperties": {
-                                                "clearRecord": {
+                                                "ejectRecord": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getRecord": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -6576,7 +6591,7 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "setRecord": {
+                                                "pauseRecord": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -6584,11 +6599,20 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                            },
-                                            "properties": {
-                                                "constructor": {
+                                                "playRecord": {
                                                     "value": {
-                                                        "ref": "Minecraft.BlockRecordPlayerComponent",
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setRecord": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -8316,6 +8340,94 @@
                             },
                             "configurable": false,
                         },
+                        "CustomComponentInvalidRegistryError": {
+                            "value": {
+                                "type": "function",
+                                "name": "CustomComponentInvalidRegistryError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.CustomComponentInvalidRegistryError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "CustomComponentNameError": {
+                            "value": {
+                                "type": "function",
+                                "name": "CustomComponentNameError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.CustomComponentNameError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "reason": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "CustomComponentNameErrorReason": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "DisallowedNamespace": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "NoNamespace": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "DataDrivenEntityTriggerAfterEvent": {
                             "value": {
                                 "type": "function",
@@ -9919,14 +10031,6 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "fallDistance": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
                                                 "getBlockFromViewDirection": {
                                                     "value": {
                                                         "type": "function",
@@ -10149,14 +10253,6 @@
                                                 },
                                                 "kill": {
                                                     "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "lifetimeState": {
-                                                    "getter": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -13455,16 +13551,57 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.EntityLeashableComponent",
+                                            "enumerableProperties": {
+                                                "canBeStolen": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
-                                            },
-                                            "enumerableProperties": {
-                                                "leash": {
+                                                "hardDistance": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "isLeashed": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "leashHolder": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "leashHolderEntityId": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "leashTo": {
                                                     "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "maxDistance": {
+                                                    "getter": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -13488,6 +13625,13 @@
                                                     },
                                                 },
                                             },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.EntityLeashableComponent",
+                                                    },
+                                                },
+                                            },
                                             "prototype": {
                                                 "ref": "Minecraft.EntityComponent.prototype",
                                             },
@@ -13498,28 +13642,6 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.EntityComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "EntityLifetimeState": {
-                            "value": {
-                                "type": "object",
-                                "enumerableProperties": {
-                                    "Loaded": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Loaded",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "Unloaded": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Unloaded",
-                                        },
-                                        "readOnly": true,
-                                    },
                                 },
                             },
                             "configurable": false,
@@ -16060,6 +16182,13 @@
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
+                                    "Body": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Body",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Chest": {
                                         "value": {
                                             "type": "string",
@@ -18368,6 +18497,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "Potion": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:potion",
+                                        },
+                                        "readOnly": true,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -18560,34 +18696,6 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.ItemCustomComponentAlreadyRegisteredError",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Error.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "ItemCustomComponentNameError": {
-                            "value": {
-                                "type": "function",
-                                "name": "ItemCustomComponentNameError",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.ItemCustomComponentNameError",
                                                     },
                                                 },
                                             },
@@ -18983,6 +19091,72 @@
                             },
                             "configurable": false,
                         },
+                        "ItemPotionComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemPotionComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:potion",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemPotionComponent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "potionEffectType": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "potionLiquidType": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "potionModifierType": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "ItemReleaseUseAfterEvent": {
                             "value": {
                                 "type": "function",
@@ -19081,6 +19255,16 @@
                                 "name": "ItemStack",
                                 "native": true,
                                 "length": 0,
+                                "enumerableProperties": {
+                                    "createPotion": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                },
                                 "properties": {
                                     "prototype": {
                                         "value": {
@@ -22842,6 +23026,162 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.IPlayerSpawnAfterEventSignal",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PotionEffectType": {
+                            "value": {
+                                "type": "function",
+                                "name": "PotionEffectType",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PotionEffectType",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "id": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PotionLiquidType": {
+                            "value": {
+                                "type": "function",
+                                "name": "PotionLiquidType",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PotionLiquidType",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "id": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PotionModifierType": {
+                            "value": {
+                                "type": "function",
+                                "name": "PotionModifierType",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PotionModifierType",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "id": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "Potions": {
+                            "value": {
+                                "type": "function",
+                                "name": "Potions",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "getPotionEffectType": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                    "getPotionLiquidType": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                    "getPotionModifierType": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.Potions",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -28117,6 +28457,50 @@
                             },
                             "configurable": false,
                         },
+                        "UIManager": {
+                            "value": {
+                                "type": "function",
+                                "name": "UIManager",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "closeAllForms": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftUI.UIManager",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "uiManager": {
+                            "value": {
+                                "type": "object",
+                                "prototype": {
+                                    "ref": "MinecraftUI.UIManager.prototype",
+                                },
+                            },
+                            "configurable": false,
+                        },
                     },
                     "symbolProperties": {
                         "Symbol(Symbol.toStringTag)": {
@@ -29071,9 +29455,12 @@
         "Minecraft.BlockRecordPlayerComponent.componentId",
         "Minecraft.BlockRecordPlayerComponent.prototype",
         "Minecraft.BlockRecordPlayerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockRecordPlayerComponent.prototype.clearRecord",
         "Minecraft.BlockRecordPlayerComponent.prototype.constructor",
+        "Minecraft.BlockRecordPlayerComponent.prototype.ejectRecord",
+        "Minecraft.BlockRecordPlayerComponent.prototype.getRecord",
         "Minecraft.BlockRecordPlayerComponent.prototype.isPlaying",
+        "Minecraft.BlockRecordPlayerComponent.prototype.pauseRecord",
+        "Minecraft.BlockRecordPlayerComponent.prototype.playRecord",
         "Minecraft.BlockRecordPlayerComponent.prototype.setRecord",
         "Minecraft.BlockSignComponent",
         "Minecraft.BlockSignComponent.[[Prototype]]",
@@ -29292,6 +29679,18 @@
         "Minecraft.ContainerSlot.prototype.setLore",
         "Minecraft.ContainerSlot.prototype.type.[[Get]]",
         "Minecraft.ContainerSlot.prototype.typeId.[[Get]]",
+        "Minecraft.CustomComponentInvalidRegistryError",
+        "Minecraft.CustomComponentInvalidRegistryError.prototype",
+        "Minecraft.CustomComponentInvalidRegistryError.prototype.[[Prototype]]",
+        "Minecraft.CustomComponentInvalidRegistryError.prototype.constructor",
+        "Minecraft.CustomComponentNameError",
+        "Minecraft.CustomComponentNameError.prototype",
+        "Minecraft.CustomComponentNameError.prototype.[[Prototype]]",
+        "Minecraft.CustomComponentNameError.prototype.constructor",
+        "Minecraft.CustomComponentNameError.prototype.reason.[[Get]]",
+        "Minecraft.CustomComponentNameErrorReason",
+        "Minecraft.CustomComponentNameErrorReason.DisallowedNamespace",
+        "Minecraft.CustomComponentNameErrorReason.NoNamespace",
         "Minecraft.DataDrivenEntityTriggerAfterEvent",
         "Minecraft.DataDrivenEntityTriggerAfterEvent.prototype",
         "Minecraft.DataDrivenEntityTriggerAfterEvent.prototype.constructor",
@@ -29502,7 +29901,6 @@
         "Minecraft.Entity.prototype.constructor",
         "Minecraft.Entity.prototype.dimension.[[Get]]",
         "Minecraft.Entity.prototype.extinguishFire",
-        "Minecraft.Entity.prototype.fallDistance.[[Get]]",
         "Minecraft.Entity.prototype.getBlockFromViewDirection",
         "Minecraft.Entity.prototype.getComponent",
         "Minecraft.Entity.prototype.getComponents",
@@ -29532,7 +29930,6 @@
         "Minecraft.Entity.prototype.isSwimming.[[Get]]",
         "Minecraft.Entity.prototype.isValid",
         "Minecraft.Entity.prototype.kill",
-        "Minecraft.Entity.prototype.lifetimeState.[[Get]]",
         "Minecraft.Entity.prototype.location.[[Get]]",
         "Minecraft.Entity.prototype.matches",
         "Minecraft.Entity.prototype.nameTag.[[Get]]",
@@ -29988,13 +30385,16 @@
         "Minecraft.EntityLeashableComponent.componentId",
         "Minecraft.EntityLeashableComponent.prototype",
         "Minecraft.EntityLeashableComponent.prototype.[[Prototype]]",
+        "Minecraft.EntityLeashableComponent.prototype.canBeStolen.[[Get]]",
         "Minecraft.EntityLeashableComponent.prototype.constructor",
-        "Minecraft.EntityLeashableComponent.prototype.leash",
+        "Minecraft.EntityLeashableComponent.prototype.hardDistance.[[Get]]",
+        "Minecraft.EntityLeashableComponent.prototype.isLeashed.[[Get]]",
+        "Minecraft.EntityLeashableComponent.prototype.leashHolder.[[Get]]",
+        "Minecraft.EntityLeashableComponent.prototype.leashHolderEntityId.[[Get]]",
+        "Minecraft.EntityLeashableComponent.prototype.leashTo",
+        "Minecraft.EntityLeashableComponent.prototype.maxDistance.[[Get]]",
         "Minecraft.EntityLeashableComponent.prototype.softDistance.[[Get]]",
         "Minecraft.EntityLeashableComponent.prototype.unleash",
-        "Minecraft.EntityLifetimeState",
-        "Minecraft.EntityLifetimeState.Loaded",
-        "Minecraft.EntityLifetimeState.Unloaded",
         "Minecraft.EntityLoadAfterEvent",
         "Minecraft.EntityLoadAfterEvent.prototype",
         "Minecraft.EntityLoadAfterEvent.prototype.constructor",
@@ -30344,6 +30744,7 @@
         "Minecraft.EntityWantsJockeyComponent.prototype.[[Prototype]]",
         "Minecraft.EntityWantsJockeyComponent.prototype.constructor",
         "Minecraft.EquipmentSlot",
+        "Minecraft.EquipmentSlot.Body",
         "Minecraft.EquipmentSlot.Chest",
         "Minecraft.EquipmentSlot.Feet",
         "Minecraft.EquipmentSlot.Head",
@@ -30648,6 +31049,7 @@
         "Minecraft.ItemComponentTypes.Durability",
         "Minecraft.ItemComponentTypes.Enchantable",
         "Minecraft.ItemComponentTypes.Food",
+        "Minecraft.ItemComponentTypes.Potion",
         "Minecraft.ItemComponentUseEvent",
         "Minecraft.ItemComponentUseEvent.prototype",
         "Minecraft.ItemComponentUseEvent.prototype.constructor",
@@ -30675,10 +31077,6 @@
         "Minecraft.ItemCustomComponentAlreadyRegisteredError.prototype",
         "Minecraft.ItemCustomComponentAlreadyRegisteredError.prototype.[[Prototype]]",
         "Minecraft.ItemCustomComponentAlreadyRegisteredError.prototype.constructor",
-        "Minecraft.ItemCustomComponentNameError",
-        "Minecraft.ItemCustomComponentNameError.prototype",
-        "Minecraft.ItemCustomComponentNameError.prototype.[[Prototype]]",
-        "Minecraft.ItemCustomComponentNameError.prototype.constructor",
         "Minecraft.ItemCustomComponentReloadNewComponentError",
         "Minecraft.ItemCustomComponentReloadNewComponentError.prototype",
         "Minecraft.ItemCustomComponentReloadNewComponentError.prototype.[[Prototype]]",
@@ -30731,6 +31129,15 @@
         "Minecraft.ItemLockMode.inventory",
         "Minecraft.ItemLockMode.none",
         "Minecraft.ItemLockMode.slot",
+        "Minecraft.ItemPotionComponent",
+        "Minecraft.ItemPotionComponent.[[Prototype]]",
+        "Minecraft.ItemPotionComponent.componentId",
+        "Minecraft.ItemPotionComponent.prototype",
+        "Minecraft.ItemPotionComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemPotionComponent.prototype.constructor",
+        "Minecraft.ItemPotionComponent.prototype.potionEffectType.[[Get]]",
+        "Minecraft.ItemPotionComponent.prototype.potionLiquidType.[[Get]]",
+        "Minecraft.ItemPotionComponent.prototype.potionModifierType.[[Get]]",
         "Minecraft.ItemReleaseUseAfterEvent",
         "Minecraft.ItemReleaseUseAfterEvent.prototype",
         "Minecraft.ItemReleaseUseAfterEvent.prototype.constructor",
@@ -30743,6 +31150,7 @@
         "Minecraft.ItemReleaseUseAfterEventSignal.prototype.subscribe",
         "Minecraft.ItemReleaseUseAfterEventSignal.prototype.unsubscribe",
         "Minecraft.ItemStack",
+        "Minecraft.ItemStack.createPotion",
         "Minecraft.ItemStack.prototype",
         "Minecraft.ItemStack.prototype.amount.[[Get]]",
         "Minecraft.ItemStack.prototype.amount.[[Set]]",
@@ -31221,6 +31629,24 @@
         "Minecraft.PlayerSpawnAfterEventSignal.prototype",
         "Minecraft.PlayerSpawnAfterEventSignal.prototype.[[Prototype]]",
         "Minecraft.PlayerSpawnAfterEventSignal.prototype.constructor",
+        "Minecraft.PotionEffectType",
+        "Minecraft.PotionEffectType.prototype",
+        "Minecraft.PotionEffectType.prototype.constructor",
+        "Minecraft.PotionEffectType.prototype.id.[[Get]]",
+        "Minecraft.PotionLiquidType",
+        "Minecraft.PotionLiquidType.prototype",
+        "Minecraft.PotionLiquidType.prototype.constructor",
+        "Minecraft.PotionLiquidType.prototype.id.[[Get]]",
+        "Minecraft.PotionModifierType",
+        "Minecraft.PotionModifierType.prototype",
+        "Minecraft.PotionModifierType.prototype.constructor",
+        "Minecraft.PotionModifierType.prototype.id.[[Get]]",
+        "Minecraft.Potions",
+        "Minecraft.Potions.getPotionEffectType",
+        "Minecraft.Potions.getPotionLiquidType",
+        "Minecraft.Potions.getPotionModifierType",
+        "Minecraft.Potions.prototype",
+        "Minecraft.Potions.prototype.constructor",
         "Minecraft.PressurePlatePopAfterEvent",
         "Minecraft.PressurePlatePopAfterEvent.[[Prototype]]",
         "Minecraft.PressurePlatePopAfterEvent.prototype",
@@ -31716,6 +32142,12 @@
         "MinecraftUI.ModalFormResponse.prototype.constructor",
         "MinecraftUI.ModalFormResponse.prototype.formValues.[[Get]]",
         "MinecraftUI.Symbol(Symbol.toStringTag)",
+        "MinecraftUI.UIManager",
+        "MinecraftUI.UIManager.prototype",
+        "MinecraftUI.UIManager.prototype.closeAllForms",
+        "MinecraftUI.UIManager.prototype.constructor",
+        "MinecraftUI.uiManager",
+        "MinecraftUI.uiManager.[[Prototype]]",
         "NaN",
         "Number",
         "Number.EPSILON",
@@ -33025,6 +33457,73 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:andesite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "andesite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:andesite_stairs": {
             "properties": [
@@ -36592,6 +37091,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:brick_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:brick_slab",
+            "canBeWaterlogged": false,
+        },
         "minecraft:brick_slab": {
             "properties": [
                 {
@@ -38758,6 +39324,37 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:chiseled_stone_bricks": {
+            "properties": [
+                {
+                    "name": "stone_brick_type",
+                    "validValues": [
+                        "default",
+                        "mossy",
+                        "cracked",
+                        "chiseled",
+                        "smooth",
+                    ],
+                    "defaultValue": "chiseled",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_brick_type": "default",
+                },
+                {
+                    "stone_brick_type": "mossy",
+                },
+                {
+                    "stone_brick_type": "cracked",
+                },
+                {
+                    "stone_brick_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:chiseled_tuff": {
             "properties": [],
             "invalidStates": [],
@@ -39010,6 +39607,73 @@
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:cobblestone_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "cobblestone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:cobblestone_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:cobblestone_slab": {
@@ -39689,6 +40353,37 @@
         "minecraft:cracked_polished_blackstone_bricks": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:cracked_stone_bricks": {
+            "properties": [
+                {
+                    "name": "stone_brick_type",
+                    "validValues": [
+                        "default",
+                        "mossy",
+                        "cracked",
+                        "chiseled",
+                        "smooth",
+                    ],
+                    "defaultValue": "cracked",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_brick_type": "default",
+                },
+                {
+                    "stone_brick_type": "mossy",
+                },
+                {
+                    "stone_brick_type": "chiseled",
+                },
+                {
+                    "stone_brick_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -41480,6 +42175,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:dark_prismarine_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "prismarine_dark",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:dark_prismarine_stairs": {
             "properties": [
                 {
@@ -42706,6 +43468,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:diorite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "diorite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:diorite_stairs": {
             "properties": [
                 {
@@ -42811,93 +43640,6 @@
             "itemId": "minecraft:cut_copper_slab",
             "canBeWaterlogged": false,
         },
-        "minecraft:double_stone_block_slab": {
-            "properties": [
-                {
-                    "name": "minecraft:vertical_half",
-                    "validValues": [
-                        "bottom",
-                        "top",
-                    ],
-                    "defaultValue": "bottom",
-                },
-                {
-                    "name": "stone_slab_type",
-                    "validValues": [
-                        "smooth_stone",
-                        "sandstone",
-                        "wood",
-                        "cobblestone",
-                        "brick",
-                        "stone_brick",
-                        "quartz",
-                        "nether_brick",
-                    ],
-                    "defaultValue": "smooth_stone",
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [
-                {
-                    "minecraft:vertical_half": "bottom",
-                    "top_slot_bit": true,
-                },
-                {
-                    "minecraft:vertical_half": "top",
-                    "top_slot_bit": false,
-                },
-            ],
-            "itemId": {
-                "minecraft:smooth_stone_slab": [
-                    {
-                        "stone_slab_type": "smooth_stone",
-                    },
-                ],
-                "minecraft:sandstone_slab": [
-                    {
-                        "stone_slab_type": "sandstone",
-                    },
-                ],
-                "minecraft:petrified_oak_slab": [
-                    {
-                        "stone_slab_type": "wood",
-                    },
-                ],
-                "minecraft:cobblestone_slab": [
-                    {
-                        "stone_slab_type": "cobblestone",
-                    },
-                ],
-                "minecraft:brick_slab": [
-                    {
-                        "stone_slab_type": "brick",
-                    },
-                ],
-                "minecraft:stone_brick_slab": [
-                    {
-                        "stone_slab_type": "stone_brick",
-                    },
-                ],
-                "minecraft:quartz_slab": [
-                    {
-                        "stone_slab_type": "quartz",
-                    },
-                ],
-                "minecraft:nether_brick_slab": [
-                    {
-                        "stone_slab_type": "nether_brick",
-                    },
-                ],
-            },
-            "canBeWaterlogged": false,
-        },
         "minecraft:double_stone_block_slab2": {
             "properties": [
                 {
@@ -42941,7 +43683,48 @@
                     "top_slot_bit": false,
                 },
             ],
-            "itemId": "minecraft:stone_block_slab2",
+            "itemId": {
+                "minecraft:red_sandstone_slab": [
+                    {
+                        "stone_slab_type_2": "red_sandstone",
+                    },
+                ],
+                "minecraft:purpur_slab": [
+                    {
+                        "stone_slab_type_2": "purpur",
+                    },
+                ],
+                "minecraft:prismarine_slab": [
+                    {
+                        "stone_slab_type_2": "prismarine_rough",
+                    },
+                ],
+                "minecraft:dark_prismarine_slab": [
+                    {
+                        "stone_slab_type_2": "prismarine_dark",
+                    },
+                ],
+                "minecraft:prismarine_brick_slab": [
+                    {
+                        "stone_slab_type_2": "prismarine_brick",
+                    },
+                ],
+                "minecraft:mossy_cobblestone_slab": [
+                    {
+                        "stone_slab_type_2": "mossy_cobblestone",
+                    },
+                ],
+                "minecraft:smooth_sandstone_slab": [
+                    {
+                        "stone_slab_type_2": "smooth_sandstone",
+                    },
+                ],
+                "minecraft:red_nether_brick_slab": [
+                    {
+                        "stone_slab_type_2": "red_nether_brick",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:double_stone_block_slab3": {
@@ -42987,7 +43770,48 @@
                     "top_slot_bit": false,
                 },
             ],
-            "itemId": "minecraft:stone_block_slab3",
+            "itemId": {
+                "minecraft:end_stone_brick_slab": [
+                    {
+                        "stone_slab_type_3": "end_stone_brick",
+                    },
+                ],
+                "minecraft:smooth_red_sandstone_slab": [
+                    {
+                        "stone_slab_type_3": "smooth_red_sandstone",
+                    },
+                ],
+                "minecraft:polished_andesite_slab": [
+                    {
+                        "stone_slab_type_3": "polished_andesite",
+                    },
+                ],
+                "minecraft:andesite_slab": [
+                    {
+                        "stone_slab_type_3": "andesite",
+                    },
+                ],
+                "minecraft:diorite_slab": [
+                    {
+                        "stone_slab_type_3": "diorite",
+                    },
+                ],
+                "minecraft:polished_diorite_slab": [
+                    {
+                        "stone_slab_type_3": "polished_diorite",
+                    },
+                ],
+                "minecraft:granite_slab": [
+                    {
+                        "stone_slab_type_3": "granite",
+                    },
+                ],
+                "minecraft:polished_granite_slab": [
+                    {
+                        "stone_slab_type_3": "polished_granite",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:double_stone_block_slab4": {
@@ -43959,6 +44783,73 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:end_stone_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "end_stone_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:ender_chest": {
             "properties": [
@@ -44995,6 +45886,73 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:granite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "granite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:granite_stairs": {
             "properties": [
@@ -49037,6 +49995,111 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:infested_chiseled_stone_bricks": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "chiseled_stone_brick",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "stone",
+                },
+                {
+                    "monster_egg_stone_type": "cobblestone",
+                },
+                {
+                    "monster_egg_stone_type": "stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "mossy_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "cracked_stone_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:infested_cobblestone": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "cobblestone",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "stone",
+                },
+                {
+                    "monster_egg_stone_type": "stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "mossy_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "cracked_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "chiseled_stone_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:infested_cracked_stone_bricks": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "cracked_stone_brick",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "stone",
+                },
+                {
+                    "monster_egg_stone_type": "cobblestone",
+                },
+                {
+                    "monster_egg_stone_type": "stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "mossy_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "chiseled_stone_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:infested_deepslate": {
             "properties": [
                 {
@@ -49050,6 +50113,111 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:infested_mossy_stone_bricks": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "mossy_stone_brick",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "stone",
+                },
+                {
+                    "monster_egg_stone_type": "cobblestone",
+                },
+                {
+                    "monster_egg_stone_type": "stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "cracked_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "chiseled_stone_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:infested_stone": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "stone",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "cobblestone",
+                },
+                {
+                    "monster_egg_stone_type": "stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "mossy_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "cracked_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "chiseled_stone_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:infested_stone_bricks": {
+            "properties": [
+                {
+                    "name": "monster_egg_stone_type",
+                    "validValues": [
+                        "stone",
+                        "cobblestone",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "cracked_stone_brick",
+                        "chiseled_stone_brick",
+                    ],
+                    "defaultValue": "stone_brick",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "monster_egg_stone_type": "stone",
+                },
+                {
+                    "monster_egg_stone_type": "cobblestone",
+                },
+                {
+                    "monster_egg_stone_type": "mossy_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "cracked_stone_brick",
+                },
+                {
+                    "monster_egg_stone_type": "chiseled_stone_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -54104,25 +55272,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
-        "minecraft:monster_egg": {
-            "properties": [
-                {
-                    "name": "monster_egg_stone_type",
-                    "validValues": [
-                        "stone",
-                        "cobblestone",
-                        "stone_brick",
-                        "mossy_stone_brick",
-                        "cracked_stone_brick",
-                        "chiseled_stone_brick",
-                    ],
-                    "defaultValue": "stone",
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:moss_block": {
             "properties": [],
             "invalidStates": [],
@@ -54140,6 +55289,73 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:mossy_cobblestone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "mossy_cobblestone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:mossy_cobblestone_stairs": {
             "properties": [
@@ -54190,6 +55406,37 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:mossy_stone_bricks": {
+            "properties": [
+                {
+                    "name": "stone_brick_type",
+                    "validValues": [
+                        "default",
+                        "mossy",
+                        "cracked",
+                        "chiseled",
+                        "smooth",
+                    ],
+                    "defaultValue": "mossy",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_brick_type": "default",
+                },
+                {
+                    "stone_brick_type": "cracked",
+                },
+                {
+                    "stone_brick_type": "chiseled",
+                },
+                {
+                    "stone_brick_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
         },
         "minecraft:moving_block": {
             "properties": [],
@@ -54374,6 +55621,73 @@
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:nether_brick_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "nether_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:nether_brick_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:nether_brick_fence": {
@@ -56286,6 +57600,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:petrified_oak_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "wood",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:petrified_oak_slab",
+            "canBeWaterlogged": false,
+        },
         "minecraft:petrified_oak_slab": {
             "properties": [
                 {
@@ -57310,6 +58691,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:polished_andesite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "polished_andesite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:polished_andesite_stairs": {
             "properties": [
                 {
@@ -57884,6 +59332,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:polished_diorite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "polished_diorite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:polished_diorite_stairs": {
             "properties": [
                 {
@@ -57947,6 +59462,73 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:polished_granite_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "polished_granite",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "smooth_red_sandstone",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:polished_granite_stairs": {
             "properties": [
@@ -58376,6 +59958,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:prismarine_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "prismarine_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:prismarine_bricks_stairs": {
             "properties": [
                 {
@@ -58398,6 +60047,73 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:prismarine_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "prismarine_rough",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -59220,6 +60936,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:purpur_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "purpur",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:purpur_stairs": {
             "properties": [
                 {
@@ -59275,6 +61058,73 @@
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:quartz_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "quartz",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:quartz_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:quartz_ore": {
@@ -59794,6 +61644,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:red_nether_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "red_nether_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:red_nether_brick_stairs": {
             "properties": [
                 {
@@ -59835,6 +61752,73 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:red_sandstone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "red_sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "smooth_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:red_sandstone_stairs": {
             "properties": [
@@ -60516,6 +62500,73 @@
             ],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:sandstone_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:sandstone_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:sandstone_slab": {
@@ -61278,6 +63329,73 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:smooth_red_sandstone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_3",
+                    "validValues": [
+                        "end_stone_brick",
+                        "smooth_red_sandstone",
+                        "polished_andesite",
+                        "andesite",
+                        "diorite",
+                        "polished_diorite",
+                        "granite",
+                        "polished_granite",
+                    ],
+                    "defaultValue": "smooth_red_sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_3": "end_stone_brick",
+                },
+                {
+                    "stone_slab_type_3": "polished_andesite",
+                },
+                {
+                    "stone_slab_type_3": "andesite",
+                },
+                {
+                    "stone_slab_type_3": "diorite",
+                },
+                {
+                    "stone_slab_type_3": "polished_diorite",
+                },
+                {
+                    "stone_slab_type_3": "granite",
+                },
+                {
+                    "stone_slab_type_3": "polished_granite",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:smooth_red_sandstone_stairs": {
             "properties": [
                 {
@@ -61300,6 +63418,73 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:smooth_sandstone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_2",
+                    "validValues": [
+                        "red_sandstone",
+                        "purpur",
+                        "prismarine_rough",
+                        "prismarine_dark",
+                        "prismarine_brick",
+                        "mossy_cobblestone",
+                        "smooth_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "smooth_sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_2": "red_sandstone",
+                },
+                {
+                    "stone_slab_type_2": "purpur",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_rough",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_dark",
+                },
+                {
+                    "stone_slab_type_2": "prismarine_brick",
+                },
+                {
+                    "stone_slab_type_2": "mossy_cobblestone",
+                },
+                {
+                    "stone_slab_type_2": "red_nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -61332,6 +63517,73 @@
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:smooth_stone_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "smooth_stone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "stone_brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:smooth_stone_slab",
             "canBeWaterlogged": false,
         },
         "minecraft:smooth_stone_slab": {
@@ -62424,98 +64676,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:stone_block_slab2": {
-            "properties": [
-                {
-                    "name": "minecraft:vertical_half",
-                    "validValues": [
-                        "bottom",
-                        "top",
-                    ],
-                    "defaultValue": "bottom",
-                },
-                {
-                    "name": "stone_slab_type_2",
-                    "validValues": [
-                        "red_sandstone",
-                        "purpur",
-                        "prismarine_rough",
-                        "prismarine_dark",
-                        "prismarine_brick",
-                        "mossy_cobblestone",
-                        "smooth_sandstone",
-                        "red_nether_brick",
-                    ],
-                    "defaultValue": "red_sandstone",
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [
-                {
-                    "minecraft:vertical_half": "bottom",
-                    "top_slot_bit": true,
-                },
-                {
-                    "minecraft:vertical_half": "top",
-                    "top_slot_bit": false,
-                },
-            ],
-            "itemId": "<same>",
-            "canBeWaterlogged": true,
-        },
-        "minecraft:stone_block_slab3": {
-            "properties": [
-                {
-                    "name": "minecraft:vertical_half",
-                    "validValues": [
-                        "bottom",
-                        "top",
-                    ],
-                    "defaultValue": "bottom",
-                },
-                {
-                    "name": "stone_slab_type_3",
-                    "validValues": [
-                        "end_stone_brick",
-                        "smooth_red_sandstone",
-                        "polished_andesite",
-                        "andesite",
-                        "diorite",
-                        "polished_diorite",
-                        "granite",
-                        "polished_granite",
-                    ],
-                    "defaultValue": "end_stone_brick",
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [
-                {
-                    "minecraft:vertical_half": "bottom",
-                    "top_slot_bit": true,
-                },
-                {
-                    "minecraft:vertical_half": "top",
-                    "top_slot_bit": false,
-                },
-            ],
-            "itemId": "<same>",
-            "canBeWaterlogged": true,
-        },
         "minecraft:stone_block_slab4": {
             "properties": [
                 {
@@ -62558,6 +64718,73 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:stone_brick_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type",
+                    "validValues": [
+                        "smooth_stone",
+                        "sandstone",
+                        "wood",
+                        "cobblestone",
+                        "brick",
+                        "stone_brick",
+                        "quartz",
+                        "nether_brick",
+                    ],
+                    "defaultValue": "stone_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type": "smooth_stone",
+                },
+                {
+                    "stone_slab_type": "sandstone",
+                },
+                {
+                    "stone_slab_type": "wood",
+                },
+                {
+                    "stone_slab_type": "cobblestone",
+                },
+                {
+                    "stone_slab_type": "brick",
+                },
+                {
+                    "stone_slab_type": "quartz",
+                },
+                {
+                    "stone_slab_type": "nether_brick",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "minecraft:stone_brick_slab",
+            "canBeWaterlogged": false,
         },
         "minecraft:stone_brick_slab": {
             "properties": [
@@ -62651,6 +64878,37 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:stone_bricks": {
+            "properties": [
+                {
+                    "name": "stone_brick_type",
+                    "validValues": [
+                        "default",
+                        "mossy",
+                        "cracked",
+                        "chiseled",
+                        "smooth",
+                    ],
+                    "defaultValue": "default",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_brick_type": "mossy",
+                },
+                {
+                    "stone_brick_type": "cracked",
+                },
+                {
+                    "stone_brick_type": "chiseled",
+                },
+                {
+                    "stone_brick_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:stone_button": {
             "properties": [
                 {
@@ -62731,24 +64989,6 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
-        },
-        "minecraft:stonebrick": {
-            "properties": [
-                {
-                    "name": "stone_brick_type",
-                    "validValues": [
-                        "default",
-                        "mossy",
-                        "cracked",
-                        "chiseled",
-                        "smooth",
-                    ],
-                    "defaultValue": "default",
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
         },
         "minecraft:stonecutter": {
             "properties": [],
@@ -69415,6 +71655,7 @@
                 "defaultValue": {
                     "minecraft:acacia_double_slab": "bottom",
                     "minecraft:acacia_slab": "bottom",
+                    "minecraft:andesite_slab": "bottom",
                     "minecraft:bamboo_double_slab": "bottom",
                     "minecraft:bamboo_mosaic_double_slab": "bottom",
                     "minecraft:bamboo_mosaic_slab": "bottom",
@@ -69423,56 +71664,76 @@
                     "minecraft:birch_slab": "bottom",
                     "minecraft:blackstone_double_slab": "bottom",
                     "minecraft:blackstone_slab": "bottom",
+                    "minecraft:brick_double_slab": "bottom",
                     "minecraft:brick_slab": "bottom",
                     "minecraft:cherry_double_slab": "bottom",
                     "minecraft:cherry_slab": "bottom",
                     "minecraft:cobbled_deepslate_double_slab": "bottom",
                     "minecraft:cobbled_deepslate_slab": "bottom",
+                    "minecraft:cobblestone_double_slab": "bottom",
                     "minecraft:cobblestone_slab": "bottom",
                     "minecraft:crimson_double_slab": "bottom",
                     "minecraft:crimson_slab": "bottom",
                     "minecraft:cut_copper_slab": "bottom",
                     "minecraft:dark_oak_double_slab": "bottom",
                     "minecraft:dark_oak_slab": "bottom",
+                    "minecraft:dark_prismarine_slab": "bottom",
                     "minecraft:deepslate_brick_double_slab": "bottom",
                     "minecraft:deepslate_brick_slab": "bottom",
                     "minecraft:deepslate_tile_double_slab": "bottom",
                     "minecraft:deepslate_tile_slab": "bottom",
+                    "minecraft:diorite_slab": "bottom",
                     "minecraft:double_cut_copper_slab": "bottom",
-                    "minecraft:double_stone_block_slab": "bottom",
                     "minecraft:double_stone_block_slab2": "bottom",
                     "minecraft:double_stone_block_slab3": "bottom",
                     "minecraft:double_stone_block_slab4": "bottom",
+                    "minecraft:end_stone_brick_slab": "bottom",
                     "minecraft:exposed_cut_copper_slab": "bottom",
                     "minecraft:exposed_double_cut_copper_slab": "bottom",
+                    "minecraft:granite_slab": "bottom",
                     "minecraft:jungle_double_slab": "bottom",
                     "minecraft:jungle_slab": "bottom",
                     "minecraft:mangrove_double_slab": "bottom",
                     "minecraft:mangrove_slab": "bottom",
+                    "minecraft:mossy_cobblestone_slab": "bottom",
                     "minecraft:mud_brick_double_slab": "bottom",
                     "minecraft:mud_brick_slab": "bottom",
+                    "minecraft:nether_brick_double_slab": "bottom",
                     "minecraft:nether_brick_slab": "bottom",
                     "minecraft:oak_double_slab": "bottom",
                     "minecraft:oak_slab": "bottom",
                     "minecraft:oxidized_cut_copper_slab": "bottom",
                     "minecraft:oxidized_double_cut_copper_slab": "bottom",
+                    "minecraft:petrified_oak_double_slab": "bottom",
                     "minecraft:petrified_oak_slab": "bottom",
+                    "minecraft:polished_andesite_slab": "bottom",
                     "minecraft:polished_blackstone_brick_double_slab": "bottom",
                     "minecraft:polished_blackstone_brick_slab": "bottom",
                     "minecraft:polished_blackstone_double_slab": "bottom",
                     "minecraft:polished_blackstone_slab": "bottom",
                     "minecraft:polished_deepslate_double_slab": "bottom",
                     "minecraft:polished_deepslate_slab": "bottom",
+                    "minecraft:polished_diorite_slab": "bottom",
+                    "minecraft:polished_granite_slab": "bottom",
                     "minecraft:polished_tuff_double_slab": "bottom",
                     "minecraft:polished_tuff_slab": "bottom",
+                    "minecraft:prismarine_brick_slab": "bottom",
+                    "minecraft:prismarine_slab": "bottom",
+                    "minecraft:purpur_slab": "bottom",
+                    "minecraft:quartz_double_slab": "bottom",
                     "minecraft:quartz_slab": "bottom",
+                    "minecraft:red_nether_brick_slab": "bottom",
+                    "minecraft:red_sandstone_slab": "bottom",
+                    "minecraft:sandstone_double_slab": "bottom",
                     "minecraft:sandstone_slab": "bottom",
+                    "minecraft:smooth_red_sandstone_slab": "bottom",
+                    "minecraft:smooth_sandstone_slab": "bottom",
+                    "minecraft:smooth_stone_double_slab": "bottom",
                     "minecraft:smooth_stone_slab": "bottom",
                     "minecraft:spruce_double_slab": "bottom",
                     "minecraft:spruce_slab": "bottom",
-                    "minecraft:stone_block_slab2": "bottom",
-                    "minecraft:stone_block_slab3": "bottom",
                     "minecraft:stone_block_slab4": "bottom",
+                    "minecraft:stone_brick_double_slab": "bottom",
                     "minecraft:stone_brick_slab": "bottom",
                     "minecraft:tuff_brick_double_slab": "bottom",
                     "minecraft:tuff_brick_slab": "bottom",
@@ -69521,7 +71782,12 @@
                     "chiseled_stone_brick",
                 ],
                 "defaultValue": {
-                    "minecraft:monster_egg": "stone",
+                    "minecraft:infested_chiseled_stone_bricks": "chiseled_stone_brick",
+                    "minecraft:infested_cobblestone": "cobblestone",
+                    "minecraft:infested_cracked_stone_bricks": "cracked_stone_brick",
+                    "minecraft:infested_mossy_stone_bricks": "mossy_stone_brick",
+                    "minecraft:infested_stone": "stone",
+                    "minecraft:infested_stone_bricks": "stone_brick",
                 },
             },
         ],
@@ -70170,7 +72436,10 @@
                     "smooth",
                 ],
                 "defaultValue": {
-                    "minecraft:stonebrick": "default",
+                    "minecraft:chiseled_stone_bricks": "chiseled",
+                    "minecraft:cracked_stone_bricks": "cracked",
+                    "minecraft:mossy_stone_bricks": "mossy",
+                    "minecraft:stone_bricks": "default",
                 },
             },
         ],
@@ -70187,14 +72456,21 @@
                     "nether_brick",
                 ],
                 "defaultValue": {
+                    "minecraft:brick_double_slab": "brick",
                     "minecraft:brick_slab": "brick",
+                    "minecraft:cobblestone_double_slab": "cobblestone",
                     "minecraft:cobblestone_slab": "cobblestone",
-                    "minecraft:double_stone_block_slab": "smooth_stone",
+                    "minecraft:nether_brick_double_slab": "nether_brick",
                     "minecraft:nether_brick_slab": "nether_brick",
+                    "minecraft:petrified_oak_double_slab": "wood",
                     "minecraft:petrified_oak_slab": "wood",
+                    "minecraft:quartz_double_slab": "quartz",
                     "minecraft:quartz_slab": "quartz",
+                    "minecraft:sandstone_double_slab": "sandstone",
                     "minecraft:sandstone_slab": "sandstone",
+                    "minecraft:smooth_stone_double_slab": "smooth_stone",
                     "minecraft:smooth_stone_slab": "smooth_stone",
+                    "minecraft:stone_brick_double_slab": "stone_brick",
                     "minecraft:stone_brick_slab": "stone_brick",
                 },
             },
@@ -70212,8 +72488,15 @@
                     "red_nether_brick",
                 ],
                 "defaultValue": {
+                    "minecraft:dark_prismarine_slab": "prismarine_dark",
                     "minecraft:double_stone_block_slab2": "red_sandstone",
-                    "minecraft:stone_block_slab2": "red_sandstone",
+                    "minecraft:mossy_cobblestone_slab": "mossy_cobblestone",
+                    "minecraft:prismarine_brick_slab": "prismarine_brick",
+                    "minecraft:prismarine_slab": "prismarine_rough",
+                    "minecraft:purpur_slab": "purpur",
+                    "minecraft:red_nether_brick_slab": "red_nether_brick",
+                    "minecraft:red_sandstone_slab": "red_sandstone",
+                    "minecraft:smooth_sandstone_slab": "smooth_sandstone",
                 },
             },
         ],
@@ -70230,8 +72513,15 @@
                     "polished_granite",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_slab": "andesite",
+                    "minecraft:diorite_slab": "diorite",
                     "minecraft:double_stone_block_slab3": "end_stone_brick",
-                    "minecraft:stone_block_slab3": "end_stone_brick",
+                    "minecraft:end_stone_brick_slab": "end_stone_brick",
+                    "minecraft:granite_slab": "granite",
+                    "minecraft:polished_andesite_slab": "polished_andesite",
+                    "minecraft:polished_diorite_slab": "polished_diorite",
+                    "minecraft:polished_granite_slab": "polished_granite",
+                    "minecraft:smooth_red_sandstone_slab": "smooth_red_sandstone",
                 },
             },
         ],
@@ -70368,6 +72658,7 @@
                 "defaultValue": {
                     "minecraft:acacia_double_slab": false,
                     "minecraft:acacia_slab": false,
+                    "minecraft:andesite_slab": false,
                     "minecraft:bamboo_double_slab": false,
                     "minecraft:bamboo_mosaic_double_slab": false,
                     "minecraft:bamboo_mosaic_slab": false,
@@ -70376,54 +72667,74 @@
                     "minecraft:birch_slab": false,
                     "minecraft:blackstone_double_slab": false,
                     "minecraft:blackstone_slab": false,
+                    "minecraft:brick_double_slab": false,
                     "minecraft:brick_slab": false,
                     "minecraft:cherry_double_slab": false,
                     "minecraft:cherry_slab": false,
                     "minecraft:cobbled_deepslate_double_slab": false,
                     "minecraft:cobbled_deepslate_slab": false,
+                    "minecraft:cobblestone_double_slab": false,
                     "minecraft:cobblestone_slab": false,
                     "minecraft:crimson_double_slab": false,
                     "minecraft:crimson_slab": false,
                     "minecraft:cut_copper_slab": false,
                     "minecraft:dark_oak_double_slab": false,
                     "minecraft:dark_oak_slab": false,
+                    "minecraft:dark_prismarine_slab": false,
                     "minecraft:deepslate_brick_double_slab": false,
                     "minecraft:deepslate_brick_slab": false,
                     "minecraft:deepslate_tile_double_slab": false,
                     "minecraft:deepslate_tile_slab": false,
+                    "minecraft:diorite_slab": false,
                     "minecraft:double_cut_copper_slab": false,
-                    "minecraft:double_stone_block_slab": false,
                     "minecraft:double_stone_block_slab2": false,
                     "minecraft:double_stone_block_slab3": false,
                     "minecraft:double_stone_block_slab4": false,
+                    "minecraft:end_stone_brick_slab": false,
                     "minecraft:exposed_cut_copper_slab": false,
                     "minecraft:exposed_double_cut_copper_slab": false,
+                    "minecraft:granite_slab": false,
                     "minecraft:jungle_double_slab": false,
                     "minecraft:jungle_slab": false,
                     "minecraft:mangrove_double_slab": false,
                     "minecraft:mangrove_slab": false,
+                    "minecraft:mossy_cobblestone_slab": false,
                     "minecraft:mud_brick_double_slab": false,
                     "minecraft:mud_brick_slab": false,
+                    "minecraft:nether_brick_double_slab": false,
                     "minecraft:nether_brick_slab": false,
                     "minecraft:oak_double_slab": false,
                     "minecraft:oak_slab": false,
                     "minecraft:oxidized_cut_copper_slab": false,
                     "minecraft:oxidized_double_cut_copper_slab": false,
+                    "minecraft:petrified_oak_double_slab": false,
                     "minecraft:petrified_oak_slab": false,
+                    "minecraft:polished_andesite_slab": false,
                     "minecraft:polished_blackstone_brick_double_slab": false,
                     "minecraft:polished_blackstone_brick_slab": false,
                     "minecraft:polished_blackstone_double_slab": false,
                     "minecraft:polished_blackstone_slab": false,
                     "minecraft:polished_deepslate_double_slab": false,
                     "minecraft:polished_deepslate_slab": false,
+                    "minecraft:polished_diorite_slab": false,
+                    "minecraft:polished_granite_slab": false,
+                    "minecraft:prismarine_brick_slab": false,
+                    "minecraft:prismarine_slab": false,
+                    "minecraft:purpur_slab": false,
+                    "minecraft:quartz_double_slab": false,
                     "minecraft:quartz_slab": false,
+                    "minecraft:red_nether_brick_slab": false,
+                    "minecraft:red_sandstone_slab": false,
+                    "minecraft:sandstone_double_slab": false,
                     "minecraft:sandstone_slab": false,
+                    "minecraft:smooth_red_sandstone_slab": false,
+                    "minecraft:smooth_sandstone_slab": false,
+                    "minecraft:smooth_stone_double_slab": false,
                     "minecraft:smooth_stone_slab": false,
                     "minecraft:spruce_double_slab": false,
                     "minecraft:spruce_slab": false,
-                    "minecraft:stone_block_slab2": false,
-                    "minecraft:stone_block_slab3": false,
                     "minecraft:stone_block_slab4": false,
+                    "minecraft:stone_brick_double_slab": false,
                     "minecraft:stone_brick_slab": false,
                     "minecraft:warped_double_slab": false,
                     "minecraft:warped_slab": false,
@@ -71255,21 +73566,32 @@
         "stone": {
             "minecraft:andesite": {},
             "minecraft:brick_block": {},
+            "minecraft:brick_double_slab": {
+                "stone_slab_type": "brick",
+            },
             "minecraft:brick_slab": {
                 "stone_slab_type": "brick",
             },
             "minecraft:cobblestone": {},
+            "minecraft:cobblestone_double_slab": {
+                "stone_slab_type": "cobblestone",
+            },
             "minecraft:cobblestone_slab": {
                 "stone_slab_type": "cobblestone",
             },
             "minecraft:cobblestone_wall": {},
             "minecraft:diorite": {},
-            "minecraft:double_stone_block_slab": {},
             "minecraft:dripstone_block": {},
             "minecraft:granite": {},
             "minecraft:mossy_cobblestone": {},
+            "minecraft:nether_brick_double_slab": {
+                "stone_slab_type": "nether_brick",
+            },
             "minecraft:nether_brick_slab": {
                 "stone_slab_type": "nether_brick",
+            },
+            "minecraft:petrified_oak_double_slab": {
+                "stone_slab_type": "wood",
             },
             "minecraft:petrified_oak_slab": {
                 "stone_slab_type": "wood",
@@ -71277,16 +73599,28 @@
             "minecraft:polished_andesite": {},
             "minecraft:polished_diorite": {},
             "minecraft:polished_granite": {},
+            "minecraft:quartz_double_slab": {
+                "stone_slab_type": "quartz",
+            },
             "minecraft:quartz_slab": {
                 "stone_slab_type": "quartz",
             },
+            "minecraft:sandstone_double_slab": {
+                "stone_slab_type": "sandstone",
+            },
             "minecraft:sandstone_slab": {
                 "stone_slab_type": "sandstone",
+            },
+            "minecraft:smooth_stone_double_slab": {
+                "stone_slab_type": "smooth_stone",
             },
             "minecraft:smooth_stone_slab": {
                 "stone_slab_type": "smooth_stone",
             },
             "minecraft:stone": {},
+            "minecraft:stone_brick_double_slab": {
+                "stone_slab_type": "stone_brick",
+            },
             "minecraft:stone_brick_slab": {
                 "stone_slab_type": "stone_brick",
             },
@@ -71718,6 +74052,9 @@
             "tags": [],
         },
         "minecraft:andesite": {
+            "tags": [],
+        },
+        "minecraft:andesite_slab": {
             "tags": [],
         },
         "minecraft:andesite_stairs": {
@@ -72712,6 +75049,11 @@
         "minecraft:chiseled_polished_blackstone": {
             "tags": [],
         },
+        "minecraft:chiseled_stone_bricks": {
+            "tags": [
+                "minecraft:stone_bricks",
+            ],
+        },
         "minecraft:chiseled_tuff": {
             "tags": [],
         },
@@ -72926,6 +75268,11 @@
         },
         "minecraft:cracked_polished_blackstone_bricks": {
             "tags": [],
+        },
+        "minecraft:cracked_stone_bricks": {
+            "tags": [
+                "minecraft:stone_bricks",
+            ],
         },
         "minecraft:crafter": {
             "tags": [],
@@ -73164,6 +75511,9 @@
                 "minecraft:logs",
                 "minecraft:logs_that_burn",
             ],
+        },
+        "minecraft:dark_prismarine_slab": {
+            "tags": [],
         },
         "minecraft:dark_prismarine_stairs": {
             "tags": [],
@@ -73571,6 +75921,9 @@
         "minecraft:diorite": {
             "tags": [],
         },
+        "minecraft:diorite_slab": {
+            "tags": [],
+        },
         "minecraft:diorite_stairs": {
             "tags": [],
         },
@@ -73772,6 +76125,9 @@
             "tags": [],
         },
         "minecraft:end_stone": {
+            "tags": [],
+        },
+        "minecraft:end_stone_brick_slab": {
             "tags": [],
         },
         "minecraft:ender_chest": {
@@ -74354,6 +76710,9 @@
         "minecraft:granite": {
             "tags": [],
         },
+        "minecraft:granite_slab": {
+            "tags": [],
+        },
         "minecraft:granite_stairs": {
             "tags": [],
         },
@@ -74551,7 +76910,25 @@
         "minecraft:ice": {
             "tags": [],
         },
+        "minecraft:infested_chiseled_stone_bricks": {
+            "tags": [],
+        },
+        "minecraft:infested_cobblestone": {
+            "tags": [],
+        },
+        "minecraft:infested_cracked_stone_bricks": {
+            "tags": [],
+        },
         "minecraft:infested_deepslate": {
+            "tags": [],
+        },
+        "minecraft:infested_mossy_stone_bricks": {
+            "tags": [],
+        },
+        "minecraft:infested_stone": {
+            "tags": [],
+        },
+        "minecraft:infested_stone_bricks": {
             "tags": [],
         },
         "minecraft:ink_sac": {
@@ -75243,6 +77620,9 @@
         "minecraft:lingering_potion": {
             "unstackable": true,
             "tags": [],
+            "components": {
+                "minecraft:potion": {},
+            },
         },
         "minecraft:lit_pumpkin": {
             "tags": [],
@@ -75464,9 +77844,6 @@
             "unstackable": true,
             "tags": [],
         },
-        "minecraft:monster_egg": {
-            "tags": [],
-        },
         "minecraft:mooshroom_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -75481,11 +77858,19 @@
         "minecraft:mossy_cobblestone": {
             "tags": [],
         },
+        "minecraft:mossy_cobblestone_slab": {
+            "tags": [],
+        },
         "minecraft:mossy_cobblestone_stairs": {
             "tags": [],
         },
         "minecraft:mossy_stone_brick_stairs": {
             "tags": [],
+        },
+        "minecraft:mossy_stone_bricks": {
+            "tags": [
+                "minecraft:stone_bricks",
+            ],
         },
         "minecraft:mourner_pottery_sherd": {
             "tags": [
@@ -76265,6 +78650,9 @@
         "minecraft:polished_andesite": {
             "tags": [],
         },
+        "minecraft:polished_andesite_slab": {
+            "tags": [],
+        },
         "minecraft:polished_andesite_stairs": {
             "tags": [],
         },
@@ -76316,10 +78704,16 @@
         "minecraft:polished_diorite": {
             "tags": [],
         },
+        "minecraft:polished_diorite_slab": {
+            "tags": [],
+        },
         "minecraft:polished_diorite_stairs": {
             "tags": [],
         },
         "minecraft:polished_granite": {
+            "tags": [],
+        },
+        "minecraft:polished_granite_slab": {
             "tags": [],
         },
         "minecraft:polished_granite_stairs": {
@@ -76357,12 +78751,18 @@
         "minecraft:potion": {
             "unstackable": true,
             "tags": [],
+            "components": {
+                "minecraft:potion": {},
+            },
         },
         "minecraft:powder_snow_bucket": {
             "unstackable": true,
             "tags": [],
         },
         "minecraft:prismarine": {
+            "tags": [],
+        },
+        "minecraft:prismarine_brick_slab": {
             "tags": [],
         },
         "minecraft:prismarine_bricks_stairs": {
@@ -76372,6 +78772,9 @@
             "tags": [],
         },
         "minecraft:prismarine_shard": {
+            "tags": [],
+        },
+        "minecraft:prismarine_slab": {
             "tags": [],
         },
         "minecraft:prismarine_stairs": {
@@ -76447,6 +78850,9 @@
             ],
         },
         "minecraft:purpur_block": {
+            "tags": [],
+        },
+        "minecraft:purpur_slab": {
             "tags": [],
         },
         "minecraft:purpur_stairs": {
@@ -76567,10 +78973,16 @@
         "minecraft:red_nether_brick": {
             "tags": [],
         },
+        "minecraft:red_nether_brick_slab": {
+            "tags": [],
+        },
         "minecraft:red_nether_brick_stairs": {
             "tags": [],
         },
         "minecraft:red_sandstone": {
+            "tags": [],
+        },
+        "minecraft:red_sandstone_slab": {
             "tags": [],
         },
         "minecraft:red_sandstone_stairs": {
@@ -76863,7 +79275,13 @@
         "minecraft:smooth_quartz_stairs": {
             "tags": [],
         },
+        "minecraft:smooth_red_sandstone_slab": {
+            "tags": [],
+        },
         "minecraft:smooth_red_sandstone_stairs": {
+            "tags": [],
+        },
+        "minecraft:smooth_sandstone_slab": {
             "tags": [],
         },
         "minecraft:smooth_sandstone_stairs": {
@@ -76943,6 +79361,9 @@
         "minecraft:splash_potion": {
             "unstackable": true,
             "tags": [],
+            "components": {
+                "minecraft:potion": {},
+            },
         },
         "minecraft:sponge": {
             "tags": [],
@@ -77076,12 +79497,6 @@
                 },
             },
         },
-        "minecraft:stone_block_slab2": {
-            "tags": [],
-        },
-        "minecraft:stone_block_slab3": {
-            "tags": [],
-        },
         "minecraft:stone_block_slab4": {
             "tags": [],
         },
@@ -77090,6 +79505,11 @@
         },
         "minecraft:stone_brick_stairs": {
             "tags": [],
+        },
+        "minecraft:stone_bricks": {
+            "tags": [
+                "minecraft:stone_bricks",
+            ],
         },
         "minecraft:stone_button": {
             "tags": [],
@@ -77209,11 +79629,6 @@
                     "maxDurability": 131,
                 },
             },
-        },
-        "minecraft:stonebrick": {
-            "tags": [
-                "minecraft:stone_bricks",
-            ],
         },
         "minecraft:stonecutter_block": {
             "tags": [],
@@ -78807,6 +81222,10 @@
         ],
         "minecraft:stone_bricks": [
             "minecraft:stonebrick",
+            "minecraft:chiseled_stone_bricks",
+            "minecraft:cracked_stone_bricks",
+            "minecraft:mossy_stone_bricks",
+            "minecraft:stone_bricks",
         ],
         "minecraft:stone_crafting_materials": [
             "minecraft:blackstone",

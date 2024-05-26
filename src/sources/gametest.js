@@ -894,6 +894,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     const debugProtocol = new QuickJSDebugProtocol(socket);
     const debugSession = new QuickJSDebugSession(debugProtocol);
     const target = { packageVersion };
+    debugSession.resume();
     await evaluateExtractors(cx, target, debugSession);
     await doWSRelatedJobsCached(cx, wsSession, {});
     debugProtocol.close();

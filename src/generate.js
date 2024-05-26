@@ -146,7 +146,7 @@ async function generateBranchedOutputFiles(cx) {
     matchTranslations({
         ...commonOptions,
         name: 'item',
-        originalArray: enums.items.filter((item) => !enums.blocks.includes(item)),
+        originalArray: enums.items.filter((item) => !enums.blocks.includes(item) || (item in userTranslation.item)),
         translationMap: userTranslation.item,
         stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         langKeyPrefix: 'item.',
@@ -155,10 +155,10 @@ async function generateBranchedOutputFiles(cx) {
             const mergedItem = {};
             const { block } = translationResultMaps;
             enums.items.forEach((key) => {
-                if (key in block) {
-                    CommentJSON.assign(mergedItem, block, [key]);
-                } else {
+                if (key in item) {
                     CommentJSON.assign(mergedItem, item, [key]);
+                } else {
+                    CommentJSON.assign(mergedItem, block, [key]);
                 }
             });
             return mergedItem;
@@ -591,6 +591,7 @@ async function generateDocumentationOutputFiles(cx) {
 
 async function generateGameTestOutputFiles(cx) {
     const { version, branch, versionInfo } = cx;
+    if (cx.skipScriptAPI) return;
     const ids = await analyzeGameTestEnumsCached(cx);
     const standardizedTranslation = await fetchStandardizedTranslation();
     const javaEditionLang = (await fetchJavaEditionLangData())[USER_LANG_ID];
@@ -617,7 +618,7 @@ async function generateGameTestOutputFiles(cx) {
     const removePrefix = (s) => s.replace(/^minecraft:/, '');
     const blockIds = Object.keys(ids.blocks);
     const itemIds = Object.keys(ids.items);
-    const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e));
+    const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e) || (removePrefix(e) in userTranslation.item));
     const entityIds = ids.entities;
     matchTranslations({
         ...commonOptions,
@@ -643,10 +644,10 @@ async function generateGameTestOutputFiles(cx) {
             const mergedResult = {};
             const { block } = translationResultMaps;
             itemIds.forEach((key) => {
-                if (key in block) {
-                    CommentJSON.assign(mergedResult, block, [key]);
-                } else {
+                if (removePrefix(key) in result) {
                     mergedResult[key] = result[removePrefix(key)];
+                } else {
+                    CommentJSON.assign(mergedResult, block, [key]);
                 }
             });
             return mergedResult;
