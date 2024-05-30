@@ -348,13 +348,27 @@
                 return { scrollTo, scrollBy };
             }
             const logScroller = secondOrderScroller(logsEl, { f: 1.0, z: 1.5, r: 0.0 });
+            function waitForPageVisible() {
+                if (!document.hidden) {
+                    return Promise.resolve();
+                }
+                return new Promise((resolve) => {
+                    document.addEventListener('visibilitychange', () => {
+                        if (!document.hidden) resolve();
+                    });
+                });
+            }
+            let lastHeartbeatError;
             async function updateStatus() {
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://${controlHost}:19333/heartbeat?since=${logSince}`, 500);
+                    hb = await fetchJSON(`http://${controlHost}:19333/heartbeat?since=${logSince}`, lastHeartbeatError ? 500 : 30000);
                     success = true;
-                } catch (err) { /* ignore */ }
+                    lastHeartbeatError = undefined;
+                } catch (err) {
+                    lastHeartbeatError = err;
+                }
                 const text = [];
                 text.push(`时间：${dateTimeString(new Date())}`);
                 if (hb.version) {
@@ -432,6 +446,7 @@
                     }
                 }
                 statusBarEl.innerHTML = text.join('\n');
+                await waitForPageVisible();
                 setTimeout(updateStatus, success ? Math.min(100, hb.stepSpentAvg ?? 100) : 500);
             }
             async function updateDanmaku() {
@@ -441,6 +456,7 @@
                     danmakuOnline = true;
                 } catch (err) {
                     danmakuOnline = false;
+                    window.lastDanmakuError = err;
                 }
                 if (lines.length) {
                     danmakus.push(...lines);
@@ -456,6 +472,7 @@
                 } else {
                     danmakuEl.classList.add('hidden');
                 }
+                await waitForPageVisible();
                 setTimeout(updateDanmaku, danmakuOnline ? 1000 : 10000);
             }
             function loadVideo() {

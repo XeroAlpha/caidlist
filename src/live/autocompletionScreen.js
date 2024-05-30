@@ -85,7 +85,7 @@ export default class AutocompletionScreen {
                         JSON.stringify({
                             sessionId: this.sessionId,
                             screenshotId: this.screenshotId,
-                            logs: this.logs.slice(since),
+                            logs: this.logs.slice(since, since + 30),
                             livePrompt: this.prompt,
                             ...this.status
                         })

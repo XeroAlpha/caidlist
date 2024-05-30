@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.10.20",
+    "packageVersion": "1.21.10.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -10737,6 +10737,20 @@
                                         "value": {
                                             "type": "object",
                                             "enumerableProperties": {
+                                                "airSupply": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
                                                 "breathesAir": {
                                                     "getter": {
                                                         "type": "function",
@@ -10762,6 +10776,14 @@
                                                     },
                                                 },
                                                 "breathesWater": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "canBreathe": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -10795,14 +10817,6 @@
                                                 },
                                                 "inhaleTime": {
                                                     "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "setAirSupply": {
-                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -11171,6 +11185,13 @@
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:color2",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "CursorInventory": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:cursor_inventory",
                                         },
                                         "readOnly": true,
                                     },
@@ -21584,6 +21605,64 @@
                             },
                             "configurable": false,
                         },
+                        "PlayerCursorInventoryComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerCursorInventoryComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:cursor_inventory",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "clear": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "item": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerCursorInventoryComponent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.EntityComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.EntityComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "PlayerDimensionChangeAfterEvent": {
                             "value": {
                                 "type": "function",
@@ -29994,16 +30073,18 @@
         "Minecraft.EntityBreathableComponent.componentId",
         "Minecraft.EntityBreathableComponent.prototype",
         "Minecraft.EntityBreathableComponent.prototype.[[Prototype]]",
+        "Minecraft.EntityBreathableComponent.prototype.airSupply.[[Get]]",
+        "Minecraft.EntityBreathableComponent.prototype.airSupply.[[Set]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesAir.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesLava.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesSolids.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesWater.[[Get]]",
+        "Minecraft.EntityBreathableComponent.prototype.canBreathe.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.constructor",
         "Minecraft.EntityBreathableComponent.prototype.generatesBubbles.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.getBreatheBlocks",
         "Minecraft.EntityBreathableComponent.prototype.getNonBreatheBlocks",
         "Minecraft.EntityBreathableComponent.prototype.inhaleTime.[[Get]]",
-        "Minecraft.EntityBreathableComponent.prototype.setAirSupply",
         "Minecraft.EntityBreathableComponent.prototype.suffocateTime.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.totalSupply.[[Get]]",
         "Minecraft.EntityCanClimbComponent",
@@ -30054,6 +30135,7 @@
         "Minecraft.EntityComponentTypes.CanPowerJump",
         "Minecraft.EntityComponentTypes.Color",
         "Minecraft.EntityComponentTypes.Color2",
+        "Minecraft.EntityComponentTypes.CursorInventory",
         "Minecraft.EntityComponentTypes.Equippable",
         "Minecraft.EntityComponentTypes.FireImmune",
         "Minecraft.EntityComponentTypes.FloatsInLiquid",
@@ -31449,6 +31531,14 @@
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.constructor",
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.subscribe",
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerCursorInventoryComponent",
+        "Minecraft.PlayerCursorInventoryComponent.[[Prototype]]",
+        "Minecraft.PlayerCursorInventoryComponent.componentId",
+        "Minecraft.PlayerCursorInventoryComponent.prototype",
+        "Minecraft.PlayerCursorInventoryComponent.prototype.[[Prototype]]",
+        "Minecraft.PlayerCursorInventoryComponent.prototype.clear",
+        "Minecraft.PlayerCursorInventoryComponent.prototype.constructor",
+        "Minecraft.PlayerCursorInventoryComponent.prototype.item.[[Get]]",
         "Minecraft.PlayerDimensionChangeAfterEvent",
         "Minecraft.PlayerDimensionChangeAfterEvent.prototype",
         "Minecraft.PlayerDimensionChangeAfterEvent.prototype.constructor",
@@ -37054,6 +37144,46 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:brain_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": false,
+                },
+                {
+                    "dead_bit": true,
+                },
+            ],
+            "itemId": "minecraft:brain_coral_fan",
+            "canBeWaterlogged": true,
+        },
         "minecraft:brewing_stand": {
             "properties": [
                 {
@@ -38079,6 +38209,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:bubble_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": true,
+                },
+            ],
+            "itemId": "minecraft:bubble_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:budding_amethyst": {
@@ -40117,166 +40287,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
-        "minecraft:coral_fan_hang": {
-            "properties": [
-                {
-                    "name": "coral_direction",
-                    "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                    ],
-                    "defaultValue": 0,
-                },
-                {
-                    "name": "coral_hang_type_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "dead_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": {
-                "minecraft:tube_coral_fan": [
-                    {
-                        "coral_hang_type_bit": false,
-                        "dead_bit": false,
-                    },
-                ],
-                "minecraft:dead_tube_coral_fan": [
-                    {
-                        "coral_hang_type_bit": false,
-                        "dead_bit": true,
-                    },
-                ],
-                "minecraft:brain_coral_fan": [
-                    {
-                        "coral_hang_type_bit": true,
-                        "dead_bit": false,
-                    },
-                ],
-                "minecraft:dead_brain_coral_fan": [
-                    {
-                        "coral_hang_type_bit": true,
-                        "dead_bit": true,
-                    },
-                ],
-            },
-            "canBeWaterlogged": true,
-        },
-        "minecraft:coral_fan_hang2": {
-            "properties": [
-                {
-                    "name": "coral_direction",
-                    "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                    ],
-                    "defaultValue": 0,
-                },
-                {
-                    "name": "coral_hang_type_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "dead_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": {
-                "minecraft:bubble_coral_fan": [
-                    {
-                        "coral_hang_type_bit": false,
-                        "dead_bit": false,
-                    },
-                ],
-                "minecraft:dead_bubble_coral_fan": [
-                    {
-                        "coral_hang_type_bit": false,
-                        "dead_bit": true,
-                    },
-                ],
-                "minecraft:fire_coral_fan": [
-                    {
-                        "coral_hang_type_bit": true,
-                        "dead_bit": false,
-                    },
-                ],
-                "minecraft:dead_fire_coral_fan": [
-                    {
-                        "coral_hang_type_bit": true,
-                        "dead_bit": true,
-                    },
-                ],
-            },
-            "canBeWaterlogged": true,
-        },
-        "minecraft:coral_fan_hang3": {
-            "properties": [
-                {
-                    "name": "coral_direction",
-                    "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                    ],
-                    "defaultValue": 0,
-                },
-                {
-                    "name": "coral_hang_type_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "dead_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": {
-                "minecraft:horn_coral_fan": [
-                    {
-                        "dead_bit": false,
-                    },
-                ],
-                "minecraft:dead_horn_coral_fan": [
-                    {
-                        "dead_bit": true,
-                    },
-                ],
-            },
-            "canBeWaterlogged": true,
-        },
         "minecraft:cornflower": {
             "properties": [
                 {
@@ -40919,6 +40929,116 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:cut_red_sandstone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_4",
+                    "validValues": [
+                        "mossy_stone_brick",
+                        "smooth_quartz",
+                        "stone",
+                        "cut_sandstone",
+                        "cut_red_sandstone",
+                    ],
+                    "defaultValue": "cut_red_sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_4": "mossy_stone_brick",
+                },
+                {
+                    "stone_slab_type_4": "smooth_quartz",
+                },
+                {
+                    "stone_slab_type_4": "stone",
+                },
+                {
+                    "stone_slab_type_4": "cut_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:cut_sandstone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_4",
+                    "validValues": [
+                        "mossy_stone_brick",
+                        "smooth_quartz",
+                        "stone",
+                        "cut_sandstone",
+                        "cut_red_sandstone",
+                    ],
+                    "defaultValue": "cut_sandstone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_4": "mossy_stone_brick",
+                },
+                {
+                    "stone_slab_type_4": "smooth_quartz",
+                },
+                {
+                    "stone_slab_type_4": "stone",
+                },
+                {
+                    "stone_slab_type_4": "cut_red_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -42496,6 +42616,46 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:dead_brain_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": false,
+                },
+                {
+                    "dead_bit": false,
+                },
+            ],
+            "itemId": "minecraft:dead_brain_coral_fan",
+            "canBeWaterlogged": true,
+        },
         "minecraft:dead_bubble_coral": {
             "properties": [
                 {
@@ -42617,6 +42777,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:dead_bubble_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": false,
+                },
+            ],
+            "itemId": "minecraft:dead_bubble_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:dead_fire_coral": {
@@ -42742,6 +42942,46 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:dead_fire_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": false,
+                },
+                {
+                    "dead_bit": false,
+                },
+            ],
+            "itemId": "minecraft:dead_fire_coral_fan",
+            "canBeWaterlogged": true,
+        },
         "minecraft:dead_horn_coral": {
             "properties": [
                 {
@@ -42865,6 +43105,46 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:dead_horn_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": false,
+                },
+            ],
+            "itemId": "minecraft:dead_horn_coral_fan",
+            "canBeWaterlogged": true,
+        },
         "minecraft:dead_tube_coral": {
             "properties": [
                 {
@@ -42986,6 +43266,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:dead_tube_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": false,
+                },
+            ],
+            "itemId": "minecraft:dead_tube_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:deadbush": {
@@ -43854,7 +44174,33 @@
                     "top_slot_bit": false,
                 },
             ],
-            "itemId": "minecraft:stone_block_slab4",
+            "itemId": {
+                "minecraft:mossy_stone_brick_slab": [
+                    {
+                        "stone_slab_type_4": "mossy_stone_brick",
+                    },
+                ],
+                "minecraft:smooth_quartz_slab": [
+                    {
+                        "stone_slab_type_4": "smooth_quartz",
+                    },
+                ],
+                "minecraft:normal_stone_slab": [
+                    {
+                        "stone_slab_type_4": "stone",
+                    },
+                ],
+                "minecraft:cut_sandstone_slab": [
+                    {
+                        "stone_slab_type_4": "cut_sandstone",
+                    },
+                ],
+                "minecraft:cut_red_sandstone_slab": [
+                    {
+                        "stone_slab_type_4": "cut_red_sandstone",
+                    },
+                ],
+            },
             "canBeWaterlogged": false,
         },
         "minecraft:dragon_egg": {
@@ -45375,6 +45721,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:fire_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": false,
+                },
+                {
+                    "dead_bit": true,
+                },
+            ],
+            "itemId": "minecraft:fire_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:fletching_table": {
@@ -49987,6 +50373,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:horn_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": true,
+                },
+            ],
+            "itemId": "minecraft:horn_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:ice": {
@@ -55382,6 +55808,61 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:mossy_stone_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_4",
+                    "validValues": [
+                        "mossy_stone_brick",
+                        "smooth_quartz",
+                        "stone",
+                        "cut_sandstone",
+                        "cut_red_sandstone",
+                    ],
+                    "defaultValue": "mossy_stone_brick",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_4": "smooth_quartz",
+                },
+                {
+                    "stone_slab_type_4": "stone",
+                },
+                {
+                    "stone_slab_type_4": "cut_sandstone",
+                },
+                {
+                    "stone_slab_type_4": "cut_red_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:mossy_stone_brick_stairs": {
             "properties": [
                 {
@@ -55889,6 +56370,61 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:normal_stone_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_4",
+                    "validValues": [
+                        "mossy_stone_brick",
+                        "smooth_quartz",
+                        "stone",
+                        "cut_sandstone",
+                        "cut_red_sandstone",
+                    ],
+                    "defaultValue": "stone",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_4": "mossy_stone_brick",
+                },
+                {
+                    "stone_slab_type_4": "smooth_quartz",
+                },
+                {
+                    "stone_slab_type_4": "cut_sandstone",
+                },
+                {
+                    "stone_slab_type_4": "cut_red_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:normal_stone_stairs": {
             "properties": [
@@ -63304,6 +63840,61 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:smooth_quartz_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+                {
+                    "name": "stone_slab_type_4",
+                    "validValues": [
+                        "mossy_stone_brick",
+                        "smooth_quartz",
+                        "stone",
+                        "cut_sandstone",
+                        "cut_red_sandstone",
+                    ],
+                    "defaultValue": "smooth_quartz",
+                },
+                {
+                    "name": "top_slot_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "stone_slab_type_4": "mossy_stone_brick",
+                },
+                {
+                    "stone_slab_type_4": "stone",
+                },
+                {
+                    "stone_slab_type_4": "cut_sandstone",
+                },
+                {
+                    "stone_slab_type_4": "cut_red_sandstone",
+                },
+                {
+                    "minecraft:vertical_half": "bottom",
+                    "top_slot_bit": true,
+                },
+                {
+                    "minecraft:vertical_half": "top",
+                    "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:smooth_quartz_stairs": {
             "properties": [
                 {
@@ -64675,49 +65266,6 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
-        },
-        "minecraft:stone_block_slab4": {
-            "properties": [
-                {
-                    "name": "minecraft:vertical_half",
-                    "validValues": [
-                        "bottom",
-                        "top",
-                    ],
-                    "defaultValue": "bottom",
-                },
-                {
-                    "name": "stone_slab_type_4",
-                    "validValues": [
-                        "mossy_stone_brick",
-                        "smooth_quartz",
-                        "stone",
-                        "cut_sandstone",
-                        "cut_red_sandstone",
-                    ],
-                    "defaultValue": "mossy_stone_brick",
-                },
-                {
-                    "name": "top_slot_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
-            "invalidStates": [
-                {
-                    "minecraft:vertical_half": "bottom",
-                    "top_slot_bit": true,
-                },
-                {
-                    "minecraft:vertical_half": "top",
-                    "top_slot_bit": false,
-                },
-            ],
-            "itemId": "<same>",
-            "canBeWaterlogged": true,
         },
         "minecraft:stone_brick_double_slab": {
             "properties": [
@@ -66257,6 +66805,46 @@
                 },
             ],
             "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:tube_coral_wall_fan": {
+            "properties": [
+                {
+                    "name": "coral_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "coral_hang_type_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "dead_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "coral_hang_type_bit": true,
+                },
+                {
+                    "dead_bit": true,
+                },
+            ],
+            "itemId": "minecraft:tube_coral_fan",
             "canBeWaterlogged": true,
         },
         "minecraft:tuff": {
@@ -70676,9 +71264,16 @@
                     3,
                 ],
                 "defaultValue": {
-                    "minecraft:coral_fan_hang": 0,
-                    "minecraft:coral_fan_hang2": 0,
-                    "minecraft:coral_fan_hang3": 0,
+                    "minecraft:brain_coral_wall_fan": 0,
+                    "minecraft:bubble_coral_wall_fan": 0,
+                    "minecraft:dead_brain_coral_wall_fan": 0,
+                    "minecraft:dead_bubble_coral_wall_fan": 0,
+                    "minecraft:dead_fire_coral_wall_fan": 0,
+                    "minecraft:dead_horn_coral_wall_fan": 0,
+                    "minecraft:dead_tube_coral_wall_fan": 0,
+                    "minecraft:fire_coral_wall_fan": 0,
+                    "minecraft:horn_coral_wall_fan": 0,
+                    "minecraft:tube_coral_wall_fan": 0,
                 },
             },
         ],
@@ -70709,9 +71304,16 @@
                     true,
                 ],
                 "defaultValue": {
-                    "minecraft:coral_fan_hang": false,
-                    "minecraft:coral_fan_hang2": false,
-                    "minecraft:coral_fan_hang3": false,
+                    "minecraft:brain_coral_wall_fan": true,
+                    "minecraft:bubble_coral_wall_fan": false,
+                    "minecraft:dead_brain_coral_wall_fan": true,
+                    "minecraft:dead_bubble_coral_wall_fan": false,
+                    "minecraft:dead_fire_coral_wall_fan": true,
+                    "minecraft:dead_horn_coral_wall_fan": false,
+                    "minecraft:dead_tube_coral_wall_fan": false,
+                    "minecraft:fire_coral_wall_fan": true,
+                    "minecraft:horn_coral_wall_fan": false,
+                    "minecraft:tube_coral_wall_fan": false,
                 },
             },
         ],
@@ -70772,28 +71374,35 @@
                 "defaultValue": {
                     "minecraft:brain_coral": false,
                     "minecraft:brain_coral_block": false,
+                    "minecraft:brain_coral_wall_fan": false,
                     "minecraft:bubble_coral": false,
                     "minecraft:bubble_coral_block": false,
-                    "minecraft:coral_fan_hang": false,
-                    "minecraft:coral_fan_hang2": false,
-                    "minecraft:coral_fan_hang3": false,
+                    "minecraft:bubble_coral_wall_fan": false,
                     "minecraft:dead_brain_coral": true,
                     "minecraft:dead_brain_coral_block": true,
+                    "minecraft:dead_brain_coral_wall_fan": true,
                     "minecraft:dead_bubble_coral": true,
                     "minecraft:dead_bubble_coral_block": true,
+                    "minecraft:dead_bubble_coral_wall_fan": true,
                     "minecraft:dead_fire_coral": true,
                     "minecraft:dead_fire_coral_block": true,
+                    "minecraft:dead_fire_coral_wall_fan": true,
                     "minecraft:dead_horn_coral": true,
                     "minecraft:dead_horn_coral_block": true,
+                    "minecraft:dead_horn_coral_wall_fan": true,
                     "minecraft:dead_tube_coral": true,
                     "minecraft:dead_tube_coral_block": true,
+                    "minecraft:dead_tube_coral_wall_fan": true,
                     "minecraft:fire_coral": false,
                     "minecraft:fire_coral_block": false,
+                    "minecraft:fire_coral_wall_fan": false,
                     "minecraft:horn_coral": false,
                     "minecraft:horn_coral_block": false,
+                    "minecraft:horn_coral_wall_fan": false,
                     "minecraft:sea_pickle": false,
                     "minecraft:tube_coral": false,
                     "minecraft:tube_coral_block": false,
+                    "minecraft:tube_coral_wall_fan": false,
                 },
             },
         ],
@@ -71675,6 +72284,8 @@
                     "minecraft:crimson_double_slab": "bottom",
                     "minecraft:crimson_slab": "bottom",
                     "minecraft:cut_copper_slab": "bottom",
+                    "minecraft:cut_red_sandstone_slab": "bottom",
+                    "minecraft:cut_sandstone_slab": "bottom",
                     "minecraft:dark_oak_double_slab": "bottom",
                     "minecraft:dark_oak_slab": "bottom",
                     "minecraft:dark_prismarine_slab": "bottom",
@@ -71696,10 +72307,12 @@
                     "minecraft:mangrove_double_slab": "bottom",
                     "minecraft:mangrove_slab": "bottom",
                     "minecraft:mossy_cobblestone_slab": "bottom",
+                    "minecraft:mossy_stone_brick_slab": "bottom",
                     "minecraft:mud_brick_double_slab": "bottom",
                     "minecraft:mud_brick_slab": "bottom",
                     "minecraft:nether_brick_double_slab": "bottom",
                     "minecraft:nether_brick_slab": "bottom",
+                    "minecraft:normal_stone_slab": "bottom",
                     "minecraft:oak_double_slab": "bottom",
                     "minecraft:oak_slab": "bottom",
                     "minecraft:oxidized_cut_copper_slab": "bottom",
@@ -71726,13 +72339,13 @@
                     "minecraft:red_sandstone_slab": "bottom",
                     "minecraft:sandstone_double_slab": "bottom",
                     "minecraft:sandstone_slab": "bottom",
+                    "minecraft:smooth_quartz_slab": "bottom",
                     "minecraft:smooth_red_sandstone_slab": "bottom",
                     "minecraft:smooth_sandstone_slab": "bottom",
                     "minecraft:smooth_stone_double_slab": "bottom",
                     "minecraft:smooth_stone_slab": "bottom",
                     "minecraft:spruce_double_slab": "bottom",
                     "minecraft:spruce_slab": "bottom",
-                    "minecraft:stone_block_slab4": "bottom",
                     "minecraft:stone_brick_double_slab": "bottom",
                     "minecraft:stone_brick_slab": "bottom",
                     "minecraft:tuff_brick_double_slab": "bottom",
@@ -72535,8 +73148,12 @@
                     "cut_red_sandstone",
                 ],
                 "defaultValue": {
+                    "minecraft:cut_red_sandstone_slab": "cut_red_sandstone",
+                    "minecraft:cut_sandstone_slab": "cut_sandstone",
                     "minecraft:double_stone_block_slab4": "mossy_stone_brick",
-                    "minecraft:stone_block_slab4": "mossy_stone_brick",
+                    "minecraft:mossy_stone_brick_slab": "mossy_stone_brick",
+                    "minecraft:normal_stone_slab": "stone",
+                    "minecraft:smooth_quartz_slab": "smooth_quartz",
                 },
             },
         ],
@@ -72678,6 +73295,8 @@
                     "minecraft:crimson_double_slab": false,
                     "minecraft:crimson_slab": false,
                     "minecraft:cut_copper_slab": false,
+                    "minecraft:cut_red_sandstone_slab": false,
+                    "minecraft:cut_sandstone_slab": false,
                     "minecraft:dark_oak_double_slab": false,
                     "minecraft:dark_oak_slab": false,
                     "minecraft:dark_prismarine_slab": false,
@@ -72699,10 +73318,12 @@
                     "minecraft:mangrove_double_slab": false,
                     "minecraft:mangrove_slab": false,
                     "minecraft:mossy_cobblestone_slab": false,
+                    "minecraft:mossy_stone_brick_slab": false,
                     "minecraft:mud_brick_double_slab": false,
                     "minecraft:mud_brick_slab": false,
                     "minecraft:nether_brick_double_slab": false,
                     "minecraft:nether_brick_slab": false,
+                    "minecraft:normal_stone_slab": false,
                     "minecraft:oak_double_slab": false,
                     "minecraft:oak_slab": false,
                     "minecraft:oxidized_cut_copper_slab": false,
@@ -72727,13 +73348,13 @@
                     "minecraft:red_sandstone_slab": false,
                     "minecraft:sandstone_double_slab": false,
                     "minecraft:sandstone_slab": false,
+                    "minecraft:smooth_quartz_slab": false,
                     "minecraft:smooth_red_sandstone_slab": false,
                     "minecraft:smooth_sandstone_slab": false,
                     "minecraft:smooth_stone_double_slab": false,
                     "minecraft:smooth_stone_slab": false,
                     "minecraft:spruce_double_slab": false,
                     "minecraft:spruce_slab": false,
-                    "minecraft:stone_block_slab4": false,
                     "minecraft:stone_brick_double_slab": false,
                     "minecraft:stone_brick_slab": false,
                     "minecraft:warped_double_slab": false,
@@ -75409,6 +76030,12 @@
             "tags": [],
         },
         "minecraft:cut_copper_stairs": {
+            "tags": [],
+        },
+        "minecraft:cut_red_sandstone_slab": {
+            "tags": [],
+        },
+        "minecraft:cut_sandstone_slab": {
             "tags": [],
         },
         "minecraft:cyan_candle": {
@@ -78367,6 +78994,9 @@
         "minecraft:mossy_cobblestone_stairs": {
             "tags": [],
         },
+        "minecraft:mossy_stone_brick_slab": {
+            "tags": [],
+        },
         "minecraft:mossy_stone_brick_stairs": {
             "tags": [],
         },
@@ -78849,6 +79479,9 @@
             ],
         },
         "minecraft:netherrack": {
+            "tags": [],
+        },
+        "minecraft:normal_stone_slab": {
             "tags": [],
         },
         "minecraft:normal_stone_stairs": {
@@ -79778,6 +80411,9 @@
         "minecraft:smooth_basalt": {
             "tags": [],
         },
+        "minecraft:smooth_quartz_slab": {
+            "tags": [],
+        },
         "minecraft:smooth_quartz_stairs": {
             "tags": [],
         },
@@ -80011,9 +80647,6 @@
                     ],
                 },
             },
-        },
-        "minecraft:stone_block_slab4": {
-            "tags": [],
         },
         "minecraft:stone_brick_slab": {
             "tags": [],
