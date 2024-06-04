@@ -94,13 +94,13 @@ GET `/search?q=command%20damage&limit=5`
                 "enumId": "command",
                 "enumName": "命令",
                 "key": "damage <target: target> <amount: int> <cause: DamageCause> entity <damager: target>",
-                "value": "对实体造成伤害。"
+                "value": "对实体造成来源于特定实体的伤害。"
             },
             {
                 "enumId": "command",
                 "enumName": "命令",
                 "key": "damage <target: target> <amount: int> [cause: DamageCause]",
-                "value": "对实体造成来源于特定实体的伤害。"
+                "value": "对实体造成伤害。"
             }
         ]
     }
