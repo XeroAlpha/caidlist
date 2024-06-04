@@ -257,8 +257,8 @@
     "clone <begin: x y z> <end: x y z> <destination: x y z> filtered <cloneMode: CloneMode> <tileName: Block> <blockStates: block states>": "this: clone.filtered.withBlockState", // 在区域间复制方块。
     "clone <begin: x y z> <end: x y z> <destination: x y z> filtered <cloneMode: CloneMode> <tileName: Block> <tileData: int>": "this: clone.filtered.withDataValue", // 在区域间复制方块。
     "connect <serverUri: text>": "this: wsserver.default", // 连接WebSocket服务器。
-    "damage <target: target> <amount: int> <cause: DamageCause> entity <damager: target>": "this: damage.default", // 对实体造成伤害。
-    "damage <target: target> <amount: int> [cause: DamageCause]": "this: damage.withDamager", // 对实体造成来源于特定实体的伤害。
+    "damage <target: target> <amount: int> <cause: DamageCause> entity <damager: target>": "this: damage.withDamager", // 对实体造成来源于特定实体的伤害。
+    "damage <target: target> <amount: int> [cause: DamageCause]": "this: damage.default", // 对实体造成伤害。
     "daylock [lock: Boolean]": "this: daylock.default", // 切换昼夜更替锁定。
     "deop <player: target>": "this: deop.default", // 撤销管理员身份。
     "dialogue change <npc: target> <sceneName: string> [players: target]": "this: dialogue.change", // 更改与NPC的对话场景。
