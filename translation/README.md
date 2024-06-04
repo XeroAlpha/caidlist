@@ -1,15 +1,15 @@
 # 翻译指南
 
-您可以修改本目录下的 JSON 文件来修改或添加翻译。目前仅接受修正已有的翻译以及新增客观类或部分客观类翻译。如果您希望增加主观类翻译，或者只想反馈问题，请[加群](https://projectxero.top/qqgroup/cabeta)。
+您可以修改本目录下的 JSON 文件来修改或添加翻译。目前仅接受修正已有的翻译以及新增客观类或部分客观类翻译。如果您希望增加主观类翻译，或者只想反馈问题，请[加群](https://projectxero.top/qqgroup/cabeta/)。
 
 > 客观类翻译是指方块、物品等通过某种规则能够被唯一确定的翻译。主观类翻译是指需要根据数据或现象进行概括的翻译，例如粒子发射器、动画。由于目前暂未确定大部分主观类翻译的规则，因此暂不接受新增主观类翻译（除非您愿意在 Pull Request 中同时说明主观类翻译所使用的规则）。
-
-**请尽量引用 [标准译名表](https://zh.minecraft.wiki/w/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 与 [基岩版开发Wiki标准译名表](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中的对应译名。**
 
 欢迎通过 [MCBEID 表](#通过-mcbeid-表参与翻译) 或者 [Fork & Pull Request](https://docs.github.com/zh/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models) 参与此项目！
 
 > [!TIP]
 > 在 Fork 仓库中，GitHub Actions 会默认开启，用于在每次 Push 时构建对应的网页版本。如果您不需要，请 [禁用工作流](https://docs.github.com/zh/actions/using-workflows/disabling-and-enabling-a-workflow)。
+
+**请尽量引用 [标准译名表](https://zh.minecraft.wiki/w/Minecraft_Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 与 [基岩版开发Wiki标准译名表](https://wiki.mcbe-dev.net/p/Minecraft%E5%9F%BA%E5%B2%A9%E7%89%88%E5%BC%80%E5%8F%91Wiki:%E8%AF%91%E5%90%8D%E6%A0%87%E5%87%86%E5%8C%96) 中的对应译名。**
 
 |`translation/*.json`|内容|
 | - | - |
@@ -53,7 +53,7 @@
 3. 查找希望修改的条目，点击进入详情页面后进行编辑。编辑完成后点击保存。
 4. 在主菜单中点击“导出编辑数据”。
 5. [创建 Issue](https://github.com/XeroAlpha/caidlist/issues/new)，说明对翻译修改的部分，并附上导出的“编辑数据.json”。
-6. 如果不会第 5 步，请[加群](https://projectxero.top/qqgroup/cabeta)并将编辑数据私聊发送给群主。
+6. 如果不会第 5 步，请[加群](https://projectxero.top/qqgroup/cabeta/)并将编辑数据私聊发送给群主。
 
 ## 流程
 
