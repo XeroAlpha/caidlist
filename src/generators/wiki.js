@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import { warn } from '../util/common.js';
 
 function getInvalidStateValues(invalidStates, stateName) {
     const invalidValues = [];
@@ -58,15 +59,22 @@ export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) 
     writeFileSync(outputFile, lines.join('\n'));
 }
 
+const hiddenIds = ['cave_vines_body_with_berries', 'cave_vines_head_with_berries'];
 export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
     const indent = '\t';
     const lines = [
         'return {',
         `${indent}-- 自动生成`
     ];
+    const mappedNames = new Set();
     for (const [id, names] of Object.entries(blockTranslations)) {
         const idWithoutNamespace = id.replace(/^minecraft:/, '');
         for (const name of names.split('/')) {
+            if (hiddenIds.includes(idWithoutNamespace)) continue;
+            if (mappedNames.has(name)) {
+                warn(`Conflicted name mapping: ${name} -> ${idWithoutNamespace}`);
+            }
+            mappedNames.add(name);
             lines.push(`${indent}['${name}'] = '${idWithoutNamespace}',`);
         }
     }

@@ -610,20 +610,13 @@ const pageAnalyzer = [
         tableIndex: 0,
         idKey: 'Name',
         descriptionKey: 'Description'
-    }),
+    })
     // createMojangSchemeAnalyzer({
     //     target: 'schema',
     //     documentation: 'Schemas',
     //     path: ['Schemas'],
     //     codeIndex: 0
     // }),
-    createSchemeTableAnalyzer({
-        name: 'volume_components',
-        target: 'schema',
-        documentation: 'Volumes',
-        path: ['Volumes', 'Volume Components'],
-        tableIndex: 0
-    })
 ];
 
 const remapIdTable = [

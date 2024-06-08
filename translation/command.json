@@ -17,6 +17,8 @@
     "camera.set.*.override.pos": "位置",
     "camera.set.*.override.pos.rot": "位置与旋转角度",
     "camera.set.*.override.rot": "旋转角度",
+    "camera.set.*.override.rot.viewOffset": "旋转角度与视点偏移",
+    "camera.set.*.override.viewOffset": "视点偏移",
     "camera.set.default": "{{camera.set.*|camera.set.*.set.default}}", // 将玩家的摄像机设置为指定预设。
     "camera.set.ease.default": "{{camera.set.*|camera.set.*.set.ease}}", // 将玩家的摄像机平滑变换为指定预设。
     "camera.set.ease.facing.entity": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.rot|camera.set.*.facing.entity}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度，使其面向指定实体。
@@ -33,6 +35,8 @@
     "camera.set.pos.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.pos.rot|camera.set.*.facing.position}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度，使其面向指定坐标。
     "camera.set.pos.rot": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.pos.rot}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度。
     "camera.set.rot": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度。
+    "camera.set.rot.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与视点偏移。
+    "camera.set.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移。
     "camerashake.add": "为玩家应用镜头摇晃效果。",
     "camerashake.stop": "为玩家移除镜头摇晃效果。",
     "clear.default": "清除玩家物品栏中的物品。",
@@ -510,4 +514,6 @@
     "recipe give <player: target> <recipe: string>": "this: recipe.give", // 向玩家赋予指定的配方。
     "recipe take <player: target> <recipe: string>": "this: recipe.take", // 从玩家收回指定的配方。
     "hud <target: target> <visible: HudVisibility> [hud_element: HudElement]": "this: hud.default", // 配置选中玩家的HUD界面元素的可见性。
+    "camera <players: target> set <preset: string> rot <xRot: value> <yRot: value> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.rot.viewOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与视点偏移。
+    "camera <players: target> set <preset: string> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.viewOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移。
 }

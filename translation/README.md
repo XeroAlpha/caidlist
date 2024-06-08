@@ -2,9 +2,9 @@
 
 您可以修改本目录下的 JSON 文件来修改或添加翻译。目前仅接受修正已有的翻译以及新增客观类或部分客观类翻译。如果您希望增加主观类翻译，或者只想反馈问题，请[加群](https://projectxero.top/qqgroup/cabeta/)。
 
-> 客观类翻译是指方块、物品等通过某种规则能够被唯一确定的翻译。主观类翻译是指需要根据数据或现象进行概括的翻译，例如粒子发射器、动画。由于目前暂未确定大部分主观类翻译的规则，因此暂不接受新增主观类翻译（除非您愿意在 Pull Request 中同时说明主观类翻译所使用的规则）。
+> 客观类翻译是指方块、物品等通过某种规则能够被唯一确定的翻译。主观类翻译是指需要根据数据或现象进行概括的翻译，例如粒子发射器、动画。由于目前暂未确定大部分主观类翻译的规则，因此暂不接受新增主观类翻译，附带说明了翻译规则的除外。
 
-欢迎通过 [MCBEID 表](#通过-mcbeid-表参与翻译) 或者 [Fork & Pull Request](https://docs.github.com/zh/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models) 参与此项目！
+欢迎通过 [MCBEID 表](#user-content-通过-mcbeid表-参与翻译) 或者 [Fork & Pull Request](https://docs.github.com/zh/pull-requests/collaborating-with-pull-requests/getting-started/about-collaborative-development-models) 参与此项目！
 
 > [!TIP]
 > 在 Fork 仓库中，GitHub Actions 会默认开启，用于在每次 Push 时构建对应的网页版本。如果您不需要，请 [禁用工作流](https://docs.github.com/zh/actions/using-workflows/disabling-and-enabling-a-workflow)。
