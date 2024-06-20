@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.10.22",
+    "packageVersion": "1.21.10.23",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -5205,6 +5205,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getMapColor": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getRedstonePower": {
                                                     "value": {
                                                         "type": "function",
@@ -5959,6 +5967,118 @@
                                             "value": "minecraft:waterContainer",
                                         },
                                         "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockCustomComponentAlreadyRegisteredError": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockCustomComponentAlreadyRegisteredError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockCustomComponentAlreadyRegisteredError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockCustomComponentReloadNewComponentError": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockCustomComponentReloadNewComponentError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockCustomComponentReloadNewComponentError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockCustomComponentReloadNewEventError": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockCustomComponentReloadNewEventError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockCustomComponentReloadNewEventError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockCustomComponentReloadVersionError": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockCustomComponentReloadVersionError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockCustomComponentReloadVersionError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
                                     },
                                 },
                             },
@@ -26467,7 +26587,7 @@
                                         "value": {
                                             "type": "object",
                                             "enumerableProperties": {
-                                                "blockTypeRegistry": {
+                                                "blockComponentRegistry": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -29429,6 +29549,7 @@
         "Minecraft.Block.prototype.east",
         "Minecraft.Block.prototype.getComponent",
         "Minecraft.Block.prototype.getItemStack",
+        "Minecraft.Block.prototype.getMapColor",
         "Minecraft.Block.prototype.getRedstonePower",
         "Minecraft.Block.prototype.getTags",
         "Minecraft.Block.prototype.hasTag",
@@ -29533,6 +29654,22 @@
         "Minecraft.BlockComponentTypes.Sign",
         "Minecraft.BlockComponentTypes.SnowContainer",
         "Minecraft.BlockComponentTypes.WaterContainer",
+        "Minecraft.BlockCustomComponentAlreadyRegisteredError",
+        "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype",
+        "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype.[[Prototype]]",
+        "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype.constructor",
+        "Minecraft.BlockCustomComponentReloadNewComponentError",
+        "Minecraft.BlockCustomComponentReloadNewComponentError.prototype",
+        "Minecraft.BlockCustomComponentReloadNewComponentError.prototype.[[Prototype]]",
+        "Minecraft.BlockCustomComponentReloadNewComponentError.prototype.constructor",
+        "Minecraft.BlockCustomComponentReloadNewEventError",
+        "Minecraft.BlockCustomComponentReloadNewEventError.prototype",
+        "Minecraft.BlockCustomComponentReloadNewEventError.prototype.[[Prototype]]",
+        "Minecraft.BlockCustomComponentReloadNewEventError.prototype.constructor",
+        "Minecraft.BlockCustomComponentReloadVersionError",
+        "Minecraft.BlockCustomComponentReloadVersionError.prototype",
+        "Minecraft.BlockCustomComponentReloadVersionError.prototype.[[Prototype]]",
+        "Minecraft.BlockCustomComponentReloadVersionError.prototype.constructor",
         "Minecraft.BlockEvent",
         "Minecraft.BlockEvent.prototype",
         "Minecraft.BlockEvent.prototype.block.[[Get]]",
@@ -32219,7 +32356,7 @@
         "Minecraft.WorldInitializeAfterEventSignal.prototype.unsubscribe",
         "Minecraft.WorldInitializeBeforeEvent",
         "Minecraft.WorldInitializeBeforeEvent.prototype",
-        "Minecraft.WorldInitializeBeforeEvent.prototype.blockTypeRegistry.[[Get]]",
+        "Minecraft.WorldInitializeBeforeEvent.prototype.blockComponentRegistry.[[Get]]",
         "Minecraft.WorldInitializeBeforeEvent.prototype.constructor",
         "Minecraft.WorldInitializeBeforeEvent.prototype.itemComponentRegistry.[[Get]]",
         "Minecraft.WorldInitializeBeforeEventSignal",

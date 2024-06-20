@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.20.80.5",
-    "__COMMITHASH__": "e304be6ab8dfa57a11cf5e24a6492794a5637014",
+    "__VERSION__": "1.21.0.3",
+    "__COMMITHASH__": "c989e80c35508d658eb4a11932a04382feee4217",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -124,6 +124,11 @@
                                 },
                                 {
                                     "name": "Entity Definition",
+                                    "sections": [
+                                        {
+                                            "name": "Note",
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -174,6 +179,11 @@
                     "sections": [
                         {
                             "name": "Examples",
+                            "sections": [
+                                {
+                                    "name": "Note",
+                                },
+                            ],
                         },
                         {
                             "name": "Getting Started",
@@ -192,13 +202,90 @@
                     "name": "Overview",
                 },
                 {
-                    "name": "JSON format",
+                    "name": "JSON Format",
                 },
                 {
-                    "name": "Adding biomes",
+                    "name": "Adding Biomes",
                 },
                 {
                     "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "Biome Components",
+                        },
+                        {
+                            "name": "Biome Definition",
+                        },
+                        {
+                            "name": "Biome Description",
+                        },
+                        {
+                            "name": "Biome JSON File",
+                        },
+                        {
+                            "name": "Block Specifier",
+                        },
+                        {
+                            "name": "Molang Expression",
+                        },
+                        {
+                            "name": "minecraft:capped_surface",
+                        },
+                        {
+                            "name": "minecraft:climate",
+                        },
+                        {
+                            "name": "minecraft:frozen_ocean_surface",
+                        },
+                        {
+                            "name": "minecraft:mesa_surface",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - steep_material_adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - top_slide settings",
+                        },
+                        {
+                            "name": "minecraft:multinoise_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted biome names settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted climate categories settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_height",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment materials settings",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:surface_parameters",
+                        },
+                        {
+                            "name": "minecraft:swamp_surface",
+                        },
+                        {
+                            "name": "minecraft:tags",
+                        },
+                        {
+                            "name": "minecraft:the_end_surface",
+                        },
+                    ],
                 },
             ],
         },
@@ -245,6 +332,14 @@
                     "sections": [
                         {
                             "name": "Spawn Egg",
+                            "sections": [
+                                {
+                                    "name": "Hex Value",
+                                },
+                                {
+                                    "name": "Texture",
+                                },
+                            ],
                         },
                         {
                             "name": "animation_controllers",
@@ -1771,6 +1866,9 @@
                                     "name": "minecraft:mob_effect",
                                 },
                                 {
+                                    "name": "minecraft:mob_effect_immunity",
+                                },
+                                {
                                     "name": "minecraft:movement.amphibious",
                                 },
                                 {
@@ -1852,6 +1950,9 @@
                                     "name": "minecraft:ravager_blocked",
                                 },
                                 {
+                                    "name": "minecraft:reflect_projectiles",
+                                },
+                                {
                                     "name": "minecraft:rideable",
                                 },
                                 {
@@ -1871,9 +1972,6 @@
                                 },
                                 {
                                     "name": "minecraft:spawn_entity",
-                                },
-                                {
-                                    "name": "minecraft:strength",
                                 },
                                 {
                                     "name": "minecraft:suspect_tracking",
@@ -2752,13 +2850,22 @@
                             "name": "Animation Controller effects",
                         },
                         {
+                            "name": "Animation Controller effects (continued)",
+                        },
+                        {
                             "name": "Animation Timeline effects",
+                        },
+                        {
+                            "name": "Animation Timeline effects (continued)",
                         },
                         {
                             "name": "Effect Event",
                         },
                         {
                             "name": "Effect List",
+                        },
+                        {
+                            "name": "Effect List (continued)",
                         },
                     ],
                 },
@@ -3017,6 +3124,7 @@
         "occupied_bit": "Determines if a bed block is occupied",
         "old_leaf_type": "Determines the leaf type of some blocks",
         "old_log_type": "Determines the wood type of some blocks",
+        "ominous": "Determines if the block is the ominous version",
         "open_bit": "Determines if a door, gate, or trapdoor is open",
         "orientation": "12 variant orientation",
         "output_lit_bit": "Determines if a Comparator's output is lit",
@@ -3180,9 +3288,11 @@
         "minecraft:bookshelf": "",
         "minecraft:border_block": "",
         "minecraft:brain_coral": "",
+        "minecraft:brain_coral_block": "",
         "minecraft:brain_coral_fan": "",
         "minecraft:brewing_stand": "",
         "minecraft:brick_block": "",
+        "minecraft:brick_slab": "",
         "minecraft:brick_stairs": "",
         "minecraft:brown_candle": "",
         "minecraft:brown_candle_cake": "",
@@ -3199,6 +3309,7 @@
         "minecraft:brown_wool": "",
         "minecraft:bubble_column": "",
         "minecraft:bubble_coral": "",
+        "minecraft:bubble_coral_block": "",
         "minecraft:bubble_coral_fan": "",
         "minecraft:budding_amethyst": "",
         "minecraft:cactus": "",
@@ -3257,6 +3368,7 @@
         "minecraft:cobbled_deepslate_stairs": "",
         "minecraft:cobbled_deepslate_wall": "",
         "minecraft:cobblestone": "",
+        "minecraft:cobblestone_slab": "",
         "minecraft:cobblestone_wall": "",
         "minecraft:cocoa": "",
         "minecraft:colored_torch_bp": "",
@@ -3270,7 +3382,6 @@
         "minecraft:copper_grate": "",
         "minecraft:copper_ore": "",
         "minecraft:copper_trapdoor": "",
-        "minecraft:coral_block": "",
         "minecraft:coral_fan_hang": "",
         "minecraft:coral_fan_hang2": "",
         "minecraft:coral_fan_hang3": "",
@@ -3335,14 +3446,19 @@
         "minecraft:daylight_detector": "",
         "minecraft:daylight_detector_inverted": "",
         "minecraft:dead_brain_coral": "",
+        "minecraft:dead_brain_coral_block": "",
         "minecraft:dead_brain_coral_fan": "",
         "minecraft:dead_bubble_coral": "",
+        "minecraft:dead_bubble_coral_block": "",
         "minecraft:dead_bubble_coral_fan": "",
         "minecraft:dead_fire_coral": "",
+        "minecraft:dead_fire_coral_block": "",
         "minecraft:dead_fire_coral_fan": "",
         "minecraft:dead_horn_coral": "",
+        "minecraft:dead_horn_coral_block": "",
         "minecraft:dead_horn_coral_fan": "",
         "minecraft:dead_tube_coral": "",
+        "minecraft:dead_tube_coral_block": "",
         "minecraft:dead_tube_coral_fan": "",
         "minecraft:deadbush": "",
         "minecraft:decorated_pot": "",
@@ -3375,7 +3491,6 @@
         "minecraft:dirt_with_roots": "",
         "minecraft:dispenser": "",
         "minecraft:double_cut_copper_slab": "",
-        "minecraft:double_plant": "",
         "minecraft:double_stone_block_slab": "",
         "minecraft:double_stone_block_slab2": "",
         "minecraft:double_stone_block_slab3": "",
@@ -3526,8 +3641,10 @@
         "minecraft:exposed_double_cut_copper_slab": "",
         "minecraft:farmland": "",
         "minecraft:fence_gate": "",
+        "minecraft:fern": "",
         "minecraft:fire": "",
         "minecraft:fire_coral": "",
+        "minecraft:fire_coral_block": "",
         "minecraft:fire_coral_fan": "",
         "minecraft:fletching_table": "",
         "minecraft:flower_pot": "",
@@ -3619,6 +3736,7 @@
         "minecraft:honeycomb_block": "",
         "minecraft:hopper": "",
         "minecraft:horn_coral": "",
+        "minecraft:horn_coral_block": "",
         "minecraft:horn_coral_fan": "",
         "minecraft:ice": "",
         "minecraft:infested_deepslate": "",
@@ -3655,6 +3773,7 @@
         "minecraft:lapis_block": "",
         "minecraft:lapis_ore": "",
         "minecraft:large_amethyst_bud": "",
+        "minecraft:large_fern": "",
         "minecraft:lava": "",
         "minecraft:lectern": "",
         "minecraft:lever": "",
@@ -3682,6 +3801,7 @@
         "minecraft:light_gray_wool": "",
         "minecraft:light_weighted_pressure_plate": "",
         "minecraft:lightning_rod": "",
+        "minecraft:lilac": "",
         "minecraft:lily_of_the_valley": "",
         "minecraft:lime_candle": "",
         "minecraft:lime_candle_cake": "",
@@ -3754,6 +3874,7 @@
         "minecraft:mycelium": "",
         "minecraft:nether_brick": "",
         "minecraft:nether_brick_fence": "",
+        "minecraft:nether_brick_slab": "",
         "minecraft:nether_brick_stairs": "",
         "minecraft:nether_gold_ore": "",
         "minecraft:nether_sprouts": "",
@@ -3803,6 +3924,8 @@
         "minecraft:packed_ice": "",
         "minecraft:packed_mud": "",
         "minecraft:pearlescent_froglight": "",
+        "minecraft:peony": "",
+        "minecraft:petrified_oak_slab": "",
         "minecraft:pink_candle": "",
         "minecraft:pink_candle_cake": "",
         "minecraft:pink_carpet": "",
@@ -3878,6 +4001,7 @@
         "minecraft:quartz_block": "",
         "minecraft:quartz_bricks": "",
         "minecraft:quartz_ore": "",
+        "minecraft:quartz_slab": "",
         "minecraft:quartz_stairs": "",
         "minecraft:rail": "",
         "minecraft:raw_copper_block": "",
@@ -3911,8 +4035,10 @@
         "minecraft:repeating_command_block": "",
         "minecraft:reserved6": "",
         "minecraft:respawn_anchor": "",
+        "minecraft:rose_bush": "",
         "minecraft:sand": "",
         "minecraft:sandstone": "",
+        "minecraft:sandstone_slab": "",
         "minecraft:sandstone_stairs": "",
         "minecraft:scaffolding": "",
         "minecraft:sculk": "",
@@ -3923,6 +4049,7 @@
         "minecraft:sea_lantern": "",
         "minecraft:sea_pickle": "",
         "minecraft:seagrass": "",
+        "minecraft:short_grass": "",
         "minecraft:shroomlight": "",
         "minecraft:silver_glazed_terracotta": "",
         "minecraft:skull": "",
@@ -3936,6 +4063,7 @@
         "minecraft:smooth_red_sandstone_stairs": "",
         "minecraft:smooth_sandstone_stairs": "",
         "minecraft:smooth_stone": "",
+        "minecraft:smooth_stone_slab": "",
         "minecraft:sniffer_egg": "",
         "minecraft:snow": "",
         "minecraft:snow_layer": "",
@@ -3969,10 +4097,10 @@
         "minecraft:sticky_piston": "",
         "minecraft:sticky_piston_arm_collision": "",
         "minecraft:stone": "",
-        "minecraft:stone_block_slab": "",
         "minecraft:stone_block_slab2": "",
         "minecraft:stone_block_slab3": "",
         "minecraft:stone_block_slab4": "",
+        "minecraft:stone_brick_slab": "",
         "minecraft:stone_brick_stairs": "",
         "minecraft:stone_button": "",
         "minecraft:stone_pressure_plate": "",
@@ -4003,10 +4131,11 @@
         "minecraft:stripped_warped_stem": "",
         "minecraft:structure_block": "",
         "minecraft:structure_void": "",
+        "minecraft:sunflower": "",
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
-        "minecraft:tallgrass": "",
+        "minecraft:tall_grass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
         "minecraft:tnt": "",
@@ -4019,6 +4148,7 @@
         "minecraft:trip_wire": "",
         "minecraft:tripwire_hook": "",
         "minecraft:tube_coral": "",
+        "minecraft:tube_coral_block": "",
         "minecraft:tube_coral_fan": "",
         "minecraft:tuff": "",
         "minecraft:tuff_brick_double_slab": "",
@@ -4217,6 +4347,7 @@
         "mule": "0x02118425 (0x25)",
         "npc": "0x00000307 (0x51)",
         "ocelot": "0x00021270 (0x22)",
+        "ominous_item_spawner": "0x00000145 (0x145)",
         "painting": "0x00000083 (0x83)",
         "panda": "0x00004977 (0x113)",
         "parrot": "0x00021278 (0x30)",
@@ -4357,12 +4488,6 @@
                     "name": "minecraft:crafting_table",
                     "type": "JSON Object",
                     "defaultValue": "",
-                },
-                {
-                    "name": "",
-                    "type": "",
-                    "defaultValue": "",
-                    "description": "Experimental toggles required: Holiday Creator Features",
                 },
                 {
                     "name": "minecraft:custom_components",
@@ -5077,57 +5202,6 @@
                 },
             ],
         },
-        "volume_components": {
-            "description": "",
-            "children": [
-                {
-                    "name": "minecraft:fog",
-                    "type": "",
-                    "defaultValue": "",
-                    "description": "Displays the given fog whenever a player enters the volume. Each volume can only have one fog attached.",
-                    "children": [
-                        {
-                            "name": "fog_identifier",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "The identifier of a fog definition. Note that you will not receive any feedback if the definition does not exist.",
-                        },
-                        {
-                            "name": "priority",
-                            "type": "Integer",
-                            "defaultValue": "INT_MAX",
-                            "description": "The priority for this fog definition setting. Smaller numbers have higher priority. Fogs with equal priority will be combined together.",
-                        },
-                    ],
-                },
-                {
-                    "name": "minecraft:on_actor_enter",
-                    "type": "",
-                    "defaultValue": "",
-                    "description": "Component that defines what happens when an actor enters the volume. Can contain multiple json objects.",
-                    "children": [
-                        {
-                            "name": "on_enter",
-                            "type": "Array",
-                            "defaultValue": "",
-                        },
-                    ],
-                },
-                {
-                    "name": "minecraft:on_actor_leave",
-                    "type": "",
-                    "defaultValue": "",
-                    "description": "Component that defines what happens when an actor leaves the volume.",
-                    "children": [
-                        {
-                            "name": "on_leave",
-                            "type": "Array",
-                            "defaultValue": "",
-                        },
-                    ],
-                },
-            ],
-        },
     },
     "entitySpawnRuleConditionComponent": {
         "minecraft:biome_filter": "This component allows the players to specify which biomes the mob spawns in. Check below to see which Biome Tags exist, and what each biome is tagged as.",
@@ -5772,12 +5846,6 @@
                     "description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit.",
                 },
                 {
-                    "name": "cooldown_time",
-                    "type": "Decimal",
-                    "defaultValue": "1",
-                    "description": "Cooldown time (in seconds) between attacks.",
-                },
-                {
                     "name": "hit_delay_pct",
                     "type": "Decimal",
                     "defaultValue": "0.5",
@@ -5852,7 +5920,7 @@
                 {
                     "name": "reach_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "2",
+                    "defaultValue": "1.5",
                     "description": "Used with the base size of the entity to determine minimum target-distance before trying to deal attack damage.",
                 },
                 {
@@ -5882,7 +5950,7 @@
                 {
                     "name": "track_target",
                     "type": "Boolean",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "description": "Allows the entity to track the attack target, even if the entity has no sensing.",
                 },
                 {
@@ -5952,7 +6020,7 @@
                 {
                     "name": "active_speed",
                     "type": "Decimal",
-                    "defaultValue": "1",
+                    "defaultValue": "3",
                     "description": "The speed this entity moves when this behavior has started or while it's active.",
                 },
                 {
@@ -6016,7 +6084,7 @@
                 {
                     "name": "active_speed",
                     "type": "Decimal",
-                    "defaultValue": "1",
+                    "defaultValue": "0.6",
                     "description": "The speed this entity moves when this behavior has started or while it's active.",
                 },
                 {
@@ -7421,13 +7489,13 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "filters",
@@ -7439,19 +7507,19 @@
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the nearest entity.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the nearest entity.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7462,31 +7530,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the nearest player.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the nearest player.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7497,31 +7565,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at this mob's current target.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at this mob's current target.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -7532,31 +7600,31 @@
                     "name": "angle_of_view_horizontal",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                 },
                 {
                     "name": "angle_of_view_vertical",
                     "type": "Integer",
                     "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                 },
                 {
                     "name": "look_distance",
                     "type": "Decimal",
                     "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at",
+                    "description": "The distance in blocks from which the entity will look at the player this mob is trading with.",
                 },
                 {
                     "name": "look_time",
                     "type": "Range [a, b]",
                     "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the entity",
+                    "description": "Time range to look at the player this mob is trading with.",
                 },
                 {
                     "name": "probability",
                     "type": "Decimal",
                     "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%",
+                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
                 },
             ],
         },
@@ -8843,7 +8911,7 @@
                 {
                     "name": "damage_sources",
                     "type": "List",
-                    "defaultValue": "all",
+                    "defaultValue": "[campfire, entity_attack, entity_explosion, fire, fire_tick, fireworks, freezing, lava, lightning, magic, magma, projectile, ram_attack, sonic_boom, soul_campfire, temperature, wither]",
                     "description": "The list of Entity Damage Sources that will cause this mob to panic",
                 },
                 {
@@ -9221,6 +9289,12 @@
                     "type": "Boolean",
                     "defaultValue": "true",
                     "description": "If true, the mob can stop flying and land on a tree instead of the ground",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Movement speed multiplier of the mob when using this AI Goal",
                 },
                 {
                     "name": "xz_dist",
@@ -10389,12 +10463,6 @@
                     "description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied).",
                 },
                 {
-                    "name": "melee_fov",
-                    "type": "Decimal",
-                    "defaultValue": "90",
-                    "description": "Field of view (in degrees) when using the sensing component to detect an attack target.",
-                },
-                {
                     "name": "min_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.2",
@@ -11336,18 +11404,6 @@
                     "type": "Trigger",
                     "defaultValue": "",
                     "description": "Event to run when the mob reaches their jobsite.",
-                },
-                {
-                    "name": "sound_delay_max",
-                    "type": "Integer",
-                    "defaultValue": "N/A",
-                    "description": "Unused.",
-                },
-                {
-                    "name": "sound_delay_min",
-                    "type": "Integer",
-                    "defaultValue": "N/A",
-                    "description": "Unused.",
                 },
                 {
                     "name": "speed_multiplier",
@@ -13496,6 +13552,17 @@
                 },
             ],
         },
+        "minecraft:mob_effect_immunity": {
+            "description": "Entities with this component will have an immunity to the provided mob effects.",
+            "children": [
+                {
+                    "name": "mob_effects",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "List of names of effects the entity is immune to.",
+                },
+            ],
+        },
         "minecraft:movement.amphibious": {
             "description": "This move control allows the mob to swim in water and walk on land.",
             "children": [
@@ -14599,6 +14666,12 @@
                     "description": "The gravity applied to this entity when thrown. The higher the value, the faster the entity falls",
                 },
                 {
+                    "name": "hit_nearest_passenger",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, when hitting a vehicle, and there's at least one passenger in the vehicle, the damage will be dealt to the passenger closest to the projectile impact point. If there are no passengers, this setting does nothing.",
+                },
+                {
                     "name": "hit_sound",
                     "type": "String",
                     "defaultValue": "",
@@ -14609,6 +14682,12 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the projectile homes in to the nearest entity",
+                },
+                {
+                    "name": "ignored_entities",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "[EXPERIMENTAL] An array of strings defining the types of entities that this entity does not collide with.",
                 },
                 {
                     "name": "inertia",
@@ -14832,6 +14911,41 @@
                     "type": "List",
                     "defaultValue": "[ ]",
                     "description": "A list of weighted responses to the melee attack being blocked",
+                },
+            ],
+        },
+        "minecraft:reflect_projectiles": {
+            "description": "[EXPERIMENTAL] Allows an entity to reflect projectiles.",
+            "children": [
+                {
+                    "name": "azimuth_angle",
+                    "type": "Molang",
+                    "defaultValue": "0",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's y axis rotation.",
+                },
+                {
+                    "name": "elevation_angle",
+                    "type": "Molang",
+                    "defaultValue": "0",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's x axis rotation.",
+                },
+                {
+                    "name": "reflected_projectiles",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "[EXPERIMENTAL] An array of strings defining the types of projectiles that are reflected when they hit the entity.",
+                },
+                {
+                    "name": "reflection_scale",
+                    "type": "Molang",
+                    "defaultValue": "1",
+                    "description": "[EXPERIMENTAL] A Molang expression defining the velocity scaling of the reflected projectile. Values below 1 decrease the projectile's velocity, and values above 1 increase it.",
+                },
+                {
+                    "name": "reflection_sound",
+                    "type": "String",
+                    "defaultValue": "reflect",
+                    "description": "[EXPERIMENTAL] A string defining the name of the sound event to be played when a projectile is reflected. \"reflect\" unless specified.",
                 },
             ],
         },
@@ -15132,23 +15246,6 @@
                     "type": "String",
                     "defaultValue": "plop",
                     "description": "Identifier of the sound effect to play when the entity is spawned.",
-                },
-            ],
-        },
-        "minecraft:strength": {
-            "description": "Defines the entity's strength to carry items.",
-            "children": [
-                {
-                    "name": "max",
-                    "type": "Integer",
-                    "defaultValue": "5",
-                    "description": "The maximum strength of this entity",
-                },
-                {
-                    "name": "value",
-                    "type": "Integer",
-                    "defaultValue": "1",
-                    "description": "The initial value of the strength",
                 },
             ],
         },
@@ -16040,6 +16137,7 @@
         "query.has_collision": "Returns 1.0 if the entity has collisions enabled, else it returns 0.0.",
         "query.has_dash_cooldown": "Returns 1.0 if the entity has cooldown on its dash, else it returns 0.0",
         "query.has_gravity": "Returns 1.0 if the entity is affected by gravity, else it returns 0.0.",
+        "query.has_head_gear": "Returns boolean whether an Actor has an item in their head armor slot or not, or false if no actor in current context",
         "query.has_owner": "Returns true if the entity has an owner ID else it returns false",
         "query.has_player_rider": "Returns 1 if the entity has a player riding it in any seat, else it returns 0.",
         "query.has_property": "Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise.",
@@ -16247,5 +16345,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.state_time": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Only valid in an animation controller. Returns the time in seconds in the current animation controller state.",
+    },
 }

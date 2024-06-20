@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.20.80.5",
+    "version": "1.21.0.3",
     "content": [],
     "sections": [
         {
@@ -59,25 +59,42 @@
                     "level": 2,
                     "content": [
                         "This sets the color or texture used for the entity Spawn Egg. There are 2 ways to do this. The first is to use the hex value for the base color and the overlay color.",
-                        "When there are more than one texture associated with a texture name you can use an index to pick the one that you want. If no index is specified than it is assumed to be 0 and the first texture in the list is used.",
-                        "Example Spawn Egg specifying a texture",
+                    ],
+                    "sections": [
                         {
-                            "type": "code",
+                            "name": "Hex Value",
+                            "id": "Hex Value",
+                            "level": 4,
                             "content": [
-                                "\"spawn_egg\": {",
-                                "  \"texture\": \"spawn_egg\", ",
-                                "  \"texture_index\": 2",
-                                "}",
+                                "Example Spawn Egg using hex value",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "\"spawn_egg\": {",
+                                        "  \"base_color\": \"#53443E\",",
+                                        "  \"overlay_color\": \"#2E6854\"",
+                                        "}",
+                                    ],
+                                },
                             ],
                         },
-                        "Example Spawn Egg using hex value",
                         {
-                            "type": "code",
+                            "name": "Texture",
+                            "id": "Texture",
+                            "level": 4,
                             "content": [
-                                "\"spawn_egg\": {",
-                                "  \"base_color\": \"#53443E\",",
-                                "  \"overlay_color\": \"#2E6854\"",
-                                "}",
+                                "The other way is to specify a texture.",
+                                "Example Spawn Egg specifying a texture. The texture is located in the \"items_texture\" JSON in the textures folder of the Resource Pack. When there are more than one texture associated with a texture name you can use an index to pick the one that you want. If no index is specified than it is assumed to be 0 and the first texture in the list is used.",
+                                "Example Spawn Egg specifying a texture",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "\"spawn_egg\": {",
+                                        "  \"texture\": \"spawn_egg\", ",
+                                        "  \"texture_index\": 2",
+                                        "}",
+                                    ],
+                                },
                             ],
                         },
                     ],
@@ -633,7 +650,7 @@
                                         },
                                         {
                                             "Biome": "Frozen Ocean",
-                                            "Tags": "ocean, frozen",
+                                            "Tags": "ocean, frozen, monster",
                                         },
                                         {
                                             "Biome": "Frozen River",
@@ -14584,12 +14601,6 @@
                                             "Description": "If the entity is on fire, this allows the entity's target to catch on fire after being hit.",
                                         },
                                         {
-                                            "Name": "cooldown_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "Cooldown time (in seconds) between attacks.",
-                                        },
-                                        {
                                             "Name": "hit_delay_pct",
                                             "Type": "Decimal",
                                             "Default Value": "0.5",
@@ -14664,7 +14675,7 @@
                                         {
                                             "Name": "reach_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "2",
+                                            "Default Value": "1.5",
                                             "Description": "Used with the base size of the entity to determine minimum target-distance before trying to deal attack damage.",
                                         },
                                         {
@@ -14694,7 +14705,7 @@
                                         {
                                             "Name": "track_target",
                                             "Type": "Boolean",
-                                            "Default Value": "false",
+                                            "Default Value": "true",
                                             "Description": "Allows the entity to track the attack target, even if the entity has no sensing.",
                                         },
                                         {
@@ -14788,7 +14799,7 @@
                                         {
                                             "Name": "active_speed",
                                             "Type": "Decimal",
-                                            "Default Value": "1",
+                                            "Default Value": "3",
                                             "Description": "The speed this entity moves when this behavior has started or while it's active.",
                                         },
                                         {
@@ -14900,7 +14911,7 @@
                                         {
                                             "Name": "active_speed",
                                             "Type": "Decimal",
-                                            "Default Value": "1",
+                                            "Default Value": "0.6",
                                             "Description": "The speed this entity moves when this behavior has started or while it's active.",
                                         },
                                         {
@@ -16640,13 +16651,13 @@
                                             "Name": "angle_of_view_horizontal",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                                         },
                                         {
                                             "Name": "angle_of_view_vertical",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                                         },
                                         {
                                             "Name": "filters",
@@ -16658,19 +16669,19 @@
                                             "Name": "look_distance",
                                             "Type": "Decimal",
                                             "Default Value": "8.0",
-                                            "Description": "The distance in blocks from which the entity will look at",
+                                            "Description": "The distance in blocks from which the entity will look at the nearest entity.",
                                         },
                                         {
                                             "Name": "look_time",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[2, 4]",
-                                            "Description": "Time range to look at the entity",
+                                            "Description": "Time range to look at the nearest entity.",
                                         },
                                         {
                                             "Name": "probability",
                                             "Type": "Decimal",
                                             "Default Value": "0.02",
-                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%",
+                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%.",
                                         },
                                     ],
                                 },
@@ -16689,31 +16700,31 @@
                                             "Name": "angle_of_view_horizontal",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                                         },
                                         {
                                             "Name": "angle_of_view_vertical",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                                         },
                                         {
                                             "Name": "look_distance",
                                             "Type": "Decimal",
                                             "Default Value": "8.0",
-                                            "Description": "The distance in blocks from which the entity will look at",
+                                            "Description": "The distance in blocks from which the entity will look at the nearest player.",
                                         },
                                         {
                                             "Name": "look_time",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[2, 4]",
-                                            "Description": "Time range to look at the entity",
+                                            "Description": "Time range to look at the nearest player.",
                                         },
                                         {
                                             "Name": "probability",
                                             "Type": "Decimal",
                                             "Default Value": "0.02",
-                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%",
+                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%.",
                                         },
                                     ],
                                 },
@@ -16732,31 +16743,31 @@
                                             "Name": "angle_of_view_horizontal",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                                         },
                                         {
                                             "Name": "angle_of_view_vertical",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                                         },
                                         {
                                             "Name": "look_distance",
                                             "Type": "Decimal",
                                             "Default Value": "8.0",
-                                            "Description": "The distance in blocks from which the entity will look at",
+                                            "Description": "The distance in blocks from which the entity will look at this mob's current target.",
                                         },
                                         {
                                             "Name": "look_time",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[2, 4]",
-                                            "Description": "Time range to look at the entity",
+                                            "Description": "Time range to look at this mob's current target.",
                                         },
                                         {
                                             "Name": "probability",
                                             "Type": "Decimal",
                                             "Default Value": "0.02",
-                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%",
+                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%.",
                                         },
                                     ],
                                 },
@@ -16775,31 +16786,31 @@
                                             "Name": "angle_of_view_horizontal",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down)",
+                                            "Description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
                                         },
                                         {
                                             "Name": "angle_of_view_vertical",
                                             "Type": "Integer",
                                             "Default Value": "360",
-                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right)",
+                                            "Description": "The angle in degrees that the mob can see in the X-axis (left-right).",
                                         },
                                         {
                                             "Name": "look_distance",
                                             "Type": "Decimal",
                                             "Default Value": "8.0",
-                                            "Description": "The distance in blocks from which the entity will look at",
+                                            "Description": "The distance in blocks from which the entity will look at the player this mob is trading with.",
                                         },
                                         {
                                             "Name": "look_time",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[2, 4]",
-                                            "Description": "Time range to look at the entity",
+                                            "Description": "Time range to look at the player this mob is trading with.",
                                         },
                                         {
                                             "Name": "probability",
                                             "Type": "Decimal",
                                             "Default Value": "0.02",
-                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%",
+                                            "Description": "The probability of looking at the target. A value of 1.00 is 100%.",
                                         },
                                     ],
                                 },
@@ -18338,7 +18349,7 @@
                                         {
                                             "Name": "damage_sources",
                                             "Type": "List",
-                                            "Default Value": "all",
+                                            "Default Value": "[campfire, entity_attack, entity_explosion, fire, fire_tick, fireworks, freezing, lava, lightning, magic, magma, projectile, ram_attack, sonic_boom, soul_campfire, temperature, wither]",
                                             "Description": "The list of Entity Damage Sources that will cause this mob to panic",
                                         },
                                         {
@@ -18796,6 +18807,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "true",
                                             "Description": "If true, the mob can stop flying and land on a tree instead of the ground",
+                                        },
+                                        {
+                                            "Name": "speed_multiplier",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.0",
+                                            "Description": "Movement speed multiplier of the mob when using this AI Goal",
                                         },
                                         {
                                             "Name": "xz_dist",
@@ -20291,12 +20308,6 @@
                                             "Description": "Maximum base time (in seconds) to recalculate new attack path to target (before increases applied).",
                                         },
                                         {
-                                            "Name": "melee_fov",
-                                            "Type": "Decimal",
-                                            "Default Value": "90",
-                                            "Description": "Field of view (in degrees) when using the sensing component to detect an attack target.",
-                                        },
-                                        {
                                             "Name": "min_path_time",
                                             "Type": "Decimal",
                                             "Default Value": "0.2",
@@ -21426,18 +21437,6 @@
                                             "Type": "Trigger",
                                             "Default Value": "",
                                             "Description": "Event to run when the mob reaches their jobsite.",
-                                        },
-                                        {
-                                            "Name": "sound_delay_max",
-                                            "Type": "Integer",
-                                            "Default Value": "N/A",
-                                            "Description": "Unused.",
-                                        },
-                                        {
-                                            "Name": "sound_delay_min",
-                                            "Type": "Integer",
-                                            "Default Value": "N/A",
-                                            "Description": "Unused.",
                                         },
                                         {
                                             "Name": "speed_multiplier",
@@ -23847,6 +23846,33 @@
                                                         {
                                                             "type": "code",
                                                             "content": [
+                                                                "Valid damage causes. An invalid value will result in the default cause of \"none\" being selected.",
+                                                                "override",
+                                                                "contact",
+                                                                "entity_attack",
+                                                                "projectile",
+                                                                "suffocation",
+                                                                "fall",
+                                                                "fire",
+                                                                "fire_tick",
+                                                                "lava",
+                                                                "drowning",
+                                                                "block_explosion",
+                                                                "entity_explosion",
+                                                                "void",
+                                                                "SelfDestruct",
+                                                                "magic",
+                                                                "wither",
+                                                                "starve",
+                                                                "anvil",
+                                                                "thorns",
+                                                                "falling_block",
+                                                                "piston",
+                                                                "magma",
+                                                                "fireworks",
+                                                                "charging",
+                                                                "temperature",
+                                                                "all",
                                                                 "none",
                                                             ],
                                                         },
@@ -24341,6 +24367,25 @@
                                             "Type": "String",
                                             "Default Value": "",
                                             "Description": "The mob effect that is applied to entities that enter this entities effect range.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:mob_effect_immunity",
+                            "id": "minecraft:mob_effect_immunity",
+                            "level": 4,
+                            "content": [
+                                "Entities with this component will have an immunity to the provided mob effects.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "mob_effects",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "List of names of effects the entity is immune to.",
                                         },
                                     ],
                                 },
@@ -25628,6 +25673,12 @@
                                             "Description": "The gravity applied to this entity when thrown. The higher the value, the faster the entity falls",
                                         },
                                         {
+                                            "Name": "hit_nearest_passenger",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, when hitting a vehicle, and there's at least one passenger in the vehicle, the damage will be dealt to the passenger closest to the projectile impact point. If there are no passengers, this setting does nothing.",
+                                        },
+                                        {
                                             "Name": "hit_sound",
                                             "Type": "String",
                                             "Default Value": "",
@@ -25638,6 +25689,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, the projectile homes in to the nearest entity",
+                                        },
+                                        {
+                                            "Name": "ignored_entities",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "[EXPERIMENTAL] An array of strings defining the types of entities that this entity does not collide with.",
                                         },
                                         {
                                             "Name": "inertia",
@@ -25900,6 +25957,49 @@
                                             "Type": "List",
                                             "Default Value": "[ ]",
                                             "Description": "A list of weighted responses to the melee attack being blocked",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:reflect_projectiles",
+                            "id": "minecraft:reflect_projectiles",
+                            "level": 4,
+                            "content": [
+                                "[EXPERIMENTAL] Allows an entity to reflect projectiles.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "azimuth_angle",
+                                            "Type": "Molang",
+                                            "Default Value": "0",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's y axis rotation.",
+                                        },
+                                        {
+                                            "Name": "elevation_angle",
+                                            "Type": "Molang",
+                                            "Default Value": "0",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the angle in degrees to add to the projectile's x axis rotation.",
+                                        },
+                                        {
+                                            "Name": "reflected_projectiles",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "[EXPERIMENTAL] An array of strings defining the types of projectiles that are reflected when they hit the entity.",
+                                        },
+                                        {
+                                            "Name": "reflection_scale",
+                                            "Type": "Molang",
+                                            "Default Value": "1",
+                                            "Description": "[EXPERIMENTAL] A Molang expression defining the velocity scaling of the reflected projectile. Values below 1 decrease the projectile's velocity, and values above 1 increase it.",
+                                        },
+                                        {
+                                            "Name": "reflection_sound",
+                                            "Type": "String",
+                                            "Default Value": "reflect",
+                                            "Description": "[EXPERIMENTAL] A string defining the name of the sound event to be played when a projectile is reflected. \"reflect\" unless specified.",
                                         },
                                     ],
                                 },
@@ -26336,31 +26436,6 @@
                                             "Type": "String",
                                             "Default Value": "plop",
                                             "Description": "Identifier of the sound effect to play when the entity is spawned.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:strength",
-                            "id": "minecraft:strength",
-                            "level": 4,
-                            "content": [
-                                "Defines the entity's strength to carry items.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max",
-                                            "Type": "Integer",
-                                            "Default Value": "5",
-                                            "Description": "The maximum strength of this entity",
-                                        },
-                                        {
-                                            "Name": "value",
-                                            "Type": "Integer",
-                                            "Default Value": "1",
-                                            "Description": "The initial value of the strength",
                                         },
                                     ],
                                 },
@@ -27330,7 +27405,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.explore_outskirts",
-                                            "ID": "-1955198366",
+                                            "ID": "1573426610843290210",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.fertilize_farm_block",
@@ -27702,7 +27777,7 @@
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.slime_attack",
-                                            "ID": "-1315951081",
+                                            "ID": "9939462702916185623",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.slime_float",
@@ -28137,6 +28212,10 @@
                                             "ID": "490430596",
                                         },
                                         {
+                                            "JSON Name": "minecraft:mob_effect_immunity",
+                                            "ID": "1589547531",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:movement.amphibious",
                                             "ID": "-500784850",
                                         },
@@ -28247,6 +28326,10 @@
                                         {
                                             "JSON Name": "minecraft:ravager_blocked",
                                             "ID": "-1417579541",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:reflect_projectiles",
+                                            "ID": "-2073986952",
                                         },
                                         {
                                             "JSON Name": "minecraft:rideable",
@@ -29505,5 +29588,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "eb396daebc9c3c703588729107b51a547c3dfb4f",
+    "__OBJECTHASH__": "bfd26fd94e6642a15c03f59066e0464c45288fbb",
 }
