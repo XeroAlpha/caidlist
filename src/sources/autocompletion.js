@@ -395,7 +395,7 @@ async function analyzeCommandAutocompletionFastWin10(
             }
         });
 
-        const autocompletion = clipboardText.slice(command.length);
+        const autocompletion = clipboardText.slice(command.length).trim();
         if (autocompletions.includes(autocompletion)) {
             duplicatedCount++;
             setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
@@ -403,7 +403,7 @@ async function analyzeCommandAutocompletionFastWin10(
             if (duplicatedCount >= 5) {
                 break;
             }
-        } else {
+        } else if (autocompletion !== '') {
             const now = performance.now();
             const stepSpent = now - stepStart;
             stepStart = now;
