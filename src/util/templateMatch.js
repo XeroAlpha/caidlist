@@ -204,7 +204,7 @@ const formatInnerFunc = ({ context, originalValue, refs }, ...refResolvers) => {
     const [fmt, ...items] = resolvedRefs.map((e) => e.translation);
     return {
         state,
-        translation: format(fmt, ...items)
+        translation: format(fmt ?? '', ...items)
     };
 };
 const innerFunctions = {
@@ -222,7 +222,27 @@ const innerFunctions = {
         }
         context.warnings.push(...warnings);
         context.warnings.push(`[${context.name}] None of items is provided: ${originalValue}(${refs.join(',')})`);
-        return refResolvers[refResolvers.length - 1];
+        if (refResolvers.length > 0) {
+            return refResolvers[refResolvers.length - 1]();
+        }
+        return {
+            state: 'notFound',
+            translation: ''
+        };
+    },
+    if_exists: ({ context, originalValue, options, refs }, ...refResolvers) => {
+        const { originalArray } = options;
+        if (refs.length !== 3) {
+            context.warnings.push(`[${context.name}] Expect 3 arguments instead of ${refs.length} argument(s): ${originalValue}`);
+            return {
+                state: 'notFound',
+                translation: ''
+            };
+        }
+        const testValue = refs[0];
+        const existResolver = refResolvers[1];
+        const nonexistResolver = refResolvers[2];
+        return originalArray.includes(testValue) ? existResolver() : nonexistResolver();
     }
 };
 
@@ -258,7 +278,7 @@ export function matchTranslations(options) {
                 }
                 return (cx) => translateCached(ref, { ...context, ...cx }, true);
             });
-            return func({ context, originalValue, options, refs }, ...refResolvers);
+            return func({ context, originalValue, options, refs, translateCached }, ...refResolvers);
         }
         if (insideTemplate && originalValue.includes('!')) { // 外部引用
             const translationMap = {};

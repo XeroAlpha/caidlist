@@ -234,6 +234,23 @@ export function isArraySetEqual(a, b) {
 
 export const stringComparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0);
 
+export function naturalOrderSort(arr) {
+    const splited = new Map(arr.map((t) => [
+        t,
+        t.split(/(\d+)/g).map((e, i) => (i % 2 === 0 ? e : Number(e)))
+    ]));
+    return arr.sort((a, b) => {
+        const aArr = splited.get(a);
+        const bArr = splited.get(b);
+        const minLen = Math.min(aArr.length, bArr.length);
+        for (let i = 0; i < minLen; i++) {
+            if (aArr[i] === bArr[i]) continue;
+            return aArr[i] > bArr[i] ? 1 : aArr[i] < bArr[i] ? -1 : 0;
+        }
+        return aArr.length - bArr.length;
+    });
+}
+
 export function sortObjectKey(o) {
     return kvArrayToObject(Object.entries(o).sort(stringComparator));
 }

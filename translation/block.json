@@ -463,10 +463,12 @@
     "powder_snow": "ST: powder snow", // 细雪
     "powered_comparator": "ST: powered redstone comparator", // 激活的红石比较器
     "powered_repeater": "ST: powered redstone repeater", // 激活的红石中继器
-    "prismarine": "ST: prismarine", // 海晶石
-    "prismarine.0": "ST: prismarine", // 海晶石
-    "prismarine.1": "ST: dark prismarine", // 暗海晶石
-    "prismarine.2": "ST: prismarine bricks", // 海晶石砖
+    "prismarine": "{{if_exists|dark_prismarine|prismarine.current|prismarine.legacy}}", // 海晶石
+    "prismarine.current": "ST: prismarine", // 海晶石
+    "prismarine.legacy": "{{#0}}/{{#1}}/{{#2}}", // 海晶石/暗海晶石/海晶石砖
+    "prismarine.legacy.0": "ST: prismarine", // 海晶石
+    "prismarine.legacy.1": "ST: dark prismarine", // 暗海晶石
+    "prismarine.legacy.2": "ST: prismarine bricks", // 海晶石砖
     "prismarine_bricks_stairs": "ST: prismarine brick stairs", // 海晶石砖楼梯
     "prismarine_stairs": "ST: prismarine stairs", // 海晶石楼梯
     "pumpkin": "ST: pumpkin", // 南瓜
@@ -529,11 +531,13 @@
     "sand": "{{#0}}/{{#1}}", // 沙子/红沙
     "sand.0": "ST: sand", // 沙子
     "sand.1": "ST: red sand", // 红沙
-    "sandstone": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 砂岩/雕纹砂岩/切制砂岩/平滑砂岩
-    "sandstone.0": "ST: sandstone", // 砂岩
-    "sandstone.1": "ST: chiseled sandstone", // 雕纹砂岩
-    "sandstone.2": "ST: cut sandstone", // 切制砂岩
-    "sandstone.3": "ST: smooth sandstone", // 平滑砂岩
+    "sandstone": "{{if_exists|chiseled_sandstone|sandstone.current|sandstone.legacy}}", // 砂岩
+    "sandstone.current": "ST: sandstone", // 砂岩
+    "sandstone.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 砂岩/雕纹砂岩/切制砂岩/平滑砂岩
+    "sandstone.legacy.0": "ST: sandstone", // 砂岩
+    "sandstone.legacy.1": "ST: chiseled sandstone", // 雕纹砂岩
+    "sandstone.legacy.2": "ST: cut sandstone", // 切制砂岩
+    "sandstone.legacy.3": "ST: smooth sandstone", // 平滑砂岩
     "sandstone_stairs": "ST: sandstone stairs", // 砂岩楼梯
     "sapling": "{{#0}}/{{#1}}/{{#2}}/{{#3}}/{{#4}}/{{#5}}", // 橡树树苗/云杉树苗/白桦树苗/丛林树苗/金合欢树苗/深色橡树树苗
     "sapling.0": "ST: oak sapling", // 橡树树苗
@@ -750,7 +754,7 @@
     // Education
     "camera": "ST: camera", // 相机
     "chemical_heat": "ST: heat block", // 加热块
-    "chemistry_table": "{{chemistry_table.0}}/{{chemistry_table.4}}/{{chemistry_table.8}}/{{chemistry_table.12}}", // 化合物创建器/材料分解器/元素构造器/实验台
+    "chemistry_table": "{{#0}}/{{#4}}/{{#8}}/{{#12}}", // 化合物创建器/材料分解器/元素构造器/实验台
     "chemistry_table.0": "ST: compound creator", // 化合物创建器
     "chemistry_table.4": "ST: material reducer", // 材料分解器
     "chemistry_table.8": "ST: element constructor", // 元素构造器
@@ -1446,4 +1450,26 @@
     "smooth_quartz_double_slab": "ST: smooth quartz double slab", // 平滑石英双层台阶
     "smooth_red_sandstone_double_slab": "ST: smooth red sandstone double slab", // 平滑红砂岩双层台阶
     "smooth_sandstone_double_slab": "ST: smooth sandstone double slab", // 平滑砂岩双层台阶
+    // Modified in 1.21.20.21
+    "chiseled_sandstone": "ST: chiseled sandstone", // 雕纹砂岩
+    "cut_sandstone": "ST: cut sandstone", // 切制砂岩
+    "dandelion": "ST: dandelion", // 蒲公英
+    "smooth_sandstone": "ST: smooth sandstone", // 平滑砂岩
+    "light_block_*": "{{ST!light block}}（%s）", // 光源方块（%s）
+    "light_block_0": "{{light_block_*|'0}}", // 光源方块（0）
+    "light_block_1": "{{light_block_*|'1}}", // 光源方块（1）
+    "light_block_2": "{{light_block_*|'2}}", // 光源方块（2）
+    "light_block_3": "{{light_block_*|'3}}", // 光源方块（3）
+    "light_block_4": "{{light_block_*|'4}}", // 光源方块（4）
+    "light_block_5": "{{light_block_*|'5}}", // 光源方块（5）
+    "light_block_6": "{{light_block_*|'6}}", // 光源方块（6）
+    "light_block_7": "{{light_block_*|'7}}", // 光源方块（7）
+    "light_block_8": "{{light_block_*|'8}}", // 光源方块（8）
+    "light_block_9": "{{light_block_*|'9}}", // 光源方块（9）
+    "light_block_10": "{{light_block_*|'10}}", // 光源方块（10）
+    "light_block_11": "{{light_block_*|'11}}", // 光源方块（11）
+    "light_block_12": "{{light_block_*|'12}}", // 光源方块（12）
+    "light_block_13": "{{light_block_*|'13}}", // 光源方块（13）
+    "light_block_14": "{{light_block_*|'14}}", // 光源方块（14）
+    "light_block_15": "{{light_block_*|'15}}", // 光源方块（15）
 }

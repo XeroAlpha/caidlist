@@ -1,6 +1,6 @@
 {
     "title": "FEATURES DOCUMENTATION",
-    "version": "1.21.10.24",
+    "version": "1.21.20.21",
     "content": [],
     "sections": [
         {
@@ -2192,6 +2192,109 @@
                     ],
                 },
                 {
+                    "name": "Filter Group",
+                    "id": "Filter Group",
+                    "level": 2,
+                    "content": [
+                        "Filters allow data objects to specify test criteria which allows their use. Filters can be defined by a single object of type (Filter Test), an array of tests, collection groups, or a combination of these objects.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "AND",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates all tests in the group, all must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "NOT",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates all tests in the group, all must fail in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "OR",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates tests in the group, one or more must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "all",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates all tests in the group, all must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "all_of",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates all tests in the group, all must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "any",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates tests in the group, one or more must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "any_of",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates tests in the group, one or more must pass in order for the group to pass.",
+                                },
+                                {
+                                    "Name": "none_of",
+                                    "Type": "Object of type Filter Group",
+                                    "Required?": "Optional",
+                                    "Description": "Evaluates all tests in the group, all must fail in order for the group to pass.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Filter Test",
+                    "id": "Filter Test",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "The domain the test should be performed in.",
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "The comparison to apply with 'value'.",
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "The subject of this filter test.",
+                                },
+                                {
+                                    "Name": "test",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "The name of the test to apply.",
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "The value being compared with the test.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "Random Distribution Type",
                     "id": "Random Distribution Type",
                     "level": 2,
@@ -2292,7 +2395,7 @@
                                         "          object \"conditions\" // Parameters to control where and when the feature will be placed.",
                                         "          {",
                                         "              string \"placement_pass\" // When the feature should be placed relative to others. Earlier passes in the list are guaranteed to occur before later passes. Order is not guaranteed within each pass.",
-                                        "              biome_filter_group \"minecraft:biome_filter\" : opt // List of filter tests to determine which biomes this rule will attach to.",
+                                        "              biome_filter_group \"minecraft:biome_filter\" : opt // List of filter tests to determine which biomes this rule will attach to. Object of type FilterGroup",
                                         "          }",
                                         "          object \"distribution\" : opt // Parameters controlling the initial scatter of the feature. Object of type ScatterParams",
                                         "      }",
@@ -2306,5 +2409,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "80f400ff320df1eb7bbb2b488454bf87e86e7564",
+    "__OBJECTHASH__": "fc01be51deb120ebb918da0ff8bf91ea74d1069f",
 }

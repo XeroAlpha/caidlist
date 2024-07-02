@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { warn } from '../util/common.js';
+import { naturalOrderSort, warn } from '../util/common.js';
 
 function getInvalidStateValues(invalidStates, stateName) {
     const invalidValues = [];
@@ -18,7 +18,9 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
         'return {',
         `${indent}-- 自动生成`
     ];
-    for (const [blockId, blockInfo] of Object.entries(blockData)) {
+    const blockIds = naturalOrderSort(Object.keys(blockData));
+    for (const blockId of blockIds) {
+        const blockInfo = blockData[blockId];
         const blockIdWithoutNamespace = blockId.replace(/^minecraft:/, '');
         if (blockInfo.properties.length > 0) {
             lines.push(`${indent}['${blockIdWithoutNamespace}'] = {`);
@@ -47,7 +49,9 @@ export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) 
         'return {',
         `${indent}-- 自动生成`
     ];
-    for (const [property, propertyKinds] of Object.entries(blockProperties)) {
+    const properties = naturalOrderSort(Object.keys(blockProperties));
+    for (const property of properties) {
+        const propertyKinds = blockProperties[property];
         for (let i = 0; i < propertyKinds.length; i++) {
             const { validValues } = propertyKinds[i];
             const propertyName = i === 0 ? property : `${property}_${i}`;
@@ -67,7 +71,9 @@ export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
         `${indent}-- 自动生成`
     ];
     const mappedNames = new Set();
-    for (const [id, names] of Object.entries(blockTranslations)) {
+    const ids = naturalOrderSort(Object.keys(blockTranslations));
+    for (const id of ids) {
+        const names = blockTranslations[id];
         const idWithoutNamespace = id.replace(/^minecraft:/, '');
         for (const name of names.split('/')) {
             if (hiddenIds.includes(idWithoutNamespace)) continue;

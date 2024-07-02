@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.10.24",
+    "version": "1.21.20.21",
     "content": [],
     "sections": [
         {
@@ -8883,6 +8883,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"is_moving\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "is_navigating",
+                    "id": "is_navigating",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is currently pathfinding. Requires a \"minecraft:navigation\" component.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_navigating\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_navigating\" }",
                                     ],
                                 },
                             ],
@@ -20725,6 +20860,43 @@
                             ],
                         },
                         {
+                            "name": "minecraft:behavior.swim_up_for_breath",
+                            "id": "minecraft:behavior.swim_up_for_breath",
+                            "level": 4,
+                            "content": [
+                                "Allows the mob to try to move to air once it is close to running out of its total breathable supply. Requires \"minecraft:breathable\".",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "material_type",
+                                            "Type": "String",
+                                            "Default Value": "water",
+                                            "Description": "The material the mob is traveling in. An air block will only be considered valid to move to with a block of this material below it. Options are: \"water\", \"lava\", or \"any\".",
+                                        },
+                                        {
+                                            "Name": "search_height",
+                                            "Type": "Integer",
+                                            "Default Value": "16",
+                                            "Description": "The height (in blocks) above the mob's current position that it will search for a valid air block to move to. If a valid block cannot be found, the mob will move to the position this many blocks above it.",
+                                        },
+                                        {
+                                            "Name": "search_radius",
+                                            "Type": "Integer",
+                                            "Default Value": "4",
+                                            "Description": "The radius (in blocks) around the mob's current position that it will search for a valid air block to move to.",
+                                        },
+                                        {
+                                            "Name": "speed_mod",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.40",
+                                            "Description": "Movement speed multiplier of the mob when using this Goal.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:behavior.swim_wander",
                             "id": "minecraft:behavior.swim_wander",
                             "level": 4,
@@ -27899,6 +28071,10 @@
                                             "ID": "6562850329755828441",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.swim_up_for_breath",
+                                            "ID": "6795851152810947053",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.swim_wander",
                                             "ID": "12378924708543723854",
                                         },
@@ -29627,5 +29803,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "368cbbca31f9ce1db6d7707c3cdb471bcd93195f",
+    "__OBJECTHASH__": "47c8d45e6e4cb79252f8251392b6bf3c5a05016d",
 }

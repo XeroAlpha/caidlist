@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.10.24",
+    "packageVersion": "1.21.20.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -10857,6 +10857,20 @@
                                         "value": {
                                             "type": "object",
                                             "enumerableProperties": {
+                                                "airSupply": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
                                                 "breathesAir": {
                                                     "getter": {
                                                         "type": "function",
@@ -10882,6 +10896,14 @@
                                                     },
                                                 },
                                                 "breathesWater": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "canBreathe": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -10915,14 +10937,6 @@
                                                 },
                                                 "inhaleTime": {
                                                     "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "setAirSupply": {
-                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -25878,6 +25892,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isHardcore": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "playMusic": {
                                                     "value": {
                                                         "type": "function",
@@ -30290,16 +30312,18 @@
         "Minecraft.EntityBreathableComponent.componentId",
         "Minecraft.EntityBreathableComponent.prototype",
         "Minecraft.EntityBreathableComponent.prototype.[[Prototype]]",
+        "Minecraft.EntityBreathableComponent.prototype.airSupply.[[Get]]",
+        "Minecraft.EntityBreathableComponent.prototype.airSupply.[[Set]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesAir.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesLava.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesSolids.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.breathesWater.[[Get]]",
+        "Minecraft.EntityBreathableComponent.prototype.canBreathe.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.constructor",
         "Minecraft.EntityBreathableComponent.prototype.generatesBubbles.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.getBreatheBlocks",
         "Minecraft.EntityBreathableComponent.prototype.getNonBreatheBlocks",
         "Minecraft.EntityBreathableComponent.prototype.inhaleTime.[[Get]]",
-        "Minecraft.EntityBreathableComponent.prototype.setAirSupply",
         "Minecraft.EntityBreathableComponent.prototype.suffocateTime.[[Get]]",
         "Minecraft.EntityBreathableComponent.prototype.totalSupply.[[Get]]",
         "Minecraft.EntityCanClimbComponent",
@@ -32270,6 +32294,7 @@
         "Minecraft.World.prototype.getMoonPhase",
         "Minecraft.World.prototype.getPlayers",
         "Minecraft.World.prototype.getTimeOfDay",
+        "Minecraft.World.prototype.isHardcore.[[Get]]",
         "Minecraft.World.prototype.playMusic",
         "Minecraft.World.prototype.playSound",
         "Minecraft.World.prototype.queueMusic",
@@ -39787,6 +39812,33 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:chiseled_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "heiroglyphs",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:chiseled_stone_bricks": {
             "properties": [
                 {
@@ -41335,6 +41387,33 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:cut_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "cut",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:cut_sandstone_double_slab": {
             "properties": [
                 {
@@ -42101,6 +42180,12 @@
                     "color": "black",
                 },
             ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:dandelion": {
+            "properties": [],
+            "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -52322,7 +52407,525 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
-        "minecraft:light_block": {
+        "minecraft:light_block_0": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_1": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 1,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_10": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 10,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_11": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 11,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_12": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 12,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_13": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 13,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_14": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 14,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_15": {
             "properties": [
                 {
                     "name": "block_light_level",
@@ -52347,7 +52950,645 @@
                     "defaultValue": 15,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_2": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 2,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_3": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 3,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_4": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 4,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_5": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 5,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_6": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 6,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_7": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 7,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_8": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 8,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 9,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
+            "canBeWaterlogged": true,
+        },
+        "minecraft:light_block_9": {
+            "properties": [
+                {
+                    "name": "block_light_level",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 9,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "block_light_level": 0,
+                },
+                {
+                    "block_light_level": 1,
+                },
+                {
+                    "block_light_level": 2,
+                },
+                {
+                    "block_light_level": 3,
+                },
+                {
+                    "block_light_level": 4,
+                },
+                {
+                    "block_light_level": 5,
+                },
+                {
+                    "block_light_level": 6,
+                },
+                {
+                    "block_light_level": 7,
+                },
+                {
+                    "block_light_level": 8,
+                },
+                {
+                    "block_light_level": 10,
+                },
+                {
+                    "block_light_level": 11,
+                },
+                {
+                    "block_light_level": 12,
+                },
+                {
+                    "block_light_level": 13,
+                },
+                {
+                    "block_light_level": 14,
+                },
+                {
+                    "block_light_level": 15,
+                },
+            ],
             "canBeWaterlogged": true,
         },
         "minecraft:light_blue_candle": {
@@ -64228,7 +65469,17 @@
                     "defaultValue": "default",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -65327,6 +66578,33 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:smooth_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "smooth",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
         },
         "minecraft:smooth_sandstone_double_slab": {
             "properties": [
@@ -71522,12 +72800,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:yellow_flower": {
-            "properties": [],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:yellow_glazed_terracotta": {
             "properties": [
                 {
@@ -72118,7 +73390,22 @@
                     15,
                 ],
                 "defaultValue": {
-                    "minecraft:light_block": 15,
+                    "minecraft:light_block_0": 0,
+                    "minecraft:light_block_1": 1,
+                    "minecraft:light_block_10": 10,
+                    "minecraft:light_block_11": 11,
+                    "minecraft:light_block_12": 12,
+                    "minecraft:light_block_13": 13,
+                    "minecraft:light_block_14": 14,
+                    "minecraft:light_block_15": 15,
+                    "minecraft:light_block_2": 2,
+                    "minecraft:light_block_3": 3,
+                    "minecraft:light_block_4": 4,
+                    "minecraft:light_block_5": 5,
+                    "minecraft:light_block_6": 6,
+                    "minecraft:light_block_7": 7,
+                    "minecraft:light_block_8": 8,
+                    "minecraft:light_block_9": 9,
                 },
             },
         ],
@@ -74342,8 +75629,11 @@
                     "smooth",
                 ],
                 "defaultValue": {
+                    "minecraft:chiseled_sandstone": "heiroglyphs",
+                    "minecraft:cut_sandstone": "cut",
                     "minecraft:red_sandstone": "default",
                     "minecraft:sandstone": "default",
+                    "minecraft:smooth_sandstone": "smooth",
                 },
             },
         ],
@@ -75435,6 +76725,7 @@
             "minecraft:blue_orchid": {},
             "minecraft:cornflower": {},
             "minecraft:crimson_nylium": {},
+            "minecraft:dandelion": {},
             "minecraft:grass_block": {},
             "minecraft:lily_of_the_valley": {},
             "minecraft:moss_block": {},
@@ -75445,7 +76736,6 @@
             "minecraft:red_tulip": {},
             "minecraft:warped_nylium": {},
             "minecraft:white_tulip": {},
-            "minecraft:yellow_flower": {},
         },
         "grass": {
             "minecraft:dirt": {},
@@ -77121,6 +78411,9 @@
         "minecraft:chiseled_polished_blackstone": {
             "tags": [],
         },
+        "minecraft:chiseled_sandstone": {
+            "tags": [],
+        },
         "minecraft:chiseled_stone_bricks": {
             "tags": [
                 "minecraft:stone_bricks",
@@ -77474,6 +78767,9 @@
         "minecraft:cut_red_sandstone_slab": {
             "tags": [],
         },
+        "minecraft:cut_sandstone": {
+            "tags": [],
+        },
         "minecraft:cut_sandstone_slab": {
             "tags": [],
         },
@@ -77515,6 +78811,9 @@
                 "minecraft:vibration_damper",
                 "minecraft:wool",
             ],
+        },
+        "minecraft:dandelion": {
+            "tags": [],
         },
         "minecraft:danger_pottery_sherd": {
             "tags": [
@@ -80056,7 +81355,52 @@
         "minecraft:lever": {
             "tags": [],
         },
-        "minecraft:light_block": {
+        "minecraft:light_block_0": {
+            "tags": [],
+        },
+        "minecraft:light_block_1": {
+            "tags": [],
+        },
+        "minecraft:light_block_10": {
+            "tags": [],
+        },
+        "minecraft:light_block_11": {
+            "tags": [],
+        },
+        "minecraft:light_block_12": {
+            "tags": [],
+        },
+        "minecraft:light_block_13": {
+            "tags": [],
+        },
+        "minecraft:light_block_14": {
+            "tags": [],
+        },
+        "minecraft:light_block_15": {
+            "tags": [],
+        },
+        "minecraft:light_block_2": {
+            "tags": [],
+        },
+        "minecraft:light_block_3": {
+            "tags": [],
+        },
+        "minecraft:light_block_4": {
+            "tags": [],
+        },
+        "minecraft:light_block_5": {
+            "tags": [],
+        },
+        "minecraft:light_block_6": {
+            "tags": [],
+        },
+        "minecraft:light_block_7": {
+            "tags": [],
+        },
+        "minecraft:light_block_8": {
+            "tags": [],
+        },
+        "minecraft:light_block_9": {
             "tags": [],
         },
         "minecraft:light_blue_candle": {
@@ -81868,6 +83212,9 @@
         "minecraft:smooth_red_sandstone_stairs": {
             "tags": [],
         },
+        "minecraft:smooth_sandstone": {
+            "tags": [],
+        },
         "minecraft:smooth_sandstone_slab": {
             "tags": [],
         },
@@ -83142,9 +84489,6 @@
             "tags": [],
         },
         "minecraft:yellow_dye": {
-            "tags": [],
-        },
-        "minecraft:yellow_flower": {
             "tags": [],
         },
         "minecraft:yellow_glazed_terracotta": {

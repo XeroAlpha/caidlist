@@ -1,6 +1,6 @@
 {
-    "__VERSION__": "1.21.10.24",
-    "__COMMITHASH__": "bf54a19558826cf06d6598b76a6837dc2711e4f8",
+    "__VERSION__": "1.21.20.21",
+    "__COMMITHASH__": "4f6f952ac1243794f06380d61940005dbcf0454d",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -850,6 +850,14 @@
                             ],
                         },
                         {
+                            "name": "is_navigating",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "is_owner",
                             "sections": [
                                 {
@@ -1611,6 +1619,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.swim_idle",
+                                },
+                                {
+                                    "name": "minecraft:behavior.swim_up_for_breath",
                                 },
                                 {
                                     "name": "minecraft:behavior.swim_wander",
@@ -2415,6 +2426,12 @@
                         },
                         {
                             "name": "Coordinate Range",
+                        },
+                        {
+                            "name": "Filter Group",
+                        },
+                        {
+                            "name": "Filter Test",
                         },
                         {
                             "name": "Random Distribution Type",
@@ -3357,6 +3374,7 @@
         "minecraft:chiseled_deepslate": "",
         "minecraft:chiseled_nether_bricks": "",
         "minecraft:chiseled_polished_blackstone": "",
+        "minecraft:chiseled_sandstone": "",
         "minecraft:chiseled_stone_bricks": "",
         "minecraft:chiseled_tuff": "",
         "minecraft:chiseled_tuff_bricks": "",
@@ -3419,6 +3437,7 @@
         "minecraft:cut_copper_stairs": "",
         "minecraft:cut_red_sandstone_double_slab": "",
         "minecraft:cut_red_sandstone_slab": "",
+        "minecraft:cut_sandstone": "",
         "minecraft:cut_sandstone_double_slab": "",
         "minecraft:cut_sandstone_slab": "",
         "minecraft:cyan_candle": "",
@@ -3432,6 +3451,7 @@
         "minecraft:cyan_stained_glass_pane": "",
         "minecraft:cyan_terracotta": "",
         "minecraft:cyan_wool": "",
+        "minecraft:dandelion": "",
         "minecraft:dark_oak_button": "",
         "minecraft:dark_oak_door": "",
         "minecraft:dark_oak_double_slab": "",
@@ -3802,7 +3822,22 @@
         "minecraft:lava": "",
         "minecraft:lectern": "",
         "minecraft:lever": "",
-        "minecraft:light_block": "",
+        "minecraft:light_block_0": "",
+        "minecraft:light_block_1": "",
+        "minecraft:light_block_10": "",
+        "minecraft:light_block_11": "",
+        "minecraft:light_block_12": "",
+        "minecraft:light_block_13": "",
+        "minecraft:light_block_14": "",
+        "minecraft:light_block_15": "",
+        "minecraft:light_block_2": "",
+        "minecraft:light_block_3": "",
+        "minecraft:light_block_4": "",
+        "minecraft:light_block_5": "",
+        "minecraft:light_block_6": "",
+        "minecraft:light_block_7": "",
+        "minecraft:light_block_8": "",
+        "minecraft:light_block_9": "",
         "minecraft:light_blue_candle": "",
         "minecraft:light_blue_candle_cake": "",
         "minecraft:light_blue_carpet": "",
@@ -4117,6 +4152,7 @@
         "minecraft:smooth_red_sandstone_double_slab": "",
         "minecraft:smooth_red_sandstone_slab": "",
         "minecraft:smooth_red_sandstone_stairs": "",
+        "minecraft:smooth_sandstone": "",
         "minecraft:smooth_sandstone_double_slab": "",
         "minecraft:smooth_sandstone_slab": "",
         "minecraft:smooth_sandstone_stairs": "",
@@ -4326,7 +4362,6 @@
         "minecraft:yellow_carpet": "",
         "minecraft:yellow_concrete": "",
         "minecraft:yellow_concrete_powder": "",
-        "minecraft:yellow_flower": "",
         "minecraft:yellow_glazed_terracotta": "",
         "minecraft:yellow_shulker_box": "",
         "minecraft:yellow_stained_glass": "",
@@ -4520,7 +4555,7 @@
                     "name": "minecraft:breathability",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.Experimental toggles required: Holiday Creator Features",
+                    "description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.",
                 },
                 {
                     "name": "minecraft:collision_box",
@@ -4585,7 +4620,7 @@
                     "name": "minecraft:display_name",
                     "type": "Localization String",
                     "defaultValue": "",
-                    "description": "Specifies the language file key that maps to what text will be displayed when you hover over the block in your inventory and hotbar. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this component is omitted, the name of the block will be used as the display name.Experimental toggles required: Holiday Creator Features (in format versions before 1.19.60)",
+                    "description": "Specifies the language file key that maps to what text will be displayed when you hover over the block in your inventory and hotbar. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this component is omitted, the name of the block will be used as the display name.",
                 },
                 {
                     "name": "minecraft:flammable",
@@ -4617,7 +4652,7 @@
                     "name": "minecraft:geometry",
                     "type": "Identifier String",
                     "defaultValue": "",
-                    "description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".Experimental toggles required: Holiday Creator Features (in format versions before 1.19.40)",
+                    "description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
                 },
                 {
                     "name": "minecraft:light_dampening",
@@ -4762,7 +4797,7 @@
                     "name": "minecraft:unit_cube",
                     "type": "JSON Object",
                     "defaultValue": "",
-                    "description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features",
+                    "description": "Specifies that a unit cube is to be used with tessellation.",
                 },
             ],
         },
@@ -5327,6 +5362,7 @@
         "is_mark_variant": "Returns true if the subject entity is the mark variant number provided.",
         "is_missing_health": "Tests if the subject is not at full health.",
         "is_moving": "Returns true if the subject entity is moving.",
+        "is_navigating": "Tests if the subject is currently pathfinding. Requires a \"minecraft:navigation\" component.",
         "is_owner": "Returns true if the subject entity is the owner of the calling entity.",
         "is_panicking": "Tests if the subject is panicking.",
         "is_persistent": "Tests if the subject's persistence matches the bool value passed in.",
@@ -10866,6 +10902,35 @@
                     "type": "Decimal",
                     "defaultValue": "0.1",
                     "description": "Percent chance this entity will go idle, 1.0 = 100%.",
+                },
+            ],
+        },
+        "minecraft:behavior.swim_up_for_breath": {
+            "description": "Allows the mob to try to move to air once it is close to running out of its total breathable supply. Requires \"minecraft:breathable\".",
+            "children": [
+                {
+                    "name": "material_type",
+                    "type": "String",
+                    "defaultValue": "water",
+                    "description": "The material the mob is traveling in. An air block will only be considered valid to move to with a block of this material below it. Options are: \"water\", \"lava\", or \"any\".",
+                },
+                {
+                    "name": "search_height",
+                    "type": "Integer",
+                    "defaultValue": "16",
+                    "description": "The height (in blocks) above the mob's current position that it will search for a valid air block to move to. If a valid block cannot be found, the mob will move to the position this many blocks above it.",
+                },
+                {
+                    "name": "search_radius",
+                    "type": "Integer",
+                    "defaultValue": "4",
+                    "description": "The radius (in blocks) around the mob's current position that it will search for a valid air block to move to.",
+                },
+                {
+                    "name": "speed_mod",
+                    "type": "Decimal",
+                    "defaultValue": "1.40",
+                    "description": "Movement speed multiplier of the mob when using this Goal.",
                 },
             ],
         },
