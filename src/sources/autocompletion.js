@@ -17,7 +17,7 @@ import {
 } from '../util/common.js';
 import * as support from './support.js';
 import AutocompletionScreen from '../live/autocompletionScreen.js';
-import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
+import { doWSRelatedJobsCached } from './wsconnect.js';
 import { ScrcpyPNGStream, openScrcpy, press, stopScrcpy, isScrcpyStopped, injectText } from '../util/scrcpy.js';
 
 function guessTruncatedString(truncatedStr, startsWith) {
@@ -329,6 +329,10 @@ async function analyzeCommandAutocompletionFast(
     return autocompletions;
 }
 
+function isMinecraftWindowTitle(foregroundTitle) {
+    return foregroundTitle === 'Minecraft' || foregroundTitle === 'Minecraft Preview';
+}
+
 async function analyzeCommandAutocompletionFastWin10(
     cx,
     screen,
@@ -343,8 +347,20 @@ async function analyzeCommandAutocompletionFastWin10(
         sendKeys,
         sendText,
         getClipboardText,
-        emptyClipboard
+        emptyClipboard,
+        getForegroundWindowTitle
     } = await import('../util/win32api.js');
+
+    if (!isMinecraftWindowTitle(getForegroundWindowTitle())) {
+        for (;;) {
+            const foregroundTitle = getForegroundWindowTitle();
+            if (isMinecraftWindowTitle(foregroundTitle)) break;
+            setStatus(`Waiting for Minecraft to be foreground: ${foregroundTitle}`);
+            await sleepAsync(1000);
+        }
+        setStatus('Waiting for 5 seconds...');
+        await sleepAsync(5000);
+    }
 
     screen.updateStatus({ approxLength });
 
@@ -554,9 +570,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     };
 
     if (support.mcpews(cx)) {
-        const session = await createExclusiveWSSession(device);
-        await doWSRelatedJobsCached(cx, session, target);
-        session.disconnect();
+        await doWSRelatedJobsCached(cx, device, target);
     }
 
     const jobs = [];

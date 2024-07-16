@@ -192,9 +192,11 @@
     "diamond_block": "ST: block of diamond", // 钻石块
     "diamond_ore": "ST: diamond ore", // 钻石矿石
     "diorite_stairs": "ST: diorite stairs", // 闪长岩楼梯
-    "dirt": "{{#0}}/{{#1}}", // 泥土/砂土
-    "dirt.0": "ST: dirt", // 泥土
-    "dirt.1": "ST: coarse dirt", // 砂土
+    "dirt": "{{if_exists|coarse_dirt|dirt.current|dirt.legacy}}", // 泥土
+    "dirt.current": "ST: dirt", // 泥土
+    "dirt.legacy": "{{#0}}/{{#1}}", // 泥土/砂土
+    "dirt.legacy.0": "ST: dirt", // 泥土
+    "dirt.legacy.1": "ST: coarse dirt", // 砂土
     "dirt_with_roots": "ST: rooted dirt", // 缠根泥土
     "dispenser": "ST: dispenser", // 发射器
     "double_cut_copper_slab": "ST: double cut copper slab", // 切制铜双层台阶
@@ -482,11 +484,13 @@
     "purpur_block.2": "ST: purpur pillar", // 紫珀柱
     "purpur_block.3": "ST: smooth purpur", // 平滑紫珀块
     "purpur_stairs": "ST: purpur stairs", // 紫珀楼梯
-    "quartz_block": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 石英块/雕纹石英块/石英柱/平滑石英块
-    "quartz_block.0": "ST: quartz block", // 石英块
-    "quartz_block.1": "ST: chiseled quartz block", // 雕纹石英块
-    "quartz_block.2": "ST: quartz pillar", // 石英柱
-    "quartz_block.3": "ST: smooth quartz block", // 平滑石英块
+    "quartz_block": "{{if_exists|chiseled_quartz_block|quartz_block.current|quartz_block.legacy}}", // 石英块
+    "quartz_block.current": "ST: quartz block", // 石英块
+    "quartz_block.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 石英块/雕纹石英块/石英柱/平滑石英块
+    "quartz_block.legacy.0": "ST: quartz block", // 石英块
+    "quartz_block.legacy.1": "ST: chiseled quartz block", // 雕纹石英块
+    "quartz_block.legacy.2": "ST: quartz pillar", // 石英柱
+    "quartz_block.legacy.3": "ST: smooth quartz block", // 平滑石英块
     "quartz_bricks": "ST: quartz bricks", // 石英砖
     "quartz_ore": "ST: nether quartz ore", // 下界石英矿石
     "quartz_stairs": "ST: quartz stairs", // 石英楼梯
@@ -513,11 +517,13 @@
     "red_mushroom_block": "ST: red mushroom block", // 红色蘑菇方块
     "red_nether_brick": "ST: red nether bricks", // 红色下界砖块
     "red_nether_brick_stairs": "ST: red nether brick stairs", // 红色下界砖楼梯
-    "red_sandstone": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 红砂岩/雕纹红砂岩/切制红砂岩/平滑红砂岩
-    "red_sandstone.0": "ST: red sandstone", // 红砂岩
-    "red_sandstone.1": "ST: chiseled red sandstone", // 雕纹红砂岩
-    "red_sandstone.2": "ST: cut red sandstone", // 切制红砂岩
-    "red_sandstone.3": "ST: smooth red sandstone", // 平滑红砂岩
+    "red_sandstone": "{{if_exists|chiseled_red_sandstone|red_sandstone.current|red_sandstone.legacy}}", // 红砂岩
+    "red_sandstone.current": "ST: red sandstone", // 红砂岩
+    "red_sandstone.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 红砂岩/雕纹红砂岩/切制红砂岩/平滑红砂岩
+    "red_sandstone.legacy.0": "ST: red sandstone", // 红砂岩
+    "red_sandstone.legacy.1": "ST: chiseled red sandstone", // 雕纹红砂岩
+    "red_sandstone.legacy.2": "ST: cut red sandstone", // 切制红砂岩
+    "red_sandstone.legacy.3": "ST: smooth red sandstone", // 平滑红砂岩
     "red_sandstone_stairs": "ST: red sandstone stairs", // 红砂岩楼梯
     "redstone_block": "ST: block of redstone", // 红石块
     "redstone_lamp": "ST: redstone lamp", // 红石灯
@@ -528,9 +534,11 @@
     "repeating_command_block": "ST: repeating command block", // 循环型命令方块
     "reserved6": "reserved6",
     "respawn_anchor": "ST: respawn anchor", // 重生锚
-    "sand": "{{#0}}/{{#1}}", // 沙子/红沙
-    "sand.0": "ST: sand", // 沙子
-    "sand.1": "ST: red sand", // 红沙
+    "sand": "{{if_exists|red_sand|sand.current|sand.legacy}}", // 沙子
+    "sand.current": "ST: sand", // 沙子
+    "sand.legacy": "{{#0}}/{{#1}}", // 沙子/红沙
+    "sand.legacy.0": "ST: sand", // 沙子
+    "sand.legacy.1": "ST: red sand", // 红沙
     "sandstone": "{{if_exists|chiseled_sandstone|sandstone.current|sandstone.legacy}}", // 砂岩
     "sandstone.current": "ST: sandstone", // 砂岩
     "sandstone.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 砂岩/雕纹砂岩/切制砂岩/平滑砂岩
@@ -565,7 +573,7 @@
     "smooth_sandstone_stairs": "ST: smooth sandstone stairs", // 平滑砂岩楼梯
     "smooth_stone": "ST: smooth stone", // 平滑石头
     "snow": "ST: snow block", // 雪块
-    "snow_layer": "ST: top snow", // 顶层雪
+    "snow_layer": "ST: top snow", // 雪层
     "soul_campfire": "ST: soul campfire", // 灵魂营火
     "soul_fire": "ST: soul fire", // 灵魂火
     "soul_lantern": "ST: soul lantern", // 灵魂灯笼
@@ -1472,4 +1480,16 @@
     "light_block_13": "{{light_block_*|'13}}", // 光源方块（13）
     "light_block_14": "{{light_block_*|'14}}", // 光源方块（14）
     "light_block_15": "{{light_block_*|'15}}", // 光源方块（15）
+    // Modified in 1.21.20.22
+    "chipped_anvil": "ST: chipped anvil", // 开裂的铁砧
+    "chiseled_quartz_block": "ST: chiseled quartz block", // 雕纹石英块
+    "chiseled_red_sandstone": "ST: chiseled red sandstone", // 雕纹红砂岩
+    "coarse_dirt": "ST: coarse dirt", // 砂土
+    "cut_red_sandstone": "ST: cut red sandstone", // 切制红砂岩
+    "damaged_anvil": "ST: damaged anvil", // 损坏的铁砧
+    "deprecated_anvil": "{{ST!anvil}}（弃用）", // 铁砧（弃用）
+    "quartz_pillar": "ST: quartz pillar", // 石英柱
+    "red_sand": "ST: red sand", // 红沙
+    "smooth_quartz": "ST: smooth quartz", // 平滑石英块
+    "smooth_red_sandstone": "ST: smooth red sandstone", // 平滑红砂岩
 }

@@ -59,6 +59,10 @@ newLocateCommand.associatedCommands = [
     [
         '/locate biome <biome: Biome>',
         '/locate structure <structure: Structure> [useNewChunksOnly: Boolean]'
+    ],
+    [
+        '/locate biome <biome: Biome>',
+        '/locate structure <structure: string> [useNewChunksOnly: Boolean]'
     ]
 ];
 

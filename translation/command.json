@@ -37,6 +37,9 @@
     "camera.set.rot": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度。
     "camera.set.rot.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与视点偏移。
     "camera.set.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移。
+    "camera.removeTarget": "清除玩家摄像机的跟踪目标。",
+    "camera.targetEntity.default": "设置玩家摄像机的跟踪目标为指定实体。",
+    "camera.targetEntity.withOffset": "设置玩家摄像机的跟踪目标为指定实体偏移后的位置。",
     "camerashake.add": "为玩家应用镜头摇晃效果。",
     "camerashake.stop": "为玩家移除镜头摇晃效果。",
     "clear.default": "清除玩家物品栏中的物品。",
@@ -517,4 +520,8 @@
     "camera <players: target> set <preset: string> rot <xRot: value> <yRot: value> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.rot.viewOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与视点偏移。
     "camera <players: target> set <preset: string> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.viewOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移。
     "spreadplayers <x: value> <z: value> <spreadDistance: float> <maxRange: float> <victim: target> [maxHeight: value]": "this: spreadplayers.default", // 将指定实体传送到区域内的随机位置。
+    "locate structure <structure: string> [useNewChunksOnly: Boolean]": "this: locate.structure", // 寻找并确定最近的特定结构的坐标。
+    "camera <players: target> remove_target": "this: camera.removeTarget", // 清除玩家摄像机的跟踪目标。
+    "camera <players: target> target_entity <entity: target>": "this: camera.targetEntity.default", // 设置玩家摄像机的跟踪目标为指定实体。
+    "camera <players: target> target_entity <entity: target> target_center_offset <xTargetCenterOffset: float> <yTargetCenterOffset: float> <zTargetCenterOffset: float>": "this: camera.targetEntity.withOffset", // 设置玩家摄像机的跟踪目标为指定实体偏移后的位置。
 }

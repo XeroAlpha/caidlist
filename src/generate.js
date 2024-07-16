@@ -208,9 +208,20 @@ async function generateBranchedOutputFiles(cx) {
     matchTranslations({
         ...commonOptions,
         name: 'location',
-        originalArray: enums.locations,
+        originalArray: enums.locations.map((e) => e.replace(/^minecraft:/, '')),
         translationMap: userTranslation.location,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EnvSprite'], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['EnvSprite'], true),
+        postProcessor(location) {
+            const mergedLocation = {};
+            enums.locations.forEach((key) => {
+                if (key in location) {
+                    CommentJSON.assign(mergedLocation, location, [key]);
+                } else {
+                    mergedLocation[key] = location[`minecraft:${key}`];
+                }
+            });
+            return mergedLocation;
+        }
     });
     if (support.newLocateCommand(cx)) {
         matchTranslations({

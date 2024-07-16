@@ -12,6 +12,9 @@ function getInvalidStateValues(invalidStates, stateName) {
     return invalidValues;
 }
 
+const hiddenIds = ['deprecated_anvil'];
+const specialIds = ['cave_vines_body_with_berries', 'cave_vines_head_with_berries'];
+
 export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
     const indent = '\t';
     const lines = [
@@ -22,6 +25,7 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
     for (const blockId of blockIds) {
         const blockInfo = blockData[blockId];
         const blockIdWithoutNamespace = blockId.replace(/^minecraft:/, '');
+        if (hiddenIds.includes(blockIdWithoutNamespace)) continue;
         if (blockInfo.properties.length > 0) {
             lines.push(`${indent}['${blockIdWithoutNamespace}'] = {`);
             for (const property of blockInfo.properties) {
@@ -63,7 +67,6 @@ export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) 
     writeFileSync(outputFile, lines.join('\n'));
 }
 
-const hiddenIds = ['cave_vines_body_with_berries', 'cave_vines_head_with_berries'];
 export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
     const indent = '\t';
     const lines = [
@@ -76,7 +79,7 @@ export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
         const names = blockTranslations[id];
         const idWithoutNamespace = id.replace(/^minecraft:/, '');
         for (const name of names.split('/')) {
-            if (hiddenIds.includes(idWithoutNamespace)) continue;
+            if (hiddenIds.includes(idWithoutNamespace) || specialIds.includes(idWithoutNamespace)) continue;
             if (mappedNames.has(name)) {
                 warn(`Conflicted name mapping: ${name} -> ${idWithoutNamespace}`);
             }

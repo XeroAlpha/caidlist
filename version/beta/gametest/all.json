@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.20.21",
+    "packageVersion": "1.21.20.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -33993,6 +33993,15 @@
             ],
             "invalidStates": [
                 {
+                    "damage": "slightly_damaged",
+                },
+                {
+                    "damage": "very_damaged",
+                },
+                {
+                    "damage": "broken",
+                },
+                {
                     "direction": 0,
                     "minecraft:cardinal_direction": "west",
                 },
@@ -39701,6 +39710,101 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:chipped_anvil": {
+            "properties": [
+                {
+                    "name": "damage",
+                    "validValues": [
+                        "undamaged",
+                        "slightly_damaged",
+                        "very_damaged",
+                        "broken",
+                    ],
+                    "defaultValue": "slightly_damaged",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "damage": "undamaged",
+                },
+                {
+                    "damage": "very_damaged",
+                },
+                {
+                    "damage": "broken",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:chiseled_bookshelf": {
             "properties": [
                 {
@@ -39809,6 +39913,69 @@
         "minecraft:chiseled_polished_blackstone": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:chiseled_quartz_block": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "chiseled",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:chiseled_red_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "heiroglyphs",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -39969,6 +40136,25 @@
         "minecraft:coal_ore": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:coarse_dirt": {
+            "properties": [
+                {
+                    "name": "dirt_type",
+                    "validValues": [
+                        "normal",
+                        "coarse",
+                    ],
+                    "defaultValue": "coarse",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "dirt_type": "normal",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -41277,6 +41463,33 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:cut_red_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "cut",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:cut_red_sandstone_double_slab": {
             "properties": [
                 {
@@ -42182,6 +42395,101 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:damaged_anvil": {
+            "properties": [
+                {
+                    "name": "damage",
+                    "validValues": [
+                        "undamaged",
+                        "slightly_damaged",
+                        "very_damaged",
+                        "broken",
+                    ],
+                    "defaultValue": "very_damaged",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "damage": "undamaged",
+                },
+                {
+                    "damage": "slightly_damaged",
+                },
+                {
+                    "damage": "broken",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:dandelion": {
             "properties": [],
@@ -44271,6 +44579,101 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:deprecated_anvil": {
+            "properties": [
+                {
+                    "name": "damage",
+                    "validValues": [
+                        "undamaged",
+                        "slightly_damaged",
+                        "very_damaged",
+                        "broken",
+                    ],
+                    "defaultValue": "broken",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "damage": "undamaged",
+                },
+                {
+                    "damage": "slightly_damaged",
+                },
+                {
+                    "damage": "very_damaged",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:detector_rail": {
             "properties": [
                 {
@@ -44536,7 +44939,11 @@
                     "defaultValue": "normal",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "dirt_type": "coarse",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -63887,7 +64294,17 @@
                     "defaultValue": "y",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -63967,6 +64384,42 @@
         "minecraft:quartz_ore": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:quartz_pillar": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "lines",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -64640,6 +65093,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:red_sand": {
+            "properties": [
+                {
+                    "name": "sand_type",
+                    "validValues": [
+                        "normal",
+                        "red",
+                    ],
+                    "defaultValue": "red",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_type": "normal",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:red_sandstone": {
             "properties": [
                 {
@@ -64653,7 +65125,17 @@
                     "defaultValue": "default",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+                {
+                    "sand_stone_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -65452,7 +65934,11 @@
                     "defaultValue": "normal",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "sand_type": "red",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -66285,6 +66771,42 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:smooth_quartz": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "smooth",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:smooth_quartz_double_slab": {
             "properties": [
                 {
@@ -66419,6 +66941,33 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:smooth_red_sandstone": {
+            "properties": [
+                {
+                    "name": "sand_stone_type",
+                    "validValues": [
+                        "default",
+                        "heiroglyphs",
+                        "cut",
+                        "smooth",
+                    ],
+                    "defaultValue": "smooth",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sand_stone_type": "default",
+                },
+                {
+                    "sand_stone_type": "heiroglyphs",
+                },
+                {
+                    "sand_stone_type": "cut",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
         },
         "minecraft:smooth_red_sandstone_double_slab": {
             "properties": [
@@ -73637,8 +74186,11 @@
                     "smooth",
                 ],
                 "defaultValue": {
+                    "minecraft:chiseled_quartz_block": "chiseled",
                     "minecraft:purpur_block": "default",
                     "minecraft:quartz_block": "default",
+                    "minecraft:quartz_pillar": "lines",
+                    "minecraft:smooth_quartz": "smooth",
                 },
             },
         ],
@@ -74032,6 +74584,9 @@
                 ],
                 "defaultValue": {
                     "minecraft:anvil": "undamaged",
+                    "minecraft:chipped_anvil": "slightly_damaged",
+                    "minecraft:damaged_anvil": "very_damaged",
+                    "minecraft:deprecated_anvil": "broken",
                 },
             },
         ],
@@ -74121,6 +74676,7 @@
                     "minecraft:cherry_door": 0,
                     "minecraft:cherry_fence_gate": 0,
                     "minecraft:cherry_trapdoor": 0,
+                    "minecraft:chipped_anvil": 0,
                     "minecraft:chiseled_bookshelf": 0,
                     "minecraft:cocoa": 0,
                     "minecraft:copper_door": 0,
@@ -74128,10 +74684,12 @@
                     "minecraft:crimson_door": 0,
                     "minecraft:crimson_fence_gate": 0,
                     "minecraft:crimson_trapdoor": 0,
+                    "minecraft:damaged_anvil": 0,
                     "minecraft:dark_oak_door": 0,
                     "minecraft:dark_oak_fence_gate": 0,
                     "minecraft:dark_oak_trapdoor": 0,
                     "minecraft:decorated_pot": 0,
+                    "minecraft:deprecated_anvil": 0,
                     "minecraft:end_portal_frame": 0,
                     "minecraft:exposed_copper_door": 0,
                     "minecraft:exposed_copper_trapdoor": 0,
@@ -74187,6 +74745,7 @@
                     "coarse",
                 ],
                 "defaultValue": {
+                    "minecraft:coarse_dirt": "coarse",
                     "minecraft:dirt": "normal",
                 },
             },
@@ -74887,6 +75446,9 @@
                     "minecraft:campfire": "south",
                     "minecraft:carved_pumpkin": "south",
                     "minecraft:chest": "north",
+                    "minecraft:chipped_anvil": "south",
+                    "minecraft:damaged_anvil": "south",
+                    "minecraft:deprecated_anvil": "south",
                     "minecraft:end_portal_frame": "south",
                     "minecraft:ender_chest": "north",
                     "minecraft:furnace": "south",
@@ -75391,6 +75953,7 @@
                     "minecraft:chain": "y",
                     "minecraft:cherry_log": "y",
                     "minecraft:cherry_wood": "y",
+                    "minecraft:chiseled_quartz_block": "y",
                     "minecraft:crimson_hyphae": "y",
                     "minecraft:crimson_stem": "y",
                     "minecraft:dark_oak_log": "y",
@@ -75410,6 +75973,8 @@
                     "minecraft:polished_basalt": "y",
                     "minecraft:purpur_block": "y",
                     "minecraft:quartz_block": "y",
+                    "minecraft:quartz_pillar": "y",
+                    "minecraft:smooth_quartz": "y",
                     "minecraft:spruce_log": "y",
                     "minecraft:spruce_wood": "y",
                     "minecraft:stripped_acacia_log": "y",
@@ -75629,10 +76194,13 @@
                     "smooth",
                 ],
                 "defaultValue": {
+                    "minecraft:chiseled_red_sandstone": "heiroglyphs",
                     "minecraft:chiseled_sandstone": "heiroglyphs",
+                    "minecraft:cut_red_sandstone": "cut",
                     "minecraft:cut_sandstone": "cut",
                     "minecraft:red_sandstone": "default",
                     "minecraft:sandstone": "default",
+                    "minecraft:smooth_red_sandstone": "smooth",
                     "minecraft:smooth_sandstone": "smooth",
                 },
             },
@@ -75644,6 +76212,7 @@
                     "red",
                 ],
                 "defaultValue": {
+                    "minecraft:red_sand": "red",
                     "minecraft:sand": "normal",
                 },
             },
@@ -76709,6 +77278,7 @@
             "minecraft:redstone_ore": {},
         },
         "dirt": {
+            "minecraft:coarse_dirt": {},
             "minecraft:dirt": {},
             "minecraft:dirt_with_roots": {},
             "minecraft:farmland": {},
@@ -76738,6 +77308,7 @@
             "minecraft:white_tulip": {},
         },
         "grass": {
+            "minecraft:coarse_dirt": {},
             "minecraft:dirt": {},
             "minecraft:grass_block": {},
             "minecraft:grass_path": {},
@@ -76806,6 +77377,59 @@
         },
         "oak": {
             "minecraft:oak_log": {},
+        },
+        "one_way_collidable": {
+            "minecraft:acacia_door": {},
+            "minecraft:acacia_fence_gate": {},
+            "minecraft:acacia_trapdoor": {},
+            "minecraft:bamboo_door": {},
+            "minecraft:bamboo_fence_gate": {},
+            "minecraft:bamboo_trapdoor": {},
+            "minecraft:birch_door": {},
+            "minecraft:birch_fence_gate": {},
+            "minecraft:birch_trapdoor": {},
+            "minecraft:cherry_door": {},
+            "minecraft:cherry_fence_gate": {},
+            "minecraft:cherry_trapdoor": {},
+            "minecraft:copper_door": {},
+            "minecraft:copper_trapdoor": {},
+            "minecraft:crimson_door": {},
+            "minecraft:crimson_fence_gate": {},
+            "minecraft:crimson_trapdoor": {},
+            "minecraft:dark_oak_door": {},
+            "minecraft:dark_oak_fence_gate": {},
+            "minecraft:dark_oak_trapdoor": {},
+            "minecraft:exposed_copper_door": {},
+            "minecraft:exposed_copper_trapdoor": {},
+            "minecraft:fence_gate": {},
+            "minecraft:iron_door": {},
+            "minecraft:iron_trapdoor": {},
+            "minecraft:jungle_door": {},
+            "minecraft:jungle_fence_gate": {},
+            "minecraft:jungle_trapdoor": {},
+            "minecraft:mangrove_door": {},
+            "minecraft:mangrove_fence_gate": {},
+            "minecraft:mangrove_trapdoor": {},
+            "minecraft:oxidized_copper_door": {},
+            "minecraft:oxidized_copper_trapdoor": {},
+            "minecraft:spruce_door": {},
+            "minecraft:spruce_fence_gate": {},
+            "minecraft:spruce_trapdoor": {},
+            "minecraft:trapdoor": {},
+            "minecraft:warped_door": {},
+            "minecraft:warped_fence_gate": {},
+            "minecraft:warped_trapdoor": {},
+            "minecraft:waxed_copper_door": {},
+            "minecraft:waxed_copper_trapdoor": {},
+            "minecraft:waxed_exposed_copper_door": {},
+            "minecraft:waxed_exposed_copper_trapdoor": {},
+            "minecraft:waxed_oxidized_copper_door": {},
+            "minecraft:waxed_oxidized_copper_trapdoor": {},
+            "minecraft:waxed_weathered_copper_door": {},
+            "minecraft:waxed_weathered_copper_trapdoor": {},
+            "minecraft:weathered_copper_door": {},
+            "minecraft:weathered_copper_trapdoor": {},
+            "minecraft:wooden_door": {},
         },
         "plant": {
             "minecraft:acacia_sapling": {
@@ -76904,6 +77528,7 @@
             "minecraft:rail": {},
         },
         "sand": {
+            "minecraft:red_sand": {},
             "minecraft:sand": {},
             "minecraft:suspicious_sand": {},
         },
@@ -78396,6 +79021,9 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:chipped_anvil": {
+            "tags": [],
+        },
         "minecraft:chiseled_bookshelf": {
             "tags": [],
         },
@@ -78409,6 +79037,12 @@
             "tags": [],
         },
         "minecraft:chiseled_polished_blackstone": {
+            "tags": [],
+        },
+        "minecraft:chiseled_quartz_block": {
+            "tags": [],
+        },
+        "minecraft:chiseled_red_sandstone": {
             "tags": [],
         },
         "minecraft:chiseled_sandstone": {
@@ -78458,6 +79092,9 @@
             "tags": [],
         },
         "minecraft:coal_ore": {
+            "tags": [],
+        },
+        "minecraft:coarse_dirt": {
             "tags": [],
         },
         "minecraft:coast_armor_trim_smithing_template": {
@@ -78764,6 +79401,9 @@
         "minecraft:cut_copper_stairs": {
             "tags": [],
         },
+        "minecraft:cut_red_sandstone": {
+            "tags": [],
+        },
         "minecraft:cut_red_sandstone_slab": {
             "tags": [],
         },
@@ -78811,6 +79451,9 @@
                 "minecraft:vibration_damper",
                 "minecraft:wool",
             ],
+        },
+        "minecraft:damaged_anvil": {
+            "tags": [],
         },
         "minecraft:dandelion": {
             "tags": [],
@@ -82797,6 +83440,9 @@
         "minecraft:quartz_ore": {
             "tags": [],
         },
+        "minecraft:quartz_pillar": {
+            "tags": [],
+        },
         "minecraft:quartz_slab": {
             "tags": [],
         },
@@ -82906,6 +83552,11 @@
         },
         "minecraft:red_nether_brick_stairs": {
             "tags": [],
+        },
+        "minecraft:red_sand": {
+            "tags": [
+                "minecraft:sand",
+            ],
         },
         "minecraft:red_sandstone": {
             "tags": [],
@@ -83200,10 +83851,16 @@
         "minecraft:smooth_basalt": {
             "tags": [],
         },
+        "minecraft:smooth_quartz": {
+            "tags": [],
+        },
         "minecraft:smooth_quartz_slab": {
             "tags": [],
         },
         "minecraft:smooth_quartz_stairs": {
+            "tags": [],
+        },
+        "minecraft:smooth_red_sandstone": {
             "tags": [],
         },
         "minecraft:smooth_red_sandstone_slab": {
@@ -85048,6 +85705,7 @@
             "minecraft:warped_planks",
         ],
         "minecraft:sand": [
+            "minecraft:red_sand",
             "minecraft:sand",
         ],
         "minecraft:sign": [

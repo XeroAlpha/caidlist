@@ -1,4 +1,4 @@
-import { WSServer, MinecraftDataType } from 'mcpews';
+import { WSServer, MinecraftDataType, ServerSession } from 'mcpews';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
 import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus, pause } from '../util/common.js';
@@ -134,7 +134,7 @@ async function doWSRelatedJobs(cx, session) {
     };
 }
 
-/** @returns {Promise<import('mcpews').ServerSession>} */
+/** @returns {Promise<ServerSession>} */
 export async function createExclusiveWSSession(device) {
     const port = await getPort({ port: 19134 });
     const wsServer = new WSServer(port);
@@ -176,14 +176,23 @@ export async function createExclusiveWSSession(device) {
     return session;
 }
 
-export async function doWSRelatedJobsCached(cx, session, target) {
+export async function doWSRelatedJobsCached(cx, sessionOrDevice, target) {
     const { version, branch, packageVersion } = cx;
     const cacheId = `version.${version}.autocompletion.${branch.id}.mcpews`;
     const cache = cachedOutput(cacheId);
     let result;
     if (cache && packageVersion === cache.packageVersion) result = cache.result;
     if (!result) {
+        let session = sessionOrDevice;
+        let needCleanup = false;
+        if (!(sessionOrDevice instanceof ServerSession)) {
+            session = await createExclusiveWSSession(sessionOrDevice);
+            needCleanup = true;
+        }
         result = await doWSRelatedJobs(cx, session);
+        if (needCleanup) {
+            session.disconnect();
+        }
         cachedOutput(cacheId, { packageVersion, result });
     }
     if (branch.id !== 'gametest') {

@@ -81,6 +81,8 @@ const GetClipboardData = user32.func('HANDLE __stdcall GetClipboardData(UINT uFo
 const EmptyClipboard = user32.func('BOOL __stdcall EmptyClipboard()');
 const CloseClipboard = user32.func('BOOL __stdcall CloseClipboard()');
 const SendInput = user32.func('UINT __stdcall SendInput(UINT cInputs, LPINPUT pInputs, int cbSize)');
+const GetForegroundWindow = user32.func('HWND __stdcall GetForegroundWindow()');
+const GetWindowText = user32.func('int __stdcall GetWindowTextA(HWND hWnd, _Out_ LPSTR lpString, int nMaxCount)');
 const GlobalLock = kernel32.func('LPVOID __stdcall GlobalLock(HGLOBAL hMem)');
 const GlobalUnlock = kernel32.func('LPVOID __stdcall GlobalUnlock(HGLOBAL hMem)');
 const GetLastError = kernel32.func('DWORD __stdcall GetLastError()');
@@ -230,4 +232,16 @@ export function sendText(text) {
         });
     }
     return SendInput(keyEvents.length, keyEvents, koffi.sizeof(INPUT));
+}
+
+export function getForegroundWindowTitle() {
+    const hwnd = GetForegroundWindow();
+    if (!hwnd) return null;
+    const buffer = Buffer.allocUnsafe(1024);
+    const length = GetWindowText(hwnd, buffer, buffer.length);
+    if (!length) {
+        throwLastError();
+        return null;
+    }
+    return koffi.decode(buffer, 'char', length);
 }

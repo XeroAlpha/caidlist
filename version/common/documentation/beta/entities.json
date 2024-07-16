@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.20.21",
+    "version": "1.21.20.22",
     "content": [],
     "sections": [
         {
@@ -12828,6 +12828,141 @@
                     ],
                 },
                 {
+                    "name": "owner_distance",
+                    "id": "owner_distance",
+                    "level": 2,
+                    "content": [
+                        "Tests the distance between the subject and its owner. Returns false if there is no owner.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"owner_distance\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"owner_distance\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "random_chance",
                     "id": "random_chance",
                     "level": 2,
@@ -21099,6 +21234,31 @@
                             ],
                         },
                         {
+                            "name": "minecraft:behavior.teleport_to_owner",
+                            "id": "minecraft:behavior.teleport_to_owner",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to teleport to its owner.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.00",
+                                            "Description": "The time in seconds that must pass for the entity to be able to try to teleport again.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions to be satisfied for the entity to teleport to its owner.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:behavior.tempt",
                             "id": "minecraft:behavior.tempt",
                             "level": 4,
@@ -28091,6 +28251,10 @@
                                             "ID": "16066043784359778497",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.teleport_to_owner",
+                                            "ID": "1980014114121577323",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.tempt",
                                             "ID": "422904556",
                                         },
@@ -29803,5 +29967,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "47c8d45e6e4cb79252f8251392b6bf3c5a05016d",
+    "__OBJECTHASH__": "c461a803f89b0275e4ef92257586f8f1521b8d5f",
 }

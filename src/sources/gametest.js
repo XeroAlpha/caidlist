@@ -2,7 +2,7 @@
 import { createServer } from 'net';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { QuickJSDebugProtocol, QuickJSDebugSession } from 'quickjs-debugger';
+import { QuickJSDebugConnection, MinecraftDebugSession } from 'quickjs-debugger';
 import { resolve as resolvePath, posix } from 'path';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
 import {
@@ -23,7 +23,7 @@ import { getDeviceOrWait, pushRecursively } from '../util/adb.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
 
 /**
- * Only used in QuickJSDebugSession.evaluate
+ * Only used in MinecraftDebugSession.evaluate
  * @type {import("@minecraft/server")}
  */
 const Minecraft = {};
@@ -777,7 +777,7 @@ const ImportEnvironments = {
     MinecraftDebugUtilities: ['@minecraft/debug-utilities']
 };
 /**
- * @param {QuickJSDebugSession} session
+ * @param {MinecraftDebugSession} session
  */
 async function evaluateExtractors(cx, target, session) {
     const { coreVersion } = cx;
@@ -803,13 +803,13 @@ async function evaluateExtractors(cx, target, session) {
         session.continue()
     ]);
     await session.pause();
-    const defaultTimeout = session.protocol.requestTimeout;
+    const defaultTimeout = session.connection.requestTimeout;
     const errors = [];
     for (const extractor of Extractors) {
         if (extractor.match && !extractor.match(coreVersion)) continue;
         try {
             log(`Extracting ${extractor.name} from GameTest`);
-            session.protocol.requestTimeout = extractor.timeout || defaultTimeout;
+            session.connection.requestTimeout = extractor.timeout || defaultTimeout;
             await extractor.extract(target, topFrame, session, cx);
         } catch (err) {
             warn(`Failed to extract ${extractor.name}`, err);
@@ -891,13 +891,13 @@ export default async function analyzeGameTestEnumsCached(cx) {
         wsSession.sendCommand(`script debugger connect 127.0.0.1 ${port}`);
     }
     const socket = await socketPromise;
-    const debugProtocol = new QuickJSDebugProtocol(socket);
-    const debugSession = new QuickJSDebugSession(debugProtocol);
+    const debugConn = new QuickJSDebugConnection(socket);
+    const debugSession = new MinecraftDebugSession(debugConn);
     const target = { packageVersion };
     debugSession.resume();
     await evaluateExtractors(cx, target, debugSession);
     await doWSRelatedJobsCached(cx, wsSession, {});
-    debugProtocol.close();
+    debugConn.close();
     server.close();
     wsSession.disconnect();
     return cachedOutput(cacheId, target);
