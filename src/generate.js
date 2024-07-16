@@ -217,7 +217,7 @@ async function generateBranchedOutputFiles(cx) {
                 if (key in location) {
                     CommentJSON.assign(mergedLocation, location, [key]);
                 } else {
-                    mergedLocation[key] = location[`minecraft:${key}`];
+                    mergedLocation[key] = location[key.replace(/^minecraft:/, '')];
                 }
             });
             return mergedLocation;
