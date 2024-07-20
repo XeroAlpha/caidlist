@@ -58,7 +58,10 @@
                 justify-content: center;
                 align-items: center;
             }
-            .screenshot-available > .screenshot-nosignal {
+            .dashboard .screenshot-container {
+                display: none;
+            }
+            .screenshot-available .screenshot-nosignal {
                 display: none;
             }
             .screenshot-nosignal {
@@ -90,6 +93,9 @@
                 flex: 1;
                 overflow: hidden;
             }
+            .dashboard .explanation {
+                display: none;
+            }
             .explanation p {
                 margin: 10px 0px 10px 0px;
                 word-break: break-all;
@@ -109,6 +115,9 @@
                 flex: 0 0 auto;
                 overflow: hidden;
                 white-space: pre-wrap;
+            }
+            .dashboard .promptbar {
+                display: none;
             }
             .statusbar {
                 margin: 10px 20px 20px 10px;
@@ -546,16 +555,17 @@
                 ['命令助手呢？啥时候更新？', '已经更新了哦，请参见原作者的爱发电主页~'],
                 ['你的手机还能同时玩别的游戏的吗？', '这只是电脑画面的映射。给枯燥的直播加点趣味。']
             ];
-            dynamicMarquee.loop(
-                marquee,
-                explanationTexts.map((e) => () => {
-                    const el = document.createElement('p');
-                    el.innerHTML = `问：${e[0]}<br />答：${e.slice(1).join('')}`;
-                    return el;
-                })
-            );
             if (locationSearchParams.has('dashboard')) {
                 document.body.classList.add('dashboard');
+            } else {
+                dynamicMarquee.loop(
+                    marquee,
+                    explanationTexts.map((e) => () => {
+                        const el = document.createElement('p');
+                        el.innerHTML = `问：${e[0]}<br />答：${e.slice(1).join('')}`;
+                        return el;
+                    })
+                );
             }
         </script>
     </body>

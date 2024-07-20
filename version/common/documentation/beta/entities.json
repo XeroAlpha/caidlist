@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.20.22",
+    "version": "1.21.20.23",
     "content": [],
     "sections": [
         {
@@ -16046,7 +16046,7 @@
                             "id": "minecraft:behavior.follow_owner",
                             "level": 4,
                             "content": [
-                                "Allows the mob to follow the player that owns them.",
+                                "Allows a mob to follow the player that owns it.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -16054,19 +16054,25 @@
                                             "Name": "can_teleport",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Specify if the mob can teleport to the player if it is too far away",
+                                            "Description": "Defines if the mob will teleport to its owner when too far away.",
                                         },
                                         {
                                             "Name": "ignore_vibration",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Specify if the mob will follow the owner if it has heard a vibration lately",
+                                            "Description": "Defines if the mob should disregard following its owner after detecting a recent vibration.",
                                         },
                                         {
                                             "Name": "max_distance",
                                             "Type": "Decimal",
                                             "Default Value": "60.0",
-                                            "Description": "The maximum distance in blocks this mob can be from its owner to start following, only used when canTeleport is false",
+                                            "Description": "The maximum distance the mob can be from its owner to start following it. Applicable only when \"can_teleport\" is set to false.",
+                                        },
+                                        {
+                                            "Name": "post_teleport_distance",
+                                            "Type": "Boolean",
+                                            "Default Value": "\"stop_distance\" + 1",
+                                            "Description": "Defines how far (in blocks) the entity will be from its owner after teleporting. If not specified, it defaults to \"stop_distance\" + 1, allowing the entity to seamlessly resume navigation.",
                                         },
                                         {
                                             "Name": "speed_multiplier",
@@ -16078,13 +16084,13 @@
                                             "Name": "start_distance",
                                             "Type": "Decimal",
                                             "Default Value": "10.0",
-                                            "Description": "The distance in blocks that the owner can be away from this mob before it starts following it",
+                                            "Description": "The minimum distance the mob must be from its owner to start following it.",
                                         },
                                         {
                                             "Name": "stop_distance",
                                             "Type": "Decimal",
                                             "Default Value": "2.0",
-                                            "Description": "The distance in blocks this mob will stop from its owner while following it",
+                                            "Description": "The distance at which the mob will stop following its owner.",
                                         },
                                     ],
                                 },
@@ -29967,5 +29973,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "c461a803f89b0275e4ef92257586f8f1521b8d5f",
+    "__OBJECTHASH__": "cbba8121b970aeb95fa03bd618fce04c76f1fb59",
 }

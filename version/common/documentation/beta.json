@@ -1,6 +1,7 @@
 {
-    "__VERSION__": "1.21.20.22",
-    "__COMMITHASH__": "bea2097d7237e00cd1eb97a083e34d29e126fd22",
+    "__VERSION__": "1.21.20.23",
+    "__COMMITHASH__": "97e17155cd2531eee678cbfe4bfe02271ad4e79c",
+    "__MESSAGE__": "v1.21.20.23-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -6866,25 +6867,31 @@
             ],
         },
         "minecraft:behavior.follow_owner": {
-            "description": "Allows the mob to follow the player that owns them.",
+            "description": "Allows a mob to follow the player that owns it.",
             "children": [
                 {
                     "name": "can_teleport",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "Specify if the mob can teleport to the player if it is too far away",
+                    "description": "Defines if the mob will teleport to its owner when too far away.",
                 },
                 {
                     "name": "ignore_vibration",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "Specify if the mob will follow the owner if it has heard a vibration lately",
+                    "description": "Defines if the mob should disregard following its owner after detecting a recent vibration.",
                 },
                 {
                     "name": "max_distance",
                     "type": "Decimal",
                     "defaultValue": "60.0",
-                    "description": "The maximum distance in blocks this mob can be from its owner to start following, only used when canTeleport is false",
+                    "description": "The maximum distance the mob can be from its owner to start following it. Applicable only when \"can_teleport\" is set to false.",
+                },
+                {
+                    "name": "post_teleport_distance",
+                    "type": "Boolean",
+                    "defaultValue": "\"stop_distance\" + 1",
+                    "description": "Defines how far (in blocks) the entity will be from its owner after teleporting. If not specified, it defaults to \"stop_distance\" + 1, allowing the entity to seamlessly resume navigation.",
                 },
                 {
                     "name": "speed_multiplier",
@@ -6896,13 +6903,13 @@
                     "name": "start_distance",
                     "type": "Decimal",
                     "defaultValue": "10.0",
-                    "description": "The distance in blocks that the owner can be away from this mob before it starts following it",
+                    "description": "The minimum distance the mob must be from its owner to start following it.",
                 },
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
                     "defaultValue": "2.0",
-                    "description": "The distance in blocks this mob will stop from its owner while following it",
+                    "description": "The distance at which the mob will stop following its owner.",
                 },
             ],
         },

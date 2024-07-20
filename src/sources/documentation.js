@@ -714,20 +714,24 @@ export async function fetchDocumentationIds(cx) {
         const overwriteCommitHash = overwriteCommitHashMap[version];
         let commitHash;
         let commitTreeSHA;
+        let commitMessage;
         if (overwriteCommitHash) {
             const commitTree = (await octokit.repos.getCommit({ ...repoConfig, ref: overwriteCommitHash })).data;
             commitHash = overwriteCommitHash;
             commitTreeSHA = commitTree.commit.tree.sha;
+            commitMessage = commitTree.commit.message;
         } else {
             const repoBranch = (await octokit.repos.getBranch({ ...repoConfig, branch: branchMap[version] })).data;
             commitHash = repoBranch.commit.sha;
             commitTreeSHA = repoBranch.commit.commit.tree.sha;
+            commitMessage = repoBranch.commit.commit.message;
         }
         if (!cache || cache.__COMMITHASH__ !== commitHash) {
             const behaviorPackParsed = await fetchBehaviorPack(commitTreeSHA, cacheKey);
             cache = cachedOutput(cacheKey, {
                 __VERSION__: behaviorPackParsed.__VERSION__,
                 __COMMITHASH__: commitHash,
+                __MESSAGE__: commitMessage,
                 ...extractDocumentationIds(behaviorPackParsed)
             });
         }
