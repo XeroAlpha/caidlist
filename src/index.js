@@ -9,12 +9,14 @@ async function main(args) {
         measureAutocompletion();
     }
     if (args[0] === 'generate') {
-        const versionIds = args.slice(1).reverse();
-        await forEachArray(versionIds, async (versionId) => {
+        const versionAndBranchIds = args.slice(1).reverse();
+        await forEachArray(versionAndBranchIds, async (versionAndBranchId) => {
+            const [versionId, branchId] = versionAndBranchId.split('/');
             context.version = versionId;
             const branches = generateOutputIndex(context);
             log(`Current version: ${versionId} (${context.packageVersions[versionId].version})`);
             await forEachArray(branches, async (branch) => {
+                if (branchId && branchId !== branch.id) return;
                 context.branch = branch;
                 log(`Generating output files for ${versionId}/${branch.id}...`);
                 await generateOutputFiles(context);

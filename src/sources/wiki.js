@@ -1,6 +1,6 @@
 import * as CommentJSON from '@projectxero/comment-json';
 import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
-import { cachedOutput, forEachArray, forEachObject, log } from '../util/common.js';
+import { cachedOutput, forEachArray, forEachObject, log, warn } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
 import { fetchFile } from '../util/network.js';
 
@@ -191,34 +191,43 @@ function restoreHiddenEntries(enumMaps) {
 }
 
 export async function fetchStandardizedTranslation() {
-    const cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
-        const result = {};
-        await forEachArray(dataPages, async (e) => {
-            log(`Fetching ${e.source}:${e.name}`);
-            const source = sources[e.source];
-            const resolver = resolvers[e.resolver];
-            const url = source.getUrl(e.name);
-            const rawUrl = source.getRawUrl(e.name);
-            const content = await fetchFile(rawUrl);
-            const data = resolver(content);
-            const refComment = `Reference: ${url}`;
-            if (e.target) {
-                result[e.target] = data;
-                setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
-            } else {
-                const prefix = e.prefix || '';
-                forEachObject(data, (v, k) => {
-                    const resultKey = `${prefix}${k}`;
-                    if (e.ignoreIfExists && (resultKey in result)) {
-                        return;
-                    }
-                    result[resultKey] = v;
-                    setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
-                });
-            }
-        });
-        return postprocessEnumMap(result);
-    }, 24 * 60 * 60 * 1000);
+    let cache;
+    try {
+        cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
+            const result = {};
+            await forEachArray(dataPages, async (e) => {
+                log(`Fetching ${e.source}:${e.name}`);
+                const source = sources[e.source];
+                const resolver = resolvers[e.resolver];
+                const url = source.getUrl(e.name);
+                const rawUrl = source.getRawUrl(e.name);
+                const content = await fetchFile(rawUrl);
+                const data = resolver(content);
+                const refComment = `Reference: ${url}`;
+                if (e.target) {
+                    result[e.target] = data;
+                    setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
+                } else {
+                    const prefix = e.prefix || '';
+                    forEachObject(data, (v, k) => {
+                        const resultKey = `${prefix}${k}`;
+                        if (e.ignoreIfExists && (resultKey in result)) {
+                            return;
+                        }
+                        result[resultKey] = v;
+                        setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
+                    });
+                }
+            });
+            return postprocessEnumMap(result);
+        }, 24 * 60 * 60 * 1000);
+    } catch (err) {
+        cache = cachedOutput('version.common.wiki.standardized_translation');
+        if (!cache) {
+            throw err;
+        }
+        warn('Failed to fetch standardized translation, use cache instead', err);
+    }
     const restoredResult = restoreHiddenEntries(cache);
     return restoredResult;
 }

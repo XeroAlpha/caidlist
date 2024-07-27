@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import { URL } from 'url';
+import { fileURLToPath, URL } from 'url';
 import { existsSync, readFileSync, statSync } from 'fs';
 import { log, projectPath } from '../util/common.js';
 
@@ -78,6 +78,10 @@ export default class AutocompletionScreen {
             const url = new URL(req.url, 'http://localhost:19333');
             res.setHeader('Access-Control-Allow-Origin', '*');
             if (this.server) {
+                if (url.pathname === '/') {
+                    res.end(readFileSync(fileURLToPath(new URL('./index.html', import.meta.url))));
+                    return;
+                }
                 if (url.pathname === '/heartbeat') {
                     const since = parseInt(url.searchParams.get('since'), 10) || 0;
                     res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
