@@ -12,8 +12,17 @@ function getInvalidStateValues(invalidStates, stateName) {
     return invalidValues;
 }
 
-const hiddenIds = ['deprecated_anvil'];
-const specialIds = ['cave_vines_body_with_berries', 'cave_vines_head_with_berries'];
+const hiddenIds = [];
+const specialIds = [
+    // deprecated
+    'deprecated_anvil',
+    'deprecated_purpur_block_1',
+    'deprecated_purpur_block_2',
+
+    // not translated yet
+    'cave_vines_body_with_berries',
+    'cave_vines_head_with_berries'
+];
 
 export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
     const indent = '\t';

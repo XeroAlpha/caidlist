@@ -97,21 +97,23 @@
     "cobbled_deepslate_stairs": "ST: cobbled deepslate stairs", // 深板岩圆石楼梯
     "cobbled_deepslate_wall": "ST: cobbled deepslate wall", // 深板岩圆石墙
     "cobblestone": "ST: cobblestone", // 圆石
-    "cobblestone_wall": "{{#0}}/{{#1}}/{{#2}}/{{#3}}/{{#4}}/{{#5}}/{{#6}}/{{#7}}/{{#8}}/{{#9}}/{{#10}}/{{#11}}/{{#12}}/{{#13}}", // 圆石墙/苔石墙/花岗岩墙/闪长岩墙/安山岩墙/砂岩墙/红砖墙/石砖墙/苔石砖墙/末地石砖墙/下界砖墙/海晶石墙/红砂岩墙/红色下界砖墙
-    "cobblestone_wall.0": "ST: cobblestone wall", // 圆石墙
-    "cobblestone_wall.1": "ST: mossy cobblestone wall", // 苔石墙
-    "cobblestone_wall.2": "ST: granite wall", // 花岗岩墙
-    "cobblestone_wall.3": "ST: diorite wall", // 闪长岩墙
-    "cobblestone_wall.4": "ST: andesite wall", // 安山岩墙
-    "cobblestone_wall.5": "ST: sandstone wall", // 砂岩墙
-    "cobblestone_wall.6": "ST: brick wall", // 红砖墙
-    "cobblestone_wall.7": "ST: stone brick wall", // 石砖墙
-    "cobblestone_wall.8": "ST: mossy stone brick wall", // 苔石砖墙
-    "cobblestone_wall.9": "ST: end stone brick wall", // 末地石砖墙
-    "cobblestone_wall.10": "ST: nether brick wall", // 下界砖墙
-    "cobblestone_wall.11": "ST: prismarine wall", // 海晶石墙
-    "cobblestone_wall.12": "ST: red sandstone wall", // 红砂岩墙
-    "cobblestone_wall.13": "ST: red nether brick wall", // 红色下界砖墙
+    "cobblestone_wall": "{{if_exists|mossy_cobblestone_wall|cobblestone_wall.current|cobblestone_wall.legacy}}", // 圆石墙
+    "cobblestone_wall.current": "ST: cobblestone wall", // 圆石墙
+    "cobblestone_wall.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}/{{#4}}/{{#5}}/{{#6}}/{{#7}}/{{#8}}/{{#9}}/{{#10}}/{{#11}}/{{#12}}/{{#13}}", // 圆石墙/苔石墙/花岗岩墙/闪长岩墙/安山岩墙/砂岩墙/红砖墙/石砖墙/苔石砖墙/末地石砖墙/下界砖墙/海晶石墙/红砂岩墙/红色下界砖墙
+    "cobblestone_wall.legacy.0": "ST: cobblestone wall", // 圆石墙
+    "cobblestone_wall.legacy.1": "ST: mossy cobblestone wall", // 苔石墙
+    "cobblestone_wall.legacy.2": "ST: granite wall", // 花岗岩墙
+    "cobblestone_wall.legacy.3": "ST: diorite wall", // 闪长岩墙
+    "cobblestone_wall.legacy.4": "ST: andesite wall", // 安山岩墙
+    "cobblestone_wall.legacy.5": "ST: sandstone wall", // 砂岩墙
+    "cobblestone_wall.legacy.6": "ST: brick wall", // 红砖墙
+    "cobblestone_wall.legacy.7": "ST: stone brick wall", // 石砖墙
+    "cobblestone_wall.legacy.8": "ST: mossy stone brick wall", // 苔石砖墙
+    "cobblestone_wall.legacy.9": "ST: end stone brick wall", // 末地石砖墙
+    "cobblestone_wall.legacy.10": "ST: nether brick wall", // 下界砖墙
+    "cobblestone_wall.legacy.11": "ST: prismarine wall", // 海晶石墙
+    "cobblestone_wall.legacy.12": "ST: red sandstone wall", // 红砂岩墙
+    "cobblestone_wall.legacy.13": "ST: red nether brick wall", // 红色下界砖墙
     "cocoa": "ST: cocoa", // 可可果
     "command_block": "ST: command block", // 命令方块
     "composter": "ST: composter", // 堆肥桶
@@ -478,11 +480,13 @@
     "purple_candle": "ST: purple candle", // 紫色蜡烛
     "purple_candle_cake": "ST: cake with purple candle", // 插上紫色蜡烛的蛋糕
     "purple_glazed_terracotta": "ST: purple glazed terracotta", // 紫色带釉陶瓦
-    "purpur_block": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块
-    "purpur_block.0": "ST: purpur block", // 紫珀块
-    "purpur_block.1": "ST: chiseled purpur", // 雕纹紫珀块
-    "purpur_block.2": "ST: purpur pillar", // 紫珀柱
-    "purpur_block.3": "ST: smooth purpur", // 平滑紫珀块
+    "purpur_block": "{{if_exists|purpur_pillar|purpur_block.current|purpur_block.legacy}}", // 紫珀块
+    "purpur_block.current": "ST: purpur block", // 紫珀块
+    "purpur_block.legacy": "{{#0}}/{{#1}}/{{#2}}/{{#3}}", // 紫珀块/雕纹紫珀块/紫珀柱/平滑紫珀块
+    "purpur_block.legacy.0": "ST: purpur block", // 紫珀块
+    "purpur_block.legacy.1": "ST: chiseled purpur", // 雕纹紫珀块
+    "purpur_block.legacy.2": "ST: purpur pillar", // 紫珀柱
+    "purpur_block.legacy.3": "ST: smooth purpur", // 平滑紫珀块
     "purpur_stairs": "ST: purpur stairs", // 紫珀楼梯
     "quartz_block": "{{if_exists|chiseled_quartz_block|quartz_block.current|quartz_block.legacy}}", // 石英块
     "quartz_block.current": "ST: quartz block", // 石英块
@@ -1492,4 +1496,21 @@
     "red_sand": "ST: red sand", // 红沙
     "smooth_quartz": "ST: smooth quartz", // 平滑石英块
     "smooth_red_sandstone": "ST: smooth red sandstone", // 平滑红砂岩
+    // Modified in 1.21.30.21
+    "andesite_wall": "ST: andesite wall", // 安山岩墙
+    "brick_wall": "ST: brick wall", // 红砖墙
+    "deprecated_purpur_block_1": "{{ST!chiseled purpur}}（弃用）", // 雕纹紫珀块（弃用）
+    "deprecated_purpur_block_2": "{{ST!smooth purpur}}（弃用）", // 平滑紫珀块（弃用）
+    "diorite_wall": "ST: diorite wall", // 闪长岩墙
+    "end_stone_brick_wall": "ST: end stone brick wall", // 末地石砖墙
+    "granite_wall": "ST: granite wall", // 花岗岩墙
+    "mossy_cobblestone_wall": "ST: mossy cobblestone wall", // 苔石墙
+    "mossy_stone_brick_wall": "ST: mossy stone brick wall", // 苔石砖墙
+    "nether_brick_wall": "ST: nether brick wall", // 下界砖墙
+    "prismarine_wall": "ST: prismarine wall", // 海晶石墙
+    "purpur_pillar": "ST: purpur pillar", // 紫珀柱
+    "red_nether_brick_wall": "ST: red nether brick wall", // 红色下界砖墙
+    "red_sandstone_wall": "ST: red sandstone wall", // 红砂岩墙
+    "sandstone_wall": "ST: sandstone wall", // 砂岩墙
+    "stone_brick_wall": "ST: stone brick wall", // 石砖墙
 }

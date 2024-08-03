@@ -426,9 +426,9 @@
                     logs.push(...hb.logs);
                     logSince += hb.logs.length;
                     logsEl.innerHTML = logs.join('\n');
-                    if (logs.length > 60) {
+                    if (logsEl.scrollHeight > logsEl.clientHeight * 2) {
                         const oldHeight = logsEl.scrollHeight;
-                        logs.splice(0, logs.length - 30);
+                        logs.splice(0, Math.ceil(logs.length * 0.2));
                         logsEl.innerHTML = logs.join('\n');
                         const newHeight = logsEl.scrollHeight;
                         logScroller.scrollBy([0, newHeight - oldHeight], 'keepSpeed');

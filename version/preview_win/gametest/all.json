@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.20.24",
+    "packageVersion": "1.21.30.21",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -22347,6 +22347,14 @@
                                         "value": {
                                             "type": "object",
                                             "enumerableProperties": {
+                                                "beforeItemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "block": {
                                                     "getter": {
                                                         "type": "function",
@@ -22364,6 +22372,14 @@
                                                     },
                                                 },
                                                 "faceLocation": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "isFirstEvent": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -22495,6 +22511,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isFirstEvent": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "itemStack": {
                                                     "getter": {
                                                         "type": "function",
@@ -22580,14 +22604,15 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.PlayerInteractWithEntityAfterEvent",
+                                            "enumerableProperties": {
+                                                "beforeItemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
-                                            },
-                                            "enumerableProperties": {
                                                 "itemStack": {
                                                     "getter": {
                                                         "type": "function",
@@ -22610,6 +22635,13 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerInteractWithEntityAfterEvent",
                                                     },
                                                 },
                                             },
@@ -31846,10 +31878,12 @@
         "Minecraft.PlayerInputPermissions.prototype.movementEnabled.[[Set]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype",
+        "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.beforeItemStack.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.block.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.blockFace.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.constructor",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.faceLocation.[[Get]]",
+        "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.isFirstEvent.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.itemStack.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEvent.prototype.player.[[Get]]",
         "Minecraft.PlayerInteractWithBlockAfterEventSignal",
@@ -31865,6 +31899,7 @@
         "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.cancel.[[Set]]",
         "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.constructor",
         "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.faceLocation.[[Get]]",
+        "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.isFirstEvent.[[Get]]",
         "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.itemStack.[[Get]]",
         "Minecraft.PlayerInteractWithBlockBeforeEvent.prototype.player.[[Get]]",
         "Minecraft.PlayerInteractWithBlockBeforeEventSignal",
@@ -31874,6 +31909,7 @@
         "Minecraft.PlayerInteractWithBlockBeforeEventSignal.prototype.unsubscribe",
         "Minecraft.PlayerInteractWithEntityAfterEvent",
         "Minecraft.PlayerInteractWithEntityAfterEvent.prototype",
+        "Minecraft.PlayerInteractWithEntityAfterEvent.prototype.beforeItemStack.[[Get]]",
         "Minecraft.PlayerInteractWithEntityAfterEvent.prototype.constructor",
         "Minecraft.PlayerInteractWithEntityAfterEvent.prototype.itemStack.[[Get]]",
         "Minecraft.PlayerInteractWithEntityAfterEvent.prototype.player.[[Get]]",
@@ -33955,6 +33991,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:andesite_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "andesite",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -37707,6 +37854,117 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:brown_candle": {
             "properties": [
                 {
@@ -40511,7 +40769,47 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -44674,6 +44972,78 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:deprecated_purpur_block_1": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "chiseled",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:deprecated_purpur_block_2": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "smooth",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:detector_rail": {
             "properties": [
                 {
@@ -44925,6 +45295,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:diorite_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "diorite",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -46068,6 +46549,117 @@
                 {
                     "minecraft:vertical_half": "top",
                     "top_slot_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:end_stone_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "end_brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
                 },
             ],
             "itemId": "<same>",
@@ -47305,6 +47897,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:granite_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "granite",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -57974,6 +58677,117 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:mossy_cobblestone_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "mossy_cobblestone",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:mossy_stone_brick_double_slab": {
             "properties": [
                 {
@@ -58106,6 +58920,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:mossy_stone_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "mossy_stone_brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -58487,6 +59412,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:nether_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "nether_brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -63319,6 +64355,117 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:prismarine_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "prismarine",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:pumpkin": {
             "properties": [
                 {
@@ -64109,7 +65256,17 @@
                     "defaultValue": "y",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "lines",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -64178,6 +65335,42 @@
                 },
             ],
             "itemId": "minecraft:purpur_slab",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:purpur_pillar": {
+            "properties": [
+                {
+                    "name": "chisel_type",
+                    "validValues": [
+                        "default",
+                        "chiseled",
+                        "lines",
+                        "smooth",
+                    ],
+                    "defaultValue": "lines",
+                },
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chisel_type": "default",
+                },
+                {
+                    "chisel_type": "chiseled",
+                },
+                {
+                    "chisel_type": "smooth",
+                },
+            ],
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:purpur_slab": {
@@ -65093,6 +66286,117 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:red_nether_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "red_nether_brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:red_sand": {
             "properties": [
                 {
@@ -65295,6 +66599,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:red_sandstone_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "red_sandstone",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -66125,6 +67540,117 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:sandstone_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "sandstone",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "stone_brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -68636,6 +70162,117 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:stone_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_block_type",
+                    "validValues": [
+                        "cobblestone",
+                        "mossy_cobblestone",
+                        "granite",
+                        "diorite",
+                        "andesite",
+                        "sandstone",
+                        "brick",
+                        "stone_brick",
+                        "mossy_stone_brick",
+                        "nether_brick",
+                        "end_brick",
+                        "prismarine",
+                        "red_sandstone",
+                        "red_nether_brick",
+                    ],
+                    "defaultValue": "stone_brick",
+                },
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "wall_block_type": "cobblestone",
+                },
+                {
+                    "wall_block_type": "mossy_cobblestone",
+                },
+                {
+                    "wall_block_type": "granite",
+                },
+                {
+                    "wall_block_type": "diorite",
+                },
+                {
+                    "wall_block_type": "andesite",
+                },
+                {
+                    "wall_block_type": "sandstone",
+                },
+                {
+                    "wall_block_type": "brick",
+                },
+                {
+                    "wall_block_type": "mossy_stone_brick",
+                },
+                {
+                    "wall_block_type": "nether_brick",
+                },
+                {
+                    "wall_block_type": "end_brick",
+                },
+                {
+                    "wall_block_type": "prismarine",
+                },
+                {
+                    "wall_block_type": "red_sandstone",
+                },
+                {
+                    "wall_block_type": "red_nether_brick",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:stone_bricks": {
             "properties": [
                 {
@@ -69438,7 +71075,11 @@
                     "defaultValue": "void",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "structure_void_type": "air",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -74187,7 +75828,10 @@
                 ],
                 "defaultValue": {
                     "minecraft:chiseled_quartz_block": "chiseled",
+                    "minecraft:deprecated_purpur_block_1": "chiseled",
+                    "minecraft:deprecated_purpur_block_2": "smooth",
                     "minecraft:purpur_block": "default",
+                    "minecraft:purpur_pillar": "lines",
                     "minecraft:quartz_block": "default",
                     "minecraft:quartz_pillar": "lines",
                     "minecraft:smooth_quartz": "smooth",
@@ -75959,6 +77603,8 @@
                     "minecraft:dark_oak_log": "y",
                     "minecraft:dark_oak_wood": "y",
                     "minecraft:deepslate": "y",
+                    "minecraft:deprecated_purpur_block_1": "y",
+                    "minecraft:deprecated_purpur_block_2": "y",
                     "minecraft:hay_block": "y",
                     "minecraft:infested_deepslate": "y",
                     "minecraft:jungle_log": "y",
@@ -75972,6 +77618,7 @@
                     "minecraft:pearlescent_froglight": "y",
                     "minecraft:polished_basalt": "y",
                     "minecraft:purpur_block": "y",
+                    "minecraft:purpur_pillar": "y",
                     "minecraft:quartz_block": "y",
                     "minecraft:quartz_pillar": "y",
                     "minecraft:smooth_quartz": "y",
@@ -76970,7 +78617,20 @@
                     "red_nether_brick",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": "andesite",
+                    "minecraft:brick_wall": "brick",
                     "minecraft:cobblestone_wall": "cobblestone",
+                    "minecraft:diorite_wall": "diorite",
+                    "minecraft:end_stone_brick_wall": "end_brick",
+                    "minecraft:granite_wall": "granite",
+                    "minecraft:mossy_cobblestone_wall": "mossy_cobblestone",
+                    "minecraft:mossy_stone_brick_wall": "mossy_stone_brick",
+                    "minecraft:nether_brick_wall": "nether_brick",
+                    "minecraft:prismarine_wall": "prismarine",
+                    "minecraft:red_nether_brick_wall": "red_nether_brick",
+                    "minecraft:red_sandstone_wall": "red_sandstone",
+                    "minecraft:sandstone_wall": "sandstone",
+                    "minecraft:stone_brick_wall": "stone_brick",
                 },
             },
         ],
@@ -76982,17 +78642,30 @@
                     "tall",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": "none",
                     "minecraft:blackstone_wall": "none",
                     "minecraft:border_block": "none",
+                    "minecraft:brick_wall": "none",
                     "minecraft:cobbled_deepslate_wall": "none",
                     "minecraft:cobblestone_wall": "none",
                     "minecraft:deepslate_brick_wall": "none",
                     "minecraft:deepslate_tile_wall": "none",
+                    "minecraft:diorite_wall": "none",
+                    "minecraft:end_stone_brick_wall": "none",
+                    "minecraft:granite_wall": "none",
+                    "minecraft:mossy_cobblestone_wall": "none",
+                    "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
+                    "minecraft:nether_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_deepslate_wall": "none",
                     "minecraft:polished_tuff_wall": "none",
+                    "minecraft:prismarine_wall": "none",
+                    "minecraft:red_nether_brick_wall": "none",
+                    "minecraft:red_sandstone_wall": "none",
+                    "minecraft:sandstone_wall": "none",
+                    "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
                     "minecraft:tuff_wall": "none",
                 },
@@ -77006,17 +78679,30 @@
                     "tall",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": "none",
                     "minecraft:blackstone_wall": "none",
                     "minecraft:border_block": "none",
+                    "minecraft:brick_wall": "none",
                     "minecraft:cobbled_deepslate_wall": "none",
                     "minecraft:cobblestone_wall": "none",
                     "minecraft:deepslate_brick_wall": "none",
                     "minecraft:deepslate_tile_wall": "none",
+                    "minecraft:diorite_wall": "none",
+                    "minecraft:end_stone_brick_wall": "none",
+                    "minecraft:granite_wall": "none",
+                    "minecraft:mossy_cobblestone_wall": "none",
+                    "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
+                    "minecraft:nether_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_deepslate_wall": "none",
                     "minecraft:polished_tuff_wall": "none",
+                    "minecraft:prismarine_wall": "none",
+                    "minecraft:red_nether_brick_wall": "none",
+                    "minecraft:red_sandstone_wall": "none",
+                    "minecraft:sandstone_wall": "none",
+                    "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
                     "minecraft:tuff_wall": "none",
                 },
@@ -77030,17 +78716,30 @@
                     "tall",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": "none",
                     "minecraft:blackstone_wall": "none",
                     "minecraft:border_block": "none",
+                    "minecraft:brick_wall": "none",
                     "minecraft:cobbled_deepslate_wall": "none",
                     "minecraft:cobblestone_wall": "none",
                     "minecraft:deepslate_brick_wall": "none",
                     "minecraft:deepslate_tile_wall": "none",
+                    "minecraft:diorite_wall": "none",
+                    "minecraft:end_stone_brick_wall": "none",
+                    "minecraft:granite_wall": "none",
+                    "minecraft:mossy_cobblestone_wall": "none",
+                    "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
+                    "minecraft:nether_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_deepslate_wall": "none",
                     "minecraft:polished_tuff_wall": "none",
+                    "minecraft:prismarine_wall": "none",
+                    "minecraft:red_nether_brick_wall": "none",
+                    "minecraft:red_sandstone_wall": "none",
+                    "minecraft:sandstone_wall": "none",
+                    "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
                     "minecraft:tuff_wall": "none",
                 },
@@ -77054,17 +78753,30 @@
                     "tall",
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": "none",
                     "minecraft:blackstone_wall": "none",
                     "minecraft:border_block": "none",
+                    "minecraft:brick_wall": "none",
                     "minecraft:cobbled_deepslate_wall": "none",
                     "minecraft:cobblestone_wall": "none",
                     "minecraft:deepslate_brick_wall": "none",
                     "minecraft:deepslate_tile_wall": "none",
+                    "minecraft:diorite_wall": "none",
+                    "minecraft:end_stone_brick_wall": "none",
+                    "minecraft:granite_wall": "none",
+                    "minecraft:mossy_cobblestone_wall": "none",
+                    "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
+                    "minecraft:nether_brick_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_deepslate_wall": "none",
                     "minecraft:polished_tuff_wall": "none",
+                    "minecraft:prismarine_wall": "none",
+                    "minecraft:red_nether_brick_wall": "none",
+                    "minecraft:red_sandstone_wall": "none",
+                    "minecraft:sandstone_wall": "none",
+                    "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
                     "minecraft:tuff_wall": "none",
                 },
@@ -77077,17 +78789,30 @@
                     true,
                 ],
                 "defaultValue": {
+                    "minecraft:andesite_wall": false,
                     "minecraft:blackstone_wall": false,
                     "minecraft:border_block": false,
+                    "minecraft:brick_wall": false,
                     "minecraft:cobbled_deepslate_wall": false,
                     "minecraft:cobblestone_wall": false,
                     "minecraft:deepslate_brick_wall": false,
                     "minecraft:deepslate_tile_wall": false,
+                    "minecraft:diorite_wall": false,
+                    "minecraft:end_stone_brick_wall": false,
+                    "minecraft:granite_wall": false,
+                    "minecraft:mossy_cobblestone_wall": false,
+                    "minecraft:mossy_stone_brick_wall": false,
                     "minecraft:mud_brick_wall": false,
+                    "minecraft:nether_brick_wall": false,
                     "minecraft:polished_blackstone_brick_wall": false,
                     "minecraft:polished_blackstone_wall": false,
                     "minecraft:polished_deepslate_wall": false,
                     "minecraft:polished_tuff_wall": false,
+                    "minecraft:prismarine_wall": false,
+                    "minecraft:red_nether_brick_wall": false,
+                    "minecraft:red_sandstone_wall": false,
+                    "minecraft:sandstone_wall": false,
+                    "minecraft:stone_brick_wall": false,
                     "minecraft:tuff_brick_wall": false,
                     "minecraft:tuff_wall": false,
                 },
@@ -77540,6 +79265,7 @@
         },
         "stone": {
             "minecraft:andesite": {},
+            "minecraft:andesite_wall": {},
             "minecraft:brick_block": {},
             "minecraft:brick_double_slab": {
                 "stone_slab_type": "brick",
@@ -77547,6 +79273,7 @@
             "minecraft:brick_slab": {
                 "stone_slab_type": "brick",
             },
+            "minecraft:brick_wall": {},
             "minecraft:cobblestone": {},
             "minecraft:cobblestone_double_slab": {
                 "stone_slab_type": "cobblestone",
@@ -77556,15 +79283,21 @@
             },
             "minecraft:cobblestone_wall": {},
             "minecraft:diorite": {},
+            "minecraft:diorite_wall": {},
             "minecraft:dripstone_block": {},
+            "minecraft:end_stone_brick_wall": {},
             "minecraft:granite": {},
+            "minecraft:granite_wall": {},
             "minecraft:mossy_cobblestone": {},
+            "minecraft:mossy_cobblestone_wall": {},
+            "minecraft:mossy_stone_brick_wall": {},
             "minecraft:nether_brick_double_slab": {
                 "stone_slab_type": "nether_brick",
             },
             "minecraft:nether_brick_slab": {
                 "stone_slab_type": "nether_brick",
             },
+            "minecraft:nether_brick_wall": {},
             "minecraft:petrified_oak_double_slab": {
                 "stone_slab_type": "wood",
             },
@@ -77574,18 +79307,22 @@
             "minecraft:polished_andesite": {},
             "minecraft:polished_diorite": {},
             "minecraft:polished_granite": {},
+            "minecraft:prismarine_wall": {},
             "minecraft:quartz_double_slab": {
                 "stone_slab_type": "quartz",
             },
             "minecraft:quartz_slab": {
                 "stone_slab_type": "quartz",
             },
+            "minecraft:red_nether_brick_wall": {},
+            "minecraft:red_sandstone_wall": {},
             "minecraft:sandstone_double_slab": {
                 "stone_slab_type": "sandstone",
             },
             "minecraft:sandstone_slab": {
                 "stone_slab_type": "sandstone",
             },
+            "minecraft:sandstone_wall": {},
             "minecraft:smooth_stone_double_slab": {
                 "stone_slab_type": "smooth_stone",
             },
@@ -77599,6 +79336,7 @@
             "minecraft:stone_brick_slab": {
                 "stone_slab_type": "stone_brick",
             },
+            "minecraft:stone_brick_wall": {},
             "minecraft:stone_button": {},
             "minecraft:stone_pressure_plate": {},
             "minecraft:stone_stairs": {},
@@ -78033,6 +79771,9 @@
             "tags": [],
         },
         "minecraft:andesite_stairs": {
+            "tags": [],
+        },
+        "minecraft:andesite_wall": {
             "tags": [],
         },
         "minecraft:angler_pottery_sherd": {
@@ -78616,6 +80357,9 @@
             "tags": [],
         },
         "minecraft:brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:brick_wall": {
             "tags": [],
         },
         "minecraft:brown_candle": {
@@ -79938,6 +81682,9 @@
         "minecraft:diorite_stairs": {
             "tags": [],
         },
+        "minecraft:diorite_wall": {
+            "tags": [],
+        },
         "minecraft:dirt": {
             "tags": [],
         },
@@ -80139,6 +81886,9 @@
             "tags": [],
         },
         "minecraft:end_stone_brick_slab": {
+            "tags": [],
+        },
+        "minecraft:end_stone_brick_wall": {
             "tags": [],
         },
         "minecraft:ender_chest": {
@@ -80725,6 +82475,9 @@
             "tags": [],
         },
         "minecraft:granite_stairs": {
+            "tags": [],
+        },
+        "minecraft:granite_wall": {
             "tags": [],
         },
         "minecraft:grass_block": {
@@ -81920,10 +83673,16 @@
         "minecraft:mossy_cobblestone_stairs": {
             "tags": [],
         },
+        "minecraft:mossy_cobblestone_wall": {
+            "tags": [],
+        },
         "minecraft:mossy_stone_brick_slab": {
             "tags": [],
         },
         "minecraft:mossy_stone_brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:mossy_stone_brick_wall": {
             "tags": [],
         },
         "minecraft:mossy_stone_bricks": {
@@ -82104,6 +83863,9 @@
             "tags": [],
         },
         "minecraft:nether_brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:nether_brick_wall": {
             "tags": [],
         },
         "minecraft:nether_gold_ore": {
@@ -82845,6 +84607,9 @@
         "minecraft:prismarine_stairs": {
             "tags": [],
         },
+        "minecraft:prismarine_wall": {
+            "tags": [],
+        },
         "minecraft:prize_pottery_sherd": {
             "tags": [
                 "minecraft:decorated_pot_sherds",
@@ -82915,6 +84680,9 @@
             ],
         },
         "minecraft:purpur_block": {
+            "tags": [],
+        },
+        "minecraft:purpur_pillar": {
             "tags": [],
         },
         "minecraft:purpur_slab": {
@@ -83047,6 +84815,9 @@
         "minecraft:red_nether_brick_stairs": {
             "tags": [],
         },
+        "minecraft:red_nether_brick_wall": {
+            "tags": [],
+        },
         "minecraft:red_sand": {
             "tags": [
                 "minecraft:sand",
@@ -83059,6 +84830,9 @@
             "tags": [],
         },
         "minecraft:red_sandstone_stairs": {
+            "tags": [],
+        },
+        "minecraft:red_sandstone_wall": {
             "tags": [],
         },
         "minecraft:red_shulker_box": {
@@ -83156,6 +84930,9 @@
             "tags": [],
         },
         "minecraft:sandstone_stairs": {
+            "tags": [],
+        },
+        "minecraft:sandstone_wall": {
             "tags": [],
         },
         "minecraft:scaffolding": {
@@ -83586,6 +85363,9 @@
             "tags": [],
         },
         "minecraft:stone_brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:stone_brick_wall": {
             "tags": [],
         },
         "minecraft:stone_bricks": {
