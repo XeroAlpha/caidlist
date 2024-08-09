@@ -87,7 +87,7 @@
     "chiseled_polished_blackstone": "ST: chiseled polished blackstone", // 雕纹磨制黑石
     "chorus_flower": "ST: chorus flower", // 紫颂花
     "chorus_plant": "ST: chorus plant", // 紫颂植株
-    "clay": "ST: clay block", // 黏土块
+    "clay": "ST: clay", // 黏土
     "client_request_placeholder_block": "ST: client request placeholder block", // 客户端请求占位符方块
     "coal_block": "ST: block of coal", // 煤炭块
     "coal_ore": "ST: coal ore", // 煤矿石
@@ -353,7 +353,7 @@
     "leaves2.1": "ST: dark oak leaves", // 深色橡树树叶
     "lectern": "ST: lectern", // 讲台
     "lever": "ST: lever", // 拉杆
-    "light_block": "ST: light block", // 光源方块
+    "light_block": "ST: light", // 光源方块
     "light_blue_candle": "ST: light blue candle", // 淡蓝色蜡烛
     "light_blue_candle_cake": "ST: cake with light blue candle", // 插上淡蓝色蜡烛的蛋糕
     "light_blue_glazed_terracotta": "ST: light blue glazed terracotta", // 淡蓝色带釉陶瓦
@@ -577,16 +577,18 @@
     "smooth_sandstone_stairs": "ST: smooth sandstone stairs", // 平滑砂岩楼梯
     "smooth_stone": "ST: smooth stone", // 平滑石头
     "snow": "ST: snow block", // 雪块
-    "snow_layer": "ST: top snow", // 雪层
+    "snow_layer": "ST: snow", // 雪
     "soul_campfire": "ST: soul campfire", // 灵魂营火
     "soul_fire": "ST: soul fire", // 灵魂火
     "soul_lantern": "ST: soul lantern", // 灵魂灯笼
     "soul_sand": "ST: soul sand", // 灵魂沙
     "soul_soil": "ST: soul soil", // 灵魂土
     "soul_torch": "ST: soul torch", // 灵魂火把
-    "sponge": "{{#0}}/{{#1}}", // 海绵/湿海绵
-    "sponge.0": "ST: sponge", // 海绵
-    "sponge.1": "ST: wet sponge", // 湿海绵
+    "sponge": "{{if_exists|wet_sponge|sponge.current|sponge.legacy}}", // 海绵
+    "sponge.current": "ST: sponge", // 海绵
+    "sponge.legacy": "{{#0}}/{{#1}}", // 海绵/湿海绵
+    "sponge.legacy.0": "ST: sponge", // 海绵
+    "sponge.legacy.1": "ST: wet sponge", // 湿海绵
     "spore_blossom": "ST: spore blossom", // 孢子花
     "spruce_button": "ST: spruce button", // 云杉木按钮
     "spruce_door": "ST: spruce door", // 云杉木门
@@ -1467,7 +1469,7 @@
     "cut_sandstone": "ST: cut sandstone", // 切制砂岩
     "dandelion": "ST: dandelion", // 蒲公英
     "smooth_sandstone": "ST: smooth sandstone", // 平滑砂岩
-    "light_block_*": "{{ST!light block}}（%s）", // 光源方块（%s）
+    "light_block_*": "{{ST!light}}（%s）", // 光源方块（%s）
     "light_block_0": "{{light_block_*|'0}}", // 光源方块（0）
     "light_block_1": "{{light_block_*|'1}}", // 光源方块（1）
     "light_block_2": "{{light_block_*|'2}}", // 光源方块（2）
@@ -1513,4 +1515,10 @@
     "red_sandstone_wall": "ST: red sandstone wall", // 红砂岩墙
     "sandstone_wall": "ST: sandstone wall", // 砂岩墙
     "stone_brick_wall": "ST: stone brick wall", // 石砖墙
+    // Modified in 1.21.30.22
+    "colored_torch_blue": "ST: blue torch", // 蓝色火把
+    "colored_torch_green": "ST: green torch", // 绿色火把
+    "colored_torch_purple": "ST: purple torch", // 紫色火把
+    "colored_torch_red": "ST: red torch", // 红色火把
+    "wet_sponge": "ST: wet sponge", // 湿海绵
 }

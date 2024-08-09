@@ -12,7 +12,6 @@
                 font-family: "HYWenHei 65W", "思源黑体", monospace;
                 font-size: 16px;
                 display: flex;
-                flex-direction: row;
             }
             body.no-obs {
                 width: 100vw;
@@ -20,25 +19,30 @@
                 font-size: 20px;
                 background: center/cover url(https://projectxero.top/ca/img/background2.png);
             }
-            body.dashboard {
-                background: white;
-                font-size: 16px;
-            }
             code {
                 font-family: "JetBrains Mono", "Lucida Console", "思源黑体", monospace;
             }
             samp {
                 font-family: "Mojangles", "HYWenHei 65W", "思源黑体", monospace;
             }
+            .main {
+                flex: 1;
+                padding: 20px;
+                gap: 20px;
+                display: flex;
+                flex-direction: row;
+            }
             .leftbar {
                 display: flex;
                 flex: 0 0 auto;
                 flex-direction: column;
+                gap: 20px;
             }
             .rightbar {
                 display: flex;
                 flex: 1;
                 flex-direction: column;
+                gap: 20px;
             }
             .bar {
                 border-radius: 10px;
@@ -52,14 +56,10 @@
             .screenshot-container {
                 display: flex;
                 flex: 0 0 auto;
-                margin: 20px 10px 10px 20px;
                 width: 60vw;
                 height: 27vw;
                 justify-content: center;
                 align-items: center;
-            }
-            .dashboard .screenshot-container {
-                display: none;
             }
             .screenshot-available .screenshot-nosignal {
                 display: none;
@@ -80,7 +80,6 @@
                 display: flex;
             }
             .logs {
-                margin: 10px 10px 20px 20px;
                 width: 60vw;
                 flex: 1;
                 overflow: hidden;
@@ -89,19 +88,13 @@
                 overflow-wrap: anywhere;
             }
             .explanation {
-                margin: 20px 20px 10px 10px;
                 flex: 1;
                 overflow: hidden;
             }
-            .dashboard .explanation {
-                display: none;
-            }
             .explanation p {
-                margin: 10px 0px 10px 0px;
                 word-break: break-all;
             }
             .danmaku {
-                margin: 0px 20px 20px 10px;
                 flex: 0 0 auto;
                 height: 20vh;
                 overflow: hidden;
@@ -111,25 +104,61 @@
                 display: none;
             }
             .promptbar {
-                margin: 0px 20px 20px 10px;
                 flex: 0 0 auto;
                 overflow: hidden;
                 white-space: pre-wrap;
             }
-            .dashboard .promptbar {
-                display: none;
-            }
             .statusbar {
-                margin: 10px 20px 20px 10px;
                 flex: 0 0 auto;
                 overflow: hidden;
                 word-break: break-all;
                 white-space: pre-wrap;
                 overflow-wrap: anywhere;
             }
-            @media (max-width: 600px) {
-                .leftbar {
+            .dashboard {
+                .screenshot-container {
                     display: none;
+                }
+                .explanation {
+                    display: none;
+                }
+                .promptbar {
+                    display: none;
+                }
+                .danmaku {
+                    display: none;
+                }
+                .main {
+                    flex-direction: column-reverse;
+                }
+                .leftbar {
+                    flex: 1;
+                    min-height: 0px;
+                    flex-direction: row;
+                }
+                .rightbar {
+                    flex: 0;
+                }
+                .logs {
+                    width: auto;
+                }
+                .main {
+                    padding: 0px;
+                    gap: 10px;
+                }
+            }
+            body.dashboard {
+                background: white;
+                font-size: 16px;
+            }
+            @media (max-width: 640px) {
+                body.dashboard {
+                    font-size: 12px;
+                }
+            }
+            @media (max-width: 400px) {
+                body.dashboard {
+                    font-size: 8px;
                 }
             }
         </style>
@@ -142,18 +171,20 @@
         <script type="text/javascript" src="https://projectxero.top/js/jmuxer.js"></script>
     </head>
     <body>
-        <div class="leftbar">
-            <div class="screenshot-container bar">
-                <div class="screenshot-nosignal">正在生成世界</div>
-                <video class="screenshot" src="" alt="screenshot"></video>
+        <div class="main">
+            <div class="leftbar">
+                <div class="screenshot-container bar">
+                    <div class="screenshot-nosignal">正在生成世界</div>
+                    <video class="screenshot" src="" alt="screenshot"></video>
+                </div>
+                <div class="logs bar mojangles"></div>
             </div>
-            <div class="logs bar mojangles"></div>
-        </div>
-        <div class="rightbar">
-            <div class="explanation bar"></div>
-            <div class="statusbar bar"></div>
-            <div class="promptbar bar"></div>
-            <div class="danmaku bar"></div>
+            <div class="rightbar">
+                <div class="explanation bar"></div>
+                <div class="statusbar bar"></div>
+                <div class="promptbar bar"></div>
+                <div class="danmaku bar"></div>
+            </div>
         </div>
         <script type="module">
             /* global dynamicMarquee */

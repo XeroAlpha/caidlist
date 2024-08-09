@@ -10,6 +10,7 @@ import {
     filterObjectMap,
     isExtendFrom,
     isArraySetEqual,
+    setStatus,
     sortObjectKey,
     stringComparator,
     kvArrayToObject,
@@ -439,7 +440,9 @@ const Extractors = [
             const blockProperties = {};
             const blockTags = {};
             const blockInfoEntries = Object.entries(blockInfoList).sort((a, b) => stringComparator(a[0], b[0]));
+            let index = 0;
             for (const [blockId, blockType] of blockInfoEntries) {
+                setStatus(`[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`);
                 const { properties, states, invalidStates, canBeWaterlogged } = blockType;
                 const tagMap = {};
                 const itemIdMap = {};
@@ -499,6 +502,7 @@ const Extractors = [
                     }
                 }
             }
+            setStatus('');
             target.blocks = blocks;
             target.blockProperties = sortObjectKey(blockProperties);
             target.blockTags = sortObjectKey(blockTags);
@@ -668,10 +672,12 @@ const Extractors = [
                         if (value !== null) {
                             ItemInfoList[id] = value;
                         }
+                        setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i}: ${id} analyzed`);
                     } catch (err2) {
                         warn(`Cannot evaluate code for Item #${i}: ${err.message}`);
                     }
                 }
+                setStatus('');
             }
             const itemIds = Object.keys(ItemInfoList).sort();
             const itemTags = {};
