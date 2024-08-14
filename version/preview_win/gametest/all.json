@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.30.21",
+    "packageVersion": "1.21.30.22",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -11841,6 +11841,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "maceSmash": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "maceSmash",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "magic": {
                                         "value": {
                                             "type": "string",
@@ -20329,6 +20336,14 @@
                                                     "readOnly": true,
                                                 },
                                                 "faceLocation": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "isFirstEvent": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -30482,6 +30497,7 @@
         "Minecraft.EntityDamageCause.freezing",
         "Minecraft.EntityDamageCause.lava",
         "Minecraft.EntityDamageCause.lightning",
+        "Minecraft.EntityDamageCause.maceSmash",
         "Minecraft.EntityDamageCause.magic",
         "Minecraft.EntityDamageCause.magma",
         "Minecraft.EntityDamageCause.none",
@@ -31620,6 +31636,7 @@
         "Minecraft.ItemUseOnAfterEvent.prototype.blockFace",
         "Minecraft.ItemUseOnAfterEvent.prototype.constructor",
         "Minecraft.ItemUseOnAfterEvent.prototype.faceLocation.[[Get]]",
+        "Minecraft.ItemUseOnAfterEvent.prototype.isFirstEvent.[[Get]]",
         "Minecraft.ItemUseOnAfterEvent.prototype.itemStack.[[Get]]",
         "Minecraft.ItemUseOnAfterEvent.prototype.source.[[Get]]",
         "Minecraft.ItemUseOnAfterEventSignal",
@@ -40892,7 +40909,7 @@
             "itemId": "minecraft:cocoa_beans",
             "canBeWaterlogged": true,
         },
-        "minecraft:colored_torch_bp": {
+        "minecraft:colored_torch_blue": {
             "properties": [
                 {
                     "name": "color_bit",
@@ -40915,11 +40932,77 @@
                     "defaultValue": "unknown",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "color_bit": true,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:colored_torch_rg": {
+        "minecraft:colored_torch_green": {
+            "properties": [
+                {
+                    "name": "color_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "torch_facing_direction",
+                    "validValues": [
+                        "unknown",
+                        "west",
+                        "east",
+                        "north",
+                        "south",
+                        "top",
+                    ],
+                    "defaultValue": "unknown",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "color_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:colored_torch_purple": {
+            "properties": [
+                {
+                    "name": "color_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "torch_facing_direction",
+                    "validValues": [
+                        "unknown",
+                        "west",
+                        "east",
+                        "north",
+                        "south",
+                        "top",
+                    ],
+                    "defaultValue": "unknown",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "color_bit": false,
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:colored_torch_red": {
             "properties": [
                 {
                     "name": "color_bit",
@@ -40942,7 +41025,11 @@
                     "defaultValue": "unknown",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "color_bit": true,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -69200,7 +69287,11 @@
                     "defaultValue": "dry",
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "sponge_type": "wet",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -73887,6 +73978,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:wet_sponge": {
+            "properties": [
+                {
+                    "name": "sponge_type",
+                    "validValues": [
+                        "dry",
+                        "wet",
+                    ],
+                    "defaultValue": "wet",
+                },
+            ],
+            "invalidStates": [
+                {
+                    "sponge_type": "dry",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:wheat": {
             "properties": [
                 {
@@ -76042,8 +76152,10 @@
                     true,
                 ],
                 "defaultValue": {
-                    "minecraft:colored_torch_bp": false,
-                    "minecraft:colored_torch_rg": false,
+                    "minecraft:colored_torch_blue": false,
+                    "minecraft:colored_torch_green": true,
+                    "minecraft:colored_torch_purple": true,
+                    "minecraft:colored_torch_red": false,
                 },
             },
         ],
@@ -77917,6 +78029,7 @@
                 ],
                 "defaultValue": {
                     "minecraft:sponge": "dry",
+                    "minecraft:wet_sponge": "wet",
                 },
             },
         ],
@@ -78328,8 +78441,10 @@
                     "top",
                 ],
                 "defaultValue": {
-                    "minecraft:colored_torch_bp": "unknown",
-                    "minecraft:colored_torch_rg": "unknown",
+                    "minecraft:colored_torch_blue": "unknown",
+                    "minecraft:colored_torch_green": "unknown",
+                    "minecraft:colored_torch_purple": "unknown",
+                    "minecraft:colored_torch_red": "unknown",
                     "minecraft:redstone_torch": "unknown",
                     "minecraft:soul_torch": "unknown",
                     "minecraft:torch": "unknown",
@@ -86139,6 +86254,9 @@
             "tags": [],
         },
         "minecraft:weeping_vines": {
+            "tags": [],
+        },
+        "minecraft:wet_sponge": {
             "tags": [],
         },
         "minecraft:wheat": {

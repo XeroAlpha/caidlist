@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.0.3",
+    "version": "1.21.20.3",
     "content": [],
     "sections": [
         {
@@ -1171,6 +1171,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "feet",
                                                     "Description": "",
                                                 },
@@ -1342,6 +1346,10 @@
                                                 },
                                                 {
                                                     "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
                                                     "Description": "",
                                                 },
                                                 {
@@ -2955,6 +2963,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "feet",
                                                     "Description": "",
                                                 },
@@ -3132,6 +3144,10 @@
                                                 },
                                                 {
                                                     "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
                                                     "Description": "",
                                                 },
                                                 {
@@ -8874,6 +8890,141 @@
                     ],
                 },
                 {
+                    "name": "is_navigating",
+                    "id": "is_navigating",
+                    "level": 2,
+                    "content": [
+                        "Tests if the subject is currently pathfinding. Requires a \"minecraft:navigation\" component.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_navigating\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_navigating\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_owner",
                     "id": "is_owner",
                     "level": 2,
@@ -12677,6 +12828,141 @@
                     ],
                 },
                 {
+                    "name": "owner_distance",
+                    "id": "owner_distance",
+                    "level": 2,
+                    "content": [
+                        "Tests the distance between the subject and its owner. Returns false if there is no owner.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"owner_distance\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"owner_distance\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "random_chance",
                     "id": "random_chance",
                     "level": 2,
@@ -15760,7 +16046,7 @@
                             "id": "minecraft:behavior.follow_owner",
                             "level": 4,
                             "content": [
-                                "Allows the mob to follow the player that owns them.",
+                                "Allows a mob to follow the player that owns it.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -15768,19 +16054,25 @@
                                             "Name": "can_teleport",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Specify if the mob can teleport to the player if it is too far away",
+                                            "Description": "Defines if the mob will teleport to its owner when too far away.",
                                         },
                                         {
                                             "Name": "ignore_vibration",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Specify if the mob will follow the owner if it has heard a vibration lately",
+                                            "Description": "Defines if the mob should disregard following its owner after detecting a recent vibration.",
                                         },
                                         {
                                             "Name": "max_distance",
                                             "Type": "Decimal",
                                             "Default Value": "60.0",
-                                            "Description": "The maximum distance in blocks this mob can be from its owner to start following, only used when canTeleport is false",
+                                            "Description": "The maximum distance the mob can be from its owner to start following it. Applicable only when \"can_teleport\" is set to false.",
+                                        },
+                                        {
+                                            "Name": "post_teleport_distance",
+                                            "Type": "Boolean",
+                                            "Default Value": "\"stop_distance\" + 1",
+                                            "Description": "Defines how far (in blocks) the entity will be from its owner after teleporting. If not specified, it defaults to \"stop_distance\" + 1, allowing the entity to seamlessly resume navigation.",
                                         },
                                         {
                                             "Name": "speed_multiplier",
@@ -15792,13 +16084,13 @@
                                             "Name": "start_distance",
                                             "Type": "Decimal",
                                             "Default Value": "10.0",
-                                            "Description": "The distance in blocks that the owner can be away from this mob before it starts following it",
+                                            "Description": "The minimum distance the mob must be from its owner to start following it.",
                                         },
                                         {
                                             "Name": "stop_distance",
                                             "Type": "Decimal",
                                             "Default Value": "2.0",
-                                            "Description": "The distance in blocks this mob will stop from its owner while following it",
+                                            "Description": "The distance at which the mob will stop following its owner.",
                                         },
                                     ],
                                 },
@@ -18349,7 +18641,7 @@
                                         {
                                             "Name": "damage_sources",
                                             "Type": "List",
-                                            "Default Value": "[campfire, entity_attack, entity_explosion, fire, fire_tick, fireworks, freezing, lava, lightning, magic, magma, projectile, ram_attack, sonic_boom, soul_campfire, temperature, wither]",
+                                            "Default Value": "[campfire, fire, fire_tick, freezing, lava, lightning, magma, soul_campfire, temperature, entity_attack, entity_explosion, fireworks, magic, projectile, ram_attack, sonic_boom, wither]",
                                             "Description": "The list of Entity Damage Sources that will cause this mob to panic",
                                         },
                                         {
@@ -20709,6 +21001,43 @@
                             ],
                         },
                         {
+                            "name": "minecraft:behavior.swim_up_for_breath",
+                            "id": "minecraft:behavior.swim_up_for_breath",
+                            "level": 4,
+                            "content": [
+                                "Allows the mob to try to move to air once it is close to running out of its total breathable supply. Requires \"minecraft:breathable\".",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "material_type",
+                                            "Type": "String",
+                                            "Default Value": "water",
+                                            "Description": "The material the mob is traveling in. An air block will only be considered valid to move to with a block of this material below it. Options are: \"water\", \"lava\", or \"any\".",
+                                        },
+                                        {
+                                            "Name": "search_height",
+                                            "Type": "Integer",
+                                            "Default Value": "16",
+                                            "Description": "The height (in blocks) above the mob's current position that it will search for a valid air block to move to. If a valid block cannot be found, the mob will move to the position this many blocks above it.",
+                                        },
+                                        {
+                                            "Name": "search_radius",
+                                            "Type": "Integer",
+                                            "Default Value": "4",
+                                            "Description": "The radius (in blocks) around the mob's current position that it will search for a valid air block to move to.",
+                                        },
+                                        {
+                                            "Name": "speed_mod",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.40",
+                                            "Description": "Movement speed multiplier of the mob when using this Goal.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:behavior.swim_wander",
                             "id": "minecraft:behavior.swim_wander",
                             "level": 4,
@@ -20905,6 +21234,31 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.50",
                                             "Description": "Movement speed multiplier of the mob when using this AI Goal.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:behavior.teleport_to_owner",
+                            "id": "minecraft:behavior.teleport_to_owner",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to teleport to its owner.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "cooldown",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.00",
+                                            "Description": "The time in seconds that must pass for the entity to be able to try to teleport again.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions to be satisfied for the entity to teleport to its owner.",
                                         },
                                     ],
                                 },
@@ -23053,6 +23407,25 @@
                             ],
                         },
                         {
+                            "name": "minecraft:entity_armor_equipment_slot_mapping",
+                            "id": "minecraft:entity_armor_equipment_slot_mapping",
+                            "level": 4,
+                            "content": [
+                                "It defines to which armor slot an item equipped to 'minecraft:equippable''s second slot should be equipped to. It is automatically applied to all entities for worlds with a version greater than or equal to 1.21.10. For older worlds, 'slot.armor.torso' will be used. It is strongly advised not to explicitly use this component, as no backwards compatibility for it will be provided.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "armor_slot",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The armor slot an item equipped to 'minecraft:equippable''s second slot should be equipped to. It defaults to 'slot.armor.torso' for entities with a format version prior to 1.21.10, and to 'slot.armor.body' otherwise.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:entity_sensor",
                             "id": "minecraft:entity_sensor",
                             "level": 4,
@@ -23997,13 +24370,13 @@
                                             "Name": "drop_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "equip_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "health_amount",
@@ -24080,7 +24453,7 @@
                                                             "Name": "slot",
                                                             "Type": "Integer",
                                                             "Default Value": "",
-                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs' and 'slot.armor.feet'.",
+                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                                         },
                                                     ],
                                                 },
@@ -27864,6 +28237,10 @@
                                             "ID": "6562850329755828441",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.swim_up_for_breath",
+                                            "ID": "6795851152810947053",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.swim_wander",
                                             "ID": "12378924708543723854",
                                         },
@@ -27878,6 +28255,10 @@
                                         {
                                             "JSON Name": "minecraft:behavior.take_flower",
                                             "ID": "16066043784359778497",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:behavior.teleport_to_owner",
+                                            "ID": "1980014114121577323",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.tempt",
@@ -28094,6 +28475,10 @@
                                         {
                                             "JSON Name": "minecraft:economy_trade_table",
                                             "ID": "1705466896",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:entity_armor_equipment_slot_mapping",
+                                            "ID": "388041038",
                                         },
                                         {
                                             "JSON Name": "minecraft:entity_sensor",
@@ -29588,5 +29973,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "bfd26fd94e6642a15c03f59066e0464c45288fbb",
+    "__OBJECTHASH__": "cba3a83306f6554aab61879e4ada674e22dd18b9",
 }

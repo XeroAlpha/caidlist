@@ -117,6 +117,7 @@
 |camera_presets|摄像机预设|用于 camera 命令的摄像机预设 ID。|
 |recipes|配方|用于 recipe 命令的配方 ID。|
 |hud_elements|HUD界面元素|用于 hud 命令的界面元素 ID。|
+|entity_properties|实体属性|用于 has_property 选择器的实体属性 ID。|
 |abilities|能力|用于教育版 ability 命令的能力 ID。|
 |options|选项|仅开发版|
 |particle_types|粒子类型|仅开发版|

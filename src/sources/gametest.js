@@ -513,161 +513,110 @@ const Extractors = [
         timeout: 60000,
         async extract(target, frame) {
             let ItemInfoList;
-            try {
-                ItemInfoList = parseOrThrow(await frame.evaluate(() => {
-                    const result = {};
-                    const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
-                    const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
-                    const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
-                    enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
-                    const itemTypes = Minecraft.ItemTypes.getAll();
-                    for (let i = 0; i < itemTypes.length; i++) {
-                        const itemType = itemTypes[i];
-                        if (itemType.id === 'minecraft:air') {
-                            continue;
+            parseOrThrow(await frame.evaluate(() => {
+                const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
+                const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
+                enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
+                globalThis.__item_extract_enchantments = enchantments;
+                return '"OK"';
+            }));
+            const length = parseOrThrow(await frame.evaluate(() => {
+                const itemTypes = Minecraft.ItemTypes.getAll();
+                globalThis.__item_extract_itemTypes = itemTypes;
+                return String(itemTypes.length);
+            }));
+            parseOrThrow(await frame.evaluate(() => {
+                const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
+                const enchantments = globalThis.__item_extract_enchantments;
+                globalThis.__item_extract_dump = (itemType) => {
+                    if (itemType.id === 'minecraft:air') {
+                        return [itemType.id, null];
+                    }
+                    // Uncomment to discover where the game crashes
+                    // console.warn(`Dumping ${itemType.id}`);
+                    const itemStack = new Minecraft.ItemStack(itemType);
+                    const componentInstances = itemStack.getComponents();
+                    const commonComponents = {};
+                    const components = {};
+                    let hasComponents = false;
+                    componentInstances.forEach((component) => {
+                        const componentData = {};
+                        const componentId = component.typeId;
+                        if (component instanceof Minecraft.ItemEnchantableComponent) {
+                            const enchantmentSlots = component.slots.filter((e) => e);
+                            const existedEnchantments = component.getEnchantments();
+                            const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
+                            if (enchantmentSlots.length > 0) {
+                                componentData.enchantmentSlots = enchantmentSlots;
+                            }
+                            if (existedEnchantments.length > 0) {
+                                componentData.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
+                            }
+                            if (applicableEnchantments.length > 0) {
+                                componentData.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
+                            }
                         }
-                        // Uncomment to discover where the game crashes
-                        // console.warn(`Dumping ${itemType.id}`);
-                        const itemStack = new Minecraft.ItemStack(itemType);
-                        const componentInstances = itemStack.getComponents();
-                        const commonComponents = {};
-                        const components = {};
-                        let hasComponents = false;
-                        componentInstances.forEach((component) => {
-                            const componentData = {};
-                            const componentId = component.typeId;
-                            if (component instanceof Minecraft.ItemEnchantableComponent) {
-                                const enchantmentSlots = component.slots.filter((e) => e);
-                                const existedEnchantments = component.getEnchantments();
-                                const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
-                                if (enchantmentSlots.length > 0) {
-                                    componentData.enchantmentSlots = enchantmentSlots;
-                                }
-                                if (existedEnchantments.length > 0) {
-                                    componentData.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
-                                }
-                                if (applicableEnchantments.length > 0) {
-                                    componentData.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
-                                }
+                        if (component instanceof Minecraft.ItemCooldownComponent) {
+                            if (component.cooldownTicks > 0) {
+                                assign(componentData, component, ['cooldownCategory', 'cooldownTicks']);
                             }
-                            if (component instanceof Minecraft.ItemCooldownComponent) {
-                                if (component.cooldownTicks > 0) {
-                                    assign(componentData, component, ['cooldownCategory', 'cooldownTicks']);
-                                }
+                        }
+                        if (component instanceof Minecraft.ItemDurabilityComponent) {
+                            if (component.damage > 0) {
+                                componentData.defaultDamage = component.damage;
                             }
-                            if (component instanceof Minecraft.ItemDurabilityComponent) {
-                                if (component.damage > 0) {
-                                    componentData.defaultDamage = component.damage;
-                                }
-                                assign(componentData, component, ['maxDurability']);
-                                const damageChance = component.getDamageChance();
-                                if (damageChance !== 100) {
-                                    componentData.damageChance = damageChance;
-                                }
+                            assign(componentData, component, ['maxDurability']);
+                            const damageChance = component.getDamageChance();
+                            if (damageChance !== 100) {
+                                componentData.damageChance = damageChance;
                             }
-                            if (component instanceof Minecraft.ItemFoodComponent) {
-                                assign(componentData, component, [
-                                    'canAlwaysEat',
-                                    'nutrition',
-                                    'saturationModifier',
-                                    'usingConvertsTo'
-                                ]);
-                            }
-                            components[componentId] = componentData;
-                            hasComponents = true;
-                        });
-                        const maxAmountDefault = itemStack.isStackable ? 64 : 1;
-                        result[itemType.id] = {
+                        }
+                        if (component instanceof Minecraft.ItemFoodComponent) {
+                            assign(componentData, component, [
+                                'canAlwaysEat',
+                                'nutrition',
+                                'saturationModifier',
+                                'usingConvertsTo'
+                            ]);
+                        }
+                        components[componentId] = componentData;
+                        hasComponents = true;
+                    });
+                    const maxAmountDefault = itemStack.isStackable ? 64 : 1;
+                    return [
+                        itemType.id,
+                        {
                             unstackable: itemStack.isStackable ? undefined : true,
                             maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
                             tags: [...new Set(itemStack.getTags())],
                             components: hasComponents ? components : undefined,
                             ...commonComponents
-                        };
+                        }
+                    ];
+                };
+                return '"OK"';
+            }));
+            try {
+                ItemInfoList = parseOrThrow(await frame.evaluate(() => {
+                    const result = {};
+                    const itemTypes = globalThis.__item_extract_itemTypes;
+                    const dump = globalThis.__item_extract_dump;
+                    for (let i = 0; i < itemTypes.length; i++) {
+                        const [id, value] = dump(itemTypes[i]);
+                        result[id] = value;
                     }
                     return JSON.stringify(result);
                 }));
             } catch (err) {
                 warn(`Cannot evaluate code for ItemRegistry: ${err.message}`);
-                parseOrThrow(await frame.evaluate(() => {
-                    const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
-                    const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
-                    enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
-                    globalThis.__item_extract_enchantments = enchantments;
-                    return '"OK"';
-                }));
-                const length = parseOrThrow(await frame.evaluate(() => {
-                    const itemTypes = Minecraft.ItemTypes.getAll();
-                    globalThis.__item_extract_itemTypes = itemTypes;
-                    return String(itemTypes.length);
-                }));
                 ItemInfoList = {};
+                let corruptedCount = 0;
                 for (let i = 0; i < length; i++) {
                     try {
                         const [id, value] = parseOrThrow(await frame.evaluate((index) => {
-                            const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
                             const itemTypes = globalThis.__item_extract_itemTypes;
-                            const enchantments = globalThis.__item_extract_enchantments;
-                            const itemType = itemTypes[index];
-                            if (itemType.id === 'minecraft:air') {
-                                return [itemType.id, null];
-                            }
-                            const itemStack = new Minecraft.ItemStack(itemType);
-                            const componentInstances = itemStack.getComponents();
-                            const commonComponents = {};
-                            const components = {};
-                            let hasComponents = false;
-                            componentInstances.forEach((component) => {
-                                const componentData = {};
-                                const componentId = component.typeId;
-                                if (component instanceof Minecraft.ItemEnchantableComponent) {
-                                    const enchantmentSlots = component.slots.filter((e) => e);
-                                    const existedEnchantments = component.getEnchantments();
-                                    const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
-                                    if (enchantmentSlots.length > 0) {
-                                        componentData.enchantmentSlots = enchantmentSlots;
-                                    }
-                                    if (existedEnchantments.length > 0) {
-                                        componentData.enchantments = existedEnchantments.map((e) => e.type.id || e.type);
-                                    }
-                                    if (applicableEnchantments.length > 0) {
-                                        componentData.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
-                                    }
-                                }
-                                if (component instanceof Minecraft.ItemCooldownComponent) {
-                                    if (component.cooldownTicks > 0) {
-                                        assign(componentData, component, ['cooldownCategory', 'cooldownTicks']);
-                                    }
-                                }
-                                if (component instanceof Minecraft.ItemDurabilityComponent) {
-                                    if (component.damage > 0) {
-                                        componentData.defaultDamage = component.damage;
-                                    }
-                                    assign(componentData, component, ['maxDurability']);
-                                    const damageChance = component.getDamageChance();
-                                    if (damageChance !== 100) {
-                                        componentData.damageChance = damageChance;
-                                    }
-                                }
-                                if (component instanceof Minecraft.ItemFoodComponent) {
-                                    assign(componentData, component, [
-                                        'canAlwaysEat',
-                                        'nutrition',
-                                        'saturationModifier',
-                                        'usingConvertsTo'
-                                    ]);
-                                }
-                                components[componentId] = componentData;
-                                hasComponents = true;
-                            });
-                            const maxAmountDefault = itemStack.isStackable ? 64 : 1;
-                            return JSON.stringify([itemType.id, {
-                                unstackable: itemStack.isStackable ? undefined : true,
-                                maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
-                                tags: [...new Set(itemStack.getTags())],
-                                components: hasComponents ? components : undefined,
-                                ...commonComponents
-                            }]);
+                            const dump = globalThis.__item_extract_dump;
+                            return JSON.stringify(dump(itemTypes[index]));
                         }, i));
                         if (value !== null) {
                             ItemInfoList[id] = value;
@@ -675,10 +624,27 @@ const Extractors = [
                         setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i}: ${id} analyzed`);
                     } catch (err2) {
                         warn(`Cannot evaluate code for Item #${i}: ${err.message}`);
+                        corruptedCount += 1;
+                    }
+                }
+                if (corruptedCount > 0 && target.items) {
+                    const removedItems = Object.keys(target.items).filter((k) => !(k in ItemInfoList));
+                    if (removedItems.length === corruptedCount) {
+                        removedItems.forEach((k) => {
+                            ItemInfoList[k] = target.items[k];
+                        });
+                    } else {
+                        warn(`Cannot fix ${corruptedCount} corrupted items: ${removedItems.length} item(s) removed`);
                     }
                 }
                 setStatus('');
             }
+            parseOrThrow(await frame.evaluate(() => {
+                delete globalThis.__item_extract_enchantments;
+                delete globalThis.__item_extract_itemTypes;
+                delete globalThis.__item_extract_dump;
+                return '"OK"';
+            }));
             const itemIds = Object.keys(ItemInfoList).sort();
             const itemTags = {};
             itemIds.forEach((itemId) => {
@@ -899,7 +865,8 @@ export default async function analyzeGameTestEnumsCached(cx) {
     const socket = await socketPromise;
     const debugConn = new QuickJSDebugConnection(socket);
     const debugSession = new MinecraftDebugSession(debugConn);
-    const target = { packageVersion };
+    // Provide cache for infering corrupted items, but not affecting output (not owned by target)
+    const target = Object.assign(Object.create(cache ?? {}), { packageVersion });
     debugSession.resume();
     await evaluateExtractors(cx, target, debugSession);
     await doWSRelatedJobsCached(cx, wsSession, {});

@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.0.3",
+    "version": "1.21.20.3",
     "content": [],
     "sections": [
         {
@@ -27,7 +27,7 @@
                                     "Name": "minecraft:breathability",
                                     "Type": "String",
                                     "Default Value": "",
-                                    "Description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.Experimental toggles required: Holiday Creator Features",
+                                    "Description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.",
                                 },
                                 {
                                     "Name": "minecraft:collision_box",
@@ -35,7 +35,6 @@
                                     "Default Value": "true",
                                     "Description": [
                                         "Defines the area of the block that collides with entities. If set to true, default values are used. If set to false, the block's collision with entities is disabled. If this component is omitted, default values are used.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.50)",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -61,7 +60,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Makes your block into a custom crafting table which enables the crafting table UI and the ability to craft recipes. This component supports only \"recipe_shaped\" and \"recipe_shapeless\" typed recipes and not others like \"recipe_furnace\" or \"recipe_brewing_mix\". If there are two recipes for one item, the recipe book will pick the first that was parsed. If two input recipes are the same, crafting may assert and the resulting item may vary.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.50)",
                                         {
                                             "section": "crafting_tags",
                                             "content": [
@@ -80,7 +78,7 @@
                                     "Name": "minecraft:custom_components",
                                     "Type": "Array",
                                     "Default Value": "",
-                                    "Description": "Sets an ordered list of custom component names which are bound in script to be executed upon a block event.Experimental toggles required: Beta APIs",
+                                    "Description": "Sets an ordered list of custom component names which are bound in script to be executed upon a block event.",
                                 },
                                 {
                                     "Name": "minecraft:destructible_by_explosion",
@@ -124,7 +122,7 @@
                                     "Name": "minecraft:display_name",
                                     "Type": "Localization String",
                                     "Default Value": "",
-                                    "Description": "Specifies the language file key that maps to what text will be displayed when you hover over the block in your inventory and hotbar. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this component is omitted, the name of the block will be used as the display name.Experimental toggles required: Holiday Creator Features (in format versions before 1.19.60)",
+                                    "Description": "Specifies the language file key that maps to what text will be displayed when you hover over the block in your inventory and hotbar. If the string given can not be resolved as a loc string, the raw string given will be displayed. If this component is omitted, the name of the block will be used as the display name.",
                                 },
                                 {
                                     "Name": "minecraft:flammable",
@@ -161,7 +159,7 @@
                                     "Name": "minecraft:geometry",
                                     "Type": "Identifier String",
                                     "Default Value": "",
-                                    "Description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".Experimental toggles required: Holiday Creator Features (in format versions before 1.19.40)",
+                                    "Description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
                                 },
                                 {
                                     "Name": "minecraft:light_dampening",
@@ -193,7 +191,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "The material instances for a block. Maps face or material_instance names in a geometry file to an actual material instance. You can assign a material instance object to any of these faces: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\", or \"*\". You can also give an instance the name of your choosing such as \"my_instance\", and then assign it to a face by doing \"north\":\"my_instance\".",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.40)",
                                         {
                                             "section": "Material Instance",
                                             "content": [
@@ -237,7 +234,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Sets rules for under what conditions the block can be placed/survive",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.60)",
                                         {
                                             "section": "conditions",
                                             "content": [
@@ -294,7 +290,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Triggers the specified event, either once, or at a regular interval equal to a number of ticks randomly chosen from the interval_range provided.",
-                                        "Experimental toggles required: Holiday Creator Features",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -351,7 +346,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Triggers the specified event randomly based on the random tick speed gamerule. The random tick speed determines how often blocks are updated. Some other examples of game mechanics that use random ticking are crop growth and fire spreading.",
-                                        "Experimental toggles required: Holiday Creator Features",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -396,7 +390,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Defines the area of the block that is selected by the player's cursor. If set to true, default values are used. If set to false, this block is not selectable by the player's cursor. If this component is omitted, default values are used.",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.60)",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -422,7 +415,6 @@
                                     "Default Value": "",
                                     "Description": [
                                         "The block's translation, rotation and scale with respect to the center of its world position",
-                                        "Experimental toggles required: Holiday Creator Features (in format versions before 1.19.80)",
                                         {
                                             "section": "rotation",
                                             "content": [
@@ -459,7 +451,7 @@
                                     "Name": "minecraft:unit_cube",
                                     "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "Specifies that a unit cube is to be used with tessellation.Experimental toggles required: Holiday Creator Features",
+                                    "Description": "Specifies that a unit cube is to be used with tessellation.",
                                 },
                             ],
                         },
@@ -493,7 +485,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.0\",",
+                                        "  \"format_version\": \"1.21.20\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1181,5 +1173,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "d842b4cc3af9ccaf66f7a52346c9292a72c07e13",
+    "__OBJECTHASH__": "c2e98654cded697d884eb3c6b70ae68c350bbd10",
 }

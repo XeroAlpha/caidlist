@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.21.0.3",
+    "version": "1.21.20.3",
     "content": [],
     "sections": [
         {
@@ -923,11 +923,11 @@
                                 },
                                 {
                                     "Name": "query.armor_color_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the color of the armor in the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body).",
                                 },
                                 {
                                     "Name": "query.armor_damage_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the damage value of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet). Support for entities other than players may be limited, as the damage value is not always available on clients.",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the damage value of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body). Support for entities other than players may be limited, as the damage value is not always available on clients.",
                                 },
                                 {
                                     "Name": "query.armor_material_slot",
@@ -935,7 +935,7 @@
                                 },
                                 {
                                     "Name": "query.armor_texture_slot",
-                                    "Description": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
+                                    "Description": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body).",
                                 },
                                 {
                                     "Name": "query.average_frame_time",
@@ -1111,7 +1111,7 @@
                                 },
                                 {
                                     "Name": "query.equipment_count",
-                                    "Description": "Returns the number of equipped armor pieces for an actor from 0 to 4, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).",
+                                    "Description": "Returns the number of equipped armor pieces for an actor from 0 to 5, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).",
                                 },
                                 {
                                     "Name": "query.equipped_item_all_tags",
@@ -1934,6 +1934,10 @@
                                     "Description": "Returns the scale of how standing up the entity is.",
                                 },
                                 {
+                                    "Name": "query.state_time",
+                                    "Description": "Only valid in an animation controller. Returns the time in seconds in the current animation controller state.",
+                                },
+                                {
                                     "Name": "query.structural_integrity",
                                     "Description": "Returns the structural integrity for the actor, otherwise returns 0.",
                                 },
@@ -2049,17 +2053,7 @@
                     "name": "List of Experimental Entity Queries",
                     "id": "List of Experimental Entity Queries",
                     "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "query.state_time",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Only valid in an animation controller. Returns the time in seconds in the current animation controller state.",
-                                },
-                            ],
-                        },
-                    ],
+                    "content": [],
                 },
             ],
         },
@@ -2146,5 +2140,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "ea6185408cfa3d668e5522af9d618c028cbd3b0e",
+    "__OBJECTHASH__": "f560e05ff9327328cfec1e73749e4d89483b2d2d",
 }
