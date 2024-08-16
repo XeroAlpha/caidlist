@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.30.22",
+    "version": "1.21.30.23",
     "content": [],
     "sections": [
         {
@@ -108,6 +108,28 @@
                                         {
                                             "type": "table",
                                             "rows": [
+                                                {
+                                                    "Name": "item_specific_speeds",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": [
+                                                        "Optional array of objects to describe item specific block destroy speeds, each object contains an 'item' ItemDescriptor and a 'destroy_speed' float. This array currently requires UpcomingFeatures experiment to be enabled.",
+                                                        {
+                                                            "section": "destroy_speed",
+                                                            "content": [
+                                                                "Required.",
+                                                                "A destroy speed applied while using the defined 'item'.",
+                                                            ],
+                                                        },
+                                                        {
+                                                            "section": "item",
+                                                            "content": [
+                                                                "Required.",
+                                                                "An ItemDescriptor filtering for the item used while mining.",
+                                                            ],
+                                                        },
+                                                    ],
+                                                },
                                                 {
                                                     "Name": "seconds_to_destroy",
                                                     "Type": "Decimal",
@@ -389,22 +411,22 @@
                                     "Type": "Identifier String",
                                     "Default Value": "",
                                     "Description": [
-                                        "The basic redstone properties of a block",
-                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.30)",
+                                        "The basic redstone properties of a block; if the component is not provided the default values are used. Requires the Upcoming Creator Features experiment. If you use this component, make sure to use 1.21.30 format version for your block JSON.",
+                                        "Experimental toggles required: Upcoming Creator Features",
                                         {
                                             "type": "table",
                                             "rows": [
                                                 {
                                                     "Name": "allows_wire_to_step_down",
                                                     "Type": "Boolean",
-                                                    "Default Value": "",
-                                                    "Description": "Specifies if redstone wire can stair-step downward on the block",
+                                                    "Default Value": "true",
+                                                    "Description": "Specifies if redstone wire can stair-step downward on the block.",
                                                 },
                                                 {
                                                     "Name": "redstone_conductor",
                                                     "Type": "Boolean",
-                                                    "Default Value": "",
-                                                    "Description": "Specifies if the block can be powered by redstone",
+                                                    "Default Value": "false",
+                                                    "Description": "Specifies if the block can be powered by redstone.",
                                                 },
                                             ],
                                         },
@@ -1199,5 +1221,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "71076e3aac4eeeb65ec1f31cd145b65466dbe868",
+    "__OBJECTHASH__": "a3fe20857cb4b623b45209cd55160719ad9b10b6",
 }

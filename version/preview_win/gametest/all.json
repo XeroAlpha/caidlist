@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.30.22",
+    "packageVersion": "1.21.30.23",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -6378,6 +6378,16 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.BlockLocationIterator",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "next": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -13622,6 +13632,16 @@
                                                     },
                                                 },
                                             },
+                                            "enumerableProperties": {
+                                                "next": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
                                             "symbolProperties": {
                                                 "Symbol(Symbol.iterator)": {
                                                     "value": {
@@ -16135,6 +16155,16 @@
                                                     },
                                                 },
                                             },
+                                            "enumerableProperties": {
+                                                "next": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
                                             "symbolProperties": {
                                                 "Symbol(Symbol.iterator)": {
                                                     "value": {
@@ -18107,6 +18137,34 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.InvalidContainerSlotError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "InvalidIteratorError": {
+                            "value": {
+                                "type": "function",
+                                "name": "InvalidIteratorError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.InvalidIteratorError",
                                                     },
                                                 },
                                             },
@@ -22833,6 +22891,16 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.PlayerIterator",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "next": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -29781,6 +29849,7 @@
         "Minecraft.BlockLocationIterator.prototype",
         "Minecraft.BlockLocationIterator.prototype.Symbol(Symbol.iterator)",
         "Minecraft.BlockLocationIterator.prototype.constructor",
+        "Minecraft.BlockLocationIterator.prototype.next",
         "Minecraft.BlockPermutation",
         "Minecraft.BlockPermutation.prototype",
         "Minecraft.BlockPermutation.prototype.constructor",
@@ -30743,6 +30812,7 @@
         "Minecraft.EntityIterator.prototype",
         "Minecraft.EntityIterator.prototype.Symbol(Symbol.iterator)",
         "Minecraft.EntityIterator.prototype.constructor",
+        "Minecraft.EntityIterator.prototype.next",
         "Minecraft.EntityLavaMovementComponent",
         "Minecraft.EntityLavaMovementComponent.[[Prototype]]",
         "Minecraft.EntityLavaMovementComponent.componentId",
@@ -31088,6 +31158,7 @@
         "Minecraft.EntityTypeIterator.prototype",
         "Minecraft.EntityTypeIterator.prototype.Symbol(Symbol.iterator)",
         "Minecraft.EntityTypeIterator.prototype.constructor",
+        "Minecraft.EntityTypeIterator.prototype.next",
         "Minecraft.EntityTypes",
         "Minecraft.EntityTypes.get",
         "Minecraft.EntityTypes.getAll",
@@ -31351,6 +31422,10 @@
         "Minecraft.InvalidContainerSlotError.prototype",
         "Minecraft.InvalidContainerSlotError.prototype.[[Prototype]]",
         "Minecraft.InvalidContainerSlotError.prototype.constructor",
+        "Minecraft.InvalidIteratorError",
+        "Minecraft.InvalidIteratorError.prototype",
+        "Minecraft.InvalidIteratorError.prototype.[[Prototype]]",
+        "Minecraft.InvalidIteratorError.prototype.constructor",
         "Minecraft.InvalidStructureError",
         "Minecraft.InvalidStructureError.prototype",
         "Minecraft.InvalidStructureError.prototype.[[Prototype]]",
@@ -31953,6 +32028,7 @@
         "Minecraft.PlayerIterator.prototype",
         "Minecraft.PlayerIterator.prototype.Symbol(Symbol.iterator)",
         "Minecraft.PlayerIterator.prototype.constructor",
+        "Minecraft.PlayerIterator.prototype.next",
         "Minecraft.PlayerJoinAfterEvent",
         "Minecraft.PlayerJoinAfterEvent.prototype",
         "Minecraft.PlayerJoinAfterEvent.prototype.constructor",
@@ -39427,33 +39503,6 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:chemistry_table": {
-            "properties": [
-                {
-                    "name": "chemistry_table_type",
-                    "validValues": [
-                        "compound_creator",
-                        "material_reducer",
-                        "element_constructor",
-                        "lab_table",
-                    ],
-                    "defaultValue": "compound_creator",
-                },
-                {
-                    "name": "direction",
-                    "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                    ],
-                    "defaultValue": 0,
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-            "canBeWaterlogged": false,
-        },
         "minecraft:cherry_button": {
             "properties": [
                 {
@@ -41081,6 +41130,43 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
+        },
+        "minecraft:compound_creator": {
+            "properties": [
+                {
+                    "name": "chemistry_table_type",
+                    "validValues": [
+                        "compound_creator",
+                        "material_reducer",
+                        "element_constructor",
+                        "lab_table",
+                    ],
+                    "defaultValue": "compound_creator",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chemistry_table_type": "material_reducer",
+                },
+                {
+                    "chemistry_table_type": "element_constructor",
+                },
+                {
+                    "chemistry_table_type": "lab_table",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
         },
         "minecraft:conduit": {
             "properties": [],
@@ -46336,6 +46422,43 @@
         "minecraft:element_99": {
             "properties": [],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:element_constructor": {
+            "properties": [
+                {
+                    "name": "chemistry_table_type",
+                    "validValues": [
+                        "compound_creator",
+                        "material_reducer",
+                        "element_constructor",
+                        "lab_table",
+                    ],
+                    "defaultValue": "element_constructor",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chemistry_table_type": "compound_creator",
+                },
+                {
+                    "chemistry_table_type": "material_reducer",
+                },
+                {
+                    "chemistry_table_type": "lab_table",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -53222,6 +53345,43 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:lab_table": {
+            "properties": [
+                {
+                    "name": "chemistry_table_type",
+                    "validValues": [
+                        "compound_creator",
+                        "material_reducer",
+                        "element_constructor",
+                        "lab_table",
+                    ],
+                    "defaultValue": "lab_table",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chemistry_table_type": "compound_creator",
+                },
+                {
+                    "chemistry_table_type": "material_reducer",
+                },
+                {
+                    "chemistry_table_type": "element_constructor",
+                },
+            ],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:ladder": {
             "properties": [
                 {
@@ -58387,6 +58547,43 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:material_reducer": {
+            "properties": [
+                {
+                    "name": "chemistry_table_type",
+                    "validValues": [
+                        "compound_creator",
+                        "material_reducer",
+                        "element_constructor",
+                        "lab_table",
+                    ],
+                    "defaultValue": "material_reducer",
+                },
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "chemistry_table_type": "compound_creator",
+                },
+                {
+                    "chemistry_table_type": "element_constructor",
+                },
+                {
+                    "chemistry_table_type": "lab_table",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -71360,7 +71557,11 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "allow_underwater_bit": true,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -72075,6 +72276,33 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:underwater_tnt": {
+            "properties": [
+                {
+                    "name": "allow_underwater_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": true,
+                },
+                {
+                    "name": "explode_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [
+                {
+                    "allow_underwater_bit": false,
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
@@ -75566,6 +75794,7 @@
                 ],
                 "defaultValue": {
                     "minecraft:tnt": false,
+                    "minecraft:underwater_tnt": true,
                 },
             },
         ],
@@ -75924,7 +76153,10 @@
                     "lab_table",
                 ],
                 "defaultValue": {
-                    "minecraft:chemistry_table": "compound_creator",
+                    "minecraft:compound_creator": "compound_creator",
+                    "minecraft:element_constructor": "element_constructor",
+                    "minecraft:lab_table": "lab_table",
+                    "minecraft:material_reducer": "material_reducer",
                 },
             },
         ],
@@ -76428,13 +76660,13 @@
                     "minecraft:calibrated_sculk_sensor": 0,
                     "minecraft:campfire": 0,
                     "minecraft:carved_pumpkin": 0,
-                    "minecraft:chemistry_table": 0,
                     "minecraft:cherry_door": 0,
                     "minecraft:cherry_fence_gate": 0,
                     "minecraft:cherry_trapdoor": 0,
                     "minecraft:chipped_anvil": 0,
                     "minecraft:chiseled_bookshelf": 0,
                     "minecraft:cocoa": 0,
+                    "minecraft:compound_creator": 0,
                     "minecraft:copper_door": 0,
                     "minecraft:copper_trapdoor": 0,
                     "minecraft:crimson_door": 0,
@@ -76446,6 +76678,7 @@
                     "minecraft:dark_oak_trapdoor": 0,
                     "minecraft:decorated_pot": 0,
                     "minecraft:deprecated_anvil": 0,
+                    "minecraft:element_constructor": 0,
                     "minecraft:end_portal_frame": 0,
                     "minecraft:exposed_copper_door": 0,
                     "minecraft:exposed_copper_trapdoor": 0,
@@ -76456,12 +76689,14 @@
                     "minecraft:jungle_door": 0,
                     "minecraft:jungle_fence_gate": 0,
                     "minecraft:jungle_trapdoor": 0,
+                    "minecraft:lab_table": 0,
                     "minecraft:lectern": 0,
                     "minecraft:lit_pumpkin": 0,
                     "minecraft:loom": 0,
                     "minecraft:mangrove_door": 0,
                     "minecraft:mangrove_fence_gate": 0,
                     "minecraft:mangrove_trapdoor": 0,
+                    "minecraft:material_reducer": 0,
                     "minecraft:oxidized_copper_door": 0,
                     "minecraft:oxidized_copper_trapdoor": 0,
                     "minecraft:pink_petals": 0,
@@ -76611,6 +76846,7 @@
                 ],
                 "defaultValue": {
                     "minecraft:tnt": false,
+                    "minecraft:underwater_tnt": false,
                 },
             },
         ],
