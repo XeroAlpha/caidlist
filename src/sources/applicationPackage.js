@@ -547,21 +547,36 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
 
 const apksInstallPack = ['install_pack.apk', 'split_install_pack.apk', 'com.mojang.minecraftpe.apk', 'base.apk'];
 function extractInstallPack(packagePath) {
+    const packageApkFile = new AdmZip(packagePath);
     if (packagePath.endsWith('.apks')) {
-        const packageZip = new AdmZip(packagePath);
         log('Unpacking install pack...');
         let installPackApkEntry = null;
         for (let i = 0; i < apksInstallPack.length; i++) {
-            installPackApkEntry = packageZip.getEntry(apksInstallPack[i]);
+            installPackApkEntry = packageApkFile.getEntry(apksInstallPack[i]);
             if (installPackApkEntry) break;
         }
         if (!installPackApkEntry) {
             throw new Error('Install Pack not found!');
         }
-        const installPackApk = packageZip.readFile(installPackApkEntry);
-        return new AdmZip(installPackApk);
+        const installPackApk = packageApkFile.readFile(installPackApkEntry);
+        const installPackApkFile = new AdmZip(installPackApk);
+        const packageFileMeta = {};
+        for (const packageEntry of packageApkFile.getEntries()) {
+            if (packageEntry.entryName.toLowerCase().endsWith('.apk')) {
+                const entryData = packageEntry.getData();
+                packageFileMeta[packageEntry.entryName] = generatePackageFileMeta(new AdmZip(entryData));
+            }
+        }
+        sortObjectKey(packageFileMeta);
+        return {
+            installPack: installPackApkFile,
+            packageFileMeta
+        };
     }
-    return new AdmZip(packagePath);
+    return {
+        installPack: packageApkFile,
+        packageFileMeta: generatePackageFileMeta(packageApkFile)
+    };
 }
 
 export default function analyzePackageDataEnumsCached(cx) {
@@ -578,8 +593,7 @@ export default function analyzePackageDataEnumsCached(cx) {
             packagePath: packageInfo.path
         };
     }
-    const installPack = extractInstallPack(packageInfo.path);
-    const packageFiles = generatePackageFileMeta(installPack);
+    const { installPack, packageFileMeta: packageFiles } = extractInstallPack(packageInfo.path);
     const lang = analyzeApkPackageLang(installPack);
     const data = {
         vanilla: analyzeApkPackageDataEnums(installPack, 'vanilla'),
