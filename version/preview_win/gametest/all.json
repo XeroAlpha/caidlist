@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.30.25",
+    "packageVersion": "1.21.40.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -6034,6 +6034,13 @@
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
+                                    "FluidContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:fluidContainer",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Inventory": {
                                         "value": {
                                             "type": "string",
@@ -6041,24 +6048,10 @@
                                         },
                                         "readOnly": true,
                                     },
-                                    "LavaContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:lavaContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
                                     "Piston": {
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:piston",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "PotionContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:potionContainer",
                                         },
                                         "readOnly": true,
                                     },
@@ -6073,20 +6066,6 @@
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:sign",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "SnowContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:snowContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "WaterContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:waterContainer",
                                         },
                                         "readOnly": true,
                                     },
@@ -6341,6 +6320,108 @@
                             },
                             "configurable": false,
                         },
+                        "BlockFluidContainerComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockFluidContainerComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:fluidContainer",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "addDye": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "fillLevel": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "fluidColor": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "getFluidType": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setFluidType": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setPotion": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockFluidContainerComponent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.BlockComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.BlockComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "BlockInventoryComponent": {
                             "value": {
                                 "type": "function",
@@ -6370,101 +6451,6 @@
                                             "enumerableProperties": {
                                                 "container": {
                                                     "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockLavaContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockLavaContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:lavaContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockLavaContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockLiquidContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockLiquidContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockLiquidContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "fillLevel": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "isValidLiquid": {
-                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -6742,56 +6728,6 @@
                             },
                             "configurable": false,
                         },
-                        "BlockPotionContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockPotionContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:potionContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockPotionContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "setPotionType": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
                         "BlockRecordPlayerComponent": {
                             "value": {
                                 "type": "function",
@@ -6976,46 +6912,6 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.BlockComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockSnowContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockSnowContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:snowContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockSnowContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
                                 },
                             },
                             "configurable": false,
@@ -7389,72 +7285,6 @@
                                         },
                                         "readOnly": true,
                                     },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockWaterContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockWaterContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:waterContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "enumerableProperties": {
-                                                "addDye": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "getCustomColor": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "setCustomColor": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockWaterContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
                                 },
                             },
                             "configurable": false,
@@ -18811,6 +18641,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "Dyeable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:dyeable",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Enchantable": {
                                         "value": {
                                             "type": "string",
@@ -19185,6 +19022,70 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemDyeableComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemDyeableComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:dyeable",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "color": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "defaultColor": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemDyeableComponent",
                                                     },
                                                 },
                                             },
@@ -29922,14 +29823,11 @@
         "Minecraft.BlockComponentTickEvent.prototype.[[Prototype]]",
         "Minecraft.BlockComponentTickEvent.prototype.constructor",
         "Minecraft.BlockComponentTypes",
+        "Minecraft.BlockComponentTypes.FluidContainer",
         "Minecraft.BlockComponentTypes.Inventory",
-        "Minecraft.BlockComponentTypes.LavaContainer",
         "Minecraft.BlockComponentTypes.Piston",
-        "Minecraft.BlockComponentTypes.PotionContainer",
         "Minecraft.BlockComponentTypes.RecordPlayer",
         "Minecraft.BlockComponentTypes.Sign",
-        "Minecraft.BlockComponentTypes.SnowContainer",
-        "Minecraft.BlockComponentTypes.WaterContainer",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype.[[Prototype]]",
@@ -29963,6 +29861,20 @@
         "Minecraft.BlockExplodeAfterEventSignal.prototype.constructor",
         "Minecraft.BlockExplodeAfterEventSignal.prototype.subscribe",
         "Minecraft.BlockExplodeAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.BlockFluidContainerComponent",
+        "Minecraft.BlockFluidContainerComponent.[[Prototype]]",
+        "Minecraft.BlockFluidContainerComponent.componentId",
+        "Minecraft.BlockFluidContainerComponent.prototype",
+        "Minecraft.BlockFluidContainerComponent.prototype.[[Prototype]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.addDye",
+        "Minecraft.BlockFluidContainerComponent.prototype.constructor",
+        "Minecraft.BlockFluidContainerComponent.prototype.fillLevel.[[Get]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fillLevel.[[Set]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fluidColor.[[Get]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fluidColor.[[Set]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.getFluidType",
+        "Minecraft.BlockFluidContainerComponent.prototype.setFluidType",
+        "Minecraft.BlockFluidContainerComponent.prototype.setPotion",
         "Minecraft.BlockInventoryComponent",
         "Minecraft.BlockInventoryComponent.[[Prototype]]",
         "Minecraft.BlockInventoryComponent.componentId",
@@ -29970,20 +29882,6 @@
         "Minecraft.BlockInventoryComponent.prototype.[[Prototype]]",
         "Minecraft.BlockInventoryComponent.prototype.constructor",
         "Minecraft.BlockInventoryComponent.prototype.container.[[Get]]",
-        "Minecraft.BlockLavaContainerComponent",
-        "Minecraft.BlockLavaContainerComponent.[[Prototype]]",
-        "Minecraft.BlockLavaContainerComponent.componentId",
-        "Minecraft.BlockLavaContainerComponent.prototype",
-        "Minecraft.BlockLavaContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockLavaContainerComponent.prototype.constructor",
-        "Minecraft.BlockLiquidContainerComponent",
-        "Minecraft.BlockLiquidContainerComponent.[[Prototype]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype",
-        "Minecraft.BlockLiquidContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.constructor",
-        "Minecraft.BlockLiquidContainerComponent.prototype.fillLevel.[[Get]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.fillLevel.[[Set]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.isValidLiquid",
         "Minecraft.BlockLocationIterator",
         "Minecraft.BlockLocationIterator.prototype",
         "Minecraft.BlockLocationIterator.prototype.Symbol(Symbol.iterator)",
@@ -30016,13 +29914,6 @@
         "Minecraft.BlockPistonState.Expanding",
         "Minecraft.BlockPistonState.Retracted",
         "Minecraft.BlockPistonState.Retracting",
-        "Minecraft.BlockPotionContainerComponent",
-        "Minecraft.BlockPotionContainerComponent.[[Prototype]]",
-        "Minecraft.BlockPotionContainerComponent.componentId",
-        "Minecraft.BlockPotionContainerComponent.prototype",
-        "Minecraft.BlockPotionContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockPotionContainerComponent.prototype.constructor",
-        "Minecraft.BlockPotionContainerComponent.prototype.setPotionType",
         "Minecraft.BlockRecordPlayerComponent",
         "Minecraft.BlockRecordPlayerComponent.[[Prototype]]",
         "Minecraft.BlockRecordPlayerComponent.componentId",
@@ -30048,12 +29939,6 @@
         "Minecraft.BlockSignComponent.prototype.setText",
         "Minecraft.BlockSignComponent.prototype.setTextDyeColor",
         "Minecraft.BlockSignComponent.prototype.setWaxed",
-        "Minecraft.BlockSnowContainerComponent",
-        "Minecraft.BlockSnowContainerComponent.[[Prototype]]",
-        "Minecraft.BlockSnowContainerComponent.componentId",
-        "Minecraft.BlockSnowContainerComponent.prototype",
-        "Minecraft.BlockSnowContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockSnowContainerComponent.prototype.constructor",
         "Minecraft.BlockStateType",
         "Minecraft.BlockStateType.prototype",
         "Minecraft.BlockStateType.prototype.constructor",
@@ -30101,15 +29986,6 @@
         "Minecraft.BlockVolumeIntersection.Contains",
         "Minecraft.BlockVolumeIntersection.Disjoint",
         "Minecraft.BlockVolumeIntersection.Intersects",
-        "Minecraft.BlockWaterContainerComponent",
-        "Minecraft.BlockWaterContainerComponent.[[Prototype]]",
-        "Minecraft.BlockWaterContainerComponent.componentId",
-        "Minecraft.BlockWaterContainerComponent.prototype",
-        "Minecraft.BlockWaterContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockWaterContainerComponent.prototype.addDye",
-        "Minecraft.BlockWaterContainerComponent.prototype.constructor",
-        "Minecraft.BlockWaterContainerComponent.prototype.getCustomColor",
-        "Minecraft.BlockWaterContainerComponent.prototype.setCustomColor",
         "Minecraft.BoundingBoxUtils",
         "Minecraft.BoundingBoxUtils.createValid",
         "Minecraft.BoundingBoxUtils.dilate",
@@ -31630,6 +31506,7 @@
         "Minecraft.ItemComponentTypes",
         "Minecraft.ItemComponentTypes.Cooldown",
         "Minecraft.ItemComponentTypes.Durability",
+        "Minecraft.ItemComponentTypes.Dyeable",
         "Minecraft.ItemComponentTypes.Enchantable",
         "Minecraft.ItemComponentTypes.Food",
         "Minecraft.ItemComponentTypes.Potion",
@@ -31683,6 +31560,15 @@
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChance",
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChanceRange",
         "Minecraft.ItemDurabilityComponent.prototype.maxDurability.[[Get]]",
+        "Minecraft.ItemDyeableComponent",
+        "Minecraft.ItemDyeableComponent.[[Prototype]]",
+        "Minecraft.ItemDyeableComponent.componentId",
+        "Minecraft.ItemDyeableComponent.prototype",
+        "Minecraft.ItemDyeableComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemDyeableComponent.prototype.color.[[Get]]",
+        "Minecraft.ItemDyeableComponent.prototype.color.[[Set]]",
+        "Minecraft.ItemDyeableComponent.prototype.constructor",
+        "Minecraft.ItemDyeableComponent.prototype.defaultColor.[[Get]]",
         "Minecraft.ItemEnchantableComponent",
         "Minecraft.ItemEnchantableComponent.[[Prototype]]",
         "Minecraft.ItemEnchantableComponent.componentId",
@@ -38518,7 +38404,7 @@
                         14,
                         15,
                     ],
-                    "defaultValue": 0,
+                    "defaultValue": 14,
                 },
             ],
             "invalidStates": [],
@@ -40085,14 +39971,6 @@
                     ],
                     "defaultValue": "y",
                 },
-                {
-                    "name": "stripped_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -41593,6 +41471,25 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:creeper_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:crimson_button": {
             "properties": [
@@ -45816,6 +45713,25 @@
         },
         "minecraft:dragon_egg": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:dragon_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
@@ -58685,14 +58601,6 @@
                     ],
                     "defaultValue": "y",
                 },
-                {
-                    "name": "stripped_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -59664,6 +59572,35 @@
                         "z",
                     ],
                     "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:mushroom_stem": {
+            "properties": [
+                {
+                    "name": "huge_mushroom_bits",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 15,
                 },
             ],
             "invalidStates": [],
@@ -62014,6 +61951,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:piglin_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:pink_candle": {
             "properties": [
                 {
@@ -62899,6 +62855,25 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:player_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:podzol": {
             "properties": [],
@@ -66493,64 +66468,11 @@
                         14,
                         15,
                     ],
-                    "defaultValue": 0,
+                    "defaultValue": 14,
                 },
             ],
             "invalidStates": [],
-            "itemId": {
-                "<same>": [
-                    {
-                        "huge_mushroom_bits": 0,
-                    },
-                    {
-                        "huge_mushroom_bits": 1,
-                    },
-                    {
-                        "huge_mushroom_bits": 2,
-                    },
-                    {
-                        "huge_mushroom_bits": 3,
-                    },
-                    {
-                        "huge_mushroom_bits": 4,
-                    },
-                    {
-                        "huge_mushroom_bits": 5,
-                    },
-                    {
-                        "huge_mushroom_bits": 6,
-                    },
-                    {
-                        "huge_mushroom_bits": 7,
-                    },
-                    {
-                        "huge_mushroom_bits": 8,
-                    },
-                    {
-                        "huge_mushroom_bits": 9,
-                    },
-                    {
-                        "huge_mushroom_bits": 11,
-                    },
-                    {
-                        "huge_mushroom_bits": 12,
-                    },
-                    {
-                        "huge_mushroom_bits": 13,
-                    },
-                    {
-                        "huge_mushroom_bits": 14,
-                    },
-                ],
-                "minecraft:brown_mushroom_block": [
-                    {
-                        "huge_mushroom_bits": 10,
-                    },
-                    {
-                        "huge_mushroom_bits": 15,
-                    },
-                ],
-            },
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:red_nether_brick": {
@@ -68372,7 +68294,7 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:skull": {
+        "minecraft:skeleton_skull": {
             "properties": [
                 {
                     "name": "facing_direction",
@@ -75114,6 +75036,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:wither_skeleton_skull": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:wooden_button": {
             "properties": [
                 {
@@ -75869,6 +75810,25 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:zombie_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
     },
     "blockProperties": {
@@ -77042,6 +77002,7 @@
                     "minecraft:cherry_wall_sign": 0,
                     "minecraft:chest": 2,
                     "minecraft:command_block": 0,
+                    "minecraft:creeper_head": 0,
                     "minecraft:crimson_button": 0,
                     "minecraft:crimson_hanging_sign": 0,
                     "minecraft:crimson_wall_sign": 0,
@@ -77050,6 +77011,7 @@
                     "minecraft:dark_oak_hanging_sign": 0,
                     "minecraft:darkoak_wall_sign": 0,
                     "minecraft:dispenser": 0,
+                    "minecraft:dragon_head": 0,
                     "minecraft:dropper": 0,
                     "minecraft:end_rod": 0,
                     "minecraft:ender_chest": 2,
@@ -77080,16 +77042,18 @@
                     "minecraft:oak_hanging_sign": 0,
                     "minecraft:observer": 0,
                     "minecraft:orange_glazed_terracotta": 0,
+                    "minecraft:piglin_head": 0,
                     "minecraft:pink_glazed_terracotta": 0,
                     "minecraft:piston": 0,
                     "minecraft:piston_arm_collision": 0,
+                    "minecraft:player_head": 0,
                     "minecraft:polished_blackstone_button": 0,
                     "minecraft:pumpkin_stem": 0,
                     "minecraft:purple_glazed_terracotta": 0,
                     "minecraft:red_glazed_terracotta": 0,
                     "minecraft:repeating_command_block": 0,
                     "minecraft:silver_glazed_terracotta": 0,
-                    "minecraft:skull": 0,
+                    "minecraft:skeleton_skull": 0,
                     "minecraft:small_amethyst_bud": 1,
                     "minecraft:smoker": 3,
                     "minecraft:spruce_button": 0,
@@ -77106,8 +77070,10 @@
                     "minecraft:warped_hanging_sign": 0,
                     "minecraft:warped_wall_sign": 0,
                     "minecraft:white_glazed_terracotta": 0,
+                    "minecraft:wither_skeleton_skull": 0,
                     "minecraft:wooden_button": 0,
                     "minecraft:yellow_glazed_terracotta": 0,
+                    "minecraft:zombie_head": 0,
                 },
             },
         ],
@@ -77359,8 +77325,9 @@
                     15,
                 ],
                 "defaultValue": {
-                    "minecraft:brown_mushroom_block": 0,
-                    "minecraft:red_mushroom_block": 0,
+                    "minecraft:brown_mushroom_block": 14,
+                    "minecraft:mushroom_stem": 15,
+                    "minecraft:red_mushroom_block": 14,
                 },
             },
         ],
@@ -78612,10 +78579,8 @@
                 "defaultValue": {
                     "minecraft:acacia_wood": false,
                     "minecraft:birch_wood": false,
-                    "minecraft:cherry_wood": false,
                     "minecraft:dark_oak_wood": false,
                     "minecraft:jungle_wood": false,
-                    "minecraft:mangrove_wood": false,
                     "minecraft:oak_wood": false,
                     "minecraft:spruce_wood": false,
                     "minecraft:stripped_acacia_wood": true,
@@ -80792,6 +80757,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 384,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Bow",
@@ -80805,9 +80773,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 384,
                 },
             },
         },
@@ -80910,15 +80875,15 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 64,
+                },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
                         "mending",
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 64,
                 },
             },
         },
@@ -80975,6 +80940,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 26,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "CarrotStick",
@@ -80984,9 +80952,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 26,
                 },
             },
         },
@@ -81034,6 +80999,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 195,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -81054,9 +81022,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 195,
-                },
             },
         },
         "minecraft:chainmail_chestplate": {
@@ -81067,6 +81032,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 240,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -81083,9 +81051,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 240,
-                },
             },
         },
         "minecraft:chainmail_helmet": {
@@ -81096,6 +81061,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 165,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -81114,9 +81082,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 165,
-                },
             },
         },
         "minecraft:chainmail_leggings": {
@@ -81127,6 +81092,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 225,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -81143,9 +81111,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 225,
                 },
             },
         },
@@ -81517,6 +81482,20 @@
             "unstackable": true,
             "tags": [],
         },
+        "minecraft:creeper_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:creeper_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -81593,6 +81572,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 464,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Crossbow",
@@ -81605,9 +81587,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 464,
                 },
             },
         },
@@ -81898,6 +81877,9 @@
                 "minecraft:transformable_items",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 1561,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -81914,9 +81896,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 1561,
-                },
             },
         },
         "minecraft:diamond_block": {
@@ -81931,6 +81910,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 429,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -81951,9 +81933,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 429,
-                },
             },
         },
         "minecraft:diamond_chestplate": {
@@ -81965,6 +81944,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 528,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -81981,9 +81963,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 528,
-                },
             },
         },
         "minecraft:diamond_helmet": {
@@ -81995,6 +81974,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 363,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -82013,9 +81995,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 363,
-                },
             },
         },
         "minecraft:diamond_hoe": {
@@ -82028,6 +82007,9 @@
                 "minecraft:transformable_items",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 1561,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -82040,9 +82022,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 1561,
                 },
             },
         },
@@ -82061,6 +82040,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 495,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -82078,9 +82060,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 495,
-                },
             },
         },
         "minecraft:diamond_ore": {
@@ -82096,6 +82075,9 @@
                 "minecraft:transformable_items",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 1561,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -82109,9 +82091,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 1561,
-                },
             },
         },
         "minecraft:diamond_shovel": {
@@ -82124,6 +82103,9 @@
                 "minecraft:transformable_items",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 1561,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -82137,9 +82119,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 1561,
-                },
             },
         },
         "minecraft:diamond_sword": {
@@ -82151,6 +82130,9 @@
                 "minecraft:transformable_items",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 1561,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -82166,9 +82148,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 1561,
                 },
             },
         },
@@ -82212,6 +82191,20 @@
         "minecraft:dragon_egg": {
             "tags": [],
         },
+        "minecraft:dragon_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:dried_kelp": {
             "tags": [
                 "minecraft:is_food",
@@ -82254,6 +82247,9 @@
                 "minecraft:is_armor",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 432,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Elytra",
@@ -82264,9 +82260,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 432,
                 },
             },
         },
@@ -82512,6 +82505,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 384,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "FishingRod",
@@ -82523,9 +82519,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 384,
                 },
             },
         },
@@ -82539,6 +82532,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 64,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Flintsteel",
@@ -82548,9 +82544,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 64,
                 },
             },
         },
@@ -82698,6 +82691,9 @@
                 "minecraft:golden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 32,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -82714,9 +82710,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 32,
-                },
             },
         },
         "minecraft:golden_boots": {
@@ -82728,6 +82721,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 91,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -82748,9 +82744,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 91,
-                },
             },
         },
         "minecraft:golden_carrot": {
@@ -82766,6 +82759,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 112,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -82782,9 +82778,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 112,
-                },
             },
         },
         "minecraft:golden_helmet": {
@@ -82795,6 +82788,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 77,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -82813,9 +82809,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 77,
-                },
             },
         },
         "minecraft:golden_hoe": {
@@ -82827,6 +82820,9 @@
                 "minecraft:golden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 32,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -82839,9 +82835,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 32,
                 },
             },
         },
@@ -82859,6 +82852,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 105,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -82876,9 +82872,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 105,
-                },
             },
         },
         "minecraft:golden_pickaxe": {
@@ -82890,6 +82883,9 @@
                 "minecraft:golden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 32,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -82902,9 +82898,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 32,
                 },
             },
         },
@@ -82920,6 +82913,9 @@
                 "minecraft:golden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 32,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -82933,9 +82929,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 32,
-                },
             },
         },
         "minecraft:golden_sword": {
@@ -82946,6 +82939,9 @@
                 "minecraft:golden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 32,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -82961,9 +82957,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 32,
                 },
             },
         },
@@ -83206,6 +83199,9 @@
                 "minecraft:iron_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -83221,9 +83217,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 250,
                 },
             },
         },
@@ -83241,6 +83234,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 195,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -83261,9 +83257,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 195,
-                },
             },
         },
         "minecraft:iron_chestplate": {
@@ -83274,6 +83267,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 240,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -83289,9 +83285,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 240,
                 },
             },
         },
@@ -83313,6 +83306,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 165,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -83331,9 +83327,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 165,
-                },
             },
         },
         "minecraft:iron_hoe": {
@@ -83345,6 +83338,9 @@
                 "minecraft:iron_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -83357,9 +83353,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 250,
                 },
             },
         },
@@ -83382,6 +83375,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 225,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -83398,9 +83394,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 225,
                 },
             },
         },
@@ -83419,6 +83412,9 @@
                 "minecraft:iron_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -83432,9 +83428,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 250,
-                },
             },
         },
         "minecraft:iron_shovel": {
@@ -83446,6 +83439,9 @@
                 "minecraft:iron_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -83459,9 +83455,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 250,
-                },
             },
         },
         "minecraft:iron_sword": {
@@ -83472,6 +83465,9 @@
                 "minecraft:iron_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -83487,9 +83483,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 250,
                 },
             },
         },
@@ -83624,6 +83617,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 65,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -83644,9 +83640,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 65,
-                },
             },
         },
         "minecraft:leather_chestplate": {
@@ -83657,6 +83650,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 80,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -83673,9 +83669,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 80,
-                },
             },
         },
         "minecraft:leather_helmet": {
@@ -83686,6 +83679,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 55,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -83704,9 +83700,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 55,
-                },
             },
         },
         "minecraft:leather_horse_armor": {
@@ -83723,6 +83716,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 75,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -83739,9 +83735,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 75,
                 },
             },
         },
@@ -83965,6 +83958,9 @@
                 "minecraft:diamond_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 500,
+                },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
                         "bane_of_arthropods",
@@ -83977,9 +83973,6 @@
                         "vanishing",
                         "wind_burst",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 500,
                 },
             },
         },
@@ -84217,6 +84210,9 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:mushroom_stem": {
+            "tags": [],
+        },
         "minecraft:mushroom_stew": {
             "unstackable": true,
             "tags": [
@@ -84394,6 +84390,9 @@
                 "minecraft:netherite_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 2031,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -84410,9 +84409,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 2031,
-                },
             },
         },
         "minecraft:netherite_block": {
@@ -84426,6 +84422,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 481,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorFeet",
@@ -84446,9 +84445,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 481,
-                },
             },
         },
         "minecraft:netherite_chestplate": {
@@ -84459,6 +84455,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 592,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorTorso",
@@ -84475,9 +84474,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 592,
-                },
             },
         },
         "minecraft:netherite_helmet": {
@@ -84488,6 +84484,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 407,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -84506,9 +84505,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 407,
-                },
             },
         },
         "minecraft:netherite_hoe": {
@@ -84520,6 +84516,9 @@
                 "minecraft:netherite_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 2031,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -84532,9 +84531,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 2031,
                 },
             },
         },
@@ -84552,6 +84548,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 555,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorLegs",
@@ -84569,9 +84568,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 555,
-                },
             },
         },
         "minecraft:netherite_pickaxe": {
@@ -84583,6 +84579,9 @@
                 "minecraft:netherite_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 2031,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -84595,9 +84594,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 2031,
                 },
             },
         },
@@ -84613,6 +84609,9 @@
                 "minecraft:netherite_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 2031,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -84626,9 +84625,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 2031,
-                },
             },
         },
         "minecraft:netherite_sword": {
@@ -84639,6 +84635,9 @@
                 "minecraft:netherite_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 2031,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -84654,9 +84653,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 2031,
                 },
             },
         },
@@ -84887,6 +84883,20 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:piglin_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:piglin_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -84950,6 +84960,20 @@
         },
         "minecraft:pitcher_pod": {
             "tags": [],
+        },
+        "minecraft:player_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:plenty_pottery_sherd": {
             "tags": [
@@ -85485,6 +85509,9 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 238,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shears",
@@ -85496,9 +85523,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 238,
                 },
             },
         },
@@ -85516,6 +85540,13 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:shield",
+                    "cooldownTicks": 100,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 336,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shield",
@@ -85525,13 +85556,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 336,
-                },
-                "minecraft:cooldown": {
-                    "cooldownCategory": "minecraft:shield",
-                    "cooldownTicks": 100,
                 },
             },
         },
@@ -85567,12 +85591,7 @@
                 "minecraft:spawn_egg",
             ],
         },
-        "minecraft:skeleton_spawn_egg": {
-            "tags": [
-                "minecraft:spawn_egg",
-            ],
-        },
-        "minecraft:skull": {
+        "minecraft:skeleton_skull": {
             "tags": [],
             "components": {
                 "minecraft:enchantable": {
@@ -85585,6 +85604,11 @@
                     ],
                 },
             },
+        },
+        "minecraft:skeleton_spawn_egg": {
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
         },
         "minecraft:skull_banner_pattern": {
             "unstackable": true,
@@ -85837,6 +85861,9 @@
                 "minecraft:stone_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 131,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -85852,9 +85879,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 131,
                 },
             },
         },
@@ -85884,6 +85908,9 @@
                 "minecraft:stone_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 131,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -85897,9 +85924,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 131,
-                },
             },
         },
         "minecraft:stone_pickaxe": {
@@ -85911,6 +85935,9 @@
                 "minecraft:stone_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 131,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -85923,9 +85950,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 131,
                 },
             },
         },
@@ -85941,6 +85965,9 @@
                 "minecraft:stone_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 131,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -85953,9 +85980,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 131,
                 },
             },
         },
@@ -85970,6 +85994,9 @@
                 "minecraft:stone_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 131,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -85985,9 +86012,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 131,
                 },
             },
         },
@@ -86230,6 +86254,9 @@
                 "minecraft:is_trident",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Spear",
@@ -86243,9 +86270,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 250,
                 },
             },
         },
@@ -86309,6 +86333,9 @@
                 "minecraft:trimmable_armors",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 275,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "ArmorHead",
@@ -86326,9 +86353,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 275,
                 },
             },
         },
@@ -86412,15 +86436,15 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 100,
+                },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
                         "mending",
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 100,
                 },
             },
         },
@@ -86713,6 +86737,20 @@
         "minecraft:wither_rose": {
             "tags": [],
         },
+        "minecraft:wither_skeleton_skull": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:wither_skeleton_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -86730,6 +86768,7 @@
                 "minecraft:durability": {
                     "maxDurability": 64,
                 },
+                "minecraft:dyeable": {},
             },
         },
         "minecraft:wolf_spawn_egg": {
@@ -86746,6 +86785,9 @@
                 "minecraft:wooden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 59,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Axe",
@@ -86761,9 +86803,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 59,
                 },
             },
         },
@@ -86784,6 +86823,9 @@
                 "minecraft:wooden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 59,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Hoe",
@@ -86797,9 +86839,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 59,
-                },
             },
         },
         "minecraft:wooden_pickaxe": {
@@ -86811,6 +86850,9 @@
                 "minecraft:wooden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 59,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Pickaxe",
@@ -86823,9 +86865,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 59,
                 },
             },
         },
@@ -86841,6 +86880,9 @@
                 "minecraft:wooden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 59,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Shovel",
@@ -86854,9 +86896,6 @@
                         "vanishing",
                     ],
                 },
-                "minecraft:durability": {
-                    "maxDurability": 59,
-                },
             },
         },
         "minecraft:wooden_sword": {
@@ -86867,6 +86906,9 @@
                 "minecraft:wooden_tier",
             ],
             "components": {
+                "minecraft:durability": {
+                    "maxDurability": 59,
+                },
                 "minecraft:enchantable": {
                     "enchantmentSlots": [
                         "Sword",
@@ -86882,9 +86924,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:durability": {
-                    "maxDurability": 59,
                 },
             },
         },
@@ -86938,6 +86977,20 @@
             "tags": [
                 "minecraft:spawn_egg",
             ],
+        },
+        "minecraft:zombie_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:zombie_horse_spawn_egg": {
             "tags": [

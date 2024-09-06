@@ -14,11 +14,15 @@
     "camera.set.*.set.default": "设置为",
     "camera.set.*.facing.entity": "指定实体",
     "camera.set.*.facing.position": "指定坐标",
+    "camera.set.*.override.entityOffset": "局部坐标偏移",
     "camera.set.*.override.pos": "位置",
     "camera.set.*.override.pos.rot": "位置与旋转角度",
     "camera.set.*.override.rot": "旋转角度",
+    "camera.set.*.override.rot.entityOffset": "旋转角度与局部坐标偏移",
     "camera.set.*.override.rot.viewOffset": "旋转角度与视点偏移",
+    "camera.set.*.override.rot.viewOffset.entityOffset": "旋转角度、视点偏移与局部坐标偏移",
     "camera.set.*.override.viewOffset": "视点偏移",
+    "camera.set.*.override.viewOffset.entityOffset": "视点偏移与局部坐标偏移",
     "camera.set.default": "{{camera.set.*|camera.set.*.set.default}}", // 将玩家的摄像机设置为指定预设。
     "camera.set.ease.default": "{{camera.set.*|camera.set.*.set.ease}}", // 将玩家的摄像机平滑变换为指定预设。
     "camera.set.ease.facing.entity": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.rot|camera.set.*.facing.entity}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度，使其面向指定实体。
@@ -28,6 +32,7 @@
     "camera.set.ease.pos.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.pos.rot|camera.set.*.facing.position}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度，使其面向指定坐标。
     "camera.set.ease.pos.rot": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.pos.rot}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度。
     "camera.set.ease.rot": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.rot}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度。
+    "camera.set.entityOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.entityOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的局部坐标偏移。
     "camera.set.facing.entity": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.rot|camera.set.*.facing.entity}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度，使其面向指定实体。
     "camera.set.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.rot|camera.set.*.facing.position}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度，使其面向指定坐标。
     "camera.set.pos": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.pos}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置。
@@ -35,8 +40,11 @@
     "camera.set.pos.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.pos.rot|camera.set.*.facing.position}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度，使其面向指定坐标。
     "camera.set.pos.rot": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.pos.rot}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的位置与旋转角度。
     "camera.set.rot": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度。
+    "camera.set.rot.entityOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot.entityOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与局部坐标偏移。
     "camera.set.rot.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与视点偏移。
+    "camera.set.rot.viewOffset.entityOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.rot.viewOffset.entityOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度、视点偏移与局部坐标偏移。
     "camera.set.viewOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.viewOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移。
+    "camera.set.viewOffset.entityOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.viewOffset.entityOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移与局部坐标偏移。
     "camera.removeTarget": "清除玩家摄像机的跟踪目标。",
     "camera.targetEntity.default": "设置玩家摄像机的跟踪目标为指定实体。",
     "camera.targetEntity.withOffset": "设置玩家摄像机的跟踪目标为指定实体偏移后的位置。",
@@ -55,7 +63,8 @@
     "dialogue.open": "打开与NPC的对话场景。",
     "difficulty.withEnum": "更改游戏难度。",
     "difficulty.withInt": "更改游戏难度。",
-    "effect.add": "为实体添加状态效果。",
+    "effect.add.finite": "为实体添加持续一定时间的状态效果。",
+    "effect.add.infinite": "为实体添加持续时间无限的状态效果。",
     "effect.clear": "清除实体的状态效果。",
     "enchant.withEnum": "对实体手持的物品进行附魔。",
     "enchant.withInt": "对实体手持的物品进行附魔。",
@@ -164,9 +173,12 @@
     "ride.summonRide": "为骑手生成坐骑。",
     "ride.summonRider": "为坐骑生成骑手。",
     "say.default": "向所有玩家广播消息。",
-    "schedule.onAreaLoad.add.box": "添加在区域被加载时计划执行的函数。",
-    "schedule.onAreaLoad.add.circle": "添加在区域被加载时计划执行的函数。",
-    "schedule.onAreaLoad.add.tickingArea": "添加在区域被加载时计划执行的函数。",
+    "schedule.clear.all": "从所有计划中移除指定的函数。",
+    "schedule.onAreaLoad.add.box": "指定一个矩形区域，计划在此区域被加载时执行指定的函数。",
+    "schedule.onAreaLoad.add.circle": "指定一个圆形区域，计划在此区域被加载时执行指定的函数。",
+    "schedule.onAreaLoad.add.tickingArea": "指定一个常加载区域，计划在此区域被加载时执行指定的函数。",
+    "schedule.onAreaLoad.clear.function": "从所有区域加载时触发的计划中移除指定的函数。",
+    "schedule.onAreaLoad.clear.tickingArea": "指定一个常加载区域，从计划中移除在此区域被加载时执行的所有或指定函数。",
     "scoreboard.objectives.add": "添加记分项。",
     "scoreboard.objectives.list": "列出记分项。",
     "scoreboard.objectives.remove": "移除记分项。",
@@ -272,7 +284,7 @@
     "dialogue open <npc: target> <player: target> [sceneName: string]": "this: dialogue.open", // 打开与NPC的对话场景。
     "difficulty <difficulty: Difficulty>": "this: difficulty.withEnum", // 更改游戏难度。
     "difficulty <difficulty: int>": "this: difficulty.withInt", // 更改游戏难度。
-    "effect <player: target> <effect: Effect> [seconds: int] [amplifier: int] [hideParticles: Boolean]": "this: effect.add", // 为实体添加状态效果。
+    "effect <player: target> <effect: Effect> [seconds: int] [amplifier: int] [hideParticles: Boolean]": "this: effect.add.finite", // 为实体添加持续一定时间的状态效果。
     "effect <player: target> clear": "this: effect.clear", // 清除实体的状态效果。
     "enchant <player: target> <enchantmentId: int> [level: int]": "this: enchant.withInt", // 对实体手持的物品进行附魔。
     "enchant <player: target> <enchantmentName: Enchant> [level: int]": "this: enchant.withEnum", // 对实体手持的物品进行附魔。
@@ -327,9 +339,9 @@
     "ride <rides: target> evict_riders": "this: ride.evictRiders", // 为坐骑取消骑乘关系。
     "ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]": "this: ride.summonRider", // 为坐骑生成骑手。
     "say <message: message>": "this: say.default", // 向所有玩家广播消息。
-    "schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>": "this: schedule.onAreaLoad.add.box", // 添加在区域被加载时计划执行的函数。
-    "schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath>": "this: schedule.onAreaLoad.add.circle", // 添加在区域被加载时计划执行的函数。
-    "schedule on_area_loaded add tickingarea <name: string> <function: filepath>": "this: schedule.onAreaLoad.add.tickingArea", // 添加在区域被加载时计划执行的函数。
+    "schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>": "this: schedule.onAreaLoad.add.box", // 指定一个矩形区域，计划在此区域被加载时执行指定的函数。
+    "schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath>": "this: schedule.onAreaLoad.add.circle", // 指定一个圆形区域，计划在此区域被加载时执行指定的函数。
+    "schedule on_area_loaded add tickingarea <name: string> <function: filepath>": "this: schedule.onAreaLoad.add.tickingArea", // 指定一个常加载区域，计划在此区域被加载时执行指定的函数。
     "scoreboard objectives add <objective: string> dummy [displayName: string]": "this: scoreboard.objectives.add", // 添加记分项。
     "scoreboard objectives list": "this: scoreboard.objectives.list", // 列出记分项。
     "scoreboard objectives remove <objective: string>": "this: scoreboard.objectives.remove", // 移除记分项。
@@ -525,4 +537,13 @@
     "camera <players: target> target_entity <entity: target>": "this: camera.targetEntity.default", // 设置玩家摄像机的跟踪目标为指定实体。
     "camera <players: target> target_entity <entity: target> target_center_offset <xTargetCenterOffset: float> <yTargetCenterOffset: float> <zTargetCenterOffset: float>": "this: camera.targetEntity.withOffset", // 设置玩家摄像机的跟踪目标为指定实体偏移后的位置。
     "reload [all: reload_all]": "this: reload.default", // 重新加载行为包中的函数与脚本。
+    "effect <player: target> <effect: Effect> infinite [amplifier: int] [hideParticles: Boolean]": "this: effect.add.infinite", // 为实体添加持续时间无限的状态效果。
+    "effect <player: target> clear [effect: Effect]": "this: effect.clear", // 清除实体的状态效果。
+    "schedule clear <function: filepath>": "this: schedule.clear.all", // 从所有计划中移除指定的函数。
+    "schedule on_area_loaded clear function <function: filepath>": "this: schedule.onAreaLoad.clear.function", // 从所有区域加载时触发的计划中移除指定的函数。
+    "schedule on_area_loaded clear tickingarea <name: string> [function: filepath]": "this: schedule.onAreaLoad.clear.tickingArea", // 指定一个常加载区域，从计划中移除在此区域被加载时执行的所有或指定函数。
+    "camera <players: target> set <preset: string> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.entityOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的局部坐标偏移。
+    "camera <players: target> set <preset: string> rot <xRot: value> <yRot: value> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.rot.entityOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度与局部坐标偏移。
+    "camera <players: target> set <preset: string> rot <xRot: value> <yRot: value> view_offset <xViewOffset: float> <yViewOffset: float> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.rot.viewOffset.entityOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度、视点偏移与局部坐标偏移。
+    "camera <players: target> set <preset: string> view_offset <xViewOffset: float> <yViewOffset: float> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.viewOffset.entityOffset", // 将玩家的摄像机设置为指定预设，并覆盖该预设的视点偏移与局部坐标偏移。
 }

@@ -1,4 +1,3 @@
-import * as CommentJSON from '@projectxero/comment-json';
 import analyzePackageDataEnumsCached from './sources/applicationPackage.js';
 import analyzeAutocompletionEnumsCached from './sources/autocompletion.js';
 import { fetchStandardizedTranslation, writeHiddenEntryLog } from './sources/wiki.js';
@@ -23,7 +22,8 @@ import {
     removeMinecraftNamespace,
     setInlineCommentAfterField,
     deepCopy,
-    log
+    log,
+    pickAndAssignObject
 } from './util/common.js';
 import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockState.js';
 import { writeWikiBlockStateValuesBE, writeWikiBlockPropertyValuesBE, writeWikiBlockIdValuesBE } from './generators/wiki.js';
@@ -156,9 +156,9 @@ async function generateBranchedOutputFiles(cx) {
             const { block } = translationResultMaps;
             enums.items.forEach((key) => {
                 if (key in item) {
-                    CommentJSON.assign(mergedItem, item, [key]);
+                    pickAndAssignObject(mergedItem, item, [key]);
                 } else {
-                    CommentJSON.assign(mergedItem, block, [key]);
+                    pickAndAssignObject(mergedItem, block, [key]);
                 }
             });
             return mergedItem;
@@ -176,7 +176,7 @@ async function generateBranchedOutputFiles(cx) {
             const mergedEntity = {};
             enums.entities.forEach((key) => {
                 if (key in entity) {
-                    CommentJSON.assign(mergedEntity, entity, [key]);
+                    pickAndAssignObject(mergedEntity, entity, [key]);
                 } else {
                     mergedEntity[key] = entity[`minecraft:${key}`];
                 }
@@ -215,7 +215,7 @@ async function generateBranchedOutputFiles(cx) {
             const mergedLocation = {};
             enums.locations.forEach((key) => {
                 if (key in location) {
-                    CommentJSON.assign(mergedLocation, location, [key]);
+                    pickAndAssignObject(mergedLocation, location, [key]);
                 } else {
                     mergedLocation[key] = location[key.replace(/^minecraft:/, '')];
                 }
@@ -337,7 +337,7 @@ async function generateBranchedOutputFiles(cx) {
         });
         const nameWrapped = {};
         forEachObject(translationResultMaps.lootTable, (value, key) => {
-            const wrappedKey = CommentJSON.stringify(key);
+            const wrappedKey = JSON.stringify(key);
             if (key.includes('/')) {
                 nameWrapped[wrappedKey] = value;
             } else {
@@ -658,7 +658,7 @@ async function generateGameTestOutputFiles(cx) {
                 if (removePrefix(key) in result) {
                     mergedResult[key] = result[removePrefix(key)];
                 } else {
-                    CommentJSON.assign(mergedResult, block, [key]);
+                    pickAndAssignObject(mergedResult, block, [key]);
                 }
             });
             return mergedResult;

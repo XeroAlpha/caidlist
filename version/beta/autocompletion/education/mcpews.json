@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.30.25",
+    "packageVersion": "1.21.40.20",
     "result": {
         "commandList": [
             "/? <page: int>",
@@ -44,7 +44,8 @@
             "/difficulty <difficulty: Difficulty>",
             "/difficulty <difficulty: int>",
             "/effect <player: target> <effect: Effect> [seconds: int] [amplifier: int] [hideParticles: Boolean]",
-            "/effect <player: target> clear",
+            "/effect <player: target> <effect: Effect> infinite [amplifier: int] [hideParticles: Boolean]",
+            "/effect <player: target> clear [effect: Effect]",
             "/enchant <player: target> <enchantmentId: int> [level: int]",
             "/enchant <player: target> <enchantmentName: Enchant> [level: int]",
             "/event entity <target: target> <eventName: string>",
@@ -138,9 +139,12 @@
             "/ride <rides: target> evict_riders",
             "/ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]",
             "/say <message: message>",
+            "/schedule clear <function: filepath>",
             "/schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>",
             "/schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath>",
             "/schedule on_area_loaded add tickingarea <name: string> <function: filepath>",
+            "/schedule on_area_loaded clear function <function: filepath>",
+            "/schedule on_area_loaded clear tickingarea <name: string> [function: filepath]",
             "/scoreboard objectives add <objective: string> dummy [displayName: string]",
             "/scoreboard objectives list",
             "/scoreboard objectives remove <objective: string>",

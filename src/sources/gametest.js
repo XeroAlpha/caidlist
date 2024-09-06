@@ -7,8 +7,6 @@ import { resolve as resolvePath, posix } from 'path';
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from 'fs';
 import {
     cachedOutput,
-    filterObjectMap,
-    isExtendFrom,
     isArraySetEqual,
     setStatus,
     sortObjectKey,
@@ -36,6 +34,26 @@ function parseOrThrow(result) {
     throw result;
 }
 
+function stateToSlots(state, propNames) {
+    return propNames.map((name) => state[name]);
+}
+
+function slotsToState(slots, propNames) {
+    return kvArrayToObject(
+        slots
+            .map((v, i) => [propNames[i], v])
+            .filter(([, v]) => v !== undefined)
+    );
+}
+
+function slotsMatchPattern(input, pattern) {
+    return pattern.every((e, i) => e === undefined || input[i] === e);
+}
+
+function slotsEquals(a, b) {
+    return a.every((e, i) => e === b[i]);
+}
+
 /**
  * @template {string | number} StateName
  * @template {string | number | boolean} StateType
@@ -45,11 +63,15 @@ function parseOrThrow(result) {
  * @returns {Record<StateName,StateType>[]} 最简状态组列表
  */
 function simplifyState(stateValues, states, invalidStates) {
+    const propNames = Object.keys(stateValues);
+    // 无关项状态组列表
+    const invStates = invalidStates.map((s) => stateToSlots(s, propNames));
     // 下一代迭代状态组列表
-    const updateStates = states.slice();
+    const updateStates = states.map((s) => stateToSlots(s, propNames));
     // 循环每个属性
-    for (const [propName, propValues] of Object.entries(stateValues)) {
-        // isExtendFrom(o, p) 可以简单粗暴地认为 o 代表的最小项集合 包含于 p 代表的最小项集合
+    for (let propIndex = 0; propIndex < propNames.length; propIndex += 1) {
+        const propName = propNames[propIndex];
+        // slotsMatchPattern(o, p) 可以简单粗暴地认为 o 代表的最小项集合 包含于 p 代表的最小项集合
         // 在此我们定义 o 是 p 的子状态组，而 p 是 o 的父状态组
 
         // 一个表，键是公共状态组，值是除去当前属性外公共状态组的父状态组列表
@@ -64,9 +86,10 @@ function simplifyState(stateValues, states, invalidStates) {
         // 遍历所有状态组
         for (const state of updateStates) {
             // 去除当前属性的状态组（即当前属性可为任何值的状态组）
-            const stateWithoutProp = filterObjectMap(state, (k) => k !== propName);
+            const stateWithoutProp = [...state];
+            stateWithoutProp[propIndex] = undefined;
             // 从公共状态组中寻找 stateWithoutProp 子状态组们
-            let foundParents = [...parentMap.keys()].filter((parent) => isExtendFrom(parent, stateWithoutProp));
+            let foundParents = [...parentMap.keys()].filter((parent) => slotsMatchPattern(parent, stateWithoutProp));
             if (!foundParents.length) {
                 // 很显然，到这里没有找到任何一个公共状态组，使得 stateWithoutProp 是它的父状态组
                 // 不过没关系，我们可以把 stateWithoutProp 当成公共状态组
@@ -76,7 +99,7 @@ function simplifyState(stateValues, states, invalidStates) {
                 // 那么它的值肯定都是新的公共状态组的父状态组
                 // 我他妈好像忘记去重了 不过不影响
                 const foundValues = [...parentMap.keys()]
-                    .filter((parent) => isExtendFrom(stateWithoutProp, parent))
+                    .filter((parent) => slotsMatchPattern(stateWithoutProp, parent))
                     .map((key) => parentMap.get(key))
                     .flat(1);
                 // 加进去了，好耶
@@ -92,18 +115,20 @@ function simplifyState(stateValues, states, invalidStates) {
         }
         // 清空状态组列表
         updateStates.length = 0;
+        // 提前缓存无关项列表除去当前属性外的公共状态组
+        const invWithoutProp = invStates.map((state) => {
+            // 去除当前属性的状态组（即当前属性可为任何值的状态组）
+            const stateWithoutProp = [...state];
+            stateWithoutProp[propIndex] = undefined;
+            return stateWithoutProp;
+        });
         // 未被合并的状态组列表
         const primeStates = [];
         for (const [parent, childStates] of parentMap.entries()) {
             // 一个集合，用来验证是不是该有的值都有了
-            const validValues = new Set(propValues);
+            const validValues = new Set(stateValues[propName]);
             // 从无关项列表中找到所有除去当前属性外的公共状态组的父状态组
-            const invalidChildren = invalidStates.filter((state) => {
-                // 去除当前属性的状态组（即当前属性可为任何值的状态组）
-                const stateWithoutProp = filterObjectMap(state, (k) => k !== propName);
-                // 是公共状态组的父状态组了
-                return isExtendFrom(parent, stateWithoutProp);
-            });
+            const invalidChildren = invWithoutProp.filter((state) => slotsMatchPattern(parent, state));
             // 检查是否该有的值都有了
             // childStates 中重复的值不影响
             // 接上文，如果出现任意值，就表示所有值都出现过了，因此直接清空
@@ -111,8 +136,8 @@ function simplifyState(stateValues, states, invalidStates) {
             childStates
                 .concat(invalidChildren)
                 .forEach((state) => {
-                    if (propName in state) {
-                        validValues.delete(state[propName]);
+                    if (state[propIndex] !== undefined) {
+                        validValues.delete(state[propIndex]);
                     } else {
                         validValues.clear();
                     }
@@ -128,12 +153,12 @@ function simplifyState(stateValues, states, invalidStates) {
             // 确认一下这个状态组是否已经被合并掉了
             // 顺带去个重（我怎么感觉这个才是重点）
             // 应该可以替换成标记的形式？
-            if (!updateStates.find((state) => isExtendFrom(primeState, state))) {
+            if (!updateStates.find((state) => slotsMatchPattern(primeState, state))) {
                 updateStates.push(primeState);
             }
         }
     }
-    return updateStates;
+    return updateStates.map((s) => slotsToState(s, propNames));
 }
 
 function listAllState(stateValues) {
@@ -168,16 +193,27 @@ function listAllState(stateValues) {
 }
 
 function testResultValid(stateValues, result, states, invalidStates) {
-    const allStates = listAllState(stateValues);
-    const resultStates = [];
-    for (const stateCondition of result) {
-        const satisifiedStates = allStates.filter((state) => isExtendFrom(state, stateCondition));
-        resultStates.push(...satisifiedStates.filter((state) => !resultStates.includes(state)));
+    const propNames = Object.keys(stateValues);
+    const allStates = listAllState(stateValues).map((state) => stateToSlots(state, propNames));
+    const inputStates = new Set();
+    for (const state of states) {
+        const stateSlots = stateToSlots(state, propNames);
+        inputStates.add(allStates.find((s) => slotsEquals(s, stateSlots)));
     }
-    const isEqual = (a, b) => isExtendFrom(a, b) && isExtendFrom(b, a);
-    const isInclusive = states.every((state) => resultStates.find((e) => isEqual(e, state)));
-    const stateAndInvalid = states.concat(invalidStates);
-    const isExclusive = resultStates.every((state) => stateAndInvalid.find((e) => isEqual(e, state)));
+    const inputStatesWithInvalid = new Set(inputStates);
+    for (const stateCondition of invalidStates) {
+        const stateConditionPattern = stateToSlots(stateCondition, propNames);
+        const satisifiedStates = allStates.filter((state) => slotsMatchPattern(state, stateConditionPattern));
+        satisifiedStates.forEach((s) => inputStatesWithInvalid.add(s));
+    }
+    const resultStates = new Set();
+    for (const stateCondition of result) {
+        const stateConditionPattern = stateToSlots(stateCondition, propNames);
+        const satisifiedStates = allStates.filter((state) => slotsMatchPattern(state, stateConditionPattern));
+        satisifiedStates.forEach((s) => resultStates.add(s));
+    }
+    const isInclusive = [...inputStates].every((state) => resultStates.has(state));
+    const isExclusive = [...resultStates].every((state) => inputStatesWithInvalid.has(state));
     return isInclusive && isExclusive;
 }
 
@@ -603,12 +639,14 @@ const Extractors = [
                     const dump = globalThis.__item_extract_dump;
                     for (let i = 0; i < itemTypes.length; i++) {
                         const [id, value] = dump(itemTypes[i]);
-                        result[id] = value;
+                        if (value !== null) {
+                            result[id] = value;
+                        }
                     }
                     return JSON.stringify(result);
                 }));
             } catch (err) {
-                warn(`Cannot evaluate code for ItemRegistry: ${err.message}`);
+                warn(`Cannot evaluate code for item registry: ${err.message}`);
                 ItemInfoList = {};
                 let corruptedCount = 0;
                 for (let i = 0; i < length; i++) {
@@ -621,19 +659,38 @@ const Extractors = [
                         if (value !== null) {
                             ItemInfoList[id] = value;
                         }
-                        setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i}: ${id} analyzed`);
+                        setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i} analyzed: ${id}`);
                     } catch (err2) {
-                        warn(`Cannot evaluate code for Item #${i}: ${err.message}`);
+                        warn(`Cannot evaluate code for item #${i}: ${err.message}`);
                         corruptedCount += 1;
                     }
                 }
                 if (corruptedCount > 0 && target.items) {
                     const removedItems = Object.keys(target.items).filter((k) => !(k in ItemInfoList));
+                    for (const item of removedItems.splice(0, removedItems.length)) {
+                        try {
+                            const [id, value] = parseOrThrow(await frame.evaluate((itemId) => {
+                                const dump = globalThis.__item_extract_dump;
+                                const itemType = Minecraft.ItemTypes.get(itemId);
+                                if (!itemType) throw new Error(`Cannot find item ${itemId}`);
+                                if (itemType.id !== itemId) throw new Error(`Item id mismatched: ${itemId}`);
+                                return JSON.stringify(dump(itemType));
+                            }, item));
+                            if (value !== null) {
+                                ItemInfoList[id] = value;
+                            }
+                            corruptedCount -= 1;
+                            setStatus(`Item fixed: ${id}`);
+                        } catch (err2) {
+                            warn(`Failed to fix item ${item}: ${err.message}`);
+                            removedItems.push(item);
+                        }
+                    }
                     if (removedItems.length === corruptedCount) {
                         removedItems.forEach((k) => {
                             ItemInfoList[k] = target.items[k];
                         });
-                    } else {
+                    } else if (corruptedCount > 0) {
                         warn(`Cannot fix ${corruptedCount} corrupted items: ${removedItems.length} item(s) removed`);
                     }
                 }
@@ -648,7 +705,11 @@ const Extractors = [
             const itemIds = Object.keys(ItemInfoList).sort();
             const itemTags = {};
             itemIds.forEach((itemId) => {
-                ItemInfoList[itemId].tags.forEach((itemTag) => {
+                const itemInfo = ItemInfoList[itemId];
+                if (itemInfo.components) {
+                    itemInfo.components = sortObjectKey(itemInfo.components);
+                }
+                itemInfo.tags.forEach((itemTag) => {
                     let itemTagIds = itemTags[itemTag];
                     if (!itemTagIds) {
                         itemTagIds = itemTags[itemTag] = [];

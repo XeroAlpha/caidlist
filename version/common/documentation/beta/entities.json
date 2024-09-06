@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.30.25",
+    "version": "1.21.40.20",
     "content": [],
     "sections": [
         {
@@ -15904,7 +15904,7 @@
                                             "Name": "projectile_def",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor must be a projectile.",
+                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor must be a projectile. This field is required for the goal to be usable.",
                                         },
                                         {
                                             "Name": "ranged_fov",
@@ -18195,7 +18195,7 @@
                             "id": "minecraft:behavior.move_towards_dwelling_restriction",
                             "level": 4,
                             "content": [
-                                "Allows mobs with the dweller component to move toward their Village area that the mob should be restricted to.",
+                                "Allows entities with the \"minecraft:dweller\" component to move toward their Village area that the entity should be restricted to.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -18203,7 +18203,7 @@
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "This multiplier modifies the entity's speed when moving towards it's restriction.",
+                                            "Description": "This multiplier modifies the entity's speed when moving towards its restriction.",
                                         },
                                     ],
                                 },
@@ -18214,7 +18214,8 @@
                             "id": "minecraft:behavior.move_towards_home_restriction",
                             "level": 4,
                             "content": [
-                                "Allows mobs with the home component to move toward their pre-defined area that the mob should be restricted to.",
+                                "Allows entities with a \"minecraft:home\" component to move towards their home position.",
+                                "If \"restriction_radius\" is set, entities will be able to run this behavior only if outside of it.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -18222,7 +18223,7 @@
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "This multiplier modifies the entity's speed when moving towards it's restriction.",
+                                            "Description": "This multiplier modifies the entity's speed when moving towards its restriction.",
                                         },
                                     ],
                                 },
@@ -18919,14 +18920,6 @@
                                         },
                                     ],
                                 },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.peek",
-                            "id": "minecraft:behavior.peek",
-                            "level": 4,
-                            "content": [
-                                "Allows the mob to peek out. This is what the shulker uses to look out of its shell.",
                             ],
                         },
                         {
@@ -23528,6 +23521,14 @@
                             ],
                         },
                         {
+                            "name": "minecraft:dimension_bound",
+                            "id": "minecraft:dimension_bound",
+                            "level": 4,
+                            "content": [
+                                "Prevents the entity from changing dimension through portals.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:drying_out_timer",
                             "id": "minecraft:drying_out_timer",
                             "level": 4,
@@ -24426,7 +24427,7 @@
                             "id": "minecraft:home",
                             "level": 4,
                             "content": [
-                                "Saves a home pos for when the the entity is spawned.",
+                                "Saves a home position for when the the entity is spawned.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -24434,13 +24435,19 @@
                                             "Name": "home_block_list",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "Optional block list that the home position will be associated with. If any of the blocks no longer exist at that position, the home restriction is removed. Example syntax: minecraft:sand.  Not supported: minecraft:sand:1",
+                                            "Description": "Optional list of blocks that can be considered a valid home. If no such block longer exists at that position,\t\t\t\t\t\t\t\t\t\t\tthe home restriction is removed. Example syntax: minecraft:sand. Not supported: minecraft:sand:1.",
                                         },
                                         {
                                             "Name": "restriction_radius",
                                             "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "The radius that the entity will be restricted to in relation to its home",
+                                            "Default Value": "0",
+                                            "Description": "Optional radius that the entity will be restricted to in relation to its home.",
+                                        },
+                                        {
+                                            "Name": "restriction_type",
+                                            "Type": "String",
+                                            "Default Value": "none",
+                                            "Description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- [Beta] \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
                                         },
                                     ],
                                 },
@@ -26385,6 +26392,12 @@
                                             "Description": "Determines the velocity of the projectile",
                                         },
                                         {
+                                            "Name": "reflect_immunity",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "During the specified time, in seconds, the projectile cannot be reflected by hitting it",
+                                        },
+                                        {
                                             "Name": "reflect_on_hurt",
                                             "Type": "Boolean",
                                             "Default Value": "false",
@@ -27595,6 +27608,14 @@
                             ],
                         },
                         {
+                            "name": "minecraft:transient",
+                            "id": "minecraft:transient",
+                            "level": 4,
+                            "content": [
+                                "An entity with this component will NEVER persist, and forever disappear when unloaded.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:trusting",
                             "id": "minecraft:trusting",
                             "level": 4,
@@ -28282,10 +28303,6 @@
                                             "ID": "-169886247",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.peek",
-                                            "ID": "211304085",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.pet_sleep_with_owner",
                                             "ID": "1379392240",
                                         },
@@ -28730,6 +28747,10 @@
                                             "ID": "1674909940",
                                         },
                                         {
+                                            "JSON Name": "minecraft:dimension_bound",
+                                            "ID": "-1843592159",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:drying_out_timer",
                                             "ID": "2113510784",
                                         },
@@ -29044,6 +29065,10 @@
                                         {
                                             "JSON Name": "minecraft:transformation",
                                             "ID": "-457894577",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:transient",
+                                            "ID": "-413020544",
                                         },
                                         {
                                             "JSON Name": "minecraft:trusting",
@@ -30234,5 +30259,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "06ba83b3369e3a2270029594ca3d2d2d1f53e2ab",
+    "__OBJECTHASH__": "784e1b6697cf984ad3996d85d1307355f7f4f940",
 }

@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.30.25",
+    "packageVersion": "1.21.40.20",
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -6034,6 +6034,13 @@
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
+                                    "FluidContainer": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:fluidContainer",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Inventory": {
                                         "value": {
                                             "type": "string",
@@ -6041,24 +6048,10 @@
                                         },
                                         "readOnly": true,
                                     },
-                                    "LavaContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:lavaContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
                                     "Piston": {
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:piston",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "PotionContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:potionContainer",
                                         },
                                         "readOnly": true,
                                     },
@@ -6073,20 +6066,6 @@
                                         "value": {
                                             "type": "string",
                                             "value": "minecraft:sign",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "SnowContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:snowContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "WaterContainer": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:waterContainer",
                                         },
                                         "readOnly": true,
                                     },
@@ -6341,6 +6320,108 @@
                             },
                             "configurable": false,
                         },
+                        "BlockFluidContainerComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockFluidContainerComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:fluidContainer",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "addDye": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "fillLevel": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "fluidColor": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "getFluidType": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setFluidType": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setPotion": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockFluidContainerComponent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.BlockComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.BlockComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "BlockInventoryComponent": {
                             "value": {
                                 "type": "function",
@@ -6370,101 +6451,6 @@
                                             "enumerableProperties": {
                                                 "container": {
                                                     "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockLavaContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockLavaContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:lavaContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockLavaContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockLiquidContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockLiquidContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockLiquidContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "fillLevel": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
-                                                    },
-                                                },
-                                                "isValidLiquid": {
-                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -6742,56 +6728,6 @@
                             },
                             "configurable": false,
                         },
-                        "BlockPotionContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockPotionContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:potionContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockPotionContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "setPotionType": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
                         "BlockRecordPlayerComponent": {
                             "value": {
                                 "type": "function",
@@ -6976,46 +6912,6 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.BlockComponent",
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockSnowContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockSnowContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:snowContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockSnowContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
                                 },
                             },
                             "configurable": false,
@@ -7389,72 +7285,6 @@
                                         },
                                         "readOnly": true,
                                     },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "BlockWaterContainerComponent": {
-                            "value": {
-                                "type": "function",
-                                "name": "BlockWaterContainerComponent",
-                                "native": true,
-                                "length": 0,
-                                "enumerableProperties": {
-                                    "componentId": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "minecraft:waterContainer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                },
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "enumerableProperties": {
-                                                "addDye": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "getCustomColor": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "setCustomColor": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                            "properties": {
-                                                "constructor": {
-                                                    "value": {
-                                                        "ref": "Minecraft.BlockWaterContainerComponent",
-                                                    },
-                                                },
-                                            },
-                                            "prototype": {
-                                                "ref": "Minecraft.BlockLiquidContainerComponent.prototype",
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                                "prototype": {
-                                    "ref": "Minecraft.BlockLiquidContainerComponent",
                                 },
                             },
                             "configurable": false,
@@ -18811,6 +18641,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "Dyeable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:dyeable",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Enchantable": {
                                         "value": {
                                             "type": "string",
@@ -19185,6 +19022,70 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemDyeableComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemDyeableComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:dyeable",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "color": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
+                                                "defaultColor": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemDyeableComponent",
                                                     },
                                                 },
                                             },
@@ -29922,14 +29823,11 @@
         "Minecraft.BlockComponentTickEvent.prototype.[[Prototype]]",
         "Minecraft.BlockComponentTickEvent.prototype.constructor",
         "Minecraft.BlockComponentTypes",
+        "Minecraft.BlockComponentTypes.FluidContainer",
         "Minecraft.BlockComponentTypes.Inventory",
-        "Minecraft.BlockComponentTypes.LavaContainer",
         "Minecraft.BlockComponentTypes.Piston",
-        "Minecraft.BlockComponentTypes.PotionContainer",
         "Minecraft.BlockComponentTypes.RecordPlayer",
         "Minecraft.BlockComponentTypes.Sign",
-        "Minecraft.BlockComponentTypes.SnowContainer",
-        "Minecraft.BlockComponentTypes.WaterContainer",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype",
         "Minecraft.BlockCustomComponentAlreadyRegisteredError.prototype.[[Prototype]]",
@@ -29963,6 +29861,20 @@
         "Minecraft.BlockExplodeAfterEventSignal.prototype.constructor",
         "Minecraft.BlockExplodeAfterEventSignal.prototype.subscribe",
         "Minecraft.BlockExplodeAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.BlockFluidContainerComponent",
+        "Minecraft.BlockFluidContainerComponent.[[Prototype]]",
+        "Minecraft.BlockFluidContainerComponent.componentId",
+        "Minecraft.BlockFluidContainerComponent.prototype",
+        "Minecraft.BlockFluidContainerComponent.prototype.[[Prototype]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.addDye",
+        "Minecraft.BlockFluidContainerComponent.prototype.constructor",
+        "Minecraft.BlockFluidContainerComponent.prototype.fillLevel.[[Get]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fillLevel.[[Set]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fluidColor.[[Get]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.fluidColor.[[Set]]",
+        "Minecraft.BlockFluidContainerComponent.prototype.getFluidType",
+        "Minecraft.BlockFluidContainerComponent.prototype.setFluidType",
+        "Minecraft.BlockFluidContainerComponent.prototype.setPotion",
         "Minecraft.BlockInventoryComponent",
         "Minecraft.BlockInventoryComponent.[[Prototype]]",
         "Minecraft.BlockInventoryComponent.componentId",
@@ -29970,20 +29882,6 @@
         "Minecraft.BlockInventoryComponent.prototype.[[Prototype]]",
         "Minecraft.BlockInventoryComponent.prototype.constructor",
         "Minecraft.BlockInventoryComponent.prototype.container.[[Get]]",
-        "Minecraft.BlockLavaContainerComponent",
-        "Minecraft.BlockLavaContainerComponent.[[Prototype]]",
-        "Minecraft.BlockLavaContainerComponent.componentId",
-        "Minecraft.BlockLavaContainerComponent.prototype",
-        "Minecraft.BlockLavaContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockLavaContainerComponent.prototype.constructor",
-        "Minecraft.BlockLiquidContainerComponent",
-        "Minecraft.BlockLiquidContainerComponent.[[Prototype]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype",
-        "Minecraft.BlockLiquidContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.constructor",
-        "Minecraft.BlockLiquidContainerComponent.prototype.fillLevel.[[Get]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.fillLevel.[[Set]]",
-        "Minecraft.BlockLiquidContainerComponent.prototype.isValidLiquid",
         "Minecraft.BlockLocationIterator",
         "Minecraft.BlockLocationIterator.prototype",
         "Minecraft.BlockLocationIterator.prototype.Symbol(Symbol.iterator)",
@@ -30016,13 +29914,6 @@
         "Minecraft.BlockPistonState.Expanding",
         "Minecraft.BlockPistonState.Retracted",
         "Minecraft.BlockPistonState.Retracting",
-        "Minecraft.BlockPotionContainerComponent",
-        "Minecraft.BlockPotionContainerComponent.[[Prototype]]",
-        "Minecraft.BlockPotionContainerComponent.componentId",
-        "Minecraft.BlockPotionContainerComponent.prototype",
-        "Minecraft.BlockPotionContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockPotionContainerComponent.prototype.constructor",
-        "Minecraft.BlockPotionContainerComponent.prototype.setPotionType",
         "Minecraft.BlockRecordPlayerComponent",
         "Minecraft.BlockRecordPlayerComponent.[[Prototype]]",
         "Minecraft.BlockRecordPlayerComponent.componentId",
@@ -30048,12 +29939,6 @@
         "Minecraft.BlockSignComponent.prototype.setText",
         "Minecraft.BlockSignComponent.prototype.setTextDyeColor",
         "Minecraft.BlockSignComponent.prototype.setWaxed",
-        "Minecraft.BlockSnowContainerComponent",
-        "Minecraft.BlockSnowContainerComponent.[[Prototype]]",
-        "Minecraft.BlockSnowContainerComponent.componentId",
-        "Minecraft.BlockSnowContainerComponent.prototype",
-        "Minecraft.BlockSnowContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockSnowContainerComponent.prototype.constructor",
         "Minecraft.BlockStateType",
         "Minecraft.BlockStateType.prototype",
         "Minecraft.BlockStateType.prototype.constructor",
@@ -30101,15 +29986,6 @@
         "Minecraft.BlockVolumeIntersection.Contains",
         "Minecraft.BlockVolumeIntersection.Disjoint",
         "Minecraft.BlockVolumeIntersection.Intersects",
-        "Minecraft.BlockWaterContainerComponent",
-        "Minecraft.BlockWaterContainerComponent.[[Prototype]]",
-        "Minecraft.BlockWaterContainerComponent.componentId",
-        "Minecraft.BlockWaterContainerComponent.prototype",
-        "Minecraft.BlockWaterContainerComponent.prototype.[[Prototype]]",
-        "Minecraft.BlockWaterContainerComponent.prototype.addDye",
-        "Minecraft.BlockWaterContainerComponent.prototype.constructor",
-        "Minecraft.BlockWaterContainerComponent.prototype.getCustomColor",
-        "Minecraft.BlockWaterContainerComponent.prototype.setCustomColor",
         "Minecraft.BoundingBoxUtils",
         "Minecraft.BoundingBoxUtils.createValid",
         "Minecraft.BoundingBoxUtils.dilate",
@@ -31630,6 +31506,7 @@
         "Minecraft.ItemComponentTypes",
         "Minecraft.ItemComponentTypes.Cooldown",
         "Minecraft.ItemComponentTypes.Durability",
+        "Minecraft.ItemComponentTypes.Dyeable",
         "Minecraft.ItemComponentTypes.Enchantable",
         "Minecraft.ItemComponentTypes.Food",
         "Minecraft.ItemComponentTypes.Potion",
@@ -31683,6 +31560,15 @@
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChance",
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChanceRange",
         "Minecraft.ItemDurabilityComponent.prototype.maxDurability.[[Get]]",
+        "Minecraft.ItemDyeableComponent",
+        "Minecraft.ItemDyeableComponent.[[Prototype]]",
+        "Minecraft.ItemDyeableComponent.componentId",
+        "Minecraft.ItemDyeableComponent.prototype",
+        "Minecraft.ItemDyeableComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemDyeableComponent.prototype.color.[[Get]]",
+        "Minecraft.ItemDyeableComponent.prototype.color.[[Set]]",
+        "Minecraft.ItemDyeableComponent.prototype.constructor",
+        "Minecraft.ItemDyeableComponent.prototype.defaultColor.[[Get]]",
         "Minecraft.ItemEnchantableComponent",
         "Minecraft.ItemEnchantableComponent.[[Prototype]]",
         "Minecraft.ItemEnchantableComponent.componentId",
@@ -38518,7 +38404,7 @@
                         14,
                         15,
                     ],
-                    "defaultValue": 0,
+                    "defaultValue": 14,
                 },
             ],
             "invalidStates": [],
@@ -40085,14 +39971,6 @@
                     ],
                     "defaultValue": "y",
                 },
-                {
-                    "name": "stripped_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -41593,6 +41471,25 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:creeper_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:crimson_button": {
             "properties": [
@@ -45816,6 +45713,25 @@
         },
         "minecraft:dragon_egg": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:dragon_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": true,
@@ -58685,14 +58601,6 @@
                     ],
                     "defaultValue": "y",
                 },
-                {
-                    "name": "stripped_bit",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -59664,6 +59572,35 @@
                         "z",
                     ],
                     "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:mushroom_stem": {
+            "properties": [
+                {
+                    "name": "huge_mushroom_bits",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                    ],
+                    "defaultValue": 15,
                 },
             ],
             "invalidStates": [],
@@ -62014,6 +61951,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
+        "minecraft:piglin_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:pink_candle": {
             "properties": [
                 {
@@ -62899,6 +62855,25 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:player_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:podzol": {
             "properties": [],
@@ -66493,64 +66468,11 @@
                         14,
                         15,
                     ],
-                    "defaultValue": 0,
+                    "defaultValue": 14,
                 },
             ],
             "invalidStates": [],
-            "itemId": {
-                "<same>": [
-                    {
-                        "huge_mushroom_bits": 0,
-                    },
-                    {
-                        "huge_mushroom_bits": 1,
-                    },
-                    {
-                        "huge_mushroom_bits": 2,
-                    },
-                    {
-                        "huge_mushroom_bits": 3,
-                    },
-                    {
-                        "huge_mushroom_bits": 4,
-                    },
-                    {
-                        "huge_mushroom_bits": 5,
-                    },
-                    {
-                        "huge_mushroom_bits": 6,
-                    },
-                    {
-                        "huge_mushroom_bits": 7,
-                    },
-                    {
-                        "huge_mushroom_bits": 8,
-                    },
-                    {
-                        "huge_mushroom_bits": 9,
-                    },
-                    {
-                        "huge_mushroom_bits": 11,
-                    },
-                    {
-                        "huge_mushroom_bits": 12,
-                    },
-                    {
-                        "huge_mushroom_bits": 13,
-                    },
-                    {
-                        "huge_mushroom_bits": 14,
-                    },
-                ],
-                "minecraft:brown_mushroom_block": [
-                    {
-                        "huge_mushroom_bits": 10,
-                    },
-                    {
-                        "huge_mushroom_bits": 15,
-                    },
-                ],
-            },
+            "itemId": "<same>",
             "canBeWaterlogged": false,
         },
         "minecraft:red_nether_brick": {
@@ -68372,7 +68294,7 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
-        "minecraft:skull": {
+        "minecraft:skeleton_skull": {
             "properties": [
                 {
                     "name": "facing_direction",
@@ -75114,6 +75036,25 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:wither_skeleton_skull": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
         "minecraft:wooden_button": {
             "properties": [
                 {
@@ -75869,6 +75810,25 @@
             ],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:zombie_head": {
+            "properties": [
+                {
+                    "name": "facing_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
     },
     "blockProperties": {
@@ -77042,6 +77002,7 @@
                     "minecraft:cherry_wall_sign": 0,
                     "minecraft:chest": 2,
                     "minecraft:command_block": 0,
+                    "minecraft:creeper_head": 0,
                     "minecraft:crimson_button": 0,
                     "minecraft:crimson_hanging_sign": 0,
                     "minecraft:crimson_wall_sign": 0,
@@ -77050,6 +77011,7 @@
                     "minecraft:dark_oak_hanging_sign": 0,
                     "minecraft:darkoak_wall_sign": 0,
                     "minecraft:dispenser": 0,
+                    "minecraft:dragon_head": 0,
                     "minecraft:dropper": 0,
                     "minecraft:end_rod": 0,
                     "minecraft:ender_chest": 2,
@@ -77080,16 +77042,18 @@
                     "minecraft:oak_hanging_sign": 0,
                     "minecraft:observer": 0,
                     "minecraft:orange_glazed_terracotta": 0,
+                    "minecraft:piglin_head": 0,
                     "minecraft:pink_glazed_terracotta": 0,
                     "minecraft:piston": 0,
                     "minecraft:piston_arm_collision": 0,
+                    "minecraft:player_head": 0,
                     "minecraft:polished_blackstone_button": 0,
                     "minecraft:pumpkin_stem": 0,
                     "minecraft:purple_glazed_terracotta": 0,
                     "minecraft:red_glazed_terracotta": 0,
                     "minecraft:repeating_command_block": 0,
                     "minecraft:silver_glazed_terracotta": 0,
-                    "minecraft:skull": 0,
+                    "minecraft:skeleton_skull": 0,
                     "minecraft:small_amethyst_bud": 1,
                     "minecraft:smoker": 3,
                     "minecraft:spruce_button": 0,
@@ -77106,8 +77070,10 @@
                     "minecraft:warped_hanging_sign": 0,
                     "minecraft:warped_wall_sign": 0,
                     "minecraft:white_glazed_terracotta": 0,
+                    "minecraft:wither_skeleton_skull": 0,
                     "minecraft:wooden_button": 0,
                     "minecraft:yellow_glazed_terracotta": 0,
+                    "minecraft:zombie_head": 0,
                 },
             },
         ],
@@ -77359,8 +77325,9 @@
                     15,
                 ],
                 "defaultValue": {
-                    "minecraft:brown_mushroom_block": 0,
-                    "minecraft:red_mushroom_block": 0,
+                    "minecraft:brown_mushroom_block": 14,
+                    "minecraft:mushroom_stem": 15,
+                    "minecraft:red_mushroom_block": 14,
                 },
             },
         ],
@@ -78612,10 +78579,8 @@
                 "defaultValue": {
                     "minecraft:acacia_wood": false,
                     "minecraft:birch_wood": false,
-                    "minecraft:cherry_wood": false,
                     "minecraft:dark_oak_wood": false,
                     "minecraft:jungle_wood": false,
-                    "minecraft:mangrove_wood": false,
                     "minecraft:oak_wood": false,
                     "minecraft:spruce_wood": false,
                     "minecraft:stripped_acacia_wood": true,
@@ -79586,6 +79551,757 @@
             "minecraft:sweet_berry_bush": {},
             "minecraft:torchflower_crop": {},
             "minecraft:wheat": {},
+        },
+        "minecraft:diamond_tier_destructible": {
+            "minecraft:ancient_debris": {},
+            "minecraft:crying_obsidian": {},
+            "minecraft:glowingobsidian": {},
+            "minecraft:netherite_block": {},
+            "minecraft:obsidian": {},
+            "minecraft:respawn_anchor": {},
+        },
+        "minecraft:iron_tier_destructible": {
+            "minecraft:deepslate_diamond_ore": {},
+            "minecraft:deepslate_emerald_ore": {},
+            "minecraft:deepslate_gold_ore": {},
+            "minecraft:deepslate_redstone_ore": {},
+            "minecraft:diamond_block": {},
+            "minecraft:diamond_ore": {},
+            "minecraft:emerald_block": {},
+            "minecraft:emerald_ore": {},
+            "minecraft:gold_block": {},
+            "minecraft:gold_ore": {},
+            "minecraft:lit_deepslate_redstone_ore": {},
+            "minecraft:lit_redstone_ore": {},
+            "minecraft:raw_gold_block": {},
+            "minecraft:redstone_ore": {},
+        },
+        "minecraft:is_hatchet_item_destructible": {
+            "minecraft:acacia_button": {},
+            "minecraft:acacia_double_slab": {
+                "wood_type": "acacia",
+            },
+            "minecraft:acacia_fence": {},
+            "minecraft:acacia_log": {},
+            "minecraft:acacia_planks": {},
+            "minecraft:acacia_pressure_plate": {},
+            "minecraft:acacia_slab": {
+                "wood_type": "acacia",
+            },
+            "minecraft:acacia_wood": {
+                "stripped_bit": false,
+                "wood_type": "acacia",
+            },
+            "minecraft:bamboo": {},
+            "minecraft:bamboo_block": {},
+            "minecraft:bee_nest": {},
+            "minecraft:beehive": {},
+            "minecraft:birch_button": {},
+            "minecraft:birch_double_slab": {
+                "wood_type": "birch",
+            },
+            "minecraft:birch_fence": {},
+            "minecraft:birch_log": {},
+            "minecraft:birch_planks": {},
+            "minecraft:birch_pressure_plate": {},
+            "minecraft:birch_slab": {
+                "wood_type": "birch",
+            },
+            "minecraft:birch_wood": {
+                "stripped_bit": false,
+                "wood_type": "birch",
+            },
+            "minecraft:bookshelf": {},
+            "minecraft:campfire": {},
+            "minecraft:carved_pumpkin": {},
+            "minecraft:cherry_log": {},
+            "minecraft:cherry_wood": {},
+            "minecraft:chest": {},
+            "minecraft:composter": {},
+            "minecraft:crimson_hyphae": {},
+            "minecraft:crimson_stem": {},
+            "minecraft:dark_oak_button": {},
+            "minecraft:dark_oak_double_slab": {
+                "wood_type": "dark_oak",
+            },
+            "minecraft:dark_oak_fence": {},
+            "minecraft:dark_oak_log": {},
+            "minecraft:dark_oak_planks": {},
+            "minecraft:dark_oak_pressure_plate": {},
+            "minecraft:dark_oak_slab": {
+                "wood_type": "dark_oak",
+            },
+            "minecraft:dark_oak_wood": {
+                "stripped_bit": false,
+                "wood_type": "dark_oak",
+            },
+            "minecraft:jungle_button": {},
+            "minecraft:jungle_double_slab": {
+                "wood_type": "jungle",
+            },
+            "minecraft:jungle_fence": {},
+            "minecraft:jungle_log": {},
+            "minecraft:jungle_planks": {},
+            "minecraft:jungle_pressure_plate": {},
+            "minecraft:jungle_slab": {
+                "wood_type": "jungle",
+            },
+            "minecraft:jungle_wood": {
+                "stripped_bit": false,
+                "wood_type": "jungle",
+            },
+            "minecraft:lit_pumpkin": {},
+            "minecraft:mangrove_log": {},
+            "minecraft:mangrove_roots": {},
+            "minecraft:mangrove_wood": {},
+            "minecraft:melon_block": {},
+            "minecraft:oak_double_slab": {
+                "wood_type": "oak",
+            },
+            "minecraft:oak_fence": {},
+            "minecraft:oak_log": {},
+            "minecraft:oak_planks": {},
+            "minecraft:oak_slab": {
+                "wood_type": "oak",
+            },
+            "minecraft:oak_wood": {
+                "stripped_bit": false,
+                "wood_type": "oak",
+            },
+            "minecraft:pumpkin": {},
+            "minecraft:scaffolding": {},
+            "minecraft:soul_campfire": {},
+            "minecraft:spruce_button": {},
+            "minecraft:spruce_double_slab": {
+                "wood_type": "spruce",
+            },
+            "minecraft:spruce_fence": {},
+            "minecraft:spruce_log": {},
+            "minecraft:spruce_planks": {},
+            "minecraft:spruce_pressure_plate": {},
+            "minecraft:spruce_slab": {
+                "wood_type": "spruce",
+            },
+            "minecraft:spruce_wood": {
+                "stripped_bit": false,
+                "wood_type": "spruce",
+            },
+            "minecraft:stripped_acacia_log": {},
+            "minecraft:stripped_acacia_wood": {
+                "stripped_bit": true,
+                "wood_type": "acacia",
+            },
+            "minecraft:stripped_birch_log": {},
+            "minecraft:stripped_birch_wood": {
+                "stripped_bit": true,
+                "wood_type": "birch",
+            },
+            "minecraft:stripped_crimson_stem": {},
+            "minecraft:stripped_dark_oak_log": {},
+            "minecraft:stripped_dark_oak_wood": {
+                "stripped_bit": true,
+                "wood_type": "dark_oak",
+            },
+            "minecraft:stripped_jungle_log": {},
+            "minecraft:stripped_jungle_wood": {
+                "stripped_bit": true,
+                "wood_type": "jungle",
+            },
+            "minecraft:stripped_mangrove_wood": {},
+            "minecraft:stripped_oak_log": {},
+            "minecraft:stripped_oak_wood": {
+                "stripped_bit": true,
+                "wood_type": "oak",
+            },
+            "minecraft:stripped_spruce_log": {},
+            "minecraft:stripped_spruce_wood": {
+                "stripped_bit": true,
+                "wood_type": "spruce",
+            },
+            "minecraft:stripped_warped_stem": {},
+            "minecraft:warped_hyphae": {},
+            "minecraft:warped_stem": {},
+            "minecraft:wooden_button": {},
+            "minecraft:wooden_pressure_plate": {},
+        },
+        "minecraft:is_hoe_item_destructible": {
+            "minecraft:acacia_leaves": {},
+            "minecraft:azalea_leaves": {},
+            "minecraft:azalea_leaves_flowered": {},
+            "minecraft:birch_leaves": {},
+            "minecraft:calibrated_sculk_sensor": {},
+            "minecraft:cherry_leaves": {},
+            "minecraft:dark_oak_leaves": {},
+            "minecraft:dried_kelp_block": {},
+            "minecraft:hay_block": {},
+            "minecraft:jungle_leaves": {},
+            "minecraft:mangrove_leaves": {},
+            "minecraft:moss_block": {},
+            "minecraft:moss_carpet": {},
+            "minecraft:nether_wart_block": {},
+            "minecraft:oak_leaves": {},
+            "minecraft:sculk": {},
+            "minecraft:sculk_catalyst": {},
+            "minecraft:sculk_sensor": {},
+            "minecraft:sculk_shrieker": {},
+            "minecraft:sculk_vein": {},
+            "minecraft:shroomlight": {},
+            "minecraft:sponge": {},
+            "minecraft:spruce_leaves": {},
+            "minecraft:target": {},
+            "minecraft:warped_wart_block": {},
+            "minecraft:wet_sponge": {},
+        },
+        "minecraft:is_mace_item_destructible": {
+            "minecraft:web": {},
+        },
+        "minecraft:is_pickaxe_item_destructible": {
+            "minecraft:activator_rail": [
+                {
+                    "rail_direction": 0,
+                },
+                {
+                    "rail_direction": 1,
+                },
+                {
+                    "rail_direction": 2,
+                },
+                {
+                    "rail_direction": 3,
+                },
+                {
+                    "rail_direction": 4,
+                },
+                {
+                    "rail_direction": 5,
+                },
+            ],
+            "minecraft:amethyst_block": {},
+            "minecraft:amethyst_cluster": {},
+            "minecraft:ancient_debris": {},
+            "minecraft:andesite": {},
+            "minecraft:andesite_double_slab": {
+                "stone_slab_type_3": "andesite",
+            },
+            "minecraft:andesite_slab": {
+                "stone_slab_type_3": "andesite",
+            },
+            "minecraft:andesite_wall": {},
+            "minecraft:black_concrete": {},
+            "minecraft:black_shulker_box": {},
+            "minecraft:blue_concrete": {},
+            "minecraft:blue_shulker_box": {},
+            "minecraft:brick_double_slab": {
+                "stone_slab_type": "brick",
+            },
+            "minecraft:brick_slab": {
+                "stone_slab_type": "brick",
+            },
+            "minecraft:brick_wall": {},
+            "minecraft:brown_concrete": {},
+            "minecraft:brown_shulker_box": {},
+            "minecraft:calcite": {},
+            "minecraft:chiseled_copper": {},
+            "minecraft:chiseled_sandstone": {},
+            "minecraft:chiseled_stone_bricks": {},
+            "minecraft:coal_block": {},
+            "minecraft:coal_ore": {},
+            "minecraft:cobblestone": {},
+            "minecraft:cobblestone_double_slab": {
+                "stone_slab_type": "cobblestone",
+            },
+            "minecraft:cobblestone_slab": {
+                "stone_slab_type": "cobblestone",
+            },
+            "minecraft:cobblestone_wall": {},
+            "minecraft:copper_block": {},
+            "minecraft:copper_bulb": {},
+            "minecraft:copper_door": {},
+            "minecraft:copper_grate": {},
+            "minecraft:copper_ore": {},
+            "minecraft:copper_trapdoor": {},
+            "minecraft:cracked_stone_bricks": {},
+            "minecraft:crafter": {},
+            "minecraft:crying_obsidian": {},
+            "minecraft:cut_copper": {},
+            "minecraft:cut_copper_slab": {},
+            "minecraft:cut_copper_stairs": {},
+            "minecraft:cut_red_sandstone_double_slab": {
+                "stone_slab_type_4": "cut_red_sandstone",
+            },
+            "minecraft:cut_red_sandstone_slab": {
+                "stone_slab_type_4": "cut_red_sandstone",
+            },
+            "minecraft:cut_sandstone": {},
+            "minecraft:cut_sandstone_double_slab": {
+                "stone_slab_type_4": "cut_sandstone",
+            },
+            "minecraft:cut_sandstone_slab": {
+                "stone_slab_type_4": "cut_sandstone",
+            },
+            "minecraft:cyan_concrete": {},
+            "minecraft:cyan_shulker_box": {},
+            "minecraft:dark_prismarine_double_slab": {
+                "stone_slab_type_2": "prismarine_dark",
+            },
+            "minecraft:dark_prismarine_slab": {
+                "stone_slab_type_2": "prismarine_dark",
+            },
+            "minecraft:deepslate": {},
+            "minecraft:deepslate_copper_ore": {},
+            "minecraft:deepslate_diamond_ore": {},
+            "minecraft:deepslate_emerald_ore": {},
+            "minecraft:deepslate_gold_ore": {},
+            "minecraft:deepslate_iron_ore": {},
+            "minecraft:deepslate_lapis_ore": {},
+            "minecraft:deepslate_redstone_ore": {},
+            "minecraft:detector_rail": [
+                {
+                    "rail_direction": 0,
+                },
+                {
+                    "rail_direction": 1,
+                },
+                {
+                    "rail_direction": 2,
+                },
+                {
+                    "rail_direction": 3,
+                },
+                {
+                    "rail_direction": 4,
+                },
+                {
+                    "rail_direction": 5,
+                },
+            ],
+            "minecraft:diamond_block": {},
+            "minecraft:diamond_ore": {},
+            "minecraft:diorite": {},
+            "minecraft:diorite_double_slab": {
+                "stone_slab_type_3": "diorite",
+            },
+            "minecraft:diorite_slab": {
+                "stone_slab_type_3": "diorite",
+            },
+            "minecraft:diorite_wall": {},
+            "minecraft:double_cut_copper_slab": {},
+            "minecraft:dripstone_block": {},
+            "minecraft:emerald_block": {},
+            "minecraft:emerald_ore": {},
+            "minecraft:end_stone_brick_double_slab": {
+                "stone_slab_type_3": "end_stone_brick",
+            },
+            "minecraft:end_stone_brick_slab": {
+                "stone_slab_type_3": "end_stone_brick",
+            },
+            "minecraft:end_stone_brick_wall": {},
+            "minecraft:exposed_chiseled_copper": {},
+            "minecraft:exposed_copper": {},
+            "minecraft:exposed_copper_bulb": {},
+            "minecraft:exposed_copper_door": {},
+            "minecraft:exposed_copper_grate": {},
+            "minecraft:exposed_copper_trapdoor": {},
+            "minecraft:exposed_cut_copper": {},
+            "minecraft:exposed_cut_copper_slab": {},
+            "minecraft:exposed_cut_copper_stairs": {},
+            "minecraft:exposed_double_cut_copper_slab": {},
+            "minecraft:glowingobsidian": {},
+            "minecraft:gold_block": {},
+            "minecraft:gold_ore": {},
+            "minecraft:golden_rail": [
+                {
+                    "rail_direction": 0,
+                },
+                {
+                    "rail_direction": 1,
+                },
+                {
+                    "rail_direction": 2,
+                },
+                {
+                    "rail_direction": 3,
+                },
+                {
+                    "rail_direction": 4,
+                },
+                {
+                    "rail_direction": 5,
+                },
+            ],
+            "minecraft:granite": {},
+            "minecraft:granite_double_slab": {
+                "stone_slab_type_3": "granite",
+            },
+            "minecraft:granite_slab": {
+                "stone_slab_type_3": "granite",
+            },
+            "minecraft:granite_wall": {},
+            "minecraft:gray_concrete": {},
+            "minecraft:gray_shulker_box": {},
+            "minecraft:green_concrete": {},
+            "minecraft:green_shulker_box": {},
+            "minecraft:heavy_core": {},
+            "minecraft:infested_chiseled_stone_bricks": {},
+            "minecraft:infested_cobblestone": {},
+            "minecraft:infested_cracked_stone_bricks": {},
+            "minecraft:infested_deepslate": {},
+            "minecraft:infested_mossy_stone_bricks": {},
+            "minecraft:infested_stone": {},
+            "minecraft:infested_stone_bricks": {},
+            "minecraft:iron_block": {},
+            "minecraft:iron_ore": {},
+            "minecraft:lapis_block": {},
+            "minecraft:lapis_ore": {},
+            "minecraft:large_amethyst_bud": {},
+            "minecraft:light_blue_concrete": {},
+            "minecraft:light_blue_shulker_box": {},
+            "minecraft:light_gray_concrete": {},
+            "minecraft:light_gray_shulker_box": {},
+            "minecraft:lightning_rod": {},
+            "minecraft:lime_concrete": {},
+            "minecraft:lime_shulker_box": {},
+            "minecraft:lit_deepslate_redstone_ore": {},
+            "minecraft:lit_redstone_ore": {},
+            "minecraft:magenta_concrete": {},
+            "minecraft:magenta_shulker_box": {},
+            "minecraft:medium_amethyst_bud": {},
+            "minecraft:mossy_cobblestone": {},
+            "minecraft:mossy_cobblestone_double_slab": {
+                "stone_slab_type_2": "mossy_cobblestone",
+            },
+            "minecraft:mossy_cobblestone_slab": {
+                "stone_slab_type_2": "mossy_cobblestone",
+            },
+            "minecraft:mossy_cobblestone_wall": {},
+            "minecraft:mossy_stone_brick_double_slab": {
+                "stone_slab_type_4": "mossy_stone_brick",
+            },
+            "minecraft:mossy_stone_brick_slab": {
+                "stone_slab_type_4": "mossy_stone_brick",
+            },
+            "minecraft:mossy_stone_brick_wall": {},
+            "minecraft:mossy_stone_bricks": {},
+            "minecraft:mud_brick_double_slab": {},
+            "minecraft:mud_brick_slab": {},
+            "minecraft:mud_brick_stairs": {},
+            "minecraft:mud_brick_wall": {},
+            "minecraft:mud_bricks": {},
+            "minecraft:nether_brick_double_slab": {
+                "stone_slab_type": "nether_brick",
+            },
+            "minecraft:nether_brick_slab": {
+                "stone_slab_type": "nether_brick",
+            },
+            "minecraft:nether_brick_wall": {},
+            "minecraft:nether_gold_ore": {},
+            "minecraft:netherite_block": {},
+            "minecraft:normal_stone_double_slab": {
+                "stone_slab_type_4": "stone",
+            },
+            "minecraft:normal_stone_slab": {
+                "stone_slab_type_4": "stone",
+            },
+            "minecraft:obsidian": {},
+            "minecraft:orange_concrete": {},
+            "minecraft:orange_shulker_box": {},
+            "minecraft:oxidized_chiseled_copper": {},
+            "minecraft:oxidized_copper": {},
+            "minecraft:oxidized_copper_bulb": {},
+            "minecraft:oxidized_copper_door": {},
+            "minecraft:oxidized_copper_grate": {},
+            "minecraft:oxidized_copper_trapdoor": {},
+            "minecraft:oxidized_cut_copper": {},
+            "minecraft:oxidized_cut_copper_slab": {},
+            "minecraft:oxidized_cut_copper_stairs": {},
+            "minecraft:oxidized_double_cut_copper_slab": {},
+            "minecraft:packed_mud": {},
+            "minecraft:petrified_oak_double_slab": {
+                "stone_slab_type": "wood",
+            },
+            "minecraft:petrified_oak_slab": {
+                "stone_slab_type": "wood",
+            },
+            "minecraft:pink_concrete": {},
+            "minecraft:pink_shulker_box": {},
+            "minecraft:piston": {},
+            "minecraft:piston_arm_collision": {},
+            "minecraft:pointed_dripstone": {},
+            "minecraft:polished_andesite": {},
+            "minecraft:polished_andesite_double_slab": {
+                "stone_slab_type_3": "polished_andesite",
+            },
+            "minecraft:polished_andesite_slab": {
+                "stone_slab_type_3": "polished_andesite",
+            },
+            "minecraft:polished_diorite": {},
+            "minecraft:polished_diorite_double_slab": {
+                "stone_slab_type_3": "polished_diorite",
+            },
+            "minecraft:polished_diorite_slab": {
+                "stone_slab_type_3": "polished_diorite",
+            },
+            "minecraft:polished_granite": {},
+            "minecraft:polished_granite_double_slab": {
+                "stone_slab_type_3": "polished_granite",
+            },
+            "minecraft:polished_granite_slab": {
+                "stone_slab_type_3": "polished_granite",
+            },
+            "minecraft:prismarine_brick_double_slab": {
+                "stone_slab_type_2": "prismarine_brick",
+            },
+            "minecraft:prismarine_brick_slab": {
+                "stone_slab_type_2": "prismarine_brick",
+            },
+            "minecraft:prismarine_double_slab": {
+                "stone_slab_type_2": "prismarine_rough",
+            },
+            "minecraft:prismarine_slab": {
+                "stone_slab_type_2": "prismarine_rough",
+            },
+            "minecraft:prismarine_wall": {},
+            "minecraft:purple_concrete": {},
+            "minecraft:purple_shulker_box": {},
+            "minecraft:purpur_double_slab": {
+                "stone_slab_type_2": "purpur",
+            },
+            "minecraft:purpur_slab": {
+                "stone_slab_type_2": "purpur",
+            },
+            "minecraft:quartz_double_slab": {
+                "stone_slab_type": "quartz",
+            },
+            "minecraft:quartz_slab": {
+                "stone_slab_type": "quartz",
+            },
+            "minecraft:rail": {},
+            "minecraft:raw_copper_block": {},
+            "minecraft:raw_gold_block": {},
+            "minecraft:raw_iron_block": {},
+            "minecraft:red_concrete": {},
+            "minecraft:red_nether_brick_double_slab": {
+                "stone_slab_type_2": "red_nether_brick",
+            },
+            "minecraft:red_nether_brick_slab": {
+                "stone_slab_type_2": "red_nether_brick",
+            },
+            "minecraft:red_nether_brick_wall": {},
+            "minecraft:red_sandstone_double_slab": {
+                "stone_slab_type_2": "red_sandstone",
+            },
+            "minecraft:red_sandstone_slab": {
+                "stone_slab_type_2": "red_sandstone",
+            },
+            "minecraft:red_sandstone_wall": {},
+            "minecraft:red_shulker_box": {},
+            "minecraft:redstone_ore": {},
+            "minecraft:respawn_anchor": {},
+            "minecraft:sandstone": {},
+            "minecraft:sandstone_double_slab": {
+                "stone_slab_type": "sandstone",
+            },
+            "minecraft:sandstone_slab": {
+                "stone_slab_type": "sandstone",
+            },
+            "minecraft:sandstone_wall": {},
+            "minecraft:small_amethyst_bud": {},
+            "minecraft:smooth_basalt": {},
+            "minecraft:smooth_quartz_double_slab": {
+                "stone_slab_type_4": "smooth_quartz",
+            },
+            "minecraft:smooth_quartz_slab": {
+                "stone_slab_type_4": "smooth_quartz",
+            },
+            "minecraft:smooth_red_sandstone_double_slab": {
+                "stone_slab_type_3": "smooth_red_sandstone",
+            },
+            "minecraft:smooth_red_sandstone_slab": {
+                "stone_slab_type_3": "smooth_red_sandstone",
+            },
+            "minecraft:smooth_sandstone": {},
+            "minecraft:smooth_sandstone_double_slab": {
+                "stone_slab_type_2": "smooth_sandstone",
+            },
+            "minecraft:smooth_sandstone_slab": {
+                "stone_slab_type_2": "smooth_sandstone",
+            },
+            "minecraft:smooth_stone_double_slab": {
+                "stone_slab_type": "smooth_stone",
+            },
+            "minecraft:smooth_stone_slab": {
+                "stone_slab_type": "smooth_stone",
+            },
+            "minecraft:sticky_piston": {},
+            "minecraft:sticky_piston_arm_collision": {},
+            "minecraft:stone": {},
+            "minecraft:stone_brick_double_slab": {
+                "stone_slab_type": "stone_brick",
+            },
+            "minecraft:stone_brick_slab": {
+                "stone_slab_type": "stone_brick",
+            },
+            "minecraft:stone_brick_wall": {},
+            "minecraft:tuff": {},
+            "minecraft:waxed_chiseled_copper": {},
+            "minecraft:waxed_copper": {},
+            "minecraft:waxed_copper_bulb": {},
+            "minecraft:waxed_copper_door": {},
+            "minecraft:waxed_copper_grate": {},
+            "minecraft:waxed_copper_trapdoor": {},
+            "minecraft:waxed_cut_copper": {},
+            "minecraft:waxed_cut_copper_slab": {},
+            "minecraft:waxed_cut_copper_stairs": {},
+            "minecraft:waxed_double_cut_copper_slab": {},
+            "minecraft:waxed_exposed_chiseled_copper": {},
+            "minecraft:waxed_exposed_copper": {},
+            "minecraft:waxed_exposed_copper_bulb": {},
+            "minecraft:waxed_exposed_copper_door": {},
+            "minecraft:waxed_exposed_copper_grate": {},
+            "minecraft:waxed_exposed_copper_trapdoor": {},
+            "minecraft:waxed_exposed_cut_copper": {},
+            "minecraft:waxed_exposed_cut_copper_slab": {},
+            "minecraft:waxed_exposed_cut_copper_stairs": {},
+            "minecraft:waxed_exposed_double_cut_copper_slab": {},
+            "minecraft:waxed_oxidized_chiseled_copper": {},
+            "minecraft:waxed_oxidized_copper": {},
+            "minecraft:waxed_oxidized_copper_bulb": {},
+            "minecraft:waxed_oxidized_copper_door": {},
+            "minecraft:waxed_oxidized_copper_grate": {},
+            "minecraft:waxed_oxidized_copper_trapdoor": {},
+            "minecraft:waxed_oxidized_cut_copper": {},
+            "minecraft:waxed_oxidized_cut_copper_slab": {},
+            "minecraft:waxed_oxidized_cut_copper_stairs": {},
+            "minecraft:waxed_oxidized_double_cut_copper_slab": {},
+            "minecraft:waxed_weathered_chiseled_copper": {},
+            "minecraft:waxed_weathered_copper": {},
+            "minecraft:waxed_weathered_copper_bulb": {},
+            "minecraft:waxed_weathered_copper_door": {},
+            "minecraft:waxed_weathered_copper_grate": {},
+            "minecraft:waxed_weathered_copper_trapdoor": {},
+            "minecraft:waxed_weathered_cut_copper": {},
+            "minecraft:waxed_weathered_cut_copper_slab": {},
+            "minecraft:waxed_weathered_cut_copper_stairs": {},
+            "minecraft:waxed_weathered_double_cut_copper_slab": {},
+            "minecraft:weathered_chiseled_copper": {},
+            "minecraft:weathered_copper": {},
+            "minecraft:weathered_copper_bulb": {},
+            "minecraft:weathered_copper_door": {},
+            "minecraft:weathered_copper_grate": {},
+            "minecraft:weathered_copper_trapdoor": {},
+            "minecraft:weathered_cut_copper": {},
+            "minecraft:weathered_cut_copper_slab": {},
+            "minecraft:weathered_cut_copper_stairs": {},
+            "minecraft:weathered_double_cut_copper_slab": {},
+            "minecraft:white_concrete": {},
+            "minecraft:white_shulker_box": {},
+            "minecraft:yellow_concrete": {},
+            "minecraft:yellow_shulker_box": {},
+        },
+        "minecraft:is_shears_item_destructible": {
+            "minecraft:web": {},
+        },
+        "minecraft:is_shovel_item_destructible": {
+            "minecraft:bamboo": {},
+            "minecraft:black_concrete_powder": {},
+            "minecraft:blue_concrete_powder": {},
+            "minecraft:brown_concrete_powder": {},
+            "minecraft:clay": {},
+            "minecraft:coarse_dirt": {},
+            "minecraft:cyan_concrete_powder": {},
+            "minecraft:dirt": {},
+            "minecraft:dirt_with_roots": {},
+            "minecraft:farmland": {},
+            "minecraft:grass_block": {},
+            "minecraft:grass_path": {},
+            "minecraft:gravel": {},
+            "minecraft:gray_concrete_powder": {},
+            "minecraft:green_concrete_powder": {},
+            "minecraft:light_blue_concrete_powder": {},
+            "minecraft:light_gray_concrete_powder": {},
+            "minecraft:lime_concrete_powder": {},
+            "minecraft:magenta_concrete_powder": {},
+            "minecraft:mud": {},
+            "minecraft:muddy_mangrove_roots": {},
+            "minecraft:mycelium": {},
+            "minecraft:orange_concrete_powder": {},
+            "minecraft:pink_concrete_powder": {},
+            "minecraft:podzol": {},
+            "minecraft:purple_concrete_powder": {},
+            "minecraft:red_concrete_powder": {},
+            "minecraft:red_sand": {},
+            "minecraft:sand": {},
+            "minecraft:soul_sand": {},
+            "minecraft:soul_soil": {},
+            "minecraft:suspicious_gravel": {},
+            "minecraft:suspicious_sand": {},
+            "minecraft:white_concrete_powder": {},
+            "minecraft:yellow_concrete_powder": {},
+        },
+        "minecraft:is_sword_item_destructible": {
+            "minecraft:web": {},
+        },
+        "minecraft:stone_tier_destructible": {
+            "minecraft:chiseled_copper": {},
+            "minecraft:copper_block": {},
+            "minecraft:copper_ore": {},
+            "minecraft:crafter": {},
+            "minecraft:cut_copper": {},
+            "minecraft:cut_copper_slab": {},
+            "minecraft:cut_copper_stairs": {},
+            "minecraft:deepslate_copper_ore": {},
+            "minecraft:deepslate_iron_ore": {},
+            "minecraft:deepslate_lapis_ore": {},
+            "minecraft:double_cut_copper_slab": {},
+            "minecraft:exposed_chiseled_copper": {},
+            "minecraft:exposed_copper": {},
+            "minecraft:exposed_cut_copper": {},
+            "minecraft:exposed_cut_copper_slab": {},
+            "minecraft:exposed_cut_copper_stairs": {},
+            "minecraft:exposed_double_cut_copper_slab": {},
+            "minecraft:iron_block": {},
+            "minecraft:iron_ore": {},
+            "minecraft:lapis_block": {},
+            "minecraft:lapis_ore": {},
+            "minecraft:lightning_rod": {},
+            "minecraft:oxidized_chiseled_copper": {},
+            "minecraft:oxidized_copper": {},
+            "minecraft:oxidized_cut_copper": {},
+            "minecraft:oxidized_cut_copper_slab": {},
+            "minecraft:oxidized_cut_copper_stairs": {},
+            "minecraft:oxidized_double_cut_copper_slab": {},
+            "minecraft:raw_copper_block": {},
+            "minecraft:raw_iron_block": {},
+            "minecraft:waxed_chiseled_copper": {},
+            "minecraft:waxed_copper": {},
+            "minecraft:waxed_cut_copper": {},
+            "minecraft:waxed_cut_copper_slab": {},
+            "minecraft:waxed_cut_copper_stairs": {},
+            "minecraft:waxed_double_cut_copper_slab": {},
+            "minecraft:waxed_exposed_chiseled_copper": {},
+            "minecraft:waxed_exposed_copper": {},
+            "minecraft:waxed_exposed_cut_copper": {},
+            "minecraft:waxed_exposed_cut_copper_slab": {},
+            "minecraft:waxed_exposed_cut_copper_stairs": {},
+            "minecraft:waxed_exposed_double_cut_copper_slab": {},
+            "minecraft:waxed_oxidized_chiseled_copper": {},
+            "minecraft:waxed_oxidized_copper": {},
+            "minecraft:waxed_oxidized_cut_copper": {},
+            "minecraft:waxed_oxidized_cut_copper_slab": {},
+            "minecraft:waxed_oxidized_cut_copper_stairs": {},
+            "minecraft:waxed_oxidized_double_cut_copper_slab": {},
+            "minecraft:waxed_weathered_chiseled_copper": {},
+            "minecraft:waxed_weathered_copper": {},
+            "minecraft:waxed_weathered_cut_copper": {},
+            "minecraft:waxed_weathered_cut_copper_slab": {},
+            "minecraft:waxed_weathered_cut_copper_stairs": {},
+            "minecraft:waxed_weathered_double_cut_copper_slab": {},
+            "minecraft:weathered_chiseled_copper": {},
+            "minecraft:weathered_copper": {},
+            "minecraft:weathered_cut_copper": {},
+            "minecraft:weathered_cut_copper_slab": {},
+            "minecraft:weathered_cut_copper_stairs": {},
+            "minecraft:weathered_double_cut_copper_slab": {},
         },
         "mob_spawner": {
             "minecraft:mob_spawner": {},
@@ -81548,6 +82264,20 @@
             "unstackable": true,
             "tags": [],
         },
+        "minecraft:creeper_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:creeper_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -82242,6 +82972,20 @@
         },
         "minecraft:dragon_egg": {
             "tags": [],
+        },
+        "minecraft:dragon_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:dried_kelp": {
             "tags": [
@@ -84739,6 +85483,9 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:mushroom_stem": {
+            "tags": [],
+        },
         "minecraft:mushroom_stew": {
             "unstackable": true,
             "tags": [
@@ -85409,6 +86156,20 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:piglin_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:piglin_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -85472,6 +86233,20 @@
         },
         "minecraft:pitcher_pod": {
             "tags": [],
+        },
+        "minecraft:player_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:plenty_pottery_sherd": {
             "tags": [
@@ -86043,6 +86818,10 @@
             "unstackable": true,
             "tags": [],
             "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:shield",
+                    "cooldownTicks": 100,
+                },
                 "minecraft:durability": {
                     "maxDurability": 336,
                 },
@@ -86055,10 +86834,6 @@
                         "unbreaking",
                         "vanishing",
                     ],
-                },
-                "minecraft:cooldown": {
-                    "cooldownCategory": "minecraft:shield",
-                    "cooldownTicks": 100,
                 },
             },
         },
@@ -86094,12 +86869,7 @@
                 "minecraft:spawn_egg",
             ],
         },
-        "minecraft:skeleton_spawn_egg": {
-            "tags": [
-                "minecraft:spawn_egg",
-            ],
-        },
-        "minecraft:skull": {
+        "minecraft:skeleton_skull": {
             "tags": [],
             "components": {
                 "minecraft:enchantable": {
@@ -86112,6 +86882,11 @@
                     ],
                 },
             },
+        },
+        "minecraft:skeleton_spawn_egg": {
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
         },
         "minecraft:skull_banner_pattern": {
             "unstackable": true,
@@ -87255,6 +88030,20 @@
         "minecraft:wither_rose": {
             "tags": [],
         },
+        "minecraft:wither_skeleton_skull": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:wither_skeleton_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -87272,6 +88061,7 @@
                 "minecraft:durability": {
                     "maxDurability": 64,
                 },
+                "minecraft:dyeable": {},
             },
         },
         "minecraft:wolf_spawn_egg": {
@@ -87480,6 +88270,20 @@
             "tags": [
                 "minecraft:spawn_egg",
             ],
+        },
+        "minecraft:zombie_head": {
+            "tags": [],
+            "components": {
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "CosmeticHead",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:zombie_horse_spawn_egg": {
             "tags": [

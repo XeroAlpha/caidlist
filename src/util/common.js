@@ -166,6 +166,11 @@ export function uniqueAndSort(array, compareFn) {
     }
 }
 
+export function pickAndAssignObject(target, source, keys) {
+    for (const key of keys) target[key] = source[key];
+    return target;
+}
+
 /**
  * @template K, V
  * @param {Record<K, V>} object
@@ -177,7 +182,7 @@ export function forEachObject(object, f, thisArg) {
 
 export function filterObjectMap(map, predicate) {
     const keys = Object.keys(map).filter((key) => predicate(key, map[key], map));
-    return CommentJSON.assign({}, map, keys);
+    return pickAndAssignObject({}, map, keys);
 }
 
 export function excludeObjectEntry(map, excludeKeys, excludeValues) {
@@ -252,7 +257,7 @@ export function naturalOrderSort(arr) {
 }
 
 export function sortObjectKey(o) {
-    return kvArrayToObject(Object.entries(o).sort(stringComparator));
+    return kvArrayToObject(Object.entries(o).sort((a, b) => stringComparator(a[0], b[0])));
 }
 
 export function compareMinecraftVersion(a, b) {
