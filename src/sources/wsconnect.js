@@ -5,6 +5,10 @@ import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus, pause } from '
 import { adbShell } from '../util/adb.js';
 import * as support from './support.js';
 
+const ignoreCommands = [
+    '/gametips <status: Status>'
+];
+
 /**
  * @param {import('mcpews').ServerSession} session
  */
@@ -104,6 +108,7 @@ async function doWSRelatedJobs(cx, session) {
     } else {
         commandList = await listCommandsLegacy(session);
     }
+    commandList = commandList.filter((c) => !ignoreCommands.includes(c));
     if (cx.branch.id !== 'gametest') {
         return { commandList };
     }
