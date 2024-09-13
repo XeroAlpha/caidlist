@@ -879,7 +879,7 @@ function generateBehaviorPack(cx) {
         mkdirSync(resolvePath(targetPath, '..'), { recursive: true });
         cpSync(resolvePath(basePath, source), targetPath, { recursive: true });
     });
-    return outPath;
+    return { path: outPath, moduleUuid: options.moduleUuid };
 }
 
 export default async function analyzeGameTestEnumsCached(cx) {
@@ -892,7 +892,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     if (!versionInfo.disableAdb) {
         device = await getDeviceOrWait();
     }
-    const packPath = generateBehaviorPack(cx);
+    const { path: packPath, moduleUuid: targetModuleUuid } = generateBehaviorPack(cx);
     if (cx.devBehaviorPackPath) {
         for (;;) {
             try {
@@ -924,10 +924,16 @@ export default async function analyzeGameTestEnumsCached(cx) {
         wsSession.sendCommand(`script debugger connect 127.0.0.1 ${port}`);
     }
     const socket = await socketPromise;
-    const debugConn = new QuickJSDebugConnection(socket);
-    const debugSession = new MinecraftDebugSession(debugConn);
     // Provide cache for infering corrupted items, but not affecting output (not owned by target)
     const target = Object.assign(Object.create(cache ?? {}), { packageVersion });
+    const debugConn = new QuickJSDebugConnection(socket);
+    const debugSession = new MinecraftDebugSession(debugConn);
+    debugSession.on('protocol', (ev) => {
+        target.protocolVersion = debugConn.requestVersion = ev.version;
+        debugSession.setProtocolInfo({ version: ev.version, targetModuleUuid });
+    });
+    await pEvent(debugSession, 'protocol');
+    debugSession.setStopOnException(false);
     debugSession.resume();
     await evaluateExtractors(cx, target, debugSession);
     await doWSRelatedJobsCached(cx, wsSession, {});

@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.40.20",
+    "version": "1.21.40.21",
     "content": [],
     "sections": [
         {
@@ -24902,49 +24902,79 @@
                             ],
                         },
                         {
-                            "name": "minecraft:lookat",
-                            "id": "minecraft:lookat",
+                            "name": "minecraft:looked_at",
+                            "id": "minecraft:looked_at",
                             "level": 4,
                             "content": [
-                                "Defines the behavior when another entity looks at this entity.",
+                                "Defines the behavior when another entity looks at the owner entity.",
                                 {
                                     "type": "table",
                                     "rows": [
                                         {
-                                            "Name": "allow_invulnerable",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, invulnerable entities (e.g. Players in creative mode) are considered valid targets.",
+                                            "Name": "field_of_view",
+                                            "Type": "Decimal",
+                                            "Default Value": "26",
+                                            "Description": "[Beta] Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
                                         },
                                         {
                                             "Name": "filters",
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
-                                            "Description": "Defines the entities that can trigger this component.",
+                                            "Description": "Defines which entities are considered when searching for entities looking at the owner entity.",
                                         },
                                         {
-                                            "Name": "look_cooldown",
+                                            "Name": "find_players_only",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "[Beta] Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
+                                        },
+                                        {
+                                            "Name": "line_of_sight_obstruction_type",
+                                            "Type": "String",
+                                            "Default Value": "collision",
+                                            "Description": "[Beta] Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
+                                        },
+                                        {
+                                            "Name": "look_at_locations",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "[Beta] A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
+                                        },
+                                        {
+                                            "Name": "looked_at_cooldown",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[0, 0]",
-                                            "Description": "The range for the random amount of time during which the entity is 'cooling down' and won't get angered or look for a target.",
+                                            "Description": "Specifies the range for the random number of seconds that must pass before the owner entity can check again for entities looking at it, after detecting an entity looking at it.",
                                         },
                                         {
-                                            "Name": "look_event",
+                                            "Name": "looked_at_event",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The event identifier to run when the entities specified in filters look at this entity.",
+                                            "Description": "Defines the event to trigger when an entity is detected looking at the owner entity.",
+                                        },
+                                        {
+                                            "Name": "not_looked_at_event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "[Beta] Defines the event to trigger when no entity is found looking at the owner entity.",
+                                        },
+                                        {
+                                            "Name": "scale_fov_by_distance",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "[Beta] When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
                                         },
                                         {
                                             "Name": "search_radius",
                                             "Type": "Decimal",
                                             "Default Value": "10",
-                                            "Description": "Maximum distance this entity will look for another entity looking at it.",
+                                            "Description": "Maximum distance the owner entity will search for entities looking at it.",
                                         },
                                         {
                                             "Name": "set_target",
                                             "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, this entity will set the attack target as the entity that looked at it.",
+                                            "Default Value": "once_and_stop_scanning",
+                                            "Description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- [Beta] \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
                                         },
                                     ],
                                 },
@@ -28867,8 +28897,8 @@
                                             "ID": "893445039",
                                         },
                                         {
-                                            "JSON Name": "minecraft:lookat",
-                                            "ID": "-1329707008",
+                                            "JSON Name": "minecraft:looked_at",
+                                            "ID": "-1189178052",
                                         },
                                         {
                                             "JSON Name": "minecraft:managed_wandering_trader",
@@ -30259,5 +30289,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "784e1b6697cf984ad3996d85d1307355f7f4f940",
+    "__OBJECTHASH__": "7d305e26f4abcd8f83c5bc5b29b9bcf7aa5af98f",
 }

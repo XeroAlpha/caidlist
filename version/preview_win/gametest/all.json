@@ -1,5 +1,6 @@
 {
-    "packageVersion": "1.21.40.20",
+    "packageVersion": "1.21.40.21",
+    "protocolVersion": 3,
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -7725,6 +7726,37 @@
                                         "readOnly": true,
                                         "configurable": false,
                                     },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ClientSystemInfo": {
+                            "value": {
+                                "type": "function",
+                                "name": "ClientSystemInfo",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ClientSystemInfo",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.SystemInfo.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.SystemInfo",
                                 },
                             },
                             "configurable": false,
@@ -20839,6 +20871,56 @@
                             },
                             "configurable": false,
                         },
+                        "MemoryTier": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "High": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 4,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Low": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Mid": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 3,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "SuperHigh": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 5,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "SuperLow": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Undetermined": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 0,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "MessageReceiveAfterEvent": {
                             "value": {
                                 "type": "function",
@@ -21334,6 +21416,14 @@
                                                     },
                                                 },
                                                 "camera": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "clientSystemInfo": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -25115,6 +25205,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "serverSystemInfo": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "waitTicks": {
                                                     "value": {
                                                         "type": "function",
@@ -25199,6 +25297,39 @@
                                                         "native": true,
                                                         "length": 0,
                                                     },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "SystemInfo": {
+                            "value": {
+                                "type": "function",
+                                "name": "SystemInfo",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.SystemInfo",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "memoryTier": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
                                                 },
                                             },
                                         },
@@ -30041,6 +30172,11 @@
         "Minecraft.ChatSendBeforeEventSignal.prototype.constructor",
         "Minecraft.ChatSendBeforeEventSignal.prototype.subscribe",
         "Minecraft.ChatSendBeforeEventSignal.prototype.unsubscribe",
+        "Minecraft.ClientSystemInfo",
+        "Minecraft.ClientSystemInfo.[[Prototype]]",
+        "Minecraft.ClientSystemInfo.prototype",
+        "Minecraft.ClientSystemInfo.prototype.[[Prototype]]",
+        "Minecraft.ClientSystemInfo.prototype.constructor",
         "Minecraft.CommandError",
         "Minecraft.CommandError.prototype",
         "Minecraft.CommandError.prototype.[[Prototype]]",
@@ -31790,6 +31926,13 @@
         "Minecraft.LocationOutOfWorldBoundariesError.prototype",
         "Minecraft.LocationOutOfWorldBoundariesError.prototype.[[Prototype]]",
         "Minecraft.LocationOutOfWorldBoundariesError.prototype.constructor",
+        "Minecraft.MemoryTier",
+        "Minecraft.MemoryTier.High",
+        "Minecraft.MemoryTier.Low",
+        "Minecraft.MemoryTier.Mid",
+        "Minecraft.MemoryTier.SuperHigh",
+        "Minecraft.MemoryTier.SuperLow",
+        "Minecraft.MemoryTier.Undetermined",
         "Minecraft.MessageReceiveAfterEvent",
         "Minecraft.MessageReceiveAfterEvent.prototype",
         "Minecraft.MessageReceiveAfterEvent.prototype.constructor",
@@ -31859,6 +32002,7 @@
         "Minecraft.Player.prototype.addExperience",
         "Minecraft.Player.prototype.addLevels",
         "Minecraft.Player.prototype.camera.[[Get]]",
+        "Minecraft.Player.prototype.clientSystemInfo.[[Get]]",
         "Minecraft.Player.prototype.constructor",
         "Minecraft.Player.prototype.eatItem",
         "Minecraft.Player.prototype.getGameMode",
@@ -32331,6 +32475,7 @@
         "Minecraft.System.prototype.runInterval",
         "Minecraft.System.prototype.runJob",
         "Minecraft.System.prototype.runTimeout",
+        "Minecraft.System.prototype.serverSystemInfo.[[Get]]",
         "Minecraft.System.prototype.waitTicks",
         "Minecraft.SystemAfterEvents",
         "Minecraft.SystemAfterEvents.prototype",
@@ -32340,6 +32485,10 @@
         "Minecraft.SystemBeforeEvents.prototype",
         "Minecraft.SystemBeforeEvents.prototype.constructor",
         "Minecraft.SystemBeforeEvents.prototype.watchdogTerminate.[[Get]]",
+        "Minecraft.SystemInfo",
+        "Minecraft.SystemInfo.prototype",
+        "Minecraft.SystemInfo.prototype.constructor",
+        "Minecraft.SystemInfo.prototype.memoryTier",
         "Minecraft.TargetBlockHitAfterEvent",
         "Minecraft.TargetBlockHitAfterEvent.[[Prototype]]",
         "Minecraft.TargetBlockHitAfterEvent.prototype",
