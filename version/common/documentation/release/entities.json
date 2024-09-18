@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.20.3",
+    "version": "1.21.30.3",
     "content": [],
     "sections": [
         {
@@ -15838,6 +15838,97 @@
                             ],
                         },
                         {
+                            "name": "minecraft:behavior.fire_at_target",
+                            "id": "minecraft:behavior.fire_at_target",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to attack by firing a shot with a delay. Anchor and offset parameters of this component overrides the anchor and offset from projectile component.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "attack_cooldown",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.500000",
+                                            "Description": "The cooldown time in seconds before this goal can be used again.",
+                                        },
+                                        {
+                                            "Name": "attack_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[2.000000, 16.000000]",
+                                            "Description": "Target needs to be within this range for the attack to happen.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start.",
+                                        },
+                                        {
+                                            "Name": "max_head_rotation_x",
+                                            "Type": "Decimal",
+                                            "Default Value": "30.000000",
+                                            "Description": "Maximum head rotation (in degrees), on the X-axis, that this entity can apply while trying to look at the target.",
+                                        },
+                                        {
+                                            "Name": "max_head_rotation_y",
+                                            "Type": "Decimal",
+                                            "Default Value": "30.000000",
+                                            "Description": "Maximum head rotation (in degrees), on the Y-axis, that this entity can apply while trying to look at the target.",
+                                        },
+                                        {
+                                            "Name": "owner_anchor",
+                                            "Type": "Integer",
+                                            "Default Value": "2",
+                                            "Description": "Entity anchor for the projectile spawn location.",
+                                        },
+                                        {
+                                            "Name": "owner_offset",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[0.000, 0.000, 0.000]",
+                                            "Description": "Offset vector from the owner_anchor.",
+                                        },
+                                        {
+                                            "Name": "post_shoot_delay",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.200000",
+                                            "Description": "Time in seconds between firing the projectile and ending the goal.",
+                                        },
+                                        {
+                                            "Name": "pre_shoot_delay",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.750000",
+                                            "Description": "Time in seconds before firing the projectile.",
+                                        },
+                                        {
+                                            "Name": "projectile_def",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor must be a projectile.",
+                                        },
+                                        {
+                                            "Name": "ranged_fov",
+                                            "Type": "Decimal",
+                                            "Default Value": "90.000000",
+                                            "Description": "Field of view (in degrees) when using sensing to detect a target for attack.",
+                                        },
+                                        {
+                                            "Name": "target_anchor",
+                                            "Type": "Integer",
+                                            "Default Value": "2",
+                                            "Description": "Entity anchor for projectile target.",
+                                        },
+                                        {
+                                            "Name": "target_offset",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[0.000, 0.000, 0.000]",
+                                            "Description": "Offset vector from the target_anchor.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:behavior.flee_sun",
                             "id": "minecraft:behavior.flee_sun",
                             "level": 4,
@@ -16632,6 +16723,109 @@
                                             "Type": "Decimal",
                                             "Default Value": "1",
                                             "Description": "Movement speed multiplier",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:behavior.jump_around_target",
+                            "id": "minecraft:behavior.jump_around_target",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to jump around a target.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "check_collision",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Enables collision checks when calculating the jump. Setting check_collision to true may affect performance and should be used with care.",
+                                        },
+                                        {
+                                            "Name": "entity_bounding_box_scale",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.700000",
+                                            "Description": "Scaling temporarily applied to the entity's AABB bounds when jumping. A smaller bounding box reduces the risk of collisions during the jump. When check_collision is true it also increases the chance of being able to jump when close to obstacles.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start.",
+                                        },
+                                        {
+                                            "Name": "jump_angles",
+                                            "Type": "Array",
+                                            "Default Value": "[ 40.0, 55.0, 60.0, 75.0, 80.0 ]",
+                                            "Description": "The jump angles in float degrees that are allowed when performing the jump. The order in which the angles are chosen is randomized.",
+                                        },
+                                        {
+                                            "Name": "jump_cooldown_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.500000",
+                                            "Description": "The time in seconds to spend in cooldown before this goal can be used again.",
+                                        },
+                                        {
+                                            "Name": "jump_cooldown_when_hurt_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.100000",
+                                            "Description": "The time in seconds to spend in cooldown after being hurt before this goal can be used again.",
+                                        },
+                                        {
+                                            "Name": "landing_distance_from_target",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[4.000000, 8.000000]",
+                                            "Description": "The range deciding how close to and how far away from the target the landing position can be when jumping.",
+                                        },
+                                        {
+                                            "Name": "landing_position_spread_degrees",
+                                            "Type": "Integer",
+                                            "Default Value": "90",
+                                            "Description": "This angle (in degrees) is used for controlling the spread when picking a landing position behind the target. A zero spread angle means the landing position will be straight behind the target with no variance. A 90 degree spread angle means the landing position can be up to 45 degrees to the left and to the right of the position straight behind the target's view direction.",
+                                        },
+                                        {
+                                            "Name": "last_hurt_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "2.000000",
+                                            "Description": "If the entity was hurt within these last seconds, the jump_cooldown_when_hurt_duration will be used instead of jump_cooldown_duration.",
+                                        },
+                                        {
+                                            "Name": "line_of_sight_obstruction_height_ignore",
+                                            "Type": "Integer",
+                                            "Default Value": "4",
+                                            "Description": "If the entity's line of sight towards its target is obstructed by an obstacle with a height below this number, the obstacle will be ignored, and the goal will try to find a valid landing position.",
+                                        },
+                                        {
+                                            "Name": "max_jump_velocity",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.400000",
+                                            "Description": "Maximum velocity a jump can be performed at.",
+                                        },
+                                        {
+                                            "Name": "prepare_jump_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.500000",
+                                            "Description": "The time in seconds to spend preparing for the jump.",
+                                        },
+                                        {
+                                            "Name": "required_vertical_space",
+                                            "Type": "Integer",
+                                            "Default Value": "4",
+                                            "Description": "The number of blocks above the entity's head that has to be air for this goal to be usable.",
+                                        },
+                                        {
+                                            "Name": "snap_to_surface_block_range",
+                                            "Type": "Integer",
+                                            "Default Value": "10",
+                                            "Description": "The number of blocks above and below from the jump target position that will be checked to find a surface to land on.",
+                                        },
+                                        {
+                                            "Name": "valid_distance_to_target",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[4.000000, 20.000000]",
+                                            "Description": "Target needs to be within this range for the jump to happen.",
                                         },
                                     ],
                                 },
@@ -17487,6 +17681,61 @@
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, this mob will chase after the target as long as it's a valid target",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:behavior.move_around_target",
+                            "id": "minecraft:behavior.move_around_target",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_search_spread_degrees'.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "destination_pos_search_spread_degrees",
+                                            "Type": "Decimal",
+                                            "Default Value": "90.000000",
+                                            "Description": "This angle (in degrees) is used for controlling the spread when picking a destination position behind the target. A zero spread angle means the destination position will be straight behind the target with no variance. A 90 degree spread angle means the destination position can be up to 45 degrees to the left and to the right of the position straight behind the target's view direction..",
+                                        },
+                                        {
+                                            "Name": "destination_position_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[4.000000, 8.000000]",
+                                            "Description": "The range of distances from the target entity within which the goal should look for a position to move the owner entity to.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that need to be met for the behavior to start.",
+                                        },
+                                        {
+                                            "Name": "height_difference_limit",
+                                            "Type": "Decimal",
+                                            "Default Value": "10.000000",
+                                            "Description": "Distance in height (in blocks) between the owner entity and the target has to be less than this value when owner checks if it is too close and should move away from the target. This value needs to be bigger than zero for the move away logic to trigger.",
+                                        },
+                                        {
+                                            "Name": "horizontal_search_distance",
+                                            "Type": "Integer",
+                                            "Default Value": "5",
+                                            "Description": "Horizontal search distance (in blocks) when searching for a position to move away from target.",
+                                        },
+                                        {
+                                            "Name": "movement_speed",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.600000",
+                                            "Description": "The speed with which the entity should move to its target position.",
+                                        },
+                                        {
+                                            "Name": "vertical_search_distance",
+                                            "Type": "Integer",
+                                            "Default Value": "5",
+                                            "Description": "Vertical search distance (in blocks) when searching for a position to move away from target.",
                                         },
                                     ],
                                 },
@@ -18641,7 +18890,7 @@
                                         {
                                             "Name": "damage_sources",
                                             "Type": "List",
-                                            "Default Value": "[campfire, fire, fire_tick, freezing, lava, lightning, magma, soul_campfire, temperature, entity_attack, entity_explosion, fireworks, magic, projectile, ram_attack, sonic_boom, wither]",
+                                            "Default Value": "[campfire, fire, fire_tick, freezing, lava, lightning, magma, soul_campfire, temperature, entity_attack, entity_explosion, fireworks, magic, projectile, ram_attack, sonic_boom, wither, mace_smash]",
                                             "Description": "The list of Entity Damage Sources that will cause this mob to panic",
                                         },
                                         {
@@ -22312,12 +22561,12 @@
                                             "Name": "attack_cooldown_complete_event",
                                             "Type": "Trigger",
                                             "Default Value": "",
-                                            "Description": "Event to be runned when the cooldown is complete.",
+                                            "Description": "Event to be run when the cooldown is complete.",
                                         },
                                         {
                                             "Name": "attack_cooldown_time",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[0.0, 1.0]",
+                                            "Default Value": "[0.00, 1.00]",
                                             "Description": "Amount of time in seconds for the cooldown. Can be specified as a number or a pair of numbers (min and max).",
                                         },
                                     ],
@@ -22874,7 +23123,7 @@
                             "id": "minecraft:burns_in_daylight",
                             "level": 4,
                             "content": [
-                                "Specifies if/how a mob burns in daylight.",
+                                "Specifies if a mob burns in daylight.",
                             ],
                         },
                         {
@@ -27797,6 +28046,10 @@
                                             "ID": "-1602192311",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.fire_at_target",
+                                            "ID": "15552728018745447502",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.flee_sun",
                                             "ID": "-617664229",
                                         },
@@ -27869,6 +28122,10 @@
                                             "ID": "17828766620487298865",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.jump_around_target",
+                                            "ID": "11795366379540415834",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.jump_to_block",
                                             "ID": "9920654059703051752",
                                         },
@@ -27923,6 +28180,10 @@
                                         {
                                             "JSON Name": "minecraft:behavior.mount_pathing",
                                             "ID": "1112137677",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:behavior.move_around_target",
+                                            "ID": "12172580866581071579",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.move_indoors",
@@ -29973,5 +30234,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "cba3a83306f6554aab61879e4ada674e22dd18b9",
+    "__OBJECTHASH__": "418123411f0b327c0fd39ede7bbf24cefd850ba6",
 }

@@ -59,9 +59,9 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.21.23.01',
+        version: '1.21.30.03',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.21.23.01.apks',
+        path: 'H:\\BedrockVersions\\Latest\\1.21.30.03.apks',
         config: {
             ...smallestGUIOptions,
             // 仅在 Android 端暂时无法使用时使用 Windows 10 版替代
