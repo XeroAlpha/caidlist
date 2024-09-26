@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.40.21",
+    "version": "1.21.40.23",
     "content": [],
     "sections": [
         {
@@ -23352,7 +23352,7 @@
                             "id": "minecraft:damage_sensor",
                             "level": 4,
                             "content": [
-                                "Defines what events to call when this entity is damaged by specific entities or items.",
+                                "\"Defines what events to call when this entity is damaged by specific entities or items.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -23361,7 +23361,7 @@
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": [
-                                                "List of triggers with the events to call when taking specific kinds of damage.",
+                                                "List of triggers with the events to call when taking specific kinds of damage.\"",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -23374,32 +23374,32 @@
                                                         {
                                                             "Name": "damage_modifier",
                                                             "Type": "Decimal",
-                                                            "Default Value": "0.0",
-                                                            "Description": "A modifier that adds to/removes from the base damage from the damage cause. It does not reduce damage to less than 0.",
+                                                            "Default Value": "0.00",
+                                                            "Description": "A modifier that adds/removes to the base damage received from the specified damage cause. It does not reduce damage to less than 0.",
                                                         },
                                                         {
                                                             "Name": "damage_multiplier",
                                                             "Type": "Decimal",
-                                                            "Default Value": "1.0",
-                                                            "Description": "A multiplier that modifies the base damage from the damage cause. If deals_damage is true the multiplier can only reduce the damage the entity will take to a minimum of 1.",
+                                                            "Default Value": "1.00",
+                                                            "Description": "A multiplier that modifies the base damage received from the specified damage cause. If \"deals_damage\" is true the multiplier can only reduce the damage the entity will take to a minimum of 1.",
                                                         },
                                                         {
                                                             "Name": "deals_damage",
                                                             "Type": "Boolean",
-                                                            "Default Value": "true",
-                                                            "Description": "If true, the damage dealt to the entity will take away health from it, set to false to make the entity ignore that damage.",
+                                                            "Default Value": "yes",
+                                                            "Description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity.                                          \\n- \"no\", received damage is not applied to the entity.                                          \\n- \"no_but_side_effects_apply\", received damage is not applied to the entity, but the side effects of the attack are. This means that the attacker's weapon loses durability, enchantment side effects are applied, and so on.",
                                                         },
                                                         {
                                                             "Name": "on_damage",
                                                             "Type": "JSON Object",
                                                             "Default Value": "",
-                                                            "Description": "Specifies filters for entity definitions and events.",
+                                                            "Description": "Defines which entities the trigger applies to, and which, if any, event to emit when damaged.",
                                                         },
                                                         {
                                                             "Name": "on_damage_sound_event",
                                                             "Type": "String",
                                                             "Default Value": "",
-                                                            "Description": "Defines what sound to play, if any, when the on_damage filters are met.",
+                                                            "Description": "Defines what sound to play, if any, when the \"on_damage\" filters are met.",
                                                         },
                                                     ],
                                                 },
@@ -23951,6 +23951,12 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "allow_underwater",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the explosion will affect blocks and entities under water.",
+                                        },
+                                        {
                                             "Name": "breaks_blocks",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -23961,6 +23967,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, blocks in the explosion radius will be set on fire.",
+                                        },
+                                        {
+                                            "Name": "damage_scaling",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.000000",
+                                            "Description": "A scale factor applied to the explosion's damage to entities. A value of 0 prevents the explosion from dealing any damage. Negative values cause the explosion to heal entities instead.",
                                         },
                                         {
                                             "Name": "destroy_affected_by_griefing",
@@ -23987,16 +23999,46 @@
                                             "Description": "If true, the fuse is already lit when this component is added to the entity.",
                                         },
                                         {
+                                            "Name": "knockback_scaling",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.000000",
+                                            "Description": "A scale factor applied to the knockback force caused by the explosion.",
+                                        },
+                                        {
                                             "Name": "max_resistance",
                                             "Type": "Decimal",
                                             "Default Value": "3.40282e+38",
                                             "Description": "A blocks explosion resistance will be capped at this value when an explosion occurs.",
                                         },
                                         {
+                                            "Name": "negates_fall_damage",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Defines whether the explosion should apply fall damage negation to Players above the point of collision.",
+                                        },
+                                        {
+                                            "Name": "particle_effect",
+                                            "Type": "String",
+                                            "Default Value": "explosion",
+                                            "Description": "The name of the particle effect to use. The accepted strings are 'explosion', 'wind_burst', or 'breeze_wind_burst'.",
+                                        },
+                                        {
                                             "Name": "power",
                                             "Type": "Decimal",
                                             "Default Value": "3",
                                             "Description": "The radius of the explosion in blocks and the amount of damage the explosion deals.",
+                                        },
+                                        {
+                                            "Name": "sound_effect",
+                                            "Type": "String",
+                                            "Default Value": "explode",
+                                            "Description": "The name of the sound effect played when the explosion triggers.",
+                                        },
+                                        {
+                                            "Name": "toggles_blocks",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the explosion will toggle blocks in the explosion radius.",
                                         },
                                     ],
                                 },
@@ -30289,5 +30331,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "7d305e26f4abcd8f83c5bc5b29b9bcf7aa5af98f",
+    "__OBJECTHASH__": "32f280c7d6e509229882dfc33e165e76cee5543d",
 }
