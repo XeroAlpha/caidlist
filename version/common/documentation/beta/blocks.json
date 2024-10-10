@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.40.25",
+    "version": "1.21.50.20",
     "content": [],
     "sections": [
         {
@@ -182,6 +182,27 @@
                                     "Type": "Identifier String",
                                     "Default Value": "",
                                     "Description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
+                                },
+                                {
+                                    "Name": "minecraft:item_visual",
+                                    "Type": "Identifier String",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The description identifier of the geometry and material used to render the item of this block.",
+                                        "Experimental toggles required: Upcoming Creator Features",
+                                        {
+                                            "section": "geometry",
+                                            "content": [
+                                                "[Required] The \"minecraft:geometry\" component that will be used for the item.",
+                                            ],
+                                        },
+                                        {
+                                            "section": "material_instances",
+                                            "content": [
+                                                "[Required] The \"minecraft:material_instances\" component that will be used for the item.",
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "Name": "minecraft:light_dampening",
@@ -533,7 +554,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.40\",",
+                                        "  \"format_version\": \"1.21.50\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1221,5 +1242,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "36a41de8e397a1d3acb75eb893273679a30c892c",
+    "__OBJECTHASH__": "fd20a8c277f3514879f30990a5a6f0d7f039802f",
 }

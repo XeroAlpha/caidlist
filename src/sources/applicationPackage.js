@@ -332,7 +332,8 @@ const entryAnalyzer = [
                 '1.21.10',
                 '1.21.20',
                 '1.21.30',
-                '1.21.40'
+                '1.21.40',
+                '1.21.50'
             ]
         ]
     },
@@ -408,7 +409,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.60', '1.21.30']]
+        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.30', '1.20.60', '1.21.30']]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {

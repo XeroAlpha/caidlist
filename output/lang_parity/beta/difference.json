@@ -5,7 +5,6 @@
             "游戏": [
                 "menu.play",
                 "hbui.CreateNewWorldSideMenu.create.edu",
-                "hbui.CreateNewWorldSideMenu.play",
                 "hbui.PlayScreen.onlinePlayWarning.title",
                 "hbui.PlayScreen.realmsTab.play",
                 "hbui.PlayScreen.serverTab.Play",
@@ -19,6 +18,9 @@
                 "realmsSettingsScreen.playRealmButton",
                 "addExternalServerScreen.playButtonLabel",
                 "playscreen.header.local"
+            ],
+            "": [
+                "hbui.EditWorldSideMenu.play"
             ]
         },
         "javaLookup": {
@@ -123,8 +125,8 @@
                 "storageManager.sync_legacy_worlds.conversion_complete.cancel_button"
             ],
             "": [
-                "hbui.PlayScreen.multiplayerDisabled.close",
-                "hbui.PlayScreen.multiplayerDisabledDueToBan.close"
+                "hbui.BannedOrSuspendedMessage.close",
+                "hbui.multiplayerBlockedModal.close"
             ]
         },
         "javaLookup": {
@@ -154,8 +156,10 @@
                 "hbui.RealmsStories.ReportFeedItem.reportPanel.cancel",
                 "hbui.ReportPlayerRoute.cancel",
                 "hbui.ScreenshotDeleteModal.cancel",
+                "hbui.ScreenshotGalleryContainer.cancel",
                 "hbui.EditorBlockPickerModal.cancel",
                 "hbui.EditorConflictMessagesPopup.cancel",
+                "hbui.EditorLink.warningModal.cancel",
                 "hbui.EditorReloadModal.cancel",
                 "controller.buttonTip.cancel",
                 "controllerLayoutScreen.cancel",
@@ -173,8 +177,7 @@
                 "contentlog.delete.cancel"
             ],
             "": [
-                "hbui.ScreenshotGalleryContainer.cancel",
-                "hbui.EditorLink.warningModal.cancel"
+                "hbui.ScreenshotGalleryRoute.deleteScreenshotsModal.cancelButton"
             ]
         },
         "javaLookup": {
@@ -186,11 +189,9 @@
     {
         "source": "Ok",
         "bedrockLookup": {
-            "确定": [
-                "hbui.AccountUnlinkRoute.closeResultsButton",
-                "hbui.Realms.InviteExpiredModals.ok"
-            ],
             "好的": [
+                "hbui.AccountUnlinkRoute.closeResultsButton",
+                "hbui.Realms.InviteExpiredModals.ok",
                 "dr.button.ok"
             ]
         },
@@ -198,59 +199,6 @@
             "确定": [
                 "gui.ok",
                 "mco.gui.ok"
-            ]
-        }
-    },
-    {
-        "source": "Yes",
-        "bedrockLookup": {
-            "是": [
-                "hbui.AchievementDetails.yes",
-                "gui.yes"
-            ],
-            "": [
-                "hbui.PlayScreen.missingActiveResourcesModal.confirm"
-            ]
-        },
-        "javaLookup": {
-            "是": [
-                "gui.yes"
-            ]
-        }
-    },
-    {
-        "source": "Continue",
-        "bedrockLookup": {
-            "继续": [
-                "hbui.AnnouncementModalRoute.continue",
-                "hbui.CreateNewWorld.deleteWorldModal.continueInputLegend",
-                "hbui.CreateNewWorld.loseYourChangesModal.continueInputLegend",
-                "hbui.CreateNewWorld.optBackModal.goBackInputLegend",
-                "hbui.JoinServerWarningModal.continue",
-                "hbui.RealmsStories.errorModal.continue",
-                "hbui.ReportPlayerRoute.next",
-                "hbui.EditorReloadModal.confirm",
-                "course.edu.continueButton",
-                "realmsInvitationScreen.continue",
-                "realmsPlusUpgradeNotice.continue",
-                "gui.continue",
-                "options.continue",
-                "patchNotes.continue",
-                "permissions.Continue",
-                "storageManager.dependency.continue",
-                "store.addon.continue",
-                "store.addon.update.local.buttonContinue",
-                "store.addon.update.realms.buttonContinue",
-                "store.mashup.continue",
-                "storage_migration.button.continue"
-            ],
-            "": [
-                "hbui.EditorLink.warningModal.continue"
-            ]
-        },
-        "javaLookup": {
-            "继续": [
-                "gui.continue"
             ]
         }
     },
@@ -405,10 +353,8 @@
     {
         "source": "No amount of rest can pass this night",
         "bedrockLookup": {
-            "": [
-                "hbui.Bedtime.playersSleepingNotPossible"
-            ],
             "今晚不能再休息了": [
+                "hbui.Bedtime.playersSleepingNotPossible",
                 "multiplayer.playersSleepingNotPossible"
             ]
         },
@@ -432,6 +378,7 @@
                 "hbui.InboxRoute.select",
                 "hbui.PlayerListItem.select",
                 "hbui.PlayScreen.designPreviewInputLegend",
+                "hbui.PlayScreen.realmsTab.realmsTabErrorStates.realmsServiceError.button.inputLegend",
                 "hbui.PlayScreen.select",
                 "hbui.PlayScreen.templateScreenNotAvailableInPreview.select",
                 "hbui.PostToRealmStoriesRoute.select",
@@ -469,12 +416,40 @@
                 "gui.select"
             ],
             "": [
-                "hbui.PlayScreen.realmsTab.realmsTabErrorStates.realmsServiceError.button.inputLegend"
+                "hbui.PlayRealmsTrialModeModal.select"
             ]
         },
         "javaLookup": {
             "选择": [
                 "mco.template.button.select"
+            ]
+        }
+    },
+    {
+        "source": "Disabled",
+        "bedrockLookup": {
+            "": [
+                "hbui.CreateNewWorld.advanced.sleepSlider.disabled"
+            ],
+            "已禁用": [
+                "hbui.RealmsNewStoryRoute.disabled",
+                "hbui.WorldListItem.multiplayerDisabled",
+                "hbui.EditorDropdown.disabled",
+                "hbui.EditorTextField.disabled",
+                "hbui.EditorVec3TextField.disabled",
+                "hbui.Dropdown.narrationDisabled",
+                "hbui.Dropdown.stateDisabled",
+                "hbui.DropdownItem.disabled",
+                "hbui.Pagination.disabled",
+                "hbui.TextField.disabled",
+                "hbui.TextFieldWrapper.narrationDisabled",
+                "options.dev_nethernet_logging_verbosity.disabled",
+                "addServer.resourcePack.disabled"
+            ]
+        },
+        "javaLookup": {
+            "禁用": [
+                "addServer.resourcePack.disabled"
             ]
         }
     },
@@ -552,6 +527,9 @@
                 "selectTemplate.delete",
                 "manifestvalidation.delete",
                 "manifestvalidation.delete.confirm_delete"
+            ],
+            "": [
+                "hbui.ScreenshotGalleryRoute.deleteScreenshotsModal.deleteButton"
             ]
         },
         "javaLookup": {
@@ -670,6 +648,9 @@
         "bedrockLookup": {
             "下载中": [
                 "hbui.CreateNewWorld.packDownloadModal.downloadingProgressLabel"
+            ],
+            "正在下载 %1$s": [
+                "hbui.PlayScreen.missingDependenciesModal.body.downloading"
             ]
         },
         "javaLookup": {
@@ -681,12 +662,12 @@
     {
         "source": "Create New World",
         "bedrockLookup": {
-            "创建新世界": [
-                "hbui.CreateNewWorld.title",
-                "selectTemplate.generateRandom"
-            ],
             "创建新的世界": [
+                "hbui.CreateNewWorld.title",
                 "selectWorld.create"
+            ],
+            "创建新世界": [
+                "selectTemplate.generateRandom"
             ]
         },
         "javaLookup": {
@@ -708,7 +689,6 @@
                 "hbui.PlayScreen.nonMultiplayerSkinModal.back",
                 "hbui.PlayScreen.onlinePlayWarning.back",
                 "hbui.RealmsStories.CommentsScreen.back",
-                "hbui.ScreenshotDetailsRoute.screenshotDetailsBack",
                 "hbui.ScreenshotDetailsSideMenu.fullImageBack",
                 "hbui.SeedTemplatesRoute.errorBackButtonInputLegend",
                 "hbui.BackButton.back",
@@ -914,28 +894,6 @@
         }
     },
     {
-        "source": "Full",
-        "bedrockLookup": {
-            "满": [
-                "hbui.PlayerAvatarsOnlineInWorld.full",
-                "hbui.PlayersOnlineInWorld.full",
-                "hbui.PlayScreen.realmsTab.bannerFull",
-                "hbui.PlayScreen.realmsTab.sideMenu.full",
-                "hbui.PlayScreen.serverCapacity.fullLabel",
-                "playscreen.realmFull",
-                "recipeBook.setting.full"
-            ],
-            "": [
-                "item.bundle.full"
-            ]
-        },
-        "javaLookup": {
-            "满": [
-                "item.minecraft.bundle.full"
-            ]
-        }
-    },
-    {
         "source": "Spam or advertising",
         "bedrockLookup": {
             "滥发信息或广告": [
@@ -965,18 +923,20 @@
         }
     },
     {
-        "source": "No",
+        "source": "Report",
         "bedrockLookup": {
-            "": [
-                "hbui.PlayScreen.missingActiveResourcesModal.decline"
+            "举报": [
+                "hbui.PlayerOptionsModal.report",
+                "hbui.ReportPlayerRoute.report",
+                "xbox.profile.report"
             ],
-            "否": [
-                "gui.no"
+            "": [
+                "hbui.ScreenshotDetailsSideMenu.report"
             ]
         },
         "javaLookup": {
-            "否": [
-                "gui.no"
+            "举报": [
+                "gui.socialInteractions.report"
             ]
         }
     },
@@ -1004,44 +964,6 @@
         "javaLookup": {
             "续期": [
                 "mco.selectServer.expiredRenew"
-            ]
-        }
-    },
-    {
-        "source": "Disabled",
-        "bedrockLookup": {
-            "已禁用": [
-                "hbui.RealmsNewStoryRoute.disabled",
-                "hbui.WorldListItem.multiplayerDisabled",
-                "hbui.EditorDropdown.disabled",
-                "hbui.EditorTextField.disabled",
-                "hbui.EditorVec3TextField.disabled",
-                "hbui.Dropdown.narrationDisabled",
-                "hbui.Dropdown.stateDisabled",
-                "hbui.DropdownItem.disabled",
-                "hbui.Pagination.disabled",
-                "hbui.TextField.disabled",
-                "hbui.TextFieldWrapper.narrationDisabled",
-                "options.dev_nethernet_logging_verbosity.disabled",
-                "addServer.resourcePack.disabled"
-            ]
-        },
-        "javaLookup": {
-            "禁用": [
-                "addServer.resourcePack.disabled"
-            ]
-        }
-    },
-    {
-        "source": "Invalid Realm name",
-        "bedrockLookup": {
-            "": [
-                "hbui.RealmsPurchaseSubscriptionRoute.errorModals.invalidRealmName.title"
-            ]
-        },
-        "javaLookup": {
-            "无效的Realm名称": [
-                "mco.errorMessage.6008"
             ]
         }
     },
@@ -1294,25 +1216,6 @@
         "javaLookup": {
             "按键控制": [
                 "controls.title"
-            ]
-        }
-    },
-    {
-        "source": "Empty",
-        "bedrockLookup": {
-            "空": [
-                "hbui.TextField.empty",
-                "joincode.icon_text.null",
-                "hudScreen.tooltip.empty"
-            ],
-            "": [
-                "item.bundle.empty"
-            ]
-        },
-        "javaLookup": {
-            "空": [
-                "item.minecraft.bundle.empty",
-                "mco.configure.world.slot.empty"
             ]
         }
     },
@@ -1792,6 +1695,41 @@
         }
     },
     {
+        "source": "Jump",
+        "bedrockLookup": {
+            "": [
+                "commands.inputpermission.jump"
+            ],
+            "跳跃": [
+                "hudScreen.tooltip.basic.jump"
+            ]
+        },
+        "javaLookup": {
+            "跳跃": [
+                "key.jump"
+            ]
+        }
+    },
+    {
+        "source": "Sneak",
+        "bedrockLookup": {
+            "": [
+                "commands.inputpermission.sneak"
+            ],
+            "潜行": [
+                "options.crouch",
+                "options.sneakOption",
+                "options.toggleCrouch",
+                "hudScreen.tooltip.basic.sneak"
+            ]
+        },
+        "javaLookup": {
+            "潜行": [
+                "key.sneak"
+            ]
+        }
+    },
+    {
         "source": "Block placed",
         "bedrockLookup": {
             "方块已放置": [
@@ -2029,6 +1967,23 @@
         "javaLookup": {
             "旁观": [
                 "selectWorld.gameMode.spectator"
+            ]
+        }
+    },
+    {
+        "source": "%s%%",
+        "bedrockLookup": {
+            "": [
+                "createWorldScreen.playerSleepPercentageFormat"
+            ],
+            "%s%%": [
+                "options.percent.format"
+            ]
+        },
+        "javaLookup": {
+            "%s%%": [
+                "loading.progress",
+                "optimizeWorld.progress.percentage"
             ]
         }
     },
@@ -2511,6 +2466,20 @@
         }
     },
     {
+        "source": "Creaking",
+        "bedrockLookup": {
+            "": [
+                "entity.creaking.name"
+            ]
+        },
+        "javaLookup": {
+            "嘎枝": [
+                "entity.minecraft.creaking",
+                "entity.minecraft.creaking_transient"
+            ]
+        }
+    },
+    {
         "source": "Firework Rocket",
         "bedrockLookup": {
             "焰火火箭": [
@@ -2680,27 +2649,6 @@
         "javaLookup": {
             "旧版": [
                 "multiplayer.status.old"
-            ]
-        }
-    },
-    {
-        "source": "Custom",
-        "bedrockLookup": {
-            "自定义": [
-                "gui.custom",
-                "item.fireworksCharge.customColor",
-                "skin.Standard.Custom",
-                "skin.Standard.CustomSlim",
-                "skin.Standard.Dummy"
-            ],
-            "": [
-                "options.dev_serviceOverrideTypeCustom"
-            ]
-        },
-        "javaLookup": {
-            "自定义": [
-                "generator.custom",
-                "item.minecraft.firework_star.custom_color"
             ]
         }
     },
@@ -4959,6 +4907,19 @@
         }
     },
     {
+        "source": "Creaking Spawn Egg",
+        "bedrockLookup": {
+            "": [
+                "item.spawn_egg.entity.creaking.name"
+            ]
+        },
+        "javaLookup": {
+            "嘎枝刷怪蛋": [
+                "item.minecraft.creaking_spawn_egg"
+            ]
+        }
+    },
+    {
         "source": "Ender Dragon Spawn Egg",
         "bedrockLookup": {
             "末影龙生成蛋": [
@@ -6025,6 +5986,99 @@
         }
     },
     {
+        "source": "Pale Oak Door",
+        "bedrockLookup": {
+            "": [
+                "item.pale_oak_door.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木门": [
+                "block.minecraft.pale_oak_door"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Hanging Sign",
+        "bedrockLookup": {
+            "": [
+                "item.pale_oak_hanging_sign.name"
+            ]
+        },
+        "javaLookup": {
+            "悬挂式苍白橡木告示牌": [
+                "block.minecraft.pale_oak_hanging_sign"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Sign",
+        "bedrockLookup": {
+            "": [
+                "item.pale_oak_sign.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木告示牌": [
+                "block.minecraft.pale_oak_sign"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Sapling",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_sapling.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡树树苗": [
+                "block.minecraft.pale_oak_sapling"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Leaves",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_leaves.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡树树叶": [
+                "block.minecraft.pale_oak_leaves"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Boat",
+        "bedrockLookup": {
+            "": [
+                "item.boat.pale_oak.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木船": [
+                "entity.minecraft.pale_oak_boat",
+                "item.minecraft.pale_oak_boat"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Boat with Chest",
+        "bedrockLookup": {
+            "": [
+                "item.chest_boat.pale_oak.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木运输船": [
+                "entity.minecraft.pale_oak_chest_boat",
+                "item.minecraft.pale_oak_chest_boat"
+            ]
+        }
+    },
+    {
         "source": "Light Gray Shield",
         "bedrockLookup": {
             "浅灰色盾牌": [
@@ -6053,10 +6107,8 @@
     {
         "source": "Bundle",
         "bedrockLookup": {
-            "": [
-                "item.bundle"
-            ],
             "同捆包": [
+                "item.bundle",
                 "store.mashup.bundle"
             ]
         },
@@ -6069,7 +6121,7 @@
     {
         "source": "Black Bundle",
         "bedrockLookup": {
-            "": [
+            "Black Bundle": [
                 "item.black_bundle"
             ]
         },
@@ -6082,7 +6134,7 @@
     {
         "source": "White Bundle",
         "bedrockLookup": {
-            "": [
+            "White Bundle": [
                 "item.white_bundle"
             ]
         },
@@ -6095,7 +6147,7 @@
     {
         "source": "Red Bundle",
         "bedrockLookup": {
-            "": [
+            "Red Bundle": [
                 "item.red_bundle"
             ]
         },
@@ -6108,7 +6160,7 @@
     {
         "source": "Orange Bundle",
         "bedrockLookup": {
-            "": [
+            "Orange Bundle": [
                 "item.orange_bundle"
             ]
         },
@@ -6121,7 +6173,7 @@
     {
         "source": "Yellow Bundle",
         "bedrockLookup": {
-            "": [
+            "Yellow Bundle": [
                 "item.yellow_bundle"
             ]
         },
@@ -6134,7 +6186,7 @@
     {
         "source": "Green Bundle",
         "bedrockLookup": {
-            "": [
+            "Green Bundle": [
                 "item.green_bundle"
             ]
         },
@@ -6147,7 +6199,7 @@
     {
         "source": "Lime Bundle",
         "bedrockLookup": {
-            "": [
+            "Lime Bundle": [
                 "item.lime_bundle"
             ]
         },
@@ -6160,7 +6212,7 @@
     {
         "source": "Brown Bundle",
         "bedrockLookup": {
-            "": [
+            "Brown Bundle": [
                 "item.brown_bundle"
             ]
         },
@@ -6173,7 +6225,7 @@
     {
         "source": "Light Gray Bundle",
         "bedrockLookup": {
-            "": [
+            "Light Gray Bundle": [
                 "item.light_gray_bundle"
             ]
         },
@@ -6186,7 +6238,7 @@
     {
         "source": "Light Blue Bundle",
         "bedrockLookup": {
-            "": [
+            "Light Blue Bundle": [
                 "item.light_blue_bundle"
             ]
         },
@@ -6199,7 +6251,7 @@
     {
         "source": "Blue Bundle",
         "bedrockLookup": {
-            "": [
+            "Blue Bundle": [
                 "item.blue_bundle"
             ]
         },
@@ -6212,7 +6264,7 @@
     {
         "source": "Gray Bundle",
         "bedrockLookup": {
-            "": [
+            "Gray Bundle": [
                 "item.gray_bundle"
             ]
         },
@@ -6225,7 +6277,7 @@
     {
         "source": "Pink Bundle",
         "bedrockLookup": {
-            "": [
+            "粉红色同捆包": [
                 "item.pink_bundle"
             ]
         },
@@ -6238,7 +6290,7 @@
     {
         "source": "Magenta Bundle",
         "bedrockLookup": {
-            "": [
+            "Magenta Bundle": [
                 "item.magenta_bundle"
             ]
         },
@@ -6251,7 +6303,7 @@
     {
         "source": "Purple Bundle",
         "bedrockLookup": {
-            "": [
+            "Purple Bundle": [
                 "item.purple_bundle"
             ]
         },
@@ -6264,7 +6316,7 @@
     {
         "source": "Cyan Bundle",
         "bedrockLookup": {
-            "": [
+            "Cyan Bundle": [
                 "item.cyan_bundle"
             ]
         },
@@ -6277,7 +6329,7 @@
     {
         "source": "Can hold a mixed stack of items",
         "bedrockLookup": {
-            "": [
+            "可以容纳混合堆叠的物品": [
                 "item.bundle.empty.description"
             ]
         },
@@ -6409,10 +6461,8 @@
     {
         "source": "Bundles",
         "bedrockLookup": {
-            "": [
-                "itemGroup.name.bundles"
-            ],
             "同捆包": [
+                "itemGroup.name.bundles",
                 "store.search.filters.bundles",
                 "store.search.filter.offer_type.bundles"
             ]
@@ -6424,25 +6474,9 @@
         }
     },
     {
-        "source": "Jigsaw Block",
-        "bedrockLookup": {
-            "": [
-                "jigsaw_block.title"
-            ],
-            "拼图方块": [
-                "tile.jigsaw.name"
-            ]
-        },
-        "javaLookup": {
-            "拼图方块": [
-                "block.minecraft.jigsaw"
-            ]
-        }
-    },
-    {
         "source": "Selection Priority:",
         "bedrockLookup": {
-            "": [
+            "Selection Priority:": [
                 "jigsaw.title.selection_priority"
             ]
         },
@@ -6455,7 +6489,7 @@
     {
         "source": "Placement Priority:",
         "bedrockLookup": {
-            "": [
+            "Placement Priority:": [
                 "jigsaw.title.placement_priority"
             ]
         },
@@ -9894,6 +9928,214 @@
         "javaLookup": {
             "橡木木板": [
                 "block.minecraft.oak_planks"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Button",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_button.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木按钮": [
+                "block.minecraft.pale_oak_button"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Fence",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_fence.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木栅栏": [
+                "block.minecraft.pale_oak_fence"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Fence Gate",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_fence_gate.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木栅栏门": [
+                "block.minecraft.pale_oak_fence_gate"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Log",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_log.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木原木": [
+                "block.minecraft.pale_oak_log"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Planks",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_planks.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木木板": [
+                "block.minecraft.pale_oak_planks"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Pressure Plate",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_pressure_plate.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木压力板": [
+                "block.minecraft.pale_oak_pressure_plate"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Slab",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_slab.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木台阶": [
+                "block.minecraft.pale_oak_slab"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Stairs",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_stairs.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木楼梯": [
+                "block.minecraft.pale_oak_stairs"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Trapdoor",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_trapdoor.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木活板门": [
+                "block.minecraft.pale_oak_trapdoor"
+            ]
+        }
+    },
+    {
+        "source": "Pale Oak Wood",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_oak_wood.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白橡木": [
+                "block.minecraft.pale_oak_wood"
+            ]
+        }
+    },
+    {
+        "source": "Stripped Pale Oak Log",
+        "bedrockLookup": {
+            "": [
+                "tile.stripped_pale_oak_log.name"
+            ]
+        },
+        "javaLookup": {
+            "去皮苍白橡木原木": [
+                "block.minecraft.stripped_pale_oak_log"
+            ]
+        }
+    },
+    {
+        "source": "Stripped Pale Oak Wood",
+        "bedrockLookup": {
+            "": [
+                "tile.stripped_pale_oak_wood.name"
+            ]
+        },
+        "javaLookup": {
+            "去皮苍白橡木": [
+                "block.minecraft.stripped_pale_oak_wood"
+            ]
+        }
+    },
+    {
+        "source": "Pale Hanging Moss",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_hanging_moss.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白垂藤": [
+                "block.minecraft.pale_hanging_moss"
+            ]
+        }
+    },
+    {
+        "source": "Pale Moss Block",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_moss_block.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白苔藓块": [
+                "block.minecraft.pale_moss_block"
+            ]
+        }
+    },
+    {
+        "source": "Pale Moss Carpet",
+        "bedrockLookup": {
+            "": [
+                "tile.pale_moss_carpet.name"
+            ]
+        },
+        "javaLookup": {
+            "苍白覆地苔藓": [
+                "block.minecraft.pale_moss_carpet"
+            ]
+        }
+    },
+    {
+        "source": "Creaking Heart",
+        "bedrockLookup": {
+            "": [
+                "tile.creaking_heart.name"
+            ]
+        },
+        "javaLookup": {
+            "嘎枝之心": [
+                "block.minecraft.creaking_heart"
             ]
         }
     },

@@ -27,11 +27,18 @@ import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js'
  */
 const Minecraft = {};
 
-function parseOrThrow(result) {
-    if (typeof result === 'string') {
-        return JSON.parse(result);
+/**
+ * @param {import("quickjs-debugger").QuickJSStackFrame} frame
+ */
+async function wrapEvaluate(frame, f, args) {
+    const serializedArgs = JSON.stringify(args);
+    const code = `(()=>{try{return (JSON.stringify((${String(f)})(${serializedArgs})))}catch(e){return e}})()`;
+    const errorOrResult = await frame.evaluateExpression(code);
+    if (errorOrResult.type !== 'string') {
+        throw await errorOrResult.inspect();
     }
-    throw result;
+    const val = JSON.parse(errorOrResult.primitiveValue);
+    return val;
 }
 
 function stateToSlots(state, propNames) {
@@ -225,12 +232,47 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
     return simplifiedState;
 }
 
+/**
+ * @param {MinecraftDebugSession} session
+ */
+function createPauseController(session, breakpoints) {
+    if (breakpoints) {
+        const applyBreakpoints = (enable) => {
+            const perFileMap = {};
+            for (const { file, line } of breakpoints) {
+                const fileBreakpoints = perFileMap[file] ?? (perFileMap[file] = []);
+                fileBreakpoints.push({ line });
+            }
+            for (const [fileName, fileBreakpoints] of Object.entries(perFileMap)) {
+                session.setBreakpoints(fileName, enable ? fileBreakpoints : []);
+            }
+        };
+        return {
+            pause: async () => {
+                applyBreakpoints(true);
+                await Promise.all([
+                    session.continue(),
+                    pEvent(session, 'stopped')
+                ]);
+            },
+            continue: async () => {
+                applyBreakpoints(false);
+                await session.continue();
+            }
+        };
+    }
+    return {
+        pause: () => session.pause(),
+        continue: () => session.continue()
+    };
+}
+
 const Extractors = [
     {
         name: 'scope',
         timeout: 10000,
-        async extract(target, frame) {
-            const { tree, flatMap } = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const { tree, flatMap } = await wrapEvaluate(frame, () => {
                 const flatDescMap = {};
                 const root = { path: '', value: globalThis, desc: {}, doNotSort: true };
                 const nodeQueue = [root];
@@ -354,8 +396,8 @@ const Extractors = [
                     }
                     flatDescMap[path] = desc;
                 }
-                return JSON.stringify({ tree: root.desc, flatMap: flatDescMap });
-            }));
+                return { tree: root.desc, flatMap: flatDescMap };
+            });
             delete tree.enumerableProperties.totalTicks;
             delete flatMap.totalTicks;
             target.scopeTree = tree;
@@ -365,8 +407,8 @@ const Extractors = [
     {
         name: 'commands',
         timeout: 10000,
-        async extract(target, frame, session) {
-            parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame, session, controller }) {
+            await wrapEvaluate(frame, () => {
                 const player = [...Minecraft.world.getPlayers()][0];
                 async function asyncOp() {
                     const helpMeta = await player.runCommandAsync('help');
@@ -387,11 +429,13 @@ const Extractors = [
                     // eslint-disable-next-line no-console
                     console.info(`[Command Extractor]ERROR: ${error}`);
                 });
-                return 'null';
-            }));
-            session.continue();
-            const res = await pEvent(session, 'log', (ev) => ev.message.startsWith('[Command Extractor]'));
-            session.pause();
+                return null;
+            });
+            const [res] = await Promise.all([
+                pEvent(session, 'log', (ev) => ev.message.startsWith('[Command Extractor]')),
+                controller.continue()
+            ]);
+            await controller.pause();
             const ret = res.message.replace('[Command Extractor]', '');
             if (ret.startsWith('ERROR')) {
                 throw new Error(ret);
@@ -403,8 +447,8 @@ const Extractors = [
     {
         name: 'blocks',
         timeout: 60000,
-        async extract(target, frame) {
-            const blockInfoList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const blockInfoList = await wrapEvaluate(frame, () => {
                 const blockTypes = Minecraft.BlockTypes.getAll();
                 const result = {};
                 for (const blockType of blockTypes) {
@@ -470,8 +514,8 @@ const Extractors = [
                     }
                     result[blockType.id] = { properties, states, invalidStates, canBeWaterlogged };
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             const blocks = {};
             const blockProperties = {};
             const blockTags = {};
@@ -547,21 +591,21 @@ const Extractors = [
     {
         name: 'items',
         timeout: 60000,
-        async extract(target, frame) {
+        async extract({ target, frame }) {
             let ItemInfoList;
-            parseOrThrow(await frame.evaluate(() => {
+            await wrapEvaluate(frame, () => {
                 const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
                 const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
                 enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
                 globalThis.__item_extract_enchantments = enchantments;
                 return '"OK"';
-            }));
-            const length = parseOrThrow(await frame.evaluate(() => {
+            });
+            const length = await wrapEvaluate(frame, () => {
                 const itemTypes = Minecraft.ItemTypes.getAll();
                 globalThis.__item_extract_itemTypes = itemTypes;
                 return String(itemTypes.length);
-            }));
-            parseOrThrow(await frame.evaluate(() => {
+            });
+            await wrapEvaluate(frame, () => {
                 const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
                 const enchantments = globalThis.__item_extract_enchantments;
                 globalThis.__item_extract_dump = (itemType) => {
@@ -631,9 +675,9 @@ const Extractors = [
                     ];
                 };
                 return '"OK"';
-            }));
+            });
             try {
-                ItemInfoList = parseOrThrow(await frame.evaluate(() => {
+                ItemInfoList = await wrapEvaluate(frame, () => {
                     const result = {};
                     const itemTypes = globalThis.__item_extract_itemTypes;
                     const dump = globalThis.__item_extract_dump;
@@ -643,19 +687,19 @@ const Extractors = [
                             result[id] = value;
                         }
                     }
-                    return JSON.stringify(result);
-                }));
+                    return result;
+                });
             } catch (err) {
                 warn(`Cannot evaluate code for item registry: ${err.message}`);
                 ItemInfoList = {};
                 let corruptedCount = 0;
                 for (let i = 0; i < length; i++) {
                     try {
-                        const [id, value] = parseOrThrow(await frame.evaluate((index) => {
+                        const [id, value] = await wrapEvaluate(frame, (index) => {
                             const itemTypes = globalThis.__item_extract_itemTypes;
                             const dump = globalThis.__item_extract_dump;
-                            return JSON.stringify(dump(itemTypes[index]));
-                        }, i));
+                            return dump(itemTypes[index]);
+                        }, i);
                         if (value !== null) {
                             ItemInfoList[id] = value;
                         }
@@ -669,13 +713,13 @@ const Extractors = [
                     const removedItems = Object.keys(target.items).filter((k) => !(k in ItemInfoList));
                     for (const item of removedItems.splice(0, removedItems.length)) {
                         try {
-                            const [id, value] = parseOrThrow(await frame.evaluate((itemId) => {
+                            const [id, value] = await wrapEvaluate(frame, (itemId) => {
                                 const dump = globalThis.__item_extract_dump;
                                 const itemType = Minecraft.ItemTypes.get(itemId);
                                 if (!itemType) throw new Error(`Cannot find item ${itemId}`);
                                 if (itemType.id !== itemId) throw new Error(`Item id mismatched: ${itemId}`);
-                                return JSON.stringify(dump(itemType));
-                            }, item));
+                                return dump(itemType);
+                            }, item);
                             if (value !== null) {
                                 ItemInfoList[id] = value;
                             }
@@ -696,12 +740,12 @@ const Extractors = [
                 }
                 setStatus('');
             }
-            parseOrThrow(await frame.evaluate(() => {
+            await wrapEvaluate(frame, () => {
                 delete globalThis.__item_extract_enchantments;
                 delete globalThis.__item_extract_itemTypes;
                 delete globalThis.__item_extract_dump;
                 return '"OK"';
-            }));
+            });
             const itemIds = Object.keys(ItemInfoList).sort();
             const itemTags = {};
             itemIds.forEach((itemId) => {
@@ -724,14 +768,14 @@ const Extractors = [
     {
         name: 'entities',
         timeout: 10000,
-        async extract(target, frame) {
-            const EntityInfoList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const EntityInfoList = await wrapEvaluate(frame, () => {
                 const result = {};
                 for (const entityType of Minecraft.EntityTypes.getAll()) {
                     result[entityType.id] = {};
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             const entities = Object.keys(EntityInfoList).sort();
             target.entities = entities;
         }
@@ -739,14 +783,14 @@ const Extractors = [
     {
         name: 'effects',
         timeout: 10000,
-        async extract(target, frame) {
-            const EffectList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const EffectList = await wrapEvaluate(frame, () => {
                 const result = [];
                 for (const effectType of Minecraft.EffectTypes.getAll()) {
                     result.push(effectType.getName());
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             const effects = EffectList.sort();
             target.effects = effects;
         }
@@ -754,14 +798,14 @@ const Extractors = [
     {
         name: 'dimensions',
         timeout: 10000,
-        async extract(target, frame) {
-            const DimensionList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const DimensionList = await wrapEvaluate(frame, () => {
                 const result = [];
                 for (const dimensionType of Minecraft.DimensionTypes.getAll()) {
                     result.push(dimensionType.typeId);
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             const dimensions = DimensionList.sort();
             target.dimensions = dimensions;
         }
@@ -769,14 +813,14 @@ const Extractors = [
     {
         name: 'biomes',
         timeout: 10000,
-        async extract(target, frame) {
-            const BiomeList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const BiomeList = await wrapEvaluate(frame, () => {
                 const result = [];
                 for (const biomeType of Minecraft.BiomeTypes.getAll()) {
                     result.push(biomeType.id);
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             const biomes = BiomeList.sort();
             target.biomes = biomes;
         }
@@ -784,16 +828,16 @@ const Extractors = [
     {
         name: 'enchantments',
         timeout: 10000,
-        async extract(target, frame) {
-            const EnchantmentList = parseOrThrow(await frame.evaluate(() => {
+        async extract({ target, frame }) {
+            const EnchantmentList = await wrapEvaluate(frame, () => {
                 const result = {};
                 for (const enchantmentType of Minecraft.EnchantmentTypes.getAll()) {
                     result[enchantmentType.id] = {
                         maxLevel: enchantmentType.maxLevel
                     };
                 }
-                return JSON.stringify(result);
-            }));
+                return result;
+            });
             target.enchantments = sortObjectKey(EnchantmentList);
         }
     }
@@ -809,12 +853,13 @@ const ImportEnvironments = {
     MinecraftEditor: ['@minecraft/server-editor'],
     MinecraftDebugUtilities: ['@minecraft/debug-utilities']
 };
+
 /**
  * @param {MinecraftDebugSession} session
  */
-async function evaluateExtractors(cx, target, session) {
+async function evaluateExtractors(cx, target, session, controller) {
     const { coreVersion } = cx;
-    await session.pause();
+    await controller.pause();
     const topFrame = await session.getTopStack();
     await topFrame.evaluate((envKeys) => {
         Promise.allSettled(envKeys.map(
@@ -833,9 +878,9 @@ async function evaluateExtractors(cx, target, session) {
     }, [...Object.entries(ImportEnvironments)]);
     await Promise.all([
         pEvent(session, 'log', (ev) => ev.message.includes('###PREPARE_ENV_OK###')),
-        session.continue()
+        controller.continue()
     ]);
-    await session.pause();
+    await controller.pause();
     const defaultTimeout = session.connection.requestTimeout;
     const errors = [];
     for (const extractor of Extractors) {
@@ -843,14 +888,13 @@ async function evaluateExtractors(cx, target, session) {
         try {
             log(`Extracting ${extractor.name} from GameTest`);
             session.connection.requestTimeout = extractor.timeout || defaultTimeout;
-            await extractor.extract(target, topFrame, session, cx);
+            await extractor.extract({ target, frame: topFrame, session, controller, cx });
         } catch (err) {
             warn(`Failed to extract ${extractor.name}`, err);
             errors.push(err);
-            break;
         }
     }
-    await session.continue();
+    await controller.continue();
     if (errors.length) {
         throw new AggregateError(errors);
     }
@@ -866,20 +910,25 @@ function generateBehaviorPack(cx) {
     }
     mkdirSync(outPath);
     const fileMap = {};
-    options.staticFiles.forEach((e) => {
-        fileMap[e] = e;
-    });
-    options.versionRelatedFiles.forEach((e) => {
-        if (testMinecraftVersionInRange(coreVersion, ...e.range)) {
-            fileMap[e.target] = e.path;
+    options.files.forEach((e) => {
+        if (!e.range || testMinecraftVersionInRange(coreVersion, ...e.range)) {
+            fileMap[e.target] = e;
         }
     });
-    Object.entries(fileMap).forEach(([target, source]) => {
+    const breakpoints = [];
+    Object.entries(fileMap).forEach(([target, fileInfo]) => {
         const targetPath = resolvePath(outPath, target);
         mkdirSync(resolvePath(targetPath, '..'), { recursive: true });
-        cpSync(resolvePath(basePath, source), targetPath, { recursive: true });
+        cpSync(resolvePath(basePath, fileInfo.path), targetPath, { recursive: true });
+        if (fileInfo.breakpoints) {
+            breakpoints.push(...fileInfo.breakpoints);
+        }
     });
-    return { path: outPath, moduleUuid: options.moduleUuid };
+    return {
+        path: outPath,
+        moduleUuid: options.moduleUuid,
+        breakpoints
+    };
 }
 
 export default async function analyzeGameTestEnumsCached(cx) {
@@ -892,7 +941,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     if (!versionInfo.disableAdb) {
         device = await getDeviceOrWait();
     }
-    const { path: packPath, moduleUuid: targetModuleUuid } = generateBehaviorPack(cx);
+    const { path: packPath, moduleUuid: targetModuleUuid, breakpoints } = generateBehaviorPack(cx);
     if (cx.devBehaviorPackPath) {
         for (;;) {
             try {
@@ -935,7 +984,8 @@ export default async function analyzeGameTestEnumsCached(cx) {
     await pEvent(debugSession, 'protocol');
     debugSession.setStopOnException(false);
     debugSession.resume();
-    await evaluateExtractors(cx, target, debugSession);
+    const controller = createPauseController(debugSession, breakpoints);
+    await evaluateExtractors(cx, target, debugSession, controller);
     await doWSRelatedJobsCached(cx, wsSession, {});
     debugConn.close();
     server.close();

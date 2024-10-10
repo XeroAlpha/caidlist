@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.40.25",
+    "version": "1.21.50.20",
     "content": [],
     "sections": [
         {
@@ -21163,6 +21163,12 @@
                                                                             "Description": "",
                                                                         },
                                                                         {
+                                                                            "Name": "summon_event",
+                                                                            "Type": "String",
+                                                                            "Default Value": "",
+                                                                            "Description": "Event to invoke on each summoned entity on spawn",
+                                                                        },
+                                                                        {
                                                                             "Name": "target",
                                                                             "Type": "String",
                                                                             "Default Value": "self",
@@ -24489,7 +24495,7 @@
                                             "Name": "restriction_type",
                                             "Type": "String",
                                             "Default Value": "none",
-                                            "Description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- [Beta] \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
+                                            "Description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
                                         },
                                     ],
                                 },
@@ -24956,7 +24962,7 @@
                                             "Name": "field_of_view",
                                             "Type": "Decimal",
                                             "Default Value": "26",
-                                            "Description": "[Beta] Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
+                                            "Description": "Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
                                         },
                                         {
                                             "Name": "filters",
@@ -24968,19 +24974,19 @@
                                             "Name": "find_players_only",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "[Beta] Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
+                                            "Description": "Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
                                         },
                                         {
                                             "Name": "line_of_sight_obstruction_type",
                                             "Type": "String",
                                             "Default Value": "collision",
-                                            "Description": "[Beta] Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
+                                            "Description": "Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
                                         },
                                         {
                                             "Name": "look_at_locations",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "[Beta] A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
+                                            "Description": "A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
                                         },
                                         {
                                             "Name": "looked_at_cooldown",
@@ -24998,13 +25004,13 @@
                                             "Name": "not_looked_at_event",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "[Beta] Defines the event to trigger when no entity is found looking at the owner entity.",
+                                            "Description": "Defines the event to trigger when no entity is found looking at the owner entity.",
                                         },
                                         {
                                             "Name": "scale_fov_by_distance",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "[Beta] When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
+                                            "Description": "When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
                                         },
                                         {
                                             "Name": "search_radius",
@@ -25016,7 +25022,7 @@
                                             "Name": "set_target",
                                             "Type": "Boolean",
                                             "Default Value": "once_and_stop_scanning",
-                                            "Description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- [Beta] \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
+                                            "Description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
                                         },
                                     ],
                                 },
@@ -27902,6 +27908,24 @@
                                         },
                                     ],
                                 },
+                                {
+                                    "name": "spawn_category",
+                                    "id": "spawn_category",
+                                    "level": 5,
+                                    "content": [
+                                        "Sets the Spawn Category type of this entity. This entity will spawn with the rest of this Spawn Category type.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "The Spawn Category type of this entity, used to spawn the entity.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
                             ],
                         },
                         {
@@ -29203,6 +29227,10 @@
                                             "ID": "-31742338",
                                         },
                                         {
+                                            "JSON Name": "minecraft:can_attack_ghast",
+                                            "ID": "-1322879997",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:can_climb",
                                             "ID": "-550459594",
                                         },
@@ -29479,6 +29507,14 @@
                             "level": 4,
                             "content": [
                                 "When set, the entity will no longer visually rotate their body to match their facing direction.",
+                            ],
+                        },
+                        {
+                            "name": "minecraft:can_attack_ghast",
+                            "id": "minecraft:can_attack_ghast",
+                            "level": 4,
+                            "content": [
+                                "When set, allows this entity to target and attack Ghasts.",
                             ],
                         },
                         {
@@ -30331,5 +30367,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "929d23f1133fc8771c9ad7a0c5e147c8604e09aa",
+    "__OBJECTHASH__": "ecc780e0476215ee2e26c526b3383b6eec68b4d9",
 }

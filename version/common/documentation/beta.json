@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.40.25",
-    "__COMMITHASH__": "765ab22813fb6dfc1a32fa4653fbec9d03972d44",
-    "__MESSAGE__": "v1.21.40.25-preview",
+    "__VERSION__": "1.21.50.20",
+    "__COMMITHASH__": "79fdd11449c18040756d8ce0b97ee4d2d182ebaa",
+    "__MESSAGE__": "v1.21.50.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2121,6 +2121,9 @@
                                         {
                                             "name": "runtime_identifier",
                                         },
+                                        {
+                                            "name": "spawn_category",
+                                        },
                                     ],
                                 },
                                 {
@@ -2162,6 +2165,9 @@
                                 },
                                 {
                                     "name": "minecraft:body_rotation_blocked",
+                                },
+                                {
+                                    "name": "minecraft:can_attack_ghast",
                                 },
                                 {
                                     "name": "minecraft:can_climb",
@@ -2496,9 +2502,6 @@
                         },
                         {
                             "name": "Feature Rule Description",
-                        },
-                        {
-                            "name": "Feature Rule JSON File",
                         },
                         {
                             "name": "Filter Group",
@@ -3212,6 +3215,10 @@
         "orientation": "12 variant orientation",
         "output_lit_bit": "Determines if a Comparator's output is lit",
         "output_subtract_bit": "Determines if a Comparator is set to subtract output",
+        "pale_moss_carpet_side_east": "Determines the looks of a pale moss carpet east face",
+        "pale_moss_carpet_side_north": "Determines the looks of a pale moss carpet north face",
+        "pale_moss_carpet_side_south": "Determines the looks of a pale moss carpet south face",
+        "pale_moss_carpet_side_west": "Determines the looks of a pale moss carpet west face",
         "persistent_bit": "Determines if a leaf block is persistent",
         "portal_axis": "Determines the orientation of portal blocks",
         "powered_bit": "Shows when an observer or tripwire sends a redstone signal",
@@ -3238,6 +3245,7 @@
         "structure_void_type": "DEPRECATED - Determines which void mode to draw for structure blocks",
         "suspended_bit": "Indicates if a tripwire block is suspended",
         "tall_grass_type": "DEPRECATED - Determines the type of a tall grass block",
+        "tip": "Determines if the block is the last one in a directional chain of blocks",
         "toggle_bit": "Determines if a hopper block is active or not",
         "top_slot_bit": "Shows if a slab is the top half of the block or not",
         "torch_facing_direction": "Determines the block that a torch is attached to in relation to its position",
@@ -3489,6 +3497,7 @@
         "minecraft:cracked_stone_bricks": "",
         "minecraft:crafter": "",
         "minecraft:crafting_table": "",
+        "minecraft:creaking_heart": "",
         "minecraft:creeper_head": "",
         "minecraft:crimson_button": "",
         "minecraft:crimson_door": "",
@@ -4083,6 +4092,26 @@
         "minecraft:oxidized_double_cut_copper_slab": "",
         "minecraft:packed_ice": "",
         "minecraft:packed_mud": "",
+        "minecraft:pale_hanging_moss": "",
+        "minecraft:pale_moss_block": "",
+        "minecraft:pale_moss_carpet": "",
+        "minecraft:pale_oak_button": "",
+        "minecraft:pale_oak_door": "",
+        "minecraft:pale_oak_double_slab": "",
+        "minecraft:pale_oak_fence": "",
+        "minecraft:pale_oak_fence_gate": "",
+        "minecraft:pale_oak_hanging_sign": "",
+        "minecraft:pale_oak_leaves": "",
+        "minecraft:pale_oak_log": "",
+        "minecraft:pale_oak_planks": "",
+        "minecraft:pale_oak_pressure_plate": "",
+        "minecraft:pale_oak_sapling": "",
+        "minecraft:pale_oak_slab": "",
+        "minecraft:pale_oak_stairs": "",
+        "minecraft:pale_oak_standing_sign": "",
+        "minecraft:pale_oak_trapdoor": "",
+        "minecraft:pale_oak_wall_sign": "",
+        "minecraft:pale_oak_wood": "",
         "minecraft:pearlescent_froglight": "",
         "minecraft:peony": "",
         "minecraft:petrified_oak_double_slab": "",
@@ -4323,6 +4352,8 @@
         "minecraft:stripped_mangrove_wood": "",
         "minecraft:stripped_oak_log": "",
         "minecraft:stripped_oak_wood": "",
+        "minecraft:stripped_pale_oak_log": "",
+        "minecraft:stripped_pale_oak_wood": "",
         "minecraft:stripped_spruce_log": "",
         "minecraft:stripped_spruce_wood": "",
         "minecraft:stripped_warped_hyphae": "",
@@ -4504,6 +4535,7 @@
         "cod": "0x00009072 (0x112)",
         "command_block_minecart": "0x00524388 (0x100)",
         "cow": "0x00004875 (0x11)",
+        "creaking": "0x00002962 (0x146)",
         "creeper": "0x00002849 (0x33)",
         "dolphin": "0x00008991 (0x31)",
         "donkey": "0x02118424 (0x24)",
@@ -4768,6 +4800,11 @@
                     "type": "Identifier String",
                     "defaultValue": "",
                     "description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
+                },
+                {
+                    "name": "minecraft:item_visual",
+                    "type": "Identifier String",
+                    "defaultValue": "",
                 },
                 {
                     "name": "minecraft:light_dampening",
@@ -11215,6 +11252,12 @@
                                     "description": "",
                                 },
                                 {
+                                    "name": "summon_event",
+                                    "type": "String",
+                                    "defaultValue": "",
+                                    "description": "Event to invoke on each summoned entity on spawn",
+                                },
+                                {
                                     "name": "target",
                                     "type": "String",
                                     "defaultValue": "self",
@@ -13760,7 +13803,7 @@
                     "name": "restriction_type",
                     "type": "String",
                     "defaultValue": "none",
-                    "description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- [Beta] \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
+                    "description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
                 },
             ],
         },
@@ -14049,7 +14092,7 @@
                     "name": "field_of_view",
                     "type": "Decimal",
                     "defaultValue": "26",
-                    "description": "[Beta] Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
+                    "description": "Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
                 },
                 {
                     "name": "filters",
@@ -14061,19 +14104,19 @@
                     "name": "find_players_only",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "[Beta] Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
+                    "description": "Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
                 },
                 {
                     "name": "line_of_sight_obstruction_type",
                     "type": "String",
                     "defaultValue": "collision",
-                    "description": "[Beta] Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
+                    "description": "Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
                 },
                 {
                     "name": "look_at_locations",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "[Beta] A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
+                    "description": "A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
                 },
                 {
                     "name": "looked_at_cooldown",
@@ -14091,13 +14134,13 @@
                     "name": "not_looked_at_event",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "[Beta] Defines the event to trigger when no entity is found looking at the owner entity.",
+                    "description": "Defines the event to trigger when no entity is found looking at the owner entity.",
                 },
                 {
                     "name": "scale_fov_by_distance",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "[Beta] When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
+                    "description": "When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
                 },
                 {
                     "name": "search_radius",
@@ -14109,7 +14152,7 @@
                     "name": "set_target",
                     "type": "Boolean",
                     "defaultValue": "once_and_stop_scanning",
-                    "description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- [Beta] \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
+                    "description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
                 },
             ],
         },
@@ -16951,6 +16994,8 @@
     "molangQueryExperimental": {
         "query.client_max_render_distance": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.",
         "query.client_memory_tier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the client RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the Client (Resource Packs) only.",
+        "query.last_input_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
         "query.server_memory_tier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the server RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the server side (Behavior Packs) only.",
+        "query.touch_only_affects_hotbar": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.",
     },
 }
