@@ -190,45 +190,57 @@ function restoreHiddenEntries(enumMaps) {
     return enumMaps;
 }
 
+let stGlobalCache;
 export async function fetchStandardizedTranslation() {
-    let cache;
+    if (stGlobalCache) return stGlobalCache;
+    let cache = cachedOutput('version.common.wiki.standardized_translation');
     try {
         cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
-            const result = {};
+            const errors = [];
+            let result = {};
             await forEachArray(dataPages, async (e) => {
                 log(`Fetching ${e.source}:${e.name}`);
-                const source = sources[e.source];
-                const resolver = resolvers[e.resolver];
-                const url = source.getUrl(e.name);
-                const rawUrl = source.getRawUrl(e.name);
-                const content = await fetchFile(rawUrl);
-                const data = resolver(content);
-                const refComment = `Reference: ${url}`;
-                if (e.target) {
-                    result[e.target] = data;
-                    setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
-                } else {
-                    const prefix = e.prefix || '';
-                    forEachObject(data, (v, k) => {
-                        const resultKey = `${prefix}${k}`;
-                        if (e.ignoreIfExists && (resultKey in result)) {
-                            return;
-                        }
-                        result[resultKey] = v;
-                        setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
-                    });
+                try {
+                    const source = sources[e.source];
+                    const resolver = resolvers[e.resolver];
+                    const url = source.getUrl(e.name);
+                    const rawUrl = source.getRawUrl(e.name);
+                    const content = await fetchFile(rawUrl);
+                    const data = resolver(content);
+                    const refComment = `Reference: ${url}`;
+                    if (e.target) {
+                        result[e.target] = data;
+                        setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
+                    } else {
+                        const prefix = e.prefix || '';
+                        forEachObject(data, (v, k) => {
+                            const resultKey = `${prefix}${k}`;
+                            if (e.ignoreIfExists && (resultKey in result)) {
+                                return;
+                            }
+                            result[resultKey] = v;
+                            setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
+                        });
+                    }
+                } catch (err) {
+                    errors.push(err);
                 }
             });
-            return postprocessEnumMap(result);
+            result = postprocessEnumMap(result);
+            if (errors.length > 0) {
+                CommentJSON.assign(cache, result);
+                throw new AggregateError(errors);
+            }
+            return result;
         }, 24 * 60 * 60 * 1000);
     } catch (err) {
-        cache = cachedOutput('version.common.wiki.standardized_translation');
         if (!cache) {
             throw err;
         }
         warn('Failed to fetch standardized translation, use cache instead', err);
     }
     const restoredResult = restoreHiddenEntries(cache);
+    stGlobalCache = restoredResult;
     return restoredResult;
 }
 
