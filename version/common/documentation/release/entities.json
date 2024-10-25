@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.30.3",
+    "version": "1.21.40.3",
     "content": [],
     "sections": [
         {
@@ -15904,7 +15904,7 @@
                                             "Name": "projectile_def",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor must be a projectile.",
+                                            "Description": "Actor definition to use as projectile for the ranged attack. The actor must be a projectile. This field is required for the goal to be usable.",
                                         },
                                         {
                                             "Name": "ranged_fov",
@@ -18195,7 +18195,7 @@
                             "id": "minecraft:behavior.move_towards_dwelling_restriction",
                             "level": 4,
                             "content": [
-                                "Allows mobs with the dweller component to move toward their Village area that the mob should be restricted to.",
+                                "Allows entities with the \"minecraft:dweller\" component to move toward their Village area that the entity should be restricted to.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -18203,7 +18203,7 @@
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "This multiplier modifies the entity's speed when moving towards it's restriction.",
+                                            "Description": "This multiplier modifies the entity's speed when moving towards its restriction.",
                                         },
                                     ],
                                 },
@@ -18214,7 +18214,8 @@
                             "id": "minecraft:behavior.move_towards_home_restriction",
                             "level": 4,
                             "content": [
-                                "Allows mobs with the home component to move toward their pre-defined area that the mob should be restricted to.",
+                                "Allows entities with a \"minecraft:home\" component to move towards their home position.",
+                                "If \"restriction_radius\" is set, entities will be able to run this behavior only if outside of it.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -18222,7 +18223,7 @@
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "This multiplier modifies the entity's speed when moving towards it's restriction.",
+                                            "Description": "This multiplier modifies the entity's speed when moving towards its restriction.",
                                         },
                                     ],
                                 },
@@ -18919,14 +18920,6 @@
                                         },
                                     ],
                                 },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.peek",
-                            "id": "minecraft:behavior.peek",
-                            "level": 4,
-                            "content": [
-                                "Allows the mob to peek out. This is what the shulker uses to look out of its shell.",
                             ],
                         },
                         {
@@ -23359,7 +23352,7 @@
                             "id": "minecraft:damage_sensor",
                             "level": 4,
                             "content": [
-                                "Defines what events to call when this entity is damaged by specific entities or items.",
+                                "\"Defines what events to call when this entity is damaged by specific entities or items.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -23368,7 +23361,7 @@
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": [
-                                                "List of triggers with the events to call when taking specific kinds of damage.",
+                                                "List of triggers with the events to call when taking specific kinds of damage.\"",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -23381,32 +23374,32 @@
                                                         {
                                                             "Name": "damage_modifier",
                                                             "Type": "Decimal",
-                                                            "Default Value": "0.0",
-                                                            "Description": "A modifier that adds to/removes from the base damage from the damage cause. It does not reduce damage to less than 0.",
+                                                            "Default Value": "0.00",
+                                                            "Description": "A modifier that adds/removes to the base damage received from the specified damage cause. It does not reduce damage to less than 0.",
                                                         },
                                                         {
                                                             "Name": "damage_multiplier",
                                                             "Type": "Decimal",
-                                                            "Default Value": "1.0",
-                                                            "Description": "A multiplier that modifies the base damage from the damage cause. If deals_damage is true the multiplier can only reduce the damage the entity will take to a minimum of 1.",
+                                                            "Default Value": "1.00",
+                                                            "Description": "A multiplier that modifies the base damage received from the specified damage cause. If \"deals_damage\" is true the multiplier can only reduce the damage the entity will take to a minimum of 1.",
                                                         },
                                                         {
                                                             "Name": "deals_damage",
                                                             "Type": "Boolean",
-                                                            "Default Value": "true",
-                                                            "Description": "If true, the damage dealt to the entity will take away health from it, set to false to make the entity ignore that damage.",
+                                                            "Default Value": "yes",
+                                                            "Description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity.                                          \\n- \"no\", received damage is not applied to the entity.                                          \\n- \"no_but_side_effects_apply\", received damage is not applied to the entity, but the side effects of the attack are. This means that the attacker's weapon loses durability, enchantment side effects are applied, and so on.",
                                                         },
                                                         {
                                                             "Name": "on_damage",
                                                             "Type": "JSON Object",
                                                             "Default Value": "",
-                                                            "Description": "Specifies filters for entity definitions and events.",
+                                                            "Description": "Defines which entities the trigger applies to, and which, if any, event to emit when damaged.",
                                                         },
                                                         {
                                                             "Name": "on_damage_sound_event",
                                                             "Type": "String",
                                                             "Default Value": "",
-                                                            "Description": "Defines what sound to play, if any, when the on_damage filters are met.",
+                                                            "Description": "Defines what sound to play, if any, when the \"on_damage\" filters are met.",
                                                         },
                                                     ],
                                                 },
@@ -23525,6 +23518,14 @@
                                         },
                                     ],
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:dimension_bound",
+                            "id": "minecraft:dimension_bound",
+                            "level": 4,
+                            "content": [
+                                "Prevents the entity from changing dimension through portals.",
                             ],
                         },
                         {
@@ -23950,6 +23951,12 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "allow_underwater",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the explosion will affect blocks and entities under water.",
+                                        },
+                                        {
                                             "Name": "breaks_blocks",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -23960,6 +23967,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, blocks in the explosion radius will be set on fire.",
+                                        },
+                                        {
+                                            "Name": "damage_scaling",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.000000",
+                                            "Description": "A scale factor applied to the explosion's damage to entities. A value of 0 prevents the explosion from dealing any damage. Negative values cause the explosion to heal entities instead.",
                                         },
                                         {
                                             "Name": "destroy_affected_by_griefing",
@@ -23986,16 +23999,46 @@
                                             "Description": "If true, the fuse is already lit when this component is added to the entity.",
                                         },
                                         {
+                                            "Name": "knockback_scaling",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.000000",
+                                            "Description": "A scale factor applied to the knockback force caused by the explosion.",
+                                        },
+                                        {
                                             "Name": "max_resistance",
                                             "Type": "Decimal",
                                             "Default Value": "3.40282e+38",
                                             "Description": "A blocks explosion resistance will be capped at this value when an explosion occurs.",
                                         },
                                         {
+                                            "Name": "negates_fall_damage",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Defines whether the explosion should apply fall damage negation to Players above the point of collision.",
+                                        },
+                                        {
+                                            "Name": "particle_effect",
+                                            "Type": "String",
+                                            "Default Value": "explosion",
+                                            "Description": "The name of the particle effect to use. The accepted strings are 'explosion', 'wind_burst', or 'breeze_wind_burst'.",
+                                        },
+                                        {
                                             "Name": "power",
                                             "Type": "Decimal",
                                             "Default Value": "3",
                                             "Description": "The radius of the explosion in blocks and the amount of damage the explosion deals.",
+                                        },
+                                        {
+                                            "Name": "sound_effect",
+                                            "Type": "String",
+                                            "Default Value": "explode",
+                                            "Description": "The name of the sound effect played when the explosion triggers.",
+                                        },
+                                        {
+                                            "Name": "toggles_blocks",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the explosion will toggle blocks in the explosion radius.",
                                         },
                                     ],
                                 },
@@ -24426,7 +24469,7 @@
                             "id": "minecraft:home",
                             "level": 4,
                             "content": [
-                                "Saves a home pos for when the the entity is spawned.",
+                                "Saves a home position for when the the entity is spawned.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -24434,13 +24477,19 @@
                                             "Name": "home_block_list",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "Optional block list that the home position will be associated with. If any of the blocks no longer exist at that position, the home restriction is removed. Example syntax: minecraft:sand.  Not supported: minecraft:sand:1",
+                                            "Description": "Optional list of blocks that can be considered a valid home. If no such block longer exists at that position,\t\t\t\t\t\t\t\t\t\t\tthe home restriction is removed. Example syntax: minecraft:sand. Not supported: minecraft:sand:1.",
                                         },
                                         {
                                             "Name": "restriction_radius",
                                             "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "The radius that the entity will be restricted to in relation to its home",
+                                            "Default Value": "0",
+                                            "Description": "Optional radius that the entity will be restricted to in relation to its home.",
+                                        },
+                                        {
+                                            "Name": "restriction_type",
+                                            "Type": "String",
+                                            "Default Value": "none",
+                                            "Description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- [Beta] \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
                                         },
                                     ],
                                 },
@@ -24895,49 +24944,79 @@
                             ],
                         },
                         {
-                            "name": "minecraft:lookat",
-                            "id": "minecraft:lookat",
+                            "name": "minecraft:looked_at",
+                            "id": "minecraft:looked_at",
                             "level": 4,
                             "content": [
-                                "Defines the behavior when another entity looks at this entity.",
+                                "Defines the behavior when another entity looks at the owner entity.",
                                 {
                                     "type": "table",
                                     "rows": [
                                         {
-                                            "Name": "allow_invulnerable",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, invulnerable entities (e.g. Players in creative mode) are considered valid targets.",
+                                            "Name": "field_of_view",
+                                            "Type": "Decimal",
+                                            "Default Value": "26",
+                                            "Description": "[Beta] Defines, in degrees, the width of the field of view for entities looking at the owner entity. If \"scale_fov_by_distance\" is set to true, this value corresponds to the field of view at a distance of one block between the entities.",
                                         },
                                         {
                                             "Name": "filters",
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
-                                            "Description": "Defines the entities that can trigger this component.",
+                                            "Description": "Defines which entities are considered when searching for entities looking at the owner entity.",
                                         },
                                         {
-                                            "Name": "look_cooldown",
+                                            "Name": "find_players_only",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "[Beta] Limits the search to only the nearest Player that meets the specified \"filters\" rather than all nearby entities.",
+                                        },
+                                        {
+                                            "Name": "line_of_sight_obstruction_type",
+                                            "Type": "String",
+                                            "Default Value": "collision",
+                                            "Description": "[Beta] Defines the type of block shape used to check for line of sight obstructions. Valid values: \"outline\", \"collision\", \"collision_for_camera\".",
+                                        },
+                                        {
+                                            "Name": "look_at_locations",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "[Beta] A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
+                                        },
+                                        {
+                                            "Name": "looked_at_cooldown",
                                             "Type": "Range [a, b]",
                                             "Default Value": "[0, 0]",
-                                            "Description": "The range for the random amount of time during which the entity is 'cooling down' and won't get angered or look for a target.",
+                                            "Description": "Specifies the range for the random number of seconds that must pass before the owner entity can check again for entities looking at it, after detecting an entity looking at it.",
                                         },
                                         {
-                                            "Name": "look_event",
+                                            "Name": "looked_at_event",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The event identifier to run when the entities specified in filters look at this entity.",
+                                            "Description": "Defines the event to trigger when an entity is detected looking at the owner entity.",
+                                        },
+                                        {
+                                            "Name": "not_looked_at_event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "[Beta] Defines the event to trigger when no entity is found looking at the owner entity.",
+                                        },
+                                        {
+                                            "Name": "scale_fov_by_distance",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "[Beta] When true, the field of view narrows as the distance between the owner entity and the entity looking at it increases. This ensures that the width of the view cone remains somewhat constant towards the owner entity position, regardless of distance.",
                                         },
                                         {
                                             "Name": "search_radius",
                                             "Type": "Decimal",
                                             "Default Value": "10",
-                                            "Description": "Maximum distance this entity will look for another entity looking at it.",
+                                            "Description": "Maximum distance the owner entity will search for entities looking at it.",
                                         },
                                         {
                                             "Name": "set_target",
                                             "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, this entity will set the attack target as the entity that looked at it.",
+                                            "Default Value": "once_and_stop_scanning",
+                                            "Description": "Defines if and how the owner entity will set entities that are looking at it as its combat targets. Valid values:                                          \\n- \"never\", looking entities are never set as targets, but events are emitted.                                          \\n- \"once_and_stop_scanning\", the first detected looking entity is set as target. Scanning and event emission is suspended if and until the owner entity has a target.                                          \\n- [Beta] \"once_and_keep_scanning\", the first detected looking entity is set as target. Scanning and event emission continues.s",
                                         },
                                     ],
                                 },
@@ -26385,6 +26464,12 @@
                                             "Description": "Determines the velocity of the projectile",
                                         },
                                         {
+                                            "Name": "reflect_immunity",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "During the specified time, in seconds, the projectile cannot be reflected by hitting it",
+                                        },
+                                        {
                                             "Name": "reflect_on_hurt",
                                             "Type": "Boolean",
                                             "Default Value": "false",
@@ -27595,6 +27680,14 @@
                             ],
                         },
                         {
+                            "name": "minecraft:transient",
+                            "id": "minecraft:transient",
+                            "level": 4,
+                            "content": [
+                                "An entity with this component will NEVER persist, and forever disappear when unloaded.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:trusting",
                             "id": "minecraft:trusting",
                             "level": 4,
@@ -28282,10 +28375,6 @@
                                             "ID": "-169886247",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.peek",
-                                            "ID": "211304085",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.pet_sleep_with_owner",
                                             "ID": "1379392240",
                                         },
@@ -28730,6 +28819,10 @@
                                             "ID": "1674909940",
                                         },
                                         {
+                                            "JSON Name": "minecraft:dimension_bound",
+                                            "ID": "-1843592159",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:drying_out_timer",
                                             "ID": "2113510784",
                                         },
@@ -28846,8 +28939,8 @@
                                             "ID": "893445039",
                                         },
                                         {
-                                            "JSON Name": "minecraft:lookat",
-                                            "ID": "-1329707008",
+                                            "JSON Name": "minecraft:looked_at",
+                                            "ID": "-1189178052",
                                         },
                                         {
                                             "JSON Name": "minecraft:managed_wandering_trader",
@@ -29044,6 +29137,10 @@
                                         {
                                             "JSON Name": "minecraft:transformation",
                                             "ID": "-457894577",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:transient",
+                                            "ID": "-413020544",
                                         },
                                         {
                                             "JSON Name": "minecraft:trusting",
@@ -30234,5 +30331,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "418123411f0b327c0fd39ede7bbf24cefd850ba6",
+    "__OBJECTHASH__": "c2065170656e5e950a0f40c704ce65aea1492155",
 }

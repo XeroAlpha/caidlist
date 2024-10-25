@@ -1,0 +1,216 @@
+{
+    "title": "CLIENT BIOMES DOCUMENTATION",
+    "version": "1.21.40.3",
+    "content": [],
+    "sections": [
+        {
+            "name": "Overview",
+            "id": "Overview",
+            "level": 1,
+            "content": [
+                "Minecraft client_biome files define client-side settings for biomes in resource packs.",
+                "This is the new preferred location for per-biome settings that used to be in biomes_client.json.",
+                "(As of base game version 1.21.40, biomes_client.json is no longer loaded from built-in Vanilla resource packs. That file will still be loaded for other content regardless of version, and worlds using older base game versions will also still use it.)",
+                "These files are not part of the 'Custom Biomes' experiment and do not cause biome definitions to exist on their own, but they can be used to customize client-side settings of custom biomes.",
+            ],
+        },
+        {
+            "name": "JSON Format",
+            "id": "JSON Format",
+            "level": 1,
+            "content": [
+                "Here is a sample client_biome file.",
+                {
+                    "type": "code",
+                    "content": [
+                        "{",
+                        "  \"format_version\": \"1.21.40\",",
+                        "  \"minecraft:client_biome\": {",
+                        "    \"description\": {",
+                        "      \"identifier\": \"the_end\"",
+                        "    },",
+                        "    \"components\": {",
+                        "      \"minecraft:sky_color\": {",
+                        "        \"sky_color\": \"#000000\"",
+                        "      },",
+                        "      \"minecraft:fog_appearance\": {",
+                        "        \"fog_identifier\": \"minecraft:fog_the_end\"",
+                        "      },",
+                        "      \"minecraft:water_appearance\": {",
+                        "        \"surface_color\": \"#62529e\"",
+                        "      }",
+                        "    }",
+                        "  }",
+                        "}",
+                    ],
+                },
+            ],
+        },
+        {
+            "name": "Schema",
+            "id": "Schema",
+            "level": 1,
+            "content": [],
+            "sections": [
+                {
+                    "name": "Client Biome Components",
+                    "id": "Client Biome Components",
+                    "level": 2,
+                    "content": [
+                        "Any components that this Client Biome uses",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "minecraft:fog_appearance",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the fog settings used during rendering. Biomes without this component will have default fog settings.",
+                                },
+                                {
+                                    "Name": "minecraft:sky_color",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the sky color used during rendering. Biomes without this component will have default sky color behavior.",
+                                },
+                                {
+                                    "Name": "minecraft:water_appearance",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the water surface color used during rendering. Biomes without this component will have default water surface color behavior.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Client Biome Definition",
+                    "id": "Client Biome Definition",
+                    "level": 2,
+                    "content": [
+                        "Contains a description and components to define a Client Biome.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "components",
+                                    "Type": "Object of type Client Biome Components",
+                                    "Required?": "Required",
+                                    "Description": "Components for this Client Biome.",
+                                },
+                                {
+                                    "Name": "description",
+                                    "Type": "Object of type Client Biome Description",
+                                    "Required?": "Required",
+                                    "Description": "Non-component settings, including the Client Biome name.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Client Biome Description",
+                    "id": "Client Biome Description",
+                    "level": 2,
+                    "content": [
+                        "Contains non-component settings for a Client Biome.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "The name of the Client Biome, used by other features like the '/locate biome' command. Must match the name of a Biome defined by the game or a behavior pack.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Client Biome JSON File",
+                    "id": "Client Biome JSON File",
+                    "level": 2,
+                    "content": [
+                        "Contains a format version and a Client Biome definition",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Version of the JSON schema used by this file",
+                                },
+                                {
+                                    "Name": "minecraft:client_biome",
+                                    "Type": "Object of type Client Biome Definition",
+                                    "Required?": "Required",
+                                    "Description": "A single Client Biome definition, containing rendering or sound settings related to a Biome defined by the game or a behavior pack",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:fog_appearance",
+                    "id": "minecraft:fog_appearance",
+                    "level": 2,
+                    "content": [
+                        "Set the fog settings used during rendering. Biomes without this component will have default fog settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "fog_identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of fog definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:sky_color",
+                    "id": "minecraft:sky_color",
+                    "level": 2,
+                    "content": [
+                        "Set the sky color used during rendering. Biomes without this component will have default sky color behavior.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "sky_color",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Required",
+                                    "Description": "RGB color of the sky",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:water_appearance",
+                    "id": "minecraft:water_appearance",
+                    "level": 2,
+                    "content": [
+                        "Set the water surface color used during rendering. Biomes without this component will have default water surface color behavior.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "surface_color",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Required",
+                                    "Description": "RGB color of the water surface",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    "__OBJECTHASH__": "70300570e759b5a2c25c97766c249817f86fa21f",
+}
