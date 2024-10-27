@@ -1,6 +1,6 @@
 {
-    "packageVersion": "1.21.50.24",
-    "protocolVersion": 4,
+    "packageVersion": "1.21.50.25",
+    "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -7473,6 +7473,28 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.IButtonPushAfterEventSignal",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ButtonState": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Pressed": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Pressed",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Released": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Released",
+                                        },
+                                        "readOnly": true,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -18107,6 +18129,28 @@
                             },
                             "configurable": false,
                         },
+                        "InputButton": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Jump": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Jump",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Sneak": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Sneak",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "InputInfo": {
                             "value": {
                                 "type": "function",
@@ -18125,6 +18169,22 @@
                                                 },
                                             },
                                             "enumerableProperties": {
+                                                "getButtonState": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getMovementVector": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "lastInputModeUsed": {
                                                     "getter": {
                                                         "type": "function",
@@ -22157,6 +22217,96 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.PlayerBreakBlockBeforeEventSignal",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "subscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "unsubscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerButtonInputAfterEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerButtonInputAfterEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "button": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
+                                                },
+                                                "newButtonState": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
+                                                },
+                                                "player": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerButtonInputAfterEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerButtonInputAfterEventSignal": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerButtonInputAfterEventSignal",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerButtonInputAfterEventSignal",
                                                     },
                                                 },
                                             },
@@ -26897,6 +27047,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "playerButtonInput": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "playerDimensionChange": {
                                                     "getter": {
                                                         "type": "function",
@@ -30565,6 +30723,9 @@
         "Minecraft.ButtonPushAfterEventSignal.prototype",
         "Minecraft.ButtonPushAfterEventSignal.prototype.[[Prototype]]",
         "Minecraft.ButtonPushAfterEventSignal.prototype.constructor",
+        "Minecraft.ButtonState",
+        "Minecraft.ButtonState.Pressed",
+        "Minecraft.ButtonState.Released",
         "Minecraft.Camera",
         "Minecraft.Camera.prototype",
         "Minecraft.Camera.prototype.clear",
@@ -31992,9 +32153,14 @@
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.constructor",
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.subscribe",
         "Minecraft.IPlayerSpawnAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.InputButton",
+        "Minecraft.InputButton.Jump",
+        "Minecraft.InputButton.Sneak",
         "Minecraft.InputInfo",
         "Minecraft.InputInfo.prototype",
         "Minecraft.InputInfo.prototype.constructor",
+        "Minecraft.InputInfo.prototype.getButtonState",
+        "Minecraft.InputInfo.prototype.getMovementVector",
         "Minecraft.InputInfo.prototype.lastInputModeUsed.[[Get]]",
         "Minecraft.InputInfo.prototype.touchOnlyAffectsHotbar.[[Get]]",
         "Minecraft.InputMode",
@@ -32523,6 +32689,17 @@
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.constructor",
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.subscribe",
         "Minecraft.PlayerBreakBlockBeforeEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerButtonInputAfterEvent",
+        "Minecraft.PlayerButtonInputAfterEvent.prototype",
+        "Minecraft.PlayerButtonInputAfterEvent.prototype.button",
+        "Minecraft.PlayerButtonInputAfterEvent.prototype.constructor",
+        "Minecraft.PlayerButtonInputAfterEvent.prototype.newButtonState",
+        "Minecraft.PlayerButtonInputAfterEvent.prototype.player.[[Get]]",
+        "Minecraft.PlayerButtonInputAfterEventSignal",
+        "Minecraft.PlayerButtonInputAfterEventSignal.prototype",
+        "Minecraft.PlayerButtonInputAfterEventSignal.prototype.constructor",
+        "Minecraft.PlayerButtonInputAfterEventSignal.prototype.subscribe",
+        "Minecraft.PlayerButtonInputAfterEventSignal.prototype.unsubscribe",
         "Minecraft.PlayerCursorInventoryComponent",
         "Minecraft.PlayerCursorInventoryComponent.[[Prototype]]",
         "Minecraft.PlayerCursorInventoryComponent.componentId",
@@ -33114,6 +33291,7 @@
         "Minecraft.WorldAfterEvents.prototype.messageReceive.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.pistonActivate.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerBreakBlock.[[Get]]",
+        "Minecraft.WorldAfterEvents.prototype.playerButtonInput.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerDimensionChange.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerEmote.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerGameModeChange.[[Get]]",
@@ -40165,6 +40343,23 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:chalkboard": {
+            "properties": [
+                {
+                    "name": "direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:board",
+            "canBeWaterlogged": true,
+        },
         "minecraft:chemical_heat": {
             "properties": [],
             "invalidStates": [],
@@ -40963,6 +41158,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:chiseled_resin_bricks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:chiseled_sandstone": {
             "properties": [
                 {
@@ -41106,6 +41307,12 @@
             "canBeWaterlogged": false,
         },
         "minecraft:client_request_placeholder_block": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:closed_eyeblossom": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -42110,6 +42317,14 @@
             "properties": [
                 {
                     "name": "active",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "natural",
                     "validValues": [
                         false,
                         true,
@@ -61437,6 +61652,12 @@
             "itemId": "<same>",
             "canBeWaterlogged": false,
         },
+        "minecraft:open_eyeblossom": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
         "minecraft:orange_candle": {
             "properties": [
                 {
@@ -68777,6 +68998,201 @@
             "invalidStates": [],
             "itemId": "<same>",
             "canBeWaterlogged": false,
+        },
+        "minecraft:resin_block": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:resin_brick_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:resin_brick_slab",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:resin_brick_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:resin_brick_stairs": {
+            "properties": [
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "weirdo_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:resin_brick_wall": {
+            "properties": [
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
+        },
+        "minecraft:resin_bricks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": false,
+        },
+        "minecraft:resin_clump": {
+            "properties": [
+                {
+                    "name": "multi_face_direction_bits",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32,
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40,
+                        41,
+                        42,
+                        43,
+                        44,
+                        45,
+                        46,
+                        47,
+                        48,
+                        49,
+                        50,
+                        51,
+                        52,
+                        53,
+                        54,
+                        55,
+                        56,
+                        57,
+                        58,
+                        59,
+                        60,
+                        61,
+                        62,
+                        63,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "canBeWaterlogged": true,
         },
         "minecraft:respawn_anchor": {
             "properties": [
@@ -77955,6 +78371,7 @@
                     "minecraft:calibrated_sculk_sensor": 0,
                     "minecraft:campfire": 0,
                     "minecraft:carved_pumpkin": 0,
+                    "minecraft:chalkboard": 0,
                     "minecraft:cherry_door": 0,
                     "minecraft:cherry_fence_gate": 0,
                     "minecraft:cherry_trapdoor": 0,
@@ -78891,6 +79308,8 @@
                     "minecraft:red_nether_brick_slab": "bottom",
                     "minecraft:red_sandstone_double_slab": "bottom",
                     "minecraft:red_sandstone_slab": "bottom",
+                    "minecraft:resin_brick_double_slab": "bottom",
+                    "minecraft:resin_brick_slab": "bottom",
                     "minecraft:sandstone_double_slab": "bottom",
                     "minecraft:sandstone_slab": "bottom",
                     "minecraft:smooth_quartz_double_slab": "bottom",
@@ -79031,7 +79450,19 @@
                 ],
                 "defaultValue": {
                     "minecraft:glow_lichen": 63,
+                    "minecraft:resin_clump": 0,
                     "minecraft:sculk_vein": 0,
+                },
+            },
+        ],
+        "natural": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {
+                    "minecraft:creaking_heart": false,
                 },
             },
         ],
@@ -80273,6 +80704,7 @@
                     "minecraft:quartz_stairs": false,
                     "minecraft:red_nether_brick_stairs": false,
                     "minecraft:red_sandstone_stairs": false,
+                    "minecraft:resin_brick_stairs": false,
                     "minecraft:sandstone_stairs": false,
                     "minecraft:smooth_quartz_stairs": false,
                     "minecraft:smooth_red_sandstone_stairs": false,
@@ -80403,6 +80835,7 @@
                     "minecraft:prismarine_wall": "none",
                     "minecraft:red_nether_brick_wall": "none",
                     "minecraft:red_sandstone_wall": "none",
+                    "minecraft:resin_brick_wall": "none",
                     "minecraft:sandstone_wall": "none",
                     "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
@@ -80440,6 +80873,7 @@
                     "minecraft:prismarine_wall": "none",
                     "minecraft:red_nether_brick_wall": "none",
                     "minecraft:red_sandstone_wall": "none",
+                    "minecraft:resin_brick_wall": "none",
                     "minecraft:sandstone_wall": "none",
                     "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
@@ -80477,6 +80911,7 @@
                     "minecraft:prismarine_wall": "none",
                     "minecraft:red_nether_brick_wall": "none",
                     "minecraft:red_sandstone_wall": "none",
+                    "minecraft:resin_brick_wall": "none",
                     "minecraft:sandstone_wall": "none",
                     "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
@@ -80514,6 +80949,7 @@
                     "minecraft:prismarine_wall": "none",
                     "minecraft:red_nether_brick_wall": "none",
                     "minecraft:red_sandstone_wall": "none",
+                    "minecraft:resin_brick_wall": "none",
                     "minecraft:sandstone_wall": "none",
                     "minecraft:stone_brick_wall": "none",
                     "minecraft:tuff_brick_wall": "none",
@@ -80550,6 +80986,7 @@
                     "minecraft:prismarine_wall": false,
                     "minecraft:red_nether_brick_wall": false,
                     "minecraft:red_sandstone_wall": false,
+                    "minecraft:resin_brick_wall": false,
                     "minecraft:sandstone_wall": false,
                     "minecraft:stone_brick_wall": false,
                     "minecraft:tuff_brick_wall": false,
@@ -80643,6 +81080,7 @@
                     "minecraft:quartz_stairs": 0,
                     "minecraft:red_nether_brick_stairs": 0,
                     "minecraft:red_sandstone_stairs": 0,
+                    "minecraft:resin_brick_stairs": 0,
                     "minecraft:sandstone_stairs": 0,
                     "minecraft:smooth_quartz_stairs": 0,
                     "minecraft:smooth_red_sandstone_stairs": 0,
@@ -80945,6 +81383,7 @@
             "minecraft:campfire": {},
             "minecraft:cartography_table": {},
             "minecraft:carved_pumpkin": {},
+            "minecraft:chalkboard": {},
             "minecraft:cherry_button": {},
             "minecraft:cherry_door": {},
             "minecraft:cherry_double_slab": {},
@@ -81330,6 +81769,7 @@
             "minecraft:chiseled_polished_blackstone": {},
             "minecraft:chiseled_quartz_block": {},
             "minecraft:chiseled_red_sandstone": {},
+            "minecraft:chiseled_resin_bricks": {},
             "minecraft:chiseled_sandstone": {},
             "minecraft:chiseled_stone_bricks": {},
             "minecraft:chiseled_tuff": {},
@@ -81815,6 +82255,11 @@
             "minecraft:red_terracotta": {},
             "minecraft:redstone_block": {},
             "minecraft:redstone_ore": {},
+            "minecraft:resin_brick_double_slab": {},
+            "minecraft:resin_brick_slab": {},
+            "minecraft:resin_brick_stairs": {},
+            "minecraft:resin_brick_wall": {},
+            "minecraft:resin_bricks": {},
             "minecraft:respawn_anchor": {},
             "minecraft:sandstone": {},
             "minecraft:sandstone_double_slab": {
@@ -83206,6 +83651,10 @@
                 "minecraft:wool",
             ],
         },
+        "minecraft:board": {
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:bogged_spawn_egg": {
             "tags": [
                 "minecraft:spawn_egg",
@@ -83804,6 +84253,9 @@
         "minecraft:chiseled_red_sandstone": {
             "tags": [],
         },
+        "minecraft:chiseled_resin_bricks": {
+            "tags": [],
+        },
         "minecraft:chiseled_sandstone": {
             "tags": [],
         },
@@ -83840,6 +84292,9 @@
             "tags": [],
         },
         "minecraft:clock": {
+            "tags": [],
+        },
+        "minecraft:closed_eyeblossom": {
             "tags": [],
         },
         "minecraft:coal": {
@@ -87352,6 +87807,9 @@
         "minecraft:ominous_trial_key": {
             "tags": [],
         },
+        "minecraft:open_eyeblossom": {
+            "tags": [],
+        },
         "minecraft:orange_bundle": {
             "unstackable": true,
             "tags": [],
@@ -88106,6 +88564,29 @@
         },
         "minecraft:repeating_command_block": {
             "tags": [],
+        },
+        "minecraft:resin_block": {
+            "tags": [],
+        },
+        "minecraft:resin_brick": {
+            "tags": [],
+        },
+        "minecraft:resin_brick_slab": {
+            "tags": [],
+        },
+        "minecraft:resin_brick_stairs": {
+            "tags": [],
+        },
+        "minecraft:resin_brick_wall": {
+            "tags": [],
+        },
+        "minecraft:resin_bricks": {
+            "tags": [],
+        },
+        "minecraft:resin_clump": {
+            "tags": [
+                "minecraft:trim_materials",
+            ],
         },
         "minecraft:respawn_anchor": {
             "tags": [],
@@ -90431,6 +90912,7 @@
             "minecraft:netherite_ingot",
             "minecraft:quartz",
             "minecraft:redstone",
+            "minecraft:resin_clump",
         ],
         "minecraft:trim_templates": [
             "minecraft:bolt_armor_trim_smithing_template",

@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.50.24",
+    "version": "1.21.50.25",
     "content": [],
     "sections": [
         {
@@ -24810,7 +24810,7 @@
                                             "Name": "vibration",
                                             "Type": "String",
                                             "Default Value": "entity_interact",
-                                            "Description": "Vibration to emit when the interaction occurs. Admitted values are none (no vibration emitted), shear, entity_act, entity_interact.",
+                                            "Description": "Vibration to emit when the interaction occurs. Admitted values are none (no vibration emitted), shear, entity_die, entity_act, entity_interact.",
                                         },
                                     ],
                                 },
@@ -29227,10 +29227,6 @@
                                             "ID": "-31742338",
                                         },
                                         {
-                                            "JSON Name": "minecraft:can_attack_ghast",
-                                            "ID": "-1322879997",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:can_climb",
                                             "ID": "-550459594",
                                         },
@@ -29241,6 +29237,10 @@
                                         {
                                             "JSON Name": "minecraft:can_power_jump",
                                             "ID": "-763124853",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:cannot_be_attacked",
+                                            "ID": "1363084217",
                                         },
                                         {
                                             "JSON Name": "minecraft:color",
@@ -29510,14 +29510,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:can_attack_ghast",
-                            "id": "minecraft:can_attack_ghast",
-                            "level": 4,
-                            "content": [
-                                "When set, allows this entity to target and attack Ghasts.",
-                            ],
-                        },
-                        {
                             "name": "minecraft:can_climb",
                             "id": "minecraft:can_climb",
                             "level": 4,
@@ -29539,6 +29531,25 @@
                             "level": 4,
                             "content": [
                                 "Allows the entity to power jump like the horse does in vanilla.",
+                            ],
+                        },
+                        {
+                            "name": "minecraft:cannot_be_attacked",
+                            "id": "minecraft:cannot_be_attacked",
+                            "level": 4,
+                            "content": [
+                                "When set, filters which entities are allowed to attack the owner entity.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "exception_filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Defines which entities are exceptions and are allowed to attack the owner entity.",
+                                        },
+                                    ],
+                                },
                             ],
                         },
                         {
@@ -30367,5 +30378,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "cbeafc85463dfc18398657dcebe398cc3d032491",
+    "__OBJECTHASH__": "70c5eee9d9e71643c7756f71e9696be5fe4cabc8",
 }

@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.50.24",
-    "__COMMITHASH__": "563b7ad75fb90d686553d4e4221a4ffd132d074b",
-    "__MESSAGE__": "v1.21.50.24-preview",
+    "__VERSION__": "1.21.50.25",
+    "__COMMITHASH__": "fcb3b036d1974972c9357d97d870750c153c76e1",
+    "__MESSAGE__": "v1.21.50.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2167,9 +2167,6 @@
                                     "name": "minecraft:body_rotation_blocked",
                                 },
                                 {
-                                    "name": "minecraft:can_attack_ghast",
-                                },
-                                {
                                     "name": "minecraft:can_climb",
                                 },
                                 {
@@ -2177,6 +2174,9 @@
                                 },
                                 {
                                     "name": "minecraft:can_power_jump",
+                                },
+                                {
+                                    "name": "minecraft:cannot_be_attacked",
                                 },
                                 {
                                     "name": "minecraft:color",
@@ -3204,6 +3204,7 @@
         "minecraft:vertical_half": "Which vertical half of the space the block is placed in.",
         "moisturized_amount": "Determines the moisture level of crops",
         "monster_egg_stone_type": "DEPRECATED - Determines the stone type of a monster egg block",
+        "natural": "If the block has been placed by worldgen or by a player",
         "new_leaf_type": "DEPRECATED - Determines the leaf type of some blocks",
         "new_log_type": "DEPRECATED - Determines the wood type of some blocks",
         "no_drop_bit": "Determines if a skull block should drop loot",
@@ -3427,6 +3428,7 @@
         "minecraft:cave_vines_head_with_berries": "",
         "minecraft:chain": "",
         "minecraft:chain_command_block": "",
+        "minecraft:chalkboard": "",
         "minecraft:chemical_heat": "",
         "minecraft:cherry_button": "",
         "minecraft:cherry_door": "",
@@ -3454,6 +3456,7 @@
         "minecraft:chiseled_polished_blackstone": "",
         "minecraft:chiseled_quartz_block": "",
         "minecraft:chiseled_red_sandstone": "",
+        "minecraft:chiseled_resin_bricks": "",
         "minecraft:chiseled_sandstone": "",
         "minecraft:chiseled_stone_bricks": "",
         "minecraft:chiseled_tuff": "",
@@ -3462,6 +3465,7 @@
         "minecraft:chorus_plant": "",
         "minecraft:clay": "",
         "minecraft:client_request_placeholder_block": "",
+        "minecraft:closed_eyeblossom": "",
         "minecraft:coal_block": "",
         "minecraft:coal_ore": "",
         "minecraft:coarse_dirt": "",
@@ -4067,6 +4071,7 @@
         "minecraft:observer": "",
         "minecraft:obsidian": "",
         "minecraft:ochre_froglight": "",
+        "minecraft:open_eyeblossom": "",
         "minecraft:orange_candle": "",
         "minecraft:orange_candle_cake": "",
         "minecraft:orange_carpet": "",
@@ -4250,6 +4255,13 @@
         "minecraft:reinforced_deepslate": "",
         "minecraft:repeating_command_block": "",
         "minecraft:reserved6": "",
+        "minecraft:resin_block": "",
+        "minecraft:resin_brick_double_slab": "",
+        "minecraft:resin_brick_slab": "",
+        "minecraft:resin_brick_stairs": "",
+        "minecraft:resin_brick_wall": "",
+        "minecraft:resin_bricks": "",
+        "minecraft:resin_clump": "",
         "minecraft:respawn_anchor": "",
         "minecraft:rose_bush": "",
         "minecraft:sand": "",
@@ -4817,6 +4829,38 @@
                     "type": "Integer",
                     "defaultValue": "0",
                     "description": "The amount of light this block will emit in a range (0-15). Higher value means more light will be emitted.",
+                },
+                {
+                    "name": "minecraft:liquid_detection",
+                    "type": "Identifier String",
+                    "defaultValue": "",
+                    "description": "The definitions for how a block behaves when detecting liquid. Only one rule definition is allowed per liquid type - if multiple are specified, the first will be used and the rest will be ignored.",
+                    "children": [
+                        {
+                            "name": "can_contain_liquid",
+                            "type": "Boolean",
+                            "defaultValue": "false",
+                            "description": "Whether this block can contain the liquid. For example, if the liquid type is `water`, this means the block can be waterlogged.",
+                        },
+                        {
+                            "name": "liquid_type",
+                            "type": "String",
+                            "defaultValue": "water",
+                            "description": "The type of liquid this detection rule is for. Currently, `water` is the only supported liquid type. If this field is omitted, `water` will be the liquid type by default.",
+                        },
+                        {
+                            "name": "on_liquid_touches",
+                            "type": "String",
+                            "defaultValue": "blocking",
+                            "description": "How the block reacts to flowing water. Must be one of the following options:\"blocking\" - The default value for this field. The block stops the liquid from flowing.\"broken\" - The block is destroyed completely.\"popped\" - The block is destroyed and its item is spawned.\"no_reaction\" - The block is unaffected; visually, the liquid will flow through the block.",
+                        },
+                        {
+                            "name": "stops_liquid_flowing_out_from_direction",
+                            "type": "Array",
+                            "defaultValue": "",
+                            "description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
+                        },
+                    ],
                 },
                 {
                     "name": "minecraft:loot",
@@ -13988,7 +14032,7 @@
                     "name": "vibration",
                     "type": "String",
                     "defaultValue": "entity_interact",
-                    "description": "Vibration to emit when the interaction occurs. Admitted values are none (no vibration emitted), shear, entity_act, entity_interact.",
+                    "description": "Vibration to emit when the interaction occurs. Admitted values are none (no vibration emitted), shear, entity_die, entity_act, entity_interact.",
                 },
             ],
         },
@@ -16409,6 +16453,17 @@
                     "type": "Decimal",
                     "defaultValue": "8.000000",
                     "description": "Minimum time in seconds before the entity plays its ambient sound again.",
+                },
+            ],
+        },
+        "minecraft:cannot_be_attacked": {
+            "description": "When set, filters which entities are allowed to attack the owner entity.",
+            "children": [
+                {
+                    "name": "exception_filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Defines which entities are exceptions and are allowed to attack the owner entity.",
                 },
             ],
         },

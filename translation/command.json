@@ -2,6 +2,8 @@
     // Help text
     "ability.get": "查询玩家拥有的能力。",
     "ability.set": "设置玩家拥有的能力。",
+    "aimassist.clear": "禁用玩家的辅助瞄准。",
+    "aimassist.set": "启用玩家的辅助瞄准，并使用指定的预设。",
     "camera.clear": "重置玩家的摄像机。",
     "camera.fade.default": "使玩家视角逐渐变为黑色，维持一段时间后逐渐恢复。",
     "camera.fade.color": "使玩家视角逐渐变为指定的颜色，维持一段时间后逐渐恢复。",
@@ -207,6 +209,7 @@
     "script.profiler.stop": "停止脚本性能分析。",
     "script.watchdog.exportStats": "导出看门狗计时器统计数据。",
     "scriptevent.default": "向 Script API 模块广播消息事件。",
+    "set_movement_authority.default": "设置服务器是否对玩家客户端的移动进行校验。",
     "setblock.default": "更改指定坐标位置的方块。",
     "setblock.withBlockState": "更改指定坐标位置的方块。",
     "setblock.withDataValue": "更改指定坐标位置的方块。",
@@ -568,4 +571,7 @@
     "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> <count: int> mine <TargetBlockPosition: x y z> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.withCount.from.mine", // 将指定实体的部分槽位替换为通过挖掘特定方块所能获得的战利品。
     "loot replace entity <entity: target> <slotType: EntityEquipmentSlot> <slotId: int> mine <TargetBlockPosition: x y z> [<tool>|mainhand|offhand: string]": "this: loot.replace.entity.default.from.mine", // 将指定实体的部分槽位替换为通过挖掘特定方块所能获得的战利品。
     "loot spawn <position: x y z> mine <TargetBlockPosition: x y z> [<tool>|mainhand|offhand: string]": "this: loot.spawn.from.mine", // 在指定位置掉落通过挖掘特定方块所能获得的战利品。
+    "set_movement_authority <client|server>": "this: set_movement_authority.default", // 设置服务器是否对玩家客户端的移动进行校验。
+    "aimassist <players: target> clear": "this: aimassist.clear", // 禁用玩家的辅助瞄准。
+    "aimassist <players: target> set [x angle: float] [y angle: float] [max distance: float] [target mode: AimAssistTargetMode] [preset id: string]": "this: aimassist.set", // 启用玩家的辅助瞄准，并使用指定的预设。
 }

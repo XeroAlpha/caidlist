@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.50.24",
+    "version": "1.21.50.25",
     "content": [],
     "sections": [
         {
@@ -215,6 +215,44 @@
                                     "Type": "Integer",
                                     "Default Value": "0",
                                     "Description": "The amount of light this block will emit in a range (0-15). Higher value means more light will be emitted.",
+                                },
+                                {
+                                    "Name": "minecraft:liquid_detection",
+                                    "Type": "Identifier String",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The definitions for how a block behaves when detecting liquid. Only one rule definition is allowed per liquid type - if multiple are specified, the first will be used and the rest will be ignored.",
+                                        "Experimental toggles required: Upcoming Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "can_contain_liquid",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "false",
+                                                    "Description": "Whether this block can contain the liquid. For example, if the liquid type is `water`, this means the block can be waterlogged.",
+                                                },
+                                                {
+                                                    "Name": "liquid_type",
+                                                    "Type": "String",
+                                                    "Default Value": "water",
+                                                    "Description": "The type of liquid this detection rule is for. Currently, `water` is the only supported liquid type. If this field is omitted, `water` will be the liquid type by default.",
+                                                },
+                                                {
+                                                    "Name": "on_liquid_touches",
+                                                    "Type": "String",
+                                                    "Default Value": "blocking",
+                                                    "Description": "How the block reacts to flowing water. Must be one of the following options:\"blocking\" - The default value for this field. The block stops the liquid from flowing.\"broken\" - The block is destroyed completely.\"popped\" - The block is destroyed and its item is spawned.\"no_reaction\" - The block is unaffected; visually, the liquid will flow through the block.",
+                                                },
+                                                {
+                                                    "Name": "stops_liquid_flowing_out_from_direction",
+                                                    "Type": "Array",
+                                                    "Default Value": "",
+                                                    "Description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
+                                                },
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "Name": "minecraft:loot",
@@ -1242,5 +1280,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "a54077d9cadc182059c850d9c1c456dc8da1a92e",
+    "__OBJECTHASH__": "29be8bd6eb9b4051beba799fbf1dcb5047c29c47",
 }
