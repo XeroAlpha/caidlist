@@ -659,6 +659,20 @@ const Extractors = [
                                 'usingConvertsTo'
                             ]);
                         }
+                        if (component instanceof Minecraft.ItemPotionComponent) {
+                            componentData.potionEffectType = component.potionEffectType.id;
+                            componentData.potionLiquidType = component.potionLiquidType.id;
+                            componentData.potionModifierType = component.potionModifierType.id;
+                        }
+                        if (component instanceof Minecraft.ItemDyeableComponent) {
+                            assign(componentData, component, [
+                                'color',
+                                'defaultColor'
+                            ]);
+                        }
+                        if (component instanceof Minecraft.ItemCompostableComponent) {
+                            assign(componentData, component, ['compostingChance']);
+                        }
                         components[componentId] = componentData;
                         hasComponents = true;
                     });

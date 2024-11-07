@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.50.25",
-    "__COMMITHASH__": "fcb3b036d1974972c9357d97d870750c153c76e1",
-    "__MESSAGE__": "v1.21.50.25-preview",
+    "__VERSION__": "1.21.50.26",
+    "__COMMITHASH__": "26fec7fe068d462ac30a1cd0bbf63817212bfabb",
+    "__MESSAGE__": "v1.21.50.26-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -348,6 +348,12 @@
                         },
                         {
                             "name": "Client Biome JSON File",
+                        },
+                        {
+                            "name": "minecraft:ambient_sounds",
+                        },
+                        {
+                            "name": "minecraft:biome_music",
                         },
                         {
                             "name": "minecraft:fog_appearance",
@@ -4855,10 +4861,10 @@
                             "description": "How the block reacts to flowing water. Must be one of the following options:\"blocking\" - The default value for this field. The block stops the liquid from flowing.\"broken\" - The block is destroyed completely.\"popped\" - The block is destroyed and its item is spawned.\"no_reaction\" - The block is unaffected; visually, the liquid will flow through the block.",
                         },
                         {
-                            "name": "stops_liquid_flowing_out_from_direction",
+                            "name": "stops_liquid_flowing_from_direction",
                             "type": "Array",
                             "defaultValue": "",
-                            "description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
+                            "description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Also controls the directions in which a block can stop liquid flowing into it if `no_reaction` is set for the `on_liquid_touches` field. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
                         },
                     ],
                 },
@@ -14160,7 +14166,7 @@
                     "name": "look_at_locations",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at. Valid values: \"head\", \"body\", \"feet\".",
+                    "description": "A list of locations on the owner entity towards which line of sight checks are performed. At least one location must be unobstructed for the entity to be considered as looked at.",
                 },
                 {
                     "name": "looked_at_cooldown",
@@ -16798,6 +16804,8 @@
         "query.cardinal_facing": "Returns the current facing of the player (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
         "query.cardinal_facing_2d": "Returns the current facing of the player ignoring up/down part of the direction (North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
         "query.cardinal_player_facing": "Returns the current facing of the player (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
+        "query.client_max_render_distance": "Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.",
+        "query.client_memory_tier": "Returns a number representing the client RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the Client (Resource Packs) only.",
         "query.combine_entities": "Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.",
         "query.cooldown_time": "Returns the total cooldown time in seconds for the item held or worn by the specified equipment slot name (and if required second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities.",
         "query.cooldown_time_remaining": "Returns the cooldown time remaining in seconds for specified cooldown type or the item held or worn by the specified equipment slot name (and if required second numerical slot id), otherwise returns 0. Uses the same name and id that the replaceitem command takes when querying entities. Returns highest cooldown if no parameters are supplied.",
@@ -17007,6 +17015,7 @@
         "query.roll_counter": "Returns the roll counter of the entity.",
         "query.rotation_to_camera": "Returns the rotation required to aim at the camera.  Requires one argument representing the rotation axis you would like (0 for x, 1 for y).",
         "query.scoreboard": "Takes one argument - the name of the scoreboard entry for this entity. Returns the specified scoreboard value for this entity. Available only with behavior packs.",
+        "query.server_memory_tier": "Returns a number representing the server RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the server side (Behavior Packs) only.",
         "query.shake_angle": "Returns the shaking angle of the entity if it makes sense, else it returns 0.0.",
         "query.shake_time": "Returns the shake time of the entity.",
         "query.shield_blocking_bob": "Returns the how much the offhand shield should translate down when blocking and being hit.",
@@ -17047,10 +17056,7 @@
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
     "molangQueryExperimental": {
-        "query.client_max_render_distance": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.",
-        "query.client_memory_tier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the client RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the Client (Resource Packs) only.",
         "query.last_input_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
-        "query.server_memory_tier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the server RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the server side (Behavior Packs) only.",
         "query.touch_only_affects_hotbar": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.",
     },
 }

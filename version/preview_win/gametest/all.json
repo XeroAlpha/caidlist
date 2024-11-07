@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.50.25",
+    "packageVersion": "1.21.50.26",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -18929,6 +18929,13 @@
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
+                                    "Compostable": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:compostable",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Cooldown": {
                                         "value": {
                                             "type": "string",
@@ -19063,6 +19070,56 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.ItemUseOnEvent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ItemCompostableComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemCompostableComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:compostable",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "compostingChance": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemCompostableComponent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemComponent",
                                 },
                             },
                             "configurable": false,
@@ -19825,6 +19882,14 @@
                                                 },
                                                 "clone": {
                                                     "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "compostingChance": {
+                                                    "getter": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -21148,39 +21213,32 @@
                                     "High": {
                                         "value": {
                                             "type": "number",
-                                            "value": 4,
+                                            "value": 3,
                                         },
                                         "readOnly": true,
                                     },
                                     "Low": {
                                         "value": {
                                             "type": "number",
-                                            "value": 2,
+                                            "value": 1,
                                         },
                                         "readOnly": true,
                                     },
                                     "Mid": {
                                         "value": {
                                             "type": "number",
-                                            "value": 3,
+                                            "value": 2,
                                         },
                                         "readOnly": true,
                                     },
                                     "SuperHigh": {
                                         "value": {
                                             "type": "number",
-                                            "value": 5,
+                                            "value": 4,
                                         },
                                         "readOnly": true,
                                     },
                                     "SuperLow": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 1,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "Undetermined": {
                                         "value": {
                                             "type": "number",
                                             "value": 0,
@@ -29835,6 +29893,34 @@
                             },
                             "configurable": false,
                         },
+                        "RuntimeConditionError": {
+                            "value": {
+                                "type": "function",
+                                "name": "RuntimeConditionError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftCommon.RuntimeConditionError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                     },
                     "symbolProperties": {
                         "Symbol(Symbol.toStringTag)": {
@@ -32257,6 +32343,7 @@
         "Minecraft.ItemComponentRegistry.prototype.constructor",
         "Minecraft.ItemComponentRegistry.prototype.registerCustomComponent",
         "Minecraft.ItemComponentTypes",
+        "Minecraft.ItemComponentTypes.Compostable",
         "Minecraft.ItemComponentTypes.Cooldown",
         "Minecraft.ItemComponentTypes.Durability",
         "Minecraft.ItemComponentTypes.Dyeable",
@@ -32275,6 +32362,13 @@
         "Minecraft.ItemComponentUseOnEvent.prototype.constructor",
         "Minecraft.ItemComponentUseOnEvent.prototype.source.[[Get]]",
         "Minecraft.ItemComponentUseOnEvent.prototype.usedOnBlockPermutation.[[Get]]",
+        "Minecraft.ItemCompostableComponent",
+        "Minecraft.ItemCompostableComponent.[[Prototype]]",
+        "Minecraft.ItemCompostableComponent.componentId",
+        "Minecraft.ItemCompostableComponent.prototype",
+        "Minecraft.ItemCompostableComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemCompostableComponent.prototype.compostingChance.[[Get]]",
+        "Minecraft.ItemCompostableComponent.prototype.constructor",
         "Minecraft.ItemCooldownComponent",
         "Minecraft.ItemCooldownComponent.[[Prototype]]",
         "Minecraft.ItemCooldownComponent.componentId",
@@ -32378,6 +32472,7 @@
         "Minecraft.ItemStack.prototype.amount.[[Set]]",
         "Minecraft.ItemStack.prototype.clearDynamicProperties",
         "Minecraft.ItemStack.prototype.clone",
+        "Minecraft.ItemStack.prototype.compostingChance.[[Get]]",
         "Minecraft.ItemStack.prototype.constructor",
         "Minecraft.ItemStack.prototype.getCanDestroy",
         "Minecraft.ItemStack.prototype.getCanPlaceOn",
@@ -32549,7 +32644,6 @@
         "Minecraft.MemoryTier.Mid",
         "Minecraft.MemoryTier.SuperHigh",
         "Minecraft.MemoryTier.SuperLow",
-        "Minecraft.MemoryTier.Undetermined",
         "Minecraft.MessageReceiveAfterEvent",
         "Minecraft.MessageReceiveAfterEvent.prototype",
         "Minecraft.MessageReceiveAfterEvent.prototype.constructor",
@@ -33374,6 +33468,10 @@
         "MinecraftCommon.PropertyOutOfBoundsError.prototype.maxValue.[[Get]]",
         "MinecraftCommon.PropertyOutOfBoundsError.prototype.minValue.[[Get]]",
         "MinecraftCommon.PropertyOutOfBoundsError.prototype.value.[[Get]]",
+        "MinecraftCommon.RuntimeConditionError",
+        "MinecraftCommon.RuntimeConditionError.prototype",
+        "MinecraftCommon.RuntimeConditionError.prototype.[[Prototype]]",
+        "MinecraftCommon.RuntimeConditionError.prototype.constructor",
         "MinecraftCommon.Symbol(Symbol.toStringTag)",
         "MinecraftDebugUtilities",
         "MinecraftDebugUtilities.Symbol(Symbol.toStringTag)",
@@ -86972,7 +87070,11 @@
             "unstackable": true,
             "tags": [],
             "components": {
-                "minecraft:potion": {},
+                "minecraft:potion": {
+                    "potionEffectType": "None",
+                    "potionLiquidType": "Lingering",
+                    "potionModifierType": "Normal",
+                },
             },
         },
         "minecraft:lit_pumpkin": {
@@ -88250,7 +88352,11 @@
             "unstackable": true,
             "tags": [],
             "components": {
-                "minecraft:potion": {},
+                "minecraft:potion": {
+                    "potionEffectType": "None",
+                    "potionLiquidType": "Regular",
+                    "potionModifierType": "Normal",
+                },
             },
         },
         "minecraft:powder_snow_bucket": {
@@ -88931,7 +89037,11 @@
             "unstackable": true,
             "tags": [],
             "components": {
-                "minecraft:potion": {},
+                "minecraft:potion": {
+                    "potionEffectType": "None",
+                    "potionLiquidType": "Splash",
+                    "potionModifierType": "Normal",
+                },
             },
         },
         "minecraft:sponge": {

@@ -84,6 +84,11 @@
             "block.enchanting_table.use",
             "block.end_portal.spawn",
             "block.end_portal_frame.fill",
+            "block.eyeblossom.ambient",
+            "block.eyeblossom.close",
+            "block.eyeblossom.close_long",
+            "block.eyeblossom.open",
+            "block.eyeblossom.open_long",
             "block.false_permissions",
             "block.furnace.lit",
             "block.grindstone.use",
@@ -1486,6 +1491,8 @@
             "minecraft:explosion_manual",
             "minecraft:explosion_particle",
             "minecraft:eye_of_ender_bubble_particle",
+            "minecraft:eyeblossom_close",
+            "minecraft:eyeblossom_open",
             "minecraft:eyeofender_death_explode_particle",
             "minecraft:falling_border_dust_particle",
             "minecraft:falling_dust",
@@ -1533,6 +1540,7 @@
             "minecraft:ominous_spawning_particle",
             "minecraft:oozing_ambient",
             "minecraft:oozing_emitter",
+            "minecraft:pale_oak_leaves_particle",
             "minecraft:phantom_trail_particle",
             "minecraft:portal_directional",
             "minecraft:portal_east_west",
@@ -3293,9 +3301,9 @@
             "minecraft:redstone_torch": "<crafting_table>stick+redstone->redstone_torch",
             "minecraft:repeater": "<crafting_table>redstone_torch*2+redstone+stone:0*3->repeater",
             "minecraft:resin_block": "<crafting_table>resin_clump*9->resin_block",
-            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab",
-            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs",
-            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall",
+            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab*6",
+            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs*4",
+            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall*6",
             "minecraft:resin_bricks": "<crafting_table>resin_brick*4->resin_bricks",
             "minecraft:resin_clump_from_resin_block": "<crafting_table>resin_block->resin_clump*9",
             "minecraft:respawn_anchor": "<crafting_table>crying_obsidian*6+glowstone*3->respawn_anchor",
@@ -6968,6 +6976,9 @@
             "minecraft:ate_bluet": [
                 "minecraft:mooshroom",
             ],
+            "minecraft:ate_closed_eyeblossom": [
+                "minecraft:mooshroom",
+            ],
             "minecraft:ate_cornflower": [
                 "minecraft:mooshroom",
             ],
@@ -6978,6 +6989,9 @@
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_lily": [
+                "minecraft:mooshroom",
+            ],
+            "minecraft:ate_open_eyeblossom": [
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_orchid": [
@@ -6994,12 +7008,6 @@
             ],
             "minecraft:ate_tulip": [
                 "minecraft:mooshroom",
-            ],
-            "minecraft:attacked_by_mob": [
-                "minecraft:creaking",
-            ],
-            "minecraft:attacked_by_player": [
-                "minecraft:creaking",
             ],
             "minecraft:baby_on_calm": [
                 "minecraft:panda",
@@ -7219,6 +7227,12 @@
             ],
             "minecraft:crystal_explode": [
                 "minecraft:ender_crystal",
+            ],
+            "minecraft:damaged_by_entity": [
+                "minecraft:creaking",
+            ],
+            "minecraft:damaged_by_player": [
+                "minecraft:creaking",
             ],
             "minecraft:defend_wandering_trader": [
                 "minecraft:llama",
@@ -7453,6 +7467,9 @@
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
+            "minecraft:increment_swaying_ticks": [
+                "minecraft:creaking",
+            ],
             "minecraft:join_caravan": [
                 "minecraft:llama",
                 "minecraft:trader_llama",
@@ -7649,6 +7666,9 @@
             ],
             "minecraft:remove_raid_trigger": [
                 "minecraft:player",
+            ],
+            "minecraft:reset_swaying_ticks": [
+                "minecraft:creaking",
             ],
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
@@ -7885,9 +7905,6 @@
             "minecraft:start_sitting": [
                 "minecraft:camel",
             ],
-            "minecraft:start_swaying": [
-                "minecraft:creaking",
-            ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
@@ -7927,9 +7944,6 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
-            ],
-            "minecraft:stop_swaying": [
-                "minecraft:creaking",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -9018,6 +9032,11 @@
                     "type": "enum",
                 },
             },
+            "minecraft:creaking_swaying_ticks": {
+                "minecraft:creaking": {
+                    "type": "int",
+                },
+            },
             "minecraft:has_increased_max_health": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -9126,6 +9145,11 @@
             "block.enchanting_table.use",
             "block.end_portal.spawn",
             "block.end_portal_frame.fill",
+            "block.eyeblossom.ambient",
+            "block.eyeblossom.close",
+            "block.eyeblossom.close_long",
+            "block.eyeblossom.open",
+            "block.eyeblossom.open_long",
             "block.false_permissions",
             "block.furnace.lit",
             "block.grindstone.use",
@@ -10531,6 +10555,8 @@
             "minecraft:explosion_manual",
             "minecraft:explosion_particle",
             "minecraft:eye_of_ender_bubble_particle",
+            "minecraft:eyeblossom_close",
+            "minecraft:eyeblossom_open",
             "minecraft:eyeofender_death_explode_particle",
             "minecraft:falling_border_dust_particle",
             "minecraft:falling_dust",
@@ -10578,6 +10604,7 @@
             "minecraft:ominous_spawning_particle",
             "minecraft:oozing_ambient",
             "minecraft:oozing_emitter",
+            "minecraft:pale_oak_leaves_particle",
             "minecraft:phantom_trail_particle",
             "minecraft:portal_directional",
             "minecraft:portal_east_west",
@@ -12393,9 +12420,9 @@
             "minecraft:redstone_torch": "<crafting_table>stick+redstone->redstone_torch",
             "minecraft:repeater": "<crafting_table>redstone_torch*2+redstone+stone:0*3->repeater",
             "minecraft:resin_block": "<crafting_table>resin_clump*9->resin_block",
-            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab",
-            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs",
-            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall",
+            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab*6",
+            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs*4",
+            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall*6",
             "minecraft:resin_bricks": "<crafting_table>resin_brick*4->resin_bricks",
             "minecraft:resin_clump_from_resin_block": "<crafting_table>resin_block->resin_clump*9",
             "minecraft:respawn_anchor": "<crafting_table>crying_obsidian*6+glowstone*3->respawn_anchor",
@@ -16115,6 +16142,9 @@
             "minecraft:ate_bluet": [
                 "minecraft:mooshroom",
             ],
+            "minecraft:ate_closed_eyeblossom": [
+                "minecraft:mooshroom",
+            ],
             "minecraft:ate_cornflower": [
                 "minecraft:mooshroom",
             ],
@@ -16125,6 +16155,9 @@
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_lily": [
+                "minecraft:mooshroom",
+            ],
+            "minecraft:ate_open_eyeblossom": [
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_orchid": [
@@ -16141,12 +16174,6 @@
             ],
             "minecraft:ate_tulip": [
                 "minecraft:mooshroom",
-            ],
-            "minecraft:attacked_by_mob": [
-                "minecraft:creaking",
-            ],
-            "minecraft:attacked_by_player": [
-                "minecraft:creaking",
             ],
             "minecraft:baby_on_calm": [
                 "minecraft:panda",
@@ -16366,6 +16393,12 @@
             ],
             "minecraft:crystal_explode": [
                 "minecraft:ender_crystal",
+            ],
+            "minecraft:damaged_by_entity": [
+                "minecraft:creaking",
+            ],
+            "minecraft:damaged_by_player": [
+                "minecraft:creaking",
             ],
             "minecraft:defend_wandering_trader": [
                 "minecraft:llama",
@@ -16600,6 +16633,9 @@
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
+            "minecraft:increment_swaying_ticks": [
+                "minecraft:creaking",
+            ],
             "minecraft:join_caravan": [
                 "minecraft:llama",
                 "minecraft:trader_llama",
@@ -16796,6 +16832,9 @@
             ],
             "minecraft:remove_raid_trigger": [
                 "minecraft:player",
+            ],
+            "minecraft:reset_swaying_ticks": [
+                "minecraft:creaking",
             ],
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
@@ -17032,9 +17071,6 @@
             "minecraft:start_sitting": [
                 "minecraft:camel",
             ],
-            "minecraft:start_swaying": [
-                "minecraft:creaking",
-            ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
@@ -17074,9 +17110,6 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
-            ],
-            "minecraft:stop_swaying": [
-                "minecraft:creaking",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -18165,6 +18198,11 @@
                     "type": "enum",
                 },
             },
+            "minecraft:creaking_swaying_ticks": {
+                "minecraft:creaking": {
+                    "type": "int",
+                },
+            },
             "minecraft:has_increased_max_health": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -18272,6 +18310,11 @@
             "block.enchanting_table.use",
             "block.end_portal.spawn",
             "block.end_portal_frame.fill",
+            "block.eyeblossom.ambient",
+            "block.eyeblossom.close",
+            "block.eyeblossom.close_long",
+            "block.eyeblossom.open",
+            "block.eyeblossom.open_long",
             "block.false_permissions",
             "block.furnace.lit",
             "block.grindstone.use",
@@ -19674,6 +19717,8 @@
             "minecraft:explosion_manual",
             "minecraft:explosion_particle",
             "minecraft:eye_of_ender_bubble_particle",
+            "minecraft:eyeblossom_close",
+            "minecraft:eyeblossom_open",
             "minecraft:eyeofender_death_explode_particle",
             "minecraft:falling_border_dust_particle",
             "minecraft:falling_dust",
@@ -19721,6 +19766,7 @@
             "minecraft:ominous_spawning_particle",
             "minecraft:oozing_ambient",
             "minecraft:oozing_emitter",
+            "minecraft:pale_oak_leaves_particle",
             "minecraft:phantom_trail_particle",
             "minecraft:portal_directional",
             "minecraft:portal_east_west",
@@ -21481,9 +21527,9 @@
             "minecraft:redstone_torch": "<crafting_table>stick+redstone->redstone_torch",
             "minecraft:repeater": "<crafting_table>redstone_torch*2+redstone+stone:0*3->repeater",
             "minecraft:resin_block": "<crafting_table>resin_clump*9->resin_block",
-            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab",
-            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs",
-            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall",
+            "minecraft:resin_brick_slab": "<crafting_table>resin_bricks*3->resin_brick_slab*6",
+            "minecraft:resin_brick_stairs": "<crafting_table>resin_bricks*6->resin_brick_stairs*4",
+            "minecraft:resin_brick_wall": "<crafting_table>resin_bricks*6->resin_brick_wall*6",
             "minecraft:resin_bricks": "<crafting_table>resin_brick*4->resin_bricks",
             "minecraft:resin_clump_from_resin_block": "<crafting_table>resin_block->resin_clump*9",
             "minecraft:respawn_anchor": "<crafting_table>crying_obsidian*6+glowstone*3->respawn_anchor",
@@ -25156,6 +25202,9 @@
             "minecraft:ate_bluet": [
                 "minecraft:mooshroom",
             ],
+            "minecraft:ate_closed_eyeblossom": [
+                "minecraft:mooshroom",
+            ],
             "minecraft:ate_cornflower": [
                 "minecraft:mooshroom",
             ],
@@ -25166,6 +25215,9 @@
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_lily": [
+                "minecraft:mooshroom",
+            ],
+            "minecraft:ate_open_eyeblossom": [
                 "minecraft:mooshroom",
             ],
             "minecraft:ate_orchid": [
@@ -25182,12 +25234,6 @@
             ],
             "minecraft:ate_tulip": [
                 "minecraft:mooshroom",
-            ],
-            "minecraft:attacked_by_mob": [
-                "minecraft:creaking",
-            ],
-            "minecraft:attacked_by_player": [
-                "minecraft:creaking",
             ],
             "minecraft:baby_on_calm": [
                 "minecraft:panda",
@@ -25407,6 +25453,12 @@
             ],
             "minecraft:crystal_explode": [
                 "minecraft:ender_crystal",
+            ],
+            "minecraft:damaged_by_entity": [
+                "minecraft:creaking",
+            ],
+            "minecraft:damaged_by_player": [
+                "minecraft:creaking",
             ],
             "minecraft:defend_wandering_trader": [
                 "minecraft:llama",
@@ -25641,6 +25693,9 @@
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
+            "minecraft:increment_swaying_ticks": [
+                "minecraft:creaking",
+            ],
             "minecraft:join_caravan": [
                 "minecraft:llama",
                 "minecraft:trader_llama",
@@ -25837,6 +25892,9 @@
             ],
             "minecraft:remove_raid_trigger": [
                 "minecraft:player",
+            ],
+            "minecraft:reset_swaying_ticks": [
+                "minecraft:creaking",
             ],
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
@@ -26073,9 +26131,6 @@
             "minecraft:start_sitting": [
                 "minecraft:camel",
             ],
-            "minecraft:start_swaying": [
-                "minecraft:creaking",
-            ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
                 "minecraft:zombie",
@@ -26115,9 +26170,6 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
-            ],
-            "minecraft:stop_swaying": [
-                "minecraft:creaking",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -27204,6 +27256,11 @@
             "minecraft:creaking_state": {
                 "minecraft:creaking": {
                     "type": "enum",
+                },
+            },
+            "minecraft:creaking_swaying_ticks": {
+                "minecraft:creaking": {
+                    "type": "int",
                 },
             },
             "minecraft:has_increased_max_health": {

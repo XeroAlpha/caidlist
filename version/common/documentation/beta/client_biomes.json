@@ -1,6 +1,6 @@
 {
     "title": "CLIENT BIOMES DOCUMENTATION",
-    "version": "1.21.50.25",
+    "version": "1.21.50.26",
     "content": [],
     "sections": [
         {
@@ -61,6 +61,18 @@
                         {
                             "type": "table",
                             "rows": [
+                                {
+                                    "Name": "minecraft:ambient_sounds",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the ambient sounds for the biome. These sounds must be in the 'individual_named_sounds' in a 'sounds.json' file.",
+                                },
+                                {
+                                    "Name": "minecraft:biome_music",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Affect how music plays within the biome",
+                                },
                                 {
                                     "Name": "minecraft:fog_appearance",
                                     "Type": "Object",
@@ -153,6 +165,56 @@
                     ],
                 },
                 {
+                    "name": "minecraft:ambient_sounds",
+                    "id": "minecraft:ambient_sounds",
+                    "level": 2,
+                    "content": [
+                        "Set the ambient sounds for the biome. These sounds must be in the 'individual_named_sounds' in a 'sounds.json' file.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "addition",
+                                    "Type": "String",
+                                    "Required?": "Optional",
+                                    "Description": "Named sound that occasionally plays at the listener position",
+                                },
+                                {
+                                    "Name": "loop",
+                                    "Type": "String",
+                                    "Required?": "Optional",
+                                    "Description": "Named sound that loops while the listener position is inside the biome",
+                                },
+                                {
+                                    "Name": "mood",
+                                    "Type": "String",
+                                    "Required?": "Optional",
+                                    "Description": "Named sound that rarely plays at a nearby air block position when the light level is low. Biomes without an ambient mood sound will use the 'ambient.cave' sound.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:biome_music",
+                    "id": "minecraft:biome_music",
+                    "level": 2,
+                    "content": [
+                        "Affect how music plays within the biome",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "volume_multiplier",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Multiplier temporarily and gradually applied to music volume when within this biome. Must be a value between 0 and 1, inclusive.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:fog_appearance",
                     "id": "minecraft:fog_appearance",
                     "level": 2,
@@ -212,5 +274,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "b3ac7f3c7d19ad40ece575bf7e32dce9438cccbd",
+    "__OBJECTHASH__": "bb71e9109754108edd97ff7b1852b6df25dc3aaa",
 }
