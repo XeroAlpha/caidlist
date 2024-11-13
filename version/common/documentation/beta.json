@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.50.26",
-    "__COMMITHASH__": "26fec7fe068d462ac30a1cd0bbf63817212bfabb",
-    "__MESSAGE__": "v1.21.50.26-preview",
+    "__VERSION__": "1.21.50.28",
+    "__COMMITHASH__": "acc158ace8d048413c6be79c26584914643c9a12",
+    "__MESSAGE__": "v1.21.50.28-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2210,6 +2210,9 @@
                                 },
                                 {
                                     "name": "minecraft:ground_offset",
+                                },
+                                {
+                                    "name": "minecraft:ignore_cannot_be_attacked",
                                 },
                                 {
                                     "name": "minecraft:input_ground_controlled",
@@ -12261,6 +12264,12 @@
                     "description": "If true, other entities of the same entity definition within the broadcastRange will also become angry whenever this mob is attacked",
                 },
                 {
+                    "name": "broadcast_anger_when_dying",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If false, when this mob is killed it does not spread its anger to other entities of the same entity definition within the broadcastRange",
+                },
+                {
                     "name": "broadcast_filters",
                     "type": "Minecraft Filter",
                     "defaultValue": "",
@@ -16462,17 +16471,6 @@
                 },
             ],
         },
-        "minecraft:cannot_be_attacked": {
-            "description": "When set, filters which entities are allowed to attack the owner entity.",
-            "children": [
-                {
-                    "name": "exception_filters",
-                    "type": "Minecraft Filter",
-                    "defaultValue": "",
-                    "description": "Defines which entities are exceptions and are allowed to attack the owner entity.",
-                },
-            ],
-        },
         "minecraft:color": {
             "description": "Defines the entity's color. Only works on vanilla entities that have predefined color values (sheep, llama, shulker).",
             "children": [
@@ -16553,6 +16551,17 @@
                     "type": "Decimal",
                     "defaultValue": "0.0",
                     "description": "The value of the entity's offset from the terrain, in blocks.",
+                },
+            ],
+        },
+        "minecraft:ignore_cannot_be_attacked": {
+            "description": "When set, blocks entities from attacking the owner entity unless they have the \"minecraft:ignore_cannot_be_attacked\" component.",
+            "children": [
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Defines which entities are exceptions and are allowed to be attacked by the owner entity, potentially attacked entity is subject \"other\". If this is not specified then all attacks by the owner are allowed.",
                 },
             ],
         },
