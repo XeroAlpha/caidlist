@@ -16,7 +16,8 @@ import {
     projectRoot,
     testMinecraftVersionInRange,
     log,
-    warn
+    warn,
+    sleepAsync
 } from '../util/common.js';
 import { getDeviceOrWait, pushRecursively } from '../util/adb.js';
 import { createExclusiveWSSession, doWSRelatedJobsCached } from './wsconnect.js';
@@ -957,6 +958,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     }
     const { path: packPath, moduleUuid: targetModuleUuid, breakpoints } = generateBehaviorPack(cx);
     if (cx.devBehaviorPackPath) {
+        let warningShown = false;
         for (;;) {
             try {
                 if (device) {
@@ -968,9 +970,16 @@ export default async function analyzeGameTestEnumsCached(cx) {
                 }
                 break;
             } catch (err) {
-                warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
-                await pause('[GameTest] Please clear all the data of Minecraft');
+                if (!warningShown) {
+                    warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
+                    warningShown = true;
+                }
+                setStatus('[GameTest] Please clear all the data of Minecraft');
+                await sleepAsync(1000);
             }
+        }
+        if (warningShown) {
+            setStatus('');
         }
     }
     await pause('Please switch to branch: gametest\nInteract if the device is ready');

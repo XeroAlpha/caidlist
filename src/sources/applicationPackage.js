@@ -33,9 +33,9 @@ function iteratePackageEntries(packageZip, filter, processor) {
     setStatus('');
 }
 
-function generatePackageFileMeta(packageZip) {
+function generatePackageFileMeta(fileName, packageZip) {
     const files = [];
-    log('Analyzing package entries for hash...');
+    log(`Analyzing package entries for hash: ${fileName}`);
     iteratePackageEntries(packageZip, () => true, (entry, data) => {
         if (entry.isDirectory) {
             files.push({ name: entry.entryName, directory: true });
@@ -566,7 +566,7 @@ function extractInstallPack(packagePath) {
         for (const packageEntry of packageApkFile.getEntries()) {
             if (packageEntry.entryName.toLowerCase().endsWith('.apk')) {
                 const entryData = packageEntry.getData();
-                packageFileMeta[packageEntry.entryName] = generatePackageFileMeta(new AdmZip(entryData));
+                packageFileMeta[packageEntry.entryName] = generatePackageFileMeta(packageEntry.entryName, new AdmZip(entryData));
             }
         }
         sortObjectKey(packageFileMeta);
@@ -577,7 +577,7 @@ function extractInstallPack(packagePath) {
     }
     return {
         installPack: packageApkFile,
-        packageFileMeta: generatePackageFileMeta(packageApkFile)
+        packageFileMeta: generatePackageFileMeta(packagePath, packageApkFile)
     };
 }
 
