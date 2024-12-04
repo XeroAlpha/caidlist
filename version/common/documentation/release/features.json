@@ -1,6 +1,6 @@
 {
     "title": "FEATURES DOCUMENTATION",
-    "version": "1.21.40.3",
+    "version": "1.21.50.7",
     "content": [],
     "sections": [
         {
@@ -645,16 +645,21 @@
                             "type": "code",
                             "content": [
                                 "{",
-                                "  \"format_version\": \"1.13.0\",",
-                                "  \"minecraft:snap_to_surface_feature\": {",
-                                "    \"description\": {",
-                                "      \"identifier\": \"example:cave_vine_snapped_to_ceiling_feature\"",
-                                "    },",
-                                "    \"feature_to_snap\":  \"example:cave_vine_feature\",",
-                                "    \"vertical_search_range\":  12,",
-                                "    \"surface\": \"ceiling\"",
-                                "  }",
-                                "}",
+                                "        \"format_version\": \"1.13.0\",",
+                                "        \"minecraft:snap_to_surface_feature\": {",
+                                "        \"description\": {",
+                                "          \"identifier\": \"example:cave_vine_snapped_to_ceiling_feature\"",
+                                "        },",
+                                "        \"feature_to_snap\":  \"example:cave_vine_feature\",",
+                                "        \"vertical_search_range\":  12,",
+                                "        \"surface\": \"ceiling\",",
+                                "        \"allowed_surface_blocks\": {",
+                                "          {",
+                                "          \"name\": \"minecraft:cobblestone\"",
+                                "          }",
+                                "        }",
+                                "        }",
+                                "      }",
                             ],
                         },
                     ],
@@ -1383,6 +1388,10 @@
                                         "          string \"surface\" : opt // Defines the surface that the y-value of the placement position will be snapped to. Valid values: 'ceiling', 'floor' and 'random_horizontal'",
                                         "          bool \"allow_air_placement\" : opt // Determines whether the feature can snap through air blocks. Defaults to true.",
                                         "          bool \"allow_underwater_placement\" : opt // Determines whether the feature can snap through water blocks. Defaults to false.",
+                                        "          array \"allowed_surface_blocks\" : opt // A list of blocks that the feature is permitted to snap to. Leaving this empty results in the feature snapping to blocks that can provide support for the given face (up/down/horizontal)",
+                                        "          {",
+                                        "               \"<any array element>\"",
+                                        "          }",
                                         "      }",
                                         "      object \"minecraft:structure_template_feature\" : opt",
                                         "      {",
@@ -2353,30 +2362,6 @@
                     ],
                 },
                 {
-                    "name": "Feature Rule JSON File",
-                    "id": "Feature Rule JSON File",
-                    "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "format_version",
-                                    "Type": "String",
-                                    "Required?": "Required",
-                                    "Description": "Version of the JSON schema used by this file.",
-                                },
-                                {
-                                    "Name": "minecraft:feature_rules",
-                                    "Type": "Object of type Feature Rule Definition",
-                                    "Required?": "Required",
-                                    "Description": "A single Feature Rule Definition.",
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
                     "name": "Filter Group",
                     "id": "Filter Group",
                     "level": 2,
@@ -2564,5 +2549,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "bc2615d1e84d35b4283f8d19875bee00dcf329f2",
+    "__OBJECTHASH__": "5df4cb54f46096baeb07b858bab53a3c4b2b4402",
 }

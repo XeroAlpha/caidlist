@@ -1,6 +1,6 @@
 {
     "title": "MOLANG DOCUMENTATION",
-    "version": "1.21.40.3",
+    "version": "1.21.50.7",
     "content": [],
     "sections": [
         {
@@ -1058,6 +1058,14 @@
                                     "Description": "Returns the current facing of the player (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
                                 },
                                 {
+                                    "Name": "query.client_max_render_distance",
+                                    "Description": "Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.",
+                                },
+                                {
+                                    "Name": "query.client_memory_tier",
+                                    "Description": "Returns a number representing the client RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the Client (Resource Packs) only.",
+                                },
+                                {
                                     "Name": "query.combine_entities",
                                     "Description": "Combines any valid entity references from all arguments into a single array.  Note that order is not preserved, and duplicates and invalid values are removed.",
                                 },
@@ -1894,6 +1902,10 @@
                                     "Description": "Takes one argument - the name of the scoreboard entry for this entity. Returns the specified scoreboard value for this entity. Available only with behavior packs.",
                                 },
                                 {
+                                    "Name": "query.server_memory_tier",
+                                    "Description": "Returns a number representing the server RAM memory tier, 0 = 'SuperLow', 1 = 'Low', 2 = 'Mid', 3 = 'High', or 4 = 'SuperHigh'. Available on the server side (Behavior Packs) only.",
+                                },
+                                {
                                     "Name": "query.shake_angle",
                                     "Description": "Returns the shaking angle of the entity if it makes sense, else it returns 0.0.",
                                 },
@@ -2058,16 +2070,12 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "query.client_max_render_distance",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns the max render distance in chunks of the current client. Available on the Client (Resource Packs) only.",
+                                    "Name": "query.last_input_mode_is_any",
+                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
                                 },
                                 {
-                                    "Name": "query.client_memory_tier",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the client RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the Client (Resource Packs) only.",
-                                },
-                                {
-                                    "Name": "query.server_memory_tier",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a number representing the server RAM memory tier, 0 = 'Undetermined', 1 = 'SuperLow', 2 = 'Low', 3 = 'Mid', 4 = 'High', or 5 = 'SuperHigh'. Available on the server side (Behavior Packs) only.",
+                                    "Name": "query.touch_only_affects_hotbar",
+                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.",
                                 },
                             ],
                         },
@@ -2158,5 +2166,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "384077c8eda2cb418e98ee89d3c8bfe2d13c6669",
+    "__OBJECTHASH__": "bc7d71b57404480a46d74882c44b6c5929415ae4",
 }
