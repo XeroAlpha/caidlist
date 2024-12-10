@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.60.21",
+    "packageVersion": "1.21.60.23",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -5280,6 +5280,22 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "canBeDestroyedByLiquidSpread": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "canContainLiquid": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "canPlace": {
                                                     "value": {
                                                         "type": "function",
@@ -5376,6 +5392,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isLiquidBlocking": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "isSolid": {
                                                     "getter": {
                                                         "type": "function",
@@ -5394,6 +5418,22 @@
                                                 },
                                                 "isWaterlogged": {
                                                     "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "liquidCanFlowFromDirection": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "liquidSpreadCausesSpawn": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -6528,14 +6568,23 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "properties": {
-                                                "constructor": {
+                                            "enumerableProperties": {
+                                                "canBeDestroyedByLiquidSpread": {
                                                     "value": {
-                                                        "ref": "Minecraft.BlockPermutation",
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
-                                            },
-                                            "enumerableProperties": {
+                                                "canContainLiquid": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getAllStates": {
                                                     "value": {
                                                         "type": "function",
@@ -6576,6 +6625,22 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isLiquidBlocking": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "liquidSpreadCausesSpawn": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "matches": {
                                                     "value": {
                                                         "type": "function",
@@ -6598,6 +6663,13 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockPermutation",
                                                     },
                                                 },
                                             },
@@ -8476,6 +8548,14 @@
                                                     },
                                                 },
                                                 "setCanPlaceOn": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setDynamicProperties": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -10596,6 +10676,14 @@
                                                 },
                                                 "scoreboardIdentity": {
                                                     "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setDynamicProperties": {
+                                                    "value": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -20339,6 +20427,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "setDynamicProperties": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "setDynamicProperty": {
                                                     "value": {
                                                         "type": "function",
@@ -21366,6 +21462,21 @@
                             },
                             "configurable": false,
                         },
+                        "LiquidType": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Water": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Water",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "ListBlockVolume": {
                             "value": {
                                 "type": "function",
@@ -21835,6 +21946,66 @@
                             "value": {
                                 "type": "number",
                                 "value": 8,
+                            },
+                            "configurable": false,
+                        },
+                        "NamespaceNameError": {
+                            "value": {
+                                "type": "function",
+                                "name": "NamespaceNameError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.NamespaceNameError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "reason": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "NamespaceNameErrorReason": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "DisallowedNamespace": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "DisallowedNamespace",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "NoNamespace": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "NoNamespace",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
                             },
                             "configurable": false,
                         },
@@ -26360,6 +26531,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "scriptEvent": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "serverSystemInfo": {
                                                     "getter": {
                                                         "type": "function",
@@ -27423,6 +27602,14 @@
                                                     },
                                                 },
                                                 "setDefaultSpawnLocation": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setDynamicProperties": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -30540,6 +30727,15 @@
                 "value": {
                     "type": "object",
                     "enumerableProperties": {
+                        "collectPluginStats": {
+                            "value": {
+                                "type": "function",
+                                "name": "",
+                                "native": true,
+                                "length": 0,
+                            },
+                            "configurable": false,
+                        },
                         "collectRuntimeStats": {
                             "value": {
                                 "type": "function",
@@ -31117,6 +31313,8 @@
         "Minecraft.Block.prototype.above",
         "Minecraft.Block.prototype.below",
         "Minecraft.Block.prototype.bottomCenter",
+        "Minecraft.Block.prototype.canBeDestroyedByLiquidSpread",
+        "Minecraft.Block.prototype.canContainLiquid",
         "Minecraft.Block.prototype.canPlace",
         "Minecraft.Block.prototype.center",
         "Minecraft.Block.prototype.constructor",
@@ -31130,9 +31328,12 @@
         "Minecraft.Block.prototype.hasTag",
         "Minecraft.Block.prototype.isAir.[[Get]]",
         "Minecraft.Block.prototype.isLiquid.[[Get]]",
+        "Minecraft.Block.prototype.isLiquidBlocking",
         "Minecraft.Block.prototype.isSolid.[[Get]]",
         "Minecraft.Block.prototype.isValid",
         "Minecraft.Block.prototype.isWaterlogged.[[Get]]",
+        "Minecraft.Block.prototype.liquidCanFlowFromDirection",
+        "Minecraft.Block.prototype.liquidSpreadCausesSpawn",
         "Minecraft.Block.prototype.location.[[Get]]",
         "Minecraft.Block.prototype.matches",
         "Minecraft.Block.prototype.north",
@@ -31287,12 +31488,16 @@
         "Minecraft.BlockLocationIterator.prototype.next",
         "Minecraft.BlockPermutation",
         "Minecraft.BlockPermutation.prototype",
+        "Minecraft.BlockPermutation.prototype.canBeDestroyedByLiquidSpread",
+        "Minecraft.BlockPermutation.prototype.canContainLiquid",
         "Minecraft.BlockPermutation.prototype.constructor",
         "Minecraft.BlockPermutation.prototype.getAllStates",
         "Minecraft.BlockPermutation.prototype.getItemStack",
         "Minecraft.BlockPermutation.prototype.getState",
         "Minecraft.BlockPermutation.prototype.getTags",
         "Minecraft.BlockPermutation.prototype.hasTag",
+        "Minecraft.BlockPermutation.prototype.isLiquidBlocking",
+        "Minecraft.BlockPermutation.prototype.liquidSpreadCausesSpawn",
         "Minecraft.BlockPermutation.prototype.matches",
         "Minecraft.BlockPermutation.prototype.type.[[Get]]",
         "Minecraft.BlockPermutation.prototype.withState",
@@ -31538,6 +31743,7 @@
         "Minecraft.ContainerSlot.prototype.nameTag.[[Set]]",
         "Minecraft.ContainerSlot.prototype.setCanDestroy",
         "Minecraft.ContainerSlot.prototype.setCanPlaceOn",
+        "Minecraft.ContainerSlot.prototype.setDynamicProperties",
         "Minecraft.ContainerSlot.prototype.setDynamicProperty",
         "Minecraft.ContainerSlot.prototype.setItem",
         "Minecraft.ContainerSlot.prototype.setLore",
@@ -31813,6 +32019,7 @@
         "Minecraft.Entity.prototype.runCommand",
         "Minecraft.Entity.prototype.runCommandAsync",
         "Minecraft.Entity.prototype.scoreboardIdentity.[[Get]]",
+        "Minecraft.Entity.prototype.setDynamicProperties",
         "Minecraft.Entity.prototype.setDynamicProperty",
         "Minecraft.Entity.prototype.setOnFire",
         "Minecraft.Entity.prototype.setProperty",
@@ -33135,6 +33342,7 @@
         "Minecraft.ItemStack.prototype.nameTag.[[Set]]",
         "Minecraft.ItemStack.prototype.setCanDestroy",
         "Minecraft.ItemStack.prototype.setCanPlaceOn",
+        "Minecraft.ItemStack.prototype.setDynamicProperties",
         "Minecraft.ItemStack.prototype.setDynamicProperty",
         "Minecraft.ItemStack.prototype.setLore",
         "Minecraft.ItemStack.prototype.type.[[Get]]",
@@ -33261,6 +33469,8 @@
         "Minecraft.LeverActionAfterEventSignal.prototype",
         "Minecraft.LeverActionAfterEventSignal.prototype.[[Prototype]]",
         "Minecraft.LeverActionAfterEventSignal.prototype.constructor",
+        "Minecraft.LiquidType",
+        "Minecraft.LiquidType.Water",
         "Minecraft.ListBlockVolume",
         "Minecraft.ListBlockVolume.[[Prototype]]",
         "Minecraft.ListBlockVolume.prototype",
@@ -33325,6 +33535,14 @@
         "Minecraft.MoonPhase.WaxingCrescent",
         "Minecraft.MoonPhase.WaxingGibbous",
         "Minecraft.MoonPhaseCount",
+        "Minecraft.NamespaceNameError",
+        "Minecraft.NamespaceNameError.prototype",
+        "Minecraft.NamespaceNameError.prototype.[[Prototype]]",
+        "Minecraft.NamespaceNameError.prototype.constructor",
+        "Minecraft.NamespaceNameError.prototype.reason.[[Get]]",
+        "Minecraft.NamespaceNameErrorReason",
+        "Minecraft.NamespaceNameErrorReason.DisallowedNamespace",
+        "Minecraft.NamespaceNameErrorReason.NoNamespace",
         "Minecraft.ObjectiveSortOrder",
         "Minecraft.ObjectiveSortOrder.0",
         "Minecraft.ObjectiveSortOrder.1",
@@ -33898,6 +34116,7 @@
         "Minecraft.System.prototype.runInterval",
         "Minecraft.System.prototype.runJob",
         "Minecraft.System.prototype.runTimeout",
+        "Minecraft.System.prototype.scriptEvent",
         "Minecraft.System.prototype.serverSystemInfo.[[Get]]",
         "Minecraft.System.prototype.waitTicks",
         "Minecraft.SystemAfterEvents",
@@ -34035,6 +34254,7 @@
         "Minecraft.World.prototype.sendMessage",
         "Minecraft.World.prototype.setAbsoluteTime",
         "Minecraft.World.prototype.setDefaultSpawnLocation",
+        "Minecraft.World.prototype.setDynamicProperties",
         "Minecraft.World.prototype.setDynamicProperty",
         "Minecraft.World.prototype.setTimeOfDay",
         "Minecraft.World.prototype.stopMusic",
@@ -34159,6 +34379,7 @@
         "MinecraftCommon.Symbol(Symbol.toStringTag)",
         "MinecraftDebugUtilities",
         "MinecraftDebugUtilities.Symbol(Symbol.toStringTag)",
+        "MinecraftDebugUtilities.collectPluginStats",
         "MinecraftDebugUtilities.collectRuntimeStats",
         "MinecraftDebugUtilities.disableWatchdogTimingWarnings",
         "MinecraftUI",
@@ -34776,6 +34997,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -34784,7 +35015,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -36199,6 +36479,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -36207,7 +36497,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -37045,6 +37384,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -37053,7 +37402,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -41275,6 +41673,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -41283,7 +41691,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -43273,6 +43730,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -43281,7 +43748,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -44851,6 +45367,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -44859,7 +45385,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -48934,6 +49509,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -48942,7 +49527,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -54554,6 +55188,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -54562,7 +55206,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -59940,6 +60633,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -59948,7 +60651,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -63613,6 +64365,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -63621,7 +64383,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -72096,6 +72907,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -72104,7 +72925,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -75230,6 +76100,16 @@
                     "defaultValue": false,
                 },
                 {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
                     "name": "open_bit",
                     "validValues": [
                         false,
@@ -75238,7 +76118,56 @@
                     "defaultValue": false,
                 },
             ],
-            "invalidStates": [],
+            "invalidStates": [
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 0,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 2,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "west",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 3,
+                    "minecraft:cardinal_direction": "south",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "north",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "east",
+                },
+                {
+                    "direction": 1,
+                    "minecraft:cardinal_direction": "south",
+                },
+            ],
             "itemId": "<same>",
             "canBeWaterlogged": true,
         },
@@ -79943,24 +80872,34 @@
                     "east",
                 ],
                 "defaultValue": {
+                    "minecraft:acacia_fence_gate": "south",
                     "minecraft:anvil": "south",
+                    "minecraft:bamboo_fence_gate": "south",
                     "minecraft:big_dripleaf": "south",
+                    "minecraft:birch_fence_gate": "south",
                     "minecraft:blast_furnace": "south",
                     "minecraft:calibrated_sculk_sensor": "south",
                     "minecraft:campfire": "south",
                     "minecraft:carved_pumpkin": "south",
+                    "minecraft:cherry_fence_gate": "south",
                     "minecraft:chest": "north",
                     "minecraft:chipped_anvil": "south",
+                    "minecraft:crimson_fence_gate": "south",
                     "minecraft:damaged_anvil": "south",
+                    "minecraft:dark_oak_fence_gate": "south",
                     "minecraft:deprecated_anvil": "south",
                     "minecraft:end_portal_frame": "south",
                     "minecraft:ender_chest": "north",
+                    "minecraft:fence_gate": "south",
                     "minecraft:furnace": "south",
+                    "minecraft:jungle_fence_gate": "south",
                     "minecraft:lectern": "south",
                     "minecraft:lit_blast_furnace": "south",
                     "minecraft:lit_furnace": "south",
                     "minecraft:lit_pumpkin": "south",
                     "minecraft:lit_smoker": "south",
+                    "minecraft:mangrove_fence_gate": "south",
+                    "minecraft:pale_oak_fence_gate": "south",
                     "minecraft:pink_petals": "south",
                     "minecraft:powered_comparator": "south",
                     "minecraft:powered_repeater": "south",
@@ -79968,11 +80907,13 @@
                     "minecraft:small_dripleaf_block": "east",
                     "minecraft:smoker": "south",
                     "minecraft:soul_campfire": "south",
+                    "minecraft:spruce_fence_gate": "south",
                     "minecraft:stonecutter_block": "north",
                     "minecraft:trapped_chest": "north",
                     "minecraft:unpowered_comparator": "south",
                     "minecraft:unpowered_repeater": "south",
                     "minecraft:vault": "south",
+                    "minecraft:warped_fence_gate": "south",
                 },
             },
         ],

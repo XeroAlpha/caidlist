@@ -369,7 +369,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
+        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100', '1.21.40']]
     },
     {
         name: 'featureRule',

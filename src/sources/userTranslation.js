@@ -25,6 +25,7 @@ const userTranslationStorageKey = {
     entitySlot: 'translation.entity_slot',
     ability: 'translation.ability',
     feature: 'translation.feature',
+    featureRule: 'translation.featureRule',
     inputPermission: 'translation.input_permission',
     cameraPreset: 'translation.camera_preset',
     recipe: 'translation.recipe',

@@ -623,6 +623,10 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.hudCommand(cx)) {
         postJob('hud elements', '/hud @s hide ');
     }
+    if (support.placeCommandFeatureSubCommand(cx)) {
+        postJob('features', '/place feature ');
+        postJob('feature rules', '/place featurerule ');
+    }
     if (support.hasPropertySelectorParam(cx)) {
         postJob('entity properties', '/testfor @e[has_property={', ['property', '!']);
     }
@@ -633,8 +637,10 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
 
     if (support.devCommands(cx)) {
         postJob('particle types', '/particlelegacy ');
-        postJob('features', '/placefeature feature ');
-        postJob('feature rules', '/placefeature rule ');
+        if (!support.placeCommandFeatureSubCommand(cx)) {
+            postJob('features', '/placefeature feature ');
+            postJob('feature rules', '/placefeature rule ');
+        }
         if (support.devCommandsGameSpace(cx)) {
             postJob('options', '/option set ');
             postJob('server tests', '/test servertests ');

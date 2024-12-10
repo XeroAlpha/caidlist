@@ -55,6 +55,8 @@ const defaultTransMapNames = [
     ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
     ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
     ['featureAndRule', '地物与地物规则', '用于 placefeature 命令的地物 ID 和地物规则 ID'],
+    ['feature', '地物', '用于 place feature 子命令的地物 ID'],
+    ['featureRule', '地物规则', '用于 place featurerule 子命令的地物规则 ID'],
     ['ability', '能力', '用于 ability 命令的能力 ID'],
     ['sound', '声音', '用于 playsound 命令的声音 ID'],
     ['lootTable', '战利品表', '用于 loot 命令的战利品表选项'],
@@ -431,6 +433,20 @@ async function generateBranchedOutputFiles(cx) {
             originalArray: enums.hudElements,
             translationMap: userTranslation.hudElement,
             autoMatch: []
+        });
+    }
+    if (support.placeCommandFeatureSubCommand(cx)) {
+        matchTranslations({
+            ...commonOptions,
+            name: 'feature',
+            originalArray: enums.features,
+            translationMap: userTranslation.feature
+        });
+        matchTranslations({
+            ...commonOptions,
+            name: 'featureRule',
+            originalArray: enums.featureRules,
+            translationMap: userTranslation.featureRule
         });
     }
     if (support.eduCommands(cx)) {

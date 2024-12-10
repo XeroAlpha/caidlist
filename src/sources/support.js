@@ -128,6 +128,19 @@ hasPropertySelectorParam.associatedSelectors = [
     ['has_property']
 ];
 
+export function placeCommandFeatureSubCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return testMinecraftVersionInRange(coreVersion, '1.21.60.23', '*');
+    }
+    return false;
+}
+placeCommandFeatureSubCommand.associatedCommands = [
+    [
+        '/place feature <feature: features> [position: x y z]',
+        '/place featurerule <featurerule: featureRules> [position: x y z]'
+    ]
+];
+
 export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';
 }
