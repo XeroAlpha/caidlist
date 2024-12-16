@@ -206,12 +206,6 @@ export function keyArrayToObject(arr, f) {
     return obj;
 }
 
-export function kvArrayToObject(kvArray) {
-    const obj = {};
-    kvArray.forEach(([k, v]) => (obj[k] = v));
-    return obj;
-}
-
 export function objectToArray(obj, f) {
     return Object.keys(obj).map((k) => f(k, obj[k], obj));
 }
@@ -256,8 +250,15 @@ export function naturalOrderSort(arr) {
     });
 }
 
-export function sortObjectKey(o) {
-    return kvArrayToObject(Object.entries(o).sort((a, b) => stringComparator(a[0], b[0])));
+export function sortObjectKey(o, depth) {
+    const entries = Object.entries(o);
+    entries.sort((a, b) => stringComparator(a[0], b[0]));
+    if (depth !== undefined && depth > 1) {
+        for (const entry of entries) {
+            entry[1] = sortObjectKey(entry[1], depth - 1);
+        }
+    }
+    return Object.fromEntries(entries);
 }
 
 export function compareMinecraftVersion(a, b) {

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { replaceObjectKey, excludeObjectEntry, forEachObject, kvArrayToObject } from '../util/common.js';
+import { replaceObjectKey, excludeObjectEntry, forEachObject } from '../util/common.js';
 
 function iterateOverEnum(kvMapOrArray, f) {
     if (Array.isArray(kvMapOrArray)) {
@@ -37,7 +37,7 @@ function diffEnums(source, target) {
                 }
             });
             if (mergedKVArray.length) {
-                merged[enumId] = kvArrayToObject(mergedKVArray);
+                merged[enumId] = Object.fromEntries(mergedKVArray);
             }
             if (removedKeys.length) {
                 removed[enumId] = removedKeys;

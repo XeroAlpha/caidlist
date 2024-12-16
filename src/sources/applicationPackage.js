@@ -528,10 +528,7 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             return;
         }
         if (k === 'entityPropertyDescMap') {
-            results[k] = sortObjectKey(v);
-            forEachObject(v, (value) => {
-                sortObjectKey(value);
-            });
+            results[k] = sortObjectKey(v, 2);
             return;
         }
         if (k.endsWith('Map')) {

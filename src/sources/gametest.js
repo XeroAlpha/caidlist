@@ -11,7 +11,6 @@ import {
     setStatus,
     sortObjectKey,
     stringComparator,
-    kvArrayToObject,
     pause,
     projectRoot,
     testMinecraftVersionInRange,
@@ -47,7 +46,7 @@ function stateToSlots(state, propNames) {
 }
 
 function slotsToState(slots, propNames) {
-    return kvArrayToObject(
+    return Object.fromEntries(
         slots
             .map((v, i) => [propNames[i], v])
             .filter(([, v]) => v !== undefined)
@@ -229,6 +228,14 @@ function simplifyStateAndCheck(stateValues, tagStates, invalidStates) {
     const simplifiedState = simplifyState(stateValues, tagStates, invalidStates);
     if (!testResultValid(stateValues, simplifiedState, tagStates, invalidStates)) {
         throw new Error('Simplified failed');
+    }
+    return simplifiedState;
+}
+
+function simplifyStateAndCheckTrimmed(stateValues, tagStates, invalidStates) {
+    const simplifiedState = simplifyStateAndCheck(stateValues, tagStates, invalidStates);
+    if (simplifiedState.length === 1) {
+        return simplifiedState[0];
     }
     return simplifiedState;
 }
@@ -451,11 +458,12 @@ const Extractors = [
         async extract({ target, frame }) {
             const blockInfoList = await wrapEvaluate(frame, () => {
                 const blockTypes = Minecraft.BlockTypes.getAll();
+                const liquidTypes = Object.keys(Minecraft.LiquidType);
                 const result = {};
                 for (const blockType of blockTypes) {
                     const states = [];
                     const invalidStates = [];
-                    const { id: blockId, canBeWaterlogged } = blockType;
+                    const { id: blockId } = blockType;
                     const basePermutation = Minecraft.BlockPermutation.resolve(blockId);
                     const properties = Object.entries(basePermutation.getAllStates()).map(([name, defaultValue]) => ({
                         name,
@@ -498,7 +506,25 @@ const Extractors = [
                             if (itemId === blockId) {
                                 itemId = '<same>';
                             }
-                            states.push({ state, tags, itemId });
+                            const canContainLiquid = [];
+                            const liquidInteractPattern = {};
+                            for (const liquidType of liquidTypes) {
+                                if (permutation.canContainLiquid(liquidType)) {
+                                    canContainLiquid.push(liquidType);
+                                }
+                                const interactPattern = [];
+                                if (permutation.isLiquidBlocking(liquidType)) {
+                                    interactPattern.push('blocks liquid');
+                                }
+                                if (permutation.canBeDestroyedByLiquidSpread(liquidType)) {
+                                    interactPattern.push('destroyed when touched');
+                                }
+                                if (permutation.liquidSpreadCausesSpawn(liquidType)) {
+                                    interactPattern.push('drops when touched');
+                                }
+                                liquidInteractPattern[liquidType] = interactPattern.length > 0 ? interactPattern.join(', ') : 'none';
+                            }
+                            states.push({ state, tags, itemId, canContainLiquid, liquidInteractPattern });
                         }
                         let cursor = loopFields.length - 1;
                         while (cursor >= 0) {
@@ -513,21 +539,24 @@ const Extractors = [
                         }
                         if (cursor < 0) break;
                     }
-                    result[blockType.id] = { properties, states, invalidStates, canBeWaterlogged };
+                    result[blockType.id] = { properties, states, invalidStates };
                 }
                 return result;
             });
             const blocks = {};
             const blockProperties = {};
             const blockTags = {};
+            const containLiquidMap = {};
+            const liquidInteractMap = {};
             const blockInfoEntries = Object.entries(blockInfoList).sort((a, b) => stringComparator(a[0], b[0]));
             let index = 0;
             for (const [blockId, blockType] of blockInfoEntries) {
                 setStatus(`[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`);
-                const { properties, states, invalidStates, canBeWaterlogged } = blockType;
+                const { properties, states, invalidStates } = blockType;
                 const tagMap = {};
                 const itemIdMap = {};
-                const stateValues = kvArrayToObject(properties.map((e) => [e.name, e.validValues]));
+                const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
+                const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
                 for (const property of properties) {
                     let propertyDescriptors = blockProperties[property.name];
                     if (!propertyDescriptors) {
@@ -544,6 +573,8 @@ const Extractors = [
                     }
                     propertyDescriptor.defaultValue[blockId] = property.defaultValue;
                 }
+                const containLiquidStateMap = {};
+                const liquidInteractStateMap = {};
                 for (const state of states) {
                     for (const tag of state.tags) {
                         let tagList = tagMap[tag];
@@ -559,34 +590,68 @@ const Extractors = [
                         }
                         itemIdStates.push(state.state);
                     }
+                    for (const liquidType of state.canContainLiquid) {
+                        let containLiquidStates = containLiquidStateMap[liquidType];
+                        if (!containLiquidStates) {
+                            containLiquidStates = containLiquidStateMap[liquidType] = [];
+                        }
+                        containLiquidStates.push(state.state);
+                    }
+                    for (const [liquidType, interactPattern] of Object.entries(state.liquidInteractPattern)) {
+                        let interactPatternMap = liquidInteractStateMap[liquidType];
+                        if (!interactPatternMap) {
+                            interactPatternMap = liquidInteractStateMap[liquidType] = {};
+                        }
+                        let interactPatternStates = interactPatternMap[interactPattern];
+                        if (!interactPatternStates) {
+                            interactPatternStates = interactPatternMap[interactPattern] = [];
+                        }
+                        interactPatternStates.push(state.state);
+                    }
                 }
                 const itemIds = Object.keys(itemIdMap);
                 for (const key of itemIds) {
-                    itemIdMap[key] = simplifyStateAndCheck(stateValues, itemIdMap[key], invalidStates);
+                    itemIdMap[key] = simplifyStateAndCheckTrimmed(stateValues, itemIdMap[key], simplifiedInvalidStates);
                 }
                 blocks[blockId] = {
                     properties,
-                    invalidStates: simplifyStateAndCheck(stateValues, invalidStates, []),
-                    itemId: itemIds.length > 1 ? itemIdMap : itemIds[0],
-                    canBeWaterlogged
+                    invalidStates: simplifiedInvalidStates,
+                    itemId: itemIds.length > 1 ? itemIdMap : itemIds[0]
                 };
                 for (const [tagName, tagStates] of Object.entries(tagMap)) {
-                    const simplifiedState = simplifyStateAndCheck(stateValues, tagStates, invalidStates);
                     let tagInfo = blockTags[tagName];
                     if (!tagInfo) {
                         tagInfo = blockTags[tagName] = {};
                     }
-                    if (simplifiedState.length === 1) {
-                        [tagInfo[blockId]] = simplifiedState;
-                    } else {
-                        tagInfo[blockId] = simplifiedState;
+                    tagInfo[blockId] = simplifyStateAndCheckTrimmed(stateValues, tagStates, simplifiedInvalidStates);
+                }
+                for (const [liquidType, containableStates] of Object.entries(containLiquidStateMap)) {
+                    let containLiquidSubMap = containLiquidMap[liquidType];
+                    if (!containLiquidSubMap) {
+                        containLiquidSubMap = containLiquidMap[liquidType] = {};
+                    }
+                    containLiquidSubMap[blockId] = simplifyStateAndCheckTrimmed(stateValues, containableStates, simplifiedInvalidStates);
+                }
+                for (const [liquidType, interactStateMap] of Object.entries(liquidInteractStateMap)) {
+                    let globalInteractStateMap = liquidInteractMap[liquidType];
+                    if (!globalInteractStateMap) {
+                        globalInteractStateMap = liquidInteractMap[liquidType] = {};
+                    }
+                    for (const [interactPattern, patternStates] of Object.entries(interactStateMap)) {
+                        let globalStateMap = globalInteractStateMap[interactPattern];
+                        if (!globalStateMap) {
+                            globalStateMap = globalInteractStateMap[interactPattern] = {};
+                        }
+                        globalStateMap[blockId] = simplifyStateAndCheckTrimmed(stateValues, patternStates, simplifiedInvalidStates);
                     }
                 }
             }
             setStatus('');
             target.blocks = blocks;
             target.blockProperties = sortObjectKey(blockProperties);
-            target.blockTags = sortObjectKey(blockTags);
+            target.blockTags = sortObjectKey(blockTags, 2);
+            target.containLiquidMap = sortObjectKey(containLiquidMap, 2);
+            target.liquidInteractMap = sortObjectKey(liquidInteractMap, 3);
         }
     },
     {
@@ -985,6 +1050,7 @@ export default async function analyzeGameTestEnumsCached(cx) {
     await pause('Please switch to branch: gametest\nInteract if the device is ready');
 
     const wsSession = await createExclusiveWSSession(device);
+    const { localAddress } = wsSession.socket._socket;
     const server = createServer();
     const port = await getPort({ port: 19144 });
     server.listen(port);
@@ -993,9 +1059,10 @@ export default async function analyzeGameTestEnumsCached(cx) {
         await device.reverse('tcp:19144', `tcp:${port}`);
         wsSession.sendCommand('script debugger connect 127.0.0.1 19144');
     } else {
-        wsSession.sendCommand(`script debugger connect 127.0.0.1 ${port}`);
+        wsSession.sendCommand(`script debugger connect ${localAddress.replace('::ffff:', '')} ${port}`);
     }
     const socket = await socketPromise;
+    log(`${socket.remoteAddress} connected via qjs-debugger.`);
     // Provide cache for infering corrupted items, but not affecting output (not owned by target)
     const target = Object.assign(Object.create(cache ?? {}), { packageVersion });
     const debugConn = new QuickJSDebugConnection(socket);

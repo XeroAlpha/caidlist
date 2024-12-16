@@ -5,7 +5,6 @@ import {
     forEachObject,
     filterObjectMap,
     replaceObjectKey,
-    kvArrayToObject,
     deepCopy,
     uniqueAndSort
 } from '../util/common.js';
@@ -118,7 +117,7 @@ export function writeTransMapTextZip(cx, options) {
     }
     if (stdTransMap) {
         const stdTransText = generateTextFromMapTree(
-            kvArrayToObject(
+            Object.fromEntries(
                 stdTransMapNames
                     .map((e) => {
                         const [key, name] = e;

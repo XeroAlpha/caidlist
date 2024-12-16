@@ -172,7 +172,9 @@ export async function createExclusiveWSSession(device) {
     } else {
         log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
         setStatus('Waiting for client...');
-        ({ session } = await pEvent(wsServer, 'client'));
+        let request;
+        ({ session, request } = await pEvent(wsServer, 'client'));
+        log(`${request.socket.remoteAddress} connected via mcpews.`);
     }
     setStatus('');
     session.on('disconnect', () => {
