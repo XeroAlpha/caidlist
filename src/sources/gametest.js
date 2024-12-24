@@ -240,6 +240,101 @@ function simplifyStateAndCheckTrimmed(stateValues, tagStates, invalidStates) {
     return simplifiedState;
 }
 
+function findAliasState(stateValues, invalidStates) {
+    const propNames = Object.keys(stateValues);
+    const allStates = listAllState(stateValues).map((state) => stateToSlots(state, propNames));
+    const invalidStateSlots = invalidStates.map((state) => stateToSlots(state, propNames));
+    const validStates = allStates.filter((s) => invalidStateSlots.every((e) => !slotsMatchPattern(s, e)));
+    const mappings = [];
+    for (let i = 0; i < propNames.length; i++) {
+        if (mappings.some((e) => e[i] !== undefined)) continue;
+        const mappingGroups = new Map();
+        const currentProp = propNames[i];
+        for (const stateValue of stateValues[currentProp]) {
+            mappingGroups.set(stateValue, propNames.map(() => new Set()));
+        }
+        for (const state of validStates) {
+            for (let j = 0; j < propNames.length; j++) {
+                if (i === j) continue;
+                mappingGroups.get(state[i])[j].add(state[j]);
+            }
+        }
+        let wellMapped = true;
+        const mapping = propNames.map(() => []);
+        for (const [stateValue, valueSetSlots] of mappingGroups.entries()) {
+            const mappedValueSlots = valueSetSlots.map((e) => (e.size === 1 ? [...e][0] : undefined));
+            if (mappedValueSlots.every((e) => e === undefined)) {
+                wellMapped = false;
+                break;
+            }
+            for (let j = 0; j < propNames.length; j++) {
+                if (i === j) {
+                    mapping[i].push(stateValue);
+                } else if (mappedValueSlots[j] !== undefined) {
+                    mapping[j].push(mappedValueSlots[j]);
+                }
+            }
+        }
+        if (!wellMapped) continue;
+        for (let j = 0; j < propNames.length; j++) {
+            if (mapping[j].length < 2 || new Set(mapping[j]).size !== mapping[j].length) {
+                mapping[j] = undefined;
+            }
+        }
+        const mappingCount = mapping.filter((e) => e !== undefined).length;
+        if (mappingCount >= 2) {
+            mappings.push(mapping);
+        }
+    }
+    return mappings.map((e) => slotsToState(e, propNames));
+}
+
+function removeAliasStates(invalidStates, aliasStates) {
+    return invalidStates.filter((state) => {
+        for (const aliasStateGroup of aliasStates) {
+            let hasAllKeys = true;
+            let matchedIndex = -1;
+            for (const [key, values] of Object.entries(aliasStateGroup)) {
+                const val = state[key];
+                const valIndex = val !== undefined ? values.indexOf(val) : -1;
+                if (val === undefined || valIndex === -1) {
+                    hasAllKeys = false;
+                    break;
+                }
+                if (matchedIndex === -1) {
+                    matchedIndex = valIndex;
+                } else if (matchedIndex !== valIndex) {
+                    matchedIndex = -1;
+                    break;
+                }
+            }
+            if (hasAllKeys && matchedIndex === -1) {
+                return false;
+            }
+        }
+        return true;
+    });
+}
+
+function extractValidStateOverrides(stateValues, invalidStates) {
+    const validStateOverrides = {};
+    const filteredInvalidStates = new Set(invalidStates);
+    for (const [name, values] of Object.entries(stateValues)) {
+        const validValues = new Set(values);
+        for (const permutation of invalidStates) {
+            const keys = Object.keys(permutation);
+            if (keys.length === 1 && keys[0] === name) {
+                validValues.delete(permutation[name]);
+                filteredInvalidStates.delete(permutation);
+            }
+        }
+        if (validValues.size < values.length) {
+            validStateOverrides[name] = [...validValues];
+        }
+    }
+    return [validStateOverrides, [...filteredInvalidStates]];
+}
+
 /**
  * @param {MinecraftDebugSession} session
  */
@@ -556,7 +651,9 @@ const Extractors = [
                 const tagMap = {};
                 const itemIdMap = {};
                 const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
+                const aliasStates = findAliasState(stateValues, invalidStates);
                 const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
+                const [validStateOverrides, filteredInvalidStates] = extractValidStateOverrides(stateValues, simplifiedInvalidStates);
                 for (const property of properties) {
                     let propertyDescriptors = blockProperties[property.name];
                     if (!propertyDescriptors) {
@@ -615,7 +712,9 @@ const Extractors = [
                 }
                 blocks[blockId] = {
                     properties,
-                    invalidStates: simplifiedInvalidStates,
+                    aliasStates: aliasStates.length > 0 ? aliasStates : undefined,
+                    validStateOverrides: Object.keys(validStateOverrides).length > 0 ? validStateOverrides : undefined,
+                    invalidStates: removeAliasStates(filteredInvalidStates, aliasStates),
                     itemId: itemIds.length > 1 ? itemIdMap : itemIds[0]
                 };
                 for (const [tagName, tagStates] of Object.entries(tagMap)) {

@@ -1,17 +1,6 @@
 import { writeFileSync } from 'fs';
 import { naturalOrderSort, warn } from '../util/common.js';
 
-function getInvalidStateValues(invalidStates, stateName) {
-    const invalidValues = [];
-    invalidStates.forEach((permutation) => {
-        const keys = Object.keys(permutation);
-        if (keys.length === 1 && keys[0] === stateName) {
-            invalidValues.push(permutation[stateName]);
-        }
-    });
-    return invalidValues;
-}
-
 const hiddenIds = [];
 const specialIds = [
     // deprecated
@@ -38,10 +27,9 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
         if (blockInfo.properties.length > 0) {
             lines.push(`${indent}['${blockIdWithoutNamespace}'] = {`);
             for (const property of blockInfo.properties) {
-                const invalidValues = getInvalidStateValues(blockInfo.invalidStates, property.name);
-                const validValues = property.validValues.filter((e) => !invalidValues.includes(e));
-                if (invalidValues.length > 0) {
-                    lines.push(`${indent}${indent}{'${property.name}', '${property.defaultValue}', valid = {${validValues.map((e) => `'${e}'`).join(', ')}}},`);
+                const validOverride = blockInfo.validStateOverrides?.[property.name];
+                if (validOverride) {
+                    lines.push(`${indent}${indent}{'${property.name}', '${property.defaultValue}', valid = {${validOverride.map((e) => `'${e}'`).join(', ')}}},`);
                 } else {
                     lines.push(`${indent}${indent}{'${property.name}', '${property.defaultValue}'},`);
                 }
