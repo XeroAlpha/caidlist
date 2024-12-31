@@ -164,8 +164,11 @@ export async function pushRecursively(device, sourcePath, destPath, mode) {
 
 export async function openMonkey(device) {
     const monkeyPort = 11534;
-    const monkeyPid = (await adbShell(device, 'ps -A | grep com.android.commands.monkey | awk \'{print $2}\'')).toString().trim();
-    if (monkeyPid) { // kill monkey
+    const monkeyPid = (await adbShell(device, "ps -A | grep com.android.commands.monkey | awk '{print $2}'"))
+        .toString()
+        .trim();
+    if (monkeyPid) {
+        // kill monkey
         await adbShell(device, `kill -9 ${monkeyPid}`);
         await sleepAsync(1000);
     }

@@ -19,6 +19,7 @@ export function buildBSDocFromTransMap(blockProperties, transMap, blockTransMap)
         const lines = [];
         lines.push(result[name] || name);
         properties.forEach((property) => {
+            // eslint-disable-next-line prettier/prettier
             lines.push(
                 '',
                 '| 可选值 | 描述 |',
@@ -28,6 +29,7 @@ export function buildBSDocFromTransMap(blockProperties, transMap, blockTransMap)
                 const k = `${name}=${value}`;
                 lines.push(`| ${value} | ${result[k] || ''} |`);
             });
+            // eslint-disable-next-line prettier/prettier
             lines.push(
                 '',
                 '由以下方块使用：',

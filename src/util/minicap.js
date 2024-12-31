@@ -1,11 +1,5 @@
 import { createRequire } from 'node:module';
-import {
-    adbShell,
-    extractFromShell,
-    getSystemProp,
-    pushWithSync,
-    getDeviceSurfaceOrientation
-} from './adb.js';
+import { adbShell, extractFromShell, getSystemProp, pushWithSync, getDeviceSurfaceOrientation } from './adb.js';
 import { sleepAsync, warn } from './common.js';
 import StateTransform from './stateStream.js';
 

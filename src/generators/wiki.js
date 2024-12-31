@@ -15,6 +15,7 @@ const specialIds = [
 
 export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
     const indent = '\t';
+    // eslint-disable-next-line prettier/prettier
     const lines = [
         'return {',
         `${indent}-- 自动生成`
@@ -29,7 +30,9 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
             for (const property of blockInfo.properties) {
                 const validOverride = blockInfo.validStateOverrides?.[property.name];
                 if (validOverride) {
-                    lines.push(`${indent}${indent}{'${property.name}', '${property.defaultValue}', valid = {${validOverride.map((e) => `'${e}'`).join(', ')}}},`);
+                    lines.push(
+                        `${indent}${indent}{'${property.name}', '${property.defaultValue}', valid = {${validOverride.map((e) => `'${e}'`).join(', ')}}},`
+                    );
                 } else {
                     lines.push(`${indent}${indent}{'${property.name}', '${property.defaultValue}'},`);
                 }
@@ -46,6 +49,7 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
 
 export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) {
     const indent = '\t';
+    // eslint-disable-next-line prettier/prettier
     const lines = [
         'return {',
         `${indent}-- 自动生成`
@@ -56,7 +60,9 @@ export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) 
         for (let i = 0; i < propertyKinds.length; i++) {
             const { validValues } = propertyKinds[i];
             const propertyName = i === 0 ? property : `${property}_${i}`;
-            lines.push(`${indent}['${propertyName}'] = {'${property}', {${validValues.map((e) => `'${e}'`).join(', ')}}},`);
+            lines.push(
+                `${indent}['${propertyName}'] = {'${property}', {${validValues.map((e) => `'${e}'`).join(', ')}}},`
+            );
         }
     }
     lines.push('}');
@@ -66,6 +72,7 @@ export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) 
 
 export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
     const indent = '\t';
+    // eslint-disable-next-line prettier/prettier
     const lines = [
         'return {',
         `${indent}-- 自动生成`

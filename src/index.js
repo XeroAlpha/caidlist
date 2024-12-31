@@ -29,6 +29,7 @@ async function main(args) {
 
 main(process.argv.slice(2)).catch((err) => {
     warn('Fatal error', err);
+    // eslint-disable-next-line no-debugger
     debugger;
     process.exit(1);
 });

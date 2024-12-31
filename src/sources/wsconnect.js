@@ -5,9 +5,7 @@ import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus, pause } from '
 import { adbShell } from '../util/adb.js';
 import * as support from './support.js';
 
-const ignoreCommands = [
-    '/gametips <status: Status>'
-];
+const ignoreCommands = ['/gametips <status: Status>'];
 
 /**
  * @param {import('mcpews').ServerSession} session
@@ -90,7 +88,9 @@ function verifySupportForCommands(cx, commandList) {
         if (typeof support[key] === 'function' && support[key].associatedCommands) {
             const f = support[key];
             const result = f(cx);
-            const commandMatches = f.associatedCommands.some((andGroup) => andGroup.every((e) => commandList.includes(e)));
+            const commandMatches = f.associatedCommands.some((andGroup) =>
+                andGroup.every((e) => commandList.includes(e))
+            );
             if (result !== commandMatches) {
                 throw new Error(`support.${key} should be updated, excepted ${commandMatches}, actually got ${result}`);
             }
@@ -116,21 +116,18 @@ async function doWSRelatedJobs(cx, session) {
      * It depends on launch instance instead of world, so we
      * decide to extract them only in gametest branch.
      */
-    const wsBlockData = (await fetchData(session, MinecraftDataType.Block))
-        .reduce((obj, block) => {
-            obj[`${block.id}:${block.aux}`] = block.name;
-            return obj;
-        }, {});
-    const wsItemData = (await fetchData(session, MinecraftDataType.Item))
-        .reduce((obj, item) => {
-            obj[`${item.id}:${item.aux}`] = item.name;
-            return obj;
-        }, {});
-    const wsMobData = (await fetchData(session, MinecraftDataType.Mob))
-        .reduce((obj, mob) => {
-            obj[mob.id] = mob.name;
-            return obj;
-        }, {});
+    const wsBlockData = (await fetchData(session, MinecraftDataType.Block)).reduce((obj, block) => {
+        obj[`${block.id}:${block.aux}`] = block.name;
+        return obj;
+    }, {});
+    const wsItemData = (await fetchData(session, MinecraftDataType.Item)).reduce((obj, item) => {
+        obj[`${item.id}:${item.aux}`] = item.name;
+        return obj;
+    }, {});
+    const wsMobData = (await fetchData(session, MinecraftDataType.Mob)).reduce((obj, mob) => {
+        obj[mob.id] = mob.name;
+        return obj;
+    }, {});
     return {
         commandList,
         wsBlockData: sortObjectKey(wsBlockData),
@@ -148,7 +145,9 @@ export async function createExclusiveWSSession(device) {
         log('Connecting to wsserver: /connect 127.0.0.1:19134');
         for (;;) {
             try {
-                const sessionPromise = pEvent(wsServer, 'client', { timeout: 10000 });
+                const sessionPromise = pEvent(wsServer, 'client', {
+                    timeout: 10000
+                });
                 await device.reverse('tcp:19134', `tcp:${port}`);
                 setStatus('Simulating user actions...');
                 // 打开聊天栏

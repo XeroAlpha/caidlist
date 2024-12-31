@@ -58,7 +58,9 @@ function mergeOrderedList(base, listA, listB) {
         const b = listB[bi];
         const c = base[ci];
         if (a === b && b === c) {
-            ai++; bi++; ci++;
+            ai++;
+            bi++;
+            ci++;
             chunks.push({
                 common: true,
                 c
@@ -85,7 +87,8 @@ function mergeOrderedList(base, listA, listB) {
                         b: listB.slice(bi, commonB),
                         c: base.slice(startCi, ci)
                     });
-                    ai = commonA; bi = commonB;
+                    ai = commonA;
+                    bi = commonB;
                     break;
                 }
                 ci++;
@@ -128,7 +131,8 @@ async function analyzeCommandAutocompletionFast(
     const { commandAreaRect: rect } = cx;
     const scrcpy = await openScrcpy(device);
     const imageStream = new ScrcpyPNGStream(scrcpy, [
-        '-filter:v', [
+        '-filter:v',
+        [
             `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
             'format=pix_fmts=gray',
             'negate',
@@ -218,13 +222,16 @@ async function analyzeCommandAutocompletionFast(
                     promise.then((text) => {
                         let commandText = text.trim().replace(/\n/g, '');
                         ocrProcessCounter++;
-                        performance.measure(`ocr-${ocrProcessCounter}`, { start, detail: commandText });
+                        performance.measure(`ocr-${ocrProcessCounter}`, {
+                            start,
+                            detail: commandText
+                        });
                         cx.tesseractMistakes.forEach(([pattern, replacement]) => {
                             commandText = commandText.replace(pattern, replacement);
                         });
                         if (commandText.length && (!this.last || this.last !== commandText)) {
                             if (tabWhenChanged) droppedCount--;
-                            this.push(this.last = commandText);
+                            this.push((this.last = commandText));
                         }
                     });
                     done();
@@ -298,8 +305,16 @@ async function analyzeCommandAutocompletionFast(
                 const estTime = performanceTimeOffset + now + timeLeft;
                 const timeLeftStr = formatTimeLeft(timeLeft / 1000);
                 const estTimeStr = new Date(estTime).toLocaleTimeString();
-                screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
-                setStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`);
+                screen.updateStatus({
+                    percentage,
+                    now,
+                    stepSpentAvg,
+                    timeLeft,
+                    estTime
+                });
+                setStatus(
+                    `[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${recogizedCommand}`
+                );
             } else {
                 setStatus(`[${autocompletions.length}/?]${progressName} ${recogizedCommand}`);
             }
@@ -316,7 +331,7 @@ async function analyzeCommandAutocompletionFast(
             const nextResult = guessTruncatedString(recogizedResult, command);
             setStatus(`Waiting for end: ${recogizedResult}`);
             return nextResult == null;
-        } catch (err) {
+        } catch {
             await press(scrcpy, 'KEYCODE_ESCAPE');
             return false;
         }
@@ -333,15 +348,10 @@ function isMinecraftWindowTitle(foregroundTitle) {
     return foregroundTitle === 'Minecraft' || foregroundTitle === 'Minecraft Preview';
 }
 
-async function analyzeCommandAutocompletionFastWin10(
-    cx,
-    screen,
-    command,
-    progressName,
-    approxLength
-) {
+async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progressName, approxLength) {
     // 初始状态：游戏HUD
     const autocompletions = [];
+    // eslint-disable-next-line prettier/prettier
     const {
         Keys,
         sendKeys,
@@ -440,8 +450,16 @@ async function analyzeCommandAutocompletionFastWin10(
                 const estTime = performanceTimeOffset + now + timeLeft;
                 const timeLeftStr = formatTimeLeft(timeLeft / 1000);
                 const estTimeStr = new Date(estTime).toLocaleTimeString();
-                screen.updateStatus({ percentage, now, stepSpentAvg, timeLeft, estTime });
-                setStatus(`[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${clipboardText}`);
+                screen.updateStatus({
+                    percentage,
+                    now,
+                    stepSpentAvg,
+                    timeLeft,
+                    estTime
+                });
+                setStatus(
+                    `[${autocompletions.length}/${approxLength} ${percentage}% ${estTimeStr} ~${timeLeftStr}]${progressName} ${clipboardText}`
+                );
             } else {
                 setStatus(`[${autocompletions.length}/?]${progressName} ${clipboardText}`);
             }
@@ -515,7 +533,11 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
             retryCount++;
         }
         screen.log('Result check passed');
-        cachedOutput(cacheId, { packageVersion, result, length: result.length });
+        cachedOutput(cacheId, {
+            packageVersion,
+            result,
+            length: result.length
+        });
     }
     return (target[id] = result);
 }
@@ -525,7 +547,9 @@ function verifySupportForSelectors(cx, selectors) {
         if (typeof support[key] === 'function' && support[key].associatedSelectors) {
             const f = support[key];
             const result = f(cx);
-            const commandMatches = f.associatedSelectors.some((andGroup) => andGroup.every((e) => selectors.includes(e)));
+            const commandMatches = f.associatedSelectors.some((andGroup) =>
+                andGroup.every((e) => selectors.includes(e))
+            );
             if (result !== commandMatches) {
                 throw new Error(`support.${key} should be updated, excepted ${commandMatches}, actually got ${result}`);
             }
@@ -597,10 +621,7 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     postJob('selectors', '/testfor @e[');
 
     if (support.lootCommand(cx)) {
-        postJob('loot tools', '/loot spawn ~ ~ ~ loot empty ', [
-            'mainhand',
-            'offhand'
-        ]);
+        postJob('loot tools', '/loot spawn ~ ~ ~ loot empty ', ['mainhand', 'offhand']);
     }
     if (support.damageCommand(cx)) {
         postJob('damage causes', '/damage @s 0 ');

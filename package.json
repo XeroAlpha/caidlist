@@ -14,10 +14,9 @@
     "generate-all": "node src/index.js generate preview_win beta release netease_dev",
     "backend": "node backend/index.js output/web",
     "tsdebug": "node src/tesseract_debug.js",
-    "lint": "eslint . --ext .js --ext .cjs --ext .html",
-    "lint-fix": "eslint . --ext .js --ext .cjs --ext .html --fix",
-    "lint-fix-rule": "eslint . --ext .js --ext .cjs --ext .html --no-eslintrc --env commonjs --env es2021 --env node --parser-options=ecmaVersion:latest --fix --rule",
-    "prepare": "husky install",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "prepare": "husky",
     "pre-commit": "node script/pre-commit.js"
   },
   "author": "ProjectXero",
@@ -28,39 +27,50 @@
     "url": "https://github.com/XeroAlpha/caidlist.git"
   },
   "dependencies": {
-    "@octokit/rest": "^19.0.5",
+    "@e965/xlsx": "^0.20.3",
+    "@octokit/rest": "^21.0.2",
     "@projectxero/comment-json": "^4.3.0",
-    "@u4/adbkit": "^4.1.19",
-    "adm-zip": "^0.5.9",
-    "chevrotain": "^10.4.2",
-    "get-port": "^6.1.2",
-    "got": "^12.3.1",
-    "hpagent": "^1.0.0",
-    "mcpews": "^4.0.0-beta",
-    "node-html-parser": "^6.0.0",
+    "@u4/adbkit": "^4.1.20",
+    "adm-zip": "^0.5.16",
+    "chevrotain": "^11.0.3",
+    "get-port": "^7.1.0",
+    "got": "^14.4.5",
+    "hpagent": "^1.2.0",
+    "mcpews": "^4.0.1",
+    "node-html-parser": "^7.0.1",
     "node-lcs": "^1.0.4",
     "node-notifier": "^10.0.1",
-    "p-event": "^5.0.1",
+    "p-event": "^6.0.1",
     "png-split-stream": "^1.0.1",
-    "prettier": "^2.7.1",
+    "prettier": "^3.4.2",
     "quickjs-debugger": "^2.0.0",
-    "tesseract.js": "^5.0.5",
-    "xlsx": "^0.18.5"
+    "tesseract.js": "^5.1.1"
   },
   "devDependencies": {
-    "@html-eslint/eslint-plugin": "^0.13.2",
-    "@html-eslint/parser": "^0.13.2",
     "@minecraft/server": "^1.18.0-beta.1.21.60-preview.24",
-    "@types/node": "^20.12.4",
-    "@types/node-notifier": "^8.0.2",
-    "eslint": "^8.21.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-html": "^7.1.0",
-    "eslint-plugin-import": "^2.26.0",
-    "husky": "^8.0.0",
-    "simple-git": "^3.17.0"
+    "@types/node": "^22.10.2",
+    "@types/node-notifier": "^8.0.5",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-html": "^8.1.2",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.12.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.3.3",
+    "simple-git": "^3.27.0"
   },
   "optionalDependencies": {
-    "koffi": "^2.8.8"
+    "koffi": "^2.10.0"
+  },
+  "overrides": {
+    "@u4/adbkit": {
+      "get-port": "5.1.1",
+      "promise-duplex": "6.0.0"
+    },
+    "tesseract.js": {
+      "node-fetch": {
+        "whatwg-url": "14.1.0"
+      }
+    }
   }
 }

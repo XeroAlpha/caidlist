@@ -1,20 +1,13 @@
-/* eslint-disable no-console */
 import { simpleGit } from 'simple-git';
 
 const Restrictions = [
     {
-        files: [
-            /^output\/([^/]+)\/dev\//,
-            /^version\/dev\//
-        ],
+        files: [/^output\/([^/]+)\/dev\//, /^version\/dev\//],
         pass: ({ current }) => current === 'nda-restricted',
         message: 'Commit nda-restricted content to master is not allowed.'
     },
     {
-        except: [
-            /^output\/([^/]+)\/dev\//,
-            /^version\/dev\//
-        ],
+        except: [/^output\/([^/]+)\/dev\//, /^version\/dev\//],
         ignoreMerge: true,
         pass: ({ current }) => current !== 'nda-restricted',
         message: 'No need to commit non-nda-restricted content to nda-restricted.'

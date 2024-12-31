@@ -161,7 +161,7 @@ function restoreHiddenEntries(enumMaps) {
                     let parsedEntryObj;
                     try {
                         parsedEntryObj = CommentJSON.parse(`{${comment.value}}`);
-                    } catch (err) {
+                    } catch {
                         return false;
                     }
                     Object.entries(parsedEntryObj).forEach(([key, value]) => {
@@ -195,44 +195,48 @@ export async function fetchStandardizedTranslation() {
     if (stGlobalCache) return stGlobalCache;
     let cache = cachedOutput('version.common.wiki.standardized_translation');
     try {
-        cache = await cachedOutput('version.common.wiki.standardized_translation', async () => {
-            const errors = [];
-            let result = {};
-            await forEachArray(dataPages, async (e) => {
-                log(`Fetching ${e.source}:${e.name}`);
-                try {
-                    const source = sources[e.source];
-                    const resolver = resolvers[e.resolver];
-                    const url = source.getUrl(e.name);
-                    const rawUrl = source.getRawUrl(e.name);
-                    const content = await fetchFile(rawUrl);
-                    const data = resolver(content);
-                    const refComment = `Reference: ${url}`;
-                    if (e.target) {
-                        result[e.target] = data;
-                        setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
-                    } else {
-                        const prefix = e.prefix || '';
-                        forEachObject(data, (v, k) => {
-                            const resultKey = `${prefix}${k}`;
-                            if (e.ignoreIfExists && (resultKey in result)) {
-                                return;
-                            }
-                            result[resultKey] = v;
-                            setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
-                        });
+        cache = await cachedOutput(
+            'version.common.wiki.standardized_translation',
+            async () => {
+                const errors = [];
+                let result = {};
+                await forEachArray(dataPages, async (e) => {
+                    log(`Fetching ${e.source}:${e.name}`);
+                    try {
+                        const source = sources[e.source];
+                        const resolver = resolvers[e.resolver];
+                        const url = source.getUrl(e.name);
+                        const rawUrl = source.getRawUrl(e.name);
+                        const content = await fetchFile(rawUrl);
+                        const data = resolver(content);
+                        const refComment = `Reference: ${url}`;
+                        if (e.target) {
+                            result[e.target] = data;
+                            setJSONComment(result, CommentLocation.before(e.target), 'line', refComment);
+                        } else {
+                            const prefix = e.prefix || '';
+                            forEachObject(data, (v, k) => {
+                                const resultKey = `${prefix}${k}`;
+                                if (e.ignoreIfExists && resultKey in result) {
+                                    return;
+                                }
+                                result[resultKey] = v;
+                                setJSONComment(result, CommentLocation.before(resultKey), 'line', refComment);
+                            });
+                        }
+                    } catch (err) {
+                        errors.push(err);
                     }
-                } catch (err) {
-                    errors.push(err);
+                });
+                result = postprocessEnumMap(result);
+                if (errors.length > 0) {
+                    CommentJSON.assign(cache, result);
+                    throw new AggregateError(errors);
                 }
-            });
-            result = postprocessEnumMap(result);
-            if (errors.length > 0) {
-                CommentJSON.assign(cache, result);
-                throw new AggregateError(errors);
-            }
-            return result;
-        }, 24 * 60 * 60 * 1000);
+                return result;
+            },
+            24 * 60 * 60 * 1000
+        );
     } catch (err) {
         if (!cache) {
             throw err;

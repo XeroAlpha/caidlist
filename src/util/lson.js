@@ -19,29 +19,23 @@ function withPayload(regex, f) {
 
 const Literal = createToken({
     name: 'Literal',
-    pattern: withPayload(
-        /nil|false|true/,
-        ([match]) => {
-            if (match === 'nil') {
-                return null;
-            }
-            if (match === 'false') {
-                return false;
-            }
-            if (match === 'true') {
-                return true;
-            }
-            throw new Error(`Unexpected literal: ${match}`);
+    pattern: withPayload(/nil|false|true/, ([match]) => {
+        if (match === 'nil') {
+            return null;
         }
-    ),
+        if (match === 'false') {
+            return false;
+        }
+        if (match === 'true') {
+            return true;
+        }
+        throw new Error(`Unexpected literal: ${match}`);
+    }),
     line_breaks: false
 });
 const Numeral = createToken({
     name: 'Numeral',
-    pattern: withPayload(
-        /([+-]?\d+)(?:\.(\d+))?(?:[Ee]([+-]?\d+))?/,
-        ([match]) => parseFloat(match)
-    ),
+    pattern: withPayload(/([+-]?\d+)(?:\.(\d+))?(?:[Ee]([+-]?\d+))?/, ([match]) => parseFloat(match)),
     line_breaks: false
 });
 const HexadecimalNumeral = createToken({
@@ -51,7 +45,7 @@ const HexadecimalNumeral = createToken({
         ([, sign, base, frac, expSign, exp]) => {
             let number = parseInt(base, 16);
             if (frac) {
-                number += parseInt(frac, 16) / (16 ** frac.length);
+                number += parseInt(frac, 16) / 16 ** frac.length;
             }
             if (exp) {
                 const factor = 2 ** parseInt(exp, 16);
@@ -71,10 +65,7 @@ const HexadecimalNumeral = createToken({
 });
 const NumberalLiteral = createToken({
     name: 'NumberalLiteral',
-    pattern: withPayload(
-        /([+-]?[01])\s*\/\s*0/,
-        ([, num]) => parseInt(num, 10) / 0
-    ),
+    pattern: withPayload(/([+-]?[01])\s*\/\s*0/, ([, num]) => parseInt(num, 10) / 0),
     line_breaks: false
 });
 const EscapeMap = {
@@ -123,10 +114,7 @@ const SingleQuoteString = createToken({
 });
 const MultilineString = createToken({
     name: 'MultilineString',
-    pattern: withPayload(
-        /\[([=]*)\[([^]*?)\]\1\]/,
-        ([, content]) => content
-    ),
+    pattern: withPayload(/\[([=]*)\[([^]*?)\]\1\]/, ([, content]) => content),
     line_breaks: true
 });
 const Name = createToken({
@@ -203,10 +191,7 @@ class LSONParser extends CstParser {
 
         const $ = this;
         $.RULE('expression', () => {
-            $.OR([
-                { ALT: () => $.SUBRULE($.primitive) },
-                { ALT: () => $.SUBRULE($.tableConstructor) }
-            ]);
+            $.OR([{ ALT: () => $.SUBRULE($.primitive) }, { ALT: () => $.SUBRULE($.tableConstructor) }]);
         });
         $.RULE('primitive', () => {
             $.OR([
@@ -234,25 +219,29 @@ class LSONParser extends CstParser {
             $.CONSUME(TableEnd);
         });
         $.RULE('field', () => {
-            $.OR([{
-                ALT: () => {
-                    $.CONSUME(FieldBegin);
-                    $.SUBRULE($.primitive);
-                    $.CONSUME(FieldEnd);
-                    $.CONSUME(FieldAssign);
-                    $.SUBRULE($.expression);
+            $.OR([
+                {
+                    ALT: () => {
+                        $.CONSUME(FieldBegin);
+                        $.SUBRULE($.primitive);
+                        $.CONSUME(FieldEnd);
+                        $.CONSUME(FieldAssign);
+                        $.SUBRULE($.expression);
+                    }
+                },
+                {
+                    ALT: () => {
+                        $.CONSUME(Name);
+                        $.CONSUME2(FieldAssign);
+                        $.SUBRULE2($.expression);
+                    }
+                },
+                {
+                    ALT: () => {
+                        $.SUBRULE3($.expression);
+                    }
                 }
-            }, {
-                ALT: () => {
-                    $.CONSUME(Name);
-                    $.CONSUME2(FieldAssign);
-                    $.SUBRULE2($.expression);
-                }
-            }, {
-                ALT: () => {
-                    $.SUBRULE3($.expression);
-                }
-            }]);
+            ]);
         });
 
         this.performSelfAnalysis();

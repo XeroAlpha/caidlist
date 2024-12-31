@@ -1,36 +1,35 @@
 export const CommentLocation = {
-    beforeAll() { return Symbol.for('before-all'); },
+    beforeAll() {
+        return Symbol.for('before-all');
+    },
     before(prop) {
         if (prop !== undefined) {
             return Symbol.for(`before:${prop}`);
         }
         return Symbol.for('before');
     },
-    afterProp(prop) { return Symbol.for(`after-prop:${prop}`); },
-    afterColon(prop) { return Symbol.for(`after-colon:${prop}`); },
-    afterValue(prop) { return Symbol.for(`after-value:${prop}`); },
+    afterProp(prop) {
+        return Symbol.for(`after-prop:${prop}`);
+    },
+    afterColon(prop) {
+        return Symbol.for(`after-colon:${prop}`);
+    },
+    afterValue(prop) {
+        return Symbol.for(`after-value:${prop}`);
+    },
     after(prop) {
         if (prop !== undefined) {
             return Symbol.for(`after:${prop}`);
         }
         return Symbol.for('after');
     },
-    afterAll() { return Symbol.for('after-all'); }
+    afterAll() {
+        return Symbol.for('after-all');
+    }
 };
 
-const clPropKeyPrefixes = [
-    'before',
-    'after-prop',
-    'after-colon',
-    'after-value',
-    'after'
-];
-const clPropKey = [
-    'before-all',
-    'before',
-    'after',
-    'after-all'
-];
+const clPropKeyPrefixes = ['before', 'after-prop', 'after-colon', 'after-value', 'after'];
+const clPropKey = ['before-all', 'before', 'after', 'after-all'];
 export function extractCommentLocation(symbol) {
     const key = Symbol.keyFor(symbol);
     if (!key) return undefined;

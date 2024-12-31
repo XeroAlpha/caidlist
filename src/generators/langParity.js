@@ -121,7 +121,10 @@ export function writeLangParityPack(cx, options) {
     if (outputPackFile) {
         const zip = new AdmZip();
         const versionArray = [
-            ...cx.coreVersion.split('.').map((e) => parseInt(e, 10)).slice(0, 2),
+            ...cx.coreVersion
+                .split('.')
+                .map((e) => parseInt(e, 10))
+                .slice(0, 2),
             Date.now() / MILLS_PER_DAY
         ];
         const files = {

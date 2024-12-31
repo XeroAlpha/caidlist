@@ -1,8 +1,8 @@
-const fs = require('fs');
-const nodePath = require('path');
-const Koa = require('koa');
-const Router = require('@koa/router');
-const pinyinRaw = require('pinyin');
+import { readFileSync, statSync } from 'fs';
+import { join, resolve } from 'path';
+import Koa from 'koa';
+import Router from '@koa/router';
+import pinyinRaw, { STYLE_NORMAL } from 'pinyin';
 
 const DefaultId = Symbol('DefaultId');
 const Keywords = Symbol('Keywords');
@@ -18,20 +18,20 @@ function dateTimeToString(date) {
 }
 
 function readJSON(path) {
-    return JSON.parse(fs.readFileSync(path, 'utf-8'));
+    return JSON.parse(readFileSync(path, 'utf-8'));
 }
 
 function readFileModifiedTime(path) {
     try {
-        const stats = fs.statSync(path);
+        const stats = statSync(path);
         return stats.mtimeMs;
-    } catch (err) {
+    } catch {
         return NaN;
     }
 }
 
 function loadData(path) {
-    const pinyin = (w) => pinyinRaw(w, { style: pinyinRaw.STYLE_NORMAL }).join('');
+    const pinyin = (w) => pinyinRaw(w, { style: STYLE_NORMAL }).join('');
     const dataIndex = readJSON(path);
     const newData = {};
     const keywords = {};
@@ -55,18 +55,14 @@ function loadData(path) {
         addKeywords(versionType, { versionType });
         addKeywords(versionIndex.name, { versionType });
         versionIndex.branchList.forEach((branchInfo) => {
-            const branchData = readJSON(nodePath.join(path, '..', versionIndex.id, `${branchInfo.id}.json`));
+            const branchData = readJSON(join(path, '..', versionIndex.id, `${branchInfo.id}.json`));
             const enumEntriesMap = {};
             const nameMap = {};
             const branchId = branchInfo.id;
             addKeywords(branchId, { versionType, branchId });
             addKeywords(branchInfo.name, { versionType, branchId });
             for (const [enumKey, enumData] of Object.entries(branchData.enums)) {
-                enumEntriesMap[enumKey] = Object.entries(enumData).map(([key, value]) => [
-                    key,
-                    value,
-                    pinyin(value)
-                ]);
+                enumEntriesMap[enumKey] = Object.entries(enumData).map(([key, value]) => [key, value, pinyin(value)]);
             }
             branchData.names.forEach(([id, name]) => {
                 addKeywords(id, { versionType, branchId, enumId: id });
@@ -196,7 +192,12 @@ function doSearch(dataStore, options) {
     } else {
         let restLimit = limit;
         for (const id of Object.keys(branchData.enums)) {
-            const enumResult = searchEnum(searcher, { scope, limit: restLimit, enumId: id, branchData });
+            const enumResult = searchEnum(searcher, {
+                scope,
+                limit: restLimit,
+                enumId: id,
+                branchData
+            });
             result.push(...enumResult);
             restLimit -= enumResult.length;
             if (restLimit <= 0) {
@@ -208,11 +209,12 @@ function doSearch(dataStore, options) {
 }
 
 function toPWAHash(options) {
-    return [
+    const urlSegs = [
         `#${options.versionType}-${options.branchId}`,
         options.enumId,
         encodeURIComponent(options.searchText)
-    ].join('/');
+    ];
+    return urlSegs.join('/');
 }
 
 function toHumanReadable(options, result) {
@@ -222,7 +224,7 @@ function toHumanReadable(options, result) {
     return lines.join('\r\n');
 }
 
-const dataIndexPath = nodePath.resolve(process.argv[2], 'index.json');
+const dataIndexPath = resolve(process.argv[2], 'index.json');
 let dataStore = loadData(dataIndexPath);
 let dataCheckTime = Date.now();
 let dataUpdateTime = readFileModifiedTime(dataIndexPath);

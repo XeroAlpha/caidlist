@@ -54,11 +54,11 @@ const KEYEVENTF_UNICODE = 0x0004;
 // https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 const VK_BACK = 0x08;
 const VK_TAB = 0x09;
-const VK_RETURN = 0x0D;
+const VK_RETURN = 0x0d;
 const VK_SHIFT = 0x10;
 const VK_CONTROL = 0x11;
 const VK_MENU = 0x12;
-const VK_ESCAPE = 0x1B;
+const VK_ESCAPE = 0x1b;
 const VK_SPACE = 0x20;
 const VK_END = 0x23;
 const VK_HOME = 0x24;
@@ -66,13 +66,13 @@ const VK_LEFT = 0x25;
 const VK_UP = 0x26;
 const VK_RIGHT = 0x27;
 const VK_DOWN = 0x28;
-const VK_DELETE = 0x2E;
-const VK_LSHIFT = 0xA0;
-const VK_RSHIFT = 0xA1;
-const VK_LCONTROL = 0xA2;
-const VK_RCONTROL = 0xA3;
-const VK_LMENU = 0xA4;
-const VK_RMENU = 0xA5;
+const VK_DELETE = 0x2e;
+const VK_LSHIFT = 0xa0;
+const VK_RSHIFT = 0xa1;
+const VK_LCONTROL = 0xa2;
+const VK_RCONTROL = 0xa3;
+const VK_LMENU = 0xa4;
+const VK_RMENU = 0xa5;
 
 const kernel32 = koffi.load('kernel32.dll');
 const user32 = koffi.load('user32.dll');
@@ -223,7 +223,7 @@ export function sendText(text) {
                 ki: {
                     wVk: 0,
                     wScan: scan,
-                    // eslint-disable-next-line no-bitwise
+
                     dwFlags: KEYEVENTF_KEYUP | KEYEVENTF_UNICODE,
                     time: 0,
                     dwExtraInfo: 0

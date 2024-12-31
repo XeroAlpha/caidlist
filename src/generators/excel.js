@@ -1,4 +1,5 @@
-import * as xlsx from 'xlsx';
+import * as xlsx from '@e965/xlsx';
+import { writeFileSync } from 'fs';
 
 export default function writeTransMapsExcel(outputFile, transMaps) {
     const wb = xlsx.utils.book_new();
@@ -7,5 +8,6 @@ export default function writeTransMapsExcel(outputFile, transMaps) {
         const ws = xlsx.utils.aoa_to_sheet([['名称', '翻译'], ...aoa]);
         xlsx.utils.book_append_sheet(wb, ws, mapName);
     }
-    xlsx.writeFile(wb, outputFile);
+    const xlsxData = xlsx.write(wb, { type: 'buffer', bookType: 'xlsx' });
+    writeFileSync(outputFile, xlsxData);
 }

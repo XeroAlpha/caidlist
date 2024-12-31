@@ -3,12 +3,8 @@ import { filterRedundantEnums, fixEntityRelatedIds } from './text.js';
 import { deepCopy, forEachObject } from '../util/common.js';
 
 export function writeTransMapJson(cx, options) {
-    const {
-        versionInfo, branch
-    } = cx;
-    const {
-        outputFile, originalEnums, transMaps, transMapNames
-    } = options;
+    const { versionInfo, branch } = cx;
+    const { outputFile, originalEnums, transMaps, transMapNames } = options;
     if (versionInfo.hidden || branch.hidden) {
         return;
     }
@@ -44,12 +40,8 @@ export function writeTransMapJson(cx, options) {
 }
 
 export function writeTransMapIndexJson(cx, options) {
-    const {
-        version, packageVersion, coreVersion, versionInfo
-    } = cx;
-    const {
-        outputFile, mergedFile, rootUrl, branchList
-    } = options;
+    const { version, packageVersion, coreVersion, versionInfo } = cx;
+    const { outputFile, mergedFile, rootUrl, branchList } = options;
     const indexData = {
         id: version,
         name: versionInfo.name,

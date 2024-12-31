@@ -18,7 +18,7 @@ export default class StateTransform extends Transform {
      * @param {Buffer} chunk Data chunk
      * @returns {[any, number]} Next state and its length
      */
-    // eslint-disable-next-line no-unused-vars, class-methods-use-this
+    // eslint-disable-next-line no-unused-vars
     _processChunk(state, chunk) {
         throw new Error('Need implement _processChunk(state, chunk)');
     }
@@ -27,9 +27,8 @@ export default class StateTransform extends Transform {
         this._bufferLength += chunk.length;
         this._bufferChunks.push(chunk);
         while (this._bufferLength >= this._triggerLength) {
-            const bufferedChunk = this._bufferChunks.length === 1
-                ? this._bufferChunks[0]
-                : Buffer.concat(this._bufferChunks);
+            const bufferedChunk =
+                this._bufferChunks.length === 1 ? this._bufferChunks[0] : Buffer.concat(this._bufferChunks);
             const triggerChunk = bufferedChunk.slice(0, this._triggerLength);
             this._bufferLength -= this._triggerLength;
             this._bufferChunks = [bufferedChunk.slice(this._triggerLength)];

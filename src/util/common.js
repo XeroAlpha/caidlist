@@ -58,7 +58,10 @@ export function projectPath(id, suffix) {
     return path;
 }
 
-export const sleepAsync = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
+export const sleepAsync = (ms) =>
+    new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 
 /**
  * Examples:
@@ -213,7 +216,8 @@ export function objectToArray(obj, f) {
 export function deepCopy(json) {
     if (Array.isArray(json)) {
         return json.map((e) => deepCopy(e));
-    } if (typeof json === 'object') {
+    }
+    if (typeof json === 'object') {
         const newObject = {};
         forEachObject(json, (value, key) => {
             newObject[key] = deepCopy(value);
@@ -234,10 +238,7 @@ export function isArraySetEqual(a, b) {
 export const stringComparator = (a, b) => (a > b ? 1 : a < b ? -1 : 0);
 
 export function naturalOrderSort(arr) {
-    const splited = new Map(arr.map((t) => [
-        t,
-        t.split(/(\d+)/g).map((e, i) => (i % 2 === 0 ? e : Number(e)))
-    ]));
+    const splited = new Map(arr.map((t) => [t, t.split(/(\d+)/g).map((e, i) => (i % 2 === 0 ? e : Number(e)))]));
     return arr.sort((a, b) => {
         const aArr = splited.get(a);
         const bArr = splited.get(b);
@@ -262,10 +263,11 @@ export function sortObjectKey(o, depth) {
 }
 
 export function compareMinecraftVersion(a, b) {
-    const asVersionArray = (str) => str
-        .split('.')
-        .map((e) => (e === '*' ? Infinity : parseInt(e, 10)))
-        .map((e) => (Number.isNaN(e) ? -1 : e));
+    const asVersionArray = (str) =>
+        str
+            .split('.')
+            .map((e) => (e === '*' ? Infinity : parseInt(e, 10)))
+            .map((e) => (Number.isNaN(e) ? -1 : e));
     const aver = asVersionArray(a);
     const bver = asVersionArray(b);
     const minLength = Math.min(aver.length, bver.length);
@@ -286,7 +288,8 @@ export function formatTimeLeft(seconds) {
     const hr = Math.floor(seconds / 3600).toFixed(0);
     if (seconds >= 6000) {
         return `${hr}h${min.padStart(2, '0')}m${sec.padStart(2, '0')}s`;
-    } if (seconds >= 60) {
+    }
+    if (seconds >= 60) {
         return `${min}m${sec.padStart(2, '0')}s`;
     }
     return `${seconds.toFixed(1)}s`;

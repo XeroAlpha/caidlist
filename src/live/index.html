@@ -271,7 +271,8 @@
                 const hr = Math.floor(floorSeconds / 3600).toFixed(0);
                 if (floorSeconds >= 3600) {
                     return `${hr}小时${min.padStart(2, '0')}分${sec.padStart(2, '0')}秒`;
-                } if (floorSeconds >= 60) {
+                }
+                if (floorSeconds >= 60) {
                     return `${min}分${sec.padStart(2, '0')}秒`;
                 }
                 return `${sec}秒`;
@@ -312,7 +313,6 @@
                         obsStreaming = false;
                     });
                 } catch (err) {
-                    // eslint-disable-next-line no-console
                     console.warn('OBS api is not available, skipped...', err);
                 }
             }
@@ -378,13 +378,10 @@
                     if (!Number.isFinite(yd[0]) || !Number.isFinite(yd[1])) {
                         yd = [0, 0];
                     }
-                    y = [
-                        Math.max(0, Math.min(boundWidth, y[0] + T * yd[0])),
-                        Math.max(0, Math.min(boundHeight, y[1] + T * yd[1]))
-                    ];
+                    y = [Math.max(0, Math.min(boundWidth, y[0] + T * yd[0])), Math.max(0, Math.min(boundHeight, y[1] + T * yd[1]))];
                     yd = [
-                        yd[0] + ((x[0] - y[0]) + k3 * xd[0] - k1Stable * yd[0]) * (T / k2Stable),
-                        yd[1] + ((x[1] - y[1]) + k3 * xd[1] - k1Stable * yd[1]) * (T / k2Stable)
+                        yd[0] + (x[0] - y[0] + k3 * xd[0] - k1Stable * yd[0]) * (T / k2Stable),
+                        yd[1] + (x[1] - y[1] + k3 * xd[1] - k1Stable * yd[1]) * (T / k2Stable)
                     ];
                     dom.scrollTo({ left: y[0], top: y[1], behavior: 'instant' });
                     lastAnimate = now;
@@ -409,7 +406,10 @@
                 let hb = { sessionId: null };
                 let success = false;
                 try {
-                    hb = await fetchJSON(`http://${controlHost}:19333/heartbeat?since=${logSince}`, lastHeartbeatError ? 500 : 30000);
+                    hb = await fetchJSON(
+                        `http://${controlHost}:19333/heartbeat?since=${logSince}`,
+                        lastHeartbeatError ? 500 : 30000
+                    );
                     success = true;
                     lastHeartbeatError = undefined;
                 } catch (err) {
@@ -423,7 +423,9 @@
                     text.push(`项目：${versionName}（${hb.packageVersion}）- ${branchName}`);
                 }
                 if (hb.enumId) {
-                    text.push(`条目：(${hb.jobIndex + 1}/${hb.jobCount})${enumNameMap[hb.enumId.replace(/\s+/g, '_')] || '未知条目'}`);
+                    text.push(
+                        `条目：(${hb.jobIndex + 1}/${hb.jobCount})${enumNameMap[hb.enumId.replace(/\s+/g, '_')] || '未知条目'}`
+                    );
                 }
                 if (hb.autocompletion) {
                     text.push(`识别结果：${hb.autocompletion}`);
@@ -465,7 +467,10 @@
                         const newHeight = logsEl.scrollHeight;
                         logScroller.scrollBy([0, newHeight - oldHeight], 'keepSpeed');
                     }
-                    logScroller.scrollTo([0, Math.max(0, logsEl.scrollHeight - logsEl.clientHeight)], firstLog ? 'instant' : 'smooth');
+                    logScroller.scrollTo(
+                        [0, Math.max(0, logsEl.scrollHeight - logsEl.clientHeight)],
+                        firstLog ? 'instant' : 'smooth'
+                    );
                     lastActiveTime = Date.now();
                 }
                 if (!sessionId) {

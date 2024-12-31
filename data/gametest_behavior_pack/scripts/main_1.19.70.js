@@ -1,5 +1,5 @@
-import * as Minecraft from "@minecraft/server";
-import * as GameTest from "@minecraft/server-gametest";
+import * as Minecraft from '@minecraft/server';
+import * as GameTest from '@minecraft/server-gametest';
 
 globalThis.totalTicks = 0;
 Minecraft.system.run(function handler() {
@@ -7,6 +7,6 @@ Minecraft.system.run(function handler() {
     Minecraft.system.run(handler);
 });
 
-GameTest.register("gametest", "remote", (test) => {
+GameTest.register('gametest', 'remote', (test) => {
     test.succeed();
 });

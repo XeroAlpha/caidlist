@@ -87,6 +87,7 @@ export function writeTransMapTextZip(cx, options) {
         return;
     }
     const gameVersionText = `${versionInfo.name}（${packageVersion}）- ${branchName}`;
+    // eslint-disable-next-line prettier/prettier
     const footText = [
         `※此ID表是MCBEID表的一部分，对应游戏版本为${gameVersionText}`,
         `※详见：${projectInfo.homepage}`

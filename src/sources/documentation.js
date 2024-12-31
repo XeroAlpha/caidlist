@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
 import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
@@ -35,7 +34,7 @@ function processDocStateMachine(elements, initialState, target) {
  */
 function treeifyDocument(index, sections) {
     if (sections.length === 0) return [];
-    const hrefMap = sections.reduce((/** @type {Record<string, number[]>} */map, e, i) => {
+    const hrefMap = sections.reduce((/** @type {Record<string, number[]>} */ map, e, i) => {
         const k = `#${e.id}`;
         if (!map[k]) map[k] = [];
         map[k].push(i);
@@ -48,7 +47,7 @@ function treeifyDocument(index, sections) {
         if (startVec.length >= indexSectionMap.length) {
             /** @type {Array<Section | undefined>} */
             const indexSections = startVec.map((e) => sections[e]);
-            const grouped = indexSections.reduce((/** @type {Record<string, number[]>} */map, e, i) => {
+            const grouped = indexSections.reduce((/** @type {Record<string, number[]>} */ map, e, i) => {
                 const k = index[i].level;
                 if (!map[k]) map[k] = [];
                 map[k].push(Math.abs(e.level - k));
@@ -117,11 +116,13 @@ BedrockDocStates.set('index.table', (el, { document, index, state }) => {
     if (el instanceof HTMLElement && el.tagName === 'TABLE') {
         const tableRows = el.querySelectorAll('tr > :is(th,td) > a');
         document.content = [];
-        const indexSections = tableRows.map((a) => ({
-            name: a.text.trim(),
-            href: a.getAttribute('href'),
-            level: a.parentNode.tagName === 'TH' ? 1 : 2
-        })).filter((e) => e.name.length > 0);
+        const indexSections = tableRows
+            .map((a) => ({
+                name: a.text.trim(),
+                href: a.getAttribute('href'),
+                level: a.parentNode.tagName === 'TH' ? 1 : 2
+            }))
+            .filter((e) => e.name.length > 0);
         index.push(...indexSections);
         state.currentSection = document;
         return 'section';
@@ -235,18 +236,36 @@ BedrockDocStates.set('table.row', (el, { columnNames, rows }) => {
 });
 
 const NormalTagNames = [
-    'HTML', 'TITLE', 'HEAD', 'BODY',
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-    'TABLE', 'TH', 'TR', 'TD',
-    'A', 'P', 'BR',
-    'TEXTAREA', 'OL', 'LI', 'PRE'
+    'HTML',
+    'TITLE',
+    'HEAD',
+    'BODY',
+    'H1',
+    'H2',
+    'H3',
+    'H4',
+    'H5',
+    'H6',
+    'TABLE',
+    'TH',
+    'TR',
+    'TD',
+    'A',
+    'P',
+    'BR',
+    'TEXTAREA',
+    'OL',
+    'LI',
+    'PRE'
 ];
 /** @param {string} htmlContent */
 function cleanHtml(htmlContent) {
-    return htmlContent.replace(/<a\b(?:.*?)>Back to top<\/a>/ig, '')
+    return htmlContent
+        .replace(/<a\b(?:.*?)>Back to top<\/a>/gi, '')
         .replace(/```([^]*?)```/g, '<pre>$1</pre>')
-        .replace(/<(textarea|pre)\b(?:.*?)>([^]*?)<\/\1>/ig, (match, tag, content) => {
-            const escapedContent = content.replace(/<(?:\/)?br\s*(?:\/)?\s*>/g, '\n')
+        .replace(/<(textarea|pre)\b(?:.*?)>([^]*?)<\/\1>/gi, (match, tag, content) => {
+            const escapedContent = content
+                .replace(/<(?:\/)?br\s*(?:\/)?\s*>/g, '\n')
                 .replace(/<(?:\/)?pre>/g, '```')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
@@ -266,7 +285,12 @@ function parseBedrockDoc(content) {
     const index = [];
     const sections = [];
     const state = {};
-    processDocStateMachine(root.childNodes, 'initial', { document, index, sections, state });
+    processDocStateMachine(root.childNodes, 'initial', {
+        document,
+        index,
+        sections,
+        state
+    });
     document.sections = treeifyDocument(index, sections);
     return document;
 }
@@ -292,8 +316,7 @@ function findSection(node, ...path) {
 
 function contentToPlain(content) {
     if (Array.isArray(content)) {
-        return content.filter((e) => typeof e === 'string')
-            .join('\n');
+        return content.filter((e) => typeof e === 'string').join('\n');
     }
     return String(content);
 }
@@ -412,13 +435,7 @@ function createSectionTableAnalyzer({
     };
 }
 
-function createSchemeTableAnalyzer({
-    name,
-    target,
-    path,
-    tableIndex,
-    ...args
-}) {
+function createSchemeTableAnalyzer({ name, target, path, tableIndex, ...args }) {
     return {
         ...args,
         name: target,
@@ -684,7 +701,13 @@ const overwriteCommitHashMap = {};
 const versionRegExp = /"latest"[\s\n\r]*:[\s\n\r]*{[^"]*?"version"[\s\n\r]*:[\s\n\r]*"([\w.]+)"/;
 
 async function fetchBehaviorPack(treeSHA, cacheKey) {
-    const tree = (await octokit.git.getTree({ ...repoConfig, tree_sha: treeSHA, recursive: 1 })).data;
+    const tree = (
+        await octokit.git.getTree({
+            ...repoConfig,
+            tree_sha: treeSHA,
+            recursive: 1
+        })
+    ).data;
     const versionNode = tree.tree.find((e) => e.path === 'version.json');
     log('Fetching version for documentation...');
     const versionJSON = await fetchGitBlob(versionNode, 'utf-8');
@@ -716,12 +739,22 @@ export async function fetchDocumentationIds(cx) {
         let commitTreeSHA;
         let commitMessage;
         if (overwriteCommitHash) {
-            const commitTree = (await octokit.repos.getCommit({ ...repoConfig, ref: overwriteCommitHash })).data;
+            const commitTree = (
+                await octokit.repos.getCommit({
+                    ...repoConfig,
+                    ref: overwriteCommitHash
+                })
+            ).data;
             commitHash = overwriteCommitHash;
             commitTreeSHA = commitTree.commit.tree.sha;
             commitMessage = commitTree.commit.message;
         } else {
-            const repoBranch = (await octokit.repos.getBranch({ ...repoConfig, branch: branchMap[version] })).data;
+            const repoBranch = (
+                await octokit.repos.getBranch({
+                    ...repoConfig,
+                    branch: branchMap[version]
+                })
+            ).data;
             commitHash = repoBranch.commit.sha;
             commitTreeSHA = repoBranch.commit.commit.tree.sha;
             commitMessage = repoBranch.commit.commit.message;
@@ -777,7 +810,9 @@ function visitSchema(schema, f, stack) {
 function tryParseJSON(str, defaultValue) {
     try {
         return JSON.parse(str);
-    } catch (err) { /* ignore */ }
+    } catch {
+        // ignore
+    }
     return defaultValue;
 }
 
@@ -866,31 +901,39 @@ function generateTypedJSON(schema, name, target) {
 export function doSchemaTranslation(schemaMap, onTranslate) {
     const flatMap = {};
     forEachObject(schemaMap, (schema, mapKey) => {
-        visitSchema(schema, (type, schemaNode, path) => {
-            const k = path.join('|>');
-            if (k in flatMap) {
-                warn(`Duplicated path: ${k}`);
-            }
-            flatMap[k] = schemaNode.description || '';
-        }, [mapKey]);
+        visitSchema(
+            schema,
+            (type, schemaNode, path) => {
+                const k = path.join('|>');
+                if (k in flatMap) {
+                    warn(`Duplicated path: ${k}`);
+                }
+                flatMap[k] = schemaNode.description || '';
+            },
+            [mapKey]
+        );
     });
     const translatedFlatMap = onTranslate(flatMap, Object.keys(flatMap)) || flatMap;
     const translatedMap = {};
     forEachObject(schemaMap, (schema, mapKey) => {
         if (typeof schema === 'object') {
             const translatedSchema = deepCopy(schema);
-            visitSchema(translatedSchema, (type, schemaNode, path) => {
-                const k = path.join('|>');
-                const v = translatedFlatMap[k];
-                if (v) {
-                    const match = /\{(.+?)\} (.+)/.exec(v);
-                    if (match) {
-                        [, schemaNode.type, schemaNode.description] = match;
-                    } else {
-                        schemaNode.description = v;
+            visitSchema(
+                translatedSchema,
+                (type, schemaNode, path) => {
+                    const k = path.join('|>');
+                    const v = translatedFlatMap[k];
+                    if (v) {
+                        const match = /\{(.+?)\} (.+)/.exec(v);
+                        if (match) {
+                            [, schemaNode.type, schemaNode.description] = match;
+                        } else {
+                            schemaNode.description = v;
+                        }
                     }
-                }
-            }, [mapKey]);
+                },
+                [mapKey]
+            );
             const typedJSON = {};
             const parent = { [mapKey]: typedJSON };
             generateTypedJSON(translatedSchema, mapKey, parent);

@@ -1,3 +1,4 @@
+import lcs from 'node-lcs';
 import analyzePackageDataEnumsCached from './sources/applicationPackage.js';
 import analyzeAutocompletionEnumsCached from './sources/autocompletion.js';
 import { fetchStandardizedTranslation, writeHiddenEntryLog } from './sources/wiki.js';
@@ -26,7 +27,11 @@ import {
     pickAndAssignObject
 } from './util/common.js';
 import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockState.js';
-import { writeWikiBlockStateValuesBE, writeWikiBlockPropertyValuesBE, writeWikiBlockIdValuesBE } from './generators/wiki.js';
+import {
+    writeWikiBlockStateValuesBE,
+    writeWikiBlockPropertyValuesBE,
+    writeWikiBlockIdValuesBE
+} from './generators/wiki.js';
 
 const BASE_LANG_ID = 'en_us';
 const USER_LANG_ID = 'zh_cn';
@@ -148,7 +153,7 @@ async function generateBranchedOutputFiles(cx) {
     matchTranslations({
         ...commonOptions,
         name: 'item',
-        originalArray: enums.items.filter((item) => !enums.blocks.includes(item) || (item in userTranslation.item)),
+        originalArray: enums.items.filter((item) => !enums.blocks.includes(item) || item in userTranslation.item),
         translationMap: userTranslation.item,
         stdTransMap: cascadeMap(standardizedTranslation, ['ItemSprite', 'ExclusiveItemSprite'], true),
         langKeyPrefix: 'item.',
@@ -402,7 +407,9 @@ async function generateBranchedOutputFiles(cx) {
                     const untranslated = enums.dataDrivenRecipeData[key];
                     if (untranslated) {
                         return untranslated.replace(/[A-Za-z][A-Za-z_:0-9]*/g, (match) => {
-                            const resultContainer = { ...translationResultMaps };
+                            const resultContainer = {
+                                ...translationResultMaps
+                            };
                             const k = `$${match}`;
                             matchTranslations({
                                 ...commonOptions,
@@ -461,7 +468,9 @@ async function generateBranchedOutputFiles(cx) {
         translationResultMaps.sound,
         (key) => key.startsWith('music.') || key.startsWith('record.')
     );
-    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, (key) => enums.summonableEntities.includes(key));
+    translationResultMaps.summonableEntity = filterObjectMap(translationResultMaps.entity, (key) =>
+        enums.summonableEntities.includes(key)
+    );
     if (enums.lootTools) {
         translationResultMaps.lootTool = keyArrayToObject(enums.lootTools, (k) => {
             let key = k;
@@ -482,11 +491,13 @@ async function generateBranchedOutputFiles(cx) {
     writeTransMapClib(cx, {
         outputFile: projectPath(`output.clib.${version}.${branch.id}`),
         translationResultMaps,
-        patchOptions: branch.patch ? {
-            sourceFile: projectPath(`output.clib.${version}.${branch.patch.from}`),
-            patchFile: projectPath(`output.clib.${version}.patch.${branch.id}`),
-            uuid: branch.patch.uuid
-        } : undefined
+        patchOptions: branch.patch
+            ? {
+                  sourceFile: projectPath(`output.clib.${version}.${branch.patch.from}`),
+                  patchFile: projectPath(`output.clib.${version}.patch.${branch.id}`),
+                  uuid: branch.patch.uuid
+              }
+            : undefined
     });
     writeTransMapsExcel(projectPath(`output.translation.${version}.${branch.id}`, 'xlsx'), translationResultMaps);
     writeTransMapTextZip(cx, {
@@ -645,7 +656,7 @@ async function generateGameTestOutputFiles(cx) {
     const removePrefix = (s) => s.replace(/^minecraft:/, '');
     const blockIds = Object.keys(ids.blocks);
     const itemIds = Object.keys(ids.items);
-    const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e) || (removePrefix(e) in userTranslation.item));
+    const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e) || removePrefix(e) in userTranslation.item);
     const entityIds = ids.entities;
     matchTranslations({
         ...commonOptions,
@@ -761,7 +772,11 @@ async function generateGameTestOutputFiles(cx) {
     saveUserTranslation(userTranslation);
     writeHiddenEntryLog(cx, standardizedTranslation);
     writeWikiBlockStateValuesBE(cx, projectPath('output.wiki.module.blockStateValues', 'lua'), ids.blocks);
-    writeWikiBlockPropertyValuesBE(cx, projectPath('output.wiki.module.blockPropertyValues', 'lua'), ids.blockProperties);
+    writeWikiBlockPropertyValuesBE(
+        cx,
+        projectPath('output.wiki.module.blockPropertyValues', 'lua'),
+        ids.blockProperties
+    );
     writeWikiBlockIdValuesBE(cx, projectPath('output.wiki.module.blockIdValues', 'lua'), translationResultMaps.block);
 }
 
@@ -770,35 +785,19 @@ const versionInfoMap = {
         name: '测试版',
         description: '更新速度快，包含较多不稳定的新特性的版本',
         sortOrder: 0,
-        branches: [
-            'gametest',
-            'vanilla',
-            'education',
-            'experiment',
-            'translator',
-            'documentation',
-            'langParity'
-        ]
+        branches: ['gametest', 'vanilla', 'education', 'experiment', 'translator', 'documentation', 'langParity']
     },
     release: {
         name: '正式版',
         description: '更新速度慢，向所有人开放的稳定版本',
         sortOrder: 1,
-        branches: [
-            'vanilla',
-            'education',
-            'experiment',
-            'documentation'
-        ]
+        branches: ['vanilla', 'education', 'experiment', 'documentation']
     },
     netease: {
         name: '中国版',
         description: '由网易推出的中国本地化版本，通常落后于正式版',
         sortOrder: 2,
-        branches: [
-            'vanilla',
-            'experiment'
-        ]
+        branches: ['vanilla', 'experiment']
     },
     netease_dev: {
         // name: "中国版测试版",
@@ -807,18 +806,13 @@ const versionInfoMap = {
         description:
             '由网易推出的中国本地化版本，通常落后于正式版。由于一些限制，此处使用开发者专用的测试版启动器的数据代替。',
         sortOrder: 3,
-        branches: [
-            'vanilla',
-            'experiment'
-        ]
+        branches: ['vanilla', 'experiment']
     },
     education: {
         name: '教育版',
         description: '为教室使用而设计的教学版本',
         sortOrder: 4,
-        branches: [
-            'vanilla'
-        ]
+        branches: ['vanilla']
     },
     preview_win: {
         name: '预览版（Windows）',
@@ -826,37 +820,26 @@ const versionInfoMap = {
         sortOrder: 5,
         disableAdb: true,
         hidden: true,
-        branches: [
-            'gametest'
-        ]
+        branches: ['gametest']
     },
     bds_preview: {
         name: '专用服务器预览版',
         description: '与预览版同步更新',
         sortOrder: 6,
-        branches: [
-            'bds'
-        ]
+        branches: ['bds']
     },
     bds_release: {
         name: '专用服务器正式版',
         description: '与正式版同步更新',
         sortOrder: 7,
-        branches: [
-            'bds'
-        ]
+        branches: ['bds']
     },
     dev: {
         name: '预览版开发版',
         description: '包含部分开发者独有功能与开发中的新功能',
         sortOrder: 8,
         disableAutoMatch: true,
-        branches: [
-            'gametest',
-            'vanilla',
-            'education',
-            'experiment'
-        ]
+        branches: ['gametest', 'vanilla', 'education', 'experiment']
     }
 };
 const branchInfoMap = {
@@ -868,13 +851,19 @@ const branchInfoMap = {
     education: {
         name: '教育版',
         description: '启用了教育版选项后创建的世界的ID表',
-        patch: { from: 'vanilla', uuid: 'fa5e8807-b1e9-402f-aafa-0376e1b79ee2' },
+        patch: {
+            from: 'vanilla',
+            uuid: 'fa5e8807-b1e9-402f-aafa-0376e1b79ee2'
+        },
         sortOrder: 1
     },
     experiment: {
         name: '实验性玩法',
         description: '启用了所有实验性玩法选项后创建的世界的ID表',
-        patch: { from: 'vanilla', uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962' },
+        patch: {
+            from: 'vanilla',
+            uuid: '67ae284f-dc3e-4a13-85f8-a455a1874962'
+        },
         sortOrder: 2
     },
     gametest: {

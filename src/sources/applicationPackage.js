@@ -16,7 +16,8 @@ import {
 import { RecipeDataParser } from '../generators/recipe.js';
 
 function iteratePackageEntries(packageZip, filter, processor) {
-    const entries = packageZip.getEntries()
+    const entries = packageZip
+        .getEntries()
         .map((entry) => [entry, filter(entry)])
         .filter(([, extra]) => extra !== undefined);
     let nextStatusTime = Date.now();
@@ -36,19 +37,23 @@ function iteratePackageEntries(packageZip, filter, processor) {
 function generatePackageFileMeta(fileName, packageZip) {
     const files = [];
     log(`Analyzing package entries for hash: ${fileName}`);
-    iteratePackageEntries(packageZip, () => true, (entry, data) => {
-        if (entry.isDirectory) {
-            files.push({ name: entry.entryName, directory: true });
-        } else {
-            const digest = createHash('sha1');
-            digest.update(data);
-            files.push({
-                name: entry.entryName,
-                size: data.length,
-                sha1: digest.digest().toString('hex')
-            });
+    iteratePackageEntries(
+        packageZip,
+        () => true,
+        (entry, data) => {
+            if (entry.isDirectory) {
+                files.push({ name: entry.entryName, directory: true });
+            } else {
+                const digest = createHash('sha1');
+                digest.update(data);
+                files.push({
+                    name: entry.entryName,
+                    size: data.length,
+                    sha1: digest.digest().toString('hex')
+                });
+            }
         }
-    });
+    );
     files.sort((a, b) => stringComparator(a.name, b.name));
     return files;
 }
@@ -73,18 +78,22 @@ function analyzeApkPackageLang(packageZip) {
     const langZh = {};
     const langEn = {};
     log('Analyzing package entries for language file...');
-    iteratePackageEntries(packageZip, (entry) => {
-        const { entryName } = entry;
-        if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/zh_CN\.lang$/)) {
-            return langZh;
+    iteratePackageEntries(
+        packageZip,
+        (entry) => {
+            const { entryName } = entry;
+            if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/zh_CN\.lang$/)) {
+                return langZh;
+            }
+            if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/en_US\.lang$/)) {
+                return langEn;
+            }
+            return undefined;
+        },
+        (_, data, langObj) => {
+            parseMinecraftLang(langObj, data.toString('utf-8'));
         }
-        if (entryName.match(/resource_packs\/(?:[^/]+)\/texts\/en_US\.lang$/)) {
-            return langEn;
-        }
-        return undefined;
-    }, (_, data, langObj) => {
-        parseMinecraftLang(langObj, data.toString('utf-8'));
-    });
+    );
     return {
         zh_cn: langZh,
         en_us: langEn
@@ -256,7 +265,8 @@ const entryAnalyzer = [
         name: 'entityBehavior',
         type: 'json',
         regex: /assets\/behavior_packs\/(?:[^/]+)\/entities\/(?:[^/]+)\.json$/,
-        analyze(results, entryName, entity) { // TODO: only use newest version
+        analyze(results, entryName, entity) {
+            // TODO: only use newest version
             const { entityEventsMap, entityFamilyMap, entityPropertyDescMap } = results;
             const formatVersion = entity.format_version;
             if (this.versionsGroups[0].includes(formatVersion)) {
@@ -410,7 +420,9 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.30', '1.20.60', '1.21.30', '1.21.40', '1.21.50']]
+        versionsGroups: [
+            ['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.30', '1.20.60', '1.21.30', '1.21.40', '1.21.50']
+        ]
     }
 ];
 function analyzeApkPackageDataEnums(packageZip, branchId) {
@@ -437,33 +449,39 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         entityPropertyDescMap: {}
     };
     log('Analyzing package entries for data enums...');
-    iteratePackageEntries(packageZip, (entry) => {
-        const { entryName } = entry;
-        const analyzer = entryAnalyzer.find((e) => {
-            if (e.regex) {
-                return e.regex.test(entryName);
-            } if (e.regexList) {
-                return e.regexList.some((regex) => regex.test(entryName));
-            } if (e.filter) {
-                return e.filter(entryName, entry);
+    iteratePackageEntries(
+        packageZip,
+        (entry) => {
+            const { entryName } = entry;
+            const analyzer = entryAnalyzer.find((e) => {
+                if (e.regex) {
+                    return e.regex.test(entryName);
+                }
+                if (e.regexList) {
+                    return e.regexList.some((regex) => regex.test(entryName));
+                }
+                if (e.filter) {
+                    return e.filter(entryName, entry);
+                }
+                return false;
+            });
+            if (entryNameDenyKeywords.some((keyword) => entryName.includes(keyword))) return undefined;
+            if (entryNameAllowKeywords.every((keyword) => !entryName.includes(keyword))) return undefined;
+            return analyzer;
+        },
+        (entry, data, analyzer) => {
+            const { entryName } = entry;
+            let entryData = data;
+            if (analyzer.type === 'json') {
+                entryData = CommentJSON.parse(entryData.toString('utf8'));
             }
-            return false;
-        });
-        if (entryNameDenyKeywords.some((keyword) => entryName.includes(keyword))) return undefined;
-        if (entryNameAllowKeywords.every((keyword) => !entryName.includes(keyword))) return undefined;
-        return analyzer;
-    }, (entry, data, analyzer) => {
-        const { entryName } = entry;
-        let entryData = data;
-        if (analyzer.type === 'json') {
-            entryData = CommentJSON.parse(entryData.toString('utf8'));
+            try {
+                analyzer.analyze(results, entryName, entryData);
+            } catch (err) {
+                warn(`Analyze Error: ${entryName}`, err);
+            }
         }
-        try {
-            analyzer.analyze(results, entryName, entryData);
-        } catch (err) {
-            warn(`Analyze Error: ${entryName}`, err);
-        }
-    });
+    );
     forEachObject(results.internal.entityDefinitionMap, (definition, entityId) => {
         const { geometryMap, animationMap, animationControllerMap, renderControllerMap } = results;
         forEachObject(definition.geometry, (ref, action) => {
@@ -564,7 +582,10 @@ function extractInstallPack(packagePath) {
         for (const packageEntry of packageApkFile.getEntries()) {
             if (packageEntry.entryName.toLowerCase().endsWith('.apk')) {
                 const entryData = packageEntry.getData();
-                packageFileMeta[packageEntry.entryName] = generatePackageFileMeta(packageEntry.entryName, new AdmZip(entryData));
+                packageFileMeta[packageEntry.entryName] = generatePackageFileMeta(
+                    packageEntry.entryName,
+                    new AdmZip(entryData)
+                );
             }
         }
         sortObjectKey(packageFileMeta);

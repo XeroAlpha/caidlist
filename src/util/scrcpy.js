@@ -22,40 +22,59 @@ export class ScrcpyPNGStream extends Readable {
         });
         const { videoSocket } = scrcpy;
         this.videoSocket = videoSocket;
-        videoSocket.on('close', this._videoSocketCloseListener = () => {
-            this.destroy();
-        });
-        videoSocket.on('error', this._videoSocketErrorListener = (err) => {
-            warn('scrcpy stream error', err);
-        });
-        this.ffmpeg = spawn('ffmpeg', [
-            '-f', 'h264',
-            '-hwaccel', 'auto',
-            '-i', '-',
-            ...(ffmpegArgs || []),
-            '-c:v', 'png',
-            '-f', 'image2pipe',
-            '-'
-        ], {
-            stdio: ['pipe', 'pipe', debug ? 'inherit' : 'ignore']
-        });
+        videoSocket.on(
+            'close',
+            (this._videoSocketCloseListener = () => {
+                this.destroy();
+            })
+        );
+        videoSocket.on(
+            'error',
+            (this._videoSocketErrorListener = (err) => {
+                warn('scrcpy stream error', err);
+            })
+        );
+        this.ffmpeg = spawn(
+            'ffmpeg',
+            [
+                '-f',
+                'h264',
+                '-hwaccel',
+                'auto',
+                '-i',
+                '-',
+                ...(ffmpegArgs || []),
+                '-c:v',
+                'png',
+                '-f',
+                'image2pipe',
+                '-'
+            ],
+            {
+                stdio: ['pipe', 'pipe', debug ? 'inherit' : 'ignore']
+            }
+        );
         this.ffmpeg.on('exit', () => {
             this.destroy();
         });
         this.ffmpeg.stdin.on('error', () => {});
-        this.ffmpeg.stdout.pipe(new PNGSplitStream())
-            .on('data', (image) => {
-                if (this.pushingImages) {
-                    this.pushingImages = this.push(image);
-                }
-            });
-        let readyResolve;
-        this.ready = new Promise((resolve) => { readyResolve = resolve; });
-        videoSocket.on('data', this._videoSocketDataListener = (d) => {
-            if (this.ffmpeg.stdin.writable) {
-                this.ffmpeg.stdin.write(d);
+        this.ffmpeg.stdout.pipe(new PNGSplitStream()).on('data', (image) => {
+            if (this.pushingImages) {
+                this.pushingImages = this.push(image);
             }
         });
+        let readyResolve;
+        this.ready = new Promise((resolve) => {
+            readyResolve = resolve;
+        });
+        videoSocket.on(
+            'data',
+            (this._videoSocketDataListener = (d) => {
+                if (this.ffmpeg.stdin.writable) {
+                    this.ffmpeg.stdin.write(d);
+                }
+            })
+        );
         videoSocket.once('data', () => readyResolve());
     }
 
@@ -77,7 +96,9 @@ export class ScrcpyPNGStream extends Readable {
  */
 export async function openScrcpy(device, options) {
     const jarDest = '/data/local/tmp/scrcpy-server.jar';
-    const scid = Math.floor(Math.random() * 2147483648).toString(16).padStart(8, '0');
+    const scid = Math.floor(Math.random() * 2147483648)
+        .toString(16)
+        .padStart(8, '0');
     await device.push(scrcpyServer.path, jarDest);
     const parts = [
         `CLASSPATH=${jarDest}`,
@@ -97,7 +118,9 @@ export async function openScrcpy(device, options) {
     const commandLine = parts.filter((e) => e !== null).join(' ');
     const serverProcess = await device.shell(commandLine);
     let readyToConnectResolve;
-    const readyToConnectPromise = new Promise((resolve) => { readyToConnectResolve = resolve; });
+    const readyToConnectPromise = new Promise((resolve) => {
+        readyToConnectResolve = resolve;
+    });
     serverProcess.on('data', (text) => {
         const lines = text.toString('utf-8').split('\n');
         lines.forEach((ln) => {

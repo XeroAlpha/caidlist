@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import { createServer } from 'net';
 import { pEvent } from 'p-event';
 import getPort from 'get-port';
@@ -46,11 +45,7 @@ function stateToSlots(state, propNames) {
 }
 
 function slotsToState(slots, propNames) {
-    return Object.fromEntries(
-        slots
-            .map((v, i) => [propNames[i], v])
-            .filter(([, v]) => v !== undefined)
-    );
+    return Object.fromEntries(slots.map((v, i) => [propNames[i], v]).filter(([, v]) => v !== undefined));
 }
 
 function slotsMatchPattern(input, pattern) {
@@ -140,15 +135,13 @@ function simplifyState(stateValues, states, invalidStates) {
             // childStates 中重复的值不影响
             // 接上文，如果出现任意值，就表示所有值都出现过了，因此直接清空
             // invalidChildren 中不可能出现任意值，因为无关项列表与最小项列表不可重叠
-            childStates
-                .concat(invalidChildren)
-                .forEach((state) => {
-                    if (state[propIndex] !== undefined) {
-                        validValues.delete(state[propIndex]);
-                    } else {
-                        validValues.clear();
-                    }
-                });
+            childStates.concat(invalidChildren).forEach((state) => {
+                if (state[propIndex] !== undefined) {
+                    validValues.delete(state[propIndex]);
+                } else {
+                    validValues.clear();
+                }
+            });
             if (validValues.size > 0) {
                 // 不是全都有
                 primeStates.push(...childStates);
@@ -251,7 +244,10 @@ function findAliasState(stateValues, invalidStates) {
         const mappingGroups = new Map();
         const currentProp = propNames[i];
         for (const stateValue of stateValues[currentProp]) {
-            mappingGroups.set(stateValue, propNames.map(() => new Set()));
+            mappingGroups.set(
+                stateValue,
+                propNames.map(() => new Set())
+            );
         }
         for (const state of validStates) {
             for (let j = 0; j < propNames.length; j++) {
@@ -353,10 +349,7 @@ function createPauseController(session, breakpoints) {
         return {
             pause: async () => {
                 applyBreakpoints(true);
-                await Promise.all([
-                    session.continue(),
-                    pEvent(session, 'stopped')
-                ]);
+                await Promise.all([session.continue(), pEvent(session, 'stopped')]);
             },
             continue: async () => {
                 applyBreakpoints(false);
@@ -377,7 +370,12 @@ const Extractors = [
         async extract({ target, frame }) {
             const { tree, flatMap } = await wrapEvaluate(frame, () => {
                 const flatDescMap = {};
-                const root = { path: '', value: globalThis, desc: {}, doNotSort: true };
+                const root = {
+                    path: '',
+                    value: globalThis,
+                    desc: {},
+                    doNotSort: true
+                };
                 const nodeQueue = [root];
                 const objects = [];
                 const objectDesc = [];
@@ -485,7 +483,7 @@ const Extractors = [
                                     desc.integrity = 'preventExtensible';
                                 }
                             }
-                        } catch (err) {
+                        } catch {
                             desc.integrity = 'non-object';
                         }
                         objects.push(value);
@@ -525,13 +523,13 @@ const Extractors = [
                     }
                     return null;
                 }
-                asyncOp().then((result) => {
-                    // eslint-disable-next-line no-console
-                    console.info(`[Command Extractor]${JSON.stringify(result)}`);
-                }).catch((error) => {
-                    // eslint-disable-next-line no-console
-                    console.info(`[Command Extractor]ERROR: ${error}`);
-                });
+                asyncOp()
+                    .then((result) => {
+                        console.info(`[Command Extractor]${JSON.stringify(result)}`);
+                    })
+                    .catch((error) => {
+                        console.info(`[Command Extractor]ERROR: ${error}`);
+                    });
                 return null;
             });
             const [res] = await Promise.all([
@@ -588,7 +586,7 @@ const Extractors = [
                                     throw new Error('State property invalid');
                                 }
                             }
-                        } catch (err) {
+                        } catch {
                             permutation = null;
                             invalidStates.push(state);
                         }
@@ -617,9 +615,16 @@ const Extractors = [
                                 if (permutation.liquidSpreadCausesSpawn(liquidType)) {
                                     interactPattern.push('drops when touched');
                                 }
-                                liquidInteractPattern[liquidType] = interactPattern.length > 0 ? interactPattern.join(', ') : 'none';
+                                liquidInteractPattern[liquidType] =
+                                    interactPattern.length > 0 ? interactPattern.join(', ') : 'none';
                             }
-                            states.push({ state, tags, itemId, canContainLiquid, liquidInteractPattern });
+                            states.push({
+                                state,
+                                tags,
+                                itemId,
+                                canContainLiquid,
+                                liquidInteractPattern
+                            });
                         }
                         let cursor = loopFields.length - 1;
                         while (cursor >= 0) {
@@ -634,7 +639,11 @@ const Extractors = [
                         }
                         if (cursor < 0) break;
                     }
-                    result[blockType.id] = { properties, states, invalidStates };
+                    result[blockType.id] = {
+                        properties,
+                        states,
+                        invalidStates
+                    };
                 }
                 return result;
             });
@@ -646,27 +655,33 @@ const Extractors = [
             const blockInfoEntries = Object.entries(blockInfoList).sort((a, b) => stringComparator(a[0], b[0]));
             let index = 0;
             for (const [blockId, blockType] of blockInfoEntries) {
-                setStatus(`[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`);
+                setStatus(
+                    `[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`
+                );
                 const { properties, states, invalidStates } = blockType;
                 const tagMap = {};
                 const itemIdMap = {};
                 const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
                 const aliasStates = findAliasState(stateValues, invalidStates);
                 const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
-                const [validStateOverrides, filteredInvalidStates] = extractValidStateOverrides(stateValues, simplifiedInvalidStates);
+                const [validStateOverrides, filteredInvalidStates] = extractValidStateOverrides(
+                    stateValues,
+                    simplifiedInvalidStates
+                );
                 for (const property of properties) {
                     let propertyDescriptors = blockProperties[property.name];
                     if (!propertyDescriptors) {
                         propertyDescriptors = blockProperties[property.name] = [];
                     }
-                    let propertyDescriptor = propertyDescriptors.find(
-                        (e) => isArraySetEqual(e.validValues, property.validValues)
+                    let propertyDescriptor = propertyDescriptors.find((e) =>
+                        isArraySetEqual(e.validValues, property.validValues)
                     );
                     if (!propertyDescriptor) {
-                        propertyDescriptors.push(propertyDescriptor = {
+                        propertyDescriptor = {
                             validValues: property.validValues,
                             defaultValue: {}
-                        });
+                        };
+                        propertyDescriptors.push(propertyDescriptor);
                     }
                     propertyDescriptor.defaultValue[blockId] = property.defaultValue;
                 }
@@ -729,7 +744,11 @@ const Extractors = [
                     if (!containLiquidSubMap) {
                         containLiquidSubMap = containLiquidMap[liquidType] = {};
                     }
-                    containLiquidSubMap[blockId] = simplifyStateAndCheckTrimmed(stateValues, containableStates, simplifiedInvalidStates);
+                    containLiquidSubMap[blockId] = simplifyStateAndCheckTrimmed(
+                        stateValues,
+                        containableStates,
+                        simplifiedInvalidStates
+                    );
                 }
                 for (const [liquidType, interactStateMap] of Object.entries(liquidInteractStateMap)) {
                     let globalInteractStateMap = liquidInteractMap[liquidType];
@@ -741,7 +760,11 @@ const Extractors = [
                         if (!globalStateMap) {
                             globalStateMap = globalInteractStateMap[interactPattern] = {};
                         }
-                        globalStateMap[blockId] = simplifyStateAndCheckTrimmed(stateValues, patternStates, simplifiedInvalidStates);
+                        globalStateMap[blockId] = simplifyStateAndCheckTrimmed(
+                            stateValues,
+                            patternStates,
+                            simplifiedInvalidStates
+                        );
                     }
                 }
             }
@@ -760,7 +783,10 @@ const Extractors = [
             let ItemInfoList;
             await wrapEvaluate(frame, () => {
                 const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
-                const enchantments = enchantmentTypes.map((type) => ({ level: type.maxLevel, type }));
+                const enchantments = enchantmentTypes.map((type) => ({
+                    level: type.maxLevel,
+                    type
+                }));
                 enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
                 globalThis.__item_extract_enchantments = enchantments;
                 return '"OK"';
@@ -830,10 +856,7 @@ const Extractors = [
                             componentData.potionModifierType = component.potionModifierType.id;
                         }
                         if (component instanceof Minecraft.ItemDyeableComponent) {
-                            assign(componentData, component, [
-                                'color',
-                                'defaultColor'
-                            ]);
+                            assign(componentData, component, ['color', 'defaultColor']);
                         }
                         if (component instanceof Minecraft.ItemCompostableComponent) {
                             assign(componentData, component, ['compostingChance']);
@@ -874,16 +897,20 @@ const Extractors = [
                 let corruptedCount = 0;
                 for (let i = 0; i < length; i++) {
                     try {
-                        const [id, value] = await wrapEvaluate(frame, (index) => {
-                            const itemTypes = globalThis.__item_extract_itemTypes;
-                            const dump = globalThis.__item_extract_dump;
-                            return dump(itemTypes[index]);
-                        }, i);
+                        const [id, value] = await wrapEvaluate(
+                            frame,
+                            (index) => {
+                                const itemTypes = globalThis.__item_extract_itemTypes;
+                                const dump = globalThis.__item_extract_dump;
+                                return dump(itemTypes[index]);
+                            },
+                            i
+                        );
                         if (value !== null) {
                             ItemInfoList[id] = value;
                         }
                         setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i} analyzed: ${id}`);
-                    } catch (err2) {
+                    } catch {
                         warn(`Cannot evaluate code for item #${i}: ${err.message}`);
                         corruptedCount += 1;
                     }
@@ -892,19 +919,23 @@ const Extractors = [
                     const removedItems = Object.keys(target.items).filter((k) => !(k in ItemInfoList));
                     for (const item of removedItems.splice(0, removedItems.length)) {
                         try {
-                            const [id, value] = await wrapEvaluate(frame, (itemId) => {
-                                const dump = globalThis.__item_extract_dump;
-                                const itemType = Minecraft.ItemTypes.get(itemId);
-                                if (!itemType) throw new Error(`Cannot find item ${itemId}`);
-                                if (itemType.id !== itemId) throw new Error(`Item id mismatched: ${itemId}`);
-                                return dump(itemType);
-                            }, item);
+                            const [id, value] = await wrapEvaluate(
+                                frame,
+                                (itemId) => {
+                                    const dump = globalThis.__item_extract_dump;
+                                    const itemType = Minecraft.ItemTypes.get(itemId);
+                                    if (!itemType) throw new Error(`Cannot find item ${itemId}`);
+                                    if (itemType.id !== itemId) throw new Error(`Item id mismatched: ${itemId}`);
+                                    return dump(itemType);
+                                },
+                                item
+                            );
                             if (value !== null) {
                                 ItemInfoList[id] = value;
                             }
                             corruptedCount -= 1;
                             setStatus(`Item fixed: ${id}`);
-                        } catch (err2) {
+                        } catch {
                             warn(`Failed to fix item ${item}: ${err.message}`);
                             removedItems.push(item);
                         }
@@ -1040,21 +1071,23 @@ async function evaluateExtractors(cx, target, session, controller) {
     const { coreVersion } = cx;
     await controller.pause();
     const topFrame = await session.getTopStack();
-    await topFrame.evaluate((envKeys) => {
-        Promise.allSettled(envKeys.map(
-            ([keyName, moduleNames]) => Promise.allSettled(moduleNames.map(
-                (moduleName) => import(moduleName)
-            )).then((resolutions) => {
-                const found = resolutions.find((e) => e.status === 'fulfilled');
-                if (found) {
-                    globalThis[keyName] = found.value;
-                }
-            })
-        )).then(() => {
-            // eslint-disable-next-line no-console
-            console.info('###PREPARE_ENV_OK###');
-        });
-    }, [...Object.entries(ImportEnvironments)]);
+    await topFrame.evaluate(
+        (envKeys) => {
+            Promise.allSettled(
+                envKeys.map(([keyName, moduleNames]) =>
+                    Promise.allSettled(moduleNames.map((moduleName) => import(moduleName))).then((resolutions) => {
+                        const found = resolutions.find((e) => e.status === 'fulfilled');
+                        if (found) {
+                            globalThis[keyName] = found.value;
+                        }
+                    })
+                )
+            ).then(() => {
+                console.info('###PREPARE_ENV_OK###');
+            });
+        },
+        [...Object.entries(ImportEnvironments)]
+    );
     await Promise.all([
         pEvent(session, 'log', (ev) => ev.message.includes('###PREPARE_ENV_OK###')),
         controller.continue()
@@ -1067,7 +1100,13 @@ async function evaluateExtractors(cx, target, session, controller) {
         try {
             log(`Extracting ${extractor.name} from GameTest`);
             session.connection.requestTimeout = extractor.timeout || defaultTimeout;
-            await extractor.extract({ target, frame: topFrame, session, controller, cx });
+            await extractor.extract({
+                target,
+                frame: topFrame,
+                session,
+                controller,
+                cx
+            });
         } catch (err) {
             warn(`Failed to extract ${extractor.name}`, err);
             errors.push(err);
@@ -1098,7 +1137,9 @@ function generateBehaviorPack(cx) {
     Object.entries(fileMap).forEach(([target, fileInfo]) => {
         const targetPath = resolvePath(outPath, target);
         mkdirSync(resolvePath(targetPath, '..'), { recursive: true });
-        cpSync(resolvePath(basePath, fileInfo.path), targetPath, { recursive: true });
+        cpSync(resolvePath(basePath, fileInfo.path), targetPath, {
+            recursive: true
+        });
         if (fileInfo.breakpoints) {
             breakpoints.push(...fileInfo.breakpoints);
         }
@@ -1126,14 +1167,18 @@ export default async function analyzeGameTestEnumsCached(cx) {
         for (;;) {
             try {
                 if (device) {
-                    await pushRecursively(device, packPath, posix.join(cx.devBehaviorPackPath, 'gametest_behavior_pack'));
+                    await pushRecursively(
+                        device,
+                        packPath,
+                        posix.join(cx.devBehaviorPackPath, 'gametest_behavior_pack')
+                    );
                 } else {
                     const packDest = resolvePath(cx.devBehaviorPackPath, 'gametest_behavior_pack');
                     mkdirSync(packDest, { recursive: true });
                     cpSync(packPath, packDest, { recursive: true });
                 }
                 break;
-            } catch (err) {
+            } catch {
                 if (!warningShown) {
                     warn(`[GameTest] Cannot grant access to ${cx.devBehaviorPackPath}`);
                     warningShown = true;
@@ -1163,7 +1208,9 @@ export default async function analyzeGameTestEnumsCached(cx) {
     const socket = await socketPromise;
     log(`${socket.remoteAddress} connected via qjs-debugger.`);
     // Provide cache for infering corrupted items, but not affecting output (not owned by target)
-    const target = Object.assign(Object.create(cache ?? {}), { packageVersion });
+    const target = Object.assign(Object.create(cache ?? {}), {
+        packageVersion
+    });
     const debugConn = new QuickJSDebugConnection(socket);
     const debugSession = new MinecraftDebugSession(debugConn);
     debugSession.on('protocol', (ev) => {

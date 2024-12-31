@@ -84,7 +84,9 @@ export default class AutocompletionScreen {
                 }
                 if (url.pathname === '/heartbeat') {
                     const since = parseInt(url.searchParams.get('since'), 10) || 0;
-                    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+                    res.writeHead(200, {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    });
                     res.end(
                         JSON.stringify({
                             sessionId: this.sessionId,

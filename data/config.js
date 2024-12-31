@@ -19,25 +19,27 @@ const commonOptions = {
     ime: 'com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME',
     // OCR识别错误手动校正
     tesseractMistakes: [
-        ['\'n"\'sUmmOn Creeper', '/summon creeper'],
-        ['\'n"\'sUmmOn raVager', '/summon ravager']
+        ["'n\"'sUmmOn Creeper", '/summon creeper'],
+        ["'n\"'sUmmOn raVager", '/summon ravager']
     ],
     // 可调试行为包路径
     devBehaviorPackPath: '/sdcard/Android/data/com.mojang.minecraftpe/files/games/com.mojang/development_behavior_packs'
 };
 
 // eslint-disable-next-line no-unused-vars
-const smallerGUIOptions = { // GUI Scale = -1
+const smallerGUIOptions = {
+    // GUI Scale = -1
     ...commonOptions,
     // 命令区域大小
     commandAreaRect: [328, 976, 1784, 100],
     tesseractMistakes: [
-        ['\'/sUmmOn Creeper', '/summon creeper'],
-        ['\'/sUmmOn raVager', '/summon ravager']
+        ["'/sUmmOn Creeper", '/summon creeper'],
+        ["'/sUmmOn raVager", '/summon ravager']
     ]
 };
 
-const smallestGUIOptions = { // GUI Scale = -2
+const smallestGUIOptions = {
+    // GUI Scale = -2
     ...commonOptions,
     // 命令区域大小
     commandAreaRect: [246, 1002, 1989, 75],

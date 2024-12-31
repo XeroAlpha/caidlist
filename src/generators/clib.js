@@ -129,12 +129,15 @@ export default function writeTransMapClib(cx, options) {
                     minCAVersion: '2023-11-15',
                     minSupportVer: coreVersion,
                     enums: merged,
-                    versionPack: Object.keys(removed).length ? {
-                        remove: {
-                            enums: removed,
-                            mode: 'remove'
-                        }
-                    } : undefined,
+                    versionPack:
+                        Object.keys(removed).length > 0
+                            ? {
+                                  remove: {
+                                      enums: removed,
+                                      mode: 'remove'
+                                  }
+                              }
+                            : undefined,
                     metadata: {
                         from: sourceMeta,
                         to: metadata
