@@ -308,11 +308,33 @@ async function generateBranchedOutputFiles(cx) {
         translationMap: userTranslation.particleEmitter,
         autoMatch: []
     });
+    const javaEditionSoundSubtitles = Object.keys(javaEditionLang)
+        .filter((k) => k.startsWith('subtitles.'))
+        .map((e) => e.slice('subtitles.'.length));
     matchTranslations({
         ...commonOptions,
         name: 'sound',
         originalArray: enums.sounds,
-        translationMap: userTranslation.sound
+        translationMap: userTranslation.sound,
+        customAutoMatch(originalValue) {
+            const lcss = javaEditionSoundSubtitles
+                .map((e) => [e, lcs(e, originalValue)])
+                .filter((e) => e[1].length >= Math.max(8, 0.5 * originalValue.length, 0.5 * e.length));
+            lcss.sort((a, b) => {
+                if (a[1].length !== b[1].length) {
+                    return b[1].length - a[1].length;
+                }
+                if (a[1].offset !== b[1].offset) {
+                    return b[1].offset - a[1].offset;
+                }
+                return 0;
+            });
+            if (lcss.length > 0) {
+                return `JE: subtitles.${lcss[0][0]}`;
+            }
+            return null;
+        },
+        autoMatch: ['custom']
     });
     matchTranslations({
         ...commonOptions,

@@ -607,13 +607,13 @@ const Extractors = [
                                 }
                                 const interactPattern = [];
                                 if (permutation.isLiquidBlocking(liquidType)) {
-                                    interactPattern.push('blocks liquid');
+                                    interactPattern.push('blocking');
                                 }
                                 if (permutation.canBeDestroyedByLiquidSpread(liquidType)) {
-                                    interactPattern.push('destroyed when touched');
+                                    interactPattern.push('broken');
                                 }
                                 if (permutation.liquidSpreadCausesSpawn(liquidType)) {
-                                    interactPattern.push('drops when touched');
+                                    interactPattern.push('popped');
                                 }
                                 liquidInteractPattern[liquidType] =
                                     interactPattern.length > 0 ? interactPattern.join(', ') : 'none';

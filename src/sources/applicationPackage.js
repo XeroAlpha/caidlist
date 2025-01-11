@@ -129,7 +129,7 @@ const entryAnalyzer = [
         analyze(results, entryName, particle) {
             const { particleEmitters } = results;
             const formatVersion = particle.format_version;
-            if (formatVersion === '1.10.0') {
+            if (formatVersion === '1.10.0' || formatVersion === '1.21.60') {
                 particleEmitters.push(particle.particle_effect.description.identifier);
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
@@ -300,8 +300,12 @@ const entryAnalyzer = [
                             propertyEntityMap = entityPropertyDescMap[propertyName] = {};
                         }
                         const filteredPropertyDesc = {};
+                        const safeDescKeys = ['type'];
+                        if (propertyDesc.type === 'enum') {
+                            safeDescKeys.push('values');
+                        }
                         Object.entries(propertyDesc).forEach(([descKey, descValue]) => {
-                            if (descKey === 'type') {
+                            if (safeDescKeys.includes(descKey)) {
                                 filteredPropertyDesc[descKey] = descValue;
                             }
                         });
@@ -421,7 +425,19 @@ const entryAnalyzer = [
             }
         },
         versionsGroups: [
-            ['1.12', '1.14', '1.16', '1.19', '1.20.10', '1.20.30', '1.20.60', '1.21.30', '1.21.40', '1.21.50']
+            [
+                '1.12',
+                '1.14',
+                '1.16',
+                '1.19',
+                '1.20.10',
+                '1.20.30',
+                '1.20.60',
+                '1.21.30',
+                '1.21.40',
+                '1.21.50',
+                '1.21.60'
+            ]
         ]
     }
 ];

@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.60.24",
-    "__COMMITHASH__": "067a0d969fabd88944567048553605540ea49022",
-    "__MESSAGE__": "v1.21.60.24-preview",
+    "__VERSION__": "1.21.60.25",
+    "__COMMITHASH__": "32737beb4dce8255cbaa4e9b75184ddea30fe5b6",
+    "__MESSAGE__": "v1.21.60.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -236,6 +236,9 @@
                             "name": "minecraft:climate",
                         },
                         {
+                            "name": "minecraft:creature_spawn_probability",
+                        },
+                        {
                             "name": "minecraft:frozen_ocean_surface",
                         },
                         {
@@ -350,6 +353,12 @@
                             "name": "Client Biome JSON File",
                         },
                         {
+                            "name": "Foliage Color Map",
+                        },
+                        {
+                            "name": "Grass Color Map",
+                        },
+                        {
                             "name": "minecraft:ambient_sounds",
                         },
                         {
@@ -357,6 +366,12 @@
                         },
                         {
                             "name": "minecraft:fog_appearance",
+                        },
+                        {
+                            "name": "minecraft:foliage_appearance",
+                        },
+                        {
+                            "name": "minecraft:grass_appearance",
                         },
                         {
                             "name": "minecraft:sky_color",
@@ -3200,6 +3215,7 @@
         "covered_bit": "Describes if a top snow block is covering another block",
         "cracked_state": "Determines the cracked state of turtle eggs",
         "crafting": "Describes if the block has just crafted",
+        "creaking_heart_state": "Determines the block states for the Creaking Heart",
         "damage": "DEPRECATED - Determines the state of damage of an Anvil",
         "dead_bit": "DEPRECATED - Determines if coral, coral fans, or sea pickles are dead",
         "direction": "Determines the North, South, East, and West direction of some blocks. 0 = South, 1 = West, 2 = North 3 = East",
@@ -14215,6 +14231,12 @@
                     "type": "String",
                     "defaultValue": "",
                     "description": "Defines the event to trigger when an entity is detected looking at the owner entity.",
+                },
+                {
+                    "name": "min_looked_at_duration",
+                    "type": "Decimal",
+                    "defaultValue": "0",
+                    "description": "Defines the minimum, continuous time the owner entity has to be looked at before being considered as such. Defaults to 0 if not explicitly specified.",
                 },
                 {
                     "name": "not_looked_at_event",

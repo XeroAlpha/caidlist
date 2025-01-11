@@ -1,6 +1,6 @@
 {
     "title": "CLIENT BIOMES DOCUMENTATION",
-    "version": "1.21.60.24",
+    "version": "1.21.60.25",
     "content": [],
     "sections": [
         {
@@ -78,6 +78,18 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Set the fog settings used during rendering. Biomes without this component will have default fog settings.",
+                                },
+                                {
+                                    "Name": "minecraft:foliage_appearance",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the foliage color or color map used during rendering. Biomes without this component will have default foliage appearance.",
+                                },
+                                {
+                                    "Name": "minecraft:grass_appearance",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the grass color or color map used during rendering. Biomes without this component will have default grass appearance.",
                                 },
                                 {
                                     "Name": "minecraft:sky_color",
@@ -165,6 +177,44 @@
                     ],
                 },
                 {
+                    "name": "Foliage Color Map",
+                    "id": "Foliage Color Map",
+                    "level": 2,
+                    "content": [
+                        "Object specifying a color map for foliage instead of a specific color.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color_map",
+                                    "Type": "\"foliage\", \"birch\", \"evergreen\", \"mangrove_swamp_foliage\", \"swamp_foliage\"",
+                                    "Required?": "Required",
+                                    "Description": "Color map from textures/colormap to determine color of foliage.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Grass Color Map",
+                    "id": "Grass Color Map",
+                    "level": 2,
+                    "content": [
+                        "Object specifying a color map for grass instead of a specific color.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color_map",
+                                    "Type": "\"grass\", \"swamp_grass\"",
+                                    "Required?": "Required",
+                                    "Description": "Color map from textures/colormap to determine color of grass.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:ambient_sounds",
                     "id": "minecraft:ambient_sounds",
                     "level": 2,
@@ -234,6 +284,44 @@
                     ],
                 },
                 {
+                    "name": "minecraft:foliage_appearance",
+                    "id": "minecraft:foliage_appearance",
+                    "level": 2,
+                    "content": [
+                        "Set the foliage color or color map used during rendering. Biomes without this component will have default foliage appearance.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Color255RGB or Object of type Foliage Color Map",
+                                    "Required?": "Optional",
+                                    "Description": "RGB color of foliage, or a Foliage Color Map object.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:grass_appearance",
+                    "id": "minecraft:grass_appearance",
+                    "level": 2,
+                    "content": [
+                        "Set the grass color or color map used during rendering. Biomes without this component will have default grass appearance.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Color255RGB or Object of type Grass Color Map",
+                                    "Required?": "Optional",
+                                    "Description": "RGB color of grass.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:sky_color",
                     "id": "minecraft:sky_color",
                     "level": 2,
@@ -280,5 +368,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "2a80401e797a584b7dd8bc8da0007f4c841ecb32",
+    "__OBJECTHASH__": "fc27801e2d994545d1d1b2b144dc2c27b1625265",
 }
