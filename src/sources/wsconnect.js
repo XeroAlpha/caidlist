@@ -173,6 +173,9 @@ export async function createExclusiveWSSession(device) {
         setStatus('Waiting for client...');
         let request;
         ({ session, request } = await pEvent(wsServer, 'client'));
+        await new Promise((resolve) => {
+            session.enableEncryption(() => resolve());
+        });
         log(`${request.socket.remoteAddress} connected via mcpews.`);
     }
     setStatus('');
