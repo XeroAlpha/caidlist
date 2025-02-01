@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.21.60.28）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.21.70.20）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		21,
-		60,
-		28
+		70,
+		20
 	],
 	"require": [
 		{
@@ -16,20 +16,44 @@
 			"min": [
 				1,
 				21,
-				60,
-				28
+				70,
+				20
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.21.60.28",
+	"minSupportVer": "1.21.70.20",
 	"enums": {
+		"block": {
+			"bush": "灌木丛",
+			"firefly_bush": "萤火虫灌木丛",
+			"leaf_litter": "枯叶",
+			"wildflowers": "野花簇"
+		},
+		"item": {
+			"bush": "灌木丛",
+			"firefly_bush": "萤火虫灌木丛",
+			"leaf_litter": "枯叶",
+			"wildflowers": "野花簇"
+		},
 		"particle_emitter": {
 			"minecraft:azalea_leaves_particle": "",
-			"minecraft:biome_tinted_leaves_particle": ""
+			"minecraft:biome_tinted_leaves_particle": "",
+			"minecraft:firefly_particle": ""
+		},
+		"sound": {
+			"block.deadbush.ambient": "",
+			"block.leaf_litter.break": "",
+			"block.leaf_litter.place": "",
+			"block.leaf_litter.step": "",
+			"block.sand.ambient": "",
+			"block.sand.ambient.attached": ""
 		},
 		"camera_preset": {
 			"minecraft:fixed_boom": "第三人称固定视角"
+		},
+		"recipe": {
+			"minecraft:yellow_dye_from_wildflowers": "<工作台>野花簇~>黄色染料"
 		},
 		"feature": {
 			"minecraft:amethyst_geode_feature": "",
@@ -52,6 +76,7 @@
 			"minecraft:birch_tree_feature": "",
 			"minecraft:birch_tree_with_beehive_feature": "",
 			"minecraft:birch_tree_with_optional_beehive_feature": "",
+			"minecraft:bush_feature": "",
 			"minecraft:cave_vine_feature": "",
 			"minecraft:cave_vine_in_moss_feature": "",
 			"minecraft:cave_vine_snap_to_ceiling_feature": "",
@@ -88,6 +113,7 @@
 			"minecraft:fallen_super_birch_tree_feature": "",
 			"minecraft:fancy_oak_tree_feature": "",
 			"minecraft:fancy_oak_tree_with_beehive_feature": "",
+			"minecraft:fancy_oak_tree_with_leaf_litter_and_optional_beehive": "",
 			"minecraft:fancy_oak_tree_with_optional_beehive_feature": "",
 			"minecraft:fern_double_plant_feature": "",
 			"minecraft:fern_double_plant_lower_feature": "",
@@ -175,11 +201,16 @@
 			"minecraft:random_oak_tree_from_sapling_feature": "",
 			"minecraft:random_oak_tree_with_beehive_from_sapling_feature": "",
 			"minecraft:random_pale_oak_tree_feature": "",
+			"minecraft:random_roofed_forest_feature": "",
+			"minecraft:random_roofed_forest_feature_with_decoration_feature": "",
+			"minecraft:random_roofed_forest_feature_with_leaf_litter_feature": "",
 			"minecraft:redstone_ore_feature": "",
 			"minecraft:roofed_tree_feature": "",
 			"minecraft:roofed_tree_with_vines_feature": "",
 			"minecraft:savanna_tree_feature": "",
+			"minecraft:scatter_birch_forest_wildflowers_feature": "",
 			"minecraft:scatter_brown_mushroom_feature": "",
+			"minecraft:scatter_bush_feature": "",
 			"minecraft:scatter_cold_ocean_seagrass_feature": "",
 			"minecraft:scatter_deep_cold_ocean_seagrass_feature": "",
 			"minecraft:scatter_deep_ocean_seagrass_feature": "",
@@ -191,7 +222,10 @@
 			"minecraft:scatter_jungle_tree_cocoa_feature": "",
 			"minecraft:scatter_jungle_tree_lower_cocoa_feature": "",
 			"minecraft:scatter_jungle_tree_upper_cocoa_feature": "",
+			"minecraft:scatter_leaf_litter_feature": "",
 			"minecraft:scatter_meadow_flower_feature": "",
+			"minecraft:scatter_meadow_tall_grass_feature": "",
+			"minecraft:scatter_meadow_wildflowers_feature": "",
 			"minecraft:scatter_ocean_seagrass_feature": "",
 			"minecraft:scatter_overworld_flower_feature": "",
 			"minecraft:scatter_pale_hanging_moss_feature": "",
@@ -209,11 +243,13 @@
 			"minecraft:sculk_vein_feature": "",
 			"minecraft:select_beehive_feature": "",
 			"minecraft:select_birch_tree_feature": "",
+			"minecraft:select_birch_tree_with_leaf_litter_feature": "",
 			"minecraft:select_cocoa_feature": "",
 			"minecraft:select_jungle_plant_feature": "",
 			"minecraft:select_jungle_tree_feature": "",
 			"minecraft:select_log_mushroom_feature": "",
 			"minecraft:select_oak_tree_feature": "",
+			"minecraft:select_oak_tree_with_leaf_litter_feature": "",
 			"minecraft:select_roofed_tree_feature": "",
 			"minecraft:select_spruce_tree_feature": "",
 			"minecraft:select_standing_oak_tree_feature": "",
@@ -262,6 +298,7 @@
 			"minecraft:bamboo_jungle_after_surface_tall_grass_feature_rules": "",
 			"minecraft:bamboo_jungle_before_surface_bamboo_feature_rules": "",
 			"minecraft:bamboo_jungle_surface_tall_grass_feature": "",
+			"minecraft:birch_forest_before_surface_wildflowers_feature_rules": "",
 			"minecraft:cherry_biome_surface_double_plant_feature_rules": "",
 			"minecraft:cherry_biome_surface_tall_grass_feature_rules": "",
 			"minecraft:cherry_grove_after_surface_cherry_tree_feature_rules": "",
@@ -310,6 +347,7 @@
 			"minecraft:meadow_after_surface_double_plant_feature_rules": "",
 			"minecraft:meadow_after_surface_flowers_feature_rules": "",
 			"minecraft:meadow_after_surface_tall_grass_feature_rules": "",
+			"minecraft:meadow_before_surface_wildflowers_feature_rules": "",
 			"minecraft:meadow_flowers_feature": "",
 			"minecraft:meadow_surface_double_plant_feature_rules": "",
 			"minecraft:meadow_surface_tall_grass_feature": "",
@@ -328,6 +366,7 @@
 			"minecraft:nether_soul_sand_underground_feature_rules": "",
 			"minecraft:nether_sprouts_feature_rules": "",
 			"minecraft:ocean_after_surface_seagrass_feature_rules": "",
+			"minecraft:overworld_after_surface_bush_feature_rules": "",
 			"minecraft:overworld_after_surface_extra_brown_mushroom_feature_rules": "",
 			"minecraft:overworld_after_surface_extra_red_mushroom_feature_rules": "",
 			"minecraft:overworld_after_surface_flowers_feature_rules": "",
@@ -387,6 +426,7 @@
 			"minecraft:plains_surface_flowers_feature": "",
 			"minecraft:plains_surface_tall_grass_feature": "",
 			"minecraft:river_after_surface_seagrass_feature_rules": "",
+			"minecraft:roofed_forest_surface_roofed_tree_feature_rules": "",
 			"minecraft:savanna_after_surface_flowers_feature_rules": "",
 			"minecraft:savanna_after_surface_tall_grass_feature_rules": "",
 			"minecraft:savanna_first_double_plant_grass_feature": "",
@@ -414,6 +454,12 @@
 			"minecraft:warped_fungus_crimson_feature": "",
 			"minecraft:warped_fungus_feature": "",
 			"minecraft:warped_roots_feature": ""
+		},
+		"loot_tool": {
+			"minecraft:bush": "灌木丛",
+			"minecraft:firefly_bush": "萤火虫灌木丛",
+			"minecraft:leaf_litter": "枯叶",
+			"minecraft:wildflowers": "野花簇"
 		}
 	},
 	"metadata": {
@@ -422,16 +468,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.21.60.28",
-			"packageVersion": "1.21.60.28"
+			"coreVersion": "1.21.70.20",
+			"packageVersion": "1.21.70.20"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.21.60.28",
-			"packageVersion": "1.21.60.28"
+			"coreVersion": "1.21.70.20",
+			"packageVersion": "1.21.70.20"
 		}
 	}
 }

@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.60.28",
-    "__COMMITHASH__": "97d8dff07e514fff7ec094ebae8ca748f2ddb3fa",
-    "__MESSAGE__": "v1.21.60.28-preview",
+    "__VERSION__": "1.21.70.20",
+    "__COMMITHASH__": "52996791ab639229cbca3c4d2cef6d031ebffbaa",
+    "__MESSAGE__": "v1.21.70.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -3455,6 +3455,7 @@
         "minecraft:bubble_coral_fan": "",
         "minecraft:bubble_coral_wall_fan": "",
         "minecraft:budding_amethyst": "",
+        "minecraft:bush": "",
         "minecraft:cactus": "",
         "minecraft:cake": "",
         "minecraft:calcite": "",
@@ -3825,6 +3826,7 @@
         "minecraft:fire_coral_block": "",
         "minecraft:fire_coral_fan": "",
         "minecraft:fire_coral_wall_fan": "",
+        "minecraft:firefly_bush": "",
         "minecraft:fletching_table": "",
         "minecraft:flower_pot": "",
         "minecraft:flowering_azalea": "",
@@ -3965,6 +3967,7 @@
         "minecraft:large_amethyst_bud": "",
         "minecraft:large_fern": "",
         "minecraft:lava": "",
+        "minecraft:leaf_litter": "",
         "minecraft:lectern": "",
         "minecraft:lever": "",
         "minecraft:light_block_0": "",
@@ -4547,6 +4550,7 @@
         "minecraft:white_terracotta": "",
         "minecraft:white_tulip": "",
         "minecraft:white_wool": "",
+        "minecraft:wildflowers": "",
         "minecraft:wither_rose": "",
         "minecraft:wither_skeleton_skull": "",
         "minecraft:wooden_button": "",
@@ -4914,9 +4918,8 @@
                 },
                 {
                     "name": "minecraft:map_color",
-                    "type": "String",
+                    "type": "JSON Object",
                     "defaultValue": "",
-                    "description": "Sets the color of the block when rendered to a map. The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255. If this component is omitted, the block will not show up on the map.",
                 },
                 {
                     "name": "minecraft:material_instances",
@@ -5029,6 +5032,12 @@
                     ],
                 },
                 {
+                    "name": "minecraft:replaceable",
+                    "type": "Identifier String",
+                    "defaultValue": "",
+                    "description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
+                },
+                {
                     "name": "minecraft:selection_box",
                     "type": "Boolean / JSON Object",
                     "defaultValue": "",
@@ -5080,7 +5089,7 @@
                             "name": "duration",
                             "type": "Decimal",
                             "defaultValue": "0.0",
-                            "description": "The duration of the mob effect.",
+                            "description": "The duration of the mob effect in seconds. Can also be set to \"infinite\"",
                         },
                         {
                             "name": "effect",
@@ -12086,7 +12095,7 @@
                     "name": "effect_duration",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Duration in seconds of the status ailment applied to the damaged entity",
+                    "description": "Duration in seconds of the status ailment applied to the damaged entity. Can also be \"infinite\"",
                 },
                 {
                     "name": "effect_name",
@@ -12938,7 +12947,7 @@
                     "name": "regeneration_duration",
                     "type": "Integer",
                     "defaultValue": "5",
-                    "description": "The duration in seconds of Regeneration I added to the mob.",
+                    "description": "The duration in seconds of Regeneration I added to the mob. Can also be set to \"infinite\"",
                 },
             ],
         },
@@ -14283,7 +14292,7 @@
                     "name": "effect_time",
                     "type": "Integer",
                     "defaultValue": "10",
-                    "description": "How long the applied mob effect lasts in seconds.",
+                    "description": "How long the applied mob effect lasts in seconds. Can also be set to \"infinite\"",
                 },
                 {
                     "name": "entity_filter",
@@ -17115,5 +17124,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.graphics_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
+    },
 }

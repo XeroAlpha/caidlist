@@ -348,7 +348,8 @@ const entryAnalyzer = [
                 '1.21.30',
                 '1.21.40',
                 '1.21.50',
-                '1.21.60'
+                '1.21.60',
+                '1.21.70'
             ]
         ]
     },
@@ -383,7 +384,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100', '1.21.40']]
+        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100', '1.21.40', '1.21.60']]
     },
     {
         name: 'featureRule',
@@ -401,7 +402,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100']]
+        versionsGroups: [['1.13.0', '1.14.0', '1.16.0', '1.16.100', '1.21.60']]
     },
     {
         name: 'dataDrivenRecipes',

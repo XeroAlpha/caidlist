@@ -512,11 +512,11 @@ const Extractors = [
             await wrapEvaluate(frame, () => {
                 const player = [...Minecraft.world.getPlayers()][0];
                 async function asyncOp() {
-                    const helpMeta = await player.runCommandAsync('help');
+                    const helpMeta = player.runCommand('help');
                     if (helpMeta.body) {
                         const result = helpMeta.body.split('\n');
                         for (let i = helpMeta.page + 1; i <= helpMeta.pageCount; i++) {
-                            const data = await player.runCommandAsync(`help ${i}`);
+                            const data = player.runCommand(`help ${i}`);
                             result.push(...data.body.split('\n'));
                         }
                         return result;

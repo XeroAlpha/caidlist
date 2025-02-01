@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.60.28",
+    "version": "1.21.70.20",
     "content": [],
     "sections": [
         {
@@ -262,9 +262,23 @@
                                 },
                                 {
                                     "Name": "minecraft:map_color",
-                                    "Type": "String",
+                                    "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "Sets the color of the block when rendered to a map. The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255. If this component is omitted, the block will not show up on the map.",
+                                    "Description": [
+                                        "Sets the color of the block when rendered to a map. If this component is omitted, the block will not show up on the map.",
+                                        {
+                                            "section": "color",
+                                            "content": [
+                                                "The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255.",
+                                            ],
+                                        },
+                                        {
+                                            "section": "tint_method",
+                                            "content": [
+                                                "Tint multiplied to the color. Tint method logic varies, but often refers to the \"rain\" and \"temperature\" of the biome the block is placed in to compute the tint. Supported tint methods are \"none\", \"default_foliage\", \"birch_foliage\", \"evergreen_foliage\", \"grass\" and \"water\"",
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "Name": "minecraft:material_instances",
@@ -492,6 +506,12 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:replaceable",
+                                    "Type": "Identifier String",
+                                    "Default Value": "",
+                                    "Description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
+                                },
+                                {
                                     "Name": "minecraft:selection_box",
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "",
@@ -592,7 +612,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.60\",",
+                                        "  \"format_version\": \"1.21.70\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -662,7 +682,7 @@
                                                     "Name": "duration",
                                                     "Type": "Decimal",
                                                     "Default Value": "0.0",
-                                                    "Description": "The duration of the mob effect.",
+                                                    "Description": "The duration of the mob effect in seconds. Can also be set to \"infinite\"",
                                                 },
                                                 {
                                                     "Name": "effect",
@@ -1280,5 +1300,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "923b7469d57f7c1861e3856c98100f85697199ca",
+    "__OBJECTHASH__": "e8e9980497231d8f5bba920f73b2bf112be85718",
 }
