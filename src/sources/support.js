@@ -114,7 +114,7 @@ export function placeCommandFeatureSubCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
         return testMinecraftVersionInRange(coreVersion, '1.21.60.23', '*');
     }
-    return false;
+    return testMinecraftVersionInRange(coreVersion, '1.21.70.22', '*');
 }
 placeCommandFeatureSubCommand.associatedCommands = [
     [
@@ -127,9 +127,19 @@ export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';
 }
 
+// Education branch detector
 export function eduCommands({ branch }) {
     return branch.id === 'education';
 }
+eduCommands.associatedCommands = [
+    [
+        '/ability <player: target> <ability: Ability> <value: Boolean>',
+        '/ability <player: target> [ability: Ability]',
+        '/immutableworld [value: Boolean]',
+        '/wb',
+        '/worldbuilder'
+    ]
+];
 
 export function devCommands({ version }) {
     return version === 'dev' || version === 'release_dev';

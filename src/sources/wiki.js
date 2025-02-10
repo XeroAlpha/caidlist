@@ -235,7 +235,7 @@ export async function fetchStandardizedTranslation() {
                 }
                 return result;
             },
-            24 * 60 * 60 * 1000
+            60 * 60 * 1000
         );
     } catch (err) {
         if (!cache) {

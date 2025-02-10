@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.70.20",
-    "__COMMITHASH__": "52996791ab639229cbca3c4d2cef6d031ebffbaa",
-    "__MESSAGE__": "v1.21.70.20-preview",
+    "__VERSION__": "1.21.70.22",
+    "__COMMITHASH__": "7f2a5f8ed0c12aed2eb5822f71700e03afd08869",
+    "__MESSAGE__": "v1.21.70.22-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2201,6 +2201,9 @@
                                     "name": "minecraft:ambient_sound_interval",
                                 },
                                 {
+                                    "name": "minecraft:body_rotation_axis_aligned",
+                                },
+                                {
                                     "name": "minecraft:body_rotation_blocked",
                                 },
                                 {
@@ -2256,6 +2259,9 @@
                                 },
                                 {
                                     "name": "minecraft:is_chested",
+                                },
+                                {
+                                    "name": "minecraft:is_collidable",
                                 },
                                 {
                                     "name": "minecraft:is_dyeable",
@@ -3457,6 +3463,7 @@
         "minecraft:budding_amethyst": "",
         "minecraft:bush": "",
         "minecraft:cactus": "",
+        "minecraft:cactus_flower": "",
         "minecraft:cake": "",
         "minecraft:calcite": "",
         "minecraft:calibrated_sculk_sensor": "",
@@ -4326,6 +4333,7 @@
         "minecraft:sea_lantern": "",
         "minecraft:sea_pickle": "",
         "minecraft:seagrass": "",
+        "minecraft:short_dry_grass": "",
         "minecraft:short_grass": "",
         "minecraft:shroomlight": "",
         "minecraft:silver_glazed_terracotta": "",
@@ -4423,6 +4431,7 @@
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
+        "minecraft:tall_dry_grass": "",
         "minecraft:tall_grass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
@@ -12918,13 +12927,13 @@
                     "name": "height",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "Height of the collision box in blocks. A negative value will be assumed to be 0.",
+                    "description": "Height of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                 },
                 {
                     "name": "width",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "Width of the collision box in blocks. A negative value will be assumed to be 0.",
+                    "description": "Width of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                 },
             ],
         },
@@ -13260,6 +13269,12 @@
             "description": "A component that owns multiple subsensors, each one firing an event when a set of conditions are met by other entities within the defined range.",
             "children": [
                 {
+                    "name": "find_players_only",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Limits the search to Players only for all subsensors.",
+                },
+                {
                     "name": "relative_range",
                     "type": "Boolean",
                     "defaultValue": "true",
@@ -13312,6 +13327,12 @@
                             "type": "Boolean",
                             "defaultValue": "false",
                             "description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                        },
+                        {
+                            "name": "y_offset",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Vertical offset applied to the entity's position when computing the distance from other entities.",
                         },
                     ],
                 },

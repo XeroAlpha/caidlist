@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.70.20",
+    "version": "1.21.70.22",
     "content": [],
     "sections": [
         {
@@ -23481,13 +23481,13 @@
                                             "Name": "height",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0.",
+                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                                         },
                                         {
                                             "Name": "width",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "Width of the collision box in blocks. A negative value will be assumed to be 0.",
+                                            "Description": "Width of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                                         },
                                     ],
                                 },
@@ -23977,6 +23977,12 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "find_players_only",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Limits the search to Players only for all subsensors.",
+                                        },
+                                        {
                                             "Name": "relative_range",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -24032,6 +24038,12 @@
                                                             "Type": "Boolean",
                                                             "Default Value": "false",
                                                             "Description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                                                        },
+                                                        {
+                                                            "Name": "y_offset",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0",
+                                                            "Description": "Vertical offset applied to the entity's position when computing the distance from other entities.",
                                                         },
                                                     ],
                                                 },
@@ -29515,6 +29527,10 @@
                                             "ID": "-1314051310",
                                         },
                                         {
+                                            "JSON Name": "minecraft:body_rotation_axis_aligned",
+                                            "ID": "-769871276",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:body_rotation_blocked",
                                             "ID": "-31742338",
                                         },
@@ -29589,6 +29605,10 @@
                                         {
                                             "JSON Name": "minecraft:is_chested",
                                             "ID": "-817599379",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:is_collidable",
+                                            "ID": "1703955772",
                                         },
                                         {
                                             "JSON Name": "minecraft:is_dyeable",
@@ -29799,6 +29819,15 @@
                                         },
                                     ],
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:body_rotation_axis_aligned",
+                            "id": "minecraft:body_rotation_axis_aligned",
+                            "level": 4,
+                            "content": [
+                                "Causes the entity's body to automatically rotate to align with the nearest cardinal direction based on its current facing direction.",
+                                "Combining this with the \"minecraft:body_rotation_blocked\" component will cause the entity to align to the nearest cardinal direction and remain fixed in that orientation, regardless of future changes in its facing direction.",
                             ],
                         },
                         {
@@ -30048,6 +30077,16 @@
                             ],
                         },
                         {
+                            "name": "minecraft:is_collidable",
+                            "id": "minecraft:is_collidable",
+                            "level": 4,
+                            "content": [
+                                "Allows other mobs to have vertical and horizontal collisions with this mob. For a collision to occur, both mobs must have a \"minecraft:collision_box\" component. This component can only be used on mobs and enables collisions exclusively between mobs.",
+                                "Please note that this type of collision is unreliable for moving collidable mobs. It is recommended to use this component only in scenarios where the collidable mob remains stationary.",
+                                "Collidable behavior is closely related to stackable behavior. While the \"minecraft:is_collidable\" component governs how other mobs interact with the component's owner, the \"minecraft:is_stackable\" component describes how an entity interacts with others of its own kind.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:is_dyeable",
                             "id": "minecraft:is_dyeable",
                             "level": 4,
@@ -30127,7 +30166,8 @@
                             "id": "minecraft:is_stackable",
                             "level": 4,
                             "content": [
-                                "Sets that this entity can be stacked.",
+                                "Allows instances of this entity to have vertical and horizontal collisions with each other. For a collision to occur, both instances must have a \"minecraft:collision_box\" component.",
+                                "Stackable behavior is closely related to collidable behavior. While the \"minecraft:is_stackable\" component describes how an entity interacts with others of its own kind, the \"minecraft:is_collidable\" component governs how other mobs interact with the component's owner.)",
                             ],
                         },
                         {
@@ -30694,5 +30734,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "33f2ea9fec05551ead202cee1424d96e8bd561ff",
+    "__OBJECTHASH__": "2bbd1a99ddae5177270b1f452a40131d35809663",
 }

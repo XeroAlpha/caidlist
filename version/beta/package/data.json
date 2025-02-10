@@ -18562,6 +18562,8 @@
             "block.bell.hit",
             "block.blastfurnace.fire_crackle",
             "block.bowhit",
+            "block.cactus_flower.break",
+            "block.cactus_flower.place",
             "block.campfire.crackle",
             "block.cartography_table.use",
             "block.cave_vines.place",
@@ -18594,6 +18596,7 @@
             "block.eyeblossom.open",
             "block.eyeblossom.open_long",
             "block.false_permissions",
+            "block.firefly_bush.ambient",
             "block.furnace.lit",
             "block.grindstone.use",
             "block.itemframe.add_item",
@@ -20549,6 +20552,7 @@
             "minecraft:random_cherry_tree_feature",
             "minecraft:random_clay_with_dripleaves_feature",
             "minecraft:random_clay_with_dripleaves_snap_to_floor_feature",
+            "minecraft:random_dry_grass_block_feature",
             "minecraft:random_mangrove_tree_feature",
             "minecraft:random_oak_tree_from_sapling_feature",
             "minecraft:random_oak_tree_with_beehive_from_sapling_feature",
@@ -20567,6 +20571,7 @@
             "minecraft:scatter_deep_cold_ocean_seagrass_feature",
             "minecraft:scatter_deep_ocean_seagrass_feature",
             "minecraft:scatter_deep_warm_ocean_seagrass_feature",
+            "minecraft:scatter_dry_grass_feature",
             "minecraft:scatter_eyeblossom_feature",
             "minecraft:scatter_fern_feature",
             "minecraft:scatter_flower_forest_flower_feature",
@@ -20611,6 +20616,7 @@
             "minecraft:select_super_birch_tree_feature",
             "minecraft:select_taiga_plant_feature",
             "minecraft:select_undecorated_jungle_tree_feature",
+            "minecraft:short_dry_grass_feature",
             "minecraft:silverfish_feature",
             "minecraft:small_dripstone_feature",
             "minecraft:small_dripstone_snap_to_surface_feature",
@@ -20627,6 +20633,7 @@
             "minecraft:super_birch_tree_with_optional_beehive_feature",
             "minecraft:swamp_tree_feature",
             "minecraft:taiga_tall_grass_feature",
+            "minecraft:tall_dry_grass_feature",
             "minecraft:tall_grass_feature",
             "minecraft:tall_mangrove_tree_feature",
             "minecraft:tall_mangrove_tree_with_beenest_feature",
@@ -20677,6 +20684,7 @@
             "minecraft:desert_after_surface_cactus_feature_rules",
             "minecraft:desert_after_surface_dead_bush_feature_rules",
             "minecraft:desert_after_surface_desert_well_feature",
+            "minecraft:desert_after_surface_dry_grass_feature_rules",
             "minecraft:desert_after_surface_reeds_feature_rules",
             "minecraft:desert_or_swamp_after_surface_fossil_deepslate_feature",
             "minecraft:desert_or_swamp_after_surface_fossil_feature",
@@ -20756,6 +20764,7 @@
             "minecraft:mega_taiga_surface_trees_feature",
             "minecraft:mesa_after_surface_cactus_feature_rules",
             "minecraft:mesa_after_surface_dead_bush_feature_rules",
+            "minecraft:mesa_after_surface_dry_grass_feature_rules",
             "minecraft:mesa_after_surface_reeds_feature_rules",
             "minecraft:mesa_before_surface_gold_ore_feature",
             "minecraft:mesa_plateau_stone_surface_trees_feature",
@@ -21832,6 +21841,7 @@
             "minecraft:pink_carpet_from_white": "<crafting_table>white_carpet*8+pink_dye->pink_carpet*8",
             "minecraft:pink_concrete_powder": "<crafting_table>pink_dye+sand:0+sand:0+sand:0+sand:0+gravel+gravel+gravel+gravel~>pink_concrete_powder*8",
             "minecraft:pink_dye": "<crafting_table>dye:1+dye:19~>dye:9*2",
+            "minecraft:pink_dye_from_cactus_flower": "<crafting_table>cactus_flower~>pink_dye",
             "minecraft:pink_dye_from_peony": "<crafting_table>peony~>pink_dye*2",
             "minecraft:pink_dye_from_pink_petals": "<crafting_table>pink_petals~>pink_dye",
             "minecraft:pink_dye_from_pink_tulip": "<crafting_table>pink_tulip~>dye:9",
@@ -22542,8 +22552,13 @@
                 "minecraft:chest_boat<default>",
             ],
             "geometry.chicken": [],
-            "geometry.chicken.v1.12": [
+            "geometry.chicken.cold": [
+                "minecraft:chicken<cold>",
+            ],
+            "geometry.chicken.v1.12": [],
+            "geometry.chicken.v2": [
                 "minecraft:chicken<default>",
+                "minecraft:chicken<warm>",
             ],
             "geometry.cod": [
                 "minecraft:cod<default>",
@@ -25050,7 +25065,8 @@
             "controller.render.cat": [
                 "minecraft:cat",
             ],
-            "controller.render.chicken": [
+            "controller.render.chicken": [],
+            "controller.render.chicken.v2": [
                 "minecraft:chicken",
             ],
             "controller.render.cod": [
@@ -25083,6 +25099,9 @@
             ],
             "controller.render.drowned": [
                 "minecraft:drowned",
+            ],
+            "controller.render.egg": [
+                "minecraft:egg",
             ],
             "controller.render.ender_crystal": [
                 "minecraft:ender_crystal",
@@ -25160,7 +25179,6 @@
             "controller.render.iron_golem_cracks": [],
             "controller.render.item_default": [],
             "controller.render.item_sprite": [
-                "minecraft:egg",
                 "minecraft:ender_pearl",
                 "minecraft:eye_of_ender_signal",
                 "minecraft:snowball",
@@ -26112,6 +26130,12 @@
             "minecraft:has_target": [
                 "minecraft:drowned",
             ],
+            "minecraft:hatch_cold": [
+                "minecraft:chicken",
+            ],
+            "minecraft:hatch_warm": [
+                "minecraft:chicken",
+            ],
             "minecraft:hive_full": [
                 "minecraft:bee",
             ],
@@ -26419,6 +26443,9 @@
                 "minecraft:villager",
                 "minecraft:villager_v2",
             ],
+            "minecraft:spawn_cold": [
+                "minecraft:egg",
+            ],
             "minecraft:spawn_emerging": [
                 "minecraft:warden",
             ],
@@ -26462,6 +26489,12 @@
             "minecraft:spawn_tame_baby": [
                 "minecraft:cat",
                 "minecraft:wolf",
+            ],
+            "minecraft:spawn_temperate": [
+                "minecraft:egg",
+            ],
+            "minecraft:spawn_warm": [
+                "minecraft:egg",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -27710,7 +27743,23 @@
                 },
             },
             "minecraft:climate_variant": {
+                "minecraft:chicken": {
+                    "type": "enum",
+                    "values": [
+                        "temperate",
+                        "warm",
+                        "cold",
+                    ],
+                },
                 "minecraft:cow": {
+                    "type": "enum",
+                    "values": [
+                        "temperate",
+                        "warm",
+                        "cold",
+                    ],
+                },
+                "minecraft:egg": {
                     "type": "enum",
                     "values": [
                         "temperate",
