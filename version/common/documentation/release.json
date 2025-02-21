@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.50.7",
-    "__COMMITHASH__": "5ce65764d3426f2a1f600f4156412f829c178b55",
-    "__MESSAGE__": "v1.21.50.7",
+    "__VERSION__": "1.21.60.10",
+    "__COMMITHASH__": "43ca2795c201b6fff53f38597c4d01f6c4593e1a",
+    "__MESSAGE__": "v1.21.60.10",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -236,6 +236,9 @@
                             "name": "minecraft:climate",
                         },
                         {
+                            "name": "minecraft:creature_spawn_probability",
+                        },
+                        {
                             "name": "minecraft:frozen_ocean_surface",
                         },
                         {
@@ -350,6 +353,12 @@
                             "name": "Client Biome JSON File",
                         },
                         {
+                            "name": "Foliage Color Map",
+                        },
+                        {
+                            "name": "Grass Color Map",
+                        },
+                        {
                             "name": "minecraft:ambient_sounds",
                         },
                         {
@@ -357,6 +366,12 @@
                         },
                         {
                             "name": "minecraft:fog_appearance",
+                        },
+                        {
+                            "name": "minecraft:foliage_appearance",
+                        },
+                        {
+                            "name": "minecraft:grass_appearance",
                         },
                         {
                             "name": "minecraft:sky_color",
@@ -638,6 +653,14 @@
                             ],
                         },
                         {
+                            "name": "home_distance",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "hourly_clock_time",
                             "sections": [
                                 {
@@ -767,6 +790,14 @@
                         },
                         {
                             "name": "is_block",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_bound_to_creaking_heart",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -2275,6 +2306,9 @@
                                     "name": "minecraft:push_through",
                                 },
                                 {
+                                    "name": "minecraft:renders_when_invisible",
+                                },
+                                {
                                     "name": "minecraft:scale",
                                 },
                                 {
@@ -3181,6 +3215,7 @@
         "covered_bit": "Describes if a top snow block is covering another block",
         "cracked_state": "Determines the cracked state of turtle eggs",
         "crafting": "Describes if the block has just crafted",
+        "creaking_heart_state": "Determines the block states for the Creaking Heart",
         "damage": "DEPRECATED - Determines the state of damage of an Anvil",
         "dead_bit": "DEPRECATED - Determines if coral, coral fans, or sea pickles are dead",
         "direction": "Determines the North, South, East, and West direction of some blocks. 0 = South, 1 = West, 2 = North 3 = East",
@@ -5555,6 +5590,7 @@
         "has_tag": "Returns true if the subject entity has the tag provided.",
         "has_target": "Returns true if the subject entity has a valid target.",
         "has_trade_supply": "Tests whether the target has any trade supply left. Will return false if the target cannot be traded with.",
+        "home_distance": "Tests the distance between the subject and its home. Returns false if the subject has no home or if their home is in a different dimension.",
         "hourly_clock_time": "Compares the current 24 hour time with an int value in the range[0, 24000]",
         "in_block": "Returns true when the subject entity is inside a specified Block type.",
         "in_caravan": "Returns true if the subject entity is in a caravan.",
@@ -5572,6 +5608,7 @@
         "is_baby": "Returns true when the subject entity is a baby.",
         "is_biome": "Tests whether the Subject is currently in the named biome.",
         "is_block": "Returns true when the block has the given name.",
+        "is_bound_to_creaking_heart": "Tests that the Creaking Heart that spawned the subject Creaking still exists.",
         "is_brightness": "Tests the current brightness against a provided value in the range (0.0f, 1.0f).",
         "is_climbing": "Returns true if the subject entity is climbing.",
         "is_color": "Returns true if the subject entity is the named color.",
@@ -7232,7 +7269,7 @@
                 {
                     "name": "listen_time",
                     "type": "Integer",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "30",
                     "description": "Sets the time an entity should continue delivering items to a noteblock after hearing it.",
                 },
                 {
@@ -8552,19 +8589,19 @@
                 {
                     "name": "search_count",
                     "type": "Integer",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "10",
                     "description": "The amount of times to try finding a random outdoors position before failing.",
                 },
                 {
                     "name": "search_height",
                     "type": "Integer",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "5",
                     "description": "The y range to search for an outdoors position for.",
                 },
                 {
                     "name": "search_range",
                     "type": "Integer",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "15",
                     "description": "The x and z range to search for an outdoors position for.",
                 },
                 {
@@ -9756,7 +9793,7 @@
                 {
                     "name": "min_ram_distance",
                     "type": "Decimal",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "4.000000",
                     "description": "The minimum distance at which the mob can start a ram attack.",
                 },
                 {
@@ -9774,7 +9811,7 @@
                 {
                     "name": "ram_distance",
                     "type": "Decimal",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "7.000000",
                     "description": "The distance at which the mob start to run with ram speed.",
                 },
                 {
@@ -10002,13 +10039,13 @@
                 {
                     "name": "digging_duration_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[0.000000, 0.000000]",
+                    "defaultValue": "[8.000000, 10.000000]",
                     "description": "Digging duration in seconds.",
                 },
                 {
                     "name": "find_valid_position_retries",
                     "type": "Decimal",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "5.000000",
                     "description": "Amount of retries to find a valid target position within search range.",
                 },
                 {
@@ -10062,13 +10099,13 @@
                 {
                     "name": "search_range_xz",
                     "type": "Decimal",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "10.000000",
                     "description": "Width and length of the volume around the entity used to find a valid target position",
                 },
                 {
                     "name": "search_range_y",
                     "type": "Decimal",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "7.000000",
                     "description": "Height of the volume around the entity used to find a valid target position",
                 },
                 {
@@ -10945,7 +10982,7 @@
                 {
                     "name": "listen_time",
                     "type": "Integer",
-                    "defaultValue": "0.000000",
+                    "defaultValue": "30",
                     "description": "Sets the time an entity should stay near a noteblock after hearing it.",
                 },
                 {
@@ -12372,7 +12409,7 @@
                 {
                     "name": "play_attack_sound",
                     "type": "Boolean",
-                    "defaultValue": "4.94066e-324",
+                    "defaultValue": "true",
                     "description": "If the entity should play their attack sound when attacking a target.",
                 },
             ],
@@ -12694,7 +12731,7 @@
                             "name": "color",
                             "type": "Decimal",
                             "defaultValue": "0",
-                            "description": "The percentage chance of a mutation on the entity's color.",
+                            "description": "The percentage chance of the offspring getting its color as if spawned rather than inheriting color from its parents.",
                         },
                         {
                             "name": "extra_variant",
@@ -12721,6 +12758,12 @@
                     "type": "List",
                     "defaultValue": "",
                     "description": "[EXPERIMENTAL] List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring.",
+                },
+                {
+                    "name": "property_inheritance",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of Entity Properties that should be inherited from the parent entities and potentially mutated.",
                 },
                 {
                     "name": "random_extra_variant_mutation_interval",
@@ -14188,6 +14231,12 @@
                     "type": "String",
                     "defaultValue": "",
                     "description": "Defines the event to trigger when an entity is detected looking at the owner entity.",
+                },
+                {
+                    "name": "min_looked_at_duration",
+                    "type": "Decimal",
+                    "defaultValue": "0",
+                    "description": "Defines the minimum, continuous time the owner entity has to be looked at before being considered as such. Defaults to 0 if not explicitly specified.",
                 },
                 {
                     "name": "not_looked_at_event",
@@ -16981,6 +17030,7 @@
         "query.key_frame_lerp_time": "Returns the ratio between the previous and next key frames.",
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
+        "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
         "query.lie_amount": "Returns the lie down amount for the entity.",
         "query.life_span": "Returns the limited life span of an entity, or 0.0 if it lives forever",
         "query.life_time": "Returns the time in seconds since the current animation started, else 0.0 if not called within an animation.",
@@ -17055,6 +17105,7 @@
         "query.timer_flag_3": "Returns 1.0 if behavior.timer_flag_3 is running, else it returns 0.0.",
         "query.total_emitter_count": "Returns the total number of active emitters in the world.",
         "query.total_particle_count": "Returns the total number of active particles in the world.",
+        "query.touch_only_affects_hotbar": "Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.",
         "query.trade_tier": "Returns the trade tier of the entity if it makes sense, else it returns 0.0",
         "query.unhappy_counter": "Always returns zero. (Was originally meant to indicate Panda unhappiness but due to an early code change it has always only returned zero)",
         "query.variant": "Returns the entity's variant index",
@@ -17064,8 +17115,5 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {
-        "query.last_input_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
-        "query.touch_only_affects_hotbar": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the touch input only affects the touchbar, otherwise returns 0.0. Available on the Client (Resource Packs) only.",
-    },
+    "molangQueryExperimental": {},
 }

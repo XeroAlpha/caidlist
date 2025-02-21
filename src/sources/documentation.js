@@ -696,8 +696,6 @@ const branchMap = {
     beta: 'preview'
 };
 
-const overwriteCommitHashMap = {};
-
 const versionRegExp = /"latest"[\s\n\r]*:[\s\n\r]*{[^"]*?"version"[\s\n\r]*:[\s\n\r]*"([\w.]+)"/;
 
 async function fetchBehaviorPack(treeSHA, cacheKey) {
@@ -734,7 +732,7 @@ export async function fetchDocumentationIds(cx) {
     const cacheKey = `version.common.documentation.${version}`;
     let cache = cachedOutput(cacheKey);
     try {
-        const overwriteCommitHash = overwriteCommitHashMap[version];
+        const overwriteCommitHash = process.env[`IDLIST_DOC_HASH_OVERWRITE_${version.toUpperCase()}`];
         let commitHash;
         let commitTreeSHA;
         let commitMessage;
@@ -745,7 +743,7 @@ export async function fetchDocumentationIds(cx) {
                     ref: overwriteCommitHash
                 })
             ).data;
-            commitHash = overwriteCommitHash;
+            commitHash = commitTree.sha;
             commitTreeSHA = commitTree.commit.tree.sha;
             commitMessage = commitTree.commit.message;
         } else {

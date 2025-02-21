@@ -112,7 +112,10 @@ hasPropertySelectorParam.associatedSelectors = [['has_property']];
 
 export function placeCommandFeatureSubCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
-        return testMinecraftVersionInRange(coreVersion, '1.21.60.23', '*');
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.21.60.23', '*') ||
+            testMinecraftVersionInRange(coreVersion, '1.21.60.10', '1.21.60.10')
+        );
     }
     return testMinecraftVersionInRange(coreVersion, '1.21.70.22', '*');
 }

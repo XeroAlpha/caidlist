@@ -84,9 +84,10 @@ export default async function fetchJavaEditionLangData() {
     let cache = cachedOutput('version.common.java.lang');
     try {
         const manifest = await fetchVersionsManifestCached();
-        const versionId = getLatestSnapshotVersionId(manifest);
+        const overwriteVersionId = process.env.IDLIST_JAVA_VERSION_OVERWRITE;
+        const versionId = overwriteVersionId ?? getLatestSnapshotVersionId(manifest);
         if (!cache || cache.__VERSION__ !== versionId) {
-            log('Fetching Java Edition language data...');
+            log(`Fetching Java Edition language data: ${versionId}`);
             const versionMeta = await fetchVersionMeta(metaApiHost, manifest, versionId);
             const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, 'client');
             const assetIndex = await fetchVersionAssetIndex(metaApiHost, versionMeta);

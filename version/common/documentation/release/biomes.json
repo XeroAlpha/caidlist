@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.50.7",
+    "version": "1.21.60.10",
     "content": [],
     "sections": [
         {
@@ -112,6 +112,12 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Describes temperature, humidity, precipitation, and similar. Biomes without this component will have default values.",
+                                },
+                                {
+                                    "Name": "minecraft:creature_spawn_probability",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Probability that creatures will spawn within the biome when a chunk is generated.",
                                 },
                                 {
                                     "Name": "minecraft:frozen_ocean_surface",
@@ -378,6 +384,25 @@
                                     "Type": "Float",
                                     "Required?": "Optional",
                                     "Description": "Density of white ash precipitation visuals",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:creature_spawn_probability",
+                    "id": "minecraft:creature_spawn_probability",
+                    "level": 2,
+                    "content": [
+                        "Probability that creatures will spawn within the biome when a chunk is generated.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "probability",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Probabiltity between [0.0, 0.75] of creatures spawning within the biome on chunk generation.",
                                 },
                             ],
                         },
@@ -952,5 +977,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "cfc55a9448000f6e1421edd833ab759eb0b07150",
+    "__OBJECTHASH__": "bc89f109937babe236a7e3b8ac907d5403f1dcfe",
 }

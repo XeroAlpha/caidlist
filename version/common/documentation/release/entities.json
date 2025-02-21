@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.50.7",
+    "version": "1.21.60.10",
     "content": [],
     "sections": [
         {
@@ -2244,6 +2244,10 @@
                                                     "Description": "",
                                                 },
                                                 {
+                                                    "Options": "verticalFlySpeed",
+                                                    "Description": "",
+                                                },
+                                                {
                                                     "Options": "walkSpeed",
                                                     "Description": "",
                                                 },
@@ -4378,6 +4382,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"has_trade_supply\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "home_distance",
+                    "id": "home_distance",
+                    "level": 2,
+                    "content": [
+                        "Tests the distance between the subject and its home. Returns false if the subject has no home or if their home is in a different dimension.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"home_distance\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"home_distance\", \"value\": \"0.00\" }",
                                     ],
                                 },
                             ],
@@ -6758,6 +6897,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"is_block\", \"value\": \"player\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "is_bound_to_creaking_heart",
+                    "id": "is_bound_to_creaking_heart",
+                    "level": 2,
+                    "content": [
+                        "Tests that the Creaking Heart that spawned the subject Creaking still exists.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_bound_to_creaking_heart\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_bound_to_creaking_heart\" }",
                                     ],
                                 },
                             ],
@@ -16243,7 +16517,7 @@
                                         {
                                             "Name": "listen_time",
                                             "Type": "Integer",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "30",
                                             "Description": "Sets the time an entity should continue delivering items to a noteblock after hearing it.",
                                         },
                                         {
@@ -17784,19 +18058,19 @@
                                         {
                                             "Name": "search_count",
                                             "Type": "Integer",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "10",
                                             "Description": "The amount of times to try finding a random outdoors position before failing.",
                                         },
                                         {
                                             "Name": "search_height",
                                             "Type": "Integer",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "5",
                                             "Description": "The y range to search for an outdoors position for.",
                                         },
                                         {
                                             "Name": "search_range",
                                             "Type": "Integer",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "15",
                                             "Description": "The x and z range to search for an outdoors position for.",
                                         },
                                         {
@@ -19241,7 +19515,7 @@
                                         {
                                             "Name": "min_ram_distance",
                                             "Type": "Decimal",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "4.000000",
                                             "Description": "The minimum distance at which the mob can start a ram attack.",
                                         },
                                         {
@@ -19259,7 +19533,7 @@
                                         {
                                             "Name": "ram_distance",
                                             "Type": "Decimal",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "7.000000",
                                             "Description": "The distance at which the mob start to run with ram speed.",
                                         },
                                         {
@@ -19535,13 +19809,13 @@
                                         {
                                             "Name": "digging_duration_range",
                                             "Type": "Range [a, b]",
-                                            "Default Value": "[0.000000, 0.000000]",
+                                            "Default Value": "[8.000000, 10.000000]",
                                             "Description": "Digging duration in seconds.",
                                         },
                                         {
                                             "Name": "find_valid_position_retries",
                                             "Type": "Decimal",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "5.000000",
                                             "Description": "Amount of retries to find a valid target position within search range.",
                                         },
                                         {
@@ -19595,13 +19869,13 @@
                                         {
                                             "Name": "search_range_xz",
                                             "Type": "Decimal",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "10.000000",
                                             "Description": "Width and length of the volume around the entity used to find a valid target position",
                                         },
                                         {
                                             "Name": "search_range_y",
                                             "Type": "Decimal",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "7.000000",
                                             "Description": "Height of the volume around the entity used to find a valid target position",
                                         },
                                         {
@@ -20757,7 +21031,7 @@
                                         {
                                             "Name": "listen_time",
                                             "Type": "Integer",
-                                            "Default Value": "0.000000",
+                                            "Default Value": "30",
                                             "Description": "Sets the time an entity should stay near a noteblock after hearing it.",
                                         },
                                         {
@@ -22546,7 +22820,7 @@
                                         {
                                             "Name": "play_attack_sound",
                                             "Type": "Boolean",
-                                            "Default Value": "4.94066e-324",
+                                            "Default Value": "true",
                                             "Description": "If the entity should play their attack sound when attacking a target.",
                                         },
                                     ],
@@ -22979,7 +23253,7 @@
                                                             "Name": "color",
                                                             "Type": "Decimal",
                                                             "Default Value": "0",
-                                                            "Description": "The percentage chance of a mutation on the entity's color.",
+                                                            "Description": "The percentage chance of the offspring getting its color as if spawned rather than inheriting color from its parents.",
                                                         },
                                                         {
                                                             "Name": "extra_variant",
@@ -23008,6 +23282,12 @@
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": "[EXPERIMENTAL] List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring.",
+                                        },
+                                        {
+                                            "Name": "property_inheritance",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of Entity Properties that should be inherited from the parent entities and potentially mutated.",
                                         },
                                         {
                                             "Name": "random_extra_variant_mutation_interval",
@@ -25005,6 +25285,12 @@
                                             "Type": "String",
                                             "Default Value": "",
                                             "Description": "Defines the event to trigger when an entity is detected looking at the owner entity.",
+                                        },
+                                        {
+                                            "Name": "min_looked_at_duration",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "Defines the minimum, continuous time the owner entity has to be looked at before being considered as such. Defaults to 0 if not explicitly specified.",
                                         },
                                         {
                                             "Name": "not_looked_at_event",
@@ -29369,6 +29655,10 @@
                                             "ID": "-138030768",
                                         },
                                         {
+                                            "JSON Name": "minecraft:renders_when_invisible",
+                                            "ID": "-1395968564",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:scale",
                                             "ID": "77854436",
                                         },
@@ -29540,7 +29830,7 @@
                             "id": "minecraft:can_power_jump",
                             "level": 4,
                             "content": [
-                                "Allows the entity to power jump like the horse does in vanilla.",
+                                "Allows the entity to power jump like the Horse does in Vanilla.",
                             ],
                         },
                         {
@@ -29730,7 +30020,7 @@
                             "id": "minecraft:input_ground_controlled",
                             "level": 4,
                             "content": [
-                                "When configured as a rideable entity, the entity will be controlled using WASD controls. Beginning with 1.19.50 the default auto step height for rideable entities is half a block. Consider adding the `variable_max_auto_step` component to increase it.",
+                                "When configured as a rideable entity, the entity will be controlled using WASD controls. Beginning with 1.19.50 the default auto step height for rideable entities is half a block. Consider adding the \"minecraft:variable_max_auto_step\" component to increase it.",
                             ],
                         },
                         {
@@ -29797,7 +30087,7 @@
                             "id": "minecraft:is_illager_captain",
                             "level": 4,
                             "content": [
-                                "Sets that this entity is an illager captain.",
+                                "Sets that this entity is an Illager Captain.",
                             ],
                         },
                         {
@@ -29949,6 +30239,14 @@
                                         },
                                     ],
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:renders_when_invisible",
+                            "id": "minecraft:renders_when_invisible",
+                            "level": 4,
+                            "content": [
+                                "When set, the entity will render even when invisible. Appropriate rendering behavior can then be specified in the corresponding \"minecraft:client_entity\".",
                             ],
                         },
                         {
@@ -30396,5 +30694,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "8ee879f8c7a84aff3d73528038cf288c75a2846d",
+    "__OBJECTHASH__": "790422bcda4be522f8cfd2c4732db63a8a80eece",
 }
