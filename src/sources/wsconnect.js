@@ -161,6 +161,7 @@ export async function createExclusiveWSSession(device) {
                 await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
                 await adbShell(device, 'input keyevent KEYCODE_ENTER');
                 ({ session } = await sessionPromise);
+                log(`${device.serial} connected via mcpews.`);
                 break;
             } catch (err) {
                 setStatus('');
@@ -173,11 +174,12 @@ export async function createExclusiveWSSession(device) {
         setStatus('Waiting for client...');
         let request;
         ({ session, request } = await pEvent(wsServer, 'client'));
-        await new Promise((resolve) => {
-            session.enableEncryption(() => resolve());
-        });
         log(`${request.socket.remoteAddress} connected via mcpews.`);
     }
+    setStatus('Establishing encrypted connection...');
+    await new Promise((resolve) => {
+        session.enableEncryption(() => resolve());
+    });
     setStatus('');
     session.on('disconnect', () => {
         wsServer.close();

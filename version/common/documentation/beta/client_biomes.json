@@ -1,6 +1,6 @@
 {
     "title": "CLIENT BIOMES DOCUMENTATION",
-    "version": "1.21.70.23",
+    "version": "1.21.70.24",
     "content": [],
     "sections": [
         {
@@ -68,10 +68,28 @@
                                     "Description": "Set the ambient sounds for the biome. These sounds must be in the 'individual_named_sounds' in a 'sounds.json' file.",
                                 },
                                 {
+                                    "Name": "minecraft:atmosphere_identifier",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "[INTERNAL - WORK IN PROGRESS] Set the atmosphere settings used during deferred rendering. Biomes without this component will have default atmosphere settings.",
+                                },
+                                {
                                     "Name": "minecraft:biome_music",
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Affect how music plays within the biome",
+                                },
+                                {
+                                    "Name": "minecraft:color_grading_identifier",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "[INTERNAL - WORK IN PROGRESS] Set the color_grading settings used during deferred rendering. Biomes without this component will have default color_grading settings.",
+                                },
+                                {
+                                    "Name": "minecraft:dry_foliage_color",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the dry foliage color used during rendering. Biomes without this component will have default dry foliage color behavior.",
                                 },
                                 {
                                     "Name": "minecraft:fog_appearance",
@@ -92,6 +110,12 @@
                                     "Description": "Set the grass color or color map used during rendering. Biomes without this component will have default grass appearance.",
                                 },
                                 {
+                                    "Name": "minecraft:lighting_identifier",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "[INTERNAL - WORK IN PROGRESS] Set the lighting settings used during deferred rendering. Biomes without this component will have default lighting settings.",
+                                },
+                                {
                                     "Name": "minecraft:sky_color",
                                     "Type": "Object",
                                     "Required?": "Optional",
@@ -102,6 +126,12 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Set the water surface color used during rendering. Biomes without this component will have default water surface color behavior.",
+                                },
+                                {
+                                    "Name": "minecraft:water_identifier",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "[INTERNAL - WORK IN PROGRESS] Set the water settings used during deferred rendering. Biomes without this component will have default water settings.",
                                 },
                             ],
                         },
@@ -246,6 +276,25 @@
                     ],
                 },
                 {
+                    "name": "minecraft:atmosphere_identifier",
+                    "id": "minecraft:atmosphere_identifier",
+                    "level": 2,
+                    "content": [
+                        "[INTERNAL - WORK IN PROGRESS] Set the atmosphere settings used during deferred rendering. Biomes without this component will have default atmosphere settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "atmosphere_identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of atmosphere definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:biome_music",
                     "id": "minecraft:biome_music",
                     "level": 2,
@@ -259,6 +308,44 @@
                                     "Type": "Float",
                                     "Required?": "Optional",
                                     "Description": "Multiplier temporarily and gradually applied to music volume when within this biome. Must be a value between 0 and 1, inclusive.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:color_grading_identifier",
+                    "id": "minecraft:color_grading_identifier",
+                    "level": 2,
+                    "content": [
+                        "[INTERNAL - WORK IN PROGRESS] Set the color_grading settings used during deferred rendering. Biomes without this component will have default color_grading settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color_grading_identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of color_grading definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:dry_foliage_color",
+                    "id": "minecraft:dry_foliage_color",
+                    "level": 2,
+                    "content": [
+                        "Set the dry foliage color used during rendering. Biomes without this component will have default dry foliage color behavior.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Required",
+                                    "Description": "RGB color of dry foliage",
                                 },
                             ],
                         },
@@ -322,6 +409,25 @@
                     ],
                 },
                 {
+                    "name": "minecraft:lighting_identifier",
+                    "id": "minecraft:lighting_identifier",
+                    "level": 2,
+                    "content": [
+                        "[INTERNAL - WORK IN PROGRESS] Set the lighting settings used during deferred rendering. Biomes without this component will have default lighting settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "lighting_identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of lighting definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:sky_color",
                     "id": "minecraft:sky_color",
                     "level": 2,
@@ -365,8 +471,27 @@
                         },
                     ],
                 },
+                {
+                    "name": "minecraft:water_identifier",
+                    "id": "minecraft:water_identifier",
+                    "level": 2,
+                    "content": [
+                        "[INTERNAL - WORK IN PROGRESS] Set the water settings used during deferred rendering. Biomes without this component will have default water settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "water_identifier",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of water definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
             ],
         },
     ],
-    "__OBJECTHASH__": "0acc2847efc7600e6914dab5638c89c1d14d943a",
+    "__OBJECTHASH__": "21b6085e913e28489a88d2f851194d01d5657979",
 }

@@ -1206,7 +1206,11 @@ export default async function analyzeGameTestEnumsCached(cx) {
         wsSession.sendCommand(`script debugger connect ${localAddress.replace('::ffff:', '')} ${port}`);
     }
     const socket = await socketPromise;
-    log(`${socket.remoteAddress} connected via qjs-debugger.`);
+    if (device) {
+        log(`${device.serial} connected via qjs-debugger.`);
+    } else {
+        log(`${socket.remoteAddress} connected via qjs-debugger.`);
+    }
     // Provide cache for infering corrupted items, but not affecting output (not owned by target)
     const target = Object.assign(Object.create(cache ?? {}), {
         packageVersion

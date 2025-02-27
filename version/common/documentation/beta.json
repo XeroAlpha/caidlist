@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.70.23",
-    "__COMMITHASH__": "6a62d84934507b09834a76cd08be3e3abda4f244",
-    "__MESSAGE__": "v1.21.70.23-preview",
+    "__VERSION__": "1.21.70.24",
+    "__COMMITHASH__": "b353e8cbe549f04dd63290b765715d0a4202af51",
+    "__MESSAGE__": "v1.21.70.24-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -362,7 +362,16 @@
                             "name": "minecraft:ambient_sounds",
                         },
                         {
+                            "name": "minecraft:atmosphere_identifier",
+                        },
+                        {
                             "name": "minecraft:biome_music",
+                        },
+                        {
+                            "name": "minecraft:color_grading_identifier",
+                        },
+                        {
+                            "name": "minecraft:dry_foliage_color",
                         },
                         {
                             "name": "minecraft:fog_appearance",
@@ -374,10 +383,16 @@
                             "name": "minecraft:grass_appearance",
                         },
                         {
+                            "name": "minecraft:lighting_identifier",
+                        },
+                        {
                             "name": "minecraft:sky_color",
                         },
                         {
                             "name": "minecraft:water_appearance",
+                        },
+                        {
+                            "name": "minecraft:water_identifier",
                         },
                     ],
                 },
@@ -7082,6 +7097,12 @@
                     "description": "Range of time in seconds the mob will float around before landing and choosing to do something else",
                 },
                 {
+                    "name": "float_wander_has_move_control",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the MoveControl flag will be added to the behavior which means that it can no longer be active at the same time as other behaviors with MoveControl.",
+                },
+                {
                     "name": "must_reach",
                     "type": "Boolean",
                     "defaultValue": "false",
@@ -7092,6 +7113,12 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the mob will randomly pick a new point while moving to the previously selected one",
+                },
+                {
+                    "name": "use_home_position_restriction",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the mob will respect home position restrictions when choosing new target positions. If false, it will choose target position without considering home restrictions",
                 },
                 {
                     "name": "xz_dist",
@@ -13953,7 +13980,7 @@
             ],
         },
         "minecraft:input_air_controlled": {
-            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
+            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions. Only available with `\"use_beta_features\": true` and likely to be drastically changed or removed.",
             "children": [
                 {
                     "name": "backwards_movement_modifier",
@@ -15753,97 +15780,97 @@
             ],
         },
         "minecraft:rideable": {
-            "description": "Determines whether this entity can be ridden. Allows specifying the different seat positions and quantity.",
+            "description": "Determines whether this entity can be ridden. Allows specifying the different seat positions and amount.",
             "children": [
                 {
                     "name": "controlling_seat",
                     "type": "Integer",
                     "defaultValue": "0",
-                    "description": "The seat that designates the driver of the entity. This is only observed by the horse/boat styles of riding; minecarts/entities with \"minecraft:controlled_by_player\" give control to any player in any seat.",
+                    "description": "The seat that designates the driver of the entity. Entities with the \"minecraft:behavior.controlled_by_player\" goal ignore this field and give control to any player in any seat.",
                 },
                 {
                     "name": "crouching_skip_interact",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, this entity can't be interacted with if the entity interacting with it is crouching",
+                    "description": "If true, this entity can't be interacted with if the entity interacting with it is crouching.",
                 },
                 {
                     "name": "family_types",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "List of entities that can ride this entity",
+                    "description": "List of entities that can ride this entity.",
                 },
                 {
                     "name": "interact_text",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The text to display when the player can interact with the entity when playing with Touch-screen controls",
+                    "description": "The text to display when the player can interact with the entity when playing with touch-screen controls.",
                 },
                 {
                     "name": "passenger_max_width",
                     "type": "Decimal",
                     "defaultValue": "0.00",
-                    "description": "The max width a mob can be to be a passenger. A value of 0 ignores this parameter.",
+                    "description": "The max width a mob can have to be a rider. A value of 0 ignores this parameter.",
                 },
                 {
                     "name": "priority",
                     "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "This field may exist in old data but isn't used by minecraft:rideable.",
+                    "defaultValue": "N/A",
+                    "description": "This field may exist in old data but isn't used by \"minecraft:rideable\".",
                 },
                 {
                     "name": "pull_in_entities",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will pull in entities that are in the correct family_types into any available seats",
+                    "description": "If true, this entity will pull in entities that are in the correct \"family_types\" into any available seats.",
                 },
                 {
                     "name": "rider_can_interact",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will be picked when looked at by the rider",
+                    "description": "If true, this entity will be picked when looked at by the rider.",
                 },
                 {
                     "name": "seat_count",
                     "type": "Integer",
                     "defaultValue": "1",
-                    "description": "The number of entities that can ride this entity at the same time",
+                    "description": "The number of entities that can ride this entity at the same time.",
                 },
                 {
                     "name": "seats",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "The list of positions and number of riders for each position for entities riding this entity",
+                    "description": "The list of positions and number of riders for each position for entities riding this entity.",
                     "children": [
                         {
                             "name": "lock_rider_rotation",
                             "type": "Decimal",
                             "defaultValue": "181",
-                            "description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit",
+                            "description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit.",
                         },
                         {
                             "name": "max_rider_count",
                             "type": "Integer",
-                            "defaultValue": "seat_count",
-                            "description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid",
+                            "defaultValue": "0",
+                            "description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid.",
                         },
                         {
                             "name": "min_rider_count",
                             "type": "Integer",
                             "defaultValue": "0",
-                            "description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used",
+                            "description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used.",
                         },
                         {
                             "name": "position",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[0, 0, 0]",
-                            "description": "Position of this seat relative to this entity's position",
+                            "description": "Position of this seat relative to this entity's position.",
                         },
                         {
                             "name": "rotate_rider_by",
                             "type": "Molang",
                             "defaultValue": "0",
-                            "description": "Offset to rotate riders by",
+                            "description": "Offset to rotate riders by.",
                         },
                     ],
                 },

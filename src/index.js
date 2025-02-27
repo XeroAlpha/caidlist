@@ -9,7 +9,7 @@ async function main(args) {
         measureAutocompletion();
     }
     if (args[0] === 'generate') {
-        const versionAndBranchIds = args.slice(1).reverse();
+        const versionAndBranchIds = args.slice(1);
         await forEachArray(versionAndBranchIds, async (versionAndBranchId) => {
             const [versionId, branchId] = versionAndBranchId.split('/');
             context.version = versionId;
