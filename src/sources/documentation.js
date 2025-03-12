@@ -825,6 +825,7 @@ function getDefaultValue(schema) {
             return Number(schema.defaultValue) || 0;
         case 'String':
         case 'Molang':
+        case 'Enumerator':
             return String(schema.defaultValue);
         case 'Array':
         case 'List':
