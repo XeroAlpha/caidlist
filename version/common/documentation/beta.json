@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.80.20",
-    "__COMMITHASH__": "dd662bb52a09efd520e2b0be30a0a6d9f21a44cc",
-    "__MESSAGE__": "v1.21.80.20-preview",
+    "__VERSION__": "1.21.80.21",
+    "__COMMITHASH__": "f460e74833695db3aa2b1588e9dbe61aaee599e5",
+    "__MESSAGE__": "v1.21.80.21-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -4895,7 +4895,7 @@
                 },
                 {
                     "name": "minecraft:item_visual",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                 },
                 {
@@ -4912,7 +4912,7 @@
                 },
                 {
                     "name": "minecraft:liquid_detection",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "The definitions for how a block behaves when detecting liquid. Only one rule definition is allowed per liquid type - if multiple are specified, the first will be used and the rest will be ignored.",
                     "children": [
@@ -5045,7 +5045,7 @@
                 },
                 {
                     "name": "minecraft:redstone_conductivity",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "The basic redstone properties of a block; if the component is not provided the default values are used. Requires 1.21.30 format version and above.",
                     "children": [
@@ -5065,7 +5065,7 @@
                 },
                 {
                     "name": "minecraft:replaceable",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
                 },
@@ -14236,24 +14236,6 @@
             "description": "Allows this entity to be leashed and defines the conditions and events for this entity when is leashed.",
             "children": [
                 {
-                    "name": "can_be_stolen",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, players can leash this entity even if it is already leashed to another mob.",
-                },
-                {
-                    "name": "hard_distance",
-                    "type": "Decimal",
-                    "defaultValue": "6",
-                    "description": "Distance in blocks at which the leash stiffens, restricting movement.",
-                },
-                {
-                    "name": "max_distance",
-                    "type": "Decimal",
-                    "defaultValue": "10",
-                    "description": "Distance in blocks at which the leash breaks.",
-                },
-                {
                     "name": "on_leash",
                     "type": "String",
                     "defaultValue": "",
@@ -14266,10 +14248,42 @@
                     "description": "Event to call when this entity is unleashed.",
                 },
                 {
-                    "name": "soft_distance",
-                    "type": "Decimal",
-                    "defaultValue": "4",
-                    "description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                    "name": "presets",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
+                    "children": [
+                        {
+                            "name": "can_be_stolen",
+                            "type": "Boolean",
+                            "defaultValue": "false",
+                            "description": "If true, players can leash this entity even if it is already leashed to another mob.",
+                        },
+                        {
+                            "name": "filter",
+                            "type": "Minecraft Filter",
+                            "defaultValue": "",
+                            "description": "Conditions that must be met for this preset to be applied. These conditions are only evaluated upon leashing.",
+                        },
+                        {
+                            "name": "hard_distance",
+                            "type": "Decimal",
+                            "defaultValue": "6",
+                            "description": "Distance in blocks at which the leash stiffens, restricting movement.",
+                        },
+                        {
+                            "name": "max_distance",
+                            "type": "Decimal",
+                            "defaultValue": "10",
+                            "description": "Distance in blocks at which the leash breaks.",
+                        },
+                        {
+                            "name": "soft_distance",
+                            "type": "Decimal",
+                            "defaultValue": "4",
+                            "description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                        },
+                    ],
                 },
             ],
         },
@@ -17136,6 +17150,7 @@
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
         "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
+        "query.leashed_entity_count": "Returns the number of entities for which this entity is the leash holder.",
         "query.lie_amount": "Returns the lie down amount for the entity.",
         "query.life_span": "Returns the limited life span of an entity, or 0.0 if it lives forever",
         "query.life_time": "Returns the time in seconds since the current animation started, else 0.0 if not called within an animation.",

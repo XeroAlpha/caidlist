@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.80.20",
+    "version": "1.21.80.21",
     "content": [],
     "sections": [
         {
@@ -25244,24 +25244,6 @@
                                     "type": "table",
                                     "rows": [
                                         {
-                                            "Name": "can_be_stolen",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, players can leash this entity even if it is already leashed to another mob.",
-                                        },
-                                        {
-                                            "Name": "hard_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "6",
-                                            "Description": "Distance in blocks at which the leash stiffens, restricting movement.",
-                                        },
-                                        {
-                                            "Name": "max_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "10",
-                                            "Description": "Distance in blocks at which the leash breaks.",
-                                        },
-                                        {
                                             "Name": "on_leash",
                                             "Type": "String",
                                             "Default Value": "",
@@ -25274,10 +25256,47 @@
                                             "Description": "Event to call when this entity is unleashed.",
                                         },
                                         {
-                                            "Name": "soft_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "4",
-                                            "Description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                                            "Name": "presets",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": [
+                                                "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "can_be_stolen",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "false",
+                                                            "Description": "If true, players can leash this entity even if it is already leashed to another mob.",
+                                                        },
+                                                        {
+                                                            "Name": "filter",
+                                                            "Type": "Minecraft Filter",
+                                                            "Default Value": "",
+                                                            "Description": "Conditions that must be met for this preset to be applied. These conditions are only evaluated upon leashing.",
+                                                        },
+                                                        {
+                                                            "Name": "hard_distance",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "6",
+                                                            "Description": "Distance in blocks at which the leash stiffens, restricting movement.",
+                                                        },
+                                                        {
+                                                            "Name": "max_distance",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "10",
+                                                            "Description": "Distance in blocks at which the leash breaks.",
+                                                        },
+                                                        {
+                                                            "Name": "soft_distance",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "4",
+                                                            "Description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                                                        },
+                                                    ],
+                                                },
+                                            ],
                                         },
                                     ],
                                 },
@@ -30792,5 +30811,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "c96eb5a8bb2839ae6b4be9b8e703f42bf2247cb5",
+    "__OBJECTHASH__": "e22ac43a2e0a336ce5abaff0f783207e11e68f98",
 }
