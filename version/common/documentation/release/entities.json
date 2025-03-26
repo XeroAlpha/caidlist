@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.60.10",
+    "version": "1.21.70.3",
     "content": [],
     "sections": [
         {
@@ -16256,6 +16256,12 @@
                                             "Description": "Range of time in seconds the mob will float around before landing and choosing to do something else",
                                         },
                                         {
+                                            "Name": "float_wander_has_move_control",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, the MoveControl flag will be added to the behavior which means that it can no longer be active at the same time as other behaviors with MoveControl.",
+                                        },
+                                        {
                                             "Name": "must_reach",
                                             "Type": "Boolean",
                                             "Default Value": "false",
@@ -16266,6 +16272,12 @@
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, the mob will randomly pick a new point while moving to the previously selected one",
+                                        },
+                                        {
+                                            "Name": "use_home_position_restriction",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, the mob will respect home position restrictions when choosing new target positions. If false, it will choose target position without considering home restrictions",
                                         },
                                         {
                                             "Name": "xz_dist",
@@ -22369,7 +22381,7 @@
                                             "Name": "effect_duration",
                                             "Type": "Decimal",
                                             "Default Value": "0.0",
-                                            "Description": "Duration in seconds of the status ailment applied to the damaged entity",
+                                            "Description": "Duration in seconds of the status ailment applied to the damaged entity. Can also be \"infinite\"",
                                         },
                                         {
                                             "Name": "effect_name",
@@ -23481,13 +23493,13 @@
                                             "Name": "height",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0.",
+                                            "Description": "Height of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                                         },
                                         {
                                             "Name": "width",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "Width of the collision box in blocks. A negative value will be assumed to be 0.",
+                                            "Description": "Width of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                                         },
                                     ],
                                 },
@@ -23518,7 +23530,7 @@
                                             "Name": "regeneration_duration",
                                             "Type": "Integer",
                                             "Default Value": "5",
-                                            "Description": "The duration in seconds of Regeneration I added to the mob.",
+                                            "Description": "The duration in seconds of Regeneration I added to the mob. Can also be set to \"infinite\"",
                                         },
                                     ],
                                 },
@@ -23977,6 +23989,12 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "find_players_only",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Limits the search to Players only for all subsensors.",
+                                        },
+                                        {
                                             "Name": "relative_range",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -24032,6 +24050,12 @@
                                                             "Type": "Boolean",
                                                             "Default Value": "false",
                                                             "Description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                                                        },
+                                                        {
+                                                            "Name": "y_offset",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0",
+                                                            "Description": "Vertical offset applied to the entity's position when computing the distance from other entities.",
                                                         },
                                                     ],
                                                 },
@@ -24860,6 +24884,31 @@
                             ],
                         },
                         {
+                            "name": "minecraft:input_air_controlled",
+                            "id": "minecraft:input_air_controlled",
+                            "level": 4,
+                            "content": [
+                                "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions. Only available with `\"use_beta_features\": true` and likely to be drastically changed or removed.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "backwards_movement_modifier",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5",
+                                            "Description": "Modifies speed going backwards.",
+                                        },
+                                        {
+                                            "Name": "strafe_speed_modifier",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.4",
+                                            "Description": "Modifies the strafe speed.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:inside_block_notifier",
                             "id": "minecraft:inside_block_notifier",
                             "level": 4,
@@ -25353,7 +25402,7 @@
                                             "Name": "effect_time",
                                             "Type": "Integer",
                                             "Default Value": "10",
-                                            "Description": "How long the applied mob effect lasts in seconds.",
+                                            "Description": "How long the applied mob effect lasts in seconds. Can also be set to \"infinite\"",
                                         },
                                         {
                                             "Name": "entity_filter",
@@ -27015,7 +27064,7 @@
                             "id": "minecraft:rideable",
                             "level": 4,
                             "content": [
-                                "Determines whether this entity can be ridden. Allows specifying the different seat positions and quantity.",
+                                "Determines whether this entity can be ridden. Allows specifying the different seat positions and amount.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -27023,62 +27072,62 @@
                                             "Name": "controlling_seat",
                                             "Type": "Integer",
                                             "Default Value": "0",
-                                            "Description": "The seat that designates the driver of the entity. This is only observed by the horse/boat styles of riding; minecarts/entities with \"minecraft:controlled_by_player\" give control to any player in any seat.",
+                                            "Description": "The seat that designates the driver of the entity. Entities with the \"minecraft:behavior.controlled_by_player\" goal ignore this field and give control to any player in any seat.",
                                         },
                                         {
                                             "Name": "crouching_skip_interact",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "If true, this entity can't be interacted with if the entity interacting with it is crouching",
+                                            "Description": "If true, this entity can't be interacted with if the entity interacting with it is crouching.",
                                         },
                                         {
                                             "Name": "family_types",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "List of entities that can ride this entity",
+                                            "Description": "List of entities that can ride this entity.",
                                         },
                                         {
                                             "Name": "interact_text",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The text to display when the player can interact with the entity when playing with Touch-screen controls",
+                                            "Description": "The text to display when the player can interact with the entity when playing with touch-screen controls.",
                                         },
                                         {
                                             "Name": "passenger_max_width",
                                             "Type": "Decimal",
                                             "Default Value": "0.00",
-                                            "Description": "The max width a mob can be to be a passenger. A value of 0 ignores this parameter.",
+                                            "Description": "The max width a mob can have to be a rider. A value of 0 ignores this parameter.",
                                         },
                                         {
                                             "Name": "priority",
                                             "Type": "Integer",
-                                            "Default Value": "0",
-                                            "Description": "This field may exist in old data but isn't used by minecraft:rideable.",
+                                            "Default Value": "N/A",
+                                            "Description": "This field may exist in old data but isn't used by \"minecraft:rideable\".",
                                         },
                                         {
                                             "Name": "pull_in_entities",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "If true, this entity will pull in entities that are in the correct family_types into any available seats",
+                                            "Description": "If true, this entity will pull in entities that are in the correct \"family_types\" into any available seats.",
                                         },
                                         {
                                             "Name": "rider_can_interact",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "If true, this entity will be picked when looked at by the rider",
+                                            "Description": "If true, this entity will be picked when looked at by the rider.",
                                         },
                                         {
                                             "Name": "seat_count",
                                             "Type": "Integer",
                                             "Default Value": "1",
-                                            "Description": "The number of entities that can ride this entity at the same time",
+                                            "Description": "The number of entities that can ride this entity at the same time.",
                                         },
                                         {
                                             "Name": "seats",
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": [
-                                                "The list of positions and number of riders for each position for entities riding this entity",
+                                                "The list of positions and number of riders for each position for entities riding this entity.",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -27086,31 +27135,31 @@
                                                             "Name": "lock_rider_rotation",
                                                             "Type": "Decimal",
                                                             "Default Value": "181",
-                                                            "Description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit",
+                                                            "Description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit.",
                                                         },
                                                         {
                                                             "Name": "max_rider_count",
                                                             "Type": "Integer",
-                                                            "Default Value": "seat_count",
-                                                            "Description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid",
+                                                            "Default Value": "0",
+                                                            "Description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid.",
                                                         },
                                                         {
                                                             "Name": "min_rider_count",
                                                             "Type": "Integer",
                                                             "Default Value": "0",
-                                                            "Description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used",
+                                                            "Description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used.",
                                                         },
                                                         {
                                                             "Name": "position",
                                                             "Type": "Vector [a, b, c]",
                                                             "Default Value": "[0, 0, 0]",
-                                                            "Description": "Position of this seat relative to this entity's position",
+                                                            "Description": "Position of this seat relative to this entity's position.",
                                                         },
                                                         {
                                                             "Name": "rotate_rider_by",
                                                             "Type": "Molang",
                                                             "Default Value": "0",
-                                                            "Description": "Offset to rotate riders by",
+                                                            "Description": "Offset to rotate riders by.",
                                                         },
                                                     ],
                                                 },
@@ -29219,6 +29268,10 @@
                                             "ID": "163715083",
                                         },
                                         {
+                                            "JSON Name": "minecraft:input_air_controlled",
+                                            "ID": "1246978592",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:inside_block_notifier",
                                             "ID": "-377593253",
                                         },
@@ -29515,6 +29568,10 @@
                                             "ID": "-1314051310",
                                         },
                                         {
+                                            "JSON Name": "minecraft:body_rotation_axis_aligned",
+                                            "ID": "-769871276",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:body_rotation_blocked",
                                             "ID": "-31742338",
                                         },
@@ -29589,6 +29646,10 @@
                                         {
                                             "JSON Name": "minecraft:is_chested",
                                             "ID": "-817599379",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:is_collidable",
+                                            "ID": "1703955772",
                                         },
                                         {
                                             "JSON Name": "minecraft:is_dyeable",
@@ -29799,6 +29860,15 @@
                                         },
                                     ],
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:body_rotation_axis_aligned",
+                            "id": "minecraft:body_rotation_axis_aligned",
+                            "level": 4,
+                            "content": [
+                                "Causes the entity's body to automatically rotate to align with the nearest cardinal direction based on its current facing direction.",
+                                "Combining this with the \"minecraft:body_rotation_blocked\" component will cause the entity to align to the nearest cardinal direction and remain fixed in that orientation, regardless of future changes in its facing direction.",
                             ],
                         },
                         {
@@ -30048,6 +30118,16 @@
                             ],
                         },
                         {
+                            "name": "minecraft:is_collidable",
+                            "id": "minecraft:is_collidable",
+                            "level": 4,
+                            "content": [
+                                "Allows other mobs to have vertical and horizontal collisions with this mob. For a collision to occur, both mobs must have a \"minecraft:collision_box\" component. This component can only be used on mobs and enables collisions exclusively between mobs.",
+                                "Please note that this type of collision is unreliable for moving collidable mobs. It is recommended to use this component only in scenarios where the collidable mob remains stationary.",
+                                "Collidable behavior is closely related to stackable behavior. While the \"minecraft:is_collidable\" component governs how other mobs interact with the component's owner, the \"minecraft:is_stackable\" component describes how an entity interacts with others of its own kind.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:is_dyeable",
                             "id": "minecraft:is_dyeable",
                             "level": 4,
@@ -30127,7 +30207,8 @@
                             "id": "minecraft:is_stackable",
                             "level": 4,
                             "content": [
-                                "Sets that this entity can be stacked.",
+                                "Allows instances of this entity to have vertical and horizontal collisions with each other. For a collision to occur, both instances must have a \"minecraft:collision_box\" component.",
+                                "Stackable behavior is closely related to collidable behavior. While the \"minecraft:is_stackable\" component describes how an entity interacts with others of its own kind, the \"minecraft:is_collidable\" component governs how other mobs interact with the component's owner.)",
                             ],
                         },
                         {
@@ -30694,5 +30775,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "790422bcda4be522f8cfd2c4732db63a8a80eece",
+    "__OBJECTHASH__": "1db99052c41d808747343ef600bb244213489af2",
 }

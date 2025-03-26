@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.60.10",
+    "version": "1.21.70.3",
     "content": [],
     "sections": [
         {
@@ -141,6 +141,26 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:destruction_particles",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Sets the particles that will be used when block is destroyed. This component can be omitted.",
+                                        {
+                                            "section": "texture",
+                                            "content": [
+                                                "The texture name used for the particle.",
+                                            ],
+                                        },
+                                        {
+                                            "section": "tint_method",
+                                            "content": [
+                                                "Optional, tint multiplied to the color. Tint method logic varies, but often refers to the \"rain\" and \"temperature\" of the biome the block is placed in to compute the tint. Supported tint methods are \"none\", \"default_foliage\", \"birch_foliage\", \"evergreen_foliage\", \"dry_foliage\", \"grass\" and \"water\"",
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
                                     "Name": "minecraft:display_name",
                                     "Type": "Localization String",
                                     "Default Value": "",
@@ -262,9 +282,23 @@
                                 },
                                 {
                                     "Name": "minecraft:map_color",
-                                    "Type": "String",
+                                    "Type": "JSON Object",
                                     "Default Value": "",
-                                    "Description": "Sets the color of the block when rendered to a map. The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255. If this component is omitted, the block will not show up on the map.",
+                                    "Description": [
+                                        "Sets the color of the block when rendered to a map. If this component is omitted, the block will not show up on the map.",
+                                        {
+                                            "section": "color",
+                                            "content": [
+                                                "The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255.",
+                                            ],
+                                        },
+                                        {
+                                            "section": "tint_method",
+                                            "content": [
+                                                "Optional, tint multiplied to the color. Tint method logic varies, but often refers to the \"rain\" and \"temperature\" of the biome the block is placed in to compute the tint. Supported tint methods are \"none\", \"default_foliage\", \"birch_foliage\", \"evergreen_foliage\", \"dry_foliage\", \"grass\" and \"water\"",
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "Name": "minecraft:material_instances",
@@ -279,6 +313,12 @@
                                                 {
                                                     "type": "table",
                                                     "rows": [
+                                                        {
+                                                            "Name": "Boolean",
+                                                            "Type": "",
+                                                            "Default Value": "",
+                                                            "Description": "isotropic",
+                                                        },
                                                         {
                                                             "Name": "ambient_occlusion",
                                                             "Type": "Decimal",
@@ -302,6 +342,12 @@
                                                             "Type": "String",
                                                             "Default Value": "",
                                                             "Description": "Texture name for the material.",
+                                                        },
+                                                        {
+                                                            "Name": "tint_method",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "none",
+                                                            "Description": "Tint multiplied to the color. Tint method logic varies, but often refers to the \"rain\" and \"temperature\" of the biome the block is placed in to compute the tint. Supported tint methods are \"none\", \"default_foliage\", \"birch_foliage\", \"evergreen_foliage\", \"dry_foliage\", \"grass\" and \"water\"",
                                                         },
                                                     ],
                                                 },
@@ -492,6 +538,12 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:replaceable",
+                                    "Type": "Identifier String",
+                                    "Default Value": "",
+                                    "Description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
+                                },
+                                {
                                     "Name": "minecraft:selection_box",
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "",
@@ -592,7 +644,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.60\",",
+                                        "  \"format_version\": \"1.21.70\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -662,7 +714,7 @@
                                                     "Name": "duration",
                                                     "Type": "Decimal",
                                                     "Default Value": "0.0",
-                                                    "Description": "The duration of the mob effect.",
+                                                    "Description": "The duration of the mob effect in seconds. Can also be set to \"infinite\"",
                                                 },
                                                 {
                                                     "Name": "effect",
@@ -1280,5 +1332,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "1ac06adb647b8b9bbf927036cb206442b26f0a9f",
+    "__OBJECTHASH__": "8ac82466109f0b74bbb032e99addecbf1014fd3d",
 }

@@ -117,7 +117,10 @@ export function placeCommandFeatureSubCommand({ coreVersion, branch }) {
             testMinecraftVersionInRange(coreVersion, '1.21.60.10', '1.21.60.10')
         );
     }
-    return testMinecraftVersionInRange(coreVersion, '1.21.70.22', '*');
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.21.70.22', '*') ||
+        testMinecraftVersionInRange(coreVersion, '1.21.70.03', '1.21.70.03')
+    );
 }
 placeCommandFeatureSubCommand.associatedCommands = [
     [

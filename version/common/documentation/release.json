@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.60.10",
-    "__COMMITHASH__": "43ca2795c201b6fff53f38597c4d01f6c4593e1a",
-    "__MESSAGE__": "v1.21.60.10",
+    "__VERSION__": "1.21.70.3",
+    "__COMMITHASH__": "8cb28e3b1e7972ac8126cee3f19201109faecf50",
+    "__MESSAGE__": "v1.21.70.3",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -362,7 +362,16 @@
                             "name": "minecraft:ambient_sounds",
                         },
                         {
+                            "name": "minecraft:atmosphere_identifier",
+                        },
+                        {
                             "name": "minecraft:biome_music",
+                        },
+                        {
+                            "name": "minecraft:color_grading_identifier",
+                        },
+                        {
+                            "name": "minecraft:dry_foliage_color",
                         },
                         {
                             "name": "minecraft:fog_appearance",
@@ -374,10 +383,16 @@
                             "name": "minecraft:grass_appearance",
                         },
                         {
+                            "name": "minecraft:lighting_identifier",
+                        },
+                        {
                             "name": "minecraft:sky_color",
                         },
                         {
                             "name": "minecraft:water_appearance",
+                        },
+                        {
+                            "name": "minecraft:water_identifier",
                         },
                     ],
                 },
@@ -1939,6 +1954,9 @@
                                     "name": "minecraft:hurt_on_condition",
                                 },
                                 {
+                                    "name": "minecraft:input_air_controlled",
+                                },
+                                {
                                     "name": "minecraft:inside_block_notifier",
                                 },
                                 {
@@ -2201,6 +2219,9 @@
                                     "name": "minecraft:ambient_sound_interval",
                                 },
                                 {
+                                    "name": "minecraft:body_rotation_axis_aligned",
+                                },
+                                {
                                     "name": "minecraft:body_rotation_blocked",
                                 },
                                 {
@@ -2256,6 +2277,9 @@
                                 },
                                 {
                                     "name": "minecraft:is_chested",
+                                },
+                                {
+                                    "name": "minecraft:is_collidable",
                                 },
                                 {
                                     "name": "minecraft:is_dyeable",
@@ -3455,7 +3479,9 @@
         "minecraft:bubble_coral_fan": "",
         "minecraft:bubble_coral_wall_fan": "",
         "minecraft:budding_amethyst": "",
+        "minecraft:bush": "",
         "minecraft:cactus": "",
+        "minecraft:cactus_flower": "",
         "minecraft:cake": "",
         "minecraft:calcite": "",
         "minecraft:calibrated_sculk_sensor": "",
@@ -3825,6 +3851,7 @@
         "minecraft:fire_coral_block": "",
         "minecraft:fire_coral_fan": "",
         "minecraft:fire_coral_wall_fan": "",
+        "minecraft:firefly_bush": "",
         "minecraft:fletching_table": "",
         "minecraft:flower_pot": "",
         "minecraft:flowering_azalea": "",
@@ -3965,6 +3992,7 @@
         "minecraft:large_amethyst_bud": "",
         "minecraft:large_fern": "",
         "minecraft:lava": "",
+        "minecraft:leaf_litter": "",
         "minecraft:lectern": "",
         "minecraft:lever": "",
         "minecraft:light_block_0": "",
@@ -4323,6 +4351,7 @@
         "minecraft:sea_lantern": "",
         "minecraft:sea_pickle": "",
         "minecraft:seagrass": "",
+        "minecraft:short_dry_grass": "",
         "minecraft:short_grass": "",
         "minecraft:shroomlight": "",
         "minecraft:silver_glazed_terracotta": "",
@@ -4420,6 +4449,7 @@
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
         "minecraft:sweet_berry_bush": "",
+        "minecraft:tall_dry_grass": "",
         "minecraft:tall_grass": "",
         "minecraft:target": "",
         "minecraft:tinted_glass": "",
@@ -4547,6 +4577,7 @@
         "minecraft:white_terracotta": "",
         "minecraft:white_tulip": "",
         "minecraft:white_wool": "",
+        "minecraft:wildflowers": "",
         "minecraft:wither_rose": "",
         "minecraft:wither_skeleton_skull": "",
         "minecraft:wooden_button": "",
@@ -4820,6 +4851,11 @@
                     ],
                 },
                 {
+                    "name": "minecraft:destruction_particles",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                },
+                {
                     "name": "minecraft:display_name",
                     "type": "Localization String",
                     "defaultValue": "",
@@ -4914,9 +4950,8 @@
                 },
                 {
                     "name": "minecraft:map_color",
-                    "type": "String",
+                    "type": "JSON Object",
                     "defaultValue": "",
-                    "description": "Sets the color of the block when rendered to a map. The color is represented as a hex value in the format \"#RRGGBB\". May also be expressed as an array of [R, G, B] from 0 to 255. If this component is omitted, the block will not show up on the map.",
                 },
                 {
                     "name": "minecraft:material_instances",
@@ -5029,6 +5064,12 @@
                     ],
                 },
                 {
+                    "name": "minecraft:replaceable",
+                    "type": "Identifier String",
+                    "defaultValue": "",
+                    "description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
+                },
+                {
                     "name": "minecraft:selection_box",
                     "type": "Boolean / JSON Object",
                     "defaultValue": "",
@@ -5080,7 +5121,7 @@
                             "name": "duration",
                             "type": "Decimal",
                             "defaultValue": "0.0",
-                            "description": "The duration of the mob effect.",
+                            "description": "The duration of the mob effect in seconds. Can also be set to \"infinite\"",
                         },
                         {
                             "name": "effect",
@@ -7061,6 +7102,12 @@
                     "description": "Range of time in seconds the mob will float around before landing and choosing to do something else",
                 },
                 {
+                    "name": "float_wander_has_move_control",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the MoveControl flag will be added to the behavior which means that it can no longer be active at the same time as other behaviors with MoveControl.",
+                },
+                {
                     "name": "must_reach",
                     "type": "Boolean",
                     "defaultValue": "false",
@@ -7071,6 +7118,12 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the mob will randomly pick a new point while moving to the previously selected one",
+                },
+                {
+                    "name": "use_home_position_restriction",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the mob will respect home position restrictions when choosing new target positions. If false, it will choose target position without considering home restrictions",
                 },
                 {
                     "name": "xz_dist",
@@ -12086,7 +12139,7 @@
                     "name": "effect_duration",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Duration in seconds of the status ailment applied to the damaged entity",
+                    "description": "Duration in seconds of the status ailment applied to the damaged entity. Can also be \"infinite\"",
                 },
                 {
                     "name": "effect_name",
@@ -12909,13 +12962,13 @@
                     "name": "height",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "Height of the collision box in blocks. A negative value will be assumed to be 0.",
+                    "description": "Height of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                 },
                 {
                     "name": "width",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "Width of the collision box in blocks. A negative value will be assumed to be 0.",
+                    "description": "Width of the collision box in blocks. A negative value will be assumed to be 0. Min value is -100000000.000000 Max value is 100000000.000000",
                 },
             ],
         },
@@ -12938,7 +12991,7 @@
                     "name": "regeneration_duration",
                     "type": "Integer",
                     "defaultValue": "5",
-                    "description": "The duration in seconds of Regeneration I added to the mob.",
+                    "description": "The duration in seconds of Regeneration I added to the mob. Can also be set to \"infinite\"",
                 },
             ],
         },
@@ -13251,6 +13304,12 @@
             "description": "A component that owns multiple subsensors, each one firing an event when a set of conditions are met by other entities within the defined range.",
             "children": [
                 {
+                    "name": "find_players_only",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Limits the search to Players only for all subsensors.",
+                },
+                {
                     "name": "relative_range",
                     "type": "Boolean",
                     "defaultValue": "true",
@@ -13303,6 +13362,12 @@
                             "type": "Boolean",
                             "defaultValue": "false",
                             "description": "If true requires all nearby entities to pass the filter conditions for the events to send.",
+                        },
+                        {
+                            "name": "y_offset",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Vertical offset applied to the entity's position when computing the distance from other entities.",
                         },
                     ],
                 },
@@ -13919,6 +13984,23 @@
                 },
             ],
         },
+        "minecraft:input_air_controlled": {
+            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions. Only available with `\"use_beta_features\": true` and likely to be drastically changed or removed.",
+            "children": [
+                {
+                    "name": "backwards_movement_modifier",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Modifies speed going backwards.",
+                },
+                {
+                    "name": "strafe_speed_modifier",
+                    "type": "Decimal",
+                    "defaultValue": "0.4",
+                    "description": "Modifies the strafe speed.",
+                },
+            ],
+        },
         "minecraft:inside_block_notifier": {
             "description": "Verifies whether the entity is inside any of the listed blocks.",
             "children": [
@@ -14283,7 +14365,7 @@
                     "name": "effect_time",
                     "type": "Integer",
                     "defaultValue": "10",
-                    "description": "How long the applied mob effect lasts in seconds.",
+                    "description": "How long the applied mob effect lasts in seconds. Can also be set to \"infinite\"",
                 },
                 {
                     "name": "entity_filter",
@@ -15703,97 +15785,97 @@
             ],
         },
         "minecraft:rideable": {
-            "description": "Determines whether this entity can be ridden. Allows specifying the different seat positions and quantity.",
+            "description": "Determines whether this entity can be ridden. Allows specifying the different seat positions and amount.",
             "children": [
                 {
                     "name": "controlling_seat",
                     "type": "Integer",
                     "defaultValue": "0",
-                    "description": "The seat that designates the driver of the entity. This is only observed by the horse/boat styles of riding; minecarts/entities with \"minecraft:controlled_by_player\" give control to any player in any seat.",
+                    "description": "The seat that designates the driver of the entity. Entities with the \"minecraft:behavior.controlled_by_player\" goal ignore this field and give control to any player in any seat.",
                 },
                 {
                     "name": "crouching_skip_interact",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, this entity can't be interacted with if the entity interacting with it is crouching",
+                    "description": "If true, this entity can't be interacted with if the entity interacting with it is crouching.",
                 },
                 {
                     "name": "family_types",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "List of entities that can ride this entity",
+                    "description": "List of entities that can ride this entity.",
                 },
                 {
                     "name": "interact_text",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The text to display when the player can interact with the entity when playing with Touch-screen controls",
+                    "description": "The text to display when the player can interact with the entity when playing with touch-screen controls.",
                 },
                 {
                     "name": "passenger_max_width",
                     "type": "Decimal",
                     "defaultValue": "0.00",
-                    "description": "The max width a mob can be to be a passenger. A value of 0 ignores this parameter.",
+                    "description": "The max width a mob can have to be a rider. A value of 0 ignores this parameter.",
                 },
                 {
                     "name": "priority",
                     "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "This field may exist in old data but isn't used by minecraft:rideable.",
+                    "defaultValue": "N/A",
+                    "description": "This field may exist in old data but isn't used by \"minecraft:rideable\".",
                 },
                 {
                     "name": "pull_in_entities",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will pull in entities that are in the correct family_types into any available seats",
+                    "description": "If true, this entity will pull in entities that are in the correct \"family_types\" into any available seats.",
                 },
                 {
                     "name": "rider_can_interact",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will be picked when looked at by the rider",
+                    "description": "If true, this entity will be picked when looked at by the rider.",
                 },
                 {
                     "name": "seat_count",
                     "type": "Integer",
                     "defaultValue": "1",
-                    "description": "The number of entities that can ride this entity at the same time",
+                    "description": "The number of entities that can ride this entity at the same time.",
                 },
                 {
                     "name": "seats",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "The list of positions and number of riders for each position for entities riding this entity",
+                    "description": "The list of positions and number of riders for each position for entities riding this entity.",
                     "children": [
                         {
                             "name": "lock_rider_rotation",
                             "type": "Decimal",
                             "defaultValue": "181",
-                            "description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit",
+                            "description": "Angle in degrees that a rider is allowed to rotate while riding this entity. Omit this property for no limit.",
                         },
                         {
                             "name": "max_rider_count",
                             "type": "Integer",
-                            "defaultValue": "seat_count",
-                            "description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid",
+                            "defaultValue": "0",
+                            "description": "Defines the maximum number of riders that can be riding this entity for this seat to be valid.",
                         },
                         {
                             "name": "min_rider_count",
                             "type": "Integer",
                             "defaultValue": "0",
-                            "description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used",
+                            "description": "Defines the minimum number of riders that need to be riding this entity before this seat can be used.",
                         },
                         {
                             "name": "position",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[0, 0, 0]",
-                            "description": "Position of this seat relative to this entity's position",
+                            "description": "Position of this seat relative to this entity's position.",
                         },
                         {
                             "name": "rotate_rider_by",
                             "type": "Molang",
                             "defaultValue": "0",
-                            "description": "Offset to rotate riders by",
+                            "description": "Offset to rotate riders by.",
                         },
                     ],
                 },
@@ -17115,5 +17197,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.graphics_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
+    },
 }
