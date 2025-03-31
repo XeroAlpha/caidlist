@@ -1,44 +1,115 @@
 import * as CommentJSON from '@projectxero/comment-json';
 import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
-import { cachedOutput, forEachArray, forEachObject, log, warn } from '../util/common.js';
+import { cachedOutput, forEachArray, forEachObject, log, sortObjectKey, warn } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
-import { fetchFile } from '../util/network.js';
+import { fetchFile, proxiedGot } from '../util/network.js';
 
 const sources = {
     mcwzh: {
-        getUrl(name) {
-            return `https://zh.minecraft.wiki/w/${encodeURIComponent(name)}`;
+        getUrl(title) {
+            return `https://zh.minecraft.wiki/w/${encodeURIComponent(title)}`;
         },
-        getRawUrl(name) {
-            return `${this.getUrl(name)}?action=raw`;
+        async getRaw(title) {
+            return await fetchFile(`${this.getUrl(title)}?action=raw`);
+        },
+        async getCsrfTokens() {
+            const res = await proxiedGot
+                .get('https://zh.minecraft.wiki/api.php', {
+                    searchParams: {
+                        action: 'query',
+                        meta: 'tokens',
+                        format: 'json'
+                    }
+                })
+                .json();
+            return res.query.tokens.csrftoken;
+        },
+        async requestScribuntoConsole(title, content, question, token) {
+            const res = await proxiedGot
+                .post('https://zh.minecraft.wiki/api.php', {
+                    form: {
+                        action: 'scribunto-console',
+                        title,
+                        content,
+                        question,
+                        clear: true,
+                        token,
+                        format: 'json'
+                    }
+                })
+                .json();
+            return res;
         }
     },
     bedw: {
-        getUrl(name) {
-            return `https://wiki.mcbe-dev.net/p/${encodeURIComponent(name)}`;
+        getUrl(title) {
+            return `https://wiki.mcbe-dev.net/p/${encodeURIComponent(title)}`;
         },
-        getRawUrl(name) {
-            return `${this.getUrl(name)}?action=raw`;
+        async getRaw(title) {
+            return await fetchFile(`${this.getUrl(title)}?action=raw`);
         }
     }
 };
 
 const resolvers = {
-    enumMapLua: (content) => {
+    enumMapLua: async (title, source) => {
+        const content = (await source.getRaw(title)).toString();
         const match = /return([^]+)/.exec(content.toString());
         if (!match) {
             throw new Error('Illegal LSON');
         }
         const result = parseLSON(match[1]);
         return result;
+    },
+    mcwzhExec: async (title, source) => {
+        const content = (await source.getRaw(title)).toString();
+        const csrfToken = await source.getCsrfTokens();
+        const consoleResult = await source.requestScribuntoConsole(title, content, '=mw.text.jsonEncode(p)', csrfToken);
+        const json = JSON.parse(consoleResult.return);
+        // 万恶之源：https://zh.minecraft.wiki/w/Module:Autolink?diff=prev&oldid=1060917
+        const convert = (obj) => {
+            if (Array.isArray(obj)) {
+                return obj;
+            }
+            const newObj = {};
+            for (const [key, value] of Object.entries(obj)) {
+                if (key === 'rawKey' || key === 'keyNoLow') {
+                    continue;
+                }
+                if (typeof value === 'object' && value !== null) {
+                    if (value.rawKey) {
+                        newObj[value.rawKey] = convert(value);
+                    } else {
+                        newObj[key] = convert(value);
+                    }
+                } else {
+                    newObj[key] = value;
+                }
+            }
+            const keys = Object.keys(newObj);
+            const numbericKeys = keys.filter((k) => /^\d+$/.test(k));
+            if (numbericKeys.length >= 1) {
+                const array = [];
+                for (const k of keys) {
+                    if (numbericKeys.includes(k)) {
+                        array[Number(k) - 1] = newObj[k];
+                    } else {
+                        array[k] = newObj[k];
+                    }
+                }
+                return array;
+            }
+            return sortObjectKey(newObj);
+        };
+        return convert(json);
     }
 };
 
 /**
  * @type {Array<{
- *      source: keyof sources,
- *      name: string,
- *      resolver: keyof resolvers,
+ *      source: keyof typeof sources,
+ *      title: string,
+ *      resolver: keyof typeof resolvers,
  *      target?: string,
  *      prefix?: string,
  *      ignoreIfExists?: boolean
@@ -47,68 +118,68 @@ const resolvers = {
 const dataPages = [
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Block',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Block',
+        resolver: 'mcwzhExec',
         target: 'BlockSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Item',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Item',
+        resolver: 'mcwzhExec',
         target: 'ItemSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Entity',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Entity',
+        resolver: 'mcwzhExec',
         target: 'EntitySprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Biome',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Biome',
+        resolver: 'mcwzhExec',
         target: 'BiomeSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Effect',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Effect',
+        resolver: 'mcwzhExec',
         target: 'EffectSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Enchantment',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Enchantment',
+        resolver: 'mcwzhExec',
         target: 'EnchantmentSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Environment',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Environment',
+        resolver: 'mcwzhExec',
         target: 'EnvSprite'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Other',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Other',
+        resolver: 'mcwzhExec',
         target: 'Other'
     },
     {
         source: 'mcwzh',
-        name: 'Module:Autolink/Exclusive',
-        resolver: 'enumMapLua',
+        title: 'Module:Autolink/Exclusive',
+        resolver: 'mcwzhExec',
         prefix: 'Exclusive'
     },
     {
         source: 'bedw',
-        name: 'Module:Autolink/Glossary',
+        title: 'Module:Autolink/Glossary',
         resolver: 'enumMapLua',
         prefix: ''
     },
     {
         // Deprecated
         source: 'bedw',
-        name: 'Module:Autolink/Other',
+        title: 'Module:Autolink/Other',
         resolver: 'enumMapLua',
         prefix: '',
         ignoreIfExists: true
@@ -201,14 +272,12 @@ export async function fetchStandardizedTranslation() {
                 const errors = [];
                 let result = {};
                 await forEachArray(dataPages, async (e) => {
-                    log(`Fetching ${e.source}:${e.name}`);
+                    log(`Fetching ${e.source}:${e.title}`);
                     try {
                         const source = sources[e.source];
                         const resolver = resolvers[e.resolver];
-                        const url = source.getUrl(e.name);
-                        const rawUrl = source.getRawUrl(e.name);
-                        const content = await fetchFile(rawUrl);
-                        const data = resolver(content);
+                        const url = source.getUrl(e.title);
+                        const data = await resolver(e.title, source);
                         const refComment = `Reference: ${url}`;
                         if (e.target) {
                             result[e.target] = data;
@@ -230,7 +299,9 @@ export async function fetchStandardizedTranslation() {
                 });
                 result = postprocessEnumMap(result);
                 if (errors.length > 0) {
-                    CommentJSON.assign(cache, result);
+                    if (cache) {
+                        CommentJSON.assign(cache, result);
+                    }
                     throw new AggregateError(errors);
                 }
                 return result;

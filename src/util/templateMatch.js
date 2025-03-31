@@ -7,6 +7,26 @@ function runTemplate(template, getter) {
 
 const refTemplateRegex = /^(\S*):/;
 
+const lowerCaseCache = new WeakMap();
+function getValueIgnoreCase(obj, k) {
+    let lowerCaseMap = lowerCaseCache.get(obj);
+    if (!lowerCaseMap) {
+        lowerCaseMap = {};
+        for (const k of Object.getOwnPropertyNames(obj)) {
+            const lowerCaseKey = k.toLowerCase();
+            if (!(lowerCaseKey in lowerCaseMap)) {
+                lowerCaseMap[lowerCaseKey] = k;
+            }
+        }
+        lowerCaseCache.set(obj, lowerCaseMap);
+    }
+    const key = lowerCaseMap[k.toLowerCase()];
+    if (key === undefined) {
+        return undefined;
+    }
+    return obj[key];
+}
+
 export function matchTranslation(options) {
     const {
         originalValue,
@@ -66,7 +86,7 @@ export function matchTranslation(options) {
                 userTranslation = userTranslation.slice(colonPos + 1);
             } else if (stdTransMap && source.toLowerCase() === 'st') {
                 // 标准化译名
-                userTranslation = stdTransMap[key];
+                userTranslation = getValueIgnoreCase(stdTransMap, key);
             } else if (javaEditionLangMap && source.toLowerCase() === 'je') {
                 // Java版语言文件
                 userTranslation = javaEditionLangMap[key];
@@ -89,8 +109,9 @@ export function matchTranslation(options) {
                     translationMap: tempTranslationMap,
                     autoMatch: null
                 }).translation;
-                if (userTranslation.toLowerCase() in stdTransMap) {
-                    userTranslation = stdTransMap[userTranslation.toLowerCase()];
+                const valueInStdTransMap = getValueIgnoreCase(stdTransMap, userTranslation);
+                if (valueInStdTransMap) {
+                    userTranslation = valueInStdTransMap;
                     context.warnings.push(
                         `[${context.name}] Translation Found: ${originalValue} -> ${userTranslation}`
                     );
@@ -142,8 +163,11 @@ export function matchTranslation(options) {
             }
         }
         if (autoMatch.includes('stdTrans') && stdTransMap) {
-            const stdTranslationKey = originalValue.replace(/^minecraft:/i, '').replace(/_/g, ' ');
-            const stdTranslation = stdTransMap[stdTranslationKey];
+            const stdTranslationKey = originalValue
+                .replace(/^minecraft:/i, '')
+                .replace(/_/g, ' ')
+                .toLowerCase();
+            const stdTranslation = getValueIgnoreCase(stdTransMap, stdTranslationKey);
             if (stdTranslation) {
                 if (!(originalValue in translationMap)) {
                     context.warnings.push(

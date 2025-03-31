@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.80.21",
-    "__COMMITHASH__": "f460e74833695db3aa2b1588e9dbe61aaee599e5",
-    "__MESSAGE__": "v1.21.80.21-preview",
+    "__VERSION__": "1.21.80.22",
+    "__COMMITHASH__": "98f4a057ee1ceeb4e054188b9c7b5f11ba288f61",
+    "__MESSAGE__": "v1.21.80.22-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1396,6 +1396,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.float",
+                                },
+                                {
+                                    "name": "minecraft:behavior.float_tempt",
                                 },
                                 {
                                     "name": "minecraft:behavior.float_wander",
@@ -7012,7 +7015,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance the mob will move before stopping.",
                 },
             ],
@@ -7119,6 +7122,65 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the mob will keep sinking as long as it has passengers.",
+                },
+            ],
+        },
+        "minecraft:behavior.float_tempt": {
+            "description": "Allows a mob to be tempted by a player holding a specific item. Uses point-to-point movement. Designed for mobs that are floating (e.g. use the \"minecraft:navigation.float\" component).",
+            "children": [
+                {
+                    "name": "can_get_scared",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob.",
+                },
+                {
+                    "name": "can_tempt_vertically",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, vertical distance to the player will be considered when tempting.",
+                },
+                {
+                    "name": "can_tempt_while_ridden",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob can be tempted even if it has a passenger (i.e. if being ridden).",
+                },
+                {
+                    "name": "items",
+                    "type": "Array",
+                    "defaultValue": "[]",
+                    "description": "List of items that can tempt the mob.",
+                },
+                {
+                    "name": "sound_interval",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0.0, 0.0]",
+                    "description": "Range of random ticks to wait between tempt sounds.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Movement speed multiplier of the mob when using this AI Goal",
+                },
+                {
+                    "name": "stop_distance",
+                    "type": "Decimal",
+                    "defaultValue": "1.5",
+                    "description": "The distance at which the mob will stop following the player.",
+                },
+                {
+                    "name": "tempt_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound to play while the mob is being tempted.",
+                },
+                {
+                    "name": "within_radius",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like.",
                 },
             ],
         },
@@ -7308,7 +7370,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance in blocks this mob stops from the mob it is following",
                 },
                 {
@@ -7361,7 +7423,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance at which the mob will stop following its owner.",
                 },
             ],
@@ -11440,7 +11502,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "This mob stops swelling when a target has moved away at least this many blocks",
                 },
             ],
@@ -11679,13 +11741,13 @@
             ],
         },
         "minecraft:behavior.tempt": {
-            "description": "Allows the mob to be tempted by food they like.",
+            "description": "Allows a mob to be tempted by a player holding a specific item. Uses pathfinding for movement.",
             "children": [
                 {
                     "name": "can_get_scared",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob",
+                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob.",
                 },
                 {
                     "name": "can_tempt_vertically",
@@ -11701,9 +11763,9 @@
                 },
                 {
                     "name": "items",
-                    "type": "List",
-                    "defaultValue": "",
-                    "description": "List of items this mob is tempted by",
+                    "type": "Array",
+                    "defaultValue": "[]",
+                    "description": "List of items that can tempt the mob.",
                 },
                 {
                     "name": "sound_interval",
@@ -11718,6 +11780,12 @@
                     "description": "Movement speed multiplier of the mob when using this AI Goal",
                 },
                 {
+                    "name": "stop_distance",
+                    "type": "Decimal",
+                    "defaultValue": "1.5",
+                    "description": "The distance at which the mob will stop following the player.",
+                },
+                {
                     "name": "tempt_sound",
                     "type": "String",
                     "defaultValue": "",
@@ -11727,7 +11795,7 @@
                     "name": "within_radius",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like",
+                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like.",
                 },
             ],
         },
@@ -14236,6 +14304,12 @@
             "description": "Allows this entity to be leashed and defines the conditions and events for this entity when is leashed.",
             "children": [
                 {
+                    "name": "can_be_stolen",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, players can leash this entity even if it is already leashed to another mob.",
+                },
+                {
                     "name": "on_leash",
                     "type": "String",
                     "defaultValue": "",
@@ -14253,12 +14327,6 @@
                     "defaultValue": "",
                     "description": "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
                     "children": [
-                        {
-                            "name": "can_be_stolen",
-                            "type": "Boolean",
-                            "defaultValue": "false",
-                            "description": "If true, players can leash this entity even if it is already leashed to another mob.",
-                        },
                         {
                             "name": "filter",
                             "type": "Minecraft Filter",

@@ -868,6 +868,7 @@ const Extractors = [
                     return [
                         itemType.id,
                         {
+                            localizationKey: itemStack.localizationKey,
                             unstackable: itemStack.isStackable ? undefined : true,
                             maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
                             tags: [...new Set(itemStack.getTags())],
