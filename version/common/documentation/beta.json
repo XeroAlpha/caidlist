@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.80.22",
-    "__COMMITHASH__": "98f4a057ee1ceeb4e054188b9c7b5f11ba288f61",
-    "__MESSAGE__": "v1.21.80.22-preview",
+    "__VERSION__": "1.21.80.24",
+    "__COMMITHASH__": "bc55635619c9c0c62b771e1bad2640e9ae453dc5",
+    "__MESSAGE__": "v1.21.80.24-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -597,6 +597,14 @@
                         },
                         {
                             "name": "has_equipment",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "has_equipment_tag",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -3297,6 +3305,7 @@
         "rail_data_bit": "Shows if a rail has a redstone signal",
         "rail_direction": "Determines the orientation of a placed rail block",
         "redstone_signal": "Determines the signal strength of a redstone signal",
+        "rehydration_level": "Determines the Dried Ghast Block's progress towards a Ghastling",
         "repeater_delay": "Determines the amount of delay of a repeater",
         "sand_stone_type": "DEPRECATED - Determines the pattern of a sandstone block",
         "sand_type": "DEPRECATED - Determines the sand type of a block",
@@ -3699,6 +3708,7 @@
         "minecraft:double_cut_copper_slab": "",
         "minecraft:dragon_egg": "",
         "minecraft:dragon_head": "",
+        "minecraft:dried_ghast": "",
         "minecraft:dried_kelp_block": "",
         "minecraft:dripstone_block": "",
         "minecraft:dropper": "",
@@ -4652,6 +4662,7 @@
         "glow_squid": "0x00009089 (0x129)",
         "goat": "0x00004992 (0x128)",
         "guardian": "0x00002865 (0x49)",
+        "happy_ghast": "0x00005011 (0x147)",
         "hoglin": "0x00004988 (0x124)",
         "hopper_minecart": "0x00524384 (0x96)",
         "horse": "0x02118423 (0x23)",
@@ -4782,6 +4793,12 @@
                     "type": "JSON Object",
                     "defaultValue": "",
                     "description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value).",
+                },
+                {
+                    "name": "culling_layer",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character. Additionally, the feature is currently only usable behind the \"upcoming creator features\" toggle.",
                 },
                 {
                     "name": "minecraft:breathability",
@@ -5626,6 +5643,7 @@
         "has_damage": "Returns true when the subject entity receives the named damage type.",
         "has_damaged_equipment": "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
+        "has_equipment_tag": "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
         "has_nametag": "Tests if the subject has been given a custom name.",
         "has_property": "Tests for the presence of a property of the subject entity.",
@@ -14142,6 +14160,12 @@
                     "description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                 },
                 {
+                    "name": "drop_item_y_offset",
+                    "type": "Decimal",
+                    "defaultValue": "0",
+                    "description": "Will offset the item drop position this amount in the y direction. Requires \"drop_item_slot\" to be specified.",
+                },
+                {
                     "name": "equip_item_slot",
                     "type": "String",
                     "defaultValue": "",
@@ -14320,6 +14344,12 @@
                     "type": "String",
                     "defaultValue": "",
                     "description": "Event to call when this entity is unleashed.",
+                },
+                {
+                    "name": "on_unleash_interact_only",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for other reasons such as being stolen or the leash breaking.",
                 },
                 {
                     "name": "presets",
@@ -17082,6 +17112,7 @@
         "query.ground_speed": "Returns the ground speed of the entity in meters/second.",
         "query.had_component_group": "Usable only in behavior packs when determining the default value for an entity's Property. Requires one string argument. If the entity is being loaded from data that was last saved with a component_group with the specified name, returns 1.0, otherwise returns 0.0. The purpose of this query is to allow entity definitions to change and still be able to load the correct state of entities.",
         "query.has_any_family": "Returns 1 if the entity has any of the specified families, else 0.",
+        "query.has_any_leashed_entity_of_type": "Returns whether or not the entity is currently leashing other entities of the designated types.",
         "query.has_armor_slot": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
         "query.has_biome_tag": "Returns whether or not a Block Placement Target has a specific biome tag",
         "query.has_block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.",

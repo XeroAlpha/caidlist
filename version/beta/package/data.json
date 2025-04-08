@@ -18959,6 +18959,15 @@
             "block.deadbush.ambient",
             "block.decorated_pot.insert",
             "block.decorated_pot.insert_fail",
+            "block.dried_ghast.ambient",
+            "block.dried_ghast.ambient_water",
+            "block.dried_ghast.break",
+            "block.dried_ghast.fall",
+            "block.dried_ghast.hit",
+            "block.dried_ghast.place",
+            "block.dried_ghast.place_in_water",
+            "block.dried_ghast.state_change",
+            "block.dried_ghast.step",
             "block.enchanting_table.use",
             "block.end_portal.spawn",
             "block.end_portal_frame.fill",
@@ -19655,6 +19664,10 @@
             "mob.ghast.fireball",
             "mob.ghast.moan",
             "mob.ghast.scream",
+            "mob.ghastling.ambient",
+            "mob.ghastling.death",
+            "mob.ghastling.hurt",
+            "mob.ghastling.spawn",
             "mob.glow_squid.ambient",
             "mob.glow_squid.death",
             "mob.glow_squid.hurt",
@@ -19681,6 +19694,14 @@
             "mob.guardian.land_death",
             "mob.guardian.land_hit",
             "mob.guardian.land_idle",
+            "mob.happy_ghast.ambient",
+            "mob.happy_ghast.death",
+            "mob.happy_ghast.goggles_down",
+            "mob.happy_ghast.goggles_up",
+            "mob.happy_ghast.harness_equip",
+            "mob.happy_ghast.harness_unequip",
+            "mob.happy_ghast.hurt",
+            "mob.happy_ghast.ride",
             "mob.hoglin.ambient",
             "mob.hoglin.angry",
             "mob.hoglin.attack",
@@ -21784,6 +21805,7 @@
             "minecraft:diorite_stairs": "<crafting_table>diorite*6->diorite_stairs*4",
             "minecraft:diorite_wall": "<crafting_table>diorite*6->diorite_wall*6",
             "minecraft:dispenser": "<crafting_table>redstone+cobblestone*7+bow->dispenser:3",
+            "minecraft:dried_ghast": "<crafting_table>ghast_tear*8+bone_block->dried_ghast",
             "minecraft:dried_kelp": "<crafting_table>dried_kelp_block->dried_kelp*9",
             "minecraft:dried_kelp_block": "<crafting_table>dried_kelp*9->dried_kelp_block",
             "minecraft:dripstone_block": "<crafting_table>pointed_dripstone*4->dripstone_block",
@@ -23055,6 +23077,10 @@
                 "minecraft:elder_guardian<default>",
                 "minecraft:guardian<default>",
             ],
+            "geometry.happy_ghast": [
+                "minecraft:happy_ghast<default>",
+            ],
+            "geometry.harness": [],
             "geometry.hoglin": [
                 "minecraft:hoglin<default>",
                 "minecraft:zoglin<default>",
@@ -23785,6 +23811,12 @@
             "animation.guardian.swim": [
                 "minecraft:elder_guardian<swim>",
                 "minecraft:guardian<swim>",
+            ],
+            "animation.happy_ghast.move": [
+                "minecraft:happy_ghast<move>",
+            ],
+            "animation.happy_ghast.scale": [
+                "minecraft:happy_ghast<scale>",
             ],
             "animation.hoglin.attack": [
                 "minecraft:hoglin<attack>",
@@ -24937,6 +24969,12 @@
                 "minecraft:ghast<scale>",
             ],
             "controller.animation.goat.move": [],
+            "controller.animation.happy_ghast.move": [
+                "minecraft:happy_ghast<move_controller>",
+            ],
+            "controller.animation.happy_ghast.scale": [
+                "minecraft:happy_ghast<scale_controller>",
+            ],
             "controller.animation.hoglin.attack": [
                 "minecraft:hoglin<attack>",
             ],
@@ -25563,6 +25601,10 @@
                 "minecraft:elder_guardian",
                 "minecraft:guardian",
             ],
+            "controller.render.happy_ghast": [
+                "minecraft:happy_ghast",
+            ],
+            "controller.render.harness": [],
             "controller.render.hoglin": [
                 "minecraft:hoglin",
             ],
@@ -26008,6 +26050,7 @@
                 "minecraft:donkey",
                 "minecraft:fox",
                 "minecraft:goat",
+                "minecraft:happy_ghast",
                 "minecraft:hoglin",
                 "minecraft:horse",
                 "minecraft:llama",
@@ -26408,6 +26451,7 @@
                 "minecraft:frog",
                 "minecraft:glow_squid",
                 "minecraft:goat",
+                "minecraft:happy_ghast",
                 "minecraft:hoglin",
                 "minecraft:hopper_minecart",
                 "minecraft:horse",
@@ -26654,6 +26698,9 @@
             "minecraft:on_half_puff": [
                 "minecraft:pufferfish",
             ],
+            "minecraft:on_harnessed": [
+                "minecraft:happy_ghast",
+            ],
             "minecraft:on_hurt_event": [
                 "minecraft:blaze",
             ],
@@ -26663,11 +26710,23 @@
             "minecraft:on_leash": [
                 "minecraft:ocelot",
             ],
+            "minecraft:on_no_player_detected_above": [
+                "minecraft:happy_ghast",
+            ],
             "minecraft:on_normal_puff": [
                 "minecraft:pufferfish",
             ],
             "minecraft:on_not_riding_player": [
                 "minecraft:parrot",
+            ],
+            "minecraft:on_passenger_dismount": [
+                "minecraft:happy_ghast",
+            ],
+            "minecraft:on_passenger_mount": [
+                "minecraft:happy_ghast",
+            ],
+            "minecraft:on_player_detected_above": [
+                "minecraft:happy_ghast",
             ],
             "minecraft:on_prime": [
                 "minecraft:tnt_minecart",
@@ -26686,6 +26745,9 @@
             "minecraft:on_sheared": [
                 "minecraft:sheep",
                 "minecraft:snow_golem",
+            ],
+            "minecraft:on_stop_tempting": [
+                "minecraft:happy_ghast",
             ],
             "minecraft:on_tame": [
                 "minecraft:cat",
@@ -26706,8 +26768,14 @@
             "minecraft:on_trust": [
                 "minecraft:ocelot",
             ],
+            "minecraft:on_unharnessed": [
+                "minecraft:happy_ghast",
+            ],
             "minecraft:on_unleash": [
                 "minecraft:ocelot",
+            ],
+            "minecraft:on_unleashed": [
+                "minecraft:happy_ghast",
             ],
             "minecraft:panda_aggressive": [
                 "minecraft:panda",
@@ -26813,6 +26881,7 @@
                 "minecraft:camel",
                 "minecraft:chicken",
                 "minecraft:cow",
+                "minecraft:happy_ghast",
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:pig",
@@ -26836,6 +26905,7 @@
             ],
             "minecraft:spawn_baby": [
                 "minecraft:armadillo",
+                "minecraft:happy_ghast",
                 "minecraft:llama",
                 "minecraft:trader_llama",
             ],
@@ -27502,6 +27572,9 @@
             "guardian_elder": [
                 "minecraft:elder_guardian",
             ],
+            "happy_ghast": [
+                "minecraft:happy_ghast",
+            ],
             "hoglin": [
                 "minecraft:hoglin<huntable_adult>",
                 "minecraft:hoglin<minecraft:hoglin_baby>",
@@ -27614,6 +27687,7 @@
                 "minecraft:ghast",
                 "minecraft:glow_squid",
                 "minecraft:guardian",
+                "minecraft:happy_ghast",
                 "minecraft:hoglin<huntable_adult>",
                 "minecraft:hoglin<minecraft:hoglin_baby>",
                 "minecraft:hoglin<unhuntable_adult>",
@@ -28168,6 +28242,11 @@
                         "rolled_up_relaxing",
                         "rolled_up_unrolling",
                     ],
+                },
+            },
+            "minecraft:can_move": {
+                "minecraft:happy_ghast": {
+                    "type": "bool",
                 },
             },
             "minecraft:climate_variant": {

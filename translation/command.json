@@ -27,6 +27,7 @@
     "camera.set.*.override.viewOffset.entityOffset": "视点偏移与局部坐标偏移",
     "camera.set.default": "{{camera.set.*|camera.set.*.set.default}}", // 将玩家的摄像机设置为指定预设。
     "camera.set.ease.default": "{{camera.set.*|camera.set.*.set.ease}}", // 将玩家的摄像机平滑变换为指定预设。
+    "camera.set.ease.entityOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.entityOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的局部坐标偏移。
     "camera.set.ease.facing.entity": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.rot|camera.set.*.facing.entity}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度，使其面向指定实体。
     "camera.set.ease.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.rot|camera.set.*.facing.position}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度，使其面向指定坐标。
     "camera.set.ease.pos": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.pos}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置。
@@ -34,6 +35,11 @@
     "camera.set.ease.pos.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.ease|camera.set.*.override.pos.rot|camera.set.*.facing.position}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度，使其面向指定坐标。
     "camera.set.ease.pos.rot": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.pos.rot}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的位置与旋转角度。
     "camera.set.ease.rot": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.rot}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度。
+    "camera.set.ease.rot.entityOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.rot.entityOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度与局部坐标偏移。
+    "camera.set.ease.rot.viewOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.rot.viewOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度与视点偏移。
+    "camera.set.ease.rot.viewOffset.entityOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.rot.viewOffset.entityOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度、视点偏移与局部坐标偏移。
+    "camera.set.ease.viewOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.viewOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的视点偏移。
+    "camera.set.ease.viewOffset.entityOffset": "{{camera.set.*.override|camera.set.*.set.ease|camera.set.*.override.viewOffset.entityOffset}}", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的视点偏移与局部坐标偏移。
     "camera.set.entityOffset": "{{camera.set.*.override|camera.set.*.set.default|camera.set.*.override.entityOffset}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的局部坐标偏移。
     "camera.set.facing.entity": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.rot|camera.set.*.facing.entity}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度，使其面向指定实体。
     "camera.set.facing.position": "{{camera.set.*.override.facing|camera.set.*.set.default|camera.set.*.override.rot|camera.set.*.facing.position}}", // 将玩家的摄像机设置为指定预设，并覆盖该预设的旋转角度，使其面向指定坐标。
@@ -588,4 +594,10 @@
     "place structure <structure: string> [pos: x y z] [ignoreStartHeight: Boolean] [keepJigsaws: Boolean] [includeEntities: Boolean]": "this: place.structure.default", // 放置拼图结构并转换其中的拼图方块。
     "script diagnostics startcapture": "this: script.diagnostics.capture.start", // 启动脚本诊断数据抓取。
     "script diagnostics stopcapture": "this: script.diagnostics.capture.stop", // 结束脚本诊断数据抓取。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.ease.entityOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的局部坐标偏移。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> rot <xRot: value> <yRot: value> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.ease.rot.entityOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度与局部坐标偏移。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> rot <xRot: value> <yRot: value> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.ease.rot.viewOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度与视点偏移。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> rot <xRot: value> <yRot: value> view_offset <xViewOffset: float> <yViewOffset: float> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.ease.rot.viewOffset.entityOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的旋转角度、视点偏移与局部坐标偏移。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> view_offset <xViewOffset: float> <yViewOffset: float>": "this: camera.set.ease.viewOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的视点偏移。
+    "camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> view_offset <xViewOffset: float> <yViewOffset: float> entity_offset <xEntityOffset: float> <yEntityOffset: float> <zEntityOffset: float>": "this: camera.set.ease.viewOffset.entityOffset", // 将玩家的摄像机平滑变换为指定预设，并覆盖该预设的视点偏移与局部坐标偏移。
 }

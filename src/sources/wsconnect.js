@@ -1,8 +1,8 @@
-import { WSServer, MinecraftDataType, ServerSession } from 'mcpews';
-import { pEvent } from 'p-event';
 import getPort from 'get-port';
-import { cachedOutput, sleepAsync, sortObjectKey, log, setStatus, pause } from '../util/common.js';
-import { adbShell } from '../util/adb.js';
+import { MinecraftDataType, ServerSession, WSServer } from 'mcpews';
+import { pEvent } from 'p-event';
+import { cachedOutput, log, pause, setStatus, sleepAsync, sortObjectKey } from '../util/common.js';
+import { injectText, openScrcpy, press, stopScrcpy } from '../util/scrcpy.js';
 import * as support from './support.js';
 
 const ignoreCommands = ['/gametips <status: Status>'];
@@ -145,23 +145,25 @@ export async function createExclusiveWSSession(device) {
         log('Connecting to wsserver: /connect 127.0.0.1:19134');
         for (;;) {
             try {
+                const scrcpy = await openScrcpy(device, { controlOnly: true });
                 const sessionPromise = pEvent(wsServer, 'client', {
                     timeout: 10000
                 });
                 await device.reverse('tcp:19134', `tcp:${port}`);
                 setStatus('Simulating user actions...');
                 // 打开聊天栏
-                await adbShell(device, 'input keyevent KEYCODE_T');
+                await press(scrcpy, 'KEYCODE_T');
                 await sleepAsync(3000);
                 // 唤起输入法
-                await adbShell(device, 'input keyevent KEYCODE_SLASH');
+                await press(scrcpy, 'KEYCODE_SLASH');
                 await sleepAsync(1000);
                 // 确保光标在末尾
-                await adbShell(device, 'input keyevent KEYCODE_MOVE_END');
-                await adbShell(device, `input text ${JSON.stringify('connect 127.0.0.1:19134')}`);
-                await adbShell(device, 'input keyevent KEYCODE_ENTER');
+                await press(scrcpy, 'KEYCODE_MOVE_END');
+                await injectText(scrcpy, 'connect 127.0.0.1:19134');
+                await press(scrcpy, 'KEYCODE_ENTER');
                 ({ session } = await sessionPromise);
                 log(`${device.serial} connected via mcpews.`);
+                stopScrcpy(scrcpy);
                 break;
             } catch (err) {
                 setStatus('');

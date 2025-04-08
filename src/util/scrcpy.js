@@ -113,7 +113,8 @@ export async function openScrcpy(device, options) {
         'max_size=8192',
         'audio=false',
         'raw_stream=true',
-        options?.crop ? `crop=${options.crop}` : null
+        options?.crop ? `crop=${options.crop}` : null,
+        options?.controlOnly ? 'video=false' : null
     ];
     const commandLine = parts.filter((e) => e !== null).join(' ');
     const serverProcess = await device.shell(commandLine);
@@ -133,9 +134,12 @@ export async function openScrcpy(device, options) {
     });
     await readyToConnectPromise;
     await sleepAsync(options?.delay ?? 1500);
-    const videoSocket = await retryUntilComplete(30, 100, () => device.openLocal(`localabstract:scrcpy_${scid}`));
+    const firstSocket = await retryUntilComplete(30, 100, () => device.openLocal(`localabstract:scrcpy_${scid}`));
+    if (options?.controlOnly) {
+        return { serverProcess, controlSocket: firstSocket };
+    }
     const controlSocket = await device.openLocal(`localabstract:scrcpy_${scid}`);
-    return { serverProcess, videoSocket, controlSocket };
+    return { serverProcess, videoSocket: firstSocket, controlSocket };
 }
 
 const TYPE_INJECT_KEYCODE = 0;
@@ -216,7 +220,7 @@ const ScrcpyPendingStopped = Symbol('ScrcpyPendingStopped');
  * @param {Scrcpy} scrcpy
  */
 export function stopScrcpy(scrcpy) {
-    scrcpy.videoSocket.destroy();
+    scrcpy.videoSocket?.destroy();
     scrcpy.controlSocket.destroy();
     scrcpy.serverProcess.destroy();
     scrcpy[ScrcpyPendingStopped] = true;

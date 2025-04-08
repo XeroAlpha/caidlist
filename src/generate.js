@@ -176,7 +176,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entity',
         originalArray: removeMinecraftNamespace(enums.entities),
         translationMap: userTranslation.entity,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ExclusiveEntitySprite'], true),
         langKeyPrefix: 'entity.',
         langKeySuffix: '.name',
         postProcessor(entity) {
@@ -196,7 +196,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'effect',
         originalArray: enums.effects,
         translationMap: userTranslation.effect,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EffectSprite'], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['EffectSprite', 'ExclusiveEffectSprite'], true)
     });
     matchTranslations({
         ...commonOptions,
@@ -210,7 +210,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'fog',
         originalArray: enums.fogs,
         translationMap: userTranslation.fog,
-        stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite'], true)
+        stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite', 'ExclusiveBiomeSprite'], true)
     });
     matchTranslations({
         ...commonOptions,
@@ -236,7 +236,7 @@ async function generateBranchedOutputFiles(cx) {
             name: 'biome',
             originalArray: enums.biomes,
             translationMap: userTranslation.biome,
-            stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite'], true)
+            stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite', 'ExclusiveBiomeSprite'], true)
         });
     }
     matchTranslations({
@@ -244,7 +244,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entityEvent',
         originalArray: Object.keys(enums.entityEventsMap),
         translationMap: userTranslation.entityEvent,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ExclusiveEntitySprite'], true),
         postProcessor(entityEvent) {
             forEachObject(entityEvent, (value, key) => {
                 if (value) return;
@@ -258,7 +258,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'entityFamily',
         originalArray: Object.keys(enums.entityFamilyMap),
         translationMap: userTranslation.entityFamily,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ExclusiveEntitySprite'], true),
         postProcessor(entityFamily) {
             forEachObject(entityFamily, (value, key) => {
                 if (value) return;
@@ -272,7 +272,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'animation',
         originalArray: Object.keys(enums.animationMap),
         translationMap: userTranslation.animation,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ExclusiveEntitySprite'], true),
         postProcessor(animation) {
             forEachObject(animation, (value, key) => {
                 if (value) return;
@@ -289,7 +289,7 @@ async function generateBranchedOutputFiles(cx) {
         name: 'animationController',
         originalArray: Object.keys(enums.animationControllerMap),
         translationMap: userTranslation.animationController,
-        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite'], true),
+        stdTransMap: cascadeMap(standardizedTranslation, ['EntitySprite', 'ExclusiveEntitySprite'], true),
         postProcessor(animationController) {
             forEachObject(animationController, (value, key) => {
                 if (value) return;

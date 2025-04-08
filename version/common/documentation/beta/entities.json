@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.80.22",
+    "version": "1.21.80.24",
     "content": [],
     "sections": [
         {
@@ -3302,6 +3302,190 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"has_equipment\", \"value\": \"dirt\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "has_equipment_tag",
+                    "id": "has_equipment_tag",
+                    "level": 2,
+                    "content": [
+                        "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": "",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The item name to look for",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_equipment_tag\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"dirt\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_equipment_tag\", \"value\": \"dirt\" }",
                                     ],
                                 },
                             ],
@@ -25084,6 +25268,12 @@
                                             "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
+                                            "Name": "drop_item_y_offset",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "Will offset the item drop position this amount in the y direction. Requires \"drop_item_slot\" to be specified.",
+                                        },
+                                        {
                                             "Name": "equip_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
@@ -25333,6 +25523,12 @@
                                             "Type": "String",
                                             "Default Value": "",
                                             "Description": "Event to call when this entity is unleashed.",
+                                        },
+                                        {
+                                            "Name": "on_unleash_interact_only",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for other reasons such as being stolen or the leash breaking.",
                                         },
                                         {
                                             "Name": "presets",
@@ -30888,5 +31084,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "daa79f08fd60e6476ca7a003138b451319e5ec36",
+    "__OBJECTHASH__": "57b6489260b3b72e3500ee0cc0bf03ae9c074881",
 }

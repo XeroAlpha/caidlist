@@ -151,7 +151,7 @@ export function matchTranslation(options) {
     }
     if (autoMatch && Array.isArray(autoMatch)) {
         if (autoMatch.includes('custom') && customAutoMatch) {
-            const translation = customAutoMatch(originalValue);
+            const translation = customAutoMatch(originalValue, originalValue in translationMap);
             if (translation) {
                 if (!(originalValue in translationMap)) {
                     context.warnings.push(

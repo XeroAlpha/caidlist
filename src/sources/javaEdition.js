@@ -14,7 +14,8 @@ const skipVersions = [
     '20w14infinite',
     '22w13oneblockatatime',
     '23w13a_or_b',
-    '24w14potato'
+    '24w14potato',
+    '25w14craftmine'
 ];
 
 function replaceUrlHost(url, host) {
