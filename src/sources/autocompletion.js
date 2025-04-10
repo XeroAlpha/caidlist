@@ -531,6 +531,13 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 screen.log(`Result check failed: conflicted (${mergedResult.conflicts.length} conflicts)`);
             }
             retryCount++;
+            if (!cache) {
+                cachedOutput(cacheId, {
+                    packageVersion: null,
+                    result,
+                    length: result.length
+                });
+            }
         }
         screen.log('Result check passed');
         cachedOutput(cacheId, {
@@ -620,6 +627,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     postJob('entity slots', '/replaceitem entity @s ', ['[']);
     postJob('selectors', '/testfor @e[');
 
+    if (support.eventCommand(cx)) {
+        postJob('events', '/event entity @e ', ['[']);
+    }
     if (support.lootCommand(cx)) {
         postJob('loot tools', '/loot spawn ~ ~ ~ loot empty ', ['mainhand', 'offhand']);
     }
@@ -632,11 +642,15 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.placefeatureCommand(cx)) {
         postJob('features and rules', '/placefeature ');
     }
+    if (support.newExecuteCommand(cx)) {
+        postJob('dimensions', '/execute in ');
+    }
     if (support.inputpermissionCommand(cx)) {
         postJob('input permissions', '/inputpermission query @s ', ['[']);
     }
     if (support.cameraCommand(cx)) {
         postJob('camera presets', '/camera @s set ');
+        postJob('camera easings', '/camera @s set minecraft:free ease 1 ');
     }
     if (support.recipeNewCommand(cx)) {
         postJob('recipes', '/recipe take @s ', ['"*"', '[']);
@@ -644,12 +658,18 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.hudCommand(cx)) {
         postJob('hud elements', '/hud @s hide ');
     }
+    if (support.placeCommandStructureSubCommand(cx)) {
+        postJob('jigsaw structures', '/place structure ');
+    }
     if (support.placeCommandFeatureSubCommand(cx)) {
         postJob('features', '/place feature ');
         postJob('feature rules', '/place featurerule ');
     }
     if (support.hasPropertySelectorParam(cx)) {
         postJob('entity properties', '/testfor @e[has_property={', ['property', '!']);
+    }
+    if (support.controlSchemeCommand(cx)) {
+        postJob('control schemes', '/controlscheme @s set ');
     }
 
     if (support.eduCommands(cx)) {

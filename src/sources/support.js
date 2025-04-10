@@ -4,6 +4,14 @@ export function textCommandWebSocketFormat({ coreVersion }) {
     return testMinecraftVersionInRange(coreVersion, '1.2', '*');
 }
 
+export function eventCommand({ coreVersion }) {
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.16.100.57', '*') ||
+        testMinecraftVersionInRange(coreVersion, '1.16.100.04', '1.16.100.04')
+    );
+}
+eventCommand.associatedCommands = [['/event entity <target: target> <eventName: string>']];
+
 export function lootCommand({ coreVersion }) {
     return (
         testMinecraftVersionInRange(coreVersion, '1.18.0.21', '1.18.0.21') ||
@@ -56,6 +64,22 @@ newLocateCommand.associatedCommands = [
     ['/locate biome <biome: Biome>', '/locate structure <structure: string> [useNewChunksOnly: Boolean]']
 ];
 
+export function newExecuteCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.19.40.23', '*') ||
+            testMinecraftVersionInRange(coreVersion, '1.19.40.02', '1.19.40.02')
+        );
+    }
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.19.50.23', '*') ||
+        testMinecraftVersionInRange(coreVersion, '1.19.50.02', '1.19.50.02')
+    );
+}
+newExecuteCommand.associatedCommands = [
+    ['/execute in <dimension: Dimension> <chainedCommand: ExecuteChainedOption_0>']
+];
+
 export function inputpermissionCommand({ coreVersion }) {
     return (
         testMinecraftVersionInRange(coreVersion, '1.19.80.21', '*') ||
@@ -75,7 +99,12 @@ export function cameraCommand({ coreVersion, branch }) {
     }
     return testMinecraftVersionInRange(coreVersion, '1.20.20.22', '*');
 }
-cameraCommand.associatedCommands = [['/camera <players: target> set <preset: string> [default: default]']];
+cameraCommand.associatedCommands = [
+    [
+        '/camera <players: target> set <preset: string> [default: default]',
+        '/camera <players: target> set <preset: string> ease <easeTime: float> <easeType: Easing> [default: default]'
+    ]
+];
 
 export function recipeNewCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
@@ -110,6 +139,22 @@ export function hasPropertySelectorParam({ coreVersion }) {
 }
 hasPropertySelectorParam.associatedSelectors = [['has_property']];
 
+export function placeCommandStructureSubCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.21.50.26', '*') ||
+            testMinecraftVersionInRange(coreVersion, '1.21.50.07', '1.21.50.07')
+        );
+    }
+    return testMinecraftVersionInRange(coreVersion, '1.21.80.22', '*');
+}
+placeCommandStructureSubCommand.associatedCommands = [
+    ['/place structure <structure: string> [pos: x y z] [ignoreStartHeight: Boolean] [keepJigsaws: Boolean]'],
+    [
+        '/place structure <structure: string> [pos: x y z] [ignoreStartHeight: Boolean] [keepJigsaws: Boolean] [includeEntities: Boolean]'
+    ]
+];
+
 export function placeCommandFeatureSubCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
         return (
@@ -128,6 +173,14 @@ placeCommandFeatureSubCommand.associatedCommands = [
         '/place featurerule <featurerule: featureRules> [position: x y z]'
     ]
 ];
+
+export function controlSchemeCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return testMinecraftVersionInRange(coreVersion, '1.21.80.27', '*');
+    }
+    return false;
+}
+controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> set <control scheme: controlscheme>']];
 
 export function mcpews({ version }) {
     return version !== 'netease' && version !== 'netease_dev';

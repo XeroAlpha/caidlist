@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.80.24",
+    "version": "1.21.80.27",
     "content": [],
     "sections": [
         {
@@ -156,6 +156,12 @@
                                     "Description": "Noise parameters used to drive terrain height in the Overworld.",
                                 },
                                 {
+                                    "Name": "minecraft:replace_biomes",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Replaces a specified portion of one or more Minecraft biomes.",
+                                },
+                                {
                                     "Name": "minecraft:surface_material_adjustments",
                                     "Type": "Object",
                                     "Required?": "Optional",
@@ -253,6 +259,43 @@
                                     "Type": "Object of type Biome Definition",
                                     "Required?": "Required",
                                     "Description": "A single biome definition",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Biome Replacement",
+                    "id": "Biome Replacement",
+                    "level": 2,
+                    "content": [
+                        "Represents the replacement information used to determine the placement of the overriding biome.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "amount",
+                                    "Type": "Float",
+                                    "Required?": "Required",
+                                    "Description": "Noise value used to determine whether or not the replacement is attempted, similar to a percentage. Must be in the range (0.0, 1.0].",
+                                },
+                                {
+                                    "Name": "dimension",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Dimension in which this replacement can happen. Must be 'minecraft:overworld'.",
+                                },
+                                {
+                                    "Name": "noise_frequency_scale",
+                                    "Type": "Float",
+                                    "Required?": "Required",
+                                    "Description": "Scaling value used to alter the frequency of replacement attempts. A lower frequency will mean a bigger contiguous biome area that occurs less often. A higher frequency will mean smaller contiguous biome areas that occur more often. Must be in the range (0.0, 100.0].",
+                                },
+                                {
+                                    "Name": "targets",
+                                    "Type": "Array of String",
+                                    "Required?": "Required",
+                                    "Description": "Biomes that are going to be replaced by the overriding biome.",
                                 },
                             ],
                         },
@@ -745,6 +788,25 @@
                     ],
                 },
                 {
+                    "name": "minecraft:replace_biomes",
+                    "id": "minecraft:replace_biomes",
+                    "level": 2,
+                    "content": [
+                        "Replaces a specified portion of one or more Minecraft biomes.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "replacements",
+                                    "Type": "Array of Object of type Biome Replacement",
+                                    "Required?": "Required",
+                                    "Description": "List of biome replacement configurations. Retroactively adding a new replacement to the front of this list will cause the world generation to change. Please add any new replacements to the end of the list.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:surface_material_adjustments",
                     "id": "minecraft:surface_material_adjustments",
                     "level": 2,
@@ -971,5 +1033,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "c934eda6eaec43ef143735a23d2461e75efc6ab6",
+    "__OBJECTHASH__": "c50e430683772f91980dce8c5ed58fce04ae5f34",
 }
