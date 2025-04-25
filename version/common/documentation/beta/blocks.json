@@ -1,6 +1,6 @@
 {
     "title": "BLOCKS DOCUMENTATION",
-    "version": "1.21.80.28",
+    "version": "1.21.90.0",
     "content": [],
     "sections": [
         {
@@ -17,18 +17,6 @@
                         {
                             "type": "table",
                             "rows": [
-                                {
-                                    "Name": "bone_visibility",
-                                    "Type": "JSON Object",
-                                    "Default Value": "",
-                                    "Description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value).",
-                                },
-                                {
-                                    "Name": "culling_layer",
-                                    "Type": "String",
-                                    "Default Value": "",
-                                    "Description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character. Additionally, the feature is currently only usable behind the \"upcoming creator features\" toggle.",
-                                },
                                 {
                                     "Name": "minecraft:breathability",
                                     "Type": "String",
@@ -153,6 +141,12 @@
                                     "Description": [
                                         "Sets the particles that will be used when block is destroyed. This component can be omitted.",
                                         {
+                                            "section": "particle_count",
+                                            "content": [
+                                                "Optional, number of particles to spawn of destruction. Default is 100, maximum is 255 inclusively",
+                                            ],
+                                        },
+                                        {
                                             "section": "texture",
                                             "content": [
                                                 "The texture name used for the particle.",
@@ -205,9 +199,46 @@
                                 },
                                 {
                                     "Name": "minecraft:geometry",
-                                    "Type": "Identifier String",
+                                    "Type": "String / JSON Object",
                                     "Default Value": "",
-                                    "Description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
+                                    "Description": [
+                                        "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
+                                        {
+                                            "section": "As an object",
+                                            "content": [
+                                                "The component can be defined as an object to gain control over more specific behaviors.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "bone_visibility",
+                                                            "Type": "JSON Object",
+                                                            "Default Value": "",
+                                                            "Description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value).",
+                                                        },
+                                                        {
+                                                            "Name": "culling",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "Which block_culling .json file to use when rendering this block.",
+                                                        },
+                                                        {
+                                                            "Name": "culling_layer",
+                                                            "Type": "String",
+                                                            "Default Value": "minecraft:culling_layer.undefined",
+                                                            "Description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character. Additionally, the feature is currently only usable behind the \"upcoming creator features\" toggle.",
+                                                        },
+                                                        {
+                                                            "Name": "identifier",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "The description identifier of the geometry to use to render this block.",
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ],
                                 },
                                 {
                                     "Name": "minecraft:item_visual",
@@ -650,7 +681,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.80\",",
+                                        "  \"format_version\": \"1.21.90\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1338,5 +1369,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "4b54f06eb88acc13fa866afb4e06c2447d1d48e3",
+    "__OBJECTHASH__": "297add84912ff34dbce9f393e33008898491c5da",
 }
