@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.90.20",
+    "packageVersion": "1.21.90.21",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -22070,6 +22070,28 @@
                             },
                             "configurable": false,
                         },
+                        "LiquidSettings": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "ApplyWaterlogging": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "ApplyWaterlogging",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "IgnoreWaterlogging": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "IgnoreWaterlogging",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "LiquidType": {
                             "value": {
                                 "type": "object",
@@ -23039,6 +23061,20 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "commandPermissionLevel": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
+                                                    },
+                                                },
                                                 "eatItem": {
                                                     "value": {
                                                         "type": "function",
@@ -23143,14 +23179,6 @@
                                                         "length": 0,
                                                     },
                                                 },
-                                                "isOp": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
                                                 "level": {
                                                     "getter": {
                                                         "type": "function",
@@ -23185,6 +23213,14 @@
                                                 },
                                                 "playSound": {
                                                     "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "playerPermissionLevel": {
+                                                    "getter": {
                                                         "type": "function",
                                                         "name": "",
                                                         "native": true,
@@ -23246,14 +23282,6 @@
                                                     },
                                                 },
                                                 "setGameMode": {
-                                                    "value": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "setOp": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -25340,6 +25368,70 @@
                                         },
                                         "readOnly": true,
                                         "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerPermissionLevel": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "0": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Visitor",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "1": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Member",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "2": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Operator",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "3": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Custom",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Custom": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 3,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Member": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Operator": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Visitor": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 0,
+                                        },
+                                        "readOnly": true,
                                     },
                                 },
                             },
@@ -35124,6 +35216,9 @@
         "Minecraft.LeverActionAfterEventSignal.prototype.constructor",
         "Minecraft.LeverActionAfterEventSignal.prototype.subscribe",
         "Minecraft.LeverActionAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.LiquidSettings",
+        "Minecraft.LiquidSettings.ApplyWaterlogging",
+        "Minecraft.LiquidSettings.IgnoreWaterlogging",
         "Minecraft.LiquidType",
         "Minecraft.LiquidType.Water",
         "Minecraft.ListBlockVolume",
@@ -35259,6 +35354,8 @@
         "Minecraft.Player.prototype.camera.[[Get]]",
         "Minecraft.Player.prototype.clearPropertyOverridesForEntity",
         "Minecraft.Player.prototype.clientSystemInfo.[[Get]]",
+        "Minecraft.Player.prototype.commandPermissionLevel.[[Get]]",
+        "Minecraft.Player.prototype.commandPermissionLevel.[[Set]]",
         "Minecraft.Player.prototype.constructor",
         "Minecraft.Player.prototype.eatItem",
         "Minecraft.Player.prototype.getAimAssist",
@@ -35273,12 +35370,12 @@
         "Minecraft.Player.prototype.isFlying.[[Get]]",
         "Minecraft.Player.prototype.isGliding.[[Get]]",
         "Minecraft.Player.prototype.isJumping.[[Get]]",
-        "Minecraft.Player.prototype.isOp",
         "Minecraft.Player.prototype.level.[[Get]]",
         "Minecraft.Player.prototype.name.[[Get]]",
         "Minecraft.Player.prototype.onScreenDisplay.[[Get]]",
         "Minecraft.Player.prototype.playMusic",
         "Minecraft.Player.prototype.playSound",
+        "Minecraft.Player.prototype.playerPermissionLevel.[[Get]]",
         "Minecraft.Player.prototype.postClientMessage",
         "Minecraft.Player.prototype.queueMusic",
         "Minecraft.Player.prototype.removePropertyOverrideForEntity",
@@ -35287,7 +35384,6 @@
         "Minecraft.Player.prototype.selectedSlotIndex.[[Set]]",
         "Minecraft.Player.prototype.sendMessage",
         "Minecraft.Player.prototype.setGameMode",
-        "Minecraft.Player.prototype.setOp",
         "Minecraft.Player.prototype.setPropertyOverrideForEntity",
         "Minecraft.Player.prototype.setSpawnPoint",
         "Minecraft.Player.prototype.spawnParticle",
@@ -35538,6 +35634,15 @@
         "Minecraft.PlayerLeaveBeforeEventSignal.prototype.constructor",
         "Minecraft.PlayerLeaveBeforeEventSignal.prototype.subscribe",
         "Minecraft.PlayerLeaveBeforeEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerPermissionLevel",
+        "Minecraft.PlayerPermissionLevel.0",
+        "Minecraft.PlayerPermissionLevel.1",
+        "Minecraft.PlayerPermissionLevel.2",
+        "Minecraft.PlayerPermissionLevel.3",
+        "Minecraft.PlayerPermissionLevel.Custom",
+        "Minecraft.PlayerPermissionLevel.Member",
+        "Minecraft.PlayerPermissionLevel.Operator",
+        "Minecraft.PlayerPermissionLevel.Visitor",
         "Minecraft.PlayerPlaceBlockAfterEvent",
         "Minecraft.PlayerPlaceBlockAfterEvent.[[Prototype]]",
         "Minecraft.PlayerPlaceBlockAfterEvent.prototype",
