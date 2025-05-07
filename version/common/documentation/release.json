@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.70.3",
-    "__COMMITHASH__": "8cb28e3b1e7972ac8126cee3f19201109faecf50",
-    "__MESSAGE__": "v1.21.70.3",
+    "__VERSION__": "1.21.80.3",
+    "__COMMITHASH__": "745dbc8e337a030b86d5ca46efe5f33d3016cc28",
+    "__MESSAGE__": "v1.21.80.3",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -224,6 +224,9 @@
                             "name": "Biome JSON File",
                         },
                         {
+                            "name": "Biome Replacement",
+                        },
+                        {
                             "name": "Block Specifier",
                         },
                         {
@@ -267,6 +270,9 @@
                         },
                         {
                             "name": "minecraft:overworld_height",
+                        },
+                        {
+                            "name": "minecraft:replace_biomes",
                         },
                         {
                             "name": "minecraft:surface_material_adjustments",
@@ -597,6 +603,14 @@
                         },
                         {
                             "name": "has_equipment",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "has_equipment_tag",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -1396,6 +1410,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.float",
+                                },
+                                {
+                                    "name": "minecraft:behavior.float_tempt",
                                 },
                                 {
                                     "name": "minecraft:behavior.float_wander",
@@ -3294,6 +3311,7 @@
         "rail_data_bit": "Shows if a rail has a redstone signal",
         "rail_direction": "Determines the orientation of a placed rail block",
         "redstone_signal": "Determines the signal strength of a redstone signal",
+        "rehydration_level": "Determines the Dried Ghast Block's progress towards a Ghastling",
         "repeater_delay": "Determines the amount of delay of a repeater",
         "sand_stone_type": "DEPRECATED - Determines the pattern of a sandstone block",
         "sand_type": "DEPRECATED - Determines the sand type of a block",
@@ -3696,6 +3714,7 @@
         "minecraft:double_cut_copper_slab": "",
         "minecraft:dragon_egg": "",
         "minecraft:dragon_head": "",
+        "minecraft:dried_ghast": "",
         "minecraft:dried_kelp_block": "",
         "minecraft:dripstone_block": "",
         "minecraft:dropper": "",
@@ -4649,6 +4668,7 @@
         "glow_squid": "0x00009089 (0x129)",
         "goat": "0x00004992 (0x128)",
         "guardian": "0x00002865 (0x49)",
+        "happy_ghast": "0x00005011 (0x147)",
         "hoglin": "0x00004988 (0x124)",
         "hopper_minecart": "0x00524384 (0x96)",
         "horse": "0x02118423 (0x23)",
@@ -4781,6 +4801,12 @@
                     "description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value).",
                 },
                 {
+                    "name": "culling_layer",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character. Additionally, the feature is currently only usable behind the \"upcoming creator features\" toggle.",
+                },
+                {
                     "name": "minecraft:breathability",
                     "type": "String",
                     "defaultValue": "",
@@ -4895,7 +4921,7 @@
                 },
                 {
                     "name": "minecraft:item_visual",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                 },
                 {
@@ -4912,7 +4938,7 @@
                 },
                 {
                     "name": "minecraft:liquid_detection",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "The definitions for how a block behaves when detecting liquid. Only one rule definition is allowed per liquid type - if multiple are specified, the first will be used and the rest will be ignored.",
                     "children": [
@@ -5045,7 +5071,7 @@
                 },
                 {
                     "name": "minecraft:redstone_conductivity",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "The basic redstone properties of a block; if the component is not provided the default values are used. Requires 1.21.30 format version and above.",
                     "children": [
@@ -5065,7 +5091,7 @@
                 },
                 {
                     "name": "minecraft:replaceable",
-                    "type": "Identifier String",
+                    "type": "JSON Object",
                     "defaultValue": "",
                     "description": "A block with this component can be replaced when another block is placed in the same block position.Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.60)",
                 },
@@ -5623,6 +5649,7 @@
         "has_damage": "Returns true when the subject entity receives the named damage type.",
         "has_damaged_equipment": "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
+        "has_equipment_tag": "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
         "has_nametag": "Tests if the subject has been given a custom name.",
         "has_property": "Tests for the presence of a property of the subject entity.",
@@ -5734,7 +5761,7 @@
                 },
                 {
                     "name": "on_escape",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "Escape trigger.",
                 },
@@ -5764,7 +5791,7 @@
                 },
                 {
                     "name": "target_blocks",
-                    "type": "List",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "List of block types this mob avoids.",
                 },
@@ -5816,7 +5843,7 @@
                     "description": "The list of conditions another entity must meet to be a valid target to avoid.",
                 },
                 {
-                    "name": "ignore_visibilty",
+                    "name": "ignore_visibility",
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "Whether or not to ignore direct line of sight while this entity is running away from other specified entities.",
@@ -6027,7 +6054,7 @@
                 {
                     "name": "height_above_target_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[ 0.0, 0.0 ]",
+                    "defaultValue": "[0.0, 0.0]",
                     "description": "The number of blocks above the target that the next anchor point can be set. This value is used only when the entity is tracking a target.",
                 },
                 {
@@ -6039,7 +6066,7 @@
                 {
                     "name": "height_offset_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[ 0.0, 0.0 ]",
+                    "defaultValue": "[0.0, 0.0]",
                     "description": "Vertical distance from the anchor point this entity must stay within, upon a successful height adjustment.",
                 },
                 {
@@ -6057,7 +6084,7 @@
                 {
                     "name": "radius_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[ 5.0, 15.0 ]",
+                    "defaultValue": "[5.0, 15.0]",
                     "description": "Horizontal distance from the anchor point this entity must stay within upon a successful radius adjustment.",
                 },
                 {
@@ -6214,6 +6241,48 @@
                     "defaultValue": "0.05",
                     "description": "The percentage chance that the entity has to attack aggressors of its village, where 1.0 = 100%.",
                 },
+                {
+                    "name": "attack_owner",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, this entity can attack its owner.",
+                },
+                {
+                    "name": "entity_types",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Filters which types of targets are valid for this entity.",
+                },
+                {
+                    "name": "must_reach",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, this entity requires a path to the target.",
+                },
+                {
+                    "name": "must_see",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Determines if target-validity requires this entity to be in range only, or both in range and in sight.",
+                },
+                {
+                    "name": "must_see_forget_duration",
+                    "type": "Decimal",
+                    "defaultValue": "3.0",
+                    "description": "Time (in seconds) the target must not be seen by this entity to become invalid. Used only if \"must_see\" is true.",
+                },
+                {
+                    "name": "persist_time",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "Time (in seconds) this entity can continue attacking the target after the target is no longer valid.",
+                },
+                {
+                    "name": "within_radius",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "Maximum distance this entity can be from the target when following it, otherwise the target becomes invalid. This value is only used if the entity doesn't declare \"minecraft:follow_range\".",
+                },
             ],
         },
         "minecraft:behavior.delayed_attack": {
@@ -6256,12 +6325,6 @@
                     "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\".",
                 },
                 {
-                    "name": "max_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/A",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
-                },
-                {
                     "name": "max_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.55",
@@ -6284,6 +6347,12 @@
                     "type": "Trigger",
                     "defaultValue": "N/A",
                     "description": "Defines the event to trigger when this entity successfully attacks.",
+                },
+                {
+                    "name": "on_kill",
+                    "type": "Trigger",
+                    "defaultValue": "N/A",
+                    "description": "Defines the event to trigger when this entity kills the target.",
                 },
                 {
                     "name": "outer_boundary_time_increase",
@@ -6328,22 +6397,10 @@
                     "description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior.",
                 },
                 {
-                    "name": "set_persistent",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Allows the actor to be set to persist upon targeting a player",
-                },
-                {
                     "name": "speed_multiplier",
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "This multiplier modifies the attacking entity's speed when moving toward the target.",
-                },
-                {
-                    "name": "target_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/a",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
                 },
                 {
                     "name": "track_target",
@@ -6389,7 +6446,7 @@
                 {
                     "name": "idle_time",
                     "type": "Decimal",
-                    "defaultValue": "",
+                    "defaultValue": "0.0",
                     "description": "The minimum idle time in seconds between the last detected disturbance to the start of digging.",
                 },
                 {
@@ -6454,7 +6511,7 @@
                     "name": "cooldown_time",
                     "type": "Decimal",
                     "defaultValue": "10",
-                    "description": "Time (in seconds), after roar, to breath flame.",
+                    "description": "Time (in seconds) between each start of the cycle to roar, then breath flame.",
                 },
                 {
                     "name": "flame_time",
@@ -6695,7 +6752,7 @@
             "children": [
                 {
                     "name": "eat_and_replace_block_pairs",
-                    "type": "List",
+                    "type": "Array",
                     "defaultValue": "N/A",
                     "description": "A collection of pairs of blocks; the first (\"eat_block\")is the block the entity should eat, the second (\"replace_block\") is the block that should replace the eaten block.",
                 },
@@ -6776,7 +6833,7 @@
             "children": [
                 {
                     "name": "cooldown_time",
-                    "type": "Integer",
+                    "type": "Decimal",
                     "defaultValue": "0.50",
                     "description": "Time in seconds the mob has to wait before using the goal again",
                 },
@@ -6982,7 +7039,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance the mob will move before stopping.",
                 },
             ],
@@ -7092,9 +7149,80 @@
                 },
             ],
         },
+        "minecraft:behavior.float_tempt": {
+            "description": "Allows a mob to be tempted by a player holding a specific item. Uses point-to-point movement. Designed for mobs that are floating (e.g. use the \"minecraft:navigation.float\" component).",
+            "children": [
+                {
+                    "name": "can_get_scared",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob.",
+                },
+                {
+                    "name": "can_tempt_vertically",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, vertical distance to the player will be considered when tempting.",
+                },
+                {
+                    "name": "can_tempt_while_ridden",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob can be tempted even if it has a passenger (i.e. if being ridden).",
+                },
+                {
+                    "name": "items",
+                    "type": "Array",
+                    "defaultValue": "[]",
+                    "description": "List of items that can tempt the mob.",
+                },
+                {
+                    "name": "sound_interval",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0.0, 0.0]",
+                    "description": "Range of random ticks to wait between tempt sounds.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Movement speed multiplier of the mob when using this AI Goal",
+                },
+                {
+                    "name": "stop_distance",
+                    "type": "Decimal",
+                    "defaultValue": "1.5",
+                    "description": "The distance at which the mob will stop following the player.",
+                },
+                {
+                    "name": "tempt_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound to play while the mob is being tempted.",
+                },
+                {
+                    "name": "within_radius",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like.",
+                },
+            ],
+        },
         "minecraft:behavior.float_wander": {
             "description": "Allows the mob to float around like the Ghast.",
             "children": [
+                {
+                    "name": "additional_collision_buffer",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob will have an additional buffer zone around it to avoid collisions with blocks when picking a position to wander to.",
+                },
+                {
+                    "name": "allow_navigating_through_liquids",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true allows the mob to navigate through liquids on its way to the target position.",
+                },
                 {
                     "name": "float_duration",
                     "type": "Range [a, b]",
@@ -7114,10 +7242,28 @@
                     "description": "If true, the point has to be reachable to be a valid target",
                 },
                 {
+                    "name": "navigate_around_surface",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, will prioritize finding random positions in the vicinity of surfaces, i.e. blocks that are not Air or Liquid.",
+                },
+                {
                     "name": "random_reselect",
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the mob will randomly pick a new point while moving to the previously selected one",
+                },
+                {
+                    "name": "surface_xz_dist",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "The horizontal distance in blocks that the goal will check for a surface from a candidate position. Only valid when `navigate_around_surface` is true.",
+                },
+                {
+                    "name": "surface_y_dist",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "The vertical distance in blocks that the goal will check for a surface from a candidate position. Only valid when `navigate_around_surface` is true.",
                 },
                 {
                     "name": "use_home_position_restriction",
@@ -7222,6 +7368,18 @@
             "description": "Allows the mob to follow other mobs.",
             "children": [
                 {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "If non-empty, provides criteria for filtering which nearby Mobs can be followed. If empty default criteria will be used, which will exclude Players, Squid variants, Fish variants, Tadpoles, Dolphins, and mobs of the same type as the owner of the Goal.",
+                },
+                {
+                    "name": "preferred_actor_type",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The type of actor to prefer following. If left unspecified, a random actor among those in range will be chosen.",
+                },
+                {
                     "name": "search_range",
                     "type": "Integer",
                     "defaultValue": "0",
@@ -7236,8 +7394,14 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance in blocks this mob stops from the mob it is following",
+                },
+                {
+                    "name": "use_home_position_restriction",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the mob will respect the 'minecraft:home' component's 'restriction_radius' field when choosing a target to follow. If false, it will choose target position without considering home restrictions.",
                 },
             ],
         },
@@ -7283,7 +7447,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "The distance at which the mob will stop following its owner.",
                 },
             ],
@@ -7327,7 +7491,7 @@
                 },
                 {
                     "name": "on_item_throw",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "Event(s) to run when this mob throws items.",
                 },
@@ -7368,7 +7532,7 @@
             "children": [
                 {
                     "name": "on_item_throw",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "Event(s) to run when this mob throws items.",
                 },
@@ -7427,13 +7591,13 @@
                 },
                 {
                     "name": "on_failed",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "Event(s) to run when this goal fails.",
                 },
                 {
                     "name": "on_home",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "Event(s) to run when this mob gets home.",
                 },
@@ -8256,12 +8420,6 @@
                     "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\".",
                 },
                 {
-                    "name": "max_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/A",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
-                },
-                {
                     "name": "max_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.55",
@@ -8284,6 +8442,12 @@
                     "type": "Trigger",
                     "defaultValue": "N/A",
                     "description": "Defines the event to trigger when this entity successfully attacks.",
+                },
+                {
+                    "name": "on_kill",
+                    "type": "Trigger",
+                    "defaultValue": "N/A",
+                    "description": "Defines the event to trigger when this entity kills the target.",
                 },
                 {
                     "name": "outer_boundary_time_increase",
@@ -8328,22 +8492,10 @@
                     "description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior.",
                 },
                 {
-                    "name": "set_persistent",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Allows the actor to be set to persist upon targeting a player",
-                },
-                {
                     "name": "speed_multiplier",
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "This multiplier modifies the attacking entity's speed when moving toward the target.",
-                },
-                {
-                    "name": "target_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/a",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
                 },
                 {
                     "name": "track_target",
@@ -8405,12 +8557,6 @@
                     "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\".",
                 },
                 {
-                    "name": "max_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/A",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
-                },
-                {
                     "name": "max_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.55",
@@ -8433,6 +8579,12 @@
                     "type": "Trigger",
                     "defaultValue": "N/A",
                     "description": "Defines the event to trigger when this entity successfully attacks.",
+                },
+                {
+                    "name": "on_kill",
+                    "type": "Trigger",
+                    "defaultValue": "N/A",
+                    "description": "Defines the event to trigger when this entity kills the target.",
                 },
                 {
                     "name": "outer_boundary_time_increase",
@@ -8471,22 +8623,10 @@
                     "description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior.",
                 },
                 {
-                    "name": "set_persistent",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Allows the actor to be set to persist upon targeting a player",
-                },
-                {
                     "name": "speed_multiplier",
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "This multiplier modifies the attacking entity's speed when moving toward the target.",
-                },
-                {
-                    "name": "target_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/a",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
                 },
                 {
                     "name": "track_target",
@@ -8567,10 +8707,10 @@
             ],
         },
         "minecraft:behavior.move_around_target": {
-            "description": "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_search_spread_degrees'.",
+            "description": "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_spread_degrees'.",
             "children": [
                 {
-                    "name": "destination_pos_search_spread_degrees",
+                    "name": "destination_pos_spread_degrees",
                     "type": "Decimal",
                     "defaultValue": "90.000000",
                     "description": "This angle (in degrees) is used for controlling the spread when picking a destination position behind the target. A zero spread angle means the destination position will be straight behind the target with no variance. A 90 degree spread angle means the destination position can be up to 45 degrees to the left and to the right of the position straight behind the target's view direction..",
@@ -9040,16 +9180,10 @@
             "description": "Allows an entity to attack the closest target within a given subset of specific target types.",
             "children": [
                 {
-                    "name": "attack_interval",
+                    "name": "attack_interval|attack_interval_min",
                     "type": "Integer",
                     "defaultValue": "0",
                     "description": "Time range (in seconds) between searching for an attack target, range is in (0, \"attack_interval\"]. Only used if \"attack_interval\" is greater than 0, otherwise \"scan_interval\" is used.",
-                },
-                {
-                    "name": "attack_interval_min",
-                    "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "Alias for \"attack_interval\"; provides the same functionality as \"attack_interval\".",
                 },
                 {
                     "name": "attack_owner",
@@ -9059,41 +9193,9 @@
                 },
                 {
                     "name": "entity_types",
-                    "type": "JSON Object",
+                    "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "Filters which types of targets are valid for this entity.",
-                    "children": [
-                        {
-                            "name": "filters",
-                            "type": "Minecraft Filter",
-                            "defaultValue": "",
-                            "description": "Conditions that make this target a valid type.",
-                        },
-                        {
-                            "name": "max_dist",
-                            "type": "Decimal",
-                            "defaultValue": "16",
-                            "description": "To be a valid target choice, the target type cannot be farther away from this entity than \"max_dist\".",
-                        },
-                        {
-                            "name": "must_see",
-                            "type": "Boolean",
-                            "defaultValue": "false",
-                            "description": "Determines if target-validity requires this entity to be in range only, or both in range and in sight.",
-                        },
-                        {
-                            "name": "must_see_forget_duration",
-                            "type": "Boolean",
-                            "defaultValue": "3.0",
-                            "description": "Time (in seconds) the target must not be seen by this entity to become invalid. Used only if \"must_see\" is true.",
-                        },
-                        {
-                            "name": "reevaluate_description",
-                            "type": "Boolean",
-                            "defaultValue": "false",
-                            "description": "If true, the mob will stop being targeted if it stops meeting any conditions.",
-                        },
-                    ],
                 },
                 {
                     "name": "must_reach",
@@ -9686,7 +9788,7 @@
                 },
                 {
                     "name": "friend_types",
-                    "type": "Array",
+                    "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "The entity type(s) to consider when searching for a potential friend to play with.",
                 },
@@ -9722,7 +9824,7 @@
                 {
                     "name": "apply_regeneration",
                     "type": "Boolean",
-                    "defaultValue": "true",
+                    "defaultValue": "false",
                     "description": "Whether the mob will receive the regeneration effect while playing dead.",
                 },
                 {
@@ -9845,13 +9947,13 @@
                 },
                 {
                     "name": "min_ram_distance",
-                    "type": "Decimal",
-                    "defaultValue": "4.000000",
+                    "type": "Integer",
+                    "defaultValue": "4",
                     "description": "The minimum distance at which the mob can start a ram attack.",
                 },
                 {
                     "name": "on_start",
-                    "type": "Trigger",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "The event to trigger when attacking",
                 },
@@ -9863,8 +9965,8 @@
                 },
                 {
                     "name": "ram_distance",
-                    "type": "Decimal",
-                    "defaultValue": "7.000000",
+                    "type": "Integer",
+                    "defaultValue": "7",
                     "description": "The distance at which the mob start to run with ram speed.",
                 },
                 {
@@ -10097,8 +10199,8 @@
                 },
                 {
                     "name": "find_valid_position_retries",
-                    "type": "Decimal",
-                    "defaultValue": "5.000000",
+                    "type": "Integer",
+                    "defaultValue": "5",
                     "description": "Amount of retries to find a valid target position within search range.",
                 },
                 {
@@ -10151,14 +10253,14 @@
                 },
                 {
                     "name": "search_range_xz",
-                    "type": "Decimal",
-                    "defaultValue": "10.000000",
+                    "type": "Integer",
+                    "defaultValue": "10",
                     "description": "Width and length of the volume around the entity used to find a valid target position",
                 },
                 {
                     "name": "search_range_y",
-                    "type": "Decimal",
-                    "defaultValue": "7.000000",
+                    "type": "Integer",
+                    "defaultValue": "7",
                     "description": "Height of the volume around the entity used to find a valid target position",
                 },
                 {
@@ -10181,7 +10283,7 @@
                 },
                 {
                     "name": "target_blocks",
-                    "type": "List",
+                    "type": "Array",
                     "defaultValue": "",
                     "description": "List of target block types the goal will look to dig on. Overrides the default list.",
                 },
@@ -11092,12 +11194,6 @@
                     "description": "Time (in seconds) to add to attack path recalculation when the target is beyond the \"path_inner_boundary\".",
                 },
                 {
-                    "name": "max_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/A",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
-                },
-                {
                     "name": "max_path_time",
                     "type": "Decimal",
                     "defaultValue": "0.55",
@@ -11120,6 +11216,12 @@
                     "type": "Trigger",
                     "defaultValue": "N/A",
                     "description": "Defines the event to trigger when this entity successfully attacks.",
+                },
+                {
+                    "name": "on_kill",
+                    "type": "Trigger",
+                    "defaultValue": "N/A",
+                    "description": "Defines the event to trigger when this entity kills the target.",
                 },
                 {
                     "name": "outer_boundary_time_increase",
@@ -11164,12 +11266,6 @@
                     "description": "Toggles (on/off) the need to have a full path from the entity to the target when using this melee attack behavior.",
                 },
                 {
-                    "name": "set_persistent",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Allows the actor to be set to persist upon targeting a player",
-                },
-                {
                     "name": "speed_multiplier",
                     "type": "Decimal",
                     "defaultValue": "1",
@@ -11180,12 +11276,6 @@
                     "type": "Decimal",
                     "defaultValue": "2",
                     "description": "Multiplied with the base size of the entity to determine stomp AoE damage range.",
-                },
-                {
-                    "name": "target_dist",
-                    "type": "Decimal",
-                    "defaultValue": "N/a",
-                    "description": "Unused. No effect on \"minecraft:behavior.melee_attack\".",
                 },
                 {
                     "name": "track_target",
@@ -11436,7 +11526,7 @@
                 {
                     "name": "stop_distance",
                     "type": "Decimal",
-                    "defaultValue": "2.0",
+                    "defaultValue": "2",
                     "description": "This mob stops swelling when a target has moved away at least this many blocks",
                 },
             ],
@@ -11539,7 +11629,7 @@
                 },
                 {
                     "name": "entity_types",
-                    "type": "JSON Object",
+                    "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "Filters which types of entities are valid to follow.",
                 },
@@ -11675,13 +11765,13 @@
             ],
         },
         "minecraft:behavior.tempt": {
-            "description": "Allows the mob to be tempted by food they like.",
+            "description": "Allows a mob to be tempted by a player holding a specific item. Uses pathfinding for movement.",
             "children": [
                 {
                     "name": "can_get_scared",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob",
+                    "description": "If true, the mob can stop being tempted if the player moves too fast while close to this mob.",
                 },
                 {
                     "name": "can_tempt_vertically",
@@ -11697,9 +11787,9 @@
                 },
                 {
                     "name": "items",
-                    "type": "List",
-                    "defaultValue": "",
-                    "description": "List of items this mob is tempted by",
+                    "type": "Array",
+                    "defaultValue": "[]",
+                    "description": "List of items that can tempt the mob.",
                 },
                 {
                     "name": "sound_interval",
@@ -11714,6 +11804,12 @@
                     "description": "Movement speed multiplier of the mob when using this AI Goal",
                 },
                 {
+                    "name": "stop_distance",
+                    "type": "Decimal",
+                    "defaultValue": "1.5",
+                    "description": "The distance at which the mob will stop following the player.",
+                },
+                {
                     "name": "tempt_sound",
                     "type": "String",
                     "defaultValue": "",
@@ -11723,7 +11819,7 @@
                     "name": "within_radius",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like",
+                    "description": "Distance in blocks this mob can get tempted by a player holding an item they like.",
                 },
             ],
         },
@@ -14070,6 +14166,12 @@
                     "description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                 },
                 {
+                    "name": "drop_item_y_offset",
+                    "type": "Decimal",
+                    "defaultValue": "0",
+                    "description": "Will offset the item drop position this amount in the y direction. Requires \"drop_item_slot\" to be specified.",
+                },
+                {
                     "name": "equip_item_slot",
                     "type": "String",
                     "defaultValue": "",
@@ -14238,18 +14340,6 @@
                     "description": "If true, players can leash this entity even if it is already leashed to another mob.",
                 },
                 {
-                    "name": "hard_distance",
-                    "type": "Decimal",
-                    "defaultValue": "6",
-                    "description": "Distance in blocks at which the leash stiffens, restricting movement.",
-                },
-                {
-                    "name": "max_distance",
-                    "type": "Decimal",
-                    "defaultValue": "10",
-                    "description": "Distance in blocks at which the leash breaks.",
-                },
-                {
                     "name": "on_leash",
                     "type": "String",
                     "defaultValue": "",
@@ -14262,10 +14352,42 @@
                     "description": "Event to call when this entity is unleashed.",
                 },
                 {
-                    "name": "soft_distance",
-                    "type": "Decimal",
-                    "defaultValue": "4",
-                    "description": "Distance in blocks at which the 'spring' effect starts acting to keep this entity close to the entity that leashed it.",
+                    "name": "on_unleash_interact_only",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for other reasons such as being stolen or the leash breaking.",
+                },
+                {
+                    "name": "presets",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
+                    "children": [
+                        {
+                            "name": "filter",
+                            "type": "Minecraft Filter",
+                            "defaultValue": "",
+                            "description": "Conditions that must be met for this preset to be applied. These conditions are only evaluated upon leashing.",
+                        },
+                        {
+                            "name": "hard_distance",
+                            "type": "Decimal",
+                            "defaultValue": "6",
+                            "description": "Distance in blocks at which the leash stiffens, restricting movement.",
+                        },
+                        {
+                            "name": "max_distance",
+                            "type": "Decimal",
+                            "defaultValue": "10",
+                            "description": "Distance in blocks at which the leash breaks.",
+                        },
+                        {
+                            "name": "soft_distance",
+                            "type": "Decimal",
+                            "defaultValue": "4",
+                            "description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                        },
+                    ],
                 },
             ],
         },
@@ -15800,6 +15922,12 @@
                     "description": "If true, this entity can't be interacted with if the entity interacting with it is crouching.",
                 },
                 {
+                    "name": "dismount_mode",
+                    "type": "Enumerator",
+                    "defaultValue": "default",
+                    "description": "Defines where riders are placed when dismounting this entity:- \"default\", riders are placed on a valid ground position around the entity, or at the center of the entity's collision box if none is found.- \"on_top_center\", riders are placed at the center of the top of the entity's collision box.",
+                },
+                {
                     "name": "family_types",
                     "type": "List",
                     "defaultValue": "",
@@ -15810,6 +15938,18 @@
                     "type": "String",
                     "defaultValue": "",
                     "description": "The text to display when the player can interact with the entity when playing with touch-screen controls.",
+                },
+                {
+                    "name": "on_rider_enter_event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Event to execute on the owner entity when an entity starts riding it.",
+                },
+                {
+                    "name": "on_rider_exit_event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Event to execute on the owner entity when an entity stops riding it.",
                 },
                 {
                     "name": "passenger_max_width",
@@ -16974,9 +17114,11 @@
         "query.get_locator_offset": "Gets specified axis of the specified locator offset.",
         "query.get_name": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
         "query.get_root_locator_offset": "Gets specified axis of the specified locator offset of the root model.",
+        "query.graphics_mode_is_any": "Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
         "query.ground_speed": "Returns the ground speed of the entity in meters/second.",
         "query.had_component_group": "Usable only in behavior packs when determining the default value for an entity's Property. Requires one string argument. If the entity is being loaded from data that was last saved with a component_group with the specified name, returns 1.0, otherwise returns 0.0. The purpose of this query is to allow entity definitions to change and still be able to load the correct state of entities.",
         "query.has_any_family": "Returns 1 if the entity has any of the specified families, else 0.",
+        "query.has_any_leashed_entity_of_type": "Returns whether or not the entity is currently leashing other entities of the designated types.",
         "query.has_armor_slot": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
         "query.has_biome_tag": "Returns whether or not a Block Placement Target has a specific biome tag",
         "query.has_block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.",
@@ -17113,6 +17255,7 @@
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
         "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
+        "query.leashed_entity_count": "Returns the number of entities for which this entity is the leash holder.",
         "query.lie_amount": "Returns the lie down amount for the entity.",
         "query.life_span": "Returns the limited life span of an entity, or 0.0 if it lives forever",
         "query.life_time": "Returns the time in seconds since the current animation started, else 0.0 if not called within an animation.",
@@ -17197,7 +17340,5 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {
-        "query.graphics_mode_is_any": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
-    },
+    "molangQueryExperimental": {},
 }

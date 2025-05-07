@@ -146,7 +146,10 @@ export function placeCommandStructureSubCommand({ coreVersion, branch }) {
             testMinecraftVersionInRange(coreVersion, '1.21.50.07', '1.21.50.07')
         );
     }
-    return testMinecraftVersionInRange(coreVersion, '1.21.80.22', '*');
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.21.80.22', '*') ||
+        testMinecraftVersionInRange(coreVersion, '1.21.80.3', '1.21.80.3')
+    );
 }
 placeCommandStructureSubCommand.associatedCommands = [
     ['/place structure <structure: string> [pos: x y z] [ignoreStartHeight: Boolean] [keepJigsaws: Boolean]'],
@@ -179,7 +182,10 @@ placeCommandFeatureSubCommand.associatedCommands = [
 
 export function controlSchemeCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
-        return testMinecraftVersionInRange(coreVersion, '1.21.80.27', '*');
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.21.80.27', '*') ||
+            testMinecraftVersionInRange(coreVersion, '1.21.80.3', '1.21.80.3')
+        );
     }
     return false;
 }
