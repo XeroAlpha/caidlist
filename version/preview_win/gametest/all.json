@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.90.21",
+    "packageVersion": "1.21.90.23",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -8279,6 +8279,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "setDefaultCamera": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                             },
                                             "properties": {
                                                 "constructor": {
@@ -8997,6 +9005,13 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "containerRules": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
+                                                    "configurable": false,
+                                                },
                                                 "contains": {
                                                     "value": {
                                                         "type": "function",
@@ -9109,6 +9124,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "weight": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                             },
                                             "properties": {
                                                 "constructor": {
@@ -9120,6 +9143,87 @@
                                         },
                                         "readOnly": true,
                                         "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ContainerRulesError": {
+                            "value": {
+                                "type": "function",
+                                "name": "ContainerRulesError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ContainerRulesError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "reason": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "ContainerRulesErrorReason": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "BannedItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "BannedItem",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "NestedStorageItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "NestedStorageItem",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "NotAllowedItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "NotAllowedItem",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "OverWeightLimit": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "OverWeightLimit",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "ZeroWeightItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "ZeroWeightItem",
+                                        },
+                                        "readOnly": true,
                                     },
                                 },
                             },
@@ -9542,143 +9646,80 @@
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
-                                    "0": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Boolean",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "1": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Integer",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "2": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Float",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "3": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "String",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "4": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "EntitySelector",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "5": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "PlayerSelector",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "6": {
-                                        "value": {
-                                            "type": "string",
-                                            "value": "Location",
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "7": {
+                                    "BlockType": {
                                         "value": {
                                             "type": "string",
                                             "value": "BlockType",
                                         },
                                         "readOnly": true,
                                     },
-                                    "8": {
+                                    "Boolean": {
                                         "value": {
                                             "type": "string",
-                                            "value": "ItemType",
+                                            "value": "Boolean",
                                         },
                                         "readOnly": true,
                                     },
-                                    "9": {
+                                    "EntitySelector": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "EntitySelector",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "EntityType": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "EntityType",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Enum": {
                                         "value": {
                                             "type": "string",
                                             "value": "Enum",
                                         },
                                         "readOnly": true,
                                     },
-                                    "BlockType": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 7,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "Boolean": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 0,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "EntitySelector": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 4,
-                                        },
-                                        "readOnly": true,
-                                    },
-                                    "Enum": {
-                                        "value": {
-                                            "type": "number",
-                                            "value": 9,
-                                        },
-                                        "readOnly": true,
-                                    },
                                     "Float": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 2,
+                                            "type": "string",
+                                            "value": "Float",
                                         },
                                         "readOnly": true,
                                     },
                                     "Integer": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 1,
+                                            "type": "string",
+                                            "value": "Integer",
                                         },
                                         "readOnly": true,
                                     },
                                     "ItemType": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 8,
+                                            "type": "string",
+                                            "value": "ItemType",
                                         },
                                         "readOnly": true,
                                     },
                                     "Location": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 6,
+                                            "type": "string",
+                                            "value": "Location",
                                         },
                                         "readOnly": true,
                                     },
                                     "PlayerSelector": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 5,
+                                            "type": "string",
+                                            "value": "PlayerSelector",
                                         },
                                         "readOnly": true,
                                     },
                                     "String": {
                                         "value": {
-                                            "type": "number",
-                                            "value": 3,
+                                            "type": "string",
+                                            "value": "String",
                                         },
                                         "readOnly": true,
                                     },
@@ -20080,6 +20121,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "Inventory": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:inventory",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "Potion": {
                                         "value": {
                                             "type": "string",
@@ -20799,6 +20847,56 @@
                             },
                             "configurable": false,
                         },
+                        "ItemInventoryComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "ItemInventoryComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:inventory",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.ItemInventoryComponent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "container": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.ItemComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.ItemComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "ItemLockMode": {
                             "value": {
                                 "type": "object",
@@ -21257,6 +21355,14 @@
                                                     },
                                                 },
                                                 "typeId": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "weight": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -32440,6 +32546,193 @@
                     "integrity": "sealed",
                 },
             },
+            "MinecraftDiagnostics": {
+                "value": {
+                    "type": "object",
+                    "enumerableProperties": {
+                        "Sentry": {
+                            "value": {
+                                "type": "function",
+                                "name": "Sentry",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "addBreadcrumb": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "addTag": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getTags": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "init": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "removeTag": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftDiagnostics.Sentry",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "SentryAlreadyInitializedError": {
+                            "value": {
+                                "type": "function",
+                                "name": "SentryAlreadyInitializedError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftDiagnostics.SentryAlreadyInitializedError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "SentryBreadcrumbLevel": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "debug": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "debug",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "error": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "error",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "info": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "info",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "warning": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "warning",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "SentryUninitializedError": {
+                            "value": {
+                                "type": "function",
+                                "name": "SentryUninitializedError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftDiagnostics.SentryUninitializedError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "sentry": {
+                            "value": {
+                                "type": "object",
+                                "prototype": {
+                                    "ref": "MinecraftDiagnostics.Sentry.prototype",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                    },
+                    "symbolProperties": {
+                        "Symbol(Symbol.toStringTag)": {
+                            "value": {
+                                "type": "string",
+                                "value": "Module",
+                            },
+                            "readOnly": true,
+                            "configurable": false,
+                        },
+                    },
+                    "prototype": null,
+                    "integrity": "sealed",
+                },
+            },
         },
         "symbolProperties": {
             "Symbol(Symbol.toStringTag)": {
@@ -33378,6 +33671,7 @@
         "Minecraft.Camera.prototype.fade",
         "Minecraft.Camera.prototype.isValid.[[Get]]",
         "Minecraft.Camera.prototype.setCamera",
+        "Minecraft.Camera.prototype.setDefaultCamera",
         "Minecraft.ChatSendAfterEvent",
         "Minecraft.ChatSendAfterEvent.prototype",
         "Minecraft.ChatSendAfterEvent.prototype.constructor",
@@ -33469,6 +33763,7 @@
         "Minecraft.Container.prototype.addItem",
         "Minecraft.Container.prototype.clearAll",
         "Minecraft.Container.prototype.constructor",
+        "Minecraft.Container.prototype.containerRules",
         "Minecraft.Container.prototype.contains",
         "Minecraft.Container.prototype.emptySlotsCount.[[Get]]",
         "Minecraft.Container.prototype.find",
@@ -33483,6 +33778,18 @@
         "Minecraft.Container.prototype.size.[[Get]]",
         "Minecraft.Container.prototype.swapItems",
         "Minecraft.Container.prototype.transferItem",
+        "Minecraft.Container.prototype.weight.[[Get]]",
+        "Minecraft.ContainerRulesError",
+        "Minecraft.ContainerRulesError.prototype",
+        "Minecraft.ContainerRulesError.prototype.[[Prototype]]",
+        "Minecraft.ContainerRulesError.prototype.constructor",
+        "Minecraft.ContainerRulesError.prototype.reason.[[Get]]",
+        "Minecraft.ContainerRulesErrorReason",
+        "Minecraft.ContainerRulesErrorReason.BannedItem",
+        "Minecraft.ContainerRulesErrorReason.NestedStorageItem",
+        "Minecraft.ContainerRulesErrorReason.NotAllowedItem",
+        "Minecraft.ContainerRulesErrorReason.OverWeightLimit",
+        "Minecraft.ContainerRulesErrorReason.ZeroWeightItem",
         "Minecraft.ContainerSlot",
         "Minecraft.ContainerSlot.prototype",
         "Minecraft.ContainerSlot.prototype.amount.[[Get]]",
@@ -33537,19 +33844,10 @@
         "Minecraft.CustomCommandOrigin.prototype.sourceEntity.[[Get]]",
         "Minecraft.CustomCommandOrigin.prototype.sourceType",
         "Minecraft.CustomCommandParamType",
-        "Minecraft.CustomCommandParamType.0",
-        "Minecraft.CustomCommandParamType.1",
-        "Minecraft.CustomCommandParamType.2",
-        "Minecraft.CustomCommandParamType.3",
-        "Minecraft.CustomCommandParamType.4",
-        "Minecraft.CustomCommandParamType.5",
-        "Minecraft.CustomCommandParamType.6",
-        "Minecraft.CustomCommandParamType.7",
-        "Minecraft.CustomCommandParamType.8",
-        "Minecraft.CustomCommandParamType.9",
         "Minecraft.CustomCommandParamType.BlockType",
         "Minecraft.CustomCommandParamType.Boolean",
         "Minecraft.CustomCommandParamType.EntitySelector",
+        "Minecraft.CustomCommandParamType.EntityType",
         "Minecraft.CustomCommandParamType.Enum",
         "Minecraft.CustomCommandParamType.Float",
         "Minecraft.CustomCommandParamType.Integer",
@@ -34961,6 +35259,7 @@
         "Minecraft.ItemComponentTypes.Dyeable",
         "Minecraft.ItemComponentTypes.Enchantable",
         "Minecraft.ItemComponentTypes.Food",
+        "Minecraft.ItemComponentTypes.Inventory",
         "Minecraft.ItemComponentTypes.Potion",
         "Minecraft.ItemComponentUseEvent",
         "Minecraft.ItemComponentUseEvent.prototype",
@@ -35059,6 +35358,13 @@
         "Minecraft.ItemFoodComponent.prototype.nutrition.[[Get]]",
         "Minecraft.ItemFoodComponent.prototype.saturationModifier.[[Get]]",
         "Minecraft.ItemFoodComponent.prototype.usingConvertsTo.[[Get]]",
+        "Minecraft.ItemInventoryComponent",
+        "Minecraft.ItemInventoryComponent.[[Prototype]]",
+        "Minecraft.ItemInventoryComponent.componentId",
+        "Minecraft.ItemInventoryComponent.prototype",
+        "Minecraft.ItemInventoryComponent.prototype.[[Prototype]]",
+        "Minecraft.ItemInventoryComponent.prototype.constructor",
+        "Minecraft.ItemInventoryComponent.prototype.container.[[Get]]",
         "Minecraft.ItemLockMode",
         "Minecraft.ItemLockMode.inventory",
         "Minecraft.ItemLockMode.none",
@@ -35120,6 +35426,7 @@
         "Minecraft.ItemStack.prototype.setLore",
         "Minecraft.ItemStack.prototype.type.[[Get]]",
         "Minecraft.ItemStack.prototype.typeId.[[Get]]",
+        "Minecraft.ItemStack.prototype.weight.[[Get]]",
         "Minecraft.ItemStartUseAfterEvent",
         "Minecraft.ItemStartUseAfterEvent.prototype",
         "Minecraft.ItemStartUseAfterEvent.prototype.constructor",
@@ -36260,6 +36567,31 @@
         "MinecraftDebugUtilities.debugDrawer",
         "MinecraftDebugUtilities.debugDrawer.[[Prototype]]",
         "MinecraftDebugUtilities.disableWatchdogTimingWarnings",
+        "MinecraftDiagnostics",
+        "MinecraftDiagnostics.Sentry",
+        "MinecraftDiagnostics.Sentry.prototype",
+        "MinecraftDiagnostics.Sentry.prototype.addBreadcrumb",
+        "MinecraftDiagnostics.Sentry.prototype.addTag",
+        "MinecraftDiagnostics.Sentry.prototype.constructor",
+        "MinecraftDiagnostics.Sentry.prototype.getTags",
+        "MinecraftDiagnostics.Sentry.prototype.init",
+        "MinecraftDiagnostics.Sentry.prototype.removeTag",
+        "MinecraftDiagnostics.SentryAlreadyInitializedError",
+        "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype",
+        "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype.[[Prototype]]",
+        "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype.constructor",
+        "MinecraftDiagnostics.SentryBreadcrumbLevel",
+        "MinecraftDiagnostics.SentryBreadcrumbLevel.debug",
+        "MinecraftDiagnostics.SentryBreadcrumbLevel.error",
+        "MinecraftDiagnostics.SentryBreadcrumbLevel.info",
+        "MinecraftDiagnostics.SentryBreadcrumbLevel.warning",
+        "MinecraftDiagnostics.SentryUninitializedError",
+        "MinecraftDiagnostics.SentryUninitializedError.prototype",
+        "MinecraftDiagnostics.SentryUninitializedError.prototype.[[Prototype]]",
+        "MinecraftDiagnostics.SentryUninitializedError.prototype.constructor",
+        "MinecraftDiagnostics.Symbol(Symbol.toStringTag)",
+        "MinecraftDiagnostics.sentry",
+        "MinecraftDiagnostics.sentry.[[Prototype]]",
         "MinecraftUI",
         "MinecraftUI.ActionFormData",
         "MinecraftUI.ActionFormData.prototype",
@@ -76544,7 +76876,22 @@
         "minecraft:black_bundle": {
             "localizationKey": "item.black_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:black_candle": {
             "localizationKey": "tile.black_candle.name",
@@ -76649,7 +76996,22 @@
         "minecraft:blue_bundle": {
             "localizationKey": "item.blue_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:blue_candle": {
             "localizationKey": "tile.blue_candle.name",
@@ -76825,6 +77187,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 384,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -76911,7 +77279,22 @@
         "minecraft:brown_bundle": {
             "localizationKey": "item.brown_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:brown_candle": {
             "localizationKey": "tile.brown_candle.name",
@@ -77002,6 +77385,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 64,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77036,7 +77425,22 @@
         "minecraft:bundle": {
             "localizationKey": "item.bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:burn_pottery_sherd": {
             "localizationKey": "item.burn_pottery_sherd.name",
@@ -77120,6 +77524,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 26,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77184,6 +77594,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 195,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77215,6 +77631,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 240,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77242,6 +77664,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 165,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77271,6 +77699,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 225,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77909,6 +78343,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 464,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -77957,7 +78397,22 @@
         "minecraft:cyan_bundle": {
             "localizationKey": "item.cyan_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:cyan_candle": {
             "localizationKey": "tile.cyan_candle.name",
@@ -78319,6 +78774,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 1561,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78351,6 +78812,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 429,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78383,6 +78850,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 528,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78411,6 +78884,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 363,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78442,6 +78921,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 1561,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78474,6 +78959,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 495,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78508,6 +78999,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 1561,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78534,6 +79031,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 1561,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78559,6 +79062,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 1561,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -78709,6 +79218,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 432,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79032,6 +79547,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 64,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79239,6 +79760,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 32,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79267,6 +79794,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 91,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79304,6 +79837,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 112,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79331,6 +79870,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 77,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79361,6 +79906,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 32,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79392,6 +79943,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 105,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79421,6 +79978,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 32,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79450,6 +80013,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 32,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79474,6 +80043,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 32,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79526,7 +80101,22 @@
         "minecraft:gray_bundle": {
             "localizationKey": "item.gray_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:gray_candle": {
             "localizationKey": "tile.gray_candle.name",
@@ -79588,7 +80178,22 @@
         "minecraft:green_bundle": {
             "localizationKey": "item.green_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:green_candle": {
             "localizationKey": "tile.green_candle.name",
@@ -79842,6 +80447,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79877,6 +80488,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 195,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79908,6 +80525,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 240,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79947,6 +80570,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 165,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -79977,6 +80606,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80014,6 +80649,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 225,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80051,6 +80692,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80076,6 +80723,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80100,6 +80753,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80310,6 +80969,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 65,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80341,6 +81006,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 80,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80368,6 +81039,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 55,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80404,6 +81081,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 75,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80496,7 +81179,22 @@
         "minecraft:light_blue_bundle": {
             "localizationKey": "item.light_blue_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:light_blue_candle": {
             "localizationKey": "tile.light_blue_candle.name",
@@ -80558,7 +81256,22 @@
         "minecraft:light_gray_bundle": {
             "localizationKey": "item.light_gray_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:light_gray_candle": {
             "localizationKey": "tile.light_gray_candle.name",
@@ -80642,7 +81355,22 @@
         "minecraft:lime_bundle": {
             "localizationKey": "item.lime_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:lime_candle": {
             "localizationKey": "tile.lime_candle.name",
@@ -80753,6 +81481,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 500,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -80772,7 +81506,22 @@
         "minecraft:magenta_bundle": {
             "localizationKey": "item.magenta_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:magenta_candle": {
             "localizationKey": "tile.magenta_candle.name",
@@ -81354,6 +82103,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 2031,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81385,6 +82140,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 481,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81416,6 +82177,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 592,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81443,6 +82210,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 407,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81473,6 +82246,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 2031,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81504,6 +82283,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 555,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81533,6 +82318,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 2031,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81562,6 +82353,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 2031,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81586,6 +82383,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 2031,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -81745,7 +82548,22 @@
         "minecraft:orange_bundle": {
             "localizationKey": "item.orange_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:orange_candle": {
             "localizationKey": "tile.orange_candle.name",
@@ -82093,7 +82911,22 @@
         "minecraft:pink_bundle": {
             "localizationKey": "item.pink_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:pink_candle": {
             "localizationKey": "tile.pink_candle.name",
@@ -82479,7 +83312,22 @@
         "minecraft:purple_bundle": {
             "localizationKey": "item.purple_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:purple_candle": {
             "localizationKey": "tile.purple_candle.name",
@@ -82668,7 +83516,22 @@
         "minecraft:red_bundle": {
             "localizationKey": "item.red_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:red_candle": {
             "localizationKey": "tile.red_candle.name",
@@ -83005,6 +83868,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 238,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83040,6 +83909,12 @@
                 },
                 "minecraft:durability": {
                     "maxDurability": 336,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83467,6 +84342,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 131,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83517,6 +84398,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 131,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83542,6 +84429,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 131,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83571,6 +84464,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 131,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83599,6 +84498,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 131,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -83961,6 +84866,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 250,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84054,6 +84965,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 275,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84522,7 +85439,22 @@
         "minecraft:white_bundle": {
             "localizationKey": "item.white_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:white_candle": {
             "localizationKey": "tile.white_candle.name",
@@ -84683,6 +85615,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 59,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84721,6 +85659,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 59,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84746,6 +85690,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 59,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84775,6 +85725,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 59,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84799,6 +85755,12 @@
             "components": {
                 "minecraft:durability": {
                     "maxDurability": 59,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
                 },
                 "minecraft:enchantable": {
                     "applicableEnchantments": [
@@ -84826,7 +85788,22 @@
         "minecraft:yellow_bundle": {
             "localizationKey": "item.yellow_bundle",
             "unstackable": true,
+            "weight": 4,
             "tags": [],
+            "components": {
+                "minecraft:inventory": {
+                    "containerRules": {
+                        "allowNestedStorageItems": true,
+                        "allowedItems": [],
+                        "bannedItems": [
+                            "minecraft:shulker_box",
+                            "minecraft:undyed_shulker_box",
+                        ],
+                        "weightLimit": 64,
+                    },
+                    "size": 64,
+                },
+            },
         },
         "minecraft:yellow_candle": {
             "localizationKey": "tile.yellow_candle.name",

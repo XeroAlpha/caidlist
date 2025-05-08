@@ -837,9 +837,9 @@ const Extractors = [
                                 componentData.defaultDamage = component.damage;
                             }
                             assign(componentData, component, ['maxDurability']);
-                            const damageChance = component.getDamageChance();
-                            if (damageChance !== 100) {
-                                componentData.damageChance = damageChance;
+                            const damageChances = [0, 1, 2, 3].map((level) => component.getDamageChance(level));
+                            if (damageChances.some((e) => e !== 100)) {
+                                componentData.damageChances = damageChances;
                             }
                         }
                         if (component instanceof Minecraft.ItemFoodComponent) {
@@ -861,16 +861,21 @@ const Extractors = [
                         if (component instanceof Minecraft.ItemCompostableComponent) {
                             assign(componentData, component, ['compostingChance']);
                         }
+                        if (component instanceof Minecraft.ItemInventoryComponent) {
+                            assign(componentData, component.container, ['containerRules', 'size']);
+                        }
                         components[componentId] = componentData;
                         hasComponents = true;
                     });
                     const maxAmountDefault = itemStack.isStackable ? 64 : 1;
+                    const defaultWeight = 64 / itemStack.maxAmount;
                     return [
                         itemType.id,
                         {
                             localizationKey: itemStack.localizationKey,
                             unstackable: itemStack.isStackable ? undefined : true,
                             maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
+                            weight: itemStack.weight !== defaultWeight ? itemStack.weight : undefined,
                             tags: [...new Set(itemStack.getTags())],
                             components: hasComponents ? components : undefined,
                             ...commonComponents
@@ -1062,7 +1067,8 @@ const ImportEnvironments = {
     MinecraftNet: ['mojang-minecraft-net', '@minecraft/server-net'],
     MinecraftCommon: ['@minecraft/common'],
     MinecraftEditor: ['@minecraft/server-editor'],
-    MinecraftDebugUtilities: ['@minecraft/debug-utilities']
+    MinecraftDebugUtilities: ['@minecraft/debug-utilities'],
+    MinecraftDiagnostics: ['@minecraft/diagnostics']
 };
 
 /**

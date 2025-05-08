@@ -187,7 +187,7 @@ export function controlSchemeCommand({ coreVersion, branch }) {
             testMinecraftVersionInRange(coreVersion, '1.21.80.3', '1.21.80.3')
         );
     }
-    return false;
+    return testMinecraftVersionInRange(coreVersion, '1.21.90.23', '*');
 }
 controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> set <control scheme: controlscheme>']];
 
