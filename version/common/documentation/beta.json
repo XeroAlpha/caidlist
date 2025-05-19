@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.90.23",
-    "__COMMITHASH__": "5c457bb0d22baaca690813485e02d0b0f096287d",
-    "__MESSAGE__": "v1.21.90.23-preview",
+    "__VERSION__": "1.21.90.25",
+    "__COMMITHASH__": "9a001762f04d3d7099a3fdab18a3b7eae38bfb09",
+    "__MESSAGE__": "v1.21.90.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -995,6 +995,14 @@
                         },
                         {
                             "name": "is_riding",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_riding_self",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -2098,9 +2106,6 @@
                                 },
                                 {
                                     "name": "minecraft:reflect_projectiles",
-                                },
-                                {
-                                    "name": "minecraft:remove_in_peaceful",
                                 },
                                 {
                                     "name": "minecraft:rideable",
@@ -5694,6 +5699,7 @@
         "is_persistent": "Tests if the subject's persistence matches the bool value passed in.",
         "is_raider": "Tests if the subject is a raider.",
         "is_riding": "Returns true if the subject entity is riding on another entity.",
+        "is_riding_self": "Returns true if the subject entity is riding the calling entity.",
         "is_sitting": "Tests if the subject is sitting.",
         "is_skin_id": "Returns true if the subject entity is the skin id number provided.",
         "is_sleeping": "Tests whether the Subject is sleeping.",
@@ -14189,7 +14195,7 @@
                     "name": "interact_text",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls.",
+                    "description": "Text to show when the player is able to interact in this way with this entity when playing with touch-screen controls.",
                 },
                 {
                     "name": "on_interact",
@@ -14245,6 +14251,12 @@
                             "type": "String",
                             "defaultValue": "",
                             "description": "File path, relative to the Behavior Pack's path, to the loot table file.",
+                        },
+                        {
+                            "name": "y_offset",
+                            "type": "Decimal",
+                            "defaultValue": "1",
+                            "description": "Will offset the items spawn position this amount in the y direction.",
                         },
                     ],
                 },
@@ -14406,7 +14418,7 @@
             ],
         },
         "minecraft:leashable_to": {
-            "description": "Allows players to leash entities to this entity, retrieve those already leashed to it, or free them using shears.",
+            "description": "Allows players to leash entities to this entity, retrieve entities already leashed to it, or free them using shears. For the last interaction to work, the leashed entities must have \"can_be_cut\" set to true in their \"minecraft:leashable\" component.",
             "children": [
                 {
                     "name": "can_retrieve_from",
