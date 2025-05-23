@@ -254,12 +254,13 @@ const entryAnalyzer = [
         analyze(results, entryName, fog) {
             const { fogs } = results;
             const formatVersion = fog.format_version;
-            if (formatVersion === '1.16.100') {
+            if (this.versionsGroups[0].includes(formatVersion)) {
                 fogs.push(fog['minecraft:fog_settings'].description.identifier);
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
-        }
+        },
+        versionsGroups: [['1.16.100', '1.21.90']]
     },
     {
         name: 'entityBehavior',

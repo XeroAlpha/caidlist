@@ -149,7 +149,7 @@ export async function pause(message) {
     let timeout = setTimeout(() => {
         timeout = null;
         notify(message);
-    }, 1000);
+    }, 10000);
     await input(message);
     if (timeout) clearTimeout(timeout);
 }

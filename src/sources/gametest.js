@@ -992,8 +992,7 @@ const Extractors = [
                 }
                 return result;
             });
-            const entities = Object.keys(EntityInfoList).sort();
-            target.entities = entities;
+            target.entities = Object.keys(EntityInfoList).sort();
         }
     },
     {
@@ -1001,14 +1000,13 @@ const Extractors = [
         timeout: 10000,
         async extract({ target, frame }) {
             const EffectList = await wrapEvaluate(frame, () => {
-                const result = [];
+                const result = {};
                 for (const effectType of Minecraft.EffectTypes.getAll()) {
-                    result.push(effectType.getName());
+                    result[effectType.getName()] = {};
                 }
                 return result;
             });
-            const effects = EffectList.sort();
-            target.effects = effects;
+            target.effects = Object.keys(EffectList).sort();
         }
     },
     {
@@ -1016,14 +1014,17 @@ const Extractors = [
         timeout: 10000,
         async extract({ target, frame }) {
             const DimensionList = await wrapEvaluate(frame, () => {
-                const result = [];
+                const result = {};
                 for (const dimensionType of Minecraft.DimensionTypes.getAll()) {
-                    result.push(dimensionType.typeId);
+                    const dimension = Minecraft.world.getDimension(dimensionType.typeId);
+                    result[dimensionType.typeId] = {
+                        heightRange: [dimension.heightRange.min, dimension.heightRange.max],
+                        localizationKey: dimension.localizationKey
+                    };
                 }
                 return result;
             });
-            const dimensions = DimensionList.sort();
-            target.dimensions = dimensions;
+            target.dimensions = sortObjectKey(DimensionList);
         }
     },
     {
@@ -1031,14 +1032,13 @@ const Extractors = [
         timeout: 10000,
         async extract({ target, frame }) {
             const BiomeList = await wrapEvaluate(frame, () => {
-                const result = [];
+                const result = {};
                 for (const biomeType of Minecraft.BiomeTypes.getAll()) {
-                    result.push(biomeType.id);
+                    result[biomeType.id] = {};
                 }
                 return result;
             });
-            const biomes = BiomeList.sort();
-            target.biomes = biomes;
+            target.biomes = Object.keys(BiomeList).sort();
         }
     },
     {
