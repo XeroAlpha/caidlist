@@ -2,6 +2,7 @@ import { createServer } from 'http';
 import { fileURLToPath, URL } from 'url';
 import { existsSync, readFileSync, statSync } from 'fs';
 import { log, projectPath } from '../util/common.js';
+import getPort from 'get-port';
 
 const tokenCharset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
 function randomToken(length) {
@@ -73,9 +74,11 @@ export default class AutocompletionScreen {
         }, 5000);
     }
 
-    start() {
+    async start() {
+        const port = getPort({ port: 19333 });
+        const baseURL = `http://localhost:${port}`;
         this.server = createServer(async (req, res) => {
-            const url = new URL(req.url, 'http://localhost:19333');
+            const url = new URL(req.url, baseURL);
             res.setHeader('Access-Control-Allow-Origin', '*');
             if (this.server) {
                 if (url.pathname === '/') {
@@ -104,9 +107,9 @@ export default class AutocompletionScreen {
                 req.destroy();
             }
         });
-        this.server.listen(19333);
+        this.server.listen(port);
         this.watchPromptChange();
-        log('Live screen: http://localhost:19333');
+        log(`Live screen: ${baseURL}`);
     }
 
     stop() {
