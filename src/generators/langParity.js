@@ -125,7 +125,7 @@ export function writeLangParityPack(cx, options) {
                 .split('.')
                 .map((e) => parseInt(e, 10))
                 .slice(0, 2),
-            Date.now() / MILLS_PER_DAY
+            Math.floor(Date.now() / MILLS_PER_DAY)
         ];
         const files = {
             'manifest.json': {

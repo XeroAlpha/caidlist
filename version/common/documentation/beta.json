@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.90.28",
-    "__COMMITHASH__": "1c11c023f7c715220789c244ca4ddd23855ba258",
-    "__MESSAGE__": "v1.21.90.28-preview",
+    "__VERSION__": "1.21.100.20",
+    "__COMMITHASH__": "512dbf21a19aa134b0f6851bc4180b166b0dd65f",
+    "__MESSAGE__": "v1.21.100.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1320,9 +1320,6 @@
                                     "name": "minecraft:behavior.celebrate_survive",
                                 },
                                 {
-                                    "name": "minecraft:behavior.charge_attack",
-                                },
-                                {
                                     "name": "minecraft:behavior.charge_held_item",
                                 },
                                 {
@@ -2152,9 +2149,6 @@
                                     "name": "minecraft:teleport",
                                 },
                                 {
-                                    "name": "minecraft:tick_world",
-                                },
-                                {
                                     "name": "minecraft:timer",
                                 },
                                 {
@@ -2256,9 +2250,6 @@
                                 },
                                 {
                                     "name": "minecraft:body_rotation_always_follows_head",
-                                },
-                                {
-                                    "name": "minecraft:body_rotation_axis_aligned",
                                 },
                                 {
                                     "name": "minecraft:body_rotation_blocked",
@@ -2370,6 +2361,9 @@
                                 },
                                 {
                                     "name": "minecraft:renders_when_invisible",
+                                },
+                                {
+                                    "name": "minecraft:rotation_axis_aligned",
                                 },
                                 {
                                     "name": "minecraft:scale",
@@ -6009,35 +6003,6 @@
                     "type": "Trigger",
                     "defaultValue": "",
                     "description": "The event to trigger when the goal's duration expires.",
-                },
-            ],
-        },
-        "minecraft:behavior.charge_attack": {
-            "description": "Allows this entity to damage a target by using a running attack.",
-            "children": [
-                {
-                    "name": "max_distance",
-                    "type": "Decimal",
-                    "defaultValue": "3",
-                    "description": "A charge attack cannot start if the entity is farther than this distance to the target.",
-                },
-                {
-                    "name": "min_distance",
-                    "type": "Decimal",
-                    "defaultValue": "2",
-                    "description": "A charge attack cannot start if the entity is closer than this distance to the target.",
-                },
-                {
-                    "name": "speed_multiplier",
-                    "type": "Decimal",
-                    "defaultValue": "1",
-                    "description": "Modifies the entity's speed when charging toward the target.",
-                },
-                {
-                    "name": "success_rate",
-                    "type": "Decimal",
-                    "defaultValue": "0.1428",
-                    "description": "Percent chance this entity will start a charge attack, if not already attacking (1.0 = 100%)",
                 },
             ],
         },
@@ -16464,29 +16429,6 @@
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%",
-                },
-            ],
-        },
-        "minecraft:tick_world": {
-            "description": "Defines if the entity ticks the world and the radius around it to tick.",
-            "children": [
-                {
-                    "name": "distance_to_players",
-                    "type": "Decimal",
-                    "defaultValue": "128",
-                    "description": "The distance at which the closest player has to be before this entity despawns. This option will be ignored if never_despawn is true. Min: 128 blocks.",
-                },
-                {
-                    "name": "never_despawn",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If true, this entity will not despawn even if players are far away. If false, distance_to_players will be used to determine when to despawn.",
-                },
-                {
-                    "name": "radius",
-                    "type": "Positive Integer",
-                    "defaultValue": "2",
-                    "description": "The area around the entity to tick. Default: 2. Allowed range: 2-6.",
                 },
             ],
         },

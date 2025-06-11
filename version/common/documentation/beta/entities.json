@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.90.28",
+    "version": "1.21.100.20",
     "content": [],
     "sections": [
         {
@@ -15274,43 +15274,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.charge_attack",
-                            "id": "minecraft:behavior.charge_attack",
-                            "level": 4,
-                            "content": [
-                                "Allows this entity to damage a target by using a running attack.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "3",
-                                            "Description": "A charge attack cannot start if the entity is farther than this distance to the target.",
-                                        },
-                                        {
-                                            "Name": "min_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "2",
-                                            "Description": "A charge attack cannot start if the entity is closer than this distance to the target.",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "Modifies the entity's speed when charging toward the target.",
-                                        },
-                                        {
-                                            "Name": "success_rate",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.1428",
-                                            "Description": "Percent chance this entity will start a charge attack, if not already attacking (1.0 = 100%)",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:behavior.charge_held_item",
                             "id": "minecraft:behavior.charge_held_item",
                             "level": 4,
@@ -28356,37 +28319,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:tick_world",
-                            "id": "minecraft:tick_world",
-                            "level": 4,
-                            "content": [
-                                "Defines if the entity ticks the world and the radius around it to tick.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "distance_to_players",
-                                            "Type": "Decimal",
-                                            "Default Value": "128",
-                                            "Description": "The distance at which the closest player has to be before this entity despawns. This option will be ignored if never_despawn is true. Min: 128 blocks.",
-                                        },
-                                        {
-                                            "Name": "never_despawn",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, this entity will not despawn even if players are far away. If false, distance_to_players will be used to determine when to despawn.",
-                                        },
-                                        {
-                                            "Name": "radius",
-                                            "Type": "Positive Integer",
-                                            "Default Value": "2",
-                                            "Description": "The area around the entity to tick. Default: 2. Allowed range: 2-6.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:timer",
                             "id": "minecraft:timer",
                             "level": 4,
@@ -28988,10 +28920,6 @@
                                         {
                                             "JSON Name": "minecraft:behavior.celebrate_survive",
                                             "ID": "9921563176146616642",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.charge_attack",
-                                            "ID": "16313004636962889255",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.charge_held_item",
@@ -30114,10 +30042,6 @@
                                             "ID": "-1900891127",
                                         },
                                         {
-                                            "JSON Name": "minecraft:tick_world",
-                                            "ID": "-381759296",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:timer",
                                             "ID": "1862095863",
                                         },
@@ -30196,10 +30120,6 @@
                                         {
                                             "JSON Name": "minecraft:body_rotation_always_follows_head",
                                             "ID": "1766999981",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:body_rotation_axis_aligned",
-                                            "ID": "-769871276",
                                         },
                                         {
                                             "JSON Name": "minecraft:body_rotation_blocked",
@@ -30348,6 +30268,10 @@
                                         {
                                             "JSON Name": "minecraft:renders_when_invisible",
                                             "ID": "-1395968564",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:rotation_axis_aligned",
+                                            "ID": "-882714065",
                                         },
                                         {
                                             "JSON Name": "minecraft:scale",
@@ -30499,15 +30423,6 @@
                             "content": [
                                 "Causes the entity's body to always be automatically rotated to align with the entity's head.",
                                 "Does not override the \"minecraft:body_rotation_blocked\" component.",
-                            ],
-                        },
-                        {
-                            "name": "minecraft:body_rotation_axis_aligned",
-                            "id": "minecraft:body_rotation_axis_aligned",
-                            "level": 4,
-                            "content": [
-                                "Causes the entity's body to automatically rotate to align with the nearest cardinal direction based on its current facing direction.",
-                                "Combining this with the \"minecraft:body_rotation_blocked\" component will cause the entity to align to the nearest cardinal direction and remain fixed in that orientation, regardless of future changes in its facing direction.",
                             ],
                         },
                         {
@@ -30970,6 +30885,15 @@
                             ],
                         },
                         {
+                            "name": "minecraft:rotation_axis_aligned",
+                            "id": "minecraft:rotation_axis_aligned",
+                            "level": 4,
+                            "content": [
+                                "Causes the entity to automatically rotate to align with the nearest cardinal direction based on its current facing direction.",
+                                "Combining this with the \"minecraft:body_rotation_blocked\" component will cause the entity's body to align with the nearest cardinal direction and remain fixed in that orientation, regardless of changes in its facing direction.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:scale",
                             "id": "minecraft:scale",
                             "level": 4,
@@ -31414,5 +31338,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "1d661168ee760e820a38603cf21833a2ca65ccf9",
+    "__OBJECTHASH__": "248bf1675efd3fd95b35ba5199b4b0184853c028",
 }

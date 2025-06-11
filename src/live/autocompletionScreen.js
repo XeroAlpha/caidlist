@@ -15,6 +15,8 @@ function randomToken(length) {
 
 const livePromptPath = projectPath('data.live_prompt', 'txt');
 
+let port = undefined;
+
 export default class AutocompletionScreen {
     constructor() {
         this.updateSession();
@@ -75,7 +77,9 @@ export default class AutocompletionScreen {
     }
 
     async start() {
-        const port = await getPort({ port: [19333, 19334, 19335, 19336, 19337] });
+        if (!port) {
+            port = await getPort({ port: 19333 });
+        }
         const baseURL = `http://localhost:${port}`;
         this.server = createServer(async (req, res) => {
             const url = new URL(req.url, baseURL);

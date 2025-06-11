@@ -234,9 +234,20 @@ async function generateBranchedOutputFiles(cx) {
         matchTranslations({
             ...commonOptions,
             name: 'biome',
-            originalArray: enums.biomes,
+            originalArray: enums.biomes.map((e) => e.replace(/^minecraft:/, '')),
             translationMap: userTranslation.biome,
-            stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite', 'ExclusiveBiomeSprite'], true)
+            stdTransMap: cascadeMap(standardizedTranslation, ['BiomeSprite', 'ExclusiveBiomeSprite'], true),
+            postProcessor(biome) {
+                const mergedBiome = {};
+                enums.biomes.forEach((key) => {
+                    if (key in biome) {
+                        pickAndAssignObject(mergedBiome, biome, [key]);
+                    } else {
+                        mergedBiome[key] = biome[key.replace(/^minecraft:/, '')];
+                    }
+                });
+                return mergedBiome;
+            }
         });
     }
     matchTranslations({
