@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.100.20",
+    "version": "1.21.100.21",
     "content": [],
     "sections": [
         {
@@ -19802,6 +19802,66 @@
                             ],
                         },
                         {
+                            "name": "minecraft:behavior.place_block",
+                            "id": "minecraft:behavior.place_block",
+                            "level": 4,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "affected_by_griefing_rule",
+                                            "Type": "Boolean",
+                                            "Default Value": "",
+                                            "Description": "If true, whether the goal is affected by the mob griefing game rule.",
+                                        },
+                                        {
+                                            "Name": "can_place",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Filters for if the entity should try to place its block. Self and Target are set.",
+                                        },
+                                        {
+                                            "Name": "chance",
+                                            "Type": "Decimal",
+                                            "Default Value": "",
+                                            "Description": "Chance each tick for the entity to try and place a block.",
+                                        },
+                                        {
+                                            "Name": "on_place",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Trigger ran if the entity does place its block. Self, Target, and Block are set.",
+                                        },
+                                        {
+                                            "Name": "placeable_carried_blocks",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "Block descriptors for which blocks are valid to be placed from the entity's carried item, if empty all blocks are valid.",
+                                        },
+                                        {
+                                            "Name": "randomly_placeable_blocks",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "Weighted block descriptors for which blocks should be randomly placed, if empty the entity will try to place its carried block from placeable_carried_blocks.",
+                                        },
+                                        {
+                                            "Name": "xz_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "",
+                                            "Description": "XZ range from which the entity will try and place blocks in.",
+                                        },
+                                        {
+                                            "Name": "y_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "",
+                                            "Description": "Y range from which the entity will try and place blocks in.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:behavior.play",
                             "id": "minecraft:behavior.play",
                             "level": 4,
@@ -22190,6 +22250,66 @@
                                             "Type": "Decimal",
                                             "Default Value": "1",
                                             "Description": "During swoop attack behavior, this determines the multiplier the entity's speed is modified by when moving toward the target.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:behavior.take_block",
+                            "id": "minecraft:behavior.take_block",
+                            "level": 4,
+                            "content": [
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "affected_by_griefing_rule",
+                                            "Type": "Boolean",
+                                            "Default Value": "",
+                                            "Description": "If true, whether the goal is affected by the mob griefing game rule.",
+                                        },
+                                        {
+                                            "Name": "blocks",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": "Block descriptors for which blocks are valid to be taken by the entity, if empty all blocks are valid.",
+                                        },
+                                        {
+                                            "Name": "can_take",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Filters for if the entity should try to take a block. Self and Target are set.",
+                                        },
+                                        {
+                                            "Name": "chance",
+                                            "Type": "Decimal",
+                                            "Default Value": "",
+                                            "Description": "Chance each tick for the entity to try and take a block.",
+                                        },
+                                        {
+                                            "Name": "on_take",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Trigger ran if the entity does take a block. Self, Target, and Block are set.",
+                                        },
+                                        {
+                                            "Name": "requires_line_of_sight",
+                                            "Type": "Boolean",
+                                            "Default Value": "",
+                                            "Description": "If true, whether the entity needs line of sight to the block they are trying to take.",
+                                        },
+                                        {
+                                            "Name": "xz_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "",
+                                            "Description": "XZ range from which the entity will try and take blocks from.",
+                                        },
+                                        {
+                                            "Name": "y_range",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "",
+                                            "Description": "Y range from which the entity will try and take blocks from.",
                                         },
                                     ],
                                 },
@@ -29298,6 +29418,10 @@
                                             "ID": "644287189",
                                         },
                                         {
+                                            "JSON Name": "minecraft:behavior.place_block",
+                                            "ID": "8805775981579988731",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:behavior.play",
                                             "ID": "9028661884418335188",
                                         },
@@ -29516,6 +29640,10 @@
                                         {
                                             "JSON Name": "minecraft:behavior.swoop_attack",
                                             "ID": "7451467701814397451",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:behavior.take_block",
+                                            "ID": "6937905075348270719",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.take_flower",
@@ -31338,5 +31466,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "248bf1675efd3fd95b35ba5199b4b0184853c028",
+    "__OBJECTHASH__": "8913bc59d0714a49e079fc37d9297cca315d6b30",
 }

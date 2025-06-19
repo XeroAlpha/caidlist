@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.100.20",
-    "__COMMITHASH__": "512dbf21a19aa134b0f6851bc4180b166b0dd65f",
-    "__MESSAGE__": "v1.21.100.20-preview",
+    "__VERSION__": "1.21.100.21",
+    "__COMMITHASH__": "75e1a71254a15fb1b8663a5aaa8b3c12204c7271",
+    "__MESSAGE__": "v1.21.100.21-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1602,6 +1602,9 @@
                                     "name": "minecraft:behavior.pickup_items",
                                 },
                                 {
+                                    "name": "minecraft:behavior.place_block",
+                                },
+                                {
                                     "name": "minecraft:behavior.play",
                                 },
                                 {
@@ -1765,6 +1768,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.swoop_attack",
+                                },
+                                {
+                                    "name": "minecraft:behavior.take_block",
                                 },
                                 {
                                     "name": "minecraft:behavior.take_flower",
@@ -9746,6 +9752,59 @@
                 },
             ],
         },
+        "minecraft:behavior.place_block": {
+            "description": "",
+            "children": [
+                {
+                    "name": "affected_by_griefing_rule",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "If true, whether the goal is affected by the mob griefing game rule.",
+                },
+                {
+                    "name": "can_place",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Filters for if the entity should try to place its block. Self and Target are set.",
+                },
+                {
+                    "name": "chance",
+                    "type": "Decimal",
+                    "defaultValue": "",
+                    "description": "Chance each tick for the entity to try and place a block.",
+                },
+                {
+                    "name": "on_place",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Trigger ran if the entity does place its block. Self, Target, and Block are set.",
+                },
+                {
+                    "name": "placeable_carried_blocks",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "Block descriptors for which blocks are valid to be placed from the entity's carried item, if empty all blocks are valid.",
+                },
+                {
+                    "name": "randomly_placeable_blocks",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "Weighted block descriptors for which blocks should be randomly placed, if empty the entity will try to place its carried block from placeable_carried_blocks.",
+                },
+                {
+                    "name": "xz_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "",
+                    "description": "XZ range from which the entity will try and place blocks in.",
+                },
+                {
+                    "name": "y_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "",
+                    "description": "Y range from which the entity will try and place blocks in.",
+                },
+            ],
+        },
         "minecraft:behavior.play": {
             "description": "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
             "children": [
@@ -11672,6 +11731,59 @@
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "During swoop attack behavior, this determines the multiplier the entity's speed is modified by when moving toward the target.",
+                },
+            ],
+        },
+        "minecraft:behavior.take_block": {
+            "description": "",
+            "children": [
+                {
+                    "name": "affected_by_griefing_rule",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "If true, whether the goal is affected by the mob griefing game rule.",
+                },
+                {
+                    "name": "blocks",
+                    "type": "Array",
+                    "defaultValue": "",
+                    "description": "Block descriptors for which blocks are valid to be taken by the entity, if empty all blocks are valid.",
+                },
+                {
+                    "name": "can_take",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Filters for if the entity should try to take a block. Self and Target are set.",
+                },
+                {
+                    "name": "chance",
+                    "type": "Decimal",
+                    "defaultValue": "",
+                    "description": "Chance each tick for the entity to try and take a block.",
+                },
+                {
+                    "name": "on_take",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Trigger ran if the entity does take a block. Self, Target, and Block are set.",
+                },
+                {
+                    "name": "requires_line_of_sight",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "If true, whether the entity needs line of sight to the block they are trying to take.",
+                },
+                {
+                    "name": "xz_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "",
+                    "description": "XZ range from which the entity will try and take blocks from.",
+                },
+                {
+                    "name": "y_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "",
+                    "description": "Y range from which the entity will try and take blocks from.",
                 },
             ],
         },

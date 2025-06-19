@@ -160,6 +160,7 @@ export async function createExclusiveWSSession(device) {
                 // 确保光标在末尾
                 await press(scrcpy, 'KEYCODE_MOVE_END');
                 await injectText(scrcpy, 'connect 127.0.0.1:19134');
+                await sleepAsync(1000);
                 await press(scrcpy, 'KEYCODE_ENTER');
                 ({ session } = await sessionPromise);
                 log(`${device.serial} connected via mcpews.`);

@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.80.3",
+    "version": "1.21.90.3",
     "content": [],
     "sections": [
         {
@@ -10158,6 +10158,141 @@
                     ],
                 },
                 {
+                    "name": "is_riding_self",
+                    "id": "is_riding_self",
+                    "level": 2,
+                    "content": [
+                        "Returns true if the subject entity is riding the calling entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_riding_self\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_riding_self\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_sitting",
                     "id": "is_sitting",
                     "level": 2,
@@ -11929,6 +12064,141 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"is_variant\", \"value\": \"0\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "is_vehicle_family",
+                    "id": "is_vehicle_family",
+                    "level": 2,
+                    "content": [
+                        "Returns true when the subject entity's vehicle is a member of the named family.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The Family name to look for",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_vehicle_family\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"player\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_vehicle_family\", \"value\": \"player\" }",
                                     ],
                                 },
                             ],
@@ -25144,7 +25414,7 @@
                             "id": "minecraft:input_air_controlled",
                             "level": 4,
                             "content": [
-                                "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions. Only available with `\"use_beta_features\": true` and likely to be drastically changed or removed.",
+                                "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -25295,7 +25565,7 @@
                                             "Name": "interact_text",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls.",
+                                            "Description": "Text to show when the player is able to interact in this way with this entity when playing with touch-screen controls.",
                                         },
                                         {
                                             "Name": "on_interact",
@@ -25380,6 +25650,12 @@
                                                             "Type": "String",
                                                             "Default Value": "",
                                                             "Description": "File path, relative to the Behavior Pack's path, to the loot table file.",
+                                                        },
+                                                        {
+                                                            "Name": "y_offset",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "1",
+                                                            "Description": "Will offset the items spawn position this amount in the y direction.",
                                                         },
                                                     ],
                                                 },
@@ -25507,10 +25783,16 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "can_be_cut",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, players can cut both incoming and outgoing leashes by using shears on the entity.",
+                                        },
+                                        {
                                             "Name": "can_be_stolen",
                                             "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, players can leash this entity even if it is already leashed to another mob.",
+                                            "Default Value": "true",
+                                            "Description": "If true, players can leash this entity even if it is already leashed to another entity.",
                                         },
                                         {
                                             "Name": "on_leash",
@@ -25528,14 +25810,14 @@
                                             "Name": "on_unleash_interact_only",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for other reasons such as being stolen or the leash breaking.",
+                                            "Description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for reasons other than the player directly interacting with it.",
                                         },
                                         {
                                             "Name": "presets",
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": [
-                                                "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
+                                                "Defines how this entity behaves when leashed to another entity. The first preset which \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
                                                 {
                                                     "type": "table",
                                                     "rows": [
@@ -25543,29 +25825,60 @@
                                                             "Name": "filter",
                                                             "Type": "Minecraft Filter",
                                                             "Default Value": "",
-                                                            "Description": "Conditions that must be met for this preset to be applied. These conditions are only evaluated upon leashing.",
+                                                            "Description": "Conditions that must be met for this preset to be applied.",
                                                         },
                                                         {
                                                             "Name": "hard_distance",
                                                             "Type": "Decimal",
-                                                            "Default Value": "6",
-                                                            "Description": "Distance in blocks at which the leash stiffens, restricting movement.",
+                                                            "Default Value": "7",
+                                                            "Description": "Distance (in blocks) over which the entity starts being pulled toward the leash holder with an spring-like force.",
                                                         },
                                                         {
                                                             "Name": "max_distance",
                                                             "Type": "Decimal",
-                                                            "Default Value": "10",
+                                                            "Default Value": "12",
                                                             "Description": "Distance in blocks at which the leash breaks.",
+                                                        },
+                                                        {
+                                                            "Name": "rotation_adjustment",
+                                                            "Type": "Decimal",
+                                                            "Default Value": "0",
+                                                            "Description": "Adjusts the rotation at which the entity reaches equilibrium, when \"spring_type\" is set to \"dampened\" or \"quad_dampened\".",
                                                         },
                                                         {
                                                             "Name": "soft_distance",
                                                             "Type": "Decimal",
                                                             "Default Value": "4",
-                                                            "Description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                                                            "Description": "Distance (in blocks) over which the entity begins pathfinding toward the leash holder, if able.",
+                                                        },
+                                                        {
+                                                            "Name": "spring_type",
+                                                            "Type": "Enumerator",
+                                                            "Default Value": "dampened",
+                                                            "Description": "Defines the type of spring-like force that pulls the entity towards its leash holder:- \"bouncy\": Simulates a highly elastic spring that never reaches an equilibrium if the leashed entity is suspended mid-air.- \"dampened\": Simulates a dampened spring attached to the front of the leashed entity's collision. It reaches an equilibrium if the entity is suspended mid-air and aligns with the movement direction.- \"quad_dampened\": Simulates four dampened springs connected to the center of each side of the entities' collisions. It reaches an equilibrium if the entity is suspended mid-air and gradually aligns with the leash holder over time.",
                                                         },
                                                     ],
                                                 },
                                             ],
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:leashable_to",
+                            "id": "minecraft:leashable_to",
+                            "level": 4,
+                            "content": [
+                                "Allows players to leash entities to this entity, retrieve entities already leashed to it, or free them using shears. For the last interaction to work, the leashed entities must have \"can_be_cut\" set to true in their \"minecraft:leashable\" component.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "can_retrieve_from",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Allows players to retrieve entities that are leashed to this entity.",
                                         },
                                     ],
                                 },
@@ -29617,6 +29930,10 @@
                                             "ID": "893445039",
                                         },
                                         {
+                                            "JSON Name": "minecraft:leashable_to",
+                                            "ID": "1636924761",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:looked_at",
                                             "ID": "-1189178052",
                                         },
@@ -29875,6 +30192,10 @@
                                         {
                                             "JSON Name": "minecraft:ambient_sound_interval",
                                             "ID": "-1314051310",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:body_rotation_always_follows_head",
+                                            "ID": "1766999981",
                                         },
                                         {
                                             "JSON Name": "minecraft:body_rotation_axis_aligned",
@@ -30169,6 +30490,15 @@
                                         },
                                     ],
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:body_rotation_always_follows_head",
+                            "id": "minecraft:body_rotation_always_follows_head",
+                            "level": 4,
+                            "content": [
+                                "Causes the entity's body to always be automatically rotated to align with the entity's head.",
+                                "Does not override the \"minecraft:body_rotation_blocked\" component.",
                             ],
                         },
                         {
@@ -31084,5 +31414,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "4240f92c4a61faa9a5501b70dc02bb1830ec3043",
+    "__OBJECTHASH__": "3eb08b6f54b4e9f8777ca538b08fe8c09d4b7a75",
 }

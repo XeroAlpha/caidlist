@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.80.3",
-    "__COMMITHASH__": "745dbc8e337a030b86d5ca46efe5f33d3016cc28",
-    "__MESSAGE__": "v1.21.80.3",
+    "__VERSION__": "1.21.90.3",
+    "__COMMITHASH__": "d2c831e6028b60bb6bf19bc45de10b77df6eb8f0",
+    "__MESSAGE__": "v1.21.90.3",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1002,6 +1002,14 @@
                             ],
                         },
                         {
+                            "name": "is_riding_self",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "is_sitting",
                             "sections": [
                                 {
@@ -1099,6 +1107,14 @@
                         },
                         {
                             "name": "is_variant",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_vehicle_family",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -2001,6 +2017,9 @@
                                     "name": "minecraft:leashable",
                                 },
                                 {
+                                    "name": "minecraft:leashable_to",
+                                },
+                                {
                                     "name": "minecraft:looked_at",
                                 },
                                 {
@@ -2234,6 +2253,9 @@
                             "sections": [
                                 {
                                     "name": "minecraft:ambient_sound_interval",
+                                },
+                                {
+                                    "name": "minecraft:body_rotation_always_follows_head",
                                 },
                                 {
                                     "name": "minecraft:body_rotation_axis_aligned",
@@ -4795,18 +4817,6 @@
             "description": "",
             "children": [
                 {
-                    "name": "bone_visibility",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "A JSON object that contains a list of key/value pairs that map from bone name in the specified geometry file (key) to a boolean that tells whether the bone should be visible or not (value).",
-                },
-                {
-                    "name": "culling_layer",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character. Additionally, the feature is currently only usable behind the \"upcoming creator features\" toggle.",
-                },
-                {
                     "name": "minecraft:breathability",
                     "type": "String",
                     "defaultValue": "",
@@ -4915,9 +4925,8 @@
                 },
                 {
                     "name": "minecraft:geometry",
-                    "type": "Identifier String",
+                    "type": "String / JSON Object",
                     "defaultValue": "",
-                    "description": "The description identifier of the geometry to use to render this block. This identifier must either match an existing geometry identifier in any of the loaded resource packs or be one of the currently supported Vanilla identifiers: \"minecraft:geometry.full_block\" or \"minecraft:geometry.cross\".",
                 },
                 {
                     "name": "minecraft:item_visual",
@@ -4981,6 +4990,11 @@
                 },
                 {
                     "name": "minecraft:material_instances",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                },
+                {
+                    "name": "minecraft:movable",
                     "type": "JSON Object",
                     "defaultValue": "",
                 },
@@ -5698,6 +5712,7 @@
         "is_persistent": "Tests if the subject's persistence matches the bool value passed in.",
         "is_raider": "Tests if the subject is a raider.",
         "is_riding": "Returns true if the subject entity is riding on another entity.",
+        "is_riding_self": "Returns true if the subject entity is riding the calling entity.",
         "is_sitting": "Tests if the subject is sitting.",
         "is_skin_id": "Returns true if the subject entity is the skin id number provided.",
         "is_sleeping": "Tests whether the Subject is sleeping.",
@@ -5711,6 +5726,7 @@
         "is_underground": "Returns true when the subject entity is underground. An entity is considered underground if there are non-solid blocks above it.",
         "is_underwater": "Returns true when the subject entity is under water. An entity is considered underwater if it is completely submerged in water blocks.",
         "is_variant": "Returns true if the subject entity is the variant number provided.",
+        "is_vehicle_family": "Returns true when the subject entity's vehicle is a member of the named family.",
         "is_visible": "Returns true if the subject entity is visible.",
         "is_waterlogged": "Tests if the subject block is submerged in water.",
         "is_weather": "DEPRECATED",
@@ -14081,7 +14097,7 @@
             ],
         },
         "minecraft:input_air_controlled": {
-            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions. Only available with `\"use_beta_features\": true` and likely to be drastically changed or removed.",
+            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
             "children": [
                 {
                     "name": "backwards_movement_modifier",
@@ -14193,7 +14209,7 @@
                     "name": "interact_text",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "Text to show when the player is able to interact in this way with this entity when playing with Touch-screen controls.",
+                    "description": "Text to show when the player is able to interact in this way with this entity when playing with touch-screen controls.",
                 },
                 {
                     "name": "on_interact",
@@ -14249,6 +14265,12 @@
                             "type": "String",
                             "defaultValue": "",
                             "description": "File path, relative to the Behavior Pack's path, to the loot table file.",
+                        },
+                        {
+                            "name": "y_offset",
+                            "type": "Decimal",
+                            "defaultValue": "1",
+                            "description": "Will offset the items spawn position this amount in the y direction.",
                         },
                     ],
                 },
@@ -14334,10 +14356,16 @@
             "description": "Allows this entity to be leashed and defines the conditions and events for this entity when is leashed.",
             "children": [
                 {
+                    "name": "can_be_cut",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, players can cut both incoming and outgoing leashes by using shears on the entity.",
+                },
+                {
                     "name": "can_be_stolen",
                     "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, players can leash this entity even if it is already leashed to another mob.",
+                    "defaultValue": "true",
+                    "description": "If true, players can leash this entity even if it is already leashed to another entity.",
                 },
                 {
                     "name": "on_leash",
@@ -14355,39 +14383,62 @@
                     "name": "on_unleash_interact_only",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for other reasons such as being stolen or the leash breaking.",
+                    "description": "When set to true, \"on_unleash\" does not trigger when the entity gets unleashed for reasons other than the player directly interacting with it.",
                 },
                 {
                     "name": "presets",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "Defines how this entity behaves when leashed to another entity. A preset is selected upon leashing and remains until the entity is leashed to something else. The first preset whose \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
+                    "description": "Defines how this entity behaves when leashed to another entity. The first preset which \"filter\" conditions are met will be applied; if none match, a default configuration is used instead.",
                     "children": [
                         {
                             "name": "filter",
                             "type": "Minecraft Filter",
                             "defaultValue": "",
-                            "description": "Conditions that must be met for this preset to be applied. These conditions are only evaluated upon leashing.",
+                            "description": "Conditions that must be met for this preset to be applied.",
                         },
                         {
                             "name": "hard_distance",
                             "type": "Decimal",
-                            "defaultValue": "6",
-                            "description": "Distance in blocks at which the leash stiffens, restricting movement.",
+                            "defaultValue": "7",
+                            "description": "Distance (in blocks) over which the entity starts being pulled toward the leash holder with an spring-like force.",
                         },
                         {
                             "name": "max_distance",
                             "type": "Decimal",
-                            "defaultValue": "10",
+                            "defaultValue": "12",
                             "description": "Distance in blocks at which the leash breaks.",
+                        },
+                        {
+                            "name": "rotation_adjustment",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "Adjusts the rotation at which the entity reaches equilibrium, when \"spring_type\" is set to \"dampened\" or \"quad_dampened\".",
                         },
                         {
                             "name": "soft_distance",
                             "type": "Decimal",
                             "defaultValue": "4",
-                            "description": "Distance in blocks at which the \"spring\" effect starts acting to keep this entity close to the entity that leashed it.",
+                            "description": "Distance (in blocks) over which the entity begins pathfinding toward the leash holder, if able.",
+                        },
+                        {
+                            "name": "spring_type",
+                            "type": "Enumerator",
+                            "defaultValue": "dampened",
+                            "description": "Defines the type of spring-like force that pulls the entity towards its leash holder:- \"bouncy\": Simulates a highly elastic spring that never reaches an equilibrium if the leashed entity is suspended mid-air.- \"dampened\": Simulates a dampened spring attached to the front of the leashed entity's collision. It reaches an equilibrium if the entity is suspended mid-air and aligns with the movement direction.- \"quad_dampened\": Simulates four dampened springs connected to the center of each side of the entities' collisions. It reaches an equilibrium if the entity is suspended mid-air and gradually aligns with the leash holder over time.",
                         },
                     ],
+                },
+            ],
+        },
+        "minecraft:leashable_to": {
+            "description": "Allows players to leash entities to this entity, retrieve entities already leashed to it, or free them using shears. For the last interaction to work, the leashed entities must have \"can_be_cut\" set to true in their \"minecraft:leashable\" component.",
+            "children": [
+                {
+                    "name": "can_retrieve_from",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Allows players to retrieve entities that are leashed to this entity.",
                 },
             ],
         },
@@ -17216,6 +17267,7 @@
         "query.is_ram_attacking": "Returns 1.0 if the entity is using a ram attack, else it returns 0.0.",
         "query.is_resting": "Returns 1.0 if the entity is resting, else it returns 0.0.",
         "query.is_riding": "Returns 1.0 if the entity is riding, else it returns 0.0.",
+        "query.is_riding_any_entity_of_type": "Returns whether or not the entity is currently riding an entity of any of the designated types.",
         "query.is_rising": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_roaring": "Returns 1.0 if the entity is currently roaring, else it returns 0.0.",
         "query.is_rolling": "Returns 1.0 if the entity is rolling, else it returns 0.0.",
