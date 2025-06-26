@@ -365,6 +365,23 @@ function createPauseController(session, breakpoints) {
 
 const Extractors = [
     {
+        name: 'enchantment-check',
+        timeout: 10000,
+        async extract({ frame }) {
+            const enchantmentSlots = await wrapEvaluate(frame, () => {
+                const enchantmentSlotNames = [];
+                for (const name of Object.getOwnPropertyNames(Minecraft.EnchantmentSlot)) {
+                    enchantmentSlotNames.push(name);
+                }
+                return enchantmentSlotNames;
+            });
+            if (enchantmentSlots.length === 0) {
+                log(`[Warning] EnchantmentSlot = {}, please restart Minecraft`);
+                throw new Error(`Invalid environment: EnchantmentSlot has no member`);
+            }
+        }
+    },
+    {
         name: 'scope',
         timeout: 10000,
         async extract({ target, frame }) {
@@ -490,7 +507,7 @@ const Extractors = [
                         objectDesc.push({ path, desc });
                         continue;
                     }
-                    if (type === 'bigint' || type === 'symbol') {
+                    if (type === 'bigint' || type === 'symbol' || (type === 'number' && !Number.isFinite(value))) {
                         desc.value = value.toString();
                     } else {
                         desc.value = value;

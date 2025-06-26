@@ -169,21 +169,21 @@ const dataPages = [
         title: 'Module:Autolink/Exclusive',
         resolver: 'mcwzhExec',
         prefix: 'Exclusive'
-    },
-    {
-        source: 'bedw',
-        title: 'Module:Autolink/Glossary',
-        resolver: 'enumMapLua',
-        prefix: ''
-    },
-    {
-        // Deprecated
-        source: 'bedw',
-        title: 'Module:Autolink/Other',
-        resolver: 'enumMapLua',
-        prefix: '',
-        ignoreIfExists: true
     }
+    // {
+    //     source: 'bedw',
+    //     title: 'Module:Autolink/Glossary',
+    //     resolver: 'enumMapLua',
+    //     prefix: ''
+    // },
+    // {
+    //     // Deprecated
+    //     source: 'bedw',
+    //     title: 'Module:Autolink/Other',
+    //     resolver: 'enumMapLua',
+    //     prefix: '',
+    //     ignoreIfExists: true
+    // }
 ];
 
 // Reference: https://zh.minecraft.wiki/w/Module:Autolink?action=history

@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.100.21",
+    "version": "1.21.100.22",
     "content": [],
     "sections": [
         {
@@ -46,12 +46,15 @@
                         "    \"minecraft:overworld_height\": {",
                         "      \"noise_type\": \"lowlands\"",
                         "    },",
-                        "    \"minecraft:surface_parameters\": {",
-                        "      \"sea_floor_depth\": 7,",
-                        "      \"sea_floor_material\": \"minecraft:gravel\",",
-                        "      \"foundation_material\": \"minecraft:stone\",",
-                        "      \"mid_material\": \"minecraft:dirt\",",
-                        "      \"top_material\": \"minecraft:grass_block\"",
+                        "    \"minecraft:surface_builder\": {",
+                        "    \"builder\": {",
+                        "        \"type\": \"minecraft:overworld\",",
+                        "    \"sea_floor_depth\": 7,",
+                        "    \"sea_floor_material\": \"minecraft:gravel\",",
+                        "    \"foundation_material\": \"minecraft:stone\",",
+                        "    \"mid_material\": \"minecraft:dirt\",",
+                        "    \"top_material\": \"minecraft:grass_block\"",
+                        "    }",
                         "    },",
                         "    \"minecraft:overworld_generation_rules\": {",
                         "      \"hills_transformation\": [",
@@ -104,12 +107,6 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "minecraft:capped_surface",
-                                    "Type": "Object",
-                                    "Required?": "Optional",
-                                    "Description": "Generates surface on blocks with non-solid blocks above or below.",
-                                },
-                                {
                                     "Name": "minecraft:climate",
                                     "Type": "Object",
                                     "Required?": "Optional",
@@ -122,16 +119,10 @@
                                     "Description": "Probability that creatures will spawn within the biome when a chunk is generated.",
                                 },
                                 {
-                                    "Name": "minecraft:frozen_ocean_surface",
+                                    "Name": "minecraft:humidity",
                                     "Type": "Object",
                                     "Required?": "Optional",
-                                    "Description": "Similar to overworld_surface. Adds icebergs.",
-                                },
-                                {
-                                    "Name": "minecraft:mesa_surface",
-                                    "Type": "Object",
-                                    "Required?": "Optional",
-                                    "Description": "Similar to overworld_surface. Adds colored strata and optional pillars.",
+                                    "Description": "Forces a biome to ether always be humid or never humid. Humidity effects the spread chance, and spread rate of fire in the biome",
                                 },
                                 {
                                     "Name": "minecraft:mountain_parameters",
@@ -158,10 +149,22 @@
                                     "Description": "Noise parameters used to drive terrain height in the Overworld.",
                                 },
                                 {
+                                    "Name": "minecraft:partially_frozen",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Component will impact the temperature in a frozen biome, causing some areas to not be frozen. Ex: patchy ice, patchy snow",
+                                },
+                                {
                                     "Name": "minecraft:replace_biomes",
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Replaces a specified portion of one or more Minecraft biomes.",
+                                },
+                                {
+                                    "Name": "minecraft:surface_builder",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Controls the materials used for terrain generation.",
                                 },
                                 {
                                     "Name": "minecraft:surface_material_adjustments",
@@ -170,28 +173,10 @@
                                     "Description": "Specify fine-detail changes to blocks used in terrain generation (based on a noise function).",
                                 },
                                 {
-                                    "Name": "minecraft:surface_parameters",
-                                    "Type": "Object",
-                                    "Required?": "Optional",
-                                    "Description": "Controls the blocks used for the default Minecraft Overworld terrain generation.",
-                                },
-                                {
-                                    "Name": "minecraft:swamp_surface",
-                                    "Type": "Object",
-                                    "Required?": "Optional",
-                                    "Description": "Similar to overworld_surface. Adds swamp surface details.",
-                                },
-                                {
                                     "Name": "minecraft:tags",
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Attach arbitrary string tags to this biome.Most biome tags are referenced by JSON settings, but some meanings of tags are directly implemented in the game's code. These tags are listed here:birch: Biome uses wildflowers (mutually exclusive with other flower biome tags). Does nothing if biome is tagged \"hills\".cold: Villagers will be dressed for snowy weather.deep: Pre-Caves and Cliffs, prevents an ocean from having islands or connected rivers and makes the biome less likely to have hills.desert: Allows partially-buried ruined portals to be placed in the biome. Sand blocks will play ambient sounds when the player is nearby.extreme_hills: Ruined portals can be placed higher than normal. Biomes tagged \"forest\" or \"forest_generation\" will use normal Overworld flowers instead of forest flowers.flower_forest: Biome uses forest flowers (mutually exclusive with other flower biome tags).forest: Biome uses forest flowers (mutually exclusive with other flower biome tags). Does nothing if biome is tagged tagged \"taiga\" or \"extreme_hills\".forest_generation: Equivalent to \"forest\".frozen: Villagers will be dressed for snowy weather. Prevents the biome from containing lava springs if it is also tagged \"ocean\".ice: Around ruined portals, lava is always replaced by Netherrack and Netherrack cannot be replaced by magma.ice_plains: Prevents the biome from containing lava springs if it is also tagged \"mutated\".jungle: Ruined portals will be very mossy.hills: Biomes tagged \"meadow\" or \"birch\" will use normal Overworld flowers instead of wildflowers.meadow: Biome uses wildflowers (mutually exclusive with other flower biome tags). Does nothing if biome is tagged \"hills\".mesa: Sand blocks will play ambient sounds when the player is nearby.mountain: Ruined portals can be placed higher than normal.mutated: Pre-Caves and Cliffs, prevents switching to the specified \"mutate_transformation\" as the biome is already considered mutated. Prevents the biome from containing lava springs if it is also tagged \"ice_plains\".no_legacy_worldgen: Prevents biome from using legacy world generation behavior unless the biome is being placed in the Overworld.ocean: Prevents the biome from containing lava springs if it is also tagged \"frozen\". Allows ruined portals to be found underwater. Pre-Caves and Cliffs, determines if shorelines and rivers should be placed at the edges of the biome and identifies the biome as a shallow ocean for placing islands, unless the \"deep\" tag is present.pale_garden: Biome uses closed-eye blossoms (mutually exclusive with other flower biome tags).plains: Biome uses plains flowers (mutually exclusive with other flower biome tags).rare: Pre-Caves and Cliffs, this tag flags the biome as a special biome. Oceans cannot be special.swamp: Allows ruined portals to be found underwater. Biome uses swamp flowers (mutually exclusive with other flower biome tags).taiga: Biomes tagged \"forest\" or \"forest_generation\" will use normal Overworld flowers instead of forest flowers.",
-                                },
-                                {
-                                    "Name": "minecraft:the_end_surface",
-                                    "Type": "Object",
-                                    "Required?": "Optional",
-                                    "Description": "Use default Minecraft End terrain generation.",
                                 },
                             ],
                         },
@@ -337,8 +322,8 @@
                     ],
                 },
                 {
-                    "name": "minecraft:capped_surface",
-                    "id": "minecraft:capped_surface",
+                    "name": "minecraft:capped",
+                    "id": "minecraft:capped",
                     "level": 2,
                     "content": [
                         "Generates surface on blocks with non-solid blocks above or below.",
@@ -374,6 +359,12 @@
                                     "Type": "Object of type Block Specifier",
                                     "Required?": "Required",
                                     "Description": "Material used to replace air blocks below sea level.",
+                                },
+                                {
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of surface builder to use",
                                 },
                             ],
                         },
@@ -454,8 +445,8 @@
                     ],
                 },
                 {
-                    "name": "minecraft:frozen_ocean_surface",
-                    "id": "minecraft:frozen_ocean_surface",
+                    "name": "minecraft:frozen_ocean",
+                    "id": "minecraft:frozen_ocean",
                     "level": 2,
                     "content": [
                         "Similar to overworld_surface. Adds icebergs.",
@@ -498,13 +489,38 @@
                                     "Required?": "Required",
                                     "Description": "Controls the block type used for the surface of this biome",
                                 },
+                                {
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of surface builder to use",
+                                },
                             ],
                         },
                     ],
                 },
                 {
-                    "name": "minecraft:mesa_surface",
-                    "id": "minecraft:mesa_surface",
+                    "name": "minecraft:humidity",
+                    "id": "minecraft:humidity",
+                    "level": 2,
+                    "content": [
+                        "Forces a biome to ether always be humid or never humid. Humidity effects the spread chance, and spread rate of fire in the biome",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "is_humid",
+                                    "Type": "Boolean",
+                                    "Required?": "Required",
+                                    "Description": "",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:mesa",
+                    "id": "minecraft:mesa",
                     "level": 2,
                     "content": [
                         "Similar to overworld_surface. Adds colored strata and optional pillars.",
@@ -570,6 +586,12 @@
                                     "Type": "Object of type Block Specifier",
                                     "Required?": "Required",
                                     "Description": "Controls the block type used for the surface of this biome",
+                                },
+                                {
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of surface builder to use",
                                 },
                             ],
                         },
@@ -706,6 +728,61 @@
                     ],
                 },
                 {
+                    "name": "minecraft:overworld",
+                    "id": "minecraft:overworld",
+                    "level": 2,
+                    "content": [
+                        "Controls the blocks used for the default Minecraft Overworld terrain generation.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "foundation_material",
+                                    "Type": "Object of type Block Specifier",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block type used deep underground in this biome",
+                                },
+                                {
+                                    "Name": "mid_material",
+                                    "Type": "Object of type Block Specifier",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block type used in a layer below the surface of this biome",
+                                },
+                                {
+                                    "Name": "sea_floor_depth",
+                                    "Type": "Integer",
+                                    "Required?": "Required",
+                                    "Description": "Controls how deep below the world water level the floor should occur",
+                                },
+                                {
+                                    "Name": "sea_floor_material",
+                                    "Type": "Object of type Block Specifier",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block type used as a floor for bodies of water in this biome",
+                                },
+                                {
+                                    "Name": "sea_material",
+                                    "Type": "Object of type Block Specifier",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block type used for the bodies of water in this biome",
+                                },
+                                {
+                                    "Name": "top_material",
+                                    "Type": "Object of type Block Specifier",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block type used for the surface of this biome",
+                                },
+                                {
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of surface builder to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:overworld_generation_rules",
                     "id": "minecraft:overworld_generation_rules",
                     "level": 2,
@@ -790,6 +867,14 @@
                     ],
                 },
                 {
+                    "name": "minecraft:partially_frozen",
+                    "id": "minecraft:partially_frozen",
+                    "level": 2,
+                    "content": [
+                        "Component will impact the temperature in a frozen biome, causing some areas to not be frozen. Ex: patchy ice, patchy snow",
+                    ],
+                },
+                {
                     "name": "minecraft:replace_biomes",
                     "id": "minecraft:replace_biomes",
                     "level": 2,
@@ -803,6 +888,25 @@
                                     "Type": "Array of Object of type Biome Replacement",
                                     "Required?": "Required",
                                     "Description": "List of biome replacement configurations. Retroactively adding a new replacement to the front of this list will cause the world generation to change. Please add any new replacements to the end of the list.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:surface_builder",
+                    "id": "minecraft:surface_builder",
+                    "level": 2,
+                    "content": [
+                        "Controls the materials used for terrain generation.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "builder",
+                                    "Type": "Object of type minecraft:overworld or Object of type minecraft:frozen_ocean or Object of type minecraft:mesa or Object of type minecraft:swamp or Object of type minecraft:capped or Object of type minecraft:the_end",
+                                    "Required?": "Required",
+                                    "Description": "Controls the block types used for terrain generation.",
                                 },
                             ],
                         },
@@ -908,11 +1012,11 @@
                     ],
                 },
                 {
-                    "name": "minecraft:surface_parameters",
-                    "id": "minecraft:surface_parameters",
+                    "name": "minecraft:swamp",
+                    "id": "minecraft:swamp",
                     "level": 2,
                     "content": [
-                        "Controls the blocks used for the default Minecraft Overworld terrain generation.",
+                        "Used to add decoration to the surface of swamp biomes such as water lilies.",
                         {
                             "type": "table",
                             "rows": [
@@ -952,54 +1056,11 @@
                                     "Required?": "Required",
                                     "Description": "Controls the block type used for the surface of this biome.",
                                 },
-                            ],
-                        },
-                    ],
-                },
-                {
-                    "name": "minecraft:swamp_surface",
-                    "id": "minecraft:swamp_surface",
-                    "level": 2,
-                    "content": [
-                        "Similar to overworld_surface. Adds swamp surface details.",
-                        {
-                            "type": "table",
-                            "rows": [
                                 {
-                                    "Name": "foundation_material",
-                                    "Type": "Object of type Block Specifier",
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
                                     "Required?": "Required",
-                                    "Description": "Controls the block type used deep underground in this biome.",
-                                },
-                                {
-                                    "Name": "mid_material",
-                                    "Type": "Object of type Block Specifier",
-                                    "Required?": "Required",
-                                    "Description": "Controls the block type used in a layer below the surface of this biome.",
-                                },
-                                {
-                                    "Name": "sea_floor_depth",
-                                    "Type": "Integer",
-                                    "Required?": "Required",
-                                    "Description": "Controls how deep below the world water level the floor should occur.",
-                                },
-                                {
-                                    "Name": "sea_floor_material",
-                                    "Type": "Object of type Block Specifier",
-                                    "Required?": "Required",
-                                    "Description": "Controls the block type used as a floor for bodies of water in this biome.",
-                                },
-                                {
-                                    "Name": "sea_material",
-                                    "Type": "Object of type Block Specifier",
-                                    "Required?": "Required",
-                                    "Description": "Controls the block type used for the bodies of water in this biome.",
-                                },
-                                {
-                                    "Name": "top_material",
-                                    "Type": "Object of type Block Specifier",
-                                    "Required?": "Required",
-                                    "Description": "Controls the block type used for the surface of this biome.",
+                                    "Description": "Controls the type of surface builder to use",
                                 },
                             ],
                         },
@@ -1050,15 +1111,25 @@
                     ],
                 },
                 {
-                    "name": "minecraft:the_end_surface",
-                    "id": "minecraft:the_end_surface",
+                    "name": "minecraft:the_end",
+                    "id": "minecraft:the_end",
                     "level": 2,
                     "content": [
-                        "Use default Minecraft End terrain generation.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "type",
+                                    "Type": "\"minecraft:overworld\", \"minecraft:frozen_ocean\", \"minecraft:mesa\", \"minecraft:swamp\", \"minecraft:capped\", \"minecraft:the_end\"",
+                                    "Required?": "Required",
+                                    "Description": "Use default Minecraft End terrain generation.",
+                                },
+                            ],
+                        },
                     ],
                 },
             ],
         },
     ],
-    "__OBJECTHASH__": "348c34ac54377d6248ee585b9c575f9c56df259b",
+    "__OBJECTHASH__": "20c4d92c378eb5fc4794d66707ed940c294b120c",
 }
