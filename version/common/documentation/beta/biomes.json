@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.100.22",
+    "version": "1.21.100.23",
     "content": [],
     "sections": [
         {
@@ -123,6 +123,12 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Forces a biome to ether always be humid or never humid. Humidity effects the spread chance, and spread rate of fire in the biome",
+                                },
+                                {
+                                    "Name": "minecraft:map_tints",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Sets the color grass and foliage will be tinted by in this biome on the map.",
                                 },
                                 {
                                     "Name": "minecraft:mountain_parameters",
@@ -322,6 +328,31 @@
                     ],
                 },
                 {
+                    "name": "grass",
+                    "id": "grass",
+                    "level": 2,
+                    "content": [
+                        "Makes grass use the noise based colors for tinting in this biome on the map.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "tint",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Required",
+                                    "Description": "Tint color used in this biome on the map.",
+                                },
+                                {
+                                    "Name": "type",
+                                    "Type": "\"tint\", \"noise\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of grass tint to use.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:capped",
                     "id": "minecraft:capped",
                     "level": 2,
@@ -513,6 +544,31 @@
                                     "Type": "Boolean",
                                     "Required?": "Required",
                                     "Description": "",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:map_tints",
+                    "id": "minecraft:map_tints",
+                    "level": 2,
+                    "content": [
+                        "Sets the color grass and foliage will be tinted by in this biome on the map.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "foliage",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Optional",
+                                    "Description": "Sets the color foliage will be tinted by in this biome on the map.",
+                                },
+                                {
+                                    "Name": "grass",
+                                    "Type": "Object of type grass or Object of type grass",
+                                    "Required?": "Required",
+                                    "Description": "Controls whether the grass will use a custom tint color or a noise based tint color.",
                                 },
                             ],
                         },
@@ -1131,5 +1187,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "20c4d92c378eb5fc4794d66707ed940c294b120c",
+    "__OBJECTHASH__": "91d03ec12cd341c98a53296dbe8b9220d698b17a",
 }

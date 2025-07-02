@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.100.22",
-    "__COMMITHASH__": "aeb5f7073d90fc1fe431d6106167e72f6ebfcba9",
-    "__MESSAGE__": "v1.21.100.22-preview",
+    "__VERSION__": "1.21.100.23",
+    "__COMMITHASH__": "abc363f9cd2a3db60019212f16f2be2be4909f1a",
+    "__MESSAGE__": "v1.21.100.23-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -233,6 +233,9 @@
                             "name": "Molang Expression",
                         },
                         {
+                            "name": "grass",
+                        },
+                        {
                             "name": "minecraft:capped",
                         },
                         {
@@ -246,6 +249,9 @@
                         },
                         {
                             "name": "minecraft:humidity",
+                        },
+                        {
+                            "name": "minecraft:map_tints",
                         },
                         {
                             "name": "minecraft:mesa",
@@ -1332,12 +1338,6 @@
                                     "name": "minecraft:behavior.charge_held_item",
                                 },
                                 {
-                                    "name": "minecraft:behavior.circle_around_anchor",
-                                },
-                                {
-                                    "name": "minecraft:behavior.controlled_by_player",
-                                },
-                                {
                                     "name": "minecraft:behavior.croak",
                                 },
                                 {
@@ -1360,9 +1360,6 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.dragondeath",
-                                },
-                                {
-                                    "name": "minecraft:behavior.dragonflaming",
                                 },
                                 {
                                     "name": "minecraft:behavior.dragonholdingpattern",
@@ -1393,9 +1390,6 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.eat_carried_item",
-                                },
-                                {
-                                    "name": "minecraft:behavior.eat_mob",
                                 },
                                 {
                                     "name": "minecraft:behavior.emerge",
@@ -3608,6 +3602,7 @@
         "minecraft:conduit": "",
         "minecraft:copper_block": "",
         "minecraft:copper_bulb": "",
+        "minecraft:copper_chest": "",
         "minecraft:copper_door": "",
         "minecraft:copper_grate": "",
         "minecraft:copper_ore": "",
@@ -3886,6 +3881,7 @@
         "minecraft:exposed_chiseled_copper": "",
         "minecraft:exposed_copper": "",
         "minecraft:exposed_copper_bulb": "",
+        "minecraft:exposed_copper_chest": "",
         "minecraft:exposed_copper_door": "",
         "minecraft:exposed_copper_grate": "",
         "minecraft:exposed_copper_trapdoor": "",
@@ -4210,6 +4206,7 @@
         "minecraft:oxidized_chiseled_copper": "",
         "minecraft:oxidized_copper": "",
         "minecraft:oxidized_copper_bulb": "",
+        "minecraft:oxidized_copper_chest": "",
         "minecraft:oxidized_copper_door": "",
         "minecraft:oxidized_copper_grate": "",
         "minecraft:oxidized_copper_trapdoor": "",
@@ -4564,6 +4561,7 @@
         "minecraft:waxed_chiseled_copper": "",
         "minecraft:waxed_copper": "",
         "minecraft:waxed_copper_bulb": "",
+        "minecraft:waxed_copper_chest": "",
         "minecraft:waxed_copper_door": "",
         "minecraft:waxed_copper_grate": "",
         "minecraft:waxed_copper_trapdoor": "",
@@ -4574,6 +4572,7 @@
         "minecraft:waxed_exposed_chiseled_copper": "",
         "minecraft:waxed_exposed_copper": "",
         "minecraft:waxed_exposed_copper_bulb": "",
+        "minecraft:waxed_exposed_copper_chest": "",
         "minecraft:waxed_exposed_copper_door": "",
         "minecraft:waxed_exposed_copper_grate": "",
         "minecraft:waxed_exposed_copper_trapdoor": "",
@@ -4584,6 +4583,7 @@
         "minecraft:waxed_oxidized_chiseled_copper": "",
         "minecraft:waxed_oxidized_copper": "",
         "minecraft:waxed_oxidized_copper_bulb": "",
+        "minecraft:waxed_oxidized_copper_chest": "",
         "minecraft:waxed_oxidized_copper_door": "",
         "minecraft:waxed_oxidized_copper_grate": "",
         "minecraft:waxed_oxidized_copper_trapdoor": "",
@@ -4594,6 +4594,7 @@
         "minecraft:waxed_weathered_chiseled_copper": "",
         "minecraft:waxed_weathered_copper": "",
         "minecraft:waxed_weathered_copper_bulb": "",
+        "minecraft:waxed_weathered_copper_chest": "",
         "minecraft:waxed_weathered_copper_door": "",
         "minecraft:waxed_weathered_copper_grate": "",
         "minecraft:waxed_weathered_copper_trapdoor": "",
@@ -4604,6 +4605,7 @@
         "minecraft:weathered_chiseled_copper": "",
         "minecraft:weathered_copper": "",
         "minecraft:weathered_copper_bulb": "",
+        "minecraft:weathered_copper_chest": "",
         "minecraft:weathered_copper_door": "",
         "minecraft:weathered_copper_grate": "",
         "minecraft:weathered_copper_trapdoor": "",
@@ -4671,6 +4673,7 @@
         "chicken": "0x00004874 (0x10)",
         "cod": "0x00009072 (0x112)",
         "command_block_minecart": "0x00524388 (0x100)",
+        "copper_golem": "0x00000916 (0x148)",
         "cow": "0x00004875 (0x11)",
         "creaking": "0x00002962 (0x146)",
         "creeper": "0x00002849 (0x33)",
@@ -6032,88 +6035,6 @@
                 },
             ],
         },
-        "minecraft:behavior.circle_around_anchor": {
-            "description": "Causes an entity to circle around an anchor point placed near a point or target.",
-            "children": [
-                {
-                    "name": "angle_change",
-                    "type": "Decimal",
-                    "defaultValue": "15.0",
-                    "description": "Number of degrees to change this entity's facing by, when the entity selects its next anchor point.",
-                },
-                {
-                    "name": "goal_radius",
-                    "type": "Decimal",
-                    "defaultValue": "0.5",
-                    "description": "Maximum distance from the anchor-point in which this entity considers itself to have reached the anchor point. This is to prevent the entity from bouncing back and forth trying to reach a specific spot.",
-                },
-                {
-                    "name": "height_above_target_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[0.0, 0.0]",
-                    "description": "The number of blocks above the target that the next anchor point can be set. This value is used only when the entity is tracking a target.",
-                },
-                {
-                    "name": "height_adjustment_chance",
-                    "type": "Decimal",
-                    "defaultValue": "0.002857",
-                    "description": "Percent chance to determine how often to increase or decrease the current height around the anchor point. 1 = 100%. \"height_change_chance\" is deprecated and has been replaced with \"height_adjustment_chance\".",
-                },
-                {
-                    "name": "height_offset_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[0.0, 0.0]",
-                    "description": "Vertical distance from the anchor point this entity must stay within, upon a successful height adjustment.",
-                },
-                {
-                    "name": "radius_adjustment_chance",
-                    "type": "Decimal",
-                    "defaultValue": "0.004",
-                    "description": "Percent chance to determine how often to increase the size of the current movement radius around the anchor point. 1 = 100%. \"radius_change_chance\" is deprecated and has been replaced with \"radius_adjustment_chance\".",
-                },
-                {
-                    "name": "radius_change",
-                    "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "The number of blocks to increase the current movement radius by, upon successful \"radius_adjustment_chance\". If the current radius increases over the range maximum, the current radius will be set back to the range minimum and the entity will change between clockwise and counter-clockwise movement..",
-                },
-                {
-                    "name": "radius_range",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[5.0, 15.0]",
-                    "description": "Horizontal distance from the anchor point this entity must stay within upon a successful radius adjustment.",
-                },
-                {
-                    "name": "speed_multiplier",
-                    "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "Multiplies the speed at which this entity travels to its next desired position.",
-                },
-            ],
-        },
-        "minecraft:behavior.controlled_by_player": {
-            "description": "Allows the entity to be controlled by the player using an item in the item_controllable property (required). Also requires the minecraft:movement property, and the minecraft:rideable property. On every tick, the entity will attempt to rotate towards where the player is facing with the control item whilst simultaneously moving forward.",
-            "children": [
-                {
-                    "name": "fractional_rotation",
-                    "type": "Decimal",
-                    "defaultValue": "0.5",
-                    "description": "The entity will attempt to rotate to face where the player is facing each tick. The entity will target this percentage of their difference in their current facing angles each tick (from 0.0 to 1.0 where 1.0 = 100%). This is limited by FractionalRotationLimit. A value of 0.0 will result in the entity no longer turning to where the player is facing.",
-                },
-                {
-                    "name": "fractional_rotation_limit",
-                    "type": "Decimal",
-                    "defaultValue": "5.0",
-                    "description": "Limits the total degrees the entity can rotate to face where the player is facing on each tick.",
-                },
-                {
-                    "name": "mount_speed_multiplier",
-                    "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "Speed multiplier of mount when controlled by player.",
-                },
-            ],
-        },
         "minecraft:behavior.croak": {
             "description": "Allows the entity to croak at a random time interval with configurable conditions.",
             "children": [
@@ -6500,35 +6421,6 @@
                 },
             ],
         },
-        "minecraft:behavior.dragonflaming": {
-            "description": "Allows this entity to use a flame-breath attack. Can only be used by the Ender Dragon.",
-            "children": [
-                {
-                    "name": "cooldown_time",
-                    "type": "Decimal",
-                    "defaultValue": "10",
-                    "description": "Time (in seconds) between each start of the cycle to roar, then breath flame.",
-                },
-                {
-                    "name": "flame_time",
-                    "type": "Decimal",
-                    "defaultValue": "0.5",
-                    "description": "Time (in seconds), after roar, to breath flame.",
-                },
-                {
-                    "name": "ground_flame_count",
-                    "type": "Integer",
-                    "defaultValue": "4",
-                    "description": "Number of ground flame-breath attacks to use before flight-takeoff.",
-                },
-                {
-                    "name": "roar_time",
-                    "type": "Decimal",
-                    "defaultValue": "2",
-                    "description": "Time (in seconds) to roar, before breathing flame.",
-                },
-            ],
-        },
         "minecraft:behavior.dragonstrafeplayer": {
             "description": "Allows this entity to fly around looking for a player to shoot fireballs at. Can only be used by the Ender Dragon.",
             "children": [
@@ -6780,47 +6672,6 @@
                     "type": "Decimal",
                     "defaultValue": "",
                     "description": "Time in seconds the mob should wait before eating the item.",
-                },
-            ],
-        },
-        "minecraft:behavior.eat_mob": {
-            "description": "Allows the entity to eat a specified Mob.",
-            "children": [
-                {
-                    "name": "eat_animation_time",
-                    "type": "Decimal",
-                    "defaultValue": "1.000000",
-                    "description": "Sets the time in seconds the eat animation should play for.",
-                },
-                {
-                    "name": "eat_mob_sound",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Sets the sound that should play when eating a mob.",
-                },
-                {
-                    "name": "loot_table",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "The loot table for loot to be dropped when eating a mob.",
-                },
-                {
-                    "name": "pull_in_force",
-                    "type": "Decimal",
-                    "defaultValue": "1.000000",
-                    "description": "Sets the force which the mob-to-be-eaten is pulled towards the eating mob.",
-                },
-                {
-                    "name": "reach_mob_distance",
-                    "type": "Decimal",
-                    "defaultValue": "1.000000",
-                    "description": "Sets the desired distance to be reached before eating the mob.",
-                },
-                {
-                    "name": "run_speed",
-                    "type": "Decimal",
-                    "defaultValue": "1.000000",
-                    "description": "Sets the entity's speed when running toward the target.",
                 },
             ],
         },
@@ -14487,7 +14338,7 @@
                             "name": "hard_distance",
                             "type": "Decimal",
                             "defaultValue": "7",
-                            "description": "Distance (in blocks) over which the entity starts being pulled toward the leash holder with an spring-like force.",
+                            "description": "Distance (in blocks) over which the entity starts being pulled towards the leash holder with a spring-like force. Entities can enter and stay in vehicles if the leash is stretched under this distance, but will dismount once it exceeds it.",
                         },
                         {
                             "name": "max_distance",
@@ -14505,7 +14356,7 @@
                             "name": "soft_distance",
                             "type": "Decimal",
                             "defaultValue": "4",
-                            "description": "Distance (in blocks) over which the entity begins pathfinding toward the leash holder, if able.",
+                            "description": "Distance (in blocks) over which the entity starts pathfinding toward the leash holder, if able.",
                         },
                         {
                             "name": "spring_type",
@@ -16104,7 +15955,7 @@
                     "name": "pull_in_entities",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will pull in entities that are in the correct \"family_types\" into any available seats.",
+                    "description": "If true, this entity will pull entities matching the specified \"family_types\" into any available seats. Entities that are leashed will only be pulled in if their distance to their leash holder is less than the \"hard_distance\" defined in their own \"minecraft:leashable\" component.",
                 },
                 {
                     "name": "rider_can_interact",

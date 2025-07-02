@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.21.100.22）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.21.100.23）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		21,
 		100,
-		22
+		23
 	],
 	"require": [
 		{
@@ -17,15 +17,157 @@
 				1,
 				21,
 				100,
-				22
+				23
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.21.100.22",
+	"minSupportVer": "1.21.100.23",
 	"enums": {
+		"block": {
+			"copper_chest": "铜箱",
+			"exposed_copper_chest": "斑驳的铜箱",
+			"oxidized_copper_chest": "氧化的铜箱",
+			"waxed_copper_chest": "涂蜡的铜箱",
+			"waxed_exposed_copper_chest": "涂蜡的斑驳铜箱",
+			"waxed_oxidized_copper_chest": "涂蜡的氧化铜箱",
+			"waxed_weathered_copper_chest": "涂蜡的锈蚀铜箱",
+			"weathered_copper_chest": "锈蚀的铜箱"
+		},
+		"item": {
+			"copper_axe": "铜斧",
+			"copper_boots": "铜靴子",
+			"copper_chest": "铜箱",
+			"copper_chestplate": "铜胸甲",
+			"copper_golem_spawn_egg": "Copper Golem Spawn Egg",
+			"copper_helmet": "铜头盔",
+			"copper_hoe": "铜锄",
+			"copper_leggings": "铜护腿",
+			"copper_nugget": "铜粒",
+			"copper_pickaxe": "铜镐",
+			"copper_shovel": "铜锹",
+			"copper_sword": "铜剑",
+			"exposed_copper_chest": "斑驳的铜箱",
+			"oxidized_copper_chest": "氧化的铜箱",
+			"waxed_copper_chest": "涂蜡的铜箱",
+			"waxed_exposed_copper_chest": "涂蜡的斑驳铜箱",
+			"waxed_oxidized_copper_chest": "涂蜡的氧化铜箱",
+			"waxed_weathered_copper_chest": "涂蜡的锈蚀铜箱",
+			"weathered_copper_chest": "锈蚀的铜箱"
+		},
+		"entity": {
+			"copper_golem": "Copper Golem",
+			"minecraft:copper_golem": "Copper Golem"
+		},
+		"entity_event": {
+			"minecraft:from_player_default": "",
+			"minecraft:from_player_exposed": "",
+			"minecraft:from_player_oxidized": "",
+			"minecraft:from_player_weathered": "",
+			"minecraft:oxidize_copper": "",
+			"minecraft:remove_oxidation_layer": "",
+			"minecraft:restart_timer": "",
+			"minecraft:transport_items.start_place_fail": "",
+			"minecraft:transport_items.start_place_succeed": "",
+			"minecraft:transport_items.start_take_fail": "",
+			"minecraft:transport_items.start_take_succeed": "",
+			"minecraft:transport_items.stop_interaction": "",
+			"minecraft:wax_off": "",
+			"minecraft:wax_on": ""
+		},
+		"entity_family": {
+			"copper_golem": ""
+		},
+		"animation": {
+			"animation.copper_golem.chest_interaction.put_item": "",
+			"animation.copper_golem.chest_interaction.put_item_fail": "",
+			"animation.copper_golem.chest_interaction.take_item": "",
+			"animation.copper_golem.chest_interaction.take_item_fail": "",
+			"animation.copper_golem.hold_item": "",
+			"animation.copper_golem.spin": "",
+			"animation.copper_golem.spin.oxidized": "",
+			"animation.copper_golem.spin.weathered": "",
+			"animation.copper_golem.walk": "",
+			"animation.copper_golem.walk_holding_item": ""
+		},
+		"animation_controller": {
+			"controller.animation.copper_golem.chest_interaction": "",
+			"controller.animation.copper_golem.idle": "",
+			"controller.animation.copper_golem.walk": ""
+		},
+		"sound": {
+			"armor.equip_copper": "",
+			"block.copper_chest.closed": "",
+			"block.copper_chest.open": "",
+			"block.copper_chest.oxidized.closed": "",
+			"block.copper_chest.oxidized.open": "",
+			"block.copper_chest.weathered.closed": "",
+			"block.copper_chest.weathered.open": "",
+			"mob.copper_golem.chest_interaction.put_item": "",
+			"mob.copper_golem.chest_interaction.put_item_fail": "",
+			"mob.copper_golem.chest_interaction.take_item": "",
+			"mob.copper_golem.chest_interaction.take_item_fail": "",
+			"mob.copper_golem.death": "",
+			"mob.copper_golem.hurt": "",
+			"mob.copper_golem.oxidized.death": "",
+			"mob.copper_golem.oxidized.hurt": "",
+			"mob.copper_golem.oxidized.spin": "",
+			"mob.copper_golem.oxidized.step": "",
+			"mob.copper_golem.spawn": "",
+			"mob.copper_golem.spin": "",
+			"mob.copper_golem.step": "",
+			"mob.copper_golem.weathered.death": "",
+			"mob.copper_golem.weathered.hurt": "",
+			"mob.copper_golem.weathered.spin": "",
+			"mob.copper_golem.weathered.step": ""
+		},
+		"loot_table": {
+			"entities/copper_golem": ""
+		},
+		"loot_table_wrapped": {
+			"\"entities/copper_golem\"": ""
+		},
 		"camera_preset": {
 			"minecraft:control_scheme_camera": ""
+		},
+		"recipe": {
+			"minecraft:copper_axe": "<工作台>木棍*2+铜锭*3->铜斧",
+			"minecraft:copper_boots": "<工作台>铜锭*4->铜靴子",
+			"minecraft:copper_chest": "<工作台>箱子+铜锭*8->铜箱",
+			"minecraft:copper_chestplate": "<工作台>铜锭*8->铜胸甲",
+			"minecraft:copper_helmet": "<工作台>铜锭*5->铜头盔",
+			"minecraft:copper_hoe": "<工作台>木棍*2+铜锭*2->铜锄",
+			"minecraft:copper_ingot_from_nuggets": "<工作台>铜粒*9->铜锭",
+			"minecraft:copper_leggings": "<工作台>铜锭*7->铜护腿",
+			"minecraft:copper_nugget": "<工作台>铜锭->铜粒*9",
+			"minecraft:copper_pickaxe": "<工作台>木棍*2+铜锭*3->铜镐",
+			"minecraft:copper_shovel": "<工作台>木棍*2+铜锭->铜锹",
+			"minecraft:copper_sword": "<工作台>木棍+铜锭*2->铜剑"
+		},
+		"summonable_entity": {
+			"copper_golem": "Copper Golem",
+			"minecraft:copper_golem": "Copper Golem"
+		},
+		"loot_tool": {
+			"minecraft:copper_axe": "铜斧",
+			"minecraft:copper_boots": "铜靴子",
+			"minecraft:copper_chest": "铜箱",
+			"minecraft:copper_chestplate": "铜胸甲",
+			"minecraft:copper_golem_spawn_egg": "Copper Golem Spawn Egg",
+			"minecraft:copper_helmet": "铜头盔",
+			"minecraft:copper_hoe": "铜锄",
+			"minecraft:copper_leggings": "铜护腿",
+			"minecraft:copper_nugget": "铜粒",
+			"minecraft:copper_pickaxe": "铜镐",
+			"minecraft:copper_shovel": "铜锹",
+			"minecraft:copper_sword": "铜剑",
+			"minecraft:exposed_copper_chest": "斑驳的铜箱",
+			"minecraft:oxidized_copper_chest": "氧化的铜箱",
+			"minecraft:waxed_copper_chest": "涂蜡的铜箱",
+			"minecraft:waxed_exposed_copper_chest": "涂蜡的斑驳铜箱",
+			"minecraft:waxed_oxidized_copper_chest": "涂蜡的氧化铜箱",
+			"minecraft:waxed_weathered_copper_chest": "涂蜡的锈蚀铜箱",
+			"minecraft:weathered_copper_chest": "锈蚀的铜箱"
 		}
 	},
 	"metadata": {
@@ -34,16 +176,16 @@
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.21.100.22",
-			"packageVersion": "1.21.100.22"
+			"coreVersion": "1.21.100.23",
+			"packageVersion": "1.21.100.23"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.21.100.22",
-			"packageVersion": "1.21.100.22"
+			"coreVersion": "1.21.100.23",
+			"packageVersion": "1.21.100.23"
 		}
 	}
 }
