@@ -1,6 +1,6 @@
 # MCBEID表 在线搜索API
 
-API：`https://ca.projectxero.top/idlist/`
+API：`https://idlist.projectxero.top/`
 
 ## 搜索
 
@@ -35,7 +35,7 @@ GET /search
 |`data.result[*].value`|字符串|条目描述|
 |`error`|字符串|错误描述|
 
-注：MCBEID表的URL Hash是附加于URL上用于快速定位的片段标识符。例如 `https://ca.projectxero.top/idlist/#beta-vanilla/command/damage` 中的 `#beta-vanilla/command/damage`。
+注：MCBEID表的URL Hash是附加于URL上用于快速定位的片段标识符。例如 `https://idlist.projectxero.top/#beta-vanilla/command/damage` 中的 `#beta-vanilla/command/damage`。
 
 ### 关键词匹配
 

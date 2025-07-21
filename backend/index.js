@@ -220,7 +220,7 @@ function toPWAHash(options) {
 function toHumanReadable(options, result) {
     const lines = result.map((entry) => `${entry.enumName}: ${entry.key} -> ${entry.value}`);
     if (lines.length > 0) lines.push('');
-    lines.push(`https://ca.projectxero.top/idlist/${toPWAHash(options)}`);
+    lines.push(`https://idlist.projectxero.top/${toPWAHash(options)}`);
     return lines.join('\r\n');
 }
 
@@ -236,16 +236,28 @@ const router = new Router();
 
 router.get('/search', (ctx) => {
     const now = new Date();
-    process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ->] ${ctx.querystring}\n`);
     if (now - dataCheckTime > UPDATE_INTERVAL) {
-        const modifiedTime = readFileModifiedTime(dataIndexPath);
-        if (!Number.isNaN(modifiedTime) && modifiedTime !== dataUpdateTime) {
-            dataStore = loadData(dataIndexPath);
-            process.stdout.write(`[${dateTimeToString(now)}] DataStore successfully reloaded.\n`);
-            dataUpdateTime = modifiedTime;
-        }
-        dataCheckTime = now.getTime();
+        setTimeout(() => {
+            const modifiedTime = readFileModifiedTime(dataIndexPath);
+            if (!Number.isNaN(modifiedTime) && modifiedTime !== dataUpdateTime) {
+                dataStore = loadData(dataIndexPath);
+                process.stdout.write(`[${dateTimeToString(now)}] DataStore successfully reloaded.\n`);
+                dataUpdateTime = modifiedTime;
+            }
+            dataCheckTime = now.getTime();
+        }, 1000);
     }
+    if (ctx.query.alive === '1') {
+        ctx.body = {
+            data: {
+                count: 0,
+                hash: `dataVersion=${dataUpdateTime}`,
+                result: []
+            }
+        };
+        return;
+    }
+    process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ->] ${ctx.querystring}\n`);
     try {
         const options = {
             strategy: ctx.query.match || 'keyword',

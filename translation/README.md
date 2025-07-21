@@ -48,7 +48,7 @@
 
 ## 通过 MCBEID表 参与翻译
 
-1. 打开 [MCBEID表](https://ca.projectxero.top/idlist/)。
+1. 打开 [MCBEID表](https://idlist.projectxero.top/)。
 2. 在主菜单中启用“编辑模式”。
 3. 查找希望修改的条目，点击进入详情页面后进行编辑。编辑完成后点击保存。
 4. 在主菜单中点击“导出编辑数据”。

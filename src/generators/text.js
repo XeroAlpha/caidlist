@@ -138,8 +138,8 @@ export function writeTransMapTextZip(cx, options) {
     const fileDescriptions = transMapNames.map((e) => [`${e[0]}.txt`, e[1]]);
     files['_MCBEID_.txt'] = [
         '【MCBEID表】',
-        '在线版：https://ca.projectxero.top/idlist/',
-        '本ID表由B站@ProjectXero与命令助手开发组的小伙伴们维护，发现错误或有建议可私聊UP主或加群【MCBE命令助手开发区】：671317302',
+        '在线版：https://idlist.projectxero.top/',
+        '本ID表由B站@ProjectXero与命令助手开发组的小伙伴们维护，发现错误或有建议可私聊UP主或加群【MCBE命令助手开发区】：https://projectxero.top/qqgroup/cabeta/',
         '',
         `发布时间：${new Date().toLocaleString()}`,
         `对应游戏版本：${gameVersionText}`,

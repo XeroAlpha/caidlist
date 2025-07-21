@@ -2,7 +2,7 @@
 ## 简介
 命令助手作者 [ProjectXero](https://github.com/XeroAlpha) 使用此工具生成ID表。
 
-[MCBEID表](https://ca.projectxero.top/idlist/)（[仓库](https://github.com/XeroAlpha/caidlistweb)）是基于此工具的数据制作的可离线使用的ID表查询网站。
+[MCBEID表](https://idlist.projectxero.top/)（[仓库](https://github.com/XeroAlpha/caidlistweb)）是基于此工具的数据制作的可离线使用的ID表查询网站。
 
 [MCBEID表 在线搜索API](./backend/API.md) 是基于此工具的数据制作的在线ID表搜索接口。
 
