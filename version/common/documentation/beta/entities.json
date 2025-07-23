@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.100.24",
+    "version": "1.21.110.20",
     "content": [],
     "sections": [
         {
@@ -14903,6 +14903,141 @@
                                 },
                             ],
                         },
+                    ],
+                },
+                {
+                    "name": "y_rotation",
+                    "id": "y_rotation",
+                    "level": 2,
+                    "content": [
+                        "Returns the Y rotation of this entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Decimal",
+                                    "Default": "",
+                                    "Description": "(Required) A floating point value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"y_rotation\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"y_rotation\", \"value\": \"0.00\" }",
+                                    ],
+                                },
+                            ],
+                        },
                         {
                             "name": "Example:",
                             "level": 4,
@@ -24139,8 +24274,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:dash",
-                            "id": "minecraft:dash",
+                            "name": "minecraft:dash_action",
+                            "id": "minecraft:dash_action",
                             "level": 4,
                             "content": [
                                 "Ability for a rideable entity to dash.",
@@ -24907,6 +25042,31 @@
                             ],
                         },
                         {
+                            "name": "minecraft:free_camera_controlled",
+                            "id": "minecraft:free_camera_controlled",
+                            "level": 4,
+                            "content": [
+                                "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "backwards_movement_modifier",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5",
+                                            "Description": "Modifies speed going backwards.",
+                                        },
+                                        {
+                                            "Name": "strafe_speed_modifier",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.4",
+                                            "Description": "Modifies the strafe speed.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:game_event_movement_tracking",
                             "id": "minecraft:game_event_movement_tracking",
                             "level": 4,
@@ -25309,31 +25469,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:input_air_controlled",
-                            "id": "minecraft:input_air_controlled",
-                            "level": 4,
-                            "content": [
-                                "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "backwards_movement_modifier",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.5",
-                                            "Description": "Modifies speed going backwards.",
-                                        },
-                                        {
-                                            "Name": "strafe_speed_modifier",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.4",
-                                            "Description": "Modifies the strafe speed.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:inside_block_notifier",
                             "id": "minecraft:inside_block_notifier",
                             "level": 4,
@@ -25434,7 +25569,7 @@
                                             "Name": "drop_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                                            "Description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "drop_item_y_offset",
@@ -25446,7 +25581,7 @@
                                             "Name": "equip_item_slot",
                                             "Type": "String",
                                             "Default Value": "",
-                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                                            "Description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                         },
                                         {
                                             "Name": "health_amount",
@@ -25523,7 +25658,7 @@
                                                             "Name": "slot",
                                                             "Type": "Integer",
                                                             "Default Value": "",
-                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                                                            "Description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                                                         },
                                                     ],
                                                 },
@@ -28583,6 +28718,25 @@
                             ],
                         },
                         {
+                            "name": "minecraft:vertical_movement_action",
+                            "id": "minecraft:vertical_movement_action",
+                            "level": 4,
+                            "content": [
+                                "When configured as a rideable entity, the entity will move upwards or downwards when the player uses the jump action.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "vertical_velocity",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.5",
+                                            "Description": "Vertical velocity to apply when jump action is issued.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:vibration_damper",
                             "id": "minecraft:vibration_damper",
                             "level": 4,
@@ -29654,8 +29808,8 @@
                                             "ID": "-82616534",
                                         },
                                         {
-                                            "JSON Name": "minecraft:dash",
-                                            "ID": "-51257122",
+                                            "JSON Name": "minecraft:dash_action",
+                                            "ID": "-1446083519",
                                         },
                                         {
                                             "JSON Name": "minecraft:despawn",
@@ -29710,6 +29864,10 @@
                                             "ID": "1967597361",
                                         },
                                         {
+                                            "JSON Name": "minecraft:free_camera_controlled",
+                                            "ID": "-1826251563",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:game_event_movement_tracking",
                                             "ID": "763815151",
                                         },
@@ -29744,10 +29902,6 @@
                                         {
                                             "JSON Name": "minecraft:hurt_on_condition",
                                             "ID": "163715083",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:input_air_controlled",
-                                            "ID": "1246978592",
                                         },
                                         {
                                             "JSON Name": "minecraft:inside_block_notifier",
@@ -29996,6 +30150,10 @@
                                         {
                                             "JSON Name": "minecraft:variable_max_auto_step",
                                             "ID": "-368684982",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:vertical_movement_action",
+                                            "ID": "2076572763",
                                         },
                                         {
                                             "JSON Name": "minecraft:vibration_damper",
@@ -30956,7 +31114,7 @@
                             "id": "minecraft:on_death",
                             "level": 4,
                             "content": [
-                                "Only usable by the Ender Dragon. Adds a trigger to call on this entity's death.",
+                                "Adds a trigger to call on this entity's death.",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -31266,5 +31424,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "e670535fba2be3d2ae1b45f915bef414a331db89",
+    "__OBJECTHASH__": "a7efddb359e5500b3872e906a11811a515c776e8",
 }

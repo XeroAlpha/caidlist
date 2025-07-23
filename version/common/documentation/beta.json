@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.100.24",
-    "__COMMITHASH__": "a1f5b41b56aa2dc1d735a8704336d5342301e542",
-    "__MESSAGE__": "v1.21.100.24-preview",
+    "__VERSION__": "1.21.110.20",
+    "__COMMITHASH__": "2828375892cf3b5f6868a119c6b8d1dee764d38d",
+    "__MESSAGE__": "v1.21.110.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -405,6 +405,9 @@
                         },
                         {
                             "name": "minecraft:lighting_identifier",
+                        },
+                        {
+                            "name": "minecraft:precipitation",
                         },
                         {
                             "name": "minecraft:sky_color",
@@ -1294,6 +1297,14 @@
                                 {
                                     "name": "Examples",
                                 },
+                            ],
+                        },
+                        {
+                            "name": "y_rotation",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
                                 {
                                     "name": "Example:",
                                 },
@@ -1924,7 +1935,7 @@
                                     "name": "minecraft:damage_sensor",
                                 },
                                 {
-                                    "name": "minecraft:dash",
+                                    "name": "minecraft:dash_action",
                                 },
                                 {
                                     "name": "minecraft:despawn",
@@ -1966,6 +1977,9 @@
                                     "name": "minecraft:flocking",
                                 },
                                 {
+                                    "name": "minecraft:free_camera_controlled",
+                                },
+                                {
                                     "name": "minecraft:game_event_movement_tracking",
                                 },
                                 {
@@ -1991,9 +2005,6 @@
                                 },
                                 {
                                     "name": "minecraft:hurt_on_condition",
-                                },
-                                {
-                                    "name": "minecraft:input_air_controlled",
                                 },
                                 {
                                     "name": "minecraft:inside_block_notifier",
@@ -2177,6 +2188,9 @@
                                 },
                                 {
                                     "name": "minecraft:variable_max_auto_step",
+                                },
+                                {
+                                    "name": "minecraft:vertical_movement_action",
                                 },
                                 {
                                     "name": "minecraft:vibration_damper",
@@ -3343,6 +3357,7 @@
         "sapling_type": "DEPRECATED - Determines the type of the sapling block",
         "sculk_sensor_phase": "Determines the current phase of a sculk sensor block",
         "sea_grass_type": "Determines the type of a seagrass block",
+        "shelf_connection_type": "Determines the powered variant of the Shelf",
         "sponge_type": "DEPRECATED - Determines the type of a sponge block",
         "stability": "Determines the stability of a scaffolding block",
         "stability_check": "Describes if a scaffolding block has been checked for stability",
@@ -3389,6 +3404,7 @@
         "minecraft:acacia_planks": "",
         "minecraft:acacia_pressure_plate": "",
         "minecraft:acacia_sapling": "",
+        "minecraft:acacia_shelf": "",
         "minecraft:acacia_slab": "",
         "minecraft:acacia_stairs": "",
         "minecraft:acacia_standing_sign": "",
@@ -3427,6 +3443,7 @@
         "minecraft:bamboo_planks": "",
         "minecraft:bamboo_pressure_plate": "",
         "minecraft:bamboo_sapling": "",
+        "minecraft:bamboo_shelf": "",
         "minecraft:bamboo_slab": "",
         "minecraft:bamboo_stairs": "",
         "minecraft:bamboo_standing_sign": "",
@@ -3454,6 +3471,7 @@
         "minecraft:birch_planks": "",
         "minecraft:birch_pressure_plate": "",
         "minecraft:birch_sapling": "",
+        "minecraft:birch_shelf": "",
         "minecraft:birch_slab": "",
         "minecraft:birch_stairs": "",
         "minecraft:birch_standing_sign": "",
@@ -3554,6 +3572,7 @@
         "minecraft:cherry_planks": "",
         "minecraft:cherry_pressure_plate": "",
         "minecraft:cherry_sapling": "",
+        "minecraft:cherry_shelf": "",
         "minecraft:cherry_slab": "",
         "minecraft:cherry_stairs": "",
         "minecraft:cherry_standing_sign": "",
@@ -3604,6 +3623,7 @@
         "minecraft:copper_bulb": "",
         "minecraft:copper_chest": "",
         "minecraft:copper_door": "",
+        "minecraft:copper_golem_statue": "",
         "minecraft:copper_grate": "",
         "minecraft:copper_ore": "",
         "minecraft:copper_trapdoor": "",
@@ -3629,6 +3649,7 @@
         "minecraft:crimson_planks": "",
         "minecraft:crimson_pressure_plate": "",
         "minecraft:crimson_roots": "",
+        "minecraft:crimson_shelf": "",
         "minecraft:crimson_slab": "",
         "minecraft:crimson_stairs": "",
         "minecraft:crimson_standing_sign": "",
@@ -3669,6 +3690,7 @@
         "minecraft:dark_oak_planks": "",
         "minecraft:dark_oak_pressure_plate": "",
         "minecraft:dark_oak_sapling": "",
+        "minecraft:dark_oak_shelf": "",
         "minecraft:dark_oak_slab": "",
         "minecraft:dark_oak_stairs": "",
         "minecraft:dark_oak_trapdoor": "",
@@ -3883,6 +3905,7 @@
         "minecraft:exposed_copper_bulb": "",
         "minecraft:exposed_copper_chest": "",
         "minecraft:exposed_copper_door": "",
+        "minecraft:exposed_copper_golem_statue": "",
         "minecraft:exposed_copper_grate": "",
         "minecraft:exposed_copper_trapdoor": "",
         "minecraft:exposed_cut_copper": "",
@@ -4023,6 +4046,7 @@
         "minecraft:jungle_planks": "",
         "minecraft:jungle_pressure_plate": "",
         "minecraft:jungle_sapling": "",
+        "minecraft:jungle_shelf": "",
         "minecraft:jungle_slab": "",
         "minecraft:jungle_stairs": "",
         "minecraft:jungle_standing_sign": "",
@@ -4126,6 +4150,7 @@
         "minecraft:mangrove_pressure_plate": "",
         "minecraft:mangrove_propagule": "",
         "minecraft:mangrove_roots": "",
+        "minecraft:mangrove_shelf": "",
         "minecraft:mangrove_slab": "",
         "minecraft:mangrove_stairs": "",
         "minecraft:mangrove_standing_sign": "",
@@ -4183,6 +4208,7 @@
         "minecraft:oak_log": "",
         "minecraft:oak_planks": "",
         "minecraft:oak_sapling": "",
+        "minecraft:oak_shelf": "",
         "minecraft:oak_slab": "",
         "minecraft:oak_stairs": "",
         "minecraft:oak_wood": "",
@@ -4208,6 +4234,7 @@
         "minecraft:oxidized_copper_bulb": "",
         "minecraft:oxidized_copper_chest": "",
         "minecraft:oxidized_copper_door": "",
+        "minecraft:oxidized_copper_golem_statue": "",
         "minecraft:oxidized_copper_grate": "",
         "minecraft:oxidized_copper_trapdoor": "",
         "minecraft:oxidized_cut_copper": "",
@@ -4230,6 +4257,7 @@
         "minecraft:pale_oak_planks": "",
         "minecraft:pale_oak_pressure_plate": "",
         "minecraft:pale_oak_sapling": "",
+        "minecraft:pale_oak_shelf": "",
         "minecraft:pale_oak_slab": "",
         "minecraft:pale_oak_stairs": "",
         "minecraft:pale_oak_standing_sign": "",
@@ -4446,6 +4474,7 @@
         "minecraft:spruce_planks": "",
         "minecraft:spruce_pressure_plate": "",
         "minecraft:spruce_sapling": "",
+        "minecraft:spruce_shelf": "",
         "minecraft:spruce_slab": "",
         "minecraft:spruce_stairs": "",
         "minecraft:spruce_standing_sign": "",
@@ -4549,6 +4578,7 @@
         "minecraft:warped_planks": "",
         "minecraft:warped_pressure_plate": "",
         "minecraft:warped_roots": "",
+        "minecraft:warped_shelf": "",
         "minecraft:warped_slab": "",
         "minecraft:warped_stairs": "",
         "minecraft:warped_standing_sign": "",
@@ -4563,6 +4593,7 @@
         "minecraft:waxed_copper_bulb": "",
         "minecraft:waxed_copper_chest": "",
         "minecraft:waxed_copper_door": "",
+        "minecraft:waxed_copper_golem_statue": "",
         "minecraft:waxed_copper_grate": "",
         "minecraft:waxed_copper_trapdoor": "",
         "minecraft:waxed_cut_copper": "",
@@ -4574,6 +4605,7 @@
         "minecraft:waxed_exposed_copper_bulb": "",
         "minecraft:waxed_exposed_copper_chest": "",
         "minecraft:waxed_exposed_copper_door": "",
+        "minecraft:waxed_exposed_copper_golem_statue": "",
         "minecraft:waxed_exposed_copper_grate": "",
         "minecraft:waxed_exposed_copper_trapdoor": "",
         "minecraft:waxed_exposed_cut_copper": "",
@@ -4585,6 +4617,7 @@
         "minecraft:waxed_oxidized_copper_bulb": "",
         "minecraft:waxed_oxidized_copper_chest": "",
         "minecraft:waxed_oxidized_copper_door": "",
+        "minecraft:waxed_oxidized_copper_golem_statue": "",
         "minecraft:waxed_oxidized_copper_grate": "",
         "minecraft:waxed_oxidized_copper_trapdoor": "",
         "minecraft:waxed_oxidized_cut_copper": "",
@@ -4596,6 +4629,7 @@
         "minecraft:waxed_weathered_copper_bulb": "",
         "minecraft:waxed_weathered_copper_chest": "",
         "minecraft:waxed_weathered_copper_door": "",
+        "minecraft:waxed_weathered_copper_golem_statue": "",
         "minecraft:waxed_weathered_copper_grate": "",
         "minecraft:waxed_weathered_copper_trapdoor": "",
         "minecraft:waxed_weathered_cut_copper": "",
@@ -4607,6 +4641,7 @@
         "minecraft:weathered_copper_bulb": "",
         "minecraft:weathered_copper_chest": "",
         "minecraft:weathered_copper_door": "",
+        "minecraft:weathered_copper_golem_statue": "",
         "minecraft:weathered_copper_grate": "",
         "minecraft:weathered_copper_trapdoor": "",
         "minecraft:weathered_cut_copper": "",
@@ -5759,6 +5794,7 @@
         "was_last_hurt_by": "Tests if the subject is the last player who attacked the entity in the last 400 seconds, or the last mob to do so in the last 60 seconds.",
         "weather": "Tests the current weather in the dimension against a provided weather value.",
         "weather_at_position": "Tests the current weather, at the actor's position, against a provided weather value.",
+        "y_rotation": "Returns the Y rotation of this entity.",
     },
     "entityBehavior": {
         "minecraft:behavior.admire_item": {
@@ -13136,7 +13172,7 @@
                 },
             ],
         },
-        "minecraft:dash": {
+        "minecraft:dash_action": {
             "description": "Ability for a rideable entity to dash.",
             "children": [
                 {
@@ -13777,6 +13813,23 @@
                 },
             ],
         },
+        "minecraft:free_camera_controlled": {
+            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
+            "children": [
+                {
+                    "name": "backwards_movement_modifier",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Modifies speed going backwards.",
+                },
+                {
+                    "name": "strafe_speed_modifier",
+                    "type": "Decimal",
+                    "defaultValue": "0.4",
+                    "description": "Modifies the strafe speed.",
+                },
+            ],
+        },
         "minecraft:game_event_movement_tracking": {
             "description": "Allows an entity to emit `entityMove`, `swim` and `flap` game events, depending on the block the entity is moving through. It is added by default to every mob. Add it again to override its behavior.",
             "children": [
@@ -14033,23 +14086,6 @@
                 },
             ],
         },
-        "minecraft:input_air_controlled": {
-            "description": "When configured as a rideable entity, the entity will be controlled using WASD controls and mouse to move in three dimensions.",
-            "children": [
-                {
-                    "name": "backwards_movement_modifier",
-                    "type": "Decimal",
-                    "defaultValue": "0.5",
-                    "description": "Modifies speed going backwards.",
-                },
-                {
-                    "name": "strafe_speed_modifier",
-                    "type": "Decimal",
-                    "defaultValue": "0.4",
-                    "description": "Modifies the strafe speed.",
-                },
-            ],
-        },
         "minecraft:inside_block_notifier": {
             "description": "Verifies whether the entity is inside any of the listed blocks.",
             "children": [
@@ -14116,7 +14152,7 @@
                     "name": "drop_item_slot",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                    "description": "The entity's slot to remove and drop the item from, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                 },
                 {
                     "name": "drop_item_y_offset",
@@ -14128,7 +14164,7 @@
                     "name": "equip_item_slot",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                    "description": "The entity's slot to equip the item to, if any, upon successful interaction. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                 },
                 {
                     "name": "health_amount",
@@ -14181,7 +14217,7 @@
                             "name": "slot",
                             "type": "Integer",
                             "defaultValue": "",
-                            "description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Armor slots are denoted by 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
+                            "description": "The entity's slot containing the item to be repaired. Inventory slots are denoted by positive numbers. Equipment slots are denoted by 'slot.weapon.mainhand', 'slot.weapon.offhand', 'slot.armor.head', 'slot.armor.chest', 'slot.armor.legs', 'slot.armor.feet' and 'slot.armor.body'.",
                         },
                     ],
                 },
@@ -16666,6 +16702,17 @@
                 },
             ],
         },
+        "minecraft:vertical_movement_action": {
+            "description": "When configured as a rideable entity, the entity will move upwards or downwards when the player uses the jump action.",
+            "children": [
+                {
+                    "name": "vertical_velocity",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Vertical velocity to apply when jump action is issued.",
+                },
+            ],
+        },
         "minecraft:water_movement": {
             "description": "",
             "children": [
@@ -16935,7 +16982,7 @@
         },
     },
     "entityTrigger": {
-        "minecraft:on_death": "Only usable by the Ender Dragon. Adds a trigger to call on this entity's death.",
+        "minecraft:on_death": "Adds a trigger to call on this entity's death.",
         "minecraft:on_friendly_anger": "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
         "minecraft:on_hurt": "Adds a trigger to call when this entity takes damage.",
         "minecraft:on_hurt_by_player": "Adds a trigger to call when this entity is attacked by the player.",

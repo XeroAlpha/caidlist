@@ -3,6 +3,7 @@ import { join, resolve } from 'path';
 import Koa from 'koa';
 import Router from '@koa/router';
 import pinyinRaw, { STYLE_NORMAL } from 'pinyin';
+import { inspect } from 'util';
 
 const DefaultId = Symbol('DefaultId');
 const Keywords = Symbol('Keywords');
@@ -257,7 +258,7 @@ router.get('/search', (ctx) => {
         };
         return;
     }
-    process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ->] ${ctx.querystring}\n`);
+    const query = JSON.stringify(ctx.query);
     try {
         const options = {
             strategy: ctx.query.match || 'keyword',
@@ -282,12 +283,12 @@ router.get('/search', (ctx) => {
             };
         }
         const time = Date.now() - now;
-        const results = `${result.length} result(s) in ${time}ms`;
-        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} <-] ${options.searchText} -> ${results}\n`);
+        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ${time}ms] ${query} -> ${result.length} result(s)\n`);
     } catch (err) {
         ctx.status = 400;
         ctx.body = { error: err.message };
-        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} <-] Error: ${err.message}\n${err.stack}\n`);
+        const time = Date.now() - now;
+        process.stdout.write(`[${dateTimeToString(now)} ${ctx.ip} ${time}ms] ${query} -> Error: ${inspect(err)}\n`);
     }
 });
 

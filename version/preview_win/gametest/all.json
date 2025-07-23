@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.100.24",
+    "packageVersion": "1.21.110.20",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -5524,6 +5524,13 @@
                                 "native": true,
                                 "length": 0,
                                 "enumerableProperties": {
+                                    "DefaultCategoryId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:default",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "DefaultPresetId": {
                                         "value": {
                                             "type": "string",
@@ -10350,7 +10357,23 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getLightLevel": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getPlayers": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getSkyLightLevel": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -23494,6 +23517,92 @@
                             },
                             "configurable": false,
                         },
+                        "PackSettingChangeAfterEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "PackSettingChangeAfterEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PackSettingChangeAfterEvent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "settingName": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "settingValue": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PackSettingChangeAfterEventSignal": {
+                            "value": {
+                                "type": "function",
+                                "name": "PackSettingChangeAfterEventSignal",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PackSettingChangeAfterEventSignal",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "subscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "unsubscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "PaletteColor": {
                             "value": {
                                 "type": "object",
@@ -29604,6 +29713,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getPackSettings": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getPlayers": {
                                                     "value": {
                                                         "type": "function",
@@ -29936,6 +30053,14 @@
                                                     },
                                                 },
                                                 "messageReceive": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "packSettingChange": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -30472,6 +30597,66 @@
                             },
                             "configurable": false,
                         },
+                        "GameTestCompletedError": {
+                            "value": {
+                                "type": "function",
+                                "name": "GameTestCompletedError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "GameTest.GameTestCompletedError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "reason": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "GameTestCompletedErrorReason": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Cleanup": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Cleanup",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Done": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Done",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "GameTestError": {
                             "value": {
                                 "type": "function",
@@ -30762,6 +30947,211 @@
                                         },
                                         "readOnly": true,
                                         "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PersonaArmSize": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Slim": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Slim",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Wide": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Wide",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PersonaPieceType": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Arms": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Arms",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Back": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Back",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Body": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Body",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Bottom": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Bottom",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Capes": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Capes",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Dress": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Dress",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Eyes": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Eyes",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "FaceAccessory": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "FaceAccessory",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "FacialHair": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "FacialHair",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Feet": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Feet",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Hair": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Hair",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Hands": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Hands",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Head": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Head",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "HighPants": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "HighPants",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Hood": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Hood",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "LeftArm": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "LeftArm",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "LeftLeg": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "LeftLeg",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Legs": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Legs",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Mouth": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Mouth",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Outerwear": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Outerwear",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "RightArm": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "RightArm",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "RightLeg": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "RightLeg",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Skeleton": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Skeleton",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Skin": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Skin",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Top": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Top",
+                                        },
+                                        "readOnly": true,
                                     },
                                 },
                             },
@@ -31206,6 +31596,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "setSkin": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "startBuild": {
                                                     "value": {
                                                         "type": "function",
@@ -31629,6 +32027,22 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "isCleaningUp": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "isCompleted": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "killAllEntities": {
                                                     "value": {
                                                         "type": "function",
@@ -31965,6 +32379,15 @@
                             },
                             "configurable": false,
                         },
+                        "getPlayerSkin": {
+                            "value": {
+                                "type": "function",
+                                "name": "",
+                                "native": true,
+                                "length": 0,
+                            },
+                            "configurable": false,
+                        },
                         "register": {
                             "value": {
                                 "type": "function",
@@ -31975,6 +32398,15 @@
                             "configurable": false,
                         },
                         "registerAsync": {
+                            "value": {
+                                "type": "function",
+                                "name": "",
+                                "native": true,
+                                "length": 0,
+                            },
+                            "configurable": false,
+                        },
+                        "spawnSimulatedPlayer": {
                             "value": {
                                 "type": "function",
                                 "name": "",
@@ -33761,6 +34193,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "captureException": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getTags": {
                                                     "value": {
                                                         "type": "function",
@@ -33829,7 +34269,7 @@
                             },
                             "configurable": false,
                         },
-                        "SentryBreadcrumbLevel": {
+                        "SentryEventLevel": {
                             "value": {
                                 "type": "object",
                                 "enumerableProperties": {
@@ -33844,6 +34284,13 @@
                                         "value": {
                                             "type": "string",
                                             "value": "error",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "fatal": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "fatal",
                                         },
                                         "readOnly": true,
                                     },
@@ -34161,6 +34608,14 @@
         "GameTest.FenceConnectivity.prototype.north.[[Get]]",
         "GameTest.FenceConnectivity.prototype.south.[[Get]]",
         "GameTest.FenceConnectivity.prototype.west.[[Get]]",
+        "GameTest.GameTestCompletedError",
+        "GameTest.GameTestCompletedError.prototype",
+        "GameTest.GameTestCompletedError.prototype.[[Prototype]]",
+        "GameTest.GameTestCompletedError.prototype.constructor",
+        "GameTest.GameTestCompletedError.prototype.reason.[[Get]]",
+        "GameTest.GameTestCompletedErrorReason",
+        "GameTest.GameTestCompletedErrorReason.Cleanup",
+        "GameTest.GameTestCompletedErrorReason.Done",
         "GameTest.GameTestError",
         "GameTest.GameTestError.prototype",
         "GameTest.GameTestError.prototype.[[Prototype]]",
@@ -34199,6 +34654,35 @@
         "GameTest.NavigationResult.prototype.constructor",
         "GameTest.NavigationResult.prototype.getPath",
         "GameTest.NavigationResult.prototype.isFullPath.[[Get]]",
+        "GameTest.PersonaArmSize",
+        "GameTest.PersonaArmSize.Slim",
+        "GameTest.PersonaArmSize.Wide",
+        "GameTest.PersonaPieceType",
+        "GameTest.PersonaPieceType.Arms",
+        "GameTest.PersonaPieceType.Back",
+        "GameTest.PersonaPieceType.Body",
+        "GameTest.PersonaPieceType.Bottom",
+        "GameTest.PersonaPieceType.Capes",
+        "GameTest.PersonaPieceType.Dress",
+        "GameTest.PersonaPieceType.Eyes",
+        "GameTest.PersonaPieceType.FaceAccessory",
+        "GameTest.PersonaPieceType.FacialHair",
+        "GameTest.PersonaPieceType.Feet",
+        "GameTest.PersonaPieceType.Hair",
+        "GameTest.PersonaPieceType.Hands",
+        "GameTest.PersonaPieceType.Head",
+        "GameTest.PersonaPieceType.HighPants",
+        "GameTest.PersonaPieceType.Hood",
+        "GameTest.PersonaPieceType.LeftArm",
+        "GameTest.PersonaPieceType.LeftLeg",
+        "GameTest.PersonaPieceType.Legs",
+        "GameTest.PersonaPieceType.Mouth",
+        "GameTest.PersonaPieceType.Outerwear",
+        "GameTest.PersonaPieceType.RightArm",
+        "GameTest.PersonaPieceType.RightLeg",
+        "GameTest.PersonaPieceType.Skeleton",
+        "GameTest.PersonaPieceType.Skin",
+        "GameTest.PersonaPieceType.Top",
         "GameTest.RegistrationBuilder",
         "GameTest.RegistrationBuilder.prototype",
         "GameTest.RegistrationBuilder.prototype.batch",
@@ -34257,6 +34741,7 @@
         "GameTest.SimulatedPlayer.prototype.rotateBody",
         "GameTest.SimulatedPlayer.prototype.setBodyRotation",
         "GameTest.SimulatedPlayer.prototype.setItem",
+        "GameTest.SimulatedPlayer.prototype.setSkin",
         "GameTest.SimulatedPlayer.prototype.startBuild",
         "GameTest.SimulatedPlayer.prototype.stopBreakingBlock",
         "GameTest.SimulatedPlayer.prototype.stopBuild",
@@ -34310,6 +34795,8 @@
         "GameTest.Test.prototype.getSculkSpreader",
         "GameTest.Test.prototype.getTestDirection",
         "GameTest.Test.prototype.idle",
+        "GameTest.Test.prototype.isCleaningUp",
+        "GameTest.Test.prototype.isCompleted",
         "GameTest.Test.prototype.killAllEntities",
         "GameTest.Test.prototype.onPlayerJump",
         "GameTest.Test.prototype.pressButton",
@@ -34350,8 +34837,10 @@
         "GameTest.Test.prototype.walkToLocation",
         "GameTest.Test.prototype.worldBlockLocation",
         "GameTest.Test.prototype.worldLocation",
+        "GameTest.getPlayerSkin",
         "GameTest.register",
         "GameTest.registerAsync",
+        "GameTest.spawnSimulatedPlayer",
         "Infinity",
         "Int16Array",
         "Int16Array.BYTES_PER_ELEMENT",
@@ -34492,6 +34981,7 @@
         "Minecraft.AimAssistPresetSettings.prototype.setItemSettings",
         "Minecraft.AimAssistPresetSettings.prototype.setLiquidTargetingItems",
         "Minecraft.AimAssistRegistry",
+        "Minecraft.AimAssistRegistry.DefaultCategoryId",
         "Minecraft.AimAssistRegistry.DefaultPresetId",
         "Minecraft.AimAssistRegistry.prototype",
         "Minecraft.AimAssistRegistry.prototype.addCategory",
@@ -35121,7 +35611,9 @@
         "Minecraft.Dimension.prototype.getEntities",
         "Minecraft.Dimension.prototype.getEntitiesAtBlockLocation",
         "Minecraft.Dimension.prototype.getEntitiesFromRay",
+        "Minecraft.Dimension.prototype.getLightLevel",
         "Minecraft.Dimension.prototype.getPlayers",
+        "Minecraft.Dimension.prototype.getSkyLightLevel",
         "Minecraft.Dimension.prototype.getTopmostBlock",
         "Minecraft.Dimension.prototype.getWeather",
         "Minecraft.Dimension.prototype.heightRange.[[Get]]",
@@ -36887,6 +37379,16 @@
         "Minecraft.ObjectiveSortOrder.1",
         "Minecraft.ObjectiveSortOrder.Ascending",
         "Minecraft.ObjectiveSortOrder.Descending",
+        "Minecraft.PackSettingChangeAfterEvent",
+        "Minecraft.PackSettingChangeAfterEvent.prototype",
+        "Minecraft.PackSettingChangeAfterEvent.prototype.constructor",
+        "Minecraft.PackSettingChangeAfterEvent.prototype.settingName.[[Get]]",
+        "Minecraft.PackSettingChangeAfterEvent.prototype.settingValue.[[Get]]",
+        "Minecraft.PackSettingChangeAfterEventSignal",
+        "Minecraft.PackSettingChangeAfterEventSignal.prototype",
+        "Minecraft.PackSettingChangeAfterEventSignal.prototype.constructor",
+        "Minecraft.PackSettingChangeAfterEventSignal.prototype.subscribe",
+        "Minecraft.PackSettingChangeAfterEventSignal.prototype.unsubscribe",
         "Minecraft.PaletteColor",
         "Minecraft.PaletteColor.0",
         "Minecraft.PaletteColor.1",
@@ -37655,6 +38157,7 @@
         "Minecraft.World.prototype.getEntity",
         "Minecraft.World.prototype.getLootTableManager",
         "Minecraft.World.prototype.getMoonPhase",
+        "Minecraft.World.prototype.getPackSettings",
         "Minecraft.World.prototype.getPlayers",
         "Minecraft.World.prototype.getTimeOfDay",
         "Minecraft.World.prototype.isHardcore.[[Get]]",
@@ -37697,6 +38200,7 @@
         "Minecraft.WorldAfterEvents.prototype.itemUse.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.leverAction.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.messageReceive.[[Get]]",
+        "Minecraft.WorldAfterEvents.prototype.packSettingChange.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.pistonActivate.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerBreakBlock.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerButtonInput.[[Get]]",
@@ -37914,6 +38418,7 @@
         "MinecraftDiagnostics.Sentry.prototype",
         "MinecraftDiagnostics.Sentry.prototype.addBreadcrumb",
         "MinecraftDiagnostics.Sentry.prototype.addTag",
+        "MinecraftDiagnostics.Sentry.prototype.captureException",
         "MinecraftDiagnostics.Sentry.prototype.constructor",
         "MinecraftDiagnostics.Sentry.prototype.getTags",
         "MinecraftDiagnostics.Sentry.prototype.init",
@@ -37922,11 +38427,12 @@
         "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype",
         "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype.[[Prototype]]",
         "MinecraftDiagnostics.SentryAlreadyInitializedError.prototype.constructor",
-        "MinecraftDiagnostics.SentryBreadcrumbLevel",
-        "MinecraftDiagnostics.SentryBreadcrumbLevel.debug",
-        "MinecraftDiagnostics.SentryBreadcrumbLevel.error",
-        "MinecraftDiagnostics.SentryBreadcrumbLevel.info",
-        "MinecraftDiagnostics.SentryBreadcrumbLevel.warning",
+        "MinecraftDiagnostics.SentryEventLevel",
+        "MinecraftDiagnostics.SentryEventLevel.debug",
+        "MinecraftDiagnostics.SentryEventLevel.error",
+        "MinecraftDiagnostics.SentryEventLevel.fatal",
+        "MinecraftDiagnostics.SentryEventLevel.info",
+        "MinecraftDiagnostics.SentryEventLevel.warning",
         "MinecraftDiagnostics.SentryUninitializedError",
         "MinecraftDiagnostics.SentryUninitializedError.prototype",
         "MinecraftDiagnostics.SentryUninitializedError.prototype.[[Prototype]]",
@@ -38795,6 +39301,40 @@
                     "acacia",
                 ],
             },
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:acacia_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -39929,6 +40469,40 @@
             "invalidStates": [],
             "itemId": "minecraft:bamboo",
         },
+        "minecraft:bamboo_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:bamboo_slab": {
             "properties": [
                 {
@@ -40759,6 +41333,40 @@
                     "birch",
                 ],
             },
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:birch_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -43599,6 +44207,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:cherry_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:cherry_slab": {
             "properties": [
                 {
@@ -44787,6 +45429,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:copper_door": {
             "properties": [
@@ -44849,6 +45492,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -45387,6 +46046,40 @@
         },
         "minecraft:crimson_roots": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:crimson_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -46656,6 +47349,40 @@
                     "dark_oak",
                 ],
             },
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:dark_oak_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -49711,6 +50438,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:exposed_copper_door": {
             "properties": [
@@ -49773,6 +50501,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:exposed_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -53533,6 +54277,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:jungle_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:jungle_slab": {
             "properties": [
                 {
@@ -56519,6 +57297,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:mangrove_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:mangrove_slab": {
             "properties": [
                 {
@@ -58100,6 +58912,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:oak_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:oak_slab": {
             "properties": [
                 {
@@ -58723,6 +59569,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:oxidized_copper_door": {
             "properties": [
@@ -58785,6 +59632,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:oxidized_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -59307,6 +60170,40 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:pale_oak_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
                 },
             ],
             "invalidStates": [],
@@ -65684,6 +66581,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:spruce_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:spruce_slab": {
             "properties": [
                 {
@@ -68318,6 +69249,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:warped_shelf": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "powered_shelf_type",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:warped_slab": {
             "properties": [
                 {
@@ -68552,6 +69517,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:waxed_copper_door": {
             "properties": [
@@ -68614,6 +69580,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -68799,6 +69781,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:waxed_exposed_copper_door": {
             "properties": [
@@ -68861,6 +69844,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_exposed_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -69046,6 +70045,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:waxed_oxidized_copper_door": {
             "properties": [
@@ -69108,6 +70108,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_oxidized_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -69293,6 +70309,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:waxed_weathered_copper_door": {
             "properties": [
@@ -69355,6 +70372,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_weathered_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -69540,6 +70573,7 @@
                 },
             ],
             "invalidStates": [],
+            "itemId": "<same>",
         },
         "minecraft:weathered_copper_door": {
             "properties": [
@@ -69602,6 +70636,22 @@
                         "north",
                         "east",
                     ],
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:weathered_copper_golem_statue": {
+            "properties": [
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "invalidStates": [],
@@ -72430,38 +73480,47 @@
                 "defaultValue": {
                     "minecraft:acacia_door": "south",
                     "minecraft:acacia_fence_gate": "south",
+                    "minecraft:acacia_shelf": "south",
                     "minecraft:anvil": "south",
                     "minecraft:bamboo_door": "south",
                     "minecraft:bamboo_fence_gate": "south",
+                    "minecraft:bamboo_shelf": "south",
                     "minecraft:big_dripleaf": "south",
                     "minecraft:birch_door": "south",
                     "minecraft:birch_fence_gate": "south",
+                    "minecraft:birch_shelf": "south",
                     "minecraft:blast_furnace": "south",
                     "minecraft:calibrated_sculk_sensor": "south",
                     "minecraft:campfire": "south",
                     "minecraft:carved_pumpkin": "south",
                     "minecraft:cherry_door": "south",
                     "minecraft:cherry_fence_gate": "south",
+                    "minecraft:cherry_shelf": "south",
                     "minecraft:chest": "north",
                     "minecraft:chipped_anvil": "south",
                     "minecraft:copper_chest": "north",
                     "minecraft:copper_door": "south",
+                    "minecraft:copper_golem_statue": "south",
                     "minecraft:crimson_door": "south",
                     "minecraft:crimson_fence_gate": "south",
+                    "minecraft:crimson_shelf": "south",
                     "minecraft:damaged_anvil": "south",
                     "minecraft:dark_oak_door": "south",
                     "minecraft:dark_oak_fence_gate": "south",
+                    "minecraft:dark_oak_shelf": "south",
                     "minecraft:deprecated_anvil": "south",
                     "minecraft:dried_ghast": "south",
                     "minecraft:end_portal_frame": "south",
                     "minecraft:ender_chest": "north",
                     "minecraft:exposed_copper_chest": "north",
                     "minecraft:exposed_copper_door": "south",
+                    "minecraft:exposed_copper_golem_statue": "south",
                     "minecraft:fence_gate": "south",
                     "minecraft:furnace": "south",
                     "minecraft:iron_door": "south",
                     "minecraft:jungle_door": "south",
                     "minecraft:jungle_fence_gate": "south",
+                    "minecraft:jungle_shelf": "south",
                     "minecraft:leaf_litter": "south",
                     "minecraft:lectern": "south",
                     "minecraft:lit_blast_furnace": "south",
@@ -72470,10 +73529,14 @@
                     "minecraft:lit_smoker": "south",
                     "minecraft:mangrove_door": "south",
                     "minecraft:mangrove_fence_gate": "south",
+                    "minecraft:mangrove_shelf": "south",
+                    "minecraft:oak_shelf": "south",
                     "minecraft:oxidized_copper_chest": "north",
                     "minecraft:oxidized_copper_door": "south",
+                    "minecraft:oxidized_copper_golem_statue": "south",
                     "minecraft:pale_oak_door": "south",
                     "minecraft:pale_oak_fence_gate": "south",
+                    "minecraft:pale_oak_shelf": "south",
                     "minecraft:pink_petals": "south",
                     "minecraft:powered_comparator": "south",
                     "minecraft:powered_repeater": "south",
@@ -72483,6 +73546,7 @@
                     "minecraft:soul_campfire": "south",
                     "minecraft:spruce_door": "south",
                     "minecraft:spruce_fence_gate": "south",
+                    "minecraft:spruce_shelf": "south",
                     "minecraft:stonecutter_block": "north",
                     "minecraft:trapped_chest": "north",
                     "minecraft:unpowered_comparator": "south",
@@ -72490,16 +73554,22 @@
                     "minecraft:vault": "south",
                     "minecraft:warped_door": "south",
                     "minecraft:warped_fence_gate": "south",
+                    "minecraft:warped_shelf": "south",
                     "minecraft:waxed_copper_chest": "north",
                     "minecraft:waxed_copper_door": "south",
+                    "minecraft:waxed_copper_golem_statue": "south",
                     "minecraft:waxed_exposed_copper_chest": "north",
                     "minecraft:waxed_exposed_copper_door": "south",
+                    "minecraft:waxed_exposed_copper_golem_statue": "south",
                     "minecraft:waxed_oxidized_copper_chest": "north",
                     "minecraft:waxed_oxidized_copper_door": "south",
+                    "minecraft:waxed_oxidized_copper_golem_statue": "south",
                     "minecraft:waxed_weathered_copper_chest": "north",
                     "minecraft:waxed_weathered_copper_door": "south",
+                    "minecraft:waxed_weathered_copper_golem_statue": "south",
                     "minecraft:weathered_copper_chest": "north",
                     "minecraft:weathered_copper_door": "south",
+                    "minecraft:weathered_copper_golem_statue": "south",
                     "minecraft:wildflowers": "south",
                     "minecraft:wooden_door": "south",
                 },
@@ -73132,19 +74202,55 @@
                     true,
                 ],
                 "defaultValue": {
+                    "minecraft:acacia_shelf": false,
+                    "minecraft:bamboo_shelf": false,
+                    "minecraft:birch_shelf": false,
+                    "minecraft:cherry_shelf": false,
                     "minecraft:copper_bulb": false,
+                    "minecraft:crimson_shelf": false,
+                    "minecraft:dark_oak_shelf": false,
                     "minecraft:exposed_copper_bulb": false,
+                    "minecraft:jungle_shelf": false,
                     "minecraft:lectern": false,
+                    "minecraft:mangrove_shelf": false,
+                    "minecraft:oak_shelf": false,
                     "minecraft:observer": false,
                     "minecraft:oxidized_copper_bulb": false,
+                    "minecraft:pale_oak_shelf": false,
                     "minecraft:sculk_sensor": false,
+                    "minecraft:spruce_shelf": false,
                     "minecraft:trip_wire": false,
                     "minecraft:tripwire_hook": false,
+                    "minecraft:warped_shelf": false,
                     "minecraft:waxed_copper_bulb": false,
                     "minecraft:waxed_exposed_copper_bulb": false,
                     "minecraft:waxed_oxidized_copper_bulb": false,
                     "minecraft:waxed_weathered_copper_bulb": false,
                     "minecraft:weathered_copper_bulb": false,
+                },
+            },
+        ],
+        "powered_shelf_type": [
+            {
+                "validValues": [
+                    0,
+                    1,
+                    2,
+                    3,
+                ],
+                "defaultValue": {
+                    "minecraft:acacia_shelf": 0,
+                    "minecraft:bamboo_shelf": 0,
+                    "minecraft:birch_shelf": 0,
+                    "minecraft:cherry_shelf": 0,
+                    "minecraft:crimson_shelf": 0,
+                    "minecraft:dark_oak_shelf": 0,
+                    "minecraft:jungle_shelf": 0,
+                    "minecraft:mangrove_shelf": 0,
+                    "minecraft:oak_shelf": 0,
+                    "minecraft:pale_oak_shelf": 0,
+                    "minecraft:spruce_shelf": 0,
+                    "minecraft:warped_shelf": 0,
                 },
             },
         ],
@@ -74626,6 +75732,7 @@
             "minecraft:acacia_log": {},
             "minecraft:acacia_planks": {},
             "minecraft:acacia_pressure_plate": {},
+            "minecraft:acacia_shelf": {},
             "minecraft:acacia_slab": {},
             "minecraft:acacia_stairs": {},
             "minecraft:acacia_standing_sign": {},
@@ -74646,6 +75753,7 @@
             "minecraft:bamboo_mosaic_stairs": {},
             "minecraft:bamboo_planks": {},
             "minecraft:bamboo_pressure_plate": {},
+            "minecraft:bamboo_shelf": {},
             "minecraft:bamboo_slab": {},
             "minecraft:bamboo_stairs": {},
             "minecraft:bamboo_standing_sign": {},
@@ -74664,6 +75772,7 @@
             "minecraft:birch_log": {},
             "minecraft:birch_planks": {},
             "minecraft:birch_pressure_plate": {},
+            "minecraft:birch_shelf": {},
             "minecraft:birch_slab": {},
             "minecraft:birch_stairs": {},
             "minecraft:birch_standing_sign": {},
@@ -74686,6 +75795,7 @@
             "minecraft:cherry_log": {},
             "minecraft:cherry_planks": {},
             "minecraft:cherry_pressure_plate": {},
+            "minecraft:cherry_shelf": {},
             "minecraft:cherry_slab": {},
             "minecraft:cherry_stairs": {},
             "minecraft:cherry_standing_sign": {},
@@ -74709,6 +75819,7 @@
             "minecraft:crimson_hyphae": {},
             "minecraft:crimson_planks": {},
             "minecraft:crimson_pressure_plate": {},
+            "minecraft:crimson_shelf": {},
             "minecraft:crimson_slab": {},
             "minecraft:crimson_stairs": {},
             "minecraft:crimson_standing_sign": {},
@@ -74724,6 +75835,7 @@
             "minecraft:dark_oak_log": {},
             "minecraft:dark_oak_planks": {},
             "minecraft:dark_oak_pressure_plate": {},
+            "minecraft:dark_oak_shelf": {},
             "minecraft:dark_oak_slab": {},
             "minecraft:dark_oak_stairs": {},
             "minecraft:dark_oak_trapdoor": {},
@@ -74745,6 +75857,7 @@
             "minecraft:jungle_log": {},
             "minecraft:jungle_planks": {},
             "minecraft:jungle_pressure_plate": {},
+            "minecraft:jungle_shelf": {},
             "minecraft:jungle_slab": {},
             "minecraft:jungle_stairs": {},
             "minecraft:jungle_standing_sign": {},
@@ -74765,6 +75878,7 @@
             "minecraft:mangrove_planks": {},
             "minecraft:mangrove_pressure_plate": {},
             "minecraft:mangrove_roots": {},
+            "minecraft:mangrove_shelf": {},
             "minecraft:mangrove_slab": {},
             "minecraft:mangrove_stairs": {},
             "minecraft:mangrove_standing_sign": {},
@@ -74779,6 +75893,7 @@
             "minecraft:oak_hanging_sign": {},
             "minecraft:oak_log": {},
             "minecraft:oak_planks": {},
+            "minecraft:oak_shelf": {},
             "minecraft:oak_slab": {},
             "minecraft:oak_stairs": {},
             "minecraft:oak_wood": {},
@@ -74791,6 +75906,7 @@
             "minecraft:pale_oak_log": {},
             "minecraft:pale_oak_planks": {},
             "minecraft:pale_oak_pressure_plate": {},
+            "minecraft:pale_oak_shelf": {},
             "minecraft:pale_oak_slab": {},
             "minecraft:pale_oak_stairs": {},
             "minecraft:pale_oak_standing_sign": {},
@@ -74811,6 +75927,7 @@
             "minecraft:spruce_log": {},
             "minecraft:spruce_planks": {},
             "minecraft:spruce_pressure_plate": {},
+            "minecraft:spruce_shelf": {},
             "minecraft:spruce_slab": {},
             "minecraft:spruce_stairs": {},
             "minecraft:spruce_standing_sign": {},
@@ -74856,6 +75973,7 @@
             "minecraft:warped_hyphae": {},
             "minecraft:warped_planks": {},
             "minecraft:warped_pressure_plate": {},
+            "minecraft:warped_shelf": {},
             "minecraft:warped_slab": {},
             "minecraft:warped_stairs": {},
             "minecraft:warped_standing_sign": {},
@@ -74973,6 +76091,7 @@
             "minecraft:copper_bulb": {},
             "minecraft:copper_chest": {},
             "minecraft:copper_door": {},
+            "minecraft:copper_golem_statue": {},
             "minecraft:copper_grate": {},
             "minecraft:copper_ore": {},
             "minecraft:copper_trapdoor": {},
@@ -75057,6 +76176,7 @@
             "minecraft:exposed_copper_bulb": {},
             "minecraft:exposed_copper_chest": {},
             "minecraft:exposed_copper_door": {},
+            "minecraft:exposed_copper_golem_statue": {},
             "minecraft:exposed_copper_grate": {},
             "minecraft:exposed_copper_trapdoor": {},
             "minecraft:exposed_cut_copper": {},
@@ -75173,6 +76293,7 @@
             "minecraft:oxidized_copper_bulb": {},
             "minecraft:oxidized_copper_chest": {},
             "minecraft:oxidized_copper_door": {},
+            "minecraft:oxidized_copper_golem_statue": {},
             "minecraft:oxidized_copper_grate": {},
             "minecraft:oxidized_copper_trapdoor": {},
             "minecraft:oxidized_cut_copper": {},
@@ -75332,6 +76453,7 @@
             "minecraft:waxed_copper_bulb": {},
             "minecraft:waxed_copper_chest": {},
             "minecraft:waxed_copper_door": {},
+            "minecraft:waxed_copper_golem_statue": {},
             "minecraft:waxed_copper_grate": {},
             "minecraft:waxed_copper_trapdoor": {},
             "minecraft:waxed_cut_copper": {},
@@ -75343,6 +76465,7 @@
             "minecraft:waxed_exposed_copper_bulb": {},
             "minecraft:waxed_exposed_copper_chest": {},
             "minecraft:waxed_exposed_copper_door": {},
+            "minecraft:waxed_exposed_copper_golem_statue": {},
             "minecraft:waxed_exposed_copper_grate": {},
             "minecraft:waxed_exposed_copper_trapdoor": {},
             "minecraft:waxed_exposed_cut_copper": {},
@@ -75354,6 +76477,7 @@
             "minecraft:waxed_oxidized_copper_bulb": {},
             "minecraft:waxed_oxidized_copper_chest": {},
             "minecraft:waxed_oxidized_copper_door": {},
+            "minecraft:waxed_oxidized_copper_golem_statue": {},
             "minecraft:waxed_oxidized_copper_grate": {},
             "minecraft:waxed_oxidized_copper_trapdoor": {},
             "minecraft:waxed_oxidized_cut_copper": {},
@@ -75365,6 +76489,7 @@
             "minecraft:waxed_weathered_copper_bulb": {},
             "minecraft:waxed_weathered_copper_chest": {},
             "minecraft:waxed_weathered_copper_door": {},
+            "minecraft:waxed_weathered_copper_golem_statue": {},
             "minecraft:waxed_weathered_copper_grate": {},
             "minecraft:waxed_weathered_copper_trapdoor": {},
             "minecraft:waxed_weathered_cut_copper": {},
@@ -75376,6 +76501,7 @@
             "minecraft:weathered_copper_bulb": {},
             "minecraft:weathered_copper_chest": {},
             "minecraft:weathered_copper_door": {},
+            "minecraft:weathered_copper_golem_statue": {},
             "minecraft:weathered_copper_grate": {},
             "minecraft:weathered_copper_trapdoor": {},
             "minecraft:weathered_cut_copper": {},
@@ -75532,16 +76658,28 @@
             "minecraft:mob_spawner": {},
         },
         "not_feature_replaceable": {
+            "minecraft:acacia_shelf": {},
+            "minecraft:bamboo_shelf": {},
             "minecraft:bedrock": {},
+            "minecraft:birch_shelf": {},
+            "minecraft:cherry_shelf": {},
             "minecraft:chest": {},
             "minecraft:chiseled_bookshelf": {},
             "minecraft:copper_chest": {},
+            "minecraft:crimson_shelf": {},
+            "minecraft:dark_oak_shelf": {},
             "minecraft:end_portal_frame": {},
             "minecraft:exposed_copper_chest": {},
+            "minecraft:jungle_shelf": {},
+            "minecraft:mangrove_shelf": {},
             "minecraft:mob_spawner": {},
+            "minecraft:oak_shelf": {},
             "minecraft:oxidized_copper_chest": {},
+            "minecraft:pale_oak_shelf": {},
+            "minecraft:spruce_shelf": {},
             "minecraft:trial_spawner": {},
             "minecraft:vault": {},
+            "minecraft:warped_shelf": {},
             "minecraft:waxed_copper_chest": {},
             "minecraft:waxed_exposed_copper_chest": {},
             "minecraft:waxed_oxidized_copper_chest": {},
@@ -75696,6 +76834,7 @@
             "minecraft:copper_block": {},
             "minecraft:copper_bulb": {},
             "minecraft:copper_chest": {},
+            "minecraft:copper_golem_statue": {},
             "minecraft:copper_grate": {},
             "minecraft:copper_ore": {},
             "minecraft:cut_copper": {},
@@ -75705,6 +76844,7 @@
             "minecraft:exposed_copper": {},
             "minecraft:exposed_copper_bulb": {},
             "minecraft:exposed_copper_chest": {},
+            "minecraft:exposed_copper_golem_statue": {},
             "minecraft:exposed_copper_grate": {},
             "minecraft:exposed_cut_copper": {},
             "minecraft:exposed_cut_copper_stairs": {},
@@ -75712,6 +76852,7 @@
             "minecraft:oxidized_copper": {},
             "minecraft:oxidized_copper_bulb": {},
             "minecraft:oxidized_copper_chest": {},
+            "minecraft:oxidized_copper_golem_statue": {},
             "minecraft:oxidized_copper_grate": {},
             "minecraft:oxidized_cut_copper": {},
             "minecraft:oxidized_cut_copper_stairs": {},
@@ -75720,6 +76861,7 @@
             "minecraft:waxed_copper": {},
             "minecraft:waxed_copper_bulb": {},
             "minecraft:waxed_copper_chest": {},
+            "minecraft:waxed_copper_golem_statue": {},
             "minecraft:waxed_copper_grate": {},
             "minecraft:waxed_cut_copper": {},
             "minecraft:waxed_cut_copper_stairs": {},
@@ -75727,6 +76869,7 @@
             "minecraft:waxed_exposed_copper": {},
             "minecraft:waxed_exposed_copper_bulb": {},
             "minecraft:waxed_exposed_copper_chest": {},
+            "minecraft:waxed_exposed_copper_golem_statue": {},
             "minecraft:waxed_exposed_copper_grate": {},
             "minecraft:waxed_exposed_cut_copper": {},
             "minecraft:waxed_exposed_cut_copper_stairs": {},
@@ -75734,6 +76877,7 @@
             "minecraft:waxed_oxidized_copper": {},
             "minecraft:waxed_oxidized_copper_bulb": {},
             "minecraft:waxed_oxidized_copper_chest": {},
+            "minecraft:waxed_oxidized_copper_golem_statue": {},
             "minecraft:waxed_oxidized_copper_grate": {},
             "minecraft:waxed_oxidized_cut_copper": {},
             "minecraft:waxed_oxidized_cut_copper_slab": {},
@@ -75743,6 +76887,7 @@
             "minecraft:waxed_weathered_copper": {},
             "minecraft:waxed_weathered_copper_bulb": {},
             "minecraft:waxed_weathered_copper_chest": {},
+            "minecraft:waxed_weathered_copper_golem_statue": {},
             "minecraft:waxed_weathered_copper_grate": {},
             "minecraft:waxed_weathered_cut_copper": {},
             "minecraft:waxed_weathered_cut_copper_stairs": {},
@@ -75750,6 +76895,7 @@
             "minecraft:weathered_copper": {},
             "minecraft:weathered_copper_bulb": {},
             "minecraft:weathered_copper_chest": {},
+            "minecraft:weathered_copper_golem_statue": {},
             "minecraft:weathered_copper_grate": {},
             "minecraft:weathered_cut_copper": {},
             "minecraft:weathered_cut_copper_stairs": {},
@@ -76546,6 +77692,7 @@
                 "minecraft:acacia_log": {},
                 "minecraft:acacia_planks": {},
                 "minecraft:acacia_pressure_plate": {},
+                "minecraft:acacia_shelf": {},
                 "minecraft:acacia_slab": {},
                 "minecraft:acacia_stairs": {},
                 "minecraft:acacia_standing_sign": {},
@@ -76578,6 +77725,7 @@
                 "minecraft:bamboo_mosaic_stairs": {},
                 "minecraft:bamboo_planks": {},
                 "minecraft:bamboo_pressure_plate": {},
+                "minecraft:bamboo_shelf": {},
                 "minecraft:bamboo_slab": {},
                 "minecraft:bamboo_stairs": {},
                 "minecraft:bamboo_standing_sign": {},
@@ -76602,6 +77750,7 @@
                 "minecraft:birch_log": {},
                 "minecraft:birch_planks": {},
                 "minecraft:birch_pressure_plate": {},
+                "minecraft:birch_shelf": {},
                 "minecraft:birch_slab": {},
                 "minecraft:birch_stairs": {},
                 "minecraft:birch_standing_sign": {},
@@ -76683,6 +77832,7 @@
                 "minecraft:cherry_log": {},
                 "minecraft:cherry_planks": {},
                 "minecraft:cherry_pressure_plate": {},
+                "minecraft:cherry_shelf": {},
                 "minecraft:cherry_slab": {},
                 "minecraft:cherry_stairs": {},
                 "minecraft:cherry_standing_sign": {},
@@ -76724,6 +77874,7 @@
                 "minecraft:copper_bulb": {},
                 "minecraft:copper_chest": {},
                 "minecraft:copper_door": {},
+                "minecraft:copper_golem_statue": {},
                 "minecraft:copper_grate": {},
                 "minecraft:copper_ore": {},
                 "minecraft:copper_trapdoor": {},
@@ -76745,6 +77896,7 @@
                 "minecraft:crimson_nylium": {},
                 "minecraft:crimson_planks": {},
                 "minecraft:crimson_pressure_plate": {},
+                "minecraft:crimson_shelf": {},
                 "minecraft:crimson_slab": {},
                 "minecraft:crimson_stairs": {},
                 "minecraft:crimson_standing_sign": {},
@@ -76782,6 +77934,7 @@
                 "minecraft:dark_oak_log": {},
                 "minecraft:dark_oak_planks": {},
                 "minecraft:dark_oak_pressure_plate": {},
+                "minecraft:dark_oak_shelf": {},
                 "minecraft:dark_oak_slab": {},
                 "minecraft:dark_oak_stairs": {},
                 "minecraft:dark_oak_trapdoor": {},
@@ -76976,6 +78129,7 @@
                 "minecraft:exposed_copper_bulb": {},
                 "minecraft:exposed_copper_chest": {},
                 "minecraft:exposed_copper_door": {},
+                "minecraft:exposed_copper_golem_statue": {},
                 "minecraft:exposed_copper_grate": {},
                 "minecraft:exposed_copper_trapdoor": {},
                 "minecraft:exposed_cut_copper": {},
@@ -77097,6 +78251,7 @@
                 "minecraft:jungle_log": {},
                 "minecraft:jungle_planks": {},
                 "minecraft:jungle_pressure_plate": {},
+                "minecraft:jungle_shelf": {},
                 "minecraft:jungle_slab": {},
                 "minecraft:jungle_stairs": {},
                 "minecraft:jungle_standing_sign": {},
@@ -77171,6 +78326,7 @@
                 "minecraft:mangrove_planks": {},
                 "minecraft:mangrove_pressure_plate": {},
                 "minecraft:mangrove_roots": {},
+                "minecraft:mangrove_shelf": {},
                 "minecraft:mangrove_slab": {},
                 "minecraft:mangrove_stairs": {},
                 "minecraft:mangrove_standing_sign": {},
@@ -77222,6 +78378,7 @@
                 "minecraft:oak_leaves": {},
                 "minecraft:oak_log": {},
                 "minecraft:oak_planks": {},
+                "minecraft:oak_shelf": {},
                 "minecraft:oak_slab": {},
                 "minecraft:oak_stairs": {},
                 "minecraft:oak_wood": {},
@@ -77243,6 +78400,7 @@
                 "minecraft:oxidized_copper_bulb": {},
                 "minecraft:oxidized_copper_chest": {},
                 "minecraft:oxidized_copper_door": {},
+                "minecraft:oxidized_copper_golem_statue": {},
                 "minecraft:oxidized_copper_grate": {},
                 "minecraft:oxidized_copper_trapdoor": {},
                 "minecraft:oxidized_cut_copper": {},
@@ -77262,6 +78420,7 @@
                 "minecraft:pale_oak_log": {},
                 "minecraft:pale_oak_planks": {},
                 "minecraft:pale_oak_pressure_plate": {},
+                "minecraft:pale_oak_shelf": {},
                 "minecraft:pale_oak_slab": {},
                 "minecraft:pale_oak_stairs": {},
                 "minecraft:pale_oak_standing_sign": {},
@@ -77444,6 +78603,7 @@
                 "minecraft:spruce_log": {},
                 "minecraft:spruce_planks": {},
                 "minecraft:spruce_pressure_plate": {},
+                "minecraft:spruce_shelf": {},
                 "minecraft:spruce_slab": {},
                 "minecraft:spruce_stairs": {},
                 "minecraft:spruce_standing_sign": {},
@@ -77527,6 +78687,7 @@
                 "minecraft:warped_nylium": {},
                 "minecraft:warped_planks": {},
                 "minecraft:warped_pressure_plate": {},
+                "minecraft:warped_shelf": {},
                 "minecraft:warped_slab": {},
                 "minecraft:warped_stairs": {},
                 "minecraft:warped_standing_sign": {},
@@ -77539,6 +78700,7 @@
                 "minecraft:waxed_copper_bulb": {},
                 "minecraft:waxed_copper_chest": {},
                 "minecraft:waxed_copper_door": {},
+                "minecraft:waxed_copper_golem_statue": {},
                 "minecraft:waxed_copper_grate": {},
                 "minecraft:waxed_copper_trapdoor": {},
                 "minecraft:waxed_cut_copper": {},
@@ -77550,6 +78712,7 @@
                 "minecraft:waxed_exposed_copper_bulb": {},
                 "minecraft:waxed_exposed_copper_chest": {},
                 "minecraft:waxed_exposed_copper_door": {},
+                "minecraft:waxed_exposed_copper_golem_statue": {},
                 "minecraft:waxed_exposed_copper_grate": {},
                 "minecraft:waxed_exposed_copper_trapdoor": {},
                 "minecraft:waxed_exposed_cut_copper": {},
@@ -77561,6 +78724,7 @@
                 "minecraft:waxed_oxidized_copper_bulb": {},
                 "minecraft:waxed_oxidized_copper_chest": {},
                 "minecraft:waxed_oxidized_copper_door": {},
+                "minecraft:waxed_oxidized_copper_golem_statue": {},
                 "minecraft:waxed_oxidized_copper_grate": {},
                 "minecraft:waxed_oxidized_copper_trapdoor": {},
                 "minecraft:waxed_oxidized_cut_copper": {},
@@ -77572,6 +78736,7 @@
                 "minecraft:waxed_weathered_copper_bulb": {},
                 "minecraft:waxed_weathered_copper_chest": {},
                 "minecraft:waxed_weathered_copper_door": {},
+                "minecraft:waxed_weathered_copper_golem_statue": {},
                 "minecraft:waxed_weathered_copper_grate": {},
                 "minecraft:waxed_weathered_copper_trapdoor": {},
                 "minecraft:waxed_weathered_cut_copper": {},
@@ -77583,6 +78748,7 @@
                 "minecraft:weathered_copper_bulb": {},
                 "minecraft:weathered_copper_chest": {},
                 "minecraft:weathered_copper_door": {},
+                "minecraft:weathered_copper_golem_statue": {},
                 "minecraft:weathered_copper_grate": {},
                 "minecraft:weathered_copper_trapdoor": {},
                 "minecraft:weathered_cut_copper": {},
@@ -77892,6 +79058,10 @@
                 },
             },
         },
+        "minecraft:acacia_shelf": {
+            "localizationKey": "tile.acacia_shelf.name",
+            "tags": [],
+        },
         "minecraft:acacia_sign": {
             "localizationKey": "item.acacia_sign.name",
             "maxAmount": 16,
@@ -78166,6 +79336,10 @@
                 "minecraft:boats",
             ],
         },
+        "minecraft:bamboo_shelf": {
+            "localizationKey": "tile.bamboo_shelf.name",
+            "tags": [],
+        },
         "minecraft:bamboo_sign": {
             "localizationKey": "item.bamboo_sign.name",
             "maxAmount": 16,
@@ -78362,6 +79536,10 @@
                     "compostingChance": 30,
                 },
             },
+        },
+        "minecraft:birch_shelf": {
+            "localizationKey": "tile.birch_shelf.name",
+            "tags": [],
         },
         "minecraft:birch_sign": {
             "localizationKey": "item.birch_sign.name",
@@ -79365,6 +80543,10 @@
                 },
             },
         },
+        "minecraft:cherry_shelf": {
+            "localizationKey": "tile.cherry_shelf.name",
+            "tags": [],
+        },
         "minecraft:cherry_sign": {
             "localizationKey": "item.cherry_sign.name",
             "maxAmount": 16,
@@ -79693,13 +80875,130 @@
                 },
             },
         },
+        "minecraft:copper_axe": {
+            "localizationKey": "item.copper_axe.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:digger",
+                "minecraft:is_axe",
+                "minecraft:is_tool",
+                "minecraft:copper_tier",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "Axe",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "efficiency",
+                        "fortune",
+                        "mending",
+                        "sharpness",
+                        "silk_touch",
+                        "smite",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:copper_block": {
             "localizationKey": "tile.copper_block.name",
             "tags": [],
         },
+        "minecraft:copper_boots": {
+            "localizationKey": "item.copper_boots.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_armor",
+                "minecraft:copper_tier",
+                "minecraft:trimmable_armors",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 143,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "ArmorFeet",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "blast_protection",
+                        "depth_strider",
+                        "feather_falling",
+                        "fire_protection",
+                        "frost_walker",
+                        "mending",
+                        "projectile_protection",
+                        "protection",
+                        "soul_speed",
+                        "thorns",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:copper_bulb": {
             "localizationKey": "tile.copper_bulb.name",
             "tags": [],
+        },
+        "minecraft:copper_chest": {
+            "localizationKey": "tile.copper_chest.name",
+            "tags": [],
+        },
+        "minecraft:copper_chestplate": {
+            "localizationKey": "item.copper_chestplate.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_armor",
+                "minecraft:copper_tier",
+                "minecraft:trimmable_armors",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 176,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "ArmorTorso",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "blast_protection",
+                        "fire_protection",
+                        "mending",
+                        "projectile_protection",
+                        "protection",
+                        "thorns",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:copper_door": {
             "localizationKey": "item.copper_door.name",
@@ -79707,9 +81006,91 @@
                 "minecraft:door",
             ],
         },
+        "minecraft:copper_golem_spawn_egg": {
+            "localizationKey": "item.spawn_egg.entity.copper_golem.name",
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
+        },
+        "minecraft:copper_golem_statue": {
+            "localizationKey": "tile.copper_golem_statue.name",
+            "tags": [],
+        },
         "minecraft:copper_grate": {
             "localizationKey": "tile.copper_grate.name",
             "tags": [],
+        },
+        "minecraft:copper_helmet": {
+            "localizationKey": "item.copper_helmet.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_armor",
+                "minecraft:copper_tier",
+                "minecraft:trimmable_armors",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 121,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "ArmorHead",
+                    ],
+                    "applicableEnchantments": [
+                        "aqua_affinity",
+                        "binding",
+                        "blast_protection",
+                        "fire_protection",
+                        "mending",
+                        "projectile_protection",
+                        "protection",
+                        "respiration",
+                        "thorns",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:copper_hoe": {
+            "localizationKey": "item.copper_hoe.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:digger",
+                "minecraft:is_hoe",
+                "minecraft:is_tool",
+                "minecraft:copper_tier",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "Hoe",
+                    ],
+                    "applicableEnchantments": [
+                        "efficiency",
+                        "fortune",
+                        "mending",
+                        "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:copper_ingot": {
             "localizationKey": "item.copper_ingot.name",
@@ -79717,9 +81098,154 @@
                 "minecraft:trim_materials",
             ],
         },
+        "minecraft:copper_leggings": {
+            "localizationKey": "item.copper_leggings.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_armor",
+                "minecraft:copper_tier",
+                "minecraft:trimmable_armors",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 165,
+                    "damageChances": [
+                        100,
+                        80,
+                        73,
+                        70,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "ArmorLegs",
+                    ],
+                    "applicableEnchantments": [
+                        "binding",
+                        "blast_protection",
+                        "fire_protection",
+                        "mending",
+                        "projectile_protection",
+                        "protection",
+                        "swift_sneak",
+                        "thorns",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:copper_nugget": {
+            "localizationKey": "item.copper_nugget.name",
+            "tags": [],
+        },
         "minecraft:copper_ore": {
             "localizationKey": "tile.copper_ore.name",
             "tags": [],
+        },
+        "minecraft:copper_pickaxe": {
+            "localizationKey": "item.copper_pickaxe.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:digger",
+                "minecraft:is_pickaxe",
+                "minecraft:is_tool",
+                "minecraft:copper_tier",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "Pickaxe",
+                    ],
+                    "applicableEnchantments": [
+                        "efficiency",
+                        "fortune",
+                        "mending",
+                        "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:copper_shovel": {
+            "localizationKey": "item.copper_shovel.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:digger",
+                "minecraft:is_shovel",
+                "minecraft:is_tool",
+                "minecraft:copper_tier",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "Shovel",
+                    ],
+                    "applicableEnchantments": [
+                        "efficiency",
+                        "fortune",
+                        "mending",
+                        "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:copper_sword": {
+            "localizationKey": "item.copper_sword.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:is_sword",
+                "minecraft:is_tool",
+                "minecraft:copper_tier",
+            ],
+            "components": {
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                    "damageChances": [
+                        100,
+                        50,
+                        33,
+                        25,
+                    ],
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "Sword",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "mending",
+                        "sharpness",
+                        "smite",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
         },
         "minecraft:copper_trapdoor": {
             "localizationKey": "tile.copper_trapdoor.name",
@@ -79870,6 +81396,10 @@
                     "compostingChance": 65,
                 },
             },
+        },
+        "minecraft:crimson_shelf": {
+            "localizationKey": "tile.crimson_shelf.name",
+            "tags": [],
         },
         "minecraft:crimson_sign": {
             "localizationKey": "item.crimson_sign.name",
@@ -80132,6 +81662,10 @@
                     "compostingChance": 30,
                 },
             },
+        },
+        "minecraft:dark_oak_shelf": {
+            "localizationKey": "tile.dark_oak_shelf.name",
+            "tags": [],
         },
         "minecraft:dark_oak_sign": {
             "localizationKey": "item.darkoak_sign.name",
@@ -81034,11 +82568,19 @@
             "localizationKey": "tile.exposed_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:exposed_copper_chest": {
+            "localizationKey": "tile.exposed_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:exposed_copper_door": {
             "localizationKey": "item.exposed_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:exposed_copper_golem_statue": {
+            "localizationKey": "tile.exposed_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:exposed_copper_grate": {
             "localizationKey": "tile.exposed_copper_grate.name",
@@ -82544,6 +84086,10 @@
                 },
             },
         },
+        "minecraft:jungle_shelf": {
+            "localizationKey": "tile.jungle_shelf.name",
+            "tags": [],
+        },
         "minecraft:jungle_sign": {
             "localizationKey": "item.jungle_sign.name",
             "maxAmount": 16,
@@ -83372,6 +84918,10 @@
                     "compostingChance": 30,
                 },
             },
+        },
+        "minecraft:mangrove_shelf": {
+            "localizationKey": "tile.mangrove_shelf.name",
+            "tags": [],
         },
         "minecraft:mangrove_sign": {
             "localizationKey": "item.mangrove_sign.name",
@@ -84219,6 +85769,10 @@
                 },
             },
         },
+        "minecraft:oak_shelf": {
+            "localizationKey": "tile.oak_shelf.name",
+            "tags": [],
+        },
         "minecraft:oak_sign": {
             "localizationKey": "item.sign.name",
             "maxAmount": 16,
@@ -84385,11 +85939,19 @@
             "localizationKey": "tile.oxidized_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:oxidized_copper_chest": {
+            "localizationKey": "tile.oxidized_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:oxidized_copper_door": {
             "localizationKey": "item.oxidized_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:oxidized_copper_golem_statue": {
+            "localizationKey": "tile.oxidized_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:oxidized_copper_grate": {
             "localizationKey": "tile.oxidized_copper_grate.name",
@@ -84528,6 +86090,10 @@
                     "compostingChance": 30,
                 },
             },
+        },
+        "minecraft:pale_oak_shelf": {
+            "localizationKey": "tile.pale_oak_shelf.name",
+            "tags": [],
         },
         "minecraft:pale_oak_sign": {
             "localizationKey": "item.pale_oak_sign.name",
@@ -86027,6 +87593,10 @@
                 },
             },
         },
+        "minecraft:spruce_shelf": {
+            "localizationKey": "tile.spruce_shelf.name",
+            "tags": [],
+        },
         "minecraft:spruce_sign": {
             "localizationKey": "item.spruce_sign.name",
             "maxAmount": 16,
@@ -86923,6 +88493,10 @@
                 },
             },
         },
+        "minecraft:warped_shelf": {
+            "localizationKey": "tile.warped_shelf.name",
+            "tags": [],
+        },
         "minecraft:warped_sign": {
             "localizationKey": "item.warped_sign.name",
             "maxAmount": 16,
@@ -86986,11 +88560,19 @@
             "localizationKey": "tile.waxed_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:waxed_copper_chest": {
+            "localizationKey": "tile.waxed_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:waxed_copper_door": {
             "localizationKey": "item.waxed_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:waxed_copper_golem_statue": {
+            "localizationKey": "tile.waxed_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:waxed_copper_grate": {
             "localizationKey": "tile.waxed_copper_grate.name",
@@ -87024,11 +88606,19 @@
             "localizationKey": "tile.waxed_exposed_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:waxed_exposed_copper_chest": {
+            "localizationKey": "tile.waxed_exposed_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:waxed_exposed_copper_door": {
             "localizationKey": "item.waxed_exposed_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:waxed_exposed_copper_golem_statue": {
+            "localizationKey": "tile.waxed_exposed_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:waxed_exposed_copper_grate": {
             "localizationKey": "tile.waxed_exposed_copper_grate.name",
@@ -87062,11 +88652,19 @@
             "localizationKey": "tile.waxed_oxidized_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:waxed_oxidized_copper_chest": {
+            "localizationKey": "tile.waxed_oxidized_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:waxed_oxidized_copper_door": {
             "localizationKey": "item.waxed_oxidized_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:waxed_oxidized_copper_golem_statue": {
+            "localizationKey": "tile.waxed_oxidized_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:waxed_oxidized_copper_grate": {
             "localizationKey": "tile.waxed_oxidized_copper_grate.name",
@@ -87100,11 +88698,19 @@
             "localizationKey": "tile.waxed_weathered_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:waxed_weathered_copper_chest": {
+            "localizationKey": "tile.waxed_weathered_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:waxed_weathered_copper_door": {
             "localizationKey": "item.waxed_weathered_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:waxed_weathered_copper_golem_statue": {
+            "localizationKey": "tile.waxed_weathered_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:waxed_weathered_copper_grate": {
             "localizationKey": "tile.waxed_weathered_copper_grate.name",
@@ -87144,11 +88750,19 @@
             "localizationKey": "tile.weathered_copper_bulb.name",
             "tags": [],
         },
+        "minecraft:weathered_copper_chest": {
+            "localizationKey": "tile.weathered_copper_chest.name",
+            "tags": [],
+        },
         "minecraft:weathered_copper_door": {
             "localizationKey": "item.weathered_copper_door.name",
             "tags": [
                 "minecraft:door",
             ],
+        },
+        "minecraft:weathered_copper_golem_statue": {
+            "localizationKey": "tile.weathered_copper_golem_statue.name",
+            "tags": [],
         },
         "minecraft:weathered_copper_grate": {
             "localizationKey": "tile.weathered_copper_grate.name",
@@ -87764,6 +89378,17 @@
             "minecraft:charcoal",
             "minecraft:coal",
         ],
+        "minecraft:copper_tier": [
+            "minecraft:copper_axe",
+            "minecraft:copper_boots",
+            "minecraft:copper_chestplate",
+            "minecraft:copper_helmet",
+            "minecraft:copper_hoe",
+            "minecraft:copper_leggings",
+            "minecraft:copper_pickaxe",
+            "minecraft:copper_shovel",
+            "minecraft:copper_sword",
+        ],
         "minecraft:crimson_stems": [
             "minecraft:crimson_hyphae",
             "minecraft:crimson_stem",
@@ -87809,6 +89434,10 @@
             "minecraft:mace",
         ],
         "minecraft:digger": [
+            "minecraft:copper_axe",
+            "minecraft:copper_hoe",
+            "minecraft:copper_pickaxe",
+            "minecraft:copper_shovel",
             "minecraft:diamond_axe",
             "minecraft:diamond_hoe",
             "minecraft:diamond_pickaxe",
@@ -87930,6 +89559,10 @@
             "minecraft:chainmail_chestplate",
             "minecraft:chainmail_helmet",
             "minecraft:chainmail_leggings",
+            "minecraft:copper_boots",
+            "minecraft:copper_chestplate",
+            "minecraft:copper_helmet",
+            "minecraft:copper_leggings",
             "minecraft:diamond_boots",
             "minecraft:diamond_chestplate",
             "minecraft:diamond_helmet",
@@ -87954,6 +89587,7 @@
             "minecraft:turtle_helmet",
         ],
         "minecraft:is_axe": [
+            "minecraft:copper_axe",
             "minecraft:diamond_axe",
             "minecraft:golden_axe",
             "minecraft:iron_axe",
@@ -88010,6 +89644,7 @@
             "minecraft:sweet_berries",
         ],
         "minecraft:is_hoe": [
+            "minecraft:copper_hoe",
             "minecraft:diamond_hoe",
             "minecraft:golden_hoe",
             "minecraft:iron_hoe",
@@ -88039,6 +89674,7 @@
             "minecraft:tnt_minecart",
         ],
         "minecraft:is_pickaxe": [
+            "minecraft:copper_pickaxe",
             "minecraft:diamond_pickaxe",
             "minecraft:golden_pickaxe",
             "minecraft:iron_pickaxe",
@@ -88050,6 +89686,7 @@
             "minecraft:shears",
         ],
         "minecraft:is_shovel": [
+            "minecraft:copper_shovel",
             "minecraft:diamond_shovel",
             "minecraft:golden_shovel",
             "minecraft:iron_shovel",
@@ -88058,6 +89695,7 @@
             "minecraft:wooden_shovel",
         ],
         "minecraft:is_sword": [
+            "minecraft:copper_sword",
             "minecraft:diamond_sword",
             "minecraft:golden_sword",
             "minecraft:iron_sword",
@@ -88067,6 +89705,11 @@
             "minecraft:wooden_sword",
         ],
         "minecraft:is_tool": [
+            "minecraft:copper_axe",
+            "minecraft:copper_hoe",
+            "minecraft:copper_pickaxe",
+            "minecraft:copper_shovel",
+            "minecraft:copper_sword",
             "minecraft:diamond_axe",
             "minecraft:diamond_hoe",
             "minecraft:diamond_pickaxe",
@@ -88297,6 +89940,7 @@
             "minecraft:cave_spider_spawn_egg",
             "minecraft:chicken_spawn_egg",
             "minecraft:cod_spawn_egg",
+            "minecraft:copper_golem_spawn_egg",
             "minecraft:cow_spawn_egg",
             "minecraft:creaking_spawn_egg",
             "minecraft:creeper_spawn_egg",
@@ -88446,6 +90090,10 @@
             "minecraft:chainmail_chestplate",
             "minecraft:chainmail_helmet",
             "minecraft:chainmail_leggings",
+            "minecraft:copper_boots",
+            "minecraft:copper_chestplate",
+            "minecraft:copper_helmet",
+            "minecraft:copper_leggings",
             "minecraft:diamond_boots",
             "minecraft:diamond_chestplate",
             "minecraft:diamond_helmet",
@@ -88571,6 +90219,7 @@
         "minecraft:chicken",
         "minecraft:cod",
         "minecraft:command_block_minecart",
+        "minecraft:copper_golem",
         "minecraft:cow",
         "minecraft:creaking",
         "minecraft:creeper",

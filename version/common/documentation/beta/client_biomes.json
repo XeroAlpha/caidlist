@@ -1,6 +1,6 @@
 {
     "title": "CLIENT BIOMES DOCUMENTATION",
-    "version": "1.21.100.24",
+    "version": "1.21.110.20",
     "content": [],
     "sections": [
         {
@@ -114,6 +114,12 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Set the identifier used for lighting in Vibrant Visuals mode. Identifiers must resolve to identifiers in valid Lighting JSON schemas under the \"lighting\" directory. Biomes without this component will have default lighting settings.",
+                                },
+                                {
+                                    "Name": "minecraft:precipitation",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Describes the visuals for a biome's precipitation. Biomes without this component will have default values. At most one precipitation type can be set for a biome.",
                                 },
                                 {
                                     "Name": "minecraft:sky_color",
@@ -440,6 +446,43 @@
                     ],
                 },
                 {
+                    "name": "minecraft:precipitation",
+                    "id": "minecraft:precipitation",
+                    "level": 2,
+                    "content": [
+                        "Describes the visuals for a biome's precipitation. Biomes without this component will have default values. At most one precipitation type can be set for a biome.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "ash",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of ash precipitation visuals",
+                                },
+                                {
+                                    "Name": "blue_spores",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of blue spore precipitation visuals",
+                                },
+                                {
+                                    "Name": "red_spores",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of blue spore precipitation visuals",
+                                },
+                                {
+                                    "Name": "white_ash",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of white ash precipitation visuals",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:sky_color",
                     "id": "minecraft:sky_color",
                     "level": 2,
@@ -505,5 +548,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "bb369c360490b02dc0585400da40ac002610ac62",
+    "__OBJECTHASH__": "65f00f1b36328166e115f4ed1cde88776a2b65be",
 }
