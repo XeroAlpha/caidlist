@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.110.20",
+    "version": "1.21.110.21",
     "content": [],
     "sections": [
         {
@@ -20712,25 +20712,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.roar",
-                            "id": "minecraft:behavior.roar",
-                            "level": 4,
-                            "content": [
-                                "Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "duration",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.0",
-                                            "Description": "The amount of time to roar for.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:behavior.roll",
                             "id": "minecraft:behavior.roll",
                             "level": 4,
@@ -21032,118 +21013,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.slime_attack",
-                            "id": "minecraft:behavior.slime_attack",
-                            "level": 4,
-                            "content": [
-                                "Causes the entity to grow tired every once in a while, while attacking.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "set_persistent",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Allows the actor to be set to persist upon targeting a player",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "During attack behavior, this multiplier modifies the entity's speed when moving toward the target.",
-                                        },
-                                        {
-                                            "Name": "x_max_rotation",
-                                            "Type": "Decimal",
-                                            "Default Value": "10",
-                                            "Description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target.",
-                                        },
-                                        {
-                                            "Name": "y_max_rotation",
-                                            "Type": "Decimal",
-                                            "Default Value": "10",
-                                            "Description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate while trying to look at the target.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.slime_float",
-                            "id": "minecraft:behavior.slime_float",
-                            "level": 4,
-                            "content": [
-                                "Allow slimes to float in water / lava. Can only be used by Slime and Magma Cubes.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "jump_chance_percentage",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.8",
-                                            "Description": "Percent chance a slime or magma cube has to jump while in water / lava.",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.2",
-                                            "Description": "Determines the multiplier the entity's speed is modified by when moving through water / lava.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.slime_keep_on_jumping",
-                            "id": "minecraft:behavior.slime_keep_on_jumping",
-                            "level": 4,
-                            "content": [
-                                "Allows the entity to continuously jump around like a slime.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "Determines the multiplier this entity's speed is modified by when jumping around.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.slime_random_direction",
-                            "id": "minecraft:behavior.slime_random_direction",
-                            "level": 4,
-                            "content": [
-                                "Allows the entity to move in random directions like a slime.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "add_random_time_range",
-                                            "Type": "Integer",
-                                            "Default Value": "3",
-                                            "Description": "Additional time (in whole seconds), chosen randomly in the range of [0, \"add_random_time_range\"], to add to \"min_change_direction_time\".",
-                                        },
-                                        {
-                                            "Name": "min_change_direction_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "2",
-                                            "Description": "Constant minimum time (in seconds) to wait before choosing a new direction.",
-                                        },
-                                        {
-                                            "Name": "turn_range",
-                                            "Type": "Integer",
-                                            "Default Value": "360",
-                                            "Description": "Maximum rotation angle range (in degrees) when randomly choosing a new direction.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:behavior.snacking",
                             "id": "minecraft:behavior.snacking",
                             "level": 4,
@@ -21303,134 +21172,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.sniff",
-                            "id": "minecraft:behavior.sniff",
-                            "level": 4,
-                            "content": [
-                                "Allows this entity to detect the nearest player within \"sniffing_radius\" and update its \"minecraft:suspect_tracking\" component state",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "cooldown_range",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[3.0, 10.0]",
-                                            "Description": "Cooldown range between sniffs in seconds",
-                                        },
-                                        {
-                                            "Name": "duration",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Sniffing duration in seconds",
-                                        },
-                                        {
-                                            "Name": "sniffing_radius",
-                                            "Type": "Decimal",
-                                            "Default Value": "5.0",
-                                            "Description": "Mob detection radius",
-                                        },
-                                        {
-                                            "Name": "suspicion_radius_horizontal",
-                                            "Type": "Decimal",
-                                            "Default Value": "3.0",
-                                            "Description": "Mob suspicion horizontal radius. When a player is within this radius horizontally, the anger level towards that player is increased",
-                                        },
-                                        {
-                                            "Name": "suspicion_radius_vertical",
-                                            "Type": "Decimal",
-                                            "Default Value": "3.0",
-                                            "Description": "Mob suspicion vertical radius. When a player is within this radius vertically, the anger level towards that player is increased",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.sonic_boom",
-                            "id": "minecraft:behavior.sonic_boom",
-                            "level": 4,
-                            "content": [
-                                "Allows this entity to perform a 'sonic boom' ranged attack",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "attack_cooldown",
-                                            "Type": "Decimal",
-                                            "Default Value": "5.00",
-                                            "Description": "Cooldown in seconds required after using this attack until the entity can use sonic boom again.",
-                                        },
-                                        {
-                                            "Name": "attack_damage",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.00",
-                                            "Description": "Attack damage of the sonic boom.",
-                                        },
-                                        {
-                                            "Name": "attack_range_horizontal",
-                                            "Type": "Decimal",
-                                            "Default Value": "15.00",
-                                            "Description": "Horizontal range (in blocks) at which the sonic boom can damage the target.",
-                                        },
-                                        {
-                                            "Name": "attack_range_vertical",
-                                            "Type": "Decimal",
-                                            "Default Value": "20.00",
-                                            "Description": "Vertical range (in blocks) at which the sonic boom can damage the target.",
-                                        },
-                                        {
-                                            "Name": "attack_sound",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Sound event for the attack.",
-                                        },
-                                        {
-                                            "Name": "charge_sound",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Sound event for the charge up.",
-                                        },
-                                        {
-                                            "Name": "duration",
-                                            "Type": "Decimal",
-                                            "Default Value": "3.00",
-                                            "Description": "Goal duration in seconds",
-                                        },
-                                        {
-                                            "Name": "duration_until_attack_sound",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.70",
-                                            "Description": "Duration in seconds until the attack sound is played.",
-                                        },
-                                        {
-                                            "Name": "knockback_height_cap",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.00",
-                                            "Description": "Height cap of the attack knockback's vertical delta.",
-                                        },
-                                        {
-                                            "Name": "knockback_horizontal_strength",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.00",
-                                            "Description": "Horizontal strength of the attack's knockback applied to the attack target.",
-                                        },
-                                        {
-                                            "Name": "knockback_vertical_strength",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.00",
-                                            "Description": "Vertical strength of the attack's knockback applied to the attack target.",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.00",
-                                            "Description": "This multiplier modifies the attacking entity's speed when moving toward the target.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:behavior.squid_dive",
                             "id": "minecraft:behavior.squid_dive",
                             "level": 4,
@@ -21532,43 +21273,6 @@
                                             "Type": "Decimal",
                                             "Default Value": "2.0",
                                             "Description": "The amount of time the mob will be stuck if they fail and land on a block they can be stuck on",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.stay_near_noteblock",
-                            "id": "minecraft:behavior.stay_near_noteblock",
-                            "level": 4,
-                            "content": [
-                                "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "listen_time",
-                                            "Type": "Integer",
-                                            "Default Value": "30",
-                                            "Description": "Sets the time an entity should stay near a noteblock after hearing it.",
-                                        },
-                                        {
-                                            "Name": "speed",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.000000",
-                                            "Description": "Sets the entity's speed when moving toward the block.",
-                                        },
-                                        {
-                                            "Name": "start_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "10.000000",
-                                            "Description": "Sets the distance the entity needs to be away from the block to attempt to start the goal.",
-                                        },
-                                        {
-                                            "Name": "stop_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "2.000000",
-                                            "Description": "Sets the distance from the block the entity will attempt to reach.",
                                         },
                                     ],
                                 },
@@ -22004,105 +21708,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.swim_idle",
-                            "id": "minecraft:behavior.swim_idle",
-                            "level": 4,
-                            "content": [
-                                "Allows the entity go idle, if swimming. Entity must be in water.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "idle_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "5",
-                                            "Description": "Amount of time (in seconds) to stay idle.",
-                                        },
-                                        {
-                                            "Name": "success_rate",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.1",
-                                            "Description": "Percent chance this entity will go idle, 1.0 = 100%.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.swim_up_for_breath",
-                            "id": "minecraft:behavior.swim_up_for_breath",
-                            "level": 4,
-                            "content": [
-                                "Allows the mob to try to move to air once it is close to running out of its total breathable supply. Requires \"minecraft:breathable\".",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "material_type",
-                                            "Type": "String",
-                                            "Default Value": "water",
-                                            "Description": "The material the mob is traveling in. An air block will only be considered valid to move to with a block of this material below it. Options are: \"water\", \"lava\", or \"any\".",
-                                        },
-                                        {
-                                            "Name": "search_height",
-                                            "Type": "Integer",
-                                            "Default Value": "16",
-                                            "Description": "The height (in blocks) above the mob's current position that it will search for a valid air block to move to. If a valid block cannot be found, the mob will move to the position this many blocks above it.",
-                                        },
-                                        {
-                                            "Name": "search_radius",
-                                            "Type": "Integer",
-                                            "Default Value": "4",
-                                            "Description": "The radius (in blocks) around the mob's current position that it will search for a valid air block to move to.",
-                                        },
-                                        {
-                                            "Name": "speed_mod",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.40",
-                                            "Description": "Movement speed multiplier of the mob when using this Goal.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.swim_wander",
-                            "id": "minecraft:behavior.swim_wander",
-                            "level": 4,
-                            "content": [
-                                "Allows the entity to wander around while swimming, when not path-finding.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "interval",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.00833",
-                                            "Description": "Percent chance to start wandering, when not path-finding. 1 = 100%",
-                                        },
-                                        {
-                                            "Name": "look_ahead",
-                                            "Type": "Decimal",
-                                            "Default Value": "5",
-                                            "Description": "Distance to look ahead for obstacle avoidance, while wandering.",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "This multiplier modifies the entity's speed when wandering.",
-                                        },
-                                        {
-                                            "Name": "wander_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "5",
-                                            "Description": "Amount of time (in seconds) to wander after wandering behavior was successfully started.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:behavior.swim_with_entity",
                             "id": "minecraft:behavior.swim_with_entity",
                             "level": 4,
@@ -22170,37 +21775,6 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.1",
                                             "Description": "Percent chance to start following another entity, if not already doing so. 1.0 = 100%",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:behavior.swoop_attack",
-                            "id": "minecraft:behavior.swoop_attack",
-                            "level": 4,
-                            "content": [
-                                "Allows an entity to attack using swoop attack behavior; Ideal for use with flying mobs. The behavior ends if the entity has a horizontal collision or gets hit.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "damage_reach",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.2",
-                                            "Description": "Added to the base size of the entity, to determine the target's maximum allowable distance, when trying to deal attack damage.",
-                                        },
-                                        {
-                                            "Name": "delay_range",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[10, 20]",
-                                            "Description": "Minimum and maximum cooldown time-range (in seconds) between each attempted swoop attack.",
-                                        },
-                                        {
-                                            "Name": "speed_multiplier",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "During swoop attack behavior, this determines the multiplier the entity's speed is modified by when moving toward the target.",
                                         },
                                     ],
                                 },
@@ -24287,6 +23861,12 @@
                                             "Type": "Decimal",
                                             "Default Value": "1.00",
                                             "Description": "The dash cooldown in seconds. Default value is 1.000000.",
+                                        },
+                                        {
+                                            "Name": "direction",
+                                            "Type": "String",
+                                            "Default Value": "entity",
+                                            "Description": "Should the momentum be applied in the direction of the 'entity' or 'passenger'. When 'entity' is used the momentum is applied horizontally according to the direction the entity is looking, using only the entity's yaw. When 'passenger' is used the momentum will be applied in the direction the controlling passenger is looking, using the passenger's pitch and yaw.",
                                         },
                                         {
                                             "Name": "horizontal_momentum",
@@ -29452,10 +29032,6 @@
                                             "ID": "-950950337",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.roar",
-                                            "ID": "8169564995138049594",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.roll",
                                             "ID": "817471653",
                                         },
@@ -29492,36 +29068,12 @@
                                             "ID": "-1811763",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.slime_attack",
-                                            "ID": "9939462702916185623",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.slime_float",
-                                            "ID": "3498887529883213515",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.slime_keep_on_jumping",
-                                            "ID": "9635607836508236313",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.slime_random_direction",
-                                            "ID": "16233644158771707634",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.snacking",
                                             "ID": "875141064",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.sneeze",
                                             "ID": "1528584076",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.sniff",
-                                            "ID": "2518751594793034670",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.sonic_boom",
-                                            "ID": "3140959826915046776",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.squid_dive",
@@ -29548,10 +29100,6 @@
                                             "ID": "-1248479202",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.stay_near_noteblock",
-                                            "ID": "10537868669633006624",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.stay_while_sitting",
                                             "ID": "1346980478",
                                         },
@@ -29576,24 +29124,8 @@
                                             "ID": "-1473132493",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.swim_idle",
-                                            "ID": "6562850329755828441",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.swim_up_for_breath",
-                                            "ID": "6795851152810947053",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.swim_wander",
-                                            "ID": "12378924708543723854",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:behavior.swim_with_entity",
                                             "ID": "10204691344094313319",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:behavior.swoop_attack",
-                                            "ID": "7451467701814397451",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.take_block",
@@ -31424,5 +30956,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "a7efddb359e5500b3872e906a11811a515c776e8",
+    "__OBJECTHASH__": "5d2fcd177929382f50248c7eeceef287ea0737b3",
 }

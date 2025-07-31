@@ -1,6 +1,6 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.110.20",
+    "version": "1.21.110.21",
     "content": [],
     "sections": [
         {
@@ -328,11 +328,30 @@
                     ],
                 },
                 {
-                    "name": "grass",
-                    "id": "grass",
+                    "name": "custom_map_tint_grass_noise",
+                    "id": "custom_map_tint_grass_noise",
                     "level": 2,
                     "content": [
                         "Makes grass use the noise based colors for tinting in this biome on the map.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "type",
+                                    "Type": "\"tint\", \"noise\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of grass tint to use.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "custom_map_tint_grass_tint",
+                    "id": "custom_map_tint_grass_tint",
+                    "level": 2,
+                    "content": [
+                        "Sets the color grass will be tinted by in this biome on the map.",
                         {
                             "type": "table",
                             "rows": [
@@ -542,7 +561,7 @@
                                 },
                                 {
                                     "Name": "grass",
-                                    "Type": "Object of type grass or Object of type grass",
+                                    "Type": "Object of type custom_map_tint_grass_tint or Object of type custom_map_tint_grass_noise",
                                     "Required?": "Required",
                                     "Description": "Controls whether the grass will use a custom tint color or a noise based tint color.",
                                 },
@@ -1169,5 +1188,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "57c75351786128dc56a0ba8c34ca72dcc16f0790",
+    "__OBJECTHASH__": "aad07e2c401ef3f967e64d84fd34375a7cce06eb",
 }
