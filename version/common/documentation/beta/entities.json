@@ -1,6 +1,6 @@
 {
     "title": "ENTITIES DOCUMENTATION",
-    "version": "1.21.110.21",
+    "version": "1.21.110.23",
     "content": [],
     "sections": [
         {
@@ -21886,6 +21886,12 @@
                                             "Description": "The minimum amount of time (in seconds) for the mob to randomly wait for before taking the flower.",
                                         },
                                         {
+                                            "Name": "on_take_flower",
+                                            "Type": "Trigger",
+                                            "Default Value": "",
+                                            "Description": "Event triggered when the entity takes a flower from another entity.",
+                                        },
+                                        {
                                             "Name": "search_area",
                                             "Type": "Vector [a, b, c]",
                                             "Default Value": "[6, 2, 6]",
@@ -27450,7 +27456,7 @@
                             "id": "minecraft:shareables",
                             "level": 4,
                             "content": [
-                                "Defines a list of items the mob wants to share or pick up. Each item must have the following parameters:",
+                                "Defines a list of items the mob wants to share. Each item must have the following parameters:",
                                 {
                                     "type": "table",
                                     "rows": [
@@ -27483,7 +27489,7 @@
                                             "Type": "List",
                                             "Default Value": "",
                                             "Description": [
-                                                "List of items that the entity wants to share.",
+                                                "List of items or item tags that the entity wants to share. Items in-game will match to this list from top to bottom, meaning that the first occurance of a match, be it name or tag, will shadow those coming after.",
                                                 {
                                                     "section": "admire",
                                                     "content": [
@@ -27511,7 +27517,7 @@
                                                 {
                                                     "section": "item",
                                                     "content": [
-                                                        "The name of the item. Aux value can be specified, for instance 'minecraft:skull:1'.",
+                                                        "The name of the item. Aux value can be specified, for instance 'minecraft:skull:1'. Alternatively, a tag can be specified to match all items with that tag.",
                                                     ],
                                                 },
                                                 {
@@ -27523,7 +27529,7 @@
                                                 {
                                                     "section": "pickup_limit",
                                                     "content": [
-                                                        "Maximum number of this item the mob will pick up during a single goal tick.",
+                                                        "Maximum number items the mob will pick up during a single goal tick.",
                                                     ],
                                                 },
                                                 {
@@ -27553,7 +27559,7 @@
                                                 {
                                                     "section": "want_amount",
                                                     "content": [
-                                                        "Number of this item this entity wants to have.",
+                                                        "Number of this item this entity wants to share.",
                                                     ],
                                                 },
                                             ],
@@ -27562,7 +27568,7 @@
                                             "Name": "singular_pickup",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "Controls if the mob is able to pick up more of the same item if it is already holding that item",
+                                            "Description": "Boolean value that controls if the mob is able to pick up more of the same item if it is already holding that item",
                                         },
                                     ],
                                 },
@@ -30956,5 +30962,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "5d2fcd177929382f50248c7eeceef287ea0737b3",
+    "__OBJECTHASH__": "dabea265d0319fb86049046fff357b9523681179",
 }

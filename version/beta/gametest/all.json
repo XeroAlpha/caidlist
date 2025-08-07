@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.110.22",
+    "packageVersion": "1.21.110.23",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -5806,6 +5806,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getLightLevel": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "getMapColor": {
                                                     "value": {
                                                         "type": "function",
@@ -5815,6 +5823,14 @@
                                                     },
                                                 },
                                                 "getRedstonePower": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getSkyLightLevel": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -20107,6 +20123,62 @@
                             },
                             "configurable": false,
                         },
+                        "InvalidPotionDeliveryTypeError": {
+                            "value": {
+                                "type": "function",
+                                "name": "InvalidPotionDeliveryTypeError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.InvalidPotionDeliveryTypeError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "InvalidPotionEffectTypeError": {
+                            "value": {
+                                "type": "function",
+                                "name": "InvalidPotionEffectTypeError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.InvalidPotionEffectTypeError",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "InvalidStructureError": {
                             "value": {
                                 "type": "function",
@@ -21631,23 +21703,15 @@
                                                 },
                                             },
                                             "enumerableProperties": {
+                                                "potionDeliveryType": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "potionEffectType": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "potionLiquidType": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                                "potionModifierType": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -21769,16 +21833,6 @@
                                 "name": "ItemStack",
                                 "native": true,
                                 "length": 0,
-                                "enumerableProperties": {
-                                    "createPotion": {
-                                        "value": {
-                                            "type": "function",
-                                            "name": "",
-                                            "native": true,
-                                            "length": 0,
-                                        },
-                                    },
-                                },
                                 "properties": {
                                     "prototype": {
                                         "value": {
@@ -26721,6 +26775,40 @@
                             },
                             "configurable": false,
                         },
+                        "PotionDeliveryType": {
+                            "value": {
+                                "type": "function",
+                                "name": "PotionDeliveryType",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PotionDeliveryType",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "id": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
+                                                    "configurable": false,
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "PotionEffectType": {
                             "value": {
                                 "type": "function",
@@ -26739,83 +26827,19 @@
                                                 },
                                             },
                                             "enumerableProperties": {
-                                                "id": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "PotionLiquidType": {
-                            "value": {
-                                "type": "function",
-                                "name": "PotionLiquidType",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
+                                                "durationTicks": {
                                                     "value": {
-                                                        "ref": "Minecraft.PotionLiquidType",
+                                                        "type": "undefined",
                                                     },
+                                                    "readOnly": true,
+                                                    "configurable": false,
                                                 },
-                                            },
-                                            "enumerableProperties": {
                                                 "id": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
-                                                },
-                                            },
-                                        },
-                                        "readOnly": true,
-                                        "configurable": false,
-                                    },
-                                },
-                            },
-                            "configurable": false,
-                        },
-                        "PotionModifierType": {
-                            "value": {
-                                "type": "function",
-                                "name": "PotionModifierType",
-                                "native": true,
-                                "length": 0,
-                                "properties": {
-                                    "prototype": {
-                                        "value": {
-                                            "type": "object",
-                                            "properties": {
-                                                "constructor": {
                                                     "value": {
-                                                        "ref": "Minecraft.PotionModifierType",
+                                                        "type": "undefined",
                                                     },
-                                                },
-                                            },
-                                            "enumerableProperties": {
-                                                "id": {
-                                                    "getter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 0,
-                                                    },
+                                                    "readOnly": true,
+                                                    "configurable": false,
                                                 },
                                             },
                                         },
@@ -26833,7 +26857,7 @@
                                 "native": true,
                                 "length": 0,
                                 "enumerableProperties": {
-                                    "getPotionEffectType": {
+                                    "getAllDeliveryTypes": {
                                         "value": {
                                             "type": "function",
                                             "name": "",
@@ -26841,7 +26865,7 @@
                                             "length": 0,
                                         },
                                     },
-                                    "getPotionLiquidType": {
+                                    "getAllEffectTypes": {
                                         "value": {
                                             "type": "function",
                                             "name": "",
@@ -26849,7 +26873,23 @@
                                             "length": 0,
                                         },
                                     },
-                                    "getPotionModifierType": {
+                                    "getDeliveryType": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                    "getEffectType": {
+                                        "value": {
+                                            "type": "function",
+                                            "name": "",
+                                            "native": true,
+                                            "length": 0,
+                                        },
+                                    },
+                                    "resolve": {
                                         "value": {
                                             "type": "function",
                                             "name": "",
@@ -32413,6 +32453,24 @@
                             },
                             "configurable": false,
                         },
+                        "setAfterBatchCallback": {
+                            "value": {
+                                "type": "function",
+                                "name": "",
+                                "native": true,
+                                "length": 0,
+                            },
+                            "configurable": false,
+                        },
+                        "setBeforeBatchCallback": {
+                            "value": {
+                                "type": "function",
+                                "name": "",
+                                "native": true,
+                                "length": 0,
+                            },
+                            "configurable": false,
+                        },
                         "spawnSimulatedPlayer": {
                             "value": {
                                 "type": "function",
@@ -34847,6 +34905,8 @@
         "GameTest.getPlayerSkin",
         "GameTest.register",
         "GameTest.registerAsync",
+        "GameTest.setAfterBatchCallback",
+        "GameTest.setBeforeBatchCallback",
         "GameTest.spawnSimulatedPlayer",
         "Infinity",
         "Int16Array",
@@ -35024,8 +35084,10 @@
         "Minecraft.Block.prototype.east",
         "Minecraft.Block.prototype.getComponent",
         "Minecraft.Block.prototype.getItemStack",
+        "Minecraft.Block.prototype.getLightLevel",
         "Minecraft.Block.prototype.getMapColor",
         "Minecraft.Block.prototype.getRedstonePower",
+        "Minecraft.Block.prototype.getSkyLightLevel",
         "Minecraft.Block.prototype.getTags",
         "Minecraft.Block.prototype.hasTag",
         "Minecraft.Block.prototype.isAir.[[Get]]",
@@ -36944,6 +37006,14 @@
         "Minecraft.InvalidIteratorError.prototype",
         "Minecraft.InvalidIteratorError.prototype.[[Prototype]]",
         "Minecraft.InvalidIteratorError.prototype.constructor",
+        "Minecraft.InvalidPotionDeliveryTypeError",
+        "Minecraft.InvalidPotionDeliveryTypeError.prototype",
+        "Minecraft.InvalidPotionDeliveryTypeError.prototype.[[Prototype]]",
+        "Minecraft.InvalidPotionDeliveryTypeError.prototype.constructor",
+        "Minecraft.InvalidPotionEffectTypeError",
+        "Minecraft.InvalidPotionEffectTypeError.prototype",
+        "Minecraft.InvalidPotionEffectTypeError.prototype.[[Prototype]]",
+        "Minecraft.InvalidPotionEffectTypeError.prototype.constructor",
         "Minecraft.InvalidStructureError",
         "Minecraft.InvalidStructureError.prototype",
         "Minecraft.InvalidStructureError.prototype.[[Prototype]]",
@@ -37149,9 +37219,8 @@
         "Minecraft.ItemPotionComponent.prototype",
         "Minecraft.ItemPotionComponent.prototype.[[Prototype]]",
         "Minecraft.ItemPotionComponent.prototype.constructor",
+        "Minecraft.ItemPotionComponent.prototype.potionDeliveryType.[[Get]]",
         "Minecraft.ItemPotionComponent.prototype.potionEffectType.[[Get]]",
-        "Minecraft.ItemPotionComponent.prototype.potionLiquidType.[[Get]]",
-        "Minecraft.ItemPotionComponent.prototype.potionModifierType.[[Get]]",
         "Minecraft.ItemReleaseUseAfterEvent",
         "Minecraft.ItemReleaseUseAfterEvent.prototype",
         "Minecraft.ItemReleaseUseAfterEvent.prototype.constructor",
@@ -37164,7 +37233,6 @@
         "Minecraft.ItemReleaseUseAfterEventSignal.prototype.subscribe",
         "Minecraft.ItemReleaseUseAfterEventSignal.prototype.unsubscribe",
         "Minecraft.ItemStack",
-        "Minecraft.ItemStack.createPotion",
         "Minecraft.ItemStack.prototype",
         "Minecraft.ItemStack.prototype.amount.[[Get]]",
         "Minecraft.ItemStack.prototype.amount.[[Set]]",
@@ -37787,24 +37855,23 @@
         "Minecraft.PlayerSpawnAfterEventSignal.prototype.constructor",
         "Minecraft.PlayerSpawnAfterEventSignal.prototype.subscribe",
         "Minecraft.PlayerSpawnAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.PotionDeliveryType",
+        "Minecraft.PotionDeliveryType.prototype",
+        "Minecraft.PotionDeliveryType.prototype.constructor",
+        "Minecraft.PotionDeliveryType.prototype.id",
         "Minecraft.PotionEffectType",
         "Minecraft.PotionEffectType.prototype",
         "Minecraft.PotionEffectType.prototype.constructor",
-        "Minecraft.PotionEffectType.prototype.id.[[Get]]",
-        "Minecraft.PotionLiquidType",
-        "Minecraft.PotionLiquidType.prototype",
-        "Minecraft.PotionLiquidType.prototype.constructor",
-        "Minecraft.PotionLiquidType.prototype.id.[[Get]]",
-        "Minecraft.PotionModifierType",
-        "Minecraft.PotionModifierType.prototype",
-        "Minecraft.PotionModifierType.prototype.constructor",
-        "Minecraft.PotionModifierType.prototype.id.[[Get]]",
+        "Minecraft.PotionEffectType.prototype.durationTicks",
+        "Minecraft.PotionEffectType.prototype.id",
         "Minecraft.Potions",
-        "Minecraft.Potions.getPotionEffectType",
-        "Minecraft.Potions.getPotionLiquidType",
-        "Minecraft.Potions.getPotionModifierType",
+        "Minecraft.Potions.getAllDeliveryTypes",
+        "Minecraft.Potions.getAllEffectTypes",
+        "Minecraft.Potions.getDeliveryType",
+        "Minecraft.Potions.getEffectType",
         "Minecraft.Potions.prototype",
         "Minecraft.Potions.prototype.constructor",
+        "Minecraft.Potions.resolve",
         "Minecraft.PressurePlatePopAfterEvent",
         "Minecraft.PressurePlatePopAfterEvent.[[Prototype]]",
         "Minecraft.PressurePlatePopAfterEvent.prototype",
@@ -43824,21 +43891,6 @@
             "invalidStates": [],
             "itemId": "minecraft:glow_berries",
         },
-        "minecraft:chain": {
-            "properties": [
-                {
-                    "name": "pillar_axis",
-                    "validValues": [
-                        "y",
-                        "x",
-                        "z",
-                    ],
-                    "defaultValue": "y",
-                },
-            ],
-            "invalidStates": [],
-            "itemId": "<same>",
-        },
         "minecraft:chain_command_block": {
             "properties": [
                 {
@@ -45396,6 +45448,11 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:copper_bars": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:copper_block": {
             "properties": [],
             "invalidStates": [],
@@ -45418,6 +45475,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -45526,8 +45598,40 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:copper_ore": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:copper_torch": {
+            "properties": [
+                {
+                    "name": "torch_facing_direction",
+                    "validValues": [
+                        "unknown",
+                        "west",
+                        "east",
+                        "north",
+                        "south",
+                        "top",
+                    ],
+                    "defaultValue": "unknown",
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -50410,6 +50514,11 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:exposed_copper_bars": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:exposed_copper_bulb": {
             "properties": [
                 {
@@ -50427,6 +50536,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:exposed_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -50532,6 +50656,20 @@
         },
         "minecraft:exposed_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:exposed_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -50677,6 +50815,14 @@
                         5,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
             ],
             "invalidStates": [],
@@ -53737,6 +53883,21 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:iron_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:iron_door": {
             "properties": [
                 {
@@ -56035,6 +56196,14 @@
                         5,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
             ],
             "invalidStates": [],
@@ -59559,6 +59728,11 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:oxidized_copper_bars": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:oxidized_copper_bulb": {
             "properties": [
                 {
@@ -59576,6 +59750,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:oxidized_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -59681,6 +59870,20 @@
         },
         "minecraft:oxidized_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:oxidized_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -59826,6 +60029,14 @@
                         5,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
             ],
             "invalidStates": [],
@@ -69525,6 +69736,11 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:waxed_copper_bars": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:waxed_copper_bulb": {
             "properties": [
                 {
@@ -69542,6 +69758,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -69647,6 +69878,20 @@
         },
         "minecraft:waxed_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -69789,6 +70034,11 @@
             "invalidStates": [],
             "itemId": "<same>",
         },
+        "minecraft:waxed_exposed_copper_bars": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
         "minecraft:waxed_exposed_copper_bulb": {
             "properties": [
                 {
@@ -69806,6 +70056,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_exposed_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -69911,6 +70176,20 @@
         },
         "minecraft:waxed_exposed_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_exposed_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -70057,6 +70336,14 @@
                     ],
                     "defaultValue": 0,
                 },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70075,6 +70362,14 @@
                     ],
                     "defaultValue": 0,
                 },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70085,6 +70380,11 @@
             "itemId": "<same>",
         },
         "minecraft:waxed_oxidized_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_oxidized_copper_bars": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70106,6 +70406,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_oxidized_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -70211,6 +70526,20 @@
         },
         "minecraft:waxed_oxidized_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_oxidized_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -70357,6 +70686,14 @@
                     ],
                     "defaultValue": 0,
                 },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70367,6 +70704,11 @@
             "itemId": "<same>",
         },
         "minecraft:waxed_weathered_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_weathered_copper_bars": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70388,6 +70730,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_weathered_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -70493,6 +70850,20 @@
         },
         "minecraft:waxed_weathered_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:waxed_weathered_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -70639,6 +71010,14 @@
                     ],
                     "defaultValue": 0,
                 },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
             ],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70649,6 +71028,11 @@
             "itemId": "<same>",
         },
         "minecraft:weathered_copper": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:weathered_copper_bars": {
             "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
@@ -70670,6 +71054,21 @@
                         true,
                     ],
                     "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:weathered_copper_chain": {
+            "properties": [
+                {
+                    "name": "pillar_axis",
+                    "validValues": [
+                        "y",
+                        "x",
+                        "z",
+                    ],
+                    "defaultValue": "y",
                 },
             ],
             "invalidStates": [],
@@ -70775,6 +71174,20 @@
         },
         "minecraft:weathered_copper_grate": {
             "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+        },
+        "minecraft:weathered_copper_lantern": {
+            "properties": [
+                {
+                    "name": "hanging",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
         },
@@ -70920,6 +71333,14 @@
                         5,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "powered_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
             ],
             "invalidStates": [],
@@ -73315,13 +73736,16 @@
                     "minecraft:bamboo_hanging_sign": false,
                     "minecraft:birch_hanging_sign": false,
                     "minecraft:cherry_hanging_sign": false,
+                    "minecraft:copper_lantern": false,
                     "minecraft:crimson_hanging_sign": false,
                     "minecraft:dark_oak_hanging_sign": false,
+                    "minecraft:exposed_copper_lantern": false,
                     "minecraft:jungle_hanging_sign": false,
                     "minecraft:lantern": false,
                     "minecraft:mangrove_hanging_sign": false,
                     "minecraft:mangrove_propagule": false,
                     "minecraft:oak_hanging_sign": false,
+                    "minecraft:oxidized_copper_lantern": false,
                     "minecraft:pale_oak_hanging_sign": false,
                     "minecraft:pointed_dripstone": true,
                     "minecraft:soul_lantern": false,
@@ -73329,6 +73753,11 @@
                     "minecraft:suspicious_gravel": true,
                     "minecraft:suspicious_sand": true,
                     "minecraft:warped_hanging_sign": false,
+                    "minecraft:waxed_copper_lantern": false,
+                    "minecraft:waxed_exposed_copper_lantern": false,
+                    "minecraft:waxed_oxidized_copper_lantern": false,
+                    "minecraft:waxed_weathered_copper_lantern": false,
+                    "minecraft:weathered_copper_lantern": false,
                 },
             },
         ],
@@ -74262,10 +74691,10 @@
                     "minecraft:birch_log": "y",
                     "minecraft:birch_wood": "y",
                     "minecraft:bone_block": "y",
-                    "minecraft:chain": "y",
                     "minecraft:cherry_log": "y",
                     "minecraft:cherry_wood": "y",
                     "minecraft:chiseled_quartz_block": "y",
+                    "minecraft:copper_chain": "y",
                     "minecraft:creaking_heart": "y",
                     "minecraft:crimson_hyphae": "y",
                     "minecraft:crimson_stem": "y",
@@ -74274,8 +74703,10 @@
                     "minecraft:deepslate": "y",
                     "minecraft:deprecated_purpur_block_1": "y",
                     "minecraft:deprecated_purpur_block_2": "y",
+                    "minecraft:exposed_copper_chain": "y",
                     "minecraft:hay_block": "y",
                     "minecraft:infested_deepslate": "y",
+                    "minecraft:iron_chain": "y",
                     "minecraft:jungle_log": "y",
                     "minecraft:jungle_wood": "y",
                     "minecraft:mangrove_log": "y",
@@ -74284,6 +74715,7 @@
                     "minecraft:oak_log": "y",
                     "minecraft:oak_wood": "y",
                     "minecraft:ochre_froglight": "y",
+                    "minecraft:oxidized_copper_chain": "y",
                     "minecraft:pale_oak_log": "y",
                     "minecraft:pale_oak_wood": "y",
                     "minecraft:pearlescent_froglight": "y",
@@ -74321,6 +74753,11 @@
                     "minecraft:verdant_froglight": "y",
                     "minecraft:warped_hyphae": "y",
                     "minecraft:warped_stem": "y",
+                    "minecraft:waxed_copper_chain": "y",
+                    "minecraft:waxed_exposed_copper_chain": "y",
+                    "minecraft:waxed_oxidized_copper_chain": "y",
+                    "minecraft:waxed_weathered_copper_chain": "y",
+                    "minecraft:weathered_copper_chain": "y",
                 },
             },
         ],
@@ -74351,12 +74788,15 @@
                     "minecraft:crimson_shelf": false,
                     "minecraft:dark_oak_shelf": false,
                     "minecraft:exposed_copper_bulb": false,
+                    "minecraft:exposed_lightning_rod": false,
                     "minecraft:jungle_shelf": false,
                     "minecraft:lectern": false,
+                    "minecraft:lightning_rod": false,
                     "minecraft:mangrove_shelf": false,
                     "minecraft:oak_shelf": false,
                     "minecraft:observer": false,
                     "minecraft:oxidized_copper_bulb": false,
+                    "minecraft:oxidized_lightning_rod": false,
                     "minecraft:pale_oak_shelf": false,
                     "minecraft:sculk_sensor": false,
                     "minecraft:spruce_shelf": false,
@@ -74365,9 +74805,14 @@
                     "minecraft:warped_shelf": false,
                     "minecraft:waxed_copper_bulb": false,
                     "minecraft:waxed_exposed_copper_bulb": false,
+                    "minecraft:waxed_exposed_lightning_rod": false,
+                    "minecraft:waxed_lightning_rod": false,
                     "minecraft:waxed_oxidized_copper_bulb": false,
+                    "minecraft:waxed_oxidized_lightning_rod": false,
                     "minecraft:waxed_weathered_copper_bulb": false,
+                    "minecraft:waxed_weathered_lightning_rod": false,
                     "minecraft:weathered_copper_bulb": false,
+                    "minecraft:weathered_lightning_rod": false,
                 },
             },
         ],
@@ -75066,6 +75511,7 @@
                     "minecraft:colored_torch_green": "unknown",
                     "minecraft:colored_torch_purple": "unknown",
                     "minecraft:colored_torch_red": "unknown",
+                    "minecraft:copper_torch": "unknown",
                     "minecraft:redstone_torch": "unknown",
                     "minecraft:soul_torch": "unknown",
                     "minecraft:torch": "unknown",
@@ -75825,10 +76271,18 @@
         },
         "metal": {
             "minecraft:cauldron": {},
+            "minecraft:copper_bars": {},
+            "minecraft:exposed_copper_bars": {},
             "minecraft:gold_block": {},
             "minecraft:iron_bars": {},
             "minecraft:iron_block": {},
             "minecraft:iron_door": {},
+            "minecraft:oxidized_copper_bars": {},
+            "minecraft:waxed_copper_bars": {},
+            "minecraft:waxed_exposed_copper_bars": {},
+            "minecraft:waxed_oxidized_copper_bars": {},
+            "minecraft:waxed_weathered_copper_bars": {},
+            "minecraft:weathered_copper_bars": {},
         },
         "minecraft:crop": {
             "minecraft:beetroot": {},
@@ -76201,7 +76655,6 @@
             "minecraft:budding_amethyst": {},
             "minecraft:calcite": {},
             "minecraft:cauldron": {},
-            "minecraft:chain": {},
             "minecraft:chemical_heat": {},
             "minecraft:chipped_anvil": {},
             "minecraft:chiseled_copper": {},
@@ -76228,12 +76681,15 @@
             "minecraft:cobblestone_wall": {},
             "minecraft:compound_creator": {},
             "minecraft:conduit": {},
+            "minecraft:copper_bars": {},
             "minecraft:copper_block": {},
             "minecraft:copper_bulb": {},
+            "minecraft:copper_chain": {},
             "minecraft:copper_chest": {},
             "minecraft:copper_door": {},
             "minecraft:copper_golem_statue": {},
             "minecraft:copper_grate": {},
+            "minecraft:copper_lantern": {},
             "minecraft:copper_ore": {},
             "minecraft:copper_trapdoor": {},
             "minecraft:cracked_deepslate_bricks": {},
@@ -76314,11 +76770,14 @@
             "minecraft:ender_chest": {},
             "minecraft:exposed_chiseled_copper": {},
             "minecraft:exposed_copper": {},
+            "minecraft:exposed_copper_bars": {},
             "minecraft:exposed_copper_bulb": {},
+            "minecraft:exposed_copper_chain": {},
             "minecraft:exposed_copper_chest": {},
             "minecraft:exposed_copper_door": {},
             "minecraft:exposed_copper_golem_statue": {},
             "minecraft:exposed_copper_grate": {},
+            "minecraft:exposed_copper_lantern": {},
             "minecraft:exposed_copper_trapdoor": {},
             "minecraft:exposed_cut_copper": {},
             "minecraft:exposed_cut_copper_slab": {},
@@ -76361,6 +76820,7 @@
             "minecraft:infested_stone_bricks": {},
             "minecraft:iron_bars": {},
             "minecraft:iron_block": {},
+            "minecraft:iron_chain": {},
             "minecraft:iron_door": {},
             "minecraft:iron_ore": {},
             "minecraft:iron_trapdoor": {},
@@ -76432,11 +76892,14 @@
             "minecraft:orange_terracotta": {},
             "minecraft:oxidized_chiseled_copper": {},
             "minecraft:oxidized_copper": {},
+            "minecraft:oxidized_copper_bars": {},
             "minecraft:oxidized_copper_bulb": {},
+            "minecraft:oxidized_copper_chain": {},
             "minecraft:oxidized_copper_chest": {},
             "minecraft:oxidized_copper_door": {},
             "minecraft:oxidized_copper_golem_statue": {},
             "minecraft:oxidized_copper_grate": {},
+            "minecraft:oxidized_copper_lantern": {},
             "minecraft:oxidized_copper_trapdoor": {},
             "minecraft:oxidized_cut_copper": {},
             "minecraft:oxidized_cut_copper_slab": {},
@@ -76593,11 +77056,14 @@
             "minecraft:warped_nylium": {},
             "minecraft:waxed_chiseled_copper": {},
             "minecraft:waxed_copper": {},
+            "minecraft:waxed_copper_bars": {},
             "minecraft:waxed_copper_bulb": {},
+            "minecraft:waxed_copper_chain": {},
             "minecraft:waxed_copper_chest": {},
             "minecraft:waxed_copper_door": {},
             "minecraft:waxed_copper_golem_statue": {},
             "minecraft:waxed_copper_grate": {},
+            "minecraft:waxed_copper_lantern": {},
             "minecraft:waxed_copper_trapdoor": {},
             "minecraft:waxed_cut_copper": {},
             "minecraft:waxed_cut_copper_slab": {},
@@ -76605,11 +77071,14 @@
             "minecraft:waxed_double_cut_copper_slab": {},
             "minecraft:waxed_exposed_chiseled_copper": {},
             "minecraft:waxed_exposed_copper": {},
+            "minecraft:waxed_exposed_copper_bars": {},
             "minecraft:waxed_exposed_copper_bulb": {},
+            "minecraft:waxed_exposed_copper_chain": {},
             "minecraft:waxed_exposed_copper_chest": {},
             "minecraft:waxed_exposed_copper_door": {},
             "minecraft:waxed_exposed_copper_golem_statue": {},
             "minecraft:waxed_exposed_copper_grate": {},
+            "minecraft:waxed_exposed_copper_lantern": {},
             "minecraft:waxed_exposed_copper_trapdoor": {},
             "minecraft:waxed_exposed_cut_copper": {},
             "minecraft:waxed_exposed_cut_copper_slab": {},
@@ -76619,11 +77088,14 @@
             "minecraft:waxed_lightning_rod": {},
             "minecraft:waxed_oxidized_chiseled_copper": {},
             "minecraft:waxed_oxidized_copper": {},
+            "minecraft:waxed_oxidized_copper_bars": {},
             "minecraft:waxed_oxidized_copper_bulb": {},
+            "minecraft:waxed_oxidized_copper_chain": {},
             "minecraft:waxed_oxidized_copper_chest": {},
             "minecraft:waxed_oxidized_copper_door": {},
             "minecraft:waxed_oxidized_copper_golem_statue": {},
             "minecraft:waxed_oxidized_copper_grate": {},
+            "minecraft:waxed_oxidized_copper_lantern": {},
             "minecraft:waxed_oxidized_copper_trapdoor": {},
             "minecraft:waxed_oxidized_cut_copper": {},
             "minecraft:waxed_oxidized_cut_copper_slab": {},
@@ -76632,11 +77104,14 @@
             "minecraft:waxed_oxidized_lightning_rod": {},
             "minecraft:waxed_weathered_chiseled_copper": {},
             "minecraft:waxed_weathered_copper": {},
+            "minecraft:waxed_weathered_copper_bars": {},
             "minecraft:waxed_weathered_copper_bulb": {},
+            "minecraft:waxed_weathered_copper_chain": {},
             "minecraft:waxed_weathered_copper_chest": {},
             "minecraft:waxed_weathered_copper_door": {},
             "minecraft:waxed_weathered_copper_golem_statue": {},
             "minecraft:waxed_weathered_copper_grate": {},
+            "minecraft:waxed_weathered_copper_lantern": {},
             "minecraft:waxed_weathered_copper_trapdoor": {},
             "minecraft:waxed_weathered_cut_copper": {},
             "minecraft:waxed_weathered_cut_copper_slab": {},
@@ -76645,11 +77120,14 @@
             "minecraft:waxed_weathered_lightning_rod": {},
             "minecraft:weathered_chiseled_copper": {},
             "minecraft:weathered_copper": {},
+            "minecraft:weathered_copper_bars": {},
             "minecraft:weathered_copper_bulb": {},
+            "minecraft:weathered_copper_chain": {},
             "minecraft:weathered_copper_chest": {},
             "minecraft:weathered_copper_door": {},
             "minecraft:weathered_copper_golem_statue": {},
             "minecraft:weathered_copper_grate": {},
+            "minecraft:weathered_copper_lantern": {},
             "minecraft:weathered_copper_trapdoor": {},
             "minecraft:weathered_cut_copper": {},
             "minecraft:weathered_cut_copper_slab": {},
@@ -77365,7 +77843,6 @@
             "minecraft:campfire": {},
             "minecraft:candle": {},
             "minecraft:candle_cake": {},
-            "minecraft:chain": {},
             "minecraft:chalkboard": {},
             "minecraft:cherry_button": {},
             "minecraft:cherry_door": {},
@@ -77390,9 +77867,13 @@
             "minecraft:cocoa": {},
             "minecraft:composter": {},
             "minecraft:conduit": {},
+            "minecraft:copper_bars": {},
+            "minecraft:copper_chain": {},
             "minecraft:copper_chest": {},
             "minecraft:copper_door": {},
+            "minecraft:copper_golem_statue": {},
             "minecraft:copper_grate": {},
+            "minecraft:copper_lantern": {},
             "minecraft:copper_trapdoor": {},
             "minecraft:creeper_head": {},
             "minecraft:crimson_button": {},
@@ -77472,9 +77953,13 @@
             "minecraft:end_stone_brick_slab": {},
             "minecraft:end_stone_brick_wall": {},
             "minecraft:ender_chest": {},
+            "minecraft:exposed_copper_bars": {},
+            "minecraft:exposed_copper_chain": {},
             "minecraft:exposed_copper_chest": {},
             "minecraft:exposed_copper_door": {},
+            "minecraft:exposed_copper_golem_statue": {},
             "minecraft:exposed_copper_grate": {},
+            "minecraft:exposed_copper_lantern": {},
             "minecraft:exposed_copper_trapdoor": {},
             "minecraft:exposed_cut_copper_slab": {},
             "minecraft:exposed_cut_copper_stairs": {},
@@ -77529,6 +78014,7 @@
             "minecraft:horn_coral_fan": {},
             "minecraft:horn_coral_wall_fan": {},
             "minecraft:iron_bars": {},
+            "minecraft:iron_chain": {},
             "minecraft:iron_door": {},
             "minecraft:iron_trapdoor": {},
             "minecraft:jigsaw": {},
@@ -77635,9 +78121,13 @@
             "minecraft:orange_carpet": {},
             "minecraft:orange_shulker_box": {},
             "minecraft:orange_stained_glass_pane": {},
+            "minecraft:oxidized_copper_bars": {},
+            "minecraft:oxidized_copper_chain": {},
             "minecraft:oxidized_copper_chest": {},
             "minecraft:oxidized_copper_door": {},
+            "minecraft:oxidized_copper_golem_statue": {},
             "minecraft:oxidized_copper_grate": {},
+            "minecraft:oxidized_copper_lantern": {},
             "minecraft:oxidized_copper_trapdoor": {},
             "minecraft:oxidized_cut_copper_slab": {},
             "minecraft:oxidized_cut_copper_stairs": {},
@@ -77799,37 +78289,57 @@
             "minecraft:warped_standing_sign": {},
             "minecraft:warped_trapdoor": {},
             "minecraft:warped_wall_sign": {},
+            "minecraft:waxed_copper_bars": {},
+            "minecraft:waxed_copper_chain": {},
             "minecraft:waxed_copper_chest": {},
             "minecraft:waxed_copper_door": {},
+            "minecraft:waxed_copper_golem_statue": {},
             "minecraft:waxed_copper_grate": {},
+            "minecraft:waxed_copper_lantern": {},
             "minecraft:waxed_copper_trapdoor": {},
             "minecraft:waxed_cut_copper_slab": {},
             "minecraft:waxed_cut_copper_stairs": {},
+            "minecraft:waxed_exposed_copper_bars": {},
+            "minecraft:waxed_exposed_copper_chain": {},
             "minecraft:waxed_exposed_copper_chest": {},
             "minecraft:waxed_exposed_copper_door": {},
+            "minecraft:waxed_exposed_copper_golem_statue": {},
             "minecraft:waxed_exposed_copper_grate": {},
+            "minecraft:waxed_exposed_copper_lantern": {},
             "minecraft:waxed_exposed_copper_trapdoor": {},
             "minecraft:waxed_exposed_cut_copper_slab": {},
             "minecraft:waxed_exposed_cut_copper_stairs": {},
             "minecraft:waxed_exposed_lightning_rod": {},
             "minecraft:waxed_lightning_rod": {},
+            "minecraft:waxed_oxidized_copper_bars": {},
+            "minecraft:waxed_oxidized_copper_chain": {},
             "minecraft:waxed_oxidized_copper_chest": {},
             "minecraft:waxed_oxidized_copper_door": {},
+            "minecraft:waxed_oxidized_copper_golem_statue": {},
             "minecraft:waxed_oxidized_copper_grate": {},
+            "minecraft:waxed_oxidized_copper_lantern": {},
             "minecraft:waxed_oxidized_copper_trapdoor": {},
             "minecraft:waxed_oxidized_cut_copper_slab": {},
             "minecraft:waxed_oxidized_cut_copper_stairs": {},
             "minecraft:waxed_oxidized_lightning_rod": {},
+            "minecraft:waxed_weathered_copper_bars": {},
+            "minecraft:waxed_weathered_copper_chain": {},
             "minecraft:waxed_weathered_copper_chest": {},
             "minecraft:waxed_weathered_copper_door": {},
+            "minecraft:waxed_weathered_copper_golem_statue": {},
             "minecraft:waxed_weathered_copper_grate": {},
+            "minecraft:waxed_weathered_copper_lantern": {},
             "minecraft:waxed_weathered_copper_trapdoor": {},
             "minecraft:waxed_weathered_cut_copper_slab": {},
             "minecraft:waxed_weathered_cut_copper_stairs": {},
             "minecraft:waxed_weathered_lightning_rod": {},
+            "minecraft:weathered_copper_bars": {},
+            "minecraft:weathered_copper_chain": {},
             "minecraft:weathered_copper_chest": {},
             "minecraft:weathered_copper_door": {},
+            "minecraft:weathered_copper_golem_statue": {},
             "minecraft:weathered_copper_grate": {},
+            "minecraft:weathered_copper_lantern": {},
             "minecraft:weathered_copper_trapdoor": {},
             "minecraft:weathered_cut_copper_slab": {},
             "minecraft:weathered_cut_copper_stairs": {},
@@ -77992,7 +78502,6 @@
                 "minecraft:cartography_table": {},
                 "minecraft:carved_pumpkin": {},
                 "minecraft:cauldron": {},
-                "minecraft:chain": {},
                 "minecraft:chain_command_block": {},
                 "minecraft:chalkboard": {},
                 "minecraft:chemical_heat": {},
@@ -78044,12 +78553,15 @@
                 "minecraft:command_block": {},
                 "minecraft:composter": {},
                 "minecraft:conduit": {},
+                "minecraft:copper_bars": {},
                 "minecraft:copper_block": {},
                 "minecraft:copper_bulb": {},
+                "minecraft:copper_chain": {},
                 "minecraft:copper_chest": {},
                 "minecraft:copper_door": {},
                 "minecraft:copper_golem_statue": {},
                 "minecraft:copper_grate": {},
+                "minecraft:copper_lantern": {},
                 "minecraft:copper_ore": {},
                 "minecraft:copper_trapdoor": {},
                 "minecraft:cracked_deepslate_bricks": {},
@@ -78300,11 +78812,14 @@
                 "minecraft:ender_chest": {},
                 "minecraft:exposed_chiseled_copper": {},
                 "minecraft:exposed_copper": {},
+                "minecraft:exposed_copper_bars": {},
                 "minecraft:exposed_copper_bulb": {},
+                "minecraft:exposed_copper_chain": {},
                 "minecraft:exposed_copper_chest": {},
                 "minecraft:exposed_copper_door": {},
                 "minecraft:exposed_copper_golem_statue": {},
                 "minecraft:exposed_copper_grate": {},
+                "minecraft:exposed_copper_lantern": {},
                 "minecraft:exposed_copper_trapdoor": {},
                 "minecraft:exposed_cut_copper": {},
                 "minecraft:exposed_cut_copper_slab": {},
@@ -78411,6 +78926,7 @@
                 "minecraft:invisible_bedrock": {},
                 "minecraft:iron_bars": {},
                 "minecraft:iron_block": {},
+                "minecraft:iron_chain": {},
                 "minecraft:iron_door": {},
                 "minecraft:iron_ore": {},
                 "minecraft:iron_trapdoor": {},
@@ -78572,11 +79088,14 @@
                 "minecraft:orange_wool": {},
                 "minecraft:oxidized_chiseled_copper": {},
                 "minecraft:oxidized_copper": {},
+                "minecraft:oxidized_copper_bars": {},
                 "minecraft:oxidized_copper_bulb": {},
+                "minecraft:oxidized_copper_chain": {},
                 "minecraft:oxidized_copper_chest": {},
                 "minecraft:oxidized_copper_door": {},
                 "minecraft:oxidized_copper_golem_statue": {},
                 "minecraft:oxidized_copper_grate": {},
+                "minecraft:oxidized_copper_lantern": {},
                 "minecraft:oxidized_copper_trapdoor": {},
                 "minecraft:oxidized_cut_copper": {},
                 "minecraft:oxidized_cut_copper_slab": {},
@@ -78874,11 +79393,14 @@
                 "minecraft:warped_wart_block": {},
                 "minecraft:waxed_chiseled_copper": {},
                 "minecraft:waxed_copper": {},
+                "minecraft:waxed_copper_bars": {},
                 "minecraft:waxed_copper_bulb": {},
+                "minecraft:waxed_copper_chain": {},
                 "minecraft:waxed_copper_chest": {},
                 "minecraft:waxed_copper_door": {},
                 "minecraft:waxed_copper_golem_statue": {},
                 "minecraft:waxed_copper_grate": {},
+                "minecraft:waxed_copper_lantern": {},
                 "minecraft:waxed_copper_trapdoor": {},
                 "minecraft:waxed_cut_copper": {},
                 "minecraft:waxed_cut_copper_slab": {},
@@ -78886,11 +79408,14 @@
                 "minecraft:waxed_double_cut_copper_slab": {},
                 "minecraft:waxed_exposed_chiseled_copper": {},
                 "minecraft:waxed_exposed_copper": {},
+                "minecraft:waxed_exposed_copper_bars": {},
                 "minecraft:waxed_exposed_copper_bulb": {},
+                "minecraft:waxed_exposed_copper_chain": {},
                 "minecraft:waxed_exposed_copper_chest": {},
                 "minecraft:waxed_exposed_copper_door": {},
                 "minecraft:waxed_exposed_copper_golem_statue": {},
                 "minecraft:waxed_exposed_copper_grate": {},
+                "minecraft:waxed_exposed_copper_lantern": {},
                 "minecraft:waxed_exposed_copper_trapdoor": {},
                 "minecraft:waxed_exposed_cut_copper": {},
                 "minecraft:waxed_exposed_cut_copper_slab": {},
@@ -78900,11 +79425,14 @@
                 "minecraft:waxed_lightning_rod": {},
                 "minecraft:waxed_oxidized_chiseled_copper": {},
                 "minecraft:waxed_oxidized_copper": {},
+                "minecraft:waxed_oxidized_copper_bars": {},
                 "minecraft:waxed_oxidized_copper_bulb": {},
+                "minecraft:waxed_oxidized_copper_chain": {},
                 "minecraft:waxed_oxidized_copper_chest": {},
                 "minecraft:waxed_oxidized_copper_door": {},
                 "minecraft:waxed_oxidized_copper_golem_statue": {},
                 "minecraft:waxed_oxidized_copper_grate": {},
+                "minecraft:waxed_oxidized_copper_lantern": {},
                 "minecraft:waxed_oxidized_copper_trapdoor": {},
                 "minecraft:waxed_oxidized_cut_copper": {},
                 "minecraft:waxed_oxidized_cut_copper_slab": {},
@@ -78913,11 +79441,14 @@
                 "minecraft:waxed_oxidized_lightning_rod": {},
                 "minecraft:waxed_weathered_chiseled_copper": {},
                 "minecraft:waxed_weathered_copper": {},
+                "minecraft:waxed_weathered_copper_bars": {},
                 "minecraft:waxed_weathered_copper_bulb": {},
+                "minecraft:waxed_weathered_copper_chain": {},
                 "minecraft:waxed_weathered_copper_chest": {},
                 "minecraft:waxed_weathered_copper_door": {},
                 "minecraft:waxed_weathered_copper_golem_statue": {},
                 "minecraft:waxed_weathered_copper_grate": {},
+                "minecraft:waxed_weathered_copper_lantern": {},
                 "minecraft:waxed_weathered_copper_trapdoor": {},
                 "minecraft:waxed_weathered_cut_copper": {},
                 "minecraft:waxed_weathered_cut_copper_slab": {},
@@ -78926,11 +79457,14 @@
                 "minecraft:waxed_weathered_lightning_rod": {},
                 "minecraft:weathered_chiseled_copper": {},
                 "minecraft:weathered_copper": {},
+                "minecraft:weathered_copper_bars": {},
                 "minecraft:weathered_copper_bulb": {},
+                "minecraft:weathered_copper_chain": {},
                 "minecraft:weathered_copper_chest": {},
                 "minecraft:weathered_copper_door": {},
                 "minecraft:weathered_copper_golem_statue": {},
                 "minecraft:weathered_copper_grate": {},
+                "minecraft:weathered_copper_lantern": {},
                 "minecraft:weathered_copper_trapdoor": {},
                 "minecraft:weathered_cut_copper": {},
                 "minecraft:weathered_cut_copper_slab": {},
@@ -79046,6 +79580,7 @@
                 "minecraft:colored_torch_green": {},
                 "minecraft:colored_torch_purple": {},
                 "minecraft:colored_torch_red": {},
+                "minecraft:copper_torch": {},
                 "minecraft:cornflower": {},
                 "minecraft:creeper_head": {},
                 "minecraft:crimson_fungus": {},
@@ -80490,10 +81025,6 @@
                 "minecraft:spawn_egg",
             ],
         },
-        "minecraft:chain": {
-            "localizationKey": "tile.chain.name",
-            "tags": [],
-        },
         "minecraft:chain_command_block": {
             "localizationKey": "tile.chain_command_block.name",
             "tags": [],
@@ -80852,7 +81383,9 @@
         },
         "minecraft:chorus_fruit": {
             "localizationKey": "item.chorus_fruit.name",
-            "tags": [],
+            "tags": [
+                "minecraft:is_food",
+            ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:chorusfruit",
@@ -80956,6 +81489,7 @@
             "localizationKey": "item.fish.name",
             "tags": [
                 "minecraft:is_fish",
+                "minecraft:is_food",
             ],
         },
         "minecraft:cod_bucket": {
@@ -81048,6 +81582,7 @@
             "tags": [
                 "minecraft:is_fish",
                 "minecraft:is_cooked",
+                "minecraft:is_food",
             ],
         },
         "minecraft:cooked_mutton": {
@@ -81079,6 +81614,7 @@
             "tags": [
                 "minecraft:is_fish",
                 "minecraft:is_cooked",
+                "minecraft:is_food",
             ],
         },
         "minecraft:cookie": {
@@ -81129,6 +81665,10 @@
                 },
             },
         },
+        "minecraft:copper_bars": {
+            "localizationKey": "tile.copper_bars.name",
+            "tags": [],
+        },
         "minecraft:copper_block": {
             "localizationKey": "tile.copper_block.name",
             "tags": [],
@@ -81175,6 +81715,10 @@
         },
         "minecraft:copper_bulb": {
             "localizationKey": "tile.copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:copper_chain": {
+            "localizationKey": "tile.copper_chain.name",
             "tags": [],
         },
         "minecraft:copper_chest": {
@@ -81321,6 +81865,10 @@
             "tags": [
                 "minecraft:trim_materials",
             ],
+        },
+        "minecraft:copper_lantern": {
+            "localizationKey": "tile.copper_lantern.name",
+            "tags": [],
         },
         "minecraft:copper_leggings": {
             "localizationKey": "item.copper_leggings.name",
@@ -81470,6 +82018,10 @@
                     ],
                 },
             },
+        },
+        "minecraft:copper_torch": {
+            "localizationKey": "tile.copper_torch.name",
+            "tags": [],
         },
         "minecraft:copper_trapdoor": {
             "localizationKey": "tile.copper_trapdoor.name",
@@ -83268,8 +83820,16 @@
             "localizationKey": "tile.exposed_copper.name",
             "tags": [],
         },
+        "minecraft:exposed_copper_bars": {
+            "localizationKey": "tile.exposed_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:exposed_copper_bulb": {
             "localizationKey": "tile.exposed_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:exposed_copper_chain": {
+            "localizationKey": "tile.exposed_copper_chain.name",
             "tags": [],
         },
         "minecraft:exposed_copper_chest": {
@@ -83288,6 +83848,10 @@
         },
         "minecraft:exposed_copper_grate": {
             "localizationKey": "tile.exposed_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:exposed_copper_lantern": {
+            "localizationKey": "tile.exposed_copper_lantern.name",
             "tags": [],
         },
         "minecraft:exposed_copper_trapdoor": {
@@ -84397,7 +84961,9 @@
         "minecraft:honey_bottle": {
             "localizationKey": "item.honey_bottle.name",
             "maxAmount": 16,
-            "tags": [],
+            "tags": [
+                "minecraft:is_food",
+            ],
         },
         "minecraft:honeycomb": {
             "localizationKey": "item.honeycomb.name",
@@ -84585,6 +85151,10 @@
                     ],
                 },
             },
+        },
+        "minecraft:iron_chain": {
+            "localizationKey": "tile.iron_chain.name",
+            "tags": [],
         },
         "minecraft:iron_chestplate": {
             "localizationKey": "item.iron_chestplate.name",
@@ -85548,9 +86118,9 @@
             "tags": [],
             "components": {
                 "minecraft:potion": {
-                    "potionEffectType": "None",
-                    "potionLiquidType": "Lingering",
-                    "potionModifierType": "Normal",
+                    "potionEffectType": "minecraft:water",
+                    "potionDurationTicks": 0,
+                    "potionDeliveryType": "ThrownLingering",
                 },
             },
         },
@@ -86819,8 +87389,16 @@
             "localizationKey": "tile.oxidized_copper.name",
             "tags": [],
         },
+        "minecraft:oxidized_copper_bars": {
+            "localizationKey": "tile.oxidized_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:oxidized_copper_bulb": {
             "localizationKey": "tile.oxidized_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:oxidized_copper_chain": {
+            "localizationKey": "tile.oxidized_copper_chain.name",
             "tags": [],
         },
         "minecraft:oxidized_copper_chest": {
@@ -86839,6 +87417,10 @@
         },
         "minecraft:oxidized_copper_grate": {
             "localizationKey": "tile.oxidized_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:oxidized_copper_lantern": {
+            "localizationKey": "tile.oxidized_copper_lantern.name",
             "tags": [],
         },
         "minecraft:oxidized_copper_trapdoor": {
@@ -87246,7 +87828,9 @@
         },
         "minecraft:poisonous_potato": {
             "localizationKey": "item.poisonous_potato.name",
-            "tags": [],
+            "tags": [
+                "minecraft:is_food",
+            ],
         },
         "minecraft:polar_bear_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.polar_bear.name",
@@ -87403,9 +87987,9 @@
             "tags": [],
             "components": {
                 "minecraft:potion": {
-                    "potionEffectType": "None",
-                    "potionLiquidType": "Regular",
-                    "potionModifierType": "Normal",
+                    "potionEffectType": "minecraft:water",
+                    "potionDurationTicks": 0,
+                    "potionDeliveryType": "Consume",
                 },
             },
         },
@@ -87460,6 +88044,7 @@
             "localizationKey": "item.pufferfish.name",
             "tags": [
                 "minecraft:is_fish",
+                "minecraft:is_food",
             ],
         },
         "minecraft:pufferfish_bucket": {
@@ -87951,6 +88536,7 @@
             "localizationKey": "item.salmon.name",
             "tags": [
                 "minecraft:is_fish",
+                "minecraft:is_food",
             ],
         },
         "minecraft:salmon_bucket": {
@@ -88385,7 +88971,9 @@
         },
         "minecraft:spider_eye": {
             "localizationKey": "item.spider_eye.name",
-            "tags": [],
+            "tags": [
+                "minecraft:is_food",
+            ],
         },
         "minecraft:spider_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.spider.name",
@@ -88405,9 +88993,9 @@
             "tags": [],
             "components": {
                 "minecraft:potion": {
-                    "potionEffectType": "None",
-                    "potionLiquidType": "Splash",
-                    "potionModifierType": "Normal",
+                    "potionEffectType": "minecraft:water",
+                    "potionDurationTicks": 0,
+                    "potionDeliveryType": "ThrownSplash",
                 },
             },
         },
@@ -88982,7 +89570,9 @@
         "minecraft:suspicious_stew": {
             "localizationKey": "item.suspicious_stew.name",
             "unstackable": true,
-            "tags": [],
+            "tags": [
+                "minecraft:is_food",
+            ],
         },
         "minecraft:sweet_berries": {
             "localizationKey": "item.sweet_berries.name",
@@ -89138,6 +89728,7 @@
             "localizationKey": "item.clownfish.name",
             "tags": [
                 "minecraft:is_fish",
+                "minecraft:is_food",
             ],
         },
         "minecraft:tropical_fish_bucket": {
@@ -89472,8 +90063,16 @@
             "localizationKey": "tile.waxed_copper.name",
             "tags": [],
         },
+        "minecraft:waxed_copper_bars": {
+            "localizationKey": "tile.waxed_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:waxed_copper_bulb": {
             "localizationKey": "tile.waxed_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:waxed_copper_chain": {
+            "localizationKey": "tile.waxed_copper_chain.name",
             "tags": [],
         },
         "minecraft:waxed_copper_chest": {
@@ -89492,6 +90091,10 @@
         },
         "minecraft:waxed_copper_grate": {
             "localizationKey": "tile.waxed_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:waxed_copper_lantern": {
+            "localizationKey": "tile.waxed_copper_lantern.name",
             "tags": [],
         },
         "minecraft:waxed_copper_trapdoor": {
@@ -89518,8 +90121,16 @@
             "localizationKey": "tile.waxed_exposed_copper.name",
             "tags": [],
         },
+        "minecraft:waxed_exposed_copper_bars": {
+            "localizationKey": "tile.waxed_exposed_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:waxed_exposed_copper_bulb": {
             "localizationKey": "tile.waxed_exposed_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:waxed_exposed_copper_chain": {
+            "localizationKey": "tile.waxed_exposed_copper_chain.name",
             "tags": [],
         },
         "minecraft:waxed_exposed_copper_chest": {
@@ -89538,6 +90149,10 @@
         },
         "minecraft:waxed_exposed_copper_grate": {
             "localizationKey": "tile.waxed_exposed_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:waxed_exposed_copper_lantern": {
+            "localizationKey": "tile.waxed_exposed_copper_lantern.name",
             "tags": [],
         },
         "minecraft:waxed_exposed_copper_trapdoor": {
@@ -89572,8 +90187,16 @@
             "localizationKey": "tile.waxed_oxidized_copper.name",
             "tags": [],
         },
+        "minecraft:waxed_oxidized_copper_bars": {
+            "localizationKey": "tile.waxed_oxidized_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:waxed_oxidized_copper_bulb": {
             "localizationKey": "tile.waxed_oxidized_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:waxed_oxidized_copper_chain": {
+            "localizationKey": "tile.waxed_oxidized_copper_chain.name",
             "tags": [],
         },
         "minecraft:waxed_oxidized_copper_chest": {
@@ -89592,6 +90215,10 @@
         },
         "minecraft:waxed_oxidized_copper_grate": {
             "localizationKey": "tile.waxed_oxidized_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:waxed_oxidized_copper_lantern": {
+            "localizationKey": "tile.waxed_oxidized_copper_lantern.name",
             "tags": [],
         },
         "minecraft:waxed_oxidized_copper_trapdoor": {
@@ -89622,8 +90249,16 @@
             "localizationKey": "tile.waxed_weathered_copper.name",
             "tags": [],
         },
+        "minecraft:waxed_weathered_copper_bars": {
+            "localizationKey": "tile.waxed_weathered_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:waxed_weathered_copper_bulb": {
             "localizationKey": "tile.waxed_weathered_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:waxed_weathered_copper_chain": {
+            "localizationKey": "tile.waxed_weathered_copper_chain.name",
             "tags": [],
         },
         "minecraft:waxed_weathered_copper_chest": {
@@ -89642,6 +90277,10 @@
         },
         "minecraft:waxed_weathered_copper_grate": {
             "localizationKey": "tile.waxed_weathered_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:waxed_weathered_copper_lantern": {
+            "localizationKey": "tile.waxed_weathered_copper_lantern.name",
             "tags": [],
         },
         "minecraft:waxed_weathered_copper_trapdoor": {
@@ -89678,8 +90317,16 @@
             "localizationKey": "tile.weathered_copper.name",
             "tags": [],
         },
+        "minecraft:weathered_copper_bars": {
+            "localizationKey": "tile.weathered_copper_bars.name",
+            "tags": [],
+        },
         "minecraft:weathered_copper_bulb": {
             "localizationKey": "tile.weathered_copper_bulb.name",
+            "tags": [],
+        },
+        "minecraft:weathered_copper_chain": {
+            "localizationKey": "tile.weathered_copper_chain.name",
             "tags": [],
         },
         "minecraft:weathered_copper_chest": {
@@ -89698,6 +90345,10 @@
         },
         "minecraft:weathered_copper_grate": {
             "localizationKey": "tile.weathered_copper_grate.name",
+            "tags": [],
+        },
+        "minecraft:weathered_copper_lantern": {
+            "localizationKey": "tile.weathered_copper_lantern.name",
             "tags": [],
         },
         "minecraft:weathered_copper_trapdoor": {
@@ -90559,26 +91210,37 @@
             "minecraft:bread",
             "minecraft:carrot",
             "minecraft:chicken",
+            "minecraft:chorus_fruit",
+            "minecraft:cod",
             "minecraft:cooked_beef",
             "minecraft:cooked_chicken",
+            "minecraft:cooked_cod",
             "minecraft:cooked_mutton",
             "minecraft:cooked_porkchop",
             "minecraft:cooked_rabbit",
+            "minecraft:cooked_salmon",
             "minecraft:cookie",
             "minecraft:dried_kelp",
             "minecraft:enchanted_golden_apple",
             "minecraft:golden_apple",
             "minecraft:golden_carrot",
+            "minecraft:honey_bottle",
             "minecraft:melon_slice",
             "minecraft:mushroom_stew",
             "minecraft:mutton",
+            "minecraft:poisonous_potato",
             "minecraft:porkchop",
             "minecraft:potato",
+            "minecraft:pufferfish",
             "minecraft:pumpkin_pie",
             "minecraft:rabbit",
             "minecraft:rabbit_stew",
             "minecraft:rotten_flesh",
+            "minecraft:salmon",
+            "minecraft:spider_eye",
+            "minecraft:suspicious_stew",
             "minecraft:sweet_berries",
+            "minecraft:tropical_fish",
         ],
         "minecraft:is_hoe": [
             "minecraft:copper_hoe",
@@ -91534,6 +92196,160 @@
         },
         "wind_burst": {
             "maxLevel": 3,
+        },
+    },
+    "potionEffects": {
+        "minecraft:awkward": {
+            "durationTicks": 0,
+        },
+        "minecraft:fire_resistance": {
+            "durationTicks": 3600,
+        },
+        "minecraft:harming": {
+            "durationTicks": 1,
+        },
+        "minecraft:healing": {
+            "durationTicks": 1,
+        },
+        "minecraft:infested": {
+            "durationTicks": 3600,
+        },
+        "minecraft:invisibility": {
+            "durationTicks": 3600,
+        },
+        "minecraft:leaping": {
+            "durationTicks": 3600,
+        },
+        "minecraft:long_fire_resistance": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_invisibility": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_leaping": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_mundane": {
+            "durationTicks": 0,
+        },
+        "minecraft:long_nightvision": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_poison": {
+            "durationTicks": 2400,
+        },
+        "minecraft:long_regeneration": {
+            "durationTicks": 2400,
+        },
+        "minecraft:long_slow_falling": {
+            "durationTicks": 4800,
+        },
+        "minecraft:long_slowness": {
+            "durationTicks": 4800,
+        },
+        "minecraft:long_strength": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_swiftness": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_turtle_master": {
+            "durationTicks": 800,
+        },
+        "minecraft:long_water_breathing": {
+            "durationTicks": 9600,
+        },
+        "minecraft:long_weakness": {
+            "durationTicks": 4800,
+        },
+        "minecraft:mundane": {
+            "durationTicks": 0,
+        },
+        "minecraft:nightvision": {
+            "durationTicks": 3600,
+        },
+        "minecraft:oozing": {
+            "durationTicks": 3600,
+        },
+        "minecraft:poison": {
+            "durationTicks": 900,
+        },
+        "minecraft:regeneration": {
+            "durationTicks": 900,
+        },
+        "minecraft:slow_falling": {
+            "durationTicks": 1800,
+        },
+        "minecraft:slowness": {
+            "durationTicks": 1800,
+        },
+        "minecraft:strength": {
+            "durationTicks": 3600,
+        },
+        "minecraft:strong_harming": {
+            "durationTicks": 1,
+        },
+        "minecraft:strong_healing": {
+            "durationTicks": 1,
+        },
+        "minecraft:strong_leaping": {
+            "durationTicks": 1800,
+        },
+        "minecraft:strong_poison": {
+            "durationTicks": 450,
+        },
+        "minecraft:strong_regeneration": {
+            "durationTicks": 450,
+        },
+        "minecraft:strong_slowness": {
+            "durationTicks": 400,
+        },
+        "minecraft:strong_strength": {
+            "durationTicks": 1800,
+        },
+        "minecraft:strong_swiftness": {
+            "durationTicks": 1800,
+        },
+        "minecraft:strong_turtle_master": {
+            "durationTicks": 400,
+        },
+        "minecraft:swiftness": {
+            "durationTicks": 3600,
+        },
+        "minecraft:thick": {
+            "durationTicks": 0,
+        },
+        "minecraft:turtle_master": {
+            "durationTicks": 400,
+        },
+        "minecraft:water": {
+            "durationTicks": 0,
+        },
+        "minecraft:water_breathing": {
+            "durationTicks": 3600,
+        },
+        "minecraft:weakness": {
+            "durationTicks": 1800,
+        },
+        "minecraft:weaving": {
+            "durationTicks": 3600,
+        },
+        "minecraft:wind_charged": {
+            "durationTicks": 3600,
+        },
+        "minecraft:wither": {
+            "durationTicks": 800,
+        },
+    },
+    "potionDeliveries": {
+        "Consume": {
+            "items": "minecraft:potion",
+        },
+        "ThrownLingering": {
+            "items": "minecraft:lingering_potion",
+        },
+        "ThrownSplash": {
+            "items": "minecraft:splash_potion",
         },
     },
 }

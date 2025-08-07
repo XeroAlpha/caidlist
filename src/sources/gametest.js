@@ -869,8 +869,8 @@ const Extractors = [
                         }
                         if (component instanceof Minecraft.ItemPotionComponent) {
                             componentData.potionEffectType = component.potionEffectType.id;
-                            componentData.potionLiquidType = component.potionLiquidType.id;
-                            componentData.potionModifierType = component.potionModifierType.id;
+                            componentData.potionDurationTicks = component.potionEffectType.durationTicks;
+                            componentData.potionDeliveryType = component.potionDeliveryType.id;
                         }
                         if (component instanceof Minecraft.ItemDyeableComponent) {
                             assign(componentData, component, ['color', 'defaultColor']);
@@ -1072,6 +1072,41 @@ const Extractors = [
                 return result;
             });
             target.enchantments = sortObjectKey(EnchantmentList);
+        }
+    },
+    {
+        name: 'potions',
+        timeout: 10000,
+        async extract({ target, frame }) {
+            const { potionEffects, potionDeliveries } = await wrapEvaluate(frame, () => {
+                const potionEffects = {};
+                const potionEffectTypes = Minecraft.Potions.getAllEffectTypes();
+                for (const potionEffectType of potionEffectTypes) {
+                    potionEffects[potionEffectType.id] = {
+                        durationTicks: potionEffectType.durationTicks
+                    };
+                }
+                const potionDeliveries = {};
+                for (const potionDeliveryType of Minecraft.Potions.getAllDeliveryTypes()) {
+                    const items = {};
+                    for (const potionEffectType of potionEffectTypes) {
+                        const item = Minecraft.Potions.resolve(potionEffectType, potionDeliveryType);
+                        if (!items[item.typeId]) {
+                            items[item.typeId] = [];
+                        }
+                        items[item.typeId].push(potionEffectType.id);
+                    }
+                    potionDeliveries[potionDeliveryType.id] = { items };
+                }
+                return { potionEffects, potionDeliveries };
+            });
+            for (const [, v] of Object.entries(potionDeliveries)) {
+                if (Object.keys(v.items).length === 1) {
+                    v.items = Object.keys(v.items)[0];
+                }
+            }
+            target.potionEffects = sortObjectKey(potionEffects);
+            target.potionDeliveries = sortObjectKey(potionDeliveries);
         }
     }
 ];
