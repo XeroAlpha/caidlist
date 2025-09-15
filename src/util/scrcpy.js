@@ -1,11 +1,9 @@
-import AdbKit from '@u4/adbkit';
+import { KeyCodesMap } from '@u4/adbkit';
 import { spawn } from 'child_process';
 import PNGSplitStream from 'png-split-stream';
 import { Readable } from 'stream';
 import { log, retryUntilComplete, sleepAsync, warn } from './common.js';
 import scrcpyServer from '../../data/scrcpy-server/index.js';
-
-const { KeyCodes } = AdbKit;
 
 /**
  * @typedef {import('net').Socket} Socket
@@ -201,8 +199,8 @@ const ACTION_UP = 1;
  * @param {keyof typeof import('@u4/adbkit').KeyCodes} keycode
  */
 export async function press(scrcpy, keycode) {
-    await injectKeyCode(scrcpy, ACTION_DOWN, KeyCodes[keycode]);
-    await injectKeyCode(scrcpy, ACTION_UP, KeyCodes[keycode]);
+    await injectKeyCode(scrcpy, ACTION_DOWN, KeyCodesMap[keycode]);
+    await injectKeyCode(scrcpy, ACTION_UP, KeyCodesMap[keycode]);
 }
 
 const POWER_MODE_OFF = 0;

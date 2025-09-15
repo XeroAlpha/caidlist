@@ -1,4 +1,4 @@
-import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
+import { parse as parseHtml, TextNode, HTMLElement, NodeType } from 'node-html-parser';
 import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
 import { cachedOutput, forEachObject, deepCopy, testMinecraftVersionInRange, warn, log } from '../util/common.js';
@@ -102,8 +102,13 @@ function treeifyDocument(index, sections) {
 BedrockDocStates.set('end', () => undefined);
 BedrockDocStates.set('initial', (el, { document }) => {
     if (el instanceof HTMLElement && el.tagName === 'H1') {
-        const match = /(.+?)\s*Version:\s*([\d.]+)/.exec(el.innerText.trim());
-        [, document.title, document.version] = match;
+        const header = el.innerText.trim();
+        const match = /(.+?)\s*Version:\s*([\d.]+)/.exec(header);
+        if (match) {
+            [, document.title, document.version] = match;
+        } else {
+            document.title = header;
+        }
         return 'index.title';
     }
 });
@@ -280,7 +285,7 @@ function cleanHtml(htmlContent) {
 }
 
 function parseBedrockDoc(content) {
-    const root = parseHtml(cleanHtml(content));
+    let root = parseHtml(cleanHtml(content));
     const document = {};
     const index = [];
     const sections = [];
@@ -458,7 +463,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'blockState',
         documentation: 'Addons',
-        precondition: ({ version }) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
+        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
         path: ['BlockStates'],
         tableIndex: 0,
         idKey: 'Block State Name',
@@ -467,7 +472,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'block',
         documentation: 'Addons',
-        precondition: ({ version }) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
+        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.19.80.24'),
         path: ['Blocks'],
         tableIndex: 0,
         idKey: 'Name'
@@ -477,7 +482,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'blockState',
         documentation: 'Addons',
-        precondition: ({ version }) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
+        precondition: (_, version) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
         path: ['Blocks', 'BlockStates', 'List of all BlockStates'],
         tableIndex: 0,
         idKey: 'BlockState Name',
@@ -486,7 +491,7 @@ const pageAnalyzer = [
     createSectionTableAnalyzer({
         name: 'block',
         documentation: 'Addons',
-        precondition: ({ version }) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
+        precondition: (_, version) => testMinecraftVersionInRange(version, '1.20.0.20', '*'),
         path: ['Blocks', 'Blocks', 'List of fully-qualified block names'],
         tableIndex: 0,
         idKey: 'Name'
@@ -667,7 +672,7 @@ function extractDocumentationIds(docMap) {
             throw new Error(`Documentation not found: ${analyzer.documentation}`);
         }
         if (analyzer.precondition) {
-            if (!analyzer.precondition(doc)) {
+            if (!analyzer.precondition(doc, docMap.__VERSION__)) {
                 return;
             }
         }

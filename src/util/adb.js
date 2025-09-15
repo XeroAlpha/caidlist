@@ -1,9 +1,7 @@
-import AdbKit from '@u4/adbkit';
+import Adb from '@u4/adbkit';
 import { join as joinPath, posix } from 'path';
 import { readdirSync, statSync } from 'fs';
 import { log, setStatus, sleepAsync } from './common.js';
-
-const { Adb } = AdbKit;
 
 /**
  * @typedef {import('@u4/adbkit').Client} Client
