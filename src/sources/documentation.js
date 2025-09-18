@@ -1,4 +1,4 @@
-import { parse as parseHtml, TextNode, HTMLElement, NodeType } from 'node-html-parser';
+import { parse as parseHtml, TextNode, HTMLElement } from 'node-html-parser';
 import * as CommentJSON from '@projectxero/comment-json';
 import * as prettier from 'prettier';
 import { cachedOutput, forEachObject, deepCopy, testMinecraftVersionInRange, warn, log } from '../util/common.js';
