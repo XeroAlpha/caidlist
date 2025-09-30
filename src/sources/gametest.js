@@ -566,10 +566,10 @@ const Extractors = [
         name: 'blocks',
         timeout: 60000,
         async extract({ target, frame }) {
-            const blockInfoList = await wrapEvaluate(frame, () => {
+            const { blockInfo, blockStateInfo } = await wrapEvaluate(frame, () => {
                 const blockTypes = Minecraft.BlockTypes.getAll();
                 const liquidTypes = Object.keys(Minecraft.LiquidType);
-                const result = {};
+                const blockInfo = {};
                 for (const blockType of blockTypes) {
                     const states = [];
                     const invalidStates = [];
@@ -656,21 +656,36 @@ const Extractors = [
                         }
                         if (cursor < 0) break;
                     }
-                    result[blockType.id] = {
+                    blockInfo[blockType.id] = {
                         properties,
                         states,
                         invalidStates
                     };
                 }
-                return result;
+                const blockStates = Minecraft.BlockStates.getAll();
+                const blockStateInfo = {};
+                for (const blockState of blockStates) {
+                    blockStateInfo[blockState.id] = {
+                        validValues: blockState.validValues
+                    };
+                }
+                return { blockInfo, blockStateInfo };
             });
             const blocks = {};
             const blockProperties = {};
             const blockTags = {};
             const containLiquidMap = {};
             const liquidInteractMap = {};
-            const blockInfoEntries = Object.entries(blockInfoList).sort((a, b) => stringComparator(a[0], b[0]));
+            const blockInfoEntries = Object.entries(blockInfo).sort((a, b) => stringComparator(a[0], b[0]));
             let index = 0;
+            for (const [propertyName, property] of Object.entries(blockStateInfo)) {
+                blockProperties[propertyName] = [
+                    {
+                        validValues: property.validValues,
+                        defaultValue: {}
+                    }
+                ];
+            }
             for (const [blockId, blockType] of blockInfoEntries) {
                 setStatus(
                     `[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`
@@ -696,7 +711,8 @@ const Extractors = [
                     if (!propertyDescriptor) {
                         propertyDescriptor = {
                             validValues: property.validValues,
-                            defaultValue: {}
+                            defaultValue: {},
+                            hidden: true
                         };
                         propertyDescriptors.push(propertyDescriptor);
                     }

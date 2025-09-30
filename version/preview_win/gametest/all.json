@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.120.22",
+    "packageVersion": "1.21.120.23",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -5169,6 +5169,12 @@
                 "value": {
                     "type": "object",
                     "enumerableProperties": {
+                        "AABB": {
+                            "value": {
+                                "type": "undefined",
+                            },
+                            "configurable": false,
+                        },
                         "AimAssistCategory": {
                             "value": {
                                 "type": "function",
@@ -12393,6 +12399,14 @@
                                                     },
                                                 },
                                                 "extinguishFire": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getAABB": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -22424,6 +22438,20 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
+                                                    },
+                                                },
+                                                "unbreakable": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                    "setter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 1,
                                                     },
                                                 },
                                             },
@@ -36279,14 +36307,23 @@
                                     "prototype": {
                                         "value": {
                                             "type": "object",
-                                            "properties": {
-                                                "constructor": {
+                                            "enumerableProperties": {
+                                                "allowJoin": {
                                                     "value": {
-                                                        "ref": "MinecraftAdmin.AsyncPlayerJoinBeforeEvent",
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
-                                            },
-                                            "enumerableProperties": {
+                                                "disallowJoin": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "disconnect": {
                                                     "value": {
                                                         "type": "function",
@@ -36316,6 +36353,13 @@
                                                     },
                                                     "readOnly": true,
                                                     "configurable": false,
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "MinecraftAdmin.AsyncPlayerJoinBeforeEvent",
+                                                    },
                                                 },
                                             },
                                         },
@@ -38165,6 +38209,7 @@
         "Math.tanh",
         "Math.trunc",
         "Minecraft",
+        "Minecraft.AABB",
         "Minecraft.AimAssistCategory",
         "Minecraft.AimAssistCategory.prototype",
         "Minecraft.AimAssistCategory.prototype.constructor",
@@ -39116,6 +39161,7 @@
         "Minecraft.Entity.prototype.constructor",
         "Minecraft.Entity.prototype.dimension.[[Get]]",
         "Minecraft.Entity.prototype.extinguishFire",
+        "Minecraft.Entity.prototype.getAABB",
         "Minecraft.Entity.prototype.getAllBlocksStandingOn",
         "Minecraft.Entity.prototype.getBlockFromViewDirection",
         "Minecraft.Entity.prototype.getBlockStandingOn",
@@ -40493,6 +40539,8 @@
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChance",
         "Minecraft.ItemDurabilityComponent.prototype.getDamageChanceRange",
         "Minecraft.ItemDurabilityComponent.prototype.maxDurability.[[Get]]",
+        "Minecraft.ItemDurabilityComponent.prototype.unbreakable.[[Get]]",
+        "Minecraft.ItemDurabilityComponent.prototype.unbreakable.[[Set]]",
         "Minecraft.ItemDyeableComponent",
         "Minecraft.ItemDyeableComponent.[[Prototype]]",
         "Minecraft.ItemDyeableComponent.componentId",
@@ -41953,7 +42001,9 @@
         "MinecraftAdmin.AdminBeforeEvents.prototype.constructor",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype",
+        "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.allowJoin",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.constructor",
+        "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.disallowJoin",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.disconnect",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.isValid",
         "MinecraftAdmin.AsyncPlayerJoinBeforeEvent.prototype.name",
@@ -77779,6 +77829,42 @@
                 },
             },
         ],
+        "minecraft:connection_east": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {},
+            },
+        ],
+        "minecraft:connection_north": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {},
+            },
+        ],
+        "minecraft:connection_south": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {},
+            },
+        ],
+        "minecraft:connection_west": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {},
+            },
+        ],
         "minecraft:facing_direction": [
             {
                 "validValues": [
@@ -78073,6 +78159,15 @@
                     "minecraft:acacia_log": "acacia",
                     "minecraft:dark_oak_log": "dark_oak",
                 },
+            },
+        ],
+        "no_drop_bit": [
+            {
+                "validValues": [
+                    false,
+                    true,
+                ],
+                "defaultValue": {},
             },
         ],
         "occupied_bit": [
