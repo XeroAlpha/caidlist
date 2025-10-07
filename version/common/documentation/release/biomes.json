@@ -1,6 +1,5 @@
 {
     "title": "BIOMES DOCUMENTATION",
-    "version": "1.21.100.6",
     "content": [],
     "sections": [
         {
@@ -33,7 +32,7 @@
                     "type": "code",
                     "content": [
                         "{",
-                        "  \"format_version\": \"1.20.60\",",
+                        "  \"format_version\": \"1.21.110\",",
                         "  \"minecraft:biome\": {",
                         "    \"description\": {",
                         "      \"identifier\": \"minecraft:plains\"",
@@ -328,11 +327,30 @@
                     ],
                 },
                 {
-                    "name": "grass",
-                    "id": "grass",
+                    "name": "custom_map_tint_grass_noise",
+                    "id": "custom_map_tint_grass_noise",
                     "level": 2,
                     "content": [
                         "Makes grass use the noise based colors for tinting in this biome on the map.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "type",
+                                    "Type": "\"tint\", \"noise\"",
+                                    "Required?": "Required",
+                                    "Description": "Controls the type of grass tint to use.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "custom_map_tint_grass_tint",
+                    "id": "custom_map_tint_grass_tint",
+                    "level": 2,
+                    "content": [
+                        "Sets the color grass will be tinted by in this biome on the map.",
                         {
                             "type": "table",
                             "rows": [
@@ -411,28 +429,10 @@
                             "type": "table",
                             "rows": [
                                 {
-                                    "Name": "ash",
-                                    "Type": "Float",
-                                    "Required?": "Optional",
-                                    "Description": "Density of ash precipitation visuals",
-                                },
-                                {
-                                    "Name": "blue_spores",
-                                    "Type": "Float",
-                                    "Required?": "Optional",
-                                    "Description": "Density of blue spore precipitation visuals",
-                                },
-                                {
                                     "Name": "downfall",
                                     "Type": "Float",
                                     "Required?": "Optional",
-                                    "Description": "Amount that precipitation affects colors and block changes",
-                                },
-                                {
-                                    "Name": "red_spores",
-                                    "Type": "Float",
-                                    "Required?": "Optional",
-                                    "Description": "Density of blue spore precipitation visuals",
+                                    "Description": "Amount that precipitation affects colors and block changes. Setting to 0 will stop rain from falling in the biome.",
                                 },
                                 {
                                     "Name": "snow_accumulation",
@@ -445,12 +445,6 @@
                                     "Type": "Float",
                                     "Required?": "Optional",
                                     "Description": "Temperature affects a variety of visual and behavioral things, including snow and ice placement, sponge drying, and sky color",
-                                },
-                                {
-                                    "Name": "white_ash",
-                                    "Type": "Float",
-                                    "Required?": "Optional",
-                                    "Description": "Density of white ash precipitation visuals",
                                 },
                             ],
                         },
@@ -566,7 +560,7 @@
                                 },
                                 {
                                     "Name": "grass",
-                                    "Type": "Object of type grass or Object of type grass",
+                                    "Type": "Object of type custom_map_tint_grass_tint or Object of type custom_map_tint_grass_noise",
                                     "Required?": "Required",
                                     "Description": "Controls whether the grass will use a custom tint color or a noise based tint color.",
                                 },
@@ -1083,6 +1077,12 @@
                                     "Description": "Controls the block type used deep underground in this biome.",
                                 },
                                 {
+                                    "Name": "max_puddle_depth_below_sea_level",
+                                    "Type": "Integer",
+                                    "Required?": "Required",
+                                    "Description": "Controls the depth at which surface level blocks can be replaced with water for puddles. The number represents the number of blocks (0, 127) below sea level that we will go down to look for a surface block.",
+                                },
+                                {
                                     "Name": "mid_material",
                                     "Type": "Object of type Block Specifier",
                                     "Required?": "Required",
@@ -1187,5 +1187,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "f27822c90115ae884e83352f3a86628e95d797e7",
+    "__OBJECTHASH__": "d0197479f1419c32fcc753a655180e4640691f34",
 }

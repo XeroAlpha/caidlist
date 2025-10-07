@@ -1,6 +1,5 @@
 {
     "title": "CLIENT BIOMES DOCUMENTATION",
-    "version": "1.21.100.6",
     "content": [],
     "sections": [
         {
@@ -114,6 +113,12 @@
                                     "Type": "Object",
                                     "Required?": "Optional",
                                     "Description": "Set the identifier used for lighting in Vibrant Visuals mode. Identifiers must resolve to identifiers in valid Lighting JSON schemas under the \"lighting\" directory. Biomes without this component will have default lighting settings.",
+                                },
+                                {
+                                    "Name": "minecraft:precipitation",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Describes the visuals for a biome's precipitation. Biomes without this component will have default values. At most one precipitation type can be set for a biome.",
                                 },
                                 {
                                     "Name": "minecraft:sky_color",
@@ -310,6 +315,12 @@
                                     "Description": "Music to be played when inside this biome. If left off or not found the default music will be determined by the dimension. Empty string will result in no music.",
                                 },
                                 {
+                                    "Name": "underwater_music",
+                                    "Type": "Boolean",
+                                    "Required?": "Optional",
+                                    "Description": "Enables underwater music",
+                                },
+                                {
                                     "Name": "volume_multiplier",
                                     "Type": "Float",
                                     "Required?": "Optional",
@@ -440,6 +451,43 @@
                     ],
                 },
                 {
+                    "name": "minecraft:precipitation",
+                    "id": "minecraft:precipitation",
+                    "level": 2,
+                    "content": [
+                        "Describes the visuals for a biome's precipitation. Biomes without this component will have default values. At most one precipitation type can be set for a biome.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "ash",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of ash precipitation visuals",
+                                },
+                                {
+                                    "Name": "blue_spores",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of blue spore precipitation visuals",
+                                },
+                                {
+                                    "Name": "red_spores",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of blue spore precipitation visuals",
+                                },
+                                {
+                                    "Name": "white_ash",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Density of white ash precipitation visuals",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:sky_color",
                     "id": "minecraft:sky_color",
                     "level": 2,
@@ -505,5 +553,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "a4431d289592c443f663c40a7eb56951e0633626",
+    "__OBJECTHASH__": "8ab984bb994f44d87641c8fd77070846e9508a0a",
 }
