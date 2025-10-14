@@ -379,6 +379,8 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     // 打开聊天栏
     sendKeys('T');
     await sleepAsync(3000);
+    sendKeys('Enter'); // 临时补丁
+    await sleepAsync(3000);
     sendText('/');
     screen.log(`Input ${command}`);
     sendText(command.replace(/^\//, ''));
