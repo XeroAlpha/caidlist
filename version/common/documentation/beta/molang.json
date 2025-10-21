@@ -1869,6 +1869,22 @@
                                     "Description": "Returns the ratio between the previous and next key frames.",
                                 },
                                 {
+                                    "Name": "query.kinetic_weapon_damage_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"damage_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_delay",
+                                    "Description": "Returns the \"delay\" value from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_dismount_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"dismount_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_knockback_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"knockback_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
                                     "Name": "query.last_frame_time",
                                     "Description": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
                                 },
@@ -2153,6 +2169,10 @@
                                     "Description": "Returns the icon index of the experience orb.",
                                 },
                                 {
+                                    "Name": "query.ticks_since_last_kinetic_weapon_hit",
+                                    "Description": "Returns the number of ticks elapsed since the user last hit something while using a kinetic weapon. Returns -1.0 if no kinetic weapon is being used or if nothing has been hit yet. Hits that occur while the user is unloaded are not counted.",
+                                },
+                                {
                                     "Name": "query.time_of_day",
                                     "Description": "Returns the time of day (midnight=0.0, sunrise=0.25, noon=0.5, sunset=0.75) of the dimension the entity is in.",
                                 },
@@ -2349,5 +2369,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "5dd027abdfd768402d9b9608420da181f8951951",
+    "__OBJECTHASH__": "4f5c9f000f4c36467f6380ac2b914899010a82c5",
 }

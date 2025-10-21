@@ -85,6 +85,12 @@
                                     "Description": "Set the identifier used for color grading in Vibrant Visuals mode. Identifiers must resolve to identifiers in valid Color Grading JSON schemas under the \"color_grading\" directory. Biomes without this component will have default color_grading settings.",
                                 },
                                 {
+                                    "Name": "minecraft:cubemap_identifier",
+                                    "Type": "Object",
+                                    "Required?": "Optional",
+                                    "Description": "Set the identifier used for cubemap in Vibrant Visuals mode. Identifiers must resolve to identifiers in valid Cubemap JSON schemas under the \"cubemaps\" directory. Biomes without this component will have default cubemap settings.",
+                                },
+                                {
                                     "Name": "minecraft:dry_foliage_color",
                                     "Type": "Object",
                                     "Required?": "Optional",
@@ -392,6 +398,25 @@
                     ],
                 },
                 {
+                    "name": "minecraft:cubemap_identifier",
+                    "id": "minecraft:cubemap_identifier",
+                    "level": 2,
+                    "content": [
+                        "Set the identifier used for cubemap in Vibrant Visuals mode. Identifiers must resolve to identifiers in valid Cubemap JSON schemas under the \"cubemaps\" directory. Biomes without this component will have default cubemap settings.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "cubemap_identifier",
+                                    "Type": "Object of type Reference",
+                                    "Required?": "Required",
+                                    "Description": "Identifier of cubemap definition to use",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "minecraft:dry_foliage_color",
                     "id": "minecraft:dry_foliage_color",
                     "level": 2,
@@ -595,5 +620,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "6ac6659461aafa2dea01598ae78ce36f74217c51",
+    "__OBJECTHASH__": "d8565fb420f2208da9f697d7d4c20a7fddd7ee35",
 }

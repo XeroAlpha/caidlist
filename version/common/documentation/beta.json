@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.120.25",
-    "__COMMITHASH__": "6bcabd7cb62faa9d5a5c2e9970d05769a6634657",
-    "__MESSAGE__": "v1.21.120.25-preview",
+    "__VERSION__": "1.21.130.20",
+    "__COMMITHASH__": "b75e039197b65f77970ad8a012ba96e35c3e4ea2",
+    "__MESSAGE__": "v1.21.130.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -396,6 +396,9 @@
                         },
                         {
                             "name": "minecraft:color_grading_identifier",
+                        },
+                        {
+                            "name": "minecraft:cubemap_identifier",
                         },
                         {
                             "name": "minecraft:dry_foliage_color",
@@ -1436,7 +1439,7 @@
                                     "name": "minecraft:behavior.equip_item",
                                 },
                                 {
-                                    "name": "minecraft:behavior.explore_outskirts",
+                                    "name": "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)",
                                 },
                                 {
                                     "name": "minecraft:behavior.fertilize_farm_block",
@@ -1508,7 +1511,7 @@
                                     "name": "minecraft:behavior.inspect_bookshelf",
                                 },
                                 {
-                                    "name": "minecraft:behavior.investigate_suspicious_location",
+                                    "name": "minecraft:behavior.investigate_suspicious_location (See JSON Schema since 1.21.130)",
                                 },
                                 {
                                     "name": "minecraft:behavior.jump_around_target",
@@ -2208,6 +2211,9 @@
                                     "name": "minecraft:trusting",
                                 },
                                 {
+                                    "name": "minecraft:underwater_mount_breathing",
+                                },
+                                {
                                     "name": "minecraft:variable_max_auto_step",
                                 },
                                 {
@@ -2297,6 +2303,9 @@
                                 },
                                 {
                                     "name": "minecraft:body_rotation_blocked",
+                                },
+                                {
+                                    "name": "minecraft:body_rotation_locked_to_vehicle",
                                 },
                                 {
                                     "name": "minecraft:can_climb",
@@ -3345,6 +3354,10 @@
         "lit": "Determines if a block is lit or not",
         "minecraft:block_face": "Which blockface the player placed the block on.",
         "minecraft:cardinal_direction": "Defines the cardinal placement direction of a block.",
+        "minecraft:connection_east": "Whether the block is connected to another block to the east.",
+        "minecraft:connection_north": "Whether the block is connected to another block to the north.",
+        "minecraft:connection_south": "Whether the block is connected to another block to the south.",
+        "minecraft:connection_west": "Whether the block is connected to another block to the west.",
         "minecraft:facing_direction": "Defines all placement directions of a block.",
         "minecraft:vertical_half": "Which vertical half of the space the block is placed in.",
         "moisturized_amount": "Determines the moisture level of crops",
@@ -4808,6 +4821,7 @@
         "mooshroom": "0x00004880 (0x16)",
         "moving_block": "0x00000067 (0x67)",
         "mule": "0x02118425 (0x25)",
+        "nautilus": "0x00009109 (0x149)",
         "npc": "0x00000307 (0x51)",
         "ocelot": "0x00021270 (0x22)",
         "ominous_item_spawner": "0x00000145 (0x145)",
@@ -4869,6 +4883,7 @@
         "zoglin": "0x00068478 (0x126)",
         "zombie": "0x00199456 (0x32)",
         "zombie_horse": "0x02186011 (0x27)",
+        "zombie_nautilus": "0x00076694 (0x150)",
         "zombie_pigman": "0x00068388 (0x36)",
         "zombie_villager": "0x00199468 (0x44)",
         "zombie_villager_v2": "0x00199540 (0x116)",
@@ -5231,6 +5246,20 @@
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[16.0, 16.0, 16.0]",
                             "description": "Size of each side of the selection box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:support",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "Defines the support shape of the block. Currently only allows for blocks to have the same shape as a Vanilla fence and Vanilla stair. To work with custom stairs, requires the use of `minecraft:vertical_half` and `minecraft:cardinal_direction` or `minecraft:facing_direction` which can be set through the `minecraft:placement_direction` block trait. Custom blocks without this component will default to unit cube support.",
+                    "children": [
+                        {
+                            "name": "shape",
+                            "type": "String",
+                            "defaultValue": "",
+                            "description": "Required field. The type of support shape for this block. Currently, the options are: `fence` and `stair`.",
                         },
                     ],
                 },
@@ -6973,7 +7002,7 @@
                 },
             ],
         },
-        "minecraft:behavior.explore_outskirts": {
+        "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)": {
             "description": "Allows the entity to first travel to a random point on the outskirts of the village, and then explore random points within a small distance. This goal requires \"minecraft:dweller\" and \"minecraft:navigation\" to execute.",
             "children": [
                 {
@@ -7997,7 +8026,7 @@
                 },
             ],
         },
-        "minecraft:behavior.investigate_suspicious_location": {
+        "minecraft:behavior.investigate_suspicious_location (See JSON Schema since 1.21.130)": {
             "description": "Allows this entity to move towards a \"suspicious\" position based on data gathered in minecraft:suspect_tracking",
             "children": [
                 {
@@ -13421,6 +13450,12 @@
             "description": "Ability for a rideable entity to dash.",
             "children": [
                 {
+                    "name": "can_dash_underwater",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Whether the entity can dash underwater. Default value is false.",
+                },
+                {
                     "name": "cooldown_time",
                     "type": "Decimal",
                     "defaultValue": "1.00",
@@ -17550,6 +17585,10 @@
         "query.item_remaining_use_duration": "Returns the amount of time an item has left to use, else 0.0 if it doesn't make sense. Item queried is specified by the slot name 'main_hand' or 'off_hand'. Time remaining is normalized using the normalization value, only if one is given, else it is returned in seconds.",
         "query.item_slot_to_bone_name": "query.item_slot_to_bone_name requires one parameter: the name of the equipment slot.  This function returns the name of the bone this entity has mapped to that slot.",
         "query.key_frame_lerp_time": "Returns the ratio between the previous and next key frames.",
+        "query.kinetic_weapon_damage_duration": "Returns the \"max_duration\" value of \"damage_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+        "query.kinetic_weapon_delay": "Returns the \"delay\" value from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+        "query.kinetic_weapon_dismount_duration": "Returns the \"max_duration\" value of \"dismount_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+        "query.kinetic_weapon_knockback_duration": "Returns the \"max_duration\" value of \"knockback_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
         "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', or 'gamepad'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
@@ -17621,6 +17660,7 @@
         "query.target_x_rotation": "Returns the x rotation required to aim at the entity's current target if it has one, else it returns 0.0.",
         "query.target_y_rotation": "Returns the y rotation required to aim at the entity's current target if it has one, else it returns 0.0.",
         "query.texture_frame_index": "Returns the icon index of the experience orb.",
+        "query.ticks_since_last_kinetic_weapon_hit": "Returns the number of ticks elapsed since the user last hit something while using a kinetic weapon. Returns -1.0 if no kinetic weapon is being used or if nothing has been hit yet. Hits that occur while the user is unloaded are not counted.",
         "query.time_of_day": "Returns the time of day (midnight=0.0, sunrise=0.25, noon=0.5, sunset=0.75) of the dimension the entity is in.",
         "query.time_since_last_vibration_detection": "Returns the time in seconds since the last vibration detected by the actor. On errors or if no vibration has been detected yet, returns -1. Available on the Client (Resource Packs) only.",
         "query.time_stamp": "Returns the current time stamp of the level",

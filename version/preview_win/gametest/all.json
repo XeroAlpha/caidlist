@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.21.120.25",
+    "packageVersion": "1.21.130.20",
     "protocolVersion": 5,
     "scopeTree": {
         "type": "object",
@@ -12245,6 +12245,13 @@
                                         "value": {
                                             "type": "string",
                                             "value": "Hoe",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "MeleeSpear": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "MeleeSpear",
                                         },
                                         "readOnly": true,
                                     },
@@ -37378,6 +37385,14 @@
                                                         "length": 1,
                                                     },
                                                 },
+                                                "dimension": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "hasDuration": {
                                                     "getter": {
                                                         "type": "function",
@@ -37392,12 +37407,6 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 0,
-                                                    },
-                                                    "setter": {
-                                                        "type": "function",
-                                                        "name": "",
-                                                        "native": true,
-                                                        "length": 1,
                                                     },
                                                 },
                                                 "remove": {
@@ -37434,6 +37443,14 @@
                                                         "name": "",
                                                         "native": true,
                                                         "length": 1,
+                                                    },
+                                                },
+                                                "setLocation": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                                 "timeLeft": {
@@ -39311,6 +39328,7 @@
         "Minecraft.EnchantmentSlot.FishingRod",
         "Minecraft.EnchantmentSlot.Flintsteel",
         "Minecraft.EnchantmentSlot.Hoe",
+        "Minecraft.EnchantmentSlot.MeleeSpear",
         "Minecraft.EnchantmentSlot.Pickaxe",
         "Minecraft.EnchantmentSlot.Shears",
         "Minecraft.EnchantmentSlot.Shield",
@@ -42317,14 +42335,15 @@
         "MinecraftDebugUtilities.DebugShape.prototype.color.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.color.[[Set]]",
         "MinecraftDebugUtilities.DebugShape.prototype.constructor",
+        "MinecraftDebugUtilities.DebugShape.prototype.dimension.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.hasDuration.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.location.[[Get]]",
-        "MinecraftDebugUtilities.DebugShape.prototype.location.[[Set]]",
         "MinecraftDebugUtilities.DebugShape.prototype.remove",
         "MinecraftDebugUtilities.DebugShape.prototype.rotation.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.rotation.[[Set]]",
         "MinecraftDebugUtilities.DebugShape.prototype.scale.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.scale.[[Set]]",
+        "MinecraftDebugUtilities.DebugShape.prototype.setLocation",
         "MinecraftDebugUtilities.DebugShape.prototype.timeLeft.[[Get]]",
         "MinecraftDebugUtilities.DebugShape.prototype.timeLeft.[[Set]]",
         "MinecraftDebugUtilities.DebugShape.prototype.totalTimeLeft.[[Get]]",
@@ -84476,6 +84495,7 @@
                         "Crossbow",
                         "Shield",
                         "CosmeticHead",
+                        "MeleeSpear",
                     ],
                     "applicableEnchantments": [
                         "aqua_affinity",
@@ -84499,6 +84519,7 @@
                         "looting",
                         "loyalty",
                         "luck_of_the_sea",
+                        "lunge",
                         "lure",
                         "mending",
                         "multishot",
@@ -85794,6 +85815,13 @@
                 },
             },
         },
+        "minecraft:copper_nautilus_armor": {
+            "localizationKey": "item.copper_nautilus_armor.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:nautilus_armor",
+            ],
+        },
         "minecraft:copper_nugget": {
             "localizationKey": "item.copper_nugget.name",
             "tags": [],
@@ -85864,6 +85892,40 @@
                         "fortune",
                         "mending",
                         "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:copper_spear": {
+            "localizationKey": "item.copper_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:copper_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 15,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 190,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
                         "unbreaking",
                         "vanishing",
                     ],
@@ -86763,6 +86825,14 @@
                 },
             },
         },
+        "minecraft:diamond_nautilus_armor": {
+            "localizationKey": "item.diamond_nautilus_armor.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:nautilus_armor",
+                "minecraft:transformable_items",
+            ],
+        },
         "minecraft:diamond_ore": {
             "localizationKey": "tile.diamond_ore.name",
             "tags": [],
@@ -86831,6 +86901,41 @@
                         "fortune",
                         "mending",
                         "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:diamond_spear": {
+            "localizationKey": "item.diamond_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:diamond_tier",
+                "minecraft:transformable_items",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 18,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 1560,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
                         "unbreaking",
                         "vanishing",
                     ],
@@ -87077,6 +87182,7 @@
                         "Crossbow",
                         "Shield",
                         "CosmeticHead",
+                        "MeleeSpear",
                     ],
                     "applicableEnchantments": [
                         "aqua_affinity",
@@ -87100,6 +87206,7 @@
                         "looting",
                         "loyalty",
                         "luck_of_the_sea",
+                        "lunge",
                         "lure",
                         "mending",
                         "multishot",
@@ -87831,6 +87938,13 @@
                 },
             },
         },
+        "minecraft:golden_nautilus_armor": {
+            "localizationKey": "item.golden_nautilus_armor.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:nautilus_armor",
+            ],
+        },
         "minecraft:golden_pickaxe": {
             "localizationKey": "item.golden_pickaxe.name",
             "unstackable": true,
@@ -87897,6 +88011,40 @@
                         "fortune",
                         "mending",
                         "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:golden_spear": {
+            "localizationKey": "item.golden_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:golden_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 16,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 30,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
                         "unbreaking",
                         "vanishing",
                     ],
@@ -88570,6 +88718,13 @@
                 },
             },
         },
+        "minecraft:iron_nautilus_armor": {
+            "localizationKey": "item.iron_nautilus_armor.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:nautilus_armor",
+            ],
+        },
         "minecraft:iron_nugget": {
             "localizationKey": "item.iron_nugget.name",
             "tags": [],
@@ -88640,6 +88795,40 @@
                         "fortune",
                         "mending",
                         "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:iron_spear": {
+            "localizationKey": "item.iron_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:iron_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 16,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 250,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
                         "unbreaking",
                         "vanishing",
                     ],
@@ -89973,6 +90162,12 @@
             "localizationKey": "item.nautilus_shell.name",
             "tags": [],
         },
+        "minecraft:nautilus_spawn_egg": {
+            "localizationKey": "item.spawn_egg.entity.nautilus.name",
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
+        },
         "minecraft:nether_brick": {
             "localizationKey": "tile.nether_brick.name",
             "tags": [],
@@ -90265,6 +90460,13 @@
                 },
             },
         },
+        "minecraft:netherite_nautilus_armor": {
+            "localizationKey": "item.netherite_nautilus_armor.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:nautilus_armor",
+            ],
+        },
         "minecraft:netherite_pickaxe": {
             "localizationKey": "item.netherite_pickaxe.name",
             "unstackable": true,
@@ -90331,6 +90533,40 @@
                         "fortune",
                         "mending",
                         "silk_touch",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
+        "minecraft:netherite_spear": {
+            "localizationKey": "item.netherite_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:netherite_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 20,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 2030,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
                         "unbreaking",
                         "vanishing",
                     ],
@@ -92520,6 +92756,40 @@
                 },
             },
         },
+        "minecraft:stone_spear": {
+            "localizationKey": "item.stone_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:stone_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 14,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 130,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:stone_stairs": {
             "localizationKey": "tile.stone_stairs.name",
             "tags": [],
@@ -93932,6 +94202,40 @@
                 },
             },
         },
+        "minecraft:wooden_spear": {
+            "localizationKey": "item.wooden_spear.name",
+            "unstackable": true,
+            "tags": [
+                "minecraft:wooden_tier",
+                "minecraft:spear",
+            ],
+            "components": {
+                "minecraft:cooldown": {
+                    "cooldownCategory": "minecraft:spear",
+                    "cooldownTicks": 13,
+                },
+                "minecraft:durability": {
+                    "maxDurability": 60,
+                },
+                "minecraft:enchantable": {
+                    "enchantmentSlots": [
+                        "MeleeSpear",
+                    ],
+                    "applicableEnchantments": [
+                        "bane_of_arthropods",
+                        "fire_aspect",
+                        "knockback",
+                        "looting",
+                        "lunge",
+                        "mending",
+                        "sharpness",
+                        "smite",
+                        "unbreaking",
+                        "vanishing",
+                    ],
+                },
+            },
+        },
         "minecraft:wooden_sword": {
             "localizationKey": "item.wooden_sword.name",
             "unstackable": true,
@@ -94083,6 +94387,12 @@
                 "minecraft:spawn_egg",
             ],
         },
+        "minecraft:zombie_nautilus_spawn_egg": {
+            "localizationKey": "item.spawn_egg.entity.zombie_nautilus.name",
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
+        },
         "minecraft:zombie_pigman_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.zombie_pigman.name",
             "tags": [
@@ -94177,6 +94487,7 @@
             "minecraft:copper_leggings",
             "minecraft:copper_pickaxe",
             "minecraft:copper_shovel",
+            "minecraft:copper_spear",
             "minecraft:copper_sword",
         ],
         "minecraft:crimson_stems": [
@@ -94220,6 +94531,7 @@
             "minecraft:diamond_leggings",
             "minecraft:diamond_pickaxe",
             "minecraft:diamond_shovel",
+            "minecraft:diamond_spear",
             "minecraft:diamond_sword",
             "minecraft:mace",
         ],
@@ -94290,6 +94602,7 @@
             "minecraft:golden_leggings",
             "minecraft:golden_pickaxe",
             "minecraft:golden_shovel",
+            "minecraft:golden_spear",
             "minecraft:golden_sword",
         ],
         "minecraft:hanging_actor": [
@@ -94343,6 +94656,7 @@
             "minecraft:iron_leggings",
             "minecraft:iron_pickaxe",
             "minecraft:iron_shovel",
+            "minecraft:iron_spear",
             "minecraft:iron_sword",
         ],
         "minecraft:is_armor": [
@@ -94669,6 +94983,13 @@
             "minecraft:music_disc_wait",
             "minecraft:music_disc_ward",
         ],
+        "minecraft:nautilus_armor": [
+            "minecraft:copper_nautilus_armor",
+            "minecraft:diamond_nautilus_armor",
+            "minecraft:golden_nautilus_armor",
+            "minecraft:iron_nautilus_armor",
+            "minecraft:netherite_nautilus_armor",
+        ],
         "minecraft:netherite_tier": [
             "minecraft:netherite_axe",
             "minecraft:netherite_boots",
@@ -94678,6 +94999,7 @@
             "minecraft:netherite_leggings",
             "minecraft:netherite_pickaxe",
             "minecraft:netherite_shovel",
+            "minecraft:netherite_spear",
             "minecraft:netherite_sword",
         ],
         "minecraft:planks": [
@@ -94769,6 +95091,7 @@
             "minecraft:magma_cube_spawn_egg",
             "minecraft:mooshroom_spawn_egg",
             "minecraft:mule_spawn_egg",
+            "minecraft:nautilus_spawn_egg",
             "minecraft:ocelot_spawn_egg",
             "minecraft:panda_spawn_egg",
             "minecraft:parrot_spawn_egg",
@@ -94809,9 +95132,19 @@
             "minecraft:wolf_spawn_egg",
             "minecraft:zoglin_spawn_egg",
             "minecraft:zombie_horse_spawn_egg",
+            "minecraft:zombie_nautilus_spawn_egg",
             "minecraft:zombie_pigman_spawn_egg",
             "minecraft:zombie_spawn_egg",
             "minecraft:zombie_villager_spawn_egg",
+        ],
+        "minecraft:spear": [
+            "minecraft:copper_spear",
+            "minecraft:diamond_spear",
+            "minecraft:golden_spear",
+            "minecraft:iron_spear",
+            "minecraft:netherite_spear",
+            "minecraft:stone_spear",
+            "minecraft:wooden_spear",
         ],
         "minecraft:stone_bricks": [
             "minecraft:chiseled_stone_bricks",
@@ -94829,6 +95162,7 @@
             "minecraft:stone_hoe",
             "minecraft:stone_pickaxe",
             "minecraft:stone_shovel",
+            "minecraft:stone_spear",
             "minecraft:stone_sword",
         ],
         "minecraft:stone_tool_materials": [
@@ -94849,8 +95183,10 @@
             "minecraft:diamond_helmet",
             "minecraft:diamond_hoe",
             "minecraft:diamond_leggings",
+            "minecraft:diamond_nautilus_armor",
             "minecraft:diamond_pickaxe",
             "minecraft:diamond_shovel",
+            "minecraft:diamond_spear",
             "minecraft:diamond_sword",
             "minecraft:golden_boots",
         ],
@@ -94977,6 +95313,7 @@
             "minecraft:wooden_hoe",
             "minecraft:wooden_pickaxe",
             "minecraft:wooden_shovel",
+            "minecraft:wooden_spear",
             "minecraft:wooden_sword",
         ],
         "minecraft:wool": [
@@ -95061,6 +95398,7 @@
         "minecraft:minecart",
         "minecraft:mooshroom",
         "minecraft:mule",
+        "minecraft:nautilus",
         "minecraft:npc",
         "minecraft:ocelot",
         "minecraft:ominous_item_spawner",
@@ -95119,6 +95457,7 @@
         "minecraft:zoglin",
         "minecraft:zombie",
         "minecraft:zombie_horse",
+        "minecraft:zombie_nautilus",
         "minecraft:zombie_pigman",
         "minecraft:zombie_villager",
         "minecraft:zombie_villager_v2",
@@ -95127,6 +95466,7 @@
         "minecraft:absorption",
         "minecraft:bad_omen",
         "minecraft:blindness",
+        "minecraft:breath_of_the_nautilus",
         "minecraft:conduit_power",
         "minecraft:darkness",
         "minecraft:empty",
@@ -95336,6 +95676,9 @@
             "maxLevel": 3,
         },
         "luck_of_the_sea": {
+            "maxLevel": 3,
+        },
+        "lunge": {
             "maxLevel": 3,
         },
         "lure": {

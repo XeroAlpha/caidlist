@@ -24049,6 +24049,30 @@
                                             "Description": "Defines the cardinal placement direction of a block.",
                                         },
                                         {
+                                            "BlockState Name": "minecraft:connection_east",
+                                            "Type": "String",
+                                            "Valid Values": "true, false",
+                                            "Description": "Whether the block is connected to another block to the east.",
+                                        },
+                                        {
+                                            "BlockState Name": "minecraft:connection_north",
+                                            "Type": "String",
+                                            "Valid Values": "true, false",
+                                            "Description": "Whether the block is connected to another block to the north.",
+                                        },
+                                        {
+                                            "BlockState Name": "minecraft:connection_south",
+                                            "Type": "String",
+                                            "Valid Values": "true, false",
+                                            "Description": "Whether the block is connected to another block to the south.",
+                                        },
+                                        {
+                                            "BlockState Name": "minecraft:connection_west",
+                                            "Type": "String",
+                                            "Valid Values": "true, false",
+                                            "Description": "Whether the block is connected to another block to the west.",
+                                        },
+                                        {
                                             "BlockState Name": "minecraft:facing_direction",
                                             "Type": "String",
                                             "Valid Values": "down, up, north, south, east, west",
@@ -24471,6 +24495,38 @@
                                 {
                                     "type": "table",
                                     "rows": [
+                                        {
+                                            "Block Trait": "\"minecraft:connection\"",
+                                            "Type": "JSON Object",
+                                            "Description": [
+                                                "Adds the connection states to a block. The values of these states are updated when the block or neighboring blocks change. [\"Upcoming Creator Features\" Experimental Toggle Required]",
+                                                "Experimental toggles required: Upcoming Creator Features",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "enabled_states",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": [
+                                                                "Which connection states to enable. Options: [\"minecraft:cardinal_connections\"]. Must specify at least one.",
+                                                                {
+                                                                    "type": "table",
+                                                                    "rows": [
+                                                                        {
+                                                                            "Name": "minecraft:cardinal_connections",
+                                                                            "Type": "String",
+                                                                            "Default Value": "",
+                                                                            "Description": "Enables the \"minecraft:connection_north\", \"minecraft:connection_east\", \"minecraft:connection_south\", and \"minecraft:connection_west\" states.",
+                                                                        },
+                                                                    ],
+                                                                },
+                                                            ],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
                                         {
                                             "Block Trait": "\"minecraft:placement_direction\"",
                                             "Type": "JSON Object",
@@ -28934,6 +28990,11 @@
                             "Short ID": "25",
                         },
                         {
+                            "Identifier": "nautilus",
+                            "Full ID": "9109",
+                            "Short ID": "149",
+                        },
+                        {
                             "Identifier": "npc",
                             "Full ID": "307",
                             "Short ID": "51",
@@ -29237,6 +29298,11 @@
                             "Identifier": "zombie_horse",
                             "Full ID": "2186011",
                             "Short ID": "27",
+                        },
+                        {
+                            "Identifier": "zombie_nautilus",
+                            "Full ID": "76694",
+                            "Short ID": "150",
                         },
                         {
                             "Identifier": "zombie_pigman",
@@ -29817,7 +29883,7 @@
                         },
                         {
                             "Name": "banner_pattern",
-                            "ID": "801",
+                            "ID": "808",
                             "Aux Values": "",
                         },
                         {
@@ -30212,7 +30278,7 @@
                         },
                         {
                             "Name": "boat",
-                            "ID": "799",
+                            "ID": "806",
                             "Aux Values": "",
                         },
                         {
@@ -30527,7 +30593,7 @@
                         },
                         {
                             "Name": "carpet",
-                            "ID": "756",
+                            "ID": "763",
                             "Aux Values": "",
                         },
                         {
@@ -30627,7 +30693,7 @@
                         },
                         {
                             "Name": "chemistry_table",
-                            "ID": "793",
+                            "ID": "800",
                             "Aux Values": "",
                         },
                         {
@@ -30967,7 +31033,7 @@
                         },
                         {
                             "Name": "colored_torch_bp",
-                            "ID": "797",
+                            "ID": "804",
                             "Aux Values": "",
                         },
                         {
@@ -30987,7 +31053,7 @@
                         },
                         {
                             "Name": "colored_torch_rg",
-                            "ID": "796",
+                            "ID": "803",
                             "Aux Values": "",
                         },
                         {
@@ -31027,12 +31093,12 @@
                         },
                         {
                             "Name": "concrete",
-                            "ID": "782",
+                            "ID": "789",
                             "Aux Values": "",
                         },
                         {
                             "Name": "concrete_powder",
-                            "ID": "783",
+                            "ID": "790",
                             "Aux Values": "",
                         },
                         {
@@ -31171,6 +31237,11 @@
                             "Aux Values": "",
                         },
                         {
+                            "Name": "copper_nautilus_armor",
+                            "ID": "757",
+                            "Aux Values": "",
+                        },
+                        {
                             "Name": "copper_nugget",
                             "ID": "753",
                             "Aux Values": "",
@@ -31207,22 +31278,22 @@
                         },
                         {
                             "Name": "coral",
-                            "ID": "778",
+                            "ID": "785",
                             "Aux Values": "",
                         },
                         {
                             "Name": "coral_block",
-                            "ID": "760",
+                            "ID": "767",
                             "Aux Values": "",
                         },
                         {
                             "Name": "coral_fan",
-                            "ID": "769",
+                            "ID": "776",
                             "Aux Values": "",
                         },
                         {
                             "Name": "coral_fan_dead",
-                            "ID": "770",
+                            "ID": "777",
                             "Aux Values": "",
                         },
                         {
@@ -31946,6 +32017,11 @@
                             "Aux Values": "",
                         },
                         {
+                            "Name": "diamond_nautilus_armor",
+                            "ID": "760",
+                            "Aux Values": "",
+                        },
+                        {
                             "Name": "diamond_ore",
                             "ID": "56",
                             "Aux Values": "",
@@ -32027,27 +32103,27 @@
                         },
                         {
                             "Name": "double_plant",
-                            "ID": "776",
+                            "ID": "783",
                             "Aux Values": "",
                         },
                         {
                             "Name": "double_stone_block_slab",
-                            "ID": "765",
+                            "ID": "772",
                             "Aux Values": "",
                         },
                         {
                             "Name": "double_stone_block_slab2",
-                            "ID": "766",
+                            "ID": "773",
                             "Aux Values": "",
                         },
                         {
                             "Name": "double_stone_block_slab3",
-                            "ID": "767",
+                            "ID": "774",
                             "Aux Values": "",
                         },
                         {
                             "Name": "double_stone_block_slab4",
-                            "ID": "768",
+                            "ID": "775",
                             "Aux Values": "",
                         },
                         {
@@ -32102,7 +32178,7 @@
                         },
                         {
                             "Name": "dye",
-                            "ID": "800",
+                            "ID": "807",
                             "Aux Values": "",
                         },
                         {
@@ -32772,7 +32848,7 @@
                         },
                         {
                             "Name": "end_crystal",
-                            "ID": "803",
+                            "ID": "810",
                             "Aux Values": "",
                         },
                         {
@@ -32957,7 +33033,7 @@
                         },
                         {
                             "Name": "fence",
-                            "ID": "758",
+                            "ID": "765",
                             "Aux Values": "",
                         },
                         {
@@ -33278,6 +33354,11 @@
                         {
                             "Name": "golden_leggings",
                             "ID": "356",
+                            "Aux Values": "",
+                        },
+                        {
+                            "Name": "golden_nautilus_armor",
+                            "ID": "759",
                             "Aux Values": "",
                         },
                         {
@@ -33657,12 +33738,12 @@
                         },
                         {
                             "Name": "hard_stained_glass",
-                            "ID": "794",
+                            "ID": "801",
                             "Aux Values": "",
                         },
                         {
                             "Name": "hard_stained_glass_pane",
-                            "ID": "795",
+                            "ID": "802",
                             "Aux Values": "",
                         },
                         {
@@ -33923,6 +34004,11 @@
                         {
                             "Name": "iron_leggings",
                             "ID": "348",
+                            "Aux Values": "",
+                        },
+                        {
+                            "Name": "iron_nautilus_armor",
+                            "ID": "758",
                             "Aux Values": "",
                         },
                         {
@@ -34302,12 +34388,12 @@
                         },
                         {
                             "Name": "leaves",
-                            "ID": "772",
+                            "ID": "779",
                             "Aux Values": "",
                         },
                         {
                             "Name": "leaves2",
-                            "ID": "773",
+                            "ID": "780",
                             "Aux Values": "",
                         },
                         {
@@ -34322,7 +34408,7 @@
                         },
                         {
                             "Name": "light_block",
-                            "ID": "798",
+                            "ID": "805",
                             "Aux Values": "",
                         },
                         {
@@ -34672,12 +34758,12 @@
                         },
                         {
                             "Name": "log",
-                            "ID": "757",
+                            "ID": "764",
                             "Aux Values": "",
                         },
                         {
                             "Name": "log2",
-                            "ID": "780",
+                            "ID": "787",
                             "Aux Values": "",
                         },
                         {
@@ -34942,7 +35028,7 @@
                         },
                         {
                             "Name": "monster_egg",
-                            "ID": "781",
+                            "ID": "788",
                             "Aux Values": "",
                         },
                         {
@@ -35102,12 +35188,12 @@
                         },
                         {
                             "Name": "music_disc_creator",
-                            "ID": "788",
+                            "ID": "795",
                             "Aux Values": "",
                         },
                         {
                             "Name": "music_disc_creator_music_box",
-                            "ID": "789",
+                            "ID": "796",
                             "Aux Values": "",
                         },
                         {
@@ -35117,7 +35203,7 @@
                         },
                         {
                             "Name": "music_disc_lava_chicken",
-                            "ID": "792",
+                            "ID": "799",
                             "Aux Values": "",
                         },
                         {
@@ -35142,7 +35228,7 @@
                         },
                         {
                             "Name": "music_disc_precipice",
-                            "ID": "790",
+                            "ID": "797",
                             "Aux Values": "",
                         },
                         {
@@ -35162,7 +35248,7 @@
                         },
                         {
                             "Name": "music_disc_tears",
-                            "ID": "791",
+                            "ID": "798",
                             "Aux Values": "",
                         },
                         {
@@ -35193,6 +35279,11 @@
                         {
                             "Name": "nautilus_shell",
                             "ID": "580",
+                            "Aux Values": "",
+                        },
+                        {
+                            "Name": "nautilus_spawn_egg",
+                            "ID": "755",
                             "Aux Values": "",
                         },
                         {
@@ -35293,6 +35384,11 @@
                         {
                             "Name": "netherite_leggings",
                             "ID": "626",
+                            "Aux Values": "",
+                        },
+                        {
+                            "Name": "netherite_nautilus_armor",
+                            "ID": "761",
                             "Aux Values": "",
                         },
                         {
@@ -35922,7 +36018,7 @@
                         },
                         {
                             "Name": "planks",
-                            "ID": "777",
+                            "ID": "784",
                             "Aux Values": "",
                         },
                         {
@@ -36522,7 +36618,7 @@
                         },
                         {
                             "Name": "red_flower",
-                            "ID": "775",
+                            "ID": "782",
                             "Aux Values": "",
                         },
                         {
@@ -36792,7 +36888,7 @@
                         },
                         {
                             "Name": "sapling",
-                            "ID": "771",
+                            "ID": "778",
                             "Aux Values": "",
                         },
                         {
@@ -36897,7 +36993,7 @@
                         },
                         {
                             "Name": "shulker_box",
-                            "ID": "786",
+                            "ID": "793",
                             "Aux Values": "",
                         },
                         {
@@ -37147,7 +37243,7 @@
                         },
                         {
                             "Name": "spawn_egg",
-                            "ID": "802",
+                            "ID": "809",
                             "Aux Values": "",
                         },
                         {
@@ -37297,12 +37393,12 @@
                         },
                         {
                             "Name": "stained_glass",
-                            "ID": "784",
+                            "ID": "791",
                             "Aux Values": "",
                         },
                         {
                             "Name": "stained_glass_pane",
-                            "ID": "785",
+                            "ID": "792",
                             "Aux Values": "",
                         },
                         {
@@ -37347,22 +37443,22 @@
                         },
                         {
                             "Name": "stone_block_slab",
-                            "ID": "761",
+                            "ID": "768",
                             "Aux Values": "",
                         },
                         {
                             "Name": "stone_block_slab2",
-                            "ID": "762",
+                            "ID": "769",
                             "Aux Values": "",
                         },
                         {
                             "Name": "stone_block_slab3",
-                            "ID": "763",
+                            "ID": "770",
                             "Aux Values": "",
                         },
                         {
                             "Name": "stone_block_slab4",
-                            "ID": "764",
+                            "ID": "771",
                             "Aux Values": "",
                         },
                         {
@@ -37427,7 +37523,7 @@
                         },
                         {
                             "Name": "stonebrick",
-                            "ID": "759",
+                            "ID": "766",
                             "Aux Values": "",
                         },
                         {
@@ -37642,7 +37738,7 @@
                         },
                         {
                             "Name": "tallgrass",
-                            "ID": "779",
+                            "ID": "786",
                             "Aux Values": "",
                         },
                         {
@@ -38607,7 +38703,7 @@
                         },
                         {
                             "Name": "wood",
-                            "ID": "787",
+                            "ID": "794",
                             "Aux Values": "",
                         },
                         {
@@ -38647,7 +38743,7 @@
                         },
                         {
                             "Name": "wooden_slab",
-                            "ID": "774",
+                            "ID": "781",
                             "Aux Values": "",
                         },
                         {
@@ -38657,7 +38753,7 @@
                         },
                         {
                             "Name": "wool",
-                            "ID": "755",
+                            "ID": "762",
                             "Aux Values": "",
                         },
                         {
@@ -38748,6 +38844,11 @@
                         {
                             "Name": "zombie_horse_spawn_egg",
                             "ID": "473",
+                            "Aux Values": "",
+                        },
+                        {
+                            "Name": "zombie_nautilus_spawn_egg",
+                            "ID": "756",
                             "Aux Values": "",
                         },
                         {
@@ -39011,5 +39112,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "0ff834a976159e8463298fc106219f8d4bd5a55f",
+    "__OBJECTHASH__": "35bad8460cfe629bec5286848a9d3dd84b6fcdd8",
 }
