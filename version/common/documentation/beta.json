@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.130.20",
-    "__COMMITHASH__": "b75e039197b65f77970ad8a012ba96e35c3e4ea2",
-    "__MESSAGE__": "v1.21.130.20-preview",
+    "__VERSION__": "1.21.130.22",
+    "__COMMITHASH__": "1f0c3ef681bf32c359b7fd889d694567ef0386dc",
+    "__MESSAGE__": "v1.21.130.22-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -3358,6 +3358,7 @@
         "minecraft:connection_north": "Whether the block is connected to another block to the north.",
         "minecraft:connection_south": "Whether the block is connected to another block to the south.",
         "minecraft:connection_west": "Whether the block is connected to another block to the west.",
+        "minecraft:corner": "Defines the corner shape of a block.",
         "minecraft:facing_direction": "Defines all placement directions of a block.",
         "minecraft:vertical_half": "Which vertical half of the space the block is placed in.",
         "moisturized_amount": "Determines the moisture level of crops",
@@ -5989,7 +5990,7 @@
                 },
                 {
                     "name": "entity_types",
-                    "type": "Array",
+                    "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "The list of conditions another entity must meet to be a valid target to avoid.",
                 },
@@ -12611,7 +12612,7 @@
                     "name": "feed_items",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "List of items that can be fed to the entity. Includes 'item' for the item name and 'growth' to define how much time it grows up by.",
+                    "description": "List of items that can be fed to the entity. Includes 'item' for the item name, 'growth' to define how much time it grows up by, and 'result_item' that defines what item the feed item will transform to upon successful interaction (Format: itemName:auxValue).",
                 },
                 {
                     "name": "grow_up",
@@ -12624,12 +12625,6 @@
                     "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "List of conditions to meet so that the entity can be fed.",
-                },
-                {
-                    "name": "transform_to_item",
-                    "type": "Item Description Properties",
-                    "defaultValue": "",
-                    "description": "The feed item used will transform to this item upon successful interaction. Format: itemName:auxValue",
                 },
             ],
         },
@@ -13050,7 +13045,7 @@
                     "name": "breed_items",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "The list of items that can be used to get the entity into the 'love' state",
+                    "description": "The list of items that can be used to get the entity into the 'love' state. Includes 'item' for the item name, and 'result_item' that defines what item the breed item will transform to upon successful interaction (Format: itemName:auxValue).",
                 },
                 {
                     "name": "breeds_with",
@@ -13200,12 +13195,6 @@
                     "type": "Boolean",
                     "defaultValue": "true",
                     "description": "If true, the entities need to be tamed first before they can breed.",
-                },
-                {
-                    "name": "transform_to_item",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "The breed item used will transform to this item upon successful interaction. Format: itemName:auxValue",
                 },
             ],
         },
@@ -17431,6 +17420,9 @@
         "query.distance_from_camera": "Returns the distance of the root of this actor or particle emitter from the camera.",
         "query.effect_emitter_count": "Returns the total number of active emitters of the callee's particle effect type.",
         "query.effect_particle_count": "Returns the total number of active particles of the callee's particle effect type.",
+        "query.entity_biome_has_all_tags": "Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if all of the tag names match. Only supported in resource packs (client-side).",
+        "query.entity_biome_has_any_identifier": "Compares the biome the entity is standing in with one or more identifier names, and returns either 0 or 1 based on if any of the identifier names match. Only supported in resource packs (client-side).",
+        "query.entity_biome_has_any_tags": "Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if any of the tag names match. Only supported in resource packs (client-side).",
         "query.equipment_count": "Returns the number of equipped armor pieces for an actor from 0 to 5, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).",
         "query.equipped_item_all_tags": "Takes a slot name followed by any tag you want to check for in the form of 'tag_name' and returns 1 if all of the tags are on that equipped item, 0 otherwise.",
         "query.equipped_item_any_tag": "Takes a slot name followed by any tag you want to check for in the form of 'tag_name' and returns 0 if none of the tags are on that equipped item or 1 if at least 1 tag exists.",
@@ -17680,9 +17672,6 @@
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
     "molangQueryExperimental": {
-        "query.entity_biome_has_all_tags": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if all of the tag names match. Only supported in resource packs (client-side).",
-        "query.entity_biome_has_any_identifier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more identifier names, and returns either 0 or 1 based on if any of the identifier names match. Only supported in resource packs (client-side).",
-        "query.entity_biome_has_any_tags": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if any of the tag names match. Only supported in resource packs (client-side).",
         "query.get_pack_setting": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
         "query.is_pack_setting_enabled": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
         "query.is_pack_setting_selected": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",

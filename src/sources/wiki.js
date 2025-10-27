@@ -1,8 +1,9 @@
 import * as CommentJSON from '@projectxero/comment-json';
+import { got } from 'got';
 import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
 import { cachedOutput, forEachArray, forEachObject, log, sortObjectKey, warn } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
-import { fetchFile, proxiedGot } from '../util/network.js';
+import { fetchFile } from '../util/network.js';
 
 const sources = {
     mcwzh: {
@@ -13,7 +14,7 @@ const sources = {
             return await fetchFile(`${this.getUrl(title)}?action=raw`);
         },
         async getCsrfTokens() {
-            const res = await proxiedGot
+            const res = await got
                 .get('https://zh.minecraft.wiki/api.php', {
                     searchParams: {
                         action: 'query',
@@ -25,7 +26,7 @@ const sources = {
             return res.query.tokens.csrftoken;
         },
         async requestScribuntoConsole(title, content, question, token) {
-            const res = await proxiedGot
+            const res = await got
                 .post('https://zh.minecraft.wiki/api.php', {
                     form: {
                         action: 'scribunto-console',

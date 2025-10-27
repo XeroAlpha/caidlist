@@ -1136,7 +1136,8 @@ const ImportEnvironments = {
     MinecraftCommon: ['@minecraft/common'],
     MinecraftEditor: ['@minecraft/server-editor'],
     MinecraftDebugUtilities: ['@minecraft/debug-utilities'],
-    MinecraftDiagnostics: ['@minecraft/diagnostics']
+    MinecraftDiagnostics: ['@minecraft/diagnostics'],
+    MinecraftGraphics: ['@minecraft/server-graphics']
 };
 
 /**

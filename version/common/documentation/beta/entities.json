@@ -15219,7 +15219,7 @@
                                         },
                                         {
                                             "Name": "entity_types",
-                                            "Type": "Array",
+                                            "Type": "Minecraft Filter",
                                             "Default Value": "",
                                             "Description": "The list of conditions another entity must meet to be a valid target to avoid.",
                                         },
@@ -23373,7 +23373,7 @@
                                             "Name": "feed_items",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "List of items that can be fed to the entity. Includes 'item' for the item name and 'growth' to define how much time it grows up by.",
+                                            "Description": "List of items that can be fed to the entity. Includes 'item' for the item name, 'growth' to define how much time it grows up by, and 'result_item' that defines what item the feed item will transform to upon successful interaction (Format: itemName:auxValue).",
                                         },
                                         {
                                             "Name": "grow_up",
@@ -23386,12 +23386,6 @@
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
                                             "Description": "List of conditions to meet so that the entity can be fed.",
-                                        },
-                                        {
-                                            "Name": "transform_to_item",
-                                            "Type": "Item Description Properties",
-                                            "Default Value": "",
-                                            "Description": "The feed item used will transform to this item upon successful interaction. Format: itemName:auxValue",
                                         },
                                     ],
                                 },
@@ -23944,7 +23938,7 @@
                                             "Name": "breed_items",
                                             "Type": "List",
                                             "Default Value": "",
-                                            "Description": "The list of items that can be used to get the entity into the 'love' state",
+                                            "Description": "The list of items that can be used to get the entity into the 'love' state. Includes 'item' for the item name, and 'result_item' that defines what item the breed item will transform to upon successful interaction (Format: itemName:auxValue).",
                                         },
                                         {
                                             "Name": "breeds_with",
@@ -24131,12 +24125,6 @@
                                             "Default Value": "true",
                                             "Description": "If true, the entities need to be tamed first before they can breed.",
                                         },
-                                        {
-                                            "Name": "transform_to_item",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The breed item used will transform to this item upon successful interaction. Format: itemName:auxValue",
-                                        },
                                     ],
                                 },
                             ],
@@ -24226,7 +24214,7 @@
                             "id": "minecraft:burns_in_daylight",
                             "level": 4,
                             "content": [
-                                "Specifies if a mob burns in daylight.",
+                                ".",
                             ],
                         },
                         {
@@ -31726,5 +31714,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "8a473b3bee4c5f87471b38082ce7df4aeaa6e1eb",
+    "__OBJECTHASH__": "25ac7fffaf980390f5af7ada8ffc5a7185e20d1a",
 }
