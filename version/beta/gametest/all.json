@@ -1,6 +1,6 @@
 {
-    "packageVersion": "1.21.130.22",
-    "protocolVersion": 5,
+    "packageVersion": "1.21.130.24",
+    "protocolVersion": 6,
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -14223,6 +14223,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "dehydration": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "dehydration",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "drowning": {
                                         "value": {
                                             "type": "string",
@@ -18573,6 +18580,77 @@
                                 },
                                 "prototype": {
                                     "ref": "Minecraft.EntityComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "EntitySwingSource": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "Attack": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Attack",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Build": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Build",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "DropItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "DropItem",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Event": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Event",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Interact": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Interact",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Mine": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Mine",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "None": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "None",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "ThrowItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "ThrowItem",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "UseItem": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "UseItem",
+                                        },
+                                        "readOnly": true,
+                                    },
                                 },
                             },
                             "configurable": false,
@@ -28901,6 +28979,14 @@
                                                     },
                                                 },
                                                 "player": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "swingSource": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -39851,6 +39937,7 @@
         "Minecraft.EntityDamageCause.campfire",
         "Minecraft.EntityDamageCause.charging",
         "Minecraft.EntityDamageCause.contact",
+        "Minecraft.EntityDamageCause.dehydration",
         "Minecraft.EntityDamageCause.drowning",
         "Minecraft.EntityDamageCause.entityAttack",
         "Minecraft.EntityDamageCause.entityExplosion",
@@ -40454,6 +40541,16 @@
         "Minecraft.EntityStrengthComponent.prototype.constructor",
         "Minecraft.EntityStrengthComponent.prototype.max.[[Get]]",
         "Minecraft.EntityStrengthComponent.prototype.value.[[Get]]",
+        "Minecraft.EntitySwingSource",
+        "Minecraft.EntitySwingSource.Attack",
+        "Minecraft.EntitySwingSource.Build",
+        "Minecraft.EntitySwingSource.DropItem",
+        "Minecraft.EntitySwingSource.Event",
+        "Minecraft.EntitySwingSource.Interact",
+        "Minecraft.EntitySwingSource.Mine",
+        "Minecraft.EntitySwingSource.None",
+        "Minecraft.EntitySwingSource.ThrowItem",
+        "Minecraft.EntitySwingSource.UseItem",
         "Minecraft.EntityTameMountComponent",
         "Minecraft.EntityTameMountComponent.[[Prototype]]",
         "Minecraft.EntityTameMountComponent.componentId",
@@ -41808,6 +41905,7 @@
         "Minecraft.PlayerSwingStartAfterEvent.prototype.constructor",
         "Minecraft.PlayerSwingStartAfterEvent.prototype.heldItemStack.[[Get]]",
         "Minecraft.PlayerSwingStartAfterEvent.prototype.player.[[Get]]",
+        "Minecraft.PlayerSwingStartAfterEvent.prototype.swingSource.[[Get]]",
         "Minecraft.PlayerSwingStartAfterEventSignal",
         "Minecraft.PlayerSwingStartAfterEventSignal.prototype",
         "Minecraft.PlayerSwingStartAfterEventSignal.prototype.constructor",
@@ -85239,6 +85337,12 @@
             "localizationKey": "tile.calibrated_sculk_sensor.name",
             "tags": [],
         },
+        "minecraft:camel_husk_spawn_egg": {
+            "localizationKey": "item.spawn_egg.entity.camel_husk.name",
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
+        },
         "minecraft:camel_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.camel.name",
             "tags": [
@@ -86298,12 +86402,12 @@
             "unstackable": true,
             "tags": [
                 "minecraft:copper_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 15,
+                    "cooldownTicks": 17,
                 },
                 "minecraft:durability": {
                     "maxDurability": 190,
@@ -87308,12 +87412,12 @@
             "tags": [
                 "minecraft:diamond_tier",
                 "minecraft:transformable_items",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 18,
+                    "cooldownTicks": 21,
                 },
                 "minecraft:durability": {
                     "maxDurability": 1560,
@@ -88913,12 +89017,12 @@
             "unstackable": true,
             "tags": [
                 "minecraft:golden_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 16,
+                    "cooldownTicks": 19,
                 },
                 "minecraft:durability": {
                     "maxDurability": 30,
@@ -89844,12 +89948,12 @@
             "unstackable": true,
             "tags": [
                 "minecraft:iron_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 16,
+                    "cooldownTicks": 19,
                 },
                 "minecraft:durability": {
                     "maxDurability": 250,
@@ -91595,12 +91699,12 @@
             "unstackable": true,
             "tags": [
                 "minecraft:netherite_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 20,
+                    "cooldownTicks": 23,
                 },
                 "minecraft:durability": {
                     "maxDurability": 2030,
@@ -92120,6 +92224,12 @@
         "minecraft:paper": {
             "localizationKey": "item.paper.name",
             "tags": [],
+        },
+        "minecraft:parched_spawn_egg": {
+            "localizationKey": "item.spawn_egg.entity.parched.name",
+            "tags": [
+                "minecraft:spawn_egg",
+            ],
         },
         "minecraft:parrot_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.parrot.name",
@@ -93832,12 +93942,12 @@
             "unstackable": true,
             "tags": [
                 "minecraft:stone_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
                     "cooldownCategory": "minecraft:spear",
-                    "cooldownTicks": 14,
+                    "cooldownTicks": 15,
                 },
                 "minecraft:durability": {
                     "maxDurability": 130,
@@ -95286,7 +95396,7 @@
             "unstackable": true,
             "tags": [
                 "minecraft:wooden_tier",
-                "minecraft:spear",
+                "minecraft:is_spear",
             ],
             "components": {
                 "minecraft:cooldown": {
@@ -95889,6 +95999,15 @@
             "minecraft:stone_shovel",
             "minecraft:wooden_shovel",
         ],
+        "minecraft:is_spear": [
+            "minecraft:copper_spear",
+            "minecraft:diamond_spear",
+            "minecraft:golden_spear",
+            "minecraft:iron_spear",
+            "minecraft:netherite_spear",
+            "minecraft:stone_spear",
+            "minecraft:wooden_spear",
+        ],
         "minecraft:is_sword": [
             "minecraft:copper_sword",
             "minecraft:diamond_sword",
@@ -96138,6 +96257,7 @@
             "minecraft:blaze_spawn_egg",
             "minecraft:bogged_spawn_egg",
             "minecraft:breeze_spawn_egg",
+            "minecraft:camel_husk_spawn_egg",
             "minecraft:camel_spawn_egg",
             "minecraft:cat_spawn_egg",
             "minecraft:cave_spider_spawn_egg",
@@ -96173,6 +96293,7 @@
             "minecraft:nautilus_spawn_egg",
             "minecraft:ocelot_spawn_egg",
             "minecraft:panda_spawn_egg",
+            "minecraft:parched_spawn_egg",
             "minecraft:parrot_spawn_egg",
             "minecraft:phantom_spawn_egg",
             "minecraft:pig_spawn_egg",
@@ -96215,15 +96336,6 @@
             "minecraft:zombie_pigman_spawn_egg",
             "minecraft:zombie_spawn_egg",
             "minecraft:zombie_villager_spawn_egg",
-        ],
-        "minecraft:spear": [
-            "minecraft:copper_spear",
-            "minecraft:diamond_spear",
-            "minecraft:golden_spear",
-            "minecraft:iron_spear",
-            "minecraft:netherite_spear",
-            "minecraft:stone_spear",
-            "minecraft:wooden_spear",
         ],
         "minecraft:stone_bricks": [
             "minecraft:chiseled_stone_bricks",
@@ -96431,6 +96543,7 @@
         "minecraft:breeze",
         "minecraft:breeze_wind_charge_projectile",
         "minecraft:camel",
+        "minecraft:camel_husk",
         "minecraft:cat",
         "minecraft:cave_spider",
         "minecraft:chest_boat",
@@ -96484,6 +96597,7 @@
         "minecraft:ocelot",
         "minecraft:ominous_item_spawner",
         "minecraft:panda",
+        "minecraft:parched",
         "minecraft:parrot",
         "minecraft:phantom",
         "minecraft:pig",

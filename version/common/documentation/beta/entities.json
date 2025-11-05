@@ -8557,6 +8557,141 @@
                     ],
                 },
                 {
+                    "name": "is_in_same_vehicle",
+                    "id": "is_in_same_vehicle",
+                    "level": 2,
+                    "content": [
+                        "Returns whether the subject entity is in the same vehicle as the host entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "",
+                                    "Description": "(Required) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_in_same_vehicle\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_in_same_vehicle\", \"value\": \"true\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_in_village",
                     "id": "is_in_village",
                     "level": 2,
@@ -16869,10 +17004,22 @@
                                     "type": "table",
                                     "rows": [
                                         {
+                                            "Name": "chance_per_tick_to_float",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.8",
+                                            "Description": "The chance per tick to cause an upward impulse.",
+                                        },
+                                        {
                                             "Name": "sink_with_passengers",
                                             "Type": "Boolean",
                                             "Default Value": "false",
                                             "Description": "If true, the mob will keep sinking as long as it has passengers.",
+                                        },
+                                        {
+                                            "Name": "time_under_water_to_dismount_passengers",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.0",
+                                            "Description": "Time in seconds that a floating vehicles head can be underwater before it causes its passengers to dismount.",
                                         },
                                     ],
                                 },
@@ -23874,6 +24021,12 @@
                                             "Description": "If true, this entity can breathe in water.",
                                         },
                                         {
+                                            "Name": "can_dehydrate",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, water-only breathers will take Dehydration damage when out of water.",
+                                        },
+                                        {
                                             "Name": "generates_bubbles",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -25003,6 +25156,12 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.05",
                                             "Description": "Amount of exhaustion applied when jumping.",
+                                        },
+                                        {
+                                            "Name": "lunge",
+                                            "Type": "Decimal",
+                                            "Default Value": "4",
+                                            "Description": "Amount of exhaustion applied when triggering the lunge enchantment, multiplied by the enchantment level.",
                                         },
                                         {
                                             "Name": "mine",
@@ -30490,10 +30649,6 @@
                                             "ID": "-31742338",
                                         },
                                         {
-                                            "JSON Name": "minecraft:body_rotation_locked_to_vehicle",
-                                            "ID": "1958193887",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:can_climb",
                                             "ID": "-550459594",
                                         },
@@ -30640,6 +30795,10 @@
                                         {
                                             "JSON Name": "minecraft:rotation_axis_aligned",
                                             "ID": "-882714065",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:rotation_locked_to_vehicle",
+                                            "ID": "1649167510",
                                         },
                                         {
                                             "JSON Name": "minecraft:scale",
@@ -30799,14 +30958,6 @@
                             "level": 4,
                             "content": [
                                 "When set, the entity will no longer visually rotate their body to match their facing direction.",
-                            ],
-                        },
-                        {
-                            "name": "minecraft:body_rotation_locked_to_vehicle",
-                            "id": "minecraft:body_rotation_locked_to_vehicle",
-                            "level": 4,
-                            "content": [
-                                "Causes the entity's body rotation to match their vehicle's facing direction.",
                             ],
                         },
                         {
@@ -31270,6 +31421,14 @@
                             ],
                         },
                         {
+                            "name": "minecraft:rotation_locked_to_vehicle",
+                            "id": "minecraft:rotation_locked_to_vehicle",
+                            "level": 4,
+                            "content": [
+                                "Causes the entity's rotation to match their vehicle's facing direction.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:scale",
                             "id": "minecraft:scale",
                             "level": 4,
@@ -31714,5 +31873,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "25ac7fffaf980390f5af7ada8ffc5a7185e20d1a",
+    "__OBJECTHASH__": "f8841d8819b7dd764f546787a9c67a9042ea32a2",
 }

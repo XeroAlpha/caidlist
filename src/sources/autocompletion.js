@@ -379,8 +379,10 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     // 打开聊天栏
     sendKeys('T');
     await sleepAsync(3000);
-    sendKeys('Enter'); // 临时补丁
-    await sleepAsync(3000);
+    if (support.inputBoxRequiresManualFocus(cx)) {
+        sendKeys('Enter');
+        await sleepAsync(3000);
+    }
     sendText('/');
     screen.log(`Input ${command}`);
     sendText(command.replace(/^\//, ''));
@@ -407,9 +409,10 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     for (;;) {
         const oldClipboardText = clipboardText;
         await pressTab();
-        clipboardText = await retryUntilComplete(20, 0, async () => {
+        await sleepAsync(50);
+        clipboardText = await retryUntilComplete(10, 0, async () => {
             try {
-                return await retryUntilComplete(20, 0, async () => {
+                return await retryUntilComplete(40, 0, async () => {
                     await pressCopy();
                     const newClipboardText = getClipboardText() ?? oldClipboardText;
                     if (newClipboardText === oldClipboardText) {

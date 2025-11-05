@@ -1321,6 +1321,10 @@
                                     "Description": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
                                 },
                                 {
+                                    "Name": "query.get_pack_setting",
+                                    "Description": "Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
+                                },
+                                {
                                     "Name": "query.get_root_locator_offset",
                                     "Description": "Gets specified axis of the specified locator offset of the root model.",
                                 },
@@ -1703,6 +1707,14 @@
                                 {
                                     "Name": "query.is_owner_identifier_any",
                                     "Description": "Takes one or more arguments. Returns whether the root actor identifier is any of the specified strings. A preferred query to query.owner_identifier, as it can be adjusted by Mojang to avoid breaking content if names are changed.",
+                                },
+                                {
+                                    "Name": "query.is_pack_setting_enabled",
+                                    "Description": "Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
+                                },
+                                {
+                                    "Name": "query.is_pack_setting_selected",
+                                    "Description": "Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
                                 },
                                 {
                                     "Name": "query.is_persona_or_premium_skin",
@@ -2260,25 +2272,7 @@
                     "name": "List of Experimental Entity Queries",
                     "id": "List of Experimental Entity Queries",
                     "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "query.get_pack_setting",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
-                                },
-                                {
-                                    "Name": "query.is_pack_setting_enabled",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
-                                },
-                                {
-                                    "Name": "query.is_pack_setting_selected",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
-                                },
-                            ],
-                        },
-                    ],
+                    "content": [],
                 },
             ],
         },
@@ -2369,5 +2363,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "4cf2332b53caac1767e26614489751d9ace80c18",
+    "__OBJECTHASH__": "e4d419c304644f65b8fb874341a02ad80a214bc9",
 }

@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.130.22",
-    "__COMMITHASH__": "1f0c3ef681bf32c359b7fd889d694567ef0386dc",
-    "__MESSAGE__": "v1.21.130.22-preview",
+    "__VERSION__": "1.21.130.24",
+    "__COMMITHASH__": "2d4253c573a0d7ee3c44f0d30f0adcc9aab6171e",
+    "__MESSAGE__": "v1.21.130.24-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -926,6 +926,14 @@
                         },
                         {
                             "name": "is_immobile",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_in_same_vehicle",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -2305,9 +2313,6 @@
                                     "name": "minecraft:body_rotation_blocked",
                                 },
                                 {
-                                    "name": "minecraft:body_rotation_locked_to_vehicle",
-                                },
-                                {
                                     "name": "minecraft:can_climb",
                                 },
                                 {
@@ -2417,6 +2422,9 @@
                                 },
                                 {
                                     "name": "minecraft:rotation_axis_aligned",
+                                },
+                                {
+                                    "name": "minecraft:rotation_locked_to_vehicle",
                                 },
                                 {
                                     "name": "minecraft:scale",
@@ -4767,6 +4775,7 @@
         "breeze": "0x00002956 (0x140)",
         "breeze_wind_charge_projectile": "0x04194445 (0x141)",
         "camel": "0x00005002 (0x138)",
+        "camel_husk": "0x00068504 (0x152)",
         "cat": "0x00021323 (0x75)",
         "cave_spider": "0x00265000 (0x40)",
         "chalkboard": "0x00000078 (0x78)",
@@ -4828,6 +4837,7 @@
         "ominous_item_spawner": "0x00000145 (0x145)",
         "painting": "0x00000083 (0x83)",
         "panda": "0x00004977 (0x113)",
+        "parched": "0x01117079 (0x151)",
         "parrot": "0x00021278 (0x30)",
         "phantom": "0x00068410 (0x58)",
         "pig": "0x00004876 (0x12)",
@@ -4896,6 +4906,7 @@
         "campfire": "",
         "charging": "",
         "contact": "",
+        "dehydration": "",
         "drowning": "",
         "entity_attack": "",
         "entity_explosion": "",
@@ -5835,6 +5846,7 @@
         "is_game_rule": "Tests whether a named game rule is active.",
         "is_humid": "Tests whether the Subject is in an area with humidity",
         "is_immobile": "Returns true if the subject entity is immobile. An entity is immobile if it lacks AI goals, has just changed dimensions or if it is a mob and has no health.",
+        "is_in_same_vehicle": "Returns whether the subject entity is in the same vehicle as the host entity.",
         "is_in_village": "Tests whether the Subject is inside the bounds of a village.",
         "is_leashed": "Returns true if the subject entity is leashed.",
         "is_leashed_to": "Returns true if the subject entity leashed to the calling entity.",
@@ -7294,10 +7306,22 @@
             "description": "Allows the mob to stay afloat while swimming. Passengers will be kicked out the moment the mob's head goes underwater, which may not happen for tall mobs.",
             "children": [
                 {
+                    "name": "chance_per_tick_to_float",
+                    "type": "Decimal",
+                    "defaultValue": "0.8",
+                    "description": "The chance per tick to cause an upward impulse.",
+                },
+                {
                     "name": "sink_with_passengers",
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the mob will keep sinking as long as it has passengers.",
+                },
+                {
+                    "name": "time_under_water_to_dismount_passengers",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "Time in seconds that a floating vehicles head can be underwater before it causes its passengers to dismount.",
                 },
             ],
         },
@@ -12989,6 +13013,12 @@
                     "description": "If true, this entity can breathe in water.",
                 },
                 {
+                    "name": "can_dehydrate",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, water-only breathers will take Dehydration damage when out of water.",
+                },
+                {
                     "name": "generates_bubbles",
                     "type": "Boolean",
                     "defaultValue": "true",
@@ -13830,6 +13860,12 @@
                     "type": "Decimal",
                     "defaultValue": "0.05",
                     "description": "Amount of exhaustion applied when jumping.",
+                },
+                {
+                    "name": "lunge",
+                    "type": "Decimal",
+                    "defaultValue": "4",
+                    "description": "Amount of exhaustion applied when triggering the lunge enchantment, multiplied by the enchantment level.",
                 },
                 {
                     "name": "mine",
@@ -17437,6 +17473,7 @@
         "query.get_equipped_item_name": "DEPRECATED (Use query.is_item_name_any instead if possible so names can be changed later without breaking content.) Takes one optional hand slot as a parameter (0 or 'main_hand' for main hand, 1 or 'off_hand' for off hand), and a second parameter (0=default) if you would like the equipped item or any non-zero number for the currently rendered item, and returns the name of the item in the requested slot (defaulting to the main hand if no parameter is supplied) if there is one, otherwise returns ''.",
         "query.get_locator_offset": "Gets specified axis of the specified locator offset.",
         "query.get_name": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
+        "query.get_pack_setting": "Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
         "query.get_root_locator_offset": "Gets specified axis of the specified locator offset of the root model.",
         "query.graphics_mode_is_any": "Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
         "query.ground_speed": "Returns the ground speed of the entity in meters/second.",
@@ -17533,6 +17570,8 @@
         "query.is_onfire": "Returns 1.0 if the entity is on fire, else it returns 0.0.",
         "query.is_orphaned": "Returns 1.0 if the entity is orphaned, else it returns 0.0.",
         "query.is_owner_identifier_any": "Takes one or more arguments. Returns whether the root actor identifier is any of the specified strings. A preferred query to query.owner_identifier, as it can be adjusted by Mojang to avoid breaking content if names are changed.",
+        "query.is_pack_setting_enabled": "Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
+        "query.is_pack_setting_selected": "Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
         "query.is_persona_or_premium_skin": "Returns 1.0 if the player has a persona or premium skin, else it returns 0.0.",
         "query.is_playing_dead": "Returns 1.0 if the entity is playing dead, else it returns 0.0.",
         "query.is_powered": "Returns 1.0 if the entity is powered, else it returns 0.0.",
@@ -17671,9 +17710,5 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {
-        "query.get_pack_setting": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
-        "query.is_pack_setting_enabled": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
-        "query.is_pack_setting_selected": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
-    },
+    "molangQueryExperimental": {},
 }

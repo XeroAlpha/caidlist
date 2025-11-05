@@ -356,10 +356,22 @@
                                                     "type": "table",
                                                     "rows": [
                                                         {
+                                                            "Name": "alpha_masked_tint",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "false",
+                                                            "Description": "Should the tint be multiplied by the alpha channel of texture (similar to grass_block's sides)? Requires 'format_version' >= 1.21.120, a \"tint_method\" other than \"none\" and a \"render_method\" set to \"opaque\"",
+                                                        },
+                                                        {
                                                             "Name": "ambient_occlusion",
                                                             "Type": "Decimal",
                                                             "Default Value": "true",
                                                             "Description": "Should this material have ambient occlusion applied when lighting? If true, shadows will be created around and underneath the block. Optionally can be constructed with float to control exponent applied to ao value after lighting.",
+                                                        },
+                                                        {
+                                                            "Name": "emissive",
+                                                            "Type": "Boolean",
+                                                            "Default Value": "false",
+                                                            "Description": "Should this material be rendered as emissive? Requires 'format_version' >= 1.21.120.",
                                                         },
                                                         {
                                                             "Name": "face_dimming",
@@ -476,6 +488,20 @@
                                                         },
                                                     ],
                                                 },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "minecraft:precipitation_interactions",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Component that determines how the block will interact with rain and snow",
+                                        {
+                                            "section": "precipitation_behavior",
+                                            "content": [
+                                                "What behavior should the block have. Three possible values: obstruct_rain, obstruct_rain_accumulate_snow and none",
                                             ],
                                         },
                                     ],
@@ -713,7 +739,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.110\",",
+                                        "  \"format_version\": \"1.21.120\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1401,5 +1427,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "3ccc8c238808bf65cfa310a60323524635142cb1",
+    "__OBJECTHASH__": "a6d9d35a537ae5432331369c07181311bd04ecb8",
 }

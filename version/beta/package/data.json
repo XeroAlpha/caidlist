@@ -723,6 +723,16 @@
             "mob.camel.stand",
             "mob.camel.step",
             "mob.camel.step_sand",
+            "mob.camel_husk.ambient",
+            "mob.camel_husk.dash",
+            "mob.camel_husk.dash_ready",
+            "mob.camel_husk.death",
+            "mob.camel_husk.eat",
+            "mob.camel_husk.hurt",
+            "mob.camel_husk.sit",
+            "mob.camel_husk.stand",
+            "mob.camel_husk.step",
+            "mob.camel_husk.step_sand",
             "mob.cat.beg",
             "mob.cat.beg_for_food",
             "mob.cat.eat",
@@ -925,6 +935,7 @@
             "mob.imitate.blaze",
             "mob.imitate.bogged",
             "mob.imitate.breeze",
+            "mob.imitate.camel_husk",
             "mob.imitate.creaking",
             "mob.imitate.drowned",
             "mob.imitate.elder_guardian",
@@ -937,6 +948,7 @@
             "mob.imitate.happy_ghast",
             "mob.imitate.husk",
             "mob.imitate.magmacube",
+            "mob.imitate.parched",
             "mob.imitate.phantom",
             "mob.imitate.pillager",
             "mob.imitate.polarbear",
@@ -1000,6 +1012,10 @@
             "mob.panda.sneeze",
             "mob.panda.step",
             "mob.panda_baby.idle",
+            "mob.parched.ambient",
+            "mob.parched.death",
+            "mob.parched.hurt",
+            "mob.parched.step",
             "mob.parrot.death",
             "mob.parrot.eat",
             "mob.parrot.fly",
@@ -1252,6 +1268,7 @@
             "mob.zombie_nautilus.dash",
             "mob.zombie_nautilus.dash_ready",
             "mob.zombie_nautilus.death",
+            "mob.zombie_nautilus.eat",
             "mob.zombie_nautilus.hurt",
             "mob.zombie_villager.death",
             "mob.zombie_villager.hurt",
@@ -1963,6 +1980,7 @@
             "entities/bogged_shear",
             "entities/breeze",
             "entities/brown_mooshroom_shear",
+            "entities/camel_husk",
             "entities/cat",
             "entities/cat_gift",
             "entities/cave_spider",
@@ -2004,6 +2022,7 @@
             "entities/ocelot",
             "entities/panda",
             "entities/panda_sneeze",
+            "entities/parched",
             "entities/parrot",
             "entities/phantom",
             "entities/pig",
@@ -4302,6 +4321,9 @@
             "geometry.camel": [
                 "minecraft:camel<default>",
             ],
+            "geometry.camel_husk": [
+                "minecraft:camel_husk<default>",
+            ],
             "geometry.cape": [
                 "minecraft:player<cape>",
             ],
@@ -4522,6 +4544,9 @@
             ],
             "geometry.panda": [
                 "minecraft:panda<default>",
+            ],
+            "geometry.parched": [
+                "minecraft:parched<default>",
             ],
             "geometry.parrot": [
                 "minecraft:parrot<default>",
@@ -4907,27 +4932,35 @@
             ],
             "animation.camel.dash": [
                 "minecraft:camel<dashing>",
+                "minecraft:camel_husk<dashing>",
             ],
             "animation.camel.dash_sound": [
                 "minecraft:camel<dashing_sound>",
+                "minecraft:camel_husk<dashing_sound>",
             ],
             "animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle>",
             ],
             "animation.camel.look_at_target": [
                 "minecraft:camel<look_at_target>",
+                "minecraft:camel_husk<look_at_target>",
             ],
             "animation.camel.sit": [
                 "minecraft:camel<sitting>",
+                "minecraft:camel_husk<sitting>",
             ],
             "animation.camel.sit_down": [
                 "minecraft:camel<sit_down>",
+                "minecraft:camel_husk<sit_down>",
             ],
             "animation.camel.stand_up": [
                 "minecraft:camel<stand_up>",
+                "minecraft:camel_husk<stand_up>",
             ],
             "animation.camel.walk": [
                 "minecraft:camel<moving>",
+                "minecraft:camel_husk<moving>",
             ],
             "animation.cat.baby_transform": [
                 "minecraft:cat<baby_transform>",
@@ -5284,6 +5317,7 @@
                 "minecraft:bogged<attack.rotations>",
                 "minecraft:enderman<attack.rotations>",
                 "minecraft:husk<attack.rotations>",
+                "minecraft:parched<attack.rotations>",
                 "minecraft:pillager<attack.rotations>",
                 "minecraft:skeleton<attack.rotations>",
                 "minecraft:stray<attack.rotations>",
@@ -5321,6 +5355,7 @@
                 "minecraft:drowned<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob>",
+                "minecraft:parched<bob>",
                 "minecraft:piglin<bob>",
                 "minecraft:piglin_brute<bob>",
                 "minecraft:pillager<bob>",
@@ -5337,6 +5372,7 @@
             "animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow>",
+                "minecraft:parched<bow_and_arrow>",
                 "minecraft:player<bow_and_arrow>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
@@ -5352,6 +5388,7 @@
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:drowned<brandish_spear>",
                 "minecraft:husk<brandish_spear>",
+                "minecraft:parched<brandish_spear>",
                 "minecraft:player<brandish_spear>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
@@ -5373,6 +5410,7 @@
                 "minecraft:bogged<charging>",
                 "minecraft:drowned<charging>",
                 "minecraft:husk<charging>",
+                "minecraft:parched<charging>",
                 "minecraft:player<charging>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
@@ -5388,6 +5426,7 @@
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:drowned<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs>",
+                "minecraft:parched<damage_nearby_mobs>",
                 "minecraft:player<damage_nearby_mobs>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
@@ -5404,6 +5443,7 @@
                 "minecraft:bogged<holding>",
                 "minecraft:drowned<holding>",
                 "minecraft:husk<holding>",
+                "minecraft:parched<holding>",
                 "minecraft:pillager<holding>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
@@ -5422,6 +5462,7 @@
                 "minecraft:drowned<look_at_target_default>",
                 "minecraft:enderman<look_at_target_default>",
                 "minecraft:husk<look_at_target_default>",
+                "minecraft:parched<look_at_target_default>",
                 "minecraft:piglin<look_at_target_default>",
                 "minecraft:piglin_brute<look_at_target_default>",
                 "minecraft:pillager<look_at_target_default>",
@@ -5442,6 +5483,7 @@
                 "minecraft:drowned<look_at_target_gliding>",
                 "minecraft:enderman<look_at_target_gliding>",
                 "minecraft:husk<look_at_target_gliding>",
+                "minecraft:parched<look_at_target_gliding>",
                 "minecraft:piglin<look_at_target_gliding>",
                 "minecraft:piglin_brute<look_at_target_gliding>",
                 "minecraft:pillager<look_at_target_gliding>",
@@ -5462,6 +5504,7 @@
                 "minecraft:drowned<look_at_target_swimming>",
                 "minecraft:enderman<look_at_target_swimming>",
                 "minecraft:husk<look_at_target_swimming>",
+                "minecraft:parched<look_at_target_swimming>",
                 "minecraft:piglin<look_at_target_swimming>",
                 "minecraft:piglin_brute<look_at_target_swimming>",
                 "minecraft:pillager<look_at_target_swimming>",
@@ -5484,6 +5527,7 @@
                 "minecraft:drowned<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move>",
+                "minecraft:parched<move>",
                 "minecraft:pillager<move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -5499,6 +5543,7 @@
                 "minecraft:bogged<riding.arms>",
                 "minecraft:drowned<riding.arms>",
                 "minecraft:husk<riding.arms>",
+                "minecraft:parched<riding.arms>",
                 "minecraft:piglin<riding.arms>",
                 "minecraft:piglin_brute<riding.arms>",
                 "minecraft:pillager<riding.arms>",
@@ -5514,12 +5559,14 @@
             "animation.humanoid.riding.arms.v1.0": [],
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
+                "minecraft:parched<riding.body>",
                 "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
                 "minecraft:drowned<riding.legs>",
                 "minecraft:husk<riding.legs>",
+                "minecraft:parched<riding.legs>",
                 "minecraft:piglin<riding.legs>",
                 "minecraft:piglin_brute<riding.legs>",
                 "minecraft:pillager<riding.legs>",
@@ -5536,6 +5583,7 @@
             "animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking>",
+                "minecraft:parched<sneaking>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -5558,6 +5606,7 @@
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:drowned<use_item_progress>",
                 "minecraft:husk<use_item_progress>",
+                "minecraft:parched<use_item_progress>",
                 "minecraft:player<use_item_progress>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
@@ -5996,6 +6045,7 @@
             ],
             "animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack>",
                 "minecraft:player<skeleton_attack>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
@@ -6238,6 +6288,7 @@
                 "minecraft:bogged<swimming>",
                 "minecraft:drowned<swimming>",
                 "minecraft:husk<swimming>",
+                "minecraft:parched<swimming>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -6321,9 +6372,11 @@
             ],
             "controller.animation.camel.general": [
                 "minecraft:camel<general>",
+                "minecraft:camel_husk<general_controller>",
             ],
             "controller.animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle_controller>",
             ],
             "controller.animation.cat.baby": [
                 "minecraft:cat<baby>",
@@ -6437,6 +6490,7 @@
                 "minecraft:bogged<attack>",
                 "minecraft:enderman<attack>",
                 "minecraft:husk<attack_controller>",
+                "minecraft:parched<attack_controller>",
                 "minecraft:pillager<controller_attack>",
                 "minecraft:skeleton<attack>",
                 "minecraft:stray<attack>",
@@ -6464,6 +6518,7 @@
                 "minecraft:bogged<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob_controller>",
+                "minecraft:parched<bob_controller>",
                 "minecraft:pillager<controller_bob>",
                 "minecraft:skeleton<bob>",
                 "minecraft:stray<bob>",
@@ -6476,6 +6531,7 @@
             "controller.animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow_controller>",
+                "minecraft:parched<bow_and_arrow_controller>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
                 "minecraft:vex<bow_and_arrow>",
@@ -6488,6 +6544,7 @@
             "controller.animation.humanoid.brandish_spear": [
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:husk<brandish_spear_controller>",
+                "minecraft:parched<brandish_spear_controller>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
                 "minecraft:vex<brandish_spear>",
@@ -6500,6 +6557,7 @@
             "controller.animation.humanoid.charging": [
                 "minecraft:bogged<charging>",
                 "minecraft:husk<charging_controller>",
+                "minecraft:parched<charging_controller>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
                 "minecraft:vex<charging>",
@@ -6512,6 +6570,7 @@
             "controller.animation.humanoid.damage_nearby_mobs": [
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs_controller>",
+                "minecraft:parched<damage_nearby_mobs_controller>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
                 "minecraft:vex<damage_nearby_mobs>",
@@ -6524,6 +6583,7 @@
             "controller.animation.humanoid.holding": [
                 "minecraft:bogged<holding>",
                 "minecraft:husk<holding_controller>",
+                "minecraft:parched<holding_controller>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
                 "minecraft:vex<holding>",
@@ -6539,6 +6599,7 @@
                 "minecraft:drowned<look_at_target>",
                 "minecraft:enderman<look_at_target>",
                 "minecraft:husk<look_at_target_controller>",
+                "minecraft:parched<look_at_target_controller>",
                 "minecraft:piglin<look_at_target_controller>",
                 "minecraft:piglin_brute<look_at_target_controller>",
                 "minecraft:pillager<controller_look_at_target>",
@@ -6561,6 +6622,7 @@
                 "minecraft:bogged<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move_controller>",
+                "minecraft:parched<move_controller>",
                 "minecraft:pillager<controller_move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -6574,6 +6636,7 @@
             "controller.animation.humanoid.riding": [
                 "minecraft:bogged<riding>",
                 "minecraft:husk<riding_controller>",
+                "minecraft:parched<riding_controller>",
                 "minecraft:piglin<riding_controller>",
                 "minecraft:piglin_brute<riding_controller>",
                 "minecraft:pillager<controller_riding>",
@@ -6591,6 +6654,7 @@
             "controller.animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking_controller>",
+                "minecraft:parched<sneaking_controller>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -6607,6 +6671,7 @@
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:husk<use_item_progress_controller>",
+                "minecraft:parched<use_item_progress_controller>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
                 "minecraft:vex<use_item_progress>",
@@ -6757,6 +6822,7 @@
             ],
             "controller.animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack_controller>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
             "controller.animation.sniffer.baby": [
@@ -6906,6 +6972,7 @@
             "controller.animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
                 "minecraft:husk<swimming_controller>",
+                "minecraft:parched<swimming_controller>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -6968,6 +7035,7 @@
             ],
             "controller.render.camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "controller.render.cat": [
                 "minecraft:cat",
@@ -7005,7 +7073,9 @@
                 "minecraft:creeper",
             ],
             "controller.render.crossbow": [],
-            "controller.render.default": [],
+            "controller.render.default": [
+                "minecraft:parched",
+            ],
             "controller.render.dolphin": [
                 "minecraft:dolphin",
             ],
@@ -7827,6 +7897,12 @@
             "minecraft:calm": [
                 "minecraft:pillager",
             ],
+            "minecraft:camel_husk_saddled": [
+                "minecraft:camel_husk",
+            ],
+            "minecraft:camel_husk_unsaddled": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:camel_saddled": [
                 "minecraft:camel",
             ],
@@ -7976,6 +8052,7 @@
                 "minecraft:nautilus",
                 "minecraft:ocelot",
                 "minecraft:panda",
+                "minecraft:parched",
                 "minecraft:parrot",
                 "minecraft:pig",
                 "minecraft:piglin",
@@ -8192,6 +8269,7 @@
             ],
             "minecraft:melee_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -8412,6 +8490,7 @@
             ],
             "minecraft:ranged_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -8489,12 +8568,10 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:mule",
-                "minecraft:nautilus",
                 "minecraft:pig",
                 "minecraft:sniffer",
                 "minecraft:trader_llama",
                 "minecraft:zombie_horse",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_adult_with_rider": [
                 "minecraft:zombie_horse",
@@ -8512,6 +8589,7 @@
                 "minecraft:vindicator",
             ],
             "minecraft:spawn_as_rider": [
+                "minecraft:husk",
                 "minecraft:zombie",
             ],
             "minecraft:spawn_as_strider_jockey": [
@@ -8521,7 +8599,6 @@
                 "minecraft:armadillo",
                 "minecraft:happy_ghast",
                 "minecraft:llama",
-                "minecraft:nautilus",
                 "minecraft:trader_llama",
             ],
             "minecraft:spawn_baby_strider_jockey": [
@@ -8579,9 +8656,11 @@
                 "minecraft:llama",
                 "minecraft:mule",
                 "minecraft:wolf",
+                "minecraft:zombie_horse",
             ],
             "minecraft:spawn_tame_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_temperate": [
@@ -8592,13 +8671,16 @@
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby_or_adult": [
@@ -8633,6 +8715,9 @@
             ],
             "minecraft:spawn_with_pillager_rider": [
                 "minecraft:ravager",
+            ],
+            "minecraft:spawn_with_rider": [
+                "minecraft:camel_husk",
             ],
             "minecraft:spawn_with_vindicator_captain_rider": [
                 "minecraft:ravager",
@@ -8698,6 +8783,7 @@
             ],
             "minecraft:start_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
@@ -8745,6 +8831,7 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -9087,6 +9174,9 @@
             "axolotl": [
                 "minecraft:axolotl",
             ],
+            "baby_husk": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
@@ -9129,6 +9219,7 @@
             ],
             "camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "cartographer": [
                 "minecraft:villager<cartographer>",
@@ -9252,6 +9343,7 @@
             ],
             "husk": [
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -9325,6 +9417,7 @@
                 "minecraft:bogged",
                 "minecraft:breeze",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chicken",
@@ -9351,6 +9444,7 @@
                 "minecraft:hoglin<unhuntable_adult>",
                 "minecraft:horse",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -9360,6 +9454,7 @@
                 "minecraft:npc",
                 "minecraft:ocelot",
                 "minecraft:panda<minecraft:panda_aggressive>",
+                "minecraft:parched",
                 "minecraft:parrot<minecraft:parrot_tame>",
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
@@ -9475,7 +9570,9 @@
                 "minecraft:ghast",
                 "minecraft:guardian",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:magma_cube",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
@@ -9556,6 +9653,9 @@
             "panda_aggressive": [
                 "minecraft:panda<minecraft:panda_aggressive>",
             ],
+            "parched": [
+                "minecraft:parched",
+            ],
             "parrot_tame": [
                 "minecraft:parrot<minecraft:parrot_tame>",
             ],
@@ -9633,6 +9733,7 @@
             ],
             "skeleton": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:skeleton",
                 "minecraft:stray",
                 "minecraft:wither",
@@ -9702,8 +9803,11 @@
             ],
             "undead": [
                 "minecraft:bogged",
+                "minecraft:camel_husk",
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
@@ -9833,6 +9937,7 @@
             "zombie": [
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
@@ -10777,6 +10882,16 @@
             "mob.camel.stand",
             "mob.camel.step",
             "mob.camel.step_sand",
+            "mob.camel_husk.ambient",
+            "mob.camel_husk.dash",
+            "mob.camel_husk.dash_ready",
+            "mob.camel_husk.death",
+            "mob.camel_husk.eat",
+            "mob.camel_husk.hurt",
+            "mob.camel_husk.sit",
+            "mob.camel_husk.stand",
+            "mob.camel_husk.step",
+            "mob.camel_husk.step_sand",
             "mob.cat.beg",
             "mob.cat.beg_for_food",
             "mob.cat.eat",
@@ -10979,6 +11094,7 @@
             "mob.imitate.blaze",
             "mob.imitate.bogged",
             "mob.imitate.breeze",
+            "mob.imitate.camel_husk",
             "mob.imitate.creaking",
             "mob.imitate.drowned",
             "mob.imitate.elder_guardian",
@@ -10991,6 +11107,7 @@
             "mob.imitate.happy_ghast",
             "mob.imitate.husk",
             "mob.imitate.magmacube",
+            "mob.imitate.parched",
             "mob.imitate.phantom",
             "mob.imitate.pillager",
             "mob.imitate.polarbear",
@@ -11054,6 +11171,10 @@
             "mob.panda.sneeze",
             "mob.panda.step",
             "mob.panda_baby.idle",
+            "mob.parched.ambient",
+            "mob.parched.death",
+            "mob.parched.hurt",
+            "mob.parched.step",
             "mob.parrot.death",
             "mob.parrot.eat",
             "mob.parrot.fly",
@@ -11306,6 +11427,7 @@
             "mob.zombie_nautilus.dash",
             "mob.zombie_nautilus.dash_ready",
             "mob.zombie_nautilus.death",
+            "mob.zombie_nautilus.eat",
             "mob.zombie_nautilus.hurt",
             "mob.zombie_villager.death",
             "mob.zombie_villager.hurt",
@@ -12018,6 +12140,7 @@
             "entities/bogged_shear",
             "entities/breeze",
             "entities/brown_mooshroom_shear",
+            "entities/camel_husk",
             "entities/cat",
             "entities/cat_gift",
             "entities/cave_spider",
@@ -12059,6 +12182,7 @@
             "entities/ocelot",
             "entities/panda",
             "entities/panda_sneeze",
+            "entities/parched",
             "entities/parrot",
             "entities/phantom",
             "entities/pig",
@@ -14453,6 +14577,9 @@
             "geometry.camel": [
                 "minecraft:camel<default>",
             ],
+            "geometry.camel_husk": [
+                "minecraft:camel_husk<default>",
+            ],
             "geometry.cape": [
                 "minecraft:player<cape>",
             ],
@@ -14674,6 +14801,9 @@
             ],
             "geometry.panda": [
                 "minecraft:panda<default>",
+            ],
+            "geometry.parched": [
+                "minecraft:parched<default>",
             ],
             "geometry.parrot": [
                 "minecraft:parrot<default>",
@@ -15060,27 +15190,35 @@
             ],
             "animation.camel.dash": [
                 "minecraft:camel<dashing>",
+                "minecraft:camel_husk<dashing>",
             ],
             "animation.camel.dash_sound": [
                 "minecraft:camel<dashing_sound>",
+                "minecraft:camel_husk<dashing_sound>",
             ],
             "animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle>",
             ],
             "animation.camel.look_at_target": [
                 "minecraft:camel<look_at_target>",
+                "minecraft:camel_husk<look_at_target>",
             ],
             "animation.camel.sit": [
                 "minecraft:camel<sitting>",
+                "minecraft:camel_husk<sitting>",
             ],
             "animation.camel.sit_down": [
                 "minecraft:camel<sit_down>",
+                "minecraft:camel_husk<sit_down>",
             ],
             "animation.camel.stand_up": [
                 "minecraft:camel<stand_up>",
+                "minecraft:camel_husk<stand_up>",
             ],
             "animation.camel.walk": [
                 "minecraft:camel<moving>",
+                "minecraft:camel_husk<moving>",
             ],
             "animation.cat.baby_transform": [
                 "minecraft:cat<baby_transform>",
@@ -15437,6 +15575,7 @@
                 "minecraft:bogged<attack.rotations>",
                 "minecraft:enderman<attack.rotations>",
                 "minecraft:husk<attack.rotations>",
+                "minecraft:parched<attack.rotations>",
                 "minecraft:pillager<attack.rotations>",
                 "minecraft:skeleton<attack.rotations>",
                 "minecraft:stray<attack.rotations>",
@@ -15474,6 +15613,7 @@
                 "minecraft:drowned<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob>",
+                "minecraft:parched<bob>",
                 "minecraft:piglin<bob>",
                 "minecraft:piglin_brute<bob>",
                 "minecraft:pillager<bob>",
@@ -15490,6 +15630,7 @@
             "animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow>",
+                "minecraft:parched<bow_and_arrow>",
                 "minecraft:player<bow_and_arrow>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
@@ -15505,6 +15646,7 @@
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:drowned<brandish_spear>",
                 "minecraft:husk<brandish_spear>",
+                "minecraft:parched<brandish_spear>",
                 "minecraft:player<brandish_spear>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
@@ -15526,6 +15668,7 @@
                 "minecraft:bogged<charging>",
                 "minecraft:drowned<charging>",
                 "minecraft:husk<charging>",
+                "minecraft:parched<charging>",
                 "minecraft:player<charging>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
@@ -15541,6 +15684,7 @@
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:drowned<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs>",
+                "minecraft:parched<damage_nearby_mobs>",
                 "minecraft:player<damage_nearby_mobs>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
@@ -15557,6 +15701,7 @@
                 "minecraft:bogged<holding>",
                 "minecraft:drowned<holding>",
                 "minecraft:husk<holding>",
+                "minecraft:parched<holding>",
                 "minecraft:pillager<holding>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
@@ -15575,6 +15720,7 @@
                 "minecraft:drowned<look_at_target_default>",
                 "minecraft:enderman<look_at_target_default>",
                 "minecraft:husk<look_at_target_default>",
+                "minecraft:parched<look_at_target_default>",
                 "minecraft:piglin<look_at_target_default>",
                 "minecraft:piglin_brute<look_at_target_default>",
                 "minecraft:pillager<look_at_target_default>",
@@ -15595,6 +15741,7 @@
                 "minecraft:drowned<look_at_target_gliding>",
                 "minecraft:enderman<look_at_target_gliding>",
                 "minecraft:husk<look_at_target_gliding>",
+                "minecraft:parched<look_at_target_gliding>",
                 "minecraft:piglin<look_at_target_gliding>",
                 "minecraft:piglin_brute<look_at_target_gliding>",
                 "minecraft:pillager<look_at_target_gliding>",
@@ -15615,6 +15762,7 @@
                 "minecraft:drowned<look_at_target_swimming>",
                 "minecraft:enderman<look_at_target_swimming>",
                 "minecraft:husk<look_at_target_swimming>",
+                "minecraft:parched<look_at_target_swimming>",
                 "minecraft:piglin<look_at_target_swimming>",
                 "minecraft:piglin_brute<look_at_target_swimming>",
                 "minecraft:pillager<look_at_target_swimming>",
@@ -15637,6 +15785,7 @@
                 "minecraft:drowned<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move>",
+                "minecraft:parched<move>",
                 "minecraft:pillager<move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -15652,6 +15801,7 @@
                 "minecraft:bogged<riding.arms>",
                 "minecraft:drowned<riding.arms>",
                 "minecraft:husk<riding.arms>",
+                "minecraft:parched<riding.arms>",
                 "minecraft:piglin<riding.arms>",
                 "minecraft:piglin_brute<riding.arms>",
                 "minecraft:pillager<riding.arms>",
@@ -15667,12 +15817,14 @@
             "animation.humanoid.riding.arms.v1.0": [],
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
+                "minecraft:parched<riding.body>",
                 "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
                 "minecraft:drowned<riding.legs>",
                 "minecraft:husk<riding.legs>",
+                "minecraft:parched<riding.legs>",
                 "minecraft:piglin<riding.legs>",
                 "minecraft:piglin_brute<riding.legs>",
                 "minecraft:pillager<riding.legs>",
@@ -15689,6 +15841,7 @@
             "animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking>",
+                "minecraft:parched<sneaking>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -15711,6 +15864,7 @@
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:drowned<use_item_progress>",
                 "minecraft:husk<use_item_progress>",
+                "minecraft:parched<use_item_progress>",
                 "minecraft:player<use_item_progress>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
@@ -16149,6 +16303,7 @@
             ],
             "animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack>",
                 "minecraft:player<skeleton_attack>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
@@ -16391,6 +16546,7 @@
                 "minecraft:bogged<swimming>",
                 "minecraft:drowned<swimming>",
                 "minecraft:husk<swimming>",
+                "minecraft:parched<swimming>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -16474,9 +16630,11 @@
             ],
             "controller.animation.camel.general": [
                 "minecraft:camel<general>",
+                "minecraft:camel_husk<general_controller>",
             ],
             "controller.animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle_controller>",
             ],
             "controller.animation.cat.baby": [
                 "minecraft:cat<baby>",
@@ -16590,6 +16748,7 @@
                 "minecraft:bogged<attack>",
                 "minecraft:enderman<attack>",
                 "minecraft:husk<attack_controller>",
+                "minecraft:parched<attack_controller>",
                 "minecraft:pillager<controller_attack>",
                 "minecraft:skeleton<attack>",
                 "minecraft:stray<attack>",
@@ -16617,6 +16776,7 @@
                 "minecraft:bogged<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob_controller>",
+                "minecraft:parched<bob_controller>",
                 "minecraft:pillager<controller_bob>",
                 "minecraft:skeleton<bob>",
                 "minecraft:stray<bob>",
@@ -16629,6 +16789,7 @@
             "controller.animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow_controller>",
+                "minecraft:parched<bow_and_arrow_controller>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
                 "minecraft:vex<bow_and_arrow>",
@@ -16641,6 +16802,7 @@
             "controller.animation.humanoid.brandish_spear": [
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:husk<brandish_spear_controller>",
+                "minecraft:parched<brandish_spear_controller>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
                 "minecraft:vex<brandish_spear>",
@@ -16653,6 +16815,7 @@
             "controller.animation.humanoid.charging": [
                 "minecraft:bogged<charging>",
                 "minecraft:husk<charging_controller>",
+                "minecraft:parched<charging_controller>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
                 "minecraft:vex<charging>",
@@ -16665,6 +16828,7 @@
             "controller.animation.humanoid.damage_nearby_mobs": [
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs_controller>",
+                "minecraft:parched<damage_nearby_mobs_controller>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
                 "minecraft:vex<damage_nearby_mobs>",
@@ -16677,6 +16841,7 @@
             "controller.animation.humanoid.holding": [
                 "minecraft:bogged<holding>",
                 "minecraft:husk<holding_controller>",
+                "minecraft:parched<holding_controller>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
                 "minecraft:vex<holding>",
@@ -16692,6 +16857,7 @@
                 "minecraft:drowned<look_at_target>",
                 "minecraft:enderman<look_at_target>",
                 "minecraft:husk<look_at_target_controller>",
+                "minecraft:parched<look_at_target_controller>",
                 "minecraft:piglin<look_at_target_controller>",
                 "minecraft:piglin_brute<look_at_target_controller>",
                 "minecraft:pillager<controller_look_at_target>",
@@ -16714,6 +16880,7 @@
                 "minecraft:bogged<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move_controller>",
+                "minecraft:parched<move_controller>",
                 "minecraft:pillager<controller_move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -16727,6 +16894,7 @@
             "controller.animation.humanoid.riding": [
                 "minecraft:bogged<riding>",
                 "minecraft:husk<riding_controller>",
+                "minecraft:parched<riding_controller>",
                 "minecraft:piglin<riding_controller>",
                 "minecraft:piglin_brute<riding_controller>",
                 "minecraft:pillager<controller_riding>",
@@ -16744,6 +16912,7 @@
             "controller.animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking_controller>",
+                "minecraft:parched<sneaking_controller>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -16760,6 +16929,7 @@
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:husk<use_item_progress_controller>",
+                "minecraft:parched<use_item_progress_controller>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
                 "minecraft:vex<use_item_progress>",
@@ -16910,6 +17080,7 @@
             ],
             "controller.animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack_controller>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
             "controller.animation.sniffer.baby": [
@@ -17059,6 +17230,7 @@
             "controller.animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
                 "minecraft:husk<swimming_controller>",
+                "minecraft:parched<swimming_controller>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -17124,6 +17296,7 @@
             ],
             "controller.render.camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "controller.render.cat": [
                 "minecraft:cat",
@@ -17161,7 +17334,9 @@
                 "minecraft:creeper",
             ],
             "controller.render.crossbow": [],
-            "controller.render.default": [],
+            "controller.render.default": [
+                "minecraft:parched",
+            ],
             "controller.render.dolphin": [
                 "minecraft:dolphin",
             ],
@@ -17984,6 +18159,12 @@
             "minecraft:calm": [
                 "minecraft:pillager",
             ],
+            "minecraft:camel_husk_saddled": [
+                "minecraft:camel_husk",
+            ],
+            "minecraft:camel_husk_unsaddled": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:camel_saddled": [
                 "minecraft:camel",
             ],
@@ -18133,6 +18314,7 @@
                 "minecraft:nautilus",
                 "minecraft:ocelot",
                 "minecraft:panda",
+                "minecraft:parched",
                 "minecraft:parrot",
                 "minecraft:pig",
                 "minecraft:piglin",
@@ -18349,6 +18531,7 @@
             ],
             "minecraft:melee_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -18569,6 +18752,7 @@
             ],
             "minecraft:ranged_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -18646,12 +18830,10 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:mule",
-                "minecraft:nautilus",
                 "minecraft:pig",
                 "minecraft:sniffer",
                 "minecraft:trader_llama",
                 "minecraft:zombie_horse",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_adult_with_rider": [
                 "minecraft:zombie_horse",
@@ -18669,6 +18851,7 @@
                 "minecraft:vindicator",
             ],
             "minecraft:spawn_as_rider": [
+                "minecraft:husk",
                 "minecraft:zombie",
             ],
             "minecraft:spawn_as_strider_jockey": [
@@ -18678,7 +18861,6 @@
                 "minecraft:armadillo",
                 "minecraft:happy_ghast",
                 "minecraft:llama",
-                "minecraft:nautilus",
                 "minecraft:trader_llama",
             ],
             "minecraft:spawn_baby_strider_jockey": [
@@ -18736,9 +18918,11 @@
                 "minecraft:llama",
                 "minecraft:mule",
                 "minecraft:wolf",
+                "minecraft:zombie_horse",
             ],
             "minecraft:spawn_tame_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_temperate": [
@@ -18749,13 +18933,16 @@
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby_or_adult": [
@@ -18790,6 +18977,9 @@
             ],
             "minecraft:spawn_with_pillager_rider": [
                 "minecraft:ravager",
+            ],
+            "minecraft:spawn_with_rider": [
+                "minecraft:camel_husk",
             ],
             "minecraft:spawn_with_vindicator_captain_rider": [
                 "minecraft:ravager",
@@ -18855,6 +19045,7 @@
             ],
             "minecraft:start_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
@@ -18902,6 +19093,7 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -19244,6 +19436,9 @@
             "axolotl": [
                 "minecraft:axolotl",
             ],
+            "baby_husk": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
@@ -19286,6 +19481,7 @@
             ],
             "camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "cartographer": [
                 "minecraft:villager<cartographer>",
@@ -19409,6 +19605,7 @@
             ],
             "husk": [
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -19482,6 +19679,7 @@
                 "minecraft:bogged",
                 "minecraft:breeze",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chicken",
@@ -19508,6 +19706,7 @@
                 "minecraft:hoglin<unhuntable_adult>",
                 "minecraft:horse",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -19517,6 +19716,7 @@
                 "minecraft:npc",
                 "minecraft:ocelot",
                 "minecraft:panda<minecraft:panda_aggressive>",
+                "minecraft:parched",
                 "minecraft:parrot<minecraft:parrot_tame>",
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
@@ -19632,7 +19832,9 @@
                 "minecraft:ghast",
                 "minecraft:guardian",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:magma_cube",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
@@ -19713,6 +19915,9 @@
             "panda_aggressive": [
                 "minecraft:panda<minecraft:panda_aggressive>",
             ],
+            "parched": [
+                "minecraft:parched",
+            ],
             "parrot_tame": [
                 "minecraft:parrot<minecraft:parrot_tame>",
             ],
@@ -19790,6 +19995,7 @@
             ],
             "skeleton": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:skeleton",
                 "minecraft:stray",
                 "minecraft:wither",
@@ -19859,8 +20065,11 @@
             ],
             "undead": [
                 "minecraft:bogged",
+                "minecraft:camel_husk",
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
@@ -19990,6 +20199,7 @@
             "zombie": [
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
@@ -20931,6 +21141,16 @@
             "mob.camel.stand",
             "mob.camel.step",
             "mob.camel.step_sand",
+            "mob.camel_husk.ambient",
+            "mob.camel_husk.dash",
+            "mob.camel_husk.dash_ready",
+            "mob.camel_husk.death",
+            "mob.camel_husk.eat",
+            "mob.camel_husk.hurt",
+            "mob.camel_husk.sit",
+            "mob.camel_husk.stand",
+            "mob.camel_husk.step",
+            "mob.camel_husk.step_sand",
             "mob.cat.beg",
             "mob.cat.beg_for_food",
             "mob.cat.eat",
@@ -21133,6 +21353,7 @@
             "mob.imitate.blaze",
             "mob.imitate.bogged",
             "mob.imitate.breeze",
+            "mob.imitate.camel_husk",
             "mob.imitate.creaking",
             "mob.imitate.drowned",
             "mob.imitate.elder_guardian",
@@ -21145,6 +21366,7 @@
             "mob.imitate.happy_ghast",
             "mob.imitate.husk",
             "mob.imitate.magmacube",
+            "mob.imitate.parched",
             "mob.imitate.phantom",
             "mob.imitate.pillager",
             "mob.imitate.polarbear",
@@ -21208,6 +21430,10 @@
             "mob.panda.sneeze",
             "mob.panda.step",
             "mob.panda_baby.idle",
+            "mob.parched.ambient",
+            "mob.parched.death",
+            "mob.parched.hurt",
+            "mob.parched.step",
             "mob.parrot.death",
             "mob.parrot.eat",
             "mob.parrot.fly",
@@ -21460,6 +21686,7 @@
             "mob.zombie_nautilus.dash",
             "mob.zombie_nautilus.dash_ready",
             "mob.zombie_nautilus.death",
+            "mob.zombie_nautilus.eat",
             "mob.zombie_nautilus.hurt",
             "mob.zombie_villager.death",
             "mob.zombie_villager.hurt",
@@ -22171,6 +22398,7 @@
             "entities/bogged_shear",
             "entities/breeze",
             "entities/brown_mooshroom_shear",
+            "entities/camel_husk",
             "entities/cat",
             "entities/cat_gift",
             "entities/cave_spider",
@@ -22212,6 +22440,7 @@
             "entities/ocelot",
             "entities/panda",
             "entities/panda_sneeze",
+            "entities/parched",
             "entities/parrot",
             "entities/phantom",
             "entities/pig",
@@ -24510,6 +24739,9 @@
             "geometry.camel": [
                 "minecraft:camel<default>",
             ],
+            "geometry.camel_husk": [
+                "minecraft:camel_husk<default>",
+            ],
             "geometry.cape": [
                 "minecraft:player<cape>",
             ],
@@ -24730,6 +24962,9 @@
             ],
             "geometry.panda": [
                 "minecraft:panda<default>",
+            ],
+            "geometry.parched": [
+                "minecraft:parched<default>",
             ],
             "geometry.parrot": [
                 "minecraft:parrot<default>",
@@ -25115,27 +25350,35 @@
             ],
             "animation.camel.dash": [
                 "minecraft:camel<dashing>",
+                "minecraft:camel_husk<dashing>",
             ],
             "animation.camel.dash_sound": [
                 "minecraft:camel<dashing_sound>",
+                "minecraft:camel_husk<dashing_sound>",
             ],
             "animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle>",
             ],
             "animation.camel.look_at_target": [
                 "minecraft:camel<look_at_target>",
+                "minecraft:camel_husk<look_at_target>",
             ],
             "animation.camel.sit": [
                 "minecraft:camel<sitting>",
+                "minecraft:camel_husk<sitting>",
             ],
             "animation.camel.sit_down": [
                 "minecraft:camel<sit_down>",
+                "minecraft:camel_husk<sit_down>",
             ],
             "animation.camel.stand_up": [
                 "minecraft:camel<stand_up>",
+                "minecraft:camel_husk<stand_up>",
             ],
             "animation.camel.walk": [
                 "minecraft:camel<moving>",
+                "minecraft:camel_husk<moving>",
             ],
             "animation.cat.baby_transform": [
                 "minecraft:cat<baby_transform>",
@@ -25492,6 +25735,7 @@
                 "minecraft:bogged<attack.rotations>",
                 "minecraft:enderman<attack.rotations>",
                 "minecraft:husk<attack.rotations>",
+                "minecraft:parched<attack.rotations>",
                 "minecraft:pillager<attack.rotations>",
                 "minecraft:skeleton<attack.rotations>",
                 "minecraft:stray<attack.rotations>",
@@ -25529,6 +25773,7 @@
                 "minecraft:drowned<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob>",
+                "minecraft:parched<bob>",
                 "minecraft:piglin<bob>",
                 "minecraft:piglin_brute<bob>",
                 "minecraft:pillager<bob>",
@@ -25545,6 +25790,7 @@
             "animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow>",
+                "minecraft:parched<bow_and_arrow>",
                 "minecraft:player<bow_and_arrow>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
@@ -25560,6 +25806,7 @@
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:drowned<brandish_spear>",
                 "minecraft:husk<brandish_spear>",
+                "minecraft:parched<brandish_spear>",
                 "minecraft:player<brandish_spear>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
@@ -25581,6 +25828,7 @@
                 "minecraft:bogged<charging>",
                 "minecraft:drowned<charging>",
                 "minecraft:husk<charging>",
+                "minecraft:parched<charging>",
                 "minecraft:player<charging>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
@@ -25596,6 +25844,7 @@
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:drowned<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs>",
+                "minecraft:parched<damage_nearby_mobs>",
                 "minecraft:player<damage_nearby_mobs>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
@@ -25612,6 +25861,7 @@
                 "minecraft:bogged<holding>",
                 "minecraft:drowned<holding>",
                 "minecraft:husk<holding>",
+                "minecraft:parched<holding>",
                 "minecraft:pillager<holding>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
@@ -25630,6 +25880,7 @@
                 "minecraft:drowned<look_at_target_default>",
                 "minecraft:enderman<look_at_target_default>",
                 "minecraft:husk<look_at_target_default>",
+                "minecraft:parched<look_at_target_default>",
                 "minecraft:piglin<look_at_target_default>",
                 "minecraft:piglin_brute<look_at_target_default>",
                 "minecraft:pillager<look_at_target_default>",
@@ -25650,6 +25901,7 @@
                 "minecraft:drowned<look_at_target_gliding>",
                 "minecraft:enderman<look_at_target_gliding>",
                 "minecraft:husk<look_at_target_gliding>",
+                "minecraft:parched<look_at_target_gliding>",
                 "minecraft:piglin<look_at_target_gliding>",
                 "minecraft:piglin_brute<look_at_target_gliding>",
                 "minecraft:pillager<look_at_target_gliding>",
@@ -25670,6 +25922,7 @@
                 "minecraft:drowned<look_at_target_swimming>",
                 "minecraft:enderman<look_at_target_swimming>",
                 "minecraft:husk<look_at_target_swimming>",
+                "minecraft:parched<look_at_target_swimming>",
                 "minecraft:piglin<look_at_target_swimming>",
                 "minecraft:piglin_brute<look_at_target_swimming>",
                 "minecraft:pillager<look_at_target_swimming>",
@@ -25692,6 +25945,7 @@
                 "minecraft:drowned<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move>",
+                "minecraft:parched<move>",
                 "minecraft:pillager<move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -25707,6 +25961,7 @@
                 "minecraft:bogged<riding.arms>",
                 "minecraft:drowned<riding.arms>",
                 "minecraft:husk<riding.arms>",
+                "minecraft:parched<riding.arms>",
                 "minecraft:piglin<riding.arms>",
                 "minecraft:piglin_brute<riding.arms>",
                 "minecraft:pillager<riding.arms>",
@@ -25722,12 +25977,14 @@
             "animation.humanoid.riding.arms.v1.0": [],
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
+                "minecraft:parched<riding.body>",
                 "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
                 "minecraft:drowned<riding.legs>",
                 "minecraft:husk<riding.legs>",
+                "minecraft:parched<riding.legs>",
                 "minecraft:piglin<riding.legs>",
                 "minecraft:piglin_brute<riding.legs>",
                 "minecraft:pillager<riding.legs>",
@@ -25744,6 +26001,7 @@
             "animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking>",
+                "minecraft:parched<sneaking>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -25766,6 +26024,7 @@
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:drowned<use_item_progress>",
                 "minecraft:husk<use_item_progress>",
+                "minecraft:parched<use_item_progress>",
                 "minecraft:player<use_item_progress>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
@@ -26204,6 +26463,7 @@
             ],
             "animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack>",
                 "minecraft:player<skeleton_attack>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
@@ -26446,6 +26706,7 @@
                 "minecraft:bogged<swimming>",
                 "minecraft:drowned<swimming>",
                 "minecraft:husk<swimming>",
+                "minecraft:parched<swimming>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -26529,9 +26790,11 @@
             ],
             "controller.animation.camel.general": [
                 "minecraft:camel<general>",
+                "minecraft:camel_husk<general_controller>",
             ],
             "controller.animation.camel.idle": [
                 "minecraft:camel<idle>",
+                "minecraft:camel_husk<idle_controller>",
             ],
             "controller.animation.cat.baby": [
                 "minecraft:cat<baby>",
@@ -26645,6 +26908,7 @@
                 "minecraft:bogged<attack>",
                 "minecraft:enderman<attack>",
                 "minecraft:husk<attack_controller>",
+                "minecraft:parched<attack_controller>",
                 "minecraft:pillager<controller_attack>",
                 "minecraft:skeleton<attack>",
                 "minecraft:stray<attack>",
@@ -26672,6 +26936,7 @@
                 "minecraft:bogged<bob>",
                 "minecraft:enderman<bob>",
                 "minecraft:husk<bob_controller>",
+                "minecraft:parched<bob_controller>",
                 "minecraft:pillager<controller_bob>",
                 "minecraft:skeleton<bob>",
                 "minecraft:stray<bob>",
@@ -26684,6 +26949,7 @@
             "controller.animation.humanoid.bow_and_arrow": [
                 "minecraft:bogged<bow_and_arrow>",
                 "minecraft:husk<bow_and_arrow_controller>",
+                "minecraft:parched<bow_and_arrow_controller>",
                 "minecraft:skeleton<bow_and_arrow>",
                 "minecraft:stray<bow_and_arrow>",
                 "minecraft:vex<bow_and_arrow>",
@@ -26696,6 +26962,7 @@
             "controller.animation.humanoid.brandish_spear": [
                 "minecraft:bogged<brandish_spear>",
                 "minecraft:husk<brandish_spear_controller>",
+                "minecraft:parched<brandish_spear_controller>",
                 "minecraft:skeleton<brandish_spear>",
                 "minecraft:stray<brandish_spear>",
                 "minecraft:vex<brandish_spear>",
@@ -26708,6 +26975,7 @@
             "controller.animation.humanoid.charging": [
                 "minecraft:bogged<charging>",
                 "minecraft:husk<charging_controller>",
+                "minecraft:parched<charging_controller>",
                 "minecraft:skeleton<charging>",
                 "minecraft:stray<charging>",
                 "minecraft:vex<charging>",
@@ -26720,6 +26988,7 @@
             "controller.animation.humanoid.damage_nearby_mobs": [
                 "minecraft:bogged<damage_nearby_mobs>",
                 "minecraft:husk<damage_nearby_mobs_controller>",
+                "minecraft:parched<damage_nearby_mobs_controller>",
                 "minecraft:skeleton<damage_nearby_mobs>",
                 "minecraft:stray<damage_nearby_mobs>",
                 "minecraft:vex<damage_nearby_mobs>",
@@ -26732,6 +27001,7 @@
             "controller.animation.humanoid.holding": [
                 "minecraft:bogged<holding>",
                 "minecraft:husk<holding_controller>",
+                "minecraft:parched<holding_controller>",
                 "minecraft:skeleton<holding>",
                 "minecraft:stray<holding>",
                 "minecraft:vex<holding>",
@@ -26747,6 +27017,7 @@
                 "minecraft:drowned<look_at_target>",
                 "minecraft:enderman<look_at_target>",
                 "minecraft:husk<look_at_target_controller>",
+                "minecraft:parched<look_at_target_controller>",
                 "minecraft:piglin<look_at_target_controller>",
                 "minecraft:piglin_brute<look_at_target_controller>",
                 "minecraft:pillager<controller_look_at_target>",
@@ -26769,6 +27040,7 @@
                 "minecraft:bogged<move>",
                 "minecraft:enderman<move>",
                 "minecraft:husk<move_controller>",
+                "minecraft:parched<move_controller>",
                 "minecraft:pillager<controller_move>",
                 "minecraft:skeleton<move>",
                 "minecraft:stray<move>",
@@ -26782,6 +27054,7 @@
             "controller.animation.humanoid.riding": [
                 "minecraft:bogged<riding>",
                 "minecraft:husk<riding_controller>",
+                "minecraft:parched<riding_controller>",
                 "minecraft:piglin<riding_controller>",
                 "minecraft:piglin_brute<riding_controller>",
                 "minecraft:pillager<controller_riding>",
@@ -26799,6 +27072,7 @@
             "controller.animation.humanoid.sneaking": [
                 "minecraft:bogged<sneaking>",
                 "minecraft:husk<sneaking_controller>",
+                "minecraft:parched<sneaking_controller>",
                 "minecraft:skeleton<sneaking>",
                 "minecraft:stray<sneaking>",
                 "minecraft:vex<sneaking>",
@@ -26815,6 +27089,7 @@
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
                 "minecraft:husk<use_item_progress_controller>",
+                "minecraft:parched<use_item_progress_controller>",
                 "minecraft:skeleton<use_item_progress>",
                 "minecraft:stray<use_item_progress>",
                 "minecraft:vex<use_item_progress>",
@@ -26965,6 +27240,7 @@
             ],
             "controller.animation.skeleton.attack": [
                 "minecraft:bogged<skeleton_attack>",
+                "minecraft:parched<skeleton_attack_controller>",
                 "minecraft:skeleton<skeleton_attack>",
             ],
             "controller.animation.sniffer.baby": [
@@ -27114,6 +27390,7 @@
             "controller.animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
                 "minecraft:husk<swimming_controller>",
+                "minecraft:parched<swimming_controller>",
                 "minecraft:skeleton<swimming>",
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
@@ -27176,6 +27453,7 @@
             ],
             "controller.render.camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "controller.render.cat": [
                 "minecraft:cat",
@@ -27213,7 +27491,9 @@
                 "minecraft:creeper",
             ],
             "controller.render.crossbow": [],
-            "controller.render.default": [],
+            "controller.render.default": [
+                "minecraft:parched",
+            ],
             "controller.render.dolphin": [
                 "minecraft:dolphin",
             ],
@@ -28035,6 +28315,12 @@
             "minecraft:calm": [
                 "minecraft:pillager",
             ],
+            "minecraft:camel_husk_saddled": [
+                "minecraft:camel_husk",
+            ],
+            "minecraft:camel_husk_unsaddled": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:camel_saddled": [
                 "minecraft:camel",
             ],
@@ -28184,6 +28470,7 @@
                 "minecraft:nautilus",
                 "minecraft:ocelot",
                 "minecraft:panda",
+                "minecraft:parched",
                 "minecraft:parrot",
                 "minecraft:pig",
                 "minecraft:piglin",
@@ -28400,6 +28687,7 @@
             ],
             "minecraft:melee_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -28620,6 +28908,7 @@
             ],
             "minecraft:ranged_mode": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:pillager",
                 "minecraft:skeleton",
                 "minecraft:stray",
@@ -28697,12 +28986,10 @@
                 "minecraft:horse",
                 "minecraft:llama",
                 "minecraft:mule",
-                "minecraft:nautilus",
                 "minecraft:pig",
                 "minecraft:sniffer",
                 "minecraft:trader_llama",
                 "minecraft:zombie_horse",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_adult_with_rider": [
                 "minecraft:zombie_horse",
@@ -28720,6 +29007,7 @@
                 "minecraft:vindicator",
             ],
             "minecraft:spawn_as_rider": [
+                "minecraft:husk",
                 "minecraft:zombie",
             ],
             "minecraft:spawn_as_strider_jockey": [
@@ -28729,7 +29017,6 @@
                 "minecraft:armadillo",
                 "minecraft:happy_ghast",
                 "minecraft:llama",
-                "minecraft:nautilus",
                 "minecraft:trader_llama",
             ],
             "minecraft:spawn_baby_strider_jockey": [
@@ -28787,9 +29074,11 @@
                 "minecraft:llama",
                 "minecraft:mule",
                 "minecraft:wolf",
+                "minecraft:zombie_horse",
             ],
             "minecraft:spawn_tame_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_temperate": [
@@ -28800,13 +29089,16 @@
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby": [
                 "minecraft:cat",
+                "minecraft:nautilus",
                 "minecraft:wolf",
             ],
             "minecraft:spawn_wild_baby_or_adult": [
@@ -28841,6 +29133,9 @@
             ],
             "minecraft:spawn_with_pillager_rider": [
                 "minecraft:ravager",
+            ],
+            "minecraft:spawn_with_rider": [
+                "minecraft:camel_husk",
             ],
             "minecraft:spawn_with_vindicator_captain_rider": [
                 "minecraft:ravager",
@@ -28906,6 +29201,7 @@
             ],
             "minecraft:start_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:start_transforming": [
                 "minecraft:husk",
@@ -28953,6 +29249,7 @@
             ],
             "minecraft:stop_sitting": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "minecraft:stop_transforming": [
                 "minecraft:husk",
@@ -29295,6 +29592,9 @@
             "axolotl": [
                 "minecraft:axolotl",
             ],
+            "baby_husk": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
@@ -29337,6 +29637,7 @@
             ],
             "camel": [
                 "minecraft:camel",
+                "minecraft:camel_husk",
             ],
             "cartographer": [
                 "minecraft:villager<cartographer>",
@@ -29460,6 +29761,7 @@
             ],
             "husk": [
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -29533,6 +29835,7 @@
                 "minecraft:bogged",
                 "minecraft:breeze",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chicken",
@@ -29559,6 +29862,7 @@
                 "minecraft:hoglin<unhuntable_adult>",
                 "minecraft:horse",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -29568,6 +29872,7 @@
                 "minecraft:npc",
                 "minecraft:ocelot",
                 "minecraft:panda<minecraft:panda_aggressive>",
+                "minecraft:parched",
                 "minecraft:parrot<minecraft:parrot_tame>",
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
@@ -29683,7 +29988,9 @@
                 "minecraft:ghast",
                 "minecraft:guardian",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:magma_cube",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
@@ -29764,6 +30071,9 @@
             "panda_aggressive": [
                 "minecraft:panda<minecraft:panda_aggressive>",
             ],
+            "parched": [
+                "minecraft:parched",
+            ],
             "parrot_tame": [
                 "minecraft:parrot<minecraft:parrot_tame>",
             ],
@@ -29841,6 +30151,7 @@
             ],
             "skeleton": [
                 "minecraft:bogged",
+                "minecraft:parched",
                 "minecraft:skeleton",
                 "minecraft:stray",
                 "minecraft:wither",
@@ -29910,8 +30221,11 @@
             ],
             "undead": [
                 "minecraft:bogged",
+                "minecraft:camel_husk",
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
                 "minecraft:skeleton_horse",
@@ -30041,6 +30355,7 @@
             "zombie": [
                 "minecraft:drowned",
                 "minecraft:husk",
+                "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
                 "minecraft:zombie_villager<armorer>",

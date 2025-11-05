@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.110.2",
-    "__COMMITHASH__": "f653a0493bff08699f79264205c4408a9fac06f0",
-    "__MESSAGE__": "v1.21.110.2",
+    "__VERSION__": "1.21.120.4",
+    "__COMMITHASH__": "091dbd3ff9cf3c4205eb3c53ba4a673374b08472",
+    "__MESSAGE__": "v1.21.120.4",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -381,6 +381,9 @@
                         },
                         {
                             "name": "Grass Color Map",
+                        },
+                        {
+                            "name": "Sound Addition",
                         },
                         {
                             "name": "minecraft:ambient_sounds",
@@ -1325,10 +1328,10 @@
                                     "name": "minecraft:behavior.admire_item",
                                 },
                                 {
-                                    "name": "minecraft:behavior.avoid_block",
+                                    "name": "minecraft:behavior.avoid_block (See JSON Schema since 1.21.120)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.avoid_mob_type",
+                                    "name": "minecraft:behavior.avoid_mob_type (See JSON Schema since 1.21.120)",
                                 },
                                 {
                                     "name": "minecraft:behavior.barter",
@@ -1349,7 +1352,16 @@
                                     "name": "minecraft:behavior.celebrate_survive",
                                 },
                                 {
+                                    "name": "minecraft:behavior.charge_attack (See JSON Schema since 1.21.100)",
+                                },
+                                {
                                     "name": "minecraft:behavior.charge_held_item",
+                                },
+                                {
+                                    "name": "minecraft:behavior.circle_around_anchor (See JSON Schema since 1.21.100)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.controlled_by_player (See JSON Schema since 1.21.100)",
                                 },
                                 {
                                     "name": "minecraft:behavior.croak",
@@ -1364,7 +1376,7 @@
                                     "name": "minecraft:behavior.delayed_attack",
                                 },
                                 {
-                                    "name": "minecraft:behavior.dig",
+                                    "name": "minecraft:behavior.dig (See JSON Schema since 1.21.120)",
                                 },
                                 {
                                     "name": "minecraft:behavior.door_interact",
@@ -1374,6 +1386,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.dragondeath",
+                                },
+                                {
+                                    "name": "minecraft:behavior.dragonflaming (See JSON Schema since 1.21.100)",
                                 },
                                 {
                                     "name": "minecraft:behavior.dragonholdingpattern",
@@ -1391,7 +1406,7 @@
                                     "name": "minecraft:behavior.dragontakeoff",
                                 },
                                 {
-                                    "name": "minecraft:behavior.drink_milk",
+                                    "name": "minecraft:behavior.drink_milk (See JSON Schema since 1.21.120)",
                                 },
                                 {
                                     "name": "minecraft:behavior.drink_potion",
@@ -1404,6 +1419,9 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.eat_carried_item",
+                                },
+                                {
+                                    "name": "minecraft:behavior.eat_mob (See JSON Schema since 1.21.100)",
                                 },
                                 {
                                     "name": "minecraft:behavior.emerge",
@@ -1679,6 +1697,9 @@
                                     "name": "minecraft:behavior.rise_to_liquid_level",
                                 },
                                 {
+                                    "name": "minecraft:behavior.roar (See JSON Schema since 1.21.110)",
+                                },
+                                {
                                     "name": "minecraft:behavior.roll",
                                 },
                                 {
@@ -1706,10 +1727,28 @@
                                     "name": "minecraft:behavior.sleep",
                                 },
                                 {
+                                    "name": "minecraft:behavior.slime_attack (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.slime_float (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.slime_keep_on_jumping (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.slime_random_direction (See JSON Schema since 1.21.110)",
+                                },
+                                {
                                     "name": "minecraft:behavior.snacking",
                                 },
                                 {
                                     "name": "minecraft:behavior.sneeze",
+                                },
+                                {
+                                    "name": "minecraft:behavior.sniff (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.sonic_boom (See JSON Schema since 1.21.110)",
                                 },
                                 {
                                     "name": "minecraft:behavior.squid_dive",
@@ -1730,6 +1769,9 @@
                                     "name": "minecraft:behavior.stalk_and_pounce_on_target",
                                 },
                                 {
+                                    "name": "minecraft:behavior.stay_near_noteblock (See JSON Schema since 1.21.110)",
+                                },
+                                {
                                     "name": "minecraft:behavior.stay_while_sitting",
                                 },
                                 {
@@ -1748,7 +1790,19 @@
                                     "name": "minecraft:behavior.swell",
                                 },
                                 {
+                                    "name": "minecraft:behavior.swim_idle (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.swim_up_for_breath (See JSON Schema since 1.21.110)",
+                                },
+                                {
+                                    "name": "minecraft:behavior.swim_wander (See JSON Schema since 1.21.110)",
+                                },
+                                {
                                     "name": "minecraft:behavior.swim_with_entity",
+                                },
+                                {
+                                    "name": "minecraft:behavior.swoop_attack (See JSON Schema since 1.21.110)",
                                 },
                                 {
                                     "name": "minecraft:behavior.take_block",
@@ -5050,6 +5104,11 @@
                     "defaultValue": "",
                 },
                 {
+                    "name": "minecraft:precipitation_interactions",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                },
+                {
                     "name": "minecraft:queued_ticking",
                     "type": "JSON Object",
                     "defaultValue": "",
@@ -5813,7 +5872,7 @@
                 },
             ],
         },
-        "minecraft:behavior.avoid_block": {
+        "minecraft:behavior.avoid_block (See JSON Schema since 1.21.120)": {
             "description": "Allows this entity to avoid certain blocks.",
             "children": [
                 {
@@ -5843,7 +5902,7 @@
                 {
                     "name": "sound_interval",
                     "type": "Range [a, b]",
-                    "defaultValue": "[3.0, 8.0]",
+                    "defaultValue": "[3, 8]",
                     "description": "The range of time in seconds to randomly wait before playing the sound again.",
                 },
                 {
@@ -5878,7 +5937,7 @@
                 },
             ],
         },
-        "minecraft:behavior.avoid_mob_type": {
+        "minecraft:behavior.avoid_mob_type (See JSON Schema since 1.21.120)": {
             "description": "Allows the entity to run away from other entities that meet the criteria specified.",
             "children": [
                 {
@@ -5944,7 +6003,7 @@
                 {
                     "name": "sound_interval",
                     "type": "Range [a, b]",
-                    "defaultValue": "[3.0, 8.0]",
+                    "defaultValue": "[3, 8]",
                     "description": "The range of time in seconds to randomly wait before playing the sound again.",
                 },
                 {
@@ -6059,6 +6118,35 @@
                 },
             ],
         },
+        "minecraft:behavior.charge_attack (See JSON Schema since 1.21.100)": {
+            "description": "Allows this entity to damage a target by using a running attack.",
+            "children": [
+                {
+                    "name": "max_distance",
+                    "type": "Decimal",
+                    "defaultValue": "3",
+                    "description": "A charge attack cannot start if the entity is farther than this distance to the target.",
+                },
+                {
+                    "name": "min_distance",
+                    "type": "Decimal",
+                    "defaultValue": "2",
+                    "description": "A charge attack cannot start if the entity is closer than this distance to the target.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "Modifies the entity's speed when charging toward the target.",
+                },
+                {
+                    "name": "success_rate",
+                    "type": "Decimal",
+                    "defaultValue": "0.1428",
+                    "description": "Percent chance this entity will start a charge attack, if not already attacking (1.0 = 100%)",
+                },
+            ],
+        },
         "minecraft:behavior.charge_held_item": {
             "description": "Allows an entity to charge and use their held item.",
             "children": [
@@ -6067,6 +6155,88 @@
                     "type": "Array",
                     "defaultValue": "NA",
                     "description": "The list of items that can be used to charge the held item. This list is required and must have at least one item in it.",
+                },
+            ],
+        },
+        "minecraft:behavior.circle_around_anchor (See JSON Schema since 1.21.100)": {
+            "description": "Causes an entity to circle around an anchor point placed near a point or target.",
+            "children": [
+                {
+                    "name": "angle_change",
+                    "type": "Decimal",
+                    "defaultValue": "15.0",
+                    "description": "Number of degrees to change this entity's facing by, when the entity selects its next anchor point.",
+                },
+                {
+                    "name": "goal_radius",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Maximum distance from the anchor-point in which this entity considers itself to have reached the anchor point. This is to prevent the entity from bouncing back and forth trying to reach a specific spot.",
+                },
+                {
+                    "name": "height_above_target_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0, 0]",
+                    "description": "The number of blocks above the target that the next anchor point can be set. This value is used only when the entity is tracking a target.",
+                },
+                {
+                    "name": "height_adjustment_chance",
+                    "type": "Decimal",
+                    "defaultValue": "0.002857",
+                    "description": "Percent chance to determine how often to increase or decrease the current height around the anchor point. 1 = 100%. \"height_change_chance\" is deprecated and has been replaced with \"height_adjustment_chance\".",
+                },
+                {
+                    "name": "height_offset_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0, 0]",
+                    "description": "Vertical distance from the anchor point this entity must stay within, upon a successful height adjustment.",
+                },
+                {
+                    "name": "radius_adjustment_chance",
+                    "type": "Decimal",
+                    "defaultValue": "0.004",
+                    "description": "Percent chance to determine how often to increase the size of the current movement radius around the anchor point. 1 = 100%. \"radius_change_chance\" is deprecated and has been replaced with \"radius_adjustment_chance\".",
+                },
+                {
+                    "name": "radius_change",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "The number of blocks to increase the current movement radius by, upon successful \"radius_adjustment_chance\". If the current radius increases over the range maximum, the current radius will be set back to the range minimum and the entity will change between clockwise and counter-clockwise movement..",
+                },
+                {
+                    "name": "radius_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[5, 15]",
+                    "description": "Horizontal distance from the anchor point this entity must stay within upon a successful radius adjustment.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Multiplies the speed at which this entity travels to its next desired position.",
+                },
+            ],
+        },
+        "minecraft:behavior.controlled_by_player (See JSON Schema since 1.21.100)": {
+            "description": "Allows the entity to be controlled by the player using an item in the item_controllable property (required). Also requires the minecraft:movement property, and the minecraft:rideable property. On every tick, the entity will attempt to rotate towards where the player is facing with the control item whilst simultaneously moving forward.",
+            "children": [
+                {
+                    "name": "fractional_rotation",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "The entity will attempt to rotate to face where the player is facing each tick. The entity will target this percentage of their difference in their current facing angles each tick (from 0.0 to 1.0 where 1.0 = 100%). This is limited by FractionalRotationLimit. A value of 0.0 will result in the entity no longer turning to where the player is facing.",
+                },
+                {
+                    "name": "fractional_rotation_limit",
+                    "type": "Decimal",
+                    "defaultValue": "5.0",
+                    "description": "Limits the total degrees the entity can rotate to face where the player is facing on each tick.",
+                },
+                {
+                    "name": "mount_speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Speed multiplier of mount when controlled by player.",
                 },
             ],
         },
@@ -6374,7 +6544,7 @@
                 },
             ],
         },
-        "minecraft:behavior.dig": {
+        "minecraft:behavior.dig (See JSON Schema since 1.21.120)": {
             "description": "Allows this entity to dig into the ground before despawning.",
             "children": [
                 {
@@ -6456,6 +6626,35 @@
                 },
             ],
         },
+        "minecraft:behavior.dragonflaming (See JSON Schema since 1.21.100)": {
+            "description": "Allows this entity to use a flame-breath attack. Can only be used by the Ender Dragon.",
+            "children": [
+                {
+                    "name": "cooldown_time",
+                    "type": "Decimal",
+                    "defaultValue": "10",
+                    "description": "Time (in seconds) between each start of the cycle to roar, then breath flame.",
+                },
+                {
+                    "name": "flame_time",
+                    "type": "Decimal",
+                    "defaultValue": "0.5",
+                    "description": "Time (in seconds), after roar, to breath flame.",
+                },
+                {
+                    "name": "ground_flame_count",
+                    "type": "Integer",
+                    "defaultValue": "4",
+                    "description": "Number of ground flame-breath attacks to use before flight-takeoff.",
+                },
+                {
+                    "name": "roar_time",
+                    "type": "Decimal",
+                    "defaultValue": "2",
+                    "description": "Time (in seconds) to roar, before breathing flame.",
+                },
+            ],
+        },
         "minecraft:behavior.dragonstrafeplayer": {
             "description": "Allows this entity to fly around looking for a player to shoot fireballs at. Can only be used by the Ender Dragon.",
             "children": [
@@ -6509,7 +6708,7 @@
                 },
             ],
         },
-        "minecraft:behavior.drink_milk": {
+        "minecraft:behavior.drink_milk (See JSON Schema since 1.21.120)": {
             "description": "Allows the mob to drink milk based on specified environment conditions.",
             "children": [
                 {
@@ -6707,6 +6906,47 @@
                     "type": "Decimal",
                     "defaultValue": "",
                     "description": "Time in seconds the mob should wait before eating the item.",
+                },
+            ],
+        },
+        "minecraft:behavior.eat_mob (See JSON Schema since 1.21.100)": {
+            "description": "Allows the entity to eat a specified Mob.",
+            "children": [
+                {
+                    "name": "eat_animation_time",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Sets the time in seconds the eat animation should play for.",
+                },
+                {
+                    "name": "eat_mob_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sets the sound that should play when eating a mob.",
+                },
+                {
+                    "name": "loot_table",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The loot table for loot to be dropped when eating a mob.",
+                },
+                {
+                    "name": "pull_in_force",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Sets the force which the mob-to-be-eaten is pulled towards the eating mob.",
+                },
+                {
+                    "name": "reach_mob_distance",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Sets the desired distance to be reached before eating the mob.",
+                },
+                {
+                    "name": "run_speed",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Sets the entity's speed when running toward the target.",
                 },
             ],
         },
@@ -10447,6 +10687,17 @@
                 },
             ],
         },
+        "minecraft:behavior.roar (See JSON Schema since 1.21.110)": {
+            "description": "Allows this entity to roar at another entity based on data in minecraft:anger_level. Once the anger threshold specified in minecraft:anger_level has been reached, this entity will roar for the specified amount of time, look at the other entity, apply anger boost towards it, and finally target it.",
+            "children": [
+                {
+                    "name": "duration",
+                    "type": "Decimal",
+                    "defaultValue": "0.0",
+                    "description": "The amount of time to roar for.",
+                },
+            ],
+        },
         "minecraft:behavior.roll": {
             "description": "This allows the mob to roll forward.",
             "children": [
@@ -10666,6 +10917,86 @@
                 },
             ],
         },
+        "minecraft:behavior.slime_attack (See JSON Schema since 1.21.110)": {
+            "description": "Causes the entity to grow tired every once in a while, while attacking.",
+            "children": [
+                {
+                    "name": "set_persistent",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Allows the actor to be set to persist upon targeting a player",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "During attack behavior, this multiplier modifies the entity's speed when moving toward the target.",
+                },
+                {
+                    "name": "x_max_rotation",
+                    "type": "Decimal",
+                    "defaultValue": "10",
+                    "description": "Maximum rotation (in degrees), on the X-axis, this entity can rotate while trying to look at the target.",
+                },
+                {
+                    "name": "y_max_rotation",
+                    "type": "Decimal",
+                    "defaultValue": "10",
+                    "description": "Maximum rotation (in degrees), on the Y-axis, this entity can rotate while trying to look at the target.",
+                },
+            ],
+        },
+        "minecraft:behavior.slime_float (See JSON Schema since 1.21.110)": {
+            "description": "Allow slimes to float in water / lava. Can only be used by Slime and Magma Cubes.",
+            "children": [
+                {
+                    "name": "jump_chance_percentage",
+                    "type": "Decimal",
+                    "defaultValue": "0.8",
+                    "description": "Percent chance a slime or magma cube has to jump while in water / lava.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.2",
+                    "description": "Determines the multiplier the entity's speed is modified by when moving through water / lava.",
+                },
+            ],
+        },
+        "minecraft:behavior.slime_keep_on_jumping (See JSON Schema since 1.21.110)": {
+            "description": "Allows the entity to continuously jump around like a slime.",
+            "children": [
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "Determines the multiplier this entity's speed is modified by when jumping around.",
+                },
+            ],
+        },
+        "minecraft:behavior.slime_random_direction (See JSON Schema since 1.21.110)": {
+            "description": "Allows the entity to move in random directions like a slime.",
+            "children": [
+                {
+                    "name": "add_random_time_range",
+                    "type": "Integer",
+                    "defaultValue": "3",
+                    "description": "Additional time (in whole seconds), chosen randomly in the range of [0, \"add_random_time_range\"], to add to \"min_change_direction_time\".",
+                },
+                {
+                    "name": "min_change_direction_time",
+                    "type": "Decimal",
+                    "defaultValue": "2",
+                    "description": "Constant minimum time (in seconds) to wait before choosing a new direction.",
+                },
+                {
+                    "name": "turn_range",
+                    "type": "Integer",
+                    "defaultValue": "360",
+                    "description": "Maximum rotation angle range (in degrees) when randomly choosing a new direction.",
+                },
+            ],
+        },
         "minecraft:behavior.snacking": {
             "description": "Allows the mob to take a load off and snack on food that it found nearby.",
             "children": [
@@ -10804,6 +11135,118 @@
                 },
             ],
         },
+        "minecraft:behavior.sniff (See JSON Schema since 1.21.110)": {
+            "description": "Allows this entity to detect the nearest player within \"sniffing_radius\" and update its \"minecraft:suspect_tracking\" component state",
+            "children": [
+                {
+                    "name": "cooldown_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[3, 10]",
+                    "description": "Cooldown range between sniffs in seconds",
+                },
+                {
+                    "name": "duration",
+                    "type": "Decimal",
+                    "defaultValue": "1.0",
+                    "description": "Sniffing duration in seconds",
+                },
+                {
+                    "name": "sniffing_radius",
+                    "type": "Decimal",
+                    "defaultValue": "5.0",
+                    "description": "Mob detection radius",
+                },
+                {
+                    "name": "suspicion_radius_horizontal",
+                    "type": "Decimal",
+                    "defaultValue": "3.0",
+                    "description": "Mob suspicion horizontal radius. When a player is within this radius horizontally, the anger level towards that player is increased",
+                },
+                {
+                    "name": "suspicion_radius_vertical",
+                    "type": "Decimal",
+                    "defaultValue": "3.0",
+                    "description": "Mob suspicion vertical radius. When a player is within this radius vertically, the anger level towards that player is increased",
+                },
+            ],
+        },
+        "minecraft:behavior.sonic_boom (See JSON Schema since 1.21.110)": {
+            "description": "Allows this entity to perform a 'sonic boom' ranged attack",
+            "children": [
+                {
+                    "name": "attack_cooldown",
+                    "type": "Decimal",
+                    "defaultValue": "5.00",
+                    "description": "Cooldown in seconds required after using this attack until the entity can use sonic boom again.",
+                },
+                {
+                    "name": "attack_damage",
+                    "type": "Decimal",
+                    "defaultValue": "30.00",
+                    "description": "Attack damage of the sonic boom.",
+                },
+                {
+                    "name": "attack_range_horizontal",
+                    "type": "Decimal",
+                    "defaultValue": "15.00",
+                    "description": "Horizontal range (in blocks) at which the sonic boom can damage the target.",
+                },
+                {
+                    "name": "attack_range_vertical",
+                    "type": "Decimal",
+                    "defaultValue": "20.00",
+                    "description": "Vertical range (in blocks) at which the sonic boom can damage the target.",
+                },
+                {
+                    "name": "attack_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound event for the attack.",
+                },
+                {
+                    "name": "charge_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Sound event for the charge up.",
+                },
+                {
+                    "name": "duration",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Goal duration in seconds",
+                },
+                {
+                    "name": "duration_until_attack_sound",
+                    "type": "Decimal",
+                    "defaultValue": "1.70",
+                    "description": "Duration in seconds until the attack sound is played.",
+                },
+                {
+                    "name": "knockback_height_cap",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Height cap of the attack knockback's vertical delta.",
+                },
+                {
+                    "name": "knockback_horizontal_strength",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Horizontal strength of the attack's knockback applied to the attack target.",
+                },
+                {
+                    "name": "knockback_vertical_strength",
+                    "type": "Decimal",
+                    "defaultValue": "0.00",
+                    "description": "Vertical strength of the attack's knockback applied to the attack target.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "This multiplier modifies the attacking entity's speed when moving toward the target.",
+                },
+            ],
+        },
         "minecraft:behavior.stalk_and_pounce_on_target": {
             "description": "Allows a mob to stalk a target, then once within range pounce onto a target, on success the target will be attacked dealing damage defined by the attack component. On failure, the mob will risk getting stuck",
             "children": [
@@ -10860,6 +11303,35 @@
                     "type": "Decimal",
                     "defaultValue": "2.0",
                     "description": "The amount of time the mob will be stuck if they fail and land on a block they can be stuck on",
+                },
+            ],
+        },
+        "minecraft:behavior.stay_near_noteblock (See JSON Schema since 1.21.110)": {
+            "description": "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
+            "children": [
+                {
+                    "name": "listen_time",
+                    "type": "Integer",
+                    "defaultValue": "30",
+                    "description": "Sets the time an entity should stay near a noteblock after hearing it.",
+                },
+                {
+                    "name": "speed",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Sets the entity's speed when moving toward the block.",
+                },
+                {
+                    "name": "start_distance",
+                    "type": "Decimal",
+                    "defaultValue": "10.000000",
+                    "description": "Sets the distance the entity needs to be away from the block to attempt to start the goal.",
+                },
+                {
+                    "name": "stop_distance",
+                    "type": "Decimal",
+                    "defaultValue": "2.000000",
+                    "description": "Sets the distance from the block the entity will attempt to reach.",
                 },
             ],
         },
@@ -11234,6 +11706,81 @@
                 },
             ],
         },
+        "minecraft:behavior.swim_idle (See JSON Schema since 1.21.110)": {
+            "description": "Allows the entity go idle, if swimming. Entity must be in water.",
+            "children": [
+                {
+                    "name": "idle_time",
+                    "type": "Decimal",
+                    "defaultValue": "5",
+                    "description": "Amount of time (in seconds) to stay idle.",
+                },
+                {
+                    "name": "success_rate",
+                    "type": "Decimal",
+                    "defaultValue": "0.1",
+                    "description": "Percent chance this entity will go idle, 1.0 = 100%.",
+                },
+            ],
+        },
+        "minecraft:behavior.swim_up_for_breath (See JSON Schema since 1.21.110)": {
+            "description": "Allows the mob to try to move to air once it is close to running out of its total breathable supply. Requires \"minecraft:breathable\".",
+            "children": [
+                {
+                    "name": "material_type",
+                    "type": "String",
+                    "defaultValue": "water",
+                    "description": "The material the mob is traveling in. An air block will only be considered valid to move to with a block of this material below it. Options are: \"water\", \"lava\", or \"any\".",
+                },
+                {
+                    "name": "search_height",
+                    "type": "Integer",
+                    "defaultValue": "16",
+                    "description": "The height (in blocks) above the mob's current position that it will search for a valid air block to move to. If a valid block cannot be found, the mob will move to the position this many blocks above it.",
+                },
+                {
+                    "name": "search_radius",
+                    "type": "Integer",
+                    "defaultValue": "4",
+                    "description": "The radius (in blocks) around the mob's current position that it will search for a valid air block to move to.",
+                },
+                {
+                    "name": "speed_mod",
+                    "type": "Decimal",
+                    "defaultValue": "1.40",
+                    "description": "Movement speed multiplier of the mob when using this Goal.",
+                },
+            ],
+        },
+        "minecraft:behavior.swim_wander (See JSON Schema since 1.21.110)": {
+            "description": "Allows the entity to wander around while swimming, when not path-finding.",
+            "children": [
+                {
+                    "name": "interval",
+                    "type": "Decimal",
+                    "defaultValue": "0.00833",
+                    "description": "Percent chance to start wandering, when not path-finding. 1 = 100%",
+                },
+                {
+                    "name": "look_ahead",
+                    "type": "Decimal",
+                    "defaultValue": "5",
+                    "description": "Distance to look ahead for obstacle avoidance, while wandering.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "This multiplier modifies the entity's speed when wandering.",
+                },
+                {
+                    "name": "wander_time",
+                    "type": "Decimal",
+                    "defaultValue": "5",
+                    "description": "Amount of time (in seconds) to wander after wandering behavior was successfully started.",
+                },
+            ],
+        },
         "minecraft:behavior.swim_with_entity": {
             "description": "Allows the entity follow another entity. Both entities must be swimming [ie, in water].",
             "children": [
@@ -11296,6 +11843,29 @@
                     "type": "Decimal",
                     "defaultValue": "0.1",
                     "description": "Percent chance to start following another entity, if not already doing so. 1.0 = 100%",
+                },
+            ],
+        },
+        "minecraft:behavior.swoop_attack (See JSON Schema since 1.21.110)": {
+            "description": "Allows an entity to attack using swoop attack behavior; Ideal for use with flying mobs. The behavior ends if the entity has a horizontal collision or gets hit.",
+            "children": [
+                {
+                    "name": "damage_reach",
+                    "type": "Decimal",
+                    "defaultValue": "0.2",
+                    "description": "Added to the base size of the entity, to determine the target's maximum allowable distance, when trying to deal attack damage.",
+                },
+                {
+                    "name": "delay_range",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[10, 20]",
+                    "description": "Minimum and maximum cooldown time-range (in seconds) between each attempted swoop attack.",
+                },
+                {
+                    "name": "speed_multiplier",
+                    "type": "Decimal",
+                    "defaultValue": "1",
+                    "description": "During swoop attack behavior, this determines the multiplier the entity's speed is modified by when moving toward the target.",
                 },
             ],
         },
@@ -16709,12 +17279,44 @@
         "math.atan2(y, x)": "arctan of y/x.  NOTE: the order of arguments!",
         "math.ceil(value)": "Round value up to nearest integral number",
         "math.clamp(value, min, max)": "Clamp value to between min and max inclusive",
+        "math.copy_sign(A, B)": "Returns A with the sign of B",
         "math.cos(value)": "Cosine (in degrees) of value",
         "math.die_roll(num, low, high)": "returns the sum of 'num' random numbers, each with a value from low to high`.  Note: the generated random numbers are not integers like normal dice.  For that, use `math.die_roll_integer`.",
         "math.die_roll_integer(num, low, high)": "returns the sum of 'num' random integer numbers, each with a value from low to high`.  Note: the generated random numbers are integers like normal dice.",
+        "math.ease_in_back(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, overshooting backward before accelerating into the end",
+        "math.ease_in_bounce(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting with bounce oscillations and settling into the end",
+        "math.ease_in_circ(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating along a circular curve toward the end",
+        "math.ease_in_cubic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating rapidly toward the end",
+        "math.ease_in_elastic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting with elastic oscillations before accelerating into the end",
+        "math.ease_in_expo(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating extremely rapidly toward the end",
+        "math.ease_in_out_back(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, overshooting at both start and end, with smoother change in the middle",
+        "math.ease_in_out_bounce(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting and ending with bounce oscillations, smoother in the middle",
+        "math.ease_in_out_circ(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting and ending slow, with circular acceleration and deceleration in the middle",
+        "math.ease_in_out_cubic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow, accelerating rapidly in the middle, then slowing again at the end",
+        "math.ease_in_out_elastic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, oscillating elastically at both start and end, with stable change in the middle",
+        "math.ease_in_out_expo(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting and ending slow, with extremely rapid change in the middle",
+        "math.ease_in_out_quad(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow, accelerating in the middle, then slowing again at the end",
+        "math.ease_in_out_quart(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow, accelerating very rapidly in the middle, then slowing again at the end",
+        "math.ease_in_out_quint(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow, accelerating extremely rapidly in the middle, then slowing again at the end",
+        "math.ease_in_out_sine(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting and ending slow, with smoother change in the middle",
+        "math.ease_in_quad(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating toward the end",
+        "math.ease_in_quart(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating very rapidly toward the end",
+        "math.ease_in_quint(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating extremely rapidly toward the end",
+        "math.ease_in_sine(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting slow and accelerating smoothly toward the end",
+        "math.ease_out_back(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, overshooting past the end before settling into it",
+        "math.ease_out_bounce(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, approaching the end with bounce oscillations that diminish over time",
+        "math.ease_out_circ(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating along a circular curve toward the end",
+        "math.ease_out_cubic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating rapidly toward the end",
+        "math.ease_out_elastic(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, overshooting the end with elastic oscillations before settling",
+        "math.ease_out_expo(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting extremely fast and decelerating gradually toward the end",
+        "math.ease_out_quad(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating toward the end",
+        "math.ease_out_quart(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating very rapidly toward the end",
+        "math.ease_out_quint(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating extremely rapidly toward the end",
+        "math.ease_out_sine(start, end, 0_to_1)": "Output goes from start to end via 0_to_1, starting fast and decelerating smoothly toward the end",
         "math.exp(value)": "Calculates e to the value'th power",
         "math.floor(value)": "Round value down to nearest integral number",
         "math.hermite_blend(value)": "Useful for simple smooth curve interpolation using one of the Hermite Basis functions: `3t^2 - 2t^3`.  Note that while any valid float is a valid input, this function works best in the range [0,1].",
+        "math.inverse_lerp(start, end, value)": "Returns the normalized progress between start and end given value",
         "math.lerp(start, end, 0_to_1)": "Lerp from start to end via 0_to_1",
         "math.lerprotate(start, end, 0_to_1)": "Lerp the shortest direction around a circle from start degrees to end degrees via 0_to_1",
         "math.ln(value)": "Natural logarithm of value",
@@ -16727,6 +17329,7 @@
         "math.random(low, high)": "Random value between low and high inclusive",
         "math.random_integer(low, high)": "Random integer value between low and high inclusive",
         "math.round(value)": "Round value to nearest integral number",
+        "math.sign(value)": "Returns 1 if value is positive, -1 otherwise",
         "math.sin(value)": "Sine (in degrees) of value",
         "math.sqrt(value)": "Square root of value",
         "math.trunc(value)": "Round value towards zero",
@@ -16748,6 +17351,7 @@
         "query.armor_material_slot": "Takes the armor slot index as a parameter, and returns the armor material type in the requested armor slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
         "query.armor_texture_slot": "Takes the armor slot index as a parameter, and returns the texture type of the requested slot. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs), 3 (feet) and 4 (body).",
         "query.average_frame_time": "Returns the time in *seconds* of the average frame time over the last 'n' frames.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.average_frame_time' (or the equivalent 'query.average_frame_time(0)') will return the frame time of the frame before the current one.  'query.average_frame_time(1)' will return the average frame time of the previous two frames.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Asking for more frames will result in only sampling the number of frames stored.",
+        "query.base_swing_duration": "Returns the duration of the mob's swing/attack animation, determined by the carried item and unmodified by effects applied on the mob. To access the swing/attack animation progress, use \"variable.attack_time\" instead.",
         "query.block_face": "Returns the block face for this (only valid for certain triggers such as placing blocks, or interacting with block) (Down=0.0, Up=1.0, North=2.0, South=3.0, West=4.0, East=5.0, Undefined=6.0).",
         "query.block_has_all_tags": "Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has all of the tags provided.",
         "query.block_has_any_tag": "Takes a world-origin-relative position and one or more tag names, and returns either 0 or 1 based on if the block at that position has any of the tags provided.",
@@ -16948,7 +17552,7 @@
         "query.key_frame_lerp_time": "Returns the ratio between the previous and next key frames.",
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
-        "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', 'gamepad', or 'motion_controller'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
+        "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', or 'gamepad'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
         "query.leashed_entity_count": "Returns the number of entities for which this entity is the leash holder.",
         "query.lie_amount": "Returns the lie down amount for the entity.",
         "query.life_span": "Returns the limited life span of an entity, or 0.0 if it lives forever",
@@ -16966,6 +17570,7 @@
         "query.model_scale": "Returns the scale of the current entity.",
         "query.modified_distance_moved": "Returns the total distance the entity has moved horizontally in meters (since the entity was last loaded, not necessarily since it was originally created) modified along the way by status flags such as is_baby or on_fire.",
         "query.modified_move_speed": "Returns the current walk speed of the entity modified by status flags such as is_baby or on_fire.",
+        "query.modified_swing_duration": "Returns the duration of the mob's swing/attack animation, determined by the carried item and modified by effects applied on the mob. To access the swing/attack animation progress, use \"variable.attack_time\" instead.",
         "query.moon_brightness": "Returns the brightness of the moon (FULL_MOON=1.0, WANING_GIBBOUS=0.75, FIRST_QUARTER=0.5, WANING_CRESCENT=0.25, NEW_MOON=0.0, WAXING_CRESCENT=0.25, LAST_QUARTER=0.5, WAXING_GIBBOUS=0.75).",
         "query.moon_phase": "Returns the phase of the moon (FULL_MOON=0, WANING_GIBBOUS=1, FIRST_QUARTER=2, WANING_CRESCENT=3, NEW_MOON=4, WAXING_CRESCENT=5, LAST_QUARTER=6, WAXING_GIBBOUS=7).",
         "query.movement_direction": "Returns the specified axis of the normalized position delta of the entity.",
@@ -17034,5 +17639,12 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.entity_biome_has_all_tags": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if all of the tag names match. Only supported in resource packs (client-side).",
+        "query.entity_biome_has_any_identifier": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more identifier names, and returns either 0 or 1 based on if any of the identifier names match. Only supported in resource packs (client-side).",
+        "query.entity_biome_has_any_tags": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if any of the tag names match. Only supported in resource packs (client-side).",
+        "query.get_pack_setting": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
+        "query.is_pack_setting_enabled": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
+        "query.is_pack_setting_selected": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
+    },
 }
