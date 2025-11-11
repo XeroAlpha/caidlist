@@ -3738,6 +3738,7 @@
             "minecraft:smithing_netherite_chestplate": "<smithing_table>diamond_chestplate+netherite_ingot->netherite_chestplate",
             "minecraft:smithing_netherite_helmet": "<smithing_table>diamond_helmet+netherite_ingot->netherite_helmet",
             "minecraft:smithing_netherite_hoe": "<smithing_table>diamond_hoe+netherite_ingot->netherite_hoe",
+            "minecraft:smithing_netherite_horse_armor": "<smithing_table>diamond_horse_armor+netherite_ingot->netherite_horse_armor",
             "minecraft:smithing_netherite_leggings": "<smithing_table>diamond_leggings+netherite_ingot->netherite_leggings",
             "minecraft:smithing_netherite_nautilus_armor": "<smithing_table>diamond_nautilus_armor+netherite_ingot->netherite_nautilus_armor",
             "minecraft:smithing_netherite_pickaxe": "<smithing_table>diamond_pickaxe+netherite_ingot->netherite_pickaxe",
@@ -4530,7 +4531,10 @@
             "geometry.nautilus.baby": [
                 "minecraft:nautilus<baby>",
             ],
-            "geometry.nautilus_armor": [],
+            "geometry.nautilus_armor": [
+                "minecraft:nautilus<armor>",
+                "minecraft:zombie_nautilus<armor>",
+            ],
             "geometry.nautilus_saddle": [
                 "minecraft:nautilus<saddle>",
                 "minecraft:zombie_nautilus<saddle>",
@@ -4562,12 +4566,15 @@
             "geometry.piglin": [
                 "minecraft:piglin<default>",
                 "minecraft:piglin_brute<default>",
-                "minecraft:zombie_pigman<default>",
             ],
             "geometry.pigzombie": [],
             "geometry.pigzombie.baby": [],
-            "geometry.pigzombie.baby.v1.8": [],
-            "geometry.pigzombie.v1.8": [],
+            "geometry.pigzombie.baby.v1.8": [
+                "minecraft:zombie_pigman<baby>",
+            ],
+            "geometry.pigzombie.v1.8": [
+                "minecraft:zombie_pigman<default>",
+            ],
             "geometry.pillager": [
                 "minecraft:pillager<default>",
             ],
@@ -4751,6 +4758,9 @@
             ],
             "geometry.zombie.villager_v2": [
                 "minecraft:zombie_villager_v2<default>",
+            ],
+            "geometry.zombie_nautilus_coral": [
+                "minecraft:zombie_nautilus<coral>",
             ],
         },
         "animationMap": {
@@ -5560,7 +5570,6 @@
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
                 "minecraft:parched<riding.body>",
-                "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
@@ -5596,7 +5605,6 @@
             "animation.humanoid.sneaking.v1.0": [],
             "animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming>",
             ],
             "animation.humanoid.swimming.v1.0": [
                 "minecraft:warden<swimming>",
@@ -6278,11 +6286,9 @@
             ],
             "animation.zombie.melee_spear_hold": [
                 "minecraft:husk<melee_spear_hold>",
-                "minecraft:zombie_pigman<melee_spear_hold>",
             ],
             "animation.zombie.melee_spear_use": [
                 "minecraft:husk<melee_spear_use>",
-                "minecraft:zombie_pigman<melee_spear_use>",
             ],
             "animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
@@ -6293,6 +6299,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -6497,20 +6504,20 @@
                 "minecraft:vex<attack>",
                 "minecraft:wither_skeleton<attack>",
                 "minecraft:zombie<attack>",
-                "minecraft:zombie_pigman<attack_controller>",
+                "minecraft:zombie_pigman<attack>",
                 "minecraft:zombie_villager<attack>",
                 "minecraft:zombie_villager_v2<attack>",
             ],
             "controller.animation.humanoid.baby_big_head": [
                 "minecraft:husk<humanoid_big_head_controller>",
                 "minecraft:zombie<humanoid_baby_big_head>",
-                "minecraft:zombie_pigman<humanoid_baby_big_head_controller>",
+                "minecraft:zombie_pigman<humanoid_baby_big_head>",
                 "minecraft:zombie_villager<humanoid_baby_big_head>",
                 "minecraft:zombie_villager_v2<humanoid_baby_big_head>",
             ],
             "controller.animation.humanoid.base_pose": [
                 "minecraft:pillager<controller_humanoid_base_pose>",
-                "minecraft:zombie_pigman<humanoid_base_pose_controller>",
+                "minecraft:zombie_pigman<humanoid_base_pose>",
                 "minecraft:zombie_villager<humanoid_base_pose>",
                 "minecraft:zombie_villager_v2<humanoid_base_pose>",
             ],
@@ -6524,7 +6531,7 @@
                 "minecraft:stray<bob>",
                 "minecraft:vex<bob>",
                 "minecraft:zombie<bob>",
-                "minecraft:zombie_pigman<bob_controller>",
+                "minecraft:zombie_pigman<bob>",
                 "minecraft:zombie_villager<bob>",
                 "minecraft:zombie_villager_v2<bob>",
             ],
@@ -6537,7 +6544,7 @@
                 "minecraft:vex<bow_and_arrow>",
                 "minecraft:wither_skeleton<bow_and_arrow>",
                 "minecraft:zombie<bow_and_arrow>",
-                "minecraft:zombie_pigman<bow_and_arrow_controller>",
+                "minecraft:zombie_pigman<bow_and_arrow>",
                 "minecraft:zombie_villager<bow_and_arrow>",
                 "minecraft:zombie_villager_v2<bow_and_arrow>",
             ],
@@ -6550,7 +6557,7 @@
                 "minecraft:vex<brandish_spear>",
                 "minecraft:wither_skeleton<brandish_spear>",
                 "minecraft:zombie<brandish_spear>",
-                "minecraft:zombie_pigman<brandish_spear_controller>",
+                "minecraft:zombie_pigman<brandish_spear>",
                 "minecraft:zombie_villager<brandish_spear>",
                 "minecraft:zombie_villager_v2<brandish_spear>",
             ],
@@ -6563,7 +6570,7 @@
                 "minecraft:vex<charging>",
                 "minecraft:wither_skeleton<charging>",
                 "minecraft:zombie<charging>",
-                "minecraft:zombie_pigman<charging_controller>",
+                "minecraft:zombie_pigman<charging>",
                 "minecraft:zombie_villager<charging>",
                 "minecraft:zombie_villager_v2<charging>",
             ],
@@ -6576,7 +6583,7 @@
                 "minecraft:vex<damage_nearby_mobs>",
                 "minecraft:wither_skeleton<damage_nearby_mobs>",
                 "minecraft:zombie<damage_nearby_mobs>",
-                "minecraft:zombie_pigman<damage_nearby_mobs_controller>",
+                "minecraft:zombie_pigman<damage_nearby_mobs>",
                 "minecraft:zombie_villager<damage_nearby_mobs>",
                 "minecraft:zombie_villager_v2<damage_nearby_mobs>",
             ],
@@ -6589,7 +6596,7 @@
                 "minecraft:vex<holding>",
                 "minecraft:wither_skeleton<holding>",
                 "minecraft:zombie<holding>",
-                "minecraft:zombie_pigman<holding_controller>",
+                "minecraft:zombie_pigman<holding>",
                 "minecraft:zombie_villager<holding>",
                 "minecraft:zombie_villager_v2<holding>",
             ],
@@ -6610,13 +6617,12 @@
                 "minecraft:vindicator<controller_look_at_target>",
                 "minecraft:wither_skeleton<look_at_target>",
                 "minecraft:zombie<look_at_target>",
-                "minecraft:zombie_pigman<look_at_target_controller>",
+                "minecraft:zombie_pigman<look_at_target>",
                 "minecraft:zombie_villager<look_at_target>",
                 "minecraft:zombie_villager_v2<look_at_target>",
             ],
             "controller.animation.humanoid.melee_spear": [
                 "minecraft:husk<melee_spear_controller>",
-                "minecraft:zombie_pigman<melee_spear_controller>",
             ],
             "controller.animation.humanoid.move": [
                 "minecraft:bogged<move>",
@@ -6629,7 +6635,7 @@
                 "minecraft:vex<move>",
                 "minecraft:wither_skeleton<move>",
                 "minecraft:zombie<move>",
-                "minecraft:zombie_pigman<move_controller>",
+                "minecraft:zombie_pigman<move>",
                 "minecraft:zombie_villager<move>",
                 "minecraft:zombie_villager_v2<move>",
             ],
@@ -6646,7 +6652,7 @@
                 "minecraft:vindicator<controller_riding>",
                 "minecraft:wither_skeleton<riding>",
                 "minecraft:zombie<riding>",
-                "minecraft:zombie_pigman<riding_controller>",
+                "minecraft:zombie_pigman<riding>",
                 "minecraft:zombie_villager<riding>",
                 "minecraft:zombie_villager_v2<riding>",
             ],
@@ -6660,13 +6666,12 @@
                 "minecraft:vex<sneaking>",
                 "minecraft:wither_skeleton<sneaking>",
                 "minecraft:zombie<sneaking>",
-                "minecraft:zombie_pigman<sneaking_controller>",
+                "minecraft:zombie_pigman<sneaking>",
                 "minecraft:zombie_villager<sneaking>",
                 "minecraft:zombie_villager_v2<sneaking>",
             ],
             "controller.animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming_controller>",
             ],
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
@@ -6677,7 +6682,7 @@
                 "minecraft:vex<use_item_progress>",
                 "minecraft:wither_skeleton<use_item_progress>",
                 "minecraft:zombie<use_item_progress>",
-                "minecraft:zombie_pigman<use_item_progress_controller>",
+                "minecraft:zombie_pigman<use_item_progress>",
                 "minecraft:zombie_villager<use_item_progress>",
                 "minecraft:zombie_villager_v2<use_item_progress>",
             ],
@@ -6965,7 +6970,7 @@
             "controller.animation.zombie.attack_bare_hand": [
                 "minecraft:husk<zombie_attack_bare_hand_controller>",
                 "minecraft:zombie<zombie_attack_bare_hand>",
-                "minecraft:zombie_pigman<zombie_attack_bare_hand_controller>",
+                "minecraft:zombie_pigman<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager_v2<zombie_attack_bare_hand>",
             ],
@@ -6977,6 +6982,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -7207,6 +7213,10 @@
             ],
             "controller.render.nautilus": [
                 "minecraft:nautilus",
+            ],
+            "controller.render.nautilus_armor": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "controller.render.nautilus_saddle": [
                 "minecraft:nautilus",
@@ -7652,6 +7662,9 @@
                 "minecraft:zoglin",
                 "minecraft:zombie",
             ],
+            "minecraft:as_baby_jockey": [
+                "minecraft:zombie",
+            ],
             "minecraft:as_ranged_adult": [
                 "minecraft:drowned",
             ],
@@ -8021,6 +8034,7 @@
                 "minecraft:boat",
                 "minecraft:bogged",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chest_boat",
@@ -8219,6 +8233,12 @@
                 "minecraft:horse",
                 "minecraft:zombie_horse",
             ],
+            "minecraft:hostile_dismounted": [
+                "minecraft:zombie_horse",
+            ],
+            "minecraft:hostile_mounted": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
@@ -8396,6 +8416,18 @@
                 "minecraft:copper_golem",
                 "minecraft:sheep",
                 "minecraft:snow_golem",
+            ],
+            "minecraft:on_start_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_start_riding_zombie_horse": [
+                "minecraft:zombie",
+            ],
+            "minecraft:on_stop_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_stop_riding_zombie_horse": [
+                "minecraft:zombie",
             ],
             "minecraft:on_stop_tempting": [
                 "minecraft:happy_ghast",
@@ -8669,11 +8701,13 @@
             "minecraft:spawn_warm": [
                 "minecraft:egg",
             ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
                 "minecraft:nautilus",
                 "minecraft:wolf",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
@@ -8933,6 +8967,9 @@
             "minecraft:upgrade_to_1_21_100": [
                 "minecraft:wolf",
             ],
+            "minecraft:upgrade_to_1_21_130": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:warm_color": [
                 "minecraft:sheep",
             ],
@@ -9014,6 +9051,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_adult_melee": [
                 "minecraft:piglin",
@@ -9044,6 +9082,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_cold": [
                 "minecraft:frog",
@@ -9219,6 +9258,8 @@
             ],
             "camel": [
                 "minecraft:camel",
+            ],
+            "camel_husk": [
                 "minecraft:camel_husk",
             ],
             "cartographer": [
@@ -9344,6 +9385,10 @@
             "husk": [
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
+            ],
+            "husk_rider": [
+                "minecraft:husk<minecraft:zombie_husk_rider>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -9445,6 +9490,7 @@
                 "minecraft:horse",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -9524,6 +9570,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -9571,6 +9618,7 @@
                 "minecraft:guardian",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:magma_cube",
                 "minecraft:parched",
                 "minecraft:phantom",
@@ -9595,6 +9643,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_pigman",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
@@ -9807,6 +9856,7 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
@@ -9818,6 +9868,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -9938,8 +9989,10 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -9968,8 +10021,14 @@
                 "minecraft:zombie_villager_v2<unskilled>",
                 "minecraft:zombie_villager_v2<weaponsmith>",
             ],
+            "zombie_nautilus": [
+                "minecraft:zombie_nautilus",
+            ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+            ],
+            "zombie_rider": [
+                "minecraft:zombie<minecraft:zombie_rider>",
             ],
             "zombie_villager": [
                 "minecraft:zombie_villager<armorer>",
@@ -10002,9 +10061,6 @@
             ],
             "zombiehorse": [
                 "minecraft:zombie_horse",
-            ],
-            "zombienautilus": [
-                "minecraft:zombie_nautilus",
             ],
         },
         "entityPropertyDescMap": {
@@ -10118,6 +10174,16 @@
                     "type": "bool",
                 },
             },
+            "minecraft:is_riding_camel_husk": {
+                "minecraft:husk": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:is_riding_zombie_horse": {
+                "minecraft:zombie": {
+                    "type": "bool",
+                },
+            },
             "minecraft:is_waxed": {
                 "minecraft:copper_golem": {
                     "type": "bool",
@@ -10148,8 +10214,22 @@
                     ],
                 },
             },
+            "minecraft:variant": {
+                "minecraft:zombie_nautilus": {
+                    "type": "enum",
+                    "values": [
+                        "default",
+                        "coral",
+                    ],
+                },
+            },
             "minecraft:was_upgraded_to_1_21_100": {
                 "minecraft:wolf": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:was_upgraded_to_1_21_130": {
+                "minecraft:zombie_horse": {
                     "type": "bool",
                 },
             },
@@ -13959,6 +14039,7 @@
             "minecraft:smithing_netherite_chestplate": "<smithing_table>diamond_chestplate+netherite_ingot->netherite_chestplate",
             "minecraft:smithing_netherite_helmet": "<smithing_table>diamond_helmet+netherite_ingot->netherite_helmet",
             "minecraft:smithing_netherite_hoe": "<smithing_table>diamond_hoe+netherite_ingot->netherite_hoe",
+            "minecraft:smithing_netherite_horse_armor": "<smithing_table>diamond_horse_armor+netherite_ingot->netherite_horse_armor",
             "minecraft:smithing_netherite_leggings": "<smithing_table>diamond_leggings+netherite_ingot->netherite_leggings",
             "minecraft:smithing_netherite_nautilus_armor": "<smithing_table>diamond_nautilus_armor+netherite_ingot->netherite_nautilus_armor",
             "minecraft:smithing_netherite_pickaxe": "<smithing_table>diamond_pickaxe+netherite_ingot->netherite_pickaxe",
@@ -14787,7 +14868,10 @@
             "geometry.nautilus.baby": [
                 "minecraft:nautilus<baby>",
             ],
-            "geometry.nautilus_armor": [],
+            "geometry.nautilus_armor": [
+                "minecraft:nautilus<armor>",
+                "minecraft:zombie_nautilus<armor>",
+            ],
             "geometry.nautilus_saddle": [
                 "minecraft:nautilus<saddle>",
                 "minecraft:zombie_nautilus<saddle>",
@@ -14819,12 +14903,15 @@
             "geometry.piglin": [
                 "minecraft:piglin<default>",
                 "minecraft:piglin_brute<default>",
-                "minecraft:zombie_pigman<default>",
             ],
             "geometry.pigzombie": [],
             "geometry.pigzombie.baby": [],
-            "geometry.pigzombie.baby.v1.8": [],
-            "geometry.pigzombie.v1.8": [],
+            "geometry.pigzombie.baby.v1.8": [
+                "minecraft:zombie_pigman<baby>",
+            ],
+            "geometry.pigzombie.v1.8": [
+                "minecraft:zombie_pigman<default>",
+            ],
             "geometry.pillager": [
                 "minecraft:pillager<default>",
             ],
@@ -15008,6 +15095,9 @@
             ],
             "geometry.zombie.villager_v2": [
                 "minecraft:zombie_villager_v2<default>",
+            ],
+            "geometry.zombie_nautilus_coral": [
+                "minecraft:zombie_nautilus<coral>",
             ],
         },
         "animationMap": {
@@ -15818,7 +15908,6 @@
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
                 "minecraft:parched<riding.body>",
-                "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
@@ -15854,7 +15943,6 @@
             "animation.humanoid.sneaking.v1.0": [],
             "animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming>",
             ],
             "animation.humanoid.swimming.v1.0": [
                 "minecraft:warden<swimming>",
@@ -16536,11 +16624,9 @@
             ],
             "animation.zombie.melee_spear_hold": [
                 "minecraft:husk<melee_spear_hold>",
-                "minecraft:zombie_pigman<melee_spear_hold>",
             ],
             "animation.zombie.melee_spear_use": [
                 "minecraft:husk<melee_spear_use>",
-                "minecraft:zombie_pigman<melee_spear_use>",
             ],
             "animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
@@ -16551,6 +16637,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -16755,20 +16842,20 @@
                 "minecraft:vex<attack>",
                 "minecraft:wither_skeleton<attack>",
                 "minecraft:zombie<attack>",
-                "minecraft:zombie_pigman<attack_controller>",
+                "minecraft:zombie_pigman<attack>",
                 "minecraft:zombie_villager<attack>",
                 "minecraft:zombie_villager_v2<attack>",
             ],
             "controller.animation.humanoid.baby_big_head": [
                 "minecraft:husk<humanoid_big_head_controller>",
                 "minecraft:zombie<humanoid_baby_big_head>",
-                "minecraft:zombie_pigman<humanoid_baby_big_head_controller>",
+                "minecraft:zombie_pigman<humanoid_baby_big_head>",
                 "minecraft:zombie_villager<humanoid_baby_big_head>",
                 "minecraft:zombie_villager_v2<humanoid_baby_big_head>",
             ],
             "controller.animation.humanoid.base_pose": [
                 "minecraft:pillager<controller_humanoid_base_pose>",
-                "minecraft:zombie_pigman<humanoid_base_pose_controller>",
+                "minecraft:zombie_pigman<humanoid_base_pose>",
                 "minecraft:zombie_villager<humanoid_base_pose>",
                 "minecraft:zombie_villager_v2<humanoid_base_pose>",
             ],
@@ -16782,7 +16869,7 @@
                 "minecraft:stray<bob>",
                 "minecraft:vex<bob>",
                 "minecraft:zombie<bob>",
-                "minecraft:zombie_pigman<bob_controller>",
+                "minecraft:zombie_pigman<bob>",
                 "minecraft:zombie_villager<bob>",
                 "minecraft:zombie_villager_v2<bob>",
             ],
@@ -16795,7 +16882,7 @@
                 "minecraft:vex<bow_and_arrow>",
                 "minecraft:wither_skeleton<bow_and_arrow>",
                 "minecraft:zombie<bow_and_arrow>",
-                "minecraft:zombie_pigman<bow_and_arrow_controller>",
+                "minecraft:zombie_pigman<bow_and_arrow>",
                 "minecraft:zombie_villager<bow_and_arrow>",
                 "minecraft:zombie_villager_v2<bow_and_arrow>",
             ],
@@ -16808,7 +16895,7 @@
                 "minecraft:vex<brandish_spear>",
                 "minecraft:wither_skeleton<brandish_spear>",
                 "minecraft:zombie<brandish_spear>",
-                "minecraft:zombie_pigman<brandish_spear_controller>",
+                "minecraft:zombie_pigman<brandish_spear>",
                 "minecraft:zombie_villager<brandish_spear>",
                 "minecraft:zombie_villager_v2<brandish_spear>",
             ],
@@ -16821,7 +16908,7 @@
                 "minecraft:vex<charging>",
                 "minecraft:wither_skeleton<charging>",
                 "minecraft:zombie<charging>",
-                "minecraft:zombie_pigman<charging_controller>",
+                "minecraft:zombie_pigman<charging>",
                 "minecraft:zombie_villager<charging>",
                 "minecraft:zombie_villager_v2<charging>",
             ],
@@ -16834,7 +16921,7 @@
                 "minecraft:vex<damage_nearby_mobs>",
                 "minecraft:wither_skeleton<damage_nearby_mobs>",
                 "minecraft:zombie<damage_nearby_mobs>",
-                "minecraft:zombie_pigman<damage_nearby_mobs_controller>",
+                "minecraft:zombie_pigman<damage_nearby_mobs>",
                 "minecraft:zombie_villager<damage_nearby_mobs>",
                 "minecraft:zombie_villager_v2<damage_nearby_mobs>",
             ],
@@ -16847,7 +16934,7 @@
                 "minecraft:vex<holding>",
                 "minecraft:wither_skeleton<holding>",
                 "minecraft:zombie<holding>",
-                "minecraft:zombie_pigman<holding_controller>",
+                "minecraft:zombie_pigman<holding>",
                 "minecraft:zombie_villager<holding>",
                 "minecraft:zombie_villager_v2<holding>",
             ],
@@ -16868,13 +16955,12 @@
                 "minecraft:vindicator<controller_look_at_target>",
                 "minecraft:wither_skeleton<look_at_target>",
                 "minecraft:zombie<look_at_target>",
-                "minecraft:zombie_pigman<look_at_target_controller>",
+                "minecraft:zombie_pigman<look_at_target>",
                 "minecraft:zombie_villager<look_at_target>",
                 "minecraft:zombie_villager_v2<look_at_target>",
             ],
             "controller.animation.humanoid.melee_spear": [
                 "minecraft:husk<melee_spear_controller>",
-                "minecraft:zombie_pigman<melee_spear_controller>",
             ],
             "controller.animation.humanoid.move": [
                 "minecraft:bogged<move>",
@@ -16887,7 +16973,7 @@
                 "minecraft:vex<move>",
                 "minecraft:wither_skeleton<move>",
                 "minecraft:zombie<move>",
-                "minecraft:zombie_pigman<move_controller>",
+                "minecraft:zombie_pigman<move>",
                 "minecraft:zombie_villager<move>",
                 "minecraft:zombie_villager_v2<move>",
             ],
@@ -16904,7 +16990,7 @@
                 "minecraft:vindicator<controller_riding>",
                 "minecraft:wither_skeleton<riding>",
                 "minecraft:zombie<riding>",
-                "minecraft:zombie_pigman<riding_controller>",
+                "minecraft:zombie_pigman<riding>",
                 "minecraft:zombie_villager<riding>",
                 "minecraft:zombie_villager_v2<riding>",
             ],
@@ -16918,13 +17004,12 @@
                 "minecraft:vex<sneaking>",
                 "minecraft:wither_skeleton<sneaking>",
                 "minecraft:zombie<sneaking>",
-                "minecraft:zombie_pigman<sneaking_controller>",
+                "minecraft:zombie_pigman<sneaking>",
                 "minecraft:zombie_villager<sneaking>",
                 "minecraft:zombie_villager_v2<sneaking>",
             ],
             "controller.animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming_controller>",
             ],
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
@@ -16935,7 +17020,7 @@
                 "minecraft:vex<use_item_progress>",
                 "minecraft:wither_skeleton<use_item_progress>",
                 "minecraft:zombie<use_item_progress>",
-                "minecraft:zombie_pigman<use_item_progress_controller>",
+                "minecraft:zombie_pigman<use_item_progress>",
                 "minecraft:zombie_villager<use_item_progress>",
                 "minecraft:zombie_villager_v2<use_item_progress>",
             ],
@@ -17223,7 +17308,7 @@
             "controller.animation.zombie.attack_bare_hand": [
                 "minecraft:husk<zombie_attack_bare_hand_controller>",
                 "minecraft:zombie<zombie_attack_bare_hand>",
-                "minecraft:zombie_pigman<zombie_attack_bare_hand_controller>",
+                "minecraft:zombie_pigman<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager_v2<zombie_attack_bare_hand>",
             ],
@@ -17235,6 +17320,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -17469,6 +17555,10 @@
             ],
             "controller.render.nautilus": [
                 "minecraft:nautilus",
+            ],
+            "controller.render.nautilus_armor": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "controller.render.nautilus_saddle": [
                 "minecraft:nautilus",
@@ -17914,6 +18004,9 @@
                 "minecraft:zoglin",
                 "minecraft:zombie",
             ],
+            "minecraft:as_baby_jockey": [
+                "minecraft:zombie",
+            ],
             "minecraft:as_ranged_adult": [
                 "minecraft:drowned",
             ],
@@ -18283,6 +18376,7 @@
                 "minecraft:boat",
                 "minecraft:bogged",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chest_boat",
@@ -18481,6 +18575,12 @@
                 "minecraft:horse",
                 "minecraft:zombie_horse",
             ],
+            "minecraft:hostile_dismounted": [
+                "minecraft:zombie_horse",
+            ],
+            "minecraft:hostile_mounted": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
@@ -18658,6 +18758,18 @@
                 "minecraft:copper_golem",
                 "minecraft:sheep",
                 "minecraft:snow_golem",
+            ],
+            "minecraft:on_start_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_start_riding_zombie_horse": [
+                "minecraft:zombie",
+            ],
+            "minecraft:on_stop_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_stop_riding_zombie_horse": [
+                "minecraft:zombie",
             ],
             "minecraft:on_stop_tempting": [
                 "minecraft:happy_ghast",
@@ -18931,11 +19043,13 @@
             "minecraft:spawn_warm": [
                 "minecraft:egg",
             ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
                 "minecraft:nautilus",
                 "minecraft:wolf",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
@@ -19195,6 +19309,9 @@
             "minecraft:upgrade_to_1_21_100": [
                 "minecraft:wolf",
             ],
+            "minecraft:upgrade_to_1_21_130": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:warm_color": [
                 "minecraft:sheep",
             ],
@@ -19276,6 +19393,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_adult_melee": [
                 "minecraft:piglin",
@@ -19306,6 +19424,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_cold": [
                 "minecraft:frog",
@@ -19481,6 +19600,8 @@
             ],
             "camel": [
                 "minecraft:camel",
+            ],
+            "camel_husk": [
                 "minecraft:camel_husk",
             ],
             "cartographer": [
@@ -19606,6 +19727,10 @@
             "husk": [
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
+            ],
+            "husk_rider": [
+                "minecraft:husk<minecraft:zombie_husk_rider>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -19707,6 +19832,7 @@
                 "minecraft:horse",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -19786,6 +19912,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -19833,6 +19960,7 @@
                 "minecraft:guardian",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:magma_cube",
                 "minecraft:parched",
                 "minecraft:phantom",
@@ -19857,6 +19985,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_pigman",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
@@ -20069,6 +20198,7 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
@@ -20080,6 +20210,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -20200,8 +20331,10 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -20230,8 +20363,14 @@
                 "minecraft:zombie_villager_v2<unskilled>",
                 "minecraft:zombie_villager_v2<weaponsmith>",
             ],
+            "zombie_nautilus": [
+                "minecraft:zombie_nautilus",
+            ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+            ],
+            "zombie_rider": [
+                "minecraft:zombie<minecraft:zombie_rider>",
             ],
             "zombie_villager": [
                 "minecraft:zombie_villager<armorer>",
@@ -20264,9 +20403,6 @@
             ],
             "zombiehorse": [
                 "minecraft:zombie_horse",
-            ],
-            "zombienautilus": [
-                "minecraft:zombie_nautilus",
             ],
         },
         "entityPropertyDescMap": {
@@ -20380,6 +20516,16 @@
                     "type": "bool",
                 },
             },
+            "minecraft:is_riding_camel_husk": {
+                "minecraft:husk": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:is_riding_zombie_horse": {
+                "minecraft:zombie": {
+                    "type": "bool",
+                },
+            },
             "minecraft:is_waxed": {
                 "minecraft:copper_golem": {
                     "type": "bool",
@@ -20410,8 +20556,22 @@
                     ],
                 },
             },
+            "minecraft:variant": {
+                "minecraft:zombie_nautilus": {
+                    "type": "enum",
+                    "values": [
+                        "default",
+                        "coral",
+                    ],
+                },
+            },
             "minecraft:was_upgraded_to_1_21_100": {
                 "minecraft:wolf": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:was_upgraded_to_1_21_130": {
+                "minecraft:zombie_horse": {
                     "type": "bool",
                 },
             },
@@ -24156,6 +24316,7 @@
             "minecraft:smithing_netherite_chestplate": "<smithing_table>diamond_chestplate+netherite_ingot->netherite_chestplate",
             "minecraft:smithing_netherite_helmet": "<smithing_table>diamond_helmet+netherite_ingot->netherite_helmet",
             "minecraft:smithing_netherite_hoe": "<smithing_table>diamond_hoe+netherite_ingot->netherite_hoe",
+            "minecraft:smithing_netherite_horse_armor": "<smithing_table>diamond_horse_armor+netherite_ingot->netherite_horse_armor",
             "minecraft:smithing_netherite_leggings": "<smithing_table>diamond_leggings+netherite_ingot->netherite_leggings",
             "minecraft:smithing_netherite_nautilus_armor": "<smithing_table>diamond_nautilus_armor+netherite_ingot->netherite_nautilus_armor",
             "minecraft:smithing_netherite_pickaxe": "<smithing_table>diamond_pickaxe+netherite_ingot->netherite_pickaxe",
@@ -24948,7 +25109,10 @@
             "geometry.nautilus.baby": [
                 "minecraft:nautilus<baby>",
             ],
-            "geometry.nautilus_armor": [],
+            "geometry.nautilus_armor": [
+                "minecraft:nautilus<armor>",
+                "minecraft:zombie_nautilus<armor>",
+            ],
             "geometry.nautilus_saddle": [
                 "minecraft:nautilus<saddle>",
                 "minecraft:zombie_nautilus<saddle>",
@@ -24980,12 +25144,15 @@
             "geometry.piglin": [
                 "minecraft:piglin<default>",
                 "minecraft:piglin_brute<default>",
-                "minecraft:zombie_pigman<default>",
             ],
             "geometry.pigzombie": [],
             "geometry.pigzombie.baby": [],
-            "geometry.pigzombie.baby.v1.8": [],
-            "geometry.pigzombie.v1.8": [],
+            "geometry.pigzombie.baby.v1.8": [
+                "minecraft:zombie_pigman<baby>",
+            ],
+            "geometry.pigzombie.v1.8": [
+                "minecraft:zombie_pigman<default>",
+            ],
             "geometry.pillager": [
                 "minecraft:pillager<default>",
             ],
@@ -25169,6 +25336,9 @@
             ],
             "geometry.zombie.villager_v2": [
                 "minecraft:zombie_villager_v2<default>",
+            ],
+            "geometry.zombie_nautilus_coral": [
+                "minecraft:zombie_nautilus<coral>",
             ],
         },
         "animationMap": {
@@ -25978,7 +26148,6 @@
             "animation.humanoid.riding.body": [
                 "minecraft:husk<riding.body>",
                 "minecraft:parched<riding.body>",
-                "minecraft:zombie_pigman<riding.body>",
             ],
             "animation.humanoid.riding.legs": [
                 "minecraft:bogged<riding.legs>",
@@ -26014,7 +26183,6 @@
             "animation.humanoid.sneaking.v1.0": [],
             "animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming>",
             ],
             "animation.humanoid.swimming.v1.0": [
                 "minecraft:warden<swimming>",
@@ -26696,11 +26864,9 @@
             ],
             "animation.zombie.melee_spear_hold": [
                 "minecraft:husk<melee_spear_hold>",
-                "minecraft:zombie_pigman<melee_spear_hold>",
             ],
             "animation.zombie.melee_spear_use": [
                 "minecraft:husk<melee_spear_use>",
-                "minecraft:zombie_pigman<melee_spear_use>",
             ],
             "animation.zombie.swimming": [
                 "minecraft:bogged<swimming>",
@@ -26711,6 +26877,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -26915,20 +27082,20 @@
                 "minecraft:vex<attack>",
                 "minecraft:wither_skeleton<attack>",
                 "minecraft:zombie<attack>",
-                "minecraft:zombie_pigman<attack_controller>",
+                "minecraft:zombie_pigman<attack>",
                 "minecraft:zombie_villager<attack>",
                 "minecraft:zombie_villager_v2<attack>",
             ],
             "controller.animation.humanoid.baby_big_head": [
                 "minecraft:husk<humanoid_big_head_controller>",
                 "minecraft:zombie<humanoid_baby_big_head>",
-                "minecraft:zombie_pigman<humanoid_baby_big_head_controller>",
+                "minecraft:zombie_pigman<humanoid_baby_big_head>",
                 "minecraft:zombie_villager<humanoid_baby_big_head>",
                 "minecraft:zombie_villager_v2<humanoid_baby_big_head>",
             ],
             "controller.animation.humanoid.base_pose": [
                 "minecraft:pillager<controller_humanoid_base_pose>",
-                "minecraft:zombie_pigman<humanoid_base_pose_controller>",
+                "minecraft:zombie_pigman<humanoid_base_pose>",
                 "minecraft:zombie_villager<humanoid_base_pose>",
                 "minecraft:zombie_villager_v2<humanoid_base_pose>",
             ],
@@ -26942,7 +27109,7 @@
                 "minecraft:stray<bob>",
                 "minecraft:vex<bob>",
                 "minecraft:zombie<bob>",
-                "minecraft:zombie_pigman<bob_controller>",
+                "minecraft:zombie_pigman<bob>",
                 "minecraft:zombie_villager<bob>",
                 "minecraft:zombie_villager_v2<bob>",
             ],
@@ -26955,7 +27122,7 @@
                 "minecraft:vex<bow_and_arrow>",
                 "minecraft:wither_skeleton<bow_and_arrow>",
                 "minecraft:zombie<bow_and_arrow>",
-                "minecraft:zombie_pigman<bow_and_arrow_controller>",
+                "minecraft:zombie_pigman<bow_and_arrow>",
                 "minecraft:zombie_villager<bow_and_arrow>",
                 "minecraft:zombie_villager_v2<bow_and_arrow>",
             ],
@@ -26968,7 +27135,7 @@
                 "minecraft:vex<brandish_spear>",
                 "minecraft:wither_skeleton<brandish_spear>",
                 "minecraft:zombie<brandish_spear>",
-                "minecraft:zombie_pigman<brandish_spear_controller>",
+                "minecraft:zombie_pigman<brandish_spear>",
                 "minecraft:zombie_villager<brandish_spear>",
                 "minecraft:zombie_villager_v2<brandish_spear>",
             ],
@@ -26981,7 +27148,7 @@
                 "minecraft:vex<charging>",
                 "minecraft:wither_skeleton<charging>",
                 "minecraft:zombie<charging>",
-                "minecraft:zombie_pigman<charging_controller>",
+                "minecraft:zombie_pigman<charging>",
                 "minecraft:zombie_villager<charging>",
                 "minecraft:zombie_villager_v2<charging>",
             ],
@@ -26994,7 +27161,7 @@
                 "minecraft:vex<damage_nearby_mobs>",
                 "minecraft:wither_skeleton<damage_nearby_mobs>",
                 "minecraft:zombie<damage_nearby_mobs>",
-                "minecraft:zombie_pigman<damage_nearby_mobs_controller>",
+                "minecraft:zombie_pigman<damage_nearby_mobs>",
                 "minecraft:zombie_villager<damage_nearby_mobs>",
                 "minecraft:zombie_villager_v2<damage_nearby_mobs>",
             ],
@@ -27007,7 +27174,7 @@
                 "minecraft:vex<holding>",
                 "minecraft:wither_skeleton<holding>",
                 "minecraft:zombie<holding>",
-                "minecraft:zombie_pigman<holding_controller>",
+                "minecraft:zombie_pigman<holding>",
                 "minecraft:zombie_villager<holding>",
                 "minecraft:zombie_villager_v2<holding>",
             ],
@@ -27028,13 +27195,12 @@
                 "minecraft:vindicator<controller_look_at_target>",
                 "minecraft:wither_skeleton<look_at_target>",
                 "minecraft:zombie<look_at_target>",
-                "minecraft:zombie_pigman<look_at_target_controller>",
+                "minecraft:zombie_pigman<look_at_target>",
                 "minecraft:zombie_villager<look_at_target>",
                 "minecraft:zombie_villager_v2<look_at_target>",
             ],
             "controller.animation.humanoid.melee_spear": [
                 "minecraft:husk<melee_spear_controller>",
-                "minecraft:zombie_pigman<melee_spear_controller>",
             ],
             "controller.animation.humanoid.move": [
                 "minecraft:bogged<move>",
@@ -27047,7 +27213,7 @@
                 "minecraft:vex<move>",
                 "minecraft:wither_skeleton<move>",
                 "minecraft:zombie<move>",
-                "minecraft:zombie_pigman<move_controller>",
+                "minecraft:zombie_pigman<move>",
                 "minecraft:zombie_villager<move>",
                 "minecraft:zombie_villager_v2<move>",
             ],
@@ -27064,7 +27230,7 @@
                 "minecraft:vindicator<controller_riding>",
                 "minecraft:wither_skeleton<riding>",
                 "minecraft:zombie<riding>",
-                "minecraft:zombie_pigman<riding_controller>",
+                "minecraft:zombie_pigman<riding>",
                 "minecraft:zombie_villager<riding>",
                 "minecraft:zombie_villager_v2<riding>",
             ],
@@ -27078,13 +27244,12 @@
                 "minecraft:vex<sneaking>",
                 "minecraft:wither_skeleton<sneaking>",
                 "minecraft:zombie<sneaking>",
-                "minecraft:zombie_pigman<sneaking_controller>",
+                "minecraft:zombie_pigman<sneaking>",
                 "minecraft:zombie_villager<sneaking>",
                 "minecraft:zombie_villager_v2<sneaking>",
             ],
             "controller.animation.humanoid.swimming": [
                 "minecraft:vex<swimming>",
-                "minecraft:zombie_pigman<swimming_controller>",
             ],
             "controller.animation.humanoid.use_item_progress": [
                 "minecraft:bogged<use_item_progress>",
@@ -27095,7 +27260,7 @@
                 "minecraft:vex<use_item_progress>",
                 "minecraft:wither_skeleton<use_item_progress>",
                 "minecraft:zombie<use_item_progress>",
-                "minecraft:zombie_pigman<use_item_progress_controller>",
+                "minecraft:zombie_pigman<use_item_progress>",
                 "minecraft:zombie_villager<use_item_progress>",
                 "minecraft:zombie_villager_v2<use_item_progress>",
             ],
@@ -27383,7 +27548,7 @@
             "controller.animation.zombie.attack_bare_hand": [
                 "minecraft:husk<zombie_attack_bare_hand_controller>",
                 "minecraft:zombie<zombie_attack_bare_hand>",
-                "minecraft:zombie_pigman<zombie_attack_bare_hand_controller>",
+                "minecraft:zombie_pigman<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager<zombie_attack_bare_hand>",
                 "minecraft:zombie_villager_v2<zombie_attack_bare_hand>",
             ],
@@ -27395,6 +27560,7 @@
                 "minecraft:stray<swimming>",
                 "minecraft:wither_skeleton<swimming>",
                 "minecraft:zombie<swimming>",
+                "minecraft:zombie_pigman<swimming>",
                 "minecraft:zombie_villager<swimming>",
                 "minecraft:zombie_villager_v2<swimming>",
             ],
@@ -27625,6 +27791,10 @@
             ],
             "controller.render.nautilus": [
                 "minecraft:nautilus",
+            ],
+            "controller.render.nautilus_armor": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "controller.render.nautilus_saddle": [
                 "minecraft:nautilus",
@@ -28070,6 +28240,9 @@
                 "minecraft:zoglin",
                 "minecraft:zombie",
             ],
+            "minecraft:as_baby_jockey": [
+                "minecraft:zombie",
+            ],
             "minecraft:as_ranged_adult": [
                 "minecraft:drowned",
             ],
@@ -28439,6 +28612,7 @@
                 "minecraft:boat",
                 "minecraft:bogged",
                 "minecraft:camel",
+                "minecraft:camel_husk",
                 "minecraft:cat",
                 "minecraft:cave_spider",
                 "minecraft:chest_boat",
@@ -28637,6 +28811,12 @@
                 "minecraft:horse",
                 "minecraft:zombie_horse",
             ],
+            "minecraft:hostile_dismounted": [
+                "minecraft:zombie_horse",
+            ],
+            "minecraft:hostile_mounted": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:increase_max_health": [
                 "minecraft:wolf",
             ],
@@ -28814,6 +28994,18 @@
                 "minecraft:copper_golem",
                 "minecraft:sheep",
                 "minecraft:snow_golem",
+            ],
+            "minecraft:on_start_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_start_riding_zombie_horse": [
+                "minecraft:zombie",
+            ],
+            "minecraft:on_stop_riding_camel_husk": [
+                "minecraft:husk",
+            ],
+            "minecraft:on_stop_riding_zombie_horse": [
+                "minecraft:zombie",
             ],
             "minecraft:on_stop_tempting": [
                 "minecraft:happy_ghast",
@@ -29087,11 +29279,13 @@
             "minecraft:spawn_warm": [
                 "minecraft:egg",
             ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
                 "minecraft:nautilus",
                 "minecraft:wolf",
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_ashen": [
                 "minecraft:wolf",
@@ -29351,6 +29545,9 @@
             "minecraft:upgrade_to_1_21_100": [
                 "minecraft:wolf",
             ],
+            "minecraft:upgrade_to_1_21_130": [
+                "minecraft:zombie_horse",
+            ],
             "minecraft:warm_color": [
                 "minecraft:sheep",
             ],
@@ -29432,6 +29629,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_adult_melee": [
                 "minecraft:piglin",
@@ -29462,6 +29660,7 @@
                 "minecraft:piglin",
                 "minecraft:sheep",
                 "minecraft:strider",
+                "minecraft:zombie_pigman",
             ],
             "spawn_cold": [
                 "minecraft:frog",
@@ -29637,6 +29836,8 @@
             ],
             "camel": [
                 "minecraft:camel",
+            ],
+            "camel_husk": [
                 "minecraft:camel_husk",
             ],
             "cartographer": [
@@ -29762,6 +29963,10 @@
             "husk": [
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
+            ],
+            "husk_rider": [
+                "minecraft:husk<minecraft:zombie_husk_rider>",
             ],
             "illager": [
                 "minecraft:evocation_illager",
@@ -29863,6 +30068,7 @@
                 "minecraft:horse",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:iron_golem",
                 "minecraft:llama",
                 "minecraft:magma_cube",
@@ -29942,6 +30148,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -29989,6 +30196,7 @@
                 "minecraft:guardian",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:magma_cube",
                 "minecraft:parched",
                 "minecraft:phantom",
@@ -30013,6 +30221,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_pigman",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
@@ -30225,6 +30434,7 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:parched",
                 "minecraft:phantom",
                 "minecraft:skeleton",
@@ -30236,6 +30446,7 @@
                 "minecraft:zoglin<zoglin_baby>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
@@ -30356,8 +30567,10 @@
                 "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
+                "minecraft:husk<minecraft:zombie_husk_rider>",
                 "minecraft:zombie",
                 "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -30386,8 +30599,14 @@
                 "minecraft:zombie_villager_v2<unskilled>",
                 "minecraft:zombie_villager_v2<weaponsmith>",
             ],
+            "zombie_nautilus": [
+                "minecraft:zombie_nautilus",
+            ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+            ],
+            "zombie_rider": [
+                "minecraft:zombie<minecraft:zombie_rider>",
             ],
             "zombie_villager": [
                 "minecraft:zombie_villager<armorer>",
@@ -30420,9 +30639,6 @@
             ],
             "zombiehorse": [
                 "minecraft:zombie_horse",
-            ],
-            "zombienautilus": [
-                "minecraft:zombie_nautilus",
             ],
         },
         "entityPropertyDescMap": {
@@ -30536,6 +30752,16 @@
                     "type": "bool",
                 },
             },
+            "minecraft:is_riding_camel_husk": {
+                "minecraft:husk": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:is_riding_zombie_horse": {
+                "minecraft:zombie": {
+                    "type": "bool",
+                },
+            },
             "minecraft:is_waxed": {
                 "minecraft:copper_golem": {
                     "type": "bool",
@@ -30566,8 +30792,22 @@
                     ],
                 },
             },
+            "minecraft:variant": {
+                "minecraft:zombie_nautilus": {
+                    "type": "enum",
+                    "values": [
+                        "default",
+                        "coral",
+                    ],
+                },
+            },
             "minecraft:was_upgraded_to_1_21_100": {
                 "minecraft:wolf": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:was_upgraded_to_1_21_130": {
+                "minecraft:zombie_horse": {
                     "type": "bool",
                 },
             },

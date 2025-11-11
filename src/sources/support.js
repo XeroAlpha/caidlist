@@ -195,7 +195,10 @@ export function controlSchemeCommand({ coreVersion, branch }) {
 controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> set <control scheme: controlscheme>']];
 
 export function inputBoxRequiresManualFocus({ coreVersion }) {
-    return testMinecraftVersionInRange(coreVersion, '1.21.120.25', '1.21.130.22');
+    return (
+        testMinecraftVersionInRange(coreVersion, '1.21.120.25', '1.21.130.22') &&
+        !testMinecraftVersionInRange(coreVersion, '1.21.121.1', '1.21.121.1')
+    );
 }
 
 export function mcpews({ version }) {

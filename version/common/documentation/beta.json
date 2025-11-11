@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.130.24",
-    "__COMMITHASH__": "2d4253c573a0d7ee3c44f0d30f0adcc9aab6171e",
-    "__MESSAGE__": "v1.21.130.24-preview",
+    "__VERSION__": "1.21.130.26",
+    "__COMMITHASH__": "05b74691f9162e10a93c5fe39b89242fbdf02d04",
+    "__MESSAGE__": "v1.21.130.26-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -645,6 +645,14 @@
                             ],
                         },
                         {
+                            "name": "has_item_with_component",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "has_mob_effect",
                             "sections": [
                                 {
@@ -878,6 +886,14 @@
                         },
                         {
                             "name": "is_color",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "is_controlling_passenger_family",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -4959,13 +4975,13 @@
                             "name": "origin",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[-8.0, 0.0, -8.0]",
-                            "description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                            "description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                         },
                         {
                             "name": "size",
                             "type": "Vector [a, b, c]",
-                            "defaultValue": "[16.0, 16.0, 16.0]",
-                            "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                            "defaultValue": "[16.0, 24.0, 16.0]",
+                            "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                         },
                     ],
                 },
@@ -5810,6 +5826,7 @@
         "has_damaged_equipment": "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
         "has_equipment_tag": "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
+        "has_item_with_component": "Returns true when the subject entity is holding a item with the specified component.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
         "has_nametag": "Tests if the subject has been given a custom name.",
         "has_property": "Tests for the presence of a property of the subject entity.",
@@ -5840,6 +5857,7 @@
         "is_brightness": "Tests the current brightness against a provided value in the range (0.0f, 1.0f).",
         "is_climbing": "Returns true if the subject entity is climbing.",
         "is_color": "Returns true if the subject entity is the named color.",
+        "is_controlling_passenger_family": "Returns true when the subject entity's controlling passenger is a member of the named family.",
         "is_daytime": "Returns true during the daylight hours.",
         "is_difficulty": "Tests the current difficulty level of the game.",
         "is_family": "Returns true when the subject entity is a member of the named family.",
@@ -9356,9 +9374,9 @@
             "description": "Allows an entity to attack the closest target within a given subset of specific target types.",
             "children": [
                 {
-                    "name": "attack_interval|attack_interval_min",
-                    "type": "Integer",
-                    "defaultValue": "0",
+                    "name": "attack_interval",
+                    "type": "Range [a, b]",
+                    "defaultValue": "[0, 0]",
                     "description": "Time range (in seconds) between searching for an attack target, range is in (0, \"attack_interval\"]. Only used if \"attack_interval\" is greater than 0, otherwise \"scan_interval\" is used.",
                 },
                 {
@@ -9414,6 +9432,12 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "Allows the actor to be set to persist upon targeting a player",
+                },
+                {
+                    "name": "target_acquisition_probability",
+                    "type": "Decimal",
+                    "defaultValue": "1.00",
+                    "description": "Probability (0.0 to 1.0) that this entity will accept a found target. Checked each time a valid target is found during scanning.",
                 },
                 {
                     "name": "target_invisible_multiplier",
@@ -14806,6 +14830,12 @@
         "minecraft:mob_effect": {
             "description": "A component that applies a mob effect to entities that get within range.",
             "children": [
+                {
+                    "name": "ambient",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If the effect is considered an ambient effect (like the ones applied by Beacons or Conduits).",
+                },
                 {
                     "name": "cooldown_time",
                     "type": "Integer",

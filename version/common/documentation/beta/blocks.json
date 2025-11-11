@@ -35,13 +35,13 @@
                                                     "Name": "origin",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                                                 },
                                                 {
                                                     "Name": "size",
                                                     "Type": "Vector [a, b, c]",
-                                                    "Default Value": "[16.0, 16.0, 16.0]",
-                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                                                    "Default Value": "[16.0, 24.0, 16.0]",
+                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                                                 },
                                             ],
                                         },
@@ -498,6 +498,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Component that determines how the block will interact with rain and snow",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.120)",
                                         {
                                             "section": "precipitation_behavior",
                                             "content": [
@@ -1447,5 +1448,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "87536e2348b3adb12bea863bc0449d4a818625df",
+    "__OBJECTHASH__": "4279fe099c99ae083cbd814400b6e7dd20823788",
 }
