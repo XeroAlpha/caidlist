@@ -384,6 +384,7 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
         await sleepAsync(3000);
     }
     sendText('/');
+    await sleepAsync(3000);
     screen.log(`Input ${command}`);
     sendText(command.replace(/^\//, ''));
     emptyClipboard();
@@ -394,6 +395,7 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     };
     const pressCopy = async () => {
         sendKeys(Keys.Ctrl, 'A');
+        await sleepAsync(50);
         sendKeys(Keys.Ctrl, 'C');
         await sleepAsync(50);
         sendKeys(Keys.End);

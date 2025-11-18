@@ -377,7 +377,7 @@ const Extractors = [
             });
             if (enchantmentSlots.length === 0) {
                 log(`[Warning] EnchantmentSlot = {}, please restart level`);
-                session.connection.socket.destory();
+                session.connection.socket.destroy();
                 throw new Error(`Invalid environment: EnchantmentSlot has no member`);
             }
         }

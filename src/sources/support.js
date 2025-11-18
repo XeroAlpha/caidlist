@@ -197,7 +197,7 @@ controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> se
 export function inputBoxRequiresManualFocus({ coreVersion }) {
     return (
         testMinecraftVersionInRange(coreVersion, '1.21.120.25', '1.21.130.22') &&
-        !testMinecraftVersionInRange(coreVersion, '1.21.121.1', '1.21.121.1')
+        !testMinecraftVersionInRange(coreVersion, '1.21.121.1', '1.21.123.2')
     );
 }
 

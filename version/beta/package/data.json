@@ -992,11 +992,13 @@
             "mob.mooshroom.eat",
             "mob.mooshroom.suspicious_milk",
             "mob.nautilus.ambient",
+            "mob.nautilus.armor_unequip",
             "mob.nautilus.dash",
             "mob.nautilus.dash_ready",
             "mob.nautilus.death",
             "mob.nautilus.eat",
             "mob.nautilus.hurt",
+            "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -2013,6 +2015,7 @@
             "entities/guardian",
             "entities/hoglin",
             "entities/horse",
+            "entities/husk_rider",
             "entities/iron_golem",
             "entities/llama",
             "entities/magma_cube",
@@ -2377,8 +2380,10 @@
             "minecraft:cold_taiga_after_surface_sweet_berry_bush_feature_rules",
             "minecraft:cold_taiga_first_sweet_berry_bush_feature",
             "minecraft:crimson_feature",
+            "minecraft:crimson_fungus_warped_feature",
             "minecraft:crimson_roots_feature",
             "minecraft:crimson_roots_soul_sand_valley_feature",
+            "minecraft:crimson_roots_warped_feature",
             "minecraft:deep_cold_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_warm_ocean_after_surface_seagrass_feature_rules",
@@ -5830,7 +5835,7 @@
             ],
             "animation.player.crawl": [],
             "animation.player.crawl.legs": [],
-            "animation.player.crawl.right_arm": [],
+            "animation.player.crawl.no_right_arm": [],
             "animation.player.crossbow_equipped": [
                 "minecraft:player<third_person_crossbow_equipped>",
             ],
@@ -5939,7 +5944,7 @@
             ],
             "animation.player.swim.legs.single": [],
             "animation.player.swim.legs.stationary": [],
-            "animation.player.swim.right_arm": [],
+            "animation.player.swim.no_right_arm": [],
             "animation.polarbear.baby_transform": [
                 "minecraft:polar_bear<baby_transform>",
             ],
@@ -6090,7 +6095,6 @@
             "animation.spear.held_first_person": [],
             "animation.spear.held_third_person": [],
             "animation.spear.hit": [],
-            "animation.spear.use_sound": [],
             "animation.spider.default_leg_pose": [
                 "minecraft:cave_spider<default_leg_pose>",
                 "minecraft:spider<default_leg_pose>",
@@ -6863,7 +6867,6 @@
             ],
             "controller.animation.spear.held": [],
             "controller.animation.spear.hit": [],
-            "controller.animation.spear.sounds": [],
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
@@ -7642,6 +7645,9 @@
             ],
             "minecraft:ageable_set_baby": [
                 "minecraft:wolf",
+            ],
+            "minecraft:all_riders_dismounted": [
+                "minecraft:camel_husk",
             ],
             "minecraft:ambient_night": [
                 "minecraft:fox",
@@ -8546,6 +8552,9 @@
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
             ],
+            "minecraft:rider_mounted": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:roll_up": [
                 "minecraft:armadillo",
             ],
@@ -8700,9 +8709,6 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
-            ],
-            "minecraft:spawn_wild": [
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -10159,6 +10165,11 @@
                     "type": "bool",
                 },
             },
+            "minecraft:has_rider_mounted": {
+                "minecraft:camel_husk": {
+                    "type": "bool",
+                },
+            },
             "minecraft:is_armorable": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -11231,11 +11242,13 @@
             "mob.mooshroom.eat",
             "mob.mooshroom.suspicious_milk",
             "mob.nautilus.ambient",
+            "mob.nautilus.armor_unequip",
             "mob.nautilus.dash",
             "mob.nautilus.dash_ready",
             "mob.nautilus.death",
             "mob.nautilus.eat",
             "mob.nautilus.hurt",
+            "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -12253,6 +12266,7 @@
             "entities/guardian",
             "entities/hoglin",
             "entities/horse",
+            "entities/husk_rider",
             "entities/iron_golem",
             "entities/llama",
             "entities/magma_cube",
@@ -12617,8 +12631,10 @@
             "minecraft:cold_taiga_after_surface_sweet_berry_bush_feature_rules",
             "minecraft:cold_taiga_first_sweet_berry_bush_feature",
             "minecraft:crimson_feature",
+            "minecraft:crimson_fungus_warped_feature",
             "minecraft:crimson_roots_feature",
             "minecraft:crimson_roots_soul_sand_valley_feature",
+            "minecraft:crimson_roots_warped_feature",
             "minecraft:deep_cold_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_warm_ocean_after_surface_seagrass_feature_rules",
@@ -16168,7 +16184,7 @@
             ],
             "animation.player.crawl": [],
             "animation.player.crawl.legs": [],
-            "animation.player.crawl.right_arm": [],
+            "animation.player.crawl.no_right_arm": [],
             "animation.player.crossbow_equipped": [
                 "minecraft:player<third_person_crossbow_equipped>",
             ],
@@ -16277,7 +16293,7 @@
             ],
             "animation.player.swim.legs.single": [],
             "animation.player.swim.legs.stationary": [],
-            "animation.player.swim.right_arm": [],
+            "animation.player.swim.no_right_arm": [],
             "animation.polarbear.baby_transform": [
                 "minecraft:polar_bear<baby_transform>",
             ],
@@ -16428,7 +16444,6 @@
             "animation.spear.held_first_person": [],
             "animation.spear.held_third_person": [],
             "animation.spear.hit": [],
-            "animation.spear.use_sound": [],
             "animation.spider.default_leg_pose": [
                 "minecraft:cave_spider<default_leg_pose>",
                 "minecraft:spider<default_leg_pose>",
@@ -17201,7 +17216,6 @@
             ],
             "controller.animation.spear.held": [],
             "controller.animation.spear.hit": [],
-            "controller.animation.spear.sounds": [],
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
@@ -17984,6 +17998,9 @@
             ],
             "minecraft:ageable_set_baby": [
                 "minecraft:wolf",
+            ],
+            "minecraft:all_riders_dismounted": [
+                "minecraft:camel_husk",
             ],
             "minecraft:ambient_night": [
                 "minecraft:fox",
@@ -18888,6 +18905,9 @@
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
             ],
+            "minecraft:rider_mounted": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:roll_up": [
                 "minecraft:armadillo",
             ],
@@ -19042,9 +19062,6 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
-            ],
-            "minecraft:spawn_wild": [
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -20501,6 +20518,11 @@
                     "type": "bool",
                 },
             },
+            "minecraft:has_rider_mounted": {
+                "minecraft:camel_husk": {
+                    "type": "bool",
+                },
+            },
             "minecraft:is_armorable": {
                 "minecraft:wolf": {
                     "type": "bool",
@@ -21570,11 +21592,13 @@
             "mob.mooshroom.eat",
             "mob.mooshroom.suspicious_milk",
             "mob.nautilus.ambient",
+            "mob.nautilus.armor_unequip",
             "mob.nautilus.dash",
             "mob.nautilus.dash_ready",
             "mob.nautilus.death",
             "mob.nautilus.eat",
             "mob.nautilus.hurt",
+            "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -22591,6 +22615,7 @@
             "entities/guardian",
             "entities/hoglin",
             "entities/horse",
+            "entities/husk_rider",
             "entities/iron_golem",
             "entities/llama",
             "entities/magma_cube",
@@ -22955,8 +22980,10 @@
             "minecraft:cold_taiga_after_surface_sweet_berry_bush_feature_rules",
             "minecraft:cold_taiga_first_sweet_berry_bush_feature",
             "minecraft:crimson_feature",
+            "minecraft:crimson_fungus_warped_feature",
             "minecraft:crimson_roots_feature",
             "minecraft:crimson_roots_soul_sand_valley_feature",
+            "minecraft:crimson_roots_warped_feature",
             "minecraft:deep_cold_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_ocean_after_surface_seagrass_feature_rules",
             "minecraft:deep_warm_ocean_after_surface_seagrass_feature_rules",
@@ -26408,7 +26435,7 @@
             ],
             "animation.player.crawl": [],
             "animation.player.crawl.legs": [],
-            "animation.player.crawl.right_arm": [],
+            "animation.player.crawl.no_right_arm": [],
             "animation.player.crossbow_equipped": [
                 "minecraft:player<third_person_crossbow_equipped>",
             ],
@@ -26517,7 +26544,7 @@
             ],
             "animation.player.swim.legs.single": [],
             "animation.player.swim.legs.stationary": [],
-            "animation.player.swim.right_arm": [],
+            "animation.player.swim.no_right_arm": [],
             "animation.polarbear.baby_transform": [
                 "minecraft:polar_bear<baby_transform>",
             ],
@@ -26668,7 +26695,6 @@
             "animation.spear.held_first_person": [],
             "animation.spear.held_third_person": [],
             "animation.spear.hit": [],
-            "animation.spear.use_sound": [],
             "animation.spider.default_leg_pose": [
                 "minecraft:cave_spider<default_leg_pose>",
                 "minecraft:spider<default_leg_pose>",
@@ -27441,7 +27467,6 @@
             ],
             "controller.animation.spear.held": [],
             "controller.animation.spear.hit": [],
-            "controller.animation.spear.sounds": [],
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
@@ -28220,6 +28245,9 @@
             ],
             "minecraft:ageable_set_baby": [
                 "minecraft:wolf",
+            ],
+            "minecraft:all_riders_dismounted": [
+                "minecraft:camel_husk",
             ],
             "minecraft:ambient_night": [
                 "minecraft:fox",
@@ -29124,6 +29152,9 @@
             "minecraft:resupply_trades": [
                 "minecraft:villager_v2",
             ],
+            "minecraft:rider_mounted": [
+                "minecraft:camel_husk",
+            ],
             "minecraft:roll_up": [
                 "minecraft:armadillo",
             ],
@@ -29278,9 +29309,6 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
-            ],
-            "minecraft:spawn_wild": [
-                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -30734,6 +30762,11 @@
             },
             "minecraft:has_nectar": {
                 "minecraft:bee": {
+                    "type": "bool",
+                },
+            },
+            "minecraft:has_rider_mounted": {
+                "minecraft:camel_husk": {
                     "type": "bool",
                 },
             },
