@@ -367,7 +367,7 @@ const Extractors = [
     {
         name: 'enchantment-check',
         timeout: 10000,
-        async extract({ frame, session }) {
+        async extract({ frame }) {
             const enchantmentSlots = await wrapEvaluate(frame, () => {
                 const enchantmentSlotNames = [];
                 for (const name of Object.getOwnPropertyNames(Minecraft.EnchantmentSlot)) {
@@ -377,7 +377,6 @@ const Extractors = [
             });
             if (enchantmentSlots.length === 0) {
                 log(`[Warning] EnchantmentSlot = {}, please restart level`);
-                session.connection.socket.destroy();
                 throw new Error(`Invalid environment: EnchantmentSlot has no member`);
             }
         }
