@@ -55,24 +55,13 @@ jobs:
         yarn install
         yarn build
 
-    - name: Deploy to self-hosted site
-      if: github.repository == 'XeroAlpha/caidlist'
-      run: |
-        pushd ${{ github.workspace }}/web/dist
-        tar -cvzf ${{ github.workspace }}/idlist.tar.gz *
-        popd
-        echo "${{ secrets.SSH_KEY }}" > ${{ github.workspace }}/key.txt
-        chmod 400 ${{ github.workspace }}/key.txt
-        scp -q -P ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i ${{ github.workspace }}/key.txt ${{ github.workspace }}/idlist.tar.gz "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}":/tmp/idlist.tar.gz
-        ssh -q -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no -i ${{ github.workspace }}/key.txt "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" "rm -rf ${{ secrets.TARGET_PATH }}/* && tar -xvzf /tmp/idlist.tar.gz -C ${{ secrets.TARGET_PATH }} && rm -f /tmp/idlist.tar.gz"
-        rm ${{ github.workspace }}/key.txt
-
     - name: Setup GitHub Pages
       id: pages_setup
       uses: actions/configure-pages@v4
       continue-on-error: true
 
     - name: Upload artifact to GitHub pages
+      id: pages_upload
       if: ${{ steps.pages_setup.outcome == 'success' }}
       uses: actions/upload-pages-artifact@v3
       with:
@@ -82,3 +71,11 @@ jobs:
       if: ${{ steps.pages_setup.outcome == 'success' }}
       id: deployment
       uses: actions/deploy-pages@v4
+
+    - name: Notify
+      if: steps.pages_setup.outcome == 'success' && github.repository == 'XeroAlpha/caidlist'
+      run: |
+        curl \
+          -H "Title: ${{ secrets.NTFY_TITLE }}" \
+          -d "${{ steps.pages_upload.outputs.artifact_id }}" \
+          ${{ secrets.NTFY_URL }}
