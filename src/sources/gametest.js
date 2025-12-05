@@ -573,7 +573,7 @@ const Extractors = [
                 for (const blockType of blockTypes) {
                     const states = [];
                     const invalidStates = [];
-                    const { id: blockId } = blockType;
+                    const { id: blockId, localizationKey: typeLocalizationKey } = blockType;
                     const basePermutation = Minecraft.BlockPermutation.resolve(blockId);
                     const properties = Object.entries(basePermutation.getAllStates()).map(([name, defaultValue]) => ({
                         name,
@@ -635,12 +635,14 @@ const Extractors = [
                                 liquidInteractPattern[liquidType] =
                                     interactPattern.length > 0 ? interactPattern.join(', ') : 'none';
                             }
+                            const localizationKey = permutation.localizationKey;
                             states.push({
                                 state,
                                 tags,
                                 itemId,
                                 canContainLiquid,
-                                liquidInteractPattern
+                                liquidInteractPattern,
+                                localizationKey
                             });
                         }
                         let cursor = loopFields.length - 1;
@@ -659,7 +661,8 @@ const Extractors = [
                     blockInfo[blockType.id] = {
                         properties,
                         states,
-                        invalidStates
+                        invalidStates,
+                        localizationKey: typeLocalizationKey
                     };
                 }
                 const blockStates = Minecraft.BlockStates.getAll();
@@ -690,9 +693,10 @@ const Extractors = [
                 setStatus(
                     `[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`
                 );
-                const { properties, states, invalidStates } = blockType;
+                const { properties, states, invalidStates, localizationKey: typeLocalizationKey } = blockType;
                 const tagMap = {};
                 const itemIdMap = {};
+                const localizationKeyMap = {};
                 const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
                 const aliasStates = findAliasState(stateValues, invalidStates);
                 const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
@@ -735,6 +739,13 @@ const Extractors = [
                         }
                         itemIdStates.push(state.state);
                     }
+                    {
+                        let localizationKeyStates = localizationKeyMap[state.localizationKey];
+                        if (!localizationKeyStates) {
+                            localizationKeyStates = localizationKeyMap[state.localizationKey] = [];
+                        }
+                        localizationKeyStates.push(state.state);
+                    }
                     for (const liquidType of state.canContainLiquid) {
                         let containLiquidStates = containLiquidStateMap[liquidType];
                         if (!containLiquidStates) {
@@ -758,12 +769,23 @@ const Extractors = [
                 for (const key of itemIds) {
                     itemIdMap[key] = simplifyStateAndCheckTrimmed(stateValues, itemIdMap[key], simplifiedInvalidStates);
                 }
+                const localizationKeys = Object.keys(localizationKeyMap);
+                for (const key of localizationKeys) {
+                    localizationKeyMap[key] = simplifyStateAndCheckTrimmed(
+                        stateValues,
+                        localizationKeyMap[key],
+                        simplifiedInvalidStates
+                    );
+                }
+                const localizationKey = localizationKeys.length > 1 ? localizationKeyMap : localizationKeys[0];
                 blocks[blockId] = {
                     properties,
                     aliasStates: aliasStates.length > 0 ? aliasStates : undefined,
                     validStateOverrides: Object.keys(validStateOverrides).length > 0 ? validStateOverrides : undefined,
                     invalidStates: removeAliasStates(filteredInvalidStates, aliasStates),
-                    itemId: itemIds.length > 1 ? itemIdMap : itemIds[0]
+                    itemId: itemIds.length > 1 ? itemIdMap : itemIds[0],
+                    localizationKey,
+                    defaultLocalizationKey: localizationKey !== typeLocalizationKey ? typeLocalizationKey : undefined
                 };
                 for (const [tagName, tagStates] of Object.entries(tagMap)) {
                     let tagInfo = blockTags[tagName];
@@ -832,6 +854,7 @@ const Extractors = [
             await wrapEvaluate(frame, () => {
                 const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
                 const enchantments = globalThis.__item_extract_enchantments;
+                /** @param {import("@minecraft/server").ItemType} itemType */
                 globalThis.__item_extract_dump = (itemType) => {
                     if (itemType.id === 'minecraft:air') {
                         return [itemType.id, null];
@@ -902,9 +925,12 @@ const Extractors = [
                     });
                     const maxAmountDefault = itemStack.isStackable ? 64 : 1;
                     const defaultWeight = 64 / itemStack.maxAmount;
+                    const typeLocalizationKey = itemType.localizationKey;
                     return [
                         itemType.id,
                         {
+                            typeLocalizationKey:
+                                itemStack.localizationKey !== typeLocalizationKey ? typeLocalizationKey : undefined,
                             localizationKey: itemStack.localizationKey,
                             unstackable: itemStack.isStackable ? undefined : true,
                             maxAmount: itemStack.maxAmount !== maxAmountDefault ? itemStack.maxAmount : undefined,
@@ -1021,11 +1047,13 @@ const Extractors = [
             const EntityInfoList = await wrapEvaluate(frame, () => {
                 const result = {};
                 for (const entityType of Minecraft.EntityTypes.getAll()) {
-                    result[entityType.id] = {};
+                    result[entityType.id] = {
+                        localizationKey: entityType.localizationKey
+                    };
                 }
                 return result;
             });
-            target.entities = Object.keys(EntityInfoList).sort();
+            target.entities = sortObjectKey(EntityInfoList);
         }
     },
     {
@@ -1067,11 +1095,27 @@ const Extractors = [
             const BiomeList = await wrapEvaluate(frame, () => {
                 const result = {};
                 for (const biomeType of Minecraft.BiomeTypes.getAll()) {
-                    result[biomeType.id] = {};
+                    result[biomeType.id] = {
+                        tags: biomeType.getTags()
+                    };
                 }
                 return result;
             });
-            target.biomes = Object.keys(BiomeList).sort();
+            const biomeTags = {};
+            for (const [biomeId, biomeInfo] of Object.entries(BiomeList)) {
+                for (const biomeTag of biomeInfo.tags) {
+                    let biomeIds = biomeTags[biomeTag];
+                    if (!biomeIds) {
+                        biomeIds = biomeTags[biomeTag] = [];
+                    }
+                    biomeIds.push(biomeId);
+                }
+            }
+            for (const [, biomeIds] of Object.entries(biomeTags)) {
+                biomeIds.sort();
+            }
+            target.biomes = sortObjectKey(BiomeList);
+            target.biomeTags = sortObjectKey(biomeTags);
         }
     },
     {

@@ -690,7 +690,7 @@ async function generateGameTestOutputFiles(cx) {
     const blockIds = Object.keys(ids.blocks);
     const itemIds = Object.keys(ids.items);
     const itemIdsExclusive = itemIds.filter((e) => !blockIds.includes(e) || removePrefix(e) in userTranslation.item);
-    const entityIds = ids.entities;
+    const entityIds = Object.keys(ids.entities);
     matchTranslations({
         ...commonOptions,
         name: 'block',

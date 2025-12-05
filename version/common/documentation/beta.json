@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.21.130.28",
-    "__COMMITHASH__": "91e35083dac2c918c61daa145947cd74321bd3ef",
-    "__MESSAGE__": "v1.21.130.28-preview",
+    "__VERSION__": "1.26.0.23",
+    "__COMMITHASH__": "4977f3398f74ea3a49f1a238c7883fa51ca9f69c",
+    "__MESSAGE__": "v1.26.0.23-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1397,7 +1397,7 @@
                                     "name": "minecraft:behavior.defend_trusted_target",
                                 },
                                 {
-                                    "name": "minecraft:behavior.defend_village_target",
+                                    "name": "minecraft:behavior.defend_village_target (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.delayed_attack",
@@ -1517,7 +1517,7 @@
                                     "name": "minecraft:behavior.go_home",
                                 },
                                 {
-                                    "name": "minecraft:behavior.guardian_attack",
+                                    "name": "minecraft:behavior.guardian_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.harvest_farm_block",
@@ -1619,10 +1619,10 @@
                                     "name": "minecraft:behavior.move_to_water",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_towards_dwelling_restriction",
+                                    "name": "minecraft:behavior.move_towards_dwelling_restriction (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_towards_home_restriction",
+                                    "name": "minecraft:behavior.move_towards_home_restriction (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.move_towards_target",
@@ -1631,7 +1631,7 @@
                                     "name": "minecraft:behavior.nap",
                                 },
                                 {
-                                    "name": "minecraft:behavior.nearest_attackable_target",
+                                    "name": "minecraft:behavior.nearest_attackable_target (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.nearest_prioritized_attackable_target",
@@ -1844,13 +1844,13 @@
                                     "name": "minecraft:behavior.tempt",
                                 },
                                 {
-                                    "name": "minecraft:behavior.timer_flag_1",
+                                    "name": "minecraft:behavior.timer_flag_1 (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.timer_flag_2",
+                                    "name": "minecraft:behavior.timer_flag_2 (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.timer_flag_3",
+                                    "name": "minecraft:behavior.timer_flag_3 (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.trade_interest",
@@ -5118,6 +5118,12 @@
                             "defaultValue": "",
                             "description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Also controls the directions in which a block can stop liquid flowing into it if `no_reaction` is set for the `on_liquid_touches` field. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
                         },
+                        {
+                            "name": "use_liquid_clipping",
+                            "type": "Boolean",
+                            "defaultValue": "false",
+                            "description": "Whether this block uses the collider to visually clip the liquid.",
+                        },
                     ],
                 },
                 {
@@ -6414,7 +6420,7 @@
                 },
             ],
         },
-        "minecraft:behavior.defend_village_target": {
+        "minecraft:behavior.defend_village_target (See JSON Schema since 1.26.0)": {
             "description": "Allows the entity to stay in a village and defend the village from aggressors. If a player is in bad standing with the village this goal will cause the entity to attack the player regardless of filter conditions.",
             "children": [
                 {
@@ -7803,7 +7809,7 @@
                 },
             ],
         },
-        "minecraft:behavior.guardian_attack": {
+        "minecraft:behavior.guardian_attack (See JSON Schema since 1.26.0)": {
             "description": "Allows this entity to use a laser beam attack. Can only be used by Guardians and Elder Guardians.",
             "children": [
                 {
@@ -9308,7 +9314,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_towards_dwelling_restriction": {
+        "minecraft:behavior.move_towards_dwelling_restriction (See JSON Schema since 1.26.0)": {
             "description": "Allows entities with the \"minecraft:dweller\" component to move toward their Village area that the entity should be restricted to.",
             "children": [
                 {
@@ -9319,7 +9325,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_towards_home_restriction": {
+        "minecraft:behavior.move_towards_home_restriction (See JSON Schema since 1.26.0)": {
             "description": "Allows entities with a \"minecraft:home\" component to move towards their home position.",
             "children": [
                 {
@@ -9370,7 +9376,7 @@
                 },
             ],
         },
-        "minecraft:behavior.nearest_attackable_target": {
+        "minecraft:behavior.nearest_attackable_target (See JSON Schema since 1.26.0)": {
             "description": "Allows an entity to attack the closest target within a given subset of specific target types.",
             "children": [
                 {
@@ -12135,26 +12141,26 @@
                 },
             ],
         },
-        "minecraft:behavior.timer_flag_1": {
+        "minecraft:behavior.timer_flag_1 (See JSON Schema since 1.26.0)": {
             "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_1 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal cooldown range in seconds. If specified, the cooldown will have to elapse even before the goal can be selected for the first time.",
                 },
                 {
                     "name": "duration_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal duration range in seconds.",
                 },
                 {
                     "name": "on_end",
                     "type": "Trigger",
                     "defaultValue": "",
-                    "description": "Event(s) to run when the goal end.",
+                    "description": "Event(s) to run when the goal ends.",
                 },
                 {
                     "name": "on_start",
@@ -12164,26 +12170,26 @@
                 },
             ],
         },
-        "minecraft:behavior.timer_flag_2": {
+        "minecraft:behavior.timer_flag_2 (See JSON Schema since 1.26.0)": {
             "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_2 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal cooldown range in seconds. If specified, the cooldown will have to elapse even before the goal can be selected for the first time.",
                 },
                 {
                     "name": "duration_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal duration range in seconds.",
                 },
                 {
                     "name": "on_end",
                     "type": "Trigger",
                     "defaultValue": "",
-                    "description": "Event(s) to run when the goal end.",
+                    "description": "Event(s) to run when the goal ends.",
                 },
                 {
                     "name": "on_start",
@@ -12193,26 +12199,26 @@
                 },
             ],
         },
-        "minecraft:behavior.timer_flag_3": {
+        "minecraft:behavior.timer_flag_3 (See JSON Schema since 1.26.0)": {
             "description": "Fires an event when this behavior starts, then waits for a duration before stopping. When stopping due to that timeout or due to being interrupted by another behavior, fires another event. query.timer_flag_3 will return 1.0 on both the client and server when this behavior is running, and 0.0 otherwise.",
             "children": [
                 {
                     "name": "cooldown_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[10.000000, 10.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal cooldown range in seconds. If specified, the cooldown will have to elapse even before the goal can be selected for the first time.",
                 },
                 {
                     "name": "duration_range",
                     "type": "Range [a, b]",
-                    "defaultValue": "[2.000000, 2.000000]",
+                    "defaultValue": "[0, 0]",
                     "description": "Goal duration range in seconds.",
                 },
                 {
                     "name": "on_end",
                     "type": "Trigger",
                     "defaultValue": "",
-                    "description": "Event(s) to run when the goal end.",
+                    "description": "Event(s) to run when the goal ends.",
                 },
                 {
                     "name": "on_start",
@@ -14585,7 +14591,7 @@
                 {
                     "name": "swing",
                     "type": "Boolean",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "description": "If true, the player will do the 'swing' animation when interacting with this entity.",
                 },
                 {

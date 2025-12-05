@@ -164,7 +164,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.8.0', '1.10.0']]
+        versionsGroups: [['1.8.0', '1.10.0', '1.26.0']]
     },
     {
         name: 'geometry',
@@ -357,7 +357,8 @@ const entryAnalyzer = [
                 '1.21.110',
                 '1.21.12',
                 '1.21.120',
-                '1.21.130'
+                '1.21.130',
+                '1.26.0'
             ]
         ]
     },
