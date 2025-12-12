@@ -48,6 +48,32 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:connection_rule",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Defines whether other blocks such as fences, walls, bars, and glass panes are allowed to connect to this block.",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "accepts_connections_from",
+                                                    "Type": "String",
+                                                    "Default Value": "all",
+                                                    "Description": "The type of block allowed to connect to this block. Currently, the options are: `all` (default), `only_fences`, and `none`. Note that the `only_fences` option allows connections from all Vanilla fences excluding NetherBrick.",
+                                                },
+                                                {
+                                                    "Name": "enabled_directions",
+                                                    "Type": "Array",
+                                                    "Default Value": "['north', 'south', 'east', 'west']",
+                                                    "Description": "The cardinal directions that connection is enabled for: `north`, `south`, `east`, and `west`. All directions are enabled by default. Note that if `none` is specified for `accepts_connections_from`, this field will not be used.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
                                     "Name": "minecraft:crafting_table",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -670,7 +696,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Defines the support shape of the block. Currently only allows for blocks to have the same shape as a Vanilla fence and Vanilla stair. To work with custom stairs, requires the use of `minecraft:vertical_half` and `minecraft:cardinal_direction` or `minecraft:facing_direction` which can be set through the `minecraft:placement_direction` block trait. Custom blocks without this component will default to unit cube support.",
-                                        "Experimental toggles required: Upcoming Creator Features",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -1448,5 +1474,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "0a19a818b6a91fbdb1877ebeea80e809c51be6e0",
+    "__OBJECTHASH__": "0266a617187d59f4d0800bfd6465bc77632d26f3",
 }

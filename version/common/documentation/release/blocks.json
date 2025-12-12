@@ -35,13 +35,13 @@
                                                     "Name": "origin",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                                                 },
                                                 {
                                                     "Name": "size",
                                                     "Type": "Vector [a, b, c]",
-                                                    "Default Value": "[16.0, 16.0, 16.0]",
-                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 16, 8), inclusive.",
+                                                    "Default Value": "[16.0, 24.0, 16.0]",
+                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
                                                 },
                                             ],
                                         },
@@ -368,12 +368,6 @@
                                                             "Description": "Should this material have ambient occlusion applied when lighting? If true, shadows will be created around and underneath the block. Optionally can be constructed with float to control exponent applied to ao value after lighting.",
                                                         },
                                                         {
-                                                            "Name": "emissive",
-                                                            "Type": "Boolean",
-                                                            "Default Value": "false",
-                                                            "Description": "Should this material be rendered as emissive? Requires 'format_version' >= 1.21.120.",
-                                                        },
-                                                        {
                                                             "Name": "face_dimming",
                                                             "Type": "Boolean",
                                                             "Default Value": "true",
@@ -498,6 +492,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Component that determines how the block will interact with rain and snow",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.21.120)",
                                         {
                                             "section": "precipitation_behavior",
                                             "content": [
@@ -664,6 +659,26 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:support",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Defines the support shape of the block. Currently only allows for blocks to have the same shape as a Vanilla fence and Vanilla stair. To work with custom stairs, requires the use of `minecraft:vertical_half` and `minecraft:cardinal_direction` or `minecraft:facing_direction` which can be set through the `minecraft:placement_direction` block trait. Custom blocks without this component will default to unit cube support.",
+                                        "Experimental toggles required: Upcoming Creator Features",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "shape",
+                                                    "Type": "String",
+                                                    "Default Value": "",
+                                                    "Description": "Required field. The type of support shape for this block. Currently, the options are: `fence` and `stair`.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
                                     "Name": "minecraft:transformation",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -739,7 +754,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.120\",",
+                                        "  \"format_version\": \"1.21.130\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1427,5 +1442,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "a6d9d35a537ae5432331369c07181311bd04ecb8",
+    "__OBJECTHASH__": "588a86cbb6ec27869bf34969597357db5fdbb334",
 }

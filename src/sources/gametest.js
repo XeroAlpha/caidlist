@@ -518,6 +518,12 @@ const Extractors = [
             });
             delete tree.enumerableProperties.totalTicks;
             delete flatMap.totalTicks;
+            const seedValue =
+                tree.enumerableProperties.Minecraft?.value?.enumerableProperties?.world?.value?.enumerableProperties
+                    ?.seed?.value;
+            if (seedValue) {
+                seedValue.value = '(seed)';
+            }
             target.scopeTree = tree;
             target.scopeKeys = Object.keys(flatMap).sort();
         }

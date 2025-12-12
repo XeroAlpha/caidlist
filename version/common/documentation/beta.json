@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.0.23",
-    "__COMMITHASH__": "4977f3398f74ea3a49f1a238c7883fa51ca9f69c",
-    "__MESSAGE__": "v1.26.0.23-preview",
+    "__VERSION__": "1.26.0.25",
+    "__COMMITHASH__": "398d0299c6372f84cbfb5bb8b0d4528b37eb2033",
+    "__MESSAGE__": "v1.26.0.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -312,6 +312,9 @@
                         },
                         {
                             "name": "minecraft:the_end",
+                        },
+                        {
+                            "name": "minecraft:village_type",
                         },
                     ],
                 },
@@ -4922,7 +4925,6 @@
         "campfire": "",
         "charging": "",
         "contact": "",
-        "dehydration": "",
         "drowning": "",
         "entity_attack": "",
         "entity_explosion": "",
@@ -4982,6 +4984,26 @@
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[16.0, 24.0, 16.0]",
                             "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
+                        },
+                    ],
+                },
+                {
+                    "name": "minecraft:connection_rule",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "Defines whether other blocks such as fences, walls, bars, and glass panes are allowed to connect to this block.",
+                    "children": [
+                        {
+                            "name": "accepts_connections_from",
+                            "type": "String",
+                            "defaultValue": "all",
+                            "description": "The type of block allowed to connect to this block. Currently, the options are: `all` (default), `only_fences`, and `none`. Note that the `only_fences` option allows connections from all Vanilla fences excluding NetherBrick.",
+                        },
+                        {
+                            "name": "enabled_directions",
+                            "type": "Array",
+                            "defaultValue": "['north', 'south', 'east', 'west']",
+                            "description": "The cardinal directions that connection is enabled for: `north`, `south`, `east`, and `west`. All directions are enabled by default. Note that if `none` is specified for `accepts_connections_from`, this field will not be used.",
                         },
                     ],
                 },
@@ -13041,12 +13063,6 @@
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, this entity can breathe in water.",
-                },
-                {
-                    "name": "can_dehydrate",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, water-only breathers will take Dehydration damage when out of water.",
                 },
                 {
                     "name": "generates_bubbles",

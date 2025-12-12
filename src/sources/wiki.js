@@ -25,7 +25,7 @@ const sources = {
                 .json();
             return res.query.tokens.csrftoken;
         },
-        async requestScribuntoConsole(title, content, question, token) {
+        async execScribuntoConsole(title, content, question, token) {
             const res = await got
                 .post('https://zh.minecraft.wiki/api.php', {
                     form: {
@@ -39,7 +39,11 @@ const sources = {
                     }
                 })
                 .json();
-            return res;
+            if (res.type === 'error') {
+                throw new Error(res.message);
+            } else {
+                return res.return;
+            }
         }
     },
     bedw: {
@@ -62,13 +66,11 @@ const resolvers = {
         const result = parseLSON(match[1]);
         return result;
     },
-    mcwzhExec: async (title, source) => {
+    mcwzh: async (title, source) => {
         const content = (await source.getRaw(title)).toString();
         const csrfToken = await source.getCsrfTokens();
-        const consoleResult = await source.requestScribuntoConsole(title, content, '=mw.text.jsonEncode(p)', csrfToken);
-        const json = JSON.parse(consoleResult.return);
-        // 万恶之源：https://zh.minecraft.wiki/w/Module:Autolink?diff=prev&oldid=1060917
-        const convert = (obj) => {
+        const json = JSON.parse(await source.execScribuntoConsole(title, content, '=mw.text.jsonEncode(p)', csrfToken));
+        const simplify = (obj) => {
             if (Array.isArray(obj)) {
                 return obj;
             }
@@ -79,9 +81,9 @@ const resolvers = {
                 }
                 if (typeof value === 'object' && value !== null) {
                     if (value.rawKey) {
-                        newObj[value.rawKey] = convert(value);
+                        newObj[value.rawKey] = simplify(value);
                     } else {
-                        newObj[key] = convert(value);
+                        newObj[key] = simplify(value);
                     }
                 } else {
                     newObj[key] = value;
@@ -102,7 +104,52 @@ const resolvers = {
             }
             return sortObjectKey(newObj);
         };
-        return convert(json);
+        const zhConversionHandlerMap = new Map();
+        const zhConvert = (obj) => {
+            for (const [key, value] of Object.entries(obj)) {
+                if (typeof value === 'object' && value !== null) {
+                    zhConvert(value);
+                } else if (typeof value === 'string') {
+                    let conversionHandlers = zhConversionHandlerMap.get(value);
+                    if (!conversionHandlers) {
+                        conversionHandlers = [];
+                        zhConversionHandlerMap.set(value, conversionHandlers);
+                    }
+                    conversionHandlers.push({ obj, key });
+                }
+            }
+            return obj;
+        };
+        const map = zhConvert(simplify(json));
+        const zhConversionKeys = [...zhConversionHandlerMap.keys()];
+        const zhConversionCode = `function(input)
+            local zhconv = require('Module:ZhConversion');
+            local result = {};
+            for i, item in ipairs(input) do
+                result[i] = zhconv.to_cn(item);
+            end
+            return result;
+        end`
+            .split('\n')
+            .map((l) => l.trim())
+            .join(' ');
+        const zhConversionInput = zhConversionKeys.map((e) => JSON.stringify(e)).join(',');
+        const zhConversionResult = JSON.parse(
+            await source.execScribuntoConsole(
+                title,
+                content,
+                `=mw.text.jsonEncode((${zhConversionCode})({${zhConversionInput}}))`,
+                csrfToken
+            )
+        );
+        for (const [index, value] of zhConversionKeys.entries()) {
+            const newValue = zhConversionResult[index];
+            const conversionHandlers = zhConversionHandlerMap.get(value);
+            for (const { obj, key } of conversionHandlers) {
+                obj[key] = newValue;
+            }
+        }
+        return map;
     }
 };
 
@@ -120,55 +167,55 @@ const dataPages = [
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Block',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'BlockSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Item',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'ItemSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Entity',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'EntitySprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Biome',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'BiomeSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Effect',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'EffectSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Enchantment',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'EnchantmentSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Environment',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'EnvSprite'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Other',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         target: 'Other'
     },
     {
         source: 'mcwzh',
         title: 'Module:Autolink/Exclusive',
-        resolver: 'mcwzhExec',
+        resolver: 'mcwzh',
         prefix: 'Exclusive'
     }
     // {

@@ -1253,6 +1253,18 @@
                                     "Description": "Returns the total number of active particles of the callee's particle effect type.",
                                 },
                                 {
+                                    "Name": "query.entity_biome_has_all_tags",
+                                    "Description": "Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if all of the tag names match. Only supported in resource packs (client-side).",
+                                },
+                                {
+                                    "Name": "query.entity_biome_has_any_identifier",
+                                    "Description": "Compares the biome the entity is standing in with one or more identifier names, and returns either 0 or 1 based on if any of the identifier names match. Only supported in resource packs (client-side).",
+                                },
+                                {
+                                    "Name": "query.entity_biome_has_any_tags",
+                                    "Description": "Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if any of the tag names match. Only supported in resource packs (client-side).",
+                                },
+                                {
                                     "Name": "query.equipment_count",
                                     "Description": "Returns the number of equipped armor pieces for an actor from 0 to 5, not counting items held in hands. (To query for hand slots, use query.is_item_equipped or query.is_item_name_any).",
                                 },
@@ -1307,6 +1319,10 @@
                                 {
                                     "Name": "query.get_name",
                                     "Description": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
+                                },
+                                {
+                                    "Name": "query.get_pack_setting",
+                                    "Description": "Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
                                 },
                                 {
                                     "Name": "query.get_root_locator_offset",
@@ -1693,6 +1709,14 @@
                                     "Description": "Takes one or more arguments. Returns whether the root actor identifier is any of the specified strings. A preferred query to query.owner_identifier, as it can be adjusted by Mojang to avoid breaking content if names are changed.",
                                 },
                                 {
+                                    "Name": "query.is_pack_setting_enabled",
+                                    "Description": "Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
+                                },
+                                {
+                                    "Name": "query.is_pack_setting_selected",
+                                    "Description": "Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
+                                },
+                                {
                                     "Name": "query.is_persona_or_premium_skin",
                                     "Description": "Returns 1.0 if the player has a persona or premium skin, else it returns 0.0.",
                                 },
@@ -1867,6 +1891,22 @@
                                 {
                                     "Name": "query.key_frame_lerp_time",
                                     "Description": "Returns the ratio between the previous and next key frames.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_damage_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"damage_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_delay",
+                                    "Description": "Returns the \"delay\" value from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_dismount_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"dismount_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+                                },
+                                {
+                                    "Name": "query.kinetic_weapon_knockback_duration",
+                                    "Description": "Returns the \"max_duration\" value of \"knockback_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
                                 },
                                 {
                                     "Name": "query.last_frame_time",
@@ -2153,6 +2193,10 @@
                                     "Description": "Returns the icon index of the experience orb.",
                                 },
                                 {
+                                    "Name": "query.ticks_since_last_kinetic_weapon_hit",
+                                    "Description": "Returns the number of ticks elapsed since the user last hit something while using a kinetic weapon. Returns -1.0 if no kinetic weapon is being used or if nothing has been hit yet. Hits that occur while the user is unloaded are not counted.",
+                                },
+                                {
                                     "Name": "query.time_of_day",
                                     "Description": "Returns the time of day (midnight=0.0, sunrise=0.25, noon=0.5, sunset=0.75) of the dimension the entity is in.",
                                 },
@@ -2228,37 +2272,7 @@
                     "name": "List of Experimental Entity Queries",
                     "id": "List of Experimental Entity Queries",
                     "level": 2,
-                    "content": [
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "query.entity_biome_has_all_tags",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if all of the tag names match. Only supported in resource packs (client-side).",
-                                },
-                                {
-                                    "Name": "query.entity_biome_has_any_identifier",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more identifier names, and returns either 0 or 1 based on if any of the identifier names match. Only supported in resource packs (client-side).",
-                                },
-                                {
-                                    "Name": "query.entity_biome_has_any_tags",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Compares the biome the entity is standing in with one or more tag names, and returns either 0 or 1 based on if any of the tag names match. Only supported in resource packs (client-side).",
-                                },
-                                {
-                                    "Name": "query.get_pack_setting",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
-                                },
-                                {
-                                    "Name": "query.is_pack_setting_enabled",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
-                                },
-                                {
-                                    "Name": "query.is_pack_setting_selected",
-                                    "Description": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
-                                },
-                            ],
-                        },
-                    ],
+                    "content": [],
                 },
             ],
         },
@@ -2349,5 +2363,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "2bd18bce46c784c03d2391545ac1beea121f9fa9",
+    "__OBJECTHASH__": "6106a173d5641a4ba14c830d207aed585424f8ee",
 }
