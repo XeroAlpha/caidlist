@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.0.25",
-    "__COMMITHASH__": "398d0299c6372f84cbfb5bb8b0d4528b37eb2033",
-    "__MESSAGE__": "v1.26.0.25-preview",
+    "__VERSION__": "1.26.0.27",
+    "__COMMITHASH__": "493f4ffc613f7335a2a7591971d6971f210aa049",
+    "__MESSAGE__": "v1.26.0.27-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1403,7 +1403,7 @@
                                     "name": "minecraft:behavior.defend_village_target (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.delayed_attack",
+                                    "name": "minecraft:behavior.delayed_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.dig (See JSON Schema since 1.21.120)",
@@ -1412,7 +1412,7 @@
                                     "name": "minecraft:behavior.door_interact",
                                 },
                                 {
-                                    "name": "minecraft:behavior.dragonchargeplayer",
+                                    "name": "minecraft:behavior.dragonchargeplayer (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.dragondeath",
@@ -1430,7 +1430,7 @@
                                     "name": "minecraft:behavior.dragonscanning",
                                 },
                                 {
-                                    "name": "minecraft:behavior.dragonstrafeplayer",
+                                    "name": "minecraft:behavior.dragonstrafeplayer (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.dragontakeoff",
@@ -1559,25 +1559,13 @@
                                     "name": "minecraft:behavior.leap_at_target",
                                 },
                                 {
-                                    "name": "minecraft:behavior.look_at_entity",
-                                },
-                                {
-                                    "name": "minecraft:behavior.look_at_player",
-                                },
-                                {
-                                    "name": "minecraft:behavior.look_at_target",
-                                },
-                                {
-                                    "name": "minecraft:behavior.look_at_trading_player",
-                                },
-                                {
                                     "name": "minecraft:behavior.make_love",
                                 },
                                 {
-                                    "name": "minecraft:behavior.melee_attack",
+                                    "name": "minecraft:behavior.melee_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.melee_box_attack",
+                                    "name": "minecraft:behavior.melee_box_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.mingle",
@@ -1805,7 +1793,7 @@
                                     "name": "minecraft:behavior.stay_while_sitting",
                                 },
                                 {
-                                    "name": "minecraft:behavior.stomp_attack",
+                                    "name": "minecraft:behavior.stomp_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
                                     "name": "minecraft:behavior.stomp_turtle_egg",
@@ -2202,6 +2190,9 @@
                                     "name": "minecraft:sittable",
                                 },
                                 {
+                                    "name": "minecraft:spawn_egg_interaction",
+                                },
+                                {
                                     "name": "minecraft:spawn_entity",
                                 },
                                 {
@@ -2432,6 +2423,9 @@
                                 },
                                 {
                                     "name": "minecraft:movement_sound_distance_offset",
+                                },
+                                {
+                                    "name": "minecraft:offspring",
                                 },
                                 {
                                     "name": "minecraft:push_through",
@@ -4794,7 +4788,7 @@
         "breeze": "0x00002956 (0x140)",
         "breeze_wind_charge_projectile": "0x04194445 (0x141)",
         "camel": "0x00005002 (0x138)",
-        "camel_husk": "0x00068504 (0x152)",
+        "camel_husk": "0x00070552 (0x152)",
         "cat": "0x00021323 (0x75)",
         "cave_spider": "0x00265000 (0x40)",
         "chalkboard": "0x00000078 (0x78)",
@@ -4875,7 +4869,7 @@
         "shulker_bullet": "0x04194380 (0x76)",
         "silverfish": "0x00264999 (0x39)",
         "skeleton": "0x01116962 (0x34)",
-        "skeleton_horse": "0x02186010 (0x26)",
+        "skeleton_horse": "0x02183962 (0x26)",
         "slime": "0x00002853 (0x37)",
         "small_fireball": "0x04194398 (0x94)",
         "sniffer": "0x00005003 (0x139)",
@@ -4912,8 +4906,8 @@
         "xp_orb": "0x00000069 (0x69)",
         "zoglin": "0x00068478 (0x126)",
         "zombie": "0x00199456 (0x32)",
-        "zombie_horse": "0x02186011 (0x27)",
-        "zombie_nautilus": "0x00076694 (0x150)",
+        "zombie_horse": "0x02183963 (0x27)",
+        "zombie_nautilus": "0x00074646 (0x150)",
         "zombie_pigman": "0x00068388 (0x36)",
         "zombie_villager": "0x00199468 (0x44)",
         "zombie_villager_v2": "0x00199540 (0x116)",
@@ -4977,13 +4971,13 @@
                             "name": "origin",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[-8.0, 0.0, -8.0]",
-                            "description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
+                            "description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
                         },
                         {
                             "name": "size",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[16.0, 24.0, 16.0]",
-                            "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
+                            "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
                         },
                     ],
                 },
@@ -5144,7 +5138,7 @@
                             "name": "use_liquid_clipping",
                             "type": "Boolean",
                             "defaultValue": "false",
-                            "description": "Whether this block uses the collider to visually clip the liquid.",
+                            "description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.",
                         },
                     ],
                 },
@@ -6495,7 +6489,7 @@
                 },
             ],
         },
-        "minecraft:behavior.delayed_attack": {
+        "minecraft:behavior.delayed_attack (See JSON Schema since 1.26.0)": {
             "description": "Allows an entity to attack, while also delaying the damage-dealt until a specific time in the attack animation.",
             "children": [
                 {
@@ -6679,7 +6673,7 @@
                 },
             ],
         },
-        "minecraft:behavior.dragonchargeplayer": {
+        "minecraft:behavior.dragonchargeplayer (See JSON Schema since 1.26.0)": {
             "description": "Allows this entity to attack a player by charging at them. The player is chosen by the \"minecraft:behavior.dragonscanning\". Can only be used by the Ender Dragon.",
             "children": [
                 {
@@ -6743,7 +6737,7 @@
                 },
             ],
         },
-        "minecraft:behavior.dragonstrafeplayer": {
+        "minecraft:behavior.dragonstrafeplayer (See JSON Schema since 1.26.0)": {
             "description": "Allows this entity to fly around looking for a player to shoot fireballs at. Can only be used by the Ender Dragon.",
             "children": [
                 {
@@ -8462,153 +8456,7 @@
                 },
             ],
         },
-        "minecraft:behavior.look_at_entity": {
-            "description": "Allows the mob to look at nearby entities.",
-            "children": [
-                {
-                    "name": "angle_of_view_horizontal",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
-                },
-                {
-                    "name": "angle_of_view_vertical",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
-                },
-                {
-                    "name": "filters",
-                    "type": "Minecraft Filter",
-                    "defaultValue": "",
-                    "description": "Filter to determine the conditions for this mob to look at the entity",
-                },
-                {
-                    "name": "look_distance",
-                    "type": "Decimal",
-                    "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at the nearest entity.",
-                },
-                {
-                    "name": "look_time",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the nearest entity.",
-                },
-                {
-                    "name": "probability",
-                    "type": "Decimal",
-                    "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
-                },
-            ],
-        },
-        "minecraft:behavior.look_at_player": {
-            "description": "Allows the mob to look at the player when the player is nearby.",
-            "children": [
-                {
-                    "name": "angle_of_view_horizontal",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
-                },
-                {
-                    "name": "angle_of_view_vertical",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
-                },
-                {
-                    "name": "look_distance",
-                    "type": "Decimal",
-                    "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at the nearest player.",
-                },
-                {
-                    "name": "look_time",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the nearest player.",
-                },
-                {
-                    "name": "probability",
-                    "type": "Decimal",
-                    "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
-                },
-            ],
-        },
-        "minecraft:behavior.look_at_target": {
-            "description": "Allows the mob to look at the entity they are targetting.",
-            "children": [
-                {
-                    "name": "angle_of_view_horizontal",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
-                },
-                {
-                    "name": "angle_of_view_vertical",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
-                },
-                {
-                    "name": "look_distance",
-                    "type": "Decimal",
-                    "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at this mob's current target.",
-                },
-                {
-                    "name": "look_time",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2, 4]",
-                    "description": "Time range to look at this mob's current target.",
-                },
-                {
-                    "name": "probability",
-                    "type": "Decimal",
-                    "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
-                },
-            ],
-        },
-        "minecraft:behavior.look_at_trading_player": {
-            "description": "Allows the mob to look at the player they are trading with.",
-            "children": [
-                {
-                    "name": "angle_of_view_horizontal",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the Y-axis (up-down).",
-                },
-                {
-                    "name": "angle_of_view_vertical",
-                    "type": "Integer",
-                    "defaultValue": "360",
-                    "description": "The angle in degrees that the mob can see in the X-axis (left-right).",
-                },
-                {
-                    "name": "look_distance",
-                    "type": "Decimal",
-                    "defaultValue": "8.0",
-                    "description": "The distance in blocks from which the entity will look at the player this mob is trading with.",
-                },
-                {
-                    "name": "look_time",
-                    "type": "Range [a, b]",
-                    "defaultValue": "[2, 4]",
-                    "description": "Time range to look at the player this mob is trading with.",
-                },
-                {
-                    "name": "probability",
-                    "type": "Decimal",
-                    "defaultValue": "0.02",
-                    "description": "The probability of looking at the target. A value of 1.00 is 100%.",
-                },
-            ],
-        },
-        "minecraft:behavior.melee_attack": {
+        "minecraft:behavior.melee_attack (See JSON Schema since 1.26.0)": {
             "description": "Allows an entity to deal damage through a melee attack.",
             "children": [
                 {
@@ -8739,7 +8587,7 @@
                 },
             ],
         },
-        "minecraft:behavior.melee_box_attack": {
+        "minecraft:behavior.melee_box_attack (See JSON Schema since 1.26.0)": {
             "description": "Allows an entity to deal damage through a melee attack with reach calculations based on bounding boxes.",
             "children": [
                 {
@@ -11441,7 +11289,7 @@
                 },
             ],
         },
-        "minecraft:behavior.stomp_attack": {
+        "minecraft:behavior.stomp_attack (See JSON Schema since 1.26.0)": {
             "description": "Allows an entity to attack using stomp AoE damage behavior.",
             "children": [
                 {
@@ -13097,19 +12945,13 @@
             ],
         },
         "minecraft:breedable": {
-            "description": "Defines the way an entity can get into the 'love' state.",
+            "description": "Defines the way an entity can get into the 'love' state. The entity should also have the \"minecraft:offspring\" component to define how the offspring is created if not using \"causes_pregnancy\". Runs the \"minecraft:entity_born\" event on the created offspring.",
             "children": [
                 {
                     "name": "allow_sitting",
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, entities can breed while sitting",
-                },
-                {
-                    "name": "blend_attributes",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If true, the entities will blend their attributes in the offspring after they breed.",
                 },
                 {
                     "name": "breed_cooldown",
@@ -13127,59 +12969,13 @@
                     "name": "breeds_with",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "The list of entity definitions that this entity can breed with.",
-                    "children": [
-                        {
-                            "name": "baby_type",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "The entity definition of this entity's babies.",
-                        },
-                        {
-                            "name": "breed_event",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "Event to run when this entity breeds.",
-                        },
-                        {
-                            "name": "mate_type",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "The entity definition of this entity's mate.",
-                        },
-                    ],
+                    "description": "The map of entity definitions this entity can breed with to breeding events that fire on breeding.",
                 },
                 {
                     "name": "causes_pregnancy",
                     "type": "Boolean",
                     "defaultValue": "false",
                     "description": "If true, the entity will become pregnant instead of spawning a baby.",
-                },
-                {
-                    "name": "deny_parents_variant",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "Determines how likely the baby of parents with the same variant will deny that variant and take a random variant within the given range instead.",
-                    "children": [
-                        {
-                            "name": "chance",
-                            "type": "Decimal",
-                            "defaultValue": "0",
-                            "description": "The percentage chance of denying the parents' variant.",
-                        },
-                        {
-                            "name": "max_variant",
-                            "type": "Integer",
-                            "defaultValue": "0",
-                            "description": "The inclusive maximum of the variant range.",
-                        },
-                        {
-                            "name": "min_variant",
-                            "type": "Integer",
-                            "defaultValue": "0",
-                            "description": "The inclusive minimum of the variant range.",
-                        },
-                    ],
                 },
                 {
                     "name": "environment_requirements",
@@ -13193,72 +12989,10 @@
                     "description": "Chance that up to 16 babies will spawn between 0.0 and 1.0, where 1.0 is 100%.",
                 },
                 {
-                    "name": "inherit_tamed",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If true, the babies will be automatically tamed if its parents are",
-                },
-                {
                     "name": "love_filters",
                     "type": "Minecraft Filter",
                     "defaultValue": "",
                     "description": "The filters to run when attempting to fall in love.",
-                },
-                {
-                    "name": "mutation_factor",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "Determines how likely the babies are to NOT inherit one of their parent's variances. Values are between 0.0 and 1.0, with a higher number meaning more likely to mutate.",
-                    "children": [
-                        {
-                            "name": "color",
-                            "type": "Decimal",
-                            "defaultValue": "0",
-                            "description": "The percentage chance of the offspring getting its color as if spawned rather than inheriting color from its parents.",
-                        },
-                        {
-                            "name": "extra_variant",
-                            "type": "Decimal",
-                            "defaultValue": "0",
-                            "description": "The percentage chance of a mutation on the entity's extra variant type.",
-                        },
-                        {
-                            "name": "variant",
-                            "type": "Decimal",
-                            "defaultValue": "0",
-                            "description": "The percentage chance of a mutation on the entity's variant type.",
-                        },
-                    ],
-                },
-                {
-                    "name": "mutation_strategy",
-                    "type": "String",
-                    "defaultValue": "none",
-                    "description": "Strategy used for mutating variants and extra variants for offspring. Current valid alternatives are 'random' and 'none'.",
-                },
-                {
-                    "name": "parent_centric_attribute_blending",
-                    "type": "List",
-                    "defaultValue": "",
-                    "description": "[EXPERIMENTAL] List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring.",
-                },
-                {
-                    "name": "property_inheritance",
-                    "type": "List",
-                    "defaultValue": "",
-                    "description": "List of Entity Properties that should be inherited from the parent entities and potentially mutated.",
-                },
-                {
-                    "name": "random_extra_variant_mutation_interval",
-                    "type": "Range [a, b]",
-                    "defaultValue": "0",
-                    "description": "Range used to determine random extra variant.",
-                },
-                {
-                    "name": "random_variant_mutation_interval",
-                    "type": "Range [a, b]",
-                    "defaultValue": "0",
-                    "description": "Range used to determine random variant.",
                 },
                 {
                     "name": "require_full_health",
@@ -14671,6 +14405,21 @@
                 },
             ],
         },
+        "minecraft:jump.dynamic": {
+            "description": "Defines a dynamic type jump control that will change jump properties based on the speed modifier of the mob. Requires `minecraft:movement.skip` to be used.",
+            "children": [
+                {
+                    "name": "fast_skip_data",
+                    "type": "",
+                    "defaultValue": "",
+                },
+                {
+                    "name": "regular_skip_data",
+                    "type": "",
+                    "defaultValue": "",
+                },
+            ],
+        },
         "minecraft:jump.static": {
             "description": "Gives the entity the ability to jump.",
             "children": [
@@ -14678,7 +14427,7 @@
                     "name": "jump_power",
                     "type": "Decimal",
                     "defaultValue": "0.42",
-                    "description": "The initial vertical velocity for the jump",
+                    "description": "The initial vertical velocity for the jump.",
                 },
             ],
         },
@@ -17266,6 +17015,105 @@
                 },
             ],
         },
+        "minecraft:offspring": {
+            "description": "Defines the way an entity can create a born offspring.",
+            "children": [
+                {
+                    "name": "blend_attributes",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the entities will blend their attributes in the offspring after they breed.",
+                },
+                {
+                    "name": "deny_parents_variant",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "Determines how likely the baby of parents with the same variant will deny that variant and take a random variant within the given range instead.",
+                    "children": [
+                        {
+                            "name": "chance",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "The percentage chance of denying the parents' variant.",
+                        },
+                        {
+                            "name": "max_variant",
+                            "type": "Integer",
+                            "defaultValue": "0",
+                            "description": "The inclusive maximum of the variant range.",
+                        },
+                        {
+                            "name": "min_variant",
+                            "type": "Integer",
+                            "defaultValue": "0",
+                            "description": "The inclusive minimum of the variant range.",
+                        },
+                    ],
+                },
+                {
+                    "name": "inherit_tamed",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If true, the babies will be automatically tamed if its parents are",
+                },
+                {
+                    "name": "mutation_factor",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "Determines how likely the babies are to NOT inherit one of their parent's variances. Values are between 0.0 and 1.0, with a higher number meaning more likely to mutate.",
+                    "children": [
+                        {
+                            "name": "color",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "The percentage chance of the offspring getting its color as if spawned rather than inheriting color from its parents.",
+                        },
+                        {
+                            "name": "extra_variant",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "The percentage chance of a mutation on the entity's extra variant type.",
+                        },
+                        {
+                            "name": "variant",
+                            "type": "Decimal",
+                            "defaultValue": "0",
+                            "description": "The percentage chance of a mutation on the entity's variant type.",
+                        },
+                    ],
+                },
+                {
+                    "name": "offspring_pairs",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "The map of entity to offspring definitions that this entity can make offspring with.",
+                },
+                {
+                    "name": "parent_centric_attribute_blending",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of attributes that should benefit from parent centric attribute blending. For example, horses blend their health, movement, and jump_strength in their offspring.",
+                },
+                {
+                    "name": "property_inheritance",
+                    "type": "List",
+                    "defaultValue": "",
+                    "description": "List of Entity Properties that should be inherited from the parent entities and potentially mutated.",
+                },
+                {
+                    "name": "random_extra_variant_mutation_interval",
+                    "type": "Range [a, b]",
+                    "defaultValue": "0",
+                    "description": "Range used to determine random extra variant.",
+                },
+                {
+                    "name": "random_variant_mutation_interval",
+                    "type": "Range [a, b]",
+                    "defaultValue": "0",
+                    "description": "Range used to determine random variant.",
+                },
+            ],
+        },
         "minecraft:push_through": {
             "description": "Sets the distance through which the entity can push through.",
             "children": [
@@ -17762,5 +17610,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.get_level_seed_based_fraction": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a value in range [0.0, 1.0] based on the level seed.",
+    },
 }

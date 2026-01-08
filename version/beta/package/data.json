@@ -1007,6 +1007,8 @@
             "mob.nautilus.hurt.in.water",
             "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
+            "mob.nautilus.saddle",
+            "mob.nautilus.saddle_underwater",
             "mob.nautilus.swim",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -5696,10 +5698,6 @@
                 "minecraft:nautilus<breathe>",
                 "minecraft:zombie_nautilus<breathe>",
             ],
-            "animation.nautilus.charge_warning": [
-                "minecraft:nautilus<charge_warning>",
-                "minecraft:zombie_nautilus<charge_warning>",
-            ],
             "animation.nautilus.dashing": [
                 "minecraft:nautilus<dashing>",
                 "minecraft:zombie_nautilus<dashing>",
@@ -6727,10 +6725,6 @@
             "controller.animation.mooshroom.setup": [
                 "minecraft:mooshroom<setup>",
             ],
-            "controller.animation.nautilus.attack": [
-                "minecraft:nautilus<attack_controller>",
-                "minecraft:zombie_nautilus<attack_controller>",
-            ],
             "controller.animation.nautilus.general": [
                 "minecraft:nautilus<general_controller>",
                 "minecraft:zombie_nautilus<general_controller>",
@@ -7680,8 +7674,11 @@
                 "minecraft:husk",
                 "minecraft:zoglin",
                 "minecraft:zombie",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:as_baby_jockey": [
+                "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:zombie",
             ],
@@ -7689,6 +7686,9 @@
                 "minecraft:drowned",
             ],
             "minecraft:as_ranged_baby": [
+                "minecraft:drowned",
+            ],
+            "minecraft:as_ranged_baby_jockey": [
                 "minecraft:drowned",
             ],
             "minecraft:as_rider": [
@@ -8021,12 +8021,14 @@
                 "minecraft:cow",
                 "minecraft:dolphin",
                 "minecraft:donkey",
+                "minecraft:drowned",
                 "minecraft:fox",
                 "minecraft:glow_squid",
                 "minecraft:goat",
                 "minecraft:happy_ghast",
                 "minecraft:hoglin",
                 "minecraft:horse",
+                "minecraft:husk",
                 "minecraft:llama",
                 "minecraft:mooshroom",
                 "minecraft:mule",
@@ -8038,6 +8040,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:skeleton_horse",
                 "minecraft:sniffer",
                 "minecraft:squid",
                 "minecraft:strider",
@@ -8046,7 +8049,11 @@
                 "minecraft:villager",
                 "minecraft:villager_v2",
                 "minecraft:wolf",
+                "minecraft:zoglin",
+                "minecraft:zombie",
                 "minecraft:zombie_horse",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:entity_born_wild": [
                 "minecraft:ocelot",
@@ -8338,6 +8345,10 @@
             ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
+            ],
+            "minecraft:on_armor_equip": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:on_calm": [
                 "minecraft:cave_spider",
@@ -8711,6 +8722,9 @@
             "minecraft:spawn_skilled_adult": [
                 "minecraft:zombie_villager_v2",
             ],
+            "minecraft:spawn_tame": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_tame_adult": [
                 "minecraft:cat",
                 "minecraft:donkey",
@@ -8731,6 +8745,9 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
+            ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -9252,11 +9269,26 @@
             "baby_husk": [
                 "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
+            "baby_piglin": [
+                "minecraft:piglin<piglin_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
+            "baby_undead": [
+                "minecraft:drowned<minecraft:baby_drowned>",
+                "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
+                "minecraft:zombie_villager_v2<baby>",
+            ],
+            "baby_undead ": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_zombie": [
                 "minecraft:zombie<minecraft:zombie_baby>",
+            ],
+            "baby_zombie_pigman": [
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
             ],
             "bat": [
                 "minecraft:bat",
@@ -9345,6 +9377,8 @@
             ],
             "drowned": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
             ],
             "enderman": [
                 "minecraft:enderman",
@@ -9509,6 +9543,8 @@
                 "minecraft:dolphin",
                 "minecraft:donkey",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:ender_dragon",
                 "minecraft:enderman",
@@ -9541,6 +9577,9 @@
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
                 "minecraft:pig",
+                "minecraft:piglin<hunter>",
+                "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:pillager",
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
@@ -9610,6 +9649,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -9623,6 +9664,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -9646,6 +9688,8 @@
                 "minecraft:creaking",
                 "minecraft:creeper",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:enderman",
                 "minecraft:endermite",
@@ -9660,6 +9704,7 @@
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
                 "minecraft:pillager",
                 "minecraft:ravager",
@@ -9682,6 +9727,8 @@
                 "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -9695,6 +9742,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -9769,6 +9817,7 @@
             "piglin": [
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
             ],
             "piglin_brute": [
@@ -9891,6 +9940,8 @@
                 "minecraft:bogged",
                 "minecraft:camel_husk",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -9909,6 +9960,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -9922,6 +9975,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -10024,6 +10078,8 @@
             ],
             "zombie": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -10043,6 +10099,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -10063,6 +10120,7 @@
             ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
             ],
             "zombie_rider": [
                 "minecraft:zombie<minecraft:zombie_rider>",
@@ -10081,6 +10139,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -11288,6 +11347,8 @@
             "mob.nautilus.hurt.in.water",
             "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
+            "mob.nautilus.saddle",
+            "mob.nautilus.saddle_underwater",
             "mob.nautilus.swim",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -16076,10 +16137,6 @@
                 "minecraft:nautilus<breathe>",
                 "minecraft:zombie_nautilus<breathe>",
             ],
-            "animation.nautilus.charge_warning": [
-                "minecraft:nautilus<charge_warning>",
-                "minecraft:zombie_nautilus<charge_warning>",
-            ],
             "animation.nautilus.dashing": [
                 "minecraft:nautilus<dashing>",
                 "minecraft:zombie_nautilus<dashing>",
@@ -17107,10 +17164,6 @@
             "controller.animation.mooshroom.setup": [
                 "minecraft:mooshroom<setup>",
             ],
-            "controller.animation.nautilus.attack": [
-                "minecraft:nautilus<attack_controller>",
-                "minecraft:zombie_nautilus<attack_controller>",
-            ],
             "controller.animation.nautilus.general": [
                 "minecraft:nautilus<general_controller>",
                 "minecraft:zombie_nautilus<general_controller>",
@@ -18064,8 +18117,11 @@
                 "minecraft:husk",
                 "minecraft:zoglin",
                 "minecraft:zombie",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:as_baby_jockey": [
+                "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:zombie",
             ],
@@ -18073,6 +18129,9 @@
                 "minecraft:drowned",
             ],
             "minecraft:as_ranged_baby": [
+                "minecraft:drowned",
+            ],
+            "minecraft:as_ranged_baby_jockey": [
                 "minecraft:drowned",
             ],
             "minecraft:as_rider": [
@@ -18405,12 +18464,14 @@
                 "minecraft:cow",
                 "minecraft:dolphin",
                 "minecraft:donkey",
+                "minecraft:drowned",
                 "minecraft:fox",
                 "minecraft:glow_squid",
                 "minecraft:goat",
                 "minecraft:happy_ghast",
                 "minecraft:hoglin",
                 "minecraft:horse",
+                "minecraft:husk",
                 "minecraft:llama",
                 "minecraft:mooshroom",
                 "minecraft:mule",
@@ -18422,6 +18483,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:skeleton_horse",
                 "minecraft:sniffer",
                 "minecraft:squid",
                 "minecraft:strider",
@@ -18430,7 +18492,11 @@
                 "minecraft:villager",
                 "minecraft:villager_v2",
                 "minecraft:wolf",
+                "minecraft:zoglin",
+                "minecraft:zombie",
                 "minecraft:zombie_horse",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:entity_born_wild": [
                 "minecraft:ocelot",
@@ -18722,6 +18788,10 @@
             ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
+            ],
+            "minecraft:on_armor_equip": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:on_calm": [
                 "minecraft:cave_spider",
@@ -19095,6 +19165,9 @@
             "minecraft:spawn_skilled_adult": [
                 "minecraft:zombie_villager_v2",
             ],
+            "minecraft:spawn_tame": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_tame_adult": [
                 "minecraft:cat",
                 "minecraft:donkey",
@@ -19115,6 +19188,9 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
+            ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -19636,11 +19712,26 @@
             "baby_husk": [
                 "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
+            "baby_piglin": [
+                "minecraft:piglin<piglin_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
+            "baby_undead": [
+                "minecraft:drowned<minecraft:baby_drowned>",
+                "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
+                "minecraft:zombie_villager_v2<baby>",
+            ],
+            "baby_undead ": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_zombie": [
                 "minecraft:zombie<minecraft:zombie_baby>",
+            ],
+            "baby_zombie_pigman": [
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
             ],
             "bat": [
                 "minecraft:bat",
@@ -19729,6 +19820,8 @@
             ],
             "drowned": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
             ],
             "enderman": [
                 "minecraft:enderman",
@@ -19893,6 +19986,8 @@
                 "minecraft:dolphin",
                 "minecraft:donkey",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:ender_dragon",
                 "minecraft:enderman",
@@ -19925,6 +20020,9 @@
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
                 "minecraft:pig",
+                "minecraft:piglin<hunter>",
+                "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:pillager",
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
@@ -19994,6 +20092,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -20007,6 +20107,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -20030,6 +20131,8 @@
                 "minecraft:creaking",
                 "minecraft:creeper",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:enderman",
                 "minecraft:endermite",
@@ -20044,6 +20147,7 @@
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
                 "minecraft:pillager",
                 "minecraft:ravager",
@@ -20066,6 +20170,8 @@
                 "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -20079,6 +20185,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -20153,6 +20260,7 @@
             "piglin": [
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
             ],
             "piglin_brute": [
@@ -20275,6 +20383,8 @@
                 "minecraft:bogged",
                 "minecraft:camel_husk",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -20293,6 +20403,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -20306,6 +20418,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -20408,6 +20521,8 @@
             ],
             "zombie": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -20427,6 +20542,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -20447,6 +20563,7 @@
             ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
             ],
             "zombie_rider": [
                 "minecraft:zombie<minecraft:zombie_rider>",
@@ -20465,6 +20582,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -21341,6 +21459,10 @@
             "mob.axolotl.idle_water",
             "mob.axolotl.splash",
             "mob.axolotl.swim",
+            "mob.baby_cat.ambient",
+            "mob.baby_cat.death",
+            "mob.baby_cat.eat",
+            "mob.baby_cat.hurt",
             "mob.baby_nautilus.ambient",
             "mob.baby_nautilus.ambient.in.water",
             "mob.baby_nautilus.death",
@@ -21349,6 +21471,18 @@
             "mob.baby_nautilus.hurt",
             "mob.baby_nautilus.hurt.in.water",
             "mob.baby_nautilus.swim",
+            "mob.baby_pig.ambient",
+            "mob.baby_pig.death",
+            "mob.baby_pig.hurt",
+            "mob.baby_pig.step",
+            "mob.baby_wolf.bark",
+            "mob.baby_wolf.death",
+            "mob.baby_wolf.growl",
+            "mob.baby_wolf.hurt",
+            "mob.baby_wolf.panting",
+            "mob.baby_wolf.shake",
+            "mob.baby_wolf.step",
+            "mob.baby_wolf.whine",
             "mob.bat.death",
             "mob.bat.hurt",
             "mob.bat.idle",
@@ -21669,6 +21803,8 @@
             "mob.nautilus.hurt.in.water",
             "mob.nautilus.nautilus_saddle",
             "mob.nautilus.ride",
+            "mob.nautilus.saddle",
+            "mob.nautilus.saddle_underwater",
             "mob.nautilus.swim",
             "mob.ocelot.death",
             "mob.ocelot.idle",
@@ -24197,6 +24333,7 @@
             "minecraft:mud_bricks": "<crafting_table>packed_mud*4->mud_bricks*4",
             "minecraft:muddy_mangrove_roots": "<crafting_table>mangrove_roots+mud~>muddy_mangrove_roots",
             "minecraft:mushroom_stew": "<crafting_table>brown_mushroom+red_mushroom+bowl~>mushroom_stew",
+            "minecraft:name_tag": "<crafting_table>paper+tag:metal_nuggets->name_tag",
             "minecraft:nether_brick": "<crafting_table>netherbrick*4->nether_brick",
             "minecraft:nether_brick_fence": "<crafting_table>netherbrick*2+nether_brick*4->nether_brick_fence*6",
             "minecraft:nether_brick_stairs": "<crafting_table>nether_brick*6->nether_brick_stairs*4",
@@ -25010,6 +25147,10 @@
             "geometry.cat": [
                 "minecraft:cat<default>",
             ],
+            "geometry.cat.baby": [
+                "minecraft:cat<baby>",
+                "minecraft:ocelot<baby>",
+            ],
             "geometry.chalkboard_large": [],
             "geometry.chalkboard_medium": [],
             "geometry.chalkboard_small": [],
@@ -25017,9 +25158,15 @@
                 "minecraft:chest_boat<default>",
             ],
             "geometry.chicken": [],
-            "geometry.chicken.cold": [],
+            "geometry.chicken.baby": [
+                "minecraft:chicken<baby>",
+            ],
+            "geometry.chicken.cold": [
+                "minecraft:chicken<cold>",
+            ],
             "geometry.chicken.v1.12": [
                 "minecraft:chicken<default>",
+                "minecraft:chicken<warm>",
             ],
             "geometry.cod": [
                 "minecraft:cod<default>",
@@ -25041,12 +25188,20 @@
                 "minecraft:copper_golem<star>",
             ],
             "geometry.cow": [],
-            "geometry.cow.cold": [],
-            "geometry.cow.v1.8": [
+            "geometry.cow.baby": [
+                "minecraft:cow<baby>",
+                "minecraft:mooshroom<baby>",
+            ],
+            "geometry.cow.cold": [
+                "minecraft:cow<cold>",
+            ],
+            "geometry.cow.v1.8": [],
+            "geometry.cow.v2": [
                 "minecraft:cow<default>",
             ],
-            "geometry.cow.v2": [],
-            "geometry.cow.warm": [],
+            "geometry.cow.warm": [
+                "minecraft:cow<warm>",
+            ],
             "geometry.creaking": [
                 "minecraft:creaking<default>",
             ],
@@ -25199,10 +25354,10 @@
                 "minecraft:skull<zombie>",
             ],
             "geometry.mooshroom": [],
-            "geometry.mooshroom.v1.8": [
+            "geometry.mooshroom.v1.8": [],
+            "geometry.mooshroom.v2": [
                 "minecraft:mooshroom<default>",
             ],
-            "geometry.mooshroom.v2": [],
             "geometry.nautilus": [
                 "minecraft:nautilus<default>",
                 "minecraft:zombie_nautilus<default>",
@@ -25238,10 +25393,13 @@
                 "minecraft:phantom<default>",
             ],
             "geometry.pig": [],
-            "geometry.pig.v1.8": [
+            "geometry.pig.baby": [
+                "minecraft:pig<baby>",
+            ],
+            "geometry.pig.v1.8": [],
+            "geometry.pig.v3": [
                 "minecraft:pig<default>",
             ],
-            "geometry.pig.v3": [],
             "geometry.piglin": [
                 "minecraft:piglin<default>",
                 "minecraft:piglin_brute<default>",
@@ -25285,7 +25443,11 @@
             ],
             "geometry.quadruped": [],
             "geometry.rabbit": [],
-            "geometry.rabbit.v1.8": [
+            "geometry.rabbit.baby": [
+                "minecraft:rabbit<baby>",
+            ],
+            "geometry.rabbit.v1.8": [],
+            "geometry.rabbit.v2": [
                 "minecraft:rabbit<default>",
             ],
             "geometry.ravager": [
@@ -25295,6 +25457,9 @@
                 "minecraft:salmon<default>",
             ],
             "geometry.sheep": [],
+            "geometry.sheep.baby": [
+                "minecraft:sheep<baby>",
+            ],
             "geometry.sheep.sheared": [],
             "geometry.sheep.sheared.v1.8": [
                 "minecraft:sheep<sheared>",
@@ -25419,6 +25584,9 @@
                 "minecraft:wolf<default>",
             ],
             "geometry.wolf.armor": [],
+            "geometry.wolf.baby": [
+                "minecraft:wolf<baby>",
+            ],
             "geometry.zombie": [],
             "geometry.zombie.drowned": [],
             "geometry.zombie.drowned.v1.16": [
@@ -25651,9 +25819,14 @@
                 "minecraft:camel<moving>",
                 "minecraft:camel_husk<moving>",
             ],
-            "animation.cat.baby_transform": [
-                "minecraft:cat<baby_transform>",
+            "animation.cat.baby_lie_down": [
+                "minecraft:cat<baby_lie_down>",
             ],
+            "animation.cat.baby_sit": [
+                "minecraft:cat<baby_sit>",
+                "minecraft:ocelot<baby_sit>",
+            ],
+            "animation.cat.baby_transform": [],
             "animation.cat.lie_down": [
                 "minecraft:cat<lie_down>",
             ],
@@ -25669,9 +25842,7 @@
             "animation.cat.walk": [
                 "minecraft:cat<walk>",
             ],
-            "animation.chicken.baby_transform": [
-                "minecraft:chicken<baby_transform>",
-            ],
+            "animation.chicken.baby_transform": [],
             "animation.chicken.general": [
                 "minecraft:chicken<general>",
             ],
@@ -25753,9 +25924,7 @@
             "animation.copper_golem.walk_holding_item": [
                 "minecraft:copper_golem<walk_holding_item>",
             ],
-            "animation.cow.baby_transform": [
-                "minecraft:cow<baby_transform>",
-            ],
+            "animation.cow.baby_transform": [],
             "animation.cow.setup": [
                 "minecraft:cow<setup>",
             ],
@@ -26347,9 +26516,7 @@
                 "minecraft:tnt_minecart<move>",
             ],
             "animation.minecart.move.v1.0": [],
-            "animation.mooshroom.baby_transform": [
-                "minecraft:mooshroom<baby_transform>",
-            ],
+            "animation.mooshroom.baby_transform": [],
             "animation.mooshroom.setup": [
                 "minecraft:mooshroom<setup>",
             ],
@@ -26357,10 +26524,6 @@
             "animation.nautilus.breathe": [
                 "minecraft:nautilus<breathe>",
                 "minecraft:zombie_nautilus<breathe>",
-            ],
-            "animation.nautilus.charge_warning": [
-                "minecraft:nautilus<charge_warning>",
-                "minecraft:zombie_nautilus<charge_warning>",
             ],
             "animation.nautilus.dashing": [
                 "minecraft:nautilus<dashing>",
@@ -26385,9 +26548,7 @@
                 "minecraft:npc<move>",
             ],
             "animation.npc.raise_arms": [],
-            "animation.ocelot.baby_transform": [
-                "minecraft:ocelot<baby_transform>",
-            ],
+            "animation.ocelot.baby_transform": [],
             "animation.ocelot.sit": [
                 "minecraft:ocelot<sit>",
             ],
@@ -26448,9 +26609,7 @@
             "animation.phantom.move": [
                 "minecraft:phantom<move>",
             ],
-            "animation.pig.baby_transform": [
-                "minecraft:pig<baby_transform>",
-            ],
+            "animation.pig.baby_transform": [],
             "animation.pig.setup": [
                 "minecraft:pig<setup>",
             ],
@@ -26641,11 +26800,15 @@
                 "minecraft:sheep<walk>",
                 "minecraft:trader_llama<walk>",
             ],
-            "animation.rabbit.baby_transform": [
-                "minecraft:rabbit<baby_transform>",
+            "animation.rabbit.baby_transform": [],
+            "animation.rabbit.idle_head_tilt": [
+                "minecraft:rabbit<idle_head_tilt>",
             ],
             "animation.rabbit.move": [
                 "minecraft:rabbit<move>",
+            ],
+            "animation.rabbit.move.baby": [
+                "minecraft:rabbit<move_baby>",
             ],
             "animation.ravager.biting": [
                 "minecraft:ravager<biting>",
@@ -26700,9 +26863,7 @@
             "animation.salmon.swim": [
                 "minecraft:salmon<swim>",
             ],
-            "animation.sheep.baby_transform": [
-                "minecraft:sheep<baby_transform>",
-            ],
+            "animation.sheep.baby_transform": [],
             "animation.sheep.grazing": [
                 "minecraft:sheep<grazing>",
             ],
@@ -26932,9 +27093,7 @@
             "animation.wolf.angry": [
                 "minecraft:wolf<wolf_angry>",
             ],
-            "animation.wolf.baby_scaling": [
-                "minecraft:wolf<wolf_baby_scaling>",
-            ],
+            "animation.wolf.baby_scaling": [],
             "animation.wolf.head_rot_z": [
                 "minecraft:wolf<wolf_head_rot_z>",
             ],
@@ -27062,9 +27221,7 @@
                 "minecraft:camel<idle>",
                 "minecraft:camel_husk<idle_controller>",
             ],
-            "controller.animation.cat.baby": [
-                "minecraft:cat<baby>",
-            ],
+            "controller.animation.cat.baby": [],
             "controller.animation.cat.look_at_target": [
                 "minecraft:cat<look_at_target>",
             ],
@@ -27380,18 +27537,12 @@
             "controller.animation.magma_cube.general": [
                 "minecraft:magma_cube<general>",
             ],
-            "controller.animation.mooshroom.baby": [
-                "minecraft:mooshroom<baby>",
-            ],
+            "controller.animation.mooshroom.baby": [],
             "controller.animation.mooshroom.move": [
                 "minecraft:mooshroom<move>",
             ],
             "controller.animation.mooshroom.setup": [
                 "minecraft:mooshroom<setup>",
-            ],
-            "controller.animation.nautilus.attack": [
-                "minecraft:nautilus<attack_controller>",
-                "minecraft:zombie_nautilus<attack_controller>",
             ],
             "controller.animation.nautilus.general": [
                 "minecraft:nautilus<general_controller>",
@@ -27401,9 +27552,7 @@
                 "minecraft:nautilus<sound_controller>",
                 "minecraft:zombie_nautilus<sound_controller>",
             ],
-            "controller.animation.ocelot.baby": [
-                "minecraft:ocelot<baby>",
-            ],
+            "controller.animation.ocelot.baby": [],
             "controller.animation.ocelot.look_at_target": [
                 "minecraft:ocelot<look_at_target>",
             ],
@@ -27477,9 +27626,7 @@
             "controller.animation.polarbear.move": [
                 "minecraft:polar_bear<move>",
             ],
-            "controller.animation.rabbit.baby": [
-                "minecraft:rabbit<baby>",
-            ],
+            "controller.animation.rabbit.baby": [],
             "controller.animation.rabbit.general": [
                 "minecraft:rabbit<general>",
             ],
@@ -27622,9 +27769,7 @@
             "controller.animation.wolf.angry": [
                 "minecraft:wolf<wolf_angry>",
             ],
-            "controller.animation.wolf.baby_scaling": [
-                "minecraft:wolf<wolf_baby_scaling>",
-            ],
+            "controller.animation.wolf.baby_scaling": [],
             "controller.animation.wolf.head_rot_z": [
                 "minecraft:wolf<wolf_head_rot_z>",
             ],
@@ -27722,10 +27867,10 @@
             "controller.render.cat": [
                 "minecraft:cat",
             ],
-            "controller.render.chicken": [
+            "controller.render.chicken": [],
+            "controller.render.chicken.v2": [
                 "minecraft:chicken",
             ],
-            "controller.render.chicken.v2": [],
             "controller.render.cod": [
                 "minecraft:cod",
             ],
@@ -27738,10 +27883,10 @@
             "controller.render.copper_golem_flower": [
                 "minecraft:copper_golem",
             ],
-            "controller.render.cow": [
+            "controller.render.cow": [],
+            "controller.render.cow.v2": [
                 "minecraft:cow",
             ],
-            "controller.render.cow.v2": [],
             "controller.render.creaking": [
                 "minecraft:creaking",
             ],
@@ -27919,10 +28064,10 @@
             "controller.render.phantom": [
                 "minecraft:phantom",
             ],
-            "controller.render.pig": [
+            "controller.render.pig": [],
+            "controller.render.pig.v3": [
                 "minecraft:pig",
             ],
-            "controller.render.pig.v3": [],
             "controller.render.piglin": [
                 "minecraft:piglin",
             ],
@@ -27963,7 +28108,9 @@
             "controller.render.ravager": [
                 "minecraft:ravager",
             ],
-            "controller.render.saddle": [],
+            "controller.render.saddle": [
+                "minecraft:pig",
+            ],
             "controller.render.salmon": [
                 "minecraft:salmon",
             ],
@@ -28342,8 +28489,11 @@
                 "minecraft:husk",
                 "minecraft:zoglin",
                 "minecraft:zombie",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:as_baby_jockey": [
+                "minecraft:drowned",
                 "minecraft:husk",
                 "minecraft:zombie",
             ],
@@ -28351,6 +28501,9 @@
                 "minecraft:drowned",
             ],
             "minecraft:as_ranged_baby": [
+                "minecraft:drowned",
+            ],
+            "minecraft:as_ranged_baby_jockey": [
                 "minecraft:drowned",
             ],
             "minecraft:as_rider": [
@@ -28683,12 +28836,14 @@
                 "minecraft:cow",
                 "minecraft:dolphin",
                 "minecraft:donkey",
+                "minecraft:drowned",
                 "minecraft:fox",
                 "minecraft:glow_squid",
                 "minecraft:goat",
                 "minecraft:happy_ghast",
                 "minecraft:hoglin",
                 "minecraft:horse",
+                "minecraft:husk",
                 "minecraft:llama",
                 "minecraft:mooshroom",
                 "minecraft:mule",
@@ -28700,6 +28855,7 @@
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
                 "minecraft:sheep",
+                "minecraft:skeleton_horse",
                 "minecraft:sniffer",
                 "minecraft:squid",
                 "minecraft:strider",
@@ -28708,7 +28864,11 @@
                 "minecraft:villager",
                 "minecraft:villager_v2",
                 "minecraft:wolf",
+                "minecraft:zoglin",
+                "minecraft:zombie",
                 "minecraft:zombie_horse",
+                "minecraft:zombie_pigman",
+                "minecraft:zombie_villager_v2",
             ],
             "minecraft:entity_born_wild": [
                 "minecraft:ocelot",
@@ -29000,6 +29160,10 @@
             ],
             "minecraft:on_anger": [
                 "minecraft:polar_bear",
+            ],
+            "minecraft:on_armor_equip": [
+                "minecraft:nautilus",
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:on_calm": [
                 "minecraft:cave_spider",
@@ -29373,6 +29537,9 @@
             "minecraft:spawn_skilled_adult": [
                 "minecraft:zombie_villager_v2",
             ],
+            "minecraft:spawn_tame": [
+                "minecraft:zombie_nautilus",
+            ],
             "minecraft:spawn_tame_adult": [
                 "minecraft:cat",
                 "minecraft:donkey",
@@ -29393,6 +29560,9 @@
             ],
             "minecraft:spawn_warm": [
                 "minecraft:egg",
+            ],
+            "minecraft:spawn_wild": [
+                "minecraft:zombie_nautilus",
             ],
             "minecraft:spawn_wild_adult": [
                 "minecraft:cat",
@@ -29914,11 +30084,26 @@
             "baby_husk": [
                 "minecraft:husk<minecraft:zombie_husk_baby>",
             ],
+            "baby_piglin": [
+                "minecraft:piglin<piglin_baby>",
+            ],
             "baby_turtle": [
                 "minecraft:turtle<minecraft:baby>",
             ],
+            "baby_undead": [
+                "minecraft:drowned<minecraft:baby_drowned>",
+                "minecraft:zombie<minecraft:zombie_baby>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
+                "minecraft:zombie_villager_v2<baby>",
+            ],
+            "baby_undead ": [
+                "minecraft:husk<minecraft:zombie_husk_baby>",
+            ],
             "baby_zombie": [
                 "minecraft:zombie<minecraft:zombie_baby>",
+            ],
+            "baby_zombie_pigman": [
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
             ],
             "bat": [
                 "minecraft:bat",
@@ -30007,6 +30192,8 @@
             ],
             "drowned": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
             ],
             "enderman": [
                 "minecraft:enderman",
@@ -30171,6 +30358,8 @@
                 "minecraft:dolphin",
                 "minecraft:donkey",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:ender_dragon",
                 "minecraft:enderman",
@@ -30203,6 +30392,9 @@
                 "minecraft:parrot<minecraft:parrot_wild>",
                 "minecraft:phantom",
                 "minecraft:pig",
+                "minecraft:piglin<hunter>",
+                "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:pillager",
                 "minecraft:polar_bear",
                 "minecraft:rabbit",
@@ -30272,6 +30464,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -30285,6 +30479,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -30308,6 +30503,8 @@
                 "minecraft:creaking",
                 "minecraft:creeper",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:elder_guardian",
                 "minecraft:enderman",
                 "minecraft:endermite",
@@ -30322,6 +30519,7 @@
                 "minecraft:phantom",
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
                 "minecraft:pillager",
                 "minecraft:ravager",
@@ -30344,6 +30542,8 @@
                 "minecraft:zombie<minecraft:zombie_rider>",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -30357,6 +30557,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -30431,6 +30632,7 @@
             "piglin": [
                 "minecraft:piglin<hunter>",
                 "minecraft:piglin<not_hunter>",
+                "minecraft:piglin<piglin_baby>",
                 "minecraft:piglin_brute",
             ],
             "piglin_brute": [
@@ -30553,6 +30755,8 @@
                 "minecraft:bogged",
                 "minecraft:camel_husk",
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -30571,6 +30775,8 @@
                 "minecraft:zombie_horse",
                 "minecraft:zombie_nautilus",
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_baby>",
                 "minecraft:zombie_villager<armorer>",
                 "minecraft:zombie_villager<butcher>",
                 "minecraft:zombie_villager<cartographer>",
@@ -30584,6 +30790,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -30686,6 +30893,8 @@
             ],
             "zombie": [
                 "minecraft:drowned",
+                "minecraft:drowned<minecraft:adult_drowned>",
+                "minecraft:drowned<minecraft:baby_drowned>",
                 "minecraft:husk",
                 "minecraft:husk<minecraft:zombie_husk_baby>",
                 "minecraft:husk<minecraft:zombie_husk_rider>",
@@ -30705,6 +30914,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",
@@ -30725,6 +30935,7 @@
             ],
             "zombie_pigman": [
                 "minecraft:zombie_pigman",
+                "minecraft:zombie_pigman<minecraft:pig_zombie_adult>",
             ],
             "zombie_rider": [
                 "minecraft:zombie<minecraft:zombie_rider>",
@@ -30743,6 +30954,7 @@
                 "minecraft:zombie_villager<toolsmith>",
                 "minecraft:zombie_villager<weaponsmith>",
                 "minecraft:zombie_villager_v2<armorer>",
+                "minecraft:zombie_villager_v2<baby>",
                 "minecraft:zombie_villager_v2<butcher>",
                 "minecraft:zombie_villager_v2<cartographer>",
                 "minecraft:zombie_villager_v2<cleric>",

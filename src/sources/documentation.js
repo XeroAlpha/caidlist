@@ -860,13 +860,14 @@ function getDefaultValue(schema) {
                 return result;
             }
             return null;
+        case '':
         case undefined:
             if (schema.children) {
                 return {};
             }
             return schema.defaultValue !== undefined ? schema.defaultValue : null;
         default:
-            throw new Error(`Unknown type: ${schema.type}`);
+            throw new Error(`Unknown type: "${schema.type}"`);
     }
 }
 
