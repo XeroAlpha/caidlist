@@ -254,6 +254,12 @@
                                                             "Description": "A string that allows culling rule to group multiple blocks together when comparing them. When using the minecraft namespace, the only allowed culling layer identifiers are : \"minecraft:culling_layer.undefined\" or \"minecraft:culling_layer.leaves\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character.",
                                                         },
                                                         {
+                                                            "Name": "culling_shape",
+                                                            "Type": "String",
+                                                            "Default Value": "minecraft:empty",
+                                                            "Description": "Currently only available with the VoxelShape experiment on. The voxel shape used for culling adjacent block faces. Voxel shapes work together with culling rules and will not function if there is no culling rule defined for the block. Only adjacent blocks with voxel shapes will occlude using this shape. Blocks using \"minecraft:geometry.full_block\" always use the unit cube shape and will ignore custom shapes if specified. When using the minecraft namespace, the only currently available culling shape identifiers are : \"minecraft:empty\" or \"minecraft:unit_cube\". When using no namespaces or a custom one, the names must start and end with an alpha-numeric character.",
+                                                        },
+                                                        {
                                                             "Name": "identifier",
                                                             "Type": "String",
                                                             "Default Value": "",
@@ -786,7 +792,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.26.0\",",
+                                        "  \"format_version\": \"1.26.10\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1474,5 +1480,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "02630f6743dfb783a0c5951373af38a7d1ed8fce",
+    "__OBJECTHASH__": "73fa5afca9d0d5aa6896bbd15ca4a92768b8f86a",
 }

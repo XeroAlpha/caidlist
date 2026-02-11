@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.0.29",
-    "__COMMITHASH__": "e1f3b72b5381cae75f0256a590a50ec3944b9ba0",
-    "__MESSAGE__": "v1.26.0.29-preview",
+    "__VERSION__": "1.26.10.20",
+    "__COMMITHASH__": "7a1249061c2e58ea0706c18d53df947caa18ecba",
+    "__MESSAGE__": "v1.26.10.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -1442,7 +1442,7 @@
                                     "name": "minecraft:behavior.drink_potion",
                                 },
                                 {
-                                    "name": "minecraft:behavior.drop_item_for",
+                                    "name": "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.eat_block",
@@ -1469,7 +1469,7 @@
                                     "name": "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.fertilize_farm_block",
+                                    "name": "minecraft:behavior.fertilize_farm_block (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.find_cover",
@@ -1523,7 +1523,7 @@
                                     "name": "minecraft:behavior.guardian_attack (See JSON Schema since 1.26.0)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.harvest_farm_block",
+                                    "name": "minecraft:behavior.harvest_farm_block (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.hide",
@@ -1631,7 +1631,7 @@
                                     "name": "minecraft:behavior.ocelot_sit_on_block",
                                 },
                                 {
-                                    "name": "minecraft:behavior.ocelotattack",
+                                    "name": "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.offer_flower",
@@ -6844,7 +6844,7 @@
                 },
             ],
         },
-        "minecraft:behavior.drop_item_for": {
+        "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)": {
             "description": "Allows the entity to move toward a target, and drop an item near the target. This goal requires a \"minecraft:navigation\" to execute.",
             "children": [
                 {
@@ -6868,8 +6868,8 @@
                 {
                     "name": "goal_radius",
                     "type": "Decimal",
-                    "defaultValue": "0.50",
-                    "description": "Distance in blocks within the entity considers it has reached it's target position.",
+                    "defaultValue": "0.5",
+                    "description": "Distance in blocks within the mob considers it has reached the goal. This is the \"wiggle room\" to stop the AI from bouncing back and forth trying to reach a specific spot.",
                 },
                 {
                     "name": "loot_table",
@@ -6905,13 +6905,13 @@
                     "name": "search_count",
                     "type": "Integer",
                     "defaultValue": "0",
-                    "description": "The number of blocks each tick that the entity will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
+                    "description": "The number of randomly selected blocks each tick that the mob will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
                 },
                 {
                     "name": "search_height",
                     "type": "Integer",
                     "defaultValue": "1",
-                    "description": "The Height in blocks the entity will search within to find a valid target position.",
+                    "description": "The height in blocks the entity will search within to find a valid target position.",
                 },
                 {
                     "name": "search_range",
@@ -6928,8 +6928,8 @@
                 {
                     "name": "speed_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "1.00",
-                    "description": "Movement speed multiplier of the entity when using this Goal.",
+                    "defaultValue": "1.0",
+                    "description": "Movement speed multiplier of the mob when using this goal.",
                 },
                 {
                     "name": "target_range",
@@ -7126,13 +7126,13 @@
                 },
             ],
         },
-        "minecraft:behavior.fertilize_farm_block": {
+        "minecraft:behavior.fertilize_farm_block (See JSON Schema since 1.26.10)": {
             "description": "Allows the mob to search within an area for a growable crop block. If found, the mob will use any available fertilizer in their inventory on the crop. This goal will not execute if the mob does not have a fertilizer item in its inventory.",
             "children": [
                 {
                     "name": "goal_radius",
                     "type": "Decimal",
-                    "defaultValue": "1.50",
+                    "defaultValue": "1.5",
                     "description": "Distance in blocks within the mob considers it has reached it's target position.",
                 },
                 {
@@ -7157,7 +7157,7 @@
                     "name": "search_height",
                     "type": "Integer",
                     "defaultValue": "1",
-                    "description": "The Height in blocks the mob will search within to find a valid target position.",
+                    "description": "The height in blocks the mob will search within to find a valid target position.",
                 },
                 {
                     "name": "search_range",
@@ -7168,8 +7168,8 @@
                 {
                     "name": "speed_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "0.50",
-                    "description": "Movement speed multiplier of the mob when using this Goal.",
+                    "defaultValue": "0.5",
+                    "description": "Movement speed multiplier of the mob when using this goal.",
                 },
             ],
         },
@@ -7872,13 +7872,13 @@
                 },
             ],
         },
-        "minecraft:behavior.harvest_farm_block": {
+        "minecraft:behavior.harvest_farm_block (See JSON Schema since 1.26.10)": {
             "description": "Allows the entity to search within an area for farmland with air above it. If found, the entity will replace the air block by planting a seed item from its inventory on the farmland block. This goal requires \"minecraft:inventory\" and \"minecraft:navigation\" to execute. This goal will not execute if the entity does not have an item in its inventory.",
             "children": [
                 {
                     "name": "goal_radius",
                     "type": "Decimal",
-                    "defaultValue": "1.50",
+                    "defaultValue": "1.5",
                     "description": "Distance in blocks within the entity considers it has reached it's target position.",
                 },
                 {
@@ -7897,13 +7897,13 @@
                     "name": "search_count",
                     "type": "Integer",
                     "defaultValue": "0",
-                    "description": "The number of randomly selected blocks each tick that the entity will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
+                    "description": "The number of randomly selected blocks each tick that the mob will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
                 },
                 {
                     "name": "search_height",
                     "type": "Integer",
                     "defaultValue": "1",
-                    "description": "The Height in blocks the entity will search within to find a valid target position.",
+                    "description": "The height in blocks the entity will search within to find a valid target position.",
                 },
                 {
                     "name": "search_range",
@@ -7920,8 +7920,8 @@
                 {
                     "name": "speed_multiplier",
                     "type": "Decimal",
-                    "defaultValue": "0.50",
-                    "description": "Movement speed multiplier of the entity when using this Goal.",
+                    "defaultValue": "0.5",
+                    "description": "Movement speed multiplier of the mob when using this goal.",
                 },
             ],
         },
@@ -9485,7 +9485,7 @@
                 },
             ],
         },
-        "minecraft:behavior.ocelotattack": {
+        "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)": {
             "description": "Allows an entity to attack by sneaking and pouncing.",
             "children": [
                 {
@@ -13032,31 +13032,37 @@
                     "name": "apply_gravity",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "Applies gravity each tick. Causes more of a wave simulation, but will cause more gravity to be applied outside liquids.",
+                    "description": "Applies gravity each tick. Causes \"movement_type\" to be more impactful, but also gravity to be applied more intensely outside liquids.",
                 },
                 {
                     "name": "base_buoyancy",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "Base buoyancy used to calculate how much will a mob float.",
+                    "description": "Base buoyancy used to calculate how much will a entity float.",
                 },
                 {
                     "name": "big_wave_probability",
                     "type": "Decimal",
                     "defaultValue": "0.03",
-                    "description": "Probability for a big wave hitting the entity. Only used if `simulate_waves` is true.",
+                    "description": "Probability for a big wave hitting the entity. Only used if \"movement_type\" is \"waves\".",
                 },
                 {
                     "name": "big_wave_speed",
                     "type": "Decimal",
                     "defaultValue": "10.0",
-                    "description": "Multiplier for the speed to make a big wave. Triggered depending on 'big_wave_probability'.",
+                    "description": "Multiplier for the speed to make a big wave. Triggered depending on \"big_wave_probability\".",
+                },
+                {
+                    "name": "can_auto_step_from_liquid",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "Whether the entity can move out of a liquid block to a neighboring solid block if pushed against it.",
                 },
                 {
                     "name": "drag_down_on_buoyancy_removed",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "How much an actor will be dragged down when the Buoyancy Component is removed.",
+                    "description": "How much an entity will be dragged down when the component is removed.",
                 },
                 {
                     "name": "liquid_blocks",
@@ -13065,10 +13071,10 @@
                     "description": "List of blocks this entity can float on. Must be a liquid block.",
                 },
                 {
-                    "name": "simulate_waves",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "Should the movement simulate waves going through.",
+                    "name": "movement_type",
+                    "type": "String",
+                    "defaultValue": "waves",
+                    "description": "Type of vertical movement applied to the entity:\"waves\", simulates wave movement based on the entity speed.\"bobbing\", simulates waves going through.\"none\", simulates waves going through.",
                 },
             ],
         },
@@ -15662,7 +15668,7 @@
                     "name": "has_collision",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "Whether or not the object collides with things.",
+                    "description": "Whether or not the entity collides with things.",
                 },
                 {
                     "name": "has_gravity",
@@ -16934,7 +16940,7 @@
                     "name": "value",
                     "type": "Decimal",
                     "defaultValue": "1.0",
-                    "description": "The higher the number, the more the friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
+                    "description": "The higher the number, the more friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
                 },
             ],
         },
@@ -17371,6 +17377,7 @@
         "query.get_animation_frame": "Returns the current texture of the item",
         "query.get_default_bone_pivot": "Gets specified axis of the specified bone orientation pivot.",
         "query.get_equipped_item_name": "DEPRECATED (Use query.is_item_name_any instead if possible so names can be changed later without breaking content.) Takes one optional hand slot as a parameter (0 or 'main_hand' for main hand, 1 or 'off_hand' for off hand), and a second parameter (0=default) if you would like the equipped item or any non-zero number for the currently rendered item, and returns the name of the item in the requested slot (defaulting to the main hand if no parameter is supplied) if there is one, otherwise returns ''.",
+        "query.get_level_seed_based_fraction": "Returns a value in range [0.0, 1.0] based on the level seed.",
         "query.get_locator_offset": "Gets specified axis of the specified locator offset.",
         "query.get_name": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
         "query.get_pack_setting": "Returns value of Pack Setting slider, parameter is name of slider. Available on the Client (Resource Packs) only.",
@@ -17610,7 +17617,5 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {
-        "query.get_level_seed_based_fraction": "(EXPERIMENTAL. Enable 'Upcoming Creator Features' to use.) Returns a value in range [0.0, 1.0] based on the level seed.",
-    },
+    "molangQueryExperimental": {},
 }
