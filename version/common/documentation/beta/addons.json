@@ -24085,6 +24085,12 @@
                                             "Description": "Defines all placement directions of a block.",
                                         },
                                         {
+                                            "BlockState Name": "minecraft:multi_block_part",
+                                            "Type": "Integer",
+                                            "Valid Values": "0, 1, 2, 3",
+                                            "Description": "Defines how many block parts this multi block has. Enabled by trait 'minecraft:multi_block'",
+                                        },
+                                        {
                                             "BlockState Name": "minecraft:vertical_half",
                                             "Type": "String",
                                             "Valid Values": "bottom, top",
@@ -24528,6 +24534,37 @@
                                                                     ],
                                                                 },
                                                             ],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            "Block Trait": "\"minecraft:multi_block\"",
+                                            "Type": "JSON Object",
+                                            "Description": [
+                                                "Adds the \"minecraft:multi_block_part\" state and multi block functionality to the block.",
+                                                "Experimental toggles required: Upcoming Creator Features",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "direction",
+                                                            "Type": "String",
+                                                            "Default Value": "up",
+                                                            "Description": "The direction this multi block builds. Currently only valid values are 'up', 'down'.",
+                                                        },
+                                                        {
+                                                            "Name": "enabled_states",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": "Which state to enable. Must specify at least one. Valid value is 'minecraft:multi_block_part'.",
+                                                        },
+                                                        {
+                                                            "Name": "parts",
+                                                            "Type": "Positive Integer",
+                                                            "Default Value": "2",
+                                                            "Description": "Defines the number of parts of this multi block. Min value is 2, Max value is 4.",
                                                         },
                                                     ],
                                                 },
@@ -39163,5 +39200,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "01d3e76d94ae6e02e8a8e7853b483b4a3d2f6f0b",
+    "__OBJECTHASH__": "55e475a86c68273f1891eb06d5819600479c04f1",
 }

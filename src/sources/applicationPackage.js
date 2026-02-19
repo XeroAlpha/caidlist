@@ -111,10 +111,15 @@ const entryAnalyzer = [
         type: 'json',
         regex: /assets\/resource_packs\/(?:[^/]+)\/sounds\/sound_definitions\.json$/,
         analyze(results, entryName, soundDefinition) {
-            const { sounds } = results;
+            const { sounds, soundSubtitleMap } = results;
             const formatVersion = soundDefinition.format_version;
             if (formatVersion === '1.14.0') {
                 sounds.push(...Object.keys(soundDefinition.sound_definitions));
+                for (const [name, desc] of Object.entries(soundDefinition.sound_definitions)) {
+                    if (desc.subtitle) {
+                        soundSubtitleMap[name] = desc.subtitle;
+                    }
+                }
             } else if (!formatVersion) {
                 sounds.push(...Object.keys(soundDefinition));
             } else {
@@ -195,7 +200,7 @@ const entryAnalyzer = [
         },
         versionsGroups: [
             [undefined, '1.8.0', '1.10.0'],
-            ['1.12.0', '1.13.0', '1.14.0', '1.16.0', '1.21.0', '1.21.120']
+            ['1.12.0', '1.13.0', '1.14.0', '1.16.0', '1.21.0', '1.21.120', '1.26.10']
         ]
     },
     {
@@ -478,7 +483,8 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         renderControllerMap: {},
         entityEventsMap: {},
         entityFamilyMap: {},
-        entityPropertyDescMap: {}
+        entityPropertyDescMap: {},
+        soundSubtitleMap: {}
     };
     log('Analyzing package entries for data enums...');
     iteratePackageEntries(
@@ -579,6 +585,10 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
         }
         if (k === 'entityPropertyDescMap') {
             results[k] = sortObjectKey(v, 2);
+            return;
+        }
+        if (k === 'soundSubtitleMap') {
+            results[k] = sortObjectKey(v);
             return;
         }
         if (k.endsWith('Map')) {

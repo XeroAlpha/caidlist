@@ -666,6 +666,32 @@
                                     ],
                                 },
                                 {
+                                    "Name": "minecraft:redstone_consumer",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "A component describing how a block can consume and potentially propogate a redstone signal. This component is not availabe for block permutations.",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "min_power",
+                                                    "Type": "Integer",
+                                                    "Default Value": "0",
+                                                    "Description": "Optional minimum value for incoming signal stregth. If signal strength is greater than or equal to this value then the 'onRedstoneUpdate' event is sent to Scripts. Defaults to 0 meaning event is always emitted.",
+                                                },
+                                                {
+                                                    "Name": "propagates_power",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "false",
+                                                    "Description": "Optional Boolean to control whether a signal can pass through this block or not, defaults to false.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
                                     "Name": "minecraft:replaceable",
                                     "Type": "JSON Object",
                                     "Default Value": "",
@@ -1480,5 +1506,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "73fa5afca9d0d5aa6896bbd15ca4a92768b8f86a",
+    "__OBJECTHASH__": "e686a1645957c0caa557a48b966f0c9dc44bc022",
 }

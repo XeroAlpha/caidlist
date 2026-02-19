@@ -35,13 +35,39 @@
                                                     "Name": "origin",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
+                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
                                                 },
                                                 {
                                                     "Name": "size",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[16.0, 24.0, 16.0]",
-                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive. A max Y value above 16 requires 'format_version' >= 1.21.130 and the `Upcoming Creator Features` toggle",
+                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "minecraft:connection_rule",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "Defines whether other blocks such as fences, walls, bars, and glass panes are allowed to connect to this block.",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Name": "accepts_connections_from",
+                                                    "Type": "String",
+                                                    "Default Value": "all",
+                                                    "Description": "The type of block allowed to connect to this block. Currently, the options are: `all` (default), `only_fences`, and `none`. Note that the `only_fences` option allows connections from all Vanilla fences excluding NetherBrick.",
+                                                },
+                                                {
+                                                    "Name": "enabled_directions",
+                                                    "Type": "Array",
+                                                    "Default Value": "['north', 'south', 'east', 'west']",
+                                                    "Description": "The cardinal directions that connection is enabled for: `north`, `south`, `east`, and `west`. All directions are enabled by default. Note that if `none` is specified for `accepts_connections_from`, this field will not be used.",
                                                 },
                                             ],
                                         },
@@ -311,6 +337,12 @@
                                                     "Type": "Array",
                                                     "Default Value": "",
                                                     "Description": "When a block contains a liquid, controls the directions in which the liquid can't flow out from the block. Also controls the directions in which a block can stop liquid flowing into it if `no_reaction` is set for the `on_liquid_touches` field. Can be a list of the following directions: \"up\", \"down\", \"north\", \"south\", \"east\", \"west\". The default is an empty list; this means that liquid can flow out of all directions by default.",
+                                                },
+                                                {
+                                                    "Name": "use_liquid_clipping",
+                                                    "Type": "Boolean",
+                                                    "Default Value": "false",
+                                                    "Description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.",
                                                 },
                                             ],
                                         },
@@ -664,7 +696,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "Defines the support shape of the block. Currently only allows for blocks to have the same shape as a Vanilla fence and Vanilla stair. To work with custom stairs, requires the use of `minecraft:vertical_half` and `minecraft:cardinal_direction` or `minecraft:facing_direction` which can be set through the `minecraft:placement_direction` block trait. Custom blocks without this component will default to unit cube support.",
-                                        "Experimental toggles required: Upcoming Creator Features",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
                                         {
                                             "type": "table",
                                             "rows": [
@@ -754,7 +786,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.21.130\",",
+                                        "  \"format_version\": \"1.26.0\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1442,5 +1474,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "588a86cbb6ec27869bf34969597357db5fdbb334",
+    "__OBJECTHASH__": "379d829137db25467549ff20d13528643bdb4685",
 }

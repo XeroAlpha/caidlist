@@ -345,7 +345,15 @@ async function generateBranchedOutputFiles(cx) {
             }
             return null;
         },
-        autoMatch: ['custom']
+        autoMatch: ['custom'],
+        postProcessor(sound) {
+            forEachObject(sound, (value, key) => {
+                if (value) return;
+                if (enums.soundSubtitleMap[key]) {
+                    setInlineCommentAfterField(userTranslation.sound, key, enums.soundSubtitleMap[key]);
+                }
+            });
+        }
     });
     matchTranslations({
         ...commonOptions,

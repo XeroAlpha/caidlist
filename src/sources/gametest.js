@@ -398,6 +398,7 @@ const Extractors = [
                 const objectDesc = [];
                 const functionOwnNames = ['name', 'length', 'arguments', 'caller'];
                 const nativeFunctionRegex = /\{\s*\[native code\]\s*\}/;
+                const minifiedFunctionNameRegex = /[A-Za-z0-9]{1,3}/;
                 const defaultProto = {
                     object: Object.prototype,
                     function: Function.prototype
@@ -423,8 +424,9 @@ const Extractors = [
                             desc.name = value.name;
                             if (nativeFunctionRegex.test(String(value))) {
                                 desc.native = true;
-                            } else {
-                                desc.value = String(value);
+                            } else if (minifiedFunctionNameRegex.test(desc.name)) {
+                                desc.name = undefined;
+                                desc.probablyMinified = true;
                             }
                             desc.length = value.length;
                         }
