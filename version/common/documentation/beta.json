@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.10.23",
-    "__COMMITHASH__": "2e83a26d9c80091b567c2a878e3bc11d04323142",
-    "__MESSAGE__": "fix: Add create-release workflow to preview",
+    "__VERSION__": "1.26.10.24",
+    "__COMMITHASH__": "bfa2f9852ff9763a03e50fa34201325fcde5e1b9",
+    "__MESSAGE__": "v1.26.10.24-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -223,6 +223,99 @@
                         {
                             "name": "Biome JSON File",
                         },
+                        {
+                            "name": "Biome Replacement",
+                        },
+                        {
+                            "name": "Block Specifier",
+                        },
+                        {
+                            "name": "Molang Expression",
+                        },
+                        {
+                            "name": "custom_map_tint_grass_noise",
+                        },
+                        {
+                            "name": "custom_map_tint_grass_tint",
+                        },
+                        {
+                            "name": "minecraft:capped",
+                        },
+                        {
+                            "name": "minecraft:climate",
+                        },
+                        {
+                            "name": "minecraft:creature_spawn_probability",
+                        },
+                        {
+                            "name": "minecraft:frozen_ocean",
+                        },
+                        {
+                            "name": "minecraft:humidity",
+                        },
+                        {
+                            "name": "minecraft:map_tints",
+                        },
+                        {
+                            "name": "minecraft:mesa",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - steep_material_adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:mountain_parameters - top_slide settings",
+                        },
+                        {
+                            "name": "minecraft:multinoise_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted biome names settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_generation_rules - Weighted climate categories settings",
+                        },
+                        {
+                            "name": "minecraft:overworld_height",
+                        },
+                        {
+                            "name": "minecraft:partially_frozen",
+                        },
+                        {
+                            "name": "minecraft:replace_biomes",
+                        },
+                        {
+                            "name": "minecraft:surface_builder",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment materials settings",
+                        },
+                        {
+                            "name": "minecraft:surface_material_adjustments - surface adjustment settings",
+                        },
+                        {
+                            "name": "minecraft:swamp",
+                        },
+                        {
+                            "name": "minecraft:tags",
+                        },
+                        {
+                            "name": "minecraft:the_end",
+                        },
+                        {
+                            "name": "minecraft:village_type",
+                        },
                     ],
                 },
             ],
@@ -369,6 +462,9 @@
                         },
                         {
                             "name": "held_item_ignores_lighting",
+                        },
+                        {
+                            "name": "held_item_scale",
                         },
                         {
                             "name": "hide_armor",
@@ -1027,6 +1123,14 @@
                             ],
                         },
                         {
+                            "name": "is_tamed",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "is_target",
                             "sections": [
                                 {
@@ -1541,7 +1645,7 @@
                                     "name": "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.offer_flower",
+                                    "name": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.open_door",
@@ -1565,10 +1669,10 @@
                                     "name": "minecraft:behavior.place_block",
                                 },
                                 {
-                                    "name": "minecraft:behavior.play",
+                                    "name": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.play_dead",
+                                    "name": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
                                 },
                                 {
                                     "name": "minecraft:behavior.player_ride_tamed",
@@ -5836,6 +5940,7 @@
         "is_sneaking": "Returns true if the subject entity is sneaking.",
         "is_snow_covered": "Tests whether the Subject is in an area with snow cover",
         "is_sprinting": "Tests if the subject is sprinting.",
+        "is_tamed": "Tests whether the Subject is tamed.",
         "is_target": "Returns true if the subject entity is the target of the calling entity.",
         "is_temperature_type": "Tests whether the current temperature is a given type.",
         "is_temperature_value": "Tests the current temperature against a provided value in the range (0.0, 1.0) where 0.0f is the coldest temp and 1.0f is the hottest.",
@@ -9479,7 +9584,7 @@
                 },
             ],
         },
-        "minecraft:behavior.offer_flower": {
+        "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)": {
             "description": "Allows the mob to offer a flower to another mob with the minecraft:take_flower behavior.",
             "children": [
                 {
@@ -9823,7 +9928,7 @@
                 },
             ],
         },
-        "minecraft:behavior.play": {
+        "minecraft:behavior.play (See JSON Schema since 1.26.10)": {
             "description": "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
             "children": [
                 {
@@ -9876,7 +9981,7 @@
                 },
             ],
         },
-        "minecraft:behavior.play_dead": {
+        "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)": {
             "description": "Allows this entity to pretend to be dead to avoid being targeted by attackers.",
             "children": [
                 {
@@ -9887,7 +9992,7 @@
                 },
                 {
                     "name": "damage_sources",
-                    "type": "Array",
+                    "type": "Enumerator",
                     "defaultValue": "all",
                     "description": "The list of Entity Damage Sources that will cause this mob to play dead.",
                 },

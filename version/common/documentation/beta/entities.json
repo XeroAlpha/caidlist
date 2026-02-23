@@ -143,6 +143,20 @@
                     ],
                 },
                 {
+                    "name": "held_item_scale",
+                    "id": "held_item_scale",
+                    "level": 2,
+                    "content": [
+                        "Scales the entity's held item. Defaults to 1.0. Must be greater than zero.",
+                        {
+                            "type": "code",
+                            "content": [
+                                "\"held_item_scale\": 1.0",
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "hide_armor",
                     "id": "hide_armor",
                     "level": 2,
@@ -11662,6 +11676,141 @@
                     ],
                 },
                 {
+                    "name": "is_tamed",
+                    "id": "is_tamed",
+                    "level": 2,
+                    "content": [
+                        "Tests whether the Subject is tamed.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_tamed\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_tamed\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_target",
                     "id": "is_target",
                     "level": 2,
@@ -19881,8 +20030,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.offer_flower",
-                            "id": "minecraft:behavior.offer_flower",
+                            "name": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to offer a flower to another mob with the minecraft:take_flower behavior.",
@@ -20298,8 +20447,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.play",
-                            "id": "minecraft:behavior.play",
+                            "name": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
@@ -20359,8 +20508,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.play_dead",
-                            "id": "minecraft:behavior.play_dead",
+                            "name": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to pretend to be dead to avoid being targeted by attackers.",
@@ -20375,7 +20524,7 @@
                                         },
                                         {
                                             "Name": "damage_sources",
-                                            "Type": "Array",
+                                            "Type": "Enumerator",
                                             "Default Value": "all",
                                             "Description": "The list of Entity Damage Sources that will cause this mob to play dead.",
                                         },
@@ -29825,8 +29974,8 @@
                                             "ID": "1864655070482369691",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.offer_flower",
-                                            "ID": "14523794672066366898",
+                                            "JSON Name": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
+                                            "ID": "8438151071273746171",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.open_door",
@@ -29857,12 +30006,12 @@
                                             "ID": "8805775981579988731",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.play",
-                                            "ID": "9028661884418335188",
+                                            "JSON Name": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
+                                            "ID": "362519989320245725",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.play_dead",
-                                            "ID": "15611122012431414539",
+                                            "JSON Name": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
+                                            "ID": "8875808673684851850",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.player_ride_tamed",
@@ -32046,5 +32195,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "e9b9ca3b202f7be455d4d2aacab3068b4f2b8792",
+    "__OBJECTHASH__": "c3c490c25b1b7aedbe4375b91e48a07210712ce4",
 }
