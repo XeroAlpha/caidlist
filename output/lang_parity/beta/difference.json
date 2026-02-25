@@ -194,7 +194,8 @@
             ],
             "": [
                 "hbui.Realms.RealmsHub.Settings.Hub.Settings.leave.cancelAction",
-                "hbui.Realms.RealmsHub.SlotsScreen.Activate.cancel"
+                "hbui.Realms.RealmsHub.SlotsScreen.Activate.cancel",
+                "hbui.RealmsStories.RealmPlayerListItem.cancel"
             ],
             "取消    ": [
                 "key.cancelToast"
@@ -218,6 +219,9 @@
                 "hbui.RealmsPurchaseSubscriptionRoute.ReconciliationModals.ok",
                 "hbui.RealmsStories.OptOutInGameModal.confirm",
                 "dr.button.ok"
+            ],
+            "": [
+                "hbui.RealmsPurchaseSubscriptionRoute.errorModals.failedFetchAfterPurchase.ok"
             ]
         },
         "javaLookup": {
@@ -398,6 +402,29 @@
         }
     },
     {
+        "source": "Chat",
+        "bedrockLookup": {
+            "聊天": [
+                "hbui.Bedtime.chatButtonInputLegend",
+                "accessibility.chat.tts.textboxTitle",
+                "chat.title",
+                "howtoplay.chat",
+                "options.chat.visibility",
+                "hudScreen.tooltip.basic.chat"
+            ],
+            "": [
+                "hbui.ReportPlayerRoute.chatTypeSelector.gameChat"
+            ]
+        },
+        "javaLookup": {
+            "聊天": [
+                "gamerule.category.chat",
+                "options.accessibility.text_background.chat",
+                "options.chat.visibility"
+            ]
+        }
+    },
+    {
         "source": "Selected",
         "bedrockLookup": {
             "已选择": [
@@ -460,7 +487,6 @@
                 "hbui.RealmsPreviews.create.select",
                 "hbui.RealmsPreviews.ReplaceWorld.select",
                 "hbui.RealmsPreviews.SubscriptionNeeded.select",
-                "hbui.RealmsPurchaseSubscriptionRoute.ErrorModals.select",
                 "hbui.RealmsPurchaseSubscriptionRoute.ReconciliationModals.select",
                 "hbui.RealmsPurchaseSubscriptionRoute.select",
                 "hbui.RealmsStories.CommentsScreen.select",
@@ -491,7 +517,8 @@
                 "gui.select"
             ],
             "": [
-                "hbui.Realms.RealmsHub.Settings.Subscriptions.Button.Select"
+                "hbui.Realms.RealmsHub.Settings.Subscriptions.Button.Select",
+                "hbui.RealmsPurchaseSubscriptionRoute.errorModals.select"
             ]
         },
         "javaLookup": {
@@ -1047,6 +1074,9 @@
                 "addExternalServerScreen.removeButtonLabel",
                 "3d_export.remove"
             ],
+            "": [
+                "hbui.RealmsStories.RealmPlayerListItem.remove.confirm"
+            ],
             "删除": [
                 "realmsInvitationScreen.kick"
             ],
@@ -1138,6 +1168,30 @@
             "已屏蔽": [
                 "gui.socialInteractions.status_blocked",
                 "gui.socialInteractions.tab_blocked"
+            ]
+        }
+    },
+    {
+        "source": "Options",
+        "bedrockLookup": {
+            "选项": [
+                "hbui.PlayScreen.realmsTab.joinRealmOptionsModalMenu.title",
+                "hbui.PlayScreen.realmsTab.options",
+                "hbui.RealmsFeedModeration.item.options.header",
+                "hbui.RealmsStories.feedPost.options",
+                "hbui.RealmsStories.Timeline.OptionsModal.options",
+                "realmsSettingsScreen.optionsTitle",
+                "menu.options",
+                "options.title",
+                "pauseScreen.options"
+            ],
+            "编辑": [
+                "hbui.RealmsStories.RealmPlayerListItem.edit"
+            ]
+        },
+        "javaLookup": {
+            "选项": [
+                "options.title"
             ]
         }
     },
@@ -15515,7 +15569,10 @@
                 "subtitles.entity.camel.saddle",
                 "subtitles.entity.horse.saddle",
                 "subtitles.entity.pig.saddle",
-                "subtitles.item.nautilus_saddle_equip"
+                "subtitles.item.nautilus_saddle_equip",
+                "subtitles.entity.camel_husk.saddle",
+                "subtitles.item.nautilus_saddle_underwater_equip",
+                "subtitles.item.underwater_saddle.equip"
             ]
         },
         "javaLookup": {
@@ -18854,7 +18911,8 @@
         "source": "Nautilus jets",
         "bedrockLookup": {
             "": [
-                "subtitles.entity.nautilus.dash"
+                "subtitles.entity.nautilus.dash",
+                "subtitles.entity.nautilus.dash_land"
             ]
         },
         "javaLookup": {
@@ -18868,7 +18926,8 @@
         "source": "Nautilus recovers",
         "bedrockLookup": {
             "": [
-                "subtitles.entity.nautilus.dash_ready"
+                "subtitles.entity.nautilus.dash_ready",
+                "subtitles.entity.nautilus.dash_ready_land"
             ]
         },
         "javaLookup": {
@@ -19376,7 +19435,8 @@
             "": [
                 "subtitles.entity.parrot.imitate.husk",
                 "subtitles.entity.parrot.imitate.zombie",
-                "subtitles.entity.parrot.imitate.zombie_villager"
+                "subtitles.entity.parrot.imitate.zombie_villager",
+                "subtitles.entity.parrot.imitate.zombie_horse"
             ]
         },
         "javaLookup": {
@@ -22680,7 +22740,8 @@
         "source": "Zombie Nautilus recovers",
         "bedrockLookup": {
             "": [
-                "subtitles.entity.zombie_nautilus.dash_ready"
+                "subtitles.entity.zombie_nautilus.dash_ready",
+                "subtitles.entity.zombie_nautilus.dash_ready_land"
             ]
         },
         "javaLookup": {
@@ -23778,10 +23839,26 @@
         }
     },
     {
+        "source": "Spear jabs",
+        "bedrockLookup": {
+            "": [
+                "subtitles.item.spear.attack",
+                "subtitles.item.spear_wood.attack"
+            ]
+        },
+        "javaLookup": {
+            "矛：戳刺": [
+                "subtitles.item.spear_wood.attack",
+                "subtitles.item.spear.attack"
+            ]
+        }
+    },
+    {
         "source": "Spear hits",
         "bedrockLookup": {
             "": [
-                "subtitles.item.spear.hit"
+                "subtitles.item.spear.hit",
+                "subtitles.item.spear_wood.hit"
             ]
         },
         "javaLookup": {
@@ -23792,10 +23869,25 @@
         }
     },
     {
+        "source": "Spear lunges",
+        "bedrockLookup": {
+            "": [
+                "subtitles.item.spear.lunge",
+                "subtitles.item.spear_wood.lunge"
+            ]
+        },
+        "javaLookup": {
+            "矛：突进": [
+                "subtitles.item.spear.lunge"
+            ]
+        }
+    },
+    {
         "source": "Charges with Spear",
         "bedrockLookup": {
             "": [
-                "subtitles.item.spear.use"
+                "subtitles.item.spear.use",
+                "subtitles.item.spear_wood.use"
             ]
         },
         "javaLookup": {
@@ -24075,6 +24167,190 @@
         "javaLookup": {
             "雨：落下": [
                 "subtitles.weather.rain"
+            ]
+        }
+    },
+    {
+        "source": "Shelf activates",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.activate"
+            ]
+        },
+        "javaLookup": {
+            "展示架：激活": [
+                "subtitles.block.shelf.activate"
+            ]
+        }
+    },
+    {
+        "source": "Shelf deactivates",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.deactivate"
+            ]
+        },
+        "javaLookup": {
+            "展示架：取消激活": [
+                "subtitles.block.shelf.deactivate"
+            ]
+        }
+    },
+    {
+        "source": "Items swap",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.multi_swap"
+            ]
+        },
+        "javaLookup": {
+            "物品：交换": [
+                "subtitles.block.shelf.multi_swap"
+            ]
+        }
+    },
+    {
+        "source": "Item placed",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.place_item"
+            ]
+        },
+        "javaLookup": {
+            "物品：放置": [
+                "subtitles.block.shelf.place_item"
+            ]
+        }
+    },
+    {
+        "source": "Item swaps",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.single_swap"
+            ]
+        },
+        "javaLookup": {
+            "物品：交换": [
+                "subtitles.block.shelf.single_swap"
+            ]
+        }
+    },
+    {
+        "source": "Item taken",
+        "bedrockLookup": {
+            "": [
+                "subtitles.block.shelf.take_item"
+            ]
+        },
+        "javaLookup": {
+            "物品：被取出": [
+                "subtitles.block.shelf.take_item"
+            ]
+        }
+    },
+    {
+        "source": "Copper Golem is petrified",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.copper_golem_become_statue"
+            ]
+        },
+        "javaLookup": {
+            "铜傀儡：固定": [
+                "subtitles.entity.copper_golem_become_statue"
+            ]
+        }
+    },
+    {
+        "source": "Nautilus swims",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.nautilus.swim"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉螺：游泳": [
+                "subtitles.entity.nautilus.swim"
+            ]
+        }
+    },
+    {
+        "source": "Parrot grumphs",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.parrot.imitate.camel_husk"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉：咕哝": [
+                "subtitles.entity.parrot.imitate.camel_husk"
+            ]
+        }
+    },
+    {
+        "source": "Parrot crackles",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.parrot.imitate.parched"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉：咯咯声": [
+                "subtitles.entity.parrot.imitate.parched"
+            ]
+        }
+    },
+    {
+        "source": "Parrot gargles",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.parrot.imitate.zombie_nautilus"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉：咕噜": [
+                "subtitles.entity.parrot.imitate.zombie_nautilus"
+            ]
+        }
+    },
+    {
+        "source": "Zombie Nautilus jets",
+        "bedrockLookup": {
+            "": [
+                "subtitles.entity.zombie_nautilus.dash",
+                "subtitles.entity.zombie_nautilus.dash_land"
+            ]
+        },
+        "javaLookup": {
+            "僵尸鹦鹉螺：喷进": [
+                "subtitles.entity.zombie_nautilus.dash",
+                "subtitles.entity.zombie_nautilus.dash_land"
+            ]
+        }
+    },
+    {
+        "source": "Nautilus Armor equips",
+        "bedrockLookup": {
+            "": [
+                "subtitles.item.armor.equip_nautilus"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉螺铠：装备": [
+                "subtitles.item.armor.equip_nautilus"
+            ]
+        }
+    },
+    {
+        "source": "Nautilus Armor unequips",
+        "bedrockLookup": {
+            "": [
+                "subtitles.item.armor.unequip_nautilus"
+            ]
+        },
+        "javaLookup": {
+            "鹦鹉螺铠：卸下": [
+                "subtitles.item.armor.unequip_nautilus"
             ]
         }
     }

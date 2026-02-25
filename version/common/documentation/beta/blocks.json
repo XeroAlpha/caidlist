@@ -23,6 +23,24 @@
                                     "Description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.",
                                 },
                                 {
+                                    "Name": "minecraft:chest_obstruction",
+                                    "Type": "JSON Object",
+                                    "Default Value": "",
+                                    "Description": [
+                                        "The description identifier of the chest obstruction component",
+                                        "Experimental toggles required: Upcoming Creator Features",
+                                        {
+                                            "section": "obstruction_rule",
+                                            "content": [
+                                                "[optional] How the block should be evaluated by a chest during chest opening. Must be one of the following options:",
+                                                "\"always\" - Will always obstruct a chest from opening when directly above it.",
+                                                "\"never\" - Will never obstruct a chest from opening when directly above it.",
+                                                "\"shape\" - Will use the Blocks AABB shape to determine if the chest is obstructed from opening when directly above it; this is the default value if no rule is provided.",
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
                                     "Name": "minecraft:collision_box",
                                     "Type": "Boolean / JSON Object",
                                     "Default Value": "true",
@@ -492,7 +510,7 @@
                                                             "Type": "Array",
                                                             "Default Value": "",
                                                             "Description": [
-                                                                "List of blocks that this block can be placed against in the \"allowed_faces\" direction. Limited to 64 blocks. Each block in this list can either be specified as a String (block name) or as a BlockDescriptor. A BlockDescriptor is an object that allows you to reference a block (or multiple blocks) based on its tags, or based on its name and states. The fields of a BlockDescriptor are described below.",
+                                                                "List of blocks that this block can be placed against in the \"allowed_faces\" direction. Limited to 64 blocks. Each block in this list can either be specified as a String (block name) or as a BlockDescriptor. A BlockDescriptor is an object that allows you to reference a block (or multiple blocks) based on its tags, or based on its name and states. The fields of a BlockDescriptor are described below. If the blocks in the filter are liquid blocks, ensure that an item block is created with a 'liquid_clipped' component set to 'true' and a 'block_placer' component with 'replace_block_item' set to 'true'.",
                                                                 {
                                                                     "type": "table",
                                                                     "rows": [
@@ -670,7 +688,7 @@
                                     "Type": "JSON Object",
                                     "Default Value": "",
                                     "Description": [
-                                        "A component describing how a block can consume and potentially propogate a redstone signal. This component is not availabe for block permutations.",
+                                        "A component describing how a block can consume and potentially propogate a redstone signal. This component is not available for block permutations.",
                                         "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.0)",
                                         {
                                             "type": "table",
@@ -679,7 +697,7 @@
                                                     "Name": "min_power",
                                                     "Type": "Integer",
                                                     "Default Value": "0",
-                                                    "Description": "Optional minimum value for incoming signal stregth. If signal strength is greater than or equal to this value then the 'onRedstoneUpdate' event is sent to Scripts. Defaults to 0 meaning event is always emitted.",
+                                                    "Description": "Optional minimum value for incoming signal strength. If signal strength is greater than or equal to this value then the 'onRedstoneUpdate' event is sent to Scripts. Defaults to 0 meaning event is always emitted.",
                                                 },
                                                 {
                                                     "Name": "propagates_power",
@@ -1506,5 +1524,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "e686a1645957c0caa557a48b966f0c9dc44bc022",
+    "__OBJECTHASH__": "72a3eed4221be7838821990c3d7f23551e514d8b",
 }

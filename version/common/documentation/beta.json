@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.10.24",
-    "__COMMITHASH__": "bfa2f9852ff9763a03e50fa34201325fcde5e1b9",
-    "__MESSAGE__": "v1.26.10.24-preview",
+    "__VERSION__": "1.26.10.25",
+    "__COMMITHASH__": "97cf3e4d78b524fdda6ad57ff8ab65c5a2a28df5",
+    "__MESSAGE__": "v1.26.10.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2165,7 +2165,10 @@
                                     "name": "minecraft:projectile",
                                 },
                                 {
-                                    "name": "minecraft:pushable",
+                                    "name": "minecraft:pushable_by_block",
+                                },
+                                {
+                                    "name": "minecraft:pushable_by_entity",
                                 },
                                 {
                                     "name": "minecraft:raid_trigger",
@@ -4975,6 +4978,11 @@
                     "description": "Determines whether the block is breathable by defining if the block is treated as a `solid` or as `air`. The default is `solid` if this component is omitted.",
                 },
                 {
+                    "name": "minecraft:chest_obstruction",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                },
+                {
                     "name": "minecraft:collision_box",
                     "type": "Boolean / JSON Object",
                     "defaultValue": "true",
@@ -5290,13 +5298,13 @@
                     "name": "minecraft:redstone_consumer",
                     "type": "JSON Object",
                     "defaultValue": "",
-                    "description": "A component describing how a block can consume and potentially propogate a redstone signal. This component is not availabe for block permutations.",
+                    "description": "A component describing how a block can consume and potentially propogate a redstone signal. This component is not available for block permutations.",
                     "children": [
                         {
                             "name": "min_power",
                             "type": "Integer",
                             "defaultValue": "0",
-                            "description": "Optional minimum value for incoming signal stregth. If signal strength is greater than or equal to this value then the 'onRedstoneUpdate' event is sent to Scripts. Defaults to 0 meaning event is always emitted.",
+                            "description": "Optional minimum value for incoming signal strength. If signal strength is greater than or equal to this value then the 'onRedstoneUpdate' event is sent to Scripts. Defaults to 0 meaning event is always emitted.",
                         },
                         {
                             "name": "propagates_power",
@@ -15953,23 +15961,6 @@
                     "type": "Decimal",
                     "defaultValue": "0",
                     "description": "Determines how much difficulty affects accuracy. Accuracy is determined by the formula uncertaintyBase - difficultyLevel * uncertaintyMultiplier",
-                },
-            ],
-        },
-        "minecraft:pushable": {
-            "description": "Defines what can push an entity between other entities and pistons.",
-            "children": [
-                {
-                    "name": "is_pushable",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "Whether the entity can be pushed by other entities.",
-                },
-                {
-                    "name": "is_pushable_by_piston",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "Whether the entity can be pushed by pistons safely.",
                 },
             ],
         },
