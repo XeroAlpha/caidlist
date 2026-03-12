@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.10.26",
-    "__COMMITHASH__": "77639195abc1bf21fa98ad567cea95649883bf50",
-    "__MESSAGE__": "v1.26.10.26-preview",
+    "__VERSION__": "1.26.20.20",
+    "__COMMITHASH__": "41d983f927dd7a64337e80c111d018493c91a180",
+    "__MESSAGE__": "v1.26.20.20-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -643,6 +643,14 @@
                             ],
                         },
                         {
+                            "name": "has_equipment_block_tag",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "has_equipment_tag",
                             "sections": [
                                 {
@@ -684,6 +692,14 @@
                         },
                         {
                             "name": "has_ranged_weapon",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "has_same_equipment_in_slot_as",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -1474,7 +1490,7 @@
                                     "name": "minecraft:behavior.enderman_take_block",
                                 },
                                 {
-                                    "name": "minecraft:behavior.equip_item",
+                                    "name": "minecraft:behavior.equip_item (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)",
@@ -1588,10 +1604,10 @@
                                     "name": "minecraft:behavior.move_around_target",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_indoors",
+                                    "name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_outdoors",
+                                    "name": "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.move_through_village",
@@ -2370,9 +2386,6 @@
                                     "name": "minecraft:flying_speed",
                                 },
                                 {
-                                    "name": "minecraft:friction_modifier",
-                                },
-                                {
                                     "name": "minecraft:ground_offset",
                                 },
                                 {
@@ -2464,6 +2477,9 @@
                                 },
                                 {
                                     "name": "minecraft:type_family",
+                                },
+                                {
+                                    "name": "minecraft:uses_legacy_friction",
                                 },
                                 {
                                     "name": "minecraft:variant",
@@ -2718,11 +2734,6 @@
                     "sections": [
                         {
                             "name": "Fog Schema",
-                            "sections": [
-                                {
-                                    "name": "Fog Json Schema",
-                                },
-                            ],
                         },
                     ],
                 },
@@ -5888,12 +5899,14 @@
         "has_damage": "Returns true when the subject entity receives the named damage type.",
         "has_damaged_equipment": "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
+        "has_equipment_block_tag": "Tests for the presence of a block item with the specified block tag in the specified slot of the entity.",
         "has_equipment_tag": "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
         "has_item_with_component": "Returns true when the subject entity is holding a item with the specified component.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
         "has_nametag": "Tests if the subject has been given a custom name.",
         "has_property": "Tests for the presence of a property of the subject entity.",
         "has_ranged_weapon": "Returns true when the subject entity is holding a ranged weapon like a bow or crossbow.",
+        "has_same_equipment_in_slot_as": "Returns whether the subject entity has the same item equipped in the specified slot as calling entity. Only supports specified slots: \"main_hand\", \"head\", \"torso\", \"leg\", \"feet\", and \"body\".",
         "has_silk_touch": "Tests if the subject is holding an item with silk touch.",
         "has_tag": "Returns true if the subject entity has the tag provided.",
         "has_target": "Returns true if the subject entity has a valid target.",
@@ -8865,7 +8878,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_indoors": {
+        "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)": {
             "description": "Allows this entity to move indoors.",
             "children": [
                 {
@@ -8882,13 +8895,13 @@
                 },
             ],
         },
-        "minecraft:behavior.move_outdoors": {
+        "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)": {
             "description": "Allows this entity to move outdoors.",
             "children": [
                 {
                     "name": "goal_radius",
                     "type": "Decimal",
-                    "defaultValue": "0.500000",
+                    "defaultValue": "2.000000",
                     "description": "The radius away from the target block to count as reaching the goal.",
                 },
                 {
@@ -13287,7 +13300,7 @@
                             "name": "deals_damage",
                             "type": "Boolean",
                             "defaultValue": "yes",
-                            "description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity.                                          \\n- \"no\", received damage is not applied to the entity.                                          \\n- \"no_but_side_effects_apply\", received damage is not applied to the entity, but the side effects of the attack are. This means that the attacker's weapon loses durability, enchantment side effects are applied, and so on.",
+                            "description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity and all consequences of the attack occur.                                          \\n- \"no\", entity is unaffected and no side effects from attacking occur.                                          \\n- \"no_but_side_effects_apply\", entity is unaffected, but the side effects of the attack apply. This means that the attacker's weapon loses durability.                                          \\n- \"no_but_entity_effects_apply\", damage is not applied to the entity, but knockback and enchantments are applied and the attacker's weapon is used as normal. The entity does not flash red.",
                         },
                         {
                             "name": "on_damage",
@@ -16967,17 +16980,6 @@
                     "type": "Decimal",
                     "defaultValue": "0.02",
                     "description": "Flying speed in blocks per tick.",
-                },
-            ],
-        },
-        "minecraft:friction_modifier": {
-            "description": "Defines how much friction affects this entity.",
-            "children": [
-                {
-                    "name": "value",
-                    "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "The higher the number, the more friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
                 },
             ],
         },

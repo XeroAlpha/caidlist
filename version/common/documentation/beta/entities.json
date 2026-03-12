@@ -3338,6 +3338,194 @@
                     ],
                 },
                 {
+                    "name": "has_equipment_block_tag",
+                    "id": "has_equipment_block_tag",
+                    "level": 2,
+                    "content": [
+                        "Tests for the presence of a block item with the specified block tag in the specified slot of the entity.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "main_hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": "",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) The component name to look for",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_equipment_block_tag\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"minecraft:explode\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_equipment_block_tag\", \"value\": \"minecraft:explode\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "has_equipment_tag",
                     "id": "has_equipment_tag",
                     "level": 2,
@@ -4194,6 +4382,194 @@
                                     "type": "code",
                                     "content": [
                                         "{ \"test\": \"has_ranged_weapon\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "has_same_equipment_in_slot_as",
+                    "id": "has_same_equipment_in_slot_as",
+                    "level": 2,
+                    "content": [
+                        "Returns whether the subject entity has the same item equipped in the specified slot as calling entity. Only supports specified slots: \"main_hand\", \"head\", \"torso\", \"leg\", \"feet\", and \"body\".",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "main_hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": "",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "",
+                                    "Description": "(Required) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_same_equipment_in_slot_as\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"has_same_equipment_in_slot_as\", \"value\": \"true\" }",
                                     ],
                                 },
                             ],
@@ -17063,8 +17439,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.equip_item",
-                            "id": "minecraft:behavior.equip_item",
+                            "name": "minecraft:behavior.equip_item (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.equip_item (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "The entity puts on the desired equipment.",
@@ -19145,8 +19521,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.move_indoors",
-                            "id": "minecraft:behavior.move_indoors",
+                            "name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to move indoors.",
@@ -19170,8 +19546,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.move_outdoors",
-                            "id": "minecraft:behavior.move_outdoors",
+                            "name": "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to move outdoors.",
@@ -19181,7 +19557,7 @@
                                         {
                                             "Name": "goal_radius",
                                             "Type": "Decimal",
-                                            "Default Value": "0.500000",
+                                            "Default Value": "2.000000",
                                             "Description": "The radius away from the target block to count as reaching the goal.",
                                         },
                                         {
@@ -24505,7 +24881,7 @@
                             "id": "minecraft:can_join_raid",
                             "level": 4,
                             "content": [
-                                "Determines that this entity can join an existing raid.",
+                                "Specifies if an entity can join a raid.",
                             ],
                         },
                         {
@@ -24768,7 +25144,7 @@
                                                             "Name": "deals_damage",
                                                             "Type": "Boolean",
                                                             "Default Value": "yes",
-                                                            "Description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity.                                          \\n- \"no\", received damage is not applied to the entity.                                          \\n- \"no_but_side_effects_apply\", received damage is not applied to the entity, but the side effects of the attack are. This means that the attacker's weapon loses durability, enchantment side effects are applied, and so on.",
+                                                            "Description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity and all consequences of the attack occur.                                          \\n- \"no\", entity is unaffected and no side effects from attacking occur.                                          \\n- \"no_but_side_effects_apply\", entity is unaffected, but the side effects of the attack apply. This means that the attacker's weapon loses durability.                                          \\n- \"no_but_entity_effects_apply\", damage is not applied to the entity, but knockback and enchantments are applied and the attacker's weapon is used as normal. The entity does not flash red.",
                                                         },
                                                         {
                                                             "Name": "on_damage",
@@ -28761,7 +29137,7 @@
                             "id": "minecraft:suspect_tracking",
                             "level": 4,
                             "content": [
-                                "Allows this entity to remember suspicious locations",
+                                "Allows this entity to remember suspicious locations.",
                             ],
                         },
                         {
@@ -29358,7 +29734,7 @@
                             "id": "minecraft:vibration_damper",
                             "level": 4,
                             "content": [
-                                "Vibrations emitted by this entity will be ignored.",
+                                "Vibrations emitted by an entity with this component will be ignored.",
                             ],
                         },
                         {
@@ -29737,8 +30113,8 @@
                                             "ID": "-537294220",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.equip_item",
-                                            "ID": "13771509599928214056",
+                                            "JSON Name": "minecraft:behavior.equip_item (See JSON Schema since 1.26.20)",
+                                            "ID": "9297102446755799832",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)",
@@ -29889,12 +30265,12 @@
                                             "ID": "12172580866581071579",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.move_indoors",
-                                            "ID": "15759011189030877060",
+                                            "JSON Name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
+                                            "ID": "7148739611655517612",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.move_outdoors",
-                                            "ID": "13363481534821336549",
+                                            "JSON Name": "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)",
+                                            "ID": "11020071531498447677",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.move_through_village",
@@ -30889,10 +31265,6 @@
                                             "ID": "-570508595",
                                         },
                                         {
-                                            "JSON Name": "minecraft:friction_modifier",
-                                            "ID": "-714364556",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:ground_offset",
                                             "ID": "-1816881803",
                                         },
@@ -31015,6 +31387,10 @@
                                         {
                                             "JSON Name": "minecraft:type_family",
                                             "ID": "-255011285",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:uses_legacy_friction",
+                                            "ID": "1205386943",
                                         },
                                         {
                                             "JSON Name": "minecraft:variant",
@@ -31304,25 +31680,6 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.02",
                                             "Description": "Flying speed in blocks per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:friction_modifier",
-                            "id": "minecraft:friction_modifier",
-                            "level": 4,
-                            "content": [
-                                "Defines how much friction affects this entity.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "value",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "The higher the number, the more friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
                                         },
                                     ],
                                 },
@@ -31822,6 +32179,14 @@
                             ],
                         },
                         {
+                            "name": "minecraft:uses_legacy_friction",
+                            "id": "minecraft:uses_legacy_friction",
+                            "level": 4,
+                            "content": [
+                                "When set, legacy calculations are used when applying \"minecraft:friction_modifier\". This component is automatically added to legacy content to preserve existing behavior. The legacy calculations are incorrect and should not be used for new content.",
+                            ],
+                        },
+                        {
                             "name": "minecraft:variant",
                             "id": "minecraft:variant",
                             "level": 4,
@@ -32190,5 +32555,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "e8030dc8cbbb41a33f906914fefddc1e9524fafe",
+    "__OBJECTHASH__": "afa6bf42f5ef9e96f26f4e028c0a9415e237c9e9",
 }
