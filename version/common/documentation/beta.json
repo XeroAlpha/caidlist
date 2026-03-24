@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.20.20",
-    "__COMMITHASH__": "41d983f927dd7a64337e80c111d018493c91a180",
-    "__MESSAGE__": "v1.26.20.20-preview",
+    "__VERSION__": "1.26.20.21",
+    "__COMMITHASH__": "29551a24d8f38f467a0ef65ef28de9316f22d2b0",
+    "__MESSAGE__": "fix: Update version.json for v1.26.20.21-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -636,14 +636,6 @@
                         },
                         {
                             "name": "has_equipment",
-                            "sections": [
-                                {
-                                    "name": "Examples",
-                                },
-                            ],
-                        },
-                        {
-                            "name": "has_equipment_block_tag",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -1568,10 +1560,10 @@
                                     "name": "minecraft:behavior.investigate_suspicious_location (See JSON Schema since 1.21.130)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.jump_around_target",
+                                    "name": "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.jump_to_block",
+                                    "name": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.knockback_roar",
@@ -1601,7 +1593,7 @@
                                     "name": "minecraft:behavior.mount_pathing",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_around_target",
+                                    "name": "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
@@ -5170,7 +5162,7 @@
                             "name": "use_liquid_clipping",
                             "type": "Boolean",
                             "defaultValue": "false",
-                            "description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.",
+                            "description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.A liquid's base visual shape is ALWAYS a quad, they do not have more subdivisions.When use_liquid_clipping is TRUE, the game will attempt to reduce the visible volume of water if the collision shape allows it. Eg. a wall will turn the water base shape into a rectangle on the side of the incoming water.When use_liquid_clipping is FALSE, the game will preserve the water base shape as a full square, no matter what the collision shape of the block they share space with is.",
                         },
                     ],
                 },
@@ -5899,7 +5891,6 @@
         "has_damage": "Returns true when the subject entity receives the named damage type.",
         "has_damaged_equipment": "Tests for the presence of a damaged named item in the designated slot of the subject entity.",
         "has_equipment": "Tests for the presence of a named item in the designated slot of the subject entity.",
-        "has_equipment_block_tag": "Tests for the presence of a block item with the specified block tag in the specified slot of the entity.",
         "has_equipment_tag": "Tests for the presence of an item with the named tag in the designated slot of the subject entity.",
         "has_item_with_component": "Returns true when the subject entity is holding a item with the specified component.",
         "has_mob_effect": "Tests whether the Subject has the specified mob effect.",
@@ -8163,7 +8154,7 @@
                 },
             ],
         },
-        "minecraft:behavior.jump_around_target": {
+        "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to jump around a target.",
             "children": [
                 {
@@ -8258,7 +8249,7 @@
                 },
             ],
         },
-        "minecraft:behavior.jump_to_block": {
+        "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to jump to another random block.",
             "children": [
                 {
@@ -8313,13 +8304,13 @@
                     "name": "search_height",
                     "type": "Integer",
                     "defaultValue": "10",
-                    "description": "The height (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                    "description": "The height (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                 },
                 {
                     "name": "search_width",
                     "type": "Integer",
                     "defaultValue": "8",
-                    "description": "The width (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                    "description": "The width (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                 },
             ],
         },
@@ -8831,7 +8822,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_around_target": {
+        "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_spread_degrees'.",
             "children": [
                 {

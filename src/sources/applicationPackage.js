@@ -134,7 +134,7 @@ const entryAnalyzer = [
         analyze(results, entryName, particle) {
             const { particleEmitters } = results;
             const formatVersion = particle.format_version;
-            if (formatVersion === '1.10.0' || formatVersion === '1.21.60') {
+            if (formatVersion === '1.10.0' || formatVersion === '1.21.60' || formatVersion === '1.26.10') {
                 particleEmitters.push(particle.particle_effect.description.identifier);
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
@@ -364,7 +364,8 @@ const entryAnalyzer = [
                 '1.21.120',
                 '1.21.130',
                 '1.26.0',
-                '1.26.10'
+                '1.26.10',
+                '1.26.20'
             ]
         ]
     },

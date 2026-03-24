@@ -3338,194 +3338,6 @@
                     ],
                 },
                 {
-                    "name": "has_equipment_block_tag",
-                    "id": "has_equipment_block_tag",
-                    "level": 2,
-                    "content": [
-                        "Tests for the presence of a block item with the specified block tag in the specified slot of the entity.",
-                        {
-                            "type": "table",
-                            "rows": [
-                                {
-                                    "Name": "domain",
-                                    "Type": "String",
-                                    "Default": "any",
-                                    "Description": [
-                                        "(Optional) The equipment location to test",
-                                        {
-                                            "type": "table",
-                                            "rows": [
-                                                {
-                                                    "Options": "any",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "armor",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "body",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "feet",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "hand",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "head",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "inventory",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "leg",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "main_hand",
-                                                    "Description": "",
-                                                },
-                                                {
-                                                    "Options": "torso",
-                                                    "Description": "",
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                                {
-                                    "Name": "operator",
-                                    "Type": "String",
-                                    "Default": "equals",
-                                    "Description": [
-                                        "(Optional) The comparison to apply with 'value'.",
-                                        {
-                                            "type": "table",
-                                            "rows": [
-                                                {
-                                                    "Options": "!=",
-                                                    "Description": "Test for inequality.",
-                                                },
-                                                {
-                                                    "Options": "<",
-                                                    "Description": "Test for less-than the value.",
-                                                },
-                                                {
-                                                    "Options": "<=",
-                                                    "Description": "Test for less-than or equal to the value.",
-                                                },
-                                                {
-                                                    "Options": "<>",
-                                                    "Description": "Test for inequality.",
-                                                },
-                                                {
-                                                    "Options": "=",
-                                                    "Description": "Test for equality.",
-                                                },
-                                                {
-                                                    "Options": "==",
-                                                    "Description": "Test for equality.",
-                                                },
-                                                {
-                                                    "Options": ">",
-                                                    "Description": "Test for greater-than the value.",
-                                                },
-                                                {
-                                                    "Options": ">=",
-                                                    "Description": "Test for greater-than or equal to the value.",
-                                                },
-                                                {
-                                                    "Options": "equals",
-                                                    "Description": "Test for equality.",
-                                                },
-                                                {
-                                                    "Options": "not",
-                                                    "Description": "Test for inequality.",
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                                {
-                                    "Name": "subject",
-                                    "Type": "String",
-                                    "Default": "self",
-                                    "Description": [
-                                        "(Optional) The subject of this filter test.",
-                                        {
-                                            "type": "table",
-                                            "rows": [
-                                                {
-                                                    "Options": "block",
-                                                    "Description": "The block involved with the interaction.",
-                                                },
-                                                {
-                                                    "Options": "damager",
-                                                    "Description": "The damaging actor involved with the interaction.",
-                                                },
-                                                {
-                                                    "Options": "other",
-                                                    "Description": "The other member of an interaction, not the caller.",
-                                                },
-                                                {
-                                                    "Options": "parent",
-                                                    "Description": "The caller's current parent.",
-                                                },
-                                                {
-                                                    "Options": "player",
-                                                    "Description": "The player involved with the interaction.",
-                                                },
-                                                {
-                                                    "Options": "self",
-                                                    "Description": "The entity or object calling the test",
-                                                },
-                                                {
-                                                    "Options": "target",
-                                                    "Description": "The caller's current target.",
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                                {
-                                    "Name": "value",
-                                    "Type": "String",
-                                    "Default": "",
-                                    "Description": "(Required) The component name to look for",
-                                },
-                            ],
-                        },
-                    ],
-                    "sections": [
-                        {
-                            "name": "Examples",
-                            "level": 4,
-                            "content": [
-                                "Full..",
-                                {
-                                    "type": "code",
-                                    "content": [
-                                        "{ \"test\": \"has_equipment_block_tag\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"minecraft:explode\" }",
-                                    ],
-                                },
-                                "Short (using Defaults)..",
-                                {
-                                    "type": "code",
-                                    "content": [
-                                        "{ \"test\": \"has_equipment_block_tag\", \"value\": \"minecraft:explode\" }",
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
-                },
-                {
                     "name": "has_equipment_tag",
                     "id": "has_equipment_tag",
                     "level": 2,
@@ -18710,8 +18522,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.jump_around_target",
-                            "id": "minecraft:behavior.jump_around_target",
+                            "name": "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to jump around a target.",
@@ -18813,8 +18625,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.jump_to_block",
-                            "id": "minecraft:behavior.jump_to_block",
+                            "name": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to jump to another random block.",
@@ -18873,13 +18685,13 @@
                                             "Name": "search_height",
                                             "Type": "Integer",
                                             "Default Value": "10",
-                                            "Description": "The height (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                                            "Description": "The height (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                                         },
                                         {
                                             "Name": "search_width",
                                             "Type": "Integer",
                                             "Default Value": "8",
-                                            "Description": "The width (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                                            "Description": "The width (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                                         },
                                     ],
                                 },
@@ -19466,8 +19278,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.move_around_target",
-                            "id": "minecraft:behavior.move_around_target",
+                            "name": "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)",
+                            "id": "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_spread_degrees'.",
@@ -30217,12 +30029,12 @@
                                             "ID": "5707373970465808196",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.jump_around_target",
-                                            "ID": "11795366379540415834",
+                                            "JSON Name": "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)",
+                                            "ID": "7713683765903916030",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.jump_to_block",
-                                            "ID": "9920654059703051752",
+                                            "JSON Name": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
+                                            "ID": "4936427207419266264",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.knockback_roar",
@@ -30261,8 +30073,8 @@
                                             "ID": "1112137677",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.move_around_target",
-                                            "ID": "12172580866581071579",
+                                            "JSON Name": "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)",
+                                            "ID": "3067626056829917199",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
@@ -32555,5 +32367,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "afa6bf42f5ef9e96f26f4e028c0a9415e237c9e9",
+    "__OBJECTHASH__": "890833f106d965194bf06ad05fdb6c3269f1f1ba",
 }
