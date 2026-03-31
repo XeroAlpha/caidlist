@@ -24085,6 +24085,12 @@
                                             "Description": "Defines all placement directions of a block.",
                                         },
                                         {
+                                            "BlockState Name": "minecraft:multi_block_part",
+                                            "Type": "Integer",
+                                            "Valid Values": "0, 1, 2, 3",
+                                            "Description": "Defines how many block parts this multi block has. Enabled by trait 'minecraft:multi_block'",
+                                        },
+                                        {
                                             "BlockState Name": "minecraft:vertical_half",
                                             "Type": "String",
                                             "Valid Values": "bottom, top",
@@ -24528,6 +24534,37 @@
                                                                     ],
                                                                 },
                                                             ],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            "Block Trait": "\"minecraft:multi_block\"",
+                                            "Type": "JSON Object",
+                                            "Description": [
+                                                "Adds the \"minecraft:multi_block_part\" state and multi block functionality to the block.",
+                                                "Experimental toggles required: Upcoming Creator Features",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "direction",
+                                                            "Type": "String",
+                                                            "Default Value": "up",
+                                                            "Description": "The direction this multi block builds. Currently only valid values are 'up', 'down'.",
+                                                        },
+                                                        {
+                                                            "Name": "enabled_states",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": "Which state to enable. Must specify at least one. Valid value is 'minecraft:multi_block_part'.",
+                                                        },
+                                                        {
+                                                            "Name": "parts",
+                                                            "Type": "Positive Integer",
+                                                            "Default Value": "2",
+                                                            "Description": "Defines the number of parts of this multi block. Min value is 2, Max value is 4.",
                                                         },
                                                     ],
                                                 },
@@ -26331,6 +26368,9 @@
                                         },
                                         {
                                             "Name": "minecraft:gold_ore",
+                                        },
+                                        {
+                                            "Name": "minecraft:golden_dandelion",
                                         },
                                         {
                                             "Name": "minecraft:golden_rail",
@@ -33370,6 +33410,11 @@
                             "Aux Values": "",
                         },
                         {
+                            "Name": "golden_dandelion",
+                            "ID": "-1091",
+                            "Aux Values": "",
+                        },
+                        {
                             "Name": "golden_helmet",
                             "ID": "354",
                             "Aux Values": "",
@@ -39155,5 +39200,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "d7d078e370e000171a47a530a7a97edc114e18b2",
+    "__OBJECTHASH__": "b5846f1456ac254afc0de1144a8d04054cce5b5c",
 }

@@ -143,6 +143,20 @@
                     ],
                 },
                 {
+                    "name": "held_item_scale",
+                    "id": "held_item_scale",
+                    "level": 2,
+                    "content": [
+                        "Scales the entity's held item. Defaults to 1.0. Must be greater than zero.",
+                        {
+                            "type": "code",
+                            "content": [
+                                "\"held_item_scale\": 1.0",
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "hide_armor",
                     "id": "hide_armor",
                     "level": 2,
@@ -11662,6 +11676,141 @@
                     ],
                 },
                 {
+                    "name": "is_tamed",
+                    "id": "is_tamed",
+                    "level": 2,
+                    "content": [
+                        "Tests whether the Subject is tamed.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Boolean",
+                                    "Default": "true",
+                                    "Description": "(Optional) true or false.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_tamed\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"true\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"is_tamed\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "is_target",
                     "id": "is_target",
                     "level": 2,
@@ -15759,8 +15908,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.celebrate",
-                            "id": "minecraft:behavior.celebrate",
+                            "name": "minecraft:behavior.celebrate (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.celebrate (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to celebrate surviving a raid by making celebration sounds and jumping.",
@@ -15802,8 +15951,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.celebrate_survive",
-                            "id": "minecraft:behavior.celebrate_survive",
+                            "name": "minecraft:behavior.celebrate_survive (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.celebrate_survive (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to celebrate surviving a raid by shooting fireworks.",
@@ -16647,8 +16796,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.drop_item_for",
-                            "id": "minecraft:behavior.drop_item_for",
+                            "name": "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the entity to move toward a target, and drop an item near the target. This goal requires a \"minecraft:navigation\" to execute.",
@@ -16676,8 +16825,8 @@
                                         {
                                             "Name": "goal_radius",
                                             "Type": "Decimal",
-                                            "Default Value": "0.50",
-                                            "Description": "Distance in blocks within the entity considers it has reached it's target position.",
+                                            "Default Value": "0.5",
+                                            "Description": "Distance in blocks within the mob considers it has reached the goal. This is the \"wiggle room\" to stop the AI from bouncing back and forth trying to reach a specific spot.",
                                         },
                                         {
                                             "Name": "loot_table",
@@ -16713,13 +16862,13 @@
                                             "Name": "search_count",
                                             "Type": "Integer",
                                             "Default Value": "0",
-                                            "Description": "The number of blocks each tick that the entity will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
+                                            "Description": "The number of randomly selected blocks each tick that the mob will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
                                         },
                                         {
                                             "Name": "search_height",
                                             "Type": "Integer",
                                             "Default Value": "1",
-                                            "Description": "The Height in blocks the entity will search within to find a valid target position.",
+                                            "Description": "The height in blocks the entity will search within to find a valid target position.",
                                         },
                                         {
                                             "Name": "search_range",
@@ -16736,8 +16885,8 @@
                                         {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "1.00",
-                                            "Description": "Movement speed multiplier of the entity when using this Goal.",
+                                            "Default Value": "1.0",
+                                            "Description": "Movement speed multiplier of the mob when using this goal.",
                                         },
                                         {
                                             "Name": "target_range",
@@ -17001,8 +17150,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.fertilize_farm_block",
-                            "id": "minecraft:behavior.fertilize_farm_block",
+                            "name": "minecraft:behavior.fertilize_farm_block (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.fertilize_farm_block (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to search within an area for a growable crop block. If found, the mob will use any available fertilizer in their inventory on the crop. This goal will not execute if the mob does not have a fertilizer item in its inventory.",
@@ -17012,7 +17161,7 @@
                                         {
                                             "Name": "goal_radius",
                                             "Type": "Decimal",
-                                            "Default Value": "1.50",
+                                            "Default Value": "1.5",
                                             "Description": "Distance in blocks within the mob considers it has reached it's target position.",
                                         },
                                         {
@@ -17037,7 +17186,7 @@
                                             "Name": "search_height",
                                             "Type": "Integer",
                                             "Default Value": "1",
-                                            "Description": "The Height in blocks the mob will search within to find a valid target position.",
+                                            "Description": "The height in blocks the mob will search within to find a valid target position.",
                                         },
                                         {
                                             "Name": "search_range",
@@ -17048,8 +17197,8 @@
                                         {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "0.50",
-                                            "Description": "Movement speed multiplier of the mob when using this Goal.",
+                                            "Default Value": "0.5",
+                                            "Description": "Movement speed multiplier of the mob when using this goal.",
                                         },
                                     ],
                                 },
@@ -17896,8 +18045,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.harvest_farm_block",
-                            "id": "minecraft:behavior.harvest_farm_block",
+                            "name": "minecraft:behavior.harvest_farm_block (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.harvest_farm_block (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the entity to search within an area for farmland with air above it. If found, the entity will replace the air block by planting a seed item from its inventory on the farmland block. This goal requires \"minecraft:inventory\" and \"minecraft:navigation\" to execute. This goal will not execute if the entity does not have an item in its inventory.",
@@ -17907,7 +18056,7 @@
                                         {
                                             "Name": "goal_radius",
                                             "Type": "Decimal",
-                                            "Default Value": "1.50",
+                                            "Default Value": "1.5",
                                             "Description": "Distance in blocks within the entity considers it has reached it's target position.",
                                         },
                                         {
@@ -17926,13 +18075,13 @@
                                             "Name": "search_count",
                                             "Type": "Integer",
                                             "Default Value": "0",
-                                            "Description": "The number of randomly selected blocks each tick that the entity will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
+                                            "Description": "The number of randomly selected blocks each tick that the mob will check within its search range and height for a valid block to move to. A value of 0 will have the mob check every block within range in one tick.",
                                         },
                                         {
                                             "Name": "search_height",
                                             "Type": "Integer",
                                             "Default Value": "1",
-                                            "Description": "The Height in blocks the entity will search within to find a valid target position.",
+                                            "Description": "The height in blocks the entity will search within to find a valid target position.",
                                         },
                                         {
                                             "Name": "search_range",
@@ -17949,8 +18098,8 @@
                                         {
                                             "Name": "speed_multiplier",
                                             "Type": "Decimal",
-                                            "Default Value": "0.50",
-                                            "Description": "Movement speed multiplier of the entity when using this Goal.",
+                                            "Default Value": "0.5",
+                                            "Description": "Movement speed multiplier of the mob when using this goal.",
                                         },
                                     ],
                                 },
@@ -19808,8 +19957,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.ocelotattack",
-                            "id": "minecraft:behavior.ocelotattack",
+                            "name": "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to attack by sneaking and pouncing.",
@@ -19881,8 +20030,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.offer_flower",
-                            "id": "minecraft:behavior.offer_flower",
+                            "name": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to offer a flower to another mob with the minecraft:take_flower behavior.",
@@ -20298,8 +20447,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.play",
-                            "id": "minecraft:behavior.play",
+                            "name": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to play with other mobs by chasing each other and moving around randomly.",
@@ -20359,8 +20508,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.play_dead",
-                            "id": "minecraft:behavior.play_dead",
+                            "name": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to pretend to be dead to avoid being targeted by attackers.",
@@ -20375,7 +20524,7 @@
                                         },
                                         {
                                             "Name": "damage_sources",
-                                            "Type": "Array",
+                                            "Type": "Enumerator",
                                             "Default Value": "all",
                                             "Description": "The list of Entity Damage Sources that will cause this mob to play dead.",
                                         },
@@ -20483,8 +20632,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.ram_attack",
-                            "id": "minecraft:behavior.ram_attack",
+                            "name": "minecraft:behavior.ram_attack (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.ram_attack (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to damage a target by using a running attack.",
@@ -20795,8 +20944,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.random_search_and_dig",
-                            "id": "minecraft:behavior.random_search_and_dig",
+                            "name": "minecraft:behavior.random_search_and_dig (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.random_search_and_dig (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to locate a random target block that it can path find to. Once found, the entity will move towards it and dig up an item. [Default target block types: Dirt, Grass, Podzol, DirtWithRoots, MossBlock, Mud, MuddyMangroveRoots].",
@@ -22588,8 +22737,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.swim_with_entity",
-                            "id": "minecraft:behavior.swim_with_entity",
+                            "name": "minecraft:behavior.swim_with_entity (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.swim_with_entity (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the entity follow another entity. Both entities must be swimming [ie, in water].",
@@ -22616,7 +22765,7 @@
                                         },
                                         {
                                             "Name": "entity_types",
-                                            "Type": "Minecraft Filter",
+                                            "Type": "Array",
                                             "Default Value": "",
                                             "Description": "Filters which types of entities are valid to follow.",
                                         },
@@ -22752,8 +22901,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.take_flower",
-                            "id": "minecraft:behavior.take_flower",
+                            "name": "minecraft:behavior.take_flower (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.take_flower (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the mob to accept flowers from another mob with the minecraft:offer_flower behavior.",
@@ -22819,8 +22968,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.teleport_to_owner",
-                            "id": "minecraft:behavior.teleport_to_owner",
+                            "name": "minecraft:behavior.teleport_to_owner (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.teleport_to_owner (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to teleport to its owner.",
@@ -23065,8 +23214,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.trade_with_player",
-                            "id": "minecraft:behavior.trade_with_player",
+                            "name": "minecraft:behavior.trade_with_player (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.trade_with_player (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the player to trade with this mob. When the goal starts, it will stop the mob's navigation.",
@@ -23254,8 +23403,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.work",
-                            "id": "minecraft:behavior.work",
+                            "name": "minecraft:behavior.work (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.work (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the NPC to use the POI",
@@ -23315,8 +23464,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.work_composter",
-                            "id": "minecraft:behavior.work_composter",
+                            "name": "minecraft:behavior.work_composter (See JSON Schema since 1.26.10)",
+                            "id": "minecraft:behavior.work_composter (See JSON Schema since 1.26.10)",
                             "level": 4,
                             "content": [
                                 "Allows the NPC to use the composter POI to convert excess seeds into bone meal.",
@@ -23631,6 +23780,18 @@
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
                                             "Description": "List of conditions to meet so that the entity can be fed.",
+                                        },
+                                        {
+                                            "Name": "pause_growth_items",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of items that can be fed to the entity to pause growth for baby entities.",
+                                        },
+                                        {
+                                            "Name": "reset_growth_items",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of items that can be used to reset growth for baby entities.",
                                         },
                                     ],
                                 },
@@ -24283,31 +24444,37 @@
                                             "Name": "apply_gravity",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Applies gravity each tick. Causes more of a wave simulation, but will cause more gravity to be applied outside liquids.",
+                                            "Description": "Applies gravity each tick. Causes \"movement_type\" to be more impactful, but also gravity to be applied more intensely outside liquids.",
                                         },
                                         {
                                             "Name": "base_buoyancy",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "Base buoyancy used to calculate how much will a mob float.",
+                                            "Description": "Base buoyancy used to calculate how much will a entity float.",
                                         },
                                         {
                                             "Name": "big_wave_probability",
                                             "Type": "Decimal",
                                             "Default Value": "0.03",
-                                            "Description": "Probability for a big wave hitting the entity. Only used if `simulate_waves` is true.",
+                                            "Description": "Probability for a big wave hitting the entity. Only used if \"movement_type\" is \"waves\".",
                                         },
                                         {
                                             "Name": "big_wave_speed",
                                             "Type": "Decimal",
                                             "Default Value": "10.0",
-                                            "Description": "Multiplier for the speed to make a big wave. Triggered depending on 'big_wave_probability'.",
+                                            "Description": "Multiplier for the speed to make a big wave. Triggered depending on \"big_wave_probability\".",
+                                        },
+                                        {
+                                            "Name": "can_auto_step_from_liquid",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether the entity can move out of a liquid block to a neighboring solid block if pushed against it.",
                                         },
                                         {
                                             "Name": "drag_down_on_buoyancy_removed",
                                             "Type": "Decimal",
                                             "Default Value": "0.0",
-                                            "Description": "How much an actor will be dragged down when the Buoyancy Component is removed.",
+                                            "Description": "How much an entity will be dragged down when the component is removed.",
                                         },
                                         {
                                             "Name": "liquid_blocks",
@@ -24316,10 +24483,10 @@
                                             "Description": "List of blocks this entity can float on. Must be a liquid block.",
                                         },
                                         {
-                                            "Name": "simulate_waves",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "Should the movement simulate waves going through.",
+                                            "Name": "movement_type",
+                                            "Type": "String",
+                                            "Default Value": "waves",
+                                            "Description": "Type of vertical movement applied to the entity:\"waves\", simulates wave movement based on the entity speed.\"bobbing\", simulates waves going through.\"none\", simulates waves going through.",
                                         },
                                     ],
                                 },
@@ -27691,7 +27858,7 @@
                                             "Name": "has_collision",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "Whether or not the object collides with things.",
+                                            "Description": "Whether or not the entity collides with things.",
                                         },
                                         {
                                             "Name": "has_gravity",
@@ -27952,28 +28119,19 @@
                             ],
                         },
                         {
-                            "name": "minecraft:pushable",
-                            "id": "minecraft:pushable",
+                            "name": "minecraft:pushable_by_block",
+                            "id": "minecraft:pushable_by_block",
                             "level": 4,
                             "content": [
-                                "Defines what can push an entity between other entities and pistons.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "is_pushable",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "Whether the entity can be pushed by other entities.",
-                                        },
-                                        {
-                                            "Name": "is_pushable_by_piston",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "Whether the entity can be pushed by pistons safely.",
-                                        },
-                                    ],
-                                },
+                                "Allows the entity to be pushed by certain blocks, like Shulker Boxes and Pistons.",
+                            ],
+                        },
+                        {
+                            "name": "minecraft:pushable_by_entity",
+                            "id": "minecraft:pushable_by_entity",
+                            "level": 4,
+                            "content": [
+                                "Allows an entity to be pushed by other entities.",
                             ],
                         },
                         {
@@ -29463,12 +29621,12 @@
                                             "ID": "51166360",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.celebrate",
-                                            "ID": "3133100024050825239",
+                                            "JSON Name": "minecraft:behavior.celebrate (See JSON Schema since 1.26.10)",
+                                            "ID": "17074932802256079406",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.celebrate_survive",
-                                            "ID": "9921563176146616642",
+                                            "JSON Name": "minecraft:behavior.celebrate_survive (See JSON Schema since 1.26.10)",
+                                            "ID": "6763350374048628971",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.charge_attack (See JSON Schema since 1.21.100)",
@@ -29551,8 +29709,8 @@
                                             "ID": "277029334",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.drop_item_for",
-                                            "ID": "6288016308568137423",
+                                            "JSON Name": "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)",
+                                            "ID": "5376378384288983894",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.eat_block",
@@ -29587,8 +29745,8 @@
                                             "ID": "13285467020746982065",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.fertilize_farm_block",
-                                            "ID": "9206289212958280677",
+                                            "JSON Name": "minecraft:behavior.fertilize_farm_block (See JSON Schema since 1.26.10)",
+                                            "ID": "8807884663303834620",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.find_cover",
@@ -29659,8 +29817,8 @@
                                             "ID": "14703472964929248026",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.harvest_farm_block",
-                                            "ID": "10346419677401805698",
+                                            "JSON Name": "minecraft:behavior.harvest_farm_block (See JSON Schema since 1.26.10)",
+                                            "ID": "12386676332865576747",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.hide",
@@ -29803,12 +29961,12 @@
                                             "ID": "-1327999383",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.ocelotattack",
-                                            "ID": "6119969836310458450",
+                                            "JSON Name": "minecraft:behavior.ocelotattack (See JSON Schema since 1.26.10)",
+                                            "ID": "1864655070482369691",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.offer_flower",
-                                            "ID": "14523794672066366898",
+                                            "JSON Name": "minecraft:behavior.offer_flower (See JSON Schema since 1.26.10)",
+                                            "ID": "8438151071273746171",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.open_door",
@@ -29839,12 +29997,12 @@
                                             "ID": "8805775981579988731",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.play",
-                                            "ID": "9028661884418335188",
+                                            "JSON Name": "minecraft:behavior.play (See JSON Schema since 1.26.10)",
+                                            "ID": "362519989320245725",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.play_dead",
-                                            "ID": "15611122012431414539",
+                                            "JSON Name": "minecraft:behavior.play_dead (See JSON Schema since 1.26.10)",
+                                            "ID": "8875808673684851850",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.player_ride_tamed",
@@ -29855,8 +30013,8 @@
                                             "ID": "-1145687602",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.ram_attack",
-                                            "ID": "16987281751541937759",
+                                            "JSON Name": "minecraft:behavior.ram_attack (See JSON Schema since 1.26.10)",
+                                            "ID": "6724433720537763462",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.random_breach",
@@ -29879,8 +30037,8 @@
                                             "ID": "-1368070166",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.random_search_and_dig",
-                                            "ID": "9274891347700307903",
+                                            "JSON Name": "minecraft:behavior.random_search_and_dig (See JSON Schema since 1.26.10)",
+                                            "ID": "1450281398603630950",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.random_sitting",
@@ -30051,8 +30209,8 @@
                                             "ID": "13632521305782430415",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.swim_with_entity",
-                                            "ID": "10204691344094313319",
+                                            "JSON Name": "minecraft:behavior.swim_with_entity (See JSON Schema since 1.26.10)",
+                                            "ID": "13788007980493569758",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.swoop_attack (See JSON Schema since 1.21.110)",
@@ -30063,12 +30221,12 @@
                                             "ID": "6937905075348270719",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.take_flower",
-                                            "ID": "16066043784359778497",
+                                            "JSON Name": "minecraft:behavior.take_flower (See JSON Schema since 1.26.10)",
+                                            "ID": "4682591572767643232",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.teleport_to_owner",
-                                            "ID": "1980014114121577323",
+                                            "JSON Name": "minecraft:behavior.teleport_to_owner (See JSON Schema since 1.26.10)",
+                                            "ID": "2629175679907265770",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.tempt",
@@ -30091,8 +30249,8 @@
                                             "ID": "-574851053",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.trade_with_player",
-                                            "ID": "13082946109325010651",
+                                            "JSON Name": "minecraft:behavior.trade_with_player (See JSON Schema since 1.26.10)",
+                                            "ID": "17025540749178763770",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.vex_copy_owner_target",
@@ -30111,12 +30269,12 @@
                                             "ID": "-1065562072",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.work",
-                                            "ID": "11642413332579264431",
+                                            "JSON Name": "minecraft:behavior.work (See JSON Schema since 1.26.10)",
+                                            "ID": "16170774313464809654",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.work_composter",
-                                            "ID": "8770872254111982548",
+                                            "JSON Name": "minecraft:behavior.work_composter (See JSON Schema since 1.26.10)",
+                                            "ID": "9648954836216570845",
                                         },
                                     ],
                                 },
@@ -30515,8 +30673,12 @@
                                             "ID": "1922456869",
                                         },
                                         {
-                                            "JSON Name": "minecraft:pushable",
-                                            "ID": "-1784639134",
+                                            "JSON Name": "minecraft:pushable_by_block",
+                                            "ID": "-2087846040",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:pushable_by_entity",
+                                            "ID": "-1023158512",
                                         },
                                         {
                                             "JSON Name": "minecraft:raid_trigger",
@@ -31160,7 +31322,7 @@
                                             "Name": "value",
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
-                                            "Description": "The higher the number, the more the friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
+                                            "Description": "The higher the number, the more friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
                                         },
                                     ],
                                 },
@@ -32028,5 +32190,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "b4c8b571f9898f821db6dff09374bfa8faf3ea5b",
+    "__OBJECTHASH__": "420479c0d725d40b10c12eb6ea6b9592e8f1dbe1",
 }
