@@ -18000,14 +18000,20 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.follow_target_captain",
-                            "id": "minecraft:behavior.follow_target_captain",
+                            "name": "minecraft:behavior.follow_target_leader",
+                            "id": "minecraft:behavior.follow_target_leader",
                             "level": 4,
                             "content": [
-                                "Allows mob to move towards its current target captain.",
+                                "Allows mob to move towards its target leader.",
                                 {
                                     "type": "table",
                                     "rows": [
+                                        {
+                                            "Name": "always_look_for_leader",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the mob will always search for a valid leader to follow if none is found or current leader is not valid anymore",
+                                        },
                                         {
                                             "Name": "follow_distance",
                                             "Type": "Decimal",
@@ -18015,10 +18021,22 @@
                                             "Description": "Defines the distance in blocks the mob will stay from its target while following.",
                                         },
                                         {
+                                            "Name": "leader_filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The filters to use when determining if a mob is a suitable leader or not.",
+                                        },
+                                        {
+                                            "Name": "search_cooldown",
+                                            "Type": "Integer",
+                                            "Default Value": "20",
+                                            "Description": "Number of ticks that must pass before a new search is initiated after a target is not found, lost, or becomes invalid.",
+                                        },
+                                        {
                                             "Name": "within_radius",
                                             "Type": "Decimal",
                                             "Default Value": "0.0",
-                                            "Description": "Defines the maximum distance in blocks a mob can get from its target captain before giving up trying to follow it.",
+                                            "Description": "Defines the maximum distance in blocks a mob can get from its target leader before giving up trying to follow it.",
                                         },
                                     ],
                                 },
@@ -28201,6 +28219,12 @@
                                             "Description": "If true, the projectile will be treated as dangerous to the players",
                                         },
                                         {
+                                            "Name": "isolated_physics",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "[EXPERIMENTAL] If true, this projectile will not be affected by outside forces such as friction and drag.",
+                                        },
+                                        {
                                             "Name": "knockback",
                                             "Type": "Boolean",
                                             "Default Value": "true",
@@ -29997,8 +30021,8 @@
                                             "ID": "2127040136",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.follow_target_captain",
-                                            "ID": "-135480526",
+                                            "JSON Name": "minecraft:behavior.follow_target_leader",
+                                            "ID": "1427460687",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.go_and_give_items_to_noteblock",
@@ -32379,5 +32403,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "ff7e011347abfddc068668355ef83f22adf87377",
+    "__OBJECTHASH__": "658c07c45e59bf2e28087befceef3bce9bd71bcf",
 }

@@ -414,13 +414,16 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
         await sleepAsync(50);
         clipboardText = await retryUntilComplete(10, 0, async () => {
             try {
-                return await retryUntilComplete(40, 0, async () => {
+                return await retryUntilComplete(5, 0, async () => {
                     await pressCopy();
-                    const newClipboardText = getClipboardText() ?? oldClipboardText;
-                    if (newClipboardText === oldClipboardText) {
-                        throw new Error(`Clipboard text is not changed: ${newClipboardText}`);
-                    }
-                    return newClipboardText;
+                    const clipboardText = await retryUntilComplete(50, 10, async () => {
+                        const newClipboardText = getClipboardText() ?? oldClipboardText;
+                        if (newClipboardText === oldClipboardText) {
+                            throw new Error(`Clipboard text is not changed: ${newClipboardText}`);
+                        }
+                        return newClipboardText;
+                    });
+                    return clipboardText;
                 });
             } catch (err) {
                 await pressTab();
