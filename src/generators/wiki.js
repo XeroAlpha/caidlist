@@ -17,6 +17,7 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
     const indent = '\t';
     // eslint-disable-next-line prettier/prettier
     const lines = [
+        '-- https://zh.minecraft.wiki/w/Module:Block_state_values_BE',
         'return {',
         `${indent}-- 自动生成`
     ];
@@ -49,8 +50,8 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
 
 export function writeWikiBlockPropertyValuesBE(cx, outputFile, blockProperties) {
     const indent = '\t';
-    // eslint-disable-next-line prettier/prettier
     const lines = [
+        '-- https://zh.minecraft.wiki/w/Module:Block_property_values_BE',
         'return {',
         `${indent}-- 自动生成`
     ];
@@ -74,6 +75,7 @@ export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
     const indent = '\t';
     // eslint-disable-next-line prettier/prettier
     const lines = [
+        '-- https://zh.minecraft.wiki/w/Module:Block_id_values_BE',
         'return {',
         `${indent}-- 自动生成`
     ];
