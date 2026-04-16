@@ -8,8 +8,10 @@ const DWORD = koffi.alias('DWORD', 'uint32_t');
 const LONG = koffi.alias('LONG', 'long');
 const UINT = koffi.alias('UINT', 'uint32_t');
 const ULONG_PTR = koffi.alias('ULONG_PTR', 'uintptr_t');
+const WCHAR = koffi.alias('WCHAR', 'wchar_t');
 const LPVOID = koffi.pointer('LPVOID', koffi.opaque());
 const LPSTR = koffi.pointer('LPSTR', CHAR);
+const LPWSTR = koffi.pointer('LPWSTR', WCHAR);
 const HANDLE = koffi.alias('HANDLE', LPVOID);
 const HWND = koffi.alias('HWND', HANDLE);
 const HGLOBAL = koffi.alias('HGLOBAL', HANDLE);
@@ -82,7 +84,7 @@ const EmptyClipboard = user32.func('BOOL __stdcall EmptyClipboard()');
 const CloseClipboard = user32.func('BOOL __stdcall CloseClipboard()');
 const SendInput = user32.func('UINT __stdcall SendInput(UINT cInputs, LPINPUT pInputs, int cbSize)');
 const GetForegroundWindow = user32.func('HWND __stdcall GetForegroundWindow()');
-const GetWindowText = user32.func('int __stdcall GetWindowTextA(HWND hWnd, _Out_ LPSTR lpString, int nMaxCount)');
+const GetWindowText = user32.func('int __stdcall GetWindowTextW(HWND hWnd, _Out_ LPWSTR lpString, int nMaxCount)');
 const GlobalLock = kernel32.func('LPVOID __stdcall GlobalLock(HGLOBAL hMem)');
 const GlobalUnlock = kernel32.func('LPVOID __stdcall GlobalUnlock(HGLOBAL hMem)');
 const GetLastError = kernel32.func('DWORD __stdcall GetLastError()');
@@ -243,5 +245,5 @@ export function getForegroundWindowTitle() {
         throwLastError();
         return null;
     }
-    return koffi.decode(buffer, 'char', length);
+    return koffi.decode(buffer, 'wchar_t', length);
 }
