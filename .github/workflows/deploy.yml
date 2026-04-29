@@ -22,10 +22,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v5
       with:
-        node-version: 18.x
+        node-version: latest
 
     - name: Checkout database
       uses: actions/checkout@v4
@@ -48,6 +48,11 @@ jobs:
       run: |
         cp -r ${{ github.workspace }}/database/output/web ${{ github.workspace }}/web/public/data
         cp ${{ github.workspace }}/database/output/web/index.json ${{ github.workspace }}/web/src/assets/dataIndex.json
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.x
 
     - name: Install and build web
       working-directory: ${{ github.workspace }}/web
