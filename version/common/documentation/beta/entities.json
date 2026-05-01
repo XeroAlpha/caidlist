@@ -14587,6 +14587,141 @@
                     ],
                 },
                 {
+                    "name": "redstone_strength_at_position",
+                    "id": "redstone_strength_at_position",
+                    "level": 2,
+                    "content": [
+                        "Tests the redstone strength at the subject's position.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "Integer",
+                                    "Default": "",
+                                    "Description": "(Required) An integer value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"redstone_strength_at_position\", \"subject\": \"self\", \"operator\": \"equals\", \"value\": \"0\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"redstone_strength_at_position\", \"value\": \"0\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "rider_count",
                     "id": "rider_count",
                     "level": 2,
@@ -16324,8 +16459,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.croak",
-                            "id": "minecraft:behavior.croak",
+                            "name": "minecraft:behavior.croak (See JSON Schema since 1.26.30)",
+                            "id": "minecraft:behavior.croak (See JSON Schema since 1.26.30)",
                             "level": 4,
                             "content": [
                                 "Allows the entity to croak at a random time interval with configurable conditions.",
@@ -17204,8 +17339,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.emerge",
-                            "id": "minecraft:behavior.emerge",
+                            "name": "minecraft:behavior.emerge (See JSON Schema since 1.26.30)",
+                            "id": "minecraft:behavior.emerge (See JSON Schema since 1.26.30)",
                             "level": 4,
                             "content": [
                                 "Allows this entity to emerge from the ground",
@@ -17492,8 +17627,8 @@
                             ],
                         },
                         {
-                            "name": "minecraft:behavior.fire_at_target",
-                            "id": "minecraft:behavior.fire_at_target",
+                            "name": "minecraft:behavior.fire_at_target (See JSON Schema since 1.26.30)",
+                            "id": "minecraft:behavior.fire_at_target (See JSON Schema since 1.26.30)",
                             "level": 4,
                             "content": [
                                 "Allows an entity to attack by firing a shot with a delay. Anchor and offset parameters of this component overrides the anchor and offset from projectile component.",
@@ -29869,8 +30004,8 @@
                                             "ID": "6293745006137368026",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.croak",
-                                            "ID": "13695866816529218596",
+                                            "JSON Name": "minecraft:behavior.croak (See JSON Schema since 1.26.30)",
+                                            "ID": "2149446355064465303",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.defend_trusted_target",
@@ -29949,8 +30084,8 @@
                                             "ID": "17437542916452098121",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.emerge",
-                                            "ID": "12499259831953635711",
+                                            "JSON Name": "minecraft:behavior.emerge (See JSON Schema since 1.26.30)",
+                                            "ID": "15064750849233602384",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.enderman_leave_block",
@@ -29985,8 +30120,8 @@
                                             "ID": "-1602192311",
                                         },
                                         {
-                                            "JSON Name": "minecraft:behavior.fire_at_target",
-                                            "ID": "15552728018745447502",
+                                            "JSON Name": "minecraft:behavior.fire_at_target (See JSON Schema since 1.26.30)",
+                                            "ID": "7619695097155220213",
                                         },
                                         {
                                             "JSON Name": "minecraft:behavior.flee_sun",
@@ -32403,5 +32538,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "08b5f4d2a8d5c313063d1b0f0befea27a6503439",
+    "__OBJECTHASH__": "695185ab115e7e9861ff830a00a59eee5b8484a5",
 }

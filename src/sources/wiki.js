@@ -1,9 +1,9 @@
 import * as CommentJSON from '@projectxero/comment-json';
-import { got } from 'got';
+import got from 'got';
 import { addJSONComment, CommentLocation, extractCommentLocation, setJSONComment } from '../util/comment.js';
 import { cachedOutput, forEachArray, forEachObject, log, sortObjectKey, warn } from '../util/common.js';
 import { parseLSON } from '../util/lson.js';
-import { fetchFile } from '../util/network.js';
+import { fetchText } from '../util/network.js';
 
 const sources = {
     mcwzh: {
@@ -11,7 +11,7 @@ const sources = {
             return `https://zh.minecraft.wiki/w/${encodeURIComponent(title)}`;
         },
         async getRaw(title) {
-            return await fetchFile(`${this.getUrl(title)}?action=raw`);
+            return await fetchText(`${this.getUrl(title)}?action=raw`);
         },
         async getCsrfTokens() {
             const res = await got
@@ -51,7 +51,7 @@ const sources = {
             return `https://wiki.mcbe-dev.net/p/${encodeURIComponent(title)}`;
         },
         async getRaw(title) {
-            return await fetchFile(`${this.getUrl(title)}?action=raw`);
+            return await fetchText(`${this.getUrl(title)}?action=raw`);
         }
     }
 };

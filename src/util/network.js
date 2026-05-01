@@ -1,6 +1,6 @@
 import { Octokit } from '@octokit/rest';
 import { createHash } from 'crypto';
-import { got } from 'got';
+import got from 'got';
 import { HttpProxyAgent, HttpsProxyAgent } from 'hpagent';
 import { githubToken } from '../../data/config.js';
 import { setStatus } from './common.js';
@@ -68,7 +68,7 @@ export async function fetchFile(url, size, sha1, opts) {
 
 export async function fetchText(url, size, sha1, opts) {
     const content = await fetchFile(url, size, sha1, opts);
-    return content.toString();
+    return Buffer.from(content).toString('utf-8');
 }
 
 export async function fetchJSON(url, size, sha1, opts) {

@@ -124,7 +124,7 @@ async function analyzeCommandAutocompletionFast(
     command,
     progressName,
     approxLength,
-    aggressiveMode
+    targetReactSpeed
 ) {
     // 初始状态：游戏HUD
     const autocompletions = [];
@@ -150,14 +150,10 @@ async function analyzeCommandAutocompletionFast(
     await press(scrcpy, 'KEYCODE_SLASH');
     await sleepAsync(1000);
     await press(scrcpy, 'KEYCODE_MOVE_END');
-    screen.log(`Input ${command}`);
+    screen.log(`待补全命令：${command}`);
     await injectText(scrcpy, command.replace(/^\//, ''));
 
-    let typeahead = aggressiveMode;
-    let reactInterval = 0;
-    let reactFrameCount = 0;
-    let droppedCount = 0;
-    let tabWhenChanged = false;
+    const aggressiveMode = targetReactSpeed !== 0;
     const pressTab = async () => {
         if (!isScrcpyStopped(scrcpy)) {
             droppedCount++;
@@ -165,31 +161,58 @@ async function analyzeCommandAutocompletionFast(
             await press(scrcpy, 'KEYCODE_TAB'); // async
         }
     };
+    let tabSpeed = targetReactSpeed / 2;
+    let captureFrameCounter = 0;
+    let lastCaptureImage = null;
+    let lastCaptureTime = 0;
+    let lastCaptureFrame = 0;
+    let reactInterval = 0;
+    let reactFrameCount = 0;
+    let droppedCount = 0;
+    let tabWhenChanged = false;
     let imageDiffCounter = 0;
     let ocrProcessCounter = 0;
-    const ocrPendingPromises = new Set();
+    let lastOcrResult = '';
+    let lastOcrPromise = Promise.resolve();
+    const recentReactOffsets = [];
+    const tabSender = () => {
+        if (tabWhenChanged) {
+            setTimeout(tabSender, 1000 / tabSpeed);
+            pressTab();
+        }
+    };
     const imagePipeline = imageStream
         .pipe(
             new Transform({
                 objectMode: true,
                 transform(imageData, encoding, done) {
                     const start = performance.now();
-                    if (!this.lastImage || !imageData.equals(this.lastImage)) {
+                    if (!lastCaptureImage || !imageData.equals(lastCaptureImage)) {
                         const now = performance.now();
                         if (tabWhenChanged) {
-                            if (!typeahead) {
+                            if (!aggressiveMode && lastCaptureImage) {
                                 pressTab();
-                            } else {
-                                typeahead = false;
                             }
                         }
-                        if (this.lastImageTime) {
-                            reactFrameCount = this.framesBeforeChange;
-                            reactInterval = now - this.lastImageTime;
+                        if (lastCaptureTime) {
+                            reactFrameCount = captureFrameCounter - lastCaptureFrame;
+                            reactInterval = now - lastCaptureTime;
+                            recentReactOffsets.push(reactInterval - 1000 / tabSpeed);
+                            if (recentReactOffsets.length >= 10) {
+                                if (recentReactOffsets.length > 50) {
+                                    recentReactOffsets.splice(0, recentReactOffsets.length - 50);
+                                }
+                                const len = recentReactOffsets.length;
+                                const avg = recentReactOffsets.reduce((s, e) => s + e, 0) / len;
+                                const dev = recentReactOffsets.reduce((s, e) => s + (e - avg) ** 2, 0);
+                                const stdev = Math.sqrt(dev / len);
+                                const safeTabInterval = 1000 / targetReactSpeed + 2 * stdev;
+                                tabSpeed = Math.max(2, 0.8 * tabSpeed + 0.2 * (1000 / safeTabInterval));
+                            }
                         }
-                        this.lastImageTime = now;
-                        this.framesBeforeChange = 1;
-                        this.lastImage = imageData;
+                        lastCaptureTime = now;
+                        lastCaptureImage = imageData;
+                        lastCaptureFrame = captureFrameCounter;
                         imageDiffCounter++;
                         performance.measure(`image-diff-${imageDiffCounter}`, {
                             start,
@@ -197,12 +220,13 @@ async function analyzeCommandAutocompletionFast(
                         });
                         done(null, imageData);
                     } else {
-                        this.framesBeforeChange++;
+                        performance.measure(`image-same-${imageDiffCounter}`, {
+                            start,
+                            detail: captureFrameCounter
+                        });
                         done();
                     }
-                    if (typeahead && tabWhenChanged && this.framesBeforeChange % 2 === 0) {
-                        pressTab();
-                    }
+                    captureFrameCounter++;
                 }
             })
         )
@@ -211,29 +235,24 @@ async function analyzeCommandAutocompletionFast(
                 objectMode: true,
                 transform(image, encoding, done) {
                     const start = performance.now();
-                    let promise = tesseractScheduler.addJob('recognize', image);
-                    const beforePromises = [...ocrPendingPromises];
-                    promise = promise.then(async (result) => {
-                        ocrPendingPromises.delete(promise);
-                        await Promise.all(beforePromises);
-                        return result.data.text;
-                    });
-                    ocrPendingPromises.add(promise);
-                    promise.then((text) => {
-                        let commandText = text.trim().replace(/\n/g, '');
-                        ocrProcessCounter++;
-                        performance.measure(`ocr-${ocrProcessCounter}`, {
-                            start,
-                            detail: commandText
+                    const currentPromise = tesseractScheduler.addJob('recognize', image);
+                    lastOcrPromise = lastOcrPromise
+                        .then(() => currentPromise)
+                        .then((result) => {
+                            let commandText = result.data.text.trim().replace(/\n/g, '');
+                            ocrProcessCounter++;
+                            performance.measure(`ocr-${ocrProcessCounter}`, {
+                                start,
+                                detail: commandText
+                            });
+                            cx.tesseractMistakes.forEach(([pattern, replacement]) => {
+                                commandText = commandText.replace(pattern, replacement);
+                            });
+                            if (commandText.length && (!lastOcrResult || lastOcrResult !== commandText)) {
+                                if (tabWhenChanged) droppedCount--;
+                                this.push((lastOcrResult = commandText));
+                            }
                         });
-                        cx.tesseractMistakes.forEach(([pattern, replacement]) => {
-                            commandText = commandText.replace(pattern, replacement);
-                        });
-                        if (commandText.length && (!this.last || this.last !== commandText)) {
-                            if (tabWhenChanged) droppedCount--;
-                            this.push((this.last = commandText));
-                        }
-                    });
                     done();
                 }
             })
@@ -253,6 +272,9 @@ async function analyzeCommandAutocompletionFast(
     let duplicatedCount = 0;
     screen.updateStatus({ autocompletedCommand, recogizedCommand, timeStart });
     tabWhenChanged = true;
+    if (aggressiveMode) {
+        tabSender();
+    }
     for (;;) {
         recogizedCommand = await retryUntilComplete(10, 0, async () => {
             try {
@@ -266,7 +288,7 @@ async function analyzeCommandAutocompletionFast(
 
         autocompletedCommand = guessTruncatedString(recogizedCommand, command);
         if (!autocompletedCommand) {
-            screen.log(`Assert failed: ${recogizedCommand}`);
+            screen.log(`无法推断完整命令：${recogizedCommand}`);
             throw new Error(`Auto-completed command test failed: ${recogizedCommand}`);
         }
         if (droppedCount > 50) {
@@ -277,7 +299,7 @@ async function analyzeCommandAutocompletionFast(
         if (autocompletions.includes(autocompletion)) {
             duplicatedCount++;
             setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
-            screen.log(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            screen.log(`检测到重复项，即将结束（${duplicatedCount}/5）：${autocompletion}`);
             if (duplicatedCount >= 5) {
                 break;
             }
@@ -286,6 +308,7 @@ async function analyzeCommandAutocompletionFast(
             const stepSpent = now - stepStart;
             stepStart = now;
             stepCount++;
+            duplicatedCount = 0;
             screen.updateStatus({
                 autocompletedCommand,
                 recogizedCommand,
@@ -294,9 +317,11 @@ async function analyzeCommandAutocompletionFast(
                 resultLength: autocompletions.length,
                 reactInterval,
                 reactFrameCount,
+                recentReactOffsets: recentReactOffsets,
+                tabSpeed: aggressiveMode ? tabSpeed : undefined,
                 droppedCount
             });
-            screen.log(`Recognized: ${recogizedCommand}`);
+            screen.log(`识别：${recogizedCommand}`);
             autocompletions.push(autocompletion);
             if (approxLength > 0) {
                 const stepSpentAvg = (now - timeStart) / stepCount;
@@ -339,7 +364,7 @@ async function analyzeCommandAutocompletionFast(
     setStatus('');
 
     stopScrcpy(scrcpy);
-    await Promise.allSettled([...ocrPendingPromises]);
+    await lastOcrPromise;
 
     return autocompletions;
 }
@@ -385,7 +410,7 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     }
     sendText('/');
     await sleepAsync(3000);
-    screen.log(`Input ${command}`);
+    screen.log(`待补全命令：${command}`);
     sendText(command.replace(/^\//, ''));
     emptyClipboard();
     await sleepAsync(1000);
@@ -435,7 +460,7 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
         if (autocompletions.includes(autocompletion)) {
             duplicatedCount++;
             setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
-            screen.log(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
+            screen.log(`检测到重复项，即将结束（${duplicatedCount}/5）：${autocompletion}`);
             if (duplicatedCount >= 5) {
                 break;
             }
@@ -451,7 +476,7 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
                 stepSpent,
                 resultLength: autocompletions.length
             });
-            screen.log(`Got: ${clipboardText}`);
+            screen.log(`识别：${clipboardText}`);
             autocompletions.push(autocompletion);
             if (approxLength > 0) {
                 const stepSpentAvg = (now - timeStart) / stepCount;
@@ -524,7 +549,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                     commandPrefix,
                     progressName,
                     previousResult.length,
-                    retryCount < 8
+                    retryCount < 8 ? 15 : 0
                 );
             }
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
@@ -535,10 +560,10 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 const deletions = previousResult.filter((e) => !mergedResult.merged.includes(e));
                 if (additions.length === 0 && deletions.length === 0) break;
                 log(`${additions.length} addition(s) and ${deletions.length} deletion(s) detected`);
-                screen.log(`Result check failed: changed (${additions.length}++/${deletions.length}--)`);
+                screen.log(`验证失败：存在变更（${additions.length}++/${deletions.length}--）`);
             } else {
                 log(`${mergedResult.conflicts.length} conflict(s) detected`);
-                screen.log(`Result check failed: conflicted (${mergedResult.conflicts.length} conflicts)`);
+                screen.log(`验证失败：存在冲突（${mergedResult.conflicts.length} 处冲突）`);
             }
             retryCount++;
             if (!cache) {
@@ -549,7 +574,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 });
             }
         }
-        screen.log('Result check passed');
+        screen.log('验证成功');
         cachedOutput(cacheId, {
             packageVersion,
             result,

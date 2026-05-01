@@ -39,7 +39,6 @@ const smallerGUIOptions = {
 };
 
 const smallestGUIOptions = {
-    // GUI Scale = -2
     ...commonOptions,
     // 命令区域大小
     commandAreaRect: [246, 1002, 1989, 75],
@@ -64,23 +63,15 @@ export const packageVersions = {
         version: '1.26.13.1',
         // 安装包路径
         path: 'H:\\BedrockVersions\\Latest\\1.26.13.1.apks',
-        config: {
-            ...smallestGUIOptions,
-            // 仅在 Android 端暂时无法使用时使用 Windows 10 版替代
-            useWin10Edition: true
-        }
+        config: smallestGUIOptions
     },
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.26.20.27',
+        version: '1.26.30.21',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.26.20.28.apks',
-        config: {
-            ...smallestGUIOptions,
-            // 仅在 Android 端暂时无法使用时使用 Windows 10 版替代
-            useWin10Edition: true
-        }
+        path: 'H:\\BedrockVersions\\Latest\\1.26.30.21.apks',
+        config: smallestGUIOptions
     },
     // 中国版测试版
     netease_dev: {
@@ -94,14 +85,14 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.26.20.27',
+        version: '1.26.30.21',
         config: {
             devBehaviorPackPath: `${process.env.APPDATA}\\Minecraft Bedrock Preview\\Users\\Shared\\games\\com.mojang\\development_behavior_packs`
         }
     },
     dev: {
-        version: '1.26.20.27',
-        path: 'H:\\BedrockVersions\\Dev\\1.26.20.27.apk',
+        version: '1.26.30.21',
+        path: 'H:\\BedrockVersions\\Dev\\1.26.30.21.apk',
         config: smallestGUIOptions
     }
 };
