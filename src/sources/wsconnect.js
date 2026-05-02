@@ -110,6 +110,18 @@ async function doWSRelatedJobs(cx, session) {
     }
     commandList = commandList.filter((c) => !ignoreCommands.includes(c));
     if (cx.branch.id !== 'gametest') {
+        const prepareCommands = [
+            'gamerule dodaylightcycle false',
+            'gamerule doweathercycle false',
+            'time set noon',
+            'weather clear',
+            'camera @s set minecraft:free pos ~ -65 ~ rot -90 0'
+        ];
+        for (const command of prepareCommands) {
+            await new Promise((resolve) => {
+                session.sendCommand(command, () => resolve());
+            });
+        }
         return { commandList };
     }
     /**

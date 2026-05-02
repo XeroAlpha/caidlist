@@ -1876,6 +1876,9 @@
             "minecraft:firefly_particle",
             "minecraft:fish_hook_particle",
             "minecraft:fish_pos_particle",
+            "minecraft:geyser_base",
+            "minecraft:geyser_plume",
+            "minecraft:geyser_poof",
             "minecraft:glow_particle",
             "minecraft:green_flame_particle",
             "minecraft:guardian_attack_particle",
@@ -2421,8 +2424,8 @@
             "minecraft:pale_oak_tree_with_decorations_feature",
             "minecraft:pine_tree_feature",
             "minecraft:pink_petals_scatter_feature",
-            "minecraft:potent_sulfur_block_feature",
-            "minecraft:potent_sulfur_block_search_feature",
+            "minecraft:potent_sulfur_feature",
+            "minecraft:potent_sulfur_search_feature",
             "minecraft:random_cherry_tree_feature",
             "minecraft:random_clay_with_dripleaves_feature",
             "minecraft:random_clay_with_dripleaves_snap_to_floor_feature",
@@ -2512,7 +2515,7 @@
             "minecraft:sulfur_spring_small_2_feature",
             "minecraft:sulfur_spring_small_3_feature",
             "minecraft:sulfur_spring_small_4_feature",
-            "minecraft:sulfur_spring_trail_to_surface_system_snap_to_ceiling_feature",
+            "minecraft:sulfur_spring_trail_to_surface_snap_to_ceiling_feature",
             "minecraft:sunflower_double_plant_feature",
             "minecraft:sunflower_double_plant_lower_feature",
             "minecraft:sunflower_double_plant_patch_feature",
@@ -2765,11 +2768,11 @@
             "minecraft:sculk_vein_feature",
             "minecraft:small_dripstone_feature",
             "minecraft:soulsand_valley_fossil_surface_feature",
-            "minecraft:sulfur_caves_after_surface_sulfur_spring_trail_to_surface_system_feature_rules",
-            "minecraft:sulfur_caves_glow_lichen_cluster_feature",
-            "minecraft:sulfur_pool_with_potent_sulfur_block_after_surface_feature",
-            "minecraft:sulfur_spike_cluster_feature_rules",
-            "minecraft:sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_surface_spike_cluster_feature_rules",
+            "minecraft:sulfur_caves_after_surface_sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_underground_glow_lichen_cluster_feature_rules",
+            "minecraft:sulfur_caves_before_surface_sulfur_spring_trail_to_surface_feature_rules",
+            "minecraft:sulfur_caves_surface_sulfur_pool_with_potent_sulfur_feature_rules",
             "minecraft:surface_pass_large_dripstone_feature",
             "minecraft:swamp_after_surface_brown_mushroom_feature_rules",
             "minecraft:swamp_after_surface_dead_bush_feature_rules",
@@ -4363,6 +4366,7 @@
             "minecraft:stripped_mangrove_wood": "<deprecated>stripped_mangrove_log*4->stripped_mangrove_wood*3",
             "minecraft:stripped_warped_hyphae": "<crafting_table>stripped_warped_stem*4->stripped_warped_hyphae*3",
             "minecraft:sugar": "<crafting_table>reeds->sugar",
+            "minecraft:sulfur": "<crafting_table>sulfur_spike*4->sulfur",
             "minecraft:sulfur_brick_slab": "<crafting_table>sulfur_bricks*3->sulfur_brick_slab*6",
             "minecraft:sulfur_brick_stairs": "<crafting_table>sulfur_bricks*6->sulfur_brick_stairs*4",
             "minecraft:sulfur_brick_wall": "<crafting_table>sulfur_bricks*6->sulfur_brick_wall*6",
@@ -6487,6 +6491,9 @@
             "animation.strider.walk": [
                 "minecraft:strider<walk>",
             ],
+            "animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling>",
+            ],
             "animation.tadpole.swim": [
                 "minecraft:tadpole<swim>",
             ],
@@ -7233,6 +7240,9 @@
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
+            ],
+            "controller.animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling_controller>",
             ],
             "controller.animation.tadpole.general": [
                 "minecraft:tadpole<general>",
@@ -8229,6 +8239,9 @@
             ],
             "minecraft:become_e_red_snapper": [
                 "minecraft:tropicalfish",
+            ],
+            "minecraft:become_explosive": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:become_farmer": [
                 "minecraft:villager_v2",
@@ -9453,6 +9466,12 @@
             ],
             "minecraft:trigger_raid": [
                 "minecraft:player",
+            ],
+            "minecraft:try_priming": [
+                "minecraft:sulfur_cube",
+            ],
+            "minecraft:try_priming_on_explosion": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:turn_black": [
                 "minecraft:shulker",
@@ -10850,6 +10869,7 @@
                         "slow_sliding",
                         "sticky",
                         "high_resistance",
+                        "explosive",
                     ],
                 },
             },
@@ -14341,6 +14361,9 @@
             "minecraft:firefly_particle",
             "minecraft:fish_hook_particle",
             "minecraft:fish_pos_particle",
+            "minecraft:geyser_base",
+            "minecraft:geyser_plume",
+            "minecraft:geyser_poof",
             "minecraft:glow_particle",
             "minecraft:green_flame_particle",
             "minecraft:guardian_attack_particle",
@@ -14886,8 +14909,8 @@
             "minecraft:pale_oak_tree_with_decorations_feature",
             "minecraft:pine_tree_feature",
             "minecraft:pink_petals_scatter_feature",
-            "minecraft:potent_sulfur_block_feature",
-            "minecraft:potent_sulfur_block_search_feature",
+            "minecraft:potent_sulfur_feature",
+            "minecraft:potent_sulfur_search_feature",
             "minecraft:random_cherry_tree_feature",
             "minecraft:random_clay_with_dripleaves_feature",
             "minecraft:random_clay_with_dripleaves_snap_to_floor_feature",
@@ -14977,7 +15000,7 @@
             "minecraft:sulfur_spring_small_2_feature",
             "minecraft:sulfur_spring_small_3_feature",
             "minecraft:sulfur_spring_small_4_feature",
-            "minecraft:sulfur_spring_trail_to_surface_system_snap_to_ceiling_feature",
+            "minecraft:sulfur_spring_trail_to_surface_snap_to_ceiling_feature",
             "minecraft:sunflower_double_plant_feature",
             "minecraft:sunflower_double_plant_lower_feature",
             "minecraft:sunflower_double_plant_patch_feature",
@@ -15230,11 +15253,11 @@
             "minecraft:sculk_vein_feature",
             "minecraft:small_dripstone_feature",
             "minecraft:soulsand_valley_fossil_surface_feature",
-            "minecraft:sulfur_caves_after_surface_sulfur_spring_trail_to_surface_system_feature_rules",
-            "minecraft:sulfur_caves_glow_lichen_cluster_feature",
-            "minecraft:sulfur_pool_with_potent_sulfur_block_after_surface_feature",
-            "minecraft:sulfur_spike_cluster_feature_rules",
-            "minecraft:sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_surface_spike_cluster_feature_rules",
+            "minecraft:sulfur_caves_after_surface_sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_underground_glow_lichen_cluster_feature_rules",
+            "minecraft:sulfur_caves_before_surface_sulfur_spring_trail_to_surface_feature_rules",
+            "minecraft:sulfur_caves_surface_sulfur_pool_with_potent_sulfur_feature_rules",
             "minecraft:surface_pass_large_dripstone_feature",
             "minecraft:swamp_after_surface_brown_mushroom_feature_rules",
             "minecraft:swamp_after_surface_dead_bush_feature_rules",
@@ -16917,6 +16940,7 @@
             "minecraft:stripped_spruce_log": "<material_reducer>stripped_spruce_log->element_6*49+element_1*6+element_8*44+element_7",
             "minecraft:stripped_warped_hyphae": "<crafting_table>stripped_warped_stem*4->stripped_warped_hyphae*3",
             "minecraft:sugar": "<crafting_table>reeds->sugar",
+            "minecraft:sulfur": "<crafting_table>sulfur_spike*4->sulfur",
             "minecraft:sulfur_brick_slab": "<crafting_table>sulfur_bricks*3->sulfur_brick_slab*6",
             "minecraft:sulfur_brick_stairs": "<crafting_table>sulfur_bricks*6->sulfur_brick_stairs*4",
             "minecraft:sulfur_brick_wall": "<crafting_table>sulfur_bricks*6->sulfur_brick_wall*6",
@@ -19050,6 +19074,9 @@
             "animation.strider.walk": [
                 "minecraft:strider<walk>",
             ],
+            "animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling>",
+            ],
             "animation.tadpole.swim": [
                 "minecraft:tadpole<swim>",
             ],
@@ -19796,6 +19823,9 @@
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
+            ],
+            "controller.animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling_controller>",
             ],
             "controller.animation.tadpole.general": [
                 "minecraft:tadpole<general>",
@@ -20796,6 +20826,9 @@
             ],
             "minecraft:become_e_red_snapper": [
                 "minecraft:tropicalfish",
+            ],
+            "minecraft:become_explosive": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:become_farmer": [
                 "minecraft:villager_v2",
@@ -22020,6 +22053,12 @@
             ],
             "minecraft:trigger_raid": [
                 "minecraft:player",
+            ],
+            "minecraft:try_priming": [
+                "minecraft:sulfur_cube",
+            ],
+            "minecraft:try_priming_on_explosion": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:turn_black": [
                 "minecraft:shulker",
@@ -23417,6 +23456,7 @@
                         "slow_sliding",
                         "sticky",
                         "high_resistance",
+                        "explosive",
                     ],
                 },
             },
@@ -26904,6 +26944,9 @@
             "minecraft:firefly_particle",
             "minecraft:fish_hook_particle",
             "minecraft:fish_pos_particle",
+            "minecraft:geyser_base",
+            "minecraft:geyser_plume",
+            "minecraft:geyser_poof",
             "minecraft:glow_particle",
             "minecraft:green_flame_particle",
             "minecraft:guardian_attack_particle",
@@ -27449,8 +27492,8 @@
             "minecraft:pale_oak_tree_with_decorations_feature",
             "minecraft:pine_tree_feature",
             "minecraft:pink_petals_scatter_feature",
-            "minecraft:potent_sulfur_block_feature",
-            "minecraft:potent_sulfur_block_search_feature",
+            "minecraft:potent_sulfur_feature",
+            "minecraft:potent_sulfur_search_feature",
             "minecraft:random_cherry_tree_feature",
             "minecraft:random_clay_with_dripleaves_feature",
             "minecraft:random_clay_with_dripleaves_snap_to_floor_feature",
@@ -27540,7 +27583,7 @@
             "minecraft:sulfur_spring_small_2_feature",
             "minecraft:sulfur_spring_small_3_feature",
             "minecraft:sulfur_spring_small_4_feature",
-            "minecraft:sulfur_spring_trail_to_surface_system_snap_to_ceiling_feature",
+            "minecraft:sulfur_spring_trail_to_surface_snap_to_ceiling_feature",
             "minecraft:sunflower_double_plant_feature",
             "minecraft:sunflower_double_plant_lower_feature",
             "minecraft:sunflower_double_plant_patch_feature",
@@ -27793,11 +27836,11 @@
             "minecraft:sculk_vein_feature",
             "minecraft:small_dripstone_feature",
             "minecraft:soulsand_valley_fossil_surface_feature",
-            "minecraft:sulfur_caves_after_surface_sulfur_spring_trail_to_surface_system_feature_rules",
-            "minecraft:sulfur_caves_glow_lichen_cluster_feature",
-            "minecraft:sulfur_pool_with_potent_sulfur_block_after_surface_feature",
-            "minecraft:sulfur_spike_cluster_feature_rules",
-            "minecraft:sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_surface_spike_cluster_feature_rules",
+            "minecraft:sulfur_caves_after_surface_sulfur_spike_feature_rules",
+            "minecraft:sulfur_caves_after_underground_glow_lichen_cluster_feature_rules",
+            "minecraft:sulfur_caves_before_surface_sulfur_spring_trail_to_surface_feature_rules",
+            "minecraft:sulfur_caves_surface_sulfur_pool_with_potent_sulfur_feature_rules",
             "minecraft:surface_pass_large_dripstone_feature",
             "minecraft:swamp_after_surface_brown_mushroom_feature_rules",
             "minecraft:swamp_after_surface_dead_bush_feature_rules",
@@ -29391,6 +29434,7 @@
             "minecraft:stripped_mangrove_wood": "<deprecated>stripped_mangrove_log*4->stripped_mangrove_wood*3",
             "minecraft:stripped_warped_hyphae": "<crafting_table>stripped_warped_stem*4->stripped_warped_hyphae*3",
             "minecraft:sugar": "<crafting_table>reeds->sugar",
+            "minecraft:sulfur": "<crafting_table>sulfur_spike*4->sulfur",
             "minecraft:sulfur_brick_slab": "<crafting_table>sulfur_bricks*3->sulfur_brick_slab*6",
             "minecraft:sulfur_brick_stairs": "<crafting_table>sulfur_bricks*6->sulfur_brick_stairs*4",
             "minecraft:sulfur_brick_wall": "<crafting_table>sulfur_bricks*6->sulfur_brick_wall*6",
@@ -31515,6 +31559,9 @@
             "animation.strider.walk": [
                 "minecraft:strider<walk>",
             ],
+            "animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling>",
+            ],
             "animation.tadpole.swim": [
                 "minecraft:tadpole<swim>",
             ],
@@ -32261,6 +32308,9 @@
             "controller.animation.spider.move": [
                 "minecraft:cave_spider<move>",
                 "minecraft:spider<move>",
+            ],
+            "controller.animation.sulfur_cube.swelling": [
+                "minecraft:sulfur_cube<sulfur_cube_swelling_controller>",
             ],
             "controller.animation.tadpole.general": [
                 "minecraft:tadpole<general>",
@@ -33257,6 +33307,9 @@
             ],
             "minecraft:become_e_red_snapper": [
                 "minecraft:tropicalfish",
+            ],
+            "minecraft:become_explosive": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:become_farmer": [
                 "minecraft:villager_v2",
@@ -34481,6 +34534,12 @@
             ],
             "minecraft:trigger_raid": [
                 "minecraft:player",
+            ],
+            "minecraft:try_priming": [
+                "minecraft:sulfur_cube",
+            ],
+            "minecraft:try_priming_on_explosion": [
+                "minecraft:sulfur_cube",
             ],
             "minecraft:turn_black": [
                 "minecraft:shulker",
@@ -35878,6 +35937,7 @@
                         "slow_sliding",
                         "sticky",
                         "high_resistance",
+                        "explosive",
                     ],
                 },
             },

@@ -63,12 +63,12 @@ export async function fetchFile(url, size, sha1, opts) {
     if (typeof sha1 === 'string' && digestBufferHex('sha1', content) !== sha1) {
         throw new Error(`SHA1 mismatch: ${url}`);
     }
-    return content;
+    return Buffer.from(content.buffer, content.byteOffset, content.byteLength);
 }
 
 export async function fetchText(url, size, sha1, opts) {
     const content = await fetchFile(url, size, sha1, opts);
-    return Buffer.from(content).toString('utf-8');
+    return content.toString('utf-8');
 }
 
 export async function fetchJSON(url, size, sha1, opts) {

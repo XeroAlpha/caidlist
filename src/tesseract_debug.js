@@ -35,15 +35,19 @@ async function tesseractDebugPNG(versionType) {
     const device = await getAnyOnlineDevice(adbClient);
     const scrcpy = await openScrcpy(device);
     const rect = cx.commandAreaRect;
-    const imageStream = new ScrcpyPNGStream(scrcpy, [
-        '-filter:v',
+    const imageStream = new ScrcpyPNGStream(
+        scrcpy,
         [
-            `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
-            'format=pix_fmts=gray',
-            'negate',
-            'maskfun=low=60:high=60:fill=0:sum=256'
-        ].join(',')
-    ]);
+            '-filter:v',
+            [
+                `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
+                'negate',
+                'maskfun=low=55:high=75:fill=0:sum=256',
+                'format=pix_fmts=gray'
+            ].join(',')
+        ],
+        true
+    );
     await imageStream.ready;
     const commandTextImage = await pEvent(imageStream, 'data');
     writeFileSync('./tstest_output.png', commandTextImage);

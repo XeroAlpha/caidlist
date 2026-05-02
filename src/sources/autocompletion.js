@@ -134,9 +134,9 @@ async function analyzeCommandAutocompletionFast(
         '-filter:v',
         [
             `crop=x=${rect[0]}:y=${rect[1]}:w=${rect[2]}:h=${rect[3]}`,
-            'format=pix_fmts=gray',
             'negate',
-            'maskfun=low=60:high=60:fill=0:sum=256'
+            'maskfun=low=55:high=75:fill=0:sum=256',
+            'format=pix_fmts=gray'
         ].join(',')
     ]);
     screen.updateStatus({ approxLength });

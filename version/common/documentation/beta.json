@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.30.20",
-    "__COMMITHASH__": "a80e414f910cafe8ba2d0c2c11c4a7858a71ccee",
-    "__MESSAGE__": "v1.26.30.20-preview",
+    "__VERSION__": "1.26.30.25",
+    "__COMMITHASH__": "290530634093210e9ef099307819b1689b98508c",
+    "__MESSAGE__": "v1.26.30.25-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -270,6 +270,9 @@
                         },
                         {
                             "name": "minecraft:multinoise_generation_rules",
+                        },
+                        {
+                            "name": "minecraft:noise_gradient",
                         },
                         {
                             "name": "minecraft:overworld",
@@ -2832,6 +2835,55 @@
                                     "name": "Code Example",
                                 },
                             ],
+                        },
+                    ],
+                },
+            ],
+        },
+        "Lighting": {
+            "name": "LIGHTING DOCUMENTATION",
+            "sections": [
+                {
+                    "name": "Overview",
+                },
+                {
+                    "name": "JSON Format",
+                },
+                {
+                    "name": "Adding Lighting Settings",
+                },
+                {
+                    "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "AmbientLight",
+                        },
+                        {
+                            "name": "DirectionalLights",
+                        },
+                        {
+                            "name": "Emissive",
+                        },
+                        {
+                            "name": "KeyframedDirectionalLightImpl",
+                        },
+                        {
+                            "name": "Lighting JSON File",
+                        },
+                        {
+                            "name": "LightingDescription",
+                        },
+                        {
+                            "name": "LightingSettings",
+                        },
+                        {
+                            "name": "OrbitalLights",
+                        },
+                        {
+                            "name": "SkyIntensity",
+                        },
+                        {
+                            "name": "StaticDirectionalLight",
                         },
                     ],
                 },
@@ -8206,7 +8258,7 @@
                     "name": "goal_radius",
                     "type": "Decimal",
                     "defaultValue": "1.5",
-                    "description": "Distance in blocks within the entity considers it has reached it's target position.",
+                    "description": "Distance in blocks within the entity considers it has reached its target position.",
                 },
                 {
                     "name": "speed_multiplier",
@@ -12540,6 +12592,12 @@
                     "description": "Range of the random amount of damage the melee attack deals. A negative value can heal the entity instead of hurting it",
                 },
                 {
+                    "name": "effect_amplifier",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "Amplifier level (potion tier) of the status ailment applied to the damaged entity. Higher values increase the strength of the effect.",
+                },
+                {
                     "name": "effect_duration",
                     "type": "Decimal",
                     "defaultValue": "0.0",
@@ -12874,6 +12932,12 @@
                     "type": "Boolean",
                     "defaultValue": "true",
                     "description": "If the entity should play their attack sound when attacking a target.",
+                },
+                {
+                    "name": "use_self_as_damage_source",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "If the entity should use itself as the damage source when attacking a target. If set to `false`, the target entity won't retaliate and its `minecraft:damage_sensor` won't be able to identify the attacker as the damage source.",
                 },
             ],
         },

@@ -115,11 +115,9 @@ async function fetchJavaEditionLangData() {
         if (!zh_cn || !en_us) {
             log(`Fetching Java Edition language data: ${versionId}`);
             const releaseFile = await fetchVersionReleaseFile(releaseApiHost, versionMeta, 'client');
-            const langZhAsset = Buffer.from(
-                overwriteZhcnLangHash
-                    ? await fetchVersionAssetByHash(assetApiHost, zhcnLangHash)
-                    : await fetchVersionAsset(assetApiHost, assetIndex, 'minecraft/lang/zh_cn.json')
-            );
+            const langZhAsset = overwriteZhcnLangHash
+                ? await fetchVersionAssetByHash(assetApiHost, zhcnLangHash)
+                : await fetchVersionAsset(assetApiHost, assetIndex, 'minecraft/lang/zh_cn.json');
             const langEnAsset = extractFileFromZip(releaseFile, 'assets/minecraft/lang/en_us.json');
             cache = cachedOutput('version.common.java.lang', {
                 __VERSION__: versionMeta.id,

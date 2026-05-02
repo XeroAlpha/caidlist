@@ -41,7 +41,7 @@ const smallerGUIOptions = {
 const smallestGUIOptions = {
     ...commonOptions,
     // 命令区域大小
-    commandAreaRect: [246, 1002, 1989, 75],
+    commandAreaRect: [246, 1008, 1989, 63],
     tesseractMistakes: smallestGUITessMistakes
 };
 
@@ -68,9 +68,9 @@ export const packageVersions = {
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.26.30.21',
+        version: '1.26.30.25',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.26.30.21.apks',
+        path: 'H:\\BedrockVersions\\Latest\\1.26.30.25.apks',
         config: smallestGUIOptions
     },
     // 中国版测试版
@@ -85,14 +85,14 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.26.30.21',
+        version: '1.26.30.25',
         config: {
             devBehaviorPackPath: `${process.env.APPDATA}\\Minecraft Bedrock Preview\\Users\\Shared\\games\\com.mojang\\development_behavior_packs`
         }
     },
     dev: {
-        version: '1.26.30.21',
-        path: 'H:\\BedrockVersions\\Dev\\1.26.30.21.apk',
+        version: '1.26.30.25',
+        path: 'H:\\BedrockVersions\\Dev\\1.26.30.25.apk',
         config: smallestGUIOptions
     }
 };

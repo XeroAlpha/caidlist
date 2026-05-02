@@ -93,6 +93,7 @@
             }
             .explanation p {
                 word-break: break-all;
+                margin: 10px 0px;
             }
             .danmaku {
                 flex: 0 0 auto;
@@ -111,9 +112,16 @@
             .statusbar {
                 flex: 0 0 auto;
                 overflow: hidden;
-                word-break: break-all;
-                white-space: pre-wrap;
-                overflow-wrap: anywhere;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+            .statusbar div {
+                flex: 0 0 auto;
+                width: calc(40vw - 15px - 15px - 20px - 20px - 15px - 15px - 15px);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .dashboard {
                 .screenshot-container {
@@ -173,17 +181,17 @@
     <body>
         <div class="main">
             <div class="leftbar">
+                <div class="logs bar mojangles"></div>
                 <div class="screenshot-container bar">
                     <div class="screenshot-nosignal">正在生成世界</div>
                     <video class="screenshot" src="" alt="screenshot"></video>
                 </div>
-                <div class="logs bar mojangles"></div>
             </div>
             <div class="rightbar">
-                <div class="explanation bar"></div>
-                <div class="statusbar bar"></div>
                 <div class="promptbar bar"></div>
+                <div class="statusbar bar"></div>
                 <div class="danmaku bar"></div>
+                <div class="explanation bar"></div>
             </div>
         </div>
         <script type="module">
@@ -504,7 +512,7 @@
                         window.obsstudio.stopStreaming();
                     }
                 }
-                statusBarEl.innerHTML = text.join('\n');
+                statusBarEl.innerHTML = text.map((text) => `<div>${text}</div>`).join('');
                 await waitForPageVisible();
                 setTimeout(updateStatus, success ? Math.min(100, hb.stepSpentAvg ?? 100) : 500);
             }

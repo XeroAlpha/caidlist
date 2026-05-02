@@ -134,12 +134,13 @@ const entryAnalyzer = [
         analyze(results, entryName, particle) {
             const { particleEmitters } = results;
             const formatVersion = particle.format_version;
-            if (formatVersion === '1.10.0' || formatVersion === '1.21.60' || formatVersion === '1.26.10') {
+            if (this.versionsGroups[0].includes(formatVersion)) {
                 particleEmitters.push(particle.particle_effect.description.identifier);
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
-        }
+        },
+        versionsGroups: [['1.10.0', '1.21.60', '1.26.10', '1.26.30']]
     },
     {
         name: 'entityDefinition',
@@ -460,7 +461,8 @@ const entryAnalyzer = [
                 '1.21.90',
                 '1.21.100',
                 '1.21.110',
-                '1.26.0'
+                '1.26.0',
+                '1.26.30'
             ]
         ]
     }
