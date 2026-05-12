@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.30.25",
-    "__COMMITHASH__": "290530634093210e9ef099307819b1689b98508c",
-    "__MESSAGE__": "v1.26.30.25-preview",
+    "__VERSION__": "1.26.30.27",
+    "__COMMITHASH__": "4772c15e193301f2e030517b755009e1f56b9221",
+    "__MESSAGE__": "v1.26.30.27-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -193,6 +193,37 @@
                 },
                 {
                     "name": "Transforms",
+                },
+            ],
+        },
+        "Atmospherics": {
+            "name": "ATMOSPHERICS DOCUMENTATION",
+            "sections": [
+                {
+                    "name": "Overview",
+                },
+                {
+                    "name": "JSON Format",
+                },
+                {
+                    "name": "Adding Atmospherics Settings",
+                },
+                {
+                    "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "Atmospheric Scattering Configuration Settings",
+                        },
+                        {
+                            "name": "AtmosphericScatteringDescription",
+                        },
+                        {
+                            "name": "AtmosphericScatteringSettings",
+                        },
+                        {
+                            "name": "HorizonBlendKeyFrames",
+                        },
+                    ],
                 },
             ],
         },
@@ -432,6 +463,58 @@
                         },
                         {
                             "name": "minecraft:water_identifier",
+                        },
+                    ],
+                },
+            ],
+        },
+        "Color Grading and Tonemapping": {
+            "name": "COLOR GRADING AND TONEMAPPING DOCUMENTATION",
+            "sections": [
+                {
+                    "name": "Overview",
+                },
+                {
+                    "name": "JSON Format",
+                },
+                {
+                    "name": "Adding Color Grading and Tonemapping Settings",
+                },
+                {
+                    "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "Color Grading JSON File v1",
+                        },
+                        {
+                            "name": "ColorGrading",
+                        },
+                        {
+                            "name": "ColorGradingDescription",
+                        },
+                        {
+                            "name": "ColorGradingSettings",
+                        },
+                        {
+                            "name": "Highlights",
+                        },
+                        {
+                            "name": "Midtones",
+                        },
+                        {
+                            "name": "Shadows",
+                        },
+                        {
+                            "name": "Temperature",
+                        },
+                        {
+                            "name": "TemperatureGrading Type",
+                        },
+                        {
+                            "name": "ToneMapping",
+                        },
+                        {
+                            "name": "Tonemapper",
                         },
                     ],
                 },
@@ -2678,7 +2761,13 @@
                         },
                         {
                             "name": "minecraft:weighted_random_feature",
+                        },
+                        {
+                            "name": "minecraft:height_difference_filter_feature",
                             "sections": [
+                                {
+                                    "name": "Dripstone cluster only close to wall on flat ground.",
+                                },
                                 {
                                     "name": "Feature schema",
                                 },
@@ -3386,6 +3475,43 @@
                         },
                         {
                             "name": "Referencing Texture Resources",
+                        },
+                    ],
+                },
+            ],
+        },
+        "Water": {
+            "name": "WATER DOCUMENTATION",
+            "sections": [
+                {
+                    "name": "Overview",
+                },
+                {
+                    "name": "JSON Format",
+                },
+                {
+                    "name": "Adding Water Settings",
+                },
+                {
+                    "name": "Schema",
+                    "sections": [
+                        {
+                            "name": "CausticsParameters",
+                        },
+                        {
+                            "name": "PSY",
+                        },
+                        {
+                            "name": "Water Config JSON File v4",
+                        },
+                        {
+                            "name": "WaterDescription",
+                        },
+                        {
+                            "name": "WaterSettings",
+                        },
+                        {
+                            "name": "WaterSurfaceParameters",
                         },
                     ],
                 },
@@ -16033,6 +16159,12 @@
                     "description": "Time in seconds that the entity hit will be on fire for",
                 },
                 {
+                    "name": "owner_launch_immunity_ticks",
+                    "type": "Integer",
+                    "defaultValue": "5",
+                    "description": "[EXPERIMENTAL] Number of ticks after launch during which the projectile cannot hit its owner",
+                },
+                {
                     "name": "particle",
                     "type": "String",
                     "defaultValue": "iconcrack",
@@ -17410,6 +17542,7 @@
         "minecraft:tree_feature": "'minecraft:tree_feature' will place a tree in the world. A tree consists of a column that is anchored to a base block with set parameters for what it can be placed on and canopy that extends from the column.",
         "minecraft:vegetation_patch_feature": "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
         "minecraft:weighted_random_feature": "'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.",
+        "minecraft:height_difference_filter_feature": "'minecraft:height_difference_filter_feature' filters away positions based on the heightmap around the placement position.The filter will check for surface blocks in each cardinal direction within the `search_radius`. Each block will be checked against all given conditions.",
     },
     "molangMath": {
         "math.abs(value)": "Absolute value of value",

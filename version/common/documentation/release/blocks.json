@@ -28,7 +28,7 @@
                                     "Default Value": "",
                                     "Description": [
                                         "The description identifier of the chest obstruction component",
-                                        "Experimental toggles required: Upcoming Creator Features",
+                                        "Experimental toggles required: Upcoming Creator Features (in format versions before 1.26.20)",
                                         {
                                             "section": "obstruction_rule",
                                             "content": [
@@ -366,7 +366,7 @@
                                                     "Name": "use_liquid_clipping",
                                                     "Type": "Boolean",
                                                     "Default Value": "false",
-                                                    "Description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.",
+                                                    "Description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.A liquid's base visual shape is ALWAYS a quad, they do not have more subdivisions.When use_liquid_clipping is TRUE, the game will attempt to reduce the visible volume of water if the collision shape allows it. Eg. a wall will turn the water base shape into a rectangle on the side of the incoming water.When use_liquid_clipping is FALSE, the game will preserve the water base shape as a full square, no matter what the collision shape of the block they share space with is.",
                                                 },
                                             ],
                                         },
@@ -836,7 +836,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.26.10\",",
+                                        "  \"format_version\": \"1.26.20\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1524,5 +1524,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "e74e7904cb04676ab33a3f7e6bf5c6245d94783f",
+    "__OBJECTHASH__": "3867b37c129650d3f10fa9fdf9b63e0aa4168a3f",
 }

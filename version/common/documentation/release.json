@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.10.4",
-    "__COMMITHASH__": "f5b651000f52b66334c968f3ccf1aca7950cd6ee",
-    "__MESSAGE__": "v1.26.10.4",
+    "__VERSION__": "1.26.20.4",
+    "__COMMITHASH__": "46d817108cc218bfb4f6e8b93debf4d438eacadb",
+    "__MESSAGE__": "v1.26.20.4",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -684,6 +684,14 @@
                         },
                         {
                             "name": "has_ranged_weapon",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "has_same_equipment_in_slot_as",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -1474,7 +1482,7 @@
                                     "name": "minecraft:behavior.enderman_take_block",
                                 },
                                 {
-                                    "name": "minecraft:behavior.equip_item",
+                                    "name": "minecraft:behavior.equip_item (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.explore_outskirts (See JSON Schema since 1.21.130)",
@@ -1519,16 +1527,16 @@
                                     "name": "minecraft:behavior.follow_parent",
                                 },
                                 {
-                                    "name": "minecraft:behavior.follow_target_captain",
+                                    "name": "minecraft:behavior.follow_target_leader",
                                 },
                                 {
-                                    "name": "minecraft:behavior.go_and_give_items_to_noteblock",
+                                    "name": "minecraft:behavior.go_and_give_items_to_noteblock (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.go_and_give_items_to_owner",
+                                    "name": "minecraft:behavior.go_and_give_items_to_owner (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.go_home",
+                                    "name": "minecraft:behavior.go_home (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.guardian_attack (See JSON Schema since 1.26.0)",
@@ -1552,10 +1560,10 @@
                                     "name": "minecraft:behavior.investigate_suspicious_location (See JSON Schema since 1.21.130)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.jump_around_target",
+                                    "name": "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.jump_to_block",
+                                    "name": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.knockback_roar",
@@ -1585,13 +1593,13 @@
                                     "name": "minecraft:behavior.mount_pathing",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_around_target",
+                                    "name": "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_indoors",
+                                    "name": "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.move_outdoors",
+                                    "name": "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)",
                                 },
                                 {
                                     "name": "minecraft:behavior.move_through_village",
@@ -2370,9 +2378,6 @@
                                     "name": "minecraft:flying_speed",
                                 },
                                 {
-                                    "name": "minecraft:friction_modifier",
-                                },
-                                {
                                     "name": "minecraft:ground_offset",
                                 },
                                 {
@@ -2464,6 +2469,9 @@
                                 },
                                 {
                                     "name": "minecraft:type_family",
+                                },
+                                {
+                                    "name": "minecraft:uses_legacy_friction",
                                 },
                                 {
                                     "name": "minecraft:variant",
@@ -2718,11 +2726,6 @@
                     "sections": [
                         {
                             "name": "Fog Schema",
-                            "sections": [
-                                {
-                                    "name": "Fog Json Schema",
-                                },
-                            ],
                         },
                     ],
                 },
@@ -3652,6 +3655,7 @@
         "minecraft:chest": "",
         "minecraft:chipped_anvil": "",
         "minecraft:chiseled_bookshelf": "",
+        "minecraft:chiseled_cinnabar": "",
         "minecraft:chiseled_copper": "",
         "minecraft:chiseled_deepslate": "",
         "minecraft:chiseled_nether_bricks": "",
@@ -3661,10 +3665,21 @@
         "minecraft:chiseled_resin_bricks": "",
         "minecraft:chiseled_sandstone": "",
         "minecraft:chiseled_stone_bricks": "",
+        "minecraft:chiseled_sulfur": "",
         "minecraft:chiseled_tuff": "",
         "minecraft:chiseled_tuff_bricks": "",
         "minecraft:chorus_flower": "",
         "minecraft:chorus_plant": "",
+        "minecraft:cinnabar": "",
+        "minecraft:cinnabar_brick_double_slab": "",
+        "minecraft:cinnabar_brick_slab": "",
+        "minecraft:cinnabar_brick_stairs": "",
+        "minecraft:cinnabar_brick_wall": "",
+        "minecraft:cinnabar_bricks": "",
+        "minecraft:cinnabar_double_slab": "",
+        "minecraft:cinnabar_slab": "",
+        "minecraft:cinnabar_stairs": "",
+        "minecraft:cinnabar_wall": "",
         "minecraft:clay": "",
         "minecraft:client_request_placeholder_block": "",
         "minecraft:closed_eyeblossom": "",
@@ -4390,6 +4405,11 @@
         "minecraft:polished_blackstone_slab": "",
         "minecraft:polished_blackstone_stairs": "",
         "minecraft:polished_blackstone_wall": "",
+        "minecraft:polished_cinnabar": "",
+        "minecraft:polished_cinnabar_double_slab": "",
+        "minecraft:polished_cinnabar_slab": "",
+        "minecraft:polished_cinnabar_stairs": "",
+        "minecraft:polished_cinnabar_wall": "",
         "minecraft:polished_deepslate": "",
         "minecraft:polished_deepslate_double_slab": "",
         "minecraft:polished_deepslate_slab": "",
@@ -4403,6 +4423,11 @@
         "minecraft:polished_granite_double_slab": "",
         "minecraft:polished_granite_slab": "",
         "minecraft:polished_granite_stairs": "",
+        "minecraft:polished_sulfur": "",
+        "minecraft:polished_sulfur_double_slab": "",
+        "minecraft:polished_sulfur_slab": "",
+        "minecraft:polished_sulfur_stairs": "",
+        "minecraft:polished_sulfur_wall": "",
         "minecraft:polished_tuff": "",
         "minecraft:polished_tuff_double_slab": "",
         "minecraft:polished_tuff_slab": "",
@@ -4411,6 +4436,7 @@
         "minecraft:poppy": "",
         "minecraft:portal": "",
         "minecraft:potatoes": "",
+        "minecraft:potent_sulfur": "",
         "minecraft:powder_snow": "",
         "minecraft:powered_comparator": "",
         "minecraft:powered_repeater": "",
@@ -4605,6 +4631,16 @@
         "minecraft:stripped_warped_stem": "",
         "minecraft:structure_block": "",
         "minecraft:structure_void": "",
+        "minecraft:sulfur": "",
+        "minecraft:sulfur_brick_double_slab": "",
+        "minecraft:sulfur_brick_slab": "",
+        "minecraft:sulfur_brick_stairs": "",
+        "minecraft:sulfur_brick_wall": "",
+        "minecraft:sulfur_bricks": "",
+        "minecraft:sulfur_double_slab": "",
+        "minecraft:sulfur_slab": "",
+        "minecraft:sulfur_stairs": "",
+        "minecraft:sulfur_wall": "",
         "minecraft:sunflower": "",
         "minecraft:suspicious_gravel": "",
         "minecraft:suspicious_sand": "",
@@ -4896,6 +4932,7 @@
         "squid": "0x00008977 (0x17)",
         "stray": "0x01116974 (0x46)",
         "strider": "0x00004989 (0x125)",
+        "sulfur_cube": "0x00002969 (0x153)",
         "tadpole": "0x00009093 (0x133)",
         "thrown_trident": "0x12582985 (0x73)",
         "tnt": "0x00000065 (0x65)",
@@ -5159,7 +5196,7 @@
                             "name": "use_liquid_clipping",
                             "type": "Boolean",
                             "defaultValue": "false",
-                            "description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.",
+                            "description": "Whether this block uses the encompassing collider to visually clip the liquid. The encompassing collider is the smallest single AABB that contains all of the block's colliders.A liquid's base visual shape is ALWAYS a quad, they do not have more subdivisions.When use_liquid_clipping is TRUE, the game will attempt to reduce the visible volume of water if the collision shape allows it. Eg. a wall will turn the water base shape into a rectangle on the side of the incoming water.When use_liquid_clipping is FALSE, the game will preserve the water base shape as a full square, no matter what the collision shape of the block they share space with is.",
                         },
                     ],
                 },
@@ -5894,6 +5931,7 @@
         "has_nametag": "Tests if the subject has been given a custom name.",
         "has_property": "Tests for the presence of a property of the subject entity.",
         "has_ranged_weapon": "Returns true when the subject entity is holding a ranged weapon like a bow or crossbow.",
+        "has_same_equipment_in_slot_as": "Returns whether the subject entity has the same item equipped in the specified slot as calling entity. Only supports specified slots: \"main_hand\", \"head\", \"torso\", \"leg\", \"feet\", and \"body\".",
         "has_silk_touch": "Tests if the subject is holding an item with silk touch.",
         "has_tag": "Returns true if the subject entity has the tag provided.",
         "has_target": "Returns true if the subject entity has a valid target.",
@@ -7721,9 +7759,15 @@
                 },
             ],
         },
-        "minecraft:behavior.follow_target_captain": {
-            "description": "Allows mob to move towards its current target captain.",
+        "minecraft:behavior.follow_target_leader": {
+            "description": "Allows mob to move towards its target leader.",
             "children": [
+                {
+                    "name": "always_look_for_leader",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the mob will always search for a valid leader to follow if none is found or current leader is not valid anymore",
+                },
                 {
                     "name": "follow_distance",
                     "type": "Decimal",
@@ -7731,14 +7775,26 @@
                     "description": "Defines the distance in blocks the mob will stay from its target while following.",
                 },
                 {
+                    "name": "leader_filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The filters to use when determining if a mob is a suitable leader or not.",
+                },
+                {
+                    "name": "search_cooldown",
+                    "type": "Integer",
+                    "defaultValue": "20",
+                    "description": "Number of ticks that must pass before a new search is initiated after a target is not found, lost, or becomes invalid.",
+                },
+                {
                     "name": "within_radius",
                     "type": "Decimal",
                     "defaultValue": "0.0",
-                    "description": "Defines the maximum distance in blocks a mob can get from its target captain before giving up trying to follow it.",
+                    "description": "Defines the maximum distance in blocks a mob can get from its target leader before giving up trying to follow it.",
                 },
             ],
         },
-        "minecraft:behavior.go_and_give_items_to_noteblock": {
+        "minecraft:behavior.go_and_give_items_to_noteblock (See JSON Schema since 1.26.20)": {
             "description": "The entity will attempt to toss the items from its inventory to a nearby recently played noteblock.",
             "children": [
                 {
@@ -7785,7 +7841,7 @@
                 },
             ],
         },
-        "minecraft:behavior.go_and_give_items_to_owner": {
+        "minecraft:behavior.go_and_give_items_to_owner (See JSON Schema since 1.26.20)": {
             "description": "The entity will attempt to toss the items from its inventory to its owner.",
             "children": [
                 {
@@ -7815,7 +7871,7 @@
                 {
                     "name": "throw_sound",
                     "type": "String",
-                    "defaultValue": "item_thrown",
+                    "defaultValue": "charge",
                     "description": "Sound to play when this mob throws an item.",
                 },
                 {
@@ -7826,7 +7882,7 @@
                 },
             ],
         },
-        "minecraft:behavior.go_home": {
+        "minecraft:behavior.go_home (See JSON Schema since 1.26.20)": {
             "description": "Allows the mob to move back to the position they were spawned.",
             "children": [
                 {
@@ -8150,7 +8206,7 @@
                 },
             ],
         },
-        "minecraft:behavior.jump_around_target": {
+        "minecraft:behavior.jump_around_target (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to jump around a target.",
             "children": [
                 {
@@ -8245,7 +8301,7 @@
                 },
             ],
         },
-        "minecraft:behavior.jump_to_block": {
+        "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to jump to another random block.",
             "children": [
                 {
@@ -8300,13 +8356,13 @@
                     "name": "search_height",
                     "type": "Integer",
                     "defaultValue": "10",
-                    "description": "The height (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                    "description": "The height (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                 },
                 {
                     "name": "search_width",
                     "type": "Integer",
                     "defaultValue": "8",
-                    "description": "The width (in blocks, in range [2, 15]) of the search box, centered around the mob.",
+                    "description": "The width (in blocks, in range [1, 15]) of the search box, centered around the mob.",
                 },
             ],
         },
@@ -8818,7 +8874,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_around_target": {
+        "minecraft:behavior.move_around_target (See JSON Schema since 1.26.20)": {
             "description": "Allows an entity to move around a target. If the entity is too close (i.e. closer than destination range min and height difference limit) it will try to move away from its target. If the entity is too far away from its target it will try to move closer to a random position within the destination range. A randomized amount of those positions will be behind the target, and the spread can be tweaked with 'destination_pos_spread_degrees'.",
             "children": [
                 {
@@ -8865,7 +8921,7 @@
                 },
             ],
         },
-        "minecraft:behavior.move_indoors": {
+        "minecraft:behavior.move_indoors (See JSON Schema since 1.26.20)": {
             "description": "Allows this entity to move indoors.",
             "children": [
                 {
@@ -8882,13 +8938,13 @@
                 },
             ],
         },
-        "minecraft:behavior.move_outdoors": {
+        "minecraft:behavior.move_outdoors (See JSON Schema since 1.26.20)": {
             "description": "Allows this entity to move outdoors.",
             "children": [
                 {
                     "name": "goal_radius",
                     "type": "Decimal",
-                    "defaultValue": "0.500000",
+                    "defaultValue": "2.000000",
                     "description": "The radius away from the target block to count as reaching the goal.",
                 },
                 {
@@ -9862,6 +9918,18 @@
                     "type": "Decimal",
                     "defaultValue": "0.0",
                     "description": "Maximum distance this mob will look for items to pick up",
+                },
+                {
+                    "name": "on_pickup_item_end",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when this mob either finishes or loses interest in picking up an item",
+                },
+                {
+                    "name": "on_pickup_item_start",
+                    "type": "Trigger",
+                    "defaultValue": "",
+                    "description": "Event to run when this mob moves to pick up an item",
                 },
                 {
                     "name": "pickup_based_on_chance",
@@ -13287,7 +13355,7 @@
                             "name": "deals_damage",
                             "type": "Boolean",
                             "defaultValue": "yes",
-                            "description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity.                                          \\n- \"no\", received damage is not applied to the entity.                                          \\n- \"no_but_side_effects_apply\", received damage is not applied to the entity, but the side effects of the attack are. This means that the attacker's weapon loses durability, enchantment side effects are applied, and so on.",
+                            "description": "Defines how received damage affects the entity:                                          \\n- \"yes\", received damage is applied to the entity and all consequences of the attack occur.                                          \\n- \"no\", entity is unaffected and no side effects from attacking occur.                                          \\n- \"no_but_side_effects_apply\", entity is unaffected, but the side effects of the attack apply. This means that the attacker's weapon loses durability.                                          \\n- \"no_but_entity_effects_apply\", damage is not applied to the entity, but knockback and enchantments are applied and the attacker's weapon is used as normal. The entity does not flash red.",
                         },
                         {
                             "name": "on_damage",
@@ -15849,6 +15917,12 @@
                     "description": "If true, the projectile will be treated as dangerous to the players",
                 },
                 {
+                    "name": "isolated_physics",
+                    "type": "Boolean",
+                    "defaultValue": "true",
+                    "description": "[EXPERIMENTAL] If true, this projectile will not be affected by outside forces such as friction and drag.",
+                },
+                {
                     "name": "knockback",
                     "type": "Boolean",
                     "defaultValue": "true",
@@ -16967,17 +17041,6 @@
                     "type": "Decimal",
                     "defaultValue": "0.02",
                     "description": "Flying speed in blocks per tick.",
-                },
-            ],
-        },
-        "minecraft:friction_modifier": {
-            "description": "Defines how much friction affects this entity.",
-            "children": [
-                {
-                    "name": "value",
-                    "type": "Decimal",
-                    "defaultValue": "1.0",
-                    "description": "The higher the number, the more friction affects this entity. A value of 1.0 means regular friction, while 2.0 means twice as much.",
                 },
             ],
         },

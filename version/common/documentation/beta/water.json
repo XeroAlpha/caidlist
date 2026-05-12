@@ -1,0 +1,313 @@
+{
+    "title": "WATER DOCUMENTATION",
+    "content": [],
+    "sections": [
+        {
+            "name": "Overview",
+            "id": "Overview",
+            "level": 1,
+            "content": [
+                "There are many different Water controls in Minecraft. Things such as wave frequency, wave speed, and caustics scale are all water settings.",
+                "You can override all of these settings to change the caustic and wave visuals, and even biome water color contribution!",
+            ],
+        },
+        {
+            "name": "JSON Format",
+            "id": "JSON Format",
+            "level": 1,
+            "content": [
+                "All water settings overrides should specify the version that they target via the \"format_version\" field. The remainder of the water data is divided up into independent JSON sub-objects for each water control.",
+                "These overrides define the water data of the overarching water settings collection. To be valid, a definition must include exactly one of these type objects. See the full water settings schema below for additional details and the full list of supported water overrides.",
+                "Here is a sample water settings file.",
+                {
+                    "type": "code",
+                    "content": [
+                        "{",
+                        "          \"format_version\": \"1.21.120\",",
+                        "          \"minecraft:water_settings\": {",
+                        "            \"description\": {",
+                        "              \"identifier\": \"test:water\" // The identifier for these water settings. The identifier must include a namespace.",
+                        "            },",
+                        "            \"particle_concentrations\": { // The concentration of different optical particles in water.",
+                        "              \"chlorophyll\": 1.306, // Chlorophyll concentration in mg/L",
+                        "              \"cdom\": 7.102, // Colored dissolved organic matter (CDOM) concentration in mg/L. Also called yellow matter.",
+                        "              \"suspended_sediment\": 0.452 // Suspended sediment concentration in mg/L",
+                        "            },",
+                        "            \"caustics\": {",
+                        "              \"enabled\": true,",
+                        "              \"frame_length\": 0.05,",
+                        "              \"texture\": \"\",",
+                        "              \"scale\": 5.0,",
+                        "              \"power\": 2",
+                        "            },",
+                        "            \"waves\": {",
+                        "              \"enabled\": true,",
+                        "              \"frequency\": 0.01,",
+                        "              \"octaves\": 16,",
+                        "              \"depth\": 2.0,",
+                        "              \"speed\": 5.0,",
+                        "              \"shape\": 7.0,",
+                        "              \"pull\": 0.25,",
+                        "              \"mix\": 1.0,",
+                        "              \"frequency_scaling\": 0.5,",
+                        "              \"speed_scaling\": 0.0",
+                        "            }",
+                        "          }",
+                        "        }",
+                    ],
+                },
+            ],
+        },
+        {
+            "name": "Adding Water Settings",
+            "id": "Adding Water Settings",
+            "level": 1,
+            "content": [
+                "Water Settings are read from JSON files in the \"water\" subfolder of resource packs. Loading enforces one water settings collection per file. The settings collection's identifier acts as its name and must be namespaced. If two resource packs define the same water settings name (including namespace), then the settings from the highest pack in the stack will be used. Adding a file with a new name to the water data location will make it available for the game to use, while existing water settings can be overridden using another settings collection with the same identifier.",
+            ],
+        },
+        {
+            "name": "Schema",
+            "id": "Schema",
+            "level": 1,
+            "content": [],
+            "sections": [
+                {
+                    "name": "CausticsParameters",
+                    "id": "CausticsParameters",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "enabled",
+                                    "Type": "Boolean",
+                                    "Required?": "Optional",
+                                    "Description": "Whether or not caustics are on or off.",
+                                },
+                                {
+                                    "Name": "frame_length",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.01 to 5.0 which controls how many seconds to spend on each frame of animation in the caustics texture.",
+                                },
+                                {
+                                    "Name": "power",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 1 to 6 which controls how bright the caustics effect appears.",
+                                },
+                                {
+                                    "Name": "scale",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.1 to 5.0 which controls how size of the repetition of the caustics texture.",
+                                },
+                                {
+                                    "Name": "texture",
+                                    "Type": "String",
+                                    "Required?": "Optional",
+                                    "Description": "Resource location to a texture for controlling the shape of the caustics; if not used, a built-in Minecraft texture will be supplied automatically.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "PSY",
+                    "id": "PSY",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "cdom",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Concentration of chromophoric dissolved organic matter from 0.0 to 15.0 in mg/L; higher concentrations produce more yellow/yellow-brown colors.",
+                                },
+                                {
+                                    "Name": "chlorophyll",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Concentration of chlorophyll from 0.0 to 10.0 in mg/L; higher concentrations produce more green colors.",
+                                },
+                                {
+                                    "Name": "suspended_sediment",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Concentration of suspended sediment from 0.0 to 300.0 in mg/L; higher concentrations produce more red/red-brown colors.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Water Config JSON File v4",
+                    "id": "Water Config JSON File v4",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Specifies the version of the game these Water Settings were made in. If the version is lower than the current version, any changes made to the settings in the vanilla version will be applied to it.",
+                                },
+                                {
+                                    "Name": "minecraft:water_settings",
+                                    "Type": "Object of type WaterSettings",
+                                    "Required?": "Required",
+                                    "Description": "Water Settings definition which includes the 'particle_concentrations,' 'waves,' 'biome_water_color_contribution,' and 'caustics' sections.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "WaterDescription",
+                    "id": "WaterDescription",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "identifier",
+                                    "Type": "Object of type Identifier",
+                                    "Required?": "Required",
+                                    "Description": "The name of this Water Description in the format 'namespace_name:description_name'.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "WaterSettings",
+                    "id": "WaterSettings",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "biome_water_color_contribution",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "Controls how much the surface_color value defined in *.client_biome.json files will be mixed into the base color of the water in Vibrant Visuals.",
+                                },
+                                {
+                                    "Name": "caustics",
+                                    "Type": "Object of type CausticsParameters",
+                                    "Required?": "Optional",
+                                    "Description": "Caustics make bodies of water more realistic by projecting light rays on underwater surfaces. These rays then scatter and dance as the surface of the water moves. This effect is enabled by default, but can be selectively disabled in given water configurations.",
+                                },
+                                {
+                                    "Name": "description",
+                                    "Type": "Object of type WaterDescription",
+                                    "Required?": "Required",
+                                    "Description": "",
+                                },
+                                {
+                                    "Name": "particle_concentrations",
+                                    "Type": "Object of type PSY",
+                                    "Required?": "Optional",
+                                    "Description": "The composition of particles in a body of water determines its color and how light behaves as it travels through the water. We've boiled them down to three concentrations in mg/L. Use these values to simulate crystal clear lakes, deep oceans, or muddy rivers.",
+                                },
+                                {
+                                    "Name": "waves",
+                                    "Type": "Object of type WaterSurfaceParameters",
+                                    "Required?": "Optional",
+                                    "Description": "Waves are an optional effect that can be used to complement water surface animations to make your water appear more realistic. You can blend them with existing water texture animations, or replace them entirely. The waves in Vibrant Visuals are purely an image-based effect—waves don't actually move the vertices of the water surface, so the water surface geometry will remain unchanged.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "WaterSurfaceParameters",
+                    "id": "WaterSurfaceParameters",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "depth",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.0 to 3.0 which controls the amount of wave displacement.",
+                                },
+                                {
+                                    "Name": "direction_increment",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.0 to 360.0 which controls how much the heading changes between each octave.",
+                                },
+                                {
+                                    "Name": "enabled",
+                                    "Type": "Boolean",
+                                    "Required?": "Optional",
+                                    "Description": "Whether or not waves are on or off.",
+                                },
+                                {
+                                    "Name": "frequency",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.01 to 3.0 which controls the size of individual waves; higher values create more tightly packed waves.",
+                                },
+                                {
+                                    "Name": "frequency_scaling",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.0 to 2.0 which controls how much frequencies change in subsequent octaves.",
+                                },
+                                {
+                                    "Name": "mix",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.0 to 1.0 which controls how much each octave will blend into the neighboring octave.",
+                                },
+                                {
+                                    "Name": "octaves",
+                                    "Type": "",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 1 to 30 which determines how many layers of waves to simulate; high values result in more complex waves.",
+                                },
+                                {
+                                    "Name": "pull",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from -1.0 to 1.0 which controls how much smaller waves are pulled into larger ones.",
+                                },
+                                {
+                                    "Name": "shape",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 1.0 to 10.0 which adjusts the shape of the wave.",
+                                },
+                                {
+                                    "Name": "speed",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.01 to 10.0 which controls the starting speed of the first waves.",
+                                },
+                                {
+                                    "Name": "speed_scaling",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "A range from 0.0 to 2.0 which controls how much faster/slower subsequent octaves move.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    "__OBJECTHASH__": "6a82ed1640b2000b9eac6ffad8d039df4f1f74c0",
+}
