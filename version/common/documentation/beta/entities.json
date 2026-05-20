@@ -147,11 +147,11 @@
                     "id": "held_item_scale",
                     "level": 2,
                     "content": [
-                        "Scales the entity's held item. Defaults to 1.0. Must be greater than zero.",
+                        "Scales the entity's held item using a Molang expression. Defaults to 1.0. Must resolve to greater than zero.",
                         {
                             "type": "code",
                             "content": [
-                                "\"held_item_scale\": 1.0",
+                                "\"held_item_scale\": \"variable.held_item_scale\"",
                             ],
                         },
                     ],
@@ -24391,6 +24391,12 @@
                                             "Description": "How close a hostile entity must be to have the damage applied.",
                                         },
                                         {
+                                            "Name": "death_message_override",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "A localization key to use as the death message when the area attack kills an entity. If empty, the default death message for the damage cause is used.",
+                                        },
+                                        {
                                             "Name": "entity_filter",
                                             "Type": "Minecraft Filter",
                                             "Default Value": "",
@@ -28383,7 +28389,7 @@
                                             "Name": "isolated_physics",
                                             "Type": "Boolean",
                                             "Default Value": "true",
-                                            "Description": "[EXPERIMENTAL] If true, this projectile will not be affected by outside forces such as friction and drag.",
+                                            "Description": "If true, this projectile will not be affected by outside forces such as friction and drag.",
                                         },
                                         {
                                             "Name": "knockback",
@@ -28425,7 +28431,7 @@
                                             "Name": "owner_launch_immunity_ticks",
                                             "Type": "Integer",
                                             "Default Value": "5",
-                                            "Description": "[EXPERIMENTAL] Number of ticks after launch during which the projectile cannot hit its owner",
+                                            "Description": "Number of ticks after launch during which the projectile cannot hit its owner",
                                         },
                                         {
                                             "Name": "particle",
@@ -32570,5 +32576,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "84a89cbd8ed43a8a896130f49b593cd9aee3f52d",
+    "__OBJECTHASH__": "7f8646d48173e773c4f32a01ac56738fc358e8d6",
 }
