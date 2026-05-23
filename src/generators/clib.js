@@ -128,6 +128,10 @@ export default function writeTransMapClib(cx, options) {
                     require: [{ uuid: source.uuid, min: versionArray }],
                     minCAVersion: '2023-11-15',
                     minSupportVer: coreVersion,
+                    metadata: {
+                        from: sourceMeta,
+                        to: metadata
+                    },
                     enums: merged,
                     versionPack:
                         Object.keys(removed).length > 0
@@ -137,11 +141,7 @@ export default function writeTransMapClib(cx, options) {
                                       mode: 'remove'
                                   }
                               }
-                            : undefined,
-                    metadata: {
-                        from: sourceMeta,
-                        to: metadata
-                    }
+                            : undefined
                 },
                 null,
                 '\t'
