@@ -929,6 +929,194 @@
             ],
             "sections": [
                 {
+                    "name": "actor_has_item_with_enchantment_in_slot",
+                    "id": "actor_has_item_with_enchantment_in_slot",
+                    "level": 2,
+                    "content": [
+                        "Tests that an actor has an item equipped with a given enchantment.",
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "domain",
+                                    "Type": "String",
+                                    "Default": "any",
+                                    "Description": [
+                                        "(Optional) The equipment location to test",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "any",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "armor",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "body",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "feet",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "head",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "inventory",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "leg",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "main_hand",
+                                                    "Description": "",
+                                                },
+                                                {
+                                                    "Options": "torso",
+                                                    "Description": "",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "operator",
+                                    "Type": "String",
+                                    "Default": "equals",
+                                    "Description": [
+                                        "(Optional) The comparison to apply with 'value'.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "!=",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "<",
+                                                    "Description": "Test for less-than the value.",
+                                                },
+                                                {
+                                                    "Options": "<=",
+                                                    "Description": "Test for less-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "<>",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                                {
+                                                    "Options": "=",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "==",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": ">",
+                                                    "Description": "Test for greater-than the value.",
+                                                },
+                                                {
+                                                    "Options": ">=",
+                                                    "Description": "Test for greater-than or equal to the value.",
+                                                },
+                                                {
+                                                    "Options": "equals",
+                                                    "Description": "Test for equality.",
+                                                },
+                                                {
+                                                    "Options": "not",
+                                                    "Description": "Test for inequality.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "subject",
+                                    "Type": "String",
+                                    "Default": "self",
+                                    "Description": [
+                                        "(Optional) The subject of this filter test.",
+                                        {
+                                            "type": "table",
+                                            "rows": [
+                                                {
+                                                    "Options": "block",
+                                                    "Description": "The block involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "damager",
+                                                    "Description": "The damaging actor involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "other",
+                                                    "Description": "The other member of an interaction, not the caller.",
+                                                },
+                                                {
+                                                    "Options": "parent",
+                                                    "Description": "The caller's current parent.",
+                                                },
+                                                {
+                                                    "Options": "player",
+                                                    "Description": "The player involved with the interaction.",
+                                                },
+                                                {
+                                                    "Options": "self",
+                                                    "Description": "The entity or object calling the test",
+                                                },
+                                                {
+                                                    "Options": "target",
+                                                    "Description": "The caller's current target.",
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                                {
+                                    "Name": "value",
+                                    "Type": "String",
+                                    "Default": "",
+                                    "Description": "(Required) A string value.",
+                                },
+                            ],
+                        },
+                    ],
+                    "sections": [
+                        {
+                            "name": "Examples",
+                            "level": 4,
+                            "content": [
+                                "Full..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"actor_has_item_with_enchantment_in_slot\", \"subject\": \"self\", \"domain\": \"any\", \"operator\": \"equals\", \"value\": \"\" }",
+                                    ],
+                                },
+                                "Short (using Defaults)..",
+                                {
+                                    "type": "code",
+                                    "content": [
+                                        "{ \"test\": \"actor_has_item_with_enchantment_in_slot\", \"value\": \"\" }",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     "name": "actor_health",
                     "id": "actor_health",
                     "level": 2,
@@ -28184,6 +28372,316 @@
                             ],
                         },
                         {
+                            "name": "minecraft:on_death",
+                            "id": "minecraft:on_death",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call on this entity's death.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_friendly_anger",
+                            "id": "minecraft:on_friendly_anger",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_hurt",
+                            "id": "minecraft:on_hurt",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this entity takes damage.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_hurt_by_player",
+                            "id": "minecraft:on_hurt_by_player",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this entity is attacked by the player.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_ignite",
+                            "id": "minecraft:on_ignite",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this entity is set on fire.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_start_landing",
+                            "id": "minecraft:on_start_landing",
+                            "level": 4,
+                            "content": [
+                                "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_start_takeoff",
+                            "id": "minecraft:on_start_takeoff",
+                            "level": 4,
+                            "content": [
+                                "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_target_acquired",
+                            "id": "minecraft:on_target_acquired",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this entity finds a target.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_target_escape",
+                            "id": "minecraft:on_target_escape",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this entity loses the target it currently has.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:on_wake_with_owner",
+                            "id": "minecraft:on_wake_with_owner",
+                            "level": 4,
+                            "content": [
+                                "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The event to run when the conditions for this trigger are met.",
+                                        },
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The list of conditions for this trigger to execute.",
+                                        },
+                                        {
+                                            "Name": "target",
+                                            "Type": "String",
+                                            "Default Value": "self",
+                                            "Description": "The target of the event.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:out_of_control",
                             "id": "minecraft:out_of_control",
                             "level": 4,
@@ -31046,6 +31544,46 @@
                                             "ID": "1140005505",
                                         },
                                         {
+                                            "JSON Name": "minecraft:on_death",
+                                            "ID": "-49357854",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_friendly_anger",
+                                            "ID": "-1009986313",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_hurt",
+                                            "ID": "-1028603471",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_hurt_by_player",
+                                            "ID": "-599009831",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_ignite",
+                                            "ID": "-1911489054",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_start_landing",
+                                            "ID": "-555648368",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_start_takeoff",
+                                            "ID": "426083399",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_target_acquired",
+                                            "ID": "1063277906",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_target_escape",
+                                            "ID": "-1373130027",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:on_wake_with_owner",
+                                            "ID": "-1543219003",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:out_of_control",
                                             "ID": "-639930856",
                                         },
@@ -31433,53 +31971,7 @@
                             "name": "Triggers",
                             "id": "Triggers",
                             "level": 4,
-                            "content": [
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "JSON Name": "minecraft:on_death",
-                                            "ID": "-49357854",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_friendly_anger",
-                                            "ID": "-1009986313",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_hurt",
-                                            "ID": "-1028603471",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_hurt_by_player",
-                                            "ID": "-599009831",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_ignite",
-                                            "ID": "-1911489054",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_start_landing",
-                                            "ID": "-555648368",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_start_takeoff",
-                                            "ID": "426083399",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_target_acquired",
-                                            "ID": "1063277906",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_target_escape",
-                                            "ID": "-1373130027",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:on_wake_with_owner",
-                                            "ID": "-1543219003",
-                                        },
-                                    ],
-                                },
-                            ],
+                            "content": [],
                         },
                     ],
                 },
@@ -32260,321 +32752,9 @@
                     "id": "Triggers",
                     "level": 2,
                     "content": [],
-                    "sections": [
-                        {
-                            "name": "minecraft:on_death",
-                            "id": "minecraft:on_death",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call on this entity's death.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_friendly_anger",
-                            "id": "minecraft:on_friendly_anger",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_hurt",
-                            "id": "minecraft:on_hurt",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this entity takes damage.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_hurt_by_player",
-                            "id": "minecraft:on_hurt_by_player",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this entity is attacked by the player.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_ignite",
-                            "id": "minecraft:on_ignite",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this entity is set on fire.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_start_landing",
-                            "id": "minecraft:on_start_landing",
-                            "level": 4,
-                            "content": [
-                                "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_start_takeoff",
-                            "id": "minecraft:on_start_takeoff",
-                            "level": 4,
-                            "content": [
-                                "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_target_acquired",
-                            "id": "minecraft:on_target_acquired",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this entity finds a target.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_target_escape",
-                            "id": "minecraft:on_target_escape",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this entity loses the target it currently has.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:on_wake_with_owner",
-                            "id": "minecraft:on_wake_with_owner",
-                            "level": 4,
-                            "content": [
-                                "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "The event to run when the conditions for this trigger are met.",
-                                        },
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The list of conditions for this trigger to execute.",
-                                        },
-                                        {
-                                            "Name": "target",
-                                            "Type": "String",
-                                            "Default Value": "self",
-                                            "Description": "The target of the event.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
                 },
             ],
         },
     ],
-    "__OBJECTHASH__": "f74985b18d4fa81221d7b750e0741328bed5e41c",
+    "__OBJECTHASH__": "a7a810d3ca4144c957ef3f40bf371babbbe8b865",
 }

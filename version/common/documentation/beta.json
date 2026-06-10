@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.30.32",
-    "__COMMITHASH__": "97de63455ff4f6b2a6ffc182dae69cc25f6b3ceb",
-    "__MESSAGE__": "v1.26.40.20-preview",
+    "__VERSION__": "1.26.40.22",
+    "__COMMITHASH__": "a01e64efe5f1e9b833b7d22e429124654b557dcf",
+    "__MESSAGE__": "v1.26.40.22-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -608,6 +608,14 @@
                 {
                     "name": "Filters",
                     "sections": [
+                        {
+                            "name": "actor_has_item_with_enchantment_in_slot",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
                         {
                             "name": "actor_health",
                             "sections": [
@@ -2249,6 +2257,36 @@
                                     "name": "minecraft:navigation.walk",
                                 },
                                 {
+                                    "name": "minecraft:on_death",
+                                },
+                                {
+                                    "name": "minecraft:on_friendly_anger",
+                                },
+                                {
+                                    "name": "minecraft:on_hurt",
+                                },
+                                {
+                                    "name": "minecraft:on_hurt_by_player",
+                                },
+                                {
+                                    "name": "minecraft:on_ignite",
+                                },
+                                {
+                                    "name": "minecraft:on_start_landing",
+                                },
+                                {
+                                    "name": "minecraft:on_start_takeoff",
+                                },
+                                {
+                                    "name": "minecraft:on_target_acquired",
+                                },
+                                {
+                                    "name": "minecraft:on_target_escape",
+                                },
+                                {
+                                    "name": "minecraft:on_wake_with_owner",
+                                },
+                                {
                                     "name": "minecraft:out_of_control",
                                 },
                                 {
@@ -2580,38 +2618,6 @@
                         },
                         {
                             "name": "Triggers",
-                            "sections": [
-                                {
-                                    "name": "minecraft:on_death",
-                                },
-                                {
-                                    "name": "minecraft:on_friendly_anger",
-                                },
-                                {
-                                    "name": "minecraft:on_hurt",
-                                },
-                                {
-                                    "name": "minecraft:on_hurt_by_player",
-                                },
-                                {
-                                    "name": "minecraft:on_ignite",
-                                },
-                                {
-                                    "name": "minecraft:on_start_landing",
-                                },
-                                {
-                                    "name": "minecraft:on_start_takeoff",
-                                },
-                                {
-                                    "name": "minecraft:on_target_acquired",
-                                },
-                                {
-                                    "name": "minecraft:on_target_escape",
-                                },
-                                {
-                                    "name": "minecraft:on_wake_with_owner",
-                                },
-                            ],
                         },
                     ],
                 },
@@ -5120,7 +5126,7 @@
         "squid": "0x00008977 (0x17)",
         "stray": "0x01116974 (0x46)",
         "strider": "0x00004989 (0x125)",
-        "sulfur_cube": "0x00002969 (0x153)",
+        "sulfur_cube": "0x00000921 (0x153)",
         "tadpole": "0x00009093 (0x133)",
         "thrown_trident": "0x12582985 (0x73)",
         "tnt": "0x00000065 (0x65)",
@@ -6098,6 +6104,7 @@
         "minecraft:weight": "This component allows players to give a priority to how often that mob should spawn. Mobs with lower weight values have a higher chance to spawn than mobs with higher weight values.",
     },
     "entityFilter": {
+        "actor_has_item_with_enchantment_in_slot": "Tests that an actor has an item equipped with a given enchantment.",
         "actor_health": "Tests the health of the subject.",
         "all_slots_empty": "Returns true when the designated equipment location for the subject entity is completely empty.",
         "any_slot_empty": "Returns true when the designated equipment location for the subject entity has any empty slot.",
@@ -15979,6 +15986,236 @@
                 },
             ],
         },
+        "minecraft:on_death": {
+            "description": "Adds a trigger to call on this entity's death.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_friendly_anger": {
+            "description": "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_hurt": {
+            "description": "Adds a trigger to call when this entity takes damage.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_hurt_by_player": {
+            "description": "Adds a trigger to call when this entity is attacked by the player.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_ignite": {
+            "description": "Adds a trigger to call when this entity is set on fire.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_start_landing": {
+            "description": "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_start_takeoff": {
+            "description": "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_target_acquired": {
+            "description": "Adds a trigger to call when this entity finds a target.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_target_escape": {
+            "description": "Adds a trigger to call when this entity loses the target it currently has.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_wake_with_owner": {
+            "description": "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
         "minecraft:peek": {
             "description": "Defines the entity's 'peek' behavior, defining the events that should be called during it.",
             "children": [
@@ -17522,18 +17759,6 @@
                 },
             ],
         },
-    },
-    "entityTrigger": {
-        "minecraft:on_death": "Adds a trigger to call on this entity's death.",
-        "minecraft:on_friendly_anger": "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
-        "minecraft:on_hurt": "Adds a trigger to call when this entity takes damage.",
-        "minecraft:on_hurt_by_player": "Adds a trigger to call when this entity is attacked by the player.",
-        "minecraft:on_ignite": "Adds a trigger to call when this entity is set on fire.",
-        "minecraft:on_start_landing": "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
-        "minecraft:on_start_takeoff": "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
-        "minecraft:on_target_acquired": "Adds a trigger to call when this entity finds a target.",
-        "minecraft:on_target_escape": "Adds a trigger to call when this entity loses the target it currently has.",
-        "minecraft:on_wake_with_owner": "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
     },
     "featureType": {
         "minecraft:aggregate_feature": "'minecraft:aggregate_feature' places a collection of features in an arbitary order. All features in the collection use the same input position. Features should not depend on each other, as there is no guarantee on the order the features will be placed.",

@@ -592,7 +592,8 @@ const pageAnalyzer = [
     createSectionSummaryAnalyzer({
         name: 'entityTrigger',
         documentation: 'Entities',
-        path: ['Server Entity Documentation', 'Triggers']
+        path: ['Server Entity Documentation', 'Triggers'],
+        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.26.40.20')
     }),
     createSectionSummaryAnalyzer({
         name: 'featureType',
@@ -781,7 +782,7 @@ export async function fetchDocumentationIds(cx) {
     remapIdTable.forEach(([name, targetName]) => {
         if (targetName in target) {
             Object.assign(target[targetName], cache[name]);
-        } else {
+        } else if (cache[name]) {
             target[targetName] = cache[name];
         }
     });
