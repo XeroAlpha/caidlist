@@ -877,6 +877,9 @@ const Extractors = [
                     componentInstances.forEach((component) => {
                         const componentData = {};
                         const componentId = component.typeId;
+                        if (component instanceof Minecraft.ItemBlockDynamicPropertiesComponent) {
+                            return;
+                        }
                         if (component instanceof Minecraft.ItemEnchantableComponent) {
                             const enchantmentSlots = component.slots.filter((e) => e);
                             const existedEnchantments = component.getEnchantments();

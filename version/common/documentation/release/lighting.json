@@ -1,0 +1,324 @@
+{
+    "title": "LIGHTING DOCUMENTATION",
+    "content": [],
+    "sections": [
+        {
+            "name": "Overview",
+            "id": "Overview",
+            "level": 1,
+            "content": [
+                "There are many different Lighting controls in Minecraft. Things like sun color, ambient color, and moon illuminance are all lighting controls.",
+                "You can override all of these lighting controls to change the colors and illuminance of many things!",
+            ],
+        },
+        {
+            "name": "JSON Format",
+            "id": "JSON Format",
+            "level": 1,
+            "content": [
+                "All lighting settings overrides should specify the version that they target via the \"format_version\" field. The remainder of the lighting data is divided up into independent JSON sub-objects for each lighting control.",
+                "These overrides define the lighting data of the overarching light settings collection. To be valid, a definition must include exactly one of these type objects. See the full lighting schema below for additional details and the full list of supported lighting overrides.",
+                "Here is a sample lighting file.",
+                {
+                    "type": "code",
+                    "content": [
+                        "{",
+                        "        \"format_version\": \"1.21.40\",",
+                        "        \"description\": {",
+                        "          \"identifier\": \"myResourcePack:default_lighting\"",
+                        "        },",
+                        "        \"directional_lights\": {",
+                        "          \"sun\": {",
+                        "            \"illuminance\": {",
+                        "              \"0.0\": 109880.0,",
+                        "              \"0.25\": 20000.0,",
+                        "              \"0.35\": 400.0,",
+                        "              \"0.5\": 1.0,",
+                        "              \"0.65\": 400.0,",
+                        "              \"0.75\": 20000.0,",
+                        "              \"1.0\": 109880.0",
+                        "            },",
+                        "            \"color\": [ 255.0, 255.0, 255.0, 255.0 ]",
+                        "          },",
+                        "          \"moon\": {",
+                        "            \"illuminance\": 0.27,",
+                        "            \"color\": {",
+                        "              \"0.0\": \"#ffffffff\",",
+                        "              \"1.0\": \"#ffffffff\"",
+                        "            }",
+                        "          },",
+                        "          \"orbital_offset_degrees\": 3.0",
+                        "        },",
+                        "      \"emissive\": {",
+                        "          \"desaturation\": 0.1",
+                        "        }",
+                        "      }",
+                    ],
+                },
+            ],
+        },
+        {
+            "name": "Adding Lighting Settings",
+            "id": "Adding Lighting Settings",
+            "level": 1,
+            "content": [
+                "Lighting Settings are read from JSON files in the \"lighting\" subfolder of behavior packs. Loading enforces one lighting settings collection per file. The settings collection's identifier acts as its name and must be namespaced. If two behavior packs define the same lighting settings name (including namespace), then the settings from the highest pack in the stack will be used. Adding a file with a new name to the lighting data location will make it available for the game to use, while existing lighting settings can be overridden using another settings collection with the same identifier.",
+            ],
+        },
+        {
+            "name": "Schema",
+            "id": "Schema",
+            "level": 1,
+            "content": [],
+            "sections": [
+                {
+                    "name": "AmbientLight",
+                    "id": "AmbientLight",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Required",
+                                    "Description": "The 'color' value can be expressed either as an array of three numerical values in the range of 0–255, or as a six-digit hexadecimal string. This can also be specified using keyframes in a time_of_day:color format where time_of_day ranges from 0-1 inclusive.",
+                                },
+                                {
+                                    "Name": "illuminance",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Required",
+                                    "Description": "The 'illuminance' value corresponds to the strength, in lux (lx), of the ambient light, and should be kept quite low in general. The allowed range for this value is 0.0 - 5.0. This can also be specified using keyframes in a time_of_day:illuminance format where time_of_day ranges from 0-1 inclusive.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "DirectionalLights",
+                    "id": "DirectionalLights",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "flash",
+                                    "Type": "Object of type StaticDirectionalLight",
+                                    "Required?": "Optional",
+                                    "Description": "A single Static Directional Light definition, containing Static Directional Light settings defined by resource pack",
+                                },
+                                {
+                                    "Name": "orbital",
+                                    "Type": "Object of type OrbitalLights",
+                                    "Required?": "Optional",
+                                    "Description": "A single Orbital Light definition, containing Orbital Light settings defined by resource pack",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Emissive",
+                    "id": "Emissive",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "desaturation",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "The 'desaturation' is a factor from 0.0 to 1.0 that controls how much the albedo of a given pixel is desaturated when computing the color of emissive light.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "KeyframedDirectionalLightImpl",
+                    "id": "KeyframedDirectionalLightImpl",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Optional",
+                                    "Description": "The 'color' value can be expressed either as an array of three numerical values in the range of 0–255, or as a six-digit hexadecimal string. This can also be specified using keyframes in a time_of_day:color format where time_of_day ranges from 0-1 inclusive.",
+                                },
+                                {
+                                    "Name": "illuminance",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Optional",
+                                    "Description": "The 'illuminance' value corresponds to the strength, in lux (lx) as a float. This can also be specified using keyframes in a time_of_day:illuminance format where time_of_day ranges from 0-1 inclusive.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "Lighting JSON File",
+                    "id": "Lighting JSON File",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "format_version",
+                                    "Type": "String",
+                                    "Required?": "Required",
+                                    "Description": "Specifies the version of the game this entity was made in. If the version is lower than the current version, any changes made to the entity in the vanilla version will be applied to it.",
+                                },
+                                {
+                                    "Name": "minecraft:lighting_settings",
+                                    "Type": "Object of type LightingSettings",
+                                    "Required?": "Optional",
+                                    "Description": "Lighting Settings definition which includes the 'description,' 'ambient,' 'directional_lights,' 'emissive,' and 'sky sections.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "LightingDescription",
+                    "id": "LightingDescription",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "identifier",
+                                    "Type": "Object of type Identifier",
+                                    "Required?": "Required",
+                                    "Description": "The name of this Lighting Description in the format 'namespace_name:description_name'.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "LightingSettings",
+                    "id": "LightingSettings",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "ambient",
+                                    "Type": "Object of type AmbientLight",
+                                    "Required?": "Optional",
+                                    "Description": "Parameters to control ambient lighting.",
+                                },
+                                {
+                                    "Name": "description",
+                                    "Type": "Object of type LightingDescription",
+                                    "Required?": "Optional",
+                                    "Description": "Identifier for the Lighting Settings.",
+                                },
+                                {
+                                    "Name": "directional_lights",
+                                    "Type": "Object of type DirectionalLights",
+                                    "Required?": "Optional",
+                                    "Description": "Parameters to control directional lights like the sun and moon.",
+                                },
+                                {
+                                    "Name": "emissive",
+                                    "Type": "Object of type Emissive",
+                                    "Required?": "Optional",
+                                    "Description": "Parameters to control emissives.",
+                                },
+                                {
+                                    "Name": "sky",
+                                    "Type": "Object of type SkyIntensity",
+                                    "Required?": "Optional",
+                                    "Description": "Parameters to control sky intensity.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "OrbitalLights",
+                    "id": "OrbitalLights",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "moon",
+                                    "Type": "Object of type KeyframedDirectionalLightImpl",
+                                    "Required?": "Optional",
+                                    "Description": "The directional light description including color and illuminance values to control the moon.",
+                                },
+                                {
+                                    "Name": "orbital_offset_degrees",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Optional",
+                                    "Description": "A pair of float:float values with the format time_of_day:orbital_offset, where the time_of_day is in a range from 0-1 inclusive.",
+                                },
+                                {
+                                    "Name": "sun",
+                                    "Type": "Object of type KeyframedDirectionalLightImpl",
+                                    "Required?": "Optional",
+                                    "Description": "The directional light description including color and illuminance values to control the sun.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "SkyIntensity",
+                    "id": "SkyIntensity",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "intensity",
+                                    "Type": "Object of type Keyframes",
+                                    "Required?": "Optional",
+                                    "Description": "The sky's 'intensity' value is a factor from 0.1 to 1.0 that controls how much sky light is factored into the indirect term for both diffuse and specular. A value of 1.0 causes the sky to contribute more to indirect light, and will result in shadows being less dark; a value of 0.1 will result in darker shadows, because less indirect light is contributed from the sky. The default value, if not provided, is 1.0.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "StaticDirectionalLight",
+                    "id": "StaticDirectionalLight",
+                    "level": 2,
+                    "content": [
+                        {
+                            "type": "table",
+                            "rows": [
+                                {
+                                    "Name": "color",
+                                    "Type": "Object of type Color255RGB",
+                                    "Required?": "Optional",
+                                    "Description": "The 'color' value can be expressed either as an array of three numerical values in the range of 0–255, or as a six-digit hexadecimal string.",
+                                },
+                                {
+                                    "Name": "illuminance",
+                                    "Type": "Float",
+                                    "Required?": "Optional",
+                                    "Description": "The 'illuminance' value corresponds to the strength, in lux(lx) as a float.",
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    ],
+    "__OBJECTHASH__": "15c186b26011e0a12b2ed07e93ad0cee91534aa7",
+}

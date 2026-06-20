@@ -113,7 +113,7 @@ const entryAnalyzer = [
         analyze(results, entryName, soundDefinition) {
             const { sounds, soundSubtitleMap } = results;
             const formatVersion = soundDefinition.format_version;
-            if (formatVersion === '1.14.0') {
+            if (formatVersion === '1.14.0' || formatVersion === '1.20.20') {
                 sounds.push(...Object.keys(soundDefinition.sound_definitions));
                 for (const [name, desc] of Object.entries(soundDefinition.sound_definitions)) {
                     if (desc.subtitle) {
