@@ -929,7 +929,18 @@ const Extractors = [
                             assign(componentData, component, ['compostingChance']);
                         }
                         if (component instanceof Minecraft.ItemInventoryComponent) {
-                            assign(componentData, component.container, ['containerRules', 'size']);
+                            const { containerRules } = component.container;
+                            if (containerRules) {
+                                const { allowedItems, allowNestedStorageItems, bannedItems, weightLimit } =
+                                    containerRules;
+                                componentData.containerRules = {
+                                    allowedItems,
+                                    allowNestedStorageItems,
+                                    bannedItems,
+                                    weightLimit
+                                };
+                            }
+                            componentData.size = component.container.size;
                         }
                         components[componentId] = componentData;
                         hasComponents = true;
@@ -1178,6 +1189,56 @@ const Extractors = [
             }
             target.potionEffects = sortObjectKey(potionEffects);
             target.potionDeliveries = sortObjectKey(potionDeliveries);
+        }
+    },
+    {
+        name: 'sounds',
+        timeout: 10000,
+        async extract({ target, frame }) {
+            const serverSoundEventCount = await wrapEvaluate(
+                frame,
+                () => Minecraft.world.soundDefinitionRegistry.getDefinitions().length
+            );
+            if (serverSoundEventCount === 0) {
+                warn(`No sound events found in the server.`);
+                return;
+            }
+            const { soundEvents, musicEvents } = await wrapEvaluate(frame, () => {
+                const soundEvents = {};
+                const musicEvents = {};
+                const soundDefinitions = Minecraft.world.soundDefinitionRegistry.getDefinitions();
+                for (const soundDefinition of soundDefinitions) {
+                    const soundEvent = {};
+                    if (soundDefinition.durationInfo) {
+                        soundEvent.durationInSeconds = soundDefinition.durationInfo.duration;
+                    }
+                    if (soundDefinition.tags) {
+                        soundEvent.tags = soundDefinition.tags;
+                    }
+                    if (soundDefinition.musicInfo) {
+                        if (soundDefinition.musicInfo.title !== undefined) {
+                            soundEvent.title = soundDefinition.musicInfo.title;
+                        }
+                        if (soundDefinition.musicInfo.artist !== undefined) {
+                            soundEvent.artist = soundDefinition.musicInfo.artist;
+                        }
+                        if (soundDefinition.musicInfo.genres !== undefined) {
+                            soundEvent.genres = soundDefinition.musicInfo.genres;
+                        }
+                        if (soundDefinition.musicInfo.moods !== undefined) {
+                            soundEvent.moods = soundDefinition.musicInfo.moods;
+                        }
+                    }
+                    if (soundDefinition.musicInfo) {
+                        musicEvents[soundDefinition.musicEventId] = soundEvent;
+                    } else {
+                        soundEvents[soundDefinition.soundEventId] = soundEvent;
+                    }
+                }
+                return { soundEvents, musicEvents };
+            });
+            target.soundEvents = sortObjectKey(soundEvents);
+            target.musicEvents = sortObjectKey(musicEvents);
         }
     }
 ];

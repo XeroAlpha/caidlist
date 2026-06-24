@@ -812,13 +812,19 @@ async function generateGameTestOutputFiles(cx) {
     });
     saveUserTranslation(userTranslation);
     writeHiddenEntryLog(cx, standardizedTranslation);
-    writeWikiBlockStateValuesBE(cx, projectPath('output.wiki.module.blockStateValues', 'lua'), ids.blocks);
-    writeWikiBlockPropertyValuesBE(
-        cx,
-        projectPath('output.wiki.module.blockPropertyValues', 'lua'),
-        ids.blockProperties
-    );
-    writeWikiBlockIdValuesBE(cx, projectPath('output.wiki.module.blockIdValues', 'lua'), translationResultMaps.block);
+    if (version === 'beta') {
+        writeWikiBlockStateValuesBE(cx, projectPath('output.wiki.module.blockStateValues', 'lua'), ids.blocks);
+        writeWikiBlockPropertyValuesBE(
+            cx,
+            projectPath('output.wiki.module.blockPropertyValues', 'lua'),
+            ids.blockProperties
+        );
+        writeWikiBlockIdValuesBE(
+            cx,
+            projectPath('output.wiki.module.blockIdValues', 'lua'),
+            translationResultMaps.block
+        );
+    }
 }
 
 const versionInfoMap = {
