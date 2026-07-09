@@ -1,12 +1,15 @@
 import { generateOutputFiles, generateOutputIndex } from './generate.js';
 import { forEachArray, log, warn } from './util/common.js';
 import * as config from '../data/config.js';
-import { measureAutocompletion } from './sources/autocompletion.js';
+import { measureAutocompletion, testDiffMerge } from './sources/autocompletion.js';
 
 async function main(args) {
     const context = { ...config };
     if (process.env.MEASURE_AUTOCOMPLETION) {
         measureAutocompletion();
+    }
+    if (process.env.TEST_DIFF_MERGE) {
+        testDiffMerge(context);
     }
     if (args[0] === 'generate') {
         const versionAndBranchIds = args.slice(1);

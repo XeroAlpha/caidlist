@@ -813,6 +813,7 @@ async function generateGameTestOutputFiles(cx) {
     saveUserTranslation(userTranslation);
     writeHiddenEntryLog(cx, standardizedTranslation);
     if (version === 'beta') {
+        log('Exporting wiki data...');
         writeWikiBlockStateValuesBE(cx, projectPath('output.wiki.module.blockStateValues', 'lua'), ids.blocks);
         writeWikiBlockPropertyValuesBE(
             cx,

@@ -1,6 +1,6 @@
 {
-    "packageVersion": "1.26.40.27",
-    "protocolVersion": 8,
+    "packageVersion": "1.26.40.30",
+    "protocolVersion": 9,
     "scopeTree": {
         "type": "object",
         "properties": {
@@ -9859,6 +9859,56 @@
                             },
                             "configurable": false,
                         },
+                        "CloneMode": {
+                            "value": {
+                                "type": "object",
+                                "enumerableProperties": {
+                                    "0": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Copy",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "1": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "ForceCopy",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "2": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "Move",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Copy": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 0,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "ForceCopy": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 1,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                    "Move": {
+                                        "value": {
+                                            "type": "number",
+                                            "value": 2,
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "CommandError": {
                             "value": {
                                 "type": "function",
@@ -11637,6 +11687,14 @@
                                             "type": "object",
                                             "enumerableProperties": {
                                                 "calculateClosestBiomeFromSeed": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "cloneBlocks": {
                                                     "value": {
                                                         "type": "function",
                                                         "name": "",
@@ -32778,6 +32836,14 @@
                                                         "length": 0,
                                                     },
                                                 },
+                                                "getShapes": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "maxShapes": {
                                                     "value": {
                                                         "type": "undefined",
@@ -41506,6 +41572,14 @@
                                                         "length": 1,
                                                     },
                                                 },
+                                                "entries": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                                 "reloadFile": {
                                                     "value": {
                                                         "type": "function",
@@ -45927,6 +46001,13 @@
         "Minecraft.ClientSystemInfo.prototype.locale",
         "Minecraft.ClientSystemInfo.prototype.maxRenderDistance",
         "Minecraft.ClientSystemInfo.prototype.platformType",
+        "Minecraft.CloneMode",
+        "Minecraft.CloneMode.0",
+        "Minecraft.CloneMode.1",
+        "Minecraft.CloneMode.2",
+        "Minecraft.CloneMode.Copy",
+        "Minecraft.CloneMode.ForceCopy",
+        "Minecraft.CloneMode.Move",
         "Minecraft.CommandError",
         "Minecraft.CommandError.prototype",
         "Minecraft.CommandError.prototype.[[Prototype]]",
@@ -46161,6 +46242,7 @@
         "Minecraft.Dimension",
         "Minecraft.Dimension.prototype",
         "Minecraft.Dimension.prototype.calculateClosestBiomeFromSeed",
+        "Minecraft.Dimension.prototype.cloneBlocks",
         "Minecraft.Dimension.prototype.constructor",
         "Minecraft.Dimension.prototype.containsBiomes",
         "Minecraft.Dimension.prototype.containsBlock",
@@ -48952,6 +49034,7 @@
         "Minecraft.PrimitiveShapesManager.prototype",
         "Minecraft.PrimitiveShapesManager.prototype.addText",
         "Minecraft.PrimitiveShapesManager.prototype.constructor",
+        "Minecraft.PrimitiveShapesManager.prototype.getShapes",
         "Minecraft.PrimitiveShapesManager.prototype.maxShapes",
         "Minecraft.PrimitiveShapesManager.prototype.removeAll",
         "Minecraft.PrimitiveShapesManager.prototype.removeText",
@@ -49666,6 +49749,7 @@
         "MinecraftAdmin.AllowList.prototype.contains",
         "MinecraftAdmin.AllowList.prototype.enabled.[[Get]]",
         "MinecraftAdmin.AllowList.prototype.enabled.[[Set]]",
+        "MinecraftAdmin.AllowList.prototype.entries.[[Get]]",
         "MinecraftAdmin.AllowList.prototype.reloadFile",
         "MinecraftAdmin.AllowList.prototype.remove",
         "MinecraftAdmin.AllowListFileReloadError",
@@ -50772,38 +50856,6 @@
         "minecraft:acacia_fence": {
             "properties": [
                 {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
                     "name": "wood_type",
                     "validValues": [
                         "oak",
@@ -51181,17 +51233,6 @@
         },
         "minecraft:acacia_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -51620,17 +51661,6 @@
         "minecraft:andesite_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -52046,40 +52076,7 @@
             "localizationKey": "tile.bamboo_double_slab.name",
         },
         "minecraft:bamboo_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.bamboo_fence.name",
@@ -52279,17 +52276,6 @@
         "minecraft:bamboo_mosaic_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -52434,17 +52420,6 @@
         },
         "minecraft:bamboo_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -52976,38 +52951,6 @@
         "minecraft:birch_fence": {
             "properties": [
                 {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
                     "name": "wood_type",
                     "validValues": [
                         "oak",
@@ -53389,17 +53332,6 @@
         },
         "minecraft:birch_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -53912,17 +53844,6 @@
         "minecraft:black_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -54023,17 +53944,6 @@
         },
         "minecraft:blackstone_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -54560,17 +54470,6 @@
         "minecraft:blue_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -54963,17 +54862,6 @@
         },
         "minecraft:brick_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -55471,17 +55359,6 @@
         },
         "minecraft:brown_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -56277,40 +56154,7 @@
             "localizationKey": "tile.cherry_double_slab.name",
         },
         "minecraft:cherry_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.cherry_fence.name",
@@ -56592,17 +56436,6 @@
         },
         "minecraft:cherry_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -57157,17 +56990,6 @@
         "minecraft:cinnabar_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -57279,17 +57101,6 @@
         },
         "minecraft:cinnabar_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -57492,17 +57303,6 @@
         },
         "minecraft:cobbled_deepslate_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -58585,40 +58385,7 @@
             "localizationKey": "tile.crimson_double_slab.name",
         },
         "minecraft:crimson_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.crimson_fence.name",
@@ -58881,17 +58648,6 @@
         "minecraft:crimson_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -59060,17 +58816,6 @@
         },
         "minecraft:cut_copper_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -59706,17 +59451,6 @@
         "minecraft:cyan_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -59951,38 +59685,6 @@
         },
         "minecraft:dark_oak_fence": {
             "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
                 {
                     "name": "wood_type",
                     "validValues": [
@@ -60362,17 +60064,6 @@
         "minecraft:dark_oak_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -60603,17 +60294,6 @@
         },
         "minecraft:dark_prismarine_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -61555,17 +61235,6 @@
         "minecraft:deepslate_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -61765,17 +61434,6 @@
         },
         "minecraft:deepslate_tile_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -62170,17 +61828,6 @@
         },
         "minecraft:diorite_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -63226,17 +62873,6 @@
         "minecraft:end_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -63843,17 +63479,6 @@
         },
         "minecraft:exposed_cut_copper_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -64765,17 +64390,6 @@
         "minecraft:granite_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -65256,17 +64870,6 @@
         "minecraft:gray_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -65652,17 +65255,6 @@
         },
         "minecraft:green_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -67567,38 +67159,6 @@
         "minecraft:jungle_fence": {
             "properties": [
                 {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
                     "name": "wood_type",
                     "validValues": [
                         "oak",
@@ -67980,17 +67540,6 @@
         },
         "minecraft:jungle_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -69386,17 +68935,6 @@
         "minecraft:light_blue_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -69763,17 +69301,6 @@
         },
         "minecraft:light_gray_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -70277,17 +69804,6 @@
         },
         "minecraft:lime_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -70918,17 +70434,6 @@
         "minecraft:magenta_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -71087,40 +70592,7 @@
             "localizationKey": "tile.mangrove_double_slab.name",
         },
         "minecraft:mangrove_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.mangrove_fence.name",
@@ -71419,17 +70891,6 @@
         },
         "minecraft:mangrove_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -71807,17 +71268,6 @@
         "minecraft:mossy_cobblestone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -72020,17 +71470,6 @@
         },
         "minecraft:mossy_stone_brick_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -72237,17 +71676,6 @@
         "minecraft:mud_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -72439,40 +71867,7 @@
             "localizationKey": "tile.double_stone_slab.nether_brick.name",
         },
         "minecraft:nether_brick_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.nether_brick_fence.name",
@@ -72533,17 +71928,6 @@
         },
         "minecraft:nether_brick_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -72821,17 +72205,6 @@
         "minecraft:normal_stone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -72914,38 +72287,6 @@
         },
         "minecraft:oak_fence": {
             "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
                 {
                     "name": "wood_type",
                     "validValues": [
@@ -73240,17 +72581,6 @@
         },
         "minecraft:oak_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -73821,17 +73151,6 @@
         "minecraft:orange_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -74139,17 +73458,6 @@
         "minecraft:oxidized_cut_copper_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -74428,40 +73736,7 @@
             "localizationKey": "tile.pale_oak_double_slab.name",
         },
         "minecraft:pale_oak_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.pale_oak_fence.name",
@@ -74723,17 +73998,6 @@
         },
         "minecraft:pale_oak_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -75479,17 +74743,6 @@
         "minecraft:pink_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -75781,17 +75034,6 @@
         "minecraft:polished_andesite_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -75908,17 +75150,6 @@
         },
         "minecraft:polished_blackstone_brick_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -76128,17 +75359,6 @@
         "minecraft:polished_blackstone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -76250,17 +75470,6 @@
         },
         "minecraft:polished_cinnabar_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -76413,17 +75622,6 @@
         },
         "minecraft:polished_deepslate_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -76634,17 +75832,6 @@
         "minecraft:polished_diorite_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -76803,17 +75990,6 @@
         "minecraft:polished_granite_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -76874,17 +76050,6 @@
         },
         "minecraft:polished_sulfur_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -76997,17 +76162,6 @@
         },
         "minecraft:polished_tuff_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -77166,40 +76320,7 @@
             "localizationKey": "tile.poplar_double_slab.name",
         },
         "minecraft:poplar_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.poplar_fence.name",
@@ -77412,17 +76533,6 @@
         },
         "minecraft:poplar_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -77897,17 +77007,6 @@
         "minecraft:prismarine_bricks_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -78040,17 +77139,6 @@
         },
         "minecraft:prismarine_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -78590,17 +77678,6 @@
         "minecraft:purple_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -78795,17 +77872,6 @@
         },
         "minecraft:purpur_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -79013,17 +78079,6 @@
         },
         "minecraft:quartz_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -79401,17 +78456,6 @@
         "minecraft:red_nether_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -79685,17 +78729,6 @@
         },
         "minecraft:red_sandstone_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -80033,17 +79066,6 @@
         "minecraft:red_wool_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -80238,17 +79260,6 @@
         },
         "minecraft:resin_brick_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -80609,17 +79620,6 @@
         "minecraft:sandstone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -80955,18 +79955,6 @@
         "minecraft:shelf_mushroom": {
             "properties": [
                 {
-                    "name": "facing_direction",
-                    "validValues": [
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5,
-                    ],
-                    "defaultValue": 0,
-                },
-                {
                     "name": "growth",
                     "validValues": [
                         0,
@@ -80979,6 +79967,16 @@
                         7,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
                 },
             ],
             "validStateOverrides": {
@@ -81372,17 +80370,6 @@
         "minecraft:smooth_quartz_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -81538,17 +80525,6 @@
         "minecraft:smooth_red_sandstone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -81703,17 +80679,6 @@
         },
         "minecraft:smooth_sandstone_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -82202,38 +81167,6 @@
         "minecraft:spruce_fence": {
             "properties": [
                 {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
                     "name": "wood_type",
                     "validValues": [
                         "oak",
@@ -82616,17 +81549,6 @@
         "minecraft:spruce_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -83006,17 +81928,6 @@
         "minecraft:stone_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -83197,17 +82108,6 @@
         "minecraft:stone_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -83288,6 +82188,39 @@
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.stonecutter_block.name",
+        },
+        "minecraft:straw_bed": {
+            "properties": [
+                {
+                    "name": "head_piece_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:cardinal_direction",
+                    "validValues": [
+                        "south",
+                        "west",
+                        "north",
+                        "east",
+                    ],
+                    "defaultValue": "south",
+                },
+                {
+                    "name": "occupied_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.straw_bed.name",
         },
         "minecraft:stripped_acacia_log": {
             "properties": [
@@ -83935,17 +82868,6 @@
         "minecraft:sulfur_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -84083,17 +83005,6 @@
         },
         "minecraft:sulfur_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -84757,17 +83668,6 @@
         "minecraft:tuff_brick_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -84879,17 +83779,6 @@
         },
         "minecraft:tuff_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -85467,40 +84356,7 @@
             "localizationKey": "tile.warped_double_slab.name",
         },
         "minecraft:warped_fence": {
-            "properties": [
-                {
-                    "name": "minecraft:connection_east",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_north",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_south",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-                {
-                    "name": "minecraft:connection_west",
-                    "validValues": [
-                        false,
-                        true,
-                    ],
-                    "defaultValue": false,
-                },
-            ],
+            "properties": [],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.warped_fence.name",
@@ -85762,17 +84618,6 @@
         },
         "minecraft:warped_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -86189,17 +85034,6 @@
         "minecraft:waxed_cut_copper_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -86512,17 +85346,6 @@
         },
         "minecraft:waxed_exposed_cut_copper_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -86891,17 +85714,6 @@
         "minecraft:waxed_oxidized_cut_copper_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -87242,17 +86054,6 @@
         "minecraft:waxed_weathered_cut_copper_stairs": {
             "properties": [
                 {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
-                {
                     "name": "upside_down_bit",
                     "validValues": [
                         false,
@@ -87592,17 +86393,6 @@
         },
         "minecraft:weathered_cut_copper_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -88166,17 +86956,6 @@
         },
         "minecraft:white_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -88765,17 +87544,6 @@
         },
         "minecraft:yellow_wool_stairs": {
             "properties": [
-                {
-                    "name": "minecraft:corner",
-                    "validValues": [
-                        "none",
-                        "inner_left",
-                        "inner_right",
-                        "outer_left",
-                        "outer_right",
-                    ],
-                    "defaultValue": "none",
-                },
                 {
                     "name": "upside_down_bit",
                     "validValues": [
@@ -90075,7 +88843,6 @@
                     "minecraft:purple_glazed_terracotta": 0,
                     "minecraft:red_glazed_terracotta": 0,
                     "minecraft:repeating_command_block": 0,
-                    "minecraft:shelf_mushroom": 0,
                     "minecraft:silver_glazed_terracotta": 0,
                     "minecraft:skeleton_skull": 0,
                     "minecraft:small_amethyst_bud": 1,
@@ -90315,6 +89082,7 @@
                 ],
                 "defaultValue": {
                     "minecraft:bed": false,
+                    "minecraft:straw_bed": false,
                 },
             },
         ],
@@ -90661,6 +89429,7 @@
                     "minecraft:powered_comparator": "south",
                     "minecraft:powered_repeater": "south",
                     "minecraft:pumpkin": "south",
+                    "minecraft:shelf_mushroom": "south",
                     "minecraft:small_dripleaf_block": "east",
                     "minecraft:smoker": "south",
                     "minecraft:soul_campfire": "south",
@@ -90668,6 +89437,7 @@
                     "minecraft:spruce_fence_gate": "south",
                     "minecraft:spruce_shelf": "south",
                     "minecraft:stonecutter_block": "north",
+                    "minecraft:straw_bed": "south",
                     "minecraft:trapped_chest": "north",
                     "minecraft:unpowered_comparator": "south",
                     "minecraft:unpowered_repeater": "south",
@@ -90701,22 +89471,7 @@
                     false,
                     true,
                 ],
-                "defaultValue": {
-                    "minecraft:acacia_fence": false,
-                    "minecraft:bamboo_fence": false,
-                    "minecraft:birch_fence": false,
-                    "minecraft:cherry_fence": false,
-                    "minecraft:crimson_fence": false,
-                    "minecraft:dark_oak_fence": false,
-                    "minecraft:jungle_fence": false,
-                    "minecraft:mangrove_fence": false,
-                    "minecraft:nether_brick_fence": false,
-                    "minecraft:oak_fence": false,
-                    "minecraft:pale_oak_fence": false,
-                    "minecraft:poplar_fence": false,
-                    "minecraft:spruce_fence": false,
-                    "minecraft:warped_fence": false,
-                },
+                "defaultValue": {},
             },
         ],
         "minecraft:connection_north": [
@@ -90725,22 +89480,7 @@
                     false,
                     true,
                 ],
-                "defaultValue": {
-                    "minecraft:acacia_fence": false,
-                    "minecraft:bamboo_fence": false,
-                    "minecraft:birch_fence": false,
-                    "minecraft:cherry_fence": false,
-                    "minecraft:crimson_fence": false,
-                    "minecraft:dark_oak_fence": false,
-                    "minecraft:jungle_fence": false,
-                    "minecraft:mangrove_fence": false,
-                    "minecraft:nether_brick_fence": false,
-                    "minecraft:oak_fence": false,
-                    "minecraft:pale_oak_fence": false,
-                    "minecraft:poplar_fence": false,
-                    "minecraft:spruce_fence": false,
-                    "minecraft:warped_fence": false,
-                },
+                "defaultValue": {},
             },
         ],
         "minecraft:connection_south": [
@@ -90749,22 +89489,7 @@
                     false,
                     true,
                 ],
-                "defaultValue": {
-                    "minecraft:acacia_fence": false,
-                    "minecraft:bamboo_fence": false,
-                    "minecraft:birch_fence": false,
-                    "minecraft:cherry_fence": false,
-                    "minecraft:crimson_fence": false,
-                    "minecraft:dark_oak_fence": false,
-                    "minecraft:jungle_fence": false,
-                    "minecraft:mangrove_fence": false,
-                    "minecraft:nether_brick_fence": false,
-                    "minecraft:oak_fence": false,
-                    "minecraft:pale_oak_fence": false,
-                    "minecraft:poplar_fence": false,
-                    "minecraft:spruce_fence": false,
-                    "minecraft:warped_fence": false,
-                },
+                "defaultValue": {},
             },
         ],
         "minecraft:connection_west": [
@@ -90773,22 +89498,7 @@
                     false,
                     true,
                 ],
-                "defaultValue": {
-                    "minecraft:acacia_fence": false,
-                    "minecraft:bamboo_fence": false,
-                    "minecraft:birch_fence": false,
-                    "minecraft:cherry_fence": false,
-                    "minecraft:crimson_fence": false,
-                    "minecraft:dark_oak_fence": false,
-                    "minecraft:jungle_fence": false,
-                    "minecraft:mangrove_fence": false,
-                    "minecraft:nether_brick_fence": false,
-                    "minecraft:oak_fence": false,
-                    "minecraft:pale_oak_fence": false,
-                    "minecraft:poplar_fence": false,
-                    "minecraft:spruce_fence": false,
-                    "minecraft:warped_fence": false,
-                },
+                "defaultValue": {},
             },
         ],
         "minecraft:corner": [
@@ -90800,89 +89510,7 @@
                     "outer_left",
                     "outer_right",
                 ],
-                "defaultValue": {
-                    "minecraft:acacia_stairs": "none",
-                    "minecraft:andesite_stairs": "none",
-                    "minecraft:bamboo_mosaic_stairs": "none",
-                    "minecraft:bamboo_stairs": "none",
-                    "minecraft:birch_stairs": "none",
-                    "minecraft:black_wool_stairs": "none",
-                    "minecraft:blackstone_stairs": "none",
-                    "minecraft:blue_wool_stairs": "none",
-                    "minecraft:brick_stairs": "none",
-                    "minecraft:brown_wool_stairs": "none",
-                    "minecraft:cherry_stairs": "none",
-                    "minecraft:cinnabar_brick_stairs": "none",
-                    "minecraft:cinnabar_stairs": "none",
-                    "minecraft:cobbled_deepslate_stairs": "none",
-                    "minecraft:crimson_stairs": "none",
-                    "minecraft:cut_copper_stairs": "none",
-                    "minecraft:cyan_wool_stairs": "none",
-                    "minecraft:dark_oak_stairs": "none",
-                    "minecraft:dark_prismarine_stairs": "none",
-                    "minecraft:deepslate_brick_stairs": "none",
-                    "minecraft:deepslate_tile_stairs": "none",
-                    "minecraft:diorite_stairs": "none",
-                    "minecraft:end_brick_stairs": "none",
-                    "minecraft:exposed_cut_copper_stairs": "none",
-                    "minecraft:granite_stairs": "none",
-                    "minecraft:gray_wool_stairs": "none",
-                    "minecraft:green_wool_stairs": "none",
-                    "minecraft:jungle_stairs": "none",
-                    "minecraft:light_blue_wool_stairs": "none",
-                    "minecraft:light_gray_wool_stairs": "none",
-                    "minecraft:lime_wool_stairs": "none",
-                    "minecraft:magenta_wool_stairs": "none",
-                    "minecraft:mangrove_stairs": "none",
-                    "minecraft:mossy_cobblestone_stairs": "none",
-                    "minecraft:mossy_stone_brick_stairs": "none",
-                    "minecraft:mud_brick_stairs": "none",
-                    "minecraft:nether_brick_stairs": "none",
-                    "minecraft:normal_stone_stairs": "none",
-                    "minecraft:oak_stairs": "none",
-                    "minecraft:orange_wool_stairs": "none",
-                    "minecraft:oxidized_cut_copper_stairs": "none",
-                    "minecraft:pale_oak_stairs": "none",
-                    "minecraft:pink_wool_stairs": "none",
-                    "minecraft:polished_andesite_stairs": "none",
-                    "minecraft:polished_blackstone_brick_stairs": "none",
-                    "minecraft:polished_blackstone_stairs": "none",
-                    "minecraft:polished_cinnabar_stairs": "none",
-                    "minecraft:polished_deepslate_stairs": "none",
-                    "minecraft:polished_diorite_stairs": "none",
-                    "minecraft:polished_granite_stairs": "none",
-                    "minecraft:polished_sulfur_stairs": "none",
-                    "minecraft:polished_tuff_stairs": "none",
-                    "minecraft:poplar_stairs": "none",
-                    "minecraft:prismarine_bricks_stairs": "none",
-                    "minecraft:prismarine_stairs": "none",
-                    "minecraft:purple_wool_stairs": "none",
-                    "minecraft:purpur_stairs": "none",
-                    "minecraft:quartz_stairs": "none",
-                    "minecraft:red_nether_brick_stairs": "none",
-                    "minecraft:red_sandstone_stairs": "none",
-                    "minecraft:red_wool_stairs": "none",
-                    "minecraft:resin_brick_stairs": "none",
-                    "minecraft:sandstone_stairs": "none",
-                    "minecraft:smooth_quartz_stairs": "none",
-                    "minecraft:smooth_red_sandstone_stairs": "none",
-                    "minecraft:smooth_sandstone_stairs": "none",
-                    "minecraft:spruce_stairs": "none",
-                    "minecraft:stone_brick_stairs": "none",
-                    "minecraft:stone_stairs": "none",
-                    "minecraft:sulfur_brick_stairs": "none",
-                    "minecraft:sulfur_stairs": "none",
-                    "minecraft:tuff_brick_stairs": "none",
-                    "minecraft:tuff_stairs": "none",
-                    "minecraft:warped_stairs": "none",
-                    "minecraft:waxed_cut_copper_stairs": "none",
-                    "minecraft:waxed_exposed_cut_copper_stairs": "none",
-                    "minecraft:waxed_oxidized_cut_copper_stairs": "none",
-                    "minecraft:waxed_weathered_cut_copper_stairs": "none",
-                    "minecraft:weathered_cut_copper_stairs": "none",
-                    "minecraft:white_wool_stairs": "none",
-                    "minecraft:yellow_wool_stairs": "none",
-                },
+                "defaultValue": {},
             },
         ],
         "minecraft:facing_direction": [
@@ -91278,6 +89906,7 @@
                 ],
                 "defaultValue": {
                     "minecraft:bed": false,
+                    "minecraft:straw_bed": false,
                 },
             },
         ],
@@ -95454,6 +94083,7 @@
             "minecraft:stone_pressure_plate": {},
             "minecraft:stone_stairs": {},
             "minecraft:stonecutter_block": {},
+            "minecraft:straw_bed": {},
             "minecraft:sulfur_brick_slab": {},
             "minecraft:sulfur_brick_stairs": {},
             "minecraft:sulfur_brick_wall": {},
@@ -96815,6 +95445,7 @@
                 "minecraft:chorus_flower": {},
                 "minecraft:powder_snow": {},
                 "minecraft:snow_layer": {},
+                "minecraft:straw_bed": {},
             },
             "none": {
                 "minecraft:air": {},
@@ -97668,6 +96299,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:black_cushion": {
+            "localizationKey": "item.cushion.black.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:black_dye": {
             "localizationKey": "item.dye.black_new.name",
             "tags": [],
@@ -97813,6 +96449,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:blue_cushion": {
+            "localizationKey": "item.cushion.blue.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:blue_dye": {
             "localizationKey": "item.dye.blue_new.name",
@@ -98151,6 +96792,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:brown_cushion": {
+            "localizationKey": "item.cushion.brown.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:brown_dye": {
             "localizationKey": "item.dye.brown_new.name",
@@ -99893,6 +98539,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:cyan_cushion": {
+            "localizationKey": "item.cushion.cyan.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:cyan_dye": {
             "localizationKey": "item.dye.cyan.name",
@@ -102416,6 +101067,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:gray_cushion": {
+            "localizationKey": "item.cushion.gray.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:gray_dye": {
             "localizationKey": "item.dye.gray.name",
             "tags": [],
@@ -102513,6 +101169,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:green_cushion": {
+            "localizationKey": "item.cushion.green.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:green_dye": {
             "localizationKey": "item.dye.green.name",
@@ -103804,6 +102465,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:light_blue_cushion": {
+            "localizationKey": "item.cushion.lightBlue.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:light_blue_dye": {
             "localizationKey": "item.dye.lightBlue.name",
             "tags": [],
@@ -103901,6 +102567,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:light_gray_cushion": {
+            "localizationKey": "item.cushion.silver.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:light_gray_dye": {
             "localizationKey": "item.dye.silver.name",
@@ -104019,6 +102690,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:lime_cushion": {
+            "localizationKey": "item.cushion.lime.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:lime_dye": {
             "localizationKey": "item.dye.lime.name",
@@ -104193,6 +102869,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:magenta_cushion": {
+            "localizationKey": "item.cushion.magenta.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:magenta_dye": {
             "localizationKey": "item.dye.magenta.name",
@@ -105423,6 +104104,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:orange_cushion": {
+            "localizationKey": "item.cushion.orange.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:orange_dye": {
             "localizationKey": "item.dye.orange.name",
             "tags": [],
@@ -105871,6 +104557,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:pink_cushion": {
+            "localizationKey": "item.cushion.pink.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:pink_dye": {
             "localizationKey": "item.dye.pink.name",
@@ -106462,6 +105153,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:purple_cushion": {
+            "localizationKey": "item.cushion.purple.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:purple_dye": {
             "localizationKey": "item.dye.purple.name",
             "tags": [],
@@ -106708,6 +105404,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:red_cushion": {
+            "localizationKey": "item.cushion.red.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:red_dye": {
             "localizationKey": "item.dye.red.name",
@@ -107858,6 +106559,16 @@
         "minecraft:stonecutter_block": {
             "localizationKey": "tile.stonecutter_block.name",
             "tags": [],
+        },
+        "minecraft:straw_bed": {
+            "localizationKey": "item.straw_bed.name",
+            "maxAmount": 16,
+            "tags": [],
+            "components": {
+                "minecraft:compostable": {
+                    "compostingChance": 85,
+                },
+            },
         },
         "minecraft:stray_spawn_egg": {
             "localizationKey": "item.spawn_egg.entity.stray.name",
@@ -109104,6 +107815,11 @@
                 "minecraft:sulfur_cube_archetype_regular",
             ],
         },
+        "minecraft:white_cushion": {
+            "localizationKey": "item.cushion.white.name",
+            "maxAmount": 16,
+            "tags": [],
+        },
         "minecraft:white_dye": {
             "localizationKey": "item.dye.white_new.name",
             "tags": [],
@@ -109534,6 +108250,11 @@
             "tags": [
                 "minecraft:sulfur_cube_archetype_regular",
             ],
+        },
+        "minecraft:yellow_cushion": {
+            "localizationKey": "item.cushion.yellow.name",
+            "maxAmount": 16,
+            "tags": [],
         },
         "minecraft:yellow_dye": {
             "localizationKey": "item.dye.yellow.name",
@@ -111057,6 +109778,9 @@
         "minecraft:creeper": {
             "localizationKey": "entity.creeper.name",
         },
+        "minecraft:cushion": {
+            "localizationKey": "entity.cushion.name",
+        },
         "minecraft:dolphin": {
             "localizationKey": "entity.dolphin.name",
         },
@@ -111777,6 +110501,7 @@
                 "mutated",
                 "overworld",
                 "bee_habitat",
+                "has_structure_abandoned_camp",
             ],
         },
         "minecraft:forest": {
@@ -112157,6 +110882,7 @@
                 "monster",
                 "overworld",
                 "pale_garden",
+                "has_structure_abandoned_camp",
             ],
         },
         "minecraft:plains": {
@@ -112610,11 +111336,13 @@
             "minecraft:cold_taiga",
             "minecraft:dappled_forest",
             "minecraft:extreme_hills_plus_trees",
+            "minecraft:flower_forest",
             "minecraft:forest",
             "minecraft:jungle_edge",
             "minecraft:meadow",
             "minecraft:mega_taiga",
             "minecraft:mesa_plateau_stone",
+            "minecraft:pale_garden",
             "minecraft:redwood_taiga_mutated",
             "minecraft:savanna",
             "minecraft:swampland",

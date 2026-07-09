@@ -151,6 +151,7 @@ async function analyzeCommandAutocompletionFast(
     await sleepAsync(1000);
     await press(scrcpy, 'KEYCODE_MOVE_END');
     screen.log(`待补全命令：${command}`);
+    cx.logDiffMerge?.(`[Input] ${command}`);
     await injectText(scrcpy, command.replace(/^\//, ''));
 
     const aggressiveMode = targetReactSpeed !== 0;
@@ -300,6 +301,7 @@ async function analyzeCommandAutocompletionFast(
             duplicatedCount++;
             setStatus(`Exit condition(${duplicatedCount}/5): ${autocompletion}`);
             screen.log(`检测到重复项，即将结束（${duplicatedCount}/5）：${autocompletion}`);
+            cx.logDiffMerge?.(`[Duplicate] ${duplicatedCount}/5: ${autocompletion}`);
             if (duplicatedCount >= 5) {
                 break;
             }
@@ -322,6 +324,7 @@ async function analyzeCommandAutocompletionFast(
                 droppedCount
             });
             screen.log(`识别：${recogizedCommand}`);
+            cx.logDiffMerge?.(`[Recognize] ${autocompletion}`);
             autocompletions.push(autocompletion);
             if (approxLength > 0) {
                 const stepSpentAvg = (now - timeStart) / stepCount;
@@ -355,6 +358,7 @@ async function analyzeCommandAutocompletionFast(
             const recogizedResult = await readStreamOnce(imagePipeline, 2000);
             const nextResult = guessTruncatedString(recogizedResult, command);
             setStatus(`Waiting for end: ${recogizedResult}`);
+            cx.logDiffMerge?.(`[Cleanup] ${recogizedResult}`);
             return nextResult == null;
         } catch {
             await press(scrcpy, 'KEYCODE_ESCAPE');
@@ -531,6 +535,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
         for (;;) {
             const previousResult = result || cachedResult;
             screen.updateStatus({ retryCount });
+            cx.logDiffMerge?.(`[Start] ${name}`);
             let resultSample;
             if (useWin10Edition) {
                 resultSample = await analyzeCommandAutocompletionFastWin10(
@@ -554,6 +559,25 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
             }
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
             const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);
+            if (cx.logDiffMerge) {
+                for (const item of cachedResult) {
+                    cx.logDiffMerge(`[MergeBase] ${item}`);
+                }
+                if (result) {
+                    for (const item of result) {
+                        cx.logDiffMerge(`[MergeMain] ${item}`);
+                    }
+                }
+                for (const item of resultSample) {
+                    cx.logDiffMerge(`[MergeSample] ${item}`);
+                }
+                for (const item of mergedResult.merged) {
+                    cx.logDiffMerge(`[MergeResult] ${item}`);
+                }
+                if (mergedResult.hasConflicts) {
+                    cx.logDiffMerge(`[MergeState] Conflicts detected`);
+                }
+            }
             result = mergedResult.merged;
             if (!mergedResult.hasConflicts) {
                 const additions = mergedResult.merged.filter((e) => !previousResult.includes(e));
@@ -763,6 +787,14 @@ export function measureAutocompletion() {
     obs.observe({ entryTypes: ['mark', 'measure'] });
     process.on('exit', () => {
         obs.disconnect();
+        logStream.end();
+    });
+}
+
+export function testDiffMerge(cx) {
+    const logStream = createWriteStream('./diff_merge.log');
+    cx.logDiffMerge = (text) => logStream.write(`${text}\n`);
+    process.on('exit', () => {
         logStream.end();
     });
 }
