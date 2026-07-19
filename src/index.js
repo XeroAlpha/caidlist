@@ -5,6 +5,12 @@ import { measureAutocompletion, testDiffMerge } from './sources/autocompletion.j
 
 async function main(args) {
     const context = { ...config };
+    try {
+        process.loadEnvFile();
+        // eslint-disable-next-line no-unused-vars
+    } catch (err) {
+        // ignore error
+    }
     if (process.env.MEASURE_AUTOCOMPLETION) {
         measureAutocompletion();
     }
