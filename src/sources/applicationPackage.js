@@ -14,10 +14,45 @@ import {
     warn
 } from '../util/common.js';
 import { RecipeDataParser } from '../generators/recipe.js';
+import { parseBrarchive } from '../util/brarchive.js';
+
+const BRARCHIVE_MARKER = '__brarchive/';
+const BRARCHIVE_EXT = '.brarchive';
+const BRARCHIVE_MCB = Buffer.from('\x7fMCB');
+
+function expandBrarchiveEntries(zipEntries) {
+    const result = [];
+    for (const entry of zipEntries) {
+        if (!entry.isDirectory && entry.entryName.endsWith(BRARCHIVE_EXT)) {
+            const brDirIndex = entry.entryName.lastIndexOf(BRARCHIVE_MARKER);
+            if (brDirIndex >= 0) {
+                try {
+                    const data = entry.getData();
+                    const brEntries = parseBrarchive(data);
+                    const afterBrDir = entry.entryName.slice(brDirIndex + BRARCHIVE_MARKER.length);
+                    const withoutExt = afterBrDir.slice(0, afterBrDir.length - BRARCHIVE_EXT.length);
+                    const prefix = entry.entryName.slice(0, brDirIndex) + withoutExt;
+                    for (const brEntry of brEntries) {
+                        const content = brEntry.content;
+                        result.push({
+                            entryName: `${prefix}/${brEntry.name}`,
+                            isDirectory: false,
+                            getData: () => content
+                        });
+                    }
+                    continue;
+                } catch (err) {
+                    warn(`Failed to parse brarchive: ${entry.entryName}`, err);
+                }
+            }
+        }
+        result.push(entry);
+    }
+    return result;
+}
 
 function iteratePackageEntries(packageZip, filter, processor) {
-    const entries = packageZip
-        .getEntries()
+    const entries = expandBrarchiveEntries(packageZip.getEntries())
         .map((entry) => [entry, filter(entry)])
         .filter(([, extra]) => extra !== undefined);
     let nextStatusTime = Date.now();
@@ -127,21 +162,21 @@ const entryAnalyzer = [
             }
         }
     },
-    {
-        name: 'particle',
-        type: 'json',
-        regex: /assets\/resource_packs\/(?:[^/]+)\/particles\/(?:[^/]+)\.json$/,
-        analyze(results, entryName, particle) {
-            const { particleEmitters } = results;
-            const formatVersion = particle.format_version;
-            if (this.versionsGroups[0].includes(formatVersion)) {
-                particleEmitters.push(particle.particle_effect.description.identifier);
-            } else {
-                warn(`Unknown format version: ${formatVersion} - ${entryName}`);
-            }
-        },
-        versionsGroups: [['1.10.0', '1.21.60', '1.26.10', '1.26.30']]
-    },
+    // {
+    //     name: 'particle',
+    //     type: 'json',
+    //     regex: /assets\/resource_packs\/(?:[^/]+)\/particles\/(?:[^/]+)\.json$/,
+    //     analyze(results, entryName, particle) {
+    //         const { particleEmitters } = results;
+    //         const formatVersion = particle.format_version;
+    //         if (this.versionsGroups[0].includes(formatVersion)) {
+    //             particleEmitters.push(particle.particle_effect.description.identifier);
+    //         } else {
+    //             warn(`Unknown format version: ${formatVersion} - ${entryName}`);
+    //         }
+    //     },
+    //     versionsGroups: [['1.10.0', '1.21.60', '1.26.10', '1.26.30']]
+    // },
     {
         name: 'entityDefinition',
         type: 'json',
@@ -369,6 +404,7 @@ const entryAnalyzer = [
                 '1.26.20',
                 '1.26.30',
                 '1.26.40',
+                '1.26.50',
                 'beta'
             ]
         ]
@@ -479,7 +515,6 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             entityDefinitionMap: {}
         },
         sounds: [],
-        particleEmitters: [],
         fogs: [],
         lootTables: [],
         features: [],
@@ -519,7 +554,16 @@ function analyzeApkPackageDataEnums(packageZip, branchId) {
             const { entryName } = entry;
             let entryData = data;
             if (analyzer.type === 'json') {
-                entryData = CommentJSON.parse(entryData.toString('utf8'));
+                if (entryData.subarray(0, 4).equals(BRARCHIVE_MCB)) {
+                    warn(`Bypass Binary serialization: ${entryName}`);
+                    return;
+                }
+                try {
+                    entryData = CommentJSON.parse(entryData.toString('utf8'));
+                } catch (err) {
+                    warn(`Read JSON Failed: ${entryName}`, err);
+                    return;
+                }
             }
             try {
                 analyzer.analyze(results, entryName, entryData);

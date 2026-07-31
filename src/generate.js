@@ -58,7 +58,6 @@ const defaultTransMapNames = [
     ['hudElement', 'HUD界面元素', '用于 hud 命令的界面元素 ID'],
     ['animation', '动画', '用于 playanimation 命令的动画 ID'],
     ['animationController', '动画控制器', '用于 playanimation 命令的动画控制器 ID'],
-    ['particleEmitter', '粒子发射器', '用于 particle 命令的粒子发射器 ID'],
     ['featureAndRule', '地物与地物规则', '用于 placefeature 命令的地物 ID 和地物规则 ID'],
     ['feature', '地物', '用于 place feature 子命令的地物 ID'],
     ['featureRule', '地物规则', '用于 place featurerule 子命令的地物规则 ID'],
@@ -311,13 +310,6 @@ async function generateBranchedOutputFiles(cx) {
                 }
             });
         }
-    });
-    matchTranslations({
-        ...commonOptions,
-        name: 'particleEmitter',
-        originalArray: enums.particleEmitters,
-        translationMap: userTranslation.particleEmitter,
-        autoMatch: []
     });
     const javaEditionSoundSubtitles = Object.keys(javaEditionLang)
         .filter((k) => k.startsWith('subtitles.'))

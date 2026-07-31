@@ -266,6 +266,7 @@ async function analyzeCommandAutocompletionFast(
         assert.equal(pickedCommand, autocompletedCommand);
         return pickedCommand;
     });
+    await sleepAsync(1000);
     const timeStart = performance.now();
     const performanceTimeOffset = Date.now() - timeStart;
     let stepStart = timeStart;
