@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.40.27",
-    "__COMMITHASH__": "0e58d43fae40ddcf47f84c11ea779c8b6c7ffb46",
-    "__MESSAGE__": "v1.26.40.27-preview",
+    "__VERSION__": "1.26.50.25",
+    "__COMMITHASH__": "56b35f1ebfddcbc936f0d33a7829f74552c35bc6",
+    "__MESSAGE__": "v1.26.50.25-preview metadata",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2020,9 +2020,6 @@
                                     "name": "minecraft:ageable",
                                 },
                                 {
-                                    "name": "minecraft:anger_level",
-                                },
-                                {
                                     "name": "minecraft:angry",
                                 },
                                 {
@@ -2033,9 +2030,6 @@
                                 },
                                 {
                                     "name": "minecraft:attack_cooldown",
-                                },
-                                {
-                                    "name": "minecraft:barter",
                                 },
                                 {
                                     "name": "minecraft:block_climber",
@@ -2284,12 +2278,6 @@
                                     "name": "minecraft:physics",
                                 },
                                 {
-                                    "name": "minecraft:preferred_path",
-                                },
-                                {
-                                    "name": "minecraft:projectile",
-                                },
-                                {
                                     "name": "minecraft:pushable_by_block",
                                 },
                                 {
@@ -2339,9 +2327,6 @@
                                 },
                                 {
                                     "name": "minecraft:tameable",
-                                },
-                                {
-                                    "name": "minecraft:tamemount",
                                 },
                                 {
                                     "name": "minecraft:target_nearby_sensor",
@@ -2454,6 +2439,12 @@
                             "sections": [
                                 {
                                     "name": "minecraft:ambient_sound_interval",
+                                },
+                                {
+                                    "name": "minecraft:anger_level",
+                                },
+                                {
+                                    "name": "minecraft:barter",
                                 },
                                 {
                                     "name": "minecraft:body_rotation_always_follows_head",
@@ -2585,6 +2576,9 @@
                                     "name": "minecraft:sound_volume",
                                 },
                                 {
+                                    "name": "minecraft:tamemount",
+                                },
+                                {
                                     "name": "minecraft:type_family",
                                 },
                                 {
@@ -2679,13 +2673,19 @@
                     "name": "Supported features",
                     "sections": [
                         {
-                            "name": "minecraft:aggregate_feature",
-                        },
-                        {
-                            "name": "minecraft:sequence_feature",
-                        },
-                        {
                             "name": "minecraft:beards_and_shavers",
+                        },
+                        {
+                            "name": "minecraft:rect_layout",
+                        },
+                        {
+                            "name": "minecraft:scan_surface",
+                        },
+                        {
+                            "name": "minecraft:sculk_patch_feature",
+                        },
+                        {
+                            "name": "minecraft:aggregate_feature",
                         },
                         {
                             "name": "minecraft:cave_carver_feature",
@@ -2703,10 +2703,26 @@
                             "name": "minecraft:growing_plant_feature",
                         },
                         {
-                            "name": "minecraft:nether_cave_carver_feature",
+                            "name": "minecraft:height_difference_filter_feature",
+                            "sections": [
+                                {
+                                    "name": "Dripstone cluster only close to wall on flat ground.",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:horizontal_tree_decoration_feature",
+                            "sections": [
+                                {
+                                    "name": "Place block in a random horizontal direction, disallowing adjacent neighbors and only placing the block on the bark side of a log",
+                                },
+                            ],
                         },
                         {
                             "name": "minecraft:multiface_feature",
+                        },
+                        {
+                            "name": "minecraft:nether_cave_carver_feature",
                         },
                         {
                             "name": "minecraft:ore_feature",
@@ -2715,19 +2731,13 @@
                             "name": "minecraft:partially_exposed_blob_feature",
                         },
                         {
-                            "name": "minecraft:rect_layout",
-                        },
-                        {
-                            "name": "minecraft:scan_surface",
-                        },
-                        {
                             "name": "minecraft:scatter_feature",
                         },
                         {
-                            "name": "minecraft:sculk_patch_feature",
+                            "name": "minecraft:search_feature",
                         },
                         {
-                            "name": "minecraft:search_feature",
+                            "name": "minecraft:sequence_feature",
                         },
                         {
                             "name": "minecraft:single_block_feature",
@@ -2742,10 +2752,10 @@
                             "name": "minecraft:surface_relative_threshold_feature",
                         },
                         {
-                            "name": "minecraft:underwater_cave_carver_feature",
+                            "name": "minecraft:tree_feature",
                         },
                         {
-                            "name": "minecraft:tree_feature",
+                            "name": "minecraft:underwater_cave_carver_feature",
                         },
                         {
                             "name": "minecraft:vegetation_patch_feature",
@@ -2754,19 +2764,11 @@
                             "name": "minecraft:weighted_random_feature",
                         },
                         {
-                            "name": "minecraft:height_difference_filter_feature",
-                            "sections": [
-                                {
-                                    "name": "Dripstone cluster only close to wall on flat ground.",
-                                },
-                            ],
+                            "name": "minecraft:multi_block_feature",
                         },
                         {
-                            "name": "minecraft:horizontal_tree_decoration_feature",
+                            "name": "minecraft:multipart_block_column_feature",
                             "sections": [
-                                {
-                                    "name": "Place block in a random horizontal direction, disallowing adjacent neighbors and only placing the block on the bark side of a log",
-                                },
                                 {
                                     "name": "Feature schema",
                                 },
@@ -3577,9 +3579,11 @@
         "lit": "Determines if a block is lit or not",
         "minecraft:block_face": "Which blockface the player placed the block on.",
         "minecraft:cardinal_direction": "Defines the cardinal placement direction of a block.",
+        "minecraft:connection_down": "Whether the block is connected to another block below.",
         "minecraft:connection_east": "Whether the block is connected to another block to the east.",
         "minecraft:connection_north": "Whether the block is connected to another block to the north.",
         "minecraft:connection_south": "Whether the block is connected to another block to the south.",
+        "minecraft:connection_up": "Whether the block is connected to another block above.",
         "minecraft:connection_west": "Whether the block is connected to another block to the west.",
         "minecraft:corner": "Defines the corner shape of a block.",
         "minecraft:facing_direction": "Defines all placement directions of a block.",
@@ -4811,6 +4815,7 @@
         "minecraft:stone_stairs": "",
         "minecraft:stonecutter": "",
         "minecraft:stonecutter_block": "",
+        "minecraft:straw_bed": "",
         "minecraft:stripped_acacia_log": "",
         "minecraft:stripped_acacia_wood": "",
         "minecraft:stripped_bamboo_block": "",
@@ -5062,6 +5067,7 @@
         "cow": "0x00004875 (0x11)",
         "creaking": "0x00002962 (0x146)",
         "creeper": "0x00002849 (0x33)",
+        "cushion": "0x00000154 (0x154)",
         "dolphin": "0x00008991 (0x31)",
         "donkey": "0x02118424 (0x24)",
         "dragon_fireball": "0x04194383 (0x79)",
@@ -12891,58 +12897,6 @@
                 },
             ],
         },
-        "minecraft:anger_level": {
-            "description": "Allows this entity to track anger towards a set of nuisances",
-            "children": [
-                {
-                    "name": "anger_decrement_interval",
-                    "type": "Decimal",
-                    "defaultValue": "1.00",
-                    "description": "Anger level will decay over time. Defines how often anger towards all nuisances will be decreased by one",
-                },
-                {
-                    "name": "angry_boost",
-                    "type": "Positive Integer",
-                    "defaultValue": "20",
-                    "description": "Anger boost applied to angry threshold when mob gets angry",
-                },
-                {
-                    "name": "angry_threshold",
-                    "type": "Positive Integer",
-                    "defaultValue": "80",
-                    "description": "Threshold that define when the mob is considered angry at a nuisance",
-                },
-                {
-                    "name": "default_annoyingness",
-                    "type": "String",
-                    "defaultValue": "0",
-                    "description": "The default amount of annoyingness for any given nuisance. Specifies how much to raise anger level on each provocation",
-                },
-                {
-                    "name": "max_anger",
-                    "type": "Positive Integer",
-                    "defaultValue": "100",
-                    "description": "The maximum anger level that can be reached. Applies to any nuisance",
-                },
-                {
-                    "name": "nuisance_filter",
-                    "type": "Minecraft Filter",
-                    "defaultValue": "",
-                    "description": "Filter that is applied to determine if a mob can be a nuisance",
-                },
-                {
-                    "name": "on_increase_sounds",
-                    "type": "Array",
-                    "defaultValue": "",
-                },
-                {
-                    "name": "remove_targets_below_angry_threshold",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "Defines if the mob should remove target if it falls below 'angry' threshold",
-                },
-            ],
-        },
         "minecraft:angry": {
             "description": "Defines the entity's 'angry' state using a timer.",
             "children": [
@@ -13110,23 +13064,6 @@
                     "type": "Range [a, b]",
                     "defaultValue": "[0.00, 1.00]",
                     "description": "Amount of time in seconds for the cooldown. Can be specified as a number or a pair of numbers (min and max).",
-                },
-            ],
-        },
-        "minecraft:barter": {
-            "description": "Enables the component to drop an item as a barter exchange.",
-            "children": [
-                {
-                    "name": "barter_table",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Loot table that's used to drop a random item.",
-                },
-                {
-                    "name": "cooldown_after_being_attacked",
-                    "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "Duration, in seconds, for which mob won't barter items if it was hurt",
                 },
             ],
         },
@@ -14437,7 +14374,7 @@
                     "name": "chance",
                     "type": "Decimal",
                     "defaultValue": "0",
-                    "description": "Value between 0-1. Chance of success per tick.",
+                    "description": "Value between 0-1. Chance of success per tick",
                 },
                 {
                     "name": "charges",
@@ -14508,7 +14445,7 @@
                     "name": "home_block_list",
                     "type": "List",
                     "defaultValue": "",
-                    "description": "Optional list of blocks that can be considered a valid home. If no such block longer exists at that position,\t\t\t\t\t\t\t\t\t\t\tthe home restriction is removed. Example syntax: minecraft:sand. Not supported: minecraft:sand:1.",
+                    "description": "Optional list of blocks that can be considered a valid home. If no such block longer exists at that position, the home restriction is removed. Example syntax: minecraft:sand. Not supported: minecraft:sand:1.",
                 },
                 {
                     "name": "restriction_radius",
@@ -14520,7 +14457,7 @@
                     "name": "restriction_type",
                     "type": "String",
                     "defaultValue": "none",
-                    "description": "Defines how the the entity will be restricted to its home position. The possible values are:\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"none\", which poses no restriction.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"random_movement\", which restricts randomized movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\\n- \"all_movement\", which restricts any kind of movement to be around the home position.\t\t\t\t\t\t\t\t\t\t\t\t\tHowever, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
+                    "description": "Defines how the the entity will be restricted to its home position. The possible values are:- \"none\", which poses no restriction.- \"random_movement\", which restricts randomized movement to be around the home position.- \"all_movement\", which restricts any kind of movement to be around the home position.  However, entities that somehow got too far away from their home will always be able to move closer to it, if prompted to do so.",
                 },
             ],
         },
@@ -14690,7 +14627,7 @@
                         {
                             "name": "y_offset",
                             "type": "Decimal",
-                            "defaultValue": "1",
+                            "defaultValue": "0",
                             "description": "Will offset the items spawn position this amount in the y direction.",
                         },
                     ],
@@ -16251,237 +16188,6 @@
                 },
             ],
         },
-        "minecraft:preferred_path": {
-            "description": "Specifies costing information for mobs that prefer to walk on preferred paths.",
-            "children": [
-                {
-                    "name": "default_block_cost",
-                    "type": "Decimal",
-                    "defaultValue": "0",
-                    "description": "Cost for non-preferred blocks",
-                },
-                {
-                    "name": "jump_cost",
-                    "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "Added cost for jumping up a node",
-                },
-                {
-                    "name": "max_fall_blocks",
-                    "type": "Integer",
-                    "defaultValue": "3",
-                    "description": "Distance mob can fall without taking damage",
-                },
-                {
-                    "name": "preferred_path_blocks",
-                    "type": "List",
-                    "defaultValue": "",
-                    "description": "A list of blocks with their associated cost",
-                },
-            ],
-        },
-        "minecraft:projectile": {
-            "description": "Turns the entity into a projectile: a thrown or shot entity that flies along a ballistic arc and reacts when it impacts a block, a fluid, or another entity.",
-            "children": [
-                {
-                    "name": "anchor",
-                    "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "Reference point on the shooter used to position the projectile at spawn: `0` = origin (feet), `1` = eye height, `2` = middle of the bounding box.",
-                },
-                {
-                    "name": "angle_offset",
-                    "type": "Decimal",
-                    "defaultValue": "0",
-                    "description": "Additional upwards pitch (in degrees) applied to the shooter's aim direction at launch. Negative values aim downward.",
-                },
-                {
-                    "name": "catch_fire",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "Legacy default for whether the projectile sets the entity hit on fire. Prefer the `catch_fire` on-hit subcomponent.",
-                },
-                {
-                    "name": "crit_particle_on_hurt",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, critical-hit particles are spawned on the projectile when it is struck.",
-                },
-                {
-                    "name": "destroy_on_hurt",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile is removed from the world when struck.",
-                },
-                {
-                    "name": "gravity",
-                    "type": "Decimal",
-                    "defaultValue": "0.05",
-                    "description": "Downward acceleration (blocks per tick squared) applied each tick while in flight. Higher values make the projectile fall faster.",
-                },
-                {
-                    "name": "hit_ground_sound",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Identifier of the sound to play when the projectile hits a block. Defaults to `hit_sound` when empty.",
-                },
-                {
-                    "name": "hit_nearest_passenger",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, when the projectile hits a vehicle with at least one passenger, the on-hit behavior is applied to the passenger closest to the impact point instead of the vehicle itself.",
-                },
-                {
-                    "name": "hit_sound",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Identifier of the sound to play when the projectile hits an entity. Also used for block hits when `hit_ground_sound` is not specified.",
-                },
-                {
-                    "name": "homing",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile steers towards an active target while in flight.",
-                },
-                {
-                    "name": "ignored_entities",
-                    "type": "Array",
-                    "defaultValue": "",
-                    "description": "Array of entity identifiers that the projectile will pass through without registering a hit.",
-                },
-                {
-                    "name": "inertia",
-                    "type": "Decimal",
-                    "defaultValue": "0.99",
-                    "description": "Fraction of the projectile's velocity preserved each tick while traveling through air. Values below `1.0` cause it to slow down over time.",
-                },
-                {
-                    "name": "is_dangerous",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile is flagged as dangerous, affecting AI reactions and certain client-side behaviors.",
-                },
-                {
-                    "name": "isolated_physics",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If `true`, the projectile uses a dedicated ballistic physics path and ignores generic actor movement systems (friction, drag, etc.). Recommended for custom projectiles.",
-                },
-                {
-                    "name": "lightning",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile can channel a lightning bolt when it hits an entity during a thunderstorm.",
-                },
-                {
-                    "name": "liquid_inertia",
-                    "type": "Decimal",
-                    "defaultValue": "0.6",
-                    "description": "Fraction of the projectile's velocity preserved each tick while traveling through a fluid.",
-                },
-                {
-                    "name": "multiple_targets",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If `true`, the projectile can hit more than one entity over the course of its flight; if `false`, it stops at the first entity it hits.",
-                },
-                {
-                    "name": "offset",
-                    "type": "Vector [a, b, c]",
-                    "defaultValue": "Vec3(0,0,0)",
-                    "description": "Offset, relative to the `anchor`, at which the projectile is spawned when fired by the shooter.",
-                },
-                {
-                    "name": "on_fire_time",
-                    "type": "Decimal",
-                    "defaultValue": "5",
-                    "description": "Duration in seconds for which an entity set on fire by this projectile remains burning. Applied both by the legacy top-level `catch_fire` flag and by the `catch_fire` on-hit subcomponent.",
-                },
-                {
-                    "name": "on_hit",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                },
-                {
-                    "name": "owner_launch_immunity_ticks",
-                    "type": "Integer",
-                    "defaultValue": "5",
-                    "description": "Number of ticks immediately after launch during which the projectile cannot hit its own shooter.",
-                },
-                {
-                    "name": "particle",
-                    "type": "String",
-                    "defaultValue": "iconcrack",
-                    "description": "Particle effect emitted at the impact location when the projectile hits something.",
-                },
-                {
-                    "name": "potion_effect",
-                    "type": "Integer",
-                    "defaultValue": "-1",
-                    "description": "Default potion aux value associated with the projectile. Normally set programmatically by potion items; rarely useful at authoring time. A value matching the water potion is required for the `douse_fire` on-hit subcomponent to extinguish fires.",
-                },
-                {
-                    "name": "power",
-                    "type": "Decimal",
-                    "defaultValue": "1.3",
-                    "description": "Initial speed (in blocks per tick) at which the projectile is launched.",
-                },
-                {
-                    "name": "reflect_immunity",
-                    "type": "Decimal",
-                    "defaultValue": "0",
-                    "description": "Duration in seconds after launch during which the projectile cannot be reflected by being struck.",
-                },
-                {
-                    "name": "reflect_on_hurt",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile reverses direction when struck, reflecting back towards the attacker.",
-                },
-                {
-                    "name": "shoot_sound",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Identifier of the sound to play when the projectile is fired.",
-                },
-                {
-                    "name": "shoot_target",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If `true`, the projectile is aimed at the shooter's current target (when one exists) rather than straight ahead.",
-                },
-                {
-                    "name": "should_bounce",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile bounces off surfaces and entities on impact instead of stopping.",
-                },
-                {
-                    "name": "splash_range",
-                    "type": "Decimal",
-                    "defaultValue": "4",
-                    "description": "Splash radius (in blocks) used when applying potion effects via the splash/lingering potion code path.",
-                },
-                {
-                    "name": "stop_on_hurt",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If `true`, the projectile has its velocity zeroed out when struck.",
-                },
-                {
-                    "name": "uncertainty_base",
-                    "type": "Decimal",
-                    "defaultValue": "0",
-                    "description": "Base inaccuracy added to the launch direction. The total inaccuracy is `uncertainty_base - difficultyLevel * uncertainty_multiplier`.",
-                },
-                {
-                    "name": "uncertainty_multiplier",
-                    "type": "Decimal",
-                    "defaultValue": "0",
-                    "description": "Per-difficulty-level reduction in inaccuracy. See `uncertainty_base` for the full formula.",
-                },
-            ],
-        },
         "minecraft:raid_trigger": {
             "description": "Attempts to trigger a raid at the entity's location.",
             "children": [
@@ -16944,81 +16650,6 @@
                 },
             ],
         },
-        "minecraft:tamemount": {
-            "description": "Allows the Entity to be tamed by mounting it.",
-            "children": [
-                {
-                    "name": "attempt_temper_mod",
-                    "type": "Integer",
-                    "defaultValue": "5",
-                    "description": "The amount the entity's temper will increase when mounted.",
-                },
-                {
-                    "name": "autoRejectItems",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "The list of items that, if carried while interacting with the entity, will anger it.",
-                    "children": [
-                        {
-                            "name": "item",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "Name of the item this entity dislikes and will cause it to get angry if used while untamed.",
-                        },
-                    ],
-                },
-                {
-                    "name": "feed_items",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "The list of items that can be used to increase the entity's temper and speed up the taming process.",
-                    "children": [
-                        {
-                            "name": "item",
-                            "type": "String",
-                            "defaultValue": "",
-                            "description": "Name of the item this entity likes and can be used to increase this entity's temper.",
-                        },
-                        {
-                            "name": "temper_mod",
-                            "type": "Integer",
-                            "defaultValue": "0",
-                            "description": "The amount of temper this entity gains when fed this item.",
-                        },
-                    ],
-                },
-                {
-                    "name": "feed_text",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "The text that shows in the feeding interact button.",
-                },
-                {
-                    "name": "max_temper",
-                    "type": "Integer",
-                    "defaultValue": "100",
-                    "description": "The maximum value for the entity's random starting temper.",
-                },
-                {
-                    "name": "min_temper",
-                    "type": "Integer",
-                    "defaultValue": "0",
-                    "description": "The minimum value for the entity's random starting temper.",
-                },
-                {
-                    "name": "ride_text",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "The text that shows in the riding interact button.",
-                },
-                {
-                    "name": "tame_event",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Event that triggers when the entity becomes tamed.",
-                },
-            ],
-        },
         "minecraft:target_nearby_sensor": {
             "description": "Defines the entity's range within which it can see or sense other entities to target them.",
             "children": [
@@ -17088,6 +16719,12 @@
                     "description": "Minimum amount of time in seconds between random teleports",
                 },
                 {
+                    "name": "projectile_filter",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Conditions that determine which projectiles cause the entity to attempt to teleport. If omitted, all projectiles cause a teleport attempt",
+                },
+                {
                     "name": "random_teleport_cube",
                     "type": "Vector [a, b, c]",
                     "defaultValue": "[32, 16, 32]",
@@ -17110,6 +16747,12 @@
                     "type": "Decimal",
                     "defaultValue": "1",
                     "description": "The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%",
+                },
+                {
+                    "name": "teleports_on_projectile_hit",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If true, the entity will attempt to teleport away from projectiles about to hit it",
                 },
             ],
         },
@@ -17427,6 +17070,75 @@
                 },
             ],
         },
+        "minecraft:anger_level": {
+            "description": "Allows this entity to track anger towards a set of nuisances.",
+            "children": [
+                {
+                    "name": "anger_decrement_interval",
+                    "type": "Decimal",
+                    "defaultValue": "1.000000",
+                    "description": "Anger level will decay over time. Defines how often anger towards all nuisances will be decreased by one.",
+                },
+                {
+                    "name": "angry_boost",
+                    "type": "Positive Integer",
+                    "defaultValue": "20",
+                    "description": "Anger boost applied to angry threshold when mob gets angry.",
+                },
+                {
+                    "name": "angry_threshold",
+                    "type": "Positive Integer",
+                    "defaultValue": "80",
+                    "description": "Threshold that define when the mob is considered angry at a nuisance.",
+                },
+                {
+                    "name": "default_annoyingness",
+                    "type": "String",
+                    "defaultValue": "0",
+                    "description": "The default amount of annoyingness for any given nuisance. Specifies how much to raise anger level on each provocation.",
+                },
+                {
+                    "name": "max_anger",
+                    "type": "Positive Integer",
+                    "defaultValue": "100",
+                    "description": "The maximum anger level that can be reached. Applies to any nuisance.",
+                },
+                {
+                    "name": "nuisance_filter",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Filter that is applied to determine if a mob can be a nuisance.",
+                },
+                {
+                    "name": "on_increase_sounds",
+                    "type": "Array",
+                    "defaultValue": "",
+                },
+                {
+                    "name": "remove_targets_below_angry_threshold",
+                    "type": "Boolean",
+                    "defaultValue": "1",
+                    "description": "Defines if the mob should remove target if it falls below 'angry' threshold.",
+                },
+            ],
+        },
+        "minecraft:barter": {
+            "description": "Enables the component to drop an item as a barter exchange.",
+            "children": [
+                {
+                    "name": "barter_table",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Loot table that's used to drop a random item.",
+                },
+                {
+                    "name": "cooldown_after_being_attacked",
+                    "type": "Integer",
+                    "defaultValue": "10",
+                    "description": "Duration, in seconds, for which mob won't barter items if it was hurt.",
+                },
+            ],
+        },
         "minecraft:color": {
             "description": "Defines the entity's color. Only works on vanilla entities that have predefined color values (sheep, llama, shulker).",
             "children": [
@@ -17500,7 +17212,7 @@
             ],
         },
         "minecraft:ignore_cannot_be_attacked": {
-            "description": "When set, blocks entities from attacking the owner entity unless they have the \"minecraft:ignore_cannot_be_attacked\" component.",
+            "description": "Allows the owner entity to ignore the \"minecraft:cannot_be_attacked\" component on entities that fulfill the filter.",
             "children": [
                 {
                     "name": "filters",
@@ -17708,6 +17420,81 @@
                 },
             ],
         },
+        "minecraft:tamemount": {
+            "description": "Allows the Entity to be tamed by mounting it.",
+            "children": [
+                {
+                    "name": "attempt_temper_mod",
+                    "type": "Integer",
+                    "defaultValue": "5",
+                    "description": "The amount the entity's temper will increase when mounted.",
+                },
+                {
+                    "name": "autoRejectItems",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "The list of items that, if carried while interacting with the entity, will anger it.",
+                    "children": [
+                        {
+                            "name": "item",
+                            "type": "String",
+                            "defaultValue": "",
+                            "description": "The list of items that, if carried while interacting with the entity, will anger it.",
+                        },
+                    ],
+                },
+                {
+                    "name": "feed_items",
+                    "type": "JSON Object",
+                    "defaultValue": "",
+                    "description": "The list of items that can be used to increase the entity's temper and speed up the taming process.",
+                    "children": [
+                        {
+                            "name": "item",
+                            "type": "String",
+                            "defaultValue": "",
+                            "description": "Name of the item this entity likes and can be used to increase this entity's temper.",
+                        },
+                        {
+                            "name": "temper_mod",
+                            "type": "Integer",
+                            "defaultValue": "0",
+                            "description": "The amount of temper this entity gains when fed this item.",
+                        },
+                    ],
+                },
+                {
+                    "name": "feed_text",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The text that shows in the feeding interact button.",
+                },
+                {
+                    "name": "max_temper",
+                    "type": "Integer",
+                    "defaultValue": "100",
+                    "description": "The maximum value for the entity's random starting temper.",
+                },
+                {
+                    "name": "min_temper",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "The minimum value for the entity's random starting temper.",
+                },
+                {
+                    "name": "ride_text",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The text that shows in the riding interact button.",
+                },
+                {
+                    "name": "tame_event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Event that triggers when the entity becomes tamed.",
+                },
+            ],
+        },
         "minecraft:type_family": {
             "description": "Defines the families this entity belongs to.",
             "children": [
@@ -17743,33 +17530,35 @@
         },
     },
     "featureType": {
-        "minecraft:aggregate_feature": "'minecraft:aggregate_feature' places a collection of features in an arbitary order. All features in the collection use the same input position. Features should not depend on each other, as there is no guarantee on the order the features will be placed.",
-        "minecraft:sequence_feature": "'minecraft:sequence_feature' places a collection of features sequentially, in the order they appear in data. The output position of the previous feature is used as the input position for the next. For example, a tree feature is placed at (0, 0, 0) and places blocks up to (0, 10, 0). The next feature in the sequence begins at (0, 10, 0).",
         "minecraft:beards_and_shavers": "'minecraft:beards_and_shavers' will build a 'beard' or 'shave' out space so as to provide a clear space for a feature to place.",
+        "minecraft:rect_layout": "'minecraft:rect_layout' scans the surface of a Chunk, calling place() on the surface of each block column.",
+        "minecraft:scan_surface": "'minecraft:scan_surface' scans the surface of a Chunk, calling place() on the surface of each block column.",
+        "minecraft:sculk_patch_feature": "Feature type 'minecraft:sculk_patch_feature' has not yet been documented.",
+        "minecraft:aggregate_feature": "'minecraft:aggregate_feature' places a collection of features in an arbitary order. All features in the collection use the same input position. Features should not depend on each other, as there is no guarantee on the order the features will be placed.",
         "minecraft:cave_carver_feature": "'minecraft:cave_carver_feature' carves a cave through the world in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will also only work when placed specifically in the pass \"pregeneration_pass\".",
-        "minecraft:conditional_list": "'minecraft:conditional_list' Places the first suitable feature within a collection.",
+        "minecraft:conditional_list": "'minecraft:conditional_list' places the first suitable feature within a collection.",
         "minecraft:fossil_feature": "'minecraft:fossil_feature' generates a skeletal structure composed of bone blocks and parametric ore blocks.Succeeds if: The fossil is placed.",
         "minecraft:geode_feature": "'minecraft:geode_feature' generates a rock formation to simulate a geode. Each layer of, and block within, the geode can be replaced. Succeeds if: At least one block within the geode is placed.",
         "minecraft:growing_plant_feature": "'minecraft:growing_plant_feature' places a growing plant in the world. A growing plant is a column that is anchored either to the ceiling or the floor, based on its growth direction.",
-        "minecraft:nether_cave_carver_feature": "'minecraft:nether_cave_carver_feature' carves a cave through the Nether in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will also only work when placed specifically in the pass \"pregeneration_pass\".",
-        "minecraft:multiface_feature": "'minecraft:multiface_feature' places one or a few multiface blocks on floors/walls/ceilings. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if this feature can be placed on them based on the list provided in the 'can_place_on' field. If no 'can_replace_on' field is specified, the 'place_block' block can be placed on any existing block.",
-        "minecraft:ore_feature": "'minecraft:ore_feature' places a vein of blocks to simulate ore deposits. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if they can be replaced by the new ore block based on the list provided in the 'may_replace' field of a 'replace_rules' entry. If no 'may_replace' field is specified in a 'replace_rule' entry, the ore block can replace any existing block.",
-        "minecraft:partially_exposed_blob_feature": "'minecraft:partially_exposed_blob_feature' generates a blob of the specified block with the specified dimensions For the most part the blob is embedded in the specified surface, however a single side is allowed to be exposed.",
-        "minecraft:rect_layout": "'minecraft:rect_layout' scans the surface of a Chunk, calling place() on the surface of each block column.",
-        "minecraft:scan_surface": "'minecraft:scan_surface' scans the surface of a Chunk, calling place() on the surface of each block column.",
-        "minecraft:scatter_feature": "'minecraft:scatter_feature' scatters a feature throughout a chunk. The 'x', 'y', and 'z' fields are per-coordinate parameters. Note that coordinates represent an offset from the input position, not an absolute position. Coordinates may be a single value, a random distribution, or Molang expression that resolves to a numeric value. The 'coordinate_eval_order' field is provided for finer control of coordinate resolution (particularly when using the 'grid' distribution). 'iterations' controls how many individual placements should occur if the 'scatter_chance' check succeeds. The 'scatter_chance' check happens once, so either all placements will run or none will.",
-        "minecraft:sculk_patch_feature": "Feature type 'minecraft:sculk_patch_feature' has not yet been documented.",
-        "minecraft:search_feature": "'minecraft:search_feature' sweeps a volume searching for a valid placement location for its referenced feature. The 'search_volume' field specifies the axis-aligned bounding box that defines the boundaries of the search. The search sweeps along the axis defined by the 'search_axis' field, layer by layer. For example, if 'search_axis' = '-x', blocks with greater x values will be checked before blocks with lower x values. Each layer is searched from the bottom-left to the top-right before moving to the next layer along the axis. By default, only one valid position must be found, but this can be altered by specifying the 'required_successes' field. If fewer than the required successes are found, no placement will occur.",
-        "minecraft:single_block_feature": "'minecraft:single_block_feature' places a single block in the world. The 'places_block' field supports a single block or a list of weighted blocks, where the weight defines how likely it is for that block to be selected. The 'may_attach_to' and 'may_replace' fields are allowlists which specify where the block can be placed. If these fields are omitted, the block can be placed anywhere. The 'may_not_attach_to' field is a denylist that specifies what blocks can't be close to the placement location. The 'randomize_rotation' field will randomize the block's cardinal orientation. The block's internal survivability and placement rules can optionally be enforced with the 'enforce_survivability_rules' and 'enforce_placement_rules' fields. These rules are specified per-block and are typically designed to produce high quality gameplay or natural behavior. However, enabling this enforcement may make it harder to debug placement failures.",
-        "minecraft:snap_to_surface_feature": "'minecraft:snap_to_surface_feature' snaps the y-value of a feature placement pos to the floor or the ceiling within the provided 'vertical_search_range'. The placement biome is preserved. If the snap position goes outside of the placement biome, placement will fail.",
-        "minecraft:structure_template_feature": "'minecraft:structure_template_feature' places a structure in the world. The structure must be stored as a .mcstructure file in the \"structures\" subdirectory of a behavior pack. It is possible to reference structures that are part of other behavior packs, they do not need to come from the same behavior pack as this feature. Constraints can be defined to specify where the structure is allowed to be placed. During placement, the feature will search for a position within the 'adjustment_radius' that satisfies all constraints. If none are found, the structure will not be placed.",
-        "minecraft:surface_relative_threshold_feature": "'minecraft:surface_relative_threshold_feature' determines whether the provided position is below the estimated surface level of the world, and places a feature if so.If the provided position is above configured surface or the surface is not available, placement will fail. This feature only works for Overworld generators using world generation 1.18 or later.",
-        "minecraft:underwater_cave_carver_feature": "'minecraft:underwater_cave_carver_feature' carves a cave through the world in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will specifically target creating caves only below sea level.",
-        "minecraft:tree_feature": "'minecraft:tree_feature' will place a tree in the world. A tree consists of a column that is anchored to a base block with set parameters for what it can be placed on and canopy that extends from the column.",
-        "minecraft:vegetation_patch_feature": "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
-        "minecraft:weighted_random_feature": "'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.",
         "minecraft:height_difference_filter_feature": "'minecraft:height_difference_filter_feature' filters away positions based on the heightmap around the placement position.The filter will check for surface blocks in each cardinal direction within the `search_radius`. Each block will be checked against all given conditions.",
         "minecraft:horizontal_tree_decoration_feature": "'minecraft:horizontal_tree_decoration_feature' places a block in a random horizontal facing direction",
+        "minecraft:multiface_feature": "'minecraft:multiface_feature' places one or a few multiface blocks on floors/walls/ceilings. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if this feature can be placed on them based on the list provided in the 'can_place_on' field. If no 'can_replace_on' field is specified, the 'place_block' block can be placed on any existing block.",
+        "minecraft:nether_cave_carver_feature": "'minecraft:nether_cave_carver_feature' carves a cave through the Nether in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will also only work when placed specifically in the pass \"pregeneration_pass\".",
+        "minecraft:ore_feature": "'minecraft:ore_feature' places a vein of blocks to simulate ore deposits. Despite the name, any block can be placed by this feature. During placement, existing world blocks are checked to see if they can be replaced by the new ore block based on the list provided in the 'may_replace' field of a 'replace_rules' entry. If no 'may_replace' field is specified in a 'replace_rule' entry, the ore block can replace any existing block.",
+        "minecraft:partially_exposed_blob_feature": "'minecraft:partially_exposed_blob_feature' generates a blob of the specified block with the specified dimensions For the most part the blob is embedded in the specified surface, however a single side is allowed to be exposed.",
+        "minecraft:scatter_feature": "'minecraft:scatter_feature' scatters a feature throughout a chunk. The 'x', 'y', and 'z' fields are per-coordinate parameters. Note that coordinates represent an offset from the input position, not an absolute position. Coordinates may be a single value, a random distribution, or Molang expression that resolves to a numeric value. The 'coordinate_eval_order' field is provided for finer control of coordinate resolution (particularly when using the 'grid' distribution). 'iterations' controls how many individual placements should occur if the 'scatter_chance' check succeeds. The 'scatter_chance' check happens once, so either all placements will run or none will.",
+        "minecraft:search_feature": "'minecraft:search_feature' sweeps a volume searching for a valid placement location for its referenced feature. The 'search_volume' field specifies the axis-aligned bounding box that defines the boundaries of the search. The search sweeps along the axis defined by the 'search_axis' field, layer by layer. For example, if 'search_axis' = '-x', blocks with greater x values will be checked before blocks with lower x values. Each layer is searched from the bottom-left to the top-right before moving to the next layer along the axis. By default, only one valid position must be found, but this can be altered by specifying the 'required_successes' field. If fewer than the required successes are found, no placement will occur.",
+        "minecraft:sequence_feature": "'minecraft:sequence_feature' places a collection of features sequentially, in the order they appear in data. The output position of the previous feature is used as the input position for the next. For example, a tree feature is placed at (0, 0, 0) and places blocks up to (0, 10, 0). The next feature in the sequence begins at (0, 10, 0).",
+        "minecraft:single_block_feature": "'minecraft:single_block_feature' places a single block in the world. The 'places_block' field supports a single block or a list of weighted blocks, where the weight defines how likely it is for that block to be selected. The 'may_attach_to' and 'may_replace' fields are allowlists which specify where the block can be placed. If these fields are omitted, the block can be placed anywhere. The 'may_not_attach_to' field is a denylist that specifies what blocks can't be close to the placement location. The 'randomize_rotation' field will randomize the block's cardinal orientation. The block's internal survivability and placement rules can optionally be enforced with the 'enforce_survivability_rules' and 'enforce_placement_rules' fields. These rules are specified per-block and are typically designed to produce high quality gameplay or natural behavior. However, enabling this enforcement may make it harder to debug placement failures.",
+        "minecraft:snap_to_surface_feature": "'minecraft:snap_to_surface_feature' snaps the position of a feature placement to the floor, ceiling or wall within the provided 'search_range'.The placement biome is preserved. If the snap position goes outside of the placement biome, placement will fail.",
+        "minecraft:structure_template_feature": "'minecraft:structure_template_feature' places a structure in the world. The structure must be stored as a .mcstructure file in the \"structures\" subdirectory of a behavior pack. It is possible to reference structures that are part of other behavior packs, they do not need to come from the same behavior pack as this feature. Constraints can be defined to specify where the structure is allowed to be placed. During placement, the feature will search for a position within the 'adjustment_radius' that satisfies all constraints. If none are found, the structure will not be placed.",
+        "minecraft:surface_relative_threshold_feature": "'minecraft:surface_relative_threshold_feature' determines whether the provided position is below the estimated surface level of the world, and places a feature if so.If the provided position is above configured surface or the surface is not available, placement will fail. This feature only works for Overworld generators using world generation 1.18 or later.",
+        "minecraft:tree_feature": "'minecraft:tree_feature' will place a tree in the world. A tree consists of a column that is anchored to a base block with set parameters for what it can be placed on and canopy that extends from the column.",
+        "minecraft:underwater_cave_carver_feature": "'minecraft:underwater_cave_carver_feature' carves a cave through the world in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will specifically target creating caves only below sea level.",
+        "minecraft:vegetation_patch_feature": "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
+        "minecraft:weighted_random_feature": "'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.",
+        "minecraft:multi_block_feature": "'minecraft:multi_block_feature' places a multi-block in the world as a biome decoration feature. A multi-block must be defined with the 'minecraft:multi_block' trait. The required 'places_block' field supports a single block, it must be a multi-block and it must be be the first part of a multi-block i.e. the 'minecraft:multi_block_part' state must have a value of 0. The optional 'may_replace' field is an allowlists which specifies what blocks each part of the multi-block can replace. If this field is omitted, the multi-block parts can be placed anywhere. However, they may not replace other multi-block parts. The optional 'randomize_rotation' field will randomize the multi-blocks cardinal orientation. If this field is enabled then the multi-block must have the cardinal direction state. The optional 'enforce_placement_rules' field will check if each part of the multi-block may be placed on top of existing blocks. If the multi-block defines a 'minecraft:placement_filter' component then each part is also checked against the blocks defined in that component.",
+        "minecraft:multipart_block_column_feature": "'minecraft:multipart_block_column_feature' places blocks in an ordered column consisting of 1-4 parts. When the column consists of one block, only the 'tip_block' is placed. When the column consists of two blocks, a 'frustum_block' is placed with a 'tip_block' above it. For a three block column, a 'base_block' is placed at the bottom, and followed by a 'frustum_block' and a 'tip_block'. For columns larger than three blocks, the 'middle_block' is used as padding between the 'base_block' and the 'frustum_block'. 'height_range' specifies the range of blocks the column can be in any direction. 'weighted_heights' specifies a list of possible weighted lengths the column can be in any direction. Exactly one of 'height_range' or 'weighted_heights' has to be specified. 'direction' specifies the direction of the column. This can be any direction. 'may_place_on' can be used to limit what blocks a column can be placed upon. If omitted a column can be placed anywhere",
     },
     "molangMath": {
         "math.abs(value)": "Absolute value of value",
@@ -17835,7 +17624,7 @@
         "math.trunc(value)": "Round value towards zero",
     },
     "molangQuery": {
-        "query.above_top_solid": "Returns the height of the block immediately above the highest solid block at the input (x,z) position",
+        "query.above_top_solid": "Returns the height of the block immediately above the highest solid block at the input (x,z) position.",
         "query.actor_count": "Returns the number of actors rendered in the last frame.",
         "query.all": "Requires at least 3 arguments. Evaluates the first argument, then returns 1.0 if all of the following arguments evaluate to the same value as the first. Otherwise it returns 0.0.",
         "query.all_animations_finished": "Only valid in an animation controller.  Returns 1.0 if all animations in the current animation controller state have played through at least once, else it returns 0.0.",
@@ -17920,10 +17709,12 @@
         "query.graphics_mode_is_any": "Takes in one or more arguments ('simple', 'fancy', 'deferred', 'raytraced'). If the graphics mode of the client matches any of the arguments, return 1.0. Available on the Client (Resource Packs) only.",
         "query.ground_speed": "Returns the ground speed of the entity in meters/second.",
         "query.had_component_group": "Usable only in behavior packs when determining the default value for an entity's Property. Requires one string argument. If the entity is being loaded from data that was last saved with a component_group with the specified name, returns 1.0, otherwise returns 0.0. The purpose of this query is to allow entity definitions to change and still be able to load the correct state of entities.",
+        "query.has_all_biome_tags": "Returns 1.0 if the biome at the current placement position has all of the specified tags, else 0.0. Takes (tag1, tag2, ...).",
+        "query.has_any_biome_tags": "Returns 1.0 if the biome at the current placement position has at least one of the specified tags, else 0.0. Takes (tag1, tag2, ...).",
         "query.has_any_family": "Returns 1 if the entity has any of the specified families, else 0.",
         "query.has_any_leashed_entity_of_type": "Returns whether or not the entity is currently leashing other entities of the designated types.",
         "query.has_armor_slot": "Takes the armor slot index as a parameter, and returns 1.0 if the entity has armor in the requested slot, else it returns 0.0. The valid values for the armor slot index are 0 (head), 1 (chest), 2 (legs) and 3 (feet).",
-        "query.has_biome_tag": "Returns whether or not a Block Placement Target has a specific biome tag",
+        "query.has_biome_tag": "Returns 1.0 if the biome at the current placement or given position has the specified tag, else 0.0. Takes (tag), (tag, x, z), or (tag, x, y, z).",
         "query.has_block_property": "(No longer available in pack min_engine_version 1.20.40.) Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_block_state": "Returns 1.0 if the associated block has the given block state or 0.0 if not.",
         "query.has_cape": "Returns 1.0 if the player has a cape, else it returns 0.0.",
@@ -17936,13 +17727,14 @@
         "query.has_property": "Takes one argument: the name of the property on the Actor. Returns 1.0 if a property with the given name exists, 0 otherwise.",
         "query.has_rider": "Returns 1.0 if the entity has a rider, else it returns 0.0",
         "query.has_target": "Returns 1.0 if the entity has a target, else it returns 0.0",
+        "query.head_is_in_water": "Returns 1.0 if the entity's head is in water, else it returns 0.0.",
         "query.head_roll_angle": "Returns the roll angle of the head of the entity if it makes sense, else it returns 0.0.",
         "query.head_x_rotation": "Takes one argument as a parameter.  Returns the nth head x rotation of the entity if it makes sense, else it returns 0.0.",
         "query.head_y_rotation": "Takes one argument as a parameter.  Returns the nth head y rotation of the entity if it makes sense, else it returns 0.0. Horses, zombie horses, skeleton horses, donkeys and mules require a second parameter that clamps rotation in degrees.",
         "query.health": "Returns the health of the entity, or 0.0 if it doesn't make sense to call on this entity.",
         "query.heartbeat_interval": "Returns the heartbeat interval of the actor in seconds. Returns 0 when the actor has no heartbeat.",
         "query.heartbeat_phase": "Returns the heartbeat phase of the actor. 0.0 if at start of current heartbeat, 1.0 if at the end. Returns 0 on errors or when the actor has no heartbeat. Available on the Client (Resource Packs) only.",
-        "query.heightmap": "Queries Height Map",
+        "query.heightmap": "Returns the heightmap value at the given (x, z) position.",
         "query.hurt_direction": "Returns the hurt direction for the actor, otherwise returns 0.",
         "query.hurt_time": "Returns the hurt time for the actor, otherwise returns 0.",
         "query.in_range": "Requires 3 numerical arguments: some value, a minimum, and a maximum. If the first argument is between the minimum and maximum (inclusive), returns 1.0. Otherwise returns 0.0.",
@@ -18013,7 +17805,7 @@
         "query.is_orphaned": "Returns 1.0 if the entity is orphaned, else it returns 0.0.",
         "query.is_owner_identifier_any": "Takes one or more arguments. Returns whether the root actor identifier is any of the specified strings. A preferred query to query.owner_identifier, as it can be adjusted by Mojang to avoid breaking content if names are changed.",
         "query.is_pack_setting_enabled": "Returns 1.0 if the Pack Setting toggle is enabled, parameter is name of toggle. Available on the Client (Resource Packs) only.",
-        "query.is_pack_setting_selected": "Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
+        "query.is_pack_setting_selected": "Returns 1.0 if the Pack Setting dropdown or multiselect (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
         "query.is_persona_or_premium_skin": "Returns 1.0 if the player has a persona or premium skin, else it returns 0.0.",
         "query.is_playing_dead": "Returns 1.0 if the entity is playing dead, else it returns 0.0.",
         "query.is_powered": "Returns 1.0 if the entity is powered, else it returns 0.0.",
@@ -18086,7 +17878,7 @@
         "query.moon_brightness": "Returns the brightness of the moon (FULL_MOON=1.0, WANING_GIBBOUS=0.75, FIRST_QUARTER=0.5, WANING_CRESCENT=0.25, NEW_MOON=0.0, WAXING_CRESCENT=0.25, LAST_QUARTER=0.5, WAXING_GIBBOUS=0.75).",
         "query.moon_phase": "Returns the phase of the moon (FULL_MOON=0, WANING_GIBBOUS=1, FIRST_QUARTER=2, WANING_CRESCENT=3, NEW_MOON=4, WAXING_CRESCENT=5, LAST_QUARTER=6, WAXING_GIBBOUS=7).",
         "query.movement_direction": "Returns the specified axis of the normalized position delta of the entity.",
-        "query.noise": "Queries Perlin Noise Map",
+        "query.noise": "Returns a Perlin simplex noise value for the given (x, z) position.",
         "query.on_fire_time": "Returns the time that the entity is on fire, else it returns 0.0.",
         "query.out_of_control": "Returns 1.0 if the entity is out of control, else it returns 0.0.",
         "query.overlay_alpha": "DEPRECATED (Do not use - this function is deprecated and will be removed).",

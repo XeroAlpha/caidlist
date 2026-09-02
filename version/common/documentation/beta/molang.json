@@ -1010,7 +1010,7 @@
                             "rows": [
                                 {
                                     "Name": "query.above_top_solid",
-                                    "Description": "Returns the height of the block immediately above the highest solid block at the input (x,z) position",
+                                    "Description": "Returns the height of the block immediately above the highest solid block at the input (x,z) position.",
                                 },
                                 {
                                     "Name": "query.actor_count",
@@ -1349,6 +1349,14 @@
                                     "Description": "Usable only in behavior packs when determining the default value for an entity's Property. Requires one string argument. If the entity is being loaded from data that was last saved with a component_group with the specified name, returns 1.0, otherwise returns 0.0. The purpose of this query is to allow entity definitions to change and still be able to load the correct state of entities.",
                                 },
                                 {
+                                    "Name": "query.has_all_biome_tags",
+                                    "Description": "Returns 1.0 if the biome at the current placement position has all of the specified tags, else 0.0. Takes (tag1, tag2, ...).",
+                                },
+                                {
+                                    "Name": "query.has_any_biome_tags",
+                                    "Description": "Returns 1.0 if the biome at the current placement position has at least one of the specified tags, else 0.0. Takes (tag1, tag2, ...).",
+                                },
+                                {
                                     "Name": "query.has_any_family",
                                     "Description": "Returns 1 if the entity has any of the specified families, else 0.",
                                 },
@@ -1362,7 +1370,7 @@
                                 },
                                 {
                                     "Name": "query.has_biome_tag",
-                                    "Description": "Returns whether or not a Block Placement Target has a specific biome tag",
+                                    "Description": "Returns 1.0 if the biome at the current placement or given position has the specified tag, else 0.0. Takes (tag), (tag, x, z), or (tag, x, y, z).",
                                 },
                                 {
                                     "Name": "query.has_block_property",
@@ -1413,6 +1421,10 @@
                                     "Description": "Returns 1.0 if the entity has a target, else it returns 0.0",
                                 },
                                 {
+                                    "Name": "query.head_is_in_water",
+                                    "Description": "Returns 1.0 if the entity's head is in water, else it returns 0.0.",
+                                },
+                                {
                                     "Name": "query.head_roll_angle",
                                     "Description": "Returns the roll angle of the head of the entity if it makes sense, else it returns 0.0.",
                                 },
@@ -1438,7 +1450,7 @@
                                 },
                                 {
                                     "Name": "query.heightmap",
-                                    "Description": "Queries Height Map",
+                                    "Description": "Returns the heightmap value at the given (x, z) position.",
                                 },
                                 {
                                     "Name": "query.hurt_direction",
@@ -1722,7 +1734,7 @@
                                 },
                                 {
                                     "Name": "query.is_pack_setting_selected",
-                                    "Description": "Returns 1.0 if the Pack Setting dropdown (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
+                                    "Description": "Returns 1.0 if the Pack Setting dropdown or multiselect (first parameter) matches the string value of the second parameter (selection). Available on the Client (Resource Packs) only.",
                                 },
                                 {
                                     "Name": "query.is_persona_or_premium_skin",
@@ -2014,7 +2026,7 @@
                                 },
                                 {
                                     "Name": "query.noise",
-                                    "Description": "Queries Perlin Noise Map",
+                                    "Description": "Returns a Perlin simplex noise value for the given (x, z) position.",
                                 },
                                 {
                                     "Name": "query.on_fire_time",
@@ -2371,5 +2383,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "bf0dd5f3446fcc38ed78ab1d7468ff71e64dfb53",
+    "__OBJECTHASH__": "fae13b5da6c38f1e7ace28bf3573a3b5e5c4d68e",
 }

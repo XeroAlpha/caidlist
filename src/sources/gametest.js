@@ -31,16 +31,17 @@ const Minecraft = {};
  */
 async function wrapEvaluate(frame, f, args) {
     const serializedArgs = args === undefined ? '' : JSON.stringify(args);
-    const code = `(()=>{try{return (JSON.stringify((${String(f)})(${serializedArgs})))}catch(e){return e}})()`;
+    const code = `(()=>{try{return '__OK__'+JSON.stringify({value:(${String(f)})(${serializedArgs})})}catch(e){return e}})()`;
     const errorOrResult = await frame.evaluateExpression(code);
-    if (errorOrResult.type === 'undefined') {
-        return undefined;
+    if (errorOrResult.type === 'string' && errorOrResult.primitiveValue.startsWith('__OK__')) {
+        return JSON.parse(errorOrResult.primitiveValue.slice(6)).value;
     }
-    if (errorOrResult.type !== 'string') {
-        throw await errorOrResult.inspect();
-    }
-    const val = JSON.parse(errorOrResult.primitiveValue);
-    return val;
+    const inspected = await errorOrResult.inspect({ maxDepth: 2 });
+    const info = typeof inspected === 'object' && inspected !== null ? inspected : {};
+    const err = new Error(info.message ?? String(errorOrResult));
+    err.name = info['[[Prototype]]']?.name ?? 'Error';
+    if (info.stack) err.stack = `${err.name}: ${err.message}\n${info.stack}`;
+    throw err;
 }
 
 function stateToSlots(state, propNames) {
@@ -393,10 +394,21 @@ function createPauseController(session, breakpoints) {
  * @param {(id: string) => {id: string, data: unknown}} options.fix 按 id 提取
  * @param {() => void} options.cleanup 清理
  * @param {Record<string, unknown>} [options.cache] 上一轮缓存（id -> data），提供核对宇宙与回填
+ * @param {boolean} [options.emitNull=false] fix 失败且缓存值为 null（键有效、值未知）时，是否在输出中写入 null 占位
  * @param {number} [options.batchSize=64] 初始批次大小
  * @returns {Promise<Record<string, unknown>>} 提取结果（id -> data）
  */
-async function batchedRemoteExtract({ frame, category, init, dump, fix, cleanup, cache = {}, batchSize = 64 }) {
+async function batchedRemoteExtract({
+    frame,
+    category,
+    init,
+    dump,
+    fix,
+    cleanup,
+    cache = {},
+    batchSize = 64,
+    emitNull = false
+}) {
     const cacheIds = Object.keys(cache);
     const output = {};
     const brokenItems = [];
@@ -461,11 +473,13 @@ async function batchedRemoteExtract({ frame, category, init, dump, fix, cleanup,
         }
 
         // 两条路径均失败的缓存 item（规则 5）：warn（附带原始错误）并回填缓存数据；
-        // 缓存中值为 null 表示「键有效、值未知」的标记，跳过回填
+        // 缓存中值为 null 表示「键有效、值未知」：emitNull 时以 null 占位输出，由调用方自行处理
         for (const { id, err } of fixFailed) {
             warn(`${category} ${id} failed on both index and id paths, ignored`, err);
-            if (id in cache && cache[id] != null) {
+            if (cache[id] != null) {
                 output[id] = cache[id];
+            } else if (emitNull) {
+                output[id] = null;
             }
         }
         return output;
@@ -831,38 +845,16 @@ const Extractors = [
                 dump,
                 fix,
                 cleanup,
-                cache: Object.fromEntries(knownBlockIds.map((id) => [id, null]))
+                cache: Object.fromEntries(knownBlockIds.map((id) => [id, null])),
+                emitNull: true
             });
             const blocks = {};
             const blockProperties = {};
             const blockTags = {};
             const containLiquidMap = {};
             const liquidInteractMap = {};
-            const blockInfoEntries = Object.entries(blockInfo).sort((a, b) => stringComparator(a[0], b[0]));
-            let index = 0;
-            for (const [propertyName, property] of Object.entries(blockStateInfo)) {
-                blockProperties[propertyName] = [
-                    {
-                        validValues: property.validValues,
-                        defaultValue: {}
-                    }
-                ];
-            }
-            for (const [blockId, blockType] of blockInfoEntries) {
-                setStatus(
-                    `[${++index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`
-                );
-                const { properties, states, invalidStates, localizationKey: typeLocalizationKey } = blockType;
-                const tagMap = {};
-                const itemIdMap = {};
-                const localizationKeyMap = {};
-                const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
-                const aliasStates = findAliasState(stateValues, invalidStates);
-                const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
-                const [validStateOverrides, filteredInvalidStates] = extractValidStateOverrides(
-                    stateValues,
-                    simplifiedInvalidStates
-                );
+            /** 合并某个块的属性到 blockProperties（按 validValues 分组 + 登记 defaultValue） */
+            const applyBlockProperties = (properties, blockId) => {
                 for (const property of properties) {
                     let propertyDescriptors = blockProperties[property.name];
                     if (!propertyDescriptors) {
@@ -881,6 +873,84 @@ const Extractors = [
                     }
                     propertyDescriptor.defaultValue[blockId] = property.defaultValue;
                 }
+            };
+            const blockInfoEntries = Object.entries(blockInfo).sort((a, b) => stringComparator(a[0], b[0]));
+            let index = 0;
+            let lastStatusTime = 0;
+            for (const [propertyName, property] of Object.entries(blockStateInfo)) {
+                blockProperties[propertyName] = [
+                    {
+                        validValues: property.validValues,
+                        defaultValue: {}
+                    }
+                ];
+            }
+            for (const [blockId, blockType] of blockInfoEntries) {
+                index += 1;
+                // 按时间降频刷新进度（约每秒一次），避免 1477 个方块高频重绘状态行；最后一块强制显示
+                const now = Date.now();
+                if (now - lastStatusTime >= 1000 || index === blockInfoEntries.length) {
+                    lastStatusTime = now;
+                    setStatus(
+                        `[${index}/${blockInfoEntries.length} ${((index / blockInfoEntries.length) * 100).toFixed(1)}%] Processing block states for ${blockId}`
+                    );
+                }
+                if (blockType === null) {
+                    // 两条路径均失败且无历史 raw 数据（emitNull 占位）：从上一轮输出恢复
+                    const previous = target.blocks?.[blockId];
+                    if (previous) {
+                        blocks[blockId] = previous;
+                        applyBlockProperties(previous.properties ?? [], blockId);
+                        for (const [tagName, tagInfo] of Object.entries(target.blockTags ?? {})) {
+                            if (blockId in tagInfo) {
+                                let tagSubMap = blockTags[tagName];
+                                if (!tagSubMap) {
+                                    tagSubMap = blockTags[tagName] = {};
+                                }
+                                tagSubMap[blockId] = tagInfo[blockId];
+                            }
+                        }
+                        for (const [liquidType, subMap] of Object.entries(target.containLiquidMap ?? {})) {
+                            if (blockId in subMap) {
+                                let containLiquidSubMap = containLiquidMap[liquidType];
+                                if (!containLiquidSubMap) {
+                                    containLiquidSubMap = containLiquidMap[liquidType] = {};
+                                }
+                                containLiquidSubMap[blockId] = subMap[blockId];
+                            }
+                        }
+                        for (const [liquidType, patternMap] of Object.entries(target.liquidInteractMap ?? {})) {
+                            for (const [pattern, patternSubMap] of Object.entries(patternMap)) {
+                                if (blockId in patternSubMap) {
+                                    let globalPatternMap = liquidInteractMap[liquidType];
+                                    if (!globalPatternMap) {
+                                        globalPatternMap = liquidInteractMap[liquidType] = {};
+                                    }
+                                    let globalSubMap = globalPatternMap[pattern];
+                                    if (!globalSubMap) {
+                                        globalSubMap = globalPatternMap[pattern] = {};
+                                    }
+                                    globalSubMap[blockId] = patternSubMap[blockId];
+                                }
+                            }
+                        }
+                    } else {
+                        warn(`Block ${blockId} cannot be extracted and has no previous output, skipped`);
+                    }
+                    continue;
+                }
+                const { properties, states, invalidStates, localizationKey: typeLocalizationKey } = blockType;
+                const tagMap = {};
+                const itemIdMap = {};
+                const localizationKeyMap = {};
+                const stateValues = Object.fromEntries(properties.map((e) => [e.name, e.validValues]));
+                const aliasStates = findAliasState(stateValues, invalidStates);
+                const simplifiedInvalidStates = simplifyStateAndCheck(stateValues, invalidStates, []);
+                const [validStateOverrides, filteredInvalidStates] = extractValidStateOverrides(
+                    stateValues,
+                    simplifiedInvalidStates
+                );
+                applyBlockProperties(properties, blockId);
                 const containLiquidStateMap = {};
                 const liquidInteractStateMap = {};
                 for (const state of states) {
