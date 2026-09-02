@@ -30,9 +30,12 @@ const Minecraft = {};
  * @param {import("quickjs-debugger").QuickJSStackFrame} frame
  */
 async function wrapEvaluate(frame, f, args) {
-    const serializedArgs = JSON.stringify(args);
+    const serializedArgs = args === undefined ? '' : JSON.stringify(args);
     const code = `(()=>{try{return (JSON.stringify((${String(f)})(${serializedArgs})))}catch(e){return e}})()`;
     const errorOrResult = await frame.evaluateExpression(code);
+    if (errorOrResult.type === 'undefined') {
+        return undefined;
+    }
     if (errorOrResult.type !== 'string') {
         throw await errorOrResult.inspect();
     }
@@ -363,6 +366,119 @@ function createPauseController(session, breakpoints) {
     };
 }
 
+/**
+ * 通用远程分批提取流水线（针对 interrupted error 无法在游戏内捕获的场景）。
+ *
+ * 远程原语（均为游戏内函数，由本函数统一 wrapEvaluate(frame, ...) 注入执行）：
+ * - init(): 初始化全局变量（暂存的注册表数组、dump 子函数等），返回注册表长度 N。
+ * - dump(range: [start, end]): 提取 [start, end) 区间内全部数据，全有或全无——任一项失败即抛异常
+ *   （interrupted error 无法被游戏内 try/catch 捕获，因此 dump 内部不做逐项捕获）。
+ * - fix(id): 按 id 读取单个数据（与索引路径互为冗余），失败即抛异常。
+ * - cleanup(): 清理全局变量。
+ *
+ * 宿主端编排：
+ * 1. init() 取得 N；
+ * 2. 按 batchSize 分批 dump，失败区间二分缩小；单索引仍失败 → "索引路径判死"（id 不可知）；
+ * 3. 以缓存 id 列表为核对宇宙，对缺失 id 逐个 fix() 修补；
+ * 4. 账目核对：每个缺失 id 必对应一个判死索引，判死索引数超出缺失 id 数的部分
+ *    = 不在缓存中的坏 item → 直接报错，提示手动 dump 后加入缓存；
+ * 5. 两条路径均失败的缓存 item → warn 并回填缓存数据；
+ * 6. cleanup() 在 finally 中执行，并清除进度状态。
+ *
+ * @param {object} options
+ * @param {import("quickjs-debugger").QuickJSStackFrame} options.frame 调试器栈帧
+ * @param {string} options.category 处理对象名（如 'block' / 'item'），用于进度与报错
+ * @param {() => number} options.init 初始化并返回注册表长度
+ * @param {(range: [number, number]) => Array<{id: string, data: unknown}>} options.dump 区间提取
+ * @param {(id: string) => {id: string, data: unknown}} options.fix 按 id 提取
+ * @param {() => void} options.cleanup 清理
+ * @param {Record<string, unknown>} [options.cache] 上一轮缓存（id -> data），提供核对宇宙与回填
+ * @param {number} [options.batchSize=64] 初始批次大小
+ * @returns {Promise<Record<string, unknown>>} 提取结果（id -> data）
+ */
+async function batchedRemoteExtract({ frame, category, init, dump, fix, cleanup, cache = {}, batchSize = 64 }) {
+    const cacheIds = Object.keys(cache);
+    const output = {};
+    const brokenItems = [];
+    const fixFailed = [];
+    let length = 0;
+    let dumpedCount = 0;
+
+    /** 提取 [start, end)；失败则二分缩小，单索引仍失败则判死 */
+    const dumpRange = async (start, end) => {
+        setStatus(
+            `[${start}-${end} ${dumpedCount}/${length} ${((dumpedCount / length) * 100).toFixed(1)}%] Extracting ${category}s`
+        );
+        try {
+            const infos = await wrapEvaluate(frame, dump, [start, end]);
+            for (const { id, data } of infos) {
+                output[id] = data;
+            }
+            dumpedCount += infos.length;
+        } catch (err) {
+            if (end - start === 1) {
+                brokenItems.push({ index: start, message: err.message ?? String(err) });
+                return;
+            }
+            const mid = (start + end) >> 1;
+            await dumpRange(start, mid);
+            await dumpRange(mid, end);
+        }
+    };
+
+    try {
+        length = await wrapEvaluate(frame, init);
+
+        // 分批跑：全有或全无 + 二分隔离
+        for (let start = 0; start < length; start += batchSize) {
+            const end = Math.min(start + batchSize, length);
+            await dumpRange(start, end);
+        }
+
+        // 查漏补缺：以缓存 id 列表为核对宇宙
+        const missing = cacheIds.filter((id) => !(id in output));
+        for (const id of missing) {
+            setStatus(`Fixing ${category} ${id}`);
+            try {
+                const { data } = await wrapEvaluate(frame, fix, id);
+                output[id] = data;
+            } catch (err) {
+                fixFailed.push({ id, err });
+            }
+        }
+
+        // 账目核对（规则 6）：判死索引数 > 缺失 id 数 → 存在不在缓存中的坏 item
+        if (brokenItems.length > missing.length) {
+            const detail = brokenItems
+                .slice(-8)
+                .map((e) => `[${e.index}] ${e.message}`)
+                .join('\n');
+            throw new Error(
+                `${brokenItems.length - missing.length} ${category}(s) cannot be extracted and are not in the cache. ` +
+                    `Please manually dump them and add the data to the cache, ` +
+                    `or add the key with a null value to mark them as known-unavailable.\n${detail}`
+            );
+        }
+
+        // 两条路径均失败的缓存 item（规则 5）：warn（附带原始错误）并回填缓存数据；
+        // 缓存中值为 null 表示「键有效、值未知」的标记，跳过回填
+        for (const { id, err } of fixFailed) {
+            warn(`${category} ${id} failed on both index and id paths, ignored`, err);
+            if (id in cache && cache[id] != null) {
+                output[id] = cache[id];
+            }
+        }
+        return output;
+    } finally {
+        setStatus('');
+        try {
+            await wrapEvaluate(frame, cleanup);
+        } catch (err) {
+            warn('Failed to cleanup remote extraction', err);
+        }
+    }
+}
+
 const Extractors = [
     {
         name: 'enchantment-check',
@@ -572,17 +688,28 @@ const Extractors = [
     },
     {
         name: 'blocks',
-        timeout: 60000,
+        timeout: 120000,
         async extract({ target, frame }) {
-            const { blockInfo, blockStateInfo } = await wrapEvaluate(frame, () => {
-                const blockTypes = Minecraft.BlockTypes.getAll();
-                const liquidTypes = Object.keys(Minecraft.LiquidType);
-                const blockInfo = {};
-                for (const blockType of blockTypes) {
+            const { blockStateInfo } = await wrapEvaluate(frame, () => {
+                const blockStates = Minecraft.BlockStates.getAll();
+                const blockStateInfo = {};
+                for (const blockState of blockStates) {
+                    blockStateInfo[blockState.id] = {
+                        validValues: blockState.validValues
+                    };
+                }
+                return { blockStateInfo };
+            });
+            const init = () => {
+                globalThis.__block_extract_types = Minecraft.BlockTypes.getAll();
+                /** @param {import("@minecraft/server").BlockType} blockType */
+                globalThis.__block_extract_dump = (blockType) => {
+                    const id = blockType.id;
+                    const liquidTypes = Object.keys(Minecraft.LiquidType);
                     const states = [];
                     const invalidStates = [];
-                    const { id: blockId, localizationKey: typeLocalizationKey } = blockType;
-                    const basePermutation = Minecraft.BlockPermutation.resolve(blockId);
+                    const { localizationKey: typeLocalizationKey } = blockType;
+                    const basePermutation = Minecraft.BlockPermutation.resolve(id);
                     const properties = Object.entries(basePermutation.getAllStates()).map(([name, defaultValue]) => ({
                         name,
                         validValues: Minecraft.BlockStates.get(name).validValues,
@@ -602,8 +729,8 @@ const Extractors = [
                         }
                         let permutation = null;
                         try {
-                            permutation = Minecraft.BlockPermutation.resolve(blockId, state);
-                            if (permutation.type.id !== blockId) {
+                            permutation = Minecraft.BlockPermutation.resolve(id, state);
+                            if (permutation.type.id !== id) {
                                 throw new Error('State property invalid');
                             }
                             for (const k of Object.keys(state)) {
@@ -615,13 +742,11 @@ const Extractors = [
                             permutation = null;
                             invalidStates.push(state);
                         }
-                        // Uncomment to discover where the game crashes
-                        // console.info(`Dumping ${blockType.id}${JSON.stringify(state)}`);
                         if (permutation) {
                             const tags = permutation.getTags().slice();
                             const itemStack = permutation.getItemStack();
                             let itemId = itemStack && itemStack.typeId;
-                            if (itemId === blockId) {
+                            if (itemId === id) {
                                 itemId = '<same>';
                             }
                             const canContainLiquid = [];
@@ -666,21 +791,47 @@ const Extractors = [
                         }
                         if (cursor < 0) break;
                     }
-                    blockInfo[blockType.id] = {
-                        properties,
-                        states,
-                        invalidStates,
-                        localizationKey: typeLocalizationKey
+                    return {
+                        id,
+                        data: {
+                            properties,
+                            states,
+                            invalidStates,
+                            localizationKey: typeLocalizationKey
+                        }
                     };
+                };
+                return globalThis.__block_extract_types.length;
+            };
+            const dump = ([start, end]) => {
+                const types = globalThis.__block_extract_types;
+                const dumpFn = globalThis.__block_extract_dump;
+                const result = [];
+                for (let i = start; i < end; i++) {
+                    result.push(dumpFn(types[i]));
                 }
-                const blockStates = Minecraft.BlockStates.getAll();
-                const blockStateInfo = {};
-                for (const blockState of blockStates) {
-                    blockStateInfo[blockState.id] = {
-                        validValues: blockState.validValues
-                    };
-                }
-                return { blockInfo, blockStateInfo };
+                return result;
+            };
+            const fix = (id) => {
+                const dumpFn = globalThis.__block_extract_dump;
+                const blockType = Minecraft.BlockTypes.get(id);
+                if (!blockType) throw new Error(`Cannot find block ${id}`);
+                if (blockType.id !== id) throw new Error(`Block id mismatched: ${id}`);
+                return dumpFn(blockType);
+            };
+            const cleanup = () => {
+                delete globalThis.__block_extract_types;
+                delete globalThis.__block_extract_dump;
+            };
+            const knownBlockIds = Object.keys(target.blocks ?? {});
+            const blockInfo = await batchedRemoteExtract({
+                frame,
+                category: 'block',
+                init,
+                dump,
+                fix,
+                cleanup,
+                cache: Object.fromEntries(knownBlockIds.map((id) => [id, null]))
             });
             const blocks = {};
             const blockProperties = {};
@@ -843,8 +994,7 @@ const Extractors = [
         name: 'items',
         timeout: 60000,
         async extract({ target, frame }) {
-            let ItemInfoList;
-            await wrapEvaluate(frame, () => {
+            const init = () => {
                 const enchantmentTypes = Minecraft.EnchantmentTypes.getAll();
                 const enchantments = enchantmentTypes.map((type) => ({
                     level: type.maxLevel,
@@ -852,16 +1002,8 @@ const Extractors = [
                 }));
                 enchantments.sort((a, b) => (a.type.id > b.type.id ? 1 : a.type.id < b.type.id ? -1 : 0));
                 globalThis.__item_extract_enchantments = enchantments;
-                return '"OK"';
-            });
-            const length = await wrapEvaluate(frame, () => {
-                const itemTypes = Minecraft.ItemTypes.getAll();
-                globalThis.__item_extract_itemTypes = itemTypes;
-                return String(itemTypes.length);
-            });
-            await wrapEvaluate(frame, () => {
+                globalThis.__item_extract_itemTypes = Minecraft.ItemTypes.getAll();
                 const assign = (o, source, keys) => keys.forEach((k) => (o[k] = source[k]));
-                const enchantments = globalThis.__item_extract_enchantments;
                 /** @param {import("@minecraft/server").ItemType} itemType */
                 globalThis.__item_extract_dump = (itemType) => {
                     if (itemType.id === 'minecraft:air') {
@@ -963,85 +1105,42 @@ const Extractors = [
                         }
                     ];
                 };
-                return '"OK"';
-            });
-            try {
-                ItemInfoList = await wrapEvaluate(frame, () => {
-                    const result = {};
-                    const itemTypes = globalThis.__item_extract_itemTypes;
-                    const dump = globalThis.__item_extract_dump;
-                    for (let i = 0; i < itemTypes.length; i++) {
-                        const [id, value] = dump(itemTypes[i]);
-                        if (value !== null) {
-                            result[id] = value;
-                        }
-                    }
-                    return result;
-                });
-            } catch (err) {
-                warn(`Cannot evaluate code for item registry: ${err.message}`);
-                ItemInfoList = {};
-                let corruptedCount = 0;
-                for (let i = 0; i < length; i++) {
-                    try {
-                        const [id, value] = await wrapEvaluate(
-                            frame,
-                            (index) => {
-                                const itemTypes = globalThis.__item_extract_itemTypes;
-                                const dump = globalThis.__item_extract_dump;
-                                return dump(itemTypes[index]);
-                            },
-                            i
-                        );
-                        if (value !== null) {
-                            ItemInfoList[id] = value;
-                        }
-                        setStatus(`[${i}/${length} ${((i / length) * 100).toFixed(1)}%] Item #${i} analyzed: ${id}`);
-                    } catch {
-                        warn(`Cannot evaluate code for item #${i}: ${err.message}`);
-                        corruptedCount += 1;
+                return globalThis.__item_extract_itemTypes.length;
+            };
+            const dump = ([start, end]) => {
+                const itemTypes = globalThis.__item_extract_itemTypes;
+                const dumpItem = globalThis.__item_extract_dump;
+                const result = [];
+                for (let i = start; i < end; i++) {
+                    const [id, value] = dumpItem(itemTypes[i]);
+                    if (value !== null) {
+                        result.push({ id, data: value });
                     }
                 }
-                if (corruptedCount > 0 && target.items) {
-                    const removedItems = Object.keys(target.items).filter((k) => !(k in ItemInfoList));
-                    for (const item of removedItems.splice(0, removedItems.length)) {
-                        try {
-                            const [id, value] = await wrapEvaluate(
-                                frame,
-                                (itemId) => {
-                                    const dump = globalThis.__item_extract_dump;
-                                    const itemType = Minecraft.ItemTypes.get(itemId);
-                                    if (!itemType) throw new Error(`Cannot find item ${itemId}`);
-                                    if (itemType.id !== itemId) throw new Error(`Item id mismatched: ${itemId}`);
-                                    return dump(itemType);
-                                },
-                                item
-                            );
-                            if (value !== null) {
-                                ItemInfoList[id] = value;
-                            }
-                            corruptedCount -= 1;
-                            setStatus(`Item fixed: ${id}`);
-                        } catch {
-                            warn(`Failed to fix item ${item}: ${err.message}`);
-                            removedItems.push(item);
-                        }
-                    }
-                    if (removedItems.length === corruptedCount) {
-                        removedItems.forEach((k) => {
-                            ItemInfoList[k] = target.items[k];
-                        });
-                    } else if (corruptedCount > 0) {
-                        warn(`Cannot fix ${corruptedCount} corrupted items: ${removedItems.length} item(s) removed`);
-                    }
-                }
-                setStatus('');
-            }
-            await wrapEvaluate(frame, () => {
+                return result;
+            };
+            const fix = (id) => {
+                const dumpItem = globalThis.__item_extract_dump;
+                const itemType = Minecraft.ItemTypes.get(id);
+                if (!itemType) throw new Error(`Cannot find item ${id}`);
+                if (itemType.id !== id) throw new Error(`Item id mismatched: ${id}`);
+                const [itemId, value] = dumpItem(itemType);
+                if (value === null) throw new Error(`Item ${id} is not dumpable`);
+                return { id: itemId, data: value };
+            };
+            const cleanup = () => {
                 delete globalThis.__item_extract_enchantments;
                 delete globalThis.__item_extract_itemTypes;
                 delete globalThis.__item_extract_dump;
-                return '"OK"';
+            };
+            const ItemInfoList = await batchedRemoteExtract({
+                frame,
+                category: 'item',
+                init,
+                dump,
+                fix,
+                cleanup,
+                cache: target.items ?? {}
             });
             const itemIds = Object.keys(ItemInfoList).sort();
             const itemTags = {};

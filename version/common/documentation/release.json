@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.30.5",
-    "__COMMITHASH__": "921fafb05c93abeae56c2f2868cd8f942bdbcc0f",
-    "__MESSAGE__": "v1.26.30.5",
+    "__VERSION__": "1.26.40.5",
+    "__COMMITHASH__": "736072450c26a7c67f07b1661f29d9a5ebaa14b1",
+    "__MESSAGE__": "Remove protocol schemas\n\nProtocol schemas can be found here: https://github.com/Mojang/bedrock-protocol-docs",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -608,6 +608,14 @@
                 {
                     "name": "Filters",
                     "sections": [
+                        {
+                            "name": "actor_has_item_with_enchantment_in_slot",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
                         {
                             "name": "actor_health",
                             "sections": [
@@ -1498,7 +1506,7 @@
                                     "name": "minecraft:behavior.charge_attack (See JSON Schema since 1.21.100)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.charge_held_item",
+                                    "name": "minecraft:behavior.charge_held_item (See JSON Schema since 1.26.40)",
                                 },
                                 {
                                     "name": "minecraft:behavior.circle_around_anchor (See JSON Schema since 1.21.100)",
@@ -1558,7 +1566,7 @@
                                     "name": "minecraft:behavior.drop_item_for (See JSON Schema since 1.26.10)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.eat_block",
+                                    "name": "minecraft:behavior.eat_block (See JSON Schema since 1.26.40)",
                                 },
                                 {
                                     "name": "minecraft:behavior.eat_carried_item",
@@ -1660,7 +1668,7 @@
                                     "name": "minecraft:behavior.jump_to_block (See JSON Schema since 1.26.20)",
                                 },
                                 {
-                                    "name": "minecraft:behavior.knockback_roar",
+                                    "name": "minecraft:behavior.knockback_roar (See JSON Schema since 1.26.40)",
                                 },
                                 {
                                     "name": "minecraft:behavior.lay_down",
@@ -1813,7 +1821,7 @@
                                     "name": "minecraft:behavior.random_swim",
                                 },
                                 {
-                                    "name": "minecraft:behavior.ranged_attack",
+                                    "name": "minecraft:behavior.ranged_attack (See JSON Schema since 1.26.40)",
                                 },
                                 {
                                     "name": "minecraft:behavior.receive_love",
@@ -2021,9 +2029,6 @@
                                     "name": "minecraft:annotation.break_door",
                                 },
                                 {
-                                    "name": "minecraft:annotation.open_door",
-                                },
-                                {
                                     "name": "minecraft:area_attack",
                                 },
                                 {
@@ -2177,12 +2182,6 @@
                                     "name": "minecraft:item_hopper",
                                 },
                                 {
-                                    "name": "minecraft:jump.dynamic",
-                                },
-                                {
-                                    "name": "minecraft:jump.static",
-                                },
-                                {
                                     "name": "minecraft:leashable",
                                 },
                                 {
@@ -2190,9 +2189,6 @@
                                 },
                                 {
                                     "name": "minecraft:looked_at",
-                                },
-                                {
-                                    "name": "minecraft:managed_wandering_trader",
                                 },
                                 {
                                     "name": "minecraft:mob_effect",
@@ -2249,13 +2245,40 @@
                                     "name": "minecraft:navigation.walk",
                                 },
                                 {
+                                    "name": "minecraft:on_death",
+                                },
+                                {
+                                    "name": "minecraft:on_friendly_anger",
+                                },
+                                {
+                                    "name": "minecraft:on_hurt",
+                                },
+                                {
+                                    "name": "minecraft:on_hurt_by_player",
+                                },
+                                {
+                                    "name": "minecraft:on_ignite",
+                                },
+                                {
+                                    "name": "minecraft:on_start_landing",
+                                },
+                                {
+                                    "name": "minecraft:on_start_takeoff",
+                                },
+                                {
+                                    "name": "minecraft:on_target_acquired",
+                                },
+                                {
+                                    "name": "minecraft:on_target_escape",
+                                },
+                                {
+                                    "name": "minecraft:on_wake_with_owner",
+                                },
+                                {
                                     "name": "minecraft:out_of_control",
                                 },
                                 {
                                     "name": "minecraft:peek",
-                                },
-                                {
-                                    "name": "minecraft:persistent",
                                 },
                                 {
                                     "name": "minecraft:physics",
@@ -2580,38 +2603,6 @@
                         },
                         {
                             "name": "Triggers",
-                            "sections": [
-                                {
-                                    "name": "minecraft:on_death",
-                                },
-                                {
-                                    "name": "minecraft:on_friendly_anger",
-                                },
-                                {
-                                    "name": "minecraft:on_hurt",
-                                },
-                                {
-                                    "name": "minecraft:on_hurt_by_player",
-                                },
-                                {
-                                    "name": "minecraft:on_ignite",
-                                },
-                                {
-                                    "name": "minecraft:on_start_landing",
-                                },
-                                {
-                                    "name": "minecraft:on_start_takeoff",
-                                },
-                                {
-                                    "name": "minecraft:on_target_acquired",
-                                },
-                                {
-                                    "name": "minecraft:on_target_escape",
-                                },
-                                {
-                                    "name": "minecraft:on_wake_with_owner",
-                                },
-                            ],
                         },
                     ],
                 },
@@ -2768,6 +2759,19 @@
                                 {
                                     "name": "Dripstone cluster only close to wall on flat ground.",
                                 },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:horizontal_tree_decoration_feature",
+                            "sections": [
+                                {
+                                    "name": "Place block in a random horizontal direction, disallowing adjacent neighbors and only placing the block on the bark side of a log",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:multi_block_feature",
+                            "sections": [
                                 {
                                     "name": "Feature schema",
                                 },
@@ -4504,6 +4508,7 @@
         "minecraft:orange_concrete": "",
         "minecraft:orange_concrete_powder": "",
         "minecraft:orange_glazed_terracotta": "",
+        "minecraft:orange_poplar_leaves": "",
         "minecraft:orange_shulker_box": "",
         "minecraft:orange_stained_glass": "",
         "minecraft:orange_stained_glass_pane": "",
@@ -4620,6 +4625,23 @@
         "minecraft:polished_tuff_slab": "",
         "minecraft:polished_tuff_stairs": "",
         "minecraft:polished_tuff_wall": "",
+        "minecraft:poplar_button": "",
+        "minecraft:poplar_door": "",
+        "minecraft:poplar_double_slab": "",
+        "minecraft:poplar_fence": "",
+        "minecraft:poplar_fence_gate": "",
+        "minecraft:poplar_hanging_sign": "",
+        "minecraft:poplar_log": "",
+        "minecraft:poplar_planks": "",
+        "minecraft:poplar_pressure_plate": "",
+        "minecraft:poplar_sapling": "",
+        "minecraft:poplar_shelf": "",
+        "minecraft:poplar_slab": "",
+        "minecraft:poplar_stairs": "",
+        "minecraft:poplar_standing_sign": "",
+        "minecraft:poplar_trapdoor": "",
+        "minecraft:poplar_wall_sign": "",
+        "minecraft:poplar_wood": "",
         "minecraft:poppy": "",
         "minecraft:portal": "",
         "minecraft:potatoes": "",
@@ -4678,6 +4700,7 @@
         "minecraft:red_nether_brick_slab": "",
         "minecraft:red_nether_brick_stairs": "",
         "minecraft:red_nether_brick_wall": "",
+        "minecraft:red_poplar_leaves": "",
         "minecraft:red_sand": "",
         "minecraft:red_sandstone": "",
         "minecraft:red_sandstone_double_slab": "",
@@ -4793,6 +4816,7 @@
         "minecraft:stone_stairs": "",
         "minecraft:stonecutter": "",
         "minecraft:stonecutter_block": "",
+        "minecraft:straw_bed": "",
         "minecraft:stripped_acacia_log": "",
         "minecraft:stripped_acacia_wood": "",
         "minecraft:stripped_bamboo_block": "",
@@ -4812,6 +4836,8 @@
         "minecraft:stripped_oak_wood": "",
         "minecraft:stripped_pale_oak_log": "",
         "minecraft:stripped_pale_oak_wood": "",
+        "minecraft:stripped_poplar_log": "",
+        "minecraft:stripped_poplar_wood": "",
         "minecraft:stripped_spruce_log": "",
         "minecraft:stripped_spruce_wood": "",
         "minecraft:stripped_warped_hyphae": "",
@@ -5004,6 +5030,7 @@
         "minecraft:yellow_concrete": "",
         "minecraft:yellow_concrete_powder": "",
         "minecraft:yellow_glazed_terracotta": "",
+        "minecraft:yellow_poplar_leaves": "",
         "minecraft:yellow_shulker_box": "",
         "minecraft:yellow_stained_glass": "",
         "minecraft:yellow_stained_glass_pane": "",
@@ -5041,6 +5068,7 @@
         "cow": "0x00004875 (0x11)",
         "creaking": "0x00002962 (0x146)",
         "creeper": "0x00002849 (0x33)",
+        "cushion": "0x00000154 (0x154)",
         "dolphin": "0x00008991 (0x31)",
         "donkey": "0x02118424 (0x24)",
         "dragon_fireball": "0x04194383 (0x79)",
@@ -5120,7 +5148,7 @@
         "squid": "0x00008977 (0x17)",
         "stray": "0x01116974 (0x46)",
         "strider": "0x00004989 (0x125)",
-        "sulfur_cube": "0x00002969 (0x153)",
+        "sulfur_cube": "0x00000921 (0x153)",
         "tadpole": "0x00009093 (0x133)",
         "thrown_trident": "0x12582985 (0x73)",
         "tnt": "0x00000065 (0x65)",
@@ -6098,6 +6126,7 @@
         "minecraft:weight": "This component allows players to give a priority to how often that mob should spawn. Mobs with lower weight values have a higher chance to spawn than mobs with higher weight values.",
     },
     "entityFilter": {
+        "actor_has_item_with_enchantment_in_slot": "Tests that an actor has an item equipped with a given enchantment.",
         "actor_health": "Tests the health of the subject.",
         "all_slots_empty": "Returns true when the designated equipment location for the subject entity is completely empty.",
         "any_slot_empty": "Returns true when the designated equipment location for the subject entity has any empty slot.",
@@ -6498,7 +6527,7 @@
                 },
             ],
         },
-        "minecraft:behavior.charge_held_item": {
+        "minecraft:behavior.charge_held_item (See JSON Schema since 1.26.40)": {
             "description": "Allows an entity to charge and use their held item.",
             "children": [
                 {
@@ -7220,14 +7249,14 @@
                 },
             ],
         },
-        "minecraft:behavior.eat_block": {
+        "minecraft:behavior.eat_block (See JSON Schema since 1.26.40)": {
             "description": "Allows the entity to consume a block, replace the eaten block with another block, and trigger an event as a result.",
             "children": [
                 {
                     "name": "eat_and_replace_block_pairs",
                     "type": "Array",
-                    "defaultValue": "N/A",
-                    "description": "A collection of pairs of blocks; the first (\"eat_block\")is the block the entity should eat, the second (\"replace_block\") is the block that should replace the eaten block.",
+                    "defaultValue": "[{\"grass\", \"dirt\"}, {\"short_grass\", \"air\"}, {\"fern\", \"air\"}]",
+                    "description": "A collection of pairs of blocks; the first (\"eat_block\") is the block the entity should eat, the second (\"replace_block\") is the block that should replace the eaten block.",
                 },
                 {
                     "name": "on_eat",
@@ -8555,7 +8584,7 @@
                 },
             ],
         },
-        "minecraft:behavior.knockback_roar": {
+        "minecraft:behavior.knockback_roar (See JSON Schema since 1.26.40)": {
             "description": "Allows the mob to perform a damaging knockback that affects all nearby entities.",
             "children": [
                 {
@@ -8567,7 +8596,7 @@
                 {
                     "name": "cooldown_time",
                     "type": "Decimal",
-                    "defaultValue": "0.10",
+                    "defaultValue": "0.1",
                     "description": "Time (in seconds) the mob has to wait before using the goal again.",
                 },
                 {
@@ -10816,7 +10845,7 @@
                 },
             ],
         },
-        "minecraft:behavior.ranged_attack": {
+        "minecraft:behavior.ranged_attack (See JSON Schema since 1.26.40)": {
             "description": "Allows an entity to attack by using ranged shots. \"charge_shoot_trigger\" must be greater than 0 to enable charged up burst-shot attacks. Requires minecraft:shooter to define projectile behaviour.",
             "children": [
                 {
@@ -12811,14 +12840,14 @@
                 {
                     "name": "cooldown_after_being_attacked",
                     "type": "Integer",
-                    "defaultValue": "0",
+                    "defaultValue": "10",
                     "description": "Duration, in seconds, for which mob won't admire items if it was hurt",
                 },
                 {
                     "name": "duration",
                     "type": "Integer",
                     "defaultValue": "10",
-                    "description": "Duration, in seconds, that the mob is pacified.",
+                    "description": "Duration, in seconds, that the mob admires an item.",
                 },
             ],
         },
@@ -14740,32 +14769,6 @@
                 },
             ],
         },
-        "minecraft:jump.dynamic": {
-            "description": "Defines a dynamic type jump control that will change jump properties based on the speed modifier of the mob. Requires `minecraft:movement.skip` to be used.",
-            "children": [
-                {
-                    "name": "fast_skip_data",
-                    "type": "",
-                    "defaultValue": "",
-                },
-                {
-                    "name": "regular_skip_data",
-                    "type": "",
-                    "defaultValue": "",
-                },
-            ],
-        },
-        "minecraft:jump.static": {
-            "description": "Gives the entity the ability to jump.",
-            "children": [
-                {
-                    "name": "jump_power",
-                    "type": "Decimal",
-                    "defaultValue": "0.42",
-                    "description": "The initial vertical velocity for the jump.",
-                },
-            ],
-        },
         "minecraft:leashable": {
             "description": "Allows this entity to be leashed and defines the conditions and events for this entity when is leashed.",
             "children": [
@@ -15979,6 +15982,236 @@
                 },
             ],
         },
+        "minecraft:on_death": {
+            "description": "Adds a trigger to call on this entity's death.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_friendly_anger": {
+            "description": "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_hurt": {
+            "description": "Adds a trigger to call when this entity takes damage.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_hurt_by_player": {
+            "description": "Adds a trigger to call when this entity is attacked by the player.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_ignite": {
+            "description": "Adds a trigger to call when this entity is set on fire.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_start_landing": {
+            "description": "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_start_takeoff": {
+            "description": "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_target_acquired": {
+            "description": "Adds a trigger to call when this entity finds a target.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_target_escape": {
+            "description": "Adds a trigger to call when this entity loses the target it currently has.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
+        "minecraft:on_wake_with_owner": {
+            "description": "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
+            "children": [
+                {
+                    "name": "event",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "The event to run when the conditions for this trigger are met.",
+                },
+                {
+                    "name": "filters",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "The list of conditions for this trigger to execute.",
+                },
+                {
+                    "name": "target",
+                    "type": "String",
+                    "defaultValue": "self",
+                    "description": "The target of the event.",
+                },
+            ],
+        },
         "minecraft:peek": {
             "description": "Defines the entity's 'peek' behavior, defining the events that should be called during it.",
             "children": [
@@ -16055,211 +16288,204 @@
             ],
         },
         "minecraft:projectile": {
-            "description": "Allows the entity to be a thrown entity.",
+            "description": "Turns the entity into a projectile: a thrown or shot entity that flies along a ballistic arc and reacts when it impacts a block, a fluid, or another entity.",
             "children": [
+                {
+                    "name": "anchor",
+                    "type": "Integer",
+                    "defaultValue": "0",
+                    "description": "Reference point on the shooter used to position the projectile at spawn: `0` = origin (feet), `1` = eye height, `2` = middle of the bounding box.",
+                },
                 {
                     "name": "angle_offset",
                     "type": "Decimal",
                     "defaultValue": "0",
-                    "description": "Determines the angle at which the projectile is thrown",
+                    "description": "Additional upwards pitch (in degrees) applied to the shooter's aim direction at launch. Negative values aim downward.",
                 },
                 {
                     "name": "catch_fire",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the entity hit will be set on fire",
+                    "description": "Legacy default for whether the projectile sets the entity hit on fire. Prefer the `catch_fire` on-hit subcomponent.",
                 },
                 {
                     "name": "crit_particle_on_hurt",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the projectile will produce additional particles when a critical hit happens",
+                    "description": "If `true`, critical-hit particles are spawned on the projectile when it is struck.",
                 },
                 {
                     "name": "destroy_on_hurt",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will be destroyed when hit",
-                },
-                {
-                    "name": "filter",
-                    "type": "String",
-                    "defaultValue": "",
-                    "description": "Entity Definitions defined here can't be hurt by the projectile",
-                },
-                {
-                    "name": "fire_affected_by_griefing",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, whether the projectile causes fire is affected by the mob griefing game rule",
+                    "description": "If `true`, the projectile is removed from the world when struck.",
                 },
                 {
                     "name": "gravity",
                     "type": "Decimal",
                     "defaultValue": "0.05",
-                    "description": "The gravity applied to this entity when thrown. The higher the value, the faster the entity falls",
+                    "description": "Downward acceleration (blocks per tick squared) applied each tick while in flight. Higher values make the projectile fall faster.",
+                },
+                {
+                    "name": "hit_ground_sound",
+                    "type": "String",
+                    "defaultValue": "",
+                    "description": "Identifier of the sound to play when the projectile hits a block. Defaults to `hit_sound` when empty.",
                 },
                 {
                     "name": "hit_nearest_passenger",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, when hitting a vehicle, and there's at least one passenger in the vehicle, the damage will be dealt to the passenger closest to the projectile impact point. If there are no passengers, this setting does nothing.",
+                    "description": "If `true`, when the projectile hits a vehicle with at least one passenger, the on-hit behavior is applied to the passenger closest to the impact point instead of the vehicle itself.",
                 },
                 {
                     "name": "hit_sound",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The sound that plays when the projectile hits something",
+                    "description": "Identifier of the sound to play when the projectile hits an entity. Also used for block hits when `hit_ground_sound` is not specified.",
                 },
                 {
                     "name": "homing",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the projectile homes in to the nearest entity",
+                    "description": "If `true`, the projectile steers towards an active target while in flight.",
                 },
                 {
                     "name": "ignored_entities",
                     "type": "Array",
                     "defaultValue": "",
-                    "description": "[EXPERIMENTAL] An array of strings defining the types of entities that this entity does not collide with.",
+                    "description": "Array of entity identifiers that the projectile will pass through without registering a hit.",
                 },
                 {
                     "name": "inertia",
                     "type": "Decimal",
                     "defaultValue": "0.99",
-                    "description": "The fraction of the projectile's speed maintained every frame while traveling in air",
+                    "description": "Fraction of the projectile's velocity preserved each tick while traveling through air. Values below `1.0` cause it to slow down over time.",
                 },
                 {
                     "name": "is_dangerous",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the projectile will be treated as dangerous to the players",
+                    "description": "If `true`, the projectile is flagged as dangerous, affecting AI reactions and certain client-side behaviors.",
                 },
                 {
                     "name": "isolated_physics",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, this projectile will not be affected by outside forces such as friction and drag.",
-                },
-                {
-                    "name": "knockback",
-                    "type": "Boolean",
-                    "defaultValue": "true",
-                    "description": "If true, the projectile will knock back the entity it hits",
+                    "description": "If `true`, the projectile uses a dedicated ballistic physics path and ignores generic actor movement systems (friction, drag, etc.). Recommended for custom projectiles.",
                 },
                 {
                     "name": "lightning",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, the entity hit will be struck by lightning",
+                    "description": "If `true`, the projectile can channel a lightning bolt when it hits an entity during a thunderstorm.",
                 },
                 {
                     "name": "liquid_inertia",
                     "type": "Decimal",
                     "defaultValue": "0.6",
-                    "description": "The fraction of the projectile's speed maintained every frame while traveling in water",
+                    "description": "Fraction of the projectile's velocity preserved each tick while traveling through a fluid.",
                 },
                 {
                     "name": "multiple_targets",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, the projectile can hit multiple entities per flight",
+                    "description": "If `true`, the projectile can hit more than one entity over the course of its flight; if `false`, it stops at the first entity it hits.",
                 },
                 {
                     "name": "offset",
                     "type": "Vector [a, b, c]",
-                    "defaultValue": "[0, 0, 0]",
-                    "description": "The offset from the entity's anchor where the projectile will spawn",
+                    "defaultValue": "Vec3(0,0,0)",
+                    "description": "Offset, relative to the `anchor`, at which the projectile is spawned when fired by the shooter.",
                 },
                 {
                     "name": "on_fire_time",
                     "type": "Decimal",
                     "defaultValue": "5",
-                    "description": "Time in seconds that the entity hit will be on fire for",
+                    "description": "Duration in seconds for which an entity set on fire by this projectile remains burning. Applied both by the legacy top-level `catch_fire` flag and by the `catch_fire` on-hit subcomponent.",
+                },
+                {
+                    "name": "on_hit",
+                    "type": "JSON Object",
+                    "defaultValue": "",
                 },
                 {
                     "name": "owner_launch_immunity_ticks",
                     "type": "Integer",
                     "defaultValue": "5",
-                    "description": "Number of ticks after launch during which the projectile cannot hit its owner",
+                    "description": "Number of ticks immediately after launch during which the projectile cannot hit its own shooter.",
                 },
                 {
                     "name": "particle",
                     "type": "String",
                     "defaultValue": "iconcrack",
-                    "description": "Particle to use upon collision",
+                    "description": "Particle type associated with the projectile, exposed to the Script API as `hitParticle`. Does not spawn particles on its own; use the `particle_on_hit` on-hit subcomponent to emit particles at the impact location.",
                 },
                 {
                     "name": "potion_effect",
                     "type": "Integer",
                     "defaultValue": "-1",
-                    "description": "Defines the effect the arrow will apply to the entity it hits",
+                    "description": "Default potion aux value associated with the projectile. Normally set programmatically by potion items; rarely useful at authoring time. A value matching the water potion is required for the `douse_fire` on-hit subcomponent to extinguish fires.",
                 },
                 {
                     "name": "power",
                     "type": "Decimal",
                     "defaultValue": "1.3",
-                    "description": "Determines the velocity of the projectile",
+                    "description": "Initial speed (in blocks per tick) at which the projectile is launched.",
                 },
                 {
                     "name": "reflect_immunity",
                     "type": "Decimal",
                     "defaultValue": "0",
-                    "description": "During the specified time, in seconds, the projectile cannot be reflected by hitting it",
+                    "description": "Duration in seconds after launch during which the projectile cannot be reflected by being struck.",
                 },
                 {
                     "name": "reflect_on_hurt",
                     "type": "Boolean",
                     "defaultValue": "false",
-                    "description": "If true, this entity will be reflected back when hit",
-                },
-                {
-                    "name": "semi_random_diff_damage",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, damage will be randomized based on damage and speed",
+                    "description": "If `true`, the projectile reverses direction when struck, reflecting back towards the attacker.",
                 },
                 {
                     "name": "shoot_sound",
                     "type": "String",
                     "defaultValue": "",
-                    "description": "The sound that plays when the projectile is shot",
+                    "description": "Identifier of the sound to play when the projectile is fired.",
                 },
                 {
                     "name": "shoot_target",
                     "type": "Boolean",
                     "defaultValue": "true",
-                    "description": "If true, the projectile will be shot towards the target of the entity firing it",
+                    "description": "If `true`, the projectile is aimed at the shooter's current target (when one exists) rather than straight ahead.",
                 },
                 {
                     "name": "should_bounce",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, the projectile will bounce upon hit",
-                },
-                {
-                    "name": "splash_potion",
-                    "type": "Boolean",
-                    "defaultValue": "false",
-                    "description": "If true, the projectile will be treated like a splash potion",
+                    "type": "Enumerator",
+                    "defaultValue": "no",
+                    "description": "Controls whether the projectile bounces off entities on impact. `no` disables bouncing, `if_invulnerable` bounces only off invulnerable entities, and `if_no_damage_dealt` bounces whenever no damage is dealt to the target.",
                 },
                 {
                     "name": "splash_range",
                     "type": "Decimal",
                     "defaultValue": "4",
-                    "description": "Radius in blocks of the 'splash' effect",
+                    "description": "Splash radius (in blocks) used when applying potion effects via the splash/lingering potion code path.",
+                },
+                {
+                    "name": "stop_on_hurt",
+                    "type": "Boolean",
+                    "defaultValue": "false",
+                    "description": "If `true`, the projectile has its velocity zeroed out when struck.",
                 },
                 {
                     "name": "uncertainty_base",
                     "type": "Decimal",
                     "defaultValue": "0",
-                    "description": "The base accuracy. Accuracy is determined by the formula uncertaintyBase - difficultyLevel * uncertaintyMultiplier",
+                    "description": "Base inaccuracy added to the launch direction. The total inaccuracy is `uncertainty_base - difficultyLevel * uncertainty_multiplier`.",
                 },
                 {
                     "name": "uncertainty_multiplier",
                     "type": "Decimal",
                     "defaultValue": "0",
-                    "description": "Determines how much difficulty affects accuracy. Accuracy is determined by the formula uncertaintyBase - difficultyLevel * uncertaintyMultiplier",
+                    "description": "Per-difficulty-level reduction in inaccuracy. See `uncertainty_base` for the full formula.",
                 },
             ],
         },
@@ -17281,7 +17507,7 @@
             ],
         },
         "minecraft:ignore_cannot_be_attacked": {
-            "description": "When set, blocks entities from attacking the owner entity unless they have the \"minecraft:ignore_cannot_be_attacked\" component.",
+            "description": "Allows the owner entity to ignore the \"minecraft:cannot_be_attacked\" component on entities that fulfill the filter.",
             "children": [
                 {
                     "name": "filters",
@@ -17523,18 +17749,6 @@
             ],
         },
     },
-    "entityTrigger": {
-        "minecraft:on_death": "Adds a trigger to call on this entity's death.",
-        "minecraft:on_friendly_anger": "Adds a trigger that will run when a nearby entity of the same type as this entity becomes Angry.",
-        "minecraft:on_hurt": "Adds a trigger to call when this entity takes damage.",
-        "minecraft:on_hurt_by_player": "Adds a trigger to call when this entity is attacked by the player.",
-        "minecraft:on_ignite": "Adds a trigger to call when this entity is set on fire.",
-        "minecraft:on_start_landing": "Only usable by the Ender Dragon. Adds a trigger to call when this entity lands.",
-        "minecraft:on_start_takeoff": "Only usable by the Ender Dragon. Adds a trigger to call when this entity starts flying.",
-        "minecraft:on_target_acquired": "Adds a trigger to call when this entity finds a target.",
-        "minecraft:on_target_escape": "Adds a trigger to call when this entity loses the target it currently has.",
-        "minecraft:on_wake_with_owner": "Adds a trigger to call when this pet's owner awakes after sleeping with the pet.",
-    },
     "featureType": {
         "minecraft:aggregate_feature": "'minecraft:aggregate_feature' places a collection of features in an arbitary order. All features in the collection use the same input position. Features should not depend on each other, as there is no guarantee on the order the features will be placed.",
         "minecraft:sequence_feature": "'minecraft:sequence_feature' places a collection of features sequentially, in the order they appear in data. The output position of the previous feature is used as the input position for the next. For example, a tree feature is placed at (0, 0, 0) and places blocks up to (0, 10, 0). The next feature in the sequence begins at (0, 10, 0).",
@@ -17562,6 +17776,8 @@
         "minecraft:vegetation_patch_feature": "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
         "minecraft:weighted_random_feature": "'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.",
         "minecraft:height_difference_filter_feature": "'minecraft:height_difference_filter_feature' filters away positions based on the heightmap around the placement position.The filter will check for surface blocks in each cardinal direction within the `search_radius`. Each block will be checked against all given conditions.",
+        "minecraft:horizontal_tree_decoration_feature": "'minecraft:horizontal_tree_decoration_feature' places a block in a random horizontal facing direction",
+        "minecraft:multi_block_feature": "'minecraft:multi_block_feature' places a multi-block in the world as a biome decoration feature. A multi-block must be defined with the 'minecraft:multi_block' trait. The required 'places_block' field supports a single block, it must be a multi-block and it must be be the first part of a multi-block i.e. the 'minecraft:multi_block_part' state must have a value of 0. The optional 'may_replace' field is an allowlists which specifies what blocks each part of the multi-block can replace. If this field is omitted, the multi-block parts can be placed anywhere. However, they may not replace other multi-block parts. The optional 'randomize_rotation' field will randomize the multi-blocks cardinal orientation. If this field is enabled then the multi-block must have the cardinal direction state. The optional 'enforce_placement_rules' field will check if each part of the multi-block may be placed on top of existing blocks. If the multi-block defines a 'minecraft:placement_filter' component then each part is also checked against the blocks defined in that component.",
     },
     "molangMath": {
         "math.abs(value)": "Absolute value of value",

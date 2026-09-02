@@ -593,7 +593,7 @@ const pageAnalyzer = [
         name: 'entityTrigger',
         documentation: 'Entities',
         path: ['Server Entity Documentation', 'Triggers'],
-        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.26.40.20')
+        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.26.40.5')
     }),
     createSectionSummaryAnalyzer({
         name: 'featureType',

@@ -146,6 +146,10 @@ export function notify(message) {
 }
 
 export async function pause(message) {
+    if (!process.stdin.isTTY) {
+        log(`Skip pause: ${message}`);
+        return;
+    }
     let timeout = setTimeout(() => {
         timeout = null;
         notify(message);
