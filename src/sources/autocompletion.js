@@ -731,6 +731,9 @@ export default async function analyzeAutocompletionEnumsCached(cx) {
     if (support.controlSchemeCommand(cx)) {
         postJob('control schemes', '/controlscheme @s set ');
     }
+    if (support.locateCommandPoiSubCommand(cx)) {
+        postJob('pois', '/locate poi ');
+    }
 
     if (support.eduCommands(cx)) {
         postJob('abilities', '/ability @s ', ['[']);

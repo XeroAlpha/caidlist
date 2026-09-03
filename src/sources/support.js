@@ -194,6 +194,14 @@ export function controlSchemeCommand({ coreVersion, branch }) {
 }
 controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> set <control scheme: controlscheme>']];
 
+export function locateCommandPoiSubCommand({ coreVersion, branch }) {
+    if (branch.id === 'experiment') {
+        return testMinecraftVersionInRange(coreVersion, '1.26.50.26', '*');
+    }
+    return false;
+}
+locateCommandPoiSubCommand.associatedCommands = [['/locate poi <poi_type: poi type>', '/locate poi <tags: poi tag>']];
+
 export function inputBoxRequiresManualFocus({ coreVersion }) {
     return (
         testMinecraftVersionInRange(coreVersion, '1.21.120.25', '1.21.130.22') &&

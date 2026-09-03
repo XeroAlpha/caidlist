@@ -60,17 +60,17 @@ export const packageVersions = {
     // 正式版
     release: {
         // 安装包版本
-        version: '1.26.40.5',
+        version: '1.26.44.3',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.26.40.5.apks',
+        path: 'H:\\BedrockVersions\\Latest\\1.26.44.3.apks',
         config: smallestGUIOptions
     },
     // 测试版/预览版
     beta: {
         // 安装包版本
-        version: '1.26.50.25',
+        version: '1.26.50.26',
         // 安装包路径
-        path: 'H:\\BedrockVersions\\Latest\\1.26.50.25.apks',
+        path: 'H:\\BedrockVersions\\Latest\\1.26.50.26.apks',
         config: {
             ...smallestGUIOptions,
             useWin10Edition: true
@@ -88,7 +88,7 @@ export const packageVersions = {
     // 预览版（Windows 端）
     preview_win: {
         // 应用版本
-        version: '1.26.50.25',
+        version: '1.26.50.26',
         config: {
             devBehaviorPackPath: `${process.env.APPDATA}\\Minecraft Bedrock Preview\\Users\\Shared\\games\\com.mojang\\development_behavior_packs`
         }
