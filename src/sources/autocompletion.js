@@ -354,7 +354,7 @@ async function analyzeCommandAutocompletionFast(
     tabWhenChanged = false;
     await press(scrcpy, 'KEYCODE_ESCAPE');
     await press(scrcpy, 'KEYCODE_ESCAPE');
-    await retryUntilComplete(50 + droppedCount, 0, async () => {
+    await retryUntilComplete(50 + Math.max(0, droppedCount), 0, async () => {
         try {
             const recogizedResult = await readStreamOnce(imagePipeline, 2000);
             const nextResult = guessTruncatedString(recogizedResult, command);
