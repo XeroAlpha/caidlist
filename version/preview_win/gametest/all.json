@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.26.50.27",
+    "packageVersion": "1.26.60.21",
     "protocolVersion": 10,
     "scopeTree": {
         "type": "object",
@@ -7240,6 +7240,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "RecipeCrafting": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:recipe_crafting",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "RecordPlayer": {
                                         "value": {
                                             "type": "string",
@@ -8484,6 +8491,64 @@
                                                 "constructor": {
                                                     "value": {
                                                         "ref": "Minecraft.BlockPrecipitationInteractionsComponent",
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Minecraft.BlockComponent.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                                "prototype": {
+                                    "ref": "Minecraft.BlockComponent",
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "BlockRecipeCraftingComponent": {
+                            "value": {
+                                "type": "function",
+                                "name": "BlockRecipeCraftingComponent",
+                                "native": true,
+                                "length": 0,
+                                "enumerableProperties": {
+                                    "componentId": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "minecraft:recipe_crafting",
+                                        },
+                                        "readOnly": true,
+                                    },
+                                },
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.BlockRecipeCraftingComponent",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "getCraftingContext": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "players": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
                                                     },
                                                 },
                                             },
@@ -23717,6 +23782,44 @@
                             },
                             "configurable": false,
                         },
+                        "InvalidRecipeError": {
+                            "value": {
+                                "type": "function",
+                                "name": "InvalidRecipeError",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.InvalidRecipeError",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "recipeId": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "prototype": {
+                                                "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "InvalidStructureError": {
                             "value": {
                                 "type": "function",
@@ -29646,6 +29749,100 @@
                             },
                             "configurable": false,
                         },
+                        "PlayerCraftRecipeAfterEvent": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerCraftRecipeAfterEvent",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "enumerableProperties": {
+                                                "block": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "itemStack": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "player": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerCraftRecipeAfterEvent",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "PlayerCraftRecipeAfterEventSignal": {
+                            "value": {
+                                "type": "function",
+                                "name": "PlayerCraftRecipeAfterEventSignal",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.PlayerCraftRecipeAfterEventSignal",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "subscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "unsubscribe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
                         "PlayerCursorInventoryComponent": {
                             "value": {
                                 "type": "function",
@@ -33494,6 +33691,88 @@
                                             },
                                             "prototype": {
                                                 "ref": "Error.prototype",
+                                            },
+                                        },
+                                        "readOnly": true,
+                                        "configurable": false,
+                                    },
+                                },
+                            },
+                            "configurable": false,
+                        },
+                        "RecipeCraftingContext": {
+                            "value": {
+                                "type": "function",
+                                "name": "RecipeCraftingContext",
+                                "native": true,
+                                "length": 0,
+                                "properties": {
+                                    "prototype": {
+                                        "value": {
+                                            "type": "object",
+                                            "properties": {
+                                                "constructor": {
+                                                    "value": {
+                                                        "ref": "Minecraft.RecipeCraftingContext",
+                                                    },
+                                                },
+                                            },
+                                            "enumerableProperties": {
+                                                "getInputItem": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "getOutputItem": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "inputSlotCount": {
+                                                    "value": {
+                                                        "type": "undefined",
+                                                    },
+                                                    "readOnly": true,
+                                                    "configurable": false,
+                                                },
+                                                "isValid": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setInputItem": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "setSelectedRecipe": {
+                                                    "value": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "validRecipes": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
                                             },
                                         },
                                         "readOnly": true,
@@ -37892,6 +38171,14 @@
                                                     },
                                                 },
                                                 "playerCancelBreakingBlock": {
+                                                    "getter": {
+                                                        "type": "function",
+                                                        "name": "",
+                                                        "native": true,
+                                                        "length": 0,
+                                                    },
+                                                },
+                                                "playerCraftRecipe": {
                                                     "getter": {
                                                         "type": "function",
                                                         "name": "",
@@ -47066,6 +47353,7 @@
         "Minecraft.BlockComponentTypes.Movable",
         "Minecraft.BlockComponentTypes.Piston",
         "Minecraft.BlockComponentTypes.PrecipitationInteractions",
+        "Minecraft.BlockComponentTypes.RecipeCrafting",
         "Minecraft.BlockComponentTypes.RecordPlayer",
         "Minecraft.BlockComponentTypes.RedstoneProducer",
         "Minecraft.BlockComponentTypes.Sign",
@@ -47234,6 +47522,14 @@
         "Minecraft.BlockPrecipitationInteractionsComponent.prototype.constructor",
         "Minecraft.BlockPrecipitationInteractionsComponent.prototype.isSnowLoggable",
         "Minecraft.BlockPrecipitationInteractionsComponent.prototype.obstructsRain",
+        "Minecraft.BlockRecipeCraftingComponent",
+        "Minecraft.BlockRecipeCraftingComponent.[[Prototype]]",
+        "Minecraft.BlockRecipeCraftingComponent.componentId",
+        "Minecraft.BlockRecipeCraftingComponent.prototype",
+        "Minecraft.BlockRecipeCraftingComponent.prototype.[[Prototype]]",
+        "Minecraft.BlockRecipeCraftingComponent.prototype.constructor",
+        "Minecraft.BlockRecipeCraftingComponent.prototype.getCraftingContext",
+        "Minecraft.BlockRecipeCraftingComponent.prototype.players.[[Get]]",
         "Minecraft.BlockRecordPlayerComponent",
         "Minecraft.BlockRecordPlayerComponent.[[Prototype]]",
         "Minecraft.BlockRecordPlayerComponent.componentId",
@@ -49267,6 +49563,11 @@
         "Minecraft.InvalidPotionEffectTypeError.prototype",
         "Minecraft.InvalidPotionEffectTypeError.prototype.[[Prototype]]",
         "Minecraft.InvalidPotionEffectTypeError.prototype.constructor",
+        "Minecraft.InvalidRecipeError",
+        "Minecraft.InvalidRecipeError.prototype",
+        "Minecraft.InvalidRecipeError.prototype.[[Prototype]]",
+        "Minecraft.InvalidRecipeError.prototype.constructor",
+        "Minecraft.InvalidRecipeError.prototype.recipeId.[[Get]]",
         "Minecraft.InvalidStructureError",
         "Minecraft.InvalidStructureError.prototype",
         "Minecraft.InvalidStructureError.prototype.[[Prototype]]",
@@ -50043,6 +50344,17 @@
         "Minecraft.PlayerCancelBreakingBlockAfterEventSignal.prototype.constructor",
         "Minecraft.PlayerCancelBreakingBlockAfterEventSignal.prototype.subscribe",
         "Minecraft.PlayerCancelBreakingBlockAfterEventSignal.prototype.unsubscribe",
+        "Minecraft.PlayerCraftRecipeAfterEvent",
+        "Minecraft.PlayerCraftRecipeAfterEvent.prototype",
+        "Minecraft.PlayerCraftRecipeAfterEvent.prototype.block.[[Get]]",
+        "Minecraft.PlayerCraftRecipeAfterEvent.prototype.constructor",
+        "Minecraft.PlayerCraftRecipeAfterEvent.prototype.itemStack.[[Get]]",
+        "Minecraft.PlayerCraftRecipeAfterEvent.prototype.player.[[Get]]",
+        "Minecraft.PlayerCraftRecipeAfterEventSignal",
+        "Minecraft.PlayerCraftRecipeAfterEventSignal.prototype",
+        "Minecraft.PlayerCraftRecipeAfterEventSignal.prototype.constructor",
+        "Minecraft.PlayerCraftRecipeAfterEventSignal.prototype.subscribe",
+        "Minecraft.PlayerCraftRecipeAfterEventSignal.prototype.unsubscribe",
         "Minecraft.PlayerCursorInventoryComponent",
         "Minecraft.PlayerCursorInventoryComponent.[[Prototype]]",
         "Minecraft.PlayerCursorInventoryComponent.componentId",
@@ -50528,6 +50840,16 @@
         "Minecraft.RawMessageError.prototype",
         "Minecraft.RawMessageError.prototype.[[Prototype]]",
         "Minecraft.RawMessageError.prototype.constructor",
+        "Minecraft.RecipeCraftingContext",
+        "Minecraft.RecipeCraftingContext.prototype",
+        "Minecraft.RecipeCraftingContext.prototype.constructor",
+        "Minecraft.RecipeCraftingContext.prototype.getInputItem",
+        "Minecraft.RecipeCraftingContext.prototype.getOutputItem",
+        "Minecraft.RecipeCraftingContext.prototype.inputSlotCount",
+        "Minecraft.RecipeCraftingContext.prototype.isValid.[[Get]]",
+        "Minecraft.RecipeCraftingContext.prototype.setInputItem",
+        "Minecraft.RecipeCraftingContext.prototype.setSelectedRecipe",
+        "Minecraft.RecipeCraftingContext.prototype.validRecipes.[[Get]]",
         "Minecraft.Scoreboard",
         "Minecraft.Scoreboard.prototype",
         "Minecraft.Scoreboard.prototype.addObjective",
@@ -51099,6 +51421,7 @@
         "Minecraft.WorldAfterEvents.prototype.playerBreakBlock.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerButtonInput.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerCancelBreakingBlock.[[Get]]",
+        "Minecraft.WorldAfterEvents.prototype.playerCraftRecipe.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerDimensionChange.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerEmote.[[Get]]",
         "Minecraft.WorldAfterEvents.prototype.playerGameModeChange.[[Get]]",
@@ -59078,7 +59401,56 @@
             "localizationKey": "tile.chorus_flower.name",
         },
         "minecraft:chorus_plant": {
-            "properties": [],
+            "properties": [
+                {
+                    "name": "minecraft:connection_down",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_east",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_north",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_south",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_up",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_west",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
             "invalidStates": [],
             "itemId": "<same>",
             "localizationKey": "tile.chorus_plant.name",
@@ -66193,6 +66565,46 @@
                         15,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "minecraft:connection_east",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_north",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_south",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_up",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "minecraft:connection_west",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
                 },
             ],
             "invalidStates": [],
@@ -83859,6 +84271,24 @@
         "minecraft:redstone_wire": {
             "properties": [
                 {
+                    "name": "redstone_east",
+                    "validValues": [
+                        "none",
+                        "side",
+                        "up",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "redstone_north",
+                    "validValues": [
+                        "none",
+                        "side",
+                        "up",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
                     "name": "redstone_signal",
                     "validValues": [
                         0,
@@ -83879,6 +84309,24 @@
                         15,
                     ],
                     "defaultValue": 0,
+                },
+                {
+                    "name": "redstone_south",
+                    "validValues": [
+                        "none",
+                        "side",
+                        "up",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "redstone_west",
+                    "validValues": [
+                        "none",
+                        "side",
+                        "up",
+                    ],
+                    "defaultValue": "none",
                 },
             ],
             "invalidStates": [],
@@ -94880,7 +95328,9 @@
                     false,
                     true,
                 ],
-                "defaultValue": {},
+                "defaultValue": {
+                    "minecraft:chorus_plant": false,
+                },
             },
         ],
         "minecraft:connection_east": [
@@ -94897,11 +95347,13 @@
                     "minecraft:blue_stained_glass_pane": false,
                     "minecraft:brown_stained_glass_pane": false,
                     "minecraft:cherry_fence": false,
+                    "minecraft:chorus_plant": false,
                     "minecraft:copper_bars": false,
                     "minecraft:crimson_fence": false,
                     "minecraft:cyan_stained_glass_pane": false,
                     "minecraft:dark_oak_fence": false,
                     "minecraft:exposed_copper_bars": false,
+                    "minecraft:fire": false,
                     "minecraft:glass_pane": false,
                     "minecraft:gray_stained_glass_pane": false,
                     "minecraft:green_stained_glass_pane": false,
@@ -94965,11 +95417,13 @@
                     "minecraft:blue_stained_glass_pane": false,
                     "minecraft:brown_stained_glass_pane": false,
                     "minecraft:cherry_fence": false,
+                    "minecraft:chorus_plant": false,
                     "minecraft:copper_bars": false,
                     "minecraft:crimson_fence": false,
                     "minecraft:cyan_stained_glass_pane": false,
                     "minecraft:dark_oak_fence": false,
                     "minecraft:exposed_copper_bars": false,
+                    "minecraft:fire": false,
                     "minecraft:glass_pane": false,
                     "minecraft:gray_stained_glass_pane": false,
                     "minecraft:green_stained_glass_pane": false,
@@ -95033,11 +95487,13 @@
                     "minecraft:blue_stained_glass_pane": false,
                     "minecraft:brown_stained_glass_pane": false,
                     "minecraft:cherry_fence": false,
+                    "minecraft:chorus_plant": false,
                     "minecraft:copper_bars": false,
                     "minecraft:crimson_fence": false,
                     "minecraft:cyan_stained_glass_pane": false,
                     "minecraft:dark_oak_fence": false,
                     "minecraft:exposed_copper_bars": false,
+                    "minecraft:fire": false,
                     "minecraft:glass_pane": false,
                     "minecraft:gray_stained_glass_pane": false,
                     "minecraft:green_stained_glass_pane": false,
@@ -95093,7 +95549,10 @@
                     false,
                     true,
                 ],
-                "defaultValue": {},
+                "defaultValue": {
+                    "minecraft:chorus_plant": false,
+                    "minecraft:fire": false,
+                },
             },
         ],
         "minecraft:connection_west": [
@@ -95110,11 +95569,13 @@
                     "minecraft:blue_stained_glass_pane": false,
                     "minecraft:brown_stained_glass_pane": false,
                     "minecraft:cherry_fence": false,
+                    "minecraft:chorus_plant": false,
                     "minecraft:copper_bars": false,
                     "minecraft:crimson_fence": false,
                     "minecraft:cyan_stained_glass_pane": false,
                     "minecraft:dark_oak_fence": false,
                     "minecraft:exposed_copper_bars": false,
+                    "minecraft:fire": false,
                     "minecraft:glass_pane": false,
                     "minecraft:gray_stained_glass_pane": false,
                     "minecraft:green_stained_glass_pane": false,
@@ -96180,6 +96641,30 @@
                 },
             },
         ],
+        "redstone_east": [
+            {
+                "validValues": [
+                    "none",
+                    "side",
+                    "up",
+                ],
+                "defaultValue": {
+                    "minecraft:redstone_wire": "none",
+                },
+            },
+        ],
+        "redstone_north": [
+            {
+                "validValues": [
+                    "none",
+                    "side",
+                    "up",
+                ],
+                "defaultValue": {
+                    "minecraft:redstone_wire": "none",
+                },
+            },
+        ],
         "redstone_signal": [
             {
                 "validValues": [
@@ -96221,6 +96706,30 @@
                     "minecraft:stone_pressure_plate": 0,
                     "minecraft:warped_pressure_plate": 0,
                     "minecraft:wooden_pressure_plate": 0,
+                },
+            },
+        ],
+        "redstone_south": [
+            {
+                "validValues": [
+                    "none",
+                    "side",
+                    "up",
+                ],
+                "defaultValue": {
+                    "minecraft:redstone_wire": "none",
+                },
+            },
+        ],
+        "redstone_west": [
+            {
+                "validValues": [
+                    "none",
+                    "side",
+                    "up",
+                ],
+                "defaultValue": {
+                    "minecraft:redstone_wire": "none",
                 },
             },
         ],

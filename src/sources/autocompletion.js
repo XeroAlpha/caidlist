@@ -538,6 +538,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
             screen.updateStatus({ retryCount });
             cx.logDiffMerge?.(`[Start] ${name}`);
             let resultSample;
+            let trustResultSample = false;
             if (useWin10Edition) {
                 resultSample = await analyzeCommandAutocompletionFastWin10(
                     cx,
@@ -546,6 +547,7 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                     progressName,
                     previousResult.length
                 );
+                trustResultSample = true;
             } else {
                 resultSample = await analyzeCommandAutocompletionFast(
                     cx,
@@ -559,6 +561,10 @@ async function analyzeAutocompletionEnumCached(cx, options, name, commandPrefix,
                 );
             }
             if (exclusion) resultSample = resultSample.filter((e) => !exclusion.includes(e));
+            if (trustResultSample) {
+                result = resultSample;
+                break;
+            }
             const mergedResult = mergeOrderedList(cachedResult, result || resultSample, resultSample);
             if (cx.logDiffMerge) {
                 for (const item of cachedResult) {

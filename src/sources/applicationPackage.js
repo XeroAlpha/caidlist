@@ -148,7 +148,7 @@ const entryAnalyzer = [
         analyze(results, entryName, soundDefinition) {
             const { sounds, soundSubtitleMap } = results;
             const formatVersion = soundDefinition.format_version;
-            if (formatVersion === '1.14.0' || formatVersion === '1.20.20' || formatVersion === '1.26.50') {
+            if (this.versionsGroups[0].includes(formatVersion)) {
                 sounds.push(...Object.keys(soundDefinition.sound_definitions));
                 for (const [name, desc] of Object.entries(soundDefinition.sound_definitions)) {
                     if (desc.subtitle) {
@@ -160,7 +160,8 @@ const entryAnalyzer = [
             } else {
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
-        }
+        },
+        versionsGroups: [['1.14.0', '1.20.20', '1.26.50', '1.26.60']]
     },
     // {
     //     name: 'particle',
@@ -236,7 +237,19 @@ const entryAnalyzer = [
         },
         versionsGroups: [
             [undefined, '1.8.0', '1.10.0'],
-            ['1.12.0', '1.13.0', '1.14.0', '1.16.0', '1.21.0', '1.21.120', '1.26.10', '1.26.40', '1.26.50']
+            [
+                '1.12.0',
+                '1.13.0',
+                '1.14.0',
+                '1.16.0',
+                '1.21.0',
+                '1.21.120',
+                '1.26.10',
+                '1.26.40',
+                '1.26.50',
+                '1.21.60', // mistype
+                '1.26.60'
+            ]
         ]
     },
     {
@@ -405,6 +418,7 @@ const entryAnalyzer = [
                 '1.26.30',
                 '1.26.40',
                 '1.26.50',
+                '1.26.60',
                 'beta'
             ]
         ]
