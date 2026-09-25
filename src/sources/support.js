@@ -196,7 +196,10 @@ controlSchemeCommand.associatedCommands = [['/controlscheme <players: target> se
 
 export function locateCommandPoiSubCommand({ coreVersion, branch }) {
     if (branch.id === 'experiment') {
-        return testMinecraftVersionInRange(coreVersion, '1.26.50.26', '*');
+        return (
+            testMinecraftVersionInRange(coreVersion, '1.26.50.4', '1.26.50.4') ||
+            testMinecraftVersionInRange(coreVersion, '1.26.50.26', '*')
+        );
     }
     return false;
 }

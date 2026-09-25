@@ -24104,108 +24104,6 @@
                     "id": "Attributes",
                     "level": 2,
                     "content": [],
-                    "sections": [
-                        {
-                            "name": "minecraft:attack",
-                            "id": "minecraft:attack",
-                            "level": 4,
-                            "content": [
-                                "Defines an entity's melee attack and any additional effects on it.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "damage",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "",
-                                            "Description": "Range of the random amount of damage the melee attack deals. A negative value can heal the entity instead of hurting it",
-                                        },
-                                        {
-                                            "Name": "effect_amplifier",
-                                            "Type": "Integer",
-                                            "Default Value": "0",
-                                            "Description": "Amplifier level (potion tier) of the status ailment applied to the damaged entity. Higher values increase the strength of the effect.",
-                                        },
-                                        {
-                                            "Name": "effect_duration",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.0",
-                                            "Description": "Duration in seconds of the status ailment applied to the damaged entity. Can also be \"infinite\"",
-                                        },
-                                        {
-                                            "Name": "effect_name",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Identifier of the status ailment to apply to an entity attacked by this entity's melee attack",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:spell_effects",
-                            "id": "minecraft:spell_effects",
-                            "level": 4,
-                            "content": [
-                                "Defines what mob effects to add and remove to the entity when adding this component.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "add_effects",
-                                            "Type": "List",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "List of effects to add to this entity after adding this component",
-                                                {
-                                                    "type": "table",
-                                                    "rows": [
-                                                        {
-                                                            "Name": "effect",
-                                                            "Type": "String",
-                                                            "Default Value": "",
-                                                            "Description": "Effect to add to this entity. Includes 'duration' in seconds, 'amplifier' level, 'ambient' if it is to be considered an ambient effect, and 'visible' if the effect should be visible",
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "Name": "remove_effects",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "List of identifiers of effects to be removed from this entity after adding this component",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:strength",
-                            "id": "minecraft:strength",
-                            "level": 4,
-                            "content": [
-                                "Defines the entity's strength to carry items.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max",
-                                            "Type": "Integer",
-                                            "Default Value": "5",
-                                            "Description": "The maximum strength of this entity",
-                                        },
-                                        {
-                                            "Name": "value",
-                                            "Type": "Integer",
-                                            "Default Value": "1",
-                                            "Description": "The initial value of the strength",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ],
                 },
                 {
                     "name": "Built-in Events",
@@ -24432,31 +24330,6 @@
                                             "Type": "Range [a, b]",
                                             "Default Value": "0",
                                             "Description": "The range of time in seconds to randomly wait before playing the sound again",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:annotation.break_door",
-                            "id": "minecraft:annotation.break_door",
-                            "level": 4,
-                            "content": [
-                                "Allows the actor to break doors assuming that that flags set up for the component to use in navigation",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "break_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "12.0",
-                                            "Description": "The time in seconds required to break through doors.",
-                                        },
-                                        {
-                                            "Name": "min_difficulty",
-                                            "Type": "String",
-                                            "Default Value": "hard",
-                                            "Description": "The minimum difficulty that the world must be on for this entity to break doors.",
                                         },
                                     ],
                                 },
@@ -24885,67 +24758,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:buoyant",
-                            "id": "minecraft:buoyant",
-                            "level": 4,
-                            "content": [
-                                "Enables an entity to float on the specified liquid blocks.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "apply_gravity",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "Applies gravity each tick. Causes \"movement_type\" to be more impactful, but also gravity to be applied more intensely outside liquids.",
-                                        },
-                                        {
-                                            "Name": "base_buoyancy",
-                                            "Type": "Decimal",
-                                            "Default Value": "1.0",
-                                            "Description": "Base buoyancy used to calculate how much will a entity float.",
-                                        },
-                                        {
-                                            "Name": "big_wave_probability",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.03",
-                                            "Description": "Probability for a big wave hitting the entity. Only used if \"movement_type\" is \"waves\".",
-                                        },
-                                        {
-                                            "Name": "big_wave_speed",
-                                            "Type": "Decimal",
-                                            "Default Value": "10.0",
-                                            "Description": "Multiplier for the speed to make a big wave. Triggered depending on \"big_wave_probability\".",
-                                        },
-                                        {
-                                            "Name": "can_auto_step_from_liquid",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Whether the entity can move out of a liquid block to a neighboring solid block if pushed against it.",
-                                        },
-                                        {
-                                            "Name": "drag_down_on_buoyancy_removed",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.0",
-                                            "Description": "How much an entity will be dragged down when the component is removed.",
-                                        },
-                                        {
-                                            "Name": "liquid_blocks",
-                                            "Type": "List",
-                                            "Default Value": "",
-                                            "Description": "List of blocks this entity can float on. Must be a liquid block.",
-                                        },
-                                        {
-                                            "Name": "movement_type",
-                                            "Type": "String",
-                                            "Default Value": "waves",
-                                            "Description": "Type of vertical movement applied to the entity:\"waves\", simulates wave movement based on the entity speed.\"bobbing\", simulates waves going through.\"none\", simulates waves going through.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:burns_in_daylight",
                             "id": "minecraft:burns_in_daylight",
                             "level": 4,
@@ -25256,13 +25068,13 @@
                                             "Name": "can_dash_underwater",
                                             "Type": "Boolean",
                                             "Default Value": "false",
-                                            "Description": "Whether the entity can dash underwater. Default value is false.",
+                                            "Description": "Whether the entity can dash underwater",
                                         },
                                         {
                                             "Name": "cooldown_time",
                                             "Type": "Decimal",
                                             "Default Value": "1.00",
-                                            "Description": "The dash cooldown in seconds. Default value is 1.000000.",
+                                            "Description": "The dash cooldown in seconds. Default value is \"1.000000\".",
                                         },
                                         {
                                             "Name": "direction",
@@ -25412,91 +25224,6 @@
                                             "Type": "Decimal",
                                             "Default Value": "0.0",
                                             "Description": "Optional amount of additional time in seconds given by using splash water bottle on entity.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:economy_trade_table",
-                            "id": "minecraft:economy_trade_table",
-                            "level": 4,
-                            "content": [
-                                "Defines this entity's ability to trade with players.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "convert_trades_economy",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Determines when the mob transforms, if the trades should be converted when the new mob has a economy_trade_table. When the trades are converted, the mob will generate a new trade list with their new trade table, but then it will try to convert any of the same trades over to have the same enchantments and user data. For example, if the original has a Emerald to Enchanted Iron Sword (Sharpness 1), and the new trade also has an Emerald for Enchanted Iron Sword, then the enchantment will be Sharpness 1.",
-                                        },
-                                        {
-                                            "Name": "cured_discount",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[-25, -20]",
-                                            "Description": "How much should the discount be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)",
-                                        },
-                                        {
-                                            "Name": "display_name",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Name to be displayed while trading with this entity",
-                                        },
-                                        {
-                                            "Name": "hero_demand_discount",
-                                            "Type": "Integer",
-                                            "Default Value": "-4",
-                                            "Description": "Used in legacy prices to determine how much should Demand be modified by when the player has the Hero of the Village mob effect",
-                                        },
-                                        {
-                                            "Name": "max_cured_discount",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[-25, -20]",
-                                            "Description": "The max the discount can be modified by when the player has cured the Zombie Villager. Can be specified as a pair of numbers (When use_legacy_price_formula is true this is the low-tier trade discount and high-tier trade discount, otherwise it is the minor positive gossip and major positive gossip.)",
-                                        },
-                                        {
-                                            "Name": "max_nearby_cured_discount",
-                                            "Type": "Integer",
-                                            "Default Value": "-200",
-                                            "Description": "The max the discount can be modified by when the player has cured a nearby Zombie Villager. Only used when use_legacy_price_formula is true, otherwise max_cured_discount (low) is used.",
-                                        },
-                                        {
-                                            "Name": "nearby_cured_discount",
-                                            "Type": "Integer",
-                                            "Default Value": "-20",
-                                            "Description": "How much should the discount be modified by when the player has cured a nearby Zombie Villager",
-                                        },
-                                        {
-                                            "Name": "new_screen",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Used to determine if trading with entity opens the new trade screen",
-                                        },
-                                        {
-                                            "Name": "persist_trades",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Determines if the trades should persist when the mob transforms. This makes it so that the next time the mob is transformed to something with a trade_table or economy_trade_table, then it keeps their trades.",
-                                        },
-                                        {
-                                            "Name": "show_trade_screen",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "Show an in game trade screen when interacting with the mob.",
-                                        },
-                                        {
-                                            "Name": "table",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "File path relative to the resource pack root for this entity's trades",
-                                        },
-                                        {
-                                            "Name": "use_legacy_price_formula",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Determines whether the legacy formula is used to determines the trade prices.",
                                         },
                                     ],
                                 },
@@ -26279,56 +26006,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:healable",
-                            "id": "minecraft:healable",
-                            "level": 4,
-                            "content": [
-                                "Defines the interactions with this entity for healing it.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "filters",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "The filter group that defines the conditions for using this item to heal the entity.",
-                                        },
-                                        {
-                                            "Name": "force_use",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Determines if item can be used regardless of entity being at full health.",
-                                        },
-                                        {
-                                            "Name": "items",
-                                            "Type": "Array",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "The array of items that can be used to heal this entity.",
-                                                {
-                                                    "type": "table",
-                                                    "rows": [
-                                                        {
-                                                            "Name": "heal_amount",
-                                                            "Type": "Integer",
-                                                            "Default Value": "1",
-                                                            "Description": "The amount of health this entity gains when fed this item.",
-                                                        },
-                                                        {
-                                                            "Name": "item",
-                                                            "Type": "String",
-                                                            "Default Value": "",
-                                                            "Description": "Item identifier that can be used to heal this entity.",
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:heartbeat",
                             "id": "minecraft:heartbeat",
                             "level": 4,
@@ -26712,55 +26389,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:inventory",
-                            "id": "minecraft:inventory",
-                            "level": 4,
-                            "content": [
-                                "Defines this entity's inventory properties.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "additional_slots_per_strength",
-                                            "Type": "Integer",
-                                            "Default Value": "0",
-                                            "Description": "Number of slots that this entity can gain per extra strength",
-                                        },
-                                        {
-                                            "Name": "can_be_siphoned_from",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, the contents of this inventory can be removed by a hopper",
-                                        },
-                                        {
-                                            "Name": "container_type",
-                                            "Type": "String",
-                                            "Default Value": "none",
-                                            "Description": "Type of container this entity has. Can be horse, minecart_chest, chest_boat, minecart_hopper, inventory, container or hopper",
-                                        },
-                                        {
-                                            "Name": "inventory_size",
-                                            "Type": "Integer",
-                                            "Default Value": "5",
-                                            "Description": "Number of slots the container has",
-                                        },
-                                        {
-                                            "Name": "private",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, the entity will not drop its inventory on death",
-                                        },
-                                        {
-                                            "Name": "restrict_to_owner",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, the entity's inventory can only be accessed by its owner or itself",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:item_hopper",
                             "id": "minecraft:item_hopper",
                             "level": 4,
@@ -27039,176 +26667,6 @@
                                             "Type": "Array",
                                             "Default Value": "",
                                             "Description": "List of names of effects the entity is immune to.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.amphibious",
-                            "id": "minecraft:movement.amphibious",
-                            "level": 4,
-                            "content": [
-                                "This move control allows the mob to swim in water and walk on land.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.basic",
-                            "id": "minecraft:movement.basic",
-                            "level": 4,
-                            "content": [
-                                "This component accents the movement of an entity.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.fly",
-                            "id": "minecraft:movement.fly",
-                            "level": 4,
-                            "content": [
-                                "This move control causes the mob to fly.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.generic",
-                            "id": "minecraft:movement.generic",
-                            "level": 4,
-                            "content": [
-                                "This move control allows a mob to fly, swim, climb, etc.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.hover",
-                            "id": "minecraft:movement.hover",
-                            "level": 4,
-                            "content": [
-                                "This move control causes the mob to hover.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.jump",
-                            "id": "minecraft:movement.jump",
-                            "level": 4,
-                            "content": [
-                                "Move control that causes the mob to jump as it moves with a specified delay between jumps.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "jump_delay",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[0.0, 0.0]",
-                                            "Description": "Delay after landing when using the slime move control.",
-                                        },
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.skip",
-                            "id": "minecraft:movement.skip",
-                            "level": 4,
-                            "content": [
-                                "This move control causes the mob to hop as it moves.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:movement.sway",
-                            "id": "minecraft:movement.sway",
-                            "level": 4,
-                            "content": [
-                                "This move control causes the mob to sway side to side giving the impression it is swimming.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "max_turn",
-                                            "Type": "Decimal",
-                                            "Default Value": "30.0",
-                                            "Description": "The maximum number in degrees the mob can turn per tick.",
-                                        },
-                                        {
-                                            "Name": "sway_amplitude",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.05",
-                                            "Description": "Strength of the sway movement.",
-                                        },
-                                        {
-                                            "Name": "sway_frequency",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.5",
-                                            "Description": "Multiplier for the frequency of the sway movement.",
                                         },
                                     ],
                                 },
@@ -28888,129 +28346,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:shareables",
-                            "id": "minecraft:shareables",
-                            "level": 4,
-                            "content": [
-                                "Defines a list of items the mob wants to share. Each item must have the following parameters:",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "all_items",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "A bucket for all other items in the game. Note this category is always least priority items.",
-                                        },
-                                        {
-                                            "Name": "all_items_max_amount",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "Maximum number of this item the mob will hold.",
-                                        },
-                                        {
-                                            "Name": "all_items_surplus_amount",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "Number of this item considered extra that the entity wants to share.",
-                                        },
-                                        {
-                                            "Name": "all_items_want_amount",
-                                            "Type": "Integer",
-                                            "Default Value": "-1",
-                                            "Description": "Number of this item this entity wants to share.",
-                                        },
-                                        {
-                                            "Name": "items",
-                                            "Type": "List",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "List of items or item tags that the entity wants to share. Items in-game will match to this list from top to bottom, meaning that the first occurance of a match, be it name or tag, will shadow those coming after.",
-                                                {
-                                                    "section": "admire",
-                                                    "content": [
-                                                        "Mob will admire the item after picking up by looking at it. For this to happen the mob needs to have an Admire component and an Admire goal.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "barter",
-                                                    "content": [
-                                                        "Mob will barter for the item after picking it up. For this to work the mob needs to have a Barter component and a Barter goal.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "consume_item",
-                                                    "content": [
-                                                        "Determines whether the mob will consume the item or not.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "craft_into",
-                                                    "content": [
-                                                        "Defines the item this entity wants to craft with the item defined by \"item\". Should be an item name.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "item",
-                                                    "content": [
-                                                        "The name of the item. Aux value can be specified, for instance 'minecraft:skull:1'. Alternatively, a tag can be specified to match all items with that tag.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "max_amount",
-                                                    "content": [
-                                                        "Maximum number of this item the mob will hold.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "pickup_limit",
-                                                    "content": [
-                                                        "Maximum number items the mob will pick up during a single goal tick.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "pickup_only",
-                                                    "content": [
-                                                        "Determines whether the mob can only pickup the item and not drop it.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "priority",
-                                                    "content": [
-                                                        "Prioritizes which items the entity prefers. 0 is the highest priority.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "stored_in_inventory",
-                                                    "content": [
-                                                        "Determines whether the mob will try to put the item in its inventory if it has the inventory component and if it can't be equipped.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "surplus_amount",
-                                                    "content": [
-                                                        "Number of this item considered extra that the entity wants to share.",
-                                                    ],
-                                                },
-                                                {
-                                                    "section": "want_amount",
-                                                    "content": [
-                                                        "Number of this item this entity wants to share.",
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "Name": "singular_pickup",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Boolean value that controls if the mob is able to pick up more of the same item if it is already holding that item",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:shooter",
                             "id": "minecraft:shooter",
                             "level": 4,
@@ -29266,122 +28601,6 @@
                             ],
                         },
                         {
-                            "name": "minecraft:teleport",
-                            "id": "minecraft:teleport",
-                            "level": 4,
-                            "content": [
-                                "Defines an entity's teleporting behavior.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "dark_teleport_chance",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.01",
-                                            "Description": "Modifies the chance that the entity will teleport if the entity is in darkness",
-                                        },
-                                        {
-                                            "Name": "light_teleport_chance",
-                                            "Type": "Decimal",
-                                            "Default Value": "0.01",
-                                            "Description": "Modifies the chance that the entity will teleport if the entity is in daylight",
-                                        },
-                                        {
-                                            "Name": "max_random_teleport_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "20",
-                                            "Description": "Maximum amount of time in seconds between random teleports",
-                                        },
-                                        {
-                                            "Name": "min_random_teleport_time",
-                                            "Type": "Decimal",
-                                            "Default Value": "0",
-                                            "Description": "Minimum amount of time in seconds between random teleports",
-                                        },
-                                        {
-                                            "Name": "projectile_filter",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "Conditions that determine which projectiles cause the entity to attempt to teleport. If omitted, all projectiles cause a teleport attempt",
-                                        },
-                                        {
-                                            "Name": "random_teleport_cube",
-                                            "Type": "Vector [a, b, c]",
-                                            "Default Value": "[32, 16, 32]",
-                                            "Description": "Entity will teleport to a random position within the area defined by this cube",
-                                        },
-                                        {
-                                            "Name": "random_teleports",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, the entity will teleport randomly",
-                                        },
-                                        {
-                                            "Name": "target_distance",
-                                            "Type": "Decimal",
-                                            "Default Value": "16",
-                                            "Description": "Maximum distance the entity will teleport when chasing a target",
-                                        },
-                                        {
-                                            "Name": "target_teleport_chance",
-                                            "Type": "Decimal",
-                                            "Default Value": "1",
-                                            "Description": "The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%",
-                                        },
-                                        {
-                                            "Name": "teleports_on_projectile_hit",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If true, the entity will attempt to teleport away from projectiles about to hit it",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:timer",
-                            "id": "minecraft:timer",
-                            "level": 4,
-                            "content": [
-                                "Adds a timer after which an event will fire.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "looping",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, the timer will restart every time after it fires.",
-                                        },
-                                        {
-                                            "Name": "randomInterval",
-                                            "Type": "Boolean",
-                                            "Default Value": "true",
-                                            "Description": "If true, the amount of time on the timer will be random between the min and max values specified in time.",
-                                        },
-                                        {
-                                            "Name": "random_time_choices",
-                                            "Type": "List",
-                                            "Default Value": "[ ]",
-                                            "Description": "This is a list of objects, representing one value in seconds that can be picked before firing the event and an optional weight. Incompatible with time.",
-                                        },
-                                        {
-                                            "Name": "time",
-                                            "Type": "Range [a, b]",
-                                            "Default Value": "[0.0, 0.0]",
-                                            "Description": "Amount of time in seconds for the timer. Can be specified as a number or a pair of numbers (min and max). Incompatible with random_time_choices.",
-                                        },
-                                        {
-                                            "Name": "time_down_event",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Event to fire when the time on the timer runs out.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
                             "name": "minecraft:trade_table",
                             "id": "minecraft:trade_table",
                             "level": 4,
@@ -29419,178 +28638,6 @@
                                             "Type": "String",
                                             "Default Value": "",
                                             "Description": "File path relative to the behavior pack root for this entity's trades.",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:trail",
-                            "id": "minecraft:trail",
-                            "level": 4,
-                            "content": [
-                                "Causes an entity to leave a trail of blocks as it moves about the world.",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "block_type",
-                                            "Type": "String",
-                                            "Default Value": "air",
-                                            "Description": "The type of block you wish to be spawned by the entity as it move about the world. Solid blocks may not be spawned at an offset of (0,0,0).",
-                                        },
-                                        {
-                                            "Name": "spawn_filter",
-                                            "Type": "Minecraft Filter",
-                                            "Default Value": "",
-                                            "Description": "One or more conditions that must be met in order to cause the chosen block type to spawn.",
-                                        },
-                                        {
-                                            "Name": "spawn_offset",
-                                            "Type": "Vector [a, b, c]",
-                                            "Default Value": "[0, 0, 0]",
-                                            "Description": "The distance from the entities current position to spawn the block. Capped at up to 16 blocks away. The X value is left/right(-/+), the Z value is backward/forward(-/+), the Y value is below/above(-/+).",
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                        {
-                            "name": "minecraft:transformation",
-                            "id": "minecraft:transformation",
-                            "level": 4,
-                            "content": [
-                                "Defines an entity's transformation from the current definition into another",
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "Name": "add",
-                                            "Type": "JSON Object",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "List of components to add to the entity after the transformation",
-                                                {
-                                                    "type": "table",
-                                                    "rows": [
-                                                        {
-                                                            "Name": "component_groups",
-                                                            "Type": "List",
-                                                            "Default Value": "",
-                                                            "Description": "Names of component groups to add",
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "Name": "begin_transform_sound",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Sound to play when the transformation starts",
-                                        },
-                                        {
-                                            "Name": "delay",
-                                            "Type": "JSON Object",
-                                            "Default Value": "",
-                                            "Description": [
-                                                "Defines the properties of the delay for the transformation",
-                                                {
-                                                    "type": "table",
-                                                    "rows": [
-                                                        {
-                                                            "Name": "block_assist_chance",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "0",
-                                                            "Description": "Chance that the entity will look for nearby blocks that can speed up the transformation. Value must be between 0.0 and 1.0",
-                                                        },
-                                                        {
-                                                            "Name": "block_chance",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "0",
-                                                            "Description": "Chance that, once a block is found, will help speed up the transformation",
-                                                        },
-                                                        {
-                                                            "Name": "block_max",
-                                                            "Type": "Integer",
-                                                            "Default Value": "0",
-                                                            "Description": "Maximum number of blocks the entity will look for to aid in the transformation. If not defined or set to 0, it will be set to the block radius",
-                                                        },
-                                                        {
-                                                            "Name": "block_radius",
-                                                            "Type": "Integer",
-                                                            "Default Value": "0",
-                                                            "Description": "Distance in Blocks that the entity will search for blocks that can help the transformation",
-                                                        },
-                                                        {
-                                                            "Name": "block_types",
-                                                            "Type": "List",
-                                                            "Default Value": "",
-                                                            "Description": "List of blocks that can help the transformation of this entity",
-                                                        },
-                                                        {
-                                                            "Name": "range_max",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "0",
-                                                            "Description": "Time in seconds to be added to value to have the maximum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)",
-                                                        },
-                                                        {
-                                                            "Name": "range_min",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "0",
-                                                            "Description": "Time in seconds to be added to value to have the minimum random time range value until the entity transforms (if non-zero then the time in seconds before the entity transforms will be random between value+range_min and value+range_max)",
-                                                        },
-                                                        {
-                                                            "Name": "value",
-                                                            "Type": "Decimal",
-                                                            "Default Value": "0",
-                                                            "Description": "Time in seconds before the entity transforms",
-                                                        },
-                                                    ],
-                                                },
-                                            ],
-                                        },
-                                        {
-                                            "Name": "drop_equipment",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Cause the entity to drop all equipment upon transformation",
-                                        },
-                                        {
-                                            "Name": "drop_inventory",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Cause the entity to drop all items in inventory upon transformation",
-                                        },
-                                        {
-                                            "Name": "into",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Entity Definition that this entity will transform into",
-                                        },
-                                        {
-                                            "Name": "keep_level",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If this entity has trades and has leveled up, it should maintain that level after transformation.",
-                                        },
-                                        {
-                                            "Name": "keep_owner",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "If this entity is owned by another entity, it should remain owned after transformation.",
-                                        },
-                                        {
-                                            "Name": "preserve_equipment",
-                                            "Type": "Boolean",
-                                            "Default Value": "false",
-                                            "Description": "Cause the entity to keep equipment after going through transformation",
-                                        },
-                                        {
-                                            "Name": "transformation_sound",
-                                            "Type": "String",
-                                            "Default Value": "",
-                                            "Description": "Sound to play when the entity is done transforming",
                                         },
                                     ],
                                 },
@@ -30624,25 +29671,7 @@
                             "name": "Attributes",
                             "id": "Attributes",
                             "level": 4,
-                            "content": [
-                                {
-                                    "type": "table",
-                                    "rows": [
-                                        {
-                                            "JSON Name": "minecraft:attack",
-                                            "ID": "1651346034",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:spell_effects",
-                                            "ID": "523264365",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:strength",
-                                            "ID": "648564399",
-                                        },
-                                    ],
-                                },
-                            ],
+                            "content": [],
                         },
                         {
                             "name": "Components",
@@ -30671,10 +29700,6 @@
                                         {
                                             "JSON Name": "minecraft:angry",
                                             "ID": "725411499",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:annotation.break_door",
-                                            "ID": "2116838963",
                                         },
                                         {
                                             "JSON Name": "minecraft:area_attack",
@@ -30715,10 +29740,6 @@
                                         {
                                             "JSON Name": "minecraft:bribeable",
                                             "ID": "-2125526908",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:buoyant",
-                                            "ID": "-467213736",
                                         },
                                         {
                                             "JSON Name": "minecraft:burns_in_daylight",
@@ -30771,10 +29792,6 @@
                                         {
                                             "JSON Name": "minecraft:drying_out_timer",
                                             "ID": "2113510784",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:economy_trade_table",
-                                            "ID": "1705466896",
                                         },
                                         {
                                             "JSON Name": "minecraft:entity_armor_equipment_slot_mapping",
@@ -30837,10 +29854,6 @@
                                             "ID": "43636353",
                                         },
                                         {
-                                            "JSON Name": "minecraft:healable",
-                                            "ID": "-54247424",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:heartbeat",
                                             "ID": "2102942906",
                                         },
@@ -30869,10 +29882,6 @@
                                             "ID": "-1996861528",
                                         },
                                         {
-                                            "JSON Name": "minecraft:inventory",
-                                            "ID": "1941951218",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:item_hopper",
                                             "ID": "-447601772",
                                         },
@@ -30895,38 +29904,6 @@
                                         {
                                             "JSON Name": "minecraft:mob_effect_immunity",
                                             "ID": "1589547531",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.amphibious",
-                                            "ID": "-500784850",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.basic",
-                                            "ID": "3354475",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.fly",
-                                            "ID": "-1487316136",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.generic",
-                                            "ID": "-1363369868",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.hover",
-                                            "ID": "1743805051",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.jump",
-                                            "ID": "1256268727",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.skip",
-                                            "ID": "-1828832272",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:movement.sway",
-                                            "ID": "2126249079",
                                         },
                                         {
                                             "JSON Name": "minecraft:nameable",
@@ -31057,10 +30034,6 @@
                                             "ID": "-684492525",
                                         },
                                         {
-                                            "JSON Name": "minecraft:shareables",
-                                            "ID": "1301057082",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:shooter",
                                             "ID": "184150118",
                                         },
@@ -31089,24 +30062,8 @@
                                             "ID": "1309819882",
                                         },
                                         {
-                                            "JSON Name": "minecraft:teleport",
-                                            "ID": "-1900891127",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:timer",
-                                            "ID": "1862095863",
-                                        },
-                                        {
                                             "JSON Name": "minecraft:trade_table",
                                             "ID": "50480315",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:trail",
-                                            "ID": "1632590434",
-                                        },
-                                        {
-                                            "JSON Name": "minecraft:transformation",
-                                            "ID": "-457894577",
                                         },
                                         {
                                             "JSON Name": "minecraft:transient",
@@ -31181,6 +30138,10 @@
                                             "ID": "500775548",
                                         },
                                         {
+                                            "JSON Name": "minecraft:annotation.break_door",
+                                            "ID": "2116838963",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:barter",
                                             "ID": "-1660828566",
                                         },
@@ -31191,6 +30152,10 @@
                                         {
                                             "JSON Name": "minecraft:body_rotation_blocked",
                                             "ID": "-31742338",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:buoyant",
+                                            "ID": "-467213736",
                                         },
                                         {
                                             "JSON Name": "minecraft:can_climb",
@@ -31221,6 +30186,10 @@
                                             "ID": "-815556357",
                                         },
                                         {
+                                            "JSON Name": "minecraft:economy_trade_table",
+                                            "ID": "1705466896",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:equipment",
                                             "ID": "714661022",
                                         },
@@ -31241,12 +30210,20 @@
                                             "ID": "-1816881803",
                                         },
                                         {
+                                            "JSON Name": "minecraft:healable",
+                                            "ID": "-54247424",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:ignore_cannot_be_attacked",
                                             "ID": "2139692418",
                                         },
                                         {
                                             "JSON Name": "minecraft:input_ground_controlled",
                                             "ID": "-646415617",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:inventory",
+                                            "ID": "1941951218",
                                         },
                                         {
                                             "JSON Name": "minecraft:is_baby",
@@ -31349,6 +30326,10 @@
                                             "ID": "77854436",
                                         },
                                         {
+                                            "JSON Name": "minecraft:shareables",
+                                            "ID": "1301057082",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:skin_id",
                                             "ID": "1838729593",
                                         },
@@ -31357,8 +30338,20 @@
                                             "ID": "937951776",
                                         },
                                         {
+                                            "JSON Name": "minecraft:strength",
+                                            "ID": "648564399",
+                                        },
+                                        {
                                             "JSON Name": "minecraft:tamemount",
                                             "ID": "1615660288",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:teleport",
+                                            "ID": "-1900891127",
+                                        },
+                                        {
+                                            "JSON Name": "minecraft:timer",
+                                            "ID": "1862095863",
                                         },
                                         {
                                             "JSON Name": "minecraft:type_family",
@@ -31525,6 +30518,31 @@
                             ],
                         },
                         {
+                            "name": "minecraft:annotation.break_door",
+                            "id": "minecraft:annotation.break_door",
+                            "level": 4,
+                            "content": [
+                                "Allows the actor to break doors assuming that that flags set up for the component to use in navigation",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "break_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "12.0",
+                                            "Description": "The time in seconds required to break through doors.",
+                                        },
+                                        {
+                                            "Name": "min_difficulty",
+                                            "Type": "String",
+                                            "Default Value": "hard",
+                                            "Description": "The minimum difficulty that the world must be on for this entity to break doors.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:barter",
                             "id": "minecraft:barter",
                             "level": 4,
@@ -31564,6 +30582,67 @@
                             "level": 4,
                             "content": [
                                 "When set, the entity will no longer visually rotate their body to match their facing direction.",
+                            ],
+                        },
+                        {
+                            "name": "minecraft:buoyant",
+                            "id": "minecraft:buoyant",
+                            "level": 4,
+                            "content": [
+                                "Enables an entity to float on the specified liquid blocks.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "apply_gravity",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "Applies gravity each tick. Causes \"movement_type\" to be more impactful, but also gravity to be applied more intensely outside liquids.",
+                                        },
+                                        {
+                                            "Name": "base_buoyancy",
+                                            "Type": "Decimal",
+                                            "Default Value": "1.0",
+                                            "Description": "Base buoyancy used to calculate how much will a entity float.",
+                                        },
+                                        {
+                                            "Name": "big_wave_probability",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.03",
+                                            "Description": "Probability for a big wave hitting the entity. Only used if \"movement_type\" is \"waves\".",
+                                        },
+                                        {
+                                            "Name": "big_wave_speed",
+                                            "Type": "Decimal",
+                                            "Default Value": "10.0",
+                                            "Description": "Multiplier for the speed to make a big wave. Triggered depending on \"big_wave_probability\".",
+                                        },
+                                        {
+                                            "Name": "can_auto_step_from_liquid",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether the entity can move out of a liquid block to a neighboring solid block if pushed against it.",
+                                        },
+                                        {
+                                            "Name": "drag_down_on_buoyancy_removed",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.0",
+                                            "Description": "How much an entity will be dragged down when the component is removed.",
+                                        },
+                                        {
+                                            "Name": "liquid_blocks",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": "List of blocks this entity can float on. Must be a liquid block.",
+                                        },
+                                        {
+                                            "Name": "movement_type",
+                                            "Type": "String",
+                                            "Default Value": "waves",
+                                            "Description": "Type of vertical movement applied to the entity:\"waves\", simulates wave movement based on the entity speed.\"bobbing\", simulates waves going through.\"none\", simulates waves going through.",
+                                        },
+                                    ],
+                                },
                             ],
                         },
                         {
@@ -31656,6 +30735,91 @@
                             ],
                         },
                         {
+                            "name": "minecraft:economy_trade_table",
+                            "id": "minecraft:economy_trade_table",
+                            "level": 4,
+                            "content": [
+                                "Defines this entity's ability to trade with players.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "convert_trades_economy",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether legacy trade data is converted into economy trade data.",
+                                        },
+                                        {
+                                            "Name": "cured_discount",
+                                            "Type": "JSON Object",
+                                            "Default Value": "{ \"min\": -25, \"max\": -20 }",
+                                            "Description": "Range of cured villager discounts applied to trade prices.",
+                                        },
+                                        {
+                                            "Name": "display_name",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "The entity localization key used for the trading UI display name.",
+                                        },
+                                        {
+                                            "Name": "hero_demand_discount",
+                                            "Type": "Integer",
+                                            "Default Value": "-4",
+                                            "Description": "Additional demand discount applied while the player has Hero of the Village.",
+                                        },
+                                        {
+                                            "Name": "max_cured_discount",
+                                            "Type": "JSON Object",
+                                            "Default Value": "{ \"min\": -25, \"max\": -20 }",
+                                            "Description": "Maximum allowed range for cured villager discounts.",
+                                        },
+                                        {
+                                            "Name": "max_nearby_cured_discount",
+                                            "Type": "Integer",
+                                            "Default Value": "-200",
+                                            "Description": "Most negative nearby cured villager discount allowed by legacy pricing.",
+                                        },
+                                        {
+                                            "Name": "nearby_cured_discount",
+                                            "Type": "Integer",
+                                            "Default Value": "-20",
+                                            "Description": "Nearby cured villager discount step applied by legacy pricing.",
+                                        },
+                                        {
+                                            "Name": "new_screen",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether this trader uses the newer trade screen implementation.",
+                                        },
+                                        {
+                                            "Name": "persist_trades",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether generated offers are persisted with the actor save data.",
+                                        },
+                                        {
+                                            "Name": "show_trade_screen",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "Whether interacting with this trader opens the trade screen.",
+                                        },
+                                        {
+                                            "Name": "table",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "Path to the trade table JSON that defines available offers.",
+                                        },
+                                        {
+                                            "Name": "use_legacy_price_formula",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Whether legacy price calculations are used instead of the newer pricing formula.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:equipment",
                             "id": "minecraft:equipment",
                             "level": 4,
@@ -31735,6 +30899,99 @@
                             ],
                         },
                         {
+                            "name": "minecraft:healable",
+                            "id": "minecraft:healable",
+                            "level": 4,
+                            "content": [
+                                "Defines the interactions with this entity for healing it.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "filters",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "The filter group that defines the conditions for using this item to heal the entity.",
+                                        },
+                                        {
+                                            "Name": "force_use",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Determines if item can be used regardless of entity being at full health.",
+                                        },
+                                        {
+                                            "Name": "items",
+                                            "Type": "Array",
+                                            "Default Value": "",
+                                            "Description": [
+                                                "The array of items that can be used to heal this entity.",
+                                                {
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "effects",
+                                                            "Type": "Array",
+                                                            "Default Value": "",
+                                                            "Description": [
+                                                                "The effects to apply when this item is used to heal the entity.",
+                                                                {
+                                                                    "type": "table",
+                                                                    "rows": [
+                                                                        {
+                                                                            "Name": "amplifier",
+                                                                            "Type": "Integer",
+                                                                            "Default Value": "1",
+                                                                            "Description": "The amplifier of the effect.",
+                                                                        },
+                                                                        {
+                                                                            "Name": "chance",
+                                                                            "Type": "Decimal",
+                                                                            "Default Value": "1.00",
+                                                                            "Description": "The chance that the effect is applied.",
+                                                                        },
+                                                                        {
+                                                                            "Name": "duration",
+                                                                            "Type": "String",
+                                                                            "Default Value": "0",
+                                                                            "Description": "The duration of the effect in seconds, or \"infinite\".",
+                                                                        },
+                                                                        {
+                                                                            "Name": "name",
+                                                                            "Type": "String",
+                                                                            "Default Value": "",
+                                                                            "Description": "The name of the effect to apply.",
+                                                                        },
+                                                                    ],
+                                                                },
+                                                            ],
+                                                        },
+                                                        {
+                                                            "Name": "heal_amount",
+                                                            "Type": "Integer",
+                                                            "Default Value": "1",
+                                                            "Description": "The amount of health this entity gains when fed this item.",
+                                                        },
+                                                        {
+                                                            "Name": "item",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "Item identifier that can be used to heal this entity.",
+                                                        },
+                                                        {
+                                                            "Name": "result_item",
+                                                            "Type": "String",
+                                                            "Default Value": "",
+                                                            "Description": "The feed item used will transform to this item upon successful interaction.",
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:ignore_cannot_be_attacked",
                             "id": "minecraft:ignore_cannot_be_attacked",
                             "level": 4,
@@ -31759,6 +31016,55 @@
                             "level": 4,
                             "content": [
                                 "When configured as a rideable entity, the entity will be controlled using WASD controls. Beginning with 1.19.50 the default auto step height for rideable entities is half a block. Consider adding the \"minecraft:variable_max_auto_step\" component to increase it.",
+                            ],
+                        },
+                        {
+                            "name": "minecraft:inventory",
+                            "id": "minecraft:inventory",
+                            "level": 4,
+                            "content": [
+                                "Defines this entity's inventory properties.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "additional_slots_per_strength",
+                                            "Type": "Integer",
+                                            "Default Value": "0",
+                                            "Description": "Number of slots that this entity can gain per extra strength.",
+                                        },
+                                        {
+                                            "Name": "can_be_siphoned_from",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the contents of this inventory can be removed by a hopper.",
+                                        },
+                                        {
+                                            "Name": "container_type",
+                                            "Type": "String",
+                                            "Default Value": "none",
+                                            "Description": "Type of container this entity has. Can be horse, minecart_chest, chest_boat, minecart_hopper, inventory, container or hopper.",
+                                        },
+                                        {
+                                            "Name": "inventory_size",
+                                            "Type": "Integer",
+                                            "Default Value": "5",
+                                            "Description": "Number of slots the container has.",
+                                        },
+                                        {
+                                            "Name": "private",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the entity will not drop its inventory on death.",
+                                        },
+                                        {
+                                            "Name": "restrict_to_owner",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the entity's inventory can only be accessed by its owner or itself.",
+                                        },
+                                    ],
+                                },
                             ],
                         },
                         {
@@ -32152,6 +31458,129 @@
                             ],
                         },
                         {
+                            "name": "minecraft:shareables",
+                            "id": "minecraft:shareables",
+                            "level": 4,
+                            "content": [
+                                "Defines a list of items the mob wants to share. Each item must have the following parameters:",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "all_items",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "A bucket for all other items in the game. Note this category is always least priority items.",
+                                        },
+                                        {
+                                            "Name": "all_items_max_amount",
+                                            "Type": "Integer",
+                                            "Default Value": "-1",
+                                            "Description": "Maximum number of this item the mob will hold.",
+                                        },
+                                        {
+                                            "Name": "all_items_surplus_amount",
+                                            "Type": "Integer",
+                                            "Default Value": "-1",
+                                            "Description": "Number of this item considered extra that the entity wants to share.",
+                                        },
+                                        {
+                                            "Name": "all_items_want_amount",
+                                            "Type": "Integer",
+                                            "Default Value": "-1",
+                                            "Description": "Number of this item this entity wants to share.",
+                                        },
+                                        {
+                                            "Name": "items",
+                                            "Type": "List",
+                                            "Default Value": "",
+                                            "Description": [
+                                                "List of items or item tags that the entity wants to share. Items in-game will match to this list from top to bottom, meaning that the first occurance of a match, be it name or tag, will shadow those coming after.",
+                                                {
+                                                    "section": "admire",
+                                                    "content": [
+                                                        "Mob will admire the item after picking up by looking at it. For this to happen the mob needs to have an Admire component and an Admire goal.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "barter",
+                                                    "content": [
+                                                        "Mob will barter for the item after picking it up. For this to work the mob needs to have a Barter component and a Barter goal.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "consume_item",
+                                                    "content": [
+                                                        "Determines whether the mob will consume the item or not.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "craft_into",
+                                                    "content": [
+                                                        "Defines the item this entity wants to craft with the item defined by \"item\". Should be an item name.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "item",
+                                                    "content": [
+                                                        "The name of the item. Aux value can be specified, for instance 'minecraft:skull:1'. Alternatively, a tag can be specified to match all items with that tag.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "max_amount",
+                                                    "content": [
+                                                        "Maximum number of this item the mob will hold.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "pickup_limit",
+                                                    "content": [
+                                                        "Maximum number items the mob will pick up during a single goal tick.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "pickup_only",
+                                                    "content": [
+                                                        "Determines whether the mob can only pickup the item and not drop it.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "priority",
+                                                    "content": [
+                                                        "Prioritizes which items the entity prefers. 0 is the highest priority.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "stored_in_inventory",
+                                                    "content": [
+                                                        "Determines whether the mob will try to put the item in its inventory if it has the inventory component and if it can't be equipped.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "surplus_amount",
+                                                    "content": [
+                                                        "Number of this item considered extra that the entity wants to share.",
+                                                    ],
+                                                },
+                                                {
+                                                    "section": "want_amount",
+                                                    "content": [
+                                                        "Number of this item this entity wants to share.",
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                        {
+                                            "Name": "singular_pickup",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "Boolean value that controls if the mob is able to pick up more of the same item if it is already holding that item",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:skin_id",
                             "id": "minecraft:skin_id",
                             "level": 4,
@@ -32184,6 +31613,31 @@
                                             "Type": "Decimal",
                                             "Default Value": "1.0",
                                             "Description": "The value of the volume the entity uses for sound effects.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:strength",
+                            "id": "minecraft:strength",
+                            "level": 4,
+                            "content": [
+                                "Defines the strength of this entity.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "max",
+                                            "Type": "Integer",
+                                            "Default Value": "5",
+                                            "Description": "The maximum strength of this entity",
+                                        },
+                                        {
+                                            "Name": "value",
+                                            "Type": "Integer",
+                                            "Default Value": "1",
+                                            "Description": "The initial value of the strength",
                                         },
                                     ],
                                 },
@@ -32283,6 +31737,122 @@
                             ],
                         },
                         {
+                            "name": "minecraft:teleport",
+                            "id": "minecraft:teleport",
+                            "level": 4,
+                            "content": [
+                                "Defines an entity's teleporting behavior.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "dark_teleport_chance",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.01",
+                                            "Description": "Modifies the chance that the entity will teleport if the entity is in darkness",
+                                        },
+                                        {
+                                            "Name": "light_teleport_chance",
+                                            "Type": "Decimal",
+                                            "Default Value": "0.01",
+                                            "Description": "Modifies the chance that the entity will teleport if the entity is in daylight",
+                                        },
+                                        {
+                                            "Name": "max_random_teleport_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "20",
+                                            "Description": "Maximum amount of time in seconds between random teleports",
+                                        },
+                                        {
+                                            "Name": "min_random_teleport_time",
+                                            "Type": "Decimal",
+                                            "Default Value": "0",
+                                            "Description": "Minimum amount of time in seconds between random teleports",
+                                        },
+                                        {
+                                            "Name": "projectile_filter",
+                                            "Type": "Minecraft Filter",
+                                            "Default Value": "",
+                                            "Description": "Conditions that determine which projectiles cause the entity to attempt to teleport. If omitted, all projectiles cause a teleport attempt",
+                                        },
+                                        {
+                                            "Name": "random_teleport_cube",
+                                            "Type": "Vector [a, b, c]",
+                                            "Default Value": "[32, 16, 32]",
+                                            "Description": "Entity will teleport to a random position within the area defined by this cube",
+                                        },
+                                        {
+                                            "Name": "random_teleports",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, the entity will teleport randomly",
+                                        },
+                                        {
+                                            "Name": "target_distance",
+                                            "Type": "Decimal",
+                                            "Default Value": "16",
+                                            "Description": "Maximum distance the entity will teleport when chasing a target",
+                                        },
+                                        {
+                                            "Name": "target_teleport_chance",
+                                            "Type": "Decimal",
+                                            "Default Value": "1",
+                                            "Description": "The chance that the entity will teleport between 0.0 and 1.0. 1.0 means 100%",
+                                        },
+                                        {
+                                            "Name": "teleports_on_projectile_hit",
+                                            "Type": "Boolean",
+                                            "Default Value": "false",
+                                            "Description": "If true, the entity will attempt to teleport away from projectiles about to hit it",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "name": "minecraft:timer",
+                            "id": "minecraft:timer",
+                            "level": 4,
+                            "content": [
+                                "Adds a timer after which an event will fire.",
+                                {
+                                    "type": "table",
+                                    "rows": [
+                                        {
+                                            "Name": "looping",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, the timer will restart every time after it fires.",
+                                        },
+                                        {
+                                            "Name": "randomInterval",
+                                            "Type": "Boolean",
+                                            "Default Value": "true",
+                                            "Description": "If true, the amount of time on the timer will be random between the min and max values specified in time.",
+                                        },
+                                        {
+                                            "Name": "random_time_choices",
+                                            "Type": "List",
+                                            "Default Value": "[ ]",
+                                            "Description": "This is a list of objects, representing one value in seconds that can be picked before firing the event and an optional weight. Incompatible with time.",
+                                        },
+                                        {
+                                            "Name": "time",
+                                            "Type": "Range [a, b]",
+                                            "Default Value": "[0.0, 0.0]",
+                                            "Description": "Amount of time in seconds for the timer. Can be specified as a number or a pair of numbers (min and max). Incompatible with random_time_choices.",
+                                        },
+                                        {
+                                            "Name": "time_down_event",
+                                            "Type": "String",
+                                            "Default Value": "",
+                                            "Description": "Event to fire when the time on the timer runs out.",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
                             "name": "minecraft:type_family",
                             "id": "minecraft:type_family",
                             "level": 4,
@@ -32366,5 +31936,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "8f2ff2f7d8dda4f5fee6cf23ab0d3b6336a4fe1d",
+    "__OBJECTHASH__": "11508e82fbee232d5dbb64ec8f8d5f41c67af344",
 }

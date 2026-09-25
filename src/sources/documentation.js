@@ -567,6 +567,7 @@ const pageAnalyzer = [
         name: 'entityAttribute',
         documentation: 'Entities',
         path: ['Server Entity Documentation', 'Attributes'],
+        precondition: (_, version) => testMinecraftVersionInRange(version, '', '1.26.60.23'),
         withSchema: true
     }),
     createSectionTableAnalyzer({
