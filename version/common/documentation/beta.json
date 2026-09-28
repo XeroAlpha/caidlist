@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.60.24",
-    "__COMMITHASH__": "20e26bef06b33798422bdf40e25942549608f1b9",
-    "__MESSAGE__": "1.26.60.24-preview",
+    "__VERSION__": "1.26.60.28",
+    "__COMMITHASH__": "1fd999b267ae8f218dffd783df07112f133d6ec5",
+    "__MESSAGE__": "1.26.60.28-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -5207,16 +5207,16 @@
                     "description": "Defines the area of the block that collides with entities. If set to true, default values are used. If set to false, the block's collision with entities is disabled. If this component is omitted, default values are used.",
                     "children": [
                         {
-                            "name": "origin",
-                            "type": "Vector [a, b, c]",
-                            "defaultValue": "[-8.0, 0.0, -8.0]",
-                            "description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
-                        },
-                        {
-                            "name": "size",
+                            "name": "max",
                             "type": "Vector [a, b, c]",
                             "defaultValue": "[16.0, 24.0, 16.0]",
-                            "description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
+                            "description": "Maximum position of the bounds of the collision box. \"max\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
+                        },
+                        {
+                            "name": "min",
+                            "type": "Vector [a, b, c]",
+                            "defaultValue": "[0.0, 0.0, 0.0]",
+                            "description": "Minimal position of the bounds of the collision box. \"min\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
                         },
                     ],
                 },
@@ -15890,7 +15890,7 @@
                     "name": "dismount_mode",
                     "type": "Enumerator",
                     "defaultValue": "default",
-                    "description": "Defines where riders are placed when dismounting this entity:- \"default\", riders are placed on a valid ground position around the entity, or at the center of the entity's collision box if none is found.- \"on_top_center\", riders are placed at the center of the top of the entity's collision box.",
+                    "description": "Defines where riders are placed when dismounting this entity:- \"default\", riders are placed on a valid ground position around the entity, or at the center of the entity's collision box if none is found.- \"on_top_center\", riders are placed at the center of the top of the entity's collision box.- \"look_direction\", riders are placed at the center of the top neighboring block in the riders look direction on a block that is not lava.",
                 },
                 {
                     "name": "family_types",
