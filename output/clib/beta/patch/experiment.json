@@ -2,13 +2,13 @@
 	"$schema": "https://ca.projectxero.top/clib/schema_v1.json",
 	"name": "ID表补丁包增量包（测试版|原版 → 实验性玩法）",
 	"author": "CA制作组",
-	"description": "版本：测试版（1.26.60.28）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
+	"description": "版本：测试版（1.26.60.29）\n分支：原版 → 实验性玩法\n\n该命令库将旧ID表更新到对应的版本。",
 	"uuid": "67ae284f-dc3e-4a13-85f8-a455a1874962",
 	"version": [
 		1,
 		26,
 		60,
-		28
+		29
 	],
 	"require": [
 		{
@@ -17,33 +17,167 @@
 				1,
 				26,
 				60,
-				28
+				29
 			]
 		}
 	],
 	"minCAVersion": "2023-11-15",
-	"minSupportVer": "1.26.60.28",
+	"minSupportVer": "1.26.60.29",
 	"metadata": {
 		"from": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "vanilla",
 			"branchName": "原版",
-			"coreVersion": "1.26.60.28",
-			"packageVersion": "1.26.60.28"
+			"coreVersion": "1.26.60.29",
+			"packageVersion": "1.26.60.29"
 		},
 		"to": {
 			"version": "beta",
 			"versionName": "测试版",
 			"branch": "experiment",
 			"branchName": "实验性玩法",
-			"coreVersion": "1.26.60.28",
-			"packageVersion": "1.26.60.28"
+			"coreVersion": "1.26.60.29",
+			"packageVersion": "1.26.60.29"
 		}
 	},
 	"enums": {
+		"block": {
+			"ice_crystal": "Ice Crystal",
+			"icicle": ""
+		},
+		"item": {
+			"frostbite_spawn_egg": "Frostbite Spawn Egg",
+			"ice_ball": "Ice Ball",
+			"ice_crystal": "Ice Crystal",
+			"icicle": ""
+		},
+		"entity": {
+			"frostbite": "Frostbite",
+			"minecraft:frostbite": "Frostbite"
+		},
+		"fog": {
+			"minecraft:fog_ice_caves": ""
+		},
+		"biome": {
+			"minecraft:ice_caves": "Ice Caves"
+		},
+		"entity_event": {
+			"minecraft:convert_to_frostbite": "",
+			"minecraft:disable_mode_switcher": "",
+			"minecraft:enable_mode_switcher": "",
+			"minecraft:start_transforming_into_frostbite": ""
+		},
+		"entity_family": {
+			"frostbite": "Frostbite",
+			"ice_ball": "Ice Ball"
+		},
+		"animation": {
+			"animation.frostbite.arms_idle": "",
+			"animation.frostbite.baby_arms_idle": ""
+		},
+		"animation_controller": {
+			"controller.animation.frostbite.attack": ""
+		},
+		"sound": {
+			"block.ice.break": "",
+			"block.ice.fall": "",
+			"block.ice.hit": "",
+			"block.ice.land": "",
+			"block.ice.place": "",
+			"block.ice.step": "",
+			"block.ice_crystal.break": "",
+			"block.ice_crystal.fall": "",
+			"block.ice_crystal.hit": "",
+			"block.ice_crystal.land": "",
+			"block.ice_crystal.place": "",
+			"block.ice_crystal.step": "",
+			"block.icicle.break": "",
+			"block.icicle.fall": "",
+			"block.icicle.hit": "",
+			"block.icicle.land": "",
+			"block.icicle.place": "",
+			"block.icicle.step": "",
+			"entity.ice_ball.break": "",
+			"mob.frostbite.ambient": "",
+			"mob.frostbite.death": "",
+			"mob.frostbite.hurt": "",
+			"mob.frostbite.step": ""
+		},
+		"loot_table": {
+			"entities/frostbite": "",
+			"entities/frostbite_ranged_equipment": ""
+		},
+		"loot_table_wrapped": {
+			"\"entities/frostbite\"": "",
+			"\"entities/frostbite_ranged_equipment\"": ""
+		},
 		"camera_preset": {
 			"minecraft:control_scheme_camera": ""
+		},
+		"feature": {
+			"minecraft:deepslate_ore_host_feature": "",
+			"minecraft:hosted_coal_ore_feature": "",
+			"minecraft:hosted_coal_ore_upper_feature": "",
+			"minecraft:hosted_copper_ore_feature": "",
+			"minecraft:hosted_diamond_ore_buried_feature": "",
+			"minecraft:hosted_diamond_ore_feature": "",
+			"minecraft:hosted_diamond_ore_large_feature": "",
+			"minecraft:hosted_gold_ore_feature": "",
+			"minecraft:hosted_gold_ore_lower_feature": "",
+			"minecraft:hosted_iron_ore_feature": "",
+			"minecraft:hosted_iron_ore_small_feature": "",
+			"minecraft:hosted_lapis_ore_buried_feature": "",
+			"minecraft:hosted_lapis_ore_feature": "",
+			"minecraft:hosted_redstone_ore_feature": "",
+			"minecraft:ice_crystal_scatter_feature": "",
+			"minecraft:ice_crystal_single_block_feature": "",
+			"minecraft:ice_crystal_snap_to_floor_feature": "",
+			"minecraft:intrusive_andesite_feature": "",
+			"minecraft:intrusive_diorite_feature": "",
+			"minecraft:intrusive_dirt_feature": "",
+			"minecraft:intrusive_granite_feature": "",
+			"minecraft:intrusive_gravel_ore_feature": "",
+			"minecraft:snow_layer_feature": "",
+			"minecraft:snow_layer_scatter_feature": "",
+			"minecraft:snow_layer_snap_to_floor_feature": "",
+			"minecraft:stone_ore_host_feature": ""
+		},
+		"feature_rule": {
+			"minecraft:ice_caves_after_surface_ice_crystal_feature_rules": "",
+			"minecraft:ice_caves_after_surface_snow_layer_feature_rules": "",
+			"minecraft:overworld_underground_hosted_coal_ore_lower_feature": "",
+			"minecraft:overworld_underground_hosted_coal_ore_upper_feature": "",
+			"minecraft:overworld_underground_hosted_copper_ore_feature": "",
+			"minecraft:overworld_underground_hosted_diamond_ore_buried_feature": "",
+			"minecraft:overworld_underground_hosted_diamond_ore_feature": "",
+			"minecraft:overworld_underground_hosted_diamond_ore_large_feature": "",
+			"minecraft:overworld_underground_hosted_gold_ore_feature": "",
+			"minecraft:overworld_underground_hosted_gold_ore_lower_feature": "",
+			"minecraft:overworld_underground_hosted_iron_ore_middle_feature": "",
+			"minecraft:overworld_underground_hosted_iron_ore_small_feature": "",
+			"minecraft:overworld_underground_hosted_iron_ore_upper_feature": "",
+			"minecraft:overworld_underground_hosted_lapis_ore_buried_feature": "",
+			"minecraft:overworld_underground_hosted_lapis_ore_feature": "",
+			"minecraft:overworld_underground_hosted_redstone_ore_feature": "",
+			"minecraft:overworld_underground_hosted_redstone_ore_lower_feature": "",
+			"minecraft:overworld_underground_intrusive_andesite_lower_feature": "",
+			"minecraft:overworld_underground_intrusive_andesite_upper_feature": "",
+			"minecraft:overworld_underground_intrusive_diorite_lower_feature": "",
+			"minecraft:overworld_underground_intrusive_diorite_upper_feature": "",
+			"minecraft:overworld_underground_intrusive_dirt_feature": "",
+			"minecraft:overworld_underground_intrusive_granite_lower_feature": "",
+			"minecraft:overworld_underground_intrusive_granite_upper_feature": "",
+			"minecraft:overworld_underground_intrusive_gravel_ore_feature": ""
+		},
+		"summonable_entity": {
+			"frostbite": "Frostbite",
+			"minecraft:frostbite": "Frostbite"
+		},
+		"loot_tool": {
+			"minecraft:frostbite_spawn_egg": "Frostbite Spawn Egg",
+			"minecraft:ice_ball": "Ice Ball",
+			"minecraft:ice_crystal": "Ice Crystal"
 		}
 	}
 }
