@@ -398,8 +398,10 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
             setStatus(`Waiting for Minecraft to be foreground: ${foregroundTitle}`);
             await sleepAsync(1000);
         }
-        setStatus('Waiting for 5 seconds...');
-        await sleepAsync(5000);
+        for (let countdown = 5; countdown >= 0; countdown -= 1) {
+            setStatus(`Waiting for ${countdown} seconds...`);
+            await sleepAsync(1000);
+        }
     }
 
     screen.updateStatus({ approxLength });
@@ -439,6 +441,11 @@ async function analyzeCommandAutocompletionFastWin10(cx, screen, command, progre
     let stepCount = 0;
     let duplicatedCount = 0;
     for (;;) {
+        const foregroundTitle = getForegroundWindowTitle();
+        if (!isMinecraftWindowTitle(foregroundTitle)) {
+            throw new Error(`Minecraft is not foreground, current foreground is: ${foregroundTitle}`);
+        }
+
         const oldClipboardText = clipboardText;
         await pressTab();
         await sleepAsync(50);
