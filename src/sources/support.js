@@ -201,7 +201,7 @@ export function locateCommandPoiSubCommand({ coreVersion, branch }) {
             testMinecraftVersionInRange(coreVersion, '1.26.50.26', '*')
         );
     }
-    return false;
+    return testMinecraftVersionInRange(coreVersion, '1.26.70.20', '*');
 }
 locateCommandPoiSubCommand.associatedCommands = [['/locate poi <poi_type: poi type>', '/locate poi <tags: poi tag>']];
 

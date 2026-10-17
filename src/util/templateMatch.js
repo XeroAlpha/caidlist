@@ -111,13 +111,39 @@ export function matchTranslation(options) {
                 }).translation;
                 const valueInStdTransMap = getValueIgnoreCase(stdTransMap, userTranslation);
                 if (valueInStdTransMap) {
-                    userTranslation = valueInStdTransMap;
                     context.warnings.push(
-                        `[${context.name}] Translation Found: ${originalValue} -> ${userTranslation}`
+                        `[${context.name}] Translation Found: ${originalValue} -> ST: ${userTranslation} (${valueInStdTransMap})`
                     );
+                    userTranslation = valueInStdTransMap;
                 } else {
                     context.warnings.push(
                         `[${context.name}] Missing Translation: ${originalValue} -> ${userTranslation}`
+                    );
+                }
+            } else if (source.toLowerCase() === 'pa') {
+                // 未决译名
+                const tempTranslationMap = {};
+                tempTranslationMap[originalValue] = key;
+                userTranslation = matchTranslation({
+                    ...options,
+                    originalValue,
+                    translationMap: tempTranslationMap,
+                    autoMatch: null
+                }).translation;
+                let foundStId;
+                for (const k of Object.getOwnPropertyNames(stdTransMap)) {
+                    const v = stdTransMap[k];
+                    if (v === userTranslation) {
+                        foundStId = k;
+                    }
+                }
+                if (foundStId) {
+                    context.warnings.push(
+                        `[${context.name}] Approved Translation Found: ${originalValue} -> ST: ${foundStId} (${userTranslation})`
+                    );
+                } else {
+                    context.warnings.push(
+                        `[${context.name}] Pending Approval Translation: ${originalValue} -> ${userTranslation}`
                     );
                 }
             } else if (source in resultMaps) {

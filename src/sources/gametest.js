@@ -447,39 +447,42 @@ async function batchedRemoteExtract({
             await dumpRange(start, end);
         }
 
-        // 查漏补缺：以缓存 id 列表为核对宇宙
-        const missing = cacheIds.filter((id) => !(id in output));
-        for (const id of missing) {
-            setStatus(`Fixing ${category} ${id}`);
-            try {
-                const { data } = await wrapEvaluate(frame, fix, id);
-                output[id] = data;
-            } catch (err) {
-                fixFailed.push({ id, err });
+        if (brokenItems.length > 0) {
+            // 账目核对（规则 6）：判死索引数 > 缺失 id 数 → 存在不在缓存中的坏 item
+            if (brokenItems.length > missing.length) {
+                const detail = brokenItems
+                    .slice(-8)
+                    .map((e) => `[${e.index}] ${e.message}`)
+                    .join('\n');
+                throw new Error(
+                    `${brokenItems.length - missing.length} ${category}(s) cannot be extracted and are not in the cache. ` +
+                        `Please manually dump them and add the data to the cache, ` +
+                        `or add the key with a null value to mark them as known-unavailable.\n${detail}`
+                );
             }
-        }
 
-        // 账目核对（规则 6）：判死索引数 > 缺失 id 数 → 存在不在缓存中的坏 item
-        if (brokenItems.length > missing.length) {
-            const detail = brokenItems
-                .slice(-8)
-                .map((e) => `[${e.index}] ${e.message}`)
-                .join('\n');
-            throw new Error(
-                `${brokenItems.length - missing.length} ${category}(s) cannot be extracted and are not in the cache. ` +
-                    `Please manually dump them and add the data to the cache, ` +
-                    `or add the key with a null value to mark them as known-unavailable.\n${detail}`
-            );
-        }
+            // 查漏补缺：以缓存 id 列表为核对宇宙
+            const missing = cacheIds.filter((id) => !(id in output));
+            for (const id of missing) {
+                setStatus(`Fixing ${category} ${id}`);
+                try {
+                    const { data } = await wrapEvaluate(frame, fix, id);
+                    output[id] = data;
+                } catch (err) {
+                    fixFailed.push({ id, err });
+                }
+            }
 
-        // 两条路径均失败的缓存 item（规则 5）：warn（附带原始错误）并回填缓存数据；
-        // 缓存中值为 null 表示「键有效、值未知」：emitNull 时以 null 占位输出，由调用方自行处理
-        for (const { id, err } of fixFailed) {
-            warn(`${category} ${id} failed on both index and id paths, ignored`, err);
-            if (cache[id] != null) {
-                output[id] = cache[id];
-            } else if (emitNull) {
-                output[id] = null;
+            // 两条路径均失败的缓存 item（规则 5）：warn（附带原始错误）并回填缓存数据；
+            // 缓存中值为 null 表示「键有效、值未知」：emitNull 时以 null 占位输出，由调用方自行处理
+            for (const { id, err } of fixFailed) {
+                if (cache[id] != null) {
+                    output[id] = cache[id];
+                } else if (emitNull) {
+                    output[id] = null;
+                } else {
+                    warn(`${category} ${id} failed on both index and id paths, ignored`, err);
+                }
             }
         }
         return output;
@@ -1089,10 +1092,13 @@ const Extractors = [
                     componentInstances.forEach((component) => {
                         const componentData = {};
                         const componentId = component.typeId;
-                        if (component instanceof Minecraft.ItemBlockDynamicPropertiesComponent) {
+                        if (
+                            component.typeId === Minecraft.ItemBlockDynamicPropertiesComponent?.componentId ||
+                            component.typeId === Minecraft.ItemBlockEntityStorageComponent?.componentId
+                        ) {
                             return;
                         }
-                        if (component instanceof Minecraft.ItemEnchantableComponent) {
+                        if (component.typeId === Minecraft.ItemEnchantableComponent?.componentId) {
                             const enchantmentSlots = component.slots.filter((e) => e);
                             const existedEnchantments = component.getEnchantments();
                             const applicableEnchantments = enchantments.filter((e) => component.canAddEnchantment(e));
@@ -1106,12 +1112,12 @@ const Extractors = [
                                 componentData.applicableEnchantments = applicableEnchantments.map((e) => e.type.id);
                             }
                         }
-                        if (component instanceof Minecraft.ItemCooldownComponent) {
+                        if (component.typeId === Minecraft.ItemCooldownComponent?.componentId) {
                             if (component.cooldownTicks > 0) {
                                 assign(componentData, component, ['cooldownCategory', 'cooldownTicks']);
                             }
                         }
-                        if (component instanceof Minecraft.ItemDurabilityComponent) {
+                        if (component.typeId === Minecraft.ItemDurabilityComponent?.componentId) {
                             if (component.damage > 0) {
                                 componentData.defaultDamage = component.damage;
                             }
@@ -1121,7 +1127,7 @@ const Extractors = [
                                 componentData.damageChances = damageChances;
                             }
                         }
-                        if (component instanceof Minecraft.ItemFoodComponent) {
+                        if (component.typeId === Minecraft.ItemFoodComponent?.componentId) {
                             assign(componentData, component, [
                                 'canAlwaysEat',
                                 'nutrition',
@@ -1129,18 +1135,18 @@ const Extractors = [
                                 'usingConvertsTo'
                             ]);
                         }
-                        if (component instanceof Minecraft.ItemPotionComponent) {
+                        if (component.typeId === Minecraft.ItemPotionComponent?.componentId) {
                             componentData.potionEffectType = component.potionEffectType.id;
                             componentData.potionDurationTicks = component.potionEffectType.durationTicks;
                             componentData.potionDeliveryType = component.potionDeliveryType.id;
                         }
-                        if (component instanceof Minecraft.ItemDyeableComponent) {
+                        if (component.typeId === Minecraft.ItemDyeableComponent?.componentId) {
                             assign(componentData, component, ['color', 'defaultColor']);
                         }
-                        if (component instanceof Minecraft.ItemCompostableComponent) {
+                        if (component.typeId === Minecraft.ItemCompostableComponent?.componentId) {
                             assign(componentData, component, ['compostingChance']);
                         }
-                        if (component instanceof Minecraft.ItemInventoryComponent) {
+                        if (component.typeId === Minecraft.ItemInventoryComponent?.componentId) {
                             const { containerRules } = component.container;
                             if (containerRules) {
                                 const { allowedItems, allowNestedStorageItems, bannedItems, weightLimit } =

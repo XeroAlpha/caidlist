@@ -161,7 +161,7 @@ const entryAnalyzer = [
                 warn(`Unknown format version: ${formatVersion} - ${entryName}`);
             }
         },
-        versionsGroups: [['1.14.0', '1.20.20', '1.26.50', '1.26.60']]
+        versionsGroups: [['1.14.0', '1.20.20', '1.26.50', '1.26.60', '1.26.70']]
     },
     // {
     //     name: 'particle',
@@ -419,6 +419,7 @@ const entryAnalyzer = [
                 '1.26.40',
                 '1.26.50',
                 '1.26.60',
+                '1.26.70',
                 'beta'
             ]
         ]
