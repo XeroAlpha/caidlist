@@ -1,5 +1,5 @@
 {
-    "packageVersion": "1.26.70.20",
+    "packageVersion": "1.26.70.21",
     "protocolVersion": 11,
     "scopeTree": {
         "type": "object",
@@ -23784,6 +23784,13 @@
                                         },
                                         "readOnly": true,
                                     },
+                                    "GamepadAndMouse": {
+                                        "value": {
+                                            "type": "string",
+                                            "value": "GamepadAndMouse",
+                                        },
+                                        "readOnly": true,
+                                    },
                                     "KeyboardAndMouse": {
                                         "value": {
                                             "type": "string",
@@ -24414,7 +24421,7 @@
                                     "componentId": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:block_actor_dynamic_properties",
+                                            "value": "minecraft:block_dynamic_properties",
                                         },
                                         "readOnly": true,
                                     },
@@ -25170,7 +25177,7 @@
                                     "BlockDynamicProperties": {
                                         "value": {
                                             "type": "string",
-                                            "value": "minecraft:block_actor_dynamic_properties",
+                                            "value": "minecraft:block_dynamic_properties",
                                         },
                                         "readOnly": true,
                                     },
@@ -50528,6 +50535,7 @@
         "Minecraft.InputInfo.prototype.touchOnlyAffectsHotbar.[[Get]]",
         "Minecraft.InputMode",
         "Minecraft.InputMode.Gamepad",
+        "Minecraft.InputMode.GamepadAndMouse",
         "Minecraft.InputMode.KeyboardAndMouse",
         "Minecraft.InputMode.MotionController",
         "Minecraft.InputMode.Touch",
@@ -79294,6 +79302,135 @@
             "itemId": "<same>",
             "localizationKey": "tile.packed_ice.name",
         },
+        "minecraft:packed_ice_bricks": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.packed_ice_bricks.name",
+        },
+        "minecraft:packed_ice_bricks_chiseled": {
+            "properties": [],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.packed_ice_bricks_chiseled.name",
+        },
+        "minecraft:packed_ice_bricks_double_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "minecraft:packed_ice_bricks_slab",
+            "localizationKey": "tile.packed_ice_bricks_double_slab.name",
+        },
+        "minecraft:packed_ice_bricks_slab": {
+            "properties": [
+                {
+                    "name": "minecraft:vertical_half",
+                    "validValues": [
+                        "bottom",
+                        "top",
+                    ],
+                    "defaultValue": "bottom",
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.packed_ice_bricks_slab.name",
+        },
+        "minecraft:packed_ice_bricks_stairs": {
+            "properties": [
+                {
+                    "name": "minecraft:corner",
+                    "validValues": [
+                        "none",
+                        "inner_left",
+                        "inner_right",
+                        "outer_left",
+                        "outer_right",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "upside_down_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+                {
+                    "name": "weirdo_direction",
+                    "validValues": [
+                        0,
+                        1,
+                        2,
+                        3,
+                    ],
+                    "defaultValue": 0,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.packed_ice_bricks_stairs.name",
+        },
+        "minecraft:packed_ice_bricks_wall": {
+            "properties": [
+                {
+                    "name": "wall_connection_type_east",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_north",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_south",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_connection_type_west",
+                    "validValues": [
+                        "none",
+                        "short",
+                        "tall",
+                    ],
+                    "defaultValue": "none",
+                },
+                {
+                    "name": "wall_post_bit",
+                    "validValues": [
+                        false,
+                        true,
+                    ],
+                    "defaultValue": false,
+                },
+            ],
+            "invalidStates": [],
+            "itemId": "<same>",
+            "localizationKey": "tile.packed_ice_bricks_wall.name",
+        },
         "minecraft:packed_mud": {
             "properties": [],
             "invalidStates": [],
@@ -96922,6 +97059,7 @@
                     "minecraft:orange_concrete_stairs": "none",
                     "minecraft:orange_wool_stairs": "none",
                     "minecraft:oxidized_cut_copper_stairs": "none",
+                    "minecraft:packed_ice_bricks_stairs": "none",
                     "minecraft:pale_oak_stairs": "none",
                     "minecraft:pink_concrete_stairs": "none",
                     "minecraft:pink_wool_stairs": "none",
@@ -97136,6 +97274,8 @@
                     "minecraft:orange_wool_slab": "bottom",
                     "minecraft:oxidized_cut_copper_slab": "bottom",
                     "minecraft:oxidized_double_cut_copper_slab": "bottom",
+                    "minecraft:packed_ice_bricks_double_slab": "bottom",
+                    "minecraft:packed_ice_bricks_slab": "bottom",
                     "minecraft:pale_oak_double_slab": "bottom",
                     "minecraft:pale_oak_slab": "bottom",
                     "minecraft:petrified_oak_double_slab": "bottom",
@@ -98756,6 +98896,7 @@
                     "minecraft:orange_wool_stairs": false,
                     "minecraft:oxidized_copper_trapdoor": false,
                     "minecraft:oxidized_cut_copper_stairs": false,
+                    "minecraft:packed_ice_bricks_stairs": false,
                     "minecraft:pale_oak_stairs": false,
                     "minecraft:pale_oak_trapdoor": false,
                     "minecraft:pink_concrete_stairs": false,
@@ -98913,6 +99054,7 @@
                     "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:nether_brick_wall": "none",
+                    "minecraft:packed_ice_bricks_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_cinnabar_wall": "none",
@@ -98957,6 +99099,7 @@
                     "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:nether_brick_wall": "none",
+                    "minecraft:packed_ice_bricks_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_cinnabar_wall": "none",
@@ -99001,6 +99144,7 @@
                     "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:nether_brick_wall": "none",
+                    "minecraft:packed_ice_bricks_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_cinnabar_wall": "none",
@@ -99045,6 +99189,7 @@
                     "minecraft:mossy_stone_brick_wall": "none",
                     "minecraft:mud_brick_wall": "none",
                     "minecraft:nether_brick_wall": "none",
+                    "minecraft:packed_ice_bricks_wall": "none",
                     "minecraft:polished_blackstone_brick_wall": "none",
                     "minecraft:polished_blackstone_wall": "none",
                     "minecraft:polished_cinnabar_wall": "none",
@@ -99088,6 +99233,7 @@
                     "minecraft:mossy_stone_brick_wall": false,
                     "minecraft:mud_brick_wall": false,
                     "minecraft:nether_brick_wall": false,
+                    "minecraft:packed_ice_bricks_wall": false,
                     "minecraft:polished_blackstone_brick_wall": false,
                     "minecraft:polished_blackstone_wall": false,
                     "minecraft:polished_cinnabar_wall": false,
@@ -99203,6 +99349,7 @@
                     "minecraft:orange_concrete_stairs": 0,
                     "minecraft:orange_wool_stairs": 0,
                     "minecraft:oxidized_cut_copper_stairs": 0,
+                    "minecraft:packed_ice_bricks_stairs": 0,
                     "minecraft:pale_oak_stairs": 0,
                     "minecraft:pink_concrete_stairs": 0,
                     "minecraft:pink_wool_stairs": 0,
@@ -99472,6 +99619,7 @@
             "minecraft:orange_concrete_stairs": {},
             "minecraft:orange_wool_stairs": {},
             "minecraft:oxidized_cut_copper_stairs": {},
+            "minecraft:packed_ice_bricks_stairs": {},
             "minecraft:pale_oak_stairs": {},
             "minecraft:pink_concrete_stairs": {},
             "minecraft:pink_wool_stairs": {},
@@ -100211,6 +100359,12 @@
             "minecraft:oxidized_double_cut_copper_slab": {},
             "minecraft:oxidized_lightning_rod": {},
             "minecraft:packed_ice": {},
+            "minecraft:packed_ice_bricks": {},
+            "minecraft:packed_ice_bricks_chiseled": {},
+            "minecraft:packed_ice_bricks_double_slab": {},
+            "minecraft:packed_ice_bricks_slab": {},
+            "minecraft:packed_ice_bricks_stairs": {},
+            "minecraft:packed_ice_bricks_wall": {},
             "minecraft:packed_mud": {},
             "minecraft:petrified_oak_double_slab": {},
             "minecraft:petrified_oak_slab": {},
@@ -101610,6 +101764,7 @@
             "minecraft:oxidized_cut_copper_slab": {},
             "minecraft:oxidized_cut_copper_stairs": {},
             "minecraft:oxidized_lightning_rod": {},
+            "minecraft:packed_ice_bricks_wall": {},
             "minecraft:pale_moss_carpet": {},
             "minecraft:pale_oak_button": {},
             "minecraft:pale_oak_door": {},
@@ -102712,6 +102867,12 @@
                 "minecraft:oxidized_double_cut_copper_slab": {},
                 "minecraft:oxidized_lightning_rod": {},
                 "minecraft:packed_ice": {},
+                "minecraft:packed_ice_bricks": {},
+                "minecraft:packed_ice_bricks_chiseled": {},
+                "minecraft:packed_ice_bricks_double_slab": {},
+                "minecraft:packed_ice_bricks_slab": {},
+                "minecraft:packed_ice_bricks_stairs": {},
+                "minecraft:packed_ice_bricks_wall": {},
                 "minecraft:packed_mud": {},
                 "minecraft:pale_moss_block": {},
                 "minecraft:pale_oak_button": {},
@@ -111427,6 +111588,30 @@
                 "minecraft:sulfur_cube_archetype_fast_sliding",
             ],
         },
+        "minecraft:packed_ice_bricks": {
+            "localizationKey": "tile.packed_ice_bricks.name",
+            "tags": [
+                "minecraft:sulfur_cube_archetype_fast_sliding",
+            ],
+        },
+        "minecraft:packed_ice_bricks_chiseled": {
+            "localizationKey": "tile.packed_ice_bricks_chiseled.name",
+            "tags": [
+                "minecraft:sulfur_cube_archetype_fast_sliding",
+            ],
+        },
+        "minecraft:packed_ice_bricks_slab": {
+            "localizationKey": "tile.packed_ice_bricks_slab.name",
+            "tags": [],
+        },
+        "minecraft:packed_ice_bricks_stairs": {
+            "localizationKey": "tile.packed_ice_bricks_stairs.name",
+            "tags": [],
+        },
+        "minecraft:packed_ice_bricks_wall": {
+            "localizationKey": "tile.packed_ice_bricks_wall.name",
+            "tags": [],
+        },
         "minecraft:packed_mud": {
             "localizationKey": "tile.packed_mud.name",
             "tags": [
@@ -116446,6 +116631,8 @@
         "minecraft:sulfur_cube_archetype_fast_sliding": [
             "minecraft:blue_ice",
             "minecraft:packed_ice",
+            "minecraft:packed_ice_bricks",
+            "minecraft:packed_ice_bricks_chiseled",
             "minecraft:snow",
         ],
         "minecraft:sulfur_cube_archetype_high_resistance": [
@@ -117482,6 +117669,7 @@
                 "ocean",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "fast_fishing",
                 "high_seas",
             ],
@@ -117496,6 +117684,7 @@
                 "taiga",
                 "has_structure_trail_ruins",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "has_structure_abandoned_camp",
             ],
         },
@@ -117523,6 +117712,7 @@
                 "taiga",
                 "overworld_generation",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
             ],
         },
         "minecraft:crimson_forest": {
@@ -117554,6 +117744,7 @@
                 "ocean",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "fast_fishing",
                 "high_seas",
             ],
@@ -117674,6 +117865,7 @@
                 "mountain",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
             ],
         },
         "minecraft:extreme_hills_mutated": {
@@ -117695,6 +117887,7 @@
                 "mountain",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "has_structure_abandoned_camp",
             ],
         },
@@ -117813,6 +118006,8 @@
                 "ice_caves",
                 "overworld",
                 "monster",
+                "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "no_dirt",
                 "no_granite",
                 "hosted_ores",
@@ -117933,6 +118128,7 @@
                 "ocean",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
                 "spawns_polar_bears_on_alternate_blocks",
                 "fast_fishing",
                 "high_seas",
@@ -118262,6 +118458,7 @@
                 "monster",
                 "overworld",
                 "spawns_cold_variant_farm_animals",
+                "spawns_cold_variant_frogs",
             ],
         },
         "minecraft:sulfur_caves": {
@@ -119018,6 +119215,7 @@
             "minecraft:frozen_peaks",
             "minecraft:frozen_river",
             "minecraft:grove",
+            "minecraft:ice_caves",
             "minecraft:ice_mountains",
             "minecraft:ice_plains",
             "minecraft:ice_plains_spikes",
@@ -119036,18 +119234,27 @@
         ],
         "spawns_cold_variant_frogs": [
             "minecraft:cold_beach",
+            "minecraft:cold_ocean",
+            "minecraft:cold_taiga",
             "minecraft:cold_taiga_hills",
+            "minecraft:cold_taiga_mutated",
+            "minecraft:deep_cold_ocean",
             "minecraft:deep_dark",
             "minecraft:deep_frozen_ocean",
+            "minecraft:extreme_hills_edge",
+            "minecraft:extreme_hills_plus_trees",
             "minecraft:frozen_ocean",
             "minecraft:frozen_peaks",
             "minecraft:frozen_river",
             "minecraft:grove",
+            "minecraft:ice_caves",
             "minecraft:ice_mountains",
             "minecraft:ice_plains",
             "minecraft:ice_plains_spikes",
             "minecraft:jagged_peaks",
+            "minecraft:legacy_frozen_ocean",
             "minecraft:snowy_slopes",
+            "minecraft:stony_peaks",
             "minecraft:the_end",
         ],
         "spawns_gold_rabbits": [
@@ -119509,6 +119716,54 @@
         },
         "ThrownSplash": {
             "items": "minecraft:splash_potion",
+        },
+    },
+    "soundEvents": {},
+    "musicEvents": {
+        "0661b43c299c469a96a6b512004de648:music": {
+            "durationInSeconds": 182.6009979248047,
+            "title": "Beginning 2",
+            "artist": "C418",
+        },
+        "334d94059b9c4f9da26da95b8a9c52c1:music": {
+            "durationInSeconds": 194.593994140625,
+            "title": "Mutation",
+            "artist": "C418",
+        },
+        "3d4c13e4c76c4e21b9904e9751971ebe:music": {
+            "durationInSeconds": 244.75,
+            "title": "Floating Trees",
+            "artist": "C418",
+        },
+        "42f2b2e8365843edbdb2bd5a7fff0048:music": {
+            "durationInSeconds": 302.1419982910156,
+            "title": "Nightly",
+            "artist": "fingerspit",
+        },
+        "80d5002cd2fe4cfcbb8d4d9b3fd28b79:music": {
+            "durationInSeconds": 306.4859924316406,
+            "title": "Ebb",
+            "artist": "fingerspit",
+        },
+        "d0fea28df732444bb94c16bf45255478:music": {
+            "durationInSeconds": 380.2130126953125,
+            "title": "Home",
+            "artist": "fingerspit",
+        },
+        "de2af0fa6e8348048c8909b5db2c96f1:music": {
+            "durationInSeconds": 245.29400634765625,
+            "title": "Memories",
+            "artist": "fingerspit",
+        },
+        "ed32eb1313a1427c8e544baad40c7e5b:music": {
+            "durationInSeconds": 320,
+            "title": "Shores",
+            "artist": "fingerspit",
+        },
+        "f1aecabb73df492a847f1bf1287ce7ea:music": {
+            "durationInSeconds": 183.6479949951172,
+            "title": "Moog City 2",
+            "artist": "C418",
         },
     },
 }

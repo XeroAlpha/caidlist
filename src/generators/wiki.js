@@ -30,7 +30,11 @@ export function writeWikiBlockStateValuesBE(cx, outputFile, blockData) {
             lines.push(`${indent}['${blockIdWithoutNamespace}'] = {`);
             for (const property of blockInfo.properties) {
                 const validOverride = blockInfo.validStateOverrides?.[property.name];
-                if (validOverride) {
+                // 安卓端 BE 的 SAPI 会跑出莫名其妙的结果，这里手动进行过滤
+                const shouldPatch =
+                    (blockIdWithoutNamespace === 'creaking_heart' && property.name === 'creaking_heart_state') ||
+                    (blockIdWithoutNamespace === 'sculk_sensor' && property.name === 'sculk_sensor_phase');
+                if (validOverride && !shouldPatch) {
                     lines.push(
                         `${indent}${indent}{'${property.name}', '${property.defaultValue}', valid = {${validOverride.map((e) => `'${e}'`).join(', ')}}},`
                     );
@@ -93,6 +97,58 @@ export function writeWikiBlockIdValuesBE(cx, outputFile, blockTranslations) {
             lines.push(`${indent}['${name}'] = '${idWithoutNamespace}',`);
         }
     }
+    lines.push('}');
+    lines.push('');
+    writeFileSync(outputFile, lines.join('\n'));
+}
+
+export function writeWikiGameTagsBE(cx, outputFile, { biomeTags, blockTags, itemTags }) {
+    const indent = '\t';
+    // eslint-disable-next-line prettier/prettier
+    const lines = [
+        '-- https://zh.minecraft.wiki/w/Module:GameTag/SnapOriBE',
+        'return {',
+        `${indent}-- 自动生成`
+    ];
+
+    const biomeTagNames = naturalOrderSort(Object.keys(biomeTags));
+    lines.push(`${indent}['biomes'] = {`);
+    for (const biomeTag of biomeTagNames) {
+        const biomes = naturalOrderSort(biomeTags[biomeTag]);
+        lines.push(`${indent.repeat(2)}['${biomeTag}'] = {`);
+        for (const biomeId of biomes) {
+            lines.push(`${indent.repeat(3)}'${biomeId}',`);
+        }
+        lines.push(`${indent.repeat(2)}},`);
+    }
+    lines.push(`${indent}},`);
+
+    const blockTagNames = naturalOrderSort(Object.keys(blockTags));
+    lines.push(`${indent}['blocks'] = {`);
+    for (const blockTag of blockTagNames) {
+        const blocks = naturalOrderSort(Object.keys(blockTags[blockTag]));
+        lines.push(`${indent.repeat(2)}['${blockTag}'] = {`);
+        for (const blockId of blocks) {
+            const idWithoutNamespace = blockId.replace(/^minecraft:/, '');
+            lines.push(`${indent.repeat(3)}'${idWithoutNamespace}',`);
+        }
+        lines.push(`${indent.repeat(2)}},`);
+    }
+    lines.push(`${indent}},`);
+
+    const itemTagNames = naturalOrderSort(Object.keys(itemTags));
+    lines.push(`${indent}['items'] = {`);
+    for (const itemTag of itemTagNames) {
+        const items = naturalOrderSort(itemTags[itemTag]);
+        lines.push(`${indent.repeat(2)}['${itemTag}'] = {`);
+        for (const itemId of items) {
+            const idWithoutNamespace = itemId.replace(/^minecraft:/, '');
+            lines.push(`${indent.repeat(3)}'${idWithoutNamespace}',`);
+        }
+        lines.push(`${indent.repeat(2)}},`);
+    }
+    lines.push(`${indent}},`);
+
     lines.push('}');
     lines.push('');
     writeFileSync(outputFile, lines.join('\n'));

@@ -30,7 +30,8 @@ import { buildBSDocFromTransMap, buildBSTransKeys } from './generators/blockStat
 import {
     writeWikiBlockStateValuesBE,
     writeWikiBlockPropertyValuesBE,
-    writeWikiBlockIdValuesBE
+    writeWikiBlockIdValuesBE,
+    writeWikiGameTagsBE
 } from './generators/wiki.js';
 
 const BASE_LANG_ID = 'en_us';
@@ -817,6 +818,7 @@ async function generateGameTestOutputFiles(cx) {
             projectPath('output.wiki.module.blockIdValues', 'lua'),
             translationResultMaps.block
         );
+        writeWikiGameTagsBE(cx, projectPath('output.wiki.module.gameTags', 'lua'), ids);
     }
 }
 

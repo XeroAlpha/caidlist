@@ -1405,7 +1405,7 @@ const Extractors = [
                         }
                     }
                     if (soundDefinition.musicInfo) {
-                        musicEvents[soundDefinition.musicEventId] = soundEvent;
+                        musicEvents[soundDefinition.soundEventId] = soundEvent;
                     } else {
                         soundEvents[soundDefinition.soundEventId] = soundEvent;
                     }
