@@ -48,19 +48,25 @@
                                     "Description": [
                                         "Defines the area of the block that collides with entities. If set to true, default values are used. If set to false, the block's collision with entities is disabled. If this component is omitted, default values are used.",
                                         {
-                                            "type": "table",
-                                            "rows": [
+                                            "section": "Using custom boxes",
+                                            "content": [
+                                                "An array of boxes that define the area of the block that collides with entities.",
                                                 {
-                                                    "Name": "max",
-                                                    "Type": "Vector [a, b, c]",
-                                                    "Default Value": "[16.0, 24.0, 16.0]",
-                                                    "Description": "Maximum position of the bounds of the collision box. \"max\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
-                                                },
-                                                {
-                                                    "Name": "min",
-                                                    "Type": "Vector [a, b, c]",
-                                                    "Default Value": "[0.0, 0.0, 0.0]",
-                                                    "Description": "Minimal position of the bounds of the collision box. \"min\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
+                                                    "type": "table",
+                                                    "rows": [
+                                                        {
+                                                            "Name": "max",
+                                                            "Type": "Vector [a, b, c]",
+                                                            "Default Value": "[16.0, 24.0, 16.0]",
+                                                            "Description": "Maximum position of the bounds of the collision box. \"max\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
+                                                        },
+                                                        {
+                                                            "Name": "min",
+                                                            "Type": "Vector [a, b, c]",
+                                                            "Default Value": "[0.0, 0.0, 0.0]",
+                                                            "Description": "Minimal position of the bounds of the collision box. \"min\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
+                                                        },
+                                                    ],
                                                 },
                                             ],
                                         },
@@ -147,6 +153,12 @@
                                             "type": "table",
                                             "rows": [
                                                 {
+                                                    "Name": "base_time_to_destroy",
+                                                    "Type": "Decimal",
+                                                    "Default Value": "0.0",
+                                                    "Description": "Sets the number of server simulation ticks it takes to mine the block with base equipment. Greater numbers result in greater mining times. A negative number means the block can't be mined.",
+                                                },
+                                                {
                                                     "Name": "item_specific_speeds",
                                                     "Type": "Array",
                                                     "Default Value": "",
@@ -167,12 +179,6 @@
                                                             ],
                                                         },
                                                     ],
-                                                },
-                                                {
-                                                    "Name": "seconds_to_destroy",
-                                                    "Type": "Decimal",
-                                                    "Default Value": "0.0",
-                                                    "Description": "Sets the number of seconds it takes to destroy the block with base equipment. Greater numbers result in greater mining times.",
                                                 },
                                             ],
                                         },
@@ -837,7 +843,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.26.60\",",
+                                        "  \"format_version\": \"1.26.70\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1525,5 +1531,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "1a03264d82502620dd67033e8994b02d28c93a46",
+    "__OBJECTHASH__": "fda9fa17527b7e7d067a22a0649adea69a6149f0",
 }

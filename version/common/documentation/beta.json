@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.60.30",
-    "__COMMITHASH__": "4d30ae63750467771b6eccda105f732c6cb77ff7",
-    "__MESSAGE__": "1.26.60.30-preview",
+    "__VERSION__": "1.26.70.22",
+    "__COMMITHASH__": "099c396dfc07a3c2f06f5fb63971a76afbd01f7e",
+    "__MESSAGE__": "1.26.70.22-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -833,6 +833,14 @@
                             ],
                         },
                         {
+                            "name": "horizontal_speed",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "hourly_clock_time",
                             "sections": [
                                 {
@@ -1401,6 +1409,14 @@
                             ],
                         },
                         {
+                            "name": "speed",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
                             "name": "surface_mob",
                             "sections": [
                                 {
@@ -1426,6 +1442,14 @@
                         },
                         {
                             "name": "trusts",
+                            "sections": [
+                                {
+                                    "name": "Examples",
+                                },
+                            ],
+                        },
+                        {
+                            "name": "vertical_speed",
                             "sections": [
                                 {
                                     "name": "Examples",
@@ -1969,12 +1993,6 @@
                                 },
                                 {
                                     "name": "minecraft:behavior.trade_with_player (See JSON Schema since 1.26.10)",
-                                },
-                                {
-                                    "name": "minecraft:behavior.vex_copy_owner_target",
-                                },
-                                {
-                                    "name": "minecraft:behavior.vex_random_move",
                                 },
                                 {
                                     "name": "minecraft:behavior.wither_random_attack_pos_goal",
@@ -2541,6 +2559,9 @@
                                     "name": "minecraft:timer",
                                 },
                                 {
+                                    "name": "minecraft:trail",
+                                },
+                                {
                                     "name": "minecraft:type_family",
                                 },
                                 {
@@ -2724,6 +2745,9 @@
                         },
                         {
                             "name": "minecraft:weighted_random_feature",
+                        },
+                        {
+                            "name": "minecraft:crevasse_feature",
                         },
                         {
                             "name": "minecraft:multi_block_feature",
@@ -3493,6 +3517,7 @@
         "big_dripleaf_tilt": "Determines the tilt state of big dripleaf block",
         "bite_counter": "Tracks how many bites of cake have been taken",
         "books_stored": "Determines how many books are stored in the chiseled bookshelf",
+        "bottom": "Determines if a scaffolding block is unsupported from below and renders its lower support poles",
         "brewing_stand_slot_a_bit": "Determines if a bottle is shown in slot a of the brewing stand",
         "brewing_stand_slot_b_bit": "Determines if a bottle is shown in slot b of the brewing stand",
         "brewing_stand_slot_c_bit": "Determines if a bottle is shown in slot c of the brewing stand",
@@ -3539,6 +3564,7 @@
         "item_frame_photo_bit": "Describes if an item frame block has a photo in it",
         "liquid_depth": "Determines the level of liquid blocks",
         "lit": "Determines if a block is lit or not",
+        "locked": "Determines if a repeater is locked by a powered repeater or comparator facing into its side",
         "minecraft:block_face": "Which blockface the player placed the block on.",
         "minecraft:cardinal_direction": "Defines the cardinal placement direction of a block.",
         "minecraft:connection_down": "Whether the block is connected to another block below.",
@@ -3751,6 +3777,7 @@
         "minecraft:brick_slab": "",
         "minecraft:brick_stairs": "",
         "minecraft:brick_wall": "",
+        "minecraft:brittle_ice": "",
         "minecraft:brown_candle": "",
         "minecraft:brown_candle_cake": "",
         "minecraft:brown_carpet": "",
@@ -4003,7 +4030,6 @@
         "minecraft:diorite_wall": "",
         "minecraft:dirt": "",
         "minecraft:dirt_with_roots": "",
-        "minecraft:disc_press": "",
         "minecraft:dispenser": "",
         "minecraft:double_cut_copper_slab": "",
         "minecraft:dragon_egg": "",
@@ -4501,6 +4527,7 @@
         "minecraft:oxidized_double_cut_copper_slab": "",
         "minecraft:oxidized_lightning_rod": "",
         "minecraft:packed_ice": "",
+        "minecraft:packed_ice_brick_wall": "",
         "minecraft:packed_mud": "",
         "minecraft:pale_hanging_moss": "",
         "minecraft:pale_moss_block": "",
@@ -4742,6 +4769,7 @@
         "minecraft:smooth_stone_slab": "",
         "minecraft:sniffer_egg": "",
         "minecraft:snow": "",
+        "minecraft:snow_brick_wall": "",
         "minecraft:snow_layer": "",
         "minecraft:soul_campfire": "",
         "minecraft:soul_fire": "",
@@ -5209,21 +5237,6 @@
                     "name": "minecraft:collision_box",
                     "type": "Boolean / JSON Object",
                     "defaultValue": "true",
-                    "description": "Defines the area of the block that collides with entities. If set to true, default values are used. If set to false, the block's collision with entities is disabled. If this component is omitted, default values are used.",
-                    "children": [
-                        {
-                            "name": "max",
-                            "type": "Vector [a, b, c]",
-                            "defaultValue": "[16.0, 24.0, 16.0]",
-                            "description": "Maximum position of the bounds of the collision box. \"max\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
-                        },
-                        {
-                            "name": "min",
-                            "type": "Vector [a, b, c]",
-                            "defaultValue": "[0.0, 0.0, 0.0]",
-                            "description": "Minimal position of the bounds of the collision box. \"min\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
-                        },
-                    ],
                 },
                 {
                     "name": "minecraft:connection_rule",
@@ -5277,15 +5290,15 @@
                     "description": "Describes the destructible by mining properties for this block. If set to true, the block will take the default number of seconds to destroy. If set to false, this block is indestructible by mining. If the component is omitted, the block will take the default number of seconds to destroy.",
                     "children": [
                         {
+                            "name": "base_time_to_destroy",
+                            "type": "Decimal",
+                            "defaultValue": "0.0",
+                            "description": "Sets the number of server simulation ticks it takes to mine the block with base equipment. Greater numbers result in greater mining times. A negative number means the block can't be mined.",
+                        },
+                        {
                             "name": "item_specific_speeds",
                             "type": "Array",
                             "defaultValue": "",
-                        },
-                        {
-                            "name": "seconds_to_destroy",
-                            "type": "Decimal",
-                            "defaultValue": "0.0",
-                            "description": "Sets the number of seconds it takes to destroy the block with base equipment. Greater numbers result in greater mining times.",
                         },
                     ],
                 },
@@ -6124,6 +6137,7 @@
         "has_target": "Returns true if the subject entity has a valid target.",
         "has_trade_supply": "Tests whether the target has any trade supply left. Will return false if the target cannot be traded with.",
         "home_distance": "Tests the distance between the subject and its home. Returns false if the subject has no home or if their home is in a different dimension.",
+        "horizontal_speed": "Tests the subject entity's horizontal speed in meters per second.",
         "hourly_clock_time": "Compares the current 24 hour time with an int value in the range[0, 24000]",
         "in_block": "Returns true when the subject entity is inside a specified Block type.",
         "in_caravan": "Returns true if the subject entity is in a caravan.",
@@ -6195,10 +6209,12 @@
         "random_chance": "Returns true if the random chance rolls 0 out of a specified max range.",
         "redstone_strength_at_position": "Tests the redstone strength at the subject's position.",
         "rider_count": "Returns the number of riders on this entity.",
+        "speed": "Tests the subject entity's speed in meters per second.",
         "surface_mob": "Tests if the subject is a surface mob.",
         "taking_fire_damage": "Tests if the subject is taking fire damage. Requires the damage_sensor component",
         "target_distance": "Tests the distance between the calling entity and its target.",
         "trusts": "Returns true if the subject is trusted by entity.",
+        "vertical_speed": "Tests the subject entity's signed vertical speed in meters per second.",
         "was_last_hurt_by": "Tests if the subject is the last player who attacked the entity in the last 400 seconds, or the last mob to do so in the last 60 seconds.",
         "weather": "Tests the current weather in the dimension against a provided weather value.",
         "weather_at_position": "Tests the current weather, at the actor's position, against a provided weather value.",
@@ -12448,67 +12464,6 @@
                 },
             ],
         },
-        "minecraft:behavior.vex_copy_owner_target": {
-            "description": "Allows the mob to target the same entity its owner is targeting.",
-            "children": [
-                {
-                    "name": "entity_types",
-                    "type": "JSON Object",
-                    "defaultValue": "",
-                    "description": "List of entities this mob can copy the owner from",
-                    "children": [
-                        {
-                            "name": "cooldown",
-                            "type": "Decimal",
-                            "defaultValue": "0.0",
-                            "description": "The amount of time in seconds that the mob has to wait before selecting a target of the same type again",
-                        },
-                        {
-                            "name": "filters",
-                            "type": "Minecraft Filter",
-                            "defaultValue": "",
-                            "description": "Conditions that make this entry in the list valid",
-                        },
-                        {
-                            "name": "max_dist",
-                            "type": "Decimal",
-                            "defaultValue": "16",
-                            "description": "Maximum distance this mob can be away to be a valid choice",
-                        },
-                        {
-                            "name": "must_see",
-                            "type": "Boolean",
-                            "defaultValue": "false",
-                            "description": "If true, the mob has to be visible to be a valid choice",
-                        },
-                        {
-                            "name": "must_see_forget_duration",
-                            "type": "Decimal",
-                            "defaultValue": "3.0",
-                            "description": "Determines the amount of time in seconds that this mob will look for a target before forgetting about it and looking for a new one when the target isn't visible any more",
-                        },
-                        {
-                            "name": "reevaluate_description",
-                            "type": "Boolean",
-                            "defaultValue": "false",
-                            "description": "If true, the mob will stop being targeted if it stops meeting any conditions.",
-                        },
-                        {
-                            "name": "sprint_speed_multiplier",
-                            "type": "Decimal",
-                            "defaultValue": "1.0",
-                            "description": "Multiplier for the running speed. A value of 1.0 means the speed is unchanged",
-                        },
-                        {
-                            "name": "walk_speed_multiplier",
-                            "type": "Decimal",
-                            "defaultValue": "1.0",
-                            "description": "Multiplier for the walking speed. A value of 1.0 means the speed is unchanged",
-                        },
-                    ],
-                },
-            ],
-        },
         "minecraft:behavior.wither_target_highest_damage": {
             "description": "Allows the wither to focus its attacks on whichever mob has dealt the most damage to it.",
             "children": [
@@ -17196,6 +17151,29 @@
                 },
             ],
         },
+        "minecraft:trail": {
+            "description": "Causes an entity to leave a trail of blocks as it moves about the world.",
+            "children": [
+                {
+                    "name": "block_type",
+                    "type": "String",
+                    "defaultValue": "air",
+                    "description": "The type of block placed by the trail.",
+                },
+                {
+                    "name": "spawn_filter",
+                    "type": "Minecraft Filter",
+                    "defaultValue": "",
+                    "description": "Conditions that must be met for the trail block to be placed.",
+                },
+                {
+                    "name": "spawn_offset",
+                    "type": "Vector [a, b, c]",
+                    "defaultValue": "[0.0, 0.0, 0.0]",
+                    "description": "Offset from the entity's position where the trail block is placed.",
+                },
+            ],
+        },
         "minecraft:type_family": {
             "description": "Defines the families this entity belongs to.",
             "children": [
@@ -17258,6 +17236,7 @@
         "minecraft:underwater_cave_carver_feature": "'minecraft:underwater_cave_carver_feature' carves a cave through the world in the current chunk, and in every chunk around the current chunk in an 8 radial pattern.This feature will specifically target creating caves only below sea level.",
         "minecraft:vegetation_patch_feature": "'minecraft:vegetation_patch_feature' scatters a vegetation feature in an area. The vegetation feature’s appearance can be modified by adjusting the radius and depth that it will generate.",
         "minecraft:weighted_random_feature": "'minecraft:weighted_random_feature' randomly selects and places a feature based on a weight value. Weights are relative, with higher values making selection more likely.",
+        "minecraft:crevasse_feature": "'minecraft:crevasse_feature' carves a winding, tapered crevasse into an exposed terrain surface.",
         "minecraft:multi_block_feature": "'minecraft:multi_block_feature' places a multi-block in the world as a biome decoration feature. A multi-block must be defined with the 'minecraft:multi_block' trait. The required 'places_block' field supports a single block, it must be a multi-block and it must be be the first part of a multi-block i.e. the 'minecraft:multi_block_part' state must have a value of 0. The optional 'may_replace' field is an allowlists which specifies what blocks each part of the multi-block can replace. If this field is omitted, the multi-block parts can be placed anywhere. However, they may not replace other multi-block parts. The optional 'randomize_rotation' field will randomize the multi-blocks cardinal orientation. If this field is enabled then the multi-block must have the cardinal direction state. The optional 'enforce_placement_rules' field will check if each part of the multi-block may be placed on top of existing blocks. If the multi-block defines a 'minecraft:placement_filter' component then each part is also checked against the blocks defined in that component.",
         "minecraft:multipart_block_column_feature": "'minecraft:multipart_block_column_feature' places blocks in an ordered column consisting of 1-4 parts. When the column consists of one block, only the 'tip_block' is placed. When the column consists of two blocks, a 'frustum_block' is placed with a 'tip_block' above it. For a three block column, a 'base_block' is placed at the bottom, and followed by a 'frustum_block' and a 'tip_block'. For columns larger than three blocks, the 'middle_block' is used as padding between the 'base_block' and the 'frustum_block'. 'height_range' specifies the range of blocks the column can be in any direction. 'weighted_heights' specifies a list of possible weighted lengths the column can be in any direction. Exactly one of 'height_range' or 'weighted_heights' has to be specified. 'direction' specifies the direction of the column. This can be any direction. 'may_place_on' can be used to limit what blocks a column can be placed upon. If omitted a column can be placed anywhere",
     },
@@ -17401,7 +17380,7 @@
         "query.get_actor_info_id": "Returns the integer id of an actor by its string name.",
         "query.get_animation_frame": "Returns the current texture of the item",
         "query.get_default_bone_pivot": "Gets specified axis of the specified bone orientation pivot.",
-        "query.get_equipped_item_name": "DEPRECATED (Use query.is_item_name_any instead if possible so names can be changed later without breaking content.) Takes one optional hand slot as a parameter (0 or 'main_hand' for main hand, 1 or 'off_hand' for off hand), and a second parameter (0=default) if you would like the equipped item or any non-zero number for the currently rendered item, and returns the name of the item in the requested slot (defaulting to the main hand if no parameter is supplied) if there is one, otherwise returns ''.",
+        "query.get_equipped_item_name": "DEPRECATED (Use query.is_item_name_any instead if possible so names can be changed later without breaking content.) Returns the name of the Item in the specified hand slot, or '' if empty. Takes two optional parameters: The first to specify hand slot (0 or 'main_hand' for main hand, 1 or 'off_hand' for off-hand. Defaults to main hand). The second parameter allows selecting the currently equipped item over the rendered item in a first-person context. These will only be different during item swap animations where the previously held item is still rendered while animating out.",
         "query.get_level_seed_based_fraction": "Returns a value in range [0.0, 1.0] based on the level seed.",
         "query.get_locator_offset": "Gets specified axis of the specified locator offset.",
         "query.get_name": "DEPRECATED (Use query.is_name_any instead if possible so names can be changed later without breaking content.)Get the name of the mob if there is one, otherwise return ''.",
@@ -17472,7 +17451,7 @@
         "query.is_enchanted": "Returns 1.0 if the entity is enchanted, else it returns 0.0.",
         "query.is_feeling_happy": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_fire_immune": "Returns 1.0 if the entity is immune to fire, else it returns 0.0.",
-        "query.is_first_person": "Returns 1.0 if the entity is being rendered in first person mode, else it returns 0.0.",
+        "query.is_first_person": "DEPRECATED (Use 'variable.is_first_person'): Always returns 0.0.",
         "query.is_ghost": "Returns 1.0 if an entity is a ghost, else it returns 0.0.",
         "query.is_gliding": "Returns 1.0 if the entity is gliding, else it returns 0.0.",
         "query.is_grazing": "Returns 1.0 if the entity is grazing, or 0.0 if not.",
@@ -17513,7 +17492,7 @@
         "query.is_pregnant": "Returns 1.0 if the entity is pregnant, else it returns 0.0.",
         "query.is_ram_attacking": "Returns 1.0 if the entity is using a ram attack, else it returns 0.0.",
         "query.is_resting": "Returns 1.0 if the entity is resting, else it returns 0.0.",
-        "query.is_riding": "Returns 1.0 if the entity is riding, else it returns 0.0.",
+        "query.is_riding": "Returns 1.0 if the entity is riding a vehicle or sitting on a block, else it returns 0.0.",
         "query.is_riding_any_entity_of_type": "Returns whether or not the entity is currently riding an entity of any of the designated types.",
         "query.is_rising": "(No longer available in pack min_engine_version 1.20.50.) DEPRECATED after 1.20.40. Returns 1.0 if behavior.timer_flag_2 is running, else it returns 0.0.",
         "query.is_roaring": "Returns 1.0 if the entity is currently roaring, else it returns 0.0.",
@@ -17645,5 +17624,7 @@
         "query.wing_flap_speed": "Returns the wing flap speed of the entity, or 0.0 if this doesn't make sense.",
         "query.yaw_speed": "Returns the entity's yaw speed",
     },
-    "molangQueryExperimental": {},
+    "molangQueryExperimental": {
+        "query.is_laying": "(EXPERIMENTAL. Enable 'Beta APIs' to use.) Returns 1.0 if the entity is laying on a block, else it returns 0.0.",
+    },
 }

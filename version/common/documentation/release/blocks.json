@@ -35,7 +35,8 @@
                                                 "[optional] How the block should be evaluated by a chest during chest opening. Must be one of the following options:",
                                                 "\"always\" - Will always obstruct a chest from opening when directly above it.",
                                                 "\"never\" - Will never obstruct a chest from opening when directly above it.",
-                                                "\"shape\" - Will use the Blocks AABB shape to determine if the chest is obstructed from opening when directly above it; this is the default value if no rule is provided.",
+                                                "\"shape\" - Will use the Blocks collision shape to determine if the chest is obstructed from opening when directly above it; this is the default value if no rule is provided.",
+                                                "A Block can define its collision shape by adding a collision component.",
                                             ],
                                         },
                                     ],
@@ -50,16 +51,16 @@
                                             "type": "table",
                                             "rows": [
                                                 {
-                                                    "Name": "origin",
-                                                    "Type": "Vector [a, b, c]",
-                                                    "Default Value": "[-8.0, 0.0, -8.0]",
-                                                    "Description": "Minimal position of the bounds of the collision box. \"origin\" is specified as [x, y, z] and must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
-                                                },
-                                                {
-                                                    "Name": "size",
+                                                    "Name": "max",
                                                     "Type": "Vector [a, b, c]",
                                                     "Default Value": "[16.0, 24.0, 16.0]",
-                                                    "Description": "Size of each side of the collision box. Size is specified as [x, y, z]. \"origin\" + \"size\" must be in the range (-8, 0, -8) to (8, 24, 8), inclusive.",
+                                                    "Description": "Maximum position of the bounds of the collision box. \"max\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
+                                                },
+                                                {
+                                                    "Name": "min",
+                                                    "Type": "Vector [a, b, c]",
+                                                    "Default Value": "[0.0, 0.0, 0.0]",
+                                                    "Description": "Minimal position of the bounds of the collision box. \"min\" is specified as [x, y, z] and must be in the range (0, 0, 0) to (16, 24, 16), inclusive.",
                                                 },
                                             ],
                                         },
@@ -836,7 +837,7 @@
                                     "type": "code",
                                     "content": [
                                         "{",
-                                        "  \"format_version\": \"1.26.50\",",
+                                        "  \"format_version\": \"1.26.60\",",
                                         "  \"minecraft:block\": {",
                                         "    \"description\": {",
                                         "      \"identifier\": \"design:lavenderstone\"",
@@ -1524,5 +1525,5 @@
             ],
         },
     ],
-    "__OBJECTHASH__": "86bb6e23083676a0dd6be056ce80a8fbf00e4b94",
+    "__OBJECTHASH__": "b651c61989b01e66b4f6dec7c5d29d7527ed43a1",
 }
