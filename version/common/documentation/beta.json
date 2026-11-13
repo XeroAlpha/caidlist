@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.70.22",
-    "__COMMITHASH__": "099c396dfc07a3c2f06f5fb63971a76afbd01f7e",
-    "__MESSAGE__": "1.26.70.22-preview",
+    "__VERSION__": "1.26.70.23",
+    "__COMMITHASH__": "430142679bb7daf3160671f06ab32ea433be1e1d",
+    "__MESSAGE__": "1.26.70.23-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -2340,6 +2340,9 @@
                                     "name": "Entity Description Properties",
                                     "sections": [
                                         {
+                                            "name": "clear_behaviors_on_component_changes",
+                                        },
+                                        {
                                             "name": "identifier",
                                         },
                                         {
@@ -3802,6 +3805,8 @@
         "minecraft:cactus_flower": "",
         "minecraft:cake": "",
         "minecraft:calcite": "",
+        "minecraft:calcite_pillar": "",
+        "minecraft:calcite_wall": "",
         "minecraft:calibrated_sculk_sensor": "",
         "minecraft:camera": "",
         "minecraft:campfire": "",
@@ -4592,6 +4597,8 @@
         "minecraft:polished_blackstone_slab": "",
         "minecraft:polished_blackstone_stairs": "",
         "minecraft:polished_blackstone_wall": "",
+        "minecraft:polished_calcite_brick_wall": "",
+        "minecraft:polished_calcite_wall": "",
         "minecraft:polished_cinnabar": "",
         "minecraft:polished_cinnabar_double_slab": "",
         "minecraft:polished_cinnabar_slab": "",
@@ -17530,10 +17537,10 @@
         "query.item_remaining_use_duration": "Returns the amount of time an item has left to use, else 0.0 if it doesn't make sense. Item queried is specified by the slot name 'main_hand' or 'off_hand'. Time remaining is normalized using the normalization value, only if one is given, else it is returned in seconds.",
         "query.item_slot_to_bone_name": "query.item_slot_to_bone_name requires one parameter: the name of the equipment slot.  This function returns the name of the bone this entity has mapped to that slot.",
         "query.key_frame_lerp_time": "Returns the ratio between the previous and next key frames.",
-        "query.kinetic_weapon_damage_duration": "Returns the \"max_duration\" value of \"damage_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
-        "query.kinetic_weapon_delay": "Returns the \"delay\" value from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
-        "query.kinetic_weapon_dismount_duration": "Returns the \"max_duration\" value of \"dismount_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
-        "query.kinetic_weapon_knockback_duration": "Returns the \"max_duration\" value of \"knockback_conditions\" from the main-hand item's \"minecraft:kinetic_weapon\" component, or 0 if the component is not present.",
+        "query.kinetic_weapon_damage_duration": "Returns the \"max_duration\" value of \"damage_conditions\" from the active-hand item's \"minecraft:kinetic_weapon\" component. Returns 0 if the component is not present.",
+        "query.kinetic_weapon_delay": "Returns the \"delay\" value from the active-hand item's \"minecraft:kinetic_weapon\" component. Returns 0 if the component is not present.",
+        "query.kinetic_weapon_dismount_duration": "Returns the \"max_duration\" value of \"dismount_conditions\" from the active-hand item's \"minecraft:kinetic_weapon\" component. Returns 0 if the component is not present.",
+        "query.kinetic_weapon_knockback_duration": "Returns the \"max_duration\" value of \"knockback_conditions\" from the active-hand item's \"minecraft:kinetic_weapon\" component. Returns 0 if the component is not present.",
         "query.last_frame_time": "Returns the time in *seconds* of the last frame.  If an argument is passed, it is assumed to be the number of frames in the past that you wish to query.  'query.last_frame_time' (or the equivalent 'query.last_frame_time(0)') will return the frame time of the frame before the current one.  'query.last_frame_time(1)' will return the frame time of two frames ago.  Currently we store the history of the last 30 frames, although note that this may change in the future.  Passing an index more than the available data will return the oldest frame stored.",
         "query.last_hit_by_player": "Returns 1.0 if the entity was last hit by the player, else it returns 0.0. If called by the client always returns 0.0.",
         "query.last_input_mode_is_any": "Takes one or more arguments ('keyboard_and_mouse', 'touch', or 'gamepad'). If the last input used is any of the specified string values, returns 1.0. Otherwise returns 0.0. Available on the Client (Resource Packs) only.",
