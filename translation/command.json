@@ -63,6 +63,9 @@
     "camera.targetEntity.withOffset": "设置玩家摄像机的跟踪目标为指定实体偏移后的位置。",
     "camerashake.add": "为玩家应用镜头摇晃效果。",
     "camerashake.stop": "为玩家移除镜头摇晃效果。",
+    "chat.hide": "隐藏指定聊天频道的信息。",
+    "chat.send": "向指定聊天频道发送信息。",
+    "chat.show": "显示指定聊天频道的信息。",
     "clear.default": "清除玩家物品栏中的物品。",
     "clearspawnpoint.default": "重置玩家重生点。",
     "clone.default": "在区域间复制方块。",
@@ -132,6 +135,7 @@
     "gametest.runthis": "运行最近的 GameTest 测试。",
     "gametest.stopall": "停止全部 GameTest 测试。",
     "give.default": "给予玩家特定物品。",
+    "global.default": "向全局频道中的所有玩家广播消息。",
     "help.withCommand": "按命令名列出命令用法。",
     "help.withPage": "按页数列出命令用法。",
     "hud.default": "配置选中玩家的HUD界面元素的可见性。",
@@ -205,7 +209,7 @@
     "ride.stopRiding": "为骑手取消骑乘关系。",
     "ride.summonRide": "为骑手生成坐骑。",
     "ride.summonRider": "为坐骑生成骑手。",
-    "say.default": "向所有玩家广播消息。",
+    "say.default": "向世界内的所有玩家广播消息。",
     "schedule.clear.all": "从所有计划中移除指定的函数。",
     "schedule.delay.add": "计划在指定的时间间隔后执行指定的函数。",
     "schedule.delay.clear": "取消指定的函数在一定时间间隔后执行的计划。",
@@ -385,7 +389,7 @@
     "ride <riders: target> summon_ride <entityType: EntityType> [rideRules: RideRules] [spawnEvent: string] [nameTag: string]": "this: ride.summonRide", // 为骑手生成坐骑。
     "ride <rides: target> evict_riders": "this: ride.evictRiders", // 为坐骑取消骑乘关系。
     "ride <rides: target> summon_rider <entityType: EntityType> [spawnEvent: string] [nameTag: string]": "this: ride.summonRider", // 为坐骑生成骑手。
-    "say <message: message>": "this: say.default", // 向所有玩家广播消息。
+    "say <message: message>": "this: say.default", // 向世界内的所有玩家广播消息。
     "schedule on_area_loaded add <from: x y z> <to: x y z> <function: filepath>": "this: schedule.onAreaLoad.add.box", // 指定一个矩形区域，计划在此区域被加载时执行指定的函数。
     "schedule on_area_loaded add circle <center: x y z> <radius: int> <function: filepath>": "this: schedule.onAreaLoad.add.circle", // 指定一个圆形区域，计划在此区域被加载时执行指定的函数。
     "schedule on_area_loaded add tickingarea <name: string> <function: filepath>": "this: schedule.onAreaLoad.add.tickingArea", // 指定一个常加载区域，计划在此区域被加载时执行指定的函数。
@@ -669,4 +673,10 @@
     "time resume": "this: time.resume", // 恢复运行主世界时钟。
     "time set <timeMarkerName: timemarker name> [timeMarkerOccurrence: TimeMarkerOccurrence]": "this: time.set.withTimeMarker", // 设置当前时间为指定时间点。
     "gametest runset <tag list (optional flags 'withoutTags' and 'rotationSteps'): message>": "this: gametest.runset", // 运行指定的 GameTest 测试集合。
+    "chat hide <channel: ChatChannel>": "this: chat.hide", // 隐藏指定聊天频道的信息。
+    "chat send <channel: ChatSendChannel> <message: message>": "this: chat.send", // 向指定聊天频道发送信息。
+    "chat show <channel: ChatChannel>": "this: chat.show", // 显示指定聊天频道的信息。
+    "g <message: message>": "this: global.default", // 向全局频道中的所有玩家广播消息。
+    "global <message: message>": "this: global.default", // 向全局频道中的所有玩家广播消息。
+    "p <message: message>": "this: party.default", // 向队伍中的玩家广播消息。
 }
