@@ -1,7 +1,7 @@
 {
-    "__VERSION__": "1.26.70.23",
-    "__COMMITHASH__": "430142679bb7daf3160671f06ab32ea433be1e1d",
-    "__MESSAGE__": "1.26.70.23-preview",
+    "__VERSION__": "1.26.70.24",
+    "__COMMITHASH__": "7a328a1961af0be1cf6b3b17c3bc9929df7740b4",
+    "__MESSAGE__": "1.26.70.24-preview",
     "index": {
         "Addons": {
             "name": "ADDONS DOCUMENTATION",
@@ -12359,6 +12359,12 @@
                     "defaultValue": "",
                     "description": "Event(s) to run when the goal starts.",
                 },
+                {
+                    "name": "trigger_on_end_when_interrupted",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "Whether the 'on_end' events run when another goal interrupts this goal before its duration elapses.",
+                },
             ],
         },
         "minecraft:behavior.timer_flag_2 (See JSON Schema since 1.26.0)": {
@@ -12388,6 +12394,12 @@
                     "defaultValue": "",
                     "description": "Event(s) to run when the goal starts.",
                 },
+                {
+                    "name": "trigger_on_end_when_interrupted",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "Whether the 'on_end' events run when another goal interrupts this goal before its duration elapses.",
+                },
             ],
         },
         "minecraft:behavior.timer_flag_3 (See JSON Schema since 1.26.0)": {
@@ -12416,6 +12428,12 @@
                     "type": "Trigger",
                     "defaultValue": "",
                     "description": "Event(s) to run when the goal starts.",
+                },
+                {
+                    "name": "trigger_on_end_when_interrupted",
+                    "type": "Boolean",
+                    "defaultValue": "",
+                    "description": "Whether the 'on_end' events run when another goal interrupts this goal before its duration elapses.",
                 },
             ],
         },
@@ -17533,7 +17551,7 @@
         "query.is_wall_climbing": "Returns 1.0 if the entity is climbing a wall, else it returns 0.0.",
         "query.item_in_use_duration": "Returns the amount of time an item has been in use in seconds up to the maximum duration, else 0.0 if it doesn't make sense.",
         "query.item_is_charged": "Takes one optional hand slot as a parameter (0 or 'main_hand' for main hand, 1 or 'off_hand' for off hand), and returns 1.0 if the item is charged in the requested slot (defaulting to the main hand if no parameter is supplied), otherwise returns 0.0.",
-        "query.item_max_use_duration": "Returns the maximum amount of time the item can be used, else 0.0 if it doesn't make sense.",
+        "query.item_max_use_duration": "Returns the maximum use duration of the item in use, falling back to the mainhand item when idle, or 0.0 if no item is available.",
         "query.item_remaining_use_duration": "Returns the amount of time an item has left to use, else 0.0 if it doesn't make sense. Item queried is specified by the slot name 'main_hand' or 'off_hand'. Time remaining is normalized using the normalization value, only if one is given, else it is returned in seconds.",
         "query.item_slot_to_bone_name": "query.item_slot_to_bone_name requires one parameter: the name of the equipment slot.  This function returns the name of the bone this entity has mapped to that slot.",
         "query.key_frame_lerp_time": "Returns the ratio between the previous and next key frames.",

@@ -4,6 +4,7 @@ import { pEvent } from 'p-event';
 import { cachedOutput, log, pause, setStatus, sleepAsync, sortObjectKey } from '../util/common.js';
 import { injectText, openScrcpy, press, stopScrcpy } from '../util/scrcpy.js';
 import * as support from './support.js';
+import { setTimeout } from 'node:timers/promises';
 
 const ignoreCommands = ['/gametips <status: Status>'];
 
@@ -152,38 +153,39 @@ async function doWSRelatedJobs(cx, session) {
 export async function createExclusiveWSSession(device) {
     const port = await getPort({ port: 19134 });
     const wsServer = new WSServer(port);
-    let session;
+    let session = null;
     if (device) {
         log('Connecting to wsserver: /connect 127.0.0.1:19134');
-        for (;;) {
-            try {
-                const scrcpy = await openScrcpy(device, { controlOnly: true });
-                const sessionPromise = pEvent(wsServer, 'client', {
-                    timeout: 10000
-                });
-                await device.reverse('tcp:19134', `tcp:${port}`);
-                setStatus('Simulating user actions...');
-                // 打开聊天栏
-                await press(scrcpy, 'KEYCODE_T');
-                await sleepAsync(3000);
-                // 唤起输入法
-                await press(scrcpy, 'KEYCODE_SLASH');
-                await sleepAsync(1000);
-                // 确保光标在末尾
-                await press(scrcpy, 'KEYCODE_MOVE_END');
-                await injectText(scrcpy, 'connect 127.0.0.1:19134');
-                await sleepAsync(1000);
-                await press(scrcpy, 'KEYCODE_ENTER');
-                ({ session } = await sessionPromise);
-                log(`${device.serial} connected via mcpews.`);
-                stopScrcpy(scrcpy);
-                break;
-            } catch (err) {
+        const scrcpy = await openScrcpy(device, { controlOnly: true });
+        const sessionResolver = Promise.withResolvers();
+        wsServer.on('client', (event) => {
+            session = event.session;
+            sessionResolver.resolve();
+        });
+        await device.reverse('tcp:19134', `tcp:${port}`);
+        while (!session) {
+            setStatus('Simulating user actions...');
+            // 打开聊天栏
+            await press(scrcpy, 'KEYCODE_T');
+            await sleepAsync(3000);
+            // 唤起输入法
+            await press(scrcpy, 'KEYCODE_SLASH');
+            await sleepAsync(1000);
+            // 确保光标在末尾
+            await press(scrcpy, 'KEYCODE_MOVE_END');
+            await injectText(scrcpy, 'connect 127.0.0.1:19134');
+            await sleepAsync(1000);
+            await press(scrcpy, 'KEYCODE_ENTER');
+            setStatus('Waiting for client...');
+            await Promise.race([setTimeout(10000), sessionResolver.promise]);
+            if (!session) {
                 setStatus('');
-                log(`Device connect failed: ${err}`);
+                log('Device is not connected in 10000ms');
                 await pause('Please reset UI to initial state and retry');
             }
         }
+        log(`${device.serial} connected via mcpews.`);
+        stopScrcpy(scrcpy);
     } else {
         log(`Type "/connect 127.0.0.1:${port}" in game console to continue analyzing...`);
         setStatus('Waiting for client...');
